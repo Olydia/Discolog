@@ -2,14 +2,14 @@
            xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
   <!-- 
       A very, very simple HTN with conditions.
-      See test/Fail1.test for example execution
+      See test/Recover1.test for example execution
   -->
 
   <script init="true">
     
     // the "world model"
 
-    var p = false;
+    var p = true;
     var q = false;
     var r = false;
     
@@ -36,11 +36,11 @@
     <postcondition> r </postcondition>
   </task>
   
-  <!-- a decomposition rule for A -->
+  <!-- a decomposition rule for a -->
 
   <subtasks id="decompA" goal="a">
-    <step name="b" task="b"/>
-    <step name="c" task="c"/>
+    <step name="stepb" task="b"/>
+    <step name="stepc" task="c"/>
   </subtasks>
 
 </taskModel>
