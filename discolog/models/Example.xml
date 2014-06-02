@@ -1,0 +1,46 @@
+<taskModel about="urn:disco.wpi.edu:examples:Example" 
+           xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+  <!-- 
+      A very, very simple HTN with conditions.
+      See test/Fail1.test for example execution
+  -->
+
+  <script init="true">
+    
+    // the "world model"
+
+    var p = false;
+    var q = false;
+    var r = false;
+    
+  </script>
+
+  <!-- two primitive actions -->
+
+  <task id="b">
+    <precondition> p </precondition>
+    <postcondition> q </postcondition>
+    <script> q = true; </script>
+  </task>
+
+  <task id="c">
+    <precondition> q </precondition>
+    <postcondition> r </postcondition>
+    <script> r = true; </script>
+  </task>
+
+  <!-- one non-primitive action -->
+
+  <task id="c">
+    <precondition> p </precondition>
+    <postcondition> r </postcondition>
+  </task>
+  
+  <!-- a decomposition rule for A -->
+
+  <subtasks id="decompA" goal="a">
+    <step name="b" task="b"/>
+    <step name="c" task="c"/>
+  </subtasks>
+
+</taskModel>

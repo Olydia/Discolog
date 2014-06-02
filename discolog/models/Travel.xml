@@ -1,0 +1,29 @@
+<taskModel xmlns="http://ce.org/cea-2018" about="urn:cetask.wpi.edu:examples:travel">
+
+	<task id="Travel">
+		<input name="start" type="string"/>
+		<input name="arrival" type="string"/>
+
+		<subtasks id="travelling">
+			<step name="ticket" task="GetTicket"/>
+			<step name="go" task="GoToAirport"/>
+			<step name="fly" task="Flying"/>
+	        <binding slot="$ticket.input1" value="$this.start"/>
+			<binding slot="$ticket.input2" value="$this.arrival"/>
+			<binding slot="$go.air" value="$ticket.airport"/> 
+		</subtasks>
+	</task>
+
+	<task id="GetTicket">
+		<input name="input1" type="string"/>
+		<input name="input2" type="string"/>
+		<output name="airport" type="string"/>
+	</task>
+	
+	<task id="GoToAirport">
+		<input name="air" type="string"/>
+	</task> 
+	
+	<task id="Flying"/>
+	
+</taskModel>
