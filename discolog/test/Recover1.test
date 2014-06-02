@@ -41,12 +41,12 @@ Found recovery plan for [c]
 #
 # and adds it to Disco (see Discolog.recover()
 #
-[Achieve a] -accepted -live
+[Achieve a] -accepted -live <-focus
    User says "Let's achieve a."
    Agent execute b.
    Agent says "Ok."
-   [Execute b] -live -interruption <-focus
-      Agent says "Ok."
+   Agent says "Ok."	
+   [Execute b] -live
    [Execute c]
 #
 # Now agent executes the recovery plan b
@@ -68,9 +68,8 @@ Found recovery plan for [c]
    User says "Let's achieve a."
    Agent execute b.
    Agent says "Ok."
-   [Agent execute b] -done -interruption
-      Agent says "Ok."
-      Agent execute b.
+   Agent says "Ok."
+   Agent execute b.
    Agent says "Ok."
    Agent execute c.
    Agent says "Ok."

@@ -42,8 +42,8 @@ public class Discolog extends Agent {
                System.out.println("Found recovery plan for "+candidate);
                Disco disco = interaction.getDisco();
                // splice in recovery plan
-               disco.getFocus().getParent().add(recovery);
-               disco.push(recovery); // do it next
+               disco.getFocus().add(recovery);
+               recovery.setContributes(true); // so not interruption
                return;
             }
          }
