@@ -31,7 +31,7 @@
 
   <!-- one non-primitive action -->
 
-  <task id="c">
+  <task id="a">
     <precondition> p </precondition>
     <postcondition> r </postcondition>
   </task>
