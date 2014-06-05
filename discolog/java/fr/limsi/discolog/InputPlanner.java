@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import alice.tuprolog.*;
+import alice.tuprolog.lib.*;
+import alice.tuprolog.event.*;
 
 public class InputPlanner {
 
@@ -18,19 +20,28 @@ public class InputPlanner {
 	 * output	=	the plan 
 	 * 
 	 **/ 
-
+	 String finalResult = "";
 	public void Action(String Name	,ArrayList Precond	,ArrayList Add	,ArrayList Delete){
 	
 		
 	}
-	public static void main(String[] args) throws InvalidTheoryException,
+/*	public static void main(String[] args) throws InvalidTheoryException,
 		MalformedGoalException, NoSolutionException, NoMoreSolutionException, FileNotFoundException, IOException {
-		
-		// import the planner 
-		
+		   
 		Prolog engine = new Prolog();
-		SolveInfo info = engine.solve("test1(Plan).");
+		engine.setTheory(new Theory(":-consult('Planner.pl')."));
+		// import the planner 
+		engine.addOutputListener(new OutputListener() {
+			@Override
+			public void onOutput(OutputEvent e) {
+			finalResult += e.getMsg();
+			}
+			});
 	
+
+		SolveInfo info = engine.solve("test1(Plan).");
+		
+		
 	
 		// Init= [on(monkey,floor),on(box,floor),at(monkey,a),at(box,b),at(bananas,c),status(bananas,hanging)]
 		Struct	monkey	=	new Struct	("monkey"); 
@@ -46,14 +57,12 @@ public class InputPlanner {
 		Struct	at_b	=	new Struct	("at",	box,	b);
 		Struct	at_c	=	new Struct	("at",	bananas,	new Struct	("c"));
 		Struct	status	=	new Struct	("status",	bananas,	hanging);
-	
-		Collection<Struct> v = java.util.Arrays.asList(at_a,at_b,status);
+		
+		
 
-		System.out.println(v);
-		//System.out.println(on_box);
-		//System.out.println(at_c);
+		System.out.println(at_c);
 
 
 	}
-
+*/
 }
