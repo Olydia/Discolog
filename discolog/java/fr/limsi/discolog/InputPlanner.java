@@ -27,9 +27,8 @@ public class InputPlanner {
 		MalformedGoalException, NoSolutionException, NoMoreSolutionException, FileNotFoundException, IOException {
 		
 		// import the planner 
-		Theory theory = new Theory(":-consult('Planner.pl')");
+		
 		Prolog engine = new Prolog();
-		engine.addTheory(theory);
 		SolveInfo info = engine.solve("test1(Plan).");
 	
 	

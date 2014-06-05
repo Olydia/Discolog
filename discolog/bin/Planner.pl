@@ -173,15 +173,8 @@ holds(avion(p),init).
 holds(fret(f),init).
 holds(aeroport(cdg),init).
 holds(aeroport(jfk),init).
-holds(avion(y),init).
-holds(fret(c),init).
-
 holds(at(p,cdg),init).
 holds(at(f,cdg),init).
-
-holds(at(c,cdg),init).
-
-
 
 inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
 inconsistent(at(Y,X), at(Z,X)) :- not(Z=Y).
@@ -191,4 +184,4 @@ inconsistent(at(Y,X), on(Y,Z)).
 achieves(init,X) :-
    holds(X,init).
 
-test1(Plan):-solve([at(f,jfk)],6,Plan).
+test1(Plan):-solve([at(p,jfk)],6,Plan).
