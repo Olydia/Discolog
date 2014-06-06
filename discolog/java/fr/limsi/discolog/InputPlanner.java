@@ -59,7 +59,6 @@ public class InputPlanner {
 		Struct	status	=	new Struct	("status",	bananas,	hanging);
 		
 		
-
 		System.out.println(at_c);
 
 
