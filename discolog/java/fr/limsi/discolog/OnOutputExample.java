@@ -1,26 +1,50 @@
 package fr.limsi.discolog;
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import alice.tuprolog.*;
 import alice.tuprolog.lib.*;
 import alice.tuprolog.event.*;
 public class OnOutputExample {
-static String finalResult = "";
 
+	static String finalResult = "";
+	
 public static void main(String[] args) throws Exception {
-Prolog engine = new Prolog();
+	Prolog engine = new Prolog();
 
-engine.setTheory(new Theory(":-consult('plan.pl')."));
-engine.addTheory(new Theory("action(from_q_achieve_r_undo_q(x),[q(x)],[q(x)],[r(x)])."));
-SolveInfo res = engine.solve("execute_plan(Plan).");
-//System.out.println(res.getSolution());
+	engine.addOutputListener(new OutputListener() {
+		@Override
+		public void onOutput(OutputEvent e) {
+			finalResult += e.getMsg();
+			}
+		});
+	
 
-Struct	q	=	new Struct	("q",new Var("X"));
-Struct	r	=	new Struct	("r",new Var("X")); 
-//action(from_q_achieve_r_undo_q(x),[q(x)],[q(x)],[r(x)]).
+	//Struct go  = new Struct("pere", Term.createTerm("theodore"),Term.createTerm("geoffroy"));
+	
+	Theory theory = new Theory(new FileInputStream("C:/Users/ouldouali/Documents/GitHub/Discolog/discolog/prolog/Planner.pl"));
+	//Theory theory = new Theory(":-consult('new.pl').");
+	try {
+	        engine.setTheory(theory);
+	        //engine.addTheory(new Theory(go.toString()+"."));
+	    } catch (InvalidTheoryException ex) {
 
-Struct precond = new Struct(q, new Struct());
-Struct add = new Struct(r, new Struct());
-System.out.println();
+	    }
+	Struct goal  = new Struct("test1",new Var("Plan"));
+	SolveInfo info = engine.solve(goal);
+	System.out.println("trying to write the solution");
+	
+	 if (!info.isSuccess()) 
+		 	System.out.println("no." + goal);
+	
+	 else if (!engine.hasOpenAlternatives()) {
+		 	System.out.println(info.getVarValue("Plan"));
+	} else {// main case
+			System.out.println(info + " ?");
+	}
+	 
+	Theory curTh = engine.getTheory(); // save current theory to file
+	//System.out.println(curTh.toString());
+	
+		}
 
 }
-}  

@@ -4,10 +4,6 @@
 % WITH LOOP DETECTION + HEURISTIC INFORMATION ON UNSATISFIABLE GOALS
 % Copyright (c) 1998, Poole, Mackworth, Goebel and Oxford University Press.
 
-:- op(1200,xfx,[<-]).
-% N.B. we assume that conjunctions are represented as lists.
-
-:- op(700,xfx, \=).
 
 
 solve(G,N,P) :-
@@ -160,36 +156,44 @@ unsatisfiable(L) :-
 % achieves(action(params),move(Ag,Pos,Pos_1), effetpositif).
 % deletes(move(Ag,Pos,Pos_1), effetnegatif).
 
-% strips_rule(Action, Precondlist, AddList, DelList) 
-%action(achieve_p(x),[a(x)],[],[p(x)]).
-%action(from_p_achieve_q(x),[p(x)],[],[q(x)]).
-%action(from_q_achieve_r_undo_q(x),[q(x)],[q(x)],[r(x)]).
+% strips_rule(Action, Precondlist, AddList, DelList)
 
 
 % charger
-preconditions(achieve_p(x),[a(x)]).
-achieves(achieve_p(x),p(x)).
-
+preconditions(charger(F,P,A),[at(F,A),at(P,A),avion(P),fret(F),aeroport(A)]).
+achieves(charger(F,P,_),on(F,P)).
+deletes(charger(F,_,A),at(F,A)).
 
 % decharger
-preconditions(from_p_achieve_q(x),[p(x)]).
-achieves(from_p_achieve_q(x),q(x)).
+preconditions(decharger(F,P,A),[on(F,P),at(P,A),avion(P),fret(F),aeroport(A)]).
+achieves(decharger(F,_,A),at(F,A)).
+deletes(decharger(F,P,_),on(F,P)).
 
 % voler
+preconditions(voler(P,D,G),[at(P,D),avion(P),aeroport(D),aeroport(G)]).
+achieves(voler(P,_,G),at(P,G)).
+deletes(voler(P,D,_),at(P,D)).
 
-preconditions(from_q_achieve_r_undo_q(x),[q(x)]).
-achieves(from_q_achieve_r_undo_q(x),r(x)).
-deletes(from_q_achieve_r_undo_q(x),q(x)).
+primitive(at(_,_)).
+primitive(on(_,_)).
+primitive(avion(_)).
+primitive(fret(_)).
+primitive(aeroport(_)).
 
-primitive(a(_)).
-primitive(b(_)).
-primitive(p(_)).
-primitive(q(_)).
-primitive(r(_)).
-holds(a(x),init).
-holds(b(x),init).
+holds(avion(p),init).
+holds(fret(f),init).
+holds(aeroport(cdg),init).
+holds(aeroport(jfk),init).
+
+holds(at(p,cdg),init).
+holds(at(f,cdg),init).
+
+inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+inconsistent(at(Y,X), at(Z,X)) :- not(Z=Y).
+inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+inconsistent(at(Y,X), on(Y,Z)).
 
 achieves(init,X) :-
    holds(X,init).
 
-test1(Plan):-solve([r(x)],10,Plan).
+test1(Plan):-solve([at(f,jfk)],6,Plan).

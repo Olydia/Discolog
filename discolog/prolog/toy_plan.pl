@@ -1,10 +1,7 @@
 execute_plan(Plan):- 
-	write('Initial state:'),
 	Init= [a(x),b(x)], 
-	print_solution(Init),
+	
 	Goal= [r(x)], 
-	nl,write('Goal state:'),
-	print_solution(Goal),nl,
     generate_plan(Init,Goal,[],Plan).
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -12,7 +9,7 @@ execute_plan(Plan):-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 generate_plan(States,Goal,Plan,Plan):- sub_set(Goal, States), nl,
-											  write('the plan : '),nl,
+											
 											  print_solution(Plan),nl.
 											   
 											   
