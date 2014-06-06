@@ -22,6 +22,5 @@ Struct precond = new Struct(q, new Struct());
 Struct add = new Struct(r, new Struct());
 System.out.println();
 
-
 }
 }  
