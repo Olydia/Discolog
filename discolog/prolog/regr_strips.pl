@@ -11,48 +11,41 @@
 % G is a list of atomic subgoals. AS is the list of ancestor goal lists.
 
 solve(G,N,P) :-
-	write('solve function'),nl,
    solve(G,[G],N,P).
 
 solve(G,_,_,init) :-
    solved(G).
 
 solve(G,AS,NAs,do(A,Pl)) :-
-write('solve function '),nl,
-write(NAs), nl,
    NAs > 0,
    satisfiable(G),
    useful(G,A),
    wp(G,A,G1),
    \+ subgoal_loop(G1,AS),
-%   writeln(['Trying ',A,' to solve ',G]),
-%   writeln(['    New subgoals ',G1]),
+   writeln(['Trying ',A,' to solve ',G]),
+   writeln(['    New subgoals ',G1]),
    NA1 is NAs-1,
    solve(G1,[G1|AS],NA1,Pl).
 
 % subgoal_loop(G,AS) is true if we are in a loop of subgoals to solve.
 % This occurs if G is a more difficult to solve goal than one of its ancestors
 subgoal_loop(G1,AS) :- 
-write('subgoal'),nl,
    grnd(G1), member(An,AS),  subset(An,G1).
 
 % solved(G) is true if goal list G is true initially
 solved([]).
 solved([G|R]) :-
-write('solvedddd function'),nl,
    holds(G,init),
    solved(R).
 
 % satisfiable(G) is true if (based on a priori information) it is possible for
 %  goal list G to be true all at once.
 satisfiable(G) :-
-write('SATISFIABLE'),nl,
    \+ unsatisfiable(G).
 
 % useful(G,A) is true if action A is useful to solve a goal in goal list G
 % we try first those subgoals that do not hold initially
 useful([S|R],A) :-
-write('USEFUL Action ',A),nl,
    holds(S,init),
    useful(R,A).
 useful([S|_],A) :-
@@ -65,14 +58,13 @@ useful([S|R],A) :-
 %  initially. 
 useful(G,A) :-
    member(S,G),
-   
+   member(S,[handempty]), % handempty is the only such goal in this domain
    holds(S,init),
    achieves(S,A).
 
 % wp(G,A,G0) is true if G0 is the weakest precondition that needs to hold
 % immediately before action A to ensure that G is true immediately after A
 wp([],A,G1) :-
-	wrtie('je suis dans lexec de laction'), nl,
    preconditions(A,G),
    filter_derived(G,[],G1).
 wp([S|R],A,G1) :-
@@ -84,7 +76,6 @@ wp([S|R],A,G1) :-
 regress(S,A,G,G) :-
    achieves(A,S).
 regress(S,A,G,G1) :-
-wrtie('je sus dans le regress'), nl,
    primitive(S),
    \+ achieves(A,S),
    \+ deletes(A,S),
@@ -157,6 +148,15 @@ unsatisfiable(L) :-
    Y1 == Y2,
    \+ (X1=X2).
 
+
+
+% preconditions(action(params), [préconditions]
+% achieves(action(params),move(Ag,Pos,Pos_1), effetpositif).
+% deletes(move(Ag,Pos,Pos_1), effetnegatif).
+
+% strips_rule(Action, Precondlist, AddList, DelList)
+
+
 % charger
 preconditions(charger(F,P,A),[at(F,A),at(P,A),avion(P),fret(F),aeroport(A)]).
 achieves(charger(F,P,_),on(F,P)).
@@ -186,9 +186,7 @@ holds(aeroport(jfk),init).
 holds(at(p,cdg),init).
 holds(at(f,cdg),init).
 
-
 achieves(init,X) :-
    holds(X,init).
 
-test1(Plan):-
-write('trying to solve a problem'),nl,solve([at(p,cdg)],10,Plan).
+test1(Plan):-solve([at(f,jfk)],6,Plan).
