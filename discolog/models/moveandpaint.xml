@@ -1,0 +1,110 @@
+<taskModel about="urn:limsi.fr:examples:moveandpaint" xmlns="http://ce.org/cea-2018">
+
+	<task id="Move_Paint">
+		<input name="box" type="Box"/>
+		<subtasks id="move_paint">
+			<step name="move" task="Move"/>
+			<step name="paint" task="Paint"/>
+			<binding slot="$move.box" value="$this.box"/>
+			<binding slot="$move.from" value="$this.box.location"/>
+			<binding slot="$move.to" value="Room.ENUM.Painting_Room"/>
+			<binding slot="$paint.box" value="$move.new_box"/>
+		</subtasks>
+	</task>
+   
+	<task id="Move">
+    <input name="box" type="Box" modified="new_box"/>
+	<input name="from" type="Room"/>
+	<input name="to" type="Room"/>
+	<output name="new_box" type="Box"/>
+	
+    <subtasks id="move">
+      <step name="pickup" task="PickUp"/>
+      <step name="walk" task="Walk"/>
+	  <step name="putdown" task="PutDown"/>
+	  <binding slot="$pickup.box" value="$this.box"/>
+	  <binding slot="$walk.box" value="$this.box"/>
+	  <binding slot="$walk.from" value="$this.from"/>
+	  <binding slot="$walk.to" value="$this.to"/>
+	  <binding slot="$putdown.box" value="$walk.new_box"/>
+	  <binding slot="$this.new_box" value="$walk.new_box"/>
+
+    </subtasks>
+  </task>
+
+  <task id="PickUp">
+    <input name="box" type="Box"/>
+  </task>  
+
+  <task id="Walk">
+    <input name="box" type="Box" modified ="new_box"/>
+	<input name="from" type="Room"/>
+	<input name="to" type="Room"/>
+    <output name="new_box" type="Box"/>
+    
+	<precondition> OPEN </precondition> 
+    <postcondition sufficient="true"> 
+		($this.new_box != undefined &amp;&amp; $this.to != undefined) ? 
+			($this.new_box.location == $this.to) : undefined 
+	</postcondition> 
+	<script>
+			$this.new_box.location = $this.to;
+	</script>
+  </task>
+  
+  <task id="PutDown">
+    <input name="box" type="Box"/>
+  </task>
+  
+ <task id="Paint">
+  <input name="box" type="Box" modified ="new_box"/>
+  <output name="new_box" type="Box"/>
+  <precondition>
+		($this.box != undefined ) ? 
+			($this.box.location == Room.ENUM.Painting_Room) : undefined 
+  </precondition>
+  <postcondition sufficient="true"> 
+  	($this.new_box != undefined ) ? 
+			($this.new_box.paint) : undefined </postcondition>
+  <script>
+		$this.new_box.paint = true;
+  </script>
+ </task>
+ 
+ <task id="Open">
+	<script>
+		OPEN=true;
+  </script>
+ </task>
+ <script init="true">
+	$disco.getInteraction().getSystem().setMax(1);
+	
+    // define Box class
+ 
+    function Box (name,location, paint) {
+       this.name = name;
+	   this.location = location;
+	   this.paint = paint;
+    }
+	
+    Box.prototype.toString = function () { 
+	   return (this.name+ "[" + this.location+ "," + this.paint+"]"); }
+
+	function Room (name) { 
+		this.name = name; 
+	}
+    // define Room class
+    Room.ENUM = { Room1 : new Room("room1"), 
+                  Painting_Room : new Room("painting_room"), 
+                }
+    
+    Room.prototype.toString = function () { return this.name; }
+       
+    var BOX1 = new Box("box1", Room.ENUM.Room1, false);
+	
+	// state variables
+    var OPEN = true;
+	var LOCATION = Room.ENUM.Room1; 
+	
+</script>  
+</taskModel>

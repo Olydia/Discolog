@@ -2,6 +2,7 @@ package fr.limsi.discolog;
 
 import java.util.*;
 import edu.wpi.cetask.Plan;
+import edu.wpi.cetask.TaskEngine;
 import edu.wpi.disco.*;
 import edu.wpi.disco.Agenda.Plugin;
 
@@ -20,10 +21,12 @@ public class Discolog extends Agent {
       // restrict to performing only a single primitive action on each turn
       // so we have more control over example
       agent.setMax(1);
+      TaskEngine.DEBUG = true;
       Interaction interaction = new Interaction(agent,
             new User("user"),
             args.length > 0 && args[0].length() > 0 ? args[0] : null);
       interaction.start(true);
+     
    }
    
    // TODO add private fields here to hold Prolog engine, etc. 
@@ -54,8 +57,8 @@ public class Discolog extends Agent {
    private Plan invokePlanner (Plan candidate) {
       // this should invoke Prolog planner
       // for now it always returns the answer to make our
-      // example work, namely executing "b"
-      return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("b").newInstance());
+      // example work, namely executing "Open"
+      return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
    }
       
    private final List<Plan> candidates = new ArrayList<Plan>();

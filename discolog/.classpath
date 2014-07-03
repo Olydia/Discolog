@@ -3,10 +3,14 @@
 	<classpathentry kind="src" path="java"/>
 	<classpathentry kind="src" path="prolog"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/disco"/>
 	<classpathentry kind="lib" path="lib/2p.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/discolog/lib/2p-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/disco.jar" sourcepath="C:/Users/ouldouali/Documents/GitHub/Disco/release/lib/disco-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ouldouali/Documents/GitHub/Disco/release/lib/disco-api.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
