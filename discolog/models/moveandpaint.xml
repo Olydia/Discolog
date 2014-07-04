@@ -42,7 +42,7 @@
 	<input name="to" type="Room"/>
     <output name="new_box" type="Box"/>
     
-	<precondition> OPEN </precondition> 
+	<precondition> isOpen() </precondition> 
     <postcondition sufficient="true"> 
 		($this.new_box != undefined &amp;&amp; $this.to != undefined) ? 
 			($this.new_box.location == $this.to) : undefined 
@@ -76,6 +76,8 @@
 		OPEN=true;
   </script>
  </task>
+ <task id="Recovery"/>
+ 
  <script init="true">
 	$disco.getInteraction().getSystem().setMax(1);
 	

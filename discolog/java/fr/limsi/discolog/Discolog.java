@@ -58,9 +58,16 @@ public class Discolog extends Agent {
       // this should invoke Prolog planner
       // for now it always returns the answer to make our
       // example work, namely executing "Open"
-      return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
+      //return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
+	   TaskEngine d = candidate.getGoal().getType().getEngine();
+	   Plan p = newPlan(d,"Recovery");
+	   p.add(newPlan(d,"Unlock"));
+	   p.add(newPlan(d,"Open"));
+	   return p;
+	   }
+   private static Plan newPlan (TaskEngine disco, String name) {
+	   return new Plan(disco.getTaskClass(name).newInstance());
    }
-      
    private final List<Plan> candidates = new ArrayList<Plan>();
    
    /**
