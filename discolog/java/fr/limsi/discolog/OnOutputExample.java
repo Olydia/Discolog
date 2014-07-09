@@ -21,7 +21,7 @@ public static void main(String[] args) throws Exception {
 
 	//Struct go  = new Struct("pere", Term.createTerm("theodore"),Term.createTerm("geoffroy"));
 	
-	Theory theory = new Theory(new FileInputStream("C:/Users/ouldouali/Documents/GitHub/Discolog/discolog/prolog/Planner.pl"));
+	Theory theory = new Theory(new FileInputStream("C:/Users/ouldouali/Documents/GitHub/Discolog/discolog/prolog/regression-planner-orig/takeout.pl"));
 	//Theory theory = new Theory(":-consult('new.pl').");
 	try {
 	        engine.setTheory(theory);
@@ -29,12 +29,12 @@ public static void main(String[] args) throws Exception {
 	    } catch (InvalidTheoryException ex) {
 
 	    }
-	Struct goal  = new Struct("test1",new Var("Plan"));
-	SolveInfo info = engine.solve(goal);
+	//Struct goal  = new Struct("test1",new Var("Plan"));
+	SolveInfo info = engine.solve("takeout(X,[1,2,3],L)");
 	System.out.println("trying to write the solution");
 	
 	 if (!info.isSuccess()) 
-		 	System.out.println("no." + goal);
+		 	System.out.println("no." );
 	
 	 else if (!engine.hasOpenAlternatives()) {
 		 	System.out.println(info.getVarValue("Plan"));

@@ -5,7 +5,10 @@ import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskEngine;
 import edu.wpi.disco.*;
 import edu.wpi.disco.Agenda.Plugin;
-
+import alice.tuprolog.Struct;
+import alice.tuprolog.lib.*;
+import alice.tuprolog.event.*;
+import alice.tuprologx.pj.model.Var;
 /**
  * New main class for Discolog that extends default Disco agent to add
  * breakdown detection and recovery.
@@ -60,9 +63,13 @@ public class Discolog extends Agent {
       // example work, namely executing "Open"
       //return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 	   TaskEngine d = candidate.getGoal().getType().getEngine();
-	   Plan p = newPlan(d,"Recovery");
-	   p.add(newPlan(d,"Unlock"));
-	   p.add(newPlan(d,"Open"));
+	   Plan p = newPlan(d,"recovery");
+	   // add a loop to insert the plan repair 
+	   Struct unlock = new Struct("unlock");
+	   Struct open = new Struct("open");
+	   Struct list = new Struct(unlock, open);
+	   p.add(newPlan(d,"unlock"));
+	   p.add(newPlan(d,"open"));
 	   return p;
 	   }
    private static Plan newPlan (TaskEngine disco, String name) {

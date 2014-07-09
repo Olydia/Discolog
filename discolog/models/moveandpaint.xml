@@ -1,10 +1,10 @@
 <taskModel about="urn:limsi.fr:examples:moveandpaint" xmlns="http://ce.org/cea-2018">
 
-	<task id="Move_Paint">
+	<task id="move_paint">
 		<input name="box" type="Box"/>
-		<subtasks id="move_paint">
-			<step name="move" task="Move"/>
-			<step name="paint" task="Paint"/>
+		<subtasks id="movepaint">
+			<step name="move" task="move"/>
+			<step name="paint" task="paint"/>
 			<binding slot="$move.box" value="$this.box"/>
 			<binding slot="$move.from" value="$this.box.location"/>
 			<binding slot="$move.to" value="Room.ENUM.Painting_Room"/>
@@ -12,16 +12,16 @@
 		</subtasks>
 	</task>
    
-	<task id="Move">
+	<task id="move">
 		<input name="box" type="Box" modified="new_box"/>
 		<input name="from" type="Room"/>
 		<input name="to" type="Room"/>
 		<output name="new_box" type="Box"/>
 	
-		<subtasks id="move">
-			<step name="pickup" task="PickUp"/>
-			<step name="walk" task="Walk"/>
-			<step name="putdown" task="PutDown"/>
+		<subtasks id="move_id">
+			<step name="pickup" task="pickup"/>
+			<step name="walk" task="walk"/>
+			<step name="putdown" task="putdown"/>
 			<binding slot="$pickup.box" value="$this.box"/>
 			<binding slot="$walk.box" value="$this.box"/>
 			<binding slot="$walk.from" value="$this.from"/>
@@ -32,11 +32,11 @@
 		</subtasks>
 	</task>
 
-	<task id="PickUp">
+	<task id="pickup">
 		<input name="box" type="Box"/>
 	</task>  
 
-	<task id="Walk">
+	<task id="walk">
 		<input name="box" type="Box" modified ="new_box"/>
 		<input name="from" type="Room"/>
 		<input name="to" type="Room"/>
@@ -52,11 +52,11 @@
 		</script>
 	</task>
   
-	<task id="PutDown">
+	<task id="putdown">
 		<input name="box" type="Box"/>
 	</task>
   
-	<task id="Paint">
+	<task id="paint">
 		<input name="box" type="Box" modified ="new_box"/>
 		<output name="new_box" type="Box"/>
 		<precondition>
@@ -71,18 +71,21 @@
 		</script>
 	</task>
  
-	<task id="Open">
+	<task id="open">
+		<precondition>
+			!isLocked();
+		</precondition>
 		<script>
 			isOpen();
 		</script>
 	</task>
  
-	<task id="Unlock">
+	<task id="unlock">
 		<script>
 			!isLocked();
 		</script>
 	</task>
-	<task id="Recovery"/>
+	<task id="recovery"/>
  
 	<script init="true">
 		$disco.getInteraction().getSystem().setMax(1);
