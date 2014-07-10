@@ -42,7 +42,7 @@ public static void main(String[] args) throws Exception {
 			System.out.println(info);
 	}
 	 Term L = info.getVarValue("L");
-	 System.out.println(L.isList());
+	 System.out.println(L);
 	
 	Theory curTh = engine.getTheory(); // save current theory to file
 	//System.out.println(curTh.toString());
