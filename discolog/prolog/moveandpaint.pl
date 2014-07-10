@@ -151,14 +151,13 @@ unsatisfiable(L) :-
 :- consult('regr_strips.pl').
 % ========================================================================================================================
 % Unlock
-preconditions(unlock(door),[islocked(door)]).
-achieves(unlock(door),not(islocked(door))).
-deletes(unlock(door),islocked(door)).
+preconditions(unlock(D),[islocked(D)]).
+achieves(unlock(D),notislocked(D)).
+deletes(unlock(D),islocked(D)).
 
 % Open
-preconditions(open(door),[not(isopen(door))]).
-achieves(open(door),isopen(door)).
-deletes(open(door),not(isopen(door))).
+preconditions(open(D),[notislocked(D)]).
+achieves(open(D),isopen(D)).
 
 % pickup
 preconditions(pickup(B),[on(B,ground),box(B)]).
@@ -188,6 +187,7 @@ primitive(is_picked(_)).
 primitive(isopen(_)).
 primitive(islocked(_)).
 primitive(painted(_)).
+primitive(notislocked(_)).
 
 holds(box(box1),init).
 holds(room(room1),init).

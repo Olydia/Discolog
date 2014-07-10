@@ -6,7 +6,7 @@
 
 :- op(1200,xfx,[<-]).
 % N.B. we assume that conjunctions are represented as lists.
-% `\=' is the object level not equal.
+% '\=' is the object level not equal.
 :- op(700,xfx, \=).
 
 % solve(G,AS,NS,P) is true if P is a plan to solve goal G that uses 
