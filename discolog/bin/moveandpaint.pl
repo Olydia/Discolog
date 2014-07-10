@@ -147,8 +147,6 @@ unsatisfiable(L) :-
    member(carrying(X2,Y2),L),
    Y1 == Y2,
    \+ (X1=X2).
-
-:- consult('regr_strips.pl').
 % ========================================================================================================================
 % Unlock
 preconditions(unlock(D),[islocked(D)]).
@@ -194,7 +192,7 @@ holds(room(room1),init).
 holds(room(painting_room),init).
 holds(at(box1,room1),init).
 holds(on(box1,ground),init).
-holds(isopen(door),init).
+holds(islocked(door),init).
 
 inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
 inconsistent(is_picked(Y),on(Y,Z)).

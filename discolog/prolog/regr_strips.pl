@@ -92,7 +92,6 @@ strips_filter_derived([A \= B | R],L,L1) :-
    dif(A,B),
    strips_filter_derived(R,L,L1).
 strips_filter_derived([G|R],L0,L2) :-
-   (G <- B),
    strips_filter_derived(R,L0,L1),
    strips_filter_derived(B,L1,L2).
 
