@@ -1,0 +1,209 @@
+
+
+% charger
+strips_preconditions(charger(F,P,A),[at(F,A),at(P,A),avion(P),fret(F),aeroport(A)]).
+strips_achieves(charger(F,P,_),on(F,P)).
+strips_deletes(charger(F,_,A),at(F,A)).
+
+% decharger
+strips_preconditions(decharger(F,P,A),[on(F,P),at(P,A),avion(P),fret(F),aeroport(A)]).
+strips_achieves(decharger(F,_,A),at(F,A)).
+strips_deletes(decharger(F,P,_),on(F,P)).
+
+% voler
+strips_preconditions(voler(P,D,G),[at(P,D),avion(P),aeroport(D),aeroport(G)]).
+strips_achieves(voler(P,_,G),at(P,G)).
+strips_deletes(voler(P,D,_),at(P,D)).
+
+strips_primitive(at(_,_)).
+strips_primitive(on(_,_)).
+strips_primitive(avion(_)).
+strips_primitive(fret(_)).
+strips_primitive(aeroport(_)).
+
+strips_holds(avion(p),init).
+strips_holds(fret(f),init).
+strips_holds(aeroport(cdg),init).
+strips_holds(aeroport(jfk),init).
+
+strips_holds(at(p,cdg),init).
+strips_holds(at(f,cdg),init).
+
+strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+strips_inconsistent(at(Y,X), at(Z,X)) :- not(Z=Y).
+strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+strips_inconsistent(at(Y,X), on(Y,Z)).
+
+strips_achieves(init,X) :-
+   strips_holds(X,init).
+
+test1(Plan):-strips_solve([at(f,jfk)],6,Plan).
+
+
+strips_unsatisfiable(_) :- fail.
+
+
+
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+
+
+% Computational Intelligence: a logical approach. 
+% Prolog Code.
+% A REGRESSION PLANNER FOR ACTIONS IN STRIPS NOTATION
+% WITH LOOP DETECTION + HEURISTIC INFORMATION ON UNSATISFIABLE GOALS
+% Copyright (c) 1998, Poole, Mackworth, Goebel and Oxford University Press.
+
+%:- op(1200,xfx, <-). % force the non-instanciation of x1 and x2 befor computing the implication
+	% but what is this <- operator in SWI ?
+	% It is the <-(X,Y) op, which displays "no default open r session was found"
+	% This operator seem to be used in the R library, which is a swipl library for statistical
+	% processing (see "SWI prolog interface to R" and "R.pl"). The documentation pages mention
+	% the A <- B operator (ah ah !). In R.pl it is defined as "r_in(A<-B)" (which, I assume,
+	% calls the R code...). <- is the variable assignment operator in R.
+	% Solution 1 = load the R.pl file and pray that it works in TU-Prolog
+	%   does not work (compilation errors when loading in any interpreter other than SWI)
+	% Solution 2 = understand what the call to <- does in R
+	%   why the hell do they want to go into R and why this simple affectation works ?
+	% Maybe the idea is just to force the affectation, to say that B is G un-instantiated
+	% (with the 1200 to force the non-computation of G). Whereas the prolog "is" does the
+	% evaluation of G, which is not what we want... Can we do this otherwise in prolog ?
+	% I removed this <- line and simply use B as the head of the resulting list, and it works...
+
+% N.B. we assume that conjunctions are represented as lists.
+% '\=' is the object level not equal.
+%:- op(700,xfx, \=).
+
+% solve(G,AS,NS,P) is true if P is a plan to solve goal G that uses 
+% less than NS steps.
+% G is a list of atomic subgoals. AS is the list of ancestor goal lists.
+
+strips_solve(G,N,P) :-
+   strips_solve(G,[G],N,P).
+
+strips_solve(G,_,_,init) :-
+   strips_solved(G).
+
+strips_solve(G,AS,NAs,do(A,Pl)) :-
+   NAs > 0,
+   strips_satisfiable(G),
+   strips_useful(G,A),
+   strips_wp(G,A,G1),
+   \+ strips_subgoal_loop(G1,AS),
+%   writeln(['Trying ',A,' to solve ',G]),
+%   writeln(['    New subgoals ',G1]),
+   NA1 is NAs-1,
+   strips_solve(G1,[G1|AS],NA1,Pl).
+
+% strips_subgoal_loop(G,AS) is true if we are in a loop of subgoals to solve.
+% This occurs if G is a more difficult to solve goal than one of its ancestors
+strips_subgoal_loop(G1,AS) :-
+    strips_grnd(G1), strips_member(An,AS), strips_subset(An,G1).
+
+% strips_solved(G) is true if goal list G is true initially
+strips_solved([]).
+strips_solved([G|R]) :-
+   strips_holds(G,init),
+   strips_solved(R).
+
+% satisfiable(G) is true if (based on a priori information) it is possible for
+%  goal list G to be true all at once.
+strips_satisfiable(G) :-
+   \+ strips_unsatisfiable(G).
+
+% strips_useful(G,A) is true if action A is useful to solve a goal in goal list G
+% we try first those subgoals that do not hold initially
+strips_useful([S|R],A) :-
+   strips_holds(S,init),
+   strips_useful(R,A).
+strips_useful([S|_],A) :-
+   strips_achieves(A,S).
+strips_useful([S|R],A) :-
+   \+ strips_holds(S,init),
+   strips_useful(R,A).
+
+% domain specific rule about what may be useful to solve even if it was true
+%  initially. 
+strips_useful(G,A) :-
+   strips_member(S,G),
+   strips_member(S,[handempty]), % handempty is the only such goal in this domain
+   strips_holds(S,init),
+   strips_achieves(S,A).
+
+% strips_wp(G,A,G0) is true if G0 is the weakest precondition that needs to hold
+% immediately before action A to ensure that G is true immediately after A
+strips_wp([],A,G1) :-
+   strips_preconditions(A,G),
+   strips_filter_derived(G,[],G1).
+strips_wp([S|R],A,G1) :-
+   strips_wp(R,A,G0),
+   strips_regress(S,A,G0,G1).
+
+% strips_regress(Cond,Act,SG0,SG1) is true if regressing Cond through Act
+% starting with subgoals SG0 produces subgoals SG1
+strips_regress(S,A,G,G) :-
+   strips_achieves(A,S).
+strips_regress(S,A,G,G1) :-
+   strips_primitive(S),
+   \+ strips_achieves(A,S),
+   \+ strips_deletes(A,S),
+   strips_insert(S,G,G1).
+
+strips_filter_derived([],L,L).
+strips_filter_derived([G|R],L,[G|L1]) :-
+   strips_primitive(G),
+   strips_filter_derived(R,L,L1).
+strips_filter_derived([A \= B | R],L,L1) :-
+   dif(A,B),
+   strips_filter_derived(R,L,L1).
+% strips_filter_derived([G|R],L0,L2) :-
+%   (G <- B),
+%   strips_filter_derived(R,L0,L1),
+%   strips_filter_derived(B,L1,L2).
+strips_filter_derived([B|R],L0,L2) :-
+   strips_filter_derived(R,L0,L1),
+   strips_filter_derived(B,L1,L2).
+
+strips_regress_all([],_,G,G).
+strips_regress_all([S|R],A,G0,G2) :-
+   strips_regress(S,A,G0,G1),
+   strips_regress_all(R,A,G1,G2).
+
+% =============================================================================
+
+% strips_member(X,L) is true if X is a member of list L
+strips_member(X,[X|_]).
+strips_member(X,[_|L]) :-
+   strips_member(X,L).
+
+strips_notin(_,[]).
+strips_notin(A,[B|C]) :-
+   dif(A,B),
+   strips_notin(A,C).
+
+% strips_subset(L1,L2) is true if L1 is a subset of list L2
+strips_subset([],_).
+strips_subset([A|B],L) :-
+   strips_member(A,L),
+   strips_subset(B,L).
+
+% writeln(L) is true if L is a list of items to be written on a line, followed by a newline.
+writeln(L) :- \+ \+ (numbervars(L,0,_), writelnw(L) ).
+writelnw([]) :- nl.
+writelnw([H|T]) :- write(H), writeln(T).
+
+% strips_insert(E,L0,L1) inserts E into list L0 producing list L1.
+% If E is already a member it is not added.
+strips_insert(A,[],[A]).
+strips_insert(A,[B|L],[A|L]) :- A==B.
+strips_insert(A,[B|L],[B|R]) :-
+   \+ A == B,
+   strips_insert(A,L,R).
+strips_grnd(G) :-
+   numbervars(G,0,_).
+
