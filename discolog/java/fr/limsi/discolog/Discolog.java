@@ -63,15 +63,31 @@ public class Discolog extends Agent {
       // example work, namely executing "Open"
       //return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 	   TaskEngine d = candidate.getGoal().getType().getEngine();
+	   
 	   Plan p = newPlan(d,"recovery");
 	   // add a loop to insert the plan repair 
+
+	   /* hard-coded plan repair */
 	   Struct unlock = new Struct("unlock");
 	   Struct open = new Struct("open");
 	   Struct list = new Struct(unlock, open);
-	   p.add(newPlan(d,"unlock"));
-	   p.add(newPlan(d,"open"));
+	   
+	   /* soft-coded */
+	   // 1. inject current state into prolog
+	   // 2. inject goal
+	   // 3. call the planner
+	   // 4. decompose the output into actions
+	   // 5. transform this into Java 
+	  
+	   /* inject the plan into Disco */
+	   for(int i=0;i<list.listSize(); i++) {
+		   p.add(newPlan(d,list.getArg(i).toString()));
+		   // later, if we work at order 1, we will need to look in the term for the arguments...
+	   }
+	   
 	   return p;
 	   }
+  
    private static Plan newPlan (TaskEngine disco, String name) {
 	   return new Plan(disco.getTaskClass(name).newInstance());
    }

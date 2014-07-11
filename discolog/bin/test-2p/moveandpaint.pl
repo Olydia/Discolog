@@ -1,13 +1,102 @@
+% ========================================================================================================================
+% paint
+strips_preconditions(paint(B,painting_room),[at(B,painting_room),on(B,ground),box(B),room(painting_room)]).
+strips_achieves(paint(B,_),painted(B)).
+
+% Walk
+strips_preconditions(walk(B,From,painting_room),[is_picked(B),at(B,From),isopen,box(B),room(painting_room),room(From)]).
+strips_achieves(walk(B,_,painting_room),at(B,painting_room)).
+strips_deletes(walk(B,From,_),at(B,From)).
+
+% Open
+strips_preconditions(open,[notislocked]).
+strips_achieves(open,isopen).
+
+% Unlock
+strips_preconditions(unlock,[islocked]).
+strips_achieves(unlock,notislocked).
+strips_deletes(unlock,islocked).
+
+% pickup
+strips_preconditions(pickup(B),[on(B,ground),box(B)]).
+strips_achieves(pickup(B),is_picked(B)).
+strips_deletes(pickup(B),on(B,ground)).
+
+
+
+% putDown
+strips_preconditions(putdown(B),[is_picked(B), box(B)]).
+strips_achieves(putdown(B),on(B,ground)).
+strips_deletes(putdown(B),is_picked(B)).
+
+
+
+
+strips_primitive(at(_,_)).
+strips_primitive(on(_,_)).
+strips_primitive(box(_)).
+strips_primitive(room(_)).
+strips_primitive(is_picked(_)).
+strips_primitive(isopen).
+strips_primitive(islocked).
+strips_primitive(painted(_)).
+strips_primitive(notislocked).
+
+strips_holds(box(box1),init).
+strips_holds(room(room1),init).
+strips_holds(room(painting_room),init).
+strips_holds(at(box1,room1),init).
+strips_holds(on(box1,ground),init).
+strips_holds(islocked,init).
+
+strips_inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
+strips_inconsistent(is_picked(Y),on(Y,Z)).
+
+strips_achieves(init,X) :-
+   strips_holds(X,init).
+
+test1(Plan):- strips_solve([painted(box1)],20,Plan).
+
+
+
+strips_unsatisfiable(_) :- fail.
+
+
+
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+
+
 % Computational Intelligence: a logical approach. 
 % Prolog Code.
 % A REGRESSION PLANNER FOR ACTIONS IN STRIPS NOTATION
 % WITH LOOP DETECTION + HEURISTIC INFORMATION ON UNSATISFIABLE GOALS
 % Copyright (c) 1998, Poole, Mackworth, Goebel and Oxford University Press.
 
-:- op(1200,xfx,[<-]).
+%:- op(1200,xfx, <-). % force the non-instanciation of x1 and x2 befor computing the implication
+	% but what is this <- operator in SWI ?
+	% It is the <-(X,Y) op, which displays "no default open r session was found"
+	% This operator seem to be used in the R library, which is a swipl library for statistical
+	% processing (see "SWI prolog interface to R" and "R.pl"). The documentation pages mention
+	% the A <- B operator (ah ah !). In R.pl it is defined as "r_in(A<-B)" (which, I assume,
+	% calls the R code...). <- is the variable assignment operator in R.
+	% Solution 1 = load the R.pl file and pray that it works in TU-Prolog
+	%   does not work (compilation errors when loading in any interpreter other than SWI)
+	% Solution 2 = understand what the call to <- does in R
+	%   why the hell do they want to go into R and why this simple affectation works ?
+	% Maybe the idea is just to force the affectation, to say that B is G un-instantiated
+	% (with the 1200 to force the non-computation of G). Whereas the prolog "is" does the
+	% evaluation of G, which is not what we want... Can we do this otherwise in prolog ?
+	% I removed this <- line and simply use B as the head of the resulting list, and it works...
+
 % N.B. we assume that conjunctions are represented as lists.
 % '\=' is the object level not equal.
-:- op(700,xfx, \=).
+%:- op(700,xfx, \=).
 
 % solve(G,AS,NS,P) is true if P is a plan to solve goal G that uses 
 % less than NS steps.
@@ -91,7 +180,11 @@ strips_filter_derived([G|R],L,[G|L1]) :-
 strips_filter_derived([A \= B | R],L,L1) :-
    dif(A,B),
    strips_filter_derived(R,L,L1).
-strips_filter_derived([G|R],L0,L2) :-
+% strips_filter_derived([G|R],L0,L2) :-
+%   (G <- B),
+%   strips_filter_derived(R,L0,L1),
+%   strips_filter_derived(B,L1,L2).
+strips_filter_derived([B|R],L0,L2) :-
    strips_filter_derived(R,L0,L1),
    strips_filter_derived(B,L1,L2).
 

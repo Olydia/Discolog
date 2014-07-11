@@ -1,6 +1,8 @@
 package fr.limsi.discolog;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+
 import alice.tuprolog.*;
 import alice.tuprolog.lib.*;
 import alice.tuprolog.event.*;
@@ -19,19 +21,15 @@ public static void main(String[] args) throws Exception {
 		});
 	
 
-	//Struct go  = new Struct("pere", Term.createTerm("theodore"),Term.createTerm("geoffroy"));
-	
-	Theory theory = new Theory(new FileInputStream("C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/regression-planner-orig/takeout.pl"));
+	Theory theory = new Theory(new FileInputStream("C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
 	//Theory theory = new Theory(":-consult('new.pl').");
 	try {
 	        engine.setTheory(theory);
-	        //engine.addTheory(new Theory(go.toString()+"."));
 	    } catch (InvalidTheoryException ex) {
 
 	    }
-	Struct goal  = new Struct("takeout",new Var("X"),new Var("L"));
-	SolveInfo info = engine.solve("takeout(X,[1,2,3],L).");
-	System.out.println("trying to write the solution");
+	Struct goal  = new Struct("test1",new Var("X"));
+	SolveInfo info = engine.solve(goal);
 	
 	 if (!info.isSuccess()) 
 		 	System.out.println("no." );
@@ -39,11 +37,21 @@ public static void main(String[] args) throws Exception {
 	 else if (!engine.hasOpenAlternatives()) {
 		 	System.out.println(info);
 	} else {// main case
-			System.out.println(info);
+			System.out.println(info.getSolution());
 	}
-	 Term L = info.getVarValue("L");
-	 System.out.println(L);
-	
+	 /*String Plan = info.getVarValue("X").toString();
+	//System.out.println(Plan);
+	System.out.println("Return Value :" );
+	ArrayList<String> JavaPlan = new ArrayList<String>();
+    for (String retval: Plan.split(",")){
+    	JavaPlan.add(retval);
+    	
+    }
+    //System.out.println(JavaPlan);
+    for (String retval: Plan.split("do")){
+    	//JavaPlan.add(retval);
+    	//System.out.println(retval);
+    }*/
 	Theory curTh = engine.getTheory(); // save current theory to file
 	//System.out.println(curTh.toString());
 	

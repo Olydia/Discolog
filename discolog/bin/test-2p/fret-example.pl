@@ -1,13 +1,83 @@
+
+
+% charger
+strips_preconditions(charger(F,P,A),[at(F,A),at(P,A),avion(P),fret(F),aeroport(A)]).
+strips_achieves(charger(F,P,_),on(F,P)).
+strips_deletes(charger(F,_,A),at(F,A)).
+
+% decharger
+strips_preconditions(decharger(F,P,A),[on(F,P),at(P,A),avion(P),fret(F),aeroport(A)]).
+strips_achieves(decharger(F,_,A),at(F,A)).
+strips_deletes(decharger(F,P,_),on(F,P)).
+
+% voler
+strips_preconditions(voler(P,D,G),[at(P,D),avion(P),aeroport(D),aeroport(G)]).
+strips_achieves(voler(P,_,G),at(P,G)).
+strips_deletes(voler(P,D,_),at(P,D)).
+
+strips_primitive(at(_,_)).
+strips_primitive(on(_,_)).
+strips_primitive(avion(_)).
+strips_primitive(fret(_)).
+strips_primitive(aeroport(_)).
+
+strips_holds(avion(p),init).
+strips_holds(fret(f),init).
+strips_holds(aeroport(cdg),init).
+strips_holds(aeroport(jfk),init).
+
+strips_holds(at(p,cdg),init).
+strips_holds(at(f,cdg),init).
+
+strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+strips_inconsistent(at(Y,X), at(Z,X)) :- not(Z=Y).
+strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
+strips_inconsistent(at(Y,X), on(Y,Z)).
+
+strips_achieves(init,X) :-
+   strips_holds(X,init).
+
+test1(Plan):-strips_solve([at(f,jfk)],6,Plan).
+
+
+strips_unsatisfiable(_) :- fail.
+
+
+
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+% =============================================================
+
+
 % Computational Intelligence: a logical approach. 
 % Prolog Code.
 % A REGRESSION PLANNER FOR ACTIONS IN STRIPS NOTATION
 % WITH LOOP DETECTION + HEURISTIC INFORMATION ON UNSATISFIABLE GOALS
 % Copyright (c) 1998, Poole, Mackworth, Goebel and Oxford University Press.
 
-:- op(1200,xfx,[<-]).
+%:- op(1200,xfx, <-). % force the non-instanciation of x1 and x2 befor computing the implication
+	% but what is this <- operator in SWI ?
+	% It is the <-(X,Y) op, which displays "no default open r session was found"
+	% This operator seem to be used in the R library, which is a swipl library for statistical
+	% processing (see "SWI prolog interface to R" and "R.pl"). The documentation pages mention
+	% the A <- B operator (ah ah !). In R.pl it is defined as "r_in(A<-B)" (which, I assume,
+	% calls the R code...). <- is the variable assignment operator in R.
+	% Solution 1 = load the R.pl file and pray that it works in TU-Prolog
+	%   does not work (compilation errors when loading in any interpreter other than SWI)
+	% Solution 2 = understand what the call to <- does in R
+	%   why the hell do they want to go into R and why this simple affectation works ?
+	% Maybe the idea is just to force the affectation, to say that B is G un-instantiated
+	% (with the 1200 to force the non-computation of G). Whereas the prolog "is" does the
+	% evaluation of G, which is not what we want... Can we do this otherwise in prolog ?
+	% I removed this <- line and simply use B as the head of the resulting list, and it works...
+
 % N.B. we assume that conjunctions are represented as lists.
 % '\=' is the object level not equal.
-:- op(700,xfx, \=).
+%:- op(700,xfx, \=).
 
 % solve(G,AS,NS,P) is true if P is a plan to solve goal G that uses 
 % less than NS steps.
@@ -91,7 +161,11 @@ strips_filter_derived([G|R],L,[G|L1]) :-
 strips_filter_derived([A \= B | R],L,L1) :-
    dif(A,B),
    strips_filter_derived(R,L,L1).
-strips_filter_derived([G|R],L0,L2) :-
+% strips_filter_derived([G|R],L0,L2) :-
+%   (G <- B),
+%   strips_filter_derived(R,L0,L1),
+%   strips_filter_derived(B,L1,L2).
+strips_filter_derived([B|R],L0,L2) :-
    strips_filter_derived(R,L0,L1),
    strips_filter_derived(B,L1,L2).
 

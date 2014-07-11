@@ -149,13 +149,13 @@ unsatisfiable(L) :-
    \+ (X1=X2).
 % ========================================================================================================================
 % Unlock
-preconditions(unlock(D),[islocked(D)]).
-achieves(unlock(D),notislocked(D)).
-deletes(unlock(D),islocked(D)).
+preconditions(unlock,[islocked]).
+achieves(unlock,notislocked).
+deletes(unlock,islocked).
 
 % Open
-preconditions(open(D),[notislocked(D)]).
-achieves(open(D),isopen(D)).
+preconditions(open,[notislocked]).
+achieves(open,isopen).
 
 % pickup
 preconditions(pickup(B),[on(B,ground),box(B)]).
@@ -163,7 +163,7 @@ achieves(pickup(B),is_picked(B)).
 deletes(pickup(B),on(B,ground)).
 
 % Walk
-preconditions(walk(B,From,painting_room),[is_picked(B),at(B,From),isopen(door),box(B),room(painting_room),room(From)]).
+preconditions(walk(B,From,painting_room),[is_picked(B),at(B,From),isopen,box(B),room(painting_room),room(From)]).
 achieves(walk(B,_,painting_room),at(B,painting_room)).
 deletes(walk(B,From,_),at(B,From)).
 
@@ -182,17 +182,17 @@ primitive(on(_,_)).
 primitive(box(_)).
 primitive(room(_)).
 primitive(is_picked(_)).
-primitive(isopen(_)).
-primitive(islocked(_)).
+primitive(isopen).
+primitive(islocked).
 primitive(painted(_)).
-primitive(notislocked(_)).
+primitive(notislocked).
 
 holds(box(box1),init).
 holds(room(room1),init).
 holds(room(painting_room),init).
 holds(at(box1,room1),init).
 holds(on(box1,ground),init).
-holds(islocked(door),init).
+holds(islocked,init).
 
 inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
 inconsistent(is_picked(Y),on(Y,Z)).
