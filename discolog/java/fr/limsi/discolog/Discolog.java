@@ -1,14 +1,10 @@
 package fr.limsi.discolog;
 
 import java.util.*;
-import edu.wpi.cetask.Plan;
-import edu.wpi.cetask.TaskEngine;
-import edu.wpi.disco.*;
-import edu.wpi.disco.Agenda.Plugin;
 import alice.tuprolog.Struct;
-import alice.tuprolog.lib.*;
-import alice.tuprolog.event.*;
-import alice.tuprologx.pj.model.Var;
+import edu.wpi.cetask.*;
+import edu.wpi.disco.Agenda.Plugin;
+import edu.wpi.disco.*;
 /**
  * New main class for Discolog that extends default Disco agent to add
  * breakdown detection and recovery.
@@ -36,25 +32,29 @@ public class Discolog extends Agent {
    
    public Discolog (String name) { super(name); } 
    
-   private void recover (Interaction interaction) {
+   /**
+    * Return true iff recovery found
+    */
+   private boolean recover (Interaction interaction) {
       candidates.clear();
       findCandidates(interaction.getDisco().getTops());
-      if ( candidates.isEmpty() )
+      if ( candidates.isEmpty() ) {
          System.out.println("No recovery candidates!");
-      else { 
-         for (Plan candidate : candidates) { 
-            Plan recovery = invokePlanner(candidate);
-            if ( recovery != null ) {
-               System.out.println("Found recovery plan for "+candidate);
-               Disco disco = interaction.getDisco();
-               // splice in recovery plan
-               disco.getFocus().add(recovery);
-               recovery.setContributes(true); // so not interruption
-               return;
-            }
-         }
-         System.out.println("No recovery plans found!");
+         return false;
       }
+      // TODO: If more than one way to recover, how to choose?
+      for (Plan candidate : candidates) { 
+         Plan recovery = invokePlanner(candidate);
+         if ( recovery != null ) {
+            System.out.println("Found recovery plan for "+candidate);
+            // splice in recovery plan
+            interaction.getFocus().add(recovery);
+            recovery.setContributes(true); // so not interruption
+            return true;
+         }
+      }
+      System.out.println("No recovery plans found!");
+      return false;
    }
   
    private Plan invokePlanner (Plan candidate) {
@@ -79,14 +79,18 @@ public class Discolog extends Agent {
 	   // 4. decompose the output into actions
 	   // 5. transform this into Java 
 	  
-	   /* inject the plan into Disco */
-	   for(int i=0;i<list.listSize(); i++) {
-		   p.add(newPlan(d,list.getArg(i).toString()));
-		   // later, if we work at order 1, we will need to look in the term for the arguments...
+	   if ( candidate.isFailed() ) {
+	      // TODO: recovery plan needs to be inserted differently
+	      //       (more like retry)
+	   } else {
+	      /* inject the plan into Disco */
+	      for(int i=0;i<list.listSize(); i++) {
+	         p.add(newPlan(d,list.getArg(i).toString()));
+	         // later, if we work at order 1, we will need to look in the term for the arguments...
+	      }
 	   }
-	   
 	   return p;
-	   }
+   }
   
    private static Plan newPlan (TaskEngine disco, String name) {
 	   return new Plan(disco.getTaskClass(name).newInstance());
@@ -94,14 +98,18 @@ public class Discolog extends Agent {
    private final List<Plan> candidates = new ArrayList<Plan>();
    
    /**
-    * @return candidates for recovery planning target.
-    * 
-    * First cut approach: plans in given tree that are neither done nor live
-    * nor blocked (which means that their precondition must be false)
+    * @return candidates for recovery planning target in given tree
     */
    private void findCandidates (List<Plan> children) {
       for (Plan plan : children) {
-         if ( !(plan.isDone() || plan.isLive() || plan.isBlocked()) ) candidates.add(plan);
+         // if plan is neither done nor live nor blocked
+         // then its precondition must be false
+         if ( !(plan.isDone() || plan.isLive() || plan.isBlocked()) ) 
+            candidates.add(plan);
+         // if plan failed and it has a postcondition then that
+         // postcondition could be a planning target
+         if ( plan.isFailed() && plan.getGoal().getType().getPostcondition() != null )
+            candidates.add(plan);
          findCandidates(plan.getChildren());
       }
    }
@@ -109,8 +117,13 @@ public class Discolog extends Agent {
    @Override
    public Plugin.Item respondIf (Interaction interaction, boolean guess) {
       Plugin.Item item = super.respondIf(interaction, guess);
-      // if nothing to do, then we have a breakdown to recover from
-      if ( item == null ) recover(interaction); 
-      return item;
+      // if current toplevel goal is not done and we have
+      // nothing to do, then we have a breakdown to recover from
+      Plan focus = interaction.getFocus();
+      if ( focus != null && !interaction.getDisco().getTop(focus).isDone() && item == null ) {
+         if ( recover(interaction) ) 
+            return super.respondIf(interaction, guess);  // new response with new plan
+         else return null;
+      } else return item;
    }
 }
