@@ -2,6 +2,7 @@ package fr.limsi.discolog;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import alice.tuprolog.*;
 import alice.tuprolog.lib.*;
@@ -40,19 +41,18 @@ public static void main(String[] args) throws Exception {
 			System.out.println(info.getSolution());
 	}
 	 String Plan = info.getVarValue("X").toString();
-	//System.out.println(Plan);
 	System.out.println("Return Value :" );
 	ArrayList<String> JavaPlan = new ArrayList<String>();
-    for (String retval: Plan.split(",")){
+    for (String retval: Plan.split(",do\\(")){
     	JavaPlan.add(retval);
     	
     }
+    
+    System.out.println(JavaPlan);
     //System.out.println(JavaPlan);
-    for (String retval: Plan.split("")){
-    	JavaPlan.add(retval);
-    	System.out.println(retval);
-    }
-	Theory curTh = engine.getTheory(); // save current theory to file
+    Collections.reverse(JavaPlan);
+    System.out.println(JavaPlan);
+   Theory curTh = engine.getTheory(); // save current theory to file
 	//System.out.println(curTh.toString());
 	
 		}
