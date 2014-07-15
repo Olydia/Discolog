@@ -22,15 +22,10 @@ strips_preconditions(pickup(B),[on(B,ground),box(B)]).
 strips_achieves(pickup(B),is_picked(B)).
 strips_deletes(pickup(B),on(B,ground)).
 
-
-
 % putDown
 strips_preconditions(putdown(B),[is_picked(B), box(B)]).
 strips_achieves(putdown(B),on(B,ground)).
 strips_deletes(putdown(B),is_picked(B)).
-
-
-
 
 strips_primitive(at(_,_)).
 strips_primitive(on(_,_)).
@@ -55,9 +50,7 @@ strips_inconsistent(is_picked(Y),on(Y,Z)).
 strips_achieves(init,X) :-
    strips_holds(X,init).
 
-test1(Plan):- strips_solve([painted(box1)],20,Plan).
-
-
+test1(Plan):- strips_solve([painted(box1)],7,Plan).
 
 strips_unsatisfiable(_) :- fail.
 

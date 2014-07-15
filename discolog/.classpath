@@ -13,7 +13,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/ouldouali/Documents/GitHub/Disco/release/lib/disco-api.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/javassist.jar"/>
 	<classpathentry kind="lib" path="lib/tuprolog.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

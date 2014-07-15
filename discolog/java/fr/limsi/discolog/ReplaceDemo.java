@@ -9,7 +9,7 @@ public class ReplaceDemo {
 		           +"do(walk(box1, room1, painting_room), do(pickup(box1),"
                    +" do(open, do(unlock, init))))))";
 
-		Pattern p = Pattern.compile("(^do()(.*)()$)");
+		Pattern p = Pattern.compile("(^do()(.*))");
 		Matcher m = p.matcher(input);
 
 		StringBuffer result = new StringBuffer();

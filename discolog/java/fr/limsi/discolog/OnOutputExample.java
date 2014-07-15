@@ -22,7 +22,7 @@ public static void main(String[] args) throws Exception {
 	
 
 	Theory theory = new Theory(new FileInputStream("C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
-	//Theory theory = new Theory(":-consult('new.pl').");
+	//Theory theory = new Theory(":-consult('moveandpaint.pl').");
 	try {
 	        engine.setTheory(theory);
 	    } catch (InvalidTheoryException ex) {
@@ -39,7 +39,7 @@ public static void main(String[] args) throws Exception {
 	} else {// main case
 			System.out.println(info.getSolution());
 	}
-	 /*String Plan = info.getVarValue("X").toString();
+	 String Plan = info.getVarValue("X").toString();
 	//System.out.println(Plan);
 	System.out.println("Return Value :" );
 	ArrayList<String> JavaPlan = new ArrayList<String>();
@@ -48,10 +48,10 @@ public static void main(String[] args) throws Exception {
     	
     }
     //System.out.println(JavaPlan);
-    for (String retval: Plan.split("do")){
-    	//JavaPlan.add(retval);
-    	//System.out.println(retval);
-    }*/
+    for (String retval: Plan.split("")){
+    	JavaPlan.add(retval);
+    	System.out.println(retval);
+    }
 	Theory curTh = engine.getTheory(); // save current theory to file
 	//System.out.println(curTh.toString());
 	
