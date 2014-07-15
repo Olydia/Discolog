@@ -37,12 +37,8 @@ strips_primitive(islocked).
 strips_primitive(painted(_)).
 strips_primitive(notislocked).
 
-strips_holds(box(box1),init).
-strips_holds(room(room1),init).
-strips_holds(room(painting_room),init).
-strips_holds(at(box1,room1),init).
-strips_holds(on(box1,ground),init).
-strips_holds(islocked,init).
+
+% strips_holds(islocked,init).
 
 strips_inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
 strips_inconsistent(is_picked(Y),on(Y,Z)).
@@ -50,7 +46,7 @@ strips_inconsistent(is_picked(Y),on(Y,Z)).
 strips_achieves(init,X) :-
    strips_holds(X,init).
 
-test1(Plan):- strips_solve([painted(box1)],7,Plan).
+% test1(Plan):- strips_solve([isopen],7,Plan).
 
 strips_unsatisfiable(_) :- fail.
 

@@ -1,52 +1,20 @@
-% ========================================================================================================================
-% paint
-strips_preconditions(paint(B,painting_room),[at(B,painting_room),on(B,ground),box(B),room(painting_room)]).
-strips_achieves(paint(B,_),painted(B)).
 
-% Walk
-strips_preconditions(walk(B,From,painting_room),[is_picked(B),at(B,From),isopen,box(B),room(painting_room),room(From)]).
-strips_achieves(walk(B,_,painting_room),at(B,painting_room)).
-strips_deletes(walk(B,From,_),at(B,From)).
-
-% Open
-strips_preconditions(open,[notislocked]).
-strips_achieves(open,isopen).
-
-% Unlock
-strips_preconditions(unlock,[islocked]).
-strips_achieves(unlock,notislocked).
-strips_deletes(unlock,islocked).
-
-% pickup
-strips_preconditions(pickup(B),[on(B,ground),box(B)]).
-strips_achieves(pickup(B),is_picked(B)).
-strips_deletes(pickup(B),on(B,ground)).
-
-% putDown
-strips_preconditions(putdown(B),[is_picked(B), box(B)]).
-strips_achieves(putdown(B),on(B,ground)).
-strips_deletes(putdown(B),is_picked(B)).
+strips_preconditions(move(X,Y,_),[at(monkey,Y),at(X,Y)]).
+strips_achieves(move(X,_,Z),at(X,Z)).
+strips_achieves(move(_,_,Z),at(monkey,Z)).
+strips_deletes(move(X,Y,_),at(X,Y)).
+strips_deletes(move(_,Y,_),at(monkey,Y)).
 
 strips_primitive(at(_,_)).
-strips_primitive(on(_,_)).
-strips_primitive(box(_)).
-strips_primitive(room(_)).
-strips_primitive(is_picked(_)).
-strips_primitive(isopen).
-strips_primitive(islocked).
-strips_primitive(painted(_)).
-strips_primitive(notislocked).
 
-
-% strips_holds(islocked,init).
-
-strips_inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
-strips_inconsistent(is_picked(Y),on(Y,Z)).
-
+strips_holds(at(banana,a),init).
+strips_holds(at(monkey,b),init).
+strips_holds(at(box,c),init).
 strips_achieves(init,X) :-
    strips_holds(X,init).
 
-% test1(Plan):- strips_solve([isopen],7,Plan).
+test1(Plan):-strips_solve([at(box,a)],2,Plan).
+
 
 strips_unsatisfiable(_) :- fail.
 

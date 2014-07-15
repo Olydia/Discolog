@@ -5,10 +5,7 @@ import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskEngine;
 import edu.wpi.disco.*;
 import edu.wpi.disco.Agenda.Plugin;
-import alice.tuprolog.Struct;
-import alice.tuprolog.lib.*;
-import alice.tuprolog.event.*;
-import alice.tuprologx.pj.model.Var;
+
 /**
  * New main class for Discolog that extends default Disco agent to add
  * breakdown detection and recovery.
@@ -39,6 +36,7 @@ public class Discolog extends Agent {
    private void recover (Interaction interaction) {
       candidates.clear();
       findCandidates(interaction.getDisco().getTops());
+      System.out.println(interaction.getDisco().getTops());
       if ( candidates.isEmpty() )
          System.out.println("No recovery candidates!");
       else { 
@@ -63,31 +61,11 @@ public class Discolog extends Agent {
       // example work, namely executing "Open"
       //return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 	   TaskEngine d = candidate.getGoal().getType().getEngine();
-	   
 	   Plan p = newPlan(d,"recovery");
-	   // add a loop to insert the plan repair 
-
-	   /* hard-coded plan repair */
-	   Struct unlock = new Struct("unlock");
-	   Struct open = new Struct("open");
-	   Struct list = new Struct(unlock, open);
-	   
-	   /* soft-coded */
-	   // 1. inject current state into prolog
-	   // 2. inject goal
-	   // 3. call the planner
-	   // 4. decompose the output into actions
-	   // 5. transform this into Java 
-	  
-	   /* inject the plan into Disco */
-	   for(int i=0;i<list.listSize(); i++) {
-		   p.add(newPlan(d,list.getArg(i).toString()));
-		   // later, if we work at order 1, we will need to look in the term for the arguments...
-	   }
-	   
+	   p.add(newPlan(d,"unlock"));
+	   p.add(newPlan(d,"open"));
 	   return p;
 	   }
-  
    private static Plan newPlan (TaskEngine disco, String name) {
 	   return new Plan(disco.getTaskClass(name).newInstance());
    }
