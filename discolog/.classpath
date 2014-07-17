@@ -8,9 +8,9 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/discolog/lib/2p-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/disco.jar" sourcepath="C:/Users/ouldouali/Documents/GitHub/Disco/release/lib/disco-src.zip">
+	<classpathentry kind="lib" path="lib/disco.jar" sourcepath="lib/disco-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/ouldouali/Documents/GitHub/Disco/release/lib/disco-api.zip!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/discolog/lib/disco-api.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/tuprolog.jar"/>

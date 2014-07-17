@@ -1,0 +1,23 @@
+    # 17 juil. 2014 15:16:36 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/moveandpaint.xml
+  > task move_paint / BOX1
+    User says "Let's achieve move_paint on box1[room1,false]."
+    Agent execute pickup on box1[room1,false].
+    Agent says "Ok."
+  > eval OPEN = false
+    # Returned 'false'
+  > next
+    Agent says "Ok."
+  > next
+    Agent execute unlock.
+    Agent says "Ok."
+  > next
+    Agent execute open.
+    Agent says "Ok."
+  > next
+    Agent execute recovery.
+    Agent says "Ok."
+  > next
+    Agent says "Ok."
+  > 

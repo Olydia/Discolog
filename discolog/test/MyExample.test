@@ -1,0 +1,3 @@
+load models/moveandpaint.xml
+task move_paint / BOX1
+next

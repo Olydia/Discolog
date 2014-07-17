@@ -44,8 +44,7 @@
 		
 		<precondition> isOpen() </precondition> 
 		<postcondition sufficient="true"> 
-			($this.new_box != undefined &amp;&amp; $this.to != undefined) ? 
-				($this.new_box.location == $this.to) : undefined 
+				$this.new_box.location == $this.to
 		</postcondition> 
 		<script>
 				$this.new_box.location = $this.to;
@@ -60,12 +59,11 @@
 		<input name="box" type="Box" modified ="new_box"/>
 		<output name="new_box" type="Box"/>
 		<precondition>
-			($this.box != undefined ) ? 
-				($this.box.location == Room.ENUM.Painting_Room) : undefined 
+				$this.box.location == Room.ENUM.Painting_Room
 		</precondition>
 		<postcondition sufficient="true"> 
-			($this.new_box != undefined ) ? 
-				($this.new_box.paint) : undefined </postcondition>
+				$this.new_box.paint 
+		</postcondition>
 		<script>
 			$this.new_box.paint = true;
 		</script>
@@ -76,13 +74,13 @@
 			!isLocked();
 		</precondition>
 		<script>
-			isOpen();
+			OPEN = true;
 		</script>
 	</task>
  
 	<task id="unlock">
 		<script>
-			!isLocked();
+			LOCKED = false;
 		</script>
 	</task>
 	<task id="recovery"/>
@@ -117,8 +115,8 @@
 		var OPEN = true;
 		var LOCKED = false;
 		var LOCATION = Room.ENUM.Room1; 
-		function isOpen () { return OPEN; }
-		function isLocked () { return LOCKED; }
+		function isOpen() { return OPEN; }
+		function isLocked() { return LOCKED; }
 		
 	</script>  
 </taskModel>

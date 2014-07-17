@@ -31,7 +31,6 @@ public class Discolog extends Agent {
 		// restrict to performing only a single primitive action on each turn
 		// so we have more control over example
 		agent.setMax(1);
-		TaskEngine.DEBUG = true;
 		Interaction interaction = new Interaction(agent, new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.start(true);
@@ -42,6 +41,7 @@ public class Discolog extends Agent {
 
 	public Discolog(String name) {
 		super(name);
+		TaskEngine.DEBUG = true;
 	}
 
 	private void recover(Interaction interaction) throws FileNotFoundException, Exception {
@@ -102,7 +102,7 @@ public class Discolog extends Agent {
 	 */
 	private void findCandidates(List<Plan> children) {
 		for (Plan plan : children) {
-			if (!(plan.isDone() || plan.isLive() || plan.isBlocked()))
+			if (!(plan.isDone() || plan.isLive() || plan.isBlocked() || plan.isFailed()))
 				candidates.add(plan);
 			findCandidates(plan.getChildren());
 		}
