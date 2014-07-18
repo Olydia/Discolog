@@ -65,7 +65,8 @@
 				$this.new_box.paint 
 		</postcondition>
 		<script>
-			$this.new_box.paint = true;
+			$this.new_box.paint = !FIRST_PAINT;
+			FIRST_PAINT = false;
 		</script>
 	</task>
  
@@ -114,6 +115,7 @@
 		// state variables
 		var OPEN = true;
 		var LOCKED = false;
+		var FIRST_PAINT = true;
 		var LOCATION = Room.ENUM.Room1; 
 		function isOpen() { return OPEN; }
 		function isLocked() { return LOCKED; }

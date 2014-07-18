@@ -2,19 +2,18 @@ package fr.limsi.discolog;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import alice.tuprolog.InvalidTheoryException;
-import alice.tuprolog.Prolog;
-import alice.tuprolog.SolveInfo;
 import alice.tuprolog.Struct;
-import alice.tuprolog.Theory;
-import alice.tuprolog.Var;
-import edu.wpi.cetask.Plan;
-import edu.wpi.cetask.TaskEngine;
-import edu.wpi.disco.*;
+import edu.wpi.cetask.*;
 import edu.wpi.disco.Agenda.Plugin;
+import edu.wpi.disco.*;
+import edu.wpi.disco.Agent;
+import alice.tuprolog.*;
+import alice.tuprolog.lib.*;
+import alice.tuprolog.event.*;
 
 /**
  * New main class for Discolog that extends default Disco agent to add breakdown
@@ -44,13 +43,14 @@ public class Discolog extends Agent {
 		TaskEngine.DEBUG = true;
 	}
 
-	private void recover(Interaction interaction) throws FileNotFoundException, Exception {
+	private boolean recover(Interaction interaction){
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());
-		if (candidates.isEmpty())
+		if (candidates.isEmpty()) {
 			System.out.println("No recovery candidates!");
-		else {
+			return false;
+		} else {
 			for (Plan candidate : candidates) {
 				Plan recovery = invokePlanner(candidate);
 				if (recovery != null) {
@@ -59,14 +59,15 @@ public class Discolog extends Agent {
 					// splice in recovery plan
 					disco.getFocus().add(recovery);
 					recovery.setContributes(true); // so not interruption
-					return;
+					return true;
 				}
 			}
 			System.out.println("No recovery plans found!");
+			return false;
 		}
 	}
 
-	private Plan invokePlanner(Plan candidate) throws Exception, FileNotFoundException, Exception {
+	private Plan invokePlanner(Plan candidate) {
 		// this should invoke Prolog planner
 		// for now it always returns the answer to make our
 		// example work, namely executing "Open"
@@ -74,16 +75,23 @@ public class Discolog extends Agent {
 		// Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		 String Goal = "isopen";
-		 String initial = "islocked";
-		 JavaPlan = CallStripsPlanner(initial,Goal);
-		 Plan p = newPlan(d, "recovery");
-		 for(int i=0;i<JavaPlan.size()-1; i++) {
-			 p.add(newPlan(d,JavaPlan.get(i)));
-		 }
-		//p.add(candidate);
-		/*p.add(newPlan(d, "unlock"));
-		p.add(newPlan(d, "open"));*/
+		String Goal = "isopen";
+		String initial = "islocked";
+		JavaPlan = CallStripsPlanner(initial, Goal);
+		Plan p = newPlan(d, "recovery");
+		for (int i = 0; i < JavaPlan.size() - 1; i++) {
+			p.add(newPlan(d, JavaPlan.get(i)));
+		}
+		if (candidate.isFailed()){
+			for( Plan s: candidate.getSuccessors()) {
+				s.requires(p);
+				s.unrequires(candidate);
+			}
+		}
+		// p.add(candidate);
+		/*
+		 * p.add(newPlan(d, "unlock")); p.add(newPlan(d, "open"));
+		 */
 		return p;
 	}
 
@@ -102,27 +110,34 @@ public class Discolog extends Agent {
 	 */
 	private void findCandidates(List<Plan> children) {
 		for (Plan plan : children) {
-			if (!(plan.isDone() || plan.isLive() || plan.isBlocked() || plan.isFailed()))
+			if (!(plan.isDone() || plan.isLive() || plan.isBlocked()) 
+			    || plan.isFailed() 
+			    || (plan.isLive() && !plan.isPrimitive() && plan.isDecomposed() && plan.getDecompositions().isEmpty()))
 				candidates.add(plan);
 			findCandidates(plan.getChildren());
+			
 		}
 	}
 
 	@Override
 	public Plugin.Item respondIf(Interaction interaction, boolean guess) {
 		Plugin.Item item = super.respondIf(interaction, guess);
-		// if nothing to do, then we have a breakdown to recover from
-		if (item == null)
-			try {
-				recover(interaction);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return item;
+		// if current toplevel goal is not done and we have
+		// nothing to do, then we have a breakdown to recover from
+		Plan focus = interaction.getFocus();
+		if (focus != null && !interaction.getDisco().getTop(focus).isDone()
+				&& item == null) {
+			if (recover(interaction))
+				return super.respondIf(interaction, guess); // new response with
+															// new plan
+			else
+				return null;
+		} else
+			return item;
 	}
 
-	// ******************************* Planner Call ********************************************
+	// ******************************* Planner Call
+	// ********************************************
 
 	private static ArrayList<String> getPlannerOutput(String plan) {
 		ArrayList<String> Output = new ArrayList<String>();
@@ -145,8 +160,7 @@ public class Discolog extends Agent {
 	}
 
 	public static ArrayList<String> CallStripsPlanner(String Initial_state,
-			String Goal) throws InvalidTheoryException, FileNotFoundException,
-			Exception {
+			String Goal) {
 		String Plan = " ";
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		Prolog engine = new Prolog();
@@ -155,34 +169,35 @@ public class Discolog extends Agent {
 		 * File("moveandpaint.pl"); planner = file.getCanonicalPath();
 		 * System.out.println(planner);
 		 */
-		Theory theory = new Theory(
-				new FileInputStream(
-						"C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
 		try {
+			Theory theory = new Theory(
+					new FileInputStream(
+							"C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
 			engine.setTheory(theory);
-		} catch (InvalidTheoryException ex) {
 
+			// Add the init state and the planner call for the goal
+			Theory init = new Theory("strips_holds(" + Initial_state
+					+ ",init).");
+			// String Goal = "isopen";
+			engine.addTheory(init);
+
+			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
+					+ Goal + "],7,Plan).");
+			engine.addTheory(PlannerCall);
+
+			// The request for STRIPS.
+			Struct goal = new Struct("test1", new Var("X"));
+			SolveInfo info = engine.solve(goal);
+
+			// Results
+			if (!info.isSuccess())
+				System.out.println("no.");
+			else {// main case
+				Plan = info.getVarValue("X").toString();
+			}
+		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {
+			throw new RuntimeException(ex);
 		}
-		// Add the init state and the planner call for the goal
-		Theory init = new Theory("strips_holds(" + Initial_state + ",init).");
-		// String Goal = "isopen";
-		engine.addTheory(init);
-
-		Theory PlannerCall = new Theory("test1(Plan):- strips_solve([" + Goal
-				+ "],7,Plan).");
-		engine.addTheory(PlannerCall);
-
-		// The request for STRIPS.
-		Struct goal = new Struct("test1", new Var("X"));
-		SolveInfo info = engine.solve(goal);
-
-		// Results
-		if (!info.isSuccess())
-			System.out.println("no.");
-		else {// main case
-			Plan = info.getVarValue("X").toString();
-		}
-
 		// Split the different clauses of the resulting plan
 		// System.out.println("Return Value :");
 

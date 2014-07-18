@@ -1,18 +1,17 @@
 package fr.limsi.discolog;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import alice.tuprolog.*;
-import alice.tuprolog.lib.*;
-import alice.tuprolog.event.*;
+import alice.tuprolog.InvalidTheoryException;
+import alice.tuprolog.Prolog;
+import alice.tuprolog.SolveInfo;
+import alice.tuprolog.Struct;
+import alice.tuprolog.Theory;
+import alice.tuprolog.Var;
 
 public class OnOutputPlanner {
 
