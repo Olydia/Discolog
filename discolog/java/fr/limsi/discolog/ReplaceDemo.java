@@ -1,5 +1,7 @@
 package fr.limsi.discolog;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.regex.*;
 
@@ -30,12 +32,14 @@ public class ReplaceDemo {
 		String input = " do(paint(box1, painting_room), do(putdown(box1), "
 				+ "do(walk(box1, room1, painting_room), do(pickup(box1),"
 				+ " do(open, do(unlock, init))))))";
-
-		
-		ArrayList<String> JavaPlan = new ArrayList<String>();
+	   
+	  	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	  	InputStream is = ReplaceDemo.class.getResourceAsStream("moveandpaint.xml");
+		System.out.println(is);
+		/*ArrayList<String> JavaPlan = new ArrayList<String>();
 		JavaPlan=getPlannerOutput(input);
-		
-		System.out.println(JavaPlan.size());
+		*/
+		//System.out.println(input.trim());
 	}
 
 }

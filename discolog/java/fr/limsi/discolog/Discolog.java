@@ -3,10 +3,14 @@ package fr.limsi.discolog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Struct;
+import alice.tuprolog.Term;
+import alice.tuprolog.Theory;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.*;
@@ -110,9 +114,9 @@ public class Discolog extends Agent {
 	 */
 	private void findCandidates(List<Plan> children) {
 		for (Plan plan : children) {
-			if (!(plan.isDone() || plan.isLive() || plan.isBlocked()) 
-			    || plan.isFailed() 
-			    || (plan.isLive() && !plan.isPrimitive() && plan.isDecomposed() && plan.getDecompositions().isEmpty()))
+			if (!(plan.isDone() || plan.isLive() || plan.isBlocked())  // precond
+			    || plan.isFailed() // post cond
+			    || (plan.isLive() && !plan.isPrimitive() && plan.isDecomposed() && plan.getDecompositions().isEmpty())) // applicabiliy
 				candidates.add(plan);
 			findCandidates(plan.getChildren());
 			
@@ -139,12 +143,12 @@ public class Discolog extends Agent {
 	// ******************************* Planner Call
 	// ********************************************
 
-	private static ArrayList<String> getPlannerOutput(String plan) {
+	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
 
 		Pattern p = Pattern.compile("(do\\()");
-		String[] splitString = (p.split(plan));
+		String[] splitString = (p.split(plan.toString()));
 		// remove init, parenthisis and init argument to obtain only the name of
 		// actions
 
@@ -155,13 +159,14 @@ public class Discolog extends Agent {
 			Output.add(init);
 
 		}
+		Collections.reverse(Output);
 		return Output;
 
 	}
 
 	public static ArrayList<String> CallStripsPlanner(String Initial_state,
 			String Goal) {
-		String Plan = " ";
+		Term Plan = null ;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		Prolog engine = new Prolog();
 		/*
@@ -170,21 +175,11 @@ public class Discolog extends Agent {
 		 * System.out.println(planner);
 		 */
 		try {
-			Theory theory = new Theory(
-					new FileInputStream(
-							"C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		  	InputStream planner = ReplaceDemo.class.getResourceAsStream("/test-2p/moveandpaint.pl");
+			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
-
-			// Add the init state and the planner call for the goal
-			Theory init = new Theory("strips_holds(" + Initial_state
-					+ ",init).");
-			// String Goal = "isopen";
-			engine.addTheory(init);
-
-			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
-					+ Goal + "],7,Plan).");
-			engine.addTheory(PlannerCall);
-
+			Strips_Input(Initial_state, Goal, engine );
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
@@ -193,7 +188,7 @@ public class Discolog extends Agent {
 			if (!info.isSuccess())
 				System.out.println("no.");
 			else {// main case
-				Plan = info.getVarValue("X").toString();
+				Plan = info.getVarValue("X");
 			}
 		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {
 			throw new RuntimeException(ex);
@@ -202,9 +197,33 @@ public class Discolog extends Agent {
 		// System.out.println("Return Value :");
 
 		JavaPlan = getPlannerOutput(Plan);
-		Collections.reverse(JavaPlan);
-		// System.out.println(JavaPlan);
+				// System.out.println(JavaPlan);
 		return JavaPlan;
+	}
+	private static void Strips_Input(String Initial_state, String Goal, Prolog engine ){
+		// Add the init state and the planner call for the goal
+		Theory init;
+		try {
+			init = new Theory("strips_holds(" + Initial_state
+					+ ",init).");
+			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
+					+ Goal + "],7,Plan).");
+			engine.addTheory(init);
+			engine.addTheory(PlannerCall);
+		} catch (InvalidTheoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// String Goal = "isopen";
+		
+
+	}
+	private ArrayList<String>init_primitive(){
+		ArrayList<String> Init = new ArrayList<String>();
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	  	InputStream planner = Discolog.class.getResourceAsStream("/models/moveandpaint.xml");
+	  	return Init;
+		
 	}
 	// *****************************************************************************************
 }

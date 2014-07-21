@@ -2,6 +2,7 @@ package fr.limsi.discolog;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -46,9 +47,10 @@ public class OnOutputPlanner {
 		 * File("moveandpaint.pl"); planner = file.getCanonicalPath();
 		 * System.out.println(planner);
 		 */
-		Theory theory = new Theory(
-				new FileInputStream(
-						"C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/moveandpaint.pl"));
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	  	InputStream planner = ReplaceDemo.class.getResourceAsStream("/test-2p/moveandpaint.pl");
+		Theory theory = new Theory(planner);
+				
 		try {
 			engine.setTheory(theory);
 		} catch (InvalidTheoryException ex) {

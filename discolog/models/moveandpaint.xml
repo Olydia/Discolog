@@ -65,7 +65,7 @@
 				$this.new_box.paint 
 		</postcondition>
 		<script>
-			$this.new_box.paint = !FIRST_PAINT;
+			$this.new_box.paint = true;
 			FIRST_PAINT = false;
 		</script>
 	</task>
