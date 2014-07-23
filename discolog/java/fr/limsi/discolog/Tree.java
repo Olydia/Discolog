@@ -18,12 +18,13 @@ public class Tree {
 		this.Head = head;
 	}
 
-	@Override
-	public String toString() {
-		return "Tree [" + Head.getName() + "]";
-	}
 	public Tree getParent() {
 		return Parent;
+	}
+
+	@Override
+	public String toString() {
+		return "[Head=" + getHead().toString() + ", Parent=" + getParent() + "]";
 	}
 
 	public void setParent(Tree parent) {
@@ -46,7 +47,7 @@ public class Tree {
 		Sibling = sibling;
 	}
 
-
+	// add a child to the current node
 
 	public void addSibling(Tree child) {
 		// checks if it does already exist
@@ -63,6 +64,7 @@ public class Tree {
 					+ this.getHead().getName());
 	}
 
+	// check if the current node is a leaf (doesn't have children)
 	public boolean isLeaf() {
 		if (this.getSibling() == null)
 			return true;
@@ -70,7 +72,7 @@ public class Tree {
 			return false;
 	}
 
-
+	// return the level or depth of the current node in the tree
 	public int getLevel() {
 		int level = 0;
 		Tree p = getParent();
@@ -80,6 +82,8 @@ public class Tree {
 		}
 		return level;
 	}
+
+	// Function to create a tree
 
 	public static void createTree(Tree root, int depth, int length, String name) {
 		if (depth >= 1) {
@@ -92,8 +96,9 @@ public class Tree {
 		}
 	}
 
+	// Printing the tree
 	public static void printTree(Tree root) {
-		System.out.println(root.getLevel());
+		System.out.println(root.toString());
 		if (!root.isLeaf()) {
 			for (Tree i : root.getSibling()) {
 				printTree(i);
@@ -101,82 +106,88 @@ public class Tree {
 		}
 	}
 
-	public ArrayList<Tree> getLeaves () {
-		ArrayList<Tree> leaves = new ArrayList<Tree> ();
-		
+	// returns all the leaves in the tree by only giving as input a node
+	public ArrayList<Tree> getLeaves() {
+		ArrayList<Tree> leaves = new ArrayList<Tree>();
+
 		if (isLeaf())
-			leaves.add (this);
+			leaves.add(this);
 		else {
 			for (Tree child : this.getSibling())
-				leaves.addAll (child.getLeaves());
+				leaves.addAll(child.getLeaves());
 		}
-		
+
 		return leaves;
 	}
-	boolean IsFistChild(){
-		if (this.getParent().getSibling().get(0).equals(this))
-			return true;
-			
-	    return false;
-	}
-	boolean IsLastChild(){
-		int index = this.getParent().getSibling().size()-1;
-		if ((this.getParent().getSibling().indexOf(this)) == index ){
+
+	// checks if the current node is the first child of its father (useful for
+	// the propagation of the precondition)
+	boolean IsFistChild() {
+		if (this.getParent().getSibling().indexOf(this) == 0)
 			return true;
 
+		return false;
+	}
+
+	// checks if the current node is the last child of its father (useful for
+	// the propagation of the postcondition)
+	boolean IsLastChild() {
+		int index = this.getParent().getSibling().size() - 1;
+		if ((this.getParent().getSibling().indexOf(this)) == index) {
+			return true;
 		}
-			
-	    return false;
+		return false;
 	}
 
-	public static void propagatePrecondition(Tree root){
+	public static void propagatePrecondition(Tree root) {
 		Tree elem = root;
 		Tree p = elem.getParent();
 		while (p != null) {
-			if (elem.IsFistChild()) 
-				p.Head.setPreconditions(root.Head.getPreconditions());
+			if (elem.IsFistChild())
+				p.getHead().setPreconditions(elem.getHead().getPreconditions());
 			elem = p;
 			p = p.getParent();
-		}			
-			
 		}
-	public static void propagatePostcondition(Tree root){
+	}
+
+	public static void propagatePostcondition(Tree root) {
 		Tree elem = root;
 		Tree p = elem.getParent();
 		while (p != null) {
-			if (elem.IsLastChild()) 
-				p.Head.setPostconditions(root.Head.getPostconditions());
+			if (elem.IsLastChild())
+				p.getHead().setPostconditions(elem.getHead().getPostconditions());
 			elem = p;
 			p = p.getParent();
-		}			
-			
 		}
-	public void defineKnowledge(Tree root){
+	}
+
+	public static void defineKnowledge(Tree root) {
 		ArrayList<Tree> leafs = root.getLeaves();
-		String pre = "p";
-		//Precondition p =  new Precondition(pre," precondition");
-		for(int i =0; i<leafs.size(); i++){
-			//leafs.get(i).Head.setPreconditions(pre, simple+" precondition")
+		// Precondition p = new Precondition(pre," precondition");
+		for (int i = 0; i < leafs.size(); i++) {
+			leafs.get(i).Head.setPreconditions("p" + i);
+			leafs.get(i).Head.setPostconditions("p" + (i + 1));
+			propagatePrecondition(leafs.get(i));
+			propagatePostcondition(leafs.get(i));
 		}
-		
+
 	}
+
 	public static void main(String[] args) {
 		ArrayList<Tree> nodes = new ArrayList<Tree>();
-		ArrayList<Tree> leafs = new ArrayList<Tree>();
 		Node A = new Node("A");
 		Tree root = new Tree(A);
 		nodes.add(root);
 		int depth = 2;
 		int length = 3;
 		createTree(root, depth, length, "");
-		leafs= root.getLeaves();
-		for (Tree node: leafs){
-			propagatePrecondition(node);
-			propagatePostcondition(node);
+		defineKnowledge(root);
+		printTree(root);
+		/*
+		 * leafs= root.getLeaves(); for (Tree node: leafs){
+		 * defineKnowledge(node); }
+		 */
 
-		}
-		
 	}
 
-	
 }

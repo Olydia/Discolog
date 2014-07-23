@@ -44,7 +44,7 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return "Node [Name=" + this.getName() + ", Preconditions="
+		return "[Name=" + this.getName() + ", Preconditions="
 				+ this.getPreconditions() + ", Postconditions="
 				+ this.getPreconditions() + "]";
 	}
