@@ -11,8 +11,8 @@ public class Node {
 	 * @param args
 	 */
 	private String Name;
-	private Precondition Preconditions;
-	private Postcondition Postconditions;
+	private String Preconditions;
+	private String Postconditions;
 
 	public Node(String name) {
 		this.Name = name;
@@ -27,18 +27,18 @@ public class Node {
 	}
 
 	public String getPreconditions() {
-		return Preconditions.getScript();
+		return Preconditions;
 	}
 
-	public void setPreconditions(Precondition preconditions) {
+	public void setPreconditions(String preconditions) {
 		Preconditions = preconditions;
 	}
 
 	public String getPostconditions() {
-		return Postconditions.getScript();
+		return Postconditions;
 	}
 
-	public void setPostconditions(Postcondition postconditions) {
+	public void setPostconditions(String postconditions) {
 		Postconditions = postconditions;
 	}
 
