@@ -48,7 +48,7 @@ public class OnOutputPlanner {
 		 * System.out.println(planner);
 		 */
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-	  	InputStream planner = ReplaceDemo.class.getResourceAsStream("/test-2p/moveandpaint.pl");
+	  	InputStream planner = Discolog.class.getResourceAsStream("/test-2p/moveandpaint.pl");
 		Theory theory = new Theory(planner);
 				
 		try {

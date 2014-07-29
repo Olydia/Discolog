@@ -1,6 +1,21 @@
 package fr.limsi.discolog;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import edu.wpi.cetask.DecompositionClass;
+import edu.wpi.cetask.Plan;
+import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.TaskModel;
+import edu.wpi.cetask.DecompositionClass.Applicability;
+import edu.wpi.cetask.DecompositionClass.Step;
+import edu.wpi.cetask.TaskClass.Grounding;
+import edu.wpi.cetask.TaskClass.Postcondition;
+import edu.wpi.cetask.TaskClass.Precondition;
+import edu.wpi.disco.Agent;
+import edu.wpi.disco.Disco;
+import edu.wpi.disco.Interaction;
+import edu.wpi.disco.User;
 import fr.limsi.discolog.Node;
 
 public class Tree {
@@ -39,11 +54,11 @@ public class Tree {
 		head = head;
 	}
 
-	public ArrayList<Tree> getSibling() {
+	public ArrayList<Tree> getChildren() {
 		return children;
 	}
 
-	public void setSibling(ArrayList<Tree> sibling) {
+	public void setChildren(ArrayList<Tree> sibling) {
 		children = sibling;
 	}
 
@@ -51,13 +66,13 @@ public class Tree {
 
 	public void addSibling(Tree child) {
 		// checks if it does already exist
-		if (this.getSibling() == null) {
-			this.setSibling(new ArrayList<Tree>());
+		if (this.getChildren() == null) {
+			this.setChildren(new ArrayList<Tree>());
 			child.setParent(this);
-			this.getSibling().add(child);
-		} else if (!this.getSibling().contains(child)) {
+			this.getChildren().add(child);
+		} else if (!this.getChildren().contains(child)) {
 			child.setParent(this);
-			this.getSibling().add(child);
+			this.getChildren().add(child);
 		} else
 			System.out.println("The node" + child.getHead().getName()
 					+ "is already a sibling of the task"
@@ -66,7 +81,7 @@ public class Tree {
 
 	// check if the current node is a leaf (doesn't have children)
 	public boolean isLeaf() {
-		if (this.getSibling() == null)
+		if (this.getChildren() == null)
 			return true;
 		else
 			return false;
@@ -101,7 +116,7 @@ public class Tree {
 	public static void printTree(Tree root) {
 		System.out.println(root.toString());
 		if (!root.isLeaf()) {
-			for (Tree i : root.getSibling()) {
+			for (Tree i : root.getChildren()) {
 				printTree(i);
 			}
 		}
@@ -114,7 +129,7 @@ public class Tree {
 		if (isLeaf())
 			leaves.add(this);
 		else {
-			for (Tree child : this.getSibling())
+			for (Tree child : this.getChildren())
 				leaves.addAll(child.getLeaves());
 		}
 
@@ -124,7 +139,7 @@ public class Tree {
 	// checks if the current node is the first child of its father (useful for
 	// the propagation of the precondition)
 	boolean IsFistChild() {
-		if (this.getParent().getSibling().indexOf(this) == 0)
+		if (this.getParent().getChildren().indexOf(this) == 0)
 			return true;
 
 		return false;
@@ -133,8 +148,8 @@ public class Tree {
 	// checks if the current node is the last child of its father (useful for
 	// the propagation of the postcondition)
 	boolean IsLastChild() {
-		int index = this.getParent().getSibling().size() - 1;
-		if ((this.getParent().getSibling().indexOf(this)) == index) {
+		int index = this.getParent().getChildren().size() - 1;
+		if ((this.getParent().getChildren().indexOf(this)) == index) {
 			return true;
 		}
 		return false;
@@ -164,7 +179,6 @@ public class Tree {
 
 	public static void defineKnowledge(Tree root) {
 		ArrayList<Tree> leafs = root.getLeaves();
-		// Precondition p = new Precondition(pre," precondition");
 		for (int i = 0; i < leafs.size(); i++) {
 			leafs.get(i).head.setPreconditions("p" + i);
 			leafs.get(i).head.setPostconditions("p" + (i + 1));
@@ -173,33 +187,17 @@ public class Tree {
 		}
 	}
 
-	/*public ArrayList<Tree> getSubTree(Tree root) {
-		ArrayList<Tree> nodes = new ArrayList<Tree>();
-		while(root.getSibling()!=null){
-
-		}
-	}
-	*/
 	public void setLevelOfKnowledg(Tree root,int percentage)  {
-
-
 	}
-
+	
 	public static void main(String[] args) {
-		ArrayList<Tree> nodes = new ArrayList<Tree>();
 		Node A = new Node("A");
 		Tree root = new Tree(A);
-		nodes.add(root);
 		int depth = 2;
-		int length = 3;
+		int length = 2;
 		createTree(root, depth, length, "");
 		defineKnowledge(root);
-		printTree(root);
-		/*
-		 * leafs= root.getLeaves(); for (Tree node: leafs){
-		 * defineKnowledge(node); }
-		 */
-
+		//printTree(root);
 	}
 
 }
