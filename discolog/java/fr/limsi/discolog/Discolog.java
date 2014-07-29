@@ -1,23 +1,31 @@
 package fr.limsi.discolog;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import alice.tuprolog.InvalidTheoryException;
+import alice.tuprolog.NoSolutionException;
+import alice.tuprolog.Prolog;
+import alice.tuprolog.SolveInfo;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
-import edu.wpi.cetask.*;
+import alice.tuprolog.Var;
+import edu.wpi.cetask.DecompositionClass;
+import edu.wpi.cetask.Description.Condition;
+import edu.wpi.cetask.Plan;
+import edu.wpi.cetask.Shell;
+import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.TaskEngine;
 import edu.wpi.disco.Agenda.Plugin;
-import edu.wpi.disco.*;
 import edu.wpi.disco.Agent;
-import alice.tuprolog.*;
-import alice.tuprolog.lib.*;
-import alice.tuprolog.event.*;
+import edu.wpi.disco.Disco;
+import edu.wpi.disco.Interaction;
+import edu.wpi.disco.User;
 
 /**
  * New main class for Discolog that extends default Disco agent to add breakdown
@@ -47,7 +55,7 @@ public class Discolog extends Agent {
 		TaskEngine.DEBUG = true;
 	}
 
-	private boolean recover(Interaction interaction){
+	private boolean recover(Interaction interaction) {
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());
@@ -55,8 +63,8 @@ public class Discolog extends Agent {
 			System.out.println("No recovery candidates!");
 			return false;
 		} else {
-			for (Plan candidate : candidates) {
-				Plan recovery = invokePlanner(candidate);
+			for (Candidate candidate : candidates) {
+				Plan recovery = invokePlanner(candidate.plan);
 				if (recovery != null) {
 					System.out.println("Found recovery plan for " + candidate);
 					Disco disco = interaction.getDisco();
@@ -86,8 +94,8 @@ public class Discolog extends Agent {
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
 		}
-		if (candidate.isFailed()){
-			for( Plan s: candidate.getSuccessors()) {
+		if (candidate.isFailed()) {
+			for (Plan s : candidate.getSuccessors()) {
 				s.requires(p);
 				s.unrequires(candidate);
 			}
@@ -103,7 +111,17 @@ public class Discolog extends Agent {
 		return new Plan(disco.getTaskClass(name).newInstance());
 	}
 
-	private final List<Plan> candidates = new ArrayList<Plan>();
+	private final List<Candidate> candidates = new ArrayList<Candidate>();
+
+	private static class Candidate {
+		private final Plan plan;
+		private final Condition condition;
+
+		private Candidate(Plan plan, Condition condition) {
+			this.plan = plan;
+			this.condition = condition;
+		}
+	}
 
 	/**
 	 * @return candidates for recovery planning target.
@@ -113,13 +131,21 @@ public class Discolog extends Agent {
 	 *         false)
 	 */
 	private void findCandidates(List<Plan> children) {
+		// check there is a prolog version of the goal condition
 		for (Plan plan : children) {
-			if (!(plan.isDone() || plan.isLive() || plan.isBlocked())  // precond
-			    || plan.isFailed() // post cond
-			    || (plan.isLive() && !plan.isPrimitive() && plan.isDecomposed() && plan.getDecompositions().isEmpty())) // applicabiliy
-				candidates.add(plan);
+			TaskClass type = plan.getGoal().getType();
+			if (type.getPrecondition() != null
+					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()))
+				candidates.add(new Candidate(plan, type.getPrecondition()));
+			else if (type.getPostcondition() != null && plan.isFailed()
+					&& type.isSufficient()) // post cond
+				candidates.add(new Candidate(plan, type.getPostcondition()));
+			if (plan.isLive() && !plan.isPrimitive() && !plan.isDecomposed())
+				for (DecompositionClass c : plan.getType().getDecompositions()) {
+					if (c.getApplicable() != null)
+						candidates.add(new Candidate(plan, c.getApplicable()));
+				}
 			findCandidates(plan.getChildren());
-			
 		}
 	}
 
@@ -131,9 +157,12 @@ public class Discolog extends Agent {
 		Plan focus = interaction.getFocus();
 		if (focus != null && !interaction.getDisco().getTop(focus).isDone()
 				&& item == null) {
-			if (recover(interaction))
+			if (recover(interaction)){
+				//throw new Shell.Quit();
 				return super.respondIf(interaction, guess); // new response with
-															// new plan
+				// new plan
+			}
+				
 			else
 				return null;
 		} else
@@ -166,7 +195,7 @@ public class Discolog extends Agent {
 
 	public static ArrayList<String> CallStripsPlanner(String Initial_state,
 			String Goal) {
-		Term Plan = null ;
+		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		Prolog engine = new Prolog();
 		/*
@@ -175,11 +204,13 @@ public class Discolog extends Agent {
 		 * System.out.println(planner);
 		 */
 		try {
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		  	InputStream planner = ReplaceDemo.class.getResourceAsStream("/test-2p/moveandpaint.pl");
+			ClassLoader classloader = Thread.currentThread()
+					.getContextClassLoader();
+			InputStream planner = ReplaceDemo.class
+					.getResourceAsStream("/test-2p/moveandpaint.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
-			Strips_Input(Initial_state, Goal, engine );
+			Strips_Input(Initial_state, Goal, engine);
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
@@ -197,15 +228,16 @@ public class Discolog extends Agent {
 		// System.out.println("Return Value :");
 
 		JavaPlan = getPlannerOutput(Plan);
-				// System.out.println(JavaPlan);
+		// System.out.println(JavaPlan);
 		return JavaPlan;
 	}
-	private static void Strips_Input(String Initial_state, String Goal, Prolog engine ){
+
+	private static void Strips_Input(String Initial_state, String Goal,
+			Prolog engine) {
 		// Add the init state and the planner call for the goal
 		Theory init;
 		try {
-			init = new Theory("strips_holds(" + Initial_state
-					+ ",init).");
+			init = new Theory("strips_holds(" + Initial_state + ",init).");
 			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
 					+ Goal + "],7,Plan).");
 			engine.addTheory(init);
@@ -215,15 +247,17 @@ public class Discolog extends Agent {
 			e.printStackTrace();
 		}
 		// String Goal = "isopen";
-		
 
 	}
-	private ArrayList<String>init_primitive(){
+
+	private ArrayList<String> init_primitive() {
 		ArrayList<String> Init = new ArrayList<String>();
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-	  	InputStream planner = Discolog.class.getResourceAsStream("/models/moveandpaint.xml");
-	  	return Init;
-		
+		ClassLoader classloader = Thread.currentThread()
+				.getContextClassLoader();
+		InputStream planner = Discolog.class
+				.getResourceAsStream("/models/moveandpaint.xml");
+		return Init;
+
 	}
 	// *****************************************************************************************
 }

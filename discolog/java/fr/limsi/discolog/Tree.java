@@ -10,12 +10,12 @@ public class Tree {
 	 */
 	static int cmpt = 0;
 
-	private Node Head;
-	private ArrayList<Tree> Sibling;
+	private Node head;
+	private ArrayList<Tree> children;
 	private Tree Parent;
 
 	public Tree(Node head) {
-		this.Head = head;
+		this.head = head;
 	}
 
 	public Tree getParent() {
@@ -32,19 +32,19 @@ public class Tree {
 	}
 
 	public Node getHead() {
-		return Head;
+		return head;
 	}
 
 	public void setHead(Node head) {
-		Head = head;
+		head = head;
 	}
 
 	public ArrayList<Tree> getSibling() {
-		return Sibling;
+		return children;
 	}
 
 	public void setSibling(ArrayList<Tree> sibling) {
-		Sibling = sibling;
+		children = sibling;
 	}
 
 	// add a child to the current node
@@ -91,6 +91,7 @@ public class Tree {
 				cmpt++;
 				Tree newTreeElem = new Tree(new Node("A" + name + (i + 1)));
 				root.addSibling(newTreeElem);
+				//System.out.println(newTreeElem.toString());
 				createTree(newTreeElem, depth - 1, length, name + (i + 1));
 			}
 		}
@@ -165,11 +166,22 @@ public class Tree {
 		ArrayList<Tree> leafs = root.getLeaves();
 		// Precondition p = new Precondition(pre," precondition");
 		for (int i = 0; i < leafs.size(); i++) {
-			leafs.get(i).Head.setPreconditions("p" + i);
-			leafs.get(i).Head.setPostconditions("p" + (i + 1));
+			leafs.get(i).head.setPreconditions("p" + i);
+			leafs.get(i).head.setPostconditions("p" + (i + 1));
 			propagatePrecondition(leafs.get(i));
 			propagatePostcondition(leafs.get(i));
 		}
+	}
+
+	/*public ArrayList<Tree> getSubTree(Tree root) {
+		ArrayList<Tree> nodes = new ArrayList<Tree>();
+		while(root.getSibling()!=null){
+
+		}
+	}
+	*/
+	public void setLevelOfKnowledg(Tree root,int percentage)  {
+
 
 	}
 
