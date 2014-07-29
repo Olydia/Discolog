@@ -1,4 +1,4 @@
-
+test1(
 strips_preconditions(move(X,Y,_),[at(monkey,Y),at(X,Y)]).
 strips_achieves(move(X,_,Z),at(X,Z)).
 strips_achieves(move(_,_,Z),at(monkey,Z)).
@@ -182,4 +182,3 @@ strips_insert(A,[B|L],[B|R]) :-
    strips_insert(A,L,R).
 strips_grnd(G) :-
    numbervars(G,0,_).
-
