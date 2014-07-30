@@ -104,7 +104,7 @@ public class Tree {
 		if (depth >= 1) {
 			for (int i = 0; i < length; i++) {
 				cmpt++;
-				Tree newTreeElem = new Tree(new Node("A" + name + (i + 1)));
+				Tree newTreeElem = new Tree(new Node("a" + name + (i + 1)));
 				root.addSibling(newTreeElem);
 				//System.out.println(newTreeElem.toString());
 				createTree(newTreeElem, depth - 1, length, name + (i + 1));
@@ -180,24 +180,38 @@ public class Tree {
 	public static void defineKnowledge(Tree root) {
 		ArrayList<Tree> leafs = root.getLeaves();
 		for (int i = 0; i < leafs.size(); i++) {
-			leafs.get(i).head.setPreconditions("p" + i);
-			leafs.get(i).head.setPostconditions("p" + (i + 1));
+			leafs.get(i).head.setPreconditions("P" + i);
+			leafs.get(i).head.setPostconditions("P" + (i + 1));
 			propagatePrecondition(leafs.get(i));
 			propagatePostcondition(leafs.get(i));
 		}
 	}
 
 	public void setLevelOfKnowledg(Tree root,int percentage)  {
+		
 	}
 	
+public static String Init(Tree root){
+	ArrayList<Tree> leafs = root.getLeaves();
+	String init = "var P0";
+	for (int i = 1; i <= leafs.size(); i++) {
+		init+= ",P"+i;
+		
+	}
+	return init;
+	}
 	public static void main(String[] args) {
-		Node A = new Node("A");
+		Node A = new Node("a");
 		Tree root = new Tree(A);
 		int depth = 2;
 		int length = 2;
 		createTree(root, depth, length, "");
 		defineKnowledge(root);
-		//printTree(root);
+		//System.out.println(cmpt);
+		printTree(root);
+		
+		System.out.println(Init(root)+"=true");
+		
 	}
 
 }
