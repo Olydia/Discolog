@@ -46,7 +46,7 @@ public class Node {
 	public String toString() {
 		return "[Name=" + this.getName() + ", Preconditions="
 				+ this.getPreconditions() + ", Postconditions="
-				+ this.getPreconditions() + "]";
+				+ this.getPostconditions() + "]";
 	}
 	public void RemovePrecondition(Node T){
 		T.setPreconditions(null);
