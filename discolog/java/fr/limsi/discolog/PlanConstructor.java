@@ -1,3 +1,4 @@
+package fr.limsi.discolog;
 
 
 import java.util.List;
@@ -13,9 +14,6 @@ import edu.wpi.cetask.TaskClass.Precondition;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
-import fr.limsi.discolog.Discolog;
-import fr.limsi.discolog.Node;
-import fr.limsi.discolog.Tree;
 
 public class PlanConstructor {
 
