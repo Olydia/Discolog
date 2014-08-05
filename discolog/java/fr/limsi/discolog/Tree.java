@@ -106,7 +106,7 @@ public class Tree {
 				cmpt++;
 				Tree newTreeElem = new Tree(new Node("a" + name + (i + 1)));
 				root.addSibling(newTreeElem);
-				//System.out.println(newTreeElem.toString());
+				System.out.println(newTreeElem.toString());
 				createTree(newTreeElem, depth - 1, length, name + (i + 1));
 			}
 		}
@@ -193,7 +193,7 @@ public class Tree {
 	
 public static String Init(Tree root){
 	ArrayList<Tree> leafs = root.getLeaves();
-	String init = "var P0";
+	String init = "var P0 = true ";
 	for (int i = 1; i <= leafs.size(); i++) {
 		init+= ",P"+i;
 		
@@ -204,13 +204,13 @@ public static String Init(Tree root){
 		Node A = new Node("a");
 		Tree root = new Tree(A);
 		int depth = 2;
-		int length = 2;
+		int length = 3;
 		createTree(root, depth, length, "");
-		defineKnowledge(root);
+		//defineKnowledge(root);
 		//System.out.println(cmpt);
-		printTree(root);
+		//printTree(root);
 		
-		System.out.println(Init(root)+"=true");
+		//System.out.println(Init(root));
 		
 	}
 
