@@ -72,7 +72,7 @@ public class Discolog extends Agent {
 			for (Candidate candidate : candidates) {
 				Plan recovery = invokePlanner(candidate.plan);
 				if (recovery != null) {
-					System.out.println("Found recovery plan for " + candidate);
+					System.out.println("Found recovery plan for " + candidate.plan.getGoal().toString());
 					Disco disco = interaction.getDisco();
 					// splice in recovery plan
 					disco.getFocus().add(recovery);
@@ -87,10 +87,7 @@ public class Discolog extends Agent {
 
 	private Plan invokePlanner(Plan candidate) {
 		// this should invoke Prolog planner
-		// for now it always returns the answer to make our
-		// example work, namely executing "Open"
-		// return new
-		// Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
+		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		String Goal = "isopen";

@@ -1,26 +1,12 @@
+package fr.limsi.discolog;
 
 
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import main.Recipe_Tree;
-
-import edu.wpi.cetask.DecompositionClass;
-import edu.wpi.cetask.Plan;
-import edu.wpi.cetask.TaskClass;
-import edu.wpi.cetask.TaskModel;
-import edu.wpi.cetask.DecompositionClass.Applicability;
-import edu.wpi.cetask.DecompositionClass.Step;
-import edu.wpi.cetask.TaskClass.Grounding;
-import edu.wpi.cetask.TaskClass.Postcondition;
-import edu.wpi.cetask.TaskClass.Precondition;
-import edu.wpi.disco.Agent;
-import edu.wpi.disco.Disco;
-import edu.wpi.disco.Interaction;
-import edu.wpi.disco.User;
-import fr.limsi.discolog.Node;
 
 public class Tree_Recipes {
 
@@ -51,8 +37,7 @@ public class Tree_Recipes {
 
 	@Override
 	public String toString() {
-		return "Tree_Recipes [head=" + head + ", children=" + children
-				+ ", Parent=" + Parent + "]";
+		return "Tree_Recipes [head=" + head + "]";
 	}
 
 
@@ -92,7 +77,7 @@ public class Tree_Recipes {
 */
 	// check if the current node is a leaf (doesn't have children)
 	public boolean isLeaf() {
-		if (this.getChildren() == null)
+		if (this.getChildren()==null)
 			return true;
 		else
 			return false;
@@ -111,25 +96,64 @@ public class Tree_Recipes {
 
 	// Function to create a tree
 
-	public static void createTree(Tree_Recipes root, int depth, int length,
+	/*public static void createTree(Tree_Recipes root, int depth, int length,
 			int rep, String name) {
 		if (depth >= 1) {
-			Map<String, ArrayList<Tree_Recipes>> child_recipe = new HashMap<String, ArrayList<Tree_Recipes>>();;
-			Tree_Recipes newTreeElem;
+
 			for (int j = 0; j < rep; j++) {
-				child_recipe.put("R"+cmpt, new ArrayList<Tree_Recipes> ());
-				//ArrayList<Tree_Recipes> children_root = new ArrayList<Tree_Recipes> ();
+				Map<String, ArrayList<Tree_Recipes>> child_recipe = new HashMap<String, ArrayList<Tree_Recipes>>();
+				Tree_Recipes newTreeElem;
+				String recipe1 = "C" + cmpt;
+
+				child_recipe.put(recipe1, new ArrayList<Tree_Recipes>());
+				root.setChildren(child_recipe);
+				// ArrayList<Tree_Recipes> children_root = new
+				// ArrayList<Tree_Recipes> ();
 				for (int i = 0; i < length; i++) {
-					 newTreeElem = new Tree_Recipes(new Node("a"+ name + (i + 1)+cmpt));
-					 newTreeElem.setParent(new Parent("R"+cmpt,root));
-					//children_root.add(newTreeElem);
-					//root.addSibling(newTreeElem);
+					newTreeElem = new Tree_Recipes(new Node("a" + name
+							+ (i + 1) + cmpt));
+					newTreeElem.setParent(new Parent(recipe1, root));
+					root.getChildren().get(recipe1).add(newTreeElem);
+					// children_root.add(newTreeElem);
+					// root.addSibling(newTreeElem);
+					createTree(newTreeElem, depth - 1, length, rep - 1, name
+							+ (i + 1));
+
 				}
-				
+				cmpt++;
 			}
-			createTree(newTreeElem, depth - 1, length, rep - 1, name+ (i + 1));
+		}
+	}*/
+	
+	public static void createTree(Tree_Recipes root, int depth, int length,
+			int rep) {
+		if (depth >= 1) {
+
+			for (int j = 0; j < rep; j++) {
+				Map<String, ArrayList<Tree_Recipes>> child_recipe = new HashMap<String, ArrayList<Tree_Recipes>>();
+				Tree_Recipes newTreeElem;
+				String recipe1 = "C" + cmpt;
+				child_recipe.put(recipe1,new ArrayList<Tree_Recipes>() );
+				
+				// ArrayList<Tree_Recipes> children_root = new
+				// ArrayList<Tree_Recipes> ();
+				for (int i = 0; i < length; i++) {
+					newTreeElem = new Tree_Recipes(new Node("a" 
+							+ (i + 1) + cmpt));
+					newTreeElem.setParent(new Parent(recipe1, root));
+					root.getChildren().get(recipe1).add(newTreeElem);
+					// children_root.add(newTreeElem);
+					// root.addSibling(newTreeElem);
+					
+
+				}
+				root.setChildren(child_recipe);
+				cmpt++;
+				createTree(newTreeElem, depth - 1, length, rep - 1);
+			}
 		}
 	}
+
 
 	public Map<String, ArrayList<Tree_Recipes>> getChildren() {
 		return children;
@@ -143,14 +167,17 @@ public class Tree_Recipes {
 	public static void printTree(Tree_Recipes root) {
 		System.out.println(root.toString());
 		if (!root.isLeaf()) {
-			for (Tree_Recipes i : root.getChildren()) {
-				printTree(i);
+			for (String mapKey : root.getChildren().keySet()) {
+				for (Tree_Recipes i : root.getChildren().get(mapKey)) {
+					System.out.println(mapKey);
+					printTree(i);
 			}
+		}
 		}
 	}
 
 	// returns all the leaves in the tree by only giving as input a node
-	public ArrayList<Tree_Recipes> getLeaves() {
+/*	public ArrayList<Tree_Recipes> getLeaves() {
 		ArrayList<Tree_Recipes> leaves = new ArrayList<Tree_Recipes>();
 
 		if (isLeaf())
@@ -226,28 +253,20 @@ public static String Init(Tree_Recipes root){
 		
 	}
 	return init;
-	}
+	}*/
 	public static void main(String[] args) {
 		Node A = new Node("a");
 		Tree_Recipes root = new Tree_Recipes(A);
 		int depth = 2;
 		int length = 3;
-		createTree(root, depth, length, "");
-		defineKnowledge(root);
+		createTree(root, depth, length,2 , "");
+		//defineKnowledge(root);
 		//System.out.println(cmpt);
 		printTree(root);
 		
-		System.out.println(Init(root));
+		//System.out.println(Init(root));
 		
 	}
 	
-	public class Parent {
-		String recipe;
-		Tree_Recipes parent;
-		public Parent(String recipe, Tree_Recipes parent) {
-			this.recipe = recipe;
-			this.parent = parent;
-		}
-		
-	}
 }
+

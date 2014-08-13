@@ -7,6 +7,12 @@ import edu.wpi.cetask.TaskClass.Precondition;
 
 public class Node {
 
+	public Node(String name, String preconditions, String postconditions) {
+		super();
+		Name = name;
+		Preconditions = preconditions;
+		Postconditions = postconditions;
+	}
 	/**
 	 * @param args
 	 */
@@ -44,9 +50,8 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return "[Name=" + this.getName() + ", Preconditions="
-				+ this.getPreconditions() + ", Postconditions="
-				+ this.getPostconditions() + "]";
+		return "Node [" + Name + ", Preconditions=" + Preconditions
+				+ ", Postconditions=" + Postconditions + "]";
 	}
 	public void RemovePrecondition(Node T){
 		T.setPreconditions(null);
