@@ -36,7 +36,7 @@ public class ConstructorTest {
       // prevent agent asking about toplevel goal
       test.disco.setProperty("Ask.Should(a)@generate", false);
       // initialize all world state predicates
-      test.disco.eval("var P,Q,R,V=true,W=false", "init");
+      test.disco.eval("var P,Q,R,W=true,V=false", "init");
       // allow agent to keep executing without talking
       ((Agent) test.interaction.getSystem()).setMax(100);
       // agent starts

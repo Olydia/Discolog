@@ -90,7 +90,8 @@ public class Discolog extends Agent {
 		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		String Goal = "isopen";
+		// make the automatic call
+		String Goal = "p2";
 		String initial = "islocked";
 		JavaPlan = CallStripsPlanner(initial, Goal);
 		Plan p = newPlan(d, "recovery");
