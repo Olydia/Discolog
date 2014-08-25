@@ -1,7 +1,9 @@
 package fr.limsi.discolog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import edu.wpi.cetask.DecompositionClass.Step;
 import edu.wpi.cetask.TaskClass.Grounding;
 import edu.wpi.cetask.TaskClass.Postcondition;
 import edu.wpi.cetask.TaskClass.Precondition;
+import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
@@ -24,8 +27,12 @@ public class PlanConstructor {
 	
 	public static Plan top;
 	public static int cpt = 1;
+	public static List<String> conditions = new LinkedList<String>();
+
 	public static void main(String[] args) {
 		PlanConstructor test = new PlanConstructor();
+		/****************************
+		 */		 
 		// TODO Auto-generated method stub
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
@@ -35,32 +42,35 @@ public class PlanConstructor {
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
+		conditions = RecipeTree.LevelOfKnowledge(root, 50);
+		RecipeTree.DefineLevelOfKnowledge(root,conditions);
+		RecipeTree.printTree(root);
+		// *************** plan consturction ***********************
+
 		Plan top = test.FromTreeToPlan(root);
-		// *************** plan consturction
 		test.GeneratePlan(root, top, test);
 		test.RecipeRecoveryTask(recipecondition,top);
-		 test.getLeaves(top);
-		//test.printPlan(top);
-		 System.out.println(test.FromTreeToProlog(root,recipecondition));
-		 for(DecompositionClass a : top.getType().getDecompositions())
-				 System.out.println(a.getApplicable().getScript());
-/*
+		test.printPlan(top);
+		System.out.println(" ******************* *******************");
+		// ******************* Disco plan ******************
+		
 		top.setPlanned(true); // needed only for non-recipe nodes
 		test.disco.addTop(top); // prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
 		// initialize all world state predicates
-		test.disco.eval(RecipeTree.Init(RecipeTree.cmp, recipecondition),"init"); // allow agent to keep executing without talking
-							// ((Discolog)
-		test.disco.eval("CR8,CR9=false","init1");
-		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
-		test.interaction.start(false);
-//*/
+		//test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent to keep executing without talking
+		/*for (int i = 0; i < conditions.size(); i++){
+			System.out.print(conditions.get(i)+ "	");
+			System.out.println((Boolean)test.disco.eval(conditions.get(i).toString(),"init"));
+		 }*/
+		//((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
+	//	test.interaction.start(false);
 	}
 	
+	
 	// NB: use instance of Discolog extension instead of Agent below
-	private final Interaction interaction = new Interaction(new Discolog(
-			"agent"), new User("user")) {
-
+	private final Agent agent = new Discolog("agent");
+	private final Interaction interaction = new Interaction(agent, new User("user")) {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
@@ -78,8 +88,8 @@ public class PlanConstructor {
 		if (!primitive && grounding != null)
 			throw new IllegalArgumentException(
 					"Non-primitive cannot have grounding script: " + id);
-		TaskClass task = new TaskClass(model, id, new Precondition(
-				precondition, true, disco), new Postcondition(postcondition,
+		TaskClass task = new TaskClass(model, id, precondition == null ? null : new Precondition(
+				precondition, true, disco),postcondition == null ? null : new Postcondition(postcondition,
 				true, true, disco), grounding == null ? null : new Grounding(
 				grounding, disco));
 		task.setProperty("@primitive", primitive);
@@ -89,7 +99,8 @@ public class PlanConstructor {
 	private DecompositionClass newRecipe(String id, TaskClass goal,
 			List<Step> steps, String applicable) {
 		return new DecompositionClass(model, id, goal, steps,
-				new Applicability(applicable, true, disco));
+				applicable == null ? null : new Applicability(applicable, true,
+						disco));
 	}
 
 	private static Plan newPlan(TaskClass task) {
@@ -97,12 +108,15 @@ public class PlanConstructor {
 	}
 
 	public Plan FromTreeToPlan(RecipeTree root) {
+		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf())
-			return (newPlan(newTask(root.getHead().getName(), true, root.getHead()
-					.getPreconditions(), root.getHead().getPostconditions(),
-					root.getHead().getPostconditions().toString()
-							+ "=true;println('" + root.getHead().getName()
-							+ "')")));
+			return (newPlan(newTask(root.getHead().getName(), true, root
+					.getHead().getPreconditions(), root.getHead()
+					.getPostconditions(),
+					root.getHead().getPostconditions() == null ? null : root
+							.getHead().getPostconditions()
+							+ "=true;println('"
+							+ root.getHead().getName() + "')")));
 		else
 			return (newPlan(newTask(root.getHead().getName(), false, root.getHead()
 					.getPreconditions(), root.getHead().getPostconditions(),
@@ -136,10 +150,15 @@ public class PlanConstructor {
 					top.add(child);
 					this.GeneratePlan(node, child, test);
 				}
-				test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
-						step, "C" + NodeEntry.getKey());
+				if(conditions.contains("C" + NodeEntry.getKey())){
+					test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
+							step, "C" + NodeEntry.getKey());
+					recipecondition.add("C" + NodeEntry.getKey());
+				}
+				else test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
+						step, null);
 				step.clear();
-				recipecondition.add("C" + NodeEntry.getKey());
+				
 			}
 		}
 		
@@ -159,16 +178,18 @@ public class PlanConstructor {
 
 	// ********************************************************
 	public void printPlan(Plan top) {
-		System.out.print(top.getGoal().getType().getId()+"		");
-		/*for(DecompositionClass recipe: top.getGoal().getType().getDecompositions()){
-			System.out.print(recipe.getId()+ "	"+recipe.getApplicable().getScript()+ "		");
-			for(String name:recipe.getStepNames()){
-				System.out.print(recipe.getStepType(name)+ "	");
+		System.out.println(top.getGoal().getType().getId()+"	");
+		for(DecompositionClass recipe: top.getGoal().getType().getDecompositions()){
+			System.out.print(recipe.getId()+ ",");
+			System.out.println(recipe.getApplicable() == null ? "  " :recipe.getApplicable().getScript()+ "	");
+				System.out.print(top.getGoal().getType().getPrecondition() == null ? "null " :top.getGoal().getType().getPrecondition().getScript()+"	");
+				System.out.println(top.getGoal().getType().getPostcondition() == null ? "null " :top.getGoal().getType().getPostcondition().getScript());
 			}
-			System.out.println("");
-		}*/
-		System.out.print(top.getGoal().getType().getPrecondition().getScript()+"		");
-		System.out.println(top.getGoal().getType().getPostcondition().getScript());
+			//System.out.println("");
+		}
+
+		
+	
 		if (!top.isPrimitive()) {
 			for (Plan i : top.getChildren()) {
 				printPlan(i);
@@ -195,5 +216,15 @@ public class PlanConstructor {
 			prolog +="strips_primitive(p"+i+").\n";
 		}
 		return prolog;
+	}
+	
+	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
+		 List<String> liveCond = new ArrayList<String>();
+		 for (int i = 0; i < conditions.size(); i++){
+			 if ((Boolean)test.disco.eval(conditions.get(i),"init"))
+				System.out.println(conditions.get(i));
+		 }
+		return liveCond;
+		
 	}
 }

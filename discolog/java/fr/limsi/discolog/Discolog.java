@@ -47,10 +47,10 @@ public class Discolog extends Agent {
 		Agent agent = new Discolog("agent");
 		// restrict to performing only a single primitive action on each turn
 		// so we have more control over example
-		agent.setMax(1);
+		//agent.setMax(1);
 		Interaction interaction = new Interaction(agent, new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
-		interaction.start(true);
+		interaction.start(false);
 
 	}
 
@@ -91,8 +91,8 @@ public class Discolog extends Agent {
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		// make the automatic call
-		String Goal = "p2";
-		String initial = "islocked";
+		String Goal = "p6";
+		String initial = "p3";
 		JavaPlan = CallStripsPlanner(initial, Goal);
 		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
@@ -104,10 +104,7 @@ public class Discolog extends Agent {
 				s.unrequires(candidate);
 			}
 		}
-		// p.add(candidate);
-		/*
-		 * p.add(newPlan(d, "unlock")); p.add(newPlan(d, "open"));
-		 */
+
 		return p;
 	}
 
@@ -173,8 +170,7 @@ public class Discolog extends Agent {
 			return item;
 	}
 
-	// ******************************* Planner Call
-	// ********************************************
+							// ******************************* Planner Call ********************************************
 
 	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
@@ -202,16 +198,12 @@ public class Discolog extends Agent {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		Prolog engine = new Prolog();
-		/*
-		 * String planner = new String(); File file =new
-		 * File("moveandpaint.pl"); planner = file.getCanonicalPath();
-		 * System.out.println(planner);
-		 */
+		
 		try {
 			ClassLoader classloader = Thread.currentThread()
 					.getContextClassLoader();
 			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/moveandpaint.pl");
+					.getResourceAsStream("/test-2p/testp.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal, engine);
@@ -228,11 +220,8 @@ public class Discolog extends Agent {
 		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {
 			throw new RuntimeException(ex);
 		}
-		// Split the different clauses of the resulting plan
-		// System.out.println("Return Value :");
 
 		JavaPlan = getPlannerOutput(Plan);
-		// System.out.println(JavaPlan);
 		return JavaPlan;
 	}
 
@@ -243,7 +232,7 @@ public class Discolog extends Agent {
 		try {
 			init = new Theory("strips_holds(" + Initial_state + ",init).");
 			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
-					+ Goal + "],7,Plan).");
+					+ Goal + "],20,Plan).");
 			engine.addTheory(init);
 			engine.addTheory(PlannerCall);
 		} catch (InvalidTheoryException e) {
@@ -253,7 +242,7 @@ public class Discolog extends Agent {
 		// String Goal = "isopen";
 
 	}
-
+/*
 	private ArrayList<String> init_primitive() {
 		ArrayList<String> Init = new ArrayList<String>();
 		ClassLoader classloader = Thread.currentThread()
@@ -262,7 +251,7 @@ public class Discolog extends Agent {
 				.getResourceAsStream("/models/moveandpaint.xml");
 		return Init;
 
-	}
+	}*/
 	// **********************************************************************************************************
 	 private TaskClass newTask (String id, boolean primitive, String precondition, String postcondition, String grounding) {
 	      if ( !primitive && grounding != null ) 

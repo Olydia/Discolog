@@ -44,7 +44,7 @@ public class ConstructorTest {
    }
    
    // NB: use instance of Discolog extension instead of Agent below
-   private final Interaction interaction =  new Interaction(new Agent("agent"), new User("user")) {
+   final Interaction interaction =  new Interaction(new Agent("agent"), new User("user")) {
       
       @Override
       public void run () {
@@ -53,10 +53,10 @@ public class ConstructorTest {
       }
    };
    
-   private final Disco disco = interaction.getDisco();
+   final Disco disco = interaction.getDisco();
    private final TaskModel model = new TaskModel("urn:edu.wpi.cetask:models:Test", disco); 
    
-   private TaskClass newTask (String id, boolean primitive, String precondition, String postcondition, String grounding) {
+   TaskClass newTask (String id, boolean primitive, String precondition, String postcondition, String grounding) {
       if ( !primitive && grounding != null ) 
          throw new IllegalArgumentException("Non-primitive cannot have grounding script: "+id);
       TaskClass task = new TaskClass(model, id,
@@ -67,7 +67,7 @@ public class ConstructorTest {
       return task;
    }
    
-   private DecompositionClass newRecipe (String id, TaskClass goal, List<Step> steps, String applicable) {
+   DecompositionClass newRecipe (String id, TaskClass goal, List<Step> steps, String applicable) {
       return new DecompositionClass(model, id, goal, steps, new Applicability(applicable, true, disco));
    }
    
