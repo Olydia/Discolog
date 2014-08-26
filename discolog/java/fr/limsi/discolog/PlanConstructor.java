@@ -33,10 +33,10 @@ import edu.wpi.disco.User;
 public class PlanConstructor {
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	static List<DecompositionClass> recipes = new ArrayList<DecompositionClass>();
-	
+	public static List<String> conditions = new LinkedList<String>();
 	public static Plan top;
 	public static int cpt = 1;
-	public static List<String> conditions = new LinkedList<String>();
+	
 
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
@@ -51,7 +51,7 @@ public class PlanConstructor {
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, 75);
+		conditions = RecipeTree.LevelOfKnowledge(root, 50);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		System.out.println(RecipeTree.Init(conditions));
 		// *************** plan consturction ***********************
@@ -254,7 +254,6 @@ public class PlanConstructor {
 
 			}
 		output.close();
-        System.out.println("Done");
 		}
 		catch(IOException ioe){
 			System.out.print("Erreur : ");
@@ -262,15 +261,6 @@ public class PlanConstructor {
 			}
 	}
 	
-	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
-		 List<String> liveCond = new ArrayList<String>();
-		 for (int i = 0; i < conditions.size(); i++){
-			 if ((Boolean)test.disco.eval(conditions.get(i),"init"))
-				System.out.println(conditions.get(i));
-		 }
-		return liveCond;
-		
-	}
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
 	    InputStream is = null;
 	    OutputStream os = null;
