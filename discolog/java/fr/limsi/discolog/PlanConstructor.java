@@ -1,7 +1,10 @@
 package fr.limsi.discolog;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,10 +32,10 @@ public class PlanConstructor {
 	public static int cpt = 1;
 	public static List<String> conditions = new LinkedList<String>();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		/****************************
-		 */		 
+		 */
 		// TODO Auto-generated method stub
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
@@ -42,29 +45,29 @@ public class PlanConstructor {
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, 50);
-		RecipeTree.DefineLevelOfKnowledge(root,conditions);
-		RecipeTree.printTree(root);
+		conditions = RecipeTree.LevelOfKnowledge(root, 75);
+		RecipeTree.DefineLevelOfKnowledge(root, conditions);
+		//System.out.println(root.toString());
+		//RecipeTree.printTree(root);
+		System.out.println(RecipeTree.Init(conditions));
 		// *************** plan consturction ***********************
-
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
-		test.RecipeRecoveryTask(recipecondition,top);
-		test.printPlan(top);
+		test.RecipeRecoveryTask(recipecondition, top);
+		//test.printPlan(top);
+		test.FromTreeToProlog(root, recipecondition, conditions);
 		System.out.println(" ******************* *******************");
 		// ******************* Disco plan ******************
-		
+/*
 		top.setPlanned(true); // needed only for non-recipe nodes
 		test.disco.addTop(top); // prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
 		// initialize all world state predicates
-		//test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent to keep executing without talking
-		/*for (int i = 0; i < conditions.size(); i++){
-			System.out.print(conditions.get(i)+ "	");
-			System.out.println((Boolean)test.disco.eval(conditions.get(i).toString(),"init"));
-		 }*/
-		//((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
-	//	test.interaction.start(false);
+		test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
+		// to keep executing without talking
+		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
+		test.interaction.start(false);
+		System.out.println(test.disco.getTop(top).getGoal().getType().getId());*/
 	}
 	
 	
@@ -124,16 +127,10 @@ public class PlanConstructor {
 
 	}
 
-	/*
-	 * public void GeneratePlan(Tree root, Plan top) { Plan child = null; if
-	 * (!root.isLeaf()) { for (Tree i : root.getChildren()) { child =
-	 * FromTreeToPlan(i); top.add(child); GeneratePlan(i, child); } }
-	 * 
-	 * }
-	 */
+
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
-			top.add(newPlan(newTask(recipe, true, "P1", recipe, recipe+"=true;println('"+recipe+"')")));
+			top.add(newPlan(newTask(recipe, true, null, recipe, conditions.contains(recipe) ?recipe+"=true;println('"+recipe+"')" : null)));
 		}
 	}
 	public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
@@ -153,7 +150,7 @@ public class PlanConstructor {
 				if(conditions.contains("C" + NodeEntry.getKey())){
 					test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
 							step, "C" + NodeEntry.getKey());
-					recipecondition.add("C" + NodeEntry.getKey());
+					recipecondition.add(NodeEntry.getKey());
 				}
 				else test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
 						step, null);
@@ -178,44 +175,52 @@ public class PlanConstructor {
 
 	// ********************************************************
 	public void printPlan(Plan top) {
-		System.out.println(top.getGoal().getType().getId()+"	");
-		for(DecompositionClass recipe: top.getGoal().getType().getDecompositions()){
-			System.out.print(recipe.getId()+ ",");
-			System.out.println(recipe.getApplicable() == null ? "  " :recipe.getApplicable().getScript()+ "	");
-				System.out.print(top.getGoal().getType().getPrecondition() == null ? "null " :top.getGoal().getType().getPrecondition().getScript()+"	");
-				System.out.println(top.getGoal().getType().getPostcondition() == null ? "null " :top.getGoal().getType().getPostcondition().getScript());
-			}
-			//System.out.println("");
-		}
-
-		
-	
+		System.out.print (top.getGoal().getType().getId());
+		System.out
+				.print(top.getGoal().getType().getPrecondition() == null ? "	[null "
+						: "	[" +top.getGoal().getType().getPrecondition().getScript()
+								+ "	,");
+		System.out
+				.println(top.getGoal().getType().getPostcondition() == null ? "null "
+						: top.getGoal().getType().getPostcondition()
+								.getScript() +" ]");
 		if (!top.isPrimitive()) {
 			for (Plan i : top.getChildren()) {
 				printPlan(i);
 			}
-		
-		}
-		//else 		System.out.print(top.getGoal().toString()+"		Gronding Script " +top.getGoal().getGrounding().getScript());
 
+		}
 	}
-	public String FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition ){
+	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) throws IOException{
 		String prolog = "";
+		File file =new File("C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/testp.pl");
+		FileWriter fileWritter = new FileWriter(file.getName(),true);
+        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+        
 		for(RecipeTree leaf:root.getLeaves()){
 			if(leaf.getHead().getPreconditions()!=null)
-				prolog+= "strips_preconditions("+leaf.getHead().getName().toLowerCase()+",["+leaf.getHead().getPreconditions().toLowerCase()+"]).\n";
+				 bufferWritter.write( "strips_preconditions("+leaf.getHead().getName().toLowerCase()+",["+leaf.getHead().getPreconditions().toLowerCase()+"]).");
 			if(leaf.getHead().getPostconditions()!=null)
-				prolog+= "strips_achieves("+leaf.getHead().getName().toLowerCase()+","+leaf.getHead().getPostconditions().toLowerCase()+").\n";
+				 bufferWritter.write("strips_achieves("+leaf.getHead().getName().toLowerCase()+","+leaf.getHead().getPostconditions().toLowerCase()+").");
+			 bufferWritter.newLine();
 		}
 		for(String recipe:recipecondition){
-			prolog+= "strips_preconditions("+recipe.toLowerCase()+"p,[p1]).\n";
-			prolog+= "strips_achieves("+recipe.toLowerCase()+"p,"+recipe.toLowerCase()+").\n";
-			prolog+="strips_primitive("+recipe.toLowerCase()+").\n";
+			//prolog+= "strips_preconditions("+recipe.toLowerCase()+"p,[p1]).\n";
+			 bufferWritter.write("strips_achieves("+recipe.toLowerCase()+",c" +recipe.toLowerCase()+").");
+			 bufferWritter.newLine();
+			 bufferWritter.write("strips_primitive("+recipe.toLowerCase()+").");
+			 bufferWritter.newLine();
 			}
-		for (int i = 1; i < root.cmp; i++) {
-			prolog +="strips_primitive(p"+i+").\n";
+		for (String i: conditions) {
+			bufferWritter.write("strips_primitive("+i.toLowerCase()+").");
+			bufferWritter.newLine();
+
 		}
-		return prolog;
+		
+      
+        bufferWritter.close();
+        System.out.println("Done");
+
 	}
 	
 	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){

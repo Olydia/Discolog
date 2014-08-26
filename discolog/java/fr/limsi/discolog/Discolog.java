@@ -91,8 +91,8 @@ public class Discolog extends Agent {
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		// make the automatic call
-		String Goal = "p6";
-		String initial = "p3";
+		String Goal = "p2";
+		String initial = "p1";
 		JavaPlan = CallStripsPlanner(initial, Goal);
 		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
@@ -175,7 +175,9 @@ public class Discolog extends Agent {
 	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
-
+		if(plan == null)
+			System.out.println("No recovery plan found !");
+		else{
 		Pattern p = Pattern.compile("(do\\()");
 		String[] splitString = (p.split(plan.toString()));
 		// remove init, parenthisis and init argument to obtain only the name of
@@ -189,6 +191,7 @@ public class Discolog extends Agent {
 
 		}
 		Collections.reverse(Output);
+		}
 		return Output;
 
 	}

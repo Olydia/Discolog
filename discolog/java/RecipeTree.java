@@ -1,5 +1,6 @@
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,13 +36,14 @@ public class RecipeTree {
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 
-		int depth = 2;
+		int depth = 1;
 		int length = 2;
 		int recipe = 2;
 		createTree(root, depth, length, recipe);
 		defineKnowledge(root);
 		existingCond=LevelOfKnowledge(root,50);
 		DefineLevelOfKnowledge(root,existingCond);
+		System.out.println(root.toString());
 		printTree(root);
 		System.out.println(Init(existingCond));
 		//for(int i=0;i<existingCond.size();i++)
@@ -233,7 +235,7 @@ public class RecipeTree {
 	public static List<String> LevelOfKnowledge(RecipeTree root, int level) {
 		List<String> conditions =new LinkedList<String>();
 		conditions=root.getKnowledge(root, conditions);
-		int level1=Math.round((conditions.size()*level)/100);
+		int level1=Math.round((conditions.size()*(100-level))/100);
 		for(int i=0;i<level1 && conditions.size()>0;i++){
 			  java.util.Collections.shuffle(conditions);
 			  conditions.remove(0);
@@ -259,14 +261,14 @@ public class RecipeTree {
 	}
 	public static void DefineLevelOfKnowledge(RecipeTree root,List<String> existingCond) {
 		//existingCond= LevelOfKnowledge(root,level);
+		if(!existingCond.contains(root.getHead().getPreconditions()))
+			root.getHead().setPreconditions(null);
+		if(!existingCond.contains(root.getHead().getPostconditions()))
+			root.getHead().setPostconditions(null);
 		if (!root.isLeaf()) {
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
 				for (RecipeTree i : NodeEntry.getValue()) {
-					if(!existingCond.contains(i.getHead().getPreconditions()))
-						i.getHead().setPreconditions(null);
-					if(!existingCond.contains(i.getHead().getPostconditions()))
-						i.getHead().setPostconditions(null);
 					DefineLevelOfKnowledge(i,existingCond);
 				}
 			}
@@ -279,11 +281,11 @@ public class RecipeTree {
 	}
 	
 	public static String Init(List<String> coditions){
-		String init = "var "+ coditions.get(0);
+		String init = "var "+ coditions.get(0)+" =true";
 		for(int i=1; i<coditions.size() ; i++){
 			init += ", " + coditions.get(i);
 		}
-		init += " =true";
+	
 		return init;
 	}
 	/*public static String Init(int cond, ArrayList<String> recipecondition) {
