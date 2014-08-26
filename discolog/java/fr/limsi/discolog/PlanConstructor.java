@@ -51,9 +51,10 @@ public class PlanConstructor {
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, 50);
+		conditions = RecipeTree.LevelOfKnowledge(root, 90);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		System.out.println(RecipeTree.Init(conditions));
+		
 		// *************** plan consturction ***********************
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
@@ -67,9 +68,11 @@ public class PlanConstructor {
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
 		// initialize all world state predicates
 		test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
+		test.disco.tick();
+		System.out.println((Boolean)test.disco.eval(conditions.get(3),"breakdown"));
 		// to keep executing without talking
 		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
-		test.interaction.start(false);
+		test.interaction.start(true);
 		//System.out.println(test.disco.getTop(top).getGoal().getType().getId());
 	}
 	
@@ -254,6 +257,7 @@ public class PlanConstructor {
 
 			}
 		output.close();
+        System.out.println("Done");
 		}
 		catch(IOException ioe){
 			System.out.print("Erreur : ");
@@ -261,6 +265,15 @@ public class PlanConstructor {
 			}
 	}
 	
+	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
+		 List<String> liveCond = new ArrayList<String>();
+		 for (int i = 0; i < conditions.size(); i++){
+			 if ((Boolean)test.disco.eval(conditions.get(i),"init"))
+				System.out.println(conditions.get(i));
+		 }
+		return liveCond;
+		
+	}
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
 	    InputStream is = null;
 	    OutputStream os = null;

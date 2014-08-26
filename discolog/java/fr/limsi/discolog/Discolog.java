@@ -70,7 +70,7 @@ public class Discolog extends Agent {
 			return false;
 		} else {
 			for (Candidate candidate : candidates) {
-				Plan recovery = invokePlanner(candidate.plan);
+				Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
 				if (recovery != null) {
 					System.out.println("Found recovery plan for " + candidate.plan.getGoal().toString());
 					Disco disco = interaction.getDisco();
@@ -85,15 +85,16 @@ public class Discolog extends Agent {
 		}
 	}
 
-	private Plan invokePlanner(Plan candidate) {
+	private Plan invokePlanner(Plan candidate, String condition) {
 		// this should invoke Prolog planner
 		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		// make the automatic call
-		String Goal = "p2";
-		String initial = "p1";
-		JavaPlan = CallStripsPlanner(initial, Goal);
+		//ArrayList<String> Init = new ArrayList<String>();
+		//;
+		String Goal = condition;
+		//String initial = "islocked";
+		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions), Goal);
 		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
@@ -176,7 +177,7 @@ public class Discolog extends Agent {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
 		if(plan == null)
-			System.out.println("No recovery plan found !");
+			System.out.println("No recovery STRIPS plan found !");
 		else{
 		Pattern p = Pattern.compile("(do\\()");
 		String[] splitString = (p.split(plan.toString()));
@@ -196,7 +197,7 @@ public class Discolog extends Agent {
 
 	}
 
-	public static ArrayList<String> CallStripsPlanner(String Initial_state,
+	public static ArrayList<String> CallStripsPlanner(List<String> Initial_state,
 			String Goal) {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
@@ -206,7 +207,7 @@ public class Discolog extends Agent {
 			ClassLoader classloader = Thread.currentThread()
 					.getContextClassLoader();
 			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/testp.pl");
+					.getResourceAsStream("/test-2p/test_instance.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal, engine);
@@ -228,15 +229,18 @@ public class Discolog extends Agent {
 		return JavaPlan;
 	}
 
-	private static void Strips_Input(String Initial_state, String Goal,
+	private static void Strips_Input(List<String> Initial_state, String Goal,
 			Prolog engine) {
 		// Add the init state and the planner call for the goal
-		Theory init;
+		//Theory init;
 		try {
-			init = new Theory("strips_holds(" + Initial_state + ",init).");
+			for(String init : Initial_state){
+				//System.out.println(init);
+				engine.addTheory(new Theory("strips_holds(" + init + ",init)."));
+			}
 			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
-					+ Goal + "],20,Plan).");
-			engine.addTheory(init);
+					+ Goal + "],30,Plan).");
+			//engine.addTheory(init);
 			engine.addTheory(PlannerCall);
 		} catch (InvalidTheoryException e) {
 			// TODO Auto-generated catch block
@@ -245,16 +249,7 @@ public class Discolog extends Agent {
 		// String Goal = "isopen";
 
 	}
-/*
-	private ArrayList<String> init_primitive() {
-		ArrayList<String> Init = new ArrayList<String>();
-		ClassLoader classloader = Thread.currentThread()
-				.getContextClassLoader();
-		InputStream planner = Discolog.class
-				.getResourceAsStream("/models/moveandpaint.xml");
-		return Init;
 
-	}*/
 	// **********************************************************************************************************
 	 private TaskClass newTask (String id, boolean primitive, String precondition, String postcondition, String grounding) {
 	      if ( !primitive && grounding != null ) 
@@ -285,6 +280,15 @@ public class Discolog extends Agent {
 						GeneratePlan(i,child);	
 			}
 		}
+	}
+	public  List<String> EvalConditions(List<String> conditions){
+		 List<String> liveCond = new ArrayList<String>();
+		 for (int i = 0; i < conditions.size(); i++){
+			 if ((Boolean)disco.eval(conditions.get(i),"breakdown"))
+				System.out.println(conditions.get(i));
+		 }
+		return liveCond;
+		
 	}
 
 	// NB: use instance of Discolog extension instead of Agent below
