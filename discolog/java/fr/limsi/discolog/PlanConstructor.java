@@ -35,7 +35,7 @@ public class PlanConstructor {
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	static List<DecompositionClass> recipes = new ArrayList<DecompositionClass>();
 	//public static List<String> conditions = new LinkedList<String>();
-	public static List<String> conditions = Arrays.asList("P1","CR1","P3","P2");
+	public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 	public static Plan top;
 	public static int cpt = 1;
 	
@@ -70,13 +70,7 @@ public class PlanConstructor {
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
 		// initialize all world state predicates 
 		//test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
-		test.disco.eval("var P1=true,CR1=false,P3=false,P2=false","init"); // allow agent
-		test.disco.tick();
-		//test.disco.eval("var CR2=false","init"); // allow agent
-		test.disco.tick();
-
-		//System.out.println(conditions.get(1));
-		//System.out.println((Boolean)test.disco.eval(conditions.get(1),"hihou"));
+		test.disco.eval("var P1=true,CR1=true,CR2=false,P3,P4=false,P2=false","init"); // allow agent
 		// to keep executing without talking
 		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
 		test.interaction.start(true);
@@ -131,7 +125,7 @@ public class PlanConstructor {
 					.getPostconditions(),
 					root.getHead().getPostconditions() == null ? null : root
 							.getHead().getPostconditions()
-							+ "=false;println('"
+							+ "=true;println('"
 							+ root.getHead().getName() + "')")));
 		else
 			return (newPlan(newTask(root.getHead().getName(), false, root.getHead()
