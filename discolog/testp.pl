@@ -247,4 +247,7 @@ strips_primitive(p10).
 strips_primitive(cr6).
 strips_achieves(jgjgiojigojriogjifgjkfbknnnpdfihnfjhg).
 texte à insérer à la fin du fichiertexte à insérer à la fin du fichier
+texte à insérer à la fin du fichiertexte à insérer à la fin du fichier
+texte à insérer à la fin du fichier
+texte à insérer à la fin du fichier
 texte à insérer à la fin du fichier

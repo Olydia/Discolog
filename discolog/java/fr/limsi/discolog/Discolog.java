@@ -206,7 +206,7 @@ public class Discolog extends Agent {
 			ClassLoader classloader = Thread.currentThread()
 					.getContextClassLoader();
 			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/testp.pl");
+					.getResourceAsStream("/test-2p/test_instance.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal, engine);

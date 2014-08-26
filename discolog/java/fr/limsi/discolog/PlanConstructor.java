@@ -2,8 +2,14 @@ package fr.limsi.discolog;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -47,18 +53,15 @@ public class PlanConstructor {
 		RecipeTree.defineKnowledge(root);
 		conditions = RecipeTree.LevelOfKnowledge(root, 75);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-		//System.out.println(root.toString());
-		//RecipeTree.printTree(root);
 		System.out.println(RecipeTree.Init(conditions));
 		// *************** plan consturction ***********************
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
 		test.RecipeRecoveryTask(recipecondition, top);
-		//test.printPlan(top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
 		System.out.println(" ******************* *******************");
 		// ******************* Disco plan ******************
-/*
+
 		top.setPlanned(true); // needed only for non-recipe nodes
 		test.disco.addTop(top); // prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
@@ -67,7 +70,7 @@ public class PlanConstructor {
 		// to keep executing without talking
 		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
 		test.interaction.start(false);
-		System.out.println(test.disco.getTop(top).getGoal().getType().getId());*/
+		//System.out.println(test.disco.getTop(top).getGoal().getType().getId());
 	}
 	
 	
@@ -130,7 +133,7 @@ public class PlanConstructor {
 
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
-			top.add(newPlan(newTask(recipe, true, null, recipe, conditions.contains(recipe) ?recipe+"=true;println('"+recipe+"')" : null)));
+			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null)));
 		}
 	}
 	public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
@@ -191,36 +194,72 @@ public class PlanConstructor {
 
 		}
 	}
-	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) throws IOException{
-		String prolog = "";
-		File file =new File("C:/Users/Lydia/Documents/GitHub/Discolog/discolog/prolog/test-2p/testp.pl");
-		FileWriter fileWritter = new FileWriter(file.getName(),true);
-        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-        
-		for(RecipeTree leaf:root.getLeaves()){
-			if(leaf.getHead().getPreconditions()!=null)
-				 bufferWritter.write( "strips_preconditions("+leaf.getHead().getName().toLowerCase()+",["+leaf.getHead().getPreconditions().toLowerCase()+"]).");
-			if(leaf.getHead().getPostconditions()!=null)
-				 bufferWritter.write("strips_achieves("+leaf.getHead().getName().toLowerCase()+","+leaf.getHead().getPostconditions().toLowerCase()+").");
-			 bufferWritter.newLine();
+	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) {
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/test_instance.pl";
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(adressedufichier);
+			writer.print("");
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		for(String recipe:recipecondition){
-			//prolog+= "strips_preconditions("+recipe.toLowerCase()+"p,[p1]).\n";
-			 bufferWritter.write("strips_achieves("+recipe.toLowerCase()+",c" +recipe.toLowerCase()+").");
-			 bufferWritter.newLine();
-			 bufferWritter.write("strips_primitive("+recipe.toLowerCase()+").");
-			 bufferWritter.newLine();
+		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/testp.pl";
+		try {
+			copyFileUsingStream(new File(adresseSource), new File(adressedufichier));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			FileWriter fw = new FileWriter(adressedufichier, true);
+			BufferedWriter output = new BufferedWriter(fw);
+			output.newLine();
+			output.flush();
+			for (RecipeTree leaf : root.getLeaves()) {
+				if (leaf.getHead().getPreconditions() != null) {
+					output.write("strips_preconditions("
+							+ leaf.getHead().getName().toLowerCase() + ",["
+							+ leaf.getHead().getPreconditions().toLowerCase()
+							+ "]).");
+					output.newLine();
+					output.flush();
+				}
+				if (leaf.getHead().getPostconditions() != null) {
+					output.write("strips_achieves("
+							+ leaf.getHead().getName().toLowerCase() + ","
+							+ leaf.getHead().getPostconditions().toLowerCase()
+							+ ").");
+					output.newLine();
+					output.flush();
+				}
 			}
-		for (String i: conditions) {
-			bufferWritter.write("strips_primitive("+i.toLowerCase()+").");
-			bufferWritter.newLine();
+			for (String recipe : recipecondition) {
+				// prolog+=
+				// "strips_preconditions("+recipe.toLowerCase()+"p,[p1]).\n";
+				output.write("strips_achieves(" + recipe.toLowerCase() + ",c"
+						+ recipe.toLowerCase() + ").");
+				output.newLine();
+				output.flush();
+				output.write("strips_primitive(" + recipe.toLowerCase() + ").");
+				output.newLine();
+				output.flush();
+			}
+			for (String i : conditions) {
+				output.write("strips_primitive(" + i.toLowerCase() + ").");
+				output.newLine();
+				output.flush();
 
-		}
-		
-      
-        bufferWritter.close();
+			}
+		output.close();
         System.out.println("Done");
-
+		}
+		catch(IOException ioe){
+			System.out.print("Erreur : ");
+			ioe.printStackTrace();
+			}
 	}
 	
 	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
@@ -231,5 +270,21 @@ public class PlanConstructor {
 		 }
 		return liveCond;
 		
+	}
+	private static void copyFileUsingStream(File source, File dest) throws IOException {
+	    InputStream is = null;
+	    OutputStream os = null;
+	    try {
+	        is = new FileInputStream(source);
+	        os = new FileOutputStream(dest);
+	        byte[] buffer = new byte[1024];
+	        int length;
+	        while ((length = is.read(buffer)) > 0) {
+	            os.write(buffer, 0, length);
+	        }
+	    } finally {
+	        is.close();
+	        os.close();
+	    }
 	}
 }
