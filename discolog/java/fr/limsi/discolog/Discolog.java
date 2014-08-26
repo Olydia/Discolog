@@ -47,7 +47,7 @@ public class Discolog extends Agent {
 		Agent agent = new Discolog("agent");
 		// restrict to performing only a single primitive action on each turn
 		// so we have more control over example
-		//agent.setMax(1);
+		agent.setMax(1);
 		Interaction interaction = new Interaction(agent, new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.start(false);
@@ -137,7 +137,7 @@ public class Discolog extends Agent {
 		for (Plan plan : children) {
 			TaskClass type = plan.getGoal().getType();
 			if (type.getPrecondition() != null
-					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()))
+					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()))
 				candidates.add(new Candidate(plan, type.getPrecondition()));
 			else if (type.getPostcondition() != null && plan.isFailed()
 					&& type.isSufficient()) // post cond
@@ -284,8 +284,10 @@ public class Discolog extends Agent {
 	public  List<String> EvalConditions(List<String> conditions){
 		 List<String> liveCond = new ArrayList<String>();
 		 for (int i = 0; i < conditions.size(); i++){
-			 if ((Boolean)disco.eval(conditions.get(i),"breakdown"))
-				System.out.println(conditions.get(i));
+			 if ((Boolean)disco.eval(conditions.get(i).toString(),"breakdown")==true){
+				System.out.println("evaluating"+conditions.get(i));
+				liveCond.add(conditions.get(i).toString());
+			 }
 		 }
 		return liveCond;
 		
