@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
@@ -34,8 +35,8 @@ import edu.wpi.disco.User;
 public class PlanConstructor {
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	static List<DecompositionClass> recipes = new ArrayList<DecompositionClass>();
-	//public static List<String> conditions = new LinkedList<String>();
-	public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
+	public static List<String> conditions = new LinkedList<String>();
+	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 	public static Plan top;
 	public static int cpt = 1;
 	
@@ -48,20 +49,20 @@ public class PlanConstructor {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 1;
+		int depth = 2;
 		int length = 2;
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		//conditions = RecipeTree.LevelOfKnowledge(root, 50);
+		conditions = RecipeTree.LevelOfKnowledge(root, 50);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		//System.out.println(RecipeTree.Init(conditions));
 		RecipeTree.printTree(root);
 		// *************** plan consturction ***********************
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
-		//test.RecipeRecoveryTask(recipecondition, top);
-		//test.FromTreeToProlog(root, recipecondition, conditions);
+		test.RecipeRecoveryTask(recipecondition, top);
+		test.FromTreeToProlog(root, recipecondition, conditions);
 		System.out.println(" ******************* *******************");
 		// ******************* Disco plan ******************
 
@@ -69,8 +70,8 @@ public class PlanConstructor {
 		test.disco.addTop(top); // prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false); //
 		// initialize all world state predicates 
-		//test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
-		test.disco.eval("var P1=true,CR1=true,CR2=false,P3,P4=false,P2=false","init"); // allow agent
+		test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
+		//test.disco.eval("var P1=true,CR1=true,CR2=false,P3,P4=false,P2=false","init"); // allow agent
 		// to keep executing without talking
 		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
 		test.interaction.start(true);
@@ -119,14 +120,24 @@ public class PlanConstructor {
 
 	public Plan FromTreeToPlan(RecipeTree root) {
 		// verifier si les conditions ne sont pas nulls
-		if (root.isLeaf())
-			return (newPlan(newTask(root.getHead().getName(), true, root
+		if (root.isLeaf()){
+			Random rand = new Random();
+			int nombreAleatoire = rand.nextInt(2);
+			return ( nombreAleatoire ==1? newPlan(newTask(root.getHead().getName(), true, root
 					.getHead().getPreconditions(), root.getHead()
 					.getPostconditions(),
 					root.getHead().getPostconditions() == null ? null : root
 							.getHead().getPostconditions()
 							+ "=true;println('"
-							+ root.getHead().getName() + "')")));
+							+ root.getHead().getName() + "')")) : newPlan(newTask(root.getHead().getName(), true, root
+									.getHead().getPreconditions(), root.getHead()
+									.getPostconditions(),
+									root.getHead().getPostconditions() == null ? null : root
+											.getHead().getPostconditions()
+											+ "=false;println('"
+											+ root.getHead().getName() + "')")));
+			
+		}
 		else
 			return (newPlan(newTask(root.getHead().getName(), false, root.getHead()
 					.getPreconditions(), root.getHead().getPostconditions(),
