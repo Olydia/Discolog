@@ -1,4 +1,5 @@
 import java.util.*;
+
 import edu.wpi.cetask.*;
 import edu.wpi.cetask.TaskClass.*;
 import edu.wpi.cetask.DecompositionClass.*;
@@ -25,8 +26,7 @@ public class ConstructorTest {
                       p2.getPostcondition().getScript(), null),
                 a = test.newTask("a", false, p1.getPrecondition().getScript(), 
                       b.getPostcondition().getScript(), null);
-      test.newRecipe("r1", b, Collections.singletonList(new Step("s1", p2)), "V");
-      test.newRecipe("r2", b, Collections.singletonList(new Step("s1", p3)), "W");
+      
       // build the non-recipe part of the tree
       Plan top = newPlan(a);
       top.add(newPlan(p1));
@@ -36,11 +36,13 @@ public class ConstructorTest {
       // prevent agent asking about toplevel goal
       test.disco.setProperty("Ask.Should(a)@generate", false);
       // initialize all world state predicates
-      test.disco.eval("var P,Q,R,W=true,V=false", "init");
+      test.disco.eval("var P,Q,R,V=true,W=false", "init");
+
       // allow agent to keep executing without talking
       ((Agent) test.interaction.getSystem()).setMax(100);
       // agent starts
-      test.interaction.start(false);
+     test.interaction.start(false);
+      
    }
    
    // NB: use instance of Discolog extension instead of Agent below

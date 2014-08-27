@@ -56,13 +56,14 @@ public class PlanConstructor {
 		RecipeTree.defineKnowledge(root);
 		conditions = RecipeTree.LevelOfKnowledge(root, 50);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-		//System.out.println(RecipeTree.Init(conditions));
+		System.out.println(RecipeTree.Init(conditions));
 		RecipeTree.printTree(root);
 		// *************** plan consturction ***********************
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
 		test.RecipeRecoveryTask(recipecondition, top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
+		test.printPlan(top);
 		System.out.println(" ******************* *******************");
 		// ******************* Disco plan ******************
 
@@ -153,7 +154,8 @@ public class PlanConstructor {
 	}
 	public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
 		Plan child=null;
-		
+		ArrayList <Plan>children = new ArrayList<Plan>(); 
+		children.clear();
 		List<Step> step = new ArrayList<Step>();
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
@@ -162,7 +164,8 @@ public class PlanConstructor {
 					child=FromTreeToPlan(node);
 					step.add(new Step("s" + cpt, child.getType()));
 					cpt++;
-					top.add(child);
+					children.add(child);
+					//top.add(child);
 					this.GeneratePlan(node, child, test);
 				}
 				if(conditions.contains("C" + NodeEntry.getKey())){
@@ -173,6 +176,11 @@ public class PlanConstructor {
 				else test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
 						step, null);
 				step.clear();
+				for(Plan ch: children)
+					top.add(ch);
+				children.clear();
+				
+					
 				
 			}
 		}
@@ -202,6 +210,9 @@ public class PlanConstructor {
 				.println(top.getGoal().getType().getPostcondition() == null ? "null "
 						: top.getGoal().getType().getPostcondition()
 								.getScript() +" ]");
+		for(DecompositionClass j: top.getGoal().getType().getDecompositions())
+			System.out.println(j.getId() + " Applicability condition for a task");
+	
 		if (!top.isPrimitive()) {
 			for (Plan i : top.getChildren()) {
 				printPlan(i);
