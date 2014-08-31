@@ -1,48 +1,11 @@
-
-
-% charger
-strips_preconditions(charger(F,P,A),[at(F,A),at(P,A),avion(P),fret(F),aeroport(A)]).
-strips_achieves(charger(F,P,_),on(F,P)).
-strips_deletes(charger(F,_,A),at(F,A)).
-
-% decharger
-strips_preconditions(decharger(F,P,A),[on(F,P),at(P,A),avion(P),fret(F),aeroport(A)]).
-strips_achieves(decharger(F,_,A),at(F,A)).
-strips_deletes(decharger(F,P,_),on(F,P)).
-
-% voler
-strips_preconditions(voler(P,D,G),[at(P,D),avion(P),aeroport(D),aeroport(G)]).
-strips_achieves(voler(P,_,G),at(P,G)).
-strips_deletes(voler(P,D,_),at(P,D)).
-
-strips_primitive(at(_,_)).
-strips_primitive(on(_,_)).
-strips_primitive(avion(_)).
-strips_primitive(fret(_)).
-strips_primitive(aeroport(_)).
-
-strips_holds(avion(p),init).
-strips_holds(fret(f),init).
-strips_holds(aeroport(cdg),init).
-strips_holds(aeroport(jfk),init).
-
-strips_holds(at(p,cdg),init).
-strips_holds(at(f,cdg),init).
-
-strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
-strips_inconsistent(at(Y,X), at(Z,X)) :- not(Z=Y).
-strips_inconsistent(on(Y,X), on(Z,X)) :- not(Z=Y).
-strips_inconsistent(at(Y,X), on(Y,Z)).
+%strips_holds(p1,init).
 
 strips_achieves(init,X) :-
    strips_holds(X,init).
 
-test1(Plan):-strips_solve([at(f,jfk)],6,Plan).
-
+%test1(Plan):- strips_solve([p2],10,Plan).
 
 strips_unsatisfiable(_) :- fail.
-
-
 
 % =============================================================
 % =============================================================
@@ -206,4 +169,40 @@ strips_insert(A,[B|L],[B|R]) :-
    strips_insert(A,L,R).
 strips_grnd(G) :-
    numbervars(G,0,_).
-
+strips_achieves(a82,p3).
+strips_achieves(a71,p5).
+strips_preconditions(a72,[p5]).
+strips_achieves(a72,p3).
+strips_preconditions(a91,[p3]).
+strips_preconditions(a101,[p3]).
+strips_achieves(a21,p9).
+strips_preconditions(a22,[p9]).
+strips_achieves(a22,p8).
+strips_achieves(a32,p8).
+strips_preconditions(a41,[p8]).
+strips_preconditions(a51,[p8]).
+strips_achieves(a51,p12).
+strips_preconditions(a52,[p12]).
+strips_achieves(r7,cr7).
+strips_primitive(r7).
+strips_achieves(r10,cr10).
+strips_primitive(r10).
+strips_achieves(r6,cr6).
+strips_primitive(r6).
+strips_achieves(r2,cr2).
+strips_primitive(r2).
+strips_achieves(r3,cr3).
+strips_primitive(r3).
+strips_achieves(r1,cr1).
+strips_primitive(r1).
+strips_primitive(cr1).
+strips_primitive(cr3).
+strips_primitive(p12).
+strips_primitive(cr7).
+strips_primitive(cr10).
+strips_primitive(p5).
+strips_primitive(cr2).
+strips_primitive(p3).
+strips_primitive(cr6).
+strips_primitive(p8).
+strips_primitive(p9).

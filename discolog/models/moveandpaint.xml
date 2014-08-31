@@ -17,7 +17,6 @@
 		<input name="from" type="Room"/>
 		<input name="to" type="Room"/>
 		<output name="new_box" type="Box"/>
-	
 		<subtasks id="move_id">
 			<step name="pickup" task="pickup"/>
 			<step name="walk" task="walk"/>
@@ -28,7 +27,6 @@
 			<binding slot="$walk.to" value="$this.to"/>
 			<binding slot="$putdown.box" value="$walk.new_box"/>
 			<binding slot="$this.new_box" value="$walk.new_box"/>
-
 		</subtasks>
 	</task>
 
@@ -41,14 +39,11 @@
 		<input name="from" type="Room"/>
 		<input name="to" type="Room"/>
 		<output name="new_box" type="Box"/>
-		
 		<precondition> isOpen() </precondition> 
 		<postcondition sufficient="true"> 
 				$this.new_box.location == $this.to
 		</postcondition> 
-		<script>
-				$this.new_box.location = $this.to;
-		</script>
+		<script> $this.new_box.location = $this.to;	</script>
 	</task>
   
 	<task id="putdown">
@@ -85,40 +80,30 @@
 		</script>
 	</task>
 	<task id="recovery"/>
- 
+	
 	<script init="true">
 		$disco.getInteraction().getSystem().setMax(1);
-	
-		// define Box class
- 
 		function Box (name,location, paint) {
 		   this.name = name;
 		   this.location = location;
 		   this.paint = paint;
 		}
-		
 		Box.prototype.toString = function () { 
 		   return (this.name+ "[" + this.location+ "," + this.paint+"]"); }
 
 		function Room (name) { 
 			this.name = name; 
 		}
-		// define Room class
 		Room.ENUM = { Room1 : new Room("room1"), 
 					  Painting_Room : new Room("painting_room"), 
 					}
-		
-		Room.prototype.toString = function () { return this.name; }
-		   
+		Room.prototype.toString = function () { return this.name; }  
 		var BOX1 = new Box("box1", Room.ENUM.Room1, false);
-		
-		// state variables
 		var OPEN = true;
 		var LOCKED = false;
 		var FIRST_PAINT = true;
 		var LOCATION = Room.ENUM.Room1; 
 		function isOpen() { return OPEN; }
 		function isLocked() { return LOCKED; }
-		
 	</script>  
 </taskModel>

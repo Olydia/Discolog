@@ -221,7 +221,7 @@ public class PlanConstructor {
 		}
 	}
 	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) {
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/test_instance.pl";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter(adressedufichier);
@@ -231,7 +231,7 @@ public class PlanConstructor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/testp.pl";
+		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
 		try {
 			copyFileUsingStream(new File(adresseSource), new File(adressedufichier));
 		} catch (IOException e) {

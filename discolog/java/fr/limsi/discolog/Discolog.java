@@ -261,7 +261,7 @@ public class Discolog extends Agent {
 	      task.setProperty("@primitive",  primitive);
 	      return task;
 	   }
-	public void setLevelOfKnowledg(Tree root,int percentage)  {
+/*	public void setLevelOfKnowledg(Tree root,int percentage)  {
 	}
 
 	public Plan FromTreeToPlan(Tree node){
@@ -280,7 +280,7 @@ public class Discolog extends Agent {
 						GeneratePlan(i,child);	
 			}
 		}
-	}
+	}*/
 	public  List<String> EvalConditions(List<String> conditions){
 		 List<String> liveCond = new ArrayList<String>();
 		 for (int i = 0; i < conditions.size(); i++){
