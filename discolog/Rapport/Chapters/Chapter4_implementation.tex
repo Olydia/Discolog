@@ -1,0 +1,30 @@
+% Chapter 1
+
+\chapter{Implementation} % Main chapter title
+
+\label{Chapter 5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+\lhead{Chapter 5. \emph{Implementation}} % This is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+
+\section{DISCO}
+DISCO \cite{rich2009building}is a task based user interface with a reactive architecture. The  most important feature of this reactive architecture is that allows the system to lead the user in a real time, without making any plan in advance. DISCO's functional architecture is composed by two mains components:
+ \begin{itemize}
+ 	\item A \textit{task engine} whose function is to load and validate a task model description, and to maintain a representation	of the current status of the user’s tasks.\cite{rich2009building} In this present paper, we only focus on the this component. 
+ 	\item \textit{User interface} to ensure the communication between the task engine and the user, in the case where the engine needs more information or to help the user in order to achieve certain task.
+ 	
+
+ \end{itemize}
+%----------------------------------------------------------------------------------------
+\subsection{DISCO task model}
+Disco uses the ANSI/CEA-2018 standard for the procedural definition of the task model elements as described bellow :
+ \begin{itemize}
+\item \textit{Task}: Task model define Task classes which are modeled using XML format.The figure \ref{Chapter 4} describes eight task classes, including three compound tasks and  five primitive tasks. Primitive tasks may contain \textit{grounding script} parameter defined as JavaScript program which represent the effect of of the primitive task execution in the environment.
+talk about the grounging script
+\item \textit{Inputs and outputs} : Input includes all the data that may affect the execution of the task, and output includes all data that can be affected by the execution of the task. theses data type is defined in JavaScript.
+\item \textit{Conditions} : Task's conditions (Preconditions, postconditions ans applicability conditions) are defined as boolean JavaScript function to evaluate the execution of a task.
+	
+ \end{itemize}	
+
+\lstinputlisting[language=XML]{Chapters/moveandpaint.xml}

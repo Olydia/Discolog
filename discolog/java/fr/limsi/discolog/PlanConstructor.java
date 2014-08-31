@@ -263,8 +263,7 @@ public class PlanConstructor {
 				}
 			}
 			for (String recipe : recipecondition) {
-				// prolog+=
-				// "strips_preconditions("+recipe.toLowerCase()+"p,[p1]).\n";
+
 				output.write("strips_achieves(" + recipe.toLowerCase() + ",c"
 						+ recipe.toLowerCase() + ").");
 				output.newLine();
