@@ -43,7 +43,7 @@ public class Discolog extends Agent {
 	 * Use this main method instead of {@link Disco#main(String[])} to start
 	 * system with console.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Agent agent = new Discolog("agent");
 		// restrict to performing only a single primitive action on each turn
 		// so we have more control over example
@@ -52,7 +52,7 @@ public class Discolog extends Agent {
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.start(false);
 
-	}
+	}*/
 
 	// TODO add private fields here to hold Prolog engine, etc.
 

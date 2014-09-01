@@ -54,10 +54,10 @@ public class PlanConstructor {
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, 50);
+		conditions = RecipeTree.LevelOfKnowledge(root, 100);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		System.out.println(RecipeTree.Init(conditions));
-		RecipeTree.printTree(root);
+		//RecipeTree.printTree(root);
 		// *************** plan consturction ***********************
 		Plan top = test.FromTreeToPlan(root);
 		test.GeneratePlan(root, top, test);
@@ -81,7 +81,7 @@ public class PlanConstructor {
 	
 	
 	// NB: use instance of Discolog extension instead of Agent below
-	private final Agent agent = new Discolog("agent");
+	private final Discolog agent = new Discolog("agent");
 	private final Interaction interaction = new Interaction(agent, new User("user")) {
 		@Override
 		public void run() {
@@ -162,7 +162,7 @@ public class PlanConstructor {
 					.getChildren().entrySet()) {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToPlan(node);
-					step.add(new Step("s" + cpt, child.getType()));
+					step.add(new Step("s" + child.getType(), child.getType()));
 					cpt++;
 					children.add(child);
 					//top.add(child);
@@ -171,6 +171,8 @@ public class PlanConstructor {
 				if(conditions.contains("C" + NodeEntry.getKey())){
 					test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
 							step, "C" + NodeEntry.getKey());
+							//step, null);
+
 					recipecondition.add(NodeEntry.getKey());
 				}
 				else test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
@@ -203,15 +205,16 @@ public class PlanConstructor {
 	public void printPlan(Plan top) {
 		System.out.print (top.getGoal().getType().getId());
 		System.out
-				.print(top.getGoal().getType().getPrecondition() == null ? "	[null "
+				.print(top.getGoal().getType().getPrecondition() == null ? "	[null,"
 						: "	[" +top.getGoal().getType().getPrecondition().getScript()
-								+ "	,");
+								+ ",");
 		System.out
-				.println(top.getGoal().getType().getPostcondition() == null ? "null "
+				.println(top.getGoal().getType().getPostcondition() == null ? "null] "
 						: top.getGoal().getType().getPostcondition()
-								.getScript() +" ]");
-		for(DecompositionClass j: top.getGoal().getType().getDecompositions())
+								.getScript() +"]");
+		for(DecompositionClass j: top.getGoal().getType().getDecompositions()){
 			System.out.println(j.getId() + " Applicability condition for a task");
+				j.getStepNames();	}
 	
 		if (!top.isPrimitive()) {
 			for (Plan i : top.getChildren()) {
@@ -268,9 +271,7 @@ public class PlanConstructor {
 						+ recipe.toLowerCase() + ").");
 				output.newLine();
 				output.flush();
-				output.write("strips_primitive(" + recipe.toLowerCase() + ").");
-				output.newLine();
-				output.flush();
+				
 			}
 			for (String i : conditions) {
 				output.write("strips_primitive(" + i.toLowerCase() + ").");

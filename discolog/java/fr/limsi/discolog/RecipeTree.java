@@ -238,11 +238,14 @@ public class RecipeTree {
 
 	public static List<String> LevelOfKnowledge(RecipeTree root, int level) {
 		List<String> conditions =new LinkedList<String>();
+		ArrayList<String>  cond = new ArrayList<String>();
+		cond.add("P1"); cond.add("P2"); 
 		conditions=root.getKnowledge(root, conditions);
 		int level1=Math.round((conditions.size()*(100-level))/100);
 		for(int i=0;i<level1 && conditions.size()>0;i++){
 			  java.util.Collections.shuffle(conditions);
-			  conditions.remove(0);
+			  if(!cond.contains(conditions.get(0)))
+				  conditions.remove(0);
 		}
 		return conditions;
 	}
@@ -292,7 +295,7 @@ public class RecipeTree {
 			else{
 				Random rand = new Random();
 				int nombreAleatoire = rand.nextInt(2);
-				init += nombreAleatoire==1? ", " + coditions.get(i) +" =false":", " + coditions.get(i) +" =true";
+				init += nombreAleatoire==1? ", " + coditions.get(i) +" =false":", " + coditions.get(i) +" =false";
 			}
 		}
 	

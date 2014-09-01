@@ -1,5 +1,4 @@
 <taskModel about="urn:limsi.fr:examples:moveandpaint" xmlns="http://ce.org/cea-2018">
-
 	<task id="move_paint">
 		<input name="box" type="Box"/>
 		<subtasks id="movepaint">
