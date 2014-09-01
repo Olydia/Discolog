@@ -137,7 +137,8 @@ public class PlanConstructor {
 									root.getHead().getPostconditions() == null ? null : root
 											.getHead().getPostconditions()
 											+ "=false;println('"
-											+ root.getHead().getName() + "')")));
+											+ root.getHead().getName() + "   "+ root
+											.getHead().getPostconditions() +" =false ')")));
 			
 		}
 		else
