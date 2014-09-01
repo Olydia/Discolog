@@ -153,7 +153,10 @@ public class Discolog extends Agent {
 
 	@Override
 	public Plugin.Item respondIf(Interaction interaction, boolean guess) {
-		Plugin.Item item = super.respondIf(interaction, guess);
+	   Disco disco = interaction.getDisco();
+      disco.decomposeAll();
+      // do not call super.respondIf() here to avoid automatic retry of other recipes
+      Plugin.Item item = generateBest(interaction);
 		// if current toplevel goal is not done and we have
 		// nothing to do, then we have a breakdown to recover from
 		Plan focus = interaction.getFocus();
