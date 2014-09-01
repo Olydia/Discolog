@@ -122,31 +122,30 @@ public class PlanConstructor {
 
 	public Plan FromTreeToPlan(RecipeTree root) {
 		// verifier si les conditions ne sont pas nulls
-		if (root.isLeaf()){
+		if (root.isLeaf()) {
 			Random rand = new Random();
 			int nombreAleatoire = rand.nextInt(2);
-			return ( nombreAleatoire ==1? newPlan(newTask(root.getHead().getName(), true, root
-					.getHead().getPreconditions(), root.getHead()
-					.getPostconditions(),
-					root.getHead().getPostconditions() == null ? null : root
-							.getHead().getPostconditions()
+			return (nombreAleatoire == 1 ? newPlan(newTask(root.getHead()
+					.getName(), true, root.getHead().getPreconditions(), root
+					.getHead().getPostconditions(), root.getHead()
+					.getPostconditions() == null ? null : root.getHead()
+							.getPostconditions()
 							+ "=true;println('"
-							+ root.getHead().getName() + "')")) : newPlan(newTask(root.getHead().getName(), true, root
-									.getHead().getPreconditions(), root.getHead()
-									.getPostconditions(),
+							+ root.getHead().getName() + "')")) : newPlan(newTask(root
+									.getHead().getName(), true, root.getHead()
+									.getPreconditions(), root.getHead().getPostconditions(),
 									root.getHead().getPostconditions() == null ? null : root
 											.getHead().getPostconditions()
-											+ "=false;println('"
-											+ root.getHead().getName() + "')")));
-			
-		}
-		else
-			return (newPlan(newTask(root.getHead().getName(), false, root.getHead()
-					.getPreconditions(), root.getHead().getPostconditions(),
-					null)));
+											+ "=false;println('" + root.getHead().getName() +" precod "+ root
+											.getHead().getPostconditions()+"  = false "
+											 + "')")));
+
+		} else
+			return (newPlan(newTask(root.getHead().getName(), false, root
+					.getHead().getPreconditions(), root.getHead()
+					.getPostconditions(), null)));
 
 	}
-
 
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
