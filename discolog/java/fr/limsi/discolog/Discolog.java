@@ -152,11 +152,8 @@ public class Discolog extends Agent {
 	}
 
 	@Override
-	public Plugin.Item respondIf(Interaction interaction, boolean guess) {
-	   Disco disco = interaction.getDisco();
-      disco.decomposeAll();
-      // do not call super.respondIf() here to avoid automatic retry of other recipes
-      Plugin.Item item = generateBest(interaction);
+	public Plugin.Item respondIf(Interaction interaction, boolean guess, boolean retry) {
+		Plugin.Item item = super.respondIf(interaction, guess, retry);
 		// if current toplevel goal is not done and we have
 		// nothing to do, then we have a breakdown to recover from
 		Plan focus = interaction.getFocus();
@@ -164,7 +161,7 @@ public class Discolog extends Agent {
 				&& item == null) {
 			if (recover(interaction)){
 				//throw new Shell.Quit();
-				return super.respondIf(interaction, guess); // new response with
+				return super.respondIf(interaction, guess, retry); // new response with
 				// new plan
 			}
 				
@@ -302,7 +299,7 @@ public class Discolog extends Agent {
 	      @Override
 	      public void run () {
 	         // keep running as long as agent has something to do and then stop
-	         while (getSystem().respond(interaction, false, false)) {}
+	         while (getSystem().respond(interaction, false, false, true)) {}
 	      }
 	   };
 	   
