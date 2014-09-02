@@ -62,6 +62,7 @@ public class Discolog extends Agent {
 	}
 
 	private boolean recover(Interaction interaction) {
+		interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());

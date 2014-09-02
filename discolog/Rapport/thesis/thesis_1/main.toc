@@ -1,0 +1,23 @@
+\contentsline {chapter}{Contents}{i}{dummy.1}
+\contentsline {chapter}{List of Figures}{ii}{dummy.3}
+\contentsline {chapter}{List of Tables}{iii}{dummy.5}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.7}
+\contentsline {chapter}{\numberline {2}Discolog approach}{3}{chapter.8}
+\contentsline {section}{\numberline {2.1}The Discolog algorithm}{4}{section.10}
+\contentsline {subsection}{\numberline {2.1.1}Goal candidates detection}{5}{subsection.12}
+\contentsline {subsection}{\numberline {2.1.2}STRIPS repair planner}{5}{subsection.13}
+\contentsline {section}{\numberline {2.2}Example}{7}{section.14}
+\contentsline {chapter}{\numberline {3}Implementation}{9}{chapter.16}
+\contentsline {section}{\numberline {3.1}Development environment }{9}{section.17}
+\contentsline {section}{\numberline {3.2}DISCO}{10}{section.19}
+\contentsline {subsection}{\numberline {3.2.1}DISCO task model}{10}{subsection.20}
+\contentsline {section}{\numberline {3.3}Discolog implementation}{11}{section.22}
+\contentsline {subsection}{\numberline {3.3.1}The new Discolog API}{11}{subsection.23}
+\contentsline {subsubsection}{\numberline {3.3.1.1}Reactive DISCO }{12}{subsubsection.24}
+\contentsline {subsubsection}{\numberline {3.3.1.2} Declarative PROLOG }{13}{subsubsection.57}
+\contentsline {section}{\numberline {3.4}Conclusion}{13}{section.59}
+\contentsline {chapter}{\numberline {4}Experiments, test and results}{15}{chapter.60}
+\contentsline {section}{\numberline {4.1}experimental model creation}{15}{section.61}
+\contentsline {subsection}{\numberline {4.1.1}Test algorithm}{16}{subsection.63}
+\contentsline {section}{\numberline {4.2} results of the Experiments}{17}{section.65}
+\vspace {2em}

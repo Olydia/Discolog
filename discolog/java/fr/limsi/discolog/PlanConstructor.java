@@ -21,6 +21,7 @@ import java.util.Random;
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.TaskEngine;
 import edu.wpi.cetask.TaskModel;
 import edu.wpi.cetask.DecompositionClass.Applicability;
 import edu.wpi.cetask.DecompositionClass.Step;
@@ -74,6 +75,8 @@ public class PlanConstructor {
 		test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
 		//test.disco.eval("var P1=true,CR1=true,CR2=false,P3,P4=false,P2=false","init"); // allow agent
 		// to keep executing without talking
+		TaskEngine.VERBOSE = true;
+		//TaskEngine.DEBUG=true;
 		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
 		test.interaction.start(true);
 		//System.out.println(test.disco.getTop(top).getGoal().getType().getId());
