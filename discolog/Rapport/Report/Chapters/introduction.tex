@@ -1,0 +1,17 @@
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter 1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+\lhead{Chapter 1 . \emph{Introduction}} % This is for the header on each page - perhaps a shortened title
+
+
+Researchers in Artificial Intelligence (AI), and especially in the field of automated reasoning and problem resolving, are interested on the representation of the real world using logical models to define planning algorithms for these models. The "reasoning about actions and changes" field is one of the fields in  AI which focuses on problems involving world changes. In particular, since the 80s, planning algorithms were proposed so that, from an initial state, a goal state and a set of actions described as transitions between states, one can obtain a sequence of actions that leads from the initial state to the goal state.
+\par Once the plan is built, it is executed by the controller of the simulated system. However, sometimes during the execution, the current state may not correspond to the expected state. Therefore, the controller can no longer proceed with the plan. This is called a {\em breakdown}.
+
+These {\em breakdowns} can be caused by dynamic environment (external actions that modify the system state), or by an incomplete modeling of the real world. One common assumption is that the planner needs, in order to build a consistent plan, a complete and a faithful representation of the problem actions, called the \emph{knowledge domain}. 
+Nevertheless, modeling such a complete domain requires significant knowledge-engineering effort, and even reveals to be impossible  \cite{gil1992acquiring}. For example, representing completely  the human activity in housing for the intelligent management of energy \cite{hurauxmodele} using logics is not realistic. The most challenging part in  modeling such a complex knowledge domain is to define the granularity with which we can construct a model  representing  accurately  the real world. This  implies representing each  action and the used devices taking into account the variability of the environment. 
+%Thus, the existing models represent the general view of the world.
+  In the real life, we frequently observe a combination of these two phenomena: an incomplete model and a dynamic environment. Therefore, it is necessary to define plan repair in order to face possible breakdowns. 
+\par The goal of this master thesis is to propose a planning system that can recover from breakdowns taking into account the incompleteness of the model. Unlike the existing systems which suppose that 1) the model is  complete enough to be consistently fixed and  2) breakdowns are only caused by the dynamic nature of the environment, we consider breakdowns caused by incomplete knowledge domain and propose an algorithm . 
+\par The outline of this report is as follow. We will first present  existing works in this domain: chapter 2 presents classical planning methods (from linear planning to hierarchical planning and  reactive approaches) and discussing their limits; chapter 3, present existing plan repair systems. In chapter 4, we propose Discolog, a hybrid system that combines the execution of a reactive HTN (Disco) with simple linear planning  to recover from breakdowns.  Chapter 5 presents the  implementation of this model and chapter 6  presents the experiments and validation of the proposed solution . We conclude this thesis by presenting ongoing and future work.

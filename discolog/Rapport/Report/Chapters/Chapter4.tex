@@ -1,0 +1,153 @@
+\chapter{Discolog approach} % Main chapter title
+
+- discuter de la "nouveauté" de ton algo (sinon, ça fait trop simple) (quand tu présente l'algo ou en conclusion à la fin)
+- au début: Disco existe et moi je mets un truc au dessus -> tu peux grossir le chap 4 de beaucoup (1p de plus en tout, c'est bien).
+
+\label{Chapter 4} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\lhead{Chapter 4. \emph{Discolog approach}}
+\section{Introduction}
+In this chapter, we propose a new approach for breakdown recovery in reactive HTN with incomplete model. This approach is based on the Disco \cite{rich2009building} HTN model coupled with a simple linear STRIPS planner in Prolog. For this reason we called it \emph{Discolog}. Discolog is a reactive HTN planning, execution, and plan-repairing system. We will first present an overview of the system, and next we will detail the system architecture.
+
+
+%In this section, we introduce our solution for plan recovery in reactive HTN. We also %present the description of the main procedures of plan recovery algorithm.
+\section{Overview of the Discolog system}
+
+The hybrid system Discolog uses reactive HTN style to achieve a goal with no prediction of future states at all.
+Starting from the top level goal, Discolog recursively decomposes tasks until it reaches a set of primitives tasks that can be directely executed in the real world. 
+
+Nevertheless, because of procedural definition of reactive HTN's domain knowledge which doesn't contain any logical information allowing the planner reasoning about task decomposition and execution, if the HTN faces breakdowns during the execution, it will be unable to backtrack  finding another decomposition that achieves the execution of the task.
+
+
+In order to face this problem, Discolog uses a STRIPS planner to propose a plan recovery. It starts from the current observable state of the world and uses only the partial information available in the HTN's domain knowledge to reason about. For that matter, Discolog extends the definition of certain HTN tasks in the domain knowledge from procedural definition to a declarative definition . An overview of the proposed execution and plan repair system is illustrated in Figure ~\ref{High level description of Discolog system}  .
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Pictures/architecture.png}
+	\caption{\label{High level description of Discolog system} High level architecture of Discolog system}
+\end{figure}
+
+
+The plan recovery in Discolog comprises two main procedures. The first one attempts to detect goal candidates to repair and the second invoke the STRIPS planner to propose a plan repair for these candidates. these procedures are described in the next sections.
+\section{The Discolog algorithm}
+Let \textit{HTN} be a model of an Hierarchical Task Network with a top level task \textit{Goal} to achieve, and Disco the the reactive HTN .To achieve \textit{Goal},  Disco  proceed as follow:
+As showed in \ref{euclid}, Discolog starts from the top level goal \textit{Goal} and recursively decomposes tasks until it reaches a set of primitives tasks that can achieve \textit{Goal}.
+Each task in Disco is defined with a \textit{status(Task)} $\in$ \{Live,Blocked,Done,Failed,Succeed\}.
+\par Before decomposing a non primitive task or executing primitives task, Disco evaluate the precondition of the this task. If the current state holds the  Task's preconditions  then status of Task is updated to Live. Otherwise, Status of Task is no longer live and the HTN execution is blocked.
+The same, after executing a primitive task, Disco evaluate its postconditions. If Task's postconditions are valid in the current state the status of Task is updated to done or succeed, otherwise status Task is updated to failed and the HTN execution become blocked.
+
+
+At the end of the process,  the reactive HTN Disco(HTN,Goal) returns either Success(Goal is achieved) or failure if Disco faces a breakdown. Breakdowns are detected if the top level goal is not achieved i.e Status of Goal is different to Done and Disco has no decomposition or execution to propose. When such situation occurs, Discolog starts the recover procedure by first looking over the \textit{Goal} and its children to find task candidates that can be repaired from the current state in order to recover from the breakdown. The recover procedure is defined in the next sections.  
+\begin{algorithm}
+	\caption{DiscoLog algorithm }\label{euclid}
+	\begin{algorithmic}[]
+		\Procedure{Discolog}{HTN,Goal}
+		\State $\textit{HTN} \gets\textit{ConstructModel()} $
+		\State $\pi \gets Disco \textit{(HTN,Goal)}$
+		\If {$ \pi \gets\textit{Success} $} 
+		\State \Return $\textit{Success} $
+		\Else 
+		\State$ plan \gets Recover(Goal)$
+		\If {(plan = \textit{null})}
+		\State \Return Failure
+		\Else 
+		\For{$ \textbf{each}\text{ action }\textit{ai} \in plan $}
+		\State  $\textit{Discolog} \text{(HTN,ai)}$
+		\EndFor
+		\EndIf
+		\EndIf
+		\\
+		\EndProcedure \textbf{endProcedure}
+		\State 
+		\Procedure{Recover}{Goal}
+		\State $\textit{Candidates}\gets\textit{findCandidate}{(G)} $
+		\If {$ \textit{Candidates = }\emptyset $} 
+		\State \Return $\textit{null} $
+		\Else 
+		\State $\Pi \gets \emptyset$
+		
+		\For{$ \textbf{each} \textit{ candidate} \in \textit{Candidates}$}
+		\State $\Pi += InvokeSTRIPS(candidate,CurrentState)$
+		\State  $Cost \gets \{ cost(\pi) | \pi \in  \Pi \} $
+		\EndFor
+		\EndIf
+		\State \Return $\pi \in \Pi \text{ with minimum cost}(\pi)$
+		\\
+		\EndProcedure \textbf{endProcedure}
+		
+		\State 
+		\Procedure{FindCandidates}{Goal}
+		\For{$ \textbf{each} \textit{ child} \in \textit{Goal}$}
+		
+		\If {$\text{(precondition(child)!=} \emptyset \text{ and}$
+			\State$ \textbf{ status} (child)\notin\{\text{Done, Live, Blocked}\})$}
+		\State $  \text{ add precondition(child) to Candidates}$
+		
+		\ElsIf{$\text{(postcondition(child)!=}\emptyset 
+			\text{ and } \textbf{ status} \text{(child)} \in \{\text{Failed}\}$}
+		\State $\text{add postcondition(child) to Candidates}$
+		\EndIf
+		\If {$(\textbf{status} \in \{\text{Live}\}\text{ and nonprimitive(child) and applicability(child)!=}\emptyset)$}
+		\State add Applicabilitycondition(child) to Candidates
+		\EndIf
+		\State $\textit{findCandidates} (children(child))$
+		\EndFor
+		\State \Return Candidates
+		\\
+		\EndProcedure \textbf{endProcedure}
+		
+	\end{algorithmic}
+\end{algorithm}
+\subsection{Goal candidates detection}
+When a breakdown occurs, Discolog  will  first look over the goal task and its children to determine tasks in the HTN which are compromised by the breakdown, theses tasks are defined as task candidates for the plan recovery. 
+For each task, we extract the condition that fails because of the breakdown: 
+\begin{itemize}
+	\item	If the status of task is neither done nor live then the algorithm will attempts to repair its preconditions
+	\item	If the status of task is failed then its postcondition are not valid and the repair algorithm will attempts to repair these postconditions.
+	\item	if the task is non-primitive and all its applicability conditions are invalid in the current state then the algorithm will attempts te replan to satisfy one of its applicability condition. 
+\end{itemize}
+
+Once, the list of candidate is identified, it is then passed to the InvokeStrips procedure.
+As presented previously, a breakdown occur in a HTN if one of the task conditions fails, thus repairing a task using STRIPS planner is considered as repairing its failed condition .
+Once, the list of candidate is identified, the Prolog STRIPS planner is called to propose a recovery plan.
+\subsection{STRIPS repair planner}
+In order to generate a plan, STRIPS has to constitute the planning problem to reason about. First,  STRIPS constructs its domain knowledge by extracting partial information from the HTN's domain knowledge and extends them to declarative definition. For that, Discolog convert all the primitive tasks to a declarative and logical formalism supported by STRIPS. Then for each candidate task, STRIPS takes as goal state  the failed task condition and the current observable state is defined as the initial state.
+
+Next, STRIPS tries to generate a linear plan to reach a state where the failed condition is valid. Finally, Discolog calculate the best. i.e  the plan with the minimum cost of execution and convert its actions to reactive formalism. this plan is then passed to Disco to be executed.
+
+\section{Example}
+% Add to the 
+Taking back the move\&paint example described in figure. When the breakdown is identified, Discolog calls the recover procedure. First, Discolog  defines  the task candidates list that contains all the tasks to be repaired, which are in this example the "Walk" task with its precondition "IsOpon" and the "Move" task with its postconditions. 
+
+Once the list defined, it is passed to the STRIPS planner, which creates its domain knowledge as shown in figure \ref{Plan recovery}, next it generates a plan for both candidates. STRIPS returns the best plan that can repair the walk task composed. In this example the best plan takes as goal to open the door and is composed of two primitives tasks; unlock(door) and open(door). 
+Finally, the actions of the recovery plan are converted to Disco tasks and executed. Once the plan recovery executed, Discolog continue the task decomposition from the current state to achieve the moveandpaint task. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{Pictures/repair.png}
+	\caption{\label{Plan recovery} Plan recovery for the move\&paint task using Discolog}
+\end{figure}
+\section{Conclusion}		
+We present in this chapter the proposed solution and we detailed the conceptional procedure of this later. In the next chapter, we will present the implementation of the Discolog system.
+%Let \textit{HTN} be a model of an Hierarchical Task Network with a top level task \textit{Goal} to achieve.To achieve \textit{Goal} Disco proceed as follow:
+%
+%
+%Starting from the top level goal \textit{Goal}, Disco recursively decomposes tasks until it reaches a set of primitives tasks that can be directelly executed in the real world to achieve \textit{Goal}.
+%Each task in Disco has a \textit{status(Task)} $\in$ \{Live,Blocked,Done,Failed,Succeed\}.
+%\par Before decomposing a non primitive task or executing primitives task, Disco evaluate the precondition of the this task. If the current state holds the preconditions(Task) then status(Task) is updated to Live. otherwise, Status(Task)= Blocked and the HTN execution is blocked.
+%The same, after the execution of a primitive task(execution of the grounding script), Disco evaluate its postconditions. If postconditions(Task) are valid in the current state the status(Task) is updated to done or succeed, otherwise status(Task)= failed and the HTN execution become blocked.
+%\section{Description of the algorithm \ref{euclid}}
+%
+%
+%At the end of the process, Disco(HTN,Goal) returns either Success(Goal is achieved) or failure if Disco faces breakdown. These breakdowns are detected if the top level goal is not achieved i.e Status(Goal) != Done and Disco has no decomposition or execution to propose. 
+%
+%When such breakdown occurs, the recovery algorithm will, first look over the \textit{Goal} and its children to find task candidates which can be repaired from the current state in order to recover from the breakdown. This process is handled by the procedure FindCandidates() described in the Algorithm \ref{euclid}.
+% :
+%\begin{itemize}
+%	\item	If the status of task is neither done nor live then the algorithm will attempts to repair its preconditions
+%	\item	If the status of task is failed then its postcondition are not valid and the repair algorithm will attempts to repair these postconditions.
+%	\item	if the task is nonprimitive and all its applicability conditions are invalid in the current state then the algorithm will attempts te replan to satisfy one of its applicability condition. 
+%\end{itemize}
+%
+%For example, the moveandpaint task which breakdowns in the execution of the walk task because its precondition "isOpen(door)" is no longer valid in the current state. 
+%
+%Once, the list of candidate is identified, the prolog STRIPS planner is called for each candidate and the solution with the shorter plan is returned to Disco to be executed in the real world.
+
