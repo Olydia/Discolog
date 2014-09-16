@@ -26,7 +26,8 @@ public class ConstructorTest {
                       p2.getPostcondition().getScript(), null),
                 a = test.newTask("a", false, p1.getPrecondition().getScript(), 
                       b.getPostcondition().getScript(), null);
-      
+      test.newRecipe("r1", b, Collections.singletonList(new Step("s1", p2)), "V");
+      test.newRecipe("r2", b, Collections.singletonList(new Step("s1", p3)), "W");
       // build the non-recipe part of the tree
       Plan top = newPlan(a);
       top.add(newPlan(p1));

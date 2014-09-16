@@ -60,8 +60,10 @@ public class PlanConstructor {
 		System.out.println(RecipeTree.Init(conditions));
 		//RecipeTree.printTree(root);
 		// *************** plan consturction ***********************
-		Plan top = test.FromTreeToPlan(root);
-		test.GeneratePlan(root, top, test);
+		//Plan top = test.FromTreeToPlan(root);
+		//test.GeneratePlan(root, top, test);
+		TaskClass task = test.FromTreeToTask(root);
+		test.generateTasks(root, task, top);
 		test.RecipeRecoveryTask(recipecondition, top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
 		test.printPlan(top);
@@ -139,7 +141,7 @@ public class PlanConstructor {
 									.getPostconditions(),
 									root.getHead().getPostconditions() == null ? null : root
 											.getHead().getPostconditions()
-											+ "=false;println('"
+											+ "=true;println('"
 											+ root.getHead().getName() + "   "+ root
 											.getHead().getPostconditions() +" =false ')")));
 			
@@ -157,7 +159,67 @@ public class PlanConstructor {
 			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null)));
 		}
 	}
-	public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
+	//***************************************************************
+
+	public  TaskClass FromTreeToTask(RecipeTree root) {
+		// verifier si les conditions ne sont pas nulls
+		if (root.isLeaf()){
+			Random rand = new Random();
+			int nombreAleatoire = rand.nextInt(2);
+			if(nombreAleatoire ==1)
+			return ( newTask(root.getHead().getName(),true, 
+					root.getHead().getPreconditions(), root.getHead().getPostconditions(),
+					root.getHead().getPostconditions() == null ?null
+							:root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "')"));
+					 
+			else 
+				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
+					root.getHead().getPostconditions() == null ? null 
+							: root.getHead().getPostconditions()+ "=true;println('"
+											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
+			
+		}
+		else
+			return (newTask(root.getHead().getName(), false, root.getHead()
+					.getPreconditions(), root.getHead().getPostconditions(),
+					null));
+	}
+	public void generateTasks(RecipeTree root, TaskClass top, Plan ptop) {
+		TaskClass child=null;
+		Plan ch = null;
+		//Plan ptop = null;
+
+		ArrayList <Plan>children = new ArrayList<Plan>(); 
+		children.clear();
+		List<Step> step = new ArrayList<Step>();
+		if(!root.isLeaf()){
+			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
+					.getChildren().entrySet()) {
+				for (RecipeTree node : NodeEntry.getValue()) {
+					//System.out.println(node.getHead().getName());
+					child=FromTreeToTask(node);
+					generateTasks(node, child, ch);
+					step.add(new Step("s" + child, child));
+					if(!node.isLeaf())
+						children.add(ch);
+				}
+				if(conditions.contains("C" + NodeEntry.getKey())){
+					newRecipe(NodeEntry.getKey().toString(), top,
+							step, "C" + NodeEntry.getKey());
+							//step, null);
+					recipecondition.add(NodeEntry.getKey());
+				}
+				else newRecipe(NodeEntry.getKey().toString(), top,
+						step, null);
+				step.clear();
+				ptop = newPlan(top);
+				for(Plan elem: children)
+					ptop.add(elem);				
+			}
+		}	
+	}
+	//****************************************************************
+	/*public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
 		Plan child=null;
 		ArrayList <Plan>children = new ArrayList<Plan>(); 
 		children.clear();
@@ -186,14 +248,10 @@ public class PlanConstructor {
 				for(Plan ch: children)
 					top.add(ch);
 				children.clear();
-				
-					
-				
 			}
-		}
-		
+		}	
 	}
-
+*/
 	// github
 	// ********************************************************
 	public void getLeaves(Plan top) {
