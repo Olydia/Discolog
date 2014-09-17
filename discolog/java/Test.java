@@ -23,7 +23,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		Test test = new Test();
 		TaskClass
-		a11 = test.newTask("a11", true, "p1", "p3",	"p3=true;println('a11')"),
+		//a11 = test.newTask("a11", true, "p1", "p3",	"p3=true;println('a11')"),
 		a12 = test.newTask("a12", true, "p3", "p2", "p2=true;println('a12')"),
 		a21 = test.newTask("a21", true, "p1", "p3", "p3=true;println('a21')"), 
 		a22 = test.newTask("a22", true, "p3", "p2", "p2=true;println('a22')"),
@@ -33,7 +33,7 @@ public class Test {
 		a122 = test.newTask("a122", true, "p5", "p3","p3=true;println('a122')"),
 
 		// recursive propagation of pre/postconditions up the tree	
-		//a11 = test.newTask("a11", false, a111.getPrecondition().getScript(), a122.getPostcondition().getScript(), null),
+		a11 = test.newTask("a11", false, a111.getPrecondition().getScript(), a122.getPostcondition().getScript(), null),
 
 		a = test.newTask("a", false, a21.getPrecondition().getScript(), a22
 				.getPostcondition().getScript(), null);
@@ -53,8 +53,8 @@ public class Test {
 		stepsr4.add(new Step("s7", a121));
 		stepsr4.add(new Step("s8", a122));
 		
-		//test.newRecipe("r3",a11,stepsr3,"X");
-		//test.newRecipe("r4",a11,stepsr4,"Y");
+		test.newRecipe("r3",a11,stepsr3,"X");
+		test.newRecipe("r4",a11,stepsr4,"Y");
 		
 		test.newRecipe("r1",a,stepsr1,"V");
 		test.newRecipe("r2",a,stepsr2,"W");
@@ -66,28 +66,25 @@ public class Test {
 		/*
 		 
 		 */// needed only for non-recipe nodes
-		top.setPlanned(true);
 		test.disco.addTop(top);
 		// prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false);
 		// initialize all world state predicates
-		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V=false,Y=true,X=false", "init");
-		TaskEngine.VERBOSE = true;
-		TaskEngine.DEBUG=true;
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,V=true,W=false,Y=true,X=false", "init");
+		
 		// allow agent to keep executing without talking
-		((Agent) test.interaction.getSystem()).setMax(1);
+		//((Agent) test.interaction.getSystem()).setMax(1);
 		// agent starts
 		test.interaction.start(false);
 	}
 
 	// NB: use instance of Discolog extension instead of Agent below
-	final Interaction interaction = new Interaction(new Agent("agent"),
-			new User("user")) {
+	final Interaction interaction = new Interaction(new Agent("agent"), new User("user"), null) {
 
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, true)) {
+			while (getSystem().respond(interaction, false, false, false)) {
 			}
 		}
 	};
