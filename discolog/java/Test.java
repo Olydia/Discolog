@@ -84,8 +84,9 @@ public class Test {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, true, false)) {}
+			while (getSystem().respond(interaction, false, false, false)) {}
 		}
+
 	};
 
 	final Disco disco = interaction.getDisco();
