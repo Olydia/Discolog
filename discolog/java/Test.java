@@ -27,33 +27,51 @@ public class Test {
 		a12 = test.newTask("a12", true, "p3", "p2", "p2=true;println('a12')"),
 		a21 = test.newTask("a21", true, "p1", "p3", "p3=true;println('a21')"), 
 		a22 = test.newTask("a22", true, "p3", "p2", "p2=true;println('a22')"),
-		// recursive propagation of pre/postconditions up the tree
-		a = test.newTask("a", false, a11.getPrecondition().getScript(), a12
+		a111 = test.newTask("a111", true, "p1", "p5","p5=true;println('a111')"),
+		a112 = test.newTask("a112", true, "p5", "p3","p3=true;println('a112')"),
+		a121 = test.newTask("a121", true, "p1", "p5","p5=true;println('a121')"),
+		a122 = test.newTask("a122", true, "p5", "p3","p3=true;println('a122')"),
+
+		// recursive propagation of pre/postconditions up the tree	
+		//a11 = test.newTask("a11", false, a111.getPrecondition().getScript(), a122.getPostcondition().getScript(), null),
+
+		a = test.newTask("a", false, a21.getPrecondition().getScript(), a22
 				.getPostcondition().getScript(), null);
+		List<Step> stepsr1 = new ArrayList<Step>();
+		stepsr1.add(new Step("s1", a11));
+		stepsr1.add(new Step("s2", a12));
 		
-		List<Step> steps = new ArrayList<Step>();
-		steps.add(new Step("s3", a11));
-		steps.add(new Step("s4", a12));
+		List<Step> stepsr2 = new ArrayList<Step>();
+		stepsr2.add(new Step("s3", a21));
+		stepsr2.add(new Step("s4", a22));
 		
-		List<Step> steps1 = new ArrayList<Step>();
-		steps.add(new Step("s3", a21));
-		steps.add(new Step("s4", a22));
+		List<Step> stepsr3 = new ArrayList<Step>();
+		stepsr3.add(new Step("s5", a111));
+		stepsr3.add(new Step("s6", a112));
 		
-		test.newRecipe("r1", a,steps, "V");
-		test.newRecipe("r2", a,steps1, "W");
+		List<Step> stepsr4 = new ArrayList<Step>();
+		stepsr4.add(new Step("s7", a121));
+		stepsr4.add(new Step("s8", a122));
+		
+		//test.newRecipe("r3",a11,stepsr3,"X");
+		//test.newRecipe("r4",a11,stepsr4,"Y");
+		
+		test.newRecipe("r1",a,stepsr1,"V");
+		test.newRecipe("r2",a,stepsr2,"W");
 		
 		// build the non-recipe part of the tree
 		Plan top = newPlan(a); 
+		//top.add(newPlan(a11));
+		//top.add(newPlan(a12));
 		/*
-		 * top.add(newPlan(p1)); top.add(newPlan(b));
 		 
 		 */// needed only for non-recipe nodes
-		//top.setPlanned(true);
+		top.setPlanned(true);
 		test.disco.addTop(top);
 		// prevent agent asking about toplevel goal
 		test.disco.setProperty("Ask.Should(a)@generate", false);
 		// initialize all world state predicates
-		test.disco.eval("var p1,p2,p3=false,p4=false,W=true,V=false", "init");
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V=false,Y=true,X=false", "init");
 		TaskEngine.VERBOSE = true;
 		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
