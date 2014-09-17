@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
@@ -16,11 +15,11 @@ import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
+import edu.wpi.disco.lang.Propose;
 
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Test test = new Test();
 		TaskClass
 		//a11 = test.newTask("a11", true, "p1", "p3",	"p3=true;println('a11')"),
@@ -61,31 +60,31 @@ public class Test {
 		
 		// build the non-recipe part of the tree
 		Plan top = newPlan(a); 
-		//top.add(newPlan(a11));
-		//top.add(newPlan(a12));
-		/*
-		 
-		 */// needed only for non-recipe nodes
+		// add intention
 		test.disco.addTop(top);
+		// push top onto stack
+		test.disco.push(top);
 		// prevent agent asking about toplevel goal
-		test.disco.setProperty("Ask.Should(a)@generate", false);
+		top.getGoal().setShould(true);
 		// initialize all world state predicates
-		test.disco.eval("var p1,p5,p2,p3=false,p4=false,V=true,W=false,Y=true,X=false", "init");
-		
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=false,V=true,Y=true,X=false", "init");
+		//TaskEngine.VERBOSE = true;
+		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
-		//((Agent) test.interaction.getSystem()).setMax(1);
+		((Agent) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
 	}
 
 	// NB: use instance of Discolog extension instead of Agent below
-	final Interaction interaction = new Interaction(new Agent("agent"), new User("user"), null) {
-
+	final Interaction interaction = 
+	      new Interaction(new Agent("agent"), new User("user"), null) {
+	   
+	   // for debugging with Disco console, comment out this override
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, false)) {
-			}
+			while (getSystem().respond(interaction, false, true, false)) {}
 		}
 	};
 
@@ -103,13 +102,16 @@ public class Test {
 				true, true, disco), grounding == null ? null : new Grounding(
 				grounding, disco));
 		task.setProperty("@primitive", primitive);
+		task.setProperty("@internal", true);
 		return task;
 	}
 
 	DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
 			String applicable) {
-		return new DecompositionClass(model, id, goal, steps,
+	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
 				new Applicability(applicable, true, disco));
+	   decomp.setProperty("@internal", true);
+	   return decomp;
 	}
 
 	private static Plan newPlan(TaskClass task) {
