@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package fr.limsi.discolog;
 
 import java.io.BufferedWriter;
@@ -279,3 +280,5 @@ public class PlanConstructor {
 	    }
 	}
 }
+=======
+>>>>>>> origin/master
