@@ -40,12 +40,12 @@ public class RecipeTree {
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 
-		int depth = 1;
+		int depth = 2;
 		int length = 2;
 		int recipe = 2;
 		createTree(root, depth, length, recipe);
 		defineKnowledge(root);
-		existingCond=LevelOfKnowledge(root,50);
+		existingCond=LevelOfKnowledge(root,100);
 		DefineLevelOfKnowledge(root,existingCond);
 		System.out.println(root.toString());
 		printTree(root);
