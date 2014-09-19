@@ -294,7 +294,7 @@ public class RecipeTree {
 			else{
 				Random rand = new Random();
 				int nombreAleatoire = rand.nextInt(2);
-				init += nombreAleatoire==1? ", " + coditions.get(i) +" =true":", " + coditions.get(i) +" =false";
+				init += nombreAleatoire==1? ", " + coditions.get(i) +" =true":", " + coditions.get(i) +" =true";
 			}
 		}
 	
