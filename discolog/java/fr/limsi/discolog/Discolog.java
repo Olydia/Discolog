@@ -16,22 +16,14 @@ import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
 import edu.wpi.cetask.DecompositionClass;
-import edu.wpi.cetask.DecompositionClass.Applicability;
-import edu.wpi.cetask.DecompositionClass.Step;
 import edu.wpi.cetask.Description.Condition;
-import edu.wpi.cetask.TaskClass.Grounding;
-import edu.wpi.cetask.TaskClass.Postcondition;
-import edu.wpi.cetask.TaskClass.Precondition;
 import edu.wpi.cetask.Plan;
-import edu.wpi.cetask.Shell;
 import edu.wpi.cetask.TaskClass;
 import edu.wpi.cetask.TaskEngine;
-import edu.wpi.cetask.TaskModel;
 import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
-import edu.wpi.disco.User;
 
 /**
  * New main class for Discolog that extends default Disco agent to add breakdown
@@ -91,11 +83,12 @@ public class Discolog extends Agent {
 		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		//ArrayList<String> Init = new ArrayList<String>();
+		
 		//;
-		String Goal = condition;
 		//String initial = "islocked";
-		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions), Goal);
+		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,
+				candidate.getGoal().getType().getEngine()),condition);
+		System.out.println(PlanConstructor.conditions.size());
 		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
@@ -205,8 +198,6 @@ public class Discolog extends Agent {
 		Prolog engine = new Prolog();
 		
 		try {
-			ClassLoader classloader = Thread.currentThread()
-					.getContextClassLoader();
 			InputStream planner = Discolog.class
 					.getResourceAsStream("/test-2p/test_instance.pl");
 			Theory theory = new Theory(planner);
@@ -247,72 +238,22 @@ public class Discolog extends Agent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// String Goal = "isopen";
 
 	}
 
 	// **********************************************************************************************************
-	 private TaskClass newTask (String id, boolean primitive, String precondition, String postcondition, String grounding) {
-	      if ( !primitive && grounding != null ) 
-	         throw new IllegalArgumentException("Non-primitive cannot have grounding script: "+id);
-	      TaskClass task = new TaskClass(model, id,
-	            new Precondition(precondition, true, disco), 
-	            new Postcondition(postcondition, true, true, disco), 
-	            grounding == null ? null : new Grounding(grounding, disco));
-	      task.setProperty("@primitive",  primitive);
-	      return task;
-	   }
-/*	public void setLevelOfKnowledg(Tree root,int percentage)  {
-	}
-
-	public Plan FromTreeToPlan(Tree node){
-		if (node.isLeaf())
-			return( newPlan(newTask(node.getHead().getName(), true, node.getHead().getPreconditions(), node.getHead().getPostconditions(),
-					node.getHead().getPostconditions()+ "=true;println('"+ node.getHead().getName() + "')")));
-		else
-			return( newPlan(newTask(node.getHead().getName(), false, node.getHead().getPreconditions(), node.getHead().getPostconditions(),
-					node.getHead().getPostconditions()+ "=true;println('"+ node.getHead().getName() + "')")));
-	}
-	public void GeneratePlan(Tree root, Plan top) {
-		Plan child = null;
-		if (!root.isLeaf()) {
-					for (Tree i : root.getChildren()) {
-						child = FromTreeToPlan(i);
-						GeneratePlan(i,child);	
+	 
+	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
+		List<String> liveCond = new ArrayList<String>();
+		for (int i = 0; i < conditions.size(); i++){
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")==true){
+				//System.out.println("evaluating"+conditions.get(i));
+				liveCond.add(conditions.get(i).toString());
 			}
 		}
-	}*/
-	public  List<String> EvalConditions(List<String> conditions){
-		 List<String> liveCond = new ArrayList<String>();
-		 for (int i = 0; i < conditions.size(); i++){
-			 if ((Boolean)disco.eval(conditions.get(i).toString(),"breakdown")==true){
-				System.out.println("evaluating"+conditions.get(i));
-				liveCond.add(conditions.get(i).toString());
-			 }
-		 }
 		return liveCond;
-		
+
 	}
 
-	// NB: use instance of Discolog extension instead of Agent below
-	   private final Interaction interaction =  new Interaction(new Agent("agent"), new User("user")) {
-	      
-	      @Override
-	      public void run () {
-	         // keep running as long as agent has something to do and then stop
-	         while (getSystem().respond(interaction, false, false, true)) {}
-	      }
-	   };
-	   
-	   private final Disco disco = interaction.getDisco();
-	   private final TaskModel model = new TaskModel("urn:edu.wpi.cetask:models:Test", disco); 
-	   
-	  
-	   
-	   private DecompositionClass newRecipe (String id, TaskClass goal, List<Step> steps, String applicable) {
-	      return new DecompositionClass(model, id, goal, steps, new Applicability(applicable, true, disco));
-	   }
-	   
-	   private static Plan newPlan (TaskClass task) { return new Plan(task.newInstance()); }
 	
 }

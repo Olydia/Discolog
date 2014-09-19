@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
@@ -15,7 +14,6 @@ import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
-import edu.wpi.disco.lang.Propose;
 
 public class Test {
 
