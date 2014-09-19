@@ -55,18 +55,12 @@ public class PlanConstructor {
 		TaskClass task = test.FromTreeToTask(root);
 		test.generateTasks(root, task);
 		Plan top = test.newPlan(task);
-		//test.RecipeRecoveryTask(recipecondition, top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
-		
-	
-		// initialize all world state predicates
-		//test.disco.eval(RecipeTree.Init(conditions).toString(), "init"); // allow agent
-		// allow agent
-		
 		// add intention
 		test.disco.addTop(top);
 		// push top onto stack
 		test.disco.push(top);
+		test.newTask("recovery",false, null, null, null);
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		//test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V=false,Y=true,X=false", "init");
@@ -157,6 +151,8 @@ public class PlanConstructor {
 					.getPreconditions(), root.getHead().getPostconditions(),
 					null));
 	}
+	
+	
 	public void generateTasks(RecipeTree root, TaskClass top) {
 		TaskClass child=null;
 		List<Step> step = new ArrayList<Step>();
@@ -168,13 +164,14 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
-					/*System.out.println(child.getId() + "["+child.getPrecondition().getScript() +" , "
-													 + child.getPostcondition().getScript() +"] , "
-													 + child.getDecompositions().size());*/
+					System.out.println(child.getId() + "["+child.getPrecondition().getScript() +","
+													 + child.getPostcondition().getScript() +"],"
+													 + child.getDecompositions().size());
 					step.add(new Step("s" + child, child));
 				}
 				
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){
+					
 					newRecipe(NodeEntry.getKey().toString(), top,
 							step, "C" + NodeEntry.getKey().toString());
 					recipecondition.add(NodeEntry.getKey());
