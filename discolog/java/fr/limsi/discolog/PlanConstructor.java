@@ -38,10 +38,7 @@ public class PlanConstructor {
 	static List<DecompositionClass> recipes = new ArrayList<DecompositionClass>();
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
-	public static Plan top;
-	public static int cpt = 1;
 	
-
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		/****************************
@@ -50,7 +47,7 @@ public class PlanConstructor {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 2;
+		int depth = 1;
 		int length = 2;
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
@@ -58,102 +55,35 @@ public class PlanConstructor {
 		conditions = RecipeTree.LevelOfKnowledge(root, 100);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		System.out.println(RecipeTree.Init(conditions));
-		//RecipeTree.printTree(root);
-		// *************** plan consturction ***********************
-		//Plan top = test.FromTreeToPlan(root);
-		//test.GeneratePlan(root, top, test);
+		RecipeTree.printTree(root);
 		TaskClass task = test.FromTreeToTask(root);
-		test.generateTasks(root, task, top);
-		test.RecipeRecoveryTask(recipecondition, top);
+		test.generateTasks(root, task);
+		Plan top=newPlan(task);
+		//test.RecipeRecoveryTask(recipecondition, top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
-		test.printPlan(top);
+		//test.printPlan(top);
 		System.out.println(" ******************* *******************");
 		// ******************* Disco plan ******************
 
-		top.setPlanned(true); // needed only for non-recipe nodes
-		test.disco.addTop(top); // prevent agent asking about toplevel goal
-		test.disco.setProperty("Ask.Should(a)@generate", false); //
-		// initialize all world state predicates 
-		test.disco.eval(RecipeTree.Init(conditions),"init"); // allow agent
-		//test.disco.eval("var P1=true,CR1=true,CR2=false,P3,P4=false,P2=false","init"); // allow agent
-		// to keep executing without talking
-		TaskEngine.VERBOSE = true;
-		//TaskEngine.DEBUG=true;
-		((Discolog) test.interaction.getSystem()).setMax(100); // agent starts
-		test.interaction.start(true);
-		//System.out.println(test.disco.getTop(top).getGoal().getType().getId());
+		// add intention
+		test.disco.addTop(top);
+		// push top onto stack
+		test.disco.push(top);
+		// prevent agent asking about toplevel goal
+		top.getGoal().setShould(true);
+		// initialize all world state predicates
+		test.disco.eval(RecipeTree.Init(conditions).toString(), "init"); // allow agent
+
+		// TaskEngine.VERBOSE = true;
+		TaskEngine.DEBUG = true;
+		// allow agent to keep executing without talking
+		((Agent) test.interaction.getSystem()).setMax(1000);
+		// agent starts
+		test.interaction.start(false);
 	}
 	
 	
-	// NB: use instance of Discolog extension instead of Agent below
-	private final Discolog agent = new Discolog("agent");
-	private final Interaction interaction = new Interaction(agent, new User("user")) {
-		@Override
-		public void run() {
-			// keep running as long as agent has something to do and then stop
-		   // note retry false for testing experiment
-			while (getSystem().respond(interaction, false, false, false)) {
-			}
-		}
-	};
-
-	private final Disco disco = interaction.getDisco();
-	private final TaskModel model = new TaskModel(
-			"urn:edu.wpi.cetask:models:Test", disco);
-
-	private TaskClass newTask(String id, boolean primitive,
-			String precondition, String postcondition, String grounding) {
-		if (!primitive && grounding != null)
-			throw new IllegalArgumentException(
-					"Non-primitive cannot have grounding script: " + id);
-		TaskClass task = new TaskClass(model, id, precondition == null ? null : new Precondition(
-				precondition, true, disco),postcondition == null ? null : new Postcondition(postcondition,
-				true, true, disco), grounding == null ? null : new Grounding(
-				grounding, disco));
-		task.setProperty("@primitive", primitive);
-		return task;
-	}
-
-	private DecompositionClass newRecipe(String id, TaskClass goal,
-			List<Step> steps, String applicable) {
-		return new DecompositionClass(model, id, goal, steps,
-				applicable == null ? null : new Applicability(applicable, true,
-						disco));
-	}
-
-	private static Plan newPlan(TaskClass task) {
-		return new Plan(task.newInstance());
-	}
-
-	public Plan FromTreeToPlan(RecipeTree root) {
-		// verifier si les conditions ne sont pas nulls
-		if (root.isLeaf()){
-			Random rand = new Random();
-			int nombreAleatoire = rand.nextInt(2);
-			return ( nombreAleatoire ==1? newPlan(newTask(root.getHead().getName(), true, root
-					.getHead().getPreconditions(), root.getHead()
-					.getPostconditions(),
-					root.getHead().getPostconditions() == null ? null : root
-							.getHead().getPostconditions()
-							+ "=true;println('"
-							+ root.getHead().getName() + "')")) : newPlan(newTask(root.getHead().getName(), true, root
-									.getHead().getPreconditions(), root.getHead()
-									.getPostconditions(),
-									root.getHead().getPostconditions() == null ? null : root
-											.getHead().getPostconditions()
-											+ "=true;println('"
-											+ root.getHead().getName() + "   "+ root
-											.getHead().getPostconditions() +" =false ')")));
-			
-		}
-		else
-			return (newPlan(newTask(root.getHead().getName(), false, root.getHead()
-					.getPreconditions(), root.getHead().getPostconditions(),
-					null)));
-
-	}
-
-
+	
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
 			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null)));
@@ -184,11 +114,9 @@ public class PlanConstructor {
 					.getPreconditions(), root.getHead().getPostconditions(),
 					null));
 	}
-	public void generateTasks(RecipeTree root, TaskClass top, Plan ptop) {
+	public void generateTasks(RecipeTree root, TaskClass top) {
 		TaskClass child=null;
 		Plan ch = null;
-		//Plan ptop = null;
-
 		ArrayList <Plan>children = new ArrayList<Plan>(); 
 		children.clear();
 		List<Step> step = new ArrayList<Step>();
@@ -198,7 +126,7 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					//System.out.println(node.getHead().getName());
 					child=FromTreeToTask(node);
-					generateTasks(node, child, ch);
+					generateTasks(node, child);
 					step.add(new Step("s" + child, child));
 					if(!node.isLeaf())
 						children.add(ch);
@@ -212,46 +140,54 @@ public class PlanConstructor {
 				else newRecipe(NodeEntry.getKey().toString(), top,
 						step, null);
 				step.clear();
-				ptop = newPlan(top);
-				for(Plan elem: children)
-					ptop.add(elem);				
+						
 			}
 		}	
 	}
-	//****************************************************************
-	/*public void GeneratePlan(RecipeTree root, Plan top, PlanConstructor test) {
-		Plan child=null;
-		ArrayList <Plan>children = new ArrayList<Plan>(); 
-		children.clear();
-		List<Step> step = new ArrayList<Step>();
-		if(!root.isLeaf()){
-			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
-					.getChildren().entrySet()) {
-				for (RecipeTree node : NodeEntry.getValue()) {
-					child=FromTreeToPlan(node);
-					step.add(new Step("s" + child.getType(), child.getType()));
-					cpt++;
-					children.add(child);
-					//top.add(child);
-					this.GeneratePlan(node, child, test);
-				}
-				if(conditions.contains("C" + NodeEntry.getKey())){
-					test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
-							step, "C" + NodeEntry.getKey());
-							//step, null);
+	
+	// NB: use instance of Discolog extension instead of Agent below
+		final Interaction interaction = 
+		      new Interaction(new Agent("agent"), new User("user"), null) {
+		   
+		   // for debugging with Disco console, comment out this override
+			@Override
+			public void run() {
+				// keep running as long as agent has something to do and then stop
+				while (getSystem().respond(interaction, false, false, false)) {}
+			}
 
-					recipecondition.add(NodeEntry.getKey());
-				}
-				else test.newRecipe(NodeEntry.getKey().toString(), top.getType(),
-						step, null);
-				step.clear();
-				for(Plan ch: children)
-					top.add(ch);
-				children.clear();
-			}
-		}	
-	}
-*/
+		};
+
+		final Disco disco = interaction.getDisco();
+		private final TaskModel model = new TaskModel(
+				"urn:edu.wpi.cetask:models:Test", disco);
+
+		TaskClass newTask(String id, boolean primitive, String precondition,
+				String postcondition, String grounding) {
+			if (!primitive && grounding != null)
+				throw new IllegalArgumentException(
+						"Non-primitive cannot have grounding script: " + id);
+			TaskClass task = new TaskClass(model, id, new Precondition(
+					precondition, true, disco), new Postcondition(postcondition,
+					true, true, disco), grounding == null ? null : new Grounding(
+					grounding, disco));
+			task.setProperty("@primitive", primitive);
+			task.setProperty("@internal", true);
+			return task;
+		}
+
+		DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
+				String applicable) {
+		   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
+					new Applicability(applicable, true, disco));
+		   decomp.setProperty("@internal", true);
+		   return decomp;
+		}
+
+		private static Plan newPlan(TaskClass task) {
+			return new Plan(task.newInstance());
+		}
+
 	// github
 	// ********************************************************
 	public void getLeaves(Plan top) {
