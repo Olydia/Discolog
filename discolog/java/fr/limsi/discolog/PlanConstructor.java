@@ -37,10 +37,7 @@ public class PlanConstructor {
 	static List<DecompositionClass> recipes = new ArrayList<DecompositionClass>();
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
-<<<<<<< HEAD
-=======
-	public static int cpt = 1;
->>>>>>> origin/master
+
 	
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
@@ -54,53 +51,15 @@ public class PlanConstructor {
 		RecipeTree.defineKnowledge(root);
 		conditions = RecipeTree.LevelOfKnowledge(root, 100);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-<<<<<<< HEAD
-		System.out.println(RecipeTree.Init(conditions));
-		RecipeTree.printTree(root);
-		TaskClass task = test.FromTreeToTask(root);
-		test.generateTasks(root, task);
-		Plan top=newPlan(task);
-		//test.RecipeRecoveryTask(recipecondition, top);
-		test.FromTreeToProlog(root, recipecondition, conditions);
-		//test.printPlan(top);
-		System.out.println(" ******************* *******************");
-		// ******************* Disco plan ******************
-
-		// add intention
-		test.disco.addTop(top);
-		// push top onto stack
-		test.disco.push(top);
-		// prevent agent asking about toplevel goal
-		top.getGoal().setShould(true);
-		// initialize all world state predicates
-		test.disco.eval(RecipeTree.Init(conditions).toString(), "init"); // allow agent
-
-		// TaskEngine.VERBOSE = true;
-		TaskEngine.DEBUG = true;
-		// allow agent to keep executing without talking
-		((Agent) test.interaction.getSystem()).setMax(1000);
-		// agent starts
-		test.interaction.start(false);
-	}
-	
-	
-	
-=======
 		TaskClass task = test.FromTreeToTask(root);
 		test.generateTasks(root, task);
 		Plan top = test.newPlan(task);
-		//test.RecipeRecoveryTask(recipecondition, top);
 		test.FromTreeToProlog(root, recipecondition, conditions);
-		
-	
-		// initialize all world state predicates
-		//test.disco.eval(RecipeTree.Init(conditions).toString(), "init"); // allow agent
-		// allow agent
-		
 		// add intention
 		test.disco.addTop(top);
 		// push top onto stack
 		test.disco.push(top);
+		test.newTask("recovery",false, null, null, null);
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		//test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V=false,Y=true,X=false", "init");
@@ -162,7 +121,7 @@ public class PlanConstructor {
 
 	
 //********************************* diso *********************************************************
->>>>>>> origin/master
+
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
 			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null)));
@@ -192,14 +151,10 @@ public class PlanConstructor {
 					.getPreconditions(), root.getHead().getPostconditions(),
 					null));
 	}
+	
+	
 	public void generateTasks(RecipeTree root, TaskClass top) {
 		TaskClass child=null;
-<<<<<<< HEAD
-		Plan ch = null;
-		ArrayList <Plan>children = new ArrayList<Plan>(); 
-		children.clear();
-=======
->>>>>>> origin/master
 		List<Step> step = new ArrayList<Step>();
 		
 		if(!root.isLeaf()){
@@ -209,16 +164,16 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
-<<<<<<< HEAD
-=======
-					/*System.out.println(child.getId() + "["+child.getPrecondition().getScript() +" , "
-													 + child.getPostcondition().getScript() +"] , "
-													 + child.getDecompositions().size());*/
->>>>>>> origin/master
+
+					System.out.println(child.getId() + "["+child.getPrecondition().getScript() +","
+													 + child.getPostcondition().getScript() +"],"
+													 + child.getDecompositions().size());
+
 					step.add(new Step("s" + child, child));
 				}
 				
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){
+					
 					newRecipe(NodeEntry.getKey().toString(), top,
 							step, "C" + NodeEntry.getKey().toString());
 					recipecondition.add(NodeEntry.getKey());
@@ -230,56 +185,9 @@ public class PlanConstructor {
 			}
 		}	
 	}
-	
-<<<<<<< HEAD
-	// NB: use instance of Discolog extension instead of Agent below
-		final Interaction interaction = 
-		      new Interaction(new Agent("agent"), new User("user"), null) {
-		   
-		   // for debugging with Disco console, comment out this override
-			@Override
-			public void run() {
-				// keep running as long as agent has something to do and then stop
-				while (getSystem().respond(interaction, false, false, false)) {}
-			}
 
-		};
 
-		final Disco disco = interaction.getDisco();
-		private final TaskModel model = new TaskModel(
-				"urn:edu.wpi.cetask:models:Test", disco);
 
-		TaskClass newTask(String id, boolean primitive, String precondition,
-				String postcondition, String grounding) {
-			if (!primitive && grounding != null)
-				throw new IllegalArgumentException(
-						"Non-primitive cannot have grounding script: " + id);
-			TaskClass task = new TaskClass(model, id, new Precondition(
-					precondition, true, disco), new Postcondition(postcondition,
-					true, true, disco), grounding == null ? null : new Grounding(
-					grounding, disco));
-			task.setProperty("@primitive", primitive);
-			task.setProperty("@internal", true);
-			return task;
-		}
-
-		DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
-				String applicable) {
-		   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
-					new Applicability(applicable, true, disco));
-		   decomp.setProperty("@internal", true);
-		   return decomp;
-		}
-
-		private static Plan newPlan(TaskClass task) {
-			return new Plan(task.newInstance());
-		}
-
-=======
->>>>>>> origin/master
-	// github
-	// ********************************************************
-/**/
 //************************************ PROLOG CREATION ***********************************************
 	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) {
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";

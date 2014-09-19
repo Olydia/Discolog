@@ -86,8 +86,7 @@ public class Discolog extends Agent {
 		
 		//;
 		//String initial = "islocked";
-		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,
-				candidate.getGoal().getType().getEngine()),condition);
+		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),condition);
 		System.out.println(PlanConstructor.conditions.size());
 		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
@@ -127,7 +126,7 @@ public class Discolog extends Agent {
 	 *         false)
 	 */
 	private void findCandidates(List<Plan> children) {
-		// check there is a prolog version of the goal condition
+		//ccheck there is a prolog version of the goal condition
 		for (Plan plan : children) {
 			TaskClass type = plan.getGoal().getType();
 			if (type.getPrecondition() != null
@@ -199,7 +198,7 @@ public class Discolog extends Agent {
 		
 		try {
 			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/test_instance.pl");
+					.getResourceAsStream("/test-2p/Domain_knowledge.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal, engine);
