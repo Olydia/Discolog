@@ -184,9 +184,8 @@ public class PlanConstructor {
 		}	
 	}
 	
-	// github
-	// ********************************************************
-/**/
+
+
 //************************************ PROLOG CREATION ***********************************************
 	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) {
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";

@@ -126,7 +126,7 @@ public class Discolog extends Agent {
 	 *         false)
 	 */
 	private void findCandidates(List<Plan> children) {
-		// check there is a prolog version of the goal condition
+		//ccheck there is a prolog version of the goal condition
 		for (Plan plan : children) {
 			TaskClass type = plan.getGoal().getType();
 			if (type.getPrecondition() != null
