@@ -43,7 +43,7 @@ public class PlanConstructor {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 1;
+		int depth = 2;
 		int length = 2;
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
@@ -65,22 +65,23 @@ public class PlanConstructor {
 		// the init doen't support that the two applicabilty conditions are set to true
 		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =true", "init");
 
-		test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
+		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
 
-		/*test.disco.eval("var CR6 =true, P1 =true, P3 =true, CR8 =true, P4 =true, "
-				+ "CR7 =true, P5 =false, P2 =true, CR9 =true, P6 =true, CR10 =true, "
-				+ "P7 =true, CR1 =true, P8 =true, CR2 =true, P9 =true, CR3 =true,"
-				+ " P10 =true, CR4 =true, P11 =false, CR5 =false, P12 =true", "init");*/
+		test.disco.eval("var CR1 =true,CR6 =false, CR2 =false, CR3 =true, CR4 =true, CR5 =false,"
+				+ "CR7,CR8 , CR9,CR10 ,"
+				+ "P1 , P3 ,  P4 , "
+				+ " P5 , P2 ,  P6 ,  "
+				+ "P7 ,  P8 ,  P9, "
+				+ " P10,  P11, P12" , "init");
 		// allow agent to keep executing without talking
-		((Agent) test.interaction.getSystem()).setMax(1000);
+		((Discolog) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
 	}
 	
-
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
-	      new Interaction(new Agent("agent"), new User("user"), null) {
+	      new Interaction(new Discolog("agent"), new User("user"), null) {
 	   
 	   // for debugging with Disco console, comment out this override
 		@Override
@@ -88,7 +89,6 @@ public class PlanConstructor {
 			// keep running as long as agent has something to do and then stop
 			while (getSystem().respond(interaction, false, false, false)) {}
 		}
-
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -134,8 +134,8 @@ public class PlanConstructor {
 		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf()){
 			Random rand = new Random();
-			int nombreAleatoire = rand.nextInt(2);
-			if(nombreAleatoire ==1)
+			int nombreAleatoire = rand.nextInt(4);
+			if(nombreAleatoire !=1)
 			return ( newTask(root.getHead().getName(),true, 
 					root.getHead().getPreconditions(), root.getHead().getPostconditions(),
 					root.getHead().getPostconditions() == null ?null
@@ -144,7 +144,7 @@ public class PlanConstructor {
 			else 
 				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					root.getHead().getPostconditions() == null ? null 
-							: root.getHead().getPostconditions()+ "=true;println('"
+							: root.getHead().getPostconditions()+ "=false;println('"
 											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
 			
 		}

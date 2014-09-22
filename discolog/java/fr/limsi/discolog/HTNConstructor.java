@@ -41,7 +41,7 @@ public class HTNConstructor {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 1;
+		int depth = 2;
 		int length = 2;
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
@@ -53,7 +53,7 @@ public class HTNConstructor {
 		test.generateTasks(root, task);
 		test.newTask("recovery", false, null, null, null);
 		test.FromTreeToProlog(root, recipecondition, conditions);
-		System.out.println("try to execute plan ");
+		//System.out.println("try to execute plan ");
 		Plan top = test.newPlan(task);
 		//test.interaction.exit();
 		test.disco.addTop(top);
@@ -62,15 +62,21 @@ public class HTNConstructor {
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		//test.disco.eval(RecipeTree.Init(conditions), "init");
-		test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
+		//test.disco.eval("var P1=true, P2, P3, P4, CR1=false, CR2 =true", "init");
+		test.disco.eval("var CR1 =false,CR6 =true, CR2 =false, CR3 =true, CR4 =true, CR5 =false,"
+				+ "CR7,CR8 , CR9,CR10 ,"
+				+ "P1 , P3 ,  P4 , "
+				+ " P5 , P2 ,  P6 ,  "
+				+ "P7 ,  P8 ,  P9, "
+				+ " P10,  P11, P12" , "init");
+		
 		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
 		((Discolog) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(true);
+		
 	}
-
-
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 			new Interaction(new Discolog("agent"), new User("user"), null) {
@@ -137,7 +143,7 @@ public class HTNConstructor {
 						root.getHead().getPreconditions(),
 						root.getHead().getPostconditions(),
 						root.getHead().getPostconditions() == null ? null 
-								: root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
+								: root.getHead().getPostconditions()+ "=false;println('"+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
 		}
 		else
 			return (newTask(root.getHead().getName(), false,
