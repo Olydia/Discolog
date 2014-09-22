@@ -75,6 +75,7 @@ public class PlanConstructor {
 		((Agent) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
+		
 	}
 	
 
