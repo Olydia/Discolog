@@ -27,19 +27,17 @@ import edu.wpi.cetask.DecompositionClass.Step;
 import edu.wpi.cetask.TaskClass.Grounding;
 import edu.wpi.cetask.TaskClass.Postcondition;
 import edu.wpi.cetask.TaskClass.Precondition;
-import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
 
-public class PlanConstructor {
+public class HTNConstructor {
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	public static List<String> conditions = new LinkedList<String>();
-	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
-
 	
-	public static void main(String[] args) throws IOException {
-		PlanConstructor test = new PlanConstructor();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HTNConstructor test = new HTNConstructor();
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
@@ -50,41 +48,38 @@ public class PlanConstructor {
 		RecipeTree.defineKnowledge(root);
 		conditions = RecipeTree.LevelOfKnowledge(root, 100);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
+		//RecipeTree.printTree(root);
 		TaskClass task = test.FromTreeToTask(root);
 		test.generateTasks(root, task);
-		Plan top = test.newPlan(task);
+		test.newTask("recovery", false, null, null, null);
 		test.FromTreeToProlog(root, recipecondition, conditions);
-		// add intention
+		System.out.println("try to execute plan ");
+		Plan top = test.newPlan(task);
+		//test.interaction.exit();
 		test.disco.addTop(top);
 		// push top onto stack
 		test.disco.push(top);
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
-		TaskEngine.DEBUG = true;
+		//test.disco.eval(RecipeTree.Init(conditions), "init");
 		test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
-
-		/*test.disco.eval("var CR6 =true, P1 =true, P3 =true, CR8 =true, P4 =true, "
-				+ "CR7 =true, P5 =false, P2 =true, CR9 =true, P6 =true, CR10 =true, "
-				+ "P7 =true, CR1 =true, P8 =true, CR2 =true, P9 =true, CR3 =true,"
-				+ " P10 =true, CR4 =true, P11 =false, CR5 =false, P12 =true", "init");*/
+		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
-		((Agent) test.interaction.getSystem()).setMax(1000);
+		((Discolog) test.interaction.getSystem()).setMax(1000);
 		// agent starts
-		test.interaction.start(false);
+		test.interaction.start(true);
 	}
-	
+
 
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
-	      new Interaction(new Agent("agent"), new User("user"), null) {
-	   
-	   // for debugging with Disco console, comment out this override
+			new Interaction(new Discolog("agent"), new User("user"), null) {
+		// for debugging with Disco console, comment out this override
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, false)) {}
+			while (getSystem().respond(interaction, false, true, false)) {}
 		}
-
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -96,10 +91,12 @@ public class PlanConstructor {
 		if (!primitive && grounding != null)
 			throw new IllegalArgumentException(
 					"Non-primitive cannot have grounding script: " + id);
-		TaskClass task = new TaskClass(model, id, precondition == null ? null : new Precondition(
-				precondition, true, disco), postcondition == null ? null :  new Postcondition(postcondition,
-				true, true, disco), grounding == null ? null : new Grounding(
-				grounding, disco));
+		
+		TaskClass task = new TaskClass(model, id, 
+				precondition == null ? null : new Precondition(precondition, true, disco), 
+				postcondition == null ? null : new Postcondition(postcondition,true, true, disco),
+				grounding == null ? null : new Grounding(grounding, disco));
+		
 		task.setProperty("@primitive", primitive);
 		task.setProperty("@internal", true);
 		return task;
@@ -107,96 +104,83 @@ public class PlanConstructor {
 
 	DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
 			String applicable) {
-	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
+		DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
 				applicable == null ? null :new Applicability(applicable, true, disco));
-	   decomp.setProperty("@internal", true);
-	   return decomp;
+		decomp.setProperty("@internal", true);
+		return decomp;
 	}
 
 	private Plan newPlan(TaskClass task) {
 		return new Plan(task.newInstance());
 	}
-
-	
-//********************************* diso *********************************************************
+	//********************************* diso *********************************************************
 
 	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
 		for(String recipe: recipecondition){
 			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null)));
 		}
 	}
-	
+
 	public  TaskClass FromTreeToTask(RecipeTree root) {
 		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf()){
 			Random rand = new Random();
 			int nombreAleatoire = rand.nextInt(2);
 			if(nombreAleatoire ==1)
-			return ( newTask(root.getHead().getName(),true, 
-					root.getHead().getPreconditions(), root.getHead().getPostconditions(),
-					root.getHead().getPostconditions() == null ?null
-							:root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "')"));
-					 
+				return ( newTask(root.getHead().getName(),true, 
+						root.getHead().getPreconditions(),
+						root.getHead().getPostconditions(),
+						root.getHead().getPostconditions() == null ?null
+								:root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "')"));
 			else 
-				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
-					root.getHead().getPostconditions() == null ? null 
-							: root.getHead().getPostconditions()+ "=true;println('"
-											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =true ')"));
-			
+				return(newTask(root.getHead().getName(),true,
+						root.getHead().getPreconditions(),
+						root.getHead().getPostconditions(),
+						root.getHead().getPostconditions() == null ? null 
+								: root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
 		}
 		else
-			return (newTask(root.getHead().getName(), false, root.getHead()
-					.getPreconditions(), root.getHead().getPostconditions(),
+			return (newTask(root.getHead().getName(), false,
+					root.getHead().getPreconditions(),
+					root.getHead().getPostconditions(),
 					null));
 	}
-	
-	 TaskClass Recovery(){
-		   TaskClass Recovery = newTask("recovery", false, null, null, null);
-		   Recovery.setProperty("@primitive",  false);
-		   Recovery.setProperty("@internal", true);
-		   return Recovery;
-	   }
-	
-	/*private String testPlan(TaskEngine disco, String name) {
-			return (disco.getTaskClass(name).getId());
-		}*/
-	
+
+	/*	TaskClass Recovery(){
+		TaskClass Recovery = newTask("recovery", false, null, null, null);
+		Recovery.setProperty("@primitive",  false);
+		Recovery.setProperty("@internal", true);
+		return Recovery;
+	}
+
+	private String testPlan(TaskEngine disco, String name) {
+		return (disco.getTaskClass(name).getId());
+	}
+*/
 	public void generateTasks(RecipeTree root, TaskClass top) {
 		TaskClass child=null;
 		List<Step> step = new ArrayList<Step>();
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				
+
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
-
-					/*System.out.print(child.getId() + "[");
-					System.out.print( child.getPrecondition() == null ? "null pred, " : child.getPrecondition().getScript() +"," );
-					System.out.println (child.getPostcondition() == null ? "null post]"  : child.getPostcondition().getScript()  +"],"
-													 + child.getDecompositions().size());
-*/
 					step.add(new Step("s" + child, child));
 				}
-				
+
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){
-					
-					newRecipe(NodeEntry.getKey().toString(), top,
-							step, "C" + NodeEntry.getKey().toString());
+					newRecipe(NodeEntry.getKey().toString(), top, step, "C" + NodeEntry.getKey().toString());
 					recipecondition.add(NodeEntry.getKey());
 				}
-				else newRecipe(NodeEntry.getKey().toString(), top,
-						step, null);
+				else newRecipe(NodeEntry.getKey().toString(), top, step, null);
 				step.clear();
-						
+
 			}
 		}	
 	}
-
-
-
-//************************************ PROLOG CREATION ***********************************************
+	//************************************ PROLOG CREATION ***********************************************
 	public void FromTreeToProlog (RecipeTree root, ArrayList<String> recipecondition,List<String> conditions ) {
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		PrintWriter writer;
@@ -205,12 +189,14 @@ public class PlanConstructor {
 			writer.print("");
 			writer.close();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
 		try {
 			copyFileUsingStream(new File(adresseSource), new File(adressedufichier));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try
@@ -243,7 +229,7 @@ public class PlanConstructor {
 						+ recipe.toLowerCase() + ").");
 				output.newLine();
 				output.flush();
-				
+
 			}
 			for (String i : conditions) {
 				output.write("strips_primitive(" + i.toLowerCase() + ").");
@@ -251,38 +237,38 @@ public class PlanConstructor {
 				output.flush();
 
 			}
-		output.close();
+			output.close();
 		}
 		catch(IOException ioe){
 			System.out.print("Erreur : ");
 			ioe.printStackTrace();
-			}
+		}
 	}
-	
+
 	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
-		 List<String> liveCond = new ArrayList<String>();
-		 for (int i = 0; i < conditions.size(); i++){
-			 if ((Boolean)test.disco.eval(conditions.get(i),"init"))
+		List<String> liveCond = new ArrayList<String>();
+		for (int i = 0; i < conditions.size(); i++){
+			if ((Boolean)test.disco.eval(conditions.get(i),"init"))
 				System.out.println(conditions.get(i));
-		 }
+		}
 		return liveCond;
-		
+
 	}
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
-	    InputStream is = null;
-	    OutputStream os = null;
-	    try {
-	        is = new FileInputStream(source);
-	        os = new FileOutputStream(dest);
-	        byte[] buffer = new byte[1024];
-	        int length;
-	        while ((length = is.read(buffer)) > 0) {
-	            os.write(buffer, 0, length);
-	        }
-	    } finally {
-	        is.close();
-	        os.close();
-	    }
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		} finally {
+			is.close();
+			os.close();
+		}
 	}
 }
 

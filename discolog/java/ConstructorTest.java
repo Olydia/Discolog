@@ -43,9 +43,9 @@ public class ConstructorTest {
       ((Agent) test.interaction.getSystem()).setMax(100);
       // agent starts
      test.interaction.start(false);
-      
+    
    }
-   
+  
    // NB: use instance of Discolog extension instead of Agent below
    final Interaction interaction =  new Interaction(new Agent("agent"), new User("user")) {
       
