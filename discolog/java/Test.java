@@ -65,7 +65,8 @@ public class Test {
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		// initialize all world state predicates
-		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=false,V=true,Y=true,X=false", "init");
+		//test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=false,V=true,Y=true,X=false", "init");
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W,V,Y,X", "init");
 		//TaskEngine.VERBOSE = true;
 		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
@@ -82,9 +83,8 @@ public class Test {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, false)) {}
+			while (getSystem().respond(interaction, false, true, false)) {}
 		}
-
 	};
 
 	final Disco disco = interaction.getDisco();
@@ -110,6 +110,7 @@ public class Test {
 	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
 				new Applicability(applicable, true, disco));
 	   decomp.setProperty("@internal", true);
+	   decomp.setProperty("@authorized", true);
 	   return decomp;
 	}
 
