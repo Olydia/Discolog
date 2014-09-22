@@ -52,6 +52,7 @@ public class PlanConstructor {
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		TaskClass task = test.FromTreeToTask(root);
 		test.generateTasks(root, task);
+		test.newTask("recovery", false, null, null, null);
 		Plan top = test.newPlan(task);
 		test.FromTreeToProlog(root, recipecondition, conditions);
 		// add intention
@@ -61,6 +62,9 @@ public class PlanConstructor {
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		TaskEngine.DEBUG = true;
+		// the init doen't support that the two applicabilty conditions are set to true
+		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =true", "init");
+
 		test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
 
 		/*test.disco.eval("var CR6 =true, P1 =true, P3 =true, CR8 =true, P4 =true, "
@@ -141,7 +145,7 @@ public class PlanConstructor {
 				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					root.getHead().getPostconditions() == null ? null 
 							: root.getHead().getPostconditions()+ "=true;println('"
-											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =true ')"));
+											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
 			
 		}
 		else
