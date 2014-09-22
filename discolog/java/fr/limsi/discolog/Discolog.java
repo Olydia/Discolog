@@ -88,7 +88,7 @@ public class Discolog extends Agent {
 		//String initial = "islocked";
 		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),condition);
 		System.out.println(PlanConstructor.conditions.size());
-		Plan p = newPlan(d, "recovery");
+		Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
 		}

@@ -37,6 +37,7 @@ public class PlanConstructor {
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
+	public static TaskClass RECOVERY;
 	
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
@@ -52,7 +53,7 @@ public class PlanConstructor {
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		TaskClass task = test.FromTreeToTask(root);
 		test.generateTasks(root, task);
-		test.newTask("recovery", false, null, null, null);
+		RECOVERY = test.newTask("recovery", false, null, null, null);
 		Plan top = test.newPlan(task);
 		test.FromTreeToProlog(root, recipecondition, conditions);
 		// add intention
@@ -155,13 +156,7 @@ public class PlanConstructor {
 					null));
 	}
 	
-	 TaskClass Recovery(){
-		   TaskClass Recovery = newTask("recovery", false, null, null, null);
-		   Recovery.setProperty("@primitive",  false);
-		   Recovery.setProperty("@internal", true);
-		   return Recovery;
-	   }
-	
+
 	/*private String testPlan(TaskEngine disco, String name) {
 			return (disco.getTaskClass(name).getId());
 		}*/
