@@ -86,9 +86,9 @@ public class Discolog extends Agent {
 		
 		//;
 		//String initial = "islocked";
-		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),condition);
-		System.out.println(PlanConstructor.conditions.size());
-		Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
+		JavaPlan = CallStripsPlanner(EvalConditions(HTNConstructor.conditions,d),condition);
+		//System.out.println(PlanConstructor.conditions.size());
+		Plan p = newPlan(d, "recovery");
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
 		}
@@ -246,10 +246,13 @@ public class Discolog extends Agent {
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")){
-				//System.out.println("evaluating"+conditions.get(i));
+
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown") != false){
+				System.out.println("evaluating"+conditions.get(i));
 				liveCond.add(conditions.get(i).toString());
 			}
+			else 	System.out.println("evaluatingc false"+conditions.get(i));
+
 		}
 		return liveCond;
 

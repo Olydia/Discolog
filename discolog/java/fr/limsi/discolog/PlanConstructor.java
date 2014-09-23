@@ -65,6 +65,7 @@ public class PlanConstructor {
 		TaskEngine.DEBUG = true;
 		// the init doen't support that the two applicabilty conditions are set to true
 		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =true", "init");
+
 		String initState = RecipeTree.Init(conditions);
 		test.disco.eval(initState, "init");
 		test.EvalConditions(conditions, test.disco);
@@ -75,7 +76,6 @@ public class PlanConstructor {
 		
 	}
 	
-
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Discolog("agent"), new User("user"), null) {
@@ -86,7 +86,6 @@ public class PlanConstructor {
 			// keep running as long as agent has something to do and then stop
 			while (getSystem().respond(interaction, false, true, false)) {}
 		}
-
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -145,7 +144,7 @@ public class PlanConstructor {
 		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf()){
 			Random rand = new Random();
-			int nombreAleatoire = rand.nextInt(3);
+			int nombreAleatoire = rand.nextInt(4);
 			if(nombreAleatoire !=1)
 			return ( newTask(root.getHead().getName(),true, 
 					root.getHead().getPreconditions(), root.getHead().getPostconditions(),

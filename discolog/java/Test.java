@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
@@ -57,24 +58,30 @@ public class Test {
 		test.newRecipe("r2",a,stepsr2,"W");
 		
 		// build the non-recipe part of the tree
+		//for(int i= 0; i<2; i++){
 		Plan top = newPlan(a); 
 		// add intention
 		test.disco.addTop(top);
 		// push top onto stack
 		test.disco.push(top);
+		
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		// initialize all world state predicates
-		//test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=false,V=true,Y=true,X=false", "init");
-		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W,V,Y,X", "init");
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V,Y=true,X=false", "init");
+
 		//TaskEngine.VERBOSE = true;
 		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
 		((Agent) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
-	}
+		
+		}
+		//test.disco.push(te);
 
+		
+	//}
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Agent("agent"), new User("user"), null) {
