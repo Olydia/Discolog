@@ -58,7 +58,7 @@ public class Test {
 		test.newRecipe("r2",a,stepsr2,"W");
 		
 		// build the non-recipe part of the tree
-		for(int i= 0; i<2; i++){
+		//for(int i= 0; i<2; i++){
 		Plan top = newPlan(a); 
 		// add intention
 		test.disco.addTop(top);
@@ -68,21 +68,19 @@ public class Test {
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		// initialize all world state predicates
-		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=false,V=true,Y=true,X=false", "init");
+		test.disco.eval("var p1,p5,p2,p3=false,p4=false,W=true,V,Y=true,X=false", "init");
 		//TaskEngine.VERBOSE = true;
 		TaskEngine.DEBUG=true;
 		// allow agent to keep executing without talking
 		((Agent) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
-		if (top.isDone())
-			test.interaction.exit();
+		
 		}
 		//test.disco.push(te);
 
 		
-	}
-
+	//}
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Agent("agent"), new User("user"), null) {
@@ -91,7 +89,7 @@ public class Test {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, false)) {}
+			while (getSystem().respond(interaction, false, true, false)) {}
 		}
 
 	};

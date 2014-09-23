@@ -67,7 +67,7 @@ public class PlanConstructor {
 
 		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =false", "init");
 
-		test.disco.eval("var CR1 =true,CR6 =false, CR2 =false, CR3 =true, CR4 =true, CR5 =false,"
+		test.disco.eval("var CR1 ,CR6 , CR2 , CR3 , CR4 , CR5 ,"
 				+ "CR7,CR8 , CR9,CR10 ,"
 				+ "P1 , P3 ,  P4 , "
 				+ " P5 , P2 ,  P6 ,  "
@@ -87,7 +87,7 @@ public class PlanConstructor {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, false, false)) {}
+			while (getSystem().respond(interaction, false, true, false)) {}
 		}
 	};
 
@@ -144,7 +144,7 @@ public class PlanConstructor {
 			else 
 				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					root.getHead().getPostconditions() == null ? null 
-							: root.getHead().getPostconditions()+ "=false;println('"
+							: root.getHead().getPostconditions()+ "=true;println('"
 											+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
 			
 		}
