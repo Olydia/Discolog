@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -60,25 +61,36 @@ public class Discolog extends Agent {
 		System.out.println(interaction.getDisco().getTops());
 		if (candidates.isEmpty()) {
 			System.out.println("No recovery candidates!");
-			return false;
 		} else {
-			for (Candidate candidate : candidates) {
-				Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
-				if (recovery != null) {
-					System.out.println("Found recovery plan for " + candidate.plan.getGoal().toString());
+			//for (Candidate candidate : candidates) {
+				//Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
+				Solution STRIPS = invokePlanner(candidates);
+				Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
+				for (int i = 0; i < STRIPS.getStrips().size() - 1; i++) {
+						TaskEngine TE = STRIPS.getCandidate().plan.getGoal().getType().getEngine();
+						recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
+				}
+				if (STRIPS.getCandidate().plan.isFailed()) {
+					for (Plan s : STRIPS.getCandidate().plan.getSuccessors()) {
+						s.requires(recovery);
+						s.unrequires(STRIPS.getCandidate().plan);
+					}
+				}
+				if (recovery!= null) {
+					System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
 					Disco disco = interaction.getDisco();
 					// splice in recovery plan
 					disco.getFocus().add(recovery);
 					recovery.setContributes(true); // so not interruption
 					return true;
 				}
-			}
-			System.out.println("No recovery plans found!");
-			return false;
+			//}
+			//System.out.println("No recovery plans found!");
 		}
+		return false;
 	}
 
-	private Plan invokePlanner(Plan candidate, String condition) {
+	/*private Plan invokePlanner(Plan candidate, String condition) {
 		// this should invoke Prolog planner
 		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
 		TaskEngine d = candidate.getGoal().getType().getEngine();
@@ -86,9 +98,9 @@ public class Discolog extends Agent {
 		
 		//;
 		//String initial = "islocked";
-		JavaPlan = CallStripsPlanner(EvalConditions(HTNConstructor.conditions,d),condition);
-		//System.out.println(PlanConstructor.conditions.size());
-		Plan p = newPlan(d, "recovery");
+		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),condition);
+		System.out.println(PlanConstructor.conditions.size());
+		Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
 		for (int i = 0; i < JavaPlan.size() - 1; i++) {
 			p.add(newPlan(d, JavaPlan.get(i)));
 		}
@@ -101,7 +113,36 @@ public class Discolog extends Agent {
 
 		return p;
 	}
+*/
+	//***************************************************************************************************************************************
+	private Solution invokePlanner(List <Candidate> conditions) {
+		// this should invoke Prolog planner
+		ArrayList<String> JavaPlan = new ArrayList<String>();
+		ArrayList<Solution> planrepair = new ArrayList<Solution>();
 
+		for(Candidate candidate: candidates){
+			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
+			JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),candidate.condition.getScript());
+			if(JavaPlan != null && JavaPlan.contains("init"))
+				planrepair.add(new Solution(JavaPlan, candidate));
+		}	
+		Collections.sort(planrepair);
+		return(planrepair.get(0));
+		/*Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
+		for (int i = 0; i < planrepair.get(0).getStrips().size() - 1; i++) {
+				TaskEngine TE = planrepair.get(0).getCandidate().plan.getGoal().getType().getEngine();
+				p.add(newPlan(TE, planrepair.get(0).getStrips().get(i)));
+		}
+		if (planrepair.get(0).getCandidate().plan.isFailed()) {
+			for (Plan s : planrepair.get(0).getCandidate().plan.getSuccessors()) {
+				s.requires(p);
+				s.unrequires(planrepair.get(0).getCandidate().plan);
+			}
+		}
+
+		return p;*/
+	}
+	//***************************************************************************************************************************************
 	private static Plan newPlan(TaskEngine disco, String name) {
 		return new Plan(disco.getTaskClass(name).newInstance());
 	}
@@ -117,7 +158,6 @@ public class Discolog extends Agent {
 			this.condition = condition;
 		}
 	}
-
 	/**
 	 * @return candidates for recovery planning target.
 	 * 
@@ -169,8 +209,10 @@ public class Discolog extends Agent {
 	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
-		if(plan == null)
-			System.out.println("No recovery STRIPS plan found !");
+		if(plan == null){
+			//System.out.println("No recovery STRIPS plan was found !");
+			return null;
+		}
 		else{
 		Pattern p = Pattern.compile("(do\\()");
 		String[] splitString = (p.split(plan.toString()));
@@ -242,21 +284,41 @@ public class Discolog extends Agent {
 	
 
 	// **********************************************************************************************************
-	 
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
-
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown") != false){
-				System.out.println("evaluating"+conditions.get(i));
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= null && 
+					(Boolean)engine.eval(conditions.get(i).toString(),"breakdown")== true){
+				//System.out.println("evaluating  "+conditions.get(i));
 				liveCond.add(conditions.get(i).toString());
 			}
-			else 	System.out.println("evaluatingc false"+conditions.get(i));
-
 		}
 		return liveCond;
-
 	}
-
 	
+	public class Solution implements Comparable<Solution>{
+		private final ArrayList<String> Strips;
+		private final Candidate condition;
+
+		private Solution(ArrayList<String>  Strips, Candidate condition) {
+			this.Strips=Strips;
+			this.condition = condition;
+		}
+		public ArrayList<String> getStrips() {
+			return Strips;
+		}
+		public Candidate getCandidate() {
+			return condition;
+		}
+		public int getSolutionSize(){
+			return this.getStrips().size();
+		}
+
+		@Override
+		public int compareTo(Solution sol2) {
+			int sol2Size=((Solution)sol2).getSolutionSize();
+			/* For Ascending order*/
+			return this.getSolutionSize()-sol2Size;
+		}
+	}
 }

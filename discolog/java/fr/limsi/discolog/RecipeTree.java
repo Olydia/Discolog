@@ -288,7 +288,7 @@ public class RecipeTree {
 			else{
 				Random rand = new Random();
 				int nombreAleatoire = rand.nextInt(2);
-				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"";
+				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
 			}
 		}
 	

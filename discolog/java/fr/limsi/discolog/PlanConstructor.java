@@ -62,17 +62,15 @@ public class PlanConstructor {
 		test.disco.push(top);
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
-		TaskEngine.DEBUG = true;
+		TaskEngine.VERBOSE = true;
 		// the init doen't support that the two applicabilty conditions are set to true
 		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =true", "init");
-
 		String initState = RecipeTree.Init(conditions);
 		test.disco.eval(initState, "init");
-		test.EvalConditions(conditions, test.disco);
 		// allow agent to keep executing without talking
-		//((Discolog) test.interaction.getSystem()).setMax(1000);
+		((Discolog) test.interaction.getSystem()).setMax(1000);
 		// agent starts
-		//test.interaction.start(false);
+		test.interaction.start(false);
 		
 	}
 	
@@ -118,33 +116,13 @@ public class PlanConstructor {
 	private Plan newPlan(TaskClass task) {
 		return new Plan(task.newInstance());
 	}
-
-	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
-		List<String> liveCond = new ArrayList<String>();
-		for (int i = 0; i < conditions.size(); i++){
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")){
-				System.out.println("evaluating"+conditions.get(i));
-				liveCond.add(conditions.get(i).toString());
-			}
-		}
-		return liveCond;
-
-	}
-	
 //********************************* diso *********************************************************
 
-	public void RecipeRecoveryTask(ArrayList<String> recipecondition,Plan top){
-		for(String recipe: recipecondition){
-			top.add(newPlan(newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?
-					"C"+recipe+"=true;println('C"+recipe+"')" : null)));
-		}
-	}
-	
 	public  TaskClass FromTreeToTask(RecipeTree root) {
 		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf()){
 			Random rand = new Random();
-			int nombreAleatoire = rand.nextInt(4);
+			int nombreAleatoire = rand.nextInt(3);
 			if(nombreAleatoire !=1)
 			return ( newTask(root.getHead().getName(),true, 
 					root.getHead().getPreconditions(), root.getHead().getPostconditions(),
@@ -165,10 +143,6 @@ public class PlanConstructor {
 	}
 	
 
-	/*private String testPlan(TaskEngine disco, String name) {
-			return (disco.getTaskClass(name).getId());
-		}*/
-	
 	public void generateTasks(RecipeTree root, TaskClass top) {
 		TaskClass child=null;
 		List<Step> step = new ArrayList<Step>();
@@ -267,7 +241,7 @@ public class PlanConstructor {
 			}
 	}
 	
-	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
+/*	public static List<String> EvalConditions(List<String> conditions, PlanConstructor test){
 		 List<String> liveCond = new ArrayList<String>();
 		 for (int i = 0; i < conditions.size(); i++){
 			 if ((Boolean)test.disco.eval(conditions.get(i),"init"))
@@ -275,7 +249,7 @@ public class PlanConstructor {
 		 }
 		return liveCond;
 		
-	}
+	}*/
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
 	    InputStream is = null;
 	    OutputStream os = null;
