@@ -246,7 +246,7 @@ public class Discolog extends Agent {
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")==true){
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")){
 				//System.out.println("evaluating"+conditions.get(i));
 				liveCond.add(conditions.get(i).toString());
 			}

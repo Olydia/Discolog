@@ -1,12 +1,6 @@
 package fr.limsi.discolog;
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -287,14 +281,14 @@ public class RecipeTree {
 	}
 	
 	public static String Init(List<String> coditions){
-		String init = "var "+ coditions.get(0)+" =true";
+		String init = "var "+ coditions.get(0)+"";
 		for(int i=1; i<coditions.size() ; i++){
 			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
 			else{
 				Random rand = new Random();
 				int nombreAleatoire = rand.nextInt(2);
-				init += nombreAleatoire==1? ", " + coditions.get(i) +" =true":", " + coditions.get(i) +" =false";
+				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"";
 			}
 		}
 	
