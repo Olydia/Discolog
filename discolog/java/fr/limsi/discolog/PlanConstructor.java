@@ -220,7 +220,10 @@ public class PlanConstructor {
 				}
 			}
 			for (String recipe : recipecondition) {
-
+				//strips_preconditions(r8,[p1]).
+				output.write("strips_preconditions(" + recipe.toLowerCase() + ",[p1]).");
+				output.newLine();
+				output.flush();
 				output.write("strips_achieves(" + recipe.toLowerCase() + ",c"
 						+ recipe.toLowerCase() + ").");
 				output.newLine();

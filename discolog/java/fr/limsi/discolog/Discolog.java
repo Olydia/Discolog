@@ -63,12 +63,14 @@ public class Discolog extends Agent {
 			System.out.println("No recovery candidates!");
 		} else {
 			//for (Candidate candidate : candidates) {
-				//Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
-				Solution STRIPS = invokePlanner(candidates);
+			//Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
+			Solution STRIPS = invokePlanner(candidates);
+			if(STRIPS != null){
 				Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
-				for (int i = 0; i < STRIPS.getStrips().size() - 1; i++) {
-						TaskEngine TE = STRIPS.getCandidate().plan.getGoal().getType().getEngine();
-						recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
+				TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
+				
+				for (int i = 0; i < STRIPS.getStrips().size(); i++) {
+					recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
 				}
 				if (STRIPS.getCandidate().plan.isFailed()) {
 					for (Plan s : STRIPS.getCandidate().plan.getSuccessors()) {
@@ -76,44 +78,21 @@ public class Discolog extends Agent {
 						s.unrequires(STRIPS.getCandidate().plan);
 					}
 				}
-				if (recovery!= null) {
-					System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
-					Disco disco = interaction.getDisco();
-					// splice in recovery plan
-					disco.getFocus().add(recovery);
-					recovery.setContributes(true); // so not interruption
-					return true;
-				}
-			//}
-			//System.out.println("No recovery plans found!");
+				//if (recovery!= null) {
+				System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
+				Disco disco = interaction.getDisco();
+				// splice in recovery plan
+				disco.getFocus().add(recovery);
+				recovery.setContributes(true); // so not interruption
+				return true;
+				//}
+			}
+			else 
+				System.out.println("No recovery plans found!");
 		}
 		return false;
 	}
 
-	/*private Plan invokePlanner(Plan candidate, String condition) {
-		// this should invoke Prolog planner
-		// return new Plan(candidate.getGoal().getType().getEngine().getTaskClass("Open").newInstance());
-		TaskEngine d = candidate.getGoal().getType().getEngine();
-		ArrayList<String> JavaPlan = new ArrayList<String>();
-		
-		//;
-		//String initial = "islocked";
-		JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),condition);
-		System.out.println(PlanConstructor.conditions.size());
-		Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
-		for (int i = 0; i < JavaPlan.size() - 1; i++) {
-			p.add(newPlan(d, JavaPlan.get(i)));
-		}
-		if (candidate.isFailed()) {
-			for (Plan s : candidate.getSuccessors()) {
-				s.requires(p);
-				s.unrequires(candidate);
-			}
-		}
-
-		return p;
-	}
-*/
 	//***************************************************************************************************************************************
 	private Solution invokePlanner(List <Candidate> conditions) {
 		// this should invoke Prolog planner
@@ -123,24 +102,14 @@ public class Discolog extends Agent {
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),candidate.condition.getScript());
-			if(JavaPlan != null && JavaPlan.contains("init"))
+			if(JavaPlan != null)
 				planrepair.add(new Solution(JavaPlan, candidate));
 		}	
 		Collections.sort(planrepair);
+		if (planrepair.isEmpty())
+			return null;
 		return(planrepair.get(0));
-		/*Plan p = new Plan(PlanConstructor.RECOVERY.newInstance());
-		for (int i = 0; i < planrepair.get(0).getStrips().size() - 1; i++) {
-				TaskEngine TE = planrepair.get(0).getCandidate().plan.getGoal().getType().getEngine();
-				p.add(newPlan(TE, planrepair.get(0).getStrips().get(i)));
-		}
-		if (planrepair.get(0).getCandidate().plan.isFailed()) {
-			for (Plan s : planrepair.get(0).getCandidate().plan.getSuccessors()) {
-				s.requires(p);
-				s.unrequires(planrepair.get(0).getCandidate().plan);
-			}
-		}
-
-		return p;*/
+		
 	}
 	//***************************************************************************************************************************************
 	private static Plan newPlan(TaskEngine disco, String name) {
@@ -223,7 +192,10 @@ public class Discolog extends Agent {
 			String elem = element.replaceAll("(init)(\\)+)", "");
 			elem = elem.replaceAll(",", "");
 			init = elem.replaceAll("\\(.*\\)", "");
-			Output.add(init);
+			if (init.equals("init"))
+				init = null;
+			if (!init.equals(""))
+				Output.add(init);
 
 		}
 		Collections.reverse(Output);
@@ -243,7 +215,7 @@ public class Discolog extends Agent {
 					.getResourceAsStream("/test-2p/Domain_knowledge.pl");
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
-			Strips_Input(Initial_state, Goal, engine);
+			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
@@ -269,17 +241,16 @@ public class Discolog extends Agent {
 		try {
 			for(String init : Initial_state){
 				//System.out.println(init);
-				engine.addTheory(new Theory("strips_holds(" + init + ",init)."));
+				engine.addTheory(new Theory("strips_holds(" + init.toLowerCase() + ",init)."));
 			}
 			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
-					+ Goal + "],30,Plan).");
+					+ Goal.toLowerCase() + "],30,Plan).");
 			//engine.addTheory(init);
 			engine.addTheory(PlannerCall);
 		} catch (InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 
