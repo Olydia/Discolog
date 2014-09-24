@@ -269,17 +269,17 @@ public class Discolog extends Agent {
 	
 	public class Solution implements Comparable<Solution>{
 		private final ArrayList<String> Strips;
-		private final Candidate condition;
+		private final Candidate candidate;
 
 		private Solution(ArrayList<String>  Strips, Candidate condition) {
 			this.Strips=Strips;
-			this.condition = condition;
+			this.candidate = condition;
 		}
 		public ArrayList<String> getStrips() {
 			return Strips;
 		}
 		public Candidate getCandidate() {
-			return condition;
+			return candidate;
 		}
 		public int getSolutionSize(){
 			return this.getStrips().size();
