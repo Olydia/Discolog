@@ -55,6 +55,7 @@ public class Discolog extends Agent {
 	}
 
 	private boolean recover(Interaction interaction) {
+		//System.out.println(" **************************   Start a recover procedure		*******************");
 		interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
@@ -80,10 +81,10 @@ public class Discolog extends Agent {
 				}
 				//if (recovery!= null) {
 				System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
-				Disco disco = interaction.getDisco();
+				/*Disco disco = interaction.getDisco();
 				// splice in recovery plan
 				disco.getFocus().add(recovery);
-				recovery.setContributes(true); // so not interruption
+				recovery.setContributes(true); // so not interruption*/
 				return true;
 				//}
 			}
@@ -173,7 +174,7 @@ public class Discolog extends Agent {
 			return item;
 	}
 
-							// ******************************* Planner Call ********************************************
+// ******************************* Planner Call ********************************************
 
 	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
@@ -185,9 +186,7 @@ public class Discolog extends Agent {
 		else{
 		Pattern p = Pattern.compile("(do\\()");
 		String[] splitString = (p.split(plan.toString()));
-		// remove init, parenthisis and init argument to obtain only the name of
-		// actions
-
+		
 		for (String element : splitString) {
 			String elem = element.replaceAll("(init)(\\)+)", "");
 			elem = elem.replaceAll(",", "");

@@ -56,7 +56,6 @@ public class PlanConstructor {
 		test.CreateBenshmark(root, task, output);
 		RECOVERY = test.newTask("recovery", false, null, null, null);
 		Plan top = test.newPlan(task);
-		//test.FromTreeToProlog(root, recipecondition, conditions);
 		// add intention
 		test.disco.addTop(top);
 		// push top onto stack
@@ -72,11 +71,29 @@ public class PlanConstructor {
 		((Discolog) test.interaction.getSystem()).setMax(1000);
 		// agent starts
 		test.interaction.start(false);
+		for(int i = 1; i<=4; i++){
+		if(!test.interaction.getSystem().respond(test.interaction, false, true, false)){
+			System.out.println(" **************************   Start a plan execution number 	"+i+"	*******************");
+			test.disco.pop();
+			test.disco.eval(RecipeTree.Init(conditions), "init"+i);
+			Plan top1 = test.newPlan(task);
+			// add intention
+			test.disco.addTop(top1);
+			// push top onto stack
+			test.disco.push(top1);
+			top1.getGoal().setShould(true);
+			//((Discolog) test.interaction.getSystem()).setMax(1000);
+
+			//test.interaction.start(false);
+			//i++;
+		}
+	}
+		test.interaction.exit();
 	}
 	
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
-	      new Interaction(new Discolog("agent"), new User("user"), null) {
+	      new Interaction(new Discolog("agent"), new User("user"), null)/*{
 	   
 	   // for debugging with Disco console, comment out this override
 		@Override
@@ -84,7 +101,7 @@ public class PlanConstructor {
 			// keep running as long as agent has something to do and then stop
 			while (getSystem().respond(interaction, false, true, false)) {}
 		}
-	};
+	}*/;
 
 	final  Disco disco = interaction.getDisco();
 	private final TaskModel model = new TaskModel(
@@ -106,7 +123,7 @@ public class PlanConstructor {
 
 	DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
 			String applicable) {
-	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,
+	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,applicable == null?null:
 				new Applicability(applicable, true, disco));
 	   decomp.setProperty("@internal", true);
 	   decomp.setProperty("@authorized", true);
@@ -189,11 +206,11 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
 					generateTasks(node, child,output);
-					System.out.print(child.getId() + "[");
+					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null pred, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null post]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
-
+*/
 					step.add(new Step("s" + child, child));
 				}
 				
@@ -221,7 +238,7 @@ public class PlanConstructor {
 					+ recipe.toLowerCase() + ").");
 			output.newLine();
 			output.flush();
-			newTask(recipe, true, null, "C"+recipe, conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null);
+			newTask(recipe.toLowerCase(), true, null,/* conditions.contains(recipe) ?*/"C"+recipe , conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null);
 		}
 	}
 	

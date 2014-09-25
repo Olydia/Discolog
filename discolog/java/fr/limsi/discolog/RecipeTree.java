@@ -281,12 +281,13 @@ public class RecipeTree {
 	}
 	
 	public static String Init(List<String> coditions){
-		String init = "var "+ coditions.get(0)+"";
+		Random rand = new Random();
+		int random = rand.nextInt(2);
+		String init =  random ==1?  "var "+coditions.get(0)+"" : "var "+coditions.get(0)+"=false" ;
 		for(int i=1; i<coditions.size() ; i++){
 			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
 			else{
-				Random rand = new Random();
 				int nombreAleatoire = rand.nextInt(2);
 				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
 			}
@@ -294,17 +295,4 @@ public class RecipeTree {
 	
 		return init;
 	}
-	/*public static String Init(int cond, ArrayList<String> recipecondition) {
-
-		String init = "var P1=true";
-		for (int i = 2; i < cond; i++) {
-			init += ",P" + i;
-		}
-		init += "=false";
-		for (int i = 0; i < recipecondition.size() ; i++) {
-			init += "," + recipecondition.get(i);
-		}
-		return init;
-
-	}*/
 }
