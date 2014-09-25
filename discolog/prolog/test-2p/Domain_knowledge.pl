@@ -172,13 +172,13 @@ strips_grnd(G) :-
 strips_preconditions(a81,[p1]).
 strips_achieves(a81,p4).
 strips_preconditions(a82,[p4]).
-strips_achieves(a82,p3).
+strips_achieves(a82,not(p3)).
 strips_preconditions(a71,[p1]).
 strips_achieves(a71,p5).
 strips_preconditions(a72,[p5]).
 strips_achieves(a72,p3).
 strips_preconditions(a91,[p3]).
-strips_achieves(a91,p6).
+strips_achieves(a91,not(p6)).
 strips_preconditions(a92,[p6]).
 strips_achieves(a92,p2).
 strips_preconditions(a101,[p3]).
@@ -188,7 +188,7 @@ strips_achieves(a102,p2).
 strips_preconditions(a21,[p1]).
 strips_achieves(a21,p9).
 strips_preconditions(a22,[p9]).
-strips_achieves(a22,p8).
+strips_achieves(a22,not(p8)).
 strips_preconditions(a31,[p1]).
 strips_achieves(a31,p10).
 strips_preconditions(a32,[p10]).
@@ -198,7 +198,7 @@ strips_achieves(a41,p11).
 strips_preconditions(a42,[p11]).
 strips_achieves(a42,p2).
 strips_preconditions(a51,[p8]).
-strips_achieves(a51,p12).
+strips_achieves(a51,not(p12)).
 strips_preconditions(a52,[p12]).
 strips_achieves(a52,p2).
 strips_preconditions(r8,[p1]).
