@@ -26,14 +26,14 @@ public class TestClass{
 	
 		evaluation = saveSolution();
 
-		levels.add(0);
+		//levels.add(0);
 	 	//levels.add(50);
 		//levels.add(75);
-		//levels.add(100);
+		levels.add(100);
 		for(int level:levels){
 		System.out.println(" \n***************************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
-		RecipeTree root = DefineTree(2, 4, 3,level);
-		for(int i=0; i< 100; i++){
+		RecipeTree root = DefineTree(2, 2, 2,level);
+		for(int i=0; i< 1; i++){
 			System.out.println(" \n***************************  Test number  " +i+ "  ****************************** \n " );
 			PlanConstructor test = new PlanConstructor();
 			output = test.InitSTRIPSPlanner();
@@ -51,7 +51,7 @@ public class TestClass{
 
 	}
 	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/results.txt";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/reslts.txt";
 		/*PrintWriter writer;
 		try {
 			writer = new PrintWriter(adressedufichier);
