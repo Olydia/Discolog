@@ -32,21 +32,6 @@ import edu.wpi.disco.Interaction;
  */
 public class Discolog extends Agent {
 
-	/**
-	 * Use this main method instead of {@link Disco#main(String[])} to start
-	 * system with console.
-	 */
-	/*public static void main(String[] args) {
-		Agent agent = new Discolog("agent");
-		// restrict to performing only a single primitive action on each turn
-		// so we have more control over example
-		agent.setMax(1);
-		Interaction interaction = new Interaction(agent, new User("user"),
-				args.length > 0 && args[0].length() > 0 ? args[0] : null);
-		interaction.start(false);
-
-	}*/
-
 	// TODO add private fields here to hold Prolog engine, etc.
 
 	public Discolog(String name) {
@@ -69,18 +54,27 @@ public class Discolog extends Agent {
 			if(STRIPS != null){
 				Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
 				TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
-				
+
 				for (int i = 0; i < STRIPS.getStrips().size(); i++) {
 					recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
 				}
-				if (STRIPS.getCandidate().plan.isFailed()) {
+				/*if (STRIPS.getCandidate().plan.isFailed()) {
 					for (Plan s : STRIPS.getCandidate().plan.getSuccessors()) {
 						s.requires(recovery);
 						s.unrequires(STRIPS.getCandidate().plan);
 					}
-				}
+				}*/
 				//if (recovery!= null) {
 				System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
+				try {
+					TestClass.evaluation.write("1 ");
+					TestClass.evaluation.flush();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// write 1
 				/*Disco disco = interaction.getDisco();
 				// splice in recovery plan
 				disco.getFocus().add(recovery);
@@ -88,8 +82,18 @@ public class Discolog extends Agent {
 				return true;
 				//}
 			}
-			else 
+			else {
 				System.out.println("No recovery plans found!");
+				// write 0
+				try {
+					TestClass.evaluation.write("0 ");
+					TestClass.evaluation.flush();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return false;
 	}
@@ -102,15 +106,16 @@ public class Discolog extends Agent {
 
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
-			JavaPlan = CallStripsPlanner(EvalConditions(PlanConstructor.conditions,d),candidate.condition.getScript());
-			if(JavaPlan != null)
+			JavaPlan = CallStripsPlanner(EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
+			if((JavaPlan != null ))
 				planrepair.add(new Solution(JavaPlan, candidate));
+
 		}	
 		Collections.sort(planrepair);
 		if (planrepair.isEmpty())
 			return null;
 		return(planrepair.get(0));
-		
+
 	}
 	//***************************************************************************************************************************************
 	private static Plan newPlan(TaskEngine disco, String name) {
@@ -167,14 +172,14 @@ public class Discolog extends Agent {
 				return super.respondIf(interaction, guess, retry); // new response with
 				// new plan
 			}
-				
+
 			else
 				return null;
 		} else
 			return item;
 	}
 
-// ******************************* Planner Call ********************************************
+	// ******************************* Planner Call ********************************************
 
 	private static ArrayList<String> getPlannerOutput(Term plan) {
 		ArrayList<String> Output = new ArrayList<String>();
@@ -184,20 +189,22 @@ public class Discolog extends Agent {
 			return null;
 		}
 		else{
-		Pattern p = Pattern.compile("(do\\()");
-		String[] splitString = (p.split(plan.toString()));
-		
-		for (String element : splitString) {
-			String elem = element.replaceAll("(init)(\\)+)", "");
-			elem = elem.replaceAll(",", "");
-			init = elem.replaceAll("\\(.*\\)", "");
-			if (init.equals("init"))
-				init = null;
-			if (!init.equals(""))
-				Output.add(init);
+			Pattern p = Pattern.compile("(do\\()");
+			String[] splitString = (p.split(plan.toString()));
 
-		}
-		Collections.reverse(Output);
+			for (String element : splitString) {
+				String elem = element.replaceAll("(init)(\\)+)", "");
+				elem = elem.replaceAll(",", "");
+				init = elem.replaceAll("\\(.*\\)", "");
+				if (init.equals("init"))
+					return null;
+				else 
+				if (!init.equals(""))
+					Output.add(init);
+				
+
+			}
+			Collections.reverse(Output);
 		}
 		return Output;
 
@@ -208,7 +215,7 @@ public class Discolog extends Agent {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		Prolog engine = new Prolog();
-		
+
 		try {
 			InputStream planner = Discolog.class
 					.getResourceAsStream("/test-2p/Domain_knowledge.pl");
@@ -220,17 +227,20 @@ public class Discolog extends Agent {
 			SolveInfo info = engine.solve(goal);
 
 			// Results
-			if (!info.isSuccess())
+			if (!info.isSuccess()){
 				System.out.println("no.");
+				return null;
+			}
 			else {// main case
 				Plan = info.getVarValue("X");
+				JavaPlan = getPlannerOutput(Plan);
+				return JavaPlan;
 			}
 		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {
 			throw new RuntimeException(ex);
 		}
 
-		JavaPlan = getPlannerOutput(Plan);
-		return JavaPlan;
+		
 	}
 
 	private static void Strips_Input(List<String> Initial_state, String Goal,
@@ -251,13 +261,13 @@ public class Discolog extends Agent {
 			e.printStackTrace();
 		}
 	}
-	
+
 
 	// **********************************************************************************************************
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= null && 
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")== null ||
 					(Boolean)engine.eval(conditions.get(i).toString(),"breakdown")== true){
 				//System.out.println("evaluating  "+conditions.get(i));
 				liveCond.add(conditions.get(i).toString());
@@ -265,7 +275,7 @@ public class Discolog extends Agent {
 		}
 		return liveCond;
 	}
-	
+
 	public class Solution implements Comparable<Solution>{
 		private final ArrayList<String> Strips;
 		private final Candidate candidate;

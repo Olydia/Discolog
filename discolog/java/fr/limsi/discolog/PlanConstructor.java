@@ -33,11 +33,12 @@ import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
 
 public class PlanConstructor {
+	public static TaskClass RECOVERY;
+
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
-	public static TaskClass RECOVERY;
 
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
@@ -52,26 +53,8 @@ public class PlanConstructor {
 		RecipeTree.defineKnowledge(root);
 		conditions = RecipeTree.LevelOfKnowledge(root, 100);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-		TaskClass task = test.FromTreeToTask(root,output);
-		test.CreateBenshmark(root, task, output);
-		RECOVERY = test.newTask("recovery", false, null, null, null);
-		Plan top = test.newPlan(task);
-		// add intention
-		test.disco.addTop(top);
-		// push top onto stack
-		test.disco.push(top);
-		// prevent agent asking about toplevel goal
-		top.getGoal().setShould(true);
-		TaskEngine.VERBOSE = true;
-		// the init doen't support that the two applicabilty conditions are set to true
-		//test.disco.eval("var P1=true, P2, P3, P4, CR1=true, CR2 =true", "init");
-		String initState = RecipeTree.Init(conditions);
-		test.disco.eval(initState, "init");
-		// allow agent to keep executing without talking
-		((Discolog) test.interaction.getSystem()).setMax(1000);
-		// agent starts
-		test.interaction.start(false);
-		for(int i = 1; i<=4; i++){
+		test.LanchTest(root, output, recipecondition, conditions);
+		/*for(int i = 1; i<=4; i++){
 		if(!test.interaction.getSystem().respond(test.interaction, false, true, false)){
 			System.out.println(" **************************   Start a plan execution number 	"+i+"	*******************");
 			test.disco.pop();
@@ -88,12 +71,12 @@ public class PlanConstructor {
 			//i++;
 		}
 	}
-		test.interaction.exit();
+		test.interaction.exit();*/
 	}
 	
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
-	      new Interaction(new Discolog("agent"), new User("user"), null)/*{
+	      new Interaction(new Discolog("agent"), new User("user"), null){
 	   
 	   // for debugging with Disco console, comment out this override
 		@Override
@@ -101,7 +84,7 @@ public class PlanConstructor {
 			// keep running as long as agent has something to do and then stop
 			while (getSystem().respond(interaction, false, true, false)) {}
 		}
-	}*/;
+	};
 
 	final  Disco disco = interaction.getDisco();
 	private final TaskModel model = new TaskModel(
@@ -134,28 +117,50 @@ public class PlanConstructor {
 		return new Plan(task.newInstance());
 	}
 //********************************* diso *********************************************************
-
-	public void CreateBenshmark (RecipeTree root, TaskClass task, BufferedWriter output) throws IOException{
-		generateTasks(root, task,output);
-		RecipeRecoveryTask(recipecondition,output);
+	public void LanchTest (RecipeTree root, BufferedWriter output, ArrayList<String> recipecondition, List<String> conditions) throws IOException{
+		TaskClass task = FromTreeToTask(root,output);
+		CreateBenshmark(root, task, output,recipecondition, conditions);
+		RECOVERY =newTask("recovery", false, null, null, null);
+		Plan top = newPlan(task);
+		// add intention
+		disco.addTop(top);
+		// push top onto stack
+		disco.push(top);
+		// prevent agent asking about toplevel goal
+		top.getGoal().setShould(true);
+		TaskEngine.VERBOSE = true;
+		String initState = RecipeTree.Init(conditions);
+		disco.eval(initState, "init");
+		System.out.println(initState);
+		((Discolog)interaction.getSystem()).setMax(1000);
+		interaction.start(false);
+	}
+	public void CreateBenshmark (RecipeTree root, TaskClass task, BufferedWriter output,  ArrayList<String> recipecondition, List<String> conditions) throws IOException{
+		generateTasks(root, task,output,recipecondition, conditions);
+		RecipeRecoveryTask(recipecondition,output,conditions);
 		for (String i : conditions) {
 			output.write("strips_primitive(" + i.toLowerCase() + ").");
 			output.newLine();
 			output.flush();
 		}
-		output.close();
+		//output.close();
 	}
 	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
-		// verifier si les conditions ne sont pas nulls
 		if (root.isLeaf()){
 			Random rand = new Random();
 
-			int nombreAleatoire = rand.nextInt(3);
+			int nombreAleatoire = rand.nextInt(4);
 			if (root.getHead().getPreconditions() != null) {
 				output.write("strips_preconditions("
 						+ root.getHead().getName().toLowerCase() + ",["
 						+ root.getHead().getPreconditions().toLowerCase()
 						+ "]).");
+				output.newLine();
+				output.flush();
+			}
+			else {
+				output.write("strips_preconditions("
+						+ root.getHead().getName().toLowerCase() + ",[_]).");
 				output.newLine();
 				output.flush();
 			}
@@ -168,6 +173,14 @@ public class PlanConstructor {
 					output.newLine();
 					output.flush();
 				}
+				else{
+					output.write("strips_achieves("
+							+ root.getHead().getName().toLowerCase() + ",_).");
+					output.newLine();
+					output.flush();
+				}
+			
+				
 				return ( newTask(root.getHead().getName(),true, 
 						root.getHead().getPreconditions(), root.getHead().getPostconditions(),
 						root.getHead().getPostconditions() == null ?null
@@ -177,9 +190,9 @@ public class PlanConstructor {
 			else {
 				if (root.getHead().getPostconditions() != null) {
 					output.write("strips_achieves("
-							+ root.getHead().getName().toLowerCase() + ",not("
+							+ root.getHead().getName().toLowerCase() + ",\\+"
 							+ root.getHead().getPostconditions().toLowerCase()
-							+ ")).");
+							+ ").");
 					output.newLine();
 					output.flush();
 				}
@@ -196,7 +209,7 @@ public class PlanConstructor {
 	}
 	
 
-	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output) throws IOException {
+	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output, ArrayList<String> recipecondition, List<String> conditions) throws IOException {
 		TaskClass child=null;
 		List<Step> step = new ArrayList<Step>();
 		if(!root.isLeaf()){
@@ -205,13 +218,12 @@ public class PlanConstructor {
 				
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
-					generateTasks(node, child,output);
+					generateTasks(node, child,output,recipecondition, conditions);
 					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null pred, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null post]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
-*/
-					step.add(new Step("s" + child, child));
+					*/step.add(new Step("s" + child, child));
 				}
 				
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){		
@@ -229,7 +241,7 @@ public class PlanConstructor {
 	}
 	
 
-	public void RecipeRecoveryTask(ArrayList<String> recipecondition, BufferedWriter output) throws IOException{
+	public void RecipeRecoveryTask(ArrayList<String> recipecondition, BufferedWriter output , List<String> conditions) throws IOException{
 		for(String recipe: recipecondition){
 			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[p1]).");
 			output.newLine();
@@ -242,7 +254,7 @@ public class PlanConstructor {
 		}
 	}
 	
-	private BufferedWriter InitSTRIPSPlanner() throws IOException{
+	public BufferedWriter InitSTRIPSPlanner() throws IOException{
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		PrintWriter writer;
 		try {

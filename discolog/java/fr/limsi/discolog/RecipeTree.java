@@ -29,7 +29,7 @@ public class RecipeTree {
 		return "tree [head=" + head + "]";
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
@@ -48,6 +48,16 @@ public class RecipeTree {
 		//	System.out.println(existingCond.get(i));
 		
 
+	}*/
+	static RecipeTree DefineTree(int depth, int length, int recipe, int levelOfKnowledge, List<String> conditions){
+		Node A = new Node("a", "P1", "P2");
+		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
+		RecipeTree root = new RecipeTree(A, child);
+		RecipeTree.createTree(root, depth, length, recipe);
+		RecipeTree.defineKnowledge(root);
+		conditions = RecipeTree.LevelOfKnowledge(root, levelOfKnowledge);
+		RecipeTree.DefineLevelOfKnowledge(root, conditions);
+		return root;
 	}
 
 	public Node getHead() {
@@ -274,6 +284,7 @@ public class RecipeTree {
 			}
 		}
 	}
+	
 	public static void defineKnowledge(RecipeTree root) {
 		propagatePrecondition(root);
 		propagatePostcondition(root);
@@ -287,6 +298,7 @@ public class RecipeTree {
 		for(int i=1; i<coditions.size() ; i++){
 			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
+			
 			else{
 				int nombreAleatoire = rand.nextInt(2);
 				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
