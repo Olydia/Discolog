@@ -39,7 +39,7 @@ public class PlanConstructor {
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
-
+/*
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		BufferedWriter output = test.InitSTRIPSPlanner();
@@ -71,9 +71,9 @@ public class PlanConstructor {
 			//i++;
 		}
 	}
-		test.interaction.exit();*/
+		test.interaction.exit();
 	}
-	
+	*/
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Discolog("agent"), new User("user"), null){
