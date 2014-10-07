@@ -56,15 +56,6 @@ public class PlanConstructor {
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		test.LanchTest(root, output, recipecondition, conditions);
 
-<<<<<<< HEAD
-=======
-			//test.interaction.start(false);
-			//i++;
-		}
-	}
-		test.interaction.exit();
->>>>>>> 52ccec852297b0e250e4007ee50b6dfa7147569f
-	}
 	*/
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
