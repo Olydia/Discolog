@@ -39,11 +39,15 @@ public class RecipeTree {
 		int recipe = 2;
 		createTree(root, depth, length, recipe);
 		defineKnowledge(root);
-		existingCond=LevelOfKnowledge(root,50);
-		DefineLevelOfKnowledge(root,existingCond);
 		System.out.println(root.toString());
 		printTree(root);
-		System.out.println(levelOfk(depth, length, recipe));
+		int cond = levelOfk(depth, length, recipe, 50);
+		PartialTree(root, cond);
+		System.out.println("********************************************************************");
+
+		printTree(root);
+		
+
 		//System.out.println(Init(existingCond));
 		//for(int i=0;i<existingCond.size();i++)
 		//	System.out.println(existingCond.get(i));
@@ -122,17 +126,29 @@ public class RecipeTree {
 		}
 	}
 	
-	public static void PartialTree(RecipeTree root, int conditions) {
+	public static void PartialTree(RecipeTree root, int removalcondition) {
+		Random rand = new Random();
 		if (!root.isLeaf()) {
-			int cond= conditions/root.getChildren().entrySet().size();
 			// System.out.println(root.toString());
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				System.out.println(NodeEntry.getKey());
-				for (RecipeTree i : NodeEntry.getValue()) {
-					System.out.println(i.toString());
-					PartialTree(i, conditions);
+				int level= removalcondition;
+				while(level>0){
+					int nodeIndex = rand.nextInt(NodeEntry.getValue().size());
+					int condition = rand.nextInt(2);
+					RecipeTree currentNode = NodeEntry.getValue().get(nodeIndex);
+					if(condition == 1 && currentNode.head.getPreconditions()!=null){
+						currentNode.head.setPreconditions(null);
+						level --;
+					}
+					else if(condition != 1 && currentNode.head.getPostconditions()!=null){
+						currentNode.head.setPostconditions(null);
+						level --;
+					}
 				}
+				for (RecipeTree i : NodeEntry.getValue()) 
+					PartialTree(i, removalcondition);
+				
 			}
 		}
 	}
@@ -234,15 +250,17 @@ public class RecipeTree {
 			}
 		}
 	}
-	public static int levelOfk(int depth, int length, int recipe){
-		int knowledge =0;
-		for(int i= 0;i<=depth; i++)
+	public static int levelOfk(int depth, int length, int recipe, int percentageKnowledge){
+		int ConditionNumber = ((length*recipe)*2)+recipe;
+		int removalLevel = ((ConditionNumber*percentageKnowledge)/100)/ recipe;
+
+		/*for(int i= 0;i<=depth; i++)
 			knowledge+= Math.pow(length*recipe, i);
 		knowledge = knowledge*2;
 		for(int i= 0;i<depth; i++)
 			knowledge+= (recipe*Math.pow(length*recipe, i));
-		
-		return knowledge;
+		*/
+		return removalLevel;
 	}
 	public static List<String> LevelOfKnowledge(RecipeTree root, int level) {
 		List<String> conditions =new LinkedList<String>();

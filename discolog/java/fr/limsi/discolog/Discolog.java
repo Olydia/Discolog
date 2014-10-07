@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
@@ -23,7 +21,6 @@ import edu.wpi.cetask.TaskClass;
 import edu.wpi.cetask.TaskEngine;
 import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.Agent;
-import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 
 /**
@@ -118,9 +115,6 @@ public class Discolog extends Agent {
 
 	}
 	//***************************************************************************************************************************************
-	private static Plan newPlan(TaskEngine disco, String name) {
-		return new Plan(disco.getTaskClass(name).newInstance());
-	}
 
 	private final List<Candidate> candidates = new ArrayList<Candidate>();
 
