@@ -168,22 +168,4 @@ strips_insert(A,[B|L],[B|R]) :-
    \+ A == B,
    strips_insert(A,L,R).
 strips_grnd(G) :-
-   numbervars(G,0,_).
-strips_preconditions(a21,[p1]).
-strips_achieves(a21,\+p3).
-strips_preconditions(a22,[p3]).
-strips_achieves(a22,p2).
-strips_preconditions(a11,[p1]).
-strips_achieves(a11,p4).
-strips_preconditions(a12,[p4]).
-strips_achieves(a12,p2).
-strips_preconditions(r2,[p1]).
-strips_achieves(r2,cr2).
-strips_preconditions(r1,[p1]).
-strips_achieves(r1,cr1).
-strips_primitive(p1).
-strips_primitive(cr1).
-strips_primitive(cr2).
-strips_primitive(p3).
-strips_primitive(p2).
-strips_primitive(p4).
+

@@ -40,7 +40,7 @@ public class PlanConstructor {
 	//public static List<String> conditions = new LinkedList<String>();
 	public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
-
+/*
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		BufferedWriter output = test.InitSTRIPSPlanner();
@@ -56,8 +56,16 @@ public class PlanConstructor {
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		test.LanchTest(root, output, recipecondition, conditions);
 
+<<<<<<< HEAD
+=======
+			//test.interaction.start(false);
+			//i++;
+		}
 	}
-	
+		test.interaction.exit();
+>>>>>>> 52ccec852297b0e250e4007ee50b6dfa7147569f
+	}
+	*/
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Discolog("agent"), new User("user"), null){
