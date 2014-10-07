@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.wpi.cetask.DecompositionClass;
+import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
 
 public class TestClass{
@@ -26,18 +28,18 @@ public class TestClass{
 	
 		evaluation = saveSolution();
 
-		//levels.add(0);
+		//levels.add(25);
 	 	//levels.add(50);
-		//levels.add(75);
-		levels.add(100);
+		levels.add(50);
+		//levels.add(100);
 		for(int level:levels){
 		System.out.println(" \n***************************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
-		RecipeTree root = DefineTree(2, 2, 2,level);
+		RecipeTree root = DefineTree(1, 2, 2,level);
 		for(int i=0; i< 1; i++){
 			System.out.println(" \n***************************  Test number  " +i+ "  ****************************** \n " );
 			PlanConstructor test = new PlanConstructor();
 			output = test.InitSTRIPSPlanner();
-			test.LanchTest(root, output,recipecondition,conditions);
+			test.LanchTest(root, output, recipecondition, conditions);
 			try {
 				test.interaction.join();
 
@@ -51,7 +53,7 @@ public class TestClass{
 
 	}
 	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/reslts.txt";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/relts.txt";
 		/*PrintWriter writer;
 		try {
 			writer = new PrintWriter(adressedufichier);
@@ -85,4 +87,6 @@ public class TestClass{
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		return root;
 	}
+	
+	
 }

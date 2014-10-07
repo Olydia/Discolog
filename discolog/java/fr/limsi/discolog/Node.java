@@ -1,28 +1,47 @@
 package fr.limsi.discolog;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.cetask.DecompositionClass.Applicability;
 import edu.wpi.cetask.TaskClass.Postcondition;
 import edu.wpi.cetask.TaskClass.Precondition;
 
 public class Node {
 
+	private String Name;
+	private String Preconditions;
+	private String Postconditions;
+	private ArrayList<String> Grounding;
 	public Node(String name, String preconditions, String postconditions) {
 		super();
-		Name = name;
-		Preconditions = preconditions;
-		Postconditions = postconditions;
+		this.Name = name;
+		this.Preconditions = preconditions;
+		this.Postconditions = postconditions;
+		
+	}
+	
+	public ArrayList<String> getGrounding() {
+		return Grounding;
+	}
+	
+	public void defineGrounding() {
+		this.Grounding = new ArrayList<String>();
+		this.Grounding.add(this.Preconditions);
+		this.Grounding.add(this.Postconditions);
+	}
+	
+	public void setGrounding(ArrayList<String> grounding) {
+		Grounding = grounding;
 	}
 	/**
 	 * @param args
 	 */
-	private String Name;
-	private String Preconditions;
-	private String Postconditions;
+
 
 	public Node(String name) {
 		this.Name = name;
-			}
+	}
 
 	public String getName() {
 		return Name;
@@ -51,7 +70,7 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [" + Name + ", Preconditions=" + Preconditions
-				+ ", Postconditions=" + Postconditions + "]";
+				+ ", Postconditions=" + Postconditions +", Grounding "+ Grounding+ "]";
 	}
 	public void RemovePrecondition(Node T){
 		T.setPreconditions(null);
@@ -59,38 +78,6 @@ public class Node {
 	public void RemovePostcondition(Node T){
 		T.setPostconditions(null);
 	}
-	/*public class Recipe {
-		private ArrayList<Tree> Decomposition; 
-		private Applicability Applicable;
-		private Node Task;
-		
-		public Recipe(ArrayList<Tree> decomposition, Applicability applicable,
-				Node task) {
-			Decomposition = decomposition;
-			Applicable = applicable;
-			Task = task;
-		}
-		public ArrayList<Tree> getDecomposition() {
-			return Decomposition;
-		}
-		public void setDecomposition(ArrayList<Tree> decomposition) {
-			Decomposition = decomposition;
-		}
-		public Applicability getApplicable() {
-			return Applicable;
-		}
-		public void setApplicable(Applicability applicable) {
-			Applicable = applicable;
-		}
-		public Node getTask() {
-			return Task;
-		}
-		public void setTask(Node task) {
-			Task = task;
-		}
-		
-		
-	}*/
 
 }
 

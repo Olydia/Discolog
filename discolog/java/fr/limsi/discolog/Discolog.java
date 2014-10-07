@@ -55,10 +55,10 @@ public class Discolog extends Agent {
 				Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
 				TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
 
-				for (int i = 0; i < STRIPS.getStrips().size(); i++) {
+				/*for (int i = 0; i < STRIPS.getStrips().size(); i++) {
 					recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
 				}
-				/*if (STRIPS.getCandidate().plan.isFailed()) {
+				if (STRIPS.getCandidate().plan.isFailed()) {
 					for (Plan s : STRIPS.getCandidate().plan.getSuccessors()) {
 						s.requires(recovery);
 						s.unrequires(STRIPS.getCandidate().plan);

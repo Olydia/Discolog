@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,8 +37,8 @@ public class PlanConstructor {
 	public static TaskClass RECOVERY;
 
 	static ArrayList<String> recipecondition = new ArrayList<String>();
-	public static List<String> conditions = new LinkedList<String>();
-	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
+	//public static List<String> conditions = new LinkedList<String>();
+	public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
 
 	public static void main(String[] args) throws IOException {
@@ -46,32 +47,15 @@ public class PlanConstructor {
 		Node A = new Node("a", "P1", "P2");
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 2;
+		int depth = 1;
 		int length = 2;
 		int recipe = 2;
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, 100);
+		RecipeTree.LevelOfKnowledge(root, 75);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		test.LanchTest(root, output, recipecondition, conditions);
-		/*for(int i = 1; i<=4; i++){
-		if(!test.interaction.getSystem().respond(test.interaction, false, true, false)){
-			System.out.println(" **************************   Start a plan execution number 	"+i+"	*******************");
-			test.disco.pop();
-			test.disco.eval(RecipeTree.Init(conditions), "init"+i);
-			Plan top1 = test.newPlan(task);
-			// add intention
-			test.disco.addTop(top1);
-			// push top onto stack
-			test.disco.push(top1);
-			top1.getGoal().setShould(true);
-			//((Discolog) test.interaction.getSystem()).setMax(1000);
 
-			//test.interaction.start(false);
-			//i++;
-		}
-	}
-		test.interaction.exit();*/
 	}
 	
 	// NB: use instance of Discolog extension instead of Agent below
@@ -95,10 +79,12 @@ public class PlanConstructor {
 		if (!primitive && grounding != null)
 			throw new IllegalArgumentException(
 					"Non-primitive cannot have grounding script: " + id);
-		TaskClass task = new TaskClass(model, id, precondition == null ? null : new Precondition(
-				precondition, true, disco), postcondition == null ? null :  new Postcondition(postcondition,
-				true, true, disco), grounding == null ? null : new Grounding(
-				grounding, disco));
+		TaskClass task = new TaskClass(model, id,
+				precondition == null ? null : new Precondition(precondition, true, disco),
+				postcondition == null ? null :  new Postcondition(postcondition,true, true, disco),
+				grounding == null ? null : new Grounding(grounding, disco)
+		);
+		
 		task.setProperty("@primitive", primitive);
 		task.setProperty("@internal", true);
 		return task;
@@ -148,8 +134,8 @@ public class PlanConstructor {
 	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
 		if (root.isLeaf()){
 			Random rand = new Random();
-
-			int nombreAleatoire = rand.nextInt(4);
+			int nombreAleatoire = rand.nextInt(3);
+			//Preconditions 
 			if (root.getHead().getPreconditions() != null) {
 				output.write("strips_preconditions("
 						+ root.getHead().getName().toLowerCase() + ",["
@@ -164,43 +150,42 @@ public class PlanConstructor {
 				output.newLine();
 				output.flush();
 			}
-			if(nombreAleatoire !=1){
-				if (root.getHead().getPostconditions() != null) {
+
+			if (root.getHead().getPostconditions() != null) {
+				//Create breakdown 
+				if(nombreAleatoire !=1){
 					output.write("strips_achieves("
 							+ root.getHead().getName().toLowerCase() + ","
 							+ root.getHead().getPostconditions().toLowerCase()
 							+ ").");
 					output.newLine();
 					output.flush();
-				}
-				else{
-					output.write("strips_achieves("
-							+ root.getHead().getName().toLowerCase() + ",_).");
-					output.newLine();
-					output.flush();
-				}
-			
-				
-				return ( newTask(root.getHead().getName(),true, 
-						root.getHead().getPreconditions(), root.getHead().getPostconditions(),
-						root.getHead().getPostconditions() == null ?null
-								:root.getHead().getPostconditions()+ "=true;println('"+ root.getHead().getName() + "')"));
-			}	
+					return ( newTask(root.getHead().getName(),true, 
+							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
+							root.getHead().getGrounding().get(1)+ "=true;"+root.getHead().getGrounding().get(0) +" !=false;println('"+ root.getHead().getName() + "')"));
 
-			else {
-				if (root.getHead().getPostconditions() != null) {
+				}
+				else {
 					output.write("strips_achieves("
 							+ root.getHead().getName().toLowerCase() + ",\\+"
 							+ root.getHead().getPostconditions().toLowerCase()
 							+ ").");
 					output.newLine();
 					output.flush();
+					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
+							root.getHead().getGrounding().get(1)+ "=false;"+root.getHead().getGrounding().get(0) +" !=false;println('"
+									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
+
 				}
-				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
-						root.getHead().getPostconditions() == null ? null 
-								: root.getHead().getPostconditions()+ "=false;println('"
-								+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
-			}	
+			}
+			else{
+				output.write("strips_achieves("
+						+ root.getHead().getName().toLowerCase() + ",_).");
+				output.newLine();
+				output.flush();
+				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	null,null));
+
+			}
 		}
 		else
 			return (newTask(root.getHead().getName(), false, root.getHead()
@@ -219,11 +204,11 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
 					generateTasks(node, child,output,recipecondition, conditions);
-					/*System.out.print(child.getId() + "[");
-					System.out.print( child.getPrecondition() == null ? "null pred, " : child.getPrecondition().getScript() +"," );
-					System.out.println (child.getPostcondition() == null ? "null post]"  : child.getPostcondition().getScript()  +"],"
+					System.out.print(child.getId() + "[");
+					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
+					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
-					*/step.add(new Step("s" + child, child));
+					step.add(new Step("s" + child, child));
 				}
 				
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){		
@@ -250,6 +235,7 @@ public class PlanConstructor {
 					+ recipe.toLowerCase() + ").");
 			output.newLine();
 			output.flush();
+			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
 			newTask(recipe.toLowerCase(), true, null,/* conditions.contains(recipe) ?*/"C"+recipe , conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null);
 		}
 	}
