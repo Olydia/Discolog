@@ -38,10 +38,10 @@ public class PlanConstructor {
 
 	static ArrayList<String> recipecondition = new ArrayList<String>();
 	//public static List<String> conditions = new LinkedList<String>();
-	public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
+	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
-/*
-	public static void main(String[] args) throws IOException {
+
+	/*public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		BufferedWriter output = test.InitSTRIPSPlanner();
 		Node A = new Node("a", "P1", "P2");
@@ -55,8 +55,7 @@ public class PlanConstructor {
 		RecipeTree.LevelOfKnowledge(root, 75);
 		RecipeTree.DefineLevelOfKnowledge(root, conditions);
 		test.LanchTest(root, output, recipecondition, conditions);
-
-	*/
+	}*/
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Discolog("agent"), new User("user"), null){
@@ -102,9 +101,8 @@ public class PlanConstructor {
 		return new Plan(task.newInstance());
 	}
 //********************************* diso *********************************************************
-	public void LanchTest (RecipeTree root, BufferedWriter output, ArrayList<String> recipecondition, List<String> conditions) throws IOException{
-		TaskClass task = FromTreeToTask(root,output);
-		CreateBenshmark(root, task, output,recipecondition, conditions);
+	public void LanchTest (TaskClass task, List<String> conditions) throws IOException{
+		
 		RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
 		// add intention
@@ -120,9 +118,9 @@ public class PlanConstructor {
 		((Discolog)interaction.getSystem()).setMax(1000);
 		interaction.start(false);
 	}
-	public void CreateBenshmark (RecipeTree root, TaskClass task, BufferedWriter output,  ArrayList<String> recipecondition, List<String> conditions) throws IOException{
-		generateTasks(root, task,output,recipecondition, conditions);
-		RecipeRecoveryTask(recipecondition,output,conditions);
+	public void CreateBenshmark (RecipeTree root, TaskClass task, BufferedWriter output, List<String> conditions) throws IOException{
+		generateTasks(root, task,output, RecipeTree.RecipeCondition);
+		RecipeRecoveryTask(output,RecipeTree.RecipeCondition);
 		for (String i : conditions) {
 			output.write("strips_primitive(" + i.toLowerCase() + ").");
 			output.newLine();
@@ -132,8 +130,7 @@ public class PlanConstructor {
 	}
 	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
 		if (root.isLeaf()){
-			Random rand = new Random();
-			int nombreAleatoire = rand.nextInt(3);
+
 			//Preconditions 
 			if (root.getHead().getPreconditions() != null) {
 				output.write("strips_preconditions("
@@ -152,7 +149,7 @@ public class PlanConstructor {
 
 			if (root.getHead().getPostconditions() != null) {
 				//Create breakdown 
-				if(nombreAleatoire !=1){
+				if(root.getHead().getGrounding().get(2) == "true"){
 					output.write("strips_achieves("
 							+ root.getHead().getName().toLowerCase() + ","
 							+ root.getHead().getPostconditions().toLowerCase()
@@ -193,7 +190,7 @@ public class PlanConstructor {
 	}
 	
 
-	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output, ArrayList<String> recipecondition, List<String> conditions) throws IOException {
+	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output,  List<String> conditions) throws IOException {
 		TaskClass child=null;
 		List<Step> step = new ArrayList<Step>();
 		if(!root.isLeaf()){
@@ -202,7 +199,7 @@ public class PlanConstructor {
 				
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
-					generateTasks(node, child,output,recipecondition, conditions);
+					generateTasks(node, child,output,conditions);
 					System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
@@ -213,20 +210,18 @@ public class PlanConstructor {
 				if(conditions.contains("C" + NodeEntry.getKey().toString())){		
 					newRecipe(NodeEntry.getKey().toString(), top,
 							step, "C" + NodeEntry.getKey().toString());
-					recipecondition.add(NodeEntry.getKey());
+					//recipecondition.add(NodeEntry.getKey());
 				}
 				else newRecipe(NodeEntry.getKey().toString(), top,
 						step, null);
-				step.clear();
-						
+				step.clear();					
 			}
-		}	
-		
+		}		
 	}
 	
 
-	public void RecipeRecoveryTask(ArrayList<String> recipecondition, BufferedWriter output , List<String> conditions) throws IOException{
-		for(String recipe: recipecondition){
+	public void RecipeRecoveryTask( BufferedWriter output , List<String> conditions) throws IOException{
+		for(String recipe: conditions){
 			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[p1]).");
 			output.newLine();
 			output.flush();
@@ -235,7 +230,7 @@ public class PlanConstructor {
 			output.newLine();
 			output.flush();
 			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
-			newTask(recipe.toLowerCase(), true, null,/* conditions.contains(recipe) ?*/"C"+recipe , conditions.contains(recipe) ?"C"+recipe+"=true;println('C"+recipe+"')" : null);
+			newTask(recipe.toLowerCase(), true, null,/* conditions.contains(recipe) ?*/"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
 		}
 	}
 	

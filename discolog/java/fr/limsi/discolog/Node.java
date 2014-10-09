@@ -2,6 +2,7 @@ package fr.limsi.discolog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import edu.wpi.cetask.DecompositionClass.Applicability;
 import edu.wpi.cetask.TaskClass.Postcondition;
@@ -21,14 +22,31 @@ public class Node {
 		
 	}
 	
+	public Node(String name, String preconditions, String postconditions, ArrayList<String> grounding) {
+		super();
+		this.Name = name;
+		this.Preconditions = preconditions;
+		this.Postconditions = postconditions;
+		this.Grounding = new ArrayList<String>();
+		this.Grounding = grounding;
+		
+	}
 	public ArrayList<String> getGrounding() {
 		return Grounding;
 	}
 	
 	public void defineGrounding() {
 		this.Grounding = new ArrayList<String>();
+		Random rand = new Random();
+		int nombreAleatoire = rand.nextInt(3);
 		this.Grounding.add(this.Preconditions);
 		this.Grounding.add(this.Postconditions);
+		if(nombreAleatoire !=1)
+			this.Grounding.add("true");
+		else
+			this.Grounding.add("false");
+
+
 	}
 	
 	public void setGrounding(ArrayList<String> grounding) {
