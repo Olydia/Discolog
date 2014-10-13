@@ -62,7 +62,7 @@ public class Discolog extends Agent {
 					}
 				}*/
 				//if (recovery!= null) {
-				System.out.println("Found recovery plan for " + STRIPS.getCandidate().plan.getGoal().toString());
+				System.out.println("Found recovery plan"+ STRIPS.Strips.toString()+" for " + STRIPS.getCandidate().plan.getGoal().getType().getId());
 				try {
 					TestClass.evaluation.write("1 ");
 					TestClass.evaluation.flush();
@@ -222,7 +222,7 @@ public class Discolog extends Agent {
 
 			// Results
 			if (!info.isSuccess()){
-				System.out.println("no.");
+				System.out.println("no plan found for the condition.  "+ Goal);
 				return null;
 			}
 			else {// main case
@@ -261,8 +261,8 @@ public class Discolog extends Agent {
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
-			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")== null ||
-					(Boolean)engine.eval(conditions.get(i).toString(),"breakdown")== true){
+			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= null &&
+					(Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= false){
 				//System.out.println("evaluating  "+conditions.get(i));
 				liveCond.add(conditions.get(i).toString());
 			}

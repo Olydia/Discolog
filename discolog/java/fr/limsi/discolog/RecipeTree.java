@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class RecipeTree implements Cloneable{
+public class RecipeTree {
 
 	static int cmpt = 0;
 	static int cmp = 3;
@@ -32,10 +32,7 @@ public class RecipeTree implements Cloneable{
 		return "tree [head=" + head + "]";
 	}
 
-	 @Override
-	    public RecipeTree clone() throws CloneNotSupportedException {   
-		return (RecipeTree)super.clone();
-	    } 
+
 	public static void main(String[] args) {
 		Node A = new Node("a", "P1", "P2");
 		Node A2 = new Node("a", "P1", "P2");
@@ -44,7 +41,7 @@ public class RecipeTree implements Cloneable{
 		HashMap<String, ArrayList<RecipeTree>> CopyChild = new HashMap<String, ArrayList<RecipeTree>>();
 
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 1;
+		int depth = 2;
 		int length = 2;
 		int recipe = 2;
 		createTree(root, depth, length, recipe);
@@ -57,13 +54,24 @@ public class RecipeTree implements Cloneable{
 		int cond = levelOfConditions(depth, length, recipe, 50);
 		RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 		PartialTree(copy, cond);
-		printTree(copy);
+		//printTree(copy);
 		
 		//System.out.println(Init(existingCond));
 		//for(int i=0;i<existingCond.size();i++)
 		//	System.out.println(existingCond.get(i));
 		
 
+	}
+	
+	
+	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
+		//RecipeTree copy = new RecipeTree(A2, CopyChild);
+		RecipeTree.CloneTree(root,  patialtree);
+		RecipeTree.PartialTree(patialtree, levelOfKnowledge);
+	}
+	static void DefineCompleteTree(RecipeTree root, int depth, int length, int recipe/*, int levelOfKnowledge*/){
+		RecipeTree.createTree(root, depth, length, recipe);
+		RecipeTree.defineKnowledge(root);
 	}
 	
 	static RecipeTree DefineTree(int depth, int length, int recipe, int levelOfKnowledge, List<String> conditions){
@@ -131,7 +139,7 @@ public class RecipeTree implements Cloneable{
 					.getChildren().entrySet()) {
 				System.out.println(NodeEntry.getKey());
 				for (RecipeTree i : NodeEntry.getValue()) {
-					System.out.println(i.toString() + "    "+ i.IsFirsychild("R1"));
+					System.out.println(i.toString() + "    ");
 					printTree(i);
 				}
 			}
@@ -290,12 +298,14 @@ public class RecipeTree implements Cloneable{
 						}
 					}
 					DefineCondition(NodeEntry.getValue().get(i));
+					
 				}
 			}
 		}
 	}
 	public static int levelOfConditions(int depth, int length, int recipe, int percentageKnowledge){
 		int ConditionNumber = ((length*recipe)*2);
+		percentageKnowledge = 100 - percentageKnowledge;
 		int removalLevel = ((ConditionNumber*percentageKnowledge)/100)/ recipe;
 
 		/*for(int i= 0;i<=depth; i++)

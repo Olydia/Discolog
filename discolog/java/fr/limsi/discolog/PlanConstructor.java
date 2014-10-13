@@ -36,26 +36,32 @@ import edu.wpi.disco.User;
 public class PlanConstructor {
 	public static TaskClass RECOVERY;
 
-	static ArrayList<String> recipecondition = new ArrayList<String>();
-	//public static List<String> conditions = new LinkedList<String>();
+	static List<String> recipecondition = new LinkedList<String>();
+	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
 
-	/*public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
 		BufferedWriter output = test.InitSTRIPSPlanner();
-		Node A = new Node("a", "P1", "P2");
-		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
-		RecipeTree root = new RecipeTree(A, child);
-		int depth = 1;
-		int length = 2;
-		int recipe = 2;
-		RecipeTree.createTree(root, depth, length, recipe);
-		RecipeTree.defineKnowledge(root);
-		RecipeTree.LevelOfKnowledge(root, 75);
-		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-		test.LanchTest(root, output, recipecondition, conditions);
-	}*/
+		Node A = new Node("a", "P1", "P2"),
+			A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
+		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
+				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
+		RecipeTree root = new RecipeTree(A, child),
+				partialroot = new RecipeTree(A2, copyChild);
+		int depth = 2, length = 2, recipe = 2;
+		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
+		int cond = RecipeTree.levelOfConditions(depth, length, recipe, 25);
+		recipecondition=RecipeTree.removeRecipesConditions(RecipeTree.RecipeCondition, 25);
+		RecipeTree.DefinepartialTree(root, partialroot, cond);
+		RecipeTree.printTree(partialroot);
+		conditions = root.getKnowledge(root, conditions);
+		TaskClass task = test.FromTreeToTask(partialroot,output);
+		test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
+		output = test.InitSTRIPSPlanner();
+		test.LanchTest(task,conditions);
+	}
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 	      new Interaction(new Discolog("agent"), new User("user"), null){
@@ -200,29 +206,50 @@ public class PlanConstructor {
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
 					generateTasks(node, child,output,conditions);
-					System.out.print(child.getId() + "[");
+					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
-													 + child.getDecompositions().size());
+													 + child.getDecompositions().size());*/
 					step.add(new Step("s" + child, child));
 				}
-				
-				if(conditions.contains("C" + NodeEntry.getKey().toString())){		
+				if(conditions.contains(NodeEntry.getKey().toString())){		
 					newRecipe(NodeEntry.getKey().toString(), top,
 							step, "C" + NodeEntry.getKey().toString());
 					//recipecondition.add(NodeEntry.getKey());
 				}
 				else newRecipe(NodeEntry.getKey().toString(), top,
 						step, null);
+				/*if(conditions.contains(NodeEntry.getKey().toString())){		
+					newRecipe(NodeEntry.getKey().toString(), top, step,
+							NodeEntry.getValue().get(0).getHead().getGrounding().get(0).toString());
+					RecipeRecoveryTask(output, NodeEntry.getKey().toString(),
+							NodeEntry.getValue().get(0).getHead().getGrounding().get(0).toString() );
+				}
+				else { 
+					newRecipe(NodeEntry.getKey().toString(), top,
+						step, null);
+				}*/
 				step.clear();					
 			}
 		}		
 	}
 	
-
+	/*public void RecipeRecoveryTask( BufferedWriter output , String Id, String condition) throws IOException{
+			output.write("strips_preconditions(" + Id.toLowerCase() + ",[_]).");
+			output.newLine();
+			output.flush();
+			output.write("strips_achieves(" + Id.toLowerCase() + ","
+					+ condition.toLowerCase() + ").");
+			output.newLine();
+			output.flush();
+			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
+			newTask(Id.toLowerCase(), true, null, condition.toLowerCase(), condition+"=true;println('"+condition+"')");
+		
+	}*/
+	
 	public void RecipeRecoveryTask( BufferedWriter output , List<String> conditions) throws IOException{
 		for(String recipe: conditions){
-			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[p1]).");
+			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[_]).");
 			output.newLine();
 			output.flush();
 			output.write("strips_achieves(" + recipe.toLowerCase() + ",c"
@@ -230,15 +257,15 @@ public class PlanConstructor {
 			output.newLine();
 			output.flush();
 			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
-			newTask(recipe.toLowerCase(), true, null,/* conditions.contains(recipe) ?*/"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
+			newTask(recipe.toLowerCase(), true, null,"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
 		}
 	}
 	
 	public BufferedWriter InitSTRIPSPlanner() throws IOException{
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
+		String adressesource = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter(adressedufichier);
+			writer = new PrintWriter(adressesource);
 			writer.print("");
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -246,11 +273,11 @@ public class PlanConstructor {
 		}
 		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
 		try {
-			copyFileUsingStream(new File(adresseSource), new File(adressedufichier));
+			copyFileUsingStream(new File(adresseSource), new File(adressesource));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		FileWriter fw = new FileWriter(adressedufichier, true);
+		FileWriter fw = new FileWriter(adressesource, true);
 		BufferedWriter output = new BufferedWriter(fw);
 		output.newLine();
 		output.flush();

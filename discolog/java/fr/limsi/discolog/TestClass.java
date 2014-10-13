@@ -22,40 +22,51 @@ public class TestClass{
 		ArrayList<Integer> levels = new ArrayList<Integer>();
 		BufferedWriter output = null;
 		evaluation = saveSolution();
-		Node A = new Node("a", "P1", "P2");
-		Node A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
-		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
-		HashMap<String, ArrayList<RecipeTree>> copyChild = new HashMap<String, ArrayList<RecipeTree>>();
-		RecipeTree root = new RecipeTree(A, child);
-		
-		DefineCompleteTree(root,2, 2, 2);
-		
-		//levels.add(0);
-		levels.add(50);
+		Node A = new Node("a", "P1", "P2"),
+			A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
+		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
+				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
+		RecipeTree root = new RecipeTree(A, child),
+				partialroot = new RecipeTree(A2, copyChild);
+		int depth = 3, 
+			length = 2, 
+			recipe = 2;
+		// Define the complete domain knowledge 
+		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
+		conditions = root.getKnowledge(root, conditions);
+			
+		levels.add(25);
+		//levels.add(50);	
 		//levels.add(75);
 		//levels.add(100);
+		// Remove knowledge from  the HTN 
 		for(int level:levels){
-		System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
-		RecipeTree partialroot = new RecipeTree(A2, copyChild);
-		DefinepartialTree(root,partialroot, level);
-		PlanConstructor test = new PlanConstructor();
-		TaskClass task = test.FromTreeToTask(root,output);
-		conditions = root.getKnowledge(root, conditions);
-		test.CreateBenshmark(root, task, output, RecipeTree.RecipeCondition);
-		output = test.InitSTRIPSPlanner();
-		for(int i=0; i<1; i++){
-			System.out.println(" \n***************************  Test number  " +i+ "  ****************************** \n " );
-			test.LanchTest(task,conditions);
-			try {
-				test.interaction.join();
+			System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
+			int cond = RecipeTree.levelOfConditions(depth, length, recipe, level);
+			recipecondition=RecipeTree.removeRecipesConditions(RecipeTree.RecipeCondition, level);
+			RecipeTree.DefinepartialTree(root, partialroot, cond);
+			//RecipeTree.printTree(partialroot);
+			evaluation.newLine();evaluation.flush();
+			for(int i=0; i<1; i++){
+				PlanConstructor test = new PlanConstructor();
+				output = test.InitSTRIPSPlanner();
+				System.out.println(" \n -------------------------------------- Test number  " +i+ "  --------------------------- \n " );
+				TaskClass task = test.FromTreeToTask(partialroot,output);
+				test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
+				test.LanchTest(task,conditions);
+				try {
+					test.interaction.join();
 
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
+			System.getProperty("line.separator");
 		}
 		output.close();
-		}
+
 
 	}
 	static BufferedWriter saveSolution(){
@@ -83,14 +94,5 @@ public class TestClass{
 		
 		// le BufferedWriter output auquel on donne comme argument le FileWriter fw cree juste au dessus
 	}
-	
-	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
-		//RecipeTree copy = new RecipeTree(A2, CopyChild);
-		RecipeTree.CloneTree(root,  patialtree);
-		RecipeTree.PartialTree(patialtree, levelOfKnowledge);
-	}
-	static void DefineCompleteTree(RecipeTree root, int depth, int length, int recipe/*, int levelOfKnowledge*/){
-		RecipeTree.createTree(root, depth, length, recipe);
-		RecipeTree.defineKnowledge(root);
-	}
+
 }
