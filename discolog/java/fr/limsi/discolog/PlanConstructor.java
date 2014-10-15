@@ -135,25 +135,24 @@ public class PlanConstructor {
 		//output.close();
 	}
 	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
+		
 		if (root.isLeaf()){
-
-			//Preconditions 
-			if (root.getHead().getPreconditions() != null) {
-				output.write("strips_preconditions("
-						+ root.getHead().getName().toLowerCase() + ",["
-						+ root.getHead().getPreconditions().toLowerCase()
-						+ "]).");
-				output.newLine();
-				output.flush();
-			}
-			else {
-				output.write("strips_preconditions("
-						+ root.getHead().getName().toLowerCase() + ",[_]).");
-				output.newLine();
-				output.flush();
-			}
-
 			if (root.getHead().getPostconditions() != null) {
+				//Preconditions 
+				if (root.getHead().getPreconditions() != null) {
+					output.write("strips_preconditions("
+							+ root.getHead().getName().toLowerCase() + ",["
+							+ root.getHead().getPreconditions().toLowerCase()
+							+ "]).");
+					output.newLine();
+					output.flush();
+				}
+				else {
+					output.write("strips_preconditions("
+							+ root.getHead().getName().toLowerCase() + ",[_]).");
+					output.newLine();
+					output.flush();
+				}	
 				//Create breakdown 
 				if(root.getHead().getGrounding().get(2) == "true"){
 					output.write("strips_achieves("
@@ -181,10 +180,10 @@ public class PlanConstructor {
 				}
 			}
 			else{
-				output.write("strips_achieves("
+				/*output.write("strips_achieves("
 						+ root.getHead().getName().toLowerCase() + ",_).");
 				output.newLine();
-				output.flush();
+				output.flush();**/
 				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	null,null));
 
 			}

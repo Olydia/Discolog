@@ -28,7 +28,7 @@ public class TestClass{
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child),
 				partialroot = new RecipeTree(A2, copyChild);
-		int depth = 3, 
+		int depth = 2, 
 			length = 2, 
 			recipe = 2;
 		// Define the complete domain knowledge 
@@ -63,7 +63,6 @@ public class TestClass{
 				}
 
 			}
-			System.getProperty("line.separator");
 		}
 		output.close();
 

@@ -216,6 +216,7 @@ public class Discolog extends Agent {
 			Theory theory = new Theory(planner);
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
+			System.out.println(Initial_state.toString());
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);

@@ -1,12 +1,7 @@
 package fr.limsi.discolog;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
-import edu.wpi.cetask.DecompositionClass.Applicability;
-import edu.wpi.cetask.TaskClass.Postcondition;
-import edu.wpi.cetask.TaskClass.Precondition;
 
 public class Node {
 

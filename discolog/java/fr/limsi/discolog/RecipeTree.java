@@ -47,14 +47,14 @@ public class RecipeTree {
 		createTree(root, depth, length, recipe);
 		defineKnowledge(root);
 		System.out.println(root.toString());
-		printTree(root);
+		//printTree(root);
 		System.out.println("****************************  clonage ****************************************");
 		RecipeTree copy = new RecipeTree(A2, CopyChild);
 		CloneTree(root,  copy);
-		int cond = levelOfConditions(depth, length, recipe, 50);
+		int cond = levelOfConditions(depth, length, recipe, 75);
 		RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 		PartialTree(copy, cond);
-		//printTree(copy);
+		printTree(copy);
 		
 		//System.out.println(Init(existingCond));
 		//for(int i=0;i<existingCond.size();i++)
