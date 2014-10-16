@@ -36,7 +36,7 @@ public class TestClass{
 		RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
 			
-		levels.add(100);
+		levels.add(25);
 		//levels.add(50);	
 		//levels.add(75);
 		//levels.add(100);

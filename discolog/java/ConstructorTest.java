@@ -28,21 +28,17 @@ public class ConstructorTest {
                 a = test.newTask("a", false, p1.getPrecondition().getScript(), 
                       b.getPostcondition().getScript(), null);
       test.newRecipe("r1", b, Collections.singletonList(new Step("s1", p2)), "V");
-       test.newRecipe("r2", b, Collections.singletonList(new Step("s1", p3)), "W");
+     // test.newRecipe("r2", b, Collections.singletonList(new Step("s1", p3)), "W");
       // build the non-recipe part of the tree
+      test.disco.eval("var P,Q,R,V=true,W=false", "init");
       Plan top = newPlan(a);
-       top.add(newPlan(p1));
+      top.add(newPlan(p1));
       top.add(newPlan(b));
       top.setPlanned(true); // needed only for non-recipe nodes
       test.disco.addTop(top);
-      // add intention
-      test.disco.addTop(top);
-      // push top onto stack
-      test.disco.push(top);
       // prevent agent asking about toplevel goal
-      top.getGoal().setShould(true);
+      test.disco.setProperty("Ask.Should(a)@generate", false);
       // initialize all world state predicates
-      test.disco.eval("var P,Q,R,W=true,V=true", "init");
 
       // allow agent to keep executing without talking
       ((Agent) test.interaction.getSystem()).setMax(1);
