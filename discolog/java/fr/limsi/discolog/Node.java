@@ -39,7 +39,7 @@ public class Node {
 		if(nombreAleatoire !=1)
 			this.Grounding.add("true");
 		else
-			this.Grounding.add("false");
+			this.Grounding.add("true");
 
 
 	}

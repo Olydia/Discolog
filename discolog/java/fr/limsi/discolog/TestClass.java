@@ -28,14 +28,15 @@ public class TestClass{
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child),
 				partialroot = new RecipeTree(A2, copyChild);
-		int depth = 2, 
+		int depth = 1, 
 			length = 2, 
-			recipe = 2;
+			recipe = 1;
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
+		RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
 			
-		levels.add(25);
+		levels.add(100);
 		//levels.add(50);	
 		//levels.add(75);
 		//levels.add(100);
