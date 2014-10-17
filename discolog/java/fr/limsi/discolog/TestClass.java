@@ -52,10 +52,12 @@ public class TestClass{
 			RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 			RecipeTree.printTree(partialroot);
 			evaluation.newLine();evaluation.flush();
-			for(int i=0; i<1; i++){
+			for(RecipeTree leaf: partialroot.getLeaves()){
+				// revopie l'emplacement de l'arbre partial car plus la boucle avance plus tu araus de postcond fausse
+				RecipeTree.createBreakdown(leaf);
 				PlanConstructor test = new PlanConstructor();
 				output = test.InitSTRIPSPlanner();
-				System.out.println(" \n -------------------------------------- Test number  " +i+ "  --------------------------- \n " );
+				System.out.println(" \n -------------------------------------- Test number    --------------------------- \n " );
 				TaskClass task = test.FromTreeToTask(partialroot,output);
 				test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
 				test.LanchTest(task,conditions);
