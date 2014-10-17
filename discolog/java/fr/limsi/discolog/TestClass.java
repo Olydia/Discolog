@@ -13,6 +13,8 @@ import edu.wpi.cetask.TaskClass;
 public class TestClass{
 	static List<String> recipecondition = new LinkedList<String>();
 	public static List<String> conditions = new LinkedList<String>();
+	static int removalcondition = 0;
+
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
 
 	public static TaskClass RECOVERY;
@@ -28,25 +30,27 @@ public class TestClass{
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child),
 				partialroot = new RecipeTree(A2, copyChild);
-		int depth = 1, 
+		int depth = 2, 
 			length = 2, 
 			recipe = 1;
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
-		RecipeTree.printTree(root);
+	//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
 			
-		levels.add(25);
+		levels.add(75);
 		//levels.add(50);	
 		//levels.add(75);
 		//levels.add(100);
 		// Remove knowledge from  the HTN 
 		for(int level:levels){
 			System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
-			int cond = RecipeTree.levelOfConditions(depth, length, recipe, level);
-			recipecondition=RecipeTree.removeRecipesConditions(RecipeTree.RecipeCondition, level);
-			RecipeTree.DefinepartialTree(root, partialroot, cond);
-			//RecipeTree.printTree(partialroot);
+			RecipeTree.CloneTree(root,  partialroot);
+			RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
+			System.out.println(removalcondition);
+			//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
+			RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
+			RecipeTree.printTree(partialroot);
 			evaluation.newLine();evaluation.flush();
 			for(int i=0; i<1; i++){
 				PlanConstructor test = new PlanConstructor();
@@ -65,7 +69,7 @@ public class TestClass{
 
 			}
 		}
-		output.close();
+		//output.close();
 
 
 	}

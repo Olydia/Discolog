@@ -137,6 +137,13 @@ public class PlanConstructor {
 		
 		if (root.isLeaf()){
 			if (root.getHead().getPostconditions() != null) {
+				if(root.getHead().getGrounding().get(2) == "true"){
+					output.write("strips_achieves("
+							+ root.getHead().getName().toLowerCase() + ","
+							+ root.getHead().getPostconditions().toLowerCase()
+							+ ").");
+					output.newLine();
+					output.flush();
 				//Preconditions 
 				if (root.getHead().getPreconditions() != null) {
 					output.write("strips_preconditions("
@@ -153,29 +160,24 @@ public class PlanConstructor {
 					output.flush();
 				}	
 				//Create breakdown 
-				if(root.getHead().getGrounding().get(2) == "true"){
-					output.write("strips_achieves("
-							+ root.getHead().getName().toLowerCase() + ","
-							+ root.getHead().getPostconditions().toLowerCase()
-							+ ").");
-					output.newLine();
-					output.flush();
+				
 					return ( newTask(root.getHead().getName(),true, 
 							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
 							root.getHead().getGrounding().get(1)+ "=true;"+root.getHead().getGrounding().get(0) +" !=false;println('"+ root.getHead().getName() + "')"));
 
 				}
 				else {
-					output.write("strips_achieves("
-							+ root.getHead().getName().toLowerCase() + ",\\+"
-							+ root.getHead().getPostconditions().toLowerCase()
-							+ ").");
-					output.newLine();
-					output.flush();
+					
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
-							root.getHead().getGrounding().get(1)+ "=false;"+root.getHead().getGrounding().get(0) +" !=false;println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false ')"));
+							root.getHead().getGrounding().get(0) +" !=false;" +
+							"if ("+root.getHead().getName()+" == false) {"+
+									root.getHead().getGrounding().get(1)+ "=false;println('"
+									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false '); "
+									+ root.getHead().getName()+ "=true;}"
+							+ "else { "+root.getHead().getGrounding().get(1)+ "=true;println('"
+							+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +"');}" ));
 
+				
 				}
 			}
 			else{

@@ -32,16 +32,10 @@ public class Node {
 	
 	public void defineGrounding() {
 		this.Grounding = new ArrayList<String>();
-		Random rand = new Random();
-		int nombreAleatoire = rand.nextInt(3);
 		this.Grounding.add(this.Preconditions);
 		this.Grounding.add(this.Postconditions);
-		if(nombreAleatoire !=1)
-			this.Grounding.add("true");
-		else
-			this.Grounding.add("true");
-
-
+		this.Grounding.add("true");
+	
 	}
 	
 	public void setGrounding(ArrayList<String> grounding) {
