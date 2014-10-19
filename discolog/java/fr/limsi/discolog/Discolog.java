@@ -38,6 +38,7 @@ public class Discolog extends Agent {
 
 	private boolean recover(Interaction interaction) {
 		//System.out.println(" **************************   Start a recover procedure		*******************");
+		TestClass.NbBreakdown ++;
 		interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
@@ -63,14 +64,10 @@ public class Discolog extends Agent {
 				}*/
 				//if (recovery!= null) {
 				System.out.println("Found recovery plan"+ STRIPS.Strips.toString()+" for " + STRIPS.getCandidate().plan.getGoal().getType().getId());
-				try {
-					TestClass.evaluation.write("1 ");
-					TestClass.evaluation.flush();
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				TestClass.NbRecover ++;
+					//TestClass.evaluation.write("1 ");
+					//TestClass.evaluation.flush();
+				
 				// write 1
 				/*Disco disco = interaction.getDisco();
 				// splice in recovery plan
@@ -81,15 +78,7 @@ public class Discolog extends Agent {
 			}
 			else {
 				System.out.println("No recovery plans found!");
-				// write 0
-				try {
-					TestClass.evaluation.write("0 ");
-					TestClass.evaluation.flush();
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 			}
 		}
 		return false;
@@ -100,7 +89,7 @@ public class Discolog extends Agent {
 		// this should invoke Prolog planner
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		ArrayList<Solution> planrepair = new ArrayList<Solution>();
-
+		TestClass.NbCandidates += candidates.size();
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			JavaPlan = CallStripsPlanner(EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
@@ -111,7 +100,10 @@ public class Discolog extends Agent {
 		Collections.sort(planrepair);
 		if (planrepair.isEmpty())
 			return null;
-		return(planrepair.get(0));
+		else{
+			TestClass.NbRecoveredCandidates += planrepair.size();
+			return(planrepair.get(0));
+		}
 
 	}
 	//***************************************************************************************************************************************

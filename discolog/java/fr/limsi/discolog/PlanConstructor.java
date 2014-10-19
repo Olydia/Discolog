@@ -45,7 +45,7 @@ public class PlanConstructor {
 		PlanConstructor test = new PlanConstructor();
 		BufferedWriter output = test.InitSTRIPSPlanner();
 		Node A = new Node("a", "P1", "P2"),
-			A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
+				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child),
@@ -60,13 +60,13 @@ public class PlanConstructor {
 		TaskClass task = test.FromTreeToTask(partialroot,output);
 		test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
 		output = test.InitSTRIPSPlanner();
-		test.LanchTest(task,conditions);
+		test.LanchTest(task,conditions,root);
 	}
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
-	      new Interaction(new Discolog("agent"), new User("user"), null){
-	   
-	   // for debugging with Disco console, comment out this override
+			new Interaction(new Discolog("agent"), new User("user"), null){
+
+		// for debugging with Disco console, comment out this override
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
@@ -85,10 +85,10 @@ public class PlanConstructor {
 					"Non-primitive cannot have grounding script: " + id);
 		TaskClass task = new TaskClass(model, id,
 				precondition == null ? null : new Precondition(precondition, true, disco),
-				postcondition == null ? null :  new Postcondition(postcondition,true, true, disco),
-				grounding == null ? null : new Grounding(grounding, disco)
-		);
-		
+						postcondition == null ? null :  new Postcondition(postcondition,true, true, disco),
+								grounding == null ? null : new Grounding(grounding, disco)
+				);
+
 		task.setProperty("@primitive", primitive);
 		task.setProperty("@internal", true);
 		return task;
@@ -96,19 +96,19 @@ public class PlanConstructor {
 
 	DecompositionClass newRecipe(String id, TaskClass goal, List<Step> steps,
 			String applicable) {
-	   DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,applicable == null?null:
-				new Applicability(applicable, true, disco));
-	   decomp.setProperty("@internal", true);
-	   decomp.setProperty("@authorized", true);
-	   return decomp;
+		DecompositionClass decomp = new DecompositionClass(model, id, goal, steps,applicable == null?null:
+			new Applicability(applicable, true, disco));
+		decomp.setProperty("@internal", true);
+		decomp.setProperty("@authorized", true);
+		return decomp;
 	}
 
 	private Plan newPlan(TaskClass task) {
 		return new Plan(task.newInstance());
 	}
-//********************************* diso *********************************************************
-	public void LanchTest (TaskClass task, List<String> conditions) throws IOException{
-		String initState = RecipeTree.Init(conditions);
+	//********************************* diso *********************************************************
+	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root) throws IOException{
+		String initState = RecipeTree.Init(conditions, root);
 		disco.eval(initState, "init");
 		RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
@@ -131,19 +131,18 @@ public class PlanConstructor {
 			output.newLine();
 			output.flush();
 		}
+		for (String i : RecipeTree.RecipeCondition) {
+			output.write("strips_primitive(c" + i.toLowerCase() + ").");
+			output.newLine();
+			output.flush();
+		}
 		//output.close();
 	}
 	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
-		
+
 		if (root.isLeaf()){
 			if (root.getHead().getPostconditions() != null) {
-				if(root.getHead().getGrounding().get(2) == "true"){
-					output.write("strips_achieves("
-							+ root.getHead().getName().toLowerCase() + ","
-							+ root.getHead().getPostconditions().toLowerCase()
-							+ ").");
-					output.newLine();
-					output.flush();
+				// --------------- Prolog writing -----------------------------
 				//Preconditions 
 				if (root.getHead().getPreconditions() != null) {
 					output.write("strips_preconditions("
@@ -158,27 +157,34 @@ public class PlanConstructor {
 							+ root.getHead().getName().toLowerCase() + ",[_]).");
 					output.newLine();
 					output.flush();
-				}	
-				//Create breakdown 
-				
+				}
+
+				output.write("strips_achieves("
+						+ root.getHead().getName().toLowerCase() + ","
+						+ root.getHead().getPostconditions().toLowerCase()
+						+ ").");
+				output.newLine();
+				output.flush();
+				output.newLine();
+				output.flush();
+				// --------------- Prolog writing -----------------------------
+
+				if(root.getHead().getGrounding().get(2) == "true")
 					return ( newTask(root.getHead().getName(),true, 
 							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
 							root.getHead().getGrounding().get(1)+ "=true;"+root.getHead().getGrounding().get(0) +" !=false;println('"+ root.getHead().getName() + "')"));
 
-				}
-				else {
-					
+				
+				else 
+					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 							root.getHead().getGrounding().get(0) +" !=false;" +
-							"if ("+root.getHead().getName()+" == false) {"+
+									"if ("+root.getHead().getName()+" == false) {"+
 									root.getHead().getGrounding().get(1)+ "=false;println('"
 									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false '); "
 									+ root.getHead().getName()+ "=true;}"
-							+ "else { "+root.getHead().getGrounding().get(1)+ "=true;println('"
-							+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +"');}" ));
-
-				
-				}
+									+ "else { "+root.getHead().getGrounding().get(1)+ "=true;println('"
+									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +"');}" ));
 			}
 			else{
 				/*output.write("strips_achieves("
@@ -194,7 +200,7 @@ public class PlanConstructor {
 					.getPreconditions(), root.getHead().getPostconditions(),
 					null));
 	}
-	
+
 
 	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output,  List<String> conditions) throws IOException {
 		TaskClass child=null;
@@ -202,15 +208,15 @@ public class PlanConstructor {
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				
+
 				for (RecipeTree node : NodeEntry.getValue()) {
 					child=FromTreeToTask(node,output);
 					generateTasks(node, child,output,conditions);
 					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
-													 + child.getDecompositions().size());*/
-					step.add(new Step("s" + child, child));
+													 + child.getDecompositions().size());
+					 */step.add(new Step("s" + child, child));
 				}
 				if(conditions.contains(NodeEntry.getKey().toString())){		
 					newRecipe(NodeEntry.getKey().toString(), top,
@@ -233,20 +239,7 @@ public class PlanConstructor {
 			}
 		}		
 	}
-	
-	/*public void RecipeRecoveryTask( BufferedWriter output , String Id, String condition) throws IOException{
-			output.write("strips_preconditions(" + Id.toLowerCase() + ",[_]).");
-			output.newLine();
-			output.flush();
-			output.write("strips_achieves(" + Id.toLowerCase() + ","
-					+ condition.toLowerCase() + ").");
-			output.newLine();
-			output.flush();
-			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
-			newTask(Id.toLowerCase(), true, null, condition.toLowerCase(), condition+"=true;println('"+condition+"')");
-		
-	}*/
-	
+
 	public void RecipeRecoveryTask( BufferedWriter output , List<String> conditions) throws IOException{
 		for(String recipe: conditions){
 			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[_]).");
@@ -260,7 +253,7 @@ public class PlanConstructor {
 			newTask(recipe.toLowerCase(), true, null,"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
 		}
 	}
-	
+
 	public BufferedWriter InitSTRIPSPlanner() throws IOException{
 		String adressesource = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		PrintWriter writer;
@@ -284,19 +277,19 @@ public class PlanConstructor {
 		return output;
 	}
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
-	    InputStream is = null;
-	    OutputStream os = null;
-	    try {
-	        is = new FileInputStream(source);
-	        os = new FileOutputStream(dest);
-	        byte[] buffer = new byte[1024];
-	        int length;
-	        while ((length = is.read(buffer)) > 0) {
-	            os.write(buffer, 0, length);
-	        }
-	    } finally {
-	        is.close();
-	        os.close();
-	    }
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		} finally {
+			is.close();
+			os.close();
+		}
 	}
 }

@@ -32,7 +32,6 @@ public class RecipeTree {
 		return "tree [head=" + head + "]";
 	}
 
-
 	public static void main(String[] args) {
 		Node A = new Node("a", "P1", "P2");
 		Node A2 = new Node("a", "P1", "P2");
@@ -56,14 +55,12 @@ public class RecipeTree {
 		//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 		PartialTree(copy, removalcondition);
 		printTree(copy);
-	
-		//System.out.println(Init(existingCond));
+		//existingCond = getKnowledge(root, existingCond);
+		System.out.println(Init(existingCond, root));
 		//for(int i=0;i<existingCond.size();i++)
 		//	System.out.println(existingCond.get(i));
-		
-
-	}
 	
+	}
 	
 	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
 		//RecipeTree copy = new RecipeTree(A2, CopyChild);
@@ -173,11 +170,13 @@ public class RecipeTree {
 		}
 		return recipeCondition;
 	}
+	
 	public static void PartialTree(RecipeTree root, int removalcondition) {
 		int removal = removalcondition;
 		 while (removal > 0) 
 			removal = RemoveConditions(root);
 	}
+	
 	public static int RemoveConditions(RecipeTree root){
 		Random rand = new Random();
 		 
@@ -364,7 +363,7 @@ public class RecipeTree {
 		if (!root.isLeaf()) {
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				conditions.add("C"+NodeEntry.getKey());
+				//conditions.add("C"+NodeEntry.getKey());
 				for (RecipeTree i : NodeEntry.getValue()) {
 					if(!conditions.contains(i.getHead().getPreconditions()))
 						conditions.add(i.getHead().getPreconditions());
@@ -405,8 +404,18 @@ public class RecipeTree {
 			leaf.getHead().defineGrounding();
 		}
 	}
-	
-	public static String Init(List<String> coditions){
+	/*public List<String> getRecipeConditions(RecipeTree root, List<String> RecipeConditions){
+		if (!root.isLeaf()) {
+			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
+					.getChildren().entrySet()) {
+				RecipeConditions.add("C"+NodeEntry.getKey());
+				for (RecipeTree i : NodeEntry.getValue()) 
+					getRecipeConditions(i, RecipeConditions);
+			}
+		}
+		return RecipeConditions;
+	}*/
+	public static String Init(List<String> coditions, RecipeTree root){
 		Random rand = new Random();
 		String init = null;
 		int random = rand.nextInt(2);
@@ -423,10 +432,19 @@ public class RecipeTree {
 				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
 			}
 		}
+		for(String recipe : RecipeTree.RecipeCondition)
+			init += ", C" + recipe +" =true";
+		
+		for(RecipeTree leaf : root.getLeaves())
+			init += ", "+leaf.getHead().getName() + "=false";
 	
 		return init;
 	}
 	public static void createBreakdown(RecipeTree node){
 		node.getHead().getGrounding().set(2, "false");
+	}
+	
+	public static void removeBreakdown(RecipeTree node){
+		node.getHead().getGrounding().set(2, "true");
 	}
 }

@@ -38,7 +38,7 @@ strips_primitive(painted(_)).
 strips_primitive(notislocked).
 
 
-% strips_holds(islocked,init).
+ strips_holds(islocked,init).
 
 strips_inconsistent(at(Y,X),at(Z,X)) :- not(Z=Y).
 strips_inconsistent(is_picked(Y),on(Y,Z)).
@@ -46,11 +46,9 @@ strips_inconsistent(is_picked(Y),on(Y,Z)).
 strips_achieves(init,X) :-
    strips_holds(X,init).
 
-% test1(Plan):- strips_solve([isopen],7,Plan).
+ test1(Plan):- strips_solve([isopen],7,Plan).
 
 strips_unsatisfiable(_) :- fail.
-
-
 
 % =============================================================
 % =============================================================
@@ -214,4 +212,3 @@ strips_insert(A,[B|L],[B|R]) :-
    strips_insert(A,L,R).
 strips_grnd(G) :-
    numbervars(G,0,_).
-
