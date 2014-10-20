@@ -1,11 +1,15 @@
 package fr.limsi.discolog;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
@@ -214,8 +218,8 @@ public class Discolog extends Agent {
 			String Goal) {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		Prolog engine = new Prolog();
-
+		Prolog engine = null;
+		engine = new Prolog();
 		try {
 			InputStream planner = Discolog.class
 					.getResourceAsStream("/test-2p/Domain_knowledge.pl");
@@ -226,7 +230,13 @@ public class Discolog extends Agent {
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
-
+			Theory curTh = engine.getTheory();
+			String ad = System.getProperty("user.dir") + "/prolog/test-2p/currentTheory.pl";
+			File fichier = new File (ad);
+			OutputStream output = new FileOutputStream(fichier,true);
+			output.write( curTh.toString().getBytes());
+			output.write("****************************************************************".getBytes());
+			output.write("\n".getBytes());
 			// Results
 			if (!info.isSuccess()){
 				System.out.println("no plan found for the condition.  "+ Goal);
@@ -248,6 +258,13 @@ public class Discolog extends Agent {
 			Prolog engine) {
 		// Add the init state and the planner call for the goal
 		//Theory init;
+		try {
+			TestClass.InitSTRIPSPlanner(TestClass.partialroot, engine);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		try {
 			for(String init : Initial_state){
 				//System.out.println(init);

@@ -18,6 +18,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import alice.tuprolog.InvalidTheoryException;
+import alice.tuprolog.Prolog;
+import alice.tuprolog.Theory;
 import edu.wpi.cetask.TaskClass;
 
 public class TestClass{
@@ -30,6 +33,7 @@ public class TestClass{
 	public static int NbRecoveredCandidates = 0; 
 	public static TaskClass RECOVERY;
 	public static BufferedWriter evaluation;
+	public static RecipeTree partialroot = null;
 	public static void main(String[] args) throws IOException {
 		//PlanConstructor test = new PlanConstructor();
 		ArrayList<Integer> levels = new ArrayList<Integer>();
@@ -39,7 +43,7 @@ public class TestClass{
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
-		RecipeTree root = new RecipeTree(A, child),
+		RecipeTree root = new RecipeTree(A, child);
 				partialroot = new RecipeTree(A2, copyChild);
 		int 	depth = 2, 
 				length = 2, 
@@ -48,12 +52,10 @@ public class TestClass{
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
+		levels.add(100);
 		//levels.add(25);
 		//levels.add(50);
 		//levels.add(75);
-		levels.add(100);
-			
-		
 		
 		// Remove knowledge from  the HTN 
 		for(int level:levels){
@@ -61,14 +63,14 @@ public class TestClass{
 			RecipeTree.CloneTree(root,  partialroot);
 			RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
 			System.out.println(removalcondition);
-			for(int i =0; i<10; i++){
+			for(int i =0; i<1; i++){
 				//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 				//RecipeTree.printTree(partialroot);
-				InitSTRIPSPlanner(partialroot);
-			for(RecipeTree leaf: partialroot.getLeaves()){
-					System.out.println(" \n -------------------------------------- Test primitive "+leaf.getHead().getName()+"    --------------------------- \n " );
-					//RecipeTree leaf =  partialroot.getLeaves().get(3);
+			//	InitSTRIPSPlanner(partialroot);
+			//for(RecipeTree leaf: partialroot.getLeaves()){
+					System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
+					RecipeTree leaf =  partialroot.getLeaves().get(3);
 					RecipeTree.createBreakdown(leaf);
 					RecipeTree.printTree(partialroot);
 					PlanConstructor test = new PlanConstructor();
@@ -86,7 +88,7 @@ public class TestClass{
 					}
 					RecipeTree.removeBreakdown(leaf);
 
-				}
+				//}
 				evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 				evaluation.flush();
 				evaluation.newLine();
@@ -97,27 +99,44 @@ public class TestClass{
 		
 
 	}
-	public static void InitSTRIPSPlanner(RecipeTree root) throws IOException{
+	public static void InitSTRIPSPlanner(RecipeTree root, Prolog engine) throws IOException{
 		String adresseBut = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
 		File temp = new File(adresseBut);
 		temp.delete();
-
-		Files.copy(Paths.get(adresseSource), Paths.get(adresseBut),
+		
+		copyFileUsingStream(adresseSource, adresseBut);
+		/*Files.copy(Paths.get(adresseSource), Paths.get(adresseBut),
 				StandardCopyOption.REPLACE_EXISTING);
+*/
+		File source = new File (adresseSource);
+		try {
+			engine.clearTheory();
+			System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
+			System.out.println(source.toString());
+			System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
+			engine.addTheory(new Theory(source.toString()));
+		} catch (InvalidTheoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-
-		File fw = new File (adresseBut);
+	/*	File fw = new File (adresseBut);
 		OutputStream output = new FileOutputStream(fw,true);
 		output.write("\n".getBytes());
-		output.flush();
-		FromTreeToProlog(root,output);
-		output.close();
+		output.flush();*/
+		try {
+			FromTreeToProlog(root,engine);
+		} catch (InvalidTheoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//output.close();
 	}
 	
-	public static void FromTreeToProlog(RecipeTree root, OutputStream output) throws IOException{
-		output.write("\n".getBytes());
-		output.flush();
+	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
+		//output.write("\n".getBytes());
+	//	output.flush();
 		for(RecipeTree leaf: root.getLeaves()){
 			
 			if (leaf.getHead().getPostconditions() != null) {
@@ -125,52 +144,52 @@ public class TestClass{
 				//Preconditions 
 				
 				if (leaf.getHead().getPreconditions() != null) {
-					output.write(("strips_preconditions("
+					output.addTheory(new Theory("strips_preconditions("
 							+ leaf.getHead().getName().toLowerCase() + ",["
-							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).").getBytes());
-					output.flush();
+							+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
+					/*output.flush();
 					output.write("\n".getBytes());
-					output.flush();
+					output.flush();*/
 				}
 				else {
-					output.write(("strips_preconditions("
-							+ leaf.getHead().getName().toLowerCase() + ",[_]).").getBytes());
-					output.flush();
+					output.addTheory(new Theory("strips_preconditions("
+							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
+					/*output.flush();
 					output.write("\n".getBytes());
-					output.flush();
+					output.flush();*/
 				}
 
-				output.write(("strips_achieves("
+				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
-						+ ").").getBytes());
-				output.flush();
+						+ ")."));
+				/*output.flush();
 				output.write("\n".getBytes());
-				output.flush();
+				output.flush();*/
 				
 				// --------------- Prolog writing -----------------------------
 			}
 		}
 		for (String i : conditions) {
-			output.write(("strips_primitive(" + i.toLowerCase() + ").").getBytes());
-			output.flush();
+			output.addTheory(new Theory("strips_primitive(" + i.toLowerCase() + ")."));
+			/*output.flush();
 			output.write("\n".getBytes());
-			output.flush();
+			output.flush();*/
 		}
 		for (String recipe : RecipeTree.RecipeCondition) {
-			output.write(("strips_preconditions(" + recipe.toLowerCase() + ",[_]).").getBytes());
-			output.flush();
+			output.addTheory(new Theory("strips_preconditions(" + recipe.toLowerCase() + ",[_])."));
+			/*output.flush();
 			output.write("\n".getBytes());
-			output.flush();
-			output.write(("strips_achieves(" + recipe.toLowerCase() + ",c"
-					+ recipe.toLowerCase() + ").").getBytes());
-			output.flush();
+			output.flush();*/
+			output.addTheory(new Theory("strips_achieves(" + recipe.toLowerCase() + ",c"
+					+ recipe.toLowerCase() + ")."));
+		/*	output.flush();
 			output.write("\n".getBytes());
-			output.flush();
-			output.write(("strips_primitive(c" + recipe.toLowerCase() + ").").getBytes());
-			output.flush();
+			output.flush();*/
+			output.addTheory(new Theory("strips_primitive(c" + recipe.toLowerCase() + ")."));
+			/*output.flush();
 			output.write("\n".getBytes());
-			output.flush();
+			output.flush();*/
 		}
 	}
 

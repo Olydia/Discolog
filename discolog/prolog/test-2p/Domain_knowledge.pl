@@ -169,26 +169,3 @@ strips_insert(A,[B|L],[B|R]) :-
    strips_insert(A,L,R).
 strips_grnd(G) :-
    numbervars(G,0,_).
-
-strips_preconditions(a21,[p1]).
-strips_achieves(a21,p4).
-strips_preconditions(a22,[p4]).
-strips_achieves(a22,p3).
-strips_preconditions(a31,[p3]).
-strips_achieves(a31,p5).
-strips_preconditions(a32,[p5]).
-strips_achieves(a32,p2).
-strips_primitive(p1).
-strips_primitive(p3).
-strips_primitive(p4).
-strips_primitive(p2).
-strips_primitive(p5).
-strips_preconditions(r1,[_]).
-strips_achieves(r1,cr1).
-strips_primitive(cr1).
-strips_preconditions(r2,[_]).
-strips_achieves(r2,cr2).
-strips_primitive(cr2).
-strips_preconditions(r3,[_]).
-strips_achieves(r3,cr3).
-strips_primitive(cr3).
