@@ -28,6 +28,7 @@ import edu.wpi.disco.Interaction;
  * detection and recovery.
  */
 public class Discolog extends Agent {
+	public  static int recovred =0;
 
 	// TODO add private fields here to hold Prolog engine, etc.
 
@@ -50,9 +51,21 @@ public class Discolog extends Agent {
 			//Plan recovery = invokePlanner(candidate.plan,candidate.condition.getScript());
 			Solution STRIPS = invokePlanner(candidates);
 			if(STRIPS != null){
-				Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
+				//Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
 				TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
+				for(String plan: STRIPS.Strips){
+					if ((Boolean)TE.eval(plan,"evalsolution")== false){
+						System.out.println("Solution inapplicable");
+						TestClass.NbRecoveredCandidates -= recovred;
+						recovred = 0;
+						return false;
+					}
+					else {
+						
+						System.out.println("Solution applicable , exec "+plan + (Boolean)TE.eval("exec"+plan,"evalsolution"));
+					}
 
+				}
 				/*for (int i = 0; i < STRIPS.getStrips().size(); i++) {
 					recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
 				}
@@ -93,14 +106,15 @@ public class Discolog extends Agent {
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			JavaPlan = CallStripsPlanner(EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
-			if((JavaPlan != null ))
+			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
-
+			}
 		}	
 		Collections.sort(planrepair);
 		if (planrepair.isEmpty())
 			return null;
 		else{
+			recovred = planrepair.size();
 			TestClass.NbRecoveredCandidates += planrepair.size();
 			return(planrepair.get(0));
 		}
@@ -220,7 +234,7 @@ public class Discolog extends Agent {
 			}
 			else {// main case
 				Plan = info.getVarValue("X");
-				JavaPlan = getPlannerOutput(Plan);
+				JavaPlan = getPlannerOutput(Plan);			
 				return JavaPlan;
 			}
 		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {

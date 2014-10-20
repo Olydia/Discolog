@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -56,21 +59,22 @@ public class TestClass{
 		for(int level:levels){
 			System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
 			RecipeTree.CloneTree(root,  partialroot);
-			for(int i =0; i<1; i++){
-				RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
-				System.out.println(removalcondition);
+			RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
+			System.out.println(removalcondition);
+			for(int i =0; i<10; i++){
 				//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 				//RecipeTree.printTree(partialroot);
 				InitSTRIPSPlanner(partialroot);
-				for(RecipeTree leaf: partialroot.getLeaves()){
-					System.out.println(" \n -------------------------------------- Test number    --------------------------- \n " );
+			for(RecipeTree leaf: partialroot.getLeaves()){
+					System.out.println(" \n -------------------------------------- Test primitive "+leaf.getHead().getName()+"    --------------------------- \n " );
 					//RecipeTree leaf =  partialroot.getLeaves().get(3);
 					RecipeTree.createBreakdown(leaf);
 					RecipeTree.printTree(partialroot);
 					PlanConstructor test = new PlanConstructor();
 					TaskClass task = test.FromTreeToTask(partialroot);
 					test.CreateBenshmark(partialroot, task);
+					RecipeTree.test1(partialroot);
 					//FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
 					test.LanchTest(task,conditions, partialroot);
 					try {
@@ -96,11 +100,13 @@ public class TestClass{
 	public static void InitSTRIPSPlanner(RecipeTree root) throws IOException{
 		String adresseBut = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
 		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
-		try {
-			copyFileUsingStream(adresseSource, adresseBut);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		File temp = new File(adresseBut);
+		temp.delete();
+
+		Files.copy(Paths.get(adresseSource), Paths.get(adresseBut),
+				StandardCopyOption.REPLACE_EXISTING);
+
+
 		File fw = new File (adresseBut);
 		OutputStream output = new FileOutputStream(fw,true);
 		output.write("\n".getBytes());
@@ -110,24 +116,26 @@ public class TestClass{
 	}
 	
 	public static void FromTreeToProlog(RecipeTree root, OutputStream output) throws IOException{
+		output.write("\n".getBytes());
+		output.flush();
 		for(RecipeTree leaf: root.getLeaves()){
+			
 			if (leaf.getHead().getPostconditions() != null) {
 				// --------------- Prolog writing -----------------------------
 				//Preconditions 
-				output.write("\n".getBytes());
-				output.flush();
-				output.write("\n".getBytes());
-				output.flush();
+				
 				if (leaf.getHead().getPreconditions() != null) {
 					output.write(("strips_preconditions("
 							+ leaf.getHead().getName().toLowerCase() + ",["
 							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).").getBytes());
+					output.flush();
 					output.write("\n".getBytes());
 					output.flush();
 				}
 				else {
 					output.write(("strips_preconditions("
 							+ leaf.getHead().getName().toLowerCase() + ",[_]).").getBytes());
+					output.flush();
 					output.write("\n".getBytes());
 					output.flush();
 				}
@@ -136,24 +144,31 @@ public class TestClass{
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ").").getBytes());
+				output.flush();
+				output.write("\n".getBytes());
+				output.flush();
 				
 				// --------------- Prolog writing -----------------------------
 			}
 		}
 		for (String i : conditions) {
 			output.write(("strips_primitive(" + i.toLowerCase() + ").").getBytes());
+			output.flush();
 			output.write("\n".getBytes());
 			output.flush();
 		}
 		for (String recipe : RecipeTree.RecipeCondition) {
 			output.write(("strips_preconditions(" + recipe.toLowerCase() + ",[_]).").getBytes());
+			output.flush();
 			output.write("\n".getBytes());
 			output.flush();
 			output.write(("strips_achieves(" + recipe.toLowerCase() + ",c"
 					+ recipe.toLowerCase() + ").").getBytes());
+			output.flush();
 			output.write("\n".getBytes());
 			output.flush();
 			output.write(("strips_primitive(c" + recipe.toLowerCase() + ").").getBytes());
+			output.flush();
 			output.write("\n".getBytes());
 			output.flush();
 		}

@@ -54,9 +54,10 @@ public class RecipeTree {
 		System.out.println(removalcondition);
 		//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 		PartialTree(copy, removalcondition);
-		printTree(copy);
+		test1(root);
+		//printTree(copy);
 		//existingCond = getKnowledge(root, existingCond);
-		System.out.println(Init(existingCond, root));
+		//System.out.println(Init(existingCond, root));
 		//for(int i=0;i<existingCond.size();i++)
 		//	System.out.println(existingCond.get(i));
 	
@@ -415,6 +416,54 @@ public class RecipeTree {
 		}
 		return RecipeConditions;
 	}*/
+	public static void test1 (RecipeTree root) {
+		if(!root.isLeaf()){
+			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
+					.getChildren().entrySet()) {
+				for (RecipeTree node : NodeEntry.getValue()) {
+					String test = test(node);
+					if(test !=null)
+						System.out.println(test);
+					test1(node);
+				}
+			}
+		}
+	}
+	
+	public static String test(RecipeTree root){
+		String returne = null;
+		if (root.isLeaf()){
+			//if (root.getHead().getPostconditions() != null) {
+			if(root.getHead().getGrounding().get(2) == "true"){
+				 returne = "if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
+							+root.getHead().getGrounding().get(1) +" =true; "
+							+ "println('"+ root.getHead().getName() + "');}"
+					+ " else { "+root.getHead().getName()+"=false; "+
+							root.getHead().getGrounding().get(1) +" =false; "+
+							"println('"+ root.getHead().getName() + "=false, " + root.getHead().getGrounding().get(1) +" =false');} ";
+		}else {
+				//Create breakdown 
+
+				// preconditions are not false
+				 returne = "if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+								root.getHead().getName()+"=false; "+
+								root.getHead().getGrounding().get(1) +" =false;"+
+								"println('"+ root.getHead().getName() + "=false');} "+
+								"else {"
+									// if first run of the task
+									+"if (exec"+root.getHead().getName()+" == false) {"+
+									// psotconditions put to false and change the flag to true
+									root.getHead().getGrounding().get(1).toString()+ "=false; println(' exec"
+									+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
+									+ "exec"+root.getHead().getName()+ "=true;}"
+									// else if not the first run put the postcond to true
+									+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
+									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}}"
+		;
+			}
+		}
+		return returne;
+	}
 	public static String Init(List<String> coditions, RecipeTree root){
 		Random rand = new Random();
 		String init = null;
@@ -435,8 +484,11 @@ public class RecipeTree {
 		for(String recipe : RecipeTree.RecipeCondition)
 			init += ", C" + recipe +" =true";
 		
-		for(RecipeTree leaf : root.getLeaves())
-			init += ", "+leaf.getHead().getName() + "=false";
+		for(RecipeTree leaf : root.getLeaves()){
+			String name = leaf.getHead().getName(); 
+			init += ", "+name + "=true";
+			init += ", exec"+name + "=false";
+		}
 	
 		return init;
 	}

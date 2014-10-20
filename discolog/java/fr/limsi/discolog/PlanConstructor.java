@@ -138,21 +138,30 @@ public class PlanConstructor {
 					return ( newTask(root.getHead().getName(),true, 
 							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
 							"if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
-									+root.getHead().getGrounding().get(1) +" =true;println('"+ root.getHead().getName() + "');}"));
+									+root.getHead().getGrounding().get(1) +" =true; "
+									+ "println('"+ root.getHead().getName() + "');}"
+							+ " else { "+root.getHead().getName()+"=false; "+
+									root.getHead().getGrounding().get(1) +" =false; "+
+									"println('"+ root.getHead().getName() + "=false, " + root.getHead().getGrounding().get(1) +" =false');} "));
 				else 
 					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
-							// preconditions are not false
-							root.getHead().getGrounding().get(0) +" !=false;" +
+							
+							// preconditions are false
+							"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+								root.getHead().getName()+"=false; "+
+								root.getHead().getGrounding().get(1) +" =false;"+
+								"println('"+ root.getHead().getName() + "=false');} "+
+								"else {"
 									// if first run of the task
-									"if ("+root.getHead().getName()+" == false) {"+
+									+"if (exec"+root.getHead().getName()+" == false) {"+
 									// psotconditions put to false and change the flag to true
-									root.getHead().getGrounding().get(1).toString()+ "=false;println('"
-									+ root.getHead().getName() + " ,  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
-									+ root.getHead().getName()+ "=true;}"
+									root.getHead().getGrounding().get(1).toString()+ "=false; println(' exec"
+									+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
+									+ "exec"+root.getHead().getName()+ "=true;}"
 									// else if not the first run put the postcond to true
-									+ "else { "+root.getHead().getGrounding().get(1)+ "=true;println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}" ));
+									+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
+									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}}"));
 		
 			
 		}
