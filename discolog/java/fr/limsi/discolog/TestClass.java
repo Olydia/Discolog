@@ -1,9 +1,14 @@
 package fr.limsi.discolog;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,10 +45,10 @@ public class TestClass{
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
-		levels.add(100);
-		//levels.add(75);
-		//levels.add(50);
 		//levels.add(25);
+		//levels.add(50);
+		//levels.add(75);
+		levels.add(100);
 			
 		
 		
@@ -57,18 +62,16 @@ public class TestClass{
 				//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 				//RecipeTree.printTree(partialroot);
+				InitSTRIPSPlanner(partialroot);
 				for(RecipeTree leaf: partialroot.getLeaves()){
 					System.out.println(" \n -------------------------------------- Test number    --------------------------- \n " );
-
 					//RecipeTree leaf =  partialroot.getLeaves().get(3);
 					RecipeTree.createBreakdown(leaf);
 					RecipeTree.printTree(partialroot);
 					PlanConstructor test = new PlanConstructor();
-					BufferedWriter output = test.InitSTRIPSPlanner();
-					TaskClass task = test.FromTreeToTask(partialroot,output);
-					test.CreateBenshmark(partialroot, task, output, conditions);
-					output.close();
-					
+					TaskClass task = test.FromTreeToTask(partialroot);
+					test.CreateBenshmark(partialroot, task);
+					//FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
 					test.LanchTest(task,conditions, partialroot);
 					try {
 						test.interaction.join();
@@ -90,6 +93,93 @@ public class TestClass{
 		
 
 	}
+	public static void InitSTRIPSPlanner(RecipeTree root) throws IOException{
+		String adresseBut = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
+		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
+		try {
+			copyFileUsingStream(adresseSource, adresseBut);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		File fw = new File (adresseBut);
+		OutputStream output = new FileOutputStream(fw,true);
+		output.write("\n".getBytes());
+		output.flush();
+		FromTreeToProlog(root,output);
+		output.close();
+	}
+	
+	public static void FromTreeToProlog(RecipeTree root, OutputStream output) throws IOException{
+		for(RecipeTree leaf: root.getLeaves()){
+			if (leaf.getHead().getPostconditions() != null) {
+				// --------------- Prolog writing -----------------------------
+				//Preconditions 
+				output.write("\n".getBytes());
+				output.flush();
+				output.write("\n".getBytes());
+				output.flush();
+				if (leaf.getHead().getPreconditions() != null) {
+					output.write(("strips_preconditions("
+							+ leaf.getHead().getName().toLowerCase() + ",["
+							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).").getBytes());
+					output.write("\n".getBytes());
+					output.flush();
+				}
+				else {
+					output.write(("strips_preconditions("
+							+ leaf.getHead().getName().toLowerCase() + ",[_]).").getBytes());
+					output.write("\n".getBytes());
+					output.flush();
+				}
+
+				output.write(("strips_achieves("
+						+ leaf.getHead().getName().toLowerCase() + ","
+						+ leaf.getHead().getPostconditions().toLowerCase()
+						+ ").").getBytes());
+				
+				// --------------- Prolog writing -----------------------------
+			}
+		}
+		for (String i : conditions) {
+			output.write(("strips_primitive(" + i.toLowerCase() + ").").getBytes());
+			output.write("\n".getBytes());
+			output.flush();
+		}
+		for (String recipe : RecipeTree.RecipeCondition) {
+			output.write(("strips_preconditions(" + recipe.toLowerCase() + ",[_]).").getBytes());
+			output.write("\n".getBytes());
+			output.flush();
+			output.write(("strips_achieves(" + recipe.toLowerCase() + ",c"
+					+ recipe.toLowerCase() + ").").getBytes());
+			output.write("\n".getBytes());
+			output.flush();
+			output.write(("strips_primitive(c" + recipe.toLowerCase() + ").").getBytes());
+			output.write("\n".getBytes());
+			output.flush();
+		}
+	}
+
+	private static void copyFileUsingStream(String source, String dest) throws IOException {
+		InputStream is = null;
+		OutputStream os = null;
+		File temp = new File(dest);
+		temp.delete();
+		
+		File src = new File(source);
+		File destination = new File(dest);
+		try {
+			is = new FileInputStream(src);
+			os = new FileOutputStream(destination);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		} finally {
+			is.close();
+			os.close();
+		}
+	}           
 	static BufferedWriter saveSolution(){
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/results.txt";
 		PrintWriter writer;

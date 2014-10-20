@@ -39,11 +39,11 @@ public class PlanConstructor {
 	static List<String> recipecondition = new LinkedList<String>();
 	public static List<String> conditions = new LinkedList<String>();
 	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
-
+/*
 
 	public static void main(String[] args) throws IOException {
 		PlanConstructor test = new PlanConstructor();
-		BufferedWriter output = test.InitSTRIPSPlanner();
+		FileOutputStream output = test.InitSTRIPSPlanner();
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
@@ -61,7 +61,7 @@ public class PlanConstructor {
 		test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
 		output = test.InitSTRIPSPlanner();
 		test.LanchTest(task,conditions,root);
-	}
+	}*/
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 			new Interaction(new Discolog("agent"), new User("user"), null){
@@ -120,80 +120,41 @@ public class PlanConstructor {
 		top.getGoal().setShould(true);
 		TaskEngine.VERBOSE = true;
 		System.out.println(initState);
-		((Discolog)interaction.getSystem()).setMax(1);
+		((Discolog)interaction.getSystem()).setMax(100);
 		interaction.start(false);
 	}
-	public void CreateBenshmark (RecipeTree root, TaskClass task, BufferedWriter output, List<String> conditions) throws IOException{
-		generateTasks(root, task,output, RecipeTree.RecipeCondition);
-		RecipeRecoveryTask(output,RecipeTree.RecipeCondition);
-		for (String i : conditions) {
-			output.write("strips_primitive(" + i.toLowerCase() + ").");
-			output.newLine();
-			output.flush();
-		}
-		for (String i : RecipeTree.RecipeCondition) {
-			output.write("strips_primitive(c" + i.toLowerCase() + ").");
-			output.newLine();
-			output.flush();
-		}
+	
+		public void CreateBenshmark (RecipeTree root, TaskClass task) throws IOException{
+		generateTasks(root, task);
+		RecipeRecoveryTask(RecipeTree.RecipeCondition);
+		
 		//output.close();
 	}
-	public  TaskClass FromTreeToTask(RecipeTree root, BufferedWriter output) throws IOException {
+	public  TaskClass FromTreeToTask(RecipeTree root) throws IOException {
 
 		if (root.isLeaf()){
-			if (root.getHead().getPostconditions() != null) {
-				// --------------- Prolog writing -----------------------------
-				//Preconditions 
-				if (root.getHead().getPreconditions() != null) {
-					output.write("strips_preconditions("
-							+ root.getHead().getName().toLowerCase() + ",["
-							+ root.getHead().getPreconditions().toLowerCase()
-							+ "]).");
-					output.newLine();
-					output.flush();
-				}
-				else {
-					output.write("strips_preconditions("
-							+ root.getHead().getName().toLowerCase() + ",[_]).");
-					output.newLine();
-					output.flush();
-				}
-
-				output.write("strips_achieves("
-						+ root.getHead().getName().toLowerCase() + ","
-						+ root.getHead().getPostconditions().toLowerCase()
-						+ ").");
-				output.newLine();
-				output.flush();
-				output.newLine();
-				output.flush();
-				// --------------- Prolog writing -----------------------------
-
-				if(root.getHead().getGrounding().get(2) == "true")
+			//if (root.getHead().getPostconditions() != null) {
+					if(root.getHead().getGrounding().get(2) == "true")
 					return ( newTask(root.getHead().getName(),true, 
 							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
-							root.getHead().getGrounding().get(1)+ "=true;"+root.getHead().getGrounding().get(0) +" !=false;println('"+ root.getHead().getName() + "')"));
-
-				
+							"if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
+									+root.getHead().getGrounding().get(1) +" =true;println('"+ root.getHead().getName() + "');}"));
 				else 
 					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
+							// preconditions are not false
 							root.getHead().getGrounding().get(0) +" !=false;" +
+									// if first run of the task
 									"if ("+root.getHead().getName()+" == false) {"+
-									root.getHead().getGrounding().get(1)+ "=false;println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +" =false '); "
+									// psotconditions put to false and change the flag to true
+									root.getHead().getGrounding().get(1).toString()+ "=false;println('"
+									+ root.getHead().getName() + " ,  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
 									+ root.getHead().getName()+ "=true;}"
+									// else if not the first run put the postcond to true
 									+ "else { "+root.getHead().getGrounding().get(1)+ "=true;println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getPostconditions() +"');}" ));
-			}
-			else{
-				/*output.write("strips_achieves("
-						+ root.getHead().getName().toLowerCase() + ",_).");
-				output.newLine();
-				output.flush();**/
-				return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	null,null));
-
-			}
+									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}" ));
+		
+			
 		}
 		else
 			return (newTask(root.getHead().getName(), false, root.getHead()
@@ -201,8 +162,7 @@ public class PlanConstructor {
 					null));
 	}
 
-
-	public void generateTasks(RecipeTree root, TaskClass top,BufferedWriter output,  List<String> conditions) throws IOException {
+	public void generateTasks(RecipeTree root, TaskClass top) throws IOException {
 		TaskClass child=null;
 		List<Step> step = new LinkedList<Step>();
 		if(!root.isLeaf()){
@@ -210,86 +170,31 @@ public class PlanConstructor {
 					.getChildren().entrySet()) {
 
 				for (RecipeTree node : NodeEntry.getValue()) {
-					child=FromTreeToTask(node,output);
-					generateTasks(node, child,output,conditions);
+					child=FromTreeToTask(node);
+					generateTasks(node, child);
 					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
 					 */step.add(new Step("s" + child, child));
 				}
-				if(conditions.contains(NodeEntry.getKey().toString())){		
+				if(RecipeTree.RecipeCondition.contains(NodeEntry.getKey().toString())){		
 					newRecipe(NodeEntry.getKey().toString(), top,
 							step, "C" + NodeEntry.getKey().toString());
-					//recipecondition.add(NodeEntry.getKey());
 				}
 				else newRecipe(NodeEntry.getKey().toString(), top,
 						step, null);
-				/*if(conditions.contains(NodeEntry.getKey().toString())){		
-					newRecipe(NodeEntry.getKey().toString(), top, step,
-							NodeEntry.getValue().get(0).getHead().getGrounding().get(0).toString());
-					RecipeRecoveryTask(output, NodeEntry.getKey().toString(),
-							NodeEntry.getValue().get(0).getHead().getGrounding().get(0).toString() );
-				}
-				else { 
-					newRecipe(NodeEntry.getKey().toString(), top,
-						step, null);
-				}*/
 				step.clear();					
 			}
 		}		
 	}
 
-	public void RecipeRecoveryTask( BufferedWriter output , List<String> conditions) throws IOException{
+	public void RecipeRecoveryTask(List<String> conditions) throws IOException{
 		for(String recipe: conditions){
-			output.write("strips_preconditions(" + recipe.toLowerCase() + ",[_]).");
-			output.newLine();
-			output.flush();
-			output.write("strips_achieves(" + recipe.toLowerCase() + ",c"
-					+ recipe.toLowerCase() + ").");
-			output.newLine();
-			output.flush();
-			//System.out.println(recipe.toLowerCase()+"[null, C"+recipe+"]");
+			
 			newTask(recipe.toLowerCase(), true, null,"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
 		}
 	}
 
-	public BufferedWriter InitSTRIPSPlanner() throws IOException{
-		String adressesource = System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl";
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter(adressesource);
-			writer.print("");
-			writer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		String adresseSource = System.getProperty("user.dir") + "/prolog/test-2p/STRIPS_planner.pl";
-		try {
-			copyFileUsingStream(new File(adresseSource), new File(adressesource));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		FileWriter fw = new FileWriter(adressesource, true);
-		BufferedWriter output = new BufferedWriter(fw);
-		output.newLine();
-		output.flush();
-		return output;
-	}
-	private static void copyFileUsingStream(File source, File dest) throws IOException {
-		InputStream is = null;
-		OutputStream os = null;
-		try {
-			is = new FileInputStream(source);
-			os = new FileOutputStream(dest);
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = is.read(buffer)) > 0) {
-				os.write(buffer, 0, length);
-			}
-		} finally {
-			is.close();
-			os.close();
-		}
-	}
+	
 }
