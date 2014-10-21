@@ -54,12 +54,11 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-		@Override
-		public void run() {
+	//	@Override
+		/*public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, true, false)) {interaction.getDisco().history(System.out);
-}
-		}
+		while (getSystem().respond(interaction, false, true, false)) {}
+		}*/
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -108,7 +107,7 @@ public class PlanConstructor {
 		top.getGoal().setShould(true);
 		TaskEngine.VERBOSE = true;
 		System.out.println(initState);
-		((Discolog)interaction.getSystem()).setMax(100);
+		((Discolog)interaction.getSystem()).setMax(1);
 		interaction.start(false);
 	}
 	

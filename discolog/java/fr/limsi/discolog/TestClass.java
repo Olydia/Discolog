@@ -44,7 +44,7 @@ public class TestClass{
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
-		levels.add(25);
+		levels.add(100);
 		//levels.add(50);
 		//levels.add(75);
 		//levels.add(100);
@@ -58,10 +58,10 @@ public class TestClass{
 			for(int i =0; i<1; i++){
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 				
-			//	for(RecipeTree leaf: partialroot.getLeaves()){
+				for(RecipeTree leaf: partialroot.getLeaves()){
 					
 					System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
-					RecipeTree leaf =  partialroot.getLeaves().get(0);
+					//RecipeTree leaf =  partialroot.getLeaves().get(0);
 					RecipeTree.createBreakdown(leaf);
 					RecipeTree.printTree(partialroot);
 					PlanConstructor test = new PlanConstructor();
@@ -73,8 +73,8 @@ public class TestClass{
 					try {
 						//test.interaction.getDisco().history(System.out);
 						test.interaction.join();
-						System.out.println("end of execution");
-						test.interaction.getDisco().history(System.out);
+						//System.out.println("end of execution");
+						//test.interaction.getDisco().history(System.out);
 
 
 					} catch (InterruptedException e) {
@@ -83,7 +83,7 @@ public class TestClass{
 					}
 					RecipeTree.removeBreakdown(leaf);
 
-				//}
+				}
 				evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 				evaluation.flush();
 				evaluation.newLine();
