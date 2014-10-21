@@ -1,22 +1,10 @@
 package fr.limsi.discolog;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
@@ -28,7 +16,6 @@ import edu.wpi.cetask.DecompositionClass.Step;
 import edu.wpi.cetask.TaskClass.Grounding;
 import edu.wpi.cetask.TaskClass.Postcondition;
 import edu.wpi.cetask.TaskClass.Precondition;
-import edu.wpi.disco.Agent;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.User;
@@ -70,7 +57,8 @@ public class PlanConstructor {
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
-			while (getSystem().respond(interaction, false, true, false)) {}
+			while (getSystem().respond(interaction, false, true, false)) {interaction.getDisco().history(System.out);
+}
 		}
 	};
 
@@ -140,28 +128,22 @@ public class PlanConstructor {
 							"if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
 									+root.getHead().getGrounding().get(1) +" =true; "
 									+ "println('"+ root.getHead().getName() + "');}"
-							+ " else { "+root.getHead().getName()+"=false; "+
-									root.getHead().getGrounding().get(1) +" =false; "+
-									"println('"+ root.getHead().getName() + "=false, " + root.getHead().getGrounding().get(1) +" =false');} "));
+							+ " else { $this.sucess = false;} "));
 				else 
 					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 							
 							// preconditions are false
 							"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-								root.getHead().getName()+"=false; "+
-								root.getHead().getGrounding().get(1) +" =false;"+
-								"println('"+ root.getHead().getName() + "=false');} "+
-								"else {"
-									// if first run of the task
-									+"if (exec"+root.getHead().getName()+" == false) {"+
+									"$this.sucess = false;} "+
+								"else if ("+root.getHead().getName()+" == false) {"+
 									// psotconditions put to false and change the flag to true
-									root.getHead().getGrounding().get(1).toString()+ "=false; println(' exec"
+									root.getHead().getGrounding().get(1).toString()+ "=false; println('"
 									+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
-									+ "exec"+root.getHead().getName()+ "=true;}"
+									+root.getHead().getName()+ "=true;}"
 									// else if not the first run put the postcond to true
 									+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}}"));
+									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}"));
 		
 			
 		}

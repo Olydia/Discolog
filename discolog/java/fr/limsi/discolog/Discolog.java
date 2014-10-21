@@ -1,15 +1,11 @@
 package fr.limsi.discolog;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
@@ -56,8 +52,8 @@ public class Discolog extends Agent {
 			Solution STRIPS = invokePlanner(candidates);
 			if(STRIPS != null){
 				//Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
-				TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
-				for(String plan: STRIPS.Strips){
+				//TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
+				/*for(String plan: STRIPS.Strips){
 					if ((Boolean)TE.eval(plan,"evalsolution")== false){
 						System.out.println("Solution inapplicable");
 						TestClass.NbRecoveredCandidates -= recovred;
@@ -69,7 +65,7 @@ public class Discolog extends Agent {
 						System.out.println("Solution applicable , exec "+plan + (Boolean)TE.eval("exec"+plan,"evalsolution"));
 					}
 
-				}
+				}*/
 				/*for (int i = 0; i < STRIPS.getStrips().size(); i++) {
 					recovery.add(newPlan(TE, STRIPS.getStrips().get(i)));
 				}
@@ -222,21 +218,16 @@ public class Discolog extends Agent {
 		engine = new Prolog();
 		try {
 			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/Domain_knowledge.pl");
+					.getResourceAsStream("/test-2p/STRIPS_planner.pl");
 			Theory theory = new Theory(planner);
+			engine.clearTheory();
 			engine.setTheory(theory);
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
-			System.out.println(Initial_state.toString());
+			//System.out.println(Initial_state.toString());
 			// The request for STRIPS.
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
-			Theory curTh = engine.getTheory();
-			String ad = System.getProperty("user.dir") + "/prolog/test-2p/currentTheory.pl";
-			File fichier = new File (ad);
-			OutputStream output = new FileOutputStream(fichier,true);
-			output.write( curTh.toString().getBytes());
-			output.write("****************************************************************".getBytes());
-			output.write("\n".getBytes());
+			
 			// Results
 			if (!info.isSuccess()){
 				System.out.println("no plan found for the condition.  "+ Goal);
@@ -259,12 +250,11 @@ public class Discolog extends Agent {
 		// Add the init state and the planner call for the goal
 		//Theory init;
 		try {
-			TestClass.InitSTRIPSPlanner(TestClass.partialroot, engine);
-		} catch (IOException e1) {
+			TestClass.FromTreeToProlog(TestClass.partialroot, engine);
+		} catch (InvalidTheoryException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
 		try {
 			for(String init : Initial_state){
 				//System.out.println(init);

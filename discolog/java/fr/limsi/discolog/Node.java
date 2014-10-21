@@ -1,7 +1,6 @@
 package fr.limsi.discolog;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Node {
 

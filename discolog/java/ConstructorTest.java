@@ -4,7 +4,6 @@ import edu.wpi.cetask.*;
 import edu.wpi.cetask.TaskClass.*;
 import edu.wpi.cetask.DecompositionClass.*;
 import edu.wpi.disco.*;
-import fr.limsi.discolog.Discolog;
 
 // for testing constructing model with XML
 // to support LIMSI work on Discolog
@@ -21,7 +20,7 @@ public class ConstructorTest {
                 // note since p2 and p3 are alternative recipes for b
                 // they have the same pre/postconditions
                 p2 = test.newTask("p2", true, "Q", "R", "R=true;println('p2')"),
-                p3 = test.newTask("p3", true, "Q", "R", "R=true;println('p3')"),
+               // p3 = test.newTask("p3", true, "Q", "R", "R=true;println('p3')"),
                 // recursive propagation of pre/postconditions up the tree
                 b = test.newTask("b", false, p2.getPrecondition().getScript(),
                       p2.getPostcondition().getScript(), null),
