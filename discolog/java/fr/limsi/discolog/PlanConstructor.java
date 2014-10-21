@@ -2,6 +2,7 @@ package fr.limsi.discolog;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -159,14 +160,24 @@ public class PlanConstructor {
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
 
-				for (RecipeTree node : NodeEntry.getValue()) {
+				for (int i=0; i<NodeEntry.getValue().size(); i++) {
+					RecipeTree node = NodeEntry.getValue().get(i);
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
 					/*System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
-					 */step.add(new Step("s" + child, child));
+					step.add(new Step("s" + child, child));
+					 */
+					 if(i>0)
+						 step.add(new Step("s" +child.getId(), child, 1, 1, 
+								 Collections.singletonList(NodeEntry.getValue().get(i-1).getHead().getName())));
+					 else 
+						 step.add(new Step("s" + child, child)); 
+					 
+						 
+				
 				}
 				if(RecipeTree.RecipeCondition.contains(NodeEntry.getKey().toString())){		
 					newRecipe(NodeEntry.getKey().toString(), top,
