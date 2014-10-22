@@ -55,11 +55,11 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-		/*@Override
+		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
 		while (getSystem().respond(interaction, false, true, false)) {}
-		}*/
+		}
 	};
 
 	final  Disco disco = interaction.getDisco();
