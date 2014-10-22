@@ -45,9 +45,9 @@ public class TestClass{
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
 		levels.add(25);
-		//levels.add(50);
-		//levels.add(75);
-		//levels.add(100);
+		levels.add(50);
+		levels.add(75);
+		levels.add(100);
 
 		// Remove knowledge from  the HTN 
 		for(int level:levels){
@@ -55,7 +55,7 @@ public class TestClass{
 			RecipeTree.CloneTree(root,  partialroot);
 			RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
 			//System.out.println(removalcondition);
-			for(int i =0; i<1; i++){
+			for(int i =0; i<100; i++){
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
 				
 				for(RecipeTree leaf: partialroot.getLeaves()){
@@ -64,8 +64,8 @@ public class TestClass{
 					//RecipeTree leaf =  partialroot.getLeaves().get(0);
 					RecipeTree.createBreakdown(leaf);
 					System.out.println("-----------------------   The current HTN definition :  ------------------------- ");
-					RecipeTree.printTree(partialroot);
-					RecipeTree.test1(partialroot);
+					//RecipeTree.printTree(partialroot);
+					//RecipeTree.test1(partialroot);
 					PlanConstructor test = new PlanConstructor();
 					TaskClass task = test.FromTreeToTask(partialroot);
 					test.CreateBenshmark(partialroot, task);

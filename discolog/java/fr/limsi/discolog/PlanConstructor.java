@@ -126,17 +126,18 @@ public class PlanConstructor {
 					if(root.getHead().getGrounding().get(2) == "true")
 					return ( newTask(root.getHead().getName(),true, 
 							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
-							"if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
-									+root.getHead().getGrounding().get(1) +" =true; "
-									+ "println('"+ root.getHead().getName() + "');}"
-							+ " else {$this.sucess = false;} "));
+							"if ("+root.getHead().getGrounding().get(0)+ "==false) "
+									+ "{$this.success = false;} "
+									
+							+ " else {"+root.getHead().getGrounding().get(1) +" =true; "
+									+ "println('"+ root.getHead().getName() + "');}"));
 				else 
 					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 							
 							// preconditions are false
 							"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-									"$this.sucess = false;} "+
+									"$this.success = false;} "+
 								"else if ("+root.getHead().getName()+" == false) {"+
 									// psotconditions put to false and change the flag to true
 									root.getHead().getGrounding().get(1).toString()+ "=false; println('"
