@@ -44,7 +44,7 @@ public class TestClass{
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
-		levels.add(100);
+		levels.add(25);
 		//levels.add(50);
 		//levels.add(75);
 		//levels.add(100);
@@ -60,10 +60,12 @@ public class TestClass{
 				
 				for(RecipeTree leaf: partialroot.getLeaves()){
 					
-					System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
+					//System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
 					//RecipeTree leaf =  partialroot.getLeaves().get(0);
 					RecipeTree.createBreakdown(leaf);
+					System.out.println("-----------------------   The current HTN definition :  ------------------------- ");
 					RecipeTree.printTree(partialroot);
+					RecipeTree.test1(partialroot);
 					PlanConstructor test = new PlanConstructor();
 					TaskClass task = test.FromTreeToTask(partialroot);
 					test.CreateBenshmark(partialroot, task);
@@ -111,7 +113,6 @@ public class TestClass{
 				else {
 					output.addTheory(new Theory("strips_preconditions("
 							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
-
 				}
 
 				output.addTheory(new Theory("strips_achieves("
@@ -139,7 +140,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/results1.txt";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/results2.txt";
 		PrintWriter writer;
 		
 		try {

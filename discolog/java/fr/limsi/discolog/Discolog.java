@@ -230,7 +230,7 @@ public class Discolog extends Agent {
 			
 			// Results
 			if (!info.isSuccess()){
-				System.out.println("no plan found for the condition.  "+ Goal);
+				//System.out.println("no plan found for the condition.  "+ Goal);
 				return null;
 			}
 			else {// main case

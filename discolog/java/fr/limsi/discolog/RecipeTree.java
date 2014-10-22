@@ -63,23 +63,12 @@ public class RecipeTree {
 		RecipeTree.CloneTree(root,  patialtree);
 		RecipeTree.PartialTree(patialtree, levelOfKnowledge);
 	}
-	static void DefineCompleteTree(RecipeTree root, int depth, int length, int recipe/*, int levelOfKnowledge*/){
+	public static void DefineCompleteTree(RecipeTree root, int depth, int length, int recipe/*, int levelOfKnowledge*/){
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
 	}
 	
-	static RecipeTree DefineTree(int depth, int length, int recipe, int levelOfKnowledge, List<String> conditions){
-		Node A = new Node("a", "P1", "P2");
-		//A.defineGrounding();
-		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
-		RecipeTree root = new RecipeTree(A, child);
-		RecipeTree.createTree(root, depth, length, recipe);
-		RecipeTree.defineKnowledge(root);
-		conditions = RecipeTree.LevelOfKnowledge(root, levelOfKnowledge);
-		RecipeTree.DefineLevelOfKnowledge(root, conditions);
-		return root;
-	}
-
+	
 	public Node getHead() {
 		return head;
 	}
@@ -410,7 +399,7 @@ public class RecipeTree {
 		else
 		 init =  random ==1?  "var "+coditions.get(0)+"" : "var "+coditions.get(0)+"=false" ;
 		for(int i=1; i<coditions.size() ; i++){
-			if(coditions.get(i) =="P1")
+			if(coditions.get(i) =="P1" || coditions.get(i) =="P4")
 				init += ", " + coditions.get(i) +" =true";
 			
 			else{
@@ -453,20 +442,22 @@ public class RecipeTree {
 	}
 	
 	public static String test(RecipeTree root){
-		String returne = null;
+		String returne= null;
 		if (root.isLeaf()){
 			//if (root.getHead().getPostconditions() != null) {
+			 returne = "	\n "+root.getHead().getName()+"  Grounding Script : \n     ";
+			
 			if(root.getHead().getGrounding().get(2) == "true"){
-				 returne = "if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
+				 returne += "if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
 							+root.getHead().getGrounding().get(1) +" =true; "
 							+ "println('"+ root.getHead().getName() + "');}"
-					+ " else { this.sucess = false;} ";
+					+ " else {$this.sucess = false;} \n";
 		}else {
 				//Create breakdown 
 
 				// preconditions are not false
-				 returne = "if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-							"this.sucess = false;} "+
+				 returne += "if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+							"$this.sucess = false;} "+
 						"else if ("+root.getHead().getName()+" == false) {"+
 							// psotconditions put to false and change the flag to true
 							root.getHead().getGrounding().get(1).toString()+ "=false; println('"
@@ -474,10 +465,10 @@ public class RecipeTree {
 							+root.getHead().getName()+ "=true;}"
 							// else if not the first run put the postcond to true
 							+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
-							+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}"
-		;
+							+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}\n";
 			}
 		}
+		
 		return returne;
 	}
 }

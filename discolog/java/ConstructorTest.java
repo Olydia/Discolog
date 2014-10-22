@@ -16,20 +16,23 @@ public class ConstructorTest {
       // branching factor of three at each level
       // NB: Write an *algorithm* to generate and prune conditions in tree
       // do not handcode
+      ArrayList<Step> steps = new ArrayList<Step> ();
       TaskClass p1 = test.newTask("p1", true, "P", "Q", "Q=true;println('p1')"),
                 // note since p2 and p3 are alternative recipes for b
                 // they have the same pre/postconditions
-                p2 = test.newTask("p2", true, "Q", "R", "R=true;println('p2')"),
-               // p3 = test.newTask("p3", true, "Q", "R", "R=true;println('p3')"),
+                p2 = test.newTask("p2", true, "Q", "M", "R=true;println('p2')"),
+                p3 = test.newTask("p3", true, "M", "R", "R=true;println('p3')"),
                 // recursive propagation of pre/postconditions up the tree
                 b = test.newTask("b", false, p2.getPrecondition().getScript(),
-                      p2.getPostcondition().getScript(), null),
+                      p3.getPostcondition().getScript(), null),
                 a = test.newTask("a", false, p1.getPrecondition().getScript(), 
                       b.getPostcondition().getScript(), null);
-      test.newRecipe("r1", b, Collections.singletonList(new Step("s1", p2)), "V");
+      steps.add(new Step("s1", p2, 1, 1, Collections.singletonList(p1.getId())));
+      steps.add(new Step("s1", p3, 1, 1, Collections.singletonList(p2.getId())));
+      test.newRecipe("r1", b, steps, "V");
      // test.newRecipe("r2", b, Collections.singletonList(new Step("s1", p3)), "W");
       // build the non-recipe part of the tree
-      test.disco.eval("var P,Q,R,V=true,W=false", "init");
+      test.disco.eval("var P,M,Q,R,V=true,W=false", "init");
       Plan top = newPlan(a);
       top.add(newPlan(p1));
       top.add(newPlan(b));

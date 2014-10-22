@@ -55,8 +55,8 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-	//	@Override
-		/*public void run() {
+		/*@Override
+		public void run() {
 			// keep running as long as agent has something to do and then stop
 		while (getSystem().respond(interaction, false, true, false)) {}
 		}*/
@@ -97,6 +97,8 @@ public class PlanConstructor {
 	//********************************* diso *********************************************************
 	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root) throws IOException{
 		String initState = RecipeTree.Init(conditions, root);
+		System.out.println("\n \n ****** The initial state : ******* \n" +initState+"\n \n" );
+
 		disco.eval(initState, "init");
 		RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
@@ -107,7 +109,6 @@ public class PlanConstructor {
 		// prevent agent asking about toplevel goal
 		top.getGoal().setShould(true);
 		TaskEngine.VERBOSE = true;
-		System.out.println(initState);
 		((Discolog)interaction.getSystem()).setMax(1);
 		interaction.start(false);
 	}
@@ -128,7 +129,7 @@ public class PlanConstructor {
 							"if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
 									+root.getHead().getGrounding().get(1) +" =true; "
 									+ "println('"+ root.getHead().getName() + "');}"
-							+ " else { $this.sucess = false;} "));
+							+ " else {$this.sucess = false;} "));
 				else 
 					//Create breakdown 
 					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
@@ -170,11 +171,13 @@ public class PlanConstructor {
 													 + child.getDecompositions().size());
 					step.add(new Step("s" + child, child));
 					 */
-					 if(i>0)
-						 step.add(new Step("s" +child.getId(), child, 1, 1, 
-								 Collections.singletonList(NodeEntry.getValue().get(i-1).getHead().getName())));
+					 if(i>0){
+						 step.add(new Step(child.getId(), child, 1, 1, 
+								 Collections.singletonList(NodeEntry.getValue().get(i-1).getHead().getName().toString())));
+						 //System.out.println(NodeEntry.getValue().get(i-1).getHead().getName().toString());
+					 }
 					 else 
-						 step.add(new Step("s" + child, child)); 
+						 step.add(new Step(child.getId(), child, 1, 1, null)); 
 					 
 						 
 				
