@@ -1,10 +1,7 @@
 package fr.limsi.discolog;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -308,7 +305,7 @@ public class Discolog extends Agent {
 
 		@Override
 		public int compareTo(Solution sol2) {
-			int sol2Size=((Solution)sol2).getSolutionSize();
+			int sol2Size=sol2.getSolutionSize();
 			/* For Ascending order*/
 			return this.getSolutionSize()-sol2Size;
 		}
