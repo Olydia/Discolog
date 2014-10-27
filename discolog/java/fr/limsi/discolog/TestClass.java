@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +28,7 @@ public class TestClass{
 	public static TaskClass RECOVERY;
 	public static BufferedWriter evaluation;
 	public static RecipeTree partialroot = null;
+	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
 		//PlanConstructor test = new PlanConstructor();
 		ArrayList<Integer> levels = new ArrayList<Integer>();
@@ -37,8 +40,8 @@ public class TestClass{
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 		partialroot = new RecipeTree(A2, copyChild);
-		int 	depth = 2, 
-				length = 2, 
+		int 	depth = 4, 
+				length = 5, 
 				recipe = 1;
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
@@ -57,7 +60,7 @@ public class TestClass{
 			//System.out.println(removalcondition);
 			for(int i =0; i<100; i++){
 				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
-				
+				engine = initSTRIPS();
 				for(RecipeTree leaf: partialroot.getLeaves()){
 					
 					//System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
@@ -68,10 +71,18 @@ public class TestClass{
 					//RecipeTree.test1(partialroot);
 					PlanConstructor test = new PlanConstructor();
 					TaskClass task = test.FromTreeToTask(partialroot);
+					//long lStartTheory = System.currentTimeMillis();
 					test.CreateBenshmark(partialroot, task);
-					//FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
+					/*long lEndTheory = System.currentTimeMillis();
+					long differenceTheory = lEndTheory- lStartTheory;
+					System.out.println("HTN creation:    " + differenceTheory);
+					long lStartDisco = System.currentTimeMillis();
+					*///FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
 					test.LanchTest(task,conditions, partialroot);
-					
+					/*long lEndDisco = System.currentTimeMillis();
+					long differenceDisco = lEndDisco- lStartDisco;
+					System.out.println("Disco Call:    " + differenceDisco);
+*/
 					try {
 						//test.interaction.getDisco().history(System.out);
 						test.interaction.join();
@@ -140,7 +151,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/results2.txt";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/eval.txt";
 		PrintWriter writer;
 		
 		try {
@@ -166,5 +177,27 @@ public class TestClass{
 		return null;
 
 	}
+	
+	public static Prolog initSTRIPS(){
+		Prolog engine = new Prolog();
+		long lStartTheory = new Date().getTime();
+		InputStream planner = Discolog.class
+				.getResourceAsStream("/test-2p/STRIPS_planner.pl");
+		Theory theory;
+		try {
+			theory = new Theory(planner);
+			engine.clearTheory();
+			engine.setTheory(theory);
+			FromTreeToProlog(TestClass.partialroot, engine);
+			long lEndTheory = System.currentTimeMillis();
+			long differenceTheory = lEndTheory- lStartTheory;
+			System.out.println("Init prolog: set the domain knowledge :    " + differenceTheory);
+		} catch (IOException | InvalidTheoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return engine;
+	}
+
 
 }

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
@@ -105,7 +107,7 @@ public class Discolog extends Agent {
 		TestClass.NbCandidates += candidates.size();
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
-			JavaPlan = CallStripsPlanner(EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
+			JavaPlan = CallStripsPlanner(TestClass.engine, EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
 			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
 			}
@@ -209,36 +211,43 @@ public class Discolog extends Agent {
 		return Output;
 
 	}
-
-	public static ArrayList<String> CallStripsPlanner(List<String> Initial_state,
+	
+	public static ArrayList<String> CallStripsPlanner(Prolog engine ,List<String> Initial_state,
 			String Goal) {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
-		Prolog engine = null;
-		engine = new Prolog();
+		
 		try {
-			InputStream planner = Discolog.class
-					.getResourceAsStream("/test-2p/STRIPS_planner.pl");
-			Theory theory = new Theory(planner);
-			engine.clearTheory();
-			engine.setTheory(theory);
+			//long lStartTheory = new Date().getTime();
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
+		/*	long lEndTheory = System.currentTimeMillis();
+			long differenceTheory = lEndTheory- lStartTheory;
+			System.out.println("Init State :    " + differenceTheory);*/
 			//System.out.println(Initial_state.toString());
 			// The request for STRIPS.
+			//long lStartProlog = new Date().getTime();
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
-			
+			/*long lEndProlog = new Date().getTime();
+			long differenceProlog = lEndProlog - lStartProlog;
+			System.out.println("Prolog execution :    " + differenceProlog);
+*/
 			// Results
 			if (!info.isSuccess()){
 				//System.out.println("no plan found for the condition.  "+ Goal);
 				return null;
 			}
 			else {// main case
+				//long lStartOutput = new Date().getTime();
 				Plan = info.getVarValue("X");
-				JavaPlan = getPlannerOutput(Plan);			
+				JavaPlan = getPlannerOutput(Plan);	
+			/*	long lEndOutput = new Date().getTime();
+				long differenceOutput = lEndOutput - lStartOutput;
+				System.out.println("Prolog output :    " + differenceOutput);*/
+
 				return JavaPlan;
 			}
-		} catch (InvalidTheoryException | IOException | NoSolutionException ex) {
+		} catch (NoSolutionException ex) {
 			throw new RuntimeException(ex);
 		}
 
@@ -249,12 +258,7 @@ public class Discolog extends Agent {
 			Prolog engine) {
 		// Add the init state and the planner call for the goal
 		//Theory init;
-		try {
-			TestClass.FromTreeToProlog(TestClass.partialroot, engine);
-		} catch (InvalidTheoryException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		try {
 			for(String init : Initial_state){
 				//System.out.println(init);
