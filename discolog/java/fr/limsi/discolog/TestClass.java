@@ -151,7 +151,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/eval.txt";
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/test_4_5_25.txt";
 		PrintWriter writer;
 		
 		try {

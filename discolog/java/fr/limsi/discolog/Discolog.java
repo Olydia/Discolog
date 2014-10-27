@@ -238,12 +238,12 @@ public class Discolog extends Agent {
 				return null;
 			}
 			else {// main case
-				//long lStartOutput = new Date().getTime();
+//				long lStartOutput = new Date().getTime();
 				Plan = info.getVarValue("X");
-				JavaPlan = getPlannerOutput(Plan);	
-			/*	long lEndOutput = new Date().getTime();
-				long differenceOutput = lEndOutput - lStartOutput;
-				System.out.println("Prolog output :    " + differenceOutput);*/
+				JavaPlan = getPlannerOutput(Plan);		
+//				long lEndOutput = new Date().getTime();
+//				long differenceOutput = lEndOutput - lStartOutput;
+//				System.out.println("Prolog output :    " + differenceOutput);
 
 				return JavaPlan;
 			}
