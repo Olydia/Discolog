@@ -31,8 +31,8 @@ public class TestClass{
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 25; // 50, 75, 100
-		int debut = 3;
-		int fin = 100;	
+		int debut = 1;
+		int fin = 1;	
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i);
 		}
@@ -42,7 +42,10 @@ public class TestClass{
 		//PlanConstructor test = new PlanConstructor();
 		ArrayList<Integer> levels = new ArrayList<Integer>();
 		//BufferedWriter output = null;
-		String adresse = "test_4_5_"+level+"_"+numero+".txt";
+		int 	depth = 4, 
+				length = 4, 
+				recipe = 1;
+		String adresse = "test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse);
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -50,67 +53,49 @@ public class TestClass{
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 		partialroot = new RecipeTree(A2, copyChild);
-		int 	depth = 4, 
-				length = 5, 
-				recipe = 1;
+
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
-		levels.add(25);
-		//		levels.add(50);
-		//		levels.add(75);
-		//		levels.add(100);
-
 		// Remove knowledge from  the HTN 
-		System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
 		RecipeTree.CloneTree(root,  partialroot);
 		//RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
 		//System.out.println(removalcondition);
-			RecipeTree.PartialTree(partialroot, 100-level);
-			engine = initSTRIPS();
-			int z=0;
-			for(RecipeTree leaf: partialroot.getLeaves()){
-				System.out.println(level + " - " + numero + " - break #" + z++);
-				//System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
-				//RecipeTree leaf =  partialroot.getLeaves().get(0);
-				//	RecipeTree.createBreakdown(leaf);
-				System.out.println("-----------------------   The current HTN definition :  ------------------------- ");
-				//RecipeTree.printTree(partialroot);
-				PlanConstructor test = new PlanConstructor();
-				TaskClass task = test.FromTreeToTask(partialroot);
-				//long lStartTheory = System.currentTimeMillis();
-				test.CreateBenshmark(partialroot, task);
-				/*long lEndTheory = System.currentTimeMillis();
-					long differenceTheory = lEndTheory- lStartTheory;
-					System.out.println("HTN creation:    " + differenceTheory);
-					long lStartDisco = System.currentTimeMillis();
-				 *///FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
-				test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
-				/*long lEndDisco = System.currentTimeMillis();
-					long differenceDisco = lEndDisco- lStartDisco;
-					System.out.println("Disco Call:    " + differenceDisco);
-				 */
-				try {
-					//test.interaction.getDisco().history(System.out);
-					test.interaction.join();
-					//System.out.println("end of execution");
-					//test.interaction.getDisco().history(System.out);
+		RecipeTree.PartialTree(partialroot, 100-level);
+		engine = initSTRIPS();
+		int z=0;
+		for(RecipeTree leaf: partialroot.getLeaves()){
+			System.out.println(level + " - " + numero + " - break #" + z++);
+			//RecipeTree.printTree(partialroot);
+			PlanConstructor test = new PlanConstructor();
+			TaskClass task = test.FromTreeToTask(partialroot);
+			//long lStartTheory = System.currentTimeMillis();
+			test.CreateBenshmark(partialroot, task);
+//			long lEndTheory = System.currentTimeMillis();
+//			long differenceTheory = lEndTheory- lStartTheory;
+//			System.out.println("HTN creation:    " + differenceTheory);
+			//long lStartDisco = System.currentTimeMillis();
+			test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
+//			long lEndDisco = System.currentTimeMillis();
+//			long differenceDisco = lEndDisco- lStartDisco;
+//			System.out.println("Disco Call:    " + differenceDisco);
+
+			try {
+				test.interaction.join();
 
 
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//	RecipeTree.removeBreakdown(leaf);
-
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
-			evaluation.flush();
-			evaluation.newLine();
-			evaluation.flush();
-			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
-		
+		}
+		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
+		evaluation.flush();
+		evaluation.newLine();
+		evaluation.flush();
+		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
+
 
 
 
@@ -188,7 +173,7 @@ public class TestClass{
 
 	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
-		long lStartTheory = new Date().getTime();
+		//long lStartTheory = new Date().getTime();
 		InputStream planner = Discolog.class
 				.getResourceAsStream("/test-2p/STRIPS_planner.pl");
 		Theory theory;
@@ -197,9 +182,9 @@ public class TestClass{
 			engine.clearTheory();
 			engine.setTheory(theory);
 			FromTreeToProlog(TestClass.partialroot, engine);
-			long lEndTheory = System.currentTimeMillis();
-			long differenceTheory = lEndTheory- lStartTheory;
-			System.out.println("Init prolog: set the domain knowledge :    " + differenceTheory);
+			//			long lEndTheory = System.currentTimeMillis();
+			//			long differenceTheory = lEndTheory- lStartTheory;
+			//			System.out.println("Init prolog: set the domain knowledge :    " + differenceTheory);
 		} catch (IOException | InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
