@@ -18,13 +18,13 @@ public class RecipeTree {
 	private Map<String, ArrayList<RecipeTree>> children;
 	private RecipeTree Parent;
 	public RecipeTree(){
-		
+
 	}
 	public RecipeTree(Node head, HashMap<String, ArrayList<RecipeTree>> children) {
 		super();
 		this.children = children;
 		this.head = head;
-		
+
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class RecipeTree {
 		return "tree [head=" + head + "]";
 	}
 
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		Node A = new Node("a", "P1", "P2");
 		Node A2 = new Node("a", "P1", "P2");
 
@@ -40,9 +40,9 @@ public class RecipeTree {
 		HashMap<String, ArrayList<RecipeTree>> CopyChild = new HashMap<String, ArrayList<RecipeTree>>();
 
 		RecipeTree root = new RecipeTree(A, child);
-		int depth = 2;
-		int length = 2;
-		int recipe = 1;
+		int depth = 3;
+		int length = 5;
+		int recipe = 2;
 		createTree(root, depth, length, recipe);
 		defineKnowledge(root);
 		System.out.println(root.toString());
@@ -50,14 +50,13 @@ public class RecipeTree {
 		System.out.println("****************************  clonage ****************************************");
 		RecipeTree copy = new RecipeTree(A2, CopyChild);
 		CloneTree(root,  copy);
-		removalcondition = levelOfConditions(depth, length, recipe, 75);
 		System.out.println(removalcondition);
 		//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
-		PartialTree(copy, removalcondition);
-		test1(root);
-	
+		PartialTree(copy, 75);
+		printTree(copy);
+		//test1(root);
+
 	}
-	*/
 	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
 		//RecipeTree copy = new RecipeTree(A2, CopyChild);
 		RecipeTree.CloneTree(root,  patialtree);
@@ -67,8 +66,8 @@ public class RecipeTree {
 		RecipeTree.createTree(root, depth, length, recipe);
 		RecipeTree.defineKnowledge(root);
 	}
-	
-	
+
+
 	public Node getHead() {
 		return head;
 	}
@@ -128,8 +127,8 @@ public class RecipeTree {
 			}
 		}
 	}
-	
-	
+
+
 	public static void CloneTree(RecipeTree root, RecipeTree clone) {
 		if (!root.isLeaf()) {
 			// System.out.println(root.toString());
@@ -142,29 +141,52 @@ public class RecipeTree {
 					newTreeElem.setParent(clone);
 					clone.getChildren().get(NodeEntry.getKey()).add(newTreeElem);	
 					CloneTree(i, newTreeElem);
-					}
+				}
 			}
 		}
 	}
-	
+
 	public static List<String> removeRecipesConditions(List<String> recipeCondition, int level){
 		int level1=Math.round((recipeCondition.size()*(100-level))/100);
 		for(int i=0;i<level1 && recipeCondition.size()>0;i++){
-			  java.util.Collections.shuffle(recipeCondition);
-			  recipeCondition.remove(0);
+			java.util.Collections.shuffle(recipeCondition);
+			recipeCondition.remove(0);
 		}
 		return recipeCondition;
 	}
-	
-	public static void PartialTree(RecipeTree root, int removalcondition) {
-		int removal = removalcondition;
-		 while (removal > 0) 
-			removal = RemoveConditions(root);
+	public static void PartialTree(RecipeTree root, int level) {
+		Random rand = new Random();
+
+		if (!root.isLeaf()) {
+			// System.out.println(root.toString());
+			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root.getChildren().entrySet()) {
+				for (RecipeTree currentNode : NodeEntry.getValue()) {
+					int precondition = rand.nextInt(100);
+					if(precondition <level){
+						currentNode.head.setPreconditions(null);
+					}
+
+					int postcondition = rand.nextInt(100);
+					if(postcondition <level){
+						currentNode.head.setPostconditions(null);
+					}
+
+					PartialTree(currentNode, level);
+				}
+			}
+
+		}
 	}
-	
+
+	//	public static void PartialTree(RecipeTree root, int removalcondition) {
+	//		int removal = removalcondition;
+	//		 while (removal > 0) 
+	//			removal = RemoveConditions(root);
+	//	}
+	//	
 	public static int RemoveConditions(RecipeTree root){
 		Random rand = new Random();
-		 
+
 		if (!root.isLeaf()) {
 			// System.out.println(root.toString());
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root.getChildren().entrySet()) {
@@ -176,16 +198,16 @@ public class RecipeTree {
 						currentNode.head.setPreconditions(null);
 						removalcondition --;
 					}
-					 if (removalcondition == 0)
-							return 0;
+					if (removalcondition == 0)
+						return 0;
 					int postcondition = rand.nextInt(2);
-					 if(postcondition == 1 && currentNode.head.getPostconditions()!=null){
+					if(postcondition == 1 && currentNode.head.getPostconditions()!=null){
 						currentNode.head.setPostconditions(null);
 						removalcondition --;	
 					}
-					
+
 					// System.out.println(currentNode.toString());
-					 RemoveConditions(currentNode);
+					RemoveConditions(currentNode);
 				}
 
 			}
@@ -226,7 +248,7 @@ public class RecipeTree {
 					if (NodeEntry.getValue().indexOf(i) == 0) {
 						i.getHead().setPreconditions(
 								root.getHead().getPreconditions());
-	
+
 						propagatePrecondition(i);
 					}
 				}
@@ -239,7 +261,7 @@ public class RecipeTree {
 			return true;	
 		return false;
 	}
-	
+
 	public static void propagatePostcondition(RecipeTree root) {
 		if (!root.isLeaf()) {
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
@@ -284,7 +306,7 @@ public class RecipeTree {
 						}
 					}
 					DefineCondition(NodeEntry.getValue().get(i));
-					
+
 				}
 			}
 		}
@@ -292,18 +314,18 @@ public class RecipeTree {
 	public static int levelOfConditions(int depth, int length, int recipe, int percentageKnowledge){
 		int knowledge=0;
 		percentageKnowledge = 100 - percentageKnowledge;
-		
+
 		for(int i= 0;i<=depth; i++)
-			
+
 			knowledge+= Math.pow(length*recipe, i);
 		knowledge = knowledge*2;
 		//for(int i= 0;i<depth; i++)
 		//	knowledge+= (recipe*Math.pow(length*recipe, i));
 		knowledge = (knowledge*percentageKnowledge)/100;
 		return knowledge;
-		
+
 	}
-	
+
 	public static List<String> LevelOfKnowledge(RecipeTree root, int level) {
 		List<String> conditions =new LinkedList<String>();
 		ArrayList<String>  cond = new ArrayList<String>();
@@ -311,70 +333,70 @@ public class RecipeTree {
 		conditions=root.getKnowledge(root, conditions);
 		int level1=Math.round((conditions.size()*(100-level))/100);
 		for(int i=0;i<level1 && conditions.size()>0;i++){
-			  java.util.Collections.shuffle(conditions);
-			  if(!cond.contains(conditions.get(0)))
-				  conditions.remove(0);
+			java.util.Collections.shuffle(conditions);
+			if(!cond.contains(conditions.get(0)))
+				conditions.remove(0);
 		}
 		return conditions;
 	}
 
 	public List<String> getKnowledge(RecipeTree root,List<String> conditions) {
 		if (!root.isLeaf()) {
-			
+
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				
+
 				for (RecipeTree i : NodeEntry.getValue()) {
-					
+
 					if(!conditions.contains(i.getHead().getPreconditions()))
 						conditions.add(i.getHead().getPreconditions());
-					
+
 					if(!conditions.contains(i.getHead().getPostconditions()))
 						conditions.add(i.getHead().getPostconditions());
-					
+
 					getKnowledge(i,conditions);
 				}
 			}
 		}
 		return conditions;
 	}
-	
+
 	public static void DefineLevelOfKnowledge(RecipeTree root,List<String> existingCond) {
 
 		if(!existingCond.contains(root.getHead().getPreconditions()))
 			root.getHead().setPreconditions(null);
-		
+
 		if(!existingCond.contains(root.getHead().getPostconditions()))
 			root.getHead().setPostconditions(null);
-		
+
 		if (!root.isLeaf()) {
-			
+
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				
+
 				for (RecipeTree i : NodeEntry.getValue()) {
-					
+
 					DefineLevelOfKnowledge(i,existingCond);
 				}
 			}
 		}
 	}
-	
+
 	public static void defineKnowledge(RecipeTree root) {
-		
+
 		propagatePrecondition(root);
 		propagatePostcondition(root);
 		DefineCondition(root);
 		generateGrounding(root);
-		
+
 	}
-	
+
 	public static void generateGrounding( RecipeTree root){
-		
+
 		ArrayList<RecipeTree> leaves = root.getLeaves();
-		
+
 		for(RecipeTree leaf: leaves){
-			
+
 			leaf.getHead().defineGrounding();
 		}
 	}
@@ -390,18 +412,18 @@ public class RecipeTree {
 		return RecipeConditions;
 	}*/
 
-	public static String Init(List<String> coditions, RecipeTree root){
+	public static String Init(List<String> coditions, RecipeTree root, String broken){
 		Random rand = new Random();
 		String init = null;
 		int random = rand.nextInt(2);
 		if(coditions.get(0) =="P1")
-			 init = "var " + coditions.get(0) +" =true";
+			init = "var " + coditions.get(0) +" =true";
 		else
-		 init =  random ==1?  "var "+coditions.get(0)+"" : "var "+coditions.get(0)+"=false" ;
+			init =  random ==1?  "var "+coditions.get(0)+"" : "var "+coditions.get(0)+"=false" ;
 		for(int i=1; i<coditions.size() ; i++){
-			if(coditions.get(i) =="P1" || coditions.get(i) =="P4")
+			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
-			
+
 			else{
 				int nombreAleatoire = rand.nextInt(2);
 				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
@@ -409,24 +431,26 @@ public class RecipeTree {
 		}
 		for(String recipe : RecipeTree.RecipeCondition)
 			init += ", C" + recipe +" =true";
-		
+
 		for(RecipeTree leaf : root.getLeaves()){
-			String name = leaf.getHead().getName(); 
-			init += ", "+name + "=false";
+			if(leaf.getHead().getName() == broken)
+				init += ", "+leaf.getHead().getName() + "=false";	
+			else 
+				init += ", "+leaf.getHead().getName() + "=true";
 			//init += ", exec"+name + "=false";
 		}
-	
+
 		return init;
 	}
-	public static void createBreakdown(RecipeTree node){
-		node.getHead().getGrounding().set(2, "false");
-	}
-	
+//	public static void createBreakdown(RecipeTree node){
+//		node.getHead().getGrounding().set(2, "false");
+//	}
+//
+//
+//	public static void removeBreakdown(RecipeTree node){
+//		node.getHead().getGrounding().set(2, "true");
+//	}
 
-	public static void removeBreakdown(RecipeTree node){
-		node.getHead().getGrounding().set(2, "true");
-	}
-	
 	public static void test1 (RecipeTree root) {
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
@@ -440,35 +464,35 @@ public class RecipeTree {
 			}
 		}
 	}
-	
+
 	public static String test(RecipeTree root){
 		String returne= null;
 		if (root.isLeaf()){
 			//if (root.getHead().getPostconditions() != null) {
-			 returne = "	\n "+root.getHead().getName()+"  Grounding Script : \n     ";
-			
+			returne = "	\n "+root.getHead().getName()+"  Grounding Script : \n     ";
+
 			if(root.getHead().getGrounding().get(2) == "true"){
-				 returne += "if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
-							+root.getHead().getGrounding().get(1) +" =true; "
-							+ "println('"+ root.getHead().getName() + "');}"
-					+ " else {$this.sucess = false;} \n";
-		}else {
+				returne += "if ("+root.getHead().getGrounding().get(0)+ "!=false) {"
+						+root.getHead().getGrounding().get(1) +" =true; "
+						+ "println('"+ root.getHead().getName() + "');}"
+						+ " else {$this.sucess = false;} \n";
+			}else {
 				//Create breakdown 
 
 				// preconditions are not false
-				 returne += "if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-							"$this.sucess = false;} "+
+				returne += "if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+						"$this.sucess = false;} "+
 						"else if ("+root.getHead().getName()+" == false) {"+
-							// psotconditions put to false and change the flag to true
-							root.getHead().getGrounding().get(1).toString()+ "=false; println('"
-							+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
-							+root.getHead().getName()+ "=true;}"
-							// else if not the first run put the postcond to true
-							+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
-							+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}\n";
+						// psotconditions put to false and change the flag to true
+						root.getHead().getGrounding().get(1).toString()+ "=false; println('"
+						+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
+						+root.getHead().getName()+ "=true;}"
+						// else if not the first run put the postcond to true
+						+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
+						+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}\n";
 			}
 		}
-		
+
 		return returne;
 	}
 }

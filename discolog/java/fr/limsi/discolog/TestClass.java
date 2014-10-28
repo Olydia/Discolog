@@ -33,22 +33,23 @@ public class TestClass{
 		//PlanConstructor test = new PlanConstructor();
 		ArrayList<Integer> levels = new ArrayList<Integer>();
 		//BufferedWriter output = null;
-		evaluation = saveSolution();
+		String adresse = "test_4_5_75_100.txt";
+		evaluation = saveSolution(adresse);
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 		partialroot = new RecipeTree(A2, copyChild);
-		int 	depth = 4, 
-				length = 5, 
+		int 	depth = 2, 
+				length = 2, 
 				recipe = 1;
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
-		levels.add(25);
-		levels.add(50);
+//		levels.add(25);
+//		levels.add(50);
 		levels.add(75);
 		levels.add(100);
 
@@ -56,19 +57,18 @@ public class TestClass{
 		for(int level:levels){
 			System.out.println(" \n****************  Test in HTN with knwoledge definition  " +level+ "  ****************************** \n " );
 			RecipeTree.CloneTree(root,  partialroot);
-			RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
+			//RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
 			//System.out.println(removalcondition);
 			for(int i =0; i<100; i++){
-				RecipeTree.PartialTree(partialroot, RecipeTree.removalcondition);
+				RecipeTree.PartialTree(partialroot, 100-level);
 				engine = initSTRIPS();
 				for(RecipeTree leaf: partialroot.getLeaves()){
 					
 					//System.out.println(" \n -------------------------------------- Test primitive "/*+leaf.getHead().getName()*/+"    --------------------------- \n " );
 					//RecipeTree leaf =  partialroot.getLeaves().get(0);
-					RecipeTree.createBreakdown(leaf);
+				//	RecipeTree.createBreakdown(leaf);
 					System.out.println("-----------------------   The current HTN definition :  ------------------------- ");
 					//RecipeTree.printTree(partialroot);
-					//RecipeTree.test1(partialroot);
 					PlanConstructor test = new PlanConstructor();
 					TaskClass task = test.FromTreeToTask(partialroot);
 					//long lStartTheory = System.currentTimeMillis();
@@ -78,7 +78,7 @@ public class TestClass{
 					System.out.println("HTN creation:    " + differenceTheory);
 					long lStartDisco = System.currentTimeMillis();
 					*///FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/prolog/test-2p/Domain_knowledge.pl");
-					test.LanchTest(task,conditions, partialroot);
+					test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
 					/*long lEndDisco = System.currentTimeMillis();
 					long differenceDisco = lEndDisco- lStartDisco;
 					System.out.println("Disco Call:    " + differenceDisco);
@@ -94,7 +94,7 @@ public class TestClass{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					RecipeTree.removeBreakdown(leaf);
+				//	RecipeTree.removeBreakdown(leaf);
 
 				}
 				evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
@@ -150,8 +150,8 @@ public class TestClass{
 		}
 	}
 
-	static BufferedWriter saveSolution(){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/test_4_5_25.txt";
+	static BufferedWriter saveSolution(String adresse){
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/"+adresse;
 		PrintWriter writer;
 		
 		try {

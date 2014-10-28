@@ -33,7 +33,7 @@ public class Node {
 		this.Grounding = new ArrayList<String>();
 		this.Grounding.add(this.Preconditions);
 		this.Grounding.add(this.Postconditions);
-		this.Grounding.add("true");
+		//this.Grounding.add("true");
 	
 	}
 	

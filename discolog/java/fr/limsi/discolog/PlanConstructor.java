@@ -95,8 +95,9 @@ public class PlanConstructor {
 		return new Plan(task.newInstance());
 	}
 	//********************************* diso *********************************************************
-	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root) throws IOException{
-		String initState = RecipeTree.Init(conditions, root);
+	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root, String broken) throws IOException{
+		String initState = RecipeTree.Init(conditions, root, broken);
+		System.out.println(initState);
 		System.out.println("\n \n ****** The initial state : ******* \n" +initState+"\n \n" );
 
 		disco.eval(initState, "init");
@@ -123,31 +124,30 @@ public class PlanConstructor {
 
 		if (root.isLeaf()){
 			//if (root.getHead().getPostconditions() != null) {
-					if(root.getHead().getGrounding().get(2) == "true")
-					return ( newTask(root.getHead().getName(),true, 
-							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
-							"if ("+root.getHead().getGrounding().get(0)+ "==false) "
-									+ "{$this.success = false;} "
-									
-							+ " else {"+root.getHead().getGrounding().get(1) +" =true; "
-									+ "println('"+ root.getHead().getName() + "');}"));
-				else 
-					//Create breakdown 
-					return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
-							
-							// preconditions are false
-							"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-									"$this.success = false;} "+
-								"else if ("+root.getHead().getName()+" == false) {"+
-									// psotconditions put to false and change the flag to true
-									root.getHead().getGrounding().get(1).toString()+ "=false; println('"
-									+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
-									+root.getHead().getName()+ "=true;}"
-									// else if not the first run put the postcond to true
-									+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
-									+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}"));
-		
-			
+			//					if(root.getHead().getGrounding().get(2) == "true")
+			//					return ( newTask(root.getHead().getName(),true, 
+			//							root.getHead().getPreconditions(), root.getHead().getPostconditions(),
+			//							"if ("+root.getHead().getGrounding().get(0)+ "==false) "
+			//									+ "{$this.success = false;} "
+			//									
+			//							+ " else {"+root.getHead().getGrounding().get(1) +" =true; "
+			//									+ "println('"+ root.getHead().getName() + "');}"));
+			//				else 
+			//Create breakdown 
+			return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
+					// preconditions are false
+					"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+					"$this.success = false;} "+
+					"else if ("+root.getHead().getName()+" == false) {"+
+					// psotconditions put to false and change the flag to true
+					root.getHead().getGrounding().get(1).toString()+ "=false; println('"
+					+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
+					+root.getHead().getName()+ "=true;}"
+					// else if not the first run put the postcond to true
+					+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
+					+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}"));
+
+
 		}
 		else
 			return (newTask(root.getHead().getName(), false, root.getHead()
@@ -166,12 +166,11 @@ public class PlanConstructor {
 					RecipeTree node = NodeEntry.getValue().get(i);
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
-					/*System.out.print(child.getId() + "[");
+					System.out.print(child.getId() + "[");
 					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
 					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
 													 + child.getDecompositions().size());
-					step.add(new Step("s" + child, child));
-					 */
+					 
 					 if(i>0){
 						 step.add(new Step(child.getId(), child, 1, 1, 
 								 Collections.singletonList(NodeEntry.getValue().get(i-1).getHead().getName().toString())));
