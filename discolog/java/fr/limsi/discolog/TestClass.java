@@ -15,7 +15,9 @@ import java.util.List;
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
+import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.TaskEngine;
 
 public class TestClass{
 	static List<String> recipecondition = new LinkedList<String>();
@@ -32,7 +34,7 @@ public class TestClass{
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 25; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
+		int fin = 10;	
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i);
 		}
@@ -40,7 +42,6 @@ public class TestClass{
 
 	public static void run(int level, int numero) throws IOException {
 		//PlanConstructor test = new PlanConstructor();
-		ArrayList<Integer> levels = new ArrayList<Integer>();
 		//BufferedWriter output = null;
 		int 	depth = 4, 
 				length = 4, 
@@ -65,42 +66,53 @@ public class TestClass{
 		RecipeTree.PartialTree(partialroot, 100-level);
 		engine = initSTRIPS();
 		int z=0;
-		for(RecipeTree leaf: partialroot.getLeaves()){
+		PlanConstructor test = new PlanConstructor();
+		TaskClass task = test.FromTreeToTask(partialroot);
+		//long lStartTheory = System.currentTimeMillis();
+		test.CreateBenshmark(partialroot, task);
+//		RecipeTree leaf= partialroot.getLeaves().get(0);
+//		//test.childTest(task, conditions, partialroot, leaf);
+//		test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
+//		z++;
+		test.interaction.start();
+		for(int i=0; i<partialroot.getLeaves().size(); i++){
+			RecipeTree leaf= partialroot.getLeaves().get(i);
 			System.out.println(level + " - " + numero + " - break #" + z++);
+			//
+			test.childTest(task, conditions, partialroot, leaf);
 			//RecipeTree.printTree(partialroot);
-			PlanConstructor test = new PlanConstructor();
-			TaskClass task = test.FromTreeToTask(partialroot);
-			//long lStartTheory = System.currentTimeMillis();
-			test.CreateBenshmark(partialroot, task);
+			
 //			long lEndTheory = System.currentTimeMillis();
 //			long differenceTheory = lEndTheory- lStartTheory;
 //			System.out.println("HTN creation:    " + differenceTheory);
 			//long lStartDisco = System.currentTimeMillis();
-			test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
+//			test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
 //			long lEndDisco = System.currentTimeMillis();
 //			long differenceDisco = lEndDisco- lStartDisco;
 //			System.out.println("Disco Call:    " + differenceDisco);
-
-			try {
-				test.interaction.join();
-
-
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+				try {
+					test.disco.wait();
+					System.out.println("waiting");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
+//			test.interaction.start(false);
+//			
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
 		evaluation.newLine();
 		evaluation.flush();
 		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
-
-
-
+		
+		test.interaction.interrupt();
 
 	}
-
+	
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
 		for(RecipeTree leaf: root.getLeaves()){
 
