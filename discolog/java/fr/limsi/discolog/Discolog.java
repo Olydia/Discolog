@@ -39,7 +39,7 @@ public class Discolog extends Agent {
 	private boolean recover(Interaction interaction) {
 		//System.out.println(" **************************   Start a recover procedure		*******************");
 		TestClass.NbBreakdown ++;
-		interaction.getDisco().history(System.out);
+		//interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());
@@ -96,7 +96,6 @@ public class Discolog extends Agent {
 		return false;
 	}
 
-	//***************************************************************************************************************************************
 	private Solution invokePlanner(List <Candidate> conditions) {
 		// this should invoke Prolog planner
 		ArrayList<String> JavaPlan = new ArrayList<String>();
@@ -104,7 +103,15 @@ public class Discolog extends Agent {
 		TestClass.NbCandidates += candidates.size();
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
-			JavaPlan = CallStripsPlanner(TestClass.engine, EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
+			Prolog localtheory = new Prolog();
+			try {
+				localtheory.setTheory(TestClass.engine.getTheory());
+			} catch (InvalidTheoryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d),candidate.condition.getScript());
+			localtheory.clearTheory();
 			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
 			}
@@ -265,6 +272,7 @@ public class Discolog extends Agent {
 					+ Goal.toLowerCase() + "],30,Plan).");
 			//engine.addTheory(init);
 			engine.addTheory(PlannerCall);
+			//System.out.println(engine.getTheory());
 		} catch (InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -15,9 +15,7 @@ import java.util.List;
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
-import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
-import edu.wpi.cetask.TaskEngine;
 
 public class TestClass{
 	static List<String> recipecondition = new LinkedList<String>();
