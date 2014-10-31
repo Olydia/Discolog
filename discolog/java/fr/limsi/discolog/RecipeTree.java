@@ -59,6 +59,8 @@ public class RecipeTree {
 	}
 	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
 		//RecipeTree copy = new RecipeTree(A2, CopyChild);
+		//cmpt =0; 
+		//cmp =3; 
 		RecipeTree.CloneTree(root,  patialtree);
 		RecipeTree.PartialTree(patialtree, levelOfKnowledge);
 	}

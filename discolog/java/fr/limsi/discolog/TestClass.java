@@ -34,62 +34,44 @@ public class TestClass{
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 25; // 50, 75, 100
 		int debut = 1;
-		int fin = 10;	
-		for(int i=debut;i<=fin;i++) {
-			run(LEVEL,i);
-		}
-	}
-
-	public static void run(int level, int numero) throws IOException {
-		//PlanConstructor test = new PlanConstructor();
-		//BufferedWriter output = null;
-		int 	depth = 4, 
-				length = 4, 
-				recipe = 1;
-		String adresse = "test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
-		evaluation = saveSolution(adresse);
+		int fin = 2;	
+		int 	depth = 2, 
+				taskBranching = 2, 
+				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
 				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
 		RecipeTree root = new RecipeTree(A, child);
 		partialroot = new RecipeTree(A2, copyChild);
-
 		// Define the complete domain knowledge 
-		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
+		RecipeTree.DefineCompleteTree(root, depth, taskBranching, recipeBranching);
+
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
+		for(int i=debut;i<=fin;i++) {
+			run(LEVEL,i, root, depth, taskBranching);
+		}
+	}
+
+	public static void run(int level, int numero, RecipeTree root, int depth, int length) throws IOException {
+		String adresse = "test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
+		evaluation = saveSolution(adresse);
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
-		//RecipeTree.removalcondition = RecipeTree.levelOfConditions(depth, length, recipe, level);
-		//System.out.println(removalcondition);
 		RecipeTree.PartialTree(partialroot, 100-level);
+		RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 		int z=0;
 		PlanConstructor test = new PlanConstructor();
 		TaskClass task = test.FromTreeToTask(partialroot);
 		//long lStartTheory = System.currentTimeMillis();
 		test.CreateBenshmark(partialroot, task);
-//		RecipeTree leaf= partialroot.getLeaves().get(0);
-//		//test.childTest(task, conditions, partialroot, leaf);
-//		test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
-//		z++;
 		test.interaction.start();
 		for(int i=0; i<partialroot.getLeaves().size(); i++){
 			RecipeTree leaf= partialroot.getLeaves().get(i);
 			System.out.println(level + " - " + numero + " - break #" + z++);
-			//
-			test.childTest(task, conditions, partialroot, leaf);
-			//RecipeTree.printTree(partialroot);
-			
-//			long lEndTheory = System.currentTimeMillis();
-//			long differenceTheory = lEndTheory- lStartTheory;
-//			System.out.println("HTN creation:    " + differenceTheory);
-			//long lStartDisco = System.currentTimeMillis();
-//			test.LanchTest(task,conditions, partialroot,leaf.getHead().getName());
-//			long lEndDisco = System.currentTimeMillis();
-//			long differenceDisco = lEndDisco- lStartDisco;
-//			System.out.println("Disco Call:    " + differenceDisco);
+			test.childTest(task, conditions, partialroot, leaf);			
 			while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
 				try {
 					test.disco.wait();
@@ -98,10 +80,7 @@ public class TestClass{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			
-//			test.interaction.start(false);
-//			
+			}	
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
@@ -182,6 +161,16 @@ public class TestClass{
 		return null;
 
 	}
+	public long NumberOfPossibleTree(int depth, int taskBranching, int recipeBranching, int level){
+		long mean = 0;
+		return mean;
+	}
+	 public static int  fact(int n) {
+	        if(n == 1){
+	            return n;
+	        }
+	        return n * (fact(n-1)); // what happens if you switch the order?
+	    }
 
 	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
@@ -194,9 +183,7 @@ public class TestClass{
 			engine.clearTheory();
 			engine.setTheory(theory);
 			FromTreeToProlog(TestClass.partialroot, engine);
-			//			long lEndTheory = System.currentTimeMillis();
-			//			long differenceTheory = lEndTheory- lStartTheory;
-			//			System.out.println("Init prolog: set the domain knowledge :    " + differenceTheory);
+			
 		} catch (IOException | InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
