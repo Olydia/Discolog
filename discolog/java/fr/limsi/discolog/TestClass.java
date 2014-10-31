@@ -32,9 +32,9 @@ public class TestClass{
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 75; // 50, 75, 100
 		int debut = 1;
-		int fin = 100;	
-		int 	depth = 4, 
-				taskBranching = 4, 
+		int fin = 1;	
+		int 	depth = 1, 
+				taskBranching = 2, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());

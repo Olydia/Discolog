@@ -55,11 +55,11 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-//				@Override
-//				public void run() {
-//					// keep running as long as agent has something to do and then stop
-//				while (!Thread.currentThread().isInterrupted()) {}
-//				}
+				@Override
+				public void run() {
+					// keep running as long as agent has something to do and then stop
+				while (!Thread.currentThread().isInterrupted()) {}
+				}
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -144,12 +144,12 @@ public class PlanConstructor {
 					"$this.success = false;} "+
 					"else if ("+root.getHead().getName()+" == false) {"+
 					// psotconditions put to false and change the flag to true
-					root.getHead().getGrounding().get(1).toString()+ "=false;"/*+" println('"
-					+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false ');"*/ 
+					root.getHead().getGrounding().get(1).toString()+ "=false; println('"
+					+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "
 					+root.getHead().getName()+ "=true;}"
 					// else if not the first run put the postcond to true
-					+ "else { "+root.getHead().getGrounding().get(1)+ "=true;"+/*" println('"
-					+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');"+*/"}"));
+					+ "else { "+root.getHead().getGrounding().get(1)+ "=true; println('"
+					+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');}"));
 
 		}
 		else
