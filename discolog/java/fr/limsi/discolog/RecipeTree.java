@@ -32,31 +32,31 @@ public class RecipeTree {
 		return "tree [head=" + head + "]";
 	}
 
-	public static void main(String[] args) {
-		Node A = new Node("a", "P1", "P2");
-		Node A2 = new Node("a", "P1", "P2");
-
-		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
-		HashMap<String, ArrayList<RecipeTree>> CopyChild = new HashMap<String, ArrayList<RecipeTree>>();
-
-		RecipeTree root = new RecipeTree(A, child);
-		int depth = 3;
-		int length = 5;
-		int recipe = 2;
-		createTree(root, depth, length, recipe);
-		defineKnowledge(root);
-		System.out.println(root.toString());
-		//printTree(root);
-		System.out.println("****************************  clonage ****************************************");
-		RecipeTree copy = new RecipeTree(A2, CopyChild);
-		CloneTree(root,  copy);
-		System.out.println(removalcondition);
-		//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
-		PartialTree(copy, 75);
-		printTree(copy);
-		//test1(root);
-
-	}
+//	public static void main(String[] args) {
+//		Node A = new Node("a", "P1", "P2");
+//		Node A2 = new Node("a", "P1", "P2");
+//
+//		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>();
+//		HashMap<String, ArrayList<RecipeTree>> CopyChild = new HashMap<String, ArrayList<RecipeTree>>();
+//
+//		RecipeTree root = new RecipeTree(A, child);
+//		int depth = 3;
+//		int length = 3;
+//		int recipe = 1;
+//		createTree(root, depth, length, recipe);
+//		defineKnowledge(root);
+//		System.out.println(root.toString());
+//		printTree(root);
+////		System.out.println("****************************  clonage ****************************************");
+////		RecipeTree copy = new RecipeTree(A2, CopyChild);
+////		CloneTree(root,  copy);
+////		System.out.println(removalcondition);
+////		//RecipeCondition=removeRecipesConditions(RecipeCondition, 50); 
+////		PartialTree(copy, 75);
+////		printTree(copy);
+////		//test1(root);
+//
+//	}
 	public static void DefinepartialTree (RecipeTree root, RecipeTree patialtree, int levelOfKnowledge){
 		//RecipeTree copy = new RecipeTree(A2, CopyChild);
 		//cmpt =0; 
@@ -415,20 +415,17 @@ public class RecipeTree {
 	}*/
 
 	public static String Init(List<String> coditions, RecipeTree root, String broken){
-		Random rand = new Random();
 		String init = null;
-		int random = rand.nextInt(2);
 		if(coditions.get(0) =="P1")
 			init = "var " + coditions.get(0) +" =true";
 		else
-			init =  random ==1?  "var "+coditions.get(0)+"" : "var "+coditions.get(0)+"=false" ;
+			init =  "var "+coditions.get(0)+"=false" ;
 		for(int i=1; i<coditions.size() ; i++){
 			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
 
 			else{
-				int nombreAleatoire = rand.nextInt(2);
-				init += nombreAleatoire==1? ", " + coditions.get(i) +"":", " + coditions.get(i) +"=false";
+				init += ", " + coditions.get(i) +"=false";
 			}
 		}
 		for(String recipe : RecipeTree.RecipeCondition)

@@ -29,11 +29,11 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25; // 50, 75, 100
-		int debut = 1;
-		int fin = 100;	
-		
-		int 	depth = 4, 
+		int LEVEL = 100; // 50, 75, 100
+		int debut = 3;
+		int fin = 3;	
+
+		int 	depth =4 , 
 				taskBranching = 4, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
@@ -79,17 +79,19 @@ public class TestClass{
 					e.printStackTrace();
 				}
 			}	
+//			TestClass.evaluation.write(i+ "       ");
+//			TestClass.evaluation.flush();
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
 		evaluation.newLine();
 		evaluation.flush();
 		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
-		
+
 		test.interaction.interrupt();
 
 	}
-	
+
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
 		for(RecipeTree leaf: root.getLeaves()){
 
@@ -133,7 +135,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(String adresse){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/"+adresse;
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results_Final/"+adresse;
 		PrintWriter writer;
 
 		try {
@@ -163,12 +165,12 @@ public class TestClass{
 		long mean = 0;
 		return mean;
 	}
-	 public static int  fact(int n) {
-	        if(n == 1){
-	            return n;
-	        }
-	        return n * (fact(n-1)); // what happens if you switch the order?
-	    }
+	public static int  fact(int n) {
+		if(n == 1){
+			return n;
+		}
+		return n * (fact(n-1)); // what happens if you switch the order?
+	}
 
 	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
@@ -181,7 +183,7 @@ public class TestClass{
 			engine.clearTheory();
 			engine.setTheory(theory);
 			FromTreeToProlog(TestClass.partialroot, engine);
-			
+
 		} catch (IOException | InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
