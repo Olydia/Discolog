@@ -29,12 +29,12 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 100; // 50, 75, 100
-		int debut = 100;
+		int LEVEL = 25; // 50, 75, 100
+		int debut = 1;
 		int fin = 100;	
 
-		int 	depth =2, 
-				taskBranching = 2, 
+		int 	depth =4, 
+				taskBranching = 4, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -141,7 +141,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(String adresse){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results_Final/"+adresse;
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/"+adresse;
 		PrintWriter writer;
 
 		try {
