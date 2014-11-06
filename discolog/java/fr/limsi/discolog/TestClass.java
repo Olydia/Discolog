@@ -30,11 +30,11 @@ public class TestClass{
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 100; // 50, 75, 100
-		int debut = 3;
-		int fin = 3;	
+		int debut = 100;
+		int fin = 100;	
 
-		int 	depth =4 , 
-				taskBranching = 4, 
+		int 	depth =2, 
+				taskBranching = 2, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -53,7 +53,7 @@ public class TestClass{
 	}
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length) throws IOException {
-		String adresse = "test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
+		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse);
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
@@ -95,25 +95,31 @@ public class TestClass{
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
 		for(RecipeTree leaf: root.getLeaves()){
 
-			if (leaf.getHead().getPostconditions() != null) {
+			if (leaf.getHead().getPostconditions() != null && leaf.getHead().getPreconditions() != null) {
 				// --------------- Prolog writing -----------------------------
 				//Preconditions 
 
-				if (leaf.getHead().getPreconditions() != null) {
+				//if (leaf.getHead().getPreconditions() != null) {
 					output.addTheory(new Theory("strips_preconditions("
 							+ leaf.getHead().getName().toLowerCase() + ",["
 							+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-
-				}
-				else {
-					output.addTheory(new Theory("strips_preconditions("
-							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
-				}
+//					System.out.println("strips_preconditions("
+//							+ leaf.getHead().getName().toLowerCase() + ",["
+//							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).");
+//				//}
+//		else {
+//					output.addTheory(new Theory("strips_preconditions("
+//							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
+//				}
 
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
+//				System.out.println("strips_achieves("
+//						+ leaf.getHead().getName().toLowerCase() + ","
+//						+ leaf.getHead().getPostconditions().toLowerCase()
+//						+ ").");
 
 
 				// --------------- Prolog writing -----------------------------
@@ -165,12 +171,7 @@ public class TestClass{
 		long mean = 0;
 		return mean;
 	}
-	public static int  fact(int n) {
-		if(n == 1){
-			return n;
-		}
-		return n * (fact(n-1)); // what happens if you switch the order?
-	}
+
 
 	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
