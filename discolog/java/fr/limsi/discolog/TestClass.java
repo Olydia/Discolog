@@ -29,7 +29,8 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25; // 50, 75, 100
+		int LEVEL = 25
+				; // 50, 75, 100
 		int debut = 1;
 		int fin = 100;	
 
@@ -44,15 +45,20 @@ public class TestClass{
 		partialroot = new RecipeTree(A2, copyChild);
 		// Define the complete domain knowledge 
 		RecipeTree.DefineCompleteTree(root, depth, taskBranching, recipeBranching);
-
+		PlanConstructor test = new PlanConstructor();
+		TaskClass task = test.FromTreeToTask(root);
+		//long lStartTheory = System.currentTimeMillis();
+		test.CreateBenshmark(root, task);
+		test.interaction.start();
 		//	RecipeTree.printTree(root);
 		conditions = root.getKnowledge(root, conditions);
 		for(int i=debut;i<=fin;i++) {
-			run(LEVEL,i, root, depth, taskBranching);
+			run(LEVEL,i, root, depth, taskBranching, test, task);
 		}
+		test.interaction.interrupt();
 	}
 
-	public static void run(int level, int numero, RecipeTree root, int depth, int length) throws IOException {
+	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
 		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse);
 		// Remove knowledge from  the HTN 
@@ -61,11 +67,7 @@ public class TestClass{
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 		int z=0;
-		PlanConstructor test = new PlanConstructor();
-		TaskClass task = test.FromTreeToTask(partialroot);
-		//long lStartTheory = System.currentTimeMillis();
-		test.CreateBenshmark(partialroot, task);
-		test.interaction.start();
+		
 		for(int i=0; i<partialroot.getLeaves().size(); i++){
 			RecipeTree leaf= partialroot.getLeaves().get(i);
 			System.out.println(level + " - " + numero + " - break #" + z++);
@@ -87,9 +89,6 @@ public class TestClass{
 		evaluation.newLine();
 		evaluation.flush();
 		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
-
-		test.interaction.interrupt();
-
 	}
 
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
@@ -141,7 +140,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(String adresse){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/Test_Results/"+adresse;
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/"+adresse;
 		PrintWriter writer;
 
 		try {

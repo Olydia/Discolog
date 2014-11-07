@@ -140,9 +140,9 @@ public class PlanConstructor {
 		if (root.isLeaf()){
 			return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					// preconditions are false
-					"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
+					/*"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
 					"$this.success = false;} "+
-					"else if ("+root.getHead().getName()+" == false) {"+
+					"else*/ "if ("+root.getHead().getName()+" == false) {"+
 					// psotconditions put to false and change the flag to true
 					root.getHead().getGrounding().get(1).toString()+ "=false; "/*println('"
 					+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "*/
