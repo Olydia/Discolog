@@ -55,11 +55,11 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-				@Override
-				public void run() {
-					// keep running as long as agent has something to do and then stop
-				while (!Thread.currentThread().isInterrupted()) {}
-				}
+		@Override
+		public void run() {
+			// keep running as long as agent has something to do and then stop
+			while (!Thread.currentThread().isInterrupted()) {}
+		}
 	};
 
 	final  Disco disco = interaction.getDisco();
@@ -95,43 +95,44 @@ public class PlanConstructor {
 		return new Plan(task.newInstance());
 	}
 	//********************************* diso *********************************************************
-	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root, String broken) throws IOException{
-		String initState = RecipeTree.Init(conditions, root, broken);
-		disco.eval(initState, "init");
-		RECOVERY =newTask("recovery", false, null, null, null);
-		Plan top = newPlan(task);
-		// add intention
-		disco.addTop(top);
-		// push top onto stack
-		disco.push(top);
-		// prevent agent asking about toplevel goal
-		top.getGoal().setShould(true);
-		TaskEngine.VERBOSE = true;
-		((Discolog)interaction.getSystem()).setMax(1000);
-		interaction.start(false);
-	}
+//	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root, String broken) throws IOException{
+//		String initState = RecipeTree.Init(conditions, root, broken);
+//		disco.eval(initState, "init");
+//		RECOVERY =newTask("recovery", false, null, null, null);
+//		Plan top = newPlan(task);
+//		// add intention
+//		disco.addTop(top);
+//		// push top onto stack
+//		disco.push(top);
+//		// prevent agent asking about toplevel goal
+//		top.getGoal().setShould(true);
+//		TaskEngine.VERBOSE = true;
+//		((Discolog)interaction.getSystem()).setMax(1000);
+//		interaction.start(false);
+//	}
 
-	public void childTest(TaskClass task, List<String> conditions, RecipeTree root, RecipeTree child){
+	public void childTest(TaskClass task, List<String> conditions, RecipeTree root, RecipeTree child, String initState ){
 		disco.clear();
-		String initState = RecipeTree.Init(conditions, root,child.getHead().getName());
+		System.out.println(initState);
+
 		disco.eval(initState, "init");
 		//RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
-//		// add intention
+		//		// add intention
 		disco.addTop(top);
 		// push top onto stack
 		disco.push(top);
 		// prevent agent asking about toplevel goal
 		//top.getGoal().setShould(true);
-//		TaskEngine.VERBOSE = true;
+		//		TaskEngine.VERBOSE = true;
 		((Discolog)interaction.getSystem()).setMax(1000);
 		//disco.getFocus().add(top);
 		top.setContributes(true); 
 	}
-	
+
 	public void CreateBenshmark (RecipeTree root, TaskClass task) throws IOException{
 		generateTasks(root, task);
-		RecipeRecoveryTask(RecipeTree.RecipeCondition);
+		//RecipeRecoveryTask(RecipeTree.RecipeCondition);
 
 		//output.close();
 	}
@@ -164,7 +165,7 @@ public class PlanConstructor {
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-
+				
 				for (int i=0; i<NodeEntry.getValue().size(); i++) {
 					RecipeTree node = NodeEntry.getValue().get(i);
 					child=FromTreeToTask(node);
@@ -185,23 +186,20 @@ public class PlanConstructor {
 
 
 				}
-				if(RecipeTree.RecipeCondition.contains(NodeEntry.getKey().toString())){		
-					newRecipe(NodeEntry.getKey().toString(), top,
-							step, "C" + NodeEntry.getKey().toString());
-				}
-				else newRecipe(NodeEntry.getKey().toString(), top,
-						step, null);
+
+				newRecipe(NodeEntry.getKey().toString(), top,
+						step, "C" + NodeEntry.getKey().toString());
+				newTask(NodeEntry.getKey().toString().toLowerCase(), true, root.getHead().getPreconditions(),
+						"C"+NodeEntry.getKey().toString() ,
+						"C"+NodeEntry.getKey().toString()+"=true;"
+								+ "println('C"+NodeEntry.getKey().toString()+"')");
+
 				step.clear();					
 			}
 		}		
 	}
 
-	public void RecipeRecoveryTask(List<String> conditions) throws IOException{
-		for(String recipe: conditions){
-
-			newTask(recipe.toLowerCase(), true, null,"C"+recipe ,"C"+recipe+"=true;println('C"+recipe+"')");
-		}
-	}
+	
 
 
 }

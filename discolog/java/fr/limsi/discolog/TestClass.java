@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Prolog;
@@ -29,13 +30,13 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25
+		int LEVEL = 50
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 100;	
+		int fin = 1;	
 
-		int 	depth =4, 
-				taskBranching = 4, 
+		int 	depth =2, 
+				taskBranching = 2, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -47,11 +48,10 @@ public class TestClass{
 		RecipeTree.DefineCompleteTree(root, depth, taskBranching, recipeBranching);
 		PlanConstructor test = new PlanConstructor();
 		TaskClass task = test.FromTreeToTask(root);
-		//long lStartTheory = System.currentTimeMillis();
 		test.CreateBenshmark(root, task);
 		test.interaction.start();
-		//	RecipeTree.printTree(root);
-		conditions = root.getKnowledge(root, conditions);
+		RecipeTree.printTree(root);
+		conditions = RecipeTree.getKnowledge(root, conditions);
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, test, task);
 		}
@@ -66,23 +66,27 @@ public class TestClass{
 		RecipeTree.PartialTree(partialroot, 100-level);
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
-		int z=0;
 		
-		for(int i=0; i<partialroot.getLeaves().size(); i++){
-			RecipeTree leaf= partialroot.getLeaves().get(i);
-			System.out.println(level + " - " + numero + " - break #" + z++);
-			test.childTest(task, conditions, partialroot, leaf);			
-			while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
-				try {
-					test.disco.wait();
-					System.out.println("waiting");
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		for(int j=0; j< 2; j++){
+			int z=0;
+			String initState = RecipeTree.Init(conditions, root);
+			for(int i=0; i<partialroot.getLeaves().size(); i++){
+				RecipeTree leaf= partialroot.getLeaves().get(i);
+				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
+				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
+				test.childTest(task, conditions, partialroot, leaf, init);			
+				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+					try {
+						test.disco.wait();
+						System.out.println("waiting");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}	
-//			TestClass.evaluation.write(i+ "       ");
-//			TestClass.evaluation.flush();
+			}
+			//			TestClass.evaluation.write(i+ "       ");
+			//			TestClass.evaluation.flush();
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
@@ -99,26 +103,26 @@ public class TestClass{
 				//Preconditions 
 
 				//if (leaf.getHead().getPreconditions() != null) {
-					output.addTheory(new Theory("strips_preconditions("
-							+ leaf.getHead().getName().toLowerCase() + ",["
-							+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-//					System.out.println("strips_preconditions("
-//							+ leaf.getHead().getName().toLowerCase() + ",["
-//							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).");
-//				//}
-//		else {
-//					output.addTheory(new Theory("strips_preconditions("
-//							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
-//				}
+				output.addTheory(new Theory("strips_preconditions("
+						+ leaf.getHead().getName().toLowerCase() + ",["
+						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
+				//					System.out.println("strips_preconditions("
+				//							+ leaf.getHead().getName().toLowerCase() + ",["
+				//							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).");
+				//				//}
+				//		else {
+				//					output.addTheory(new Theory("strips_preconditions("
+				//							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
+				//				}
 
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
-//				System.out.println("strips_achieves("
-//						+ leaf.getHead().getName().toLowerCase() + ","
-//						+ leaf.getHead().getPostconditions().toLowerCase()
-//						+ ").");
+				//				System.out.println("strips_achieves("
+				//						+ leaf.getHead().getName().toLowerCase() + ","
+				//						+ leaf.getHead().getPostconditions().toLowerCase()
+				//						+ ").");
 
 
 				// --------------- Prolog writing -----------------------------
@@ -128,15 +132,16 @@ public class TestClass{
 			output.addTheory(new Theory("strips_primitive(" + i.toLowerCase() + ")."));
 
 		}
-		for (String recipe : RecipeTree.RecipeCondition) {
-			output.addTheory(new Theory("strips_preconditions(" + recipe.toLowerCase() + ",[_])."));
-
-			output.addTheory(new Theory("strips_achieves(" + recipe.toLowerCase() + ",c"
-					+ recipe.toLowerCase() + ")."));
-
-			output.addTheory(new Theory("strips_primitive(c" + recipe.toLowerCase() + ")."));
-
-		}
+//		for (Map.Entry<String, String> recipe :RecipeTree.existingRecipeCond.entrySet()) {
+//
+//			output.addTheory(new Theory("strips_preconditions(" + recipe.getKey().toLowerCase() + ",[_])."));
+//
+//			output.addTheory(new Theory("strips_achieves(" + recipe.getKey().toLowerCase() + ",c"
+//					+ recipe.getKey().toLowerCase() + ")."));
+//
+//			output.addTheory(new Theory("strips_primitive(c" + recipe.getKey().toLowerCase() + ")."));
+//
+//		}
 	}
 
 	static BufferedWriter saveSolution(String adresse){
@@ -183,7 +188,7 @@ public class TestClass{
 			engine.clearTheory();
 			engine.setTheory(theory);
 			FromTreeToProlog(TestClass.partialroot, engine);
-
+			//System.out.println(engine.getTheory());
 		} catch (IOException | InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
