@@ -73,7 +73,7 @@ public class PlanConstructor {
 					"Non-primitive cannot have grounding script: " + id);
 		TaskClass task = new TaskClass(model, id,
 				precondition == null ? null : new Precondition(precondition, true, disco),
-						postcondition == null ? null :  new Postcondition(postcondition,true, true, disco),
+						postcondition == null ? null :  new Postcondition(postcondition,true, false, disco),
 								grounding == null ? null : new Grounding(grounding, disco)
 				);
 

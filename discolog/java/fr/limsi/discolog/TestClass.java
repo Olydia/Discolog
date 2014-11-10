@@ -30,7 +30,7 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 50
+		int LEVEL = 100
 				; // 50, 75, 100
 		int debut = 1;
 		int fin = 1;	
@@ -67,11 +67,11 @@ public class TestClass{
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 		
-		for(int j=0; j< 2; j++){
+		for(int j=0; j< 1; j++){
 			int z=0;
 			String initState = RecipeTree.Init(conditions, root);
-			for(int i=0; i<partialroot.getLeaves().size(); i++){
-				RecipeTree leaf= partialroot.getLeaves().get(i);
+			//for(int i=0; i<partialroot.getLeaves().size(); i++){
+				RecipeTree leaf= partialroot.getLeaves().get(partialroot.getLeaves().size()-1);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				test.childTest(task, conditions, partialroot, leaf, init);			
@@ -84,8 +84,8 @@ public class TestClass{
 						e.printStackTrace();
 					}
 				}
-			}
-			//			TestClass.evaluation.write(i+ "       ");
+			//}
+			///			TestClass.evaluation.write(i+ "       ");
 			//			TestClass.evaluation.flush();
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);

@@ -150,7 +150,7 @@ public class Discolog extends Agent {
 					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()))
 				candidates.add(new Candidate(plan, type.getPrecondition()));
 			else if (type.getPostcondition() != null && plan.isFailed()
-					&& type.isSufficient()) // post cond
+					&& !type.isSufficient()) // post cond
 				candidates.add(new Candidate(plan, type.getPostcondition()));
 			if (plan.isLive() && !plan.isPrimitive() && !plan.isDecomposed())
 				for (DecompositionClass c : plan.getType().getDecompositions()) {
@@ -229,7 +229,6 @@ public class Discolog extends Agent {
 			/*	long lEndTheory = System.currentTimeMillis();
 			long differenceTheory = lEndTheory- lStartTheory;
 			System.out.println("Init State :    " + differenceTheory);*/
-			//System.out.println(Initial_state.toString());
 			// The request for STRIPS.
 			//long lStartProlog = new Date().getTime();
 			Struct goal = new Struct("test1", new Var("X"));
@@ -245,7 +244,10 @@ public class Discolog extends Agent {
 			else {// main case
 				//				long lStartOutput = new Date().getTime();
 				Plan = info.getVarValue("X");
-				JavaPlan = getPlannerOutput(Plan);		
+				JavaPlan = getPlannerOutput(Plan);
+//				if(JavaPlan.isEmpty())
+//					System.out.println("No recovery plan found for " +Initial_state.toString() + "  " + Goal);
+
 				//				long lEndOutput = new Date().getTime();
 				//				long differenceOutput = lEndOutput - lStartOutput;
 				//				System.out.println("Prolog output :    " + differenceOutput);
