@@ -423,9 +423,9 @@ public class RecipeTree {
 				int cond = rand.nextInt(2);
 
 				if (cond ==1 )
-					init += ", " + coditions.get(i) +"=false" ;
+					init += ", " + coditions.get(i) +"= true" ;
 				else 
-					init += ", " + coditions.get(i) +"=true"  ;
+					init += ", " + coditions.get(i) +"= false"  ;
 			}
 		}
 		for(Map.Entry<String, String> recipe :RecipeCondition.entrySet()){

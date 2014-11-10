@@ -55,12 +55,13 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-		@Override
-		public void run() {
-			// keep running as long as agent has something to do and then stop
-			while (!Thread.currentThread().isInterrupted()) {}
-		}
-	};
+//		@Override
+//		public void run() {
+//			// keep running as long as agent has something to do and then stop
+//			while (!Thread.currentThread().isInterrupted()) {}
+//		}
+	}
+;
 
 	final  Disco disco = interaction.getDisco();
 	private final TaskModel model = new TaskModel(
@@ -125,7 +126,7 @@ public class PlanConstructor {
 		// prevent agent asking about toplevel goal
 		//top.getGoal().setShould(true);
 		//		TaskEngine.VERBOSE = true;
-		((Discolog)interaction.getSystem()).setMax(1000);
+		((Discolog)interaction.getSystem()).setMax(100);
 		//disco.getFocus().add(top);
 		top.setContributes(true); 
 	}
@@ -139,18 +140,20 @@ public class PlanConstructor {
 	public  TaskClass FromTreeToTask(RecipeTree root) throws IOException {
 
 		if (root.isLeaf()){
+//			System.out.println( "if ("+root.getHead().getName()+" == false) {"+
+//					// psotconditions put to false and change the flag to true
+//					root.getHead().getGrounding().get(1).toString()+ "=false; "
+//					+root.getHead().getName()+ "=true;}"
+//					// else if not the first run put the postcond to true
+//					+ " else { "+root.getHead().getGrounding().get(1)+ "=true}");
 			return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					// preconditions are false
-					/*"if ("+root.getHead().getGrounding().get(0)+ "==false) {"+	
-					"$this.success = false;} "+
-					"else*/ "if ("+root.getHead().getName()+" == false) {"+
+					 "if ("+root.getHead().getName()+" == false) {"+
 					// psotconditions put to false and change the flag to true
-					root.getHead().getGrounding().get(1).toString()+ "=false; "/*println('"
-					+ root.getHead().getName() + "  "+ root.getHead().getGrounding().get(1).toString() +" =false '); "*/
+					root.getHead().getGrounding().get(1).toString()+ "=false; "
 					+root.getHead().getName()+ "=true;}"
 					// else if not the first run put the postcond to true
-					+ "else { "+root.getHead().getGrounding().get(1)+ "=true;" /*println('"
-					+ root.getHead().getName() + "   "+ root.getHead().getGrounding().get(1) +"');*/+"}"));
+					+ " else { "+root.getHead().getGrounding().get(1)+ "=true; println('"+root.getHead().getGrounding().get(1)+ "');}"));
 
 		}
 		else

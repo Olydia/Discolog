@@ -36,7 +36,7 @@ public class ConstructorTest {
       // prevent agent asking about toplevel goal
       test.disco.setProperty("Ask.Should(a)@generate", false);
       // initialize all world state predicates
-      test.disco.eval("var P=true,M=true,Q=false,R=false,V=true,W=false", "init");
+      test.disco.eval("var P=true,M=true,Q=true,R=false,V=false,W=true", "init");
       // allow agent to keep executing without talking
       ((Agent) test.interaction.getSystem()).setMax(100);
       // agent starts
@@ -62,7 +62,7 @@ public class ConstructorTest {
          throw new IllegalArgumentException("Non-primitive cannot have grounding script: "+id);
       TaskClass task = new TaskClass(model, id,
             new Precondition(precondition, true, disco), 
-            new Postcondition(postcondition, true, true, disco), 
+            new Postcondition(postcondition, true, false, disco), 
             grounding == null ? null : new Grounding(grounding, disco));
       task.setProperty("@primitive",  primitive);
       return task;

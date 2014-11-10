@@ -49,7 +49,7 @@ public class TestClass{
 		PlanConstructor test = new PlanConstructor();
 		TaskClass task = test.FromTreeToTask(root);
 		test.CreateBenshmark(root, task);
-		test.interaction.start();
+		test.interaction.start(false);
 		RecipeTree.printTree(root);
 		conditions = RecipeTree.getKnowledge(root, conditions);
 		for(int i=debut;i<=fin;i++) {
@@ -71,19 +71,11 @@ public class TestClass{
 			int z=0;
 			String initState = RecipeTree.Init(conditions, root);
 			//for(int i=0; i<partialroot.getLeaves().size(); i++){
-				RecipeTree leaf= partialroot.getLeaves().get(partialroot.getLeaves().size()-1);
+				RecipeTree leaf= partialroot.getLeaves().get(partialroot.getLeaves().size()-2);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				test.childTest(task, conditions, partialroot, leaf, init);			
-				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
-					try {
-						test.disco.wait();
-						System.out.println("waiting");
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+//				next
 			//}
 			///			TestClass.evaluation.write(i+ "       ");
 			//			TestClass.evaluation.flush();
