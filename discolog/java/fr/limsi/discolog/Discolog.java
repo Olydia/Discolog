@@ -38,7 +38,7 @@ public class Discolog extends Agent {
 	private boolean recover(Interaction interaction) {
 		//System.out.println(" **************************   Start a recover procedure		*******************");
 		TestClass.NbBreakdown ++;
-		interaction.getDisco().history(System.out);
+		//interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());
@@ -100,8 +100,8 @@ public class Discolog extends Agent {
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		ArrayList<Solution> planrepair = new ArrayList<Solution>();
 		TestClass.NbCandidates += candidates.size();
-		System.out.println(" The valid conditions in the current state "+EvalConditions(TestClass.conditions,candidates.get(0).plan.getGoal().getType().getEngine()).toString());
-		System.out.println("The candidates: "+candidates.toString());
+//		System.out.println(" The valid conditions in the current state "+EvalConditions(TestClass.conditions,candidates.get(0).plan.getGoal().getType().getEngine()).toString());
+//		System.out.println("The candidates: "+candidates.toString());
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			

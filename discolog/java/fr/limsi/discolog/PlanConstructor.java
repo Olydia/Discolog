@@ -55,11 +55,11 @@ public class PlanConstructor {
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
 		// for debugging with Disco console, comment out this override
-//		@Override
-//		public void run() {
-//			// keep running as long as agent has something to do and then stop
-//			while (!Thread.currentThread().isInterrupted()) {}
-//		}
+		@Override
+		public void run() {
+			// keep running as long as agent has something to do and then stop
+			while (!Thread.currentThread().isInterrupted()) {}
+		}
 	}
 ;
 
@@ -126,7 +126,7 @@ public class PlanConstructor {
 		// prevent agent asking about toplevel goal
 		//top.getGoal().setShould(true);
 		//		TaskEngine.VERBOSE = true;
-		((Discolog)interaction.getSystem()).setMax(100);
+		((Discolog)interaction.getSystem()).setMax(10000);
 		//disco.getFocus().add(top);
 		top.setContributes(true); 
 	}

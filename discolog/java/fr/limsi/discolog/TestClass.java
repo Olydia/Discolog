@@ -30,11 +30,11 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 100
+		int LEVEL = 50
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
-
+		int fin = 50;	
+		
 		int 	depth =2, 
 				taskBranching = 2, 
 				recipeBranching = 1;
@@ -50,7 +50,7 @@ public class TestClass{
 		TaskClass task = test.FromTreeToTask(root);
 		test.CreateBenshmark(root, task);
 		test.interaction.start(false);
-		RecipeTree.printTree(root);
+		//RecipeTree.printTree(root);
 		conditions = RecipeTree.getKnowledge(root, conditions);
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, test, task);
@@ -66,8 +66,9 @@ public class TestClass{
 		RecipeTree.PartialTree(partialroot, 100-level);
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
+		int Dinit= 20;
 		
-		for(int j=0; j< 1; j++){
+		for(int j=0; j< Dinit; j++){
 			int z=0;
 			String initState = RecipeTree.Init(conditions, root);
 			//for(int i=0; i<partialroot.getLeaves().size(); i++){
@@ -75,10 +76,16 @@ public class TestClass{
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				test.childTest(task, conditions, partialroot, leaf, init);			
-//				next
-			//}
-			///			TestClass.evaluation.write(i+ "       ");
-			//			TestClass.evaluation.flush();
+
+				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+					try {
+						test.disco.wait();
+						System.out.println("waiting");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
@@ -137,7 +144,7 @@ public class TestClass{
 	}
 
 	static BufferedWriter saveSolution(String adresse){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/"+adresse;
+		String adressedufichier = System.getProperty("user.dir") + "/prolog/"+adresse;
 		PrintWriter writer;
 
 		try {
