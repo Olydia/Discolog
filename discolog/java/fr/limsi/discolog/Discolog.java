@@ -37,8 +37,8 @@ public class Discolog extends Agent {
 
 	private boolean recover(Interaction interaction) {
 		//System.out.println(" **************************   Start a recover procedure		*******************");
-		TestClass.NbBreakdown ++;
-		//interaction.getDisco().history(System.out);
+		//TestClass.NbBreakdown ++;
+		interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 		System.out.println(interaction.getDisco().getTops());
@@ -75,11 +75,7 @@ public class Discolog extends Agent {
 				}*/
 				//if (recovery!= null) {
 				System.out.println("Found recovery plan"+ STRIPS.Strips.toString()+" for " + STRIPS.getCandidate().plan.getGoal().getType().getId());
-				TestClass.NbRecover ++;
-				//TestClass.evaluation.write("1 ");
-				//TestClass.evaluation.flush();
-
-				// write 1
+				//TestClass.NbRecover ++;
 				/*Disco disco = interaction.getDisco();
 				// splice in recovery plan
 				disco.getFocus().add(recovery);
@@ -99,13 +95,14 @@ public class Discolog extends Agent {
 		// this should invoke Prolog planner
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		ArrayList<Solution> planrepair = new ArrayList<Solution>();
-		TestClass.NbCandidates += candidates.size();
-//		System.out.println(" The valid conditions in the current state "+EvalConditions(TestClass.conditions,candidates.get(0).plan.getGoal().getType().getEngine()).toString());
-//		System.out.println("The candidates: "+candidates.toString());
+		//TestClass.NbCandidates += candidates.size();
+		//		System.out.println(" The valid conditions in the current state "+EvalConditions(TestClass.conditions,candidates.get(0).plan.getGoal().getType().getEngine()).toString());
+		//		System.out.println("The candidates: "+candidates.toString());
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			
-			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript());
+			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(InitStateTest.HTNconditions,d) ,candidate.condition.getScript());
+			//JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript());
 			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
 			}
@@ -114,7 +111,7 @@ public class Discolog extends Agent {
 		if (planrepair.isEmpty())
 			return null;
 		else{		
-			TestClass.NbRecoveredCandidates += planrepair.size();
+			//TestClass.NbRecoveredCandidates += planrepair.size();
 			return(planrepair.get(0));
 		}
 
@@ -221,25 +218,16 @@ public class Discolog extends Agent {
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		localtheory.clearTheory();
 		try {
-			localtheory.setTheory(TestClass.engine.getTheory());
+			localtheory.setTheory(InitStateTest.PrologEngine.getTheory());
+			//localtheory.setTheory(TestClass.engine.getTheory());
 		} catch (InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			//long lStartTheory = new Date().getTime();
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
-			/*	long lEndTheory = System.currentTimeMillis();
-			long differenceTheory = lEndTheory- lStartTheory;
-			System.out.println("Init State :    " + differenceTheory);*/
-			// The request for STRIPS.
-			//long lStartProlog = new Date().getTime();
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
-			/*long lEndProlog = new Date().getTime();
-			long differenceProlog = lEndProlog - lStartProlog;
-			System.out.println("Prolog execution :    " + differenceProlog);
-			 */
 			// Results
 			if (!info.isSuccess()){
 				return null;
@@ -248,8 +236,8 @@ public class Discolog extends Agent {
 				//				long lStartOutput = new Date().getTime();
 				Plan = info.getVarValue("X");
 				JavaPlan = getPlannerOutput(Plan);
-//				if(JavaPlan.isEmpty())
-//					System.out.println("No recovery plan found for " +Initial_state.toString() + "  " + Goal);
+				//				if(JavaPlan.isEmpty())
+				//					System.out.println("No recovery plan found for " +Initial_state.toString() + "  " + Goal);
 
 				//				long lEndOutput = new Date().getTime();
 				//				long differenceOutput = lEndOutput - lStartOutput;
@@ -276,7 +264,7 @@ public class Discolog extends Agent {
 			}
 			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
 					+ Goal.toLowerCase() + "],"
-					+(TestClass.partialroot.getLeaves().size()*2)+",Plan).");
+					+(InitStateTest.partialroot.getLeaves().size()*2)+",Plan).");
 			//engine.addTheory(init);
 			engine.addTheory(PlannerCall);
 

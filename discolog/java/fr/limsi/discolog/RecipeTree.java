@@ -401,7 +401,7 @@ public class RecipeTree {
 		}
 	}
 
-	public static String Init(List<String> coditions, RecipeTree root){
+	public static String Init(List<String> coditions, RecipeTree root, String value){
 		String init = null;
 		Random rand = new Random();
 		if(coditions.get(0) =="P1")
@@ -423,9 +423,9 @@ public class RecipeTree {
 				int cond = rand.nextInt(2);
 
 				if (cond ==1 )
-					init += ", " + coditions.get(i) +"= false" ;
+					init += ", " + coditions.get(i) +"= "+value ;
 				else 
-					init += ", " + coditions.get(i) +"= false"  ;
+					init += ", " + coditions.get(i) +"= " +value ;
 			}
 		}
 		for(Map.Entry<String, String> recipe :RecipeCondition.entrySet()){

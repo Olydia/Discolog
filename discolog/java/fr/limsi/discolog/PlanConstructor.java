@@ -54,7 +54,7 @@ public class PlanConstructor {
 	final Interaction interaction = 
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
-		// for debugging with Disco console, comment out this override
+//		// for debugging with Disco console, comment out this override
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
@@ -112,21 +112,25 @@ public class PlanConstructor {
 //		interaction.start(false);
 //	}
 
-	public void childTest(TaskClass task, List<String> conditions, RecipeTree root, RecipeTree child, String initState ){
+	public void childTest(TaskClass task, RecipeTree root, RecipeTree child, String initState ){
 		disco.clear();
 		System.out.println(initState);
-
+		TaskEngine.DEBUG = true; 
+		TaskEngine.VERBOSE = true;
 		disco.eval(initState, "init");
+		disco.clearLiveAchieved();
+
 		//RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
 		//		// add intention
 		disco.addTop(top);
 		// push top onto stack
 		disco.push(top);
+
 		// prevent agent asking about toplevel goal
 		//top.getGoal().setShould(true);
 		//		TaskEngine.VERBOSE = true;
-		((Discolog)interaction.getSystem()).setMax(10000);
+		((Discolog)interaction.getSystem()).setMax(1000);
 		//disco.getFocus().add(top);
 		top.setContributes(true); 
 	}

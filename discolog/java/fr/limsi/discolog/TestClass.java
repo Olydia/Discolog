@@ -32,7 +32,7 @@ public class TestClass{
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 50
 				; // 50, 75, 100
-		int debut = 1;
+		int debut = 50;
 		int fin = 50;	
 		
 		int 	depth =2, 
@@ -55,7 +55,7 @@ public class TestClass{
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, test, task);
 		}
-		test.interaction.interrupt();
+		//test.interaction.interrupt();
 	}
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
@@ -66,32 +66,34 @@ public class TestClass{
 		RecipeTree.PartialTree(partialroot, 100-level);
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
-		int Dinit= 20;
+		int Dinit= 1;
 		
 		for(int j=0; j< Dinit; j++){
 			int z=0;
-			String initState = RecipeTree.Init(conditions, root);
+			String value = "true";
+			String initState = RecipeTree.Init(conditions, root, value);
+			
 			//for(int i=0; i<partialroot.getLeaves().size(); i++){
 				RecipeTree leaf= partialroot.getLeaves().get(partialroot.getLeaves().size()-2);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
-				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
-				test.childTest(task, conditions, partialroot, leaf, init);			
+				//System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
+				test.childTest(task, partialroot, leaf, init);			
 
-				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
-					try {
-						test.disco.wait();
-						System.out.println("waiting");
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+//				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+//					try {
+//						test.disco.wait();
+//						System.out.println("waiting");
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+				//}
 		}
-		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
-		evaluation.flush();
-		evaluation.newLine();
-		evaluation.flush();
-		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
+//		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
+//		evaluation.flush();
+//		evaluation.newLine();
+//		evaluation.flush();
+//		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
 	}
 
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
