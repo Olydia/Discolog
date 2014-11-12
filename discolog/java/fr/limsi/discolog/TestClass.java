@@ -33,10 +33,10 @@ public class TestClass{
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 50
 				; // 50, 75, 100
-		int debut = 50;
-		int fin = 100;	
-		
-		int 	depth =4, 
+		int debut = 1;
+		int fin = 50;	
+
+		int 	depth =3, 
 				taskBranching = 3, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
@@ -53,7 +53,7 @@ public class TestClass{
 		test.interaction.start(false);
 		//RecipeTree.printTree(root);
 		conditions = RecipeTree.getKnowledge(root, conditions);
-		
+
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, test, task);
 		}
@@ -63,21 +63,21 @@ public class TestClass{
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
 		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse);
-		
+
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
 		RecipeTree.PartialTree(partialroot, 100-level);
-		
+
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
-		
+
 		int Dinit= 1;
-		
+
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 			String value = "false";
 			String initState = Init(conditions, root, value);
-			
+
 			for(int i=0; i<partialroot.getLeaves().size(); i++){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
@@ -85,15 +85,16 @@ public class TestClass{
 				test.childTest(task, partialroot, leaf, init);			
 
 				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
-					
+
 				}
+			 }
 		}
 		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 		evaluation.flush();
 		evaluation.newLine();
 		evaluation.flush();
 		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
-		}
+
 	}
 
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
@@ -106,13 +107,13 @@ public class TestClass{
 				output.addTheory(new Theory("strips_preconditions("
 						+ leaf.getHead().getName().toLowerCase() + ",["
 						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-				
-				
+
+
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
-			
+
 			}
 		}
 		for (String i : conditions) {
@@ -174,13 +175,13 @@ public class TestClass{
 		Random rand = new Random();
 		if(coditions.get(0) =="P1")
 			init = "var " + coditions.get(0) +" =true";
-		
+
 		else if(coditions.get(0) =="P2")
 			init =  "var "+coditions.get(0)+"=false" ;
-		
+
 		else
 			init =  "var "+coditions.get(0)+"=false" ;
-		
+
 		for(int i=1; i<coditions.size() ; i++){
 			if(coditions.get(i) =="P1")
 				init += ", " + coditions.get(i) +" =true";
