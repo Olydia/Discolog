@@ -31,7 +31,7 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 50
+		int LEVEL = 25
 				; // 50, 75, 100
 		int debut = 1;
 		int fin = 50;	
@@ -75,8 +75,7 @@ public class TestClass{
 
 		for(int j=0; j< Dinit; j++){
 			int z=0;
-			String value = "false";
-			String initState = Init(conditions, root, value);
+			String initState = Init(conditions, root);
 
 			for(int i=0; i<partialroot.getLeaves().size(); i++){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
@@ -170,7 +169,7 @@ public class TestClass{
 		return engine;
 	}
 
-	public static String Init(List<String> coditions, RecipeTree root, String value){
+	public static String Init(List<String> coditions, RecipeTree root){
 		String init = null;
 		Random rand = new Random();
 		if(coditions.get(0) =="P1")
@@ -192,9 +191,9 @@ public class TestClass{
 				int cond = rand.nextInt(2);
 
 				if (cond ==1 )
-					init += ", " + coditions.get(i) +"= "+value ;
+					init += ", " + coditions.get(i) +"= true" ;
 				else 
-					init += ", " + coditions.get(i) +"= " +value ;
+					init += ", " + coditions.get(i) +"= false"  ;
 			}
 		}
 		for(Map.Entry<String, String> recipe :RecipeTree.RecipeCondition.entrySet()){
