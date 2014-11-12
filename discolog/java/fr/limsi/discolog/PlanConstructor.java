@@ -95,28 +95,13 @@ public class PlanConstructor {
 	private Plan newPlan(TaskClass task) {
 		return new Plan(task.newInstance());
 	}
-	//********************************* diso *********************************************************
-//	public void LanchTest (TaskClass task, List<String> conditions, RecipeTree root, String broken) throws IOException{
-//		String initState = RecipeTree.Init(conditions, root, broken);
-//		disco.eval(initState, "init");
-//		RECOVERY =newTask("recovery", false, null, null, null);
-//		Plan top = newPlan(task);
-//		// add intention
-//		disco.addTop(top);
-//		// push top onto stack
-//		disco.push(top);
-//		// prevent agent asking about toplevel goal
-//		top.getGoal().setShould(true);
-//		TaskEngine.VERBOSE = true;
-//		((Discolog)interaction.getSystem()).setMax(1000);
-//		interaction.start(false);
-//	}
+
 
 	public void childTest(TaskClass task, RecipeTree root, RecipeTree child, String initState ){
 		disco.clear();
 		System.out.println(initState);
-		TaskEngine.DEBUG = true; 
-		TaskEngine.VERBOSE = true;
+//		TaskEngine.DEBUG = true; 
+//		TaskEngine.VERBOSE = true;
 		disco.eval(initState, "init");
 		disco.clearLiveAchieved();
 
@@ -157,7 +142,7 @@ public class PlanConstructor {
 					root.getHead().getGrounding().get(1).toString()+ "=false; "
 					+root.getHead().getName()+ "=true;}"
 					// else if not the first run put the postcond to true
-					+ " else { "+root.getHead().getGrounding().get(1)+ "=true; println('"+root.getHead().getGrounding().get(1)+ "');}"));
+					+ " else { "+root.getHead().getGrounding().get(1)+ "=true;}"));
 
 		}
 		else

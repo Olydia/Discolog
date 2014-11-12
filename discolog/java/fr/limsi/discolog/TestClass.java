@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Prolog;
@@ -33,10 +34,10 @@ public class TestClass{
 		int LEVEL = 50
 				; // 50, 75, 100
 		int debut = 50;
-		int fin = 50;	
+		int fin = 100;	
 		
-		int 	depth =2, 
-				taskBranching = 2, 
+		int 	depth =4, 
+				taskBranching = 3, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -52,48 +53,47 @@ public class TestClass{
 		test.interaction.start(false);
 		//RecipeTree.printTree(root);
 		conditions = RecipeTree.getKnowledge(root, conditions);
+		
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, test, task);
 		}
-		//test.interaction.interrupt();
+		test.interaction.interrupt();
 	}
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
 		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse);
+		
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
 		RecipeTree.PartialTree(partialroot, 100-level);
+		
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
+		
 		int Dinit= 1;
 		
 		for(int j=0; j< Dinit; j++){
 			int z=0;
-			String value = "true";
-			String initState = RecipeTree.Init(conditions, root, value);
+			String value = "false";
+			String initState = Init(conditions, root, value);
 			
-			//for(int i=0; i<partialroot.getLeaves().size(); i++){
-				RecipeTree leaf= partialroot.getLeaves().get(partialroot.getLeaves().size()-2);
+			for(int i=0; i<partialroot.getLeaves().size(); i++){
+				RecipeTree leaf= partialroot.getLeaves().get(i);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
-				//System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
+				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				test.childTest(task, partialroot, leaf, init);			
 
-//				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
-//					try {
-//						test.disco.wait();
-//						System.out.println("waiting");
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-				//}
+				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+					
+				}
 		}
-//		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
-//		evaluation.flush();
-//		evaluation.newLine();
-//		evaluation.flush();
-//		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
+		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
+		evaluation.flush();
+		evaluation.newLine();
+		evaluation.flush();
+		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
+		}
 	}
 
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
@@ -103,46 +103,22 @@ public class TestClass{
 				// --------------- Prolog writing -----------------------------
 				//Preconditions 
 
-				//if (leaf.getHead().getPreconditions() != null) {
 				output.addTheory(new Theory("strips_preconditions("
 						+ leaf.getHead().getName().toLowerCase() + ",["
 						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-				//					System.out.println("strips_preconditions("
-				//							+ leaf.getHead().getName().toLowerCase() + ",["
-				//							+ leaf.getHead().getPreconditions().toLowerCase()+ "]).");
-				//				//}
-				//		else {
-				//					output.addTheory(new Theory("strips_preconditions("
-				//							+ leaf.getHead().getName().toLowerCase() + ",[_])."));
-				//				}
-
+				
+				
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
-				//				System.out.println("strips_achieves("
-				//						+ leaf.getHead().getName().toLowerCase() + ","
-				//						+ leaf.getHead().getPostconditions().toLowerCase()
-				//						+ ").");
-
-
-				// --------------- Prolog writing -----------------------------
+			
 			}
 		}
 		for (String i : conditions) {
 			output.addTheory(new Theory("strips_primitive(" + i.toLowerCase() + ")."));
 
 		}
-//		for (Map.Entry<String, String> recipe :RecipeTree.existingRecipeCond.entrySet()) {
-//
-//			output.addTheory(new Theory("strips_preconditions(" + recipe.getKey().toLowerCase() + ",[_])."));
-//
-//			output.addTheory(new Theory("strips_achieves(" + recipe.getKey().toLowerCase() + ",c"
-//					+ recipe.getKey().toLowerCase() + ")."));
-//
-//			output.addTheory(new Theory("strips_primitive(c" + recipe.getKey().toLowerCase() + ")."));
-//
-//		}
 	}
 
 	static BufferedWriter saveSolution(String adresse){
@@ -166,7 +142,6 @@ public class TestClass{
 			return output;
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -180,7 +155,6 @@ public class TestClass{
 
 	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
-		//long lStartTheory = new Date().getTime();
 		InputStream planner = Discolog.class
 				.getResourceAsStream("/test-2p/STRIPS_planner.pl");
 		Theory theory;
@@ -189,13 +163,47 @@ public class TestClass{
 			engine.clearTheory();
 			engine.setTheory(theory);
 			FromTreeToProlog(TestClass.partialroot, engine);
-			//System.out.println(engine.getTheory());
 		} catch (IOException | InvalidTheoryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return engine;
 	}
 
+	public static String Init(List<String> coditions, RecipeTree root, String value){
+		String init = null;
+		Random rand = new Random();
+		if(coditions.get(0) =="P1")
+			init = "var " + coditions.get(0) +" =true";
+		
+		else if(coditions.get(0) =="P2")
+			init =  "var "+coditions.get(0)+"=false" ;
+		
+		else
+			init =  "var "+coditions.get(0)+"=false" ;
+		
+		for(int i=1; i<coditions.size() ; i++){
+			if(coditions.get(i) =="P1")
+				init += ", " + coditions.get(i) +" =true";
+			else if(coditions.get(i) =="P2")
+				init += ", " + coditions.get(i) +" =false";
+
+			else{
+				int cond = rand.nextInt(2);
+
+				if (cond ==1 )
+					init += ", " + coditions.get(i) +"= "+value ;
+				else 
+					init += ", " + coditions.get(i) +"= " +value ;
+			}
+		}
+		for(Map.Entry<String, String> recipe :RecipeTree.RecipeCondition.entrySet()){
+			int cond = rand.nextInt(2);
+			if (cond== 1)
+				init += ", " + recipe.getKey() +" =true";
+			else
+				init+= ","+ recipe.getKey() + "=true";
+		}
+		return init;
+	}
 
 }

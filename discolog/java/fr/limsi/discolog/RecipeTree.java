@@ -401,42 +401,7 @@ public class RecipeTree {
 		}
 	}
 
-	public static String Init(List<String> coditions, RecipeTree root, String value){
-		String init = null;
-		Random rand = new Random();
-		if(coditions.get(0) =="P1")
-			init = "var " + coditions.get(0) +" =true";
-		
-		else if(coditions.get(0) =="P2")
-			init =  "var "+coditions.get(0)+"=false" ;
-		
-		else
-			init =  "var "+coditions.get(0)+"=false" ;
-		
-		for(int i=1; i<coditions.size() ; i++){
-			if(coditions.get(i) =="P1")
-				init += ", " + coditions.get(i) +" =true";
-			else if(coditions.get(i) =="P2")
-				init += ", " + coditions.get(i) +" =false";
 
-			else{
-				int cond = rand.nextInt(2);
-
-				if (cond ==1 )
-					init += ", " + coditions.get(i) +"= "+value ;
-				else 
-					init += ", " + coditions.get(i) +"= " +value ;
-			}
-		}
-		for(Map.Entry<String, String> recipe :RecipeCondition.entrySet()){
-			int cond = rand.nextInt(2);
-			if (cond== 1)
-				init += ", " + recipe.getKey() +" =true";
-			else
-				init+= ","+ recipe.getKey() + "=true";
-		}
-		return init;
-	}
 
 
 	// function to update the flag = false in order to cause a breakdown in the "broken" task

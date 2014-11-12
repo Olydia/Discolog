@@ -79,8 +79,8 @@ public class InitStateTest {
 		// To put all the conditions to false define value = false
 		// [ p1 is always set to true and P2 always to false]
 		// to put all the conditions to false define value = true 
-		String value = "false";
-		String initState = RecipeTree.Init(HTNconditions, root, value);
+		String value = "true";
+		String initState = TestClass.Init(HTNconditions, root, value);
 
 		// to test all the leaves in the HTN uncomment the loop 
 
