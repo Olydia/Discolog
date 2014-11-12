@@ -31,13 +31,13 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25
+		int LEVEL = 75
 				; // 50, 75, 100
 		int debut = 1;
 		int fin = 50;	
 
-		int 	depth =3, 
-				taskBranching = 3, 
+		int 	depth =4, 
+				taskBranching = 4, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -71,7 +71,7 @@ public class TestClass{
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 
-		int Dinit= 1;
+		int Dinit= 100;
 
 		for(int j=0; j< Dinit; j++){
 			int z=0;

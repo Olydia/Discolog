@@ -13,10 +13,10 @@ public class ReadData {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int depth = 2, taskBranching = 2, level = 50;
+		int depth =3, taskBranching = 3, level = 75;
 		int lineNumber =2;
 		String destination = System.getProperty("user.dir") 
-				+ "/prolog/test-2p/Test_Results_Final/"+level+"/"+level;
+				+ "/prolog/results/"+level;
 		try{
 		FileWriter fw;
 		fw = new FileWriter(destination, true);
@@ -28,15 +28,14 @@ public class ReadData {
 		output.flush();
 		output.newLine();output.flush();
 
-		for(int j =1; j< 100; j++){
+		for(int j =1; j<= 50; j++){
 			String adresse = "test_"+depth+"_"+taskBranching+"_"+level+"_"+j+".txt";
 			String adressedufichier = System.getProperty("user.dir") 
-					+ "/prolog/test-2p/Test_Results_Final/"+level+"/"+adresse;
+					+ "/prolog/"+level+"/"+adresse;
 
 			InputStream is = new FileInputStream(adressedufichier);
 			InputStreamReader isr = new InputStreamReader(is);		
 			BufferedReader r = new BufferedReader(isr);// read line from file
-			
 
 			for (int i = 1; i < lineNumber ; i++)
 			{
