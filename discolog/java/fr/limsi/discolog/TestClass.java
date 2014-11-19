@@ -61,8 +61,7 @@ public class TestClass{
 	}
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
-		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
-		evaluation = saveSolution(adresse);
+		
 
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
@@ -71,9 +70,11 @@ public class TestClass{
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 
-		int Dinit= 100;
+		int Dinit= 10;
 
-		for(int j=0; j< Dinit; j++){
+		for(int j=1; j<= Dinit; j++){
+			String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+"_"+j+".txt";
+			evaluation = saveSolution(adresse);
 			int z=0;
 			String initState = Init(conditions, root);
 
@@ -87,12 +88,13 @@ public class TestClass{
 
 				}
 			 }
+			evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
+			evaluation.flush();
+			evaluation.newLine();
+			evaluation.flush();
+			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0;
 		}
-		evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
-		evaluation.flush();
-		evaluation.newLine();
-		evaluation.flush();
-		NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
+ 
 
 	}
 
