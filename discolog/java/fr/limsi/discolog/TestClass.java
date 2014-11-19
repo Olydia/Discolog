@@ -31,13 +31,28 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 75
+		
+		Thread t1 = new Thread(new Runnable() {
+			   public void run() {
+				   try {
+					TestClass.runExpriment();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   }
+			});
+			t1.start();
+	}
+
+	public static void runExpriment() throws IOException {
+		int LEVEL = 50
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 50;	
+		int fin = 1;	
 
-		int 	depth =4, 
-				taskBranching = 4, 
+		int 	depth =2, 
+				taskBranching = 2, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -71,6 +86,7 @@ public class TestClass{
 		engine = initSTRIPS();
 
 		int Dinit= 10;
+
 
 		for(int j=1; j<= Dinit; j++){
 			String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+"_"+j+".txt";
