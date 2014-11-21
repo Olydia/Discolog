@@ -31,22 +31,7 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		
-		Thread t1 = new Thread(new Runnable() {
-			   public void run() {
-				   try {
-					TestClass.runExpriment();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			   }
-			});
-			t1.start();
-	}
-
-	public static void runExpriment() throws IOException {
-		int LEVEL = 50
+		int LEVEL = 100
 				; // 50, 75, 100
 		int debut = 1;
 		int fin = 1;	
@@ -76,7 +61,8 @@ public class TestClass{
 	}
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
-		
+		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
+		evaluation = saveSolution(adresse);
 
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
@@ -85,16 +71,13 @@ public class TestClass{
 		//RecipeTree.printTree(partialroot);
 		engine = initSTRIPS();
 
-		int Dinit= 10;
+		int Dinit= 1;
 
-
-		for(int j=1; j<= Dinit; j++){
-			String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+"_"+j+".txt";
-			evaluation = saveSolution(adresse);
+		for(int j=0; j< Dinit; j++){
 			int z=0;
 			String initState = Init(conditions, root);
 
-			for(int i=0; i<partialroot.getLeaves().size(); i++){
+			for(int i=0; i<partialroot.getLeaves().size()-1; i++){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
 				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
@@ -108,9 +91,9 @@ public class TestClass{
 			evaluation.flush();
 			evaluation.newLine();
 			evaluation.flush();
-			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0;
+			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
 		}
- 
+		
 
 	}
 
