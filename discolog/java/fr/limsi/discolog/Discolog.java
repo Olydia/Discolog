@@ -96,7 +96,7 @@ public class Discolog extends Agent {
 		for(Candidate candidate: candidates){
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 
-			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript());
+			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript(), d);
 			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
 			}
@@ -177,7 +177,7 @@ public class Discolog extends Agent {
 
 	// ******************************* Planner Call ********************************************
 
-	private static ArrayList<String> getPlannerOutput(Term plan) {
+	private static ArrayList<String> getPlannerOutput(Term plan, TaskEngine d) {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
 		if(plan == null){		
@@ -200,13 +200,15 @@ public class Discolog extends Agent {
 
 			}
 			Collections.reverse(Output);
+			if(Output.size() == 1 && Output.get(0).equals(d.getFocus().getType().getId()))
+				return null;
 		}
 		return Output;
 
 	}
 
 	public static ArrayList<String> CallStripsPlanner(Prolog engine ,List<String> Initial_state,
-			String Goal) {
+			String Goal, TaskEngine d) {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		localtheory.clearTheory();
@@ -226,7 +228,7 @@ public class Discolog extends Agent {
 			}
 			else {// main case
 				Plan = info.getVarValue("X");
-				JavaPlan = getPlannerOutput(Plan);
+				JavaPlan = getPlannerOutput(Plan, d);
 				return JavaPlan;
 			}
 		} catch (NoSolutionException ex) {
