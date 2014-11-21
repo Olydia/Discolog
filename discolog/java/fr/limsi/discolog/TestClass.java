@@ -28,16 +28,18 @@ public class TestClass{
 	public static int NbRecoveredCandidates = 0; 
 	public static TaskClass RECOVERY;
 	public static BufferedWriter evaluation;
+	public static BufferedWriter strips;
+
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 100
+		int LEVEL = 25
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
+		int fin = 50;	
 
-		int 	depth =2, 
-				taskBranching = 2, 
+		int 	depth = 4, 
+				taskBranching = 4, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -62,16 +64,18 @@ public class TestClass{
 
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
 		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
-		evaluation = saveSolution(adresse);
+		evaluation = saveSolution(adresse, true);
 
 		// Remove knowledge from  the HTN 
 		RecipeTree.CloneTree(root,  partialroot);
 		RecipeTree.PartialTree(partialroot, 100-level);
 
 		//RecipeTree.printTree(partialroot);
+		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
+		strips = saveSolution(adresse_strips_file, false);
 		engine = initSTRIPS();
 
-		int Dinit= 1;
+		int Dinit= 10;
 
 		for(int j=0; j< Dinit; j++){
 			int z=0;
@@ -86,24 +90,25 @@ public class TestClass{
 				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
 
 				}
-			 }
+			}
 			evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 			evaluation.flush();
 			evaluation.newLine();
 			evaluation.flush();
 			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0; 
 		}
-		
+
 
 	}
 
 	public static void FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
+		int actionsNb =0;
 		for(RecipeTree leaf: root.getLeaves()){
 
 			if (leaf.getHead().getPostconditions() != null && leaf.getHead().getPreconditions() != null) {
 				// --------------- Prolog writing -----------------------------
 				//Preconditions 
-
+				actionsNb ++;
 				output.addTheory(new Theory("strips_preconditions("
 						+ leaf.getHead().getName().toLowerCase() + ",["
 						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
@@ -120,20 +125,24 @@ public class TestClass{
 			output.addTheory(new Theory("strips_primitive(" + i.toLowerCase() + ")."));
 
 		}
+		
+		strips.write(""+actionsNb +"");
+		strips.flush();
+		strips.newLine();
 	}
 
-	static BufferedWriter saveSolution(String adresse){
+	static BufferedWriter saveSolution(String adresse, boolean write){
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/"+adresse;
 		PrintWriter writer;
+		if(write){
+			try {
+				writer = new PrintWriter(adressedufichier);
+				writer.write("Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates");
+				writer.close();
 
-		try {
-
-			writer = new PrintWriter(adressedufichier);
-			writer.write("Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates");
-			writer.close();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		FileWriter fw;
 		try {
