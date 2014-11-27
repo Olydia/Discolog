@@ -141,14 +141,16 @@ public class Discolog extends Agent {
 		for (Plan plan : children) {
 			TaskClass type = plan.getGoal().getType();
 			if (type.getPrecondition() != null
-					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()))
+					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()) &&
+					TestClass.STRIPSconditions.contains(type.getPrecondition().getScript()))
 				candidates.add(new Candidate(plan, type.getPrecondition()));
 			else if (type.getPostcondition() != null && plan.isFailed()
-					&& !type.isSufficient()) // post cond
+					&& !type.isSufficient() 
+					&& TestClass.STRIPSconditions.contains(type.getPostcondition().getScript())) // post cond
 				candidates.add(new Candidate(plan, type.getPostcondition()));
 			if (plan.isLive() && !plan.isPrimitive() && !plan.isDecomposed())
 				for (DecompositionClass c : plan.getType().getDecompositions()) {
-					if (c.getApplicable() != null)
+					if (c.getApplicable() != null && TestClass.STRIPSconditions.contains(c.getApplicable().getScript()))
 						candidates.add(new Candidate(plan, c.getApplicable()));
 				}
 			findCandidates(plan.getChildren());

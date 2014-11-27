@@ -21,6 +21,8 @@ import edu.wpi.cetask.TaskClass;
 public class TestClass{
 	static List<String> recipecondition = new LinkedList<String>();
 	public static List<String> conditions = new LinkedList<String>();
+	public static List<String> STRIPSconditions = new ArrayList<String>();
+
 	static int removalcondition = 0;
 	public static int NbBreakdown = 0; 
 	public static int NbRecover = 0; 
@@ -33,13 +35,13 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25
+		int LEVEL = 75
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 50;	
+		int fin = 1;	
 
-		int 	depth = 4, 
-				taskBranching = 4, 
+		int 	depth = 2, 
+				taskBranching = 2, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -74,12 +76,13 @@ public class TestClass{
 		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
 		strips = saveSolution(adresse_strips_file, false);
 		engine = initSTRIPS();
-
-		int Dinit= 10;
+		System.out.println(engine.getTheory());
+		int Dinit= 1;
 
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 			String initState = Init(conditions, root);
+			System.out.println("////////////////////////"+STRIPSconditions.toString());
 
 			for(int i=0; i<partialroot.getLeaves().size()-1; i++){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
@@ -112,12 +115,15 @@ public class TestClass{
 				output.addTheory(new Theory("strips_preconditions("
 						+ leaf.getHead().getName().toLowerCase() + ",["
 						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-
-
+				
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
+				if(!STRIPSconditions.contains(leaf.getHead().getPreconditions()))
+					STRIPSconditions.add( leaf.getHead().getPreconditions());
+				if(!STRIPSconditions.contains(leaf.getHead().getPostconditions()))
+					STRIPSconditions.add( leaf.getHead().getPostconditions());
 
 			}
 		}
