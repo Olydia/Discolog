@@ -40,7 +40,7 @@ public class Discolog extends Agent {
 		//interaction.getDisco().history(System.out);
 		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
-		System.out.println(interaction.getDisco().getTops());
+		System.out.println("Breakdown detected at " +interaction.getDisco().getFocus());
 		if (candidates.isEmpty()) {
 			System.out.println("No recovery candidates!");
 		} else {

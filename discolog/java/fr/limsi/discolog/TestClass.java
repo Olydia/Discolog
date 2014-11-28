@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import alice.tuprolog.InvalidTheoryException;
@@ -22,6 +23,8 @@ public class TestClass{
 	static List<String> recipecondition = new LinkedList<String>();
 	public static List<String> conditions = new LinkedList<String>();
 	public static List<String> STRIPSconditions = new ArrayList<String>();
+	static List<String> viableRecipeConditions = new ArrayList<String>();
+
 
 	static int removalcondition = 0;
 	public static int NbBreakdown = 0; 
@@ -35,13 +38,13 @@ public class TestClass{
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 75
+		int LEVEL = 50
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
+		int fin = 50;	
 
-		int 	depth = 2, 
-				taskBranching = 2, 
+		int 	depth = 4, 
+				taskBranching = 4, 
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -76,13 +79,11 @@ public class TestClass{
 		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
 		strips = saveSolution(adresse_strips_file, false);
 		engine = initSTRIPS();
-		System.out.println(engine.getTheory());
-		int Dinit= 1;
+		int Dinit= 10;
 
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 			String initState = Init(conditions, root);
-			System.out.println("////////////////////////"+STRIPSconditions.toString());
 
 			for(int i=0; i<partialroot.getLeaves().size()-1; i++){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
@@ -115,7 +116,7 @@ public class TestClass{
 				output.addTheory(new Theory("strips_preconditions("
 						+ leaf.getHead().getName().toLowerCase() + ",["
 						+ leaf.getHead().getPreconditions().toLowerCase()+ "])."));
-				
+
 				output.addTheory(new Theory("strips_achieves("
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
@@ -131,7 +132,7 @@ public class TestClass{
 			output.addTheory(new Theory("strips_primitive(" + i.toLowerCase() + ")."));
 
 		}
-		
+
 		strips.write(""+actionsNb +"");
 		strips.flush();
 		strips.newLine();
@@ -214,12 +215,33 @@ public class TestClass{
 		}
 		for(Map.Entry<String, String> recipe :RecipeTree.RecipeCondition.entrySet()){
 			int cond = rand.nextInt(2);
-			if (cond== 1)
+			if (cond== 1){
 				init += ", " + recipe.getKey() +" =true";
+				viableRecipeConditions.add(recipe.getKey());
+			}
 			else
 				init+= ","+ recipe.getKey() + "=true";
 		}
 		return init;
 	}
+	private static Entry<String, ArrayList<RecipeTree>> GetFirstVialbeRecipe(RecipeTree root){
+		for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
+				.getChildren().entrySet()) {
+			if(viableRecipeConditions.contains(NodeEntry.getKey()))
+				return NodeEntry;
+
+		}
+		return null;
+	}
+	public static void getHTNPath (RecipeTree root) {
+		if (!root.isLeaf()) {
+			// System.out.println(root.toString());
+			Map.Entry<String, ArrayList<RecipeTree>> NodeEntry = GetFirstVialbeRecipe(root);
+			for (RecipeTree child : NodeEntry.getValue()) {
+				
+			}
+		}
+	}
+
 
 }
