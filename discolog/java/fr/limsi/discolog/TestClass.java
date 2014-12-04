@@ -38,10 +38,10 @@ public class TestClass{
 		int LEVEL = 75
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
-		int depth = 2, 
-				taskBranching = 2, 
-				recipeBranching = 2;
+		int fin = 20;	
+		int depth = 4, 
+				taskBranching = 4, 
+				recipeBranching = 4;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
@@ -84,14 +84,14 @@ public class TestClass{
 		long run = endtRun - startRun;
 		//System.out.println("partial HTN " + run);
 
-		int Dinit= 1;
+		int Dinit= 20;
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 
 			String initState = Init(conditions, root);
 			// Get the HTN path 
 			getHTNPath(root);
-			System.out.println(primitiveTasks.toString());
+			//System.out.println(primitiveTasks.toString());
 			//			if(primitiveTasks.isEmpty())
 			//				primitiveTasks.add(partialroot.getLeaves().get(0));
 
