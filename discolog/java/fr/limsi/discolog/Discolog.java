@@ -202,7 +202,7 @@ public class Discolog extends Agent {
 
 			}
 			Collections.reverse(Output);
-			if(Output.size() == 1 && Output.get(0).equals(d.getFocus().getType().getId()))
+			if(Output.get(0).equals(d.getFocus().getType().getId()))
 				return null;
 		}
 		return Output;
