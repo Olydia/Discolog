@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
+import alice.tuprolog.Operator;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.SolveInfo;
 import alice.tuprolog.Struct;
@@ -215,7 +217,9 @@ public class Discolog extends Agent {
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		localtheory.clearTheory();
 		try {
+			
 			localtheory.setTheory(TestClass.engine.getTheory());
+			//System.out.println(localtheory.getTheory());
 		} catch (InvalidTheoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -223,6 +227,7 @@ public class Discolog extends Agent {
 		try {
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
 			Struct goal = new Struct("test1", new Var("X"));
+		
 			SolveInfo info = engine.solve(goal);
 			// Results
 			if (!info.isSuccess()){
@@ -236,14 +241,10 @@ public class Discolog extends Agent {
 		} catch (NoSolutionException ex) {
 			throw new RuntimeException(ex);
 		}
-
-
 	}
 
 	private static void Strips_Input(List<String> Initial_state, String Goal,
 			Prolog engine) {
-
-
 		try {
 			for(String init : Initial_state){
 				engine.addTheory(new Theory("strips_holds(" + init.toLowerCase() + ",init)."));
@@ -256,7 +257,7 @@ public class Discolog extends Agent {
 		} catch (InvalidTheoryException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
