@@ -38,9 +38,9 @@ public class TestClass{
 		int LEVEL = 75
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
+		int fin = 20;	
 		int depth = 2, 
-				taskBranching = 2, 
+				taskBranching = 3, 
 				recipeBranching = 2;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
@@ -59,7 +59,7 @@ public class TestClass{
 		//RecipeTree.printTree(root);
 		conditions = RecipeTree.getKnowledge(root, conditions);
 		for(int i=debut;i<=fin;i++) {
-			run(LEVEL,i, root, depth, taskBranching, test, task);
+			run(LEVEL,i, root, depth, taskBranching, recipeBranching, test, task);
 		}
 	//	long HTN = endHTNConstruction-beginHTNConstruction;
 		//System.out.println("HTN Construction: "+ HTN);
@@ -69,8 +69,8 @@ public class TestClass{
 
 
 	}
-	public static void run(int level, int numero, RecipeTree root, int depth, int length, PlanConstructor test, TaskClass task) throws IOException {
-		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+level+"_"+numero+".txt";
+	public static void run(int level, int numero, RecipeTree root, int depth, int length, int recipe, PlanConstructor test, TaskClass task) throws IOException {
+		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+recipe +"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse, true);
 		// Remove knowledge from  the HTN 
 		long startRun = System.currentTimeMillis();
@@ -84,7 +84,7 @@ public class TestClass{
 		long run = endtRun - startRun;
 		//System.out.println("partial HTN " + run);
 
-		int Dinit= 1;
+		int Dinit= 20;
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 

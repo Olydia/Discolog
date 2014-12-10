@@ -1,0 +1,27 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdftex 2014.8.30)  7 DEC 2014 22:54
+entering extended mode
+**D:/IAA*Paper*Format*Instructions*and*Templates*for*LaTeX*Users/Bibliography.b
+ib
+
+("D:/IAA Paper Format Instructions and Templates for LaTeX Users/Bibliography.b
+ib"
+Overfull \hbox (0.74377pt too wide) in paragraph at lines 16--24
+[]\tenrm @inproceedingsconte1998mas, ti-tle=MAS and so-cial sim-u-la-tion: A su
+it-able com-mit-ment, au-thor=Conte,|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm i
+.\tenrm n
+.\tenrm p
+.etc.
+
+)
+*
+! Emergency stop.
+<*> ...*Templates*for*LaTeX*Users/Bibliography.bib
+                                                  
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!
