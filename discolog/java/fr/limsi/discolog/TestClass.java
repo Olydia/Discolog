@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,12 +18,11 @@ import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
 import edu.wpi.cetask.TaskClass;
 public class TestClass{
-	static List<String> recipecondition = new LinkedList<String>();
+
 	public static List<String> conditions = new LinkedList<String>();
 	public static List<String> STRIPSconditions = new ArrayList<String>();
 	static List<String> viableRecipeConditions = new ArrayList<String>();
 	private static List<RecipeTree> primitiveTasks = new ArrayList<RecipeTree>();
-	static int removalcondition = 0;
 	public static int NbBreakdown = 0; 
 	public static int NbRecover = 0; 
 	public static int NbCandidates = 0; 
@@ -34,30 +32,37 @@ public class TestClass{
 	public static BufferedWriter strips;
 	public static RecipeTree partialroot = null;
 	public static Prolog engine = null;
+	public static HashMap<String,String> recipeConditions = new HashMap<String,String> ();
+
 	public static void main(String[] args) throws IOException {
 		int LEVEL = 75
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 20;	
+		int fin = 1;	
 		int depth = 2, 
-				taskBranching = 3, 
+				taskBranching = 2, 
 				recipeBranching = 2;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
+		
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
-				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
+		copyChild = new HashMap<String, ArrayList<RecipeTree>>()
+				;
+		
 		RecipeTree root = new RecipeTree(A, child);
+		
 		partialroot = new RecipeTree(A2, copyChild);
 		//long beginHTNConstruction = System.currentTimeMillis();
+		
 		// Define the complete domain knowledge 
-		RecipeTree.DefineCompleteTree(root, depth, taskBranching, recipeBranching);
+		root.DefineCompleteTree(depth, taskBranching, recipeBranching);
 		PlanConstructor test = new PlanConstructor();
 		TaskClass task = test.FromTreeToTask(root);
 		test.CreateBenshmark(root, task);
+		
 		//long endHTNConstruction = System.currentTimeMillis();
 		test.interaction.start(false);
-		//RecipeTree.printTree(root);
-		conditions = RecipeTree.getKnowledge(root, conditions);
+		conditions = root.getKnowledge(conditions);
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, recipeBranching, test, task);
 		}
@@ -73,18 +78,16 @@ public class TestClass{
 		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+recipe +"_"+level+"_"+numero+".txt";
 		evaluation = saveSolution(adresse, true);
 		// Remove knowledge from  the HTN 
-		long startRun = System.currentTimeMillis();
-		RecipeTree.CloneTree(root,  partialroot);
-		RecipeTree.PartialTree(partialroot, 100-level);
-		//RecipeTree.printTree(partialroot);
+		//long startRun = System.currentTimeMillis();
+		root.DefinepartialTree(partialroot, 100-level);
 		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
 		strips = saveSolution(adresse_strips_file, false);
 		
-		long endtRun = System.currentTimeMillis();
-		long run = endtRun - startRun;
-		//System.out.println("partial HTN " + run);
+//		long endtRun = System.currentTimeMillis();
+//		long run = endtRun - startRun;
+//		System.out.println("partial HTN " + run);
 
-		int Dinit= 20;
+		int Dinit= 2;
 		for(int j=0; j< Dinit; j++){
 			int z=0;
 
@@ -98,7 +101,7 @@ public class TestClass{
 
 			for(RecipeTree leaf: primitiveTasks){
 				//RecipeTree leaf= partialroot.getLeaves().get(i);
-				String init = RecipeTree.BreakInit(root, leaf.getHead().getName(), initState);
+				String init = BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				engine = initSTRIPS(leaf);
 				test.childTest(task, partialroot, leaf, init);	
@@ -136,7 +139,7 @@ public class TestClass{
 	
 		
 		}
-		for(String recipe : RecipeTree.existingRecipeCond){
+		for(String recipe : partialroot.existingRecipeConditions){
 			output.addTheory(new Theory("strips_preconditions("
 					+ recipe.toLowerCase() + ",[])."));
 			output.addTheory(new Theory("strips_achieves("
@@ -196,7 +199,20 @@ public class TestClass{
 		}
 		return engine;
 	}
+	
+	public static  String BreakInit(RecipeTree root, String broken, String init) {
+		for(RecipeTree leaf : root.getLeaves()){
+			if(leaf.getHead().getName() == broken)
+				init += ", "+leaf.getHead().getName() + "=false";	
+			else 
+				init += ", "+leaf.getHead().getName() + "=true";
+			//init += ", exec"+name + "=false";
+		}
+		return init;
+	}
+	
 	public static String Init(List<String> coditions, RecipeTree root){
+		
 		String init = null;
 		Random rand = new Random();
 		if(coditions.get(0) =="P1")
@@ -218,7 +234,7 @@ public class TestClass{
 					init += ", " + coditions.get(i) +"= false"  ;
 			}
 		}
-		for(Map.Entry<String, String> recipe :RecipeTree.RecipeCondition.entrySet()){
+		for(Map.Entry<String, String> recipe :root.getRecipeConditions(recipeConditions).entrySet()){
 			int cond=rand.nextInt(2);
 			if (cond== 1){
 				init += ", C" + recipe.getKey() +" =true";
@@ -237,6 +253,8 @@ public class TestClass{
 		}
 		return null;
 	}
+	
+	
 	public static void getHTNPath (RecipeTree root) {
 		if (!root.isLeaf()) {
 			// System.out.println(root.toString());

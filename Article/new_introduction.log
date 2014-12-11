@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 DEC 2014 12:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 DEC 2014 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,7 +249,7 @@ Underfull \hbox (badness 5622) in paragraph at lines 11--17
  []
 
 )
-** WARNING: \IEEEbiography is locked out when in conference mode (line 593).
+** WARNING: \IEEEbiography is locked out when in conference mode (line 603).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -265,7 +265,7 @@ Before submitting the final camera ready copy, remember to:
 Here is how much of TeX's memory you used:
  2381 strings out of 493304
  38308 string characters out of 6139871
- 103655 words of memory out of 5000000
+ 104655 words of memory out of 5000000
  5828 multiletter control sequences out of 15000+600000
  35966 words of font info for 69 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
@@ -273,14 +273,15 @@ Here is how much of TeX's memory you used:
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/ba
 se/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/font
-s/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
-es/utmri8a.pfb>
-Output written on new_introduction.pdf (2 pages, 65992 bytes).
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
+i8a.pfb>
+Output written on new_introduction.pdf (2 pages, 73770 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 40 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

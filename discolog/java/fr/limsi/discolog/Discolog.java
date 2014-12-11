@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.NoSolutionException;
-import alice.tuprolog.Operator;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.SolveInfo;
 import alice.tuprolog.Struct;
@@ -28,8 +27,6 @@ import edu.wpi.disco.Interaction;
  * detection and recovery.
  */
 public class Discolog extends Agent {
-	public  static int recovred =0;
-
 	// TODO add private fields here to hold Prolog engine, etc.
 
 	public Discolog(String name) {
@@ -115,9 +112,9 @@ public class Discolog extends Agent {
 	//***************************************************************************************************************************************
 
 	private final List<Candidate> candidates = new ArrayList<Candidate>();
-	private final static Prolog localtheory = new Prolog();
+	private final Prolog localtheory = new Prolog();
 
-	private static class Candidate {
+	private  class Candidate {
 		private final Plan plan;
 		private final Condition condition;
 
@@ -181,7 +178,7 @@ public class Discolog extends Agent {
 
 	// ******************************* Planner Call ********************************************
 
-	private static ArrayList<String> getPlannerOutput(Term plan, TaskEngine d) {
+	private  ArrayList<String> getPlannerOutput(Term plan, TaskEngine d) {
 		ArrayList<String> Output = new ArrayList<String>();
 		String init;
 		if(plan == null){		
@@ -211,7 +208,7 @@ public class Discolog extends Agent {
 
 	}
 
-	public static ArrayList<String> CallStripsPlanner(Prolog engine ,List<String> Initial_state,
+	public  ArrayList<String> CallStripsPlanner(Prolog engine ,List<String> Initial_state,
 			String Goal, TaskEngine d) {
 		Term Plan = null;
 		ArrayList<String> JavaPlan = new ArrayList<String>();
@@ -243,7 +240,7 @@ public class Discolog extends Agent {
 		}
 	}
 
-	private static void Strips_Input(List<String> Initial_state, String Goal,
+	private  void Strips_Input(List<String> Initial_state, String Goal,
 			Prolog engine) {
 		try {
 			for(String init : Initial_state){

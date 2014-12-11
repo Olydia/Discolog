@@ -460,14 +460,16 @@ In such situation, the agent has to stop and think about a new solution to reach
 \par In section 2, we briefly present existing works in this domain. In section 3 we formalize the proposed solution \textit{Discolog} and describe its implementation. Section 4, presents the expriments and discusses the obtained solutions. At the end, we discuss the futures works to validate and extends our solution to differents domains and uses.
 
 \section{Related works}
- reactive planning becomes very popular in AI such in controlling mobile agents \cite{beaudry2005reactive} or simulating human behaviour \cite{bryson2001modularity}. (More references to add)
+ reactive planning becomes very popular in AI such in controlling mobile agents \cite{beaudry2005reactive} or simulating human behaviour \cite{bryson2001modularity}.  Nevertheless, As reactive planning is used for highly dynamic environements it presents certain limits as discussed below: 
+ \begin{itemize}
+ \item C. Brom \cite{brom2005hierarchical} proposes in his work an educational toolkit for prototyping human-like behaviour. the proposed reative architecture was based on the work proposed in \cite{bryson2001modularity}. Nevertheless, this reactive planning system faces some limits such as : 
+ impossibility to add new goals during the execution or inhebit an undesirable subtask.unatural switching between behaviour. 
+  
+ \item R. James Firby  \cite{firby1987investigation} 
+ \end{itemize}
  
  
- - Present the advantage of reactive planning system presented in those papers, and their limits as presented in \cite{firby1987investigation} and \cite{brom2005hierarchical} with their propositions. 
  
-Reactive reasoning and planning : 
-
- Subsection presenting briefly what was done in term ofp lan repair in symbolic planning system. 
 %A great deal of research has been done in the field of planning. Most of theses works were interested in constructing symbolic planning systems especially symbolic HTNs that include plan recovery from breakdwons and replanning. A common approach \cite{ayan2007hotride} \cite{van2005plan} \cite{warfield2007adaptation}. (revoir la phrase) is in addition to the plan, the HTN procduces a graph that captures the causal links between the HTN's tasks. Therefore, if during  plan execution, a breakdown occurs, the HTN uses the structure to detect all the tasks compromised by the failure and therefore needs to be repaired. The HTN is called to propose a local plan recovory to repair the failed taks instead of replanning from the scartch. Nevertheless, theses systems are always dependent to the HTN and inhirit its limitations. For example, if the HTN cannot propose a plan recovery for the failed tasks then it has to replan from the scratch or blocked.  
 %\par \cite{hayashi2006dynagent} proposes to construct a planning system applicated to musium tour guide. this planning system uses A* heurestic to define the most fiable plan. If this later still breakdwons it uses the heurstic to call other plans to recover from breakdwons.  
 %
@@ -476,11 +478,14 @@ Reactive reasoning and planning :
 	\section{Discolog}
 	\subsection{overview of the solution}
 		present the concept of the hybrid planning system that include a reactive HTN and a simple linear planner: 
+		exploit the similarity between some procedural procedure and symbolic knowledge  extend them to a symbolic formalism. 
 		
-		
-		Describe the architecture of HTN and how to use it to integrate symbolic planning system. Extends the boolean structure that approach a symbolic structure. 
+		Describe the architecture of HTN and how to use it to integrate symbolic planning system. and propose to the HTN author to extends the boolean structure that approach a symbolic structure. 
 		\subsection{Discolog architecture}
-		Describe in detail with the pseudo code how Discolog detects a breakdwon, generate the candidates and propose a plan recovery.
+		1. Brief presentation of the main architecture of Disco + ref + STRIPS in prolog 
+		
+		
+		Describe in detail with the pseudo code how Discolog detects a breakdwon, generate the candidates and propose a plan recovery: 
 		
 		
 		1. How a breakdown is detected
@@ -509,6 +514,11 @@ Reactive reasoning and planning :
 	
 		3. Present the obtained results and discuss them. 
 		
+		results obtaind of tree (5,4,1) (2,3,2) (3,3,3) 
+		
+		
+		Discuss the fact that the more symbolic knowledge we have the more recovery we get. 
+		Expose the fact that we can not have a 100 of symbolic knowelge and its is limited to the representation of the HTN hauthor which is also incomplete.
 		
 	\section{Conclusion}
 	Remind the context of our work. the proposition and its adventages. the future work : 
