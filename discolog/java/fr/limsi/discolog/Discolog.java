@@ -36,6 +36,8 @@ public class Discolog extends Agent {
 	}
 
 	private boolean recover(Interaction interaction) {
+		long begin_recover = System.currentTimeMillis();
+
 		TestClass.NbBreakdown ++;
 		//interaction.getDisco().history(System.out);
 		candidates.clear();
@@ -67,6 +69,18 @@ public class Discolog extends Agent {
 				TestClass.time_execution.write(" the plan repair procedure for the candidate : "+ 
 						interaction.getDisco().getFocus().getType().getId()+ "    :"+
 						(endplanRepair - startplanRepair)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			long end_recover = System.currentTimeMillis();
+			
+			try {
+				TestClass.time_execution.write(" recover procedure for the broken task : "+ 
+						interaction.getDisco().getFocus().getType().getId()+ "    :"+
+						(end_recover - begin_recover)+"");
 				TestClass.time_execution.flush();
 				TestClass.time_execution.newLine();
 			} catch (IOException e) {
@@ -125,10 +139,10 @@ public class Discolog extends Agent {
 
 		for(Candidate candidate: candidates){
 			long startCallStripsPlanner = System.currentTimeMillis();
-
 			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript(), d);
 			long endCallStripsPlanner = System.currentTimeMillis();
+			
 			try {
 				TestClass.time_execution.write(" ################################### "+ 
 						candidate.plan.getType().getId()+ "    :"+						" ################################### ");
@@ -355,12 +369,25 @@ public class Discolog extends Agent {
 
 
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
+		long eval_cond = System.currentTimeMillis();
+
 		List<String> liveCond = new ArrayList<String>();
 		for (int i = 0; i < conditions.size(); i++){
 			if ((Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= null &&
 					(Boolean)engine.eval(conditions.get(i).toString(),"breakdown")!= false){
 				liveCond.add(conditions.get(i).toString());
 			}
+		}
+		long end_eval_cond = System.currentTimeMillis();
+		try {
+			TestClass.time_execution.write("conditions evaluation fot the prolog init "+ 
+
+					(end_eval_cond - eval_cond+""));
+			TestClass.time_execution.flush();
+			TestClass.time_execution.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return liveCond;
 	}

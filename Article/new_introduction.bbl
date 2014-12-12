@@ -1,11 +1,19 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{NCLMA99}
+\begin{thebibliography}{WHLUMA07}
 
 \bibitem[AF02]{allen2002human}
 James Allen and George Ferguson.
 \newblock Human-machine collaborative planning.
 \newblock In {\em Proceedings of the Third International NASA Workshop on
   Planning and Scheduling for Space}, pages 27--29, 2002.
+
+\bibitem[AKYG07]{ayan2007hotride}
+N~Fazil Ayan, Ugur Kuter, Fusun Yaman, and Robert~P Goldman.
+\newblock Hotride: Hierarchical ordered task replanning in dynamic
+  environments.
+\newblock In {\em Planning and Plan Execution for Real-World
+  Systems--Principles and Practices for Planning in Execution: Papers from the
+  ICAPS Workshop. Providence, RI}, 2007.
 
 \bibitem[BBC{\etalchar{+}}05]{beaudry2005reactive}
 Eric Beaudry, Yannick Brosseau, Carle C{\^o}t{\'e}, Cl{\'e}ment Ra{\"\i}evsky,
@@ -14,6 +22,12 @@ Eric Beaudry, Yannick Brosseau, Carle C{\^o}t{\'e}, Cl{\'e}ment Ra{\"\i}evsky,
 \newblock In {\em Proceedings of the National Conference on Artificial
   Intelligence}, volume~20, page 1242. Menlo Park, CA; Cambridge, MA; London;
   AAAI Press; MIT Press; 1999, 2005.
+
+\bibitem[BD02]{boella2002replanning}
+Guido Boella and Rossana Damiano.
+\newblock A replanning algorithm for a reactive agent architecture.
+\newblock In {\em Artificial Intelligence: Methodology, Systems, and
+  Applications}, pages 183--192. Springer, 2002.
 
 \bibitem[BR03]{bohus2003ravenclaw}
 Dan Bohus and Alexander~I Rudnicky.
@@ -50,6 +64,19 @@ R~James Firby.
 \newblock An investigation into reactive planning in complex domains.
 \newblock In {\em AAAI}, volume~87, pages 202--206, 1987.
 
+\bibitem[FN72]{fikes1972strips}
+Richard~E Fikes and Nils~J Nilsson.
+\newblock Strips: A new approach to the application of theorem proving to
+  problem solving.
+\newblock {\em Artificial intelligence}, 2(3):189--208, 1972.
+
+\bibitem[HTHO06]{hayashi2006dynagent}
+Hisashi Hayashi, Seiji Tokura, Tetsuo Hasegawa, and Fumio Ozaki.
+\newblock Dynagent: An incremental forward-chaining htn planning agent in
+  dynamic domains.
+\newblock In {\em Declarative Agent Languages and Technologies III}, pages
+  171--187. Springer, 2006.
+
 \bibitem[Mae90]{maes1990designing}
 Pattie Maes.
 \newblock {\em Designing autonomous agents: Theory and practice from biology to
@@ -67,6 +94,16 @@ Dana Nau, Yue Cao, Amnon Lotem, and Hector Mu{\~n}oz-Avila.
 Earl~D Sacerdoti.
 \newblock A structure for plans and behavior.
 \newblock Technical report, DTIC Document, 1975.
+
+\bibitem[VDKDW05]{van2005plan}
+Roman Van Der~Krogt and Mathijs De~Weerdt.
+\newblock Plan repair as an extension of planning.
+\newblock In {\em ICAPS}, volume~5, pages 161--170, 2005.
+
+\bibitem[WHLUMA07]{warfield2007adaptation}
+Ian Warfield, Chad Hogg, Stephen Lee-Urban, and H{\'e}ctor Munoz-Avila.
+\newblock Adaptation of hierarchical task network plans.
+\newblock In {\em FLAIRS Conference}, pages 429--434, 2007.
 
 \bibitem[Wil88]{wilkins1988practical}
 David~E Wilkins.
