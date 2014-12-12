@@ -3,11 +3,11 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: new_introduction.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 35 of file Bibliography.bib
+Repeated entry---line 53 of file Bibliography.bib
  : @article{brom2005hierarchical
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 227 of file Bibliography.bib
+Repeated entry---line 265 of file Bibliography.bib
  : @inproceedings{firby1987investigation
  :                                      ,
 I'm skipping whatever remains of this entry
@@ -15,45 +15,45 @@ Warning--can't use both volume and number fields in beaudry2005reactive
 Warning--empty journal in bohus2003ravenclaw
 Warning--can't use both volume and number fields in bryson2001modularity
 Warning--empty journal in erol1996hierarchical
-You've used 13 entries,
+You've used 19 entries,
             2543 wiz_defined-function locations,
-            633 strings with 6736 characters,
-and the built_in function-call counts, 5699 in all, are:
-= -- 573
-> -- 241
-< -- 16
-+ -- 83
-- -- 81
-* -- 360
-:= -- 886
-add.period$ -- 43
-call.type$ -- 13
-change.case$ -- 82
-chr.to.int$ -- 13
-cite$ -- 17
-duplicate$ -- 266
-empty$ -- 426
-format.name$ -- 98
-if$ -- 1220
+            667 strings with 7906 characters,
+and the built_in function-call counts, 8877 in all, are:
+= -- 902
+> -- 391
+< -- 21
++ -- 138
+- -- 135
+* -- 575
+:= -- 1365
+add.period$ -- 63
+call.type$ -- 19
+change.case$ -- 124
+chr.to.int$ -- 19
+cite$ -- 23
+duplicate$ -- 403
+empty$ -- 663
+format.name$ -- 158
+if$ -- 1909
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 14
-newline$ -- 69
-num.names$ -- 39
-pop$ -- 104
+missing$ -- 20
+newline$ -- 99
+num.names$ -- 57
+pop$ -- 153
 preamble$ -- 1
-purify$ -- 96
+purify$ -- 144
 quote$ -- 0
-skip$ -- 228
+skip$ -- 352
 stack$ -- 0
-substring$ -- 285
-swap$ -- 83
-text.length$ -- 16
+substring$ -- 481
+swap$ -- 129
+text.length$ -- 21
 text.prefix$ -- 6
 top$ -- 0
-type$ -- 96
+type$ -- 144
 warning$ -- 4
-while$ -- 52
-width$ -- 15
-write$ -- 172
+while$ -- 84
+width$ -- 21
+write$ -- 252
 (There were 2 error messages)

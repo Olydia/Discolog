@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 DEC 2014 18:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  11 DEC 2014 15:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -226,30 +226,30 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 452.
+(Font)              <7> on input line 453.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 452.
+(Font)              <5> on input line 453.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ] (./new_introduction.bbl
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 10.
+(Font)              <8> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 10.
+(Font)              <6> on input line 18.
 
-Underfull \hbox (badness 5203) in paragraph at lines 11--17
+Underfull \hbox (badness 1803) in paragraph at lines 19--25
 []\OT1/ptm/m/n/8 Eric Beaudry, Yan-nick Brosseau, Carle C[]ot[]e, Cl[]ement
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 11--17
+Underfull \hbox (badness 1558) in paragraph at lines 19--25
 \OT1/ptm/m/n/8 Ra[]^^Pevsky, Do-minic L[]etourneau, Fro-d-u-ald Ka-banza, and
  []
 
-)
-** WARNING: \IEEEbiography is locked out when in conference mode (line 603).
+[2])
+** WARNING: \IEEEbiography is locked out when in conference mode (line 625).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -261,27 +261,29 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2] (./new_introduction.aux) ) 
+[3
+
+] (./new_introduction.aux) ) 
 Here is how much of TeX's memory you used:
- 2381 strings out of 493304
- 38308 string characters out of 6139871
- 104655 words of memory out of 5000000
- 5828 multiletter control sequences out of 15000+600000
+ 2387 strings out of 493304
+ 38422 string characters out of 6139871
+ 105703 words of memory out of 5000000
+ 5834 multiletter control sequences out of 15000+600000
  35966 words of font info for 69 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
  37i,8n,24p,1456b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/ba
-se/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
-i8a.pfb>
-Output written on new_introduction.pdf (2 pages, 73770 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base
+/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on new_introduction.pdf (3 pages, 76745 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 43 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,5 +1,6 @@
 package fr.limsi.discolog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,12 +39,41 @@ public class Discolog extends Agent {
 		TestClass.NbBreakdown ++;
 		//interaction.getDisco().history(System.out);
 		candidates.clear();
+		long find_candidates = System.currentTimeMillis();
+
 		findCandidates(interaction.getDisco().getTops());
+
+		long end_candidates = System.currentTimeMillis();
+		try {
+			TestClass.time_execution.write(" Finding candidates for the broken task : "+ 
+					interaction.getDisco().getFocus().getType().getId()+ "    :"+
+					(end_candidates - find_candidates)+"");
+			TestClass.time_execution.flush();
+			TestClass.time_execution.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		long startplanRepair = System.currentTimeMillis();
 		System.out.println("Breakdown detected at " +interaction.getDisco().getFocus());
 		if (candidates.isEmpty()) {
 			System.out.println("No recovery candidates!");
 		} else {
 			Solution STRIPS = invokePlanner(candidates);
+
+			long endplanRepair = System.currentTimeMillis();
+			try {
+				TestClass.time_execution.write(" the plan repair procedure for the candidate : "+ 
+						interaction.getDisco().getFocus().getType().getId()+ "    :"+
+						(endplanRepair - startplanRepair)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			if(STRIPS != null){
 				//Plan recovery = new Plan(PlanConstructor.RECOVERY.newInstance());
 				//TaskEngine TE = PlanConstructor.RECOVERY.getEngine();
@@ -92,13 +122,32 @@ public class Discolog extends Agent {
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		ArrayList<Solution> planrepair = new ArrayList<Solution>();
 		TestClass.NbCandidates += candidates.size();
-		for(Candidate candidate: candidates){
-			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 
+		for(Candidate candidate: candidates){
+			long startCallStripsPlanner = System.currentTimeMillis();
+
+			TaskEngine d = candidate.plan.getGoal().getType().getEngine();
 			JavaPlan = CallStripsPlanner(localtheory, EvalConditions(TestClass.conditions,d) ,candidate.condition.getScript(), d);
+			long endCallStripsPlanner = System.currentTimeMillis();
+			try {
+				TestClass.time_execution.write(" ################################### "+ 
+						candidate.plan.getType().getId()+ "    :"+						" ################################### ");
+				TestClass.time_execution.flush();
+
+				TestClass.time_execution.newLine();
+				TestClass.time_execution.write(" Call Strips Planner  for  "+ 
+						candidate.plan.getType().getId()+ "    :"+
+						(endCallStripsPlanner - startCallStripsPlanner)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if((JavaPlan != null )){
 				planrepair.add(new Solution(JavaPlan, candidate));
 			}
+
 		}	
 		Collections.sort(planrepair);
 		if (planrepair.isEmpty())
@@ -211,10 +260,14 @@ public class Discolog extends Agent {
 	public  ArrayList<String> CallStripsPlanner(Prolog engine ,List<String> Initial_state,
 			String Goal, TaskEngine d) {
 		Term Plan = null;
+
 		ArrayList<String> JavaPlan = new ArrayList<String>();
+
+		long startINITStripsPlanner = System.currentTimeMillis();
+
 		localtheory.clearTheory();
 		try {
-			
+
 			localtheory.setTheory(TestClass.engine.getTheory());
 			//System.out.println(localtheory.getTheory());
 		} catch (InvalidTheoryException e) {
@@ -223,21 +276,64 @@ public class Discolog extends Agent {
 		}
 		try {
 			Strips_Input(Initial_state, Goal.toLowerCase(), engine);
+
+			long endINITStripsPlanner = System.currentTimeMillis();
+			try {
+				TestClass.time_execution.write(" theory Update :  "+ 
+
+						(endINITStripsPlanner - startINITStripsPlanner)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			Struct goal = new Struct("test1", new Var("X"));
-		
+
+			long startFindPlan = System.currentTimeMillis();
+
 			SolveInfo info = engine.solve(goal);
+
+			long endFindPlan = System.currentTimeMillis();
+			try {
+				TestClass.time_execution.write(" fIND A PLAN FOR  "+  Goal + "  :" +
+
+						(endFindPlan - startFindPlan)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// Results
 			if (!info.isSuccess()){
 				return null;
 			}
 			else {// main case
+				long startoutputplanner = System.currentTimeMillis();
+
 				Plan = info.getVarValue("X");
 				JavaPlan = getPlannerOutput(Plan, d);
+				
+				long endoutputplanner = System.currentTimeMillis();
+				try {
+					TestClass.time_execution.write(" get Strips Planner  output "+ 
+
+							(endoutputplanner - startoutputplanner+""));
+					TestClass.time_execution.flush();
+					TestClass.time_execution.newLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return JavaPlan;
 			}
 		} catch (NoSolutionException ex) {
 			throw new RuntimeException(ex);
 		}
+		
+		
 	}
 
 	private  void Strips_Input(List<String> Initial_state, String Goal,

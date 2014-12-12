@@ -364,17 +364,18 @@
 		Univ. Paris-Sud, Orsay, France \\
 			Email: ouldouali@limsi.fr
 }
+			\and
+				\IEEEauthorblockN{Charles RICH}
+				\IEEEauthorblockA{
+					Worcester Polytechnic Institute\\ Worcester, MA, USA\\
+						Email: rich@wpi.edu/
+					}
 		\and
 		\IEEEauthorblockN{Nicolas SABOURET}
 		\IEEEauthorblockA{ LIMSI-CNRS, UPR 3251, Orsay, France \\
 			Univ. Paris-Sud, Orsay, France \\
-			Email: http://perso.limsi.fr/sabouret/}
-		\and
-		\IEEEauthorblockN{Charles RICH}
-		\IEEEauthorblockA{
-			Worcester Polytechnic Institute\\ Worcester, USA\\
-				Email: http://www.cs.wpi.edu/~rich
-			}}
+			Email: Nicolas.Sabouret@limsi.fr}
+	}
 	
 	% conference papers do not typically use \thanks and this command
 	% is locked out in conference mode. If really needed, such as for
@@ -449,7 +450,7 @@
 
 	
 \par Automatic planning is an important field of controlling artificial agents in complex and dynamic environments where research built two different approaches. The first one is symbolic planning: this approach consists in constructing a complete symbolic and logical model of the environment that allows the agent to reason about this model and define a complete plan to carry out its goals.  
-The most popular architecture used to describe the environment is the hierarchical architecture HTN (Hierarchical Taks Network) \cite{erol1996hierarchical}, which allows a recursive decomposition of complex goals into sub-goals or primitive actions. The HTN architecture eases the design of the environment and gives more expressiveness. Multiple planning systems using this approach were developed such as SHOP \cite{nau1999shop}, SIPE \cite{wilkins1988practical} or NOAH \cite{sacerdoti1975structure}. Symbolic planning assumes that the environment is fully defined. By consequence,  the agent is able to predict all the possible situations an to plan in advance. Nevertheless, it becomes clear that authoring a complete representation of a dynamic and complex environment such as simulation of human behavior \cite{conte1998mas} or the definition of dialog systems \cite{allen2002human} requires significant  knowledge-engineering effort \cite{zhuo2009learning}, and even reveals to be impossible \cite{maes1990designing}. However, with incomplete knowledge the agent cannot anticipate the future and the generated plan might be not executed as expected. Therefore, if at any point of the execution the plan breaksdown (i.e action execution fails), the planner has to stop the execution and build another plan that achieves the agent's goals. Such operation might be costly in terms of time and resources. 
+The most popular architecture used to describe the environment is the hierarchical architecture HTN (Hierarchical Taks Network) \cite{erol1996hierarchical}, which allows a recursive decomposition of complex goals into sub-goals or primitive actions. The HTN architecture eases the design of the environment and gives more expressiveness. Symbolic planning assumes that the environment is fully defined. By consequence,  the agent is able to predict all the possible situations an to plan in advance. Nevertheless, it becomes clear that authoring a complete representation of a dynamic and complex environment such as simulation of human behavior \cite{conte1998mas} or the definition of dialog systems \cite{allen2002human} requires significant  knowledge-engineering effort \cite{zhuo2009learning}, and even reveals to be impossible \cite{maes1990designing}. However, with incomplete knowledge the agent cannot anticipate the future and the generated plan might be not executed as expected. Therefore, if at any point of the execution the plan breaksdown (i.e action execution fails), the planner has to stop the execution and build another plan that achieves the agent's goals. Such operation might be costly in terms of time and resources. 
 
 \par Because of these limitations, another planning approach called reactive planning was proposed \cite{firby1987investigation}. Reactive planning avoids long-term prediction and leaves all the planning during the execution phase: the agent plans only for the next step to be executed from the current defined state of the environment. Thus, it can adapt the next step according to the observed changes. The main advantage of reactive planning systems is they don't need a complete definition of the environment. Instead, they aim to define the policy of the agent in its environment by running through a pres-authored HTN structure with  procedural  knowledge. Procedural knowledge defines conditions in the HTN domain knowledge as black-box procedures (for exmaple : JavaScript code) that contains no logical information (i.e no symbolic knowledge). This type of reactive HTN  eases the design, reduce the complexity of planning and still can cope with complex dynamic environments \cite {brom2005hierarchical}. They are used in numerous application domains, such as dialog systems \cite{bohus2003ravenclaw} and simulating human behavior \cite{brom2005hierarchical}.
 \par Nevertheless, breakdowns can still appear in reactive planning. An action execution can fail and leads the HTH to a state where no action can be applicable to achieve the goal. 
@@ -459,55 +460,75 @@ In such situation, the agent has to stop and think about a new solution to reach
 
 \par In section 2, we briefly present existing works in this domain. In section 3 we formalize the proposed solution \textit{Discolog} and describe its implementation. Section 4, presents the expriments and discusses the obtained solutions. At the end, we discuss the futures works to validate and extends our solution to differents domains and uses.
 
-\section{Related works}
- reactive planning becomes very popular in AI such in controlling mobile agents \cite{beaudry2005reactive} or simulating human behaviour \cite{bryson2001modularity}.  Nevertheless, As reactive planning is used for highly dynamic environements it presents certain limits as discussed below: 
- \begin{itemize}
+\section{Backgorund and related works}
+
+\subsection{Hierachical and linear symbolic planning}
+\begin{itemize}
+\item  Basic structure of linear planning  STRIPS 
+
+action structure + planning solution  \cite{fikes1972strips}
+\item HTN architecture: 
+hiearchical structure in AND/OR tree. Compound task . Planning : task decomposition until primitive tasks are reached. \cite{erol1996hierarchical}
+\subsection{Related works and previous approachs}
+
+	\subsubsection{Reactive planning }
+ \item Reactive planning becomes very popular in AI such in controlling mobile agents \cite{beaudry2005reactive}, simulating human behaviour \cite{bryson2001modularity} or Gaming with the name f behaviour trees. Behaviours trees have the same hiearchical structure of HTNs and do Real time decision which can be seen as reactive planning.
+   Nevertheless, As reactive planning is used for highly dynamic environements it presents certain limits as discussed below: 
+
  \item C. Brom \cite{brom2005hierarchical} proposes in his work an educational toolkit for prototyping human-like behaviour. the proposed reative architecture was based on the work proposed in \cite{bryson2001modularity}. Nevertheless, this reactive planning system faces some limits such as : 
  impossibility to add new goals during the execution or inhebit an undesirable subtask.unatural switching between behaviour. 
   
  \item R. James Firby  \cite{firby1987investigation} 
- \end{itemize}
- 
- 
+  
+
+ \subsubsection{Plan repair}
+ 	\item plan repair by extending the generated plan with graph containing the causal links between the HTN's tasks
+ 	 \cite{ayan2007hotride}  \cite{warfield2007adaptation} \cite{van2005plan} \cite{boella2002replanning}
+ 	 \item plan repair using heurestic \cite{hayashi2006dynagent}
+  \end{itemize}
  
 %A great deal of research has been done in the field of planning. Most of theses works were interested in constructing symbolic planning systems especially symbolic HTNs that include plan recovery from breakdwons and replanning. A common approach \cite{ayan2007hotride} \cite{van2005plan} \cite{warfield2007adaptation}. (revoir la phrase) is in addition to the plan, the HTN procduces a graph that captures the causal links between the HTN's tasks. Therefore, if during  plan execution, a breakdown occurs, the HTN uses the structure to detect all the tasks compromised by the failure and therefore needs to be repaired. The HTN is called to propose a local plan recovory to repair the failed taks instead of replanning from the scartch. Nevertheless, theses systems are always dependent to the HTN and inhirit its limitations. For example, if the HTN cannot propose a plan recovery for the failed tasks then it has to replan from the scratch or blocked.  
 %\par \cite{hayashi2006dynagent} proposes to construct a planning system applicated to musium tour guide. this planning system uses A* heurestic to define the most fiable plan. If this later still breakdwons it uses the heurstic to call other plans to recover from breakdwons.  
 %
 % In this last decate, there has been an interest on defineing reactive planning that can deal with high dynamic environments. Present articles in different field of IA and their solutions to handle limits of reactive planning. 
+\section{motivation}
 
+	Inlcude symblic knowledge to allow the agent on reasoning. 
+	Example : such as the robot moving an object from room 1 to room 2 
 	\section{Discolog}
 	\subsection{overview of the solution}
-		present the concept of the hybrid planning system that include a reactive HTN and a simple linear planner: 
-		exploit the similarity between some procedural procedure and symbolic knowledge  extend them to a symbolic formalism. 
 		
+		present the concept of the hybrid planning system that include a reactive HTN and a simple linear planner:		
 		Describe the architecture of HTN and how to use it to integrate symbolic planning system. and propose to the HTN author to extends the boolean structure that approach a symbolic structure. 
-		\subsection{Discolog architecture}
+		
+		
+				1. How a breakdown is detected
+				
+				
+				2. Use the algorithm to describe the plan recovery steps.
+				
+				
+				2.1. Calculate candidates: Detect the failed task and all the tasks affected by the breakdwon
+			
+			
+				2.2. How linear planner constructs its domain knowledge, build a plan recovery and calaculates the best one.
+			
+			
+				2.3. Transform the symbolic plan to a procedural one.
+		\subsection{Implementation : Discolog}
 		1. Brief presentation of the main architecture of Disco + ref + STRIPS in prolog 
 		
-		
-		Describe in detail with the pseudo code how Discolog detects a breakdwon, generate the candidates and propose a plan recovery: 
-		
-		
-		1. How a breakdown is detected
+		Describe how Discolog runs on an example 
 		
 		
-		2. Use the algorithm to describe the plan recovery steps.
-		
-		
-		2.1. Calculate candidates: Detect the failed task and all the tasks affected by the breakdwon
-	
-	
-		2.2. How STRIPS constructs its domain knowledge, build a plan recovery and calaculates the best one.
-	
-	
-		2.3. Transform the symbolic plan to a procedural one.
-		\section{Expriments and results}
+		\section{Experiments and results}
 	
 	
 		1. Approach of the expriments: Test the capability of Discolog to recover from a breakdown given a certain amount of symbolic knowlege. 
 	
 	
-		2. Benshmark creation: 
+		2. Benshmark creation:  
+		
 			Random HTNs with synthetic data. Breakdown caused in each primiive task. The purpose is to study the abbility of Discolog to find a plan recovery for all possible breakdowns in the HTN. 
 			Symbolic data generation : the variation of the level of symbolic knowledge to insert in the linear planner domain knowledge
 	
