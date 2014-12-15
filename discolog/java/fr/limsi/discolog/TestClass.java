@@ -75,7 +75,7 @@ public class TestClass{
 		test.interaction.start(false);
 		
 		long end_disco_call = System.currentTimeMillis();
-		time_execution.write("disco_call: "+(end_disco_call - disco_call)+"");
+		time_execution.write("Disco call: "+(end_disco_call - disco_call)+"");
 		time_execution.flush();
 		time_execution.newLine();
 		
@@ -89,7 +89,7 @@ public class TestClass{
 		test.interaction.interrupt();
 
 		long end = System.currentTimeMillis();
-		time_execution.write("Complete execution time: "+(end - begin)+"");
+		time_execution.write("Complete time execution : "+(end - begin)+"");
 		time_execution.flush();
 		time_execution.newLine();
 
@@ -120,9 +120,11 @@ public class TestClass{
 			for(int i=0; i<root.getLeaves().size()-1; i++){
 			//for(RecipeTree leaf: primitiveTasks){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
-				
+				time_execution.write(" ######################################################## primitive task : "+leaf.getHead().getName()
+				+"########################################################");
+				time_execution.flush();
+				time_execution.newLine();
 				long start_strip_leaf = System.currentTimeMillis();
-				
 				String init = BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
 				engine = initSTRIPS(leaf);
@@ -131,17 +133,7 @@ public class TestClass{
 				time_execution.write(" STRIPS knowledge for the broken primitive task: "+(strip_leaf - start_strip_leaf)+"");
 				time_execution.flush();
 				time_execution.newLine();
-				
-				long discoCall = System.currentTimeMillis();
-
 				test.childTest(task, partialroot, leaf, init);
-				
-
-				long end_discoCall = System.currentTimeMillis();
-				time_execution.write(" Disco call for the broken primitive task: "+(end_discoCall - discoCall)+"");
-				time_execution.flush();
-				time_execution.newLine();
-				
 				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
 				}
 			}
@@ -150,8 +142,6 @@ public class TestClass{
 			evaluation.newLine();
 			evaluation.flush();
 			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0;
-
-
 		}
 	}
 	public static void FromTreeToProlog(RecipeTree root, Prolog output, RecipeTree brokenTask) throws IOException, InvalidTheoryException{
@@ -173,8 +163,6 @@ public class TestClass{
 				if(!STRIPSconditions.contains(leaf.getHead().getPostconditions()))
 					STRIPSconditions.add( leaf.getHead().getPostconditions());
 			}
-	
-		
 		}
 		for(String recipe : partialroot.existingRecipeConditions){
 			output.addTheory(new Theory("strips_preconditions("

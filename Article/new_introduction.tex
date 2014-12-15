@@ -64,6 +64,14 @@
 %
 \documentclass[conference]{IEEEtran}
 \usepackage{blindtext, graphicx}
+\usepackage{color} 
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{subfigure}
+%\usepackage[notref,notcite]{showkeys}  % use this to temporarily show labels
+\usepackage{overcite}
+\usepackage{footnpag}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -193,7 +201,7 @@
 
 % *** SPECIALIZED LIST PACKAGES ***
 %
-%\usepackage{algorithmic}
+\usepackage{algorithmic}
 % algorithmic.sty was written by Peter Williams and Rogerio Brito.
 % This package provides an algorithmic environment fo describing algorithms.
 % You can use the algorithmic environment in-text or within a figure
@@ -227,8 +235,8 @@
 % http://www.ctan.org/tex-archive/macros/latex/required/tools/
 
 
-%\usepackage{mdwmath}
-%\usepackage{mdwtab}
+\usepackage{mdwmath}
+\usepackage{mdwtab}
 % Also highly recommended is Mark Wooding's extremely powerful MDW tools,
 % especially mdwmath.sty and mdwtab.sty which are used to format equations
 % and tables, respectively. The MDWtools set is already installed on most
@@ -241,7 +249,7 @@
 % quality.
 
 
-%\usepackage{eqparbox}
+\usepackage{eqparbox}
 % Also of notable interest is Scott Pakin's eqparbox package for creating
 % (automatically sized) equal width boxes - aka "natural width parboxes".
 % Available at:
@@ -507,7 +515,70 @@ tems were developed these recent years such as SHOP \cite{nau1999shop}, SIPE \ci
 	\section{Discolog}
 	\subsection{overview of the solution}
 		
-		present the concept of the hybrid planning system that include a reactive HTN and a simple linear planner:		
+	\par In this section we present the implementation of our solution called Discolog. Discolog is based on reactive HTN called Disco \cite{rich2009building}. Like reactive HTN, disco has no logical knowledge and plans only for the next step. Each task has a status which represents its state in the HTN. To achieve a goal, Disco starts by evaluating the preconditions of the task, if the current state holds the task's preconditions, the status of this task becomes \textit{live} else the status of the task becomes \textit{notDone} and a breakdown is detected. If the status of the task is live, Disco decomposes this task using one of its valid recipe. If all the task's recipes are invalid in the current state, then the task cannot be decomposed and a breakdown situation is detected. Disco recursively decomposes non primitive tasks as described until it reaches primitives tasks. Primitive tasks are executed by first, evaluating their preconditions, if there are valid then the task is executed in the current state using its grounding script \textit{(i.e grounding script represent the effect of the task in the world)}. Once the execution of a task is terminated, Disco evaluates its postconditions, if their are valid then the task execution is successful and its status becomes \textit{Done}. Nevertheless, if task's postconditions  are not valid, then the status of the task becomes \textit{Failed} and a breakdown is detected. 
+	
+	\par  An overview of Discolog planning , plan recovery system is described in \ref{euclid}. When a breakdown is detected, Discolog invoke the linear planner to find a recovery plan. We choose for this implementation a simple STRIPS planner coded in PROLOG. The advantage of this planner is its inference engine and the logical representation of knowledge. This allows Discolog to exploit the knowledge and  reason about in order to find a plan recovery.After constructing the declarative domain knowledge for STRIPS, Discolog  will  first look over the goal task and its children to determine which tasks in the HTN  are compromised by the breakdown, theses tasks are defined as task candidates for the plan recovery. Repairing a task using STRIPS is defined as repairing its failed conditions. 
+	
+		\begin{algorithm}
+			\caption{DiscoLog algorithm }\label{euclid}
+			\begin{algorithmic}[]
+				\Procedure{Discolog}{HTN,Goal}
+				\State $\textit{HTN} \gets\textit{ConstructModel()} $
+				\State $\pi \gets Disco \textit{(HTN,Goal)}$
+				\If {$ \pi \gets\textit{Success} $} 
+				\State \Return $\textit{Success} $
+				\Else 
+				\State$ plan \gets Recover(Goal)$
+				\If {(plan = \textit{null})}
+				\State \Return Failure
+				\Else 
+				\For{$ \textbf{each}\text{ action }\textit{ai} \in plan $}
+				\State  $\textit{Discolog} \text{(HTN,ai)}$
+				\EndFor
+				\EndIf
+				\EndIf
+				\\
+				\EndProcedure \textbf{endProcedure}
+				\State 
+				\Procedure{Recover}{Goal}
+				\State $\textit{Candidates}\gets\textit{findCandidate}{(G)} $
+				\If {$ \textit{Candidates = }\emptyset $} 
+				\State \Return $\textit{null} $
+				\Else 
+				\State $\Pi \gets \emptyset$
+				
+				\For{$ \textbf{each} \textit{ candidate} \in \textit{Candidates}$}
+				\State $\Pi += InvokeSTRIPS(candidate,CurrentState)$
+				\State  $Cost \gets \{ cost(\pi) | \pi \in  \Pi \} $
+				\EndFor
+				\EndIf
+				\State \Return $\pi \in \Pi \text{ with minimum cost}(\pi)$
+				\\
+				\EndProcedure \textbf{endProcedure}
+				
+				\State 
+				\Procedure{FindCandidates}{Goal}
+				\For{$ \textbf{each} \textit{ child} \in \textit{Goal}$}
+				
+				\If {$\text{(precondition(child)!=} \emptyset \text{ and}$
+					\State$ \textbf{ status} (child)\notin\{\text{Done, Live, Blocked}\})$}
+				\State $  \text{ add precondition(child) to Candidates}$
+				
+				\ElsIf{$\text{(postcondition(child)!=}\emptyset 
+					\text{ and } \textbf{ status} \text{(child)} \in \{\text{Failed}\}$}
+				\State $\text{add postcondition(child) to Candidates}$
+				\EndIf
+				\If {$(\textbf{status} \in \{\text{Live}\}\text{ and nonprimitive(child) and applicability(child)!=}\emptyset)$}
+				\State add Applicabilitycondition(child) to Candidates
+				\EndIf
+				\State $\textit{findCandidates} (children(child))$
+				\EndFor
+				\State \Return Candidates
+				\\
+				\EndProcedure \textbf{endProcedure}
+			
+		\end{algorithmic}
+	\end{algorithm}	present the concept of the hybrid planning system that include a reactive HTN and a simple linear planner:		
 		Describe the architecture of HTN and how to use it to integrate symbolic planning system. and propose to the HTN author to extends the boolean structure that approach a symbolic structure. 
 		
 		

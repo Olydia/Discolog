@@ -1,0 +1,12 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Backgorund and related works}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Hierachical and linear symbolic planning}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Related works and previous approachs}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Reactive planning}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Plan repair}{subsection.2.2}% 6
+\BOOKMARK [1][-]{section.3}{motivation}{}% 7
+\BOOKMARK [1][-]{section.4}{Discolog}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{overview of the solution}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Implementation : Discolog}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Experiments and results}{}% 11
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 12
