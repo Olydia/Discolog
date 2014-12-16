@@ -13,46 +13,48 @@ public class ReadData {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int depth =3, taskBranching = 3, level = 75;
-		int lineNumber =2;
+		int depth =4, taskBranching = 4, level = 25;
+		int lineNumber =2, init =10;
 		String destination = System.getProperty("user.dir") 
-				+ "/prolog/results/"+level;
+				+ "/prolog/"+level+"/"+level;
 		try{
-		FileWriter fw;
-		fw = new FileWriter(destination, true);
-		BufferedWriter output = new BufferedWriter(fw);
-	//	try {
-			
+			FileWriter fw;
+			fw = new FileWriter(destination, true);
+			BufferedWriter output = new BufferedWriter(fw);
+			//	try {
 
-		output.write("Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates");
-		output.flush();
-		output.newLine();output.flush();
 
-		for(int j =1; j<= 50; j++){
-			String adresse = "test_"+depth+"_"+taskBranching+"_"+level+"_"+j+".txt";
-			String adressedufichier = System.getProperty("user.dir") 
-					+ "/prolog/"+level+"/"+adresse;
+			output.write("Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates");
+			output.flush();
+			output.newLine();output.flush();
 
-			InputStream is = new FileInputStream(adressedufichier);
-			InputStreamReader isr = new InputStreamReader(is);		
-			BufferedReader r = new BufferedReader(isr);// read line from file
+			for(int j =1; j<= 8; j++){
+			//	for(int k =1; k<= 10; k++){
+					String adresse = "test_"+depth+"_"+taskBranching+"_"+level+"_"+j+/*"_"+k+*/".txt";
+					String adressedufichier = System.getProperty("user.dir") 
+							+ "/prolog/"+level+"/"+adresse;
 
-			for (int i = 1; i < lineNumber ; i++)
-			{
-				r.readLine();
+					InputStream is = new FileInputStream(adressedufichier);
+					InputStreamReader isr = new InputStreamReader(is);		
+					BufferedReader r = new BufferedReader(isr);// read line from file
+					r.readLine();
+					for (int i = 1; i <= 10 ; i++)
+					{
+						String line = r.readLine();
+						output.write(line);
+						System.out.println(line);
+						output.flush();
+						output.newLine();
+						output.flush();
+					}
+					
+
+					// write it in the destination file
+				//}
 			}
-			String line = r.readLine();
-			output.write(line);
-			output.flush();
-			output.newLine();
-			output.flush();
-			System.out.println(line);
-			
-			// write it in the destination file
-		}
-//		} finally {
-//            output.close();
-//        }
+			//		} finally {
+	         output.close();
+			//        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
