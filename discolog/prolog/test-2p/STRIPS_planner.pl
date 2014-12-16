@@ -7,6 +7,11 @@ strips_achieves(init,X) :-
 
 strips_unsatisfiable(_) :- fail.
 
+discolog_init([T|R]) :- assert(strips_holds(T,init)), discolog_init(R).
+discolog_init([]).
+
+discolog_destroy([T|R]) :- retract(strips_holds(T,init)), discolog_destroy(R).
+discolog_destroy([]).
 % =============================================================
 % =============================================================
 % =============================================================

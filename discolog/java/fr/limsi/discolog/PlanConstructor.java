@@ -10,7 +10,6 @@ import java.util.Map;
 import edu.wpi.cetask.DecompositionClass;
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.TaskClass;
-import edu.wpi.cetask.TaskEngine;
 import edu.wpi.cetask.TaskModel;
 import edu.wpi.cetask.DecompositionClass.Applicability;
 import edu.wpi.cetask.DecompositionClass.Step;
@@ -26,42 +25,19 @@ public class PlanConstructor {
 
 	static List<String> recipecondition = new LinkedList<String>();
 	public static List<String> conditions = new LinkedList<String>();
-	//public static List<String> conditions = Arrays.asList("P1","CR1","CR2","P3","P2","P4");
-	/*
-
-	public static void main(String[] args) throws IOException {
-		PlanConstructor test = new PlanConstructor();
-		FileOutputStream output = test.InitSTRIPSPlanner();
-		Node A = new Node("a", "P1", "P2"),
-				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
-		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
-				copyChild = new HashMap<String, ArrayList<RecipeTree>>();
-		RecipeTree root = new RecipeTree(A, child),
-				partialroot = new RecipeTree(A2, copyChild);
-		int depth = 2, length = 2, recipe = 2;
-		RecipeTree.DefineCompleteTree(root, depth, length, recipe);
-		int cond = RecipeTree.levelOfConditions(depth, length, recipe, 25);
-		recipecondition=RecipeTree.removeRecipesConditions(RecipeTree.RecipeCondition, 25);
-		RecipeTree.DefinepartialTree(root, partialroot, cond);
-		RecipeTree.printTree(partialroot);
-		conditions = root.getKnowledge(root, conditions);
-		TaskClass task = test.FromTreeToTask(partialroot,output);
-		test.CreateBenshmark(partialroot, task, output, RecipeTree.RecipeCondition);
-		output = test.InitSTRIPSPlanner();
-		test.LanchTest(task,conditions,root);
-	}*/
+	
 	// NB: use instance of Discolog extension instead of Agent below
 	final Interaction interaction = 
 			new Interaction(new Discolog("agent"), new User("user"), null){
 
-//		// for debugging with Disco console, comment out this override
+		// for debugging with Disco console, comment out this override
 		@Override
 		public void run() {
 			// keep running as long as agent has something to do and then stop
 			while (!Thread.currentThread().isInterrupted()) {}
 		}
 	}
-;
+	;
 
 	final  Disco disco = interaction.getDisco();
 	private final TaskModel model = new TaskModel(
@@ -100,44 +76,30 @@ public class PlanConstructor {
 	public void childTest(TaskClass task, RecipeTree root, RecipeTree child, String initState ){
 		disco.clear();
 		System.out.println(initState);
-//		TaskEngine.DEBUG = true; 
-//		TaskEngine.VERBOSE = true;
+		//		TaskEngine.DEBUG = true; 
+		//		TaskEngine.VERBOSE = true;
 		disco.eval(initState, "init");
 		disco.clearLiveAchieved();
-
 		//RECOVERY =newTask("recovery", false, null, null, null);
 		Plan top = newPlan(task);
-		//		// add intention
+		// add intention
 		disco.addTop(top);
 		// push top onto stack
 		disco.push(top);
-
-		// prevent agent asking about toplevel goal
-		//top.getGoal().setShould(true);
-		//		TaskEngine.VERBOSE = true;
 		((Discolog)interaction.getSystem()).setMax(1000);
-		//disco.getFocus().add(top);
 		top.setContributes(true); 
 	}
 
 	public void CreateBenshmark (RecipeTree root, TaskClass task) throws IOException{
 		generateTasks(root, task);
-		//RecipeRecoveryTask(RecipeTree.RecipeCondition);
 
-		//output.close();
 	}
 	public  TaskClass FromTreeToTask(RecipeTree root) throws IOException {
 
 		if (root.isLeaf()){
-//			System.out.println( "if ("+root.getHead().getName()+" == false) {"+
-//					// psotconditions put to false and change the flag to true
-//					root.getHead().getGrounding().get(1).toString()+ "=false; "
-//					+root.getHead().getName()+ "=true;}"
-//					// else if not the first run put the postcond to true
-//					+ " else { "+root.getHead().getGrounding().get(1)+ "=true}");
 			return(newTask(root.getHead().getName(),true,root.getHead().getPreconditions(),	root.getHead().getPostconditions(),
 					// preconditions are false
-					 "if ("+root.getHead().getName()+" == false) {"+
+					"if ("+root.getHead().getName()+" == false) {"+
 					// psotconditions put to false and change the flag to true
 					root.getHead().getGrounding().get(1).toString()+ "=false; "
 					+root.getHead().getName()+ "=true;}"
@@ -157,20 +119,15 @@ public class PlanConstructor {
 		if(!root.isLeaf()){
 			for (Map.Entry<String, ArrayList<RecipeTree>> NodeEntry : root
 					.getChildren().entrySet()) {
-				
+
 				for (int i=0; i<NodeEntry.getValue().size(); i++) {
 					RecipeTree node = NodeEntry.getValue().get(i);
 					child=FromTreeToTask(node);
 					generateTasks(node, child);
-					//					System.out.print(child.getId() + "[");
-					//					System.out.print( child.getPrecondition() == null ? "null, " : child.getPrecondition().getScript() +"," );
-					//					System.out.println (child.getPostcondition() == null ? "null]"  : child.getPostcondition().getScript()  +"],"
-					//													 + child.getDecompositions().size());
-					//					 
+									 
 					if(i>0){
 						step.add(new Step(child.getId(), child, 1, 1, 
 								Collections.singletonList(NodeEntry.getValue().get(i-1).getHead().getName().toString())));
-						//System.out.println(NodeEntry.getValue().get(i-1).getHead().getName().toString());
 					}
 					else 
 						step.add(new Step(child.getId(), child, 1, 1, null)); 
@@ -191,7 +148,7 @@ public class PlanConstructor {
 		}		
 	}
 
-	
+
 
 
 }
