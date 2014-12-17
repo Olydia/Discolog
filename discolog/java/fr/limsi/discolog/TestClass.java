@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import alice.tuprolog.InvalidTheoryException;
+import alice.tuprolog.MalformedGoalException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
 import edu.wpi.cetask.TaskClass;
@@ -23,6 +24,8 @@ public class TestClass{
 	public static List<String> STRIPSconditions = new ArrayList<String>();
 	static List<String> viableRecipeConditions = new ArrayList<String>();
 	private static List<RecipeTree> primitiveTasks = new ArrayList<RecipeTree>();
+	private static List<RecipeTree> prolog_actions = new ArrayList<RecipeTree>();
+
 	public static int NbBreakdown = 0; 
 	public static int NbRecover = 0; 
 	public static int NbCandidates = 0; 
@@ -36,8 +39,8 @@ public class TestClass{
 	public static BufferedWriter time_execution;
 
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 25
-				
+		int LEVEL = 50
+
 				; // 50, 75, 100
 		int debut = 1;
 		int fin = 1;	
@@ -46,44 +49,43 @@ public class TestClass{
 				recipeBranching = 1;
 		Node A = new Node("a", "P1", "P2"),
 				A2 = new Node(A.getName(), A.getPreconditions(), A.getPostconditions());
-		
+
 		HashMap<String, ArrayList<RecipeTree>> child = new HashMap<String, ArrayList<RecipeTree>>(),
-		copyChild = new HashMap<String, ArrayList<RecipeTree>>()
+				copyChild = new HashMap<String, ArrayList<RecipeTree>>()
 				;
-		
+
 		RecipeTree root = new RecipeTree(A, child);
-		
+
 		partialroot = new RecipeTree(A2, copyChild);
 		String time_execution_file = LEVEL +"/"+ depth+"_"+taskBranching+"_"+recipeBranching+"_"+"time_execution_file.txt";
 		long begin = System.currentTimeMillis();
-		
+
 		// Define the complete domain knowledge 
 		root.DefineCompleteTree(depth, taskBranching, recipeBranching);
 		PlanConstructor test = new PlanConstructor();
 		TaskClass task = test.FromTreeToTask(root);
 		test.CreateBenshmark(root, task);
-		
+
 		long endHTNConstruction = System.currentTimeMillis();
-		
+
 		time_execution = saveSolution(time_execution_file, false);
-		
 		time_execution.write("Complete HTN construction : "+(endHTNConstruction - begin)+"");
 		time_execution.flush();
 		time_execution.newLine();
 		long disco_call = System.currentTimeMillis();
-		
+
 		test.interaction.start(false);
-		
+
 		long end_disco_call = System.currentTimeMillis();
 		time_execution.write("Disco call: "+(end_disco_call - disco_call)+"");
 		time_execution.flush();
 		time_execution.newLine();
-		
+
 		conditions = root.getKnowledge(conditions);
 		for(int i=debut;i<=fin;i++) {
 			run(LEVEL,i, root, depth, taskBranching, recipeBranching, test, task);
 		}
-	//	long HTN = endHTNConstruction-beginHTNConstruction;
+		//	long HTN = endHTNConstruction-beginHTNConstruction;
 		//System.out.println("HTN Construction: "+ HTN);
 
 		test.interaction.interrupt();
@@ -104,9 +106,17 @@ public class TestClass{
 		root.DefinepartialTree(partialroot, 100-level);
 		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
 		strips = saveSolution(adresse_strips_file, false);
-		
 		long endRun = System.currentTimeMillis();
-		time_execution.write("Partial Tree generation + STRIPS engine: "+(endRun - startRun)+"");
+		time_execution.write("Partial Tree generation : "+(endRun - startRun)+"");
+		time_execution.flush();
+		time_execution.newLine();
+
+		long start_strip_leaf = System.currentTimeMillis();
+		engine = initSTRIPS();
+		//System.out.println(engine.getTheory());
+		long strip_leaf = System.currentTimeMillis();
+
+		time_execution.write(" STRIPS knowledge: "+(strip_leaf - start_strip_leaf)+"");
 		time_execution.flush();
 		time_execution.newLine();
 
@@ -118,25 +128,32 @@ public class TestClass{
 			// Get the HTN path 
 			//getHTNPath(root);
 			for(int i=0; i<root.getLeaves().size()-1; i++){
-			//for(RecipeTree leaf: primitiveTasks){
+				//for(RecipeTree leaf: primitiveTasks){
 				RecipeTree leaf= partialroot.getLeaves().get(i);
-				time_execution.write(" ######################################################## primitive task : "+leaf.getHead().getName()
-				+"########################################################");
+				time_execution.write(" ######################################################## primitive task :  "+leaf.getHead().getName()
+						+"   ########################################################");
 				time_execution.flush();
 				time_execution.newLine();
-				long start_strip_leaf = System.currentTimeMillis();
 				String init = BreakInit(root, leaf.getHead().getName(), initState);
 				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
-				engine = initSTRIPS(leaf);
-				
-				long strip_leaf = System.currentTimeMillis();
-				time_execution.write(" STRIPS knowledge for the broken primitive task: "+(strip_leaf - start_strip_leaf)+"");
-				time_execution.flush();
-				time_execution.newLine();
 				test.childTest(task, partialroot, leaf, init);
 				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
 				}
+				//System.out.println(engine.getTheory());
+				long update = System.currentTimeMillis();
+
+				try {
+					updateTheory(leaf,true);
+					updateTheory(partialroot.getLeaves().get(i+1), false);
+				} catch (MalformedGoalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();				}
+				long end_update = System.currentTimeMillis();
+				time_execution.write("Theory update : "+ (end_update - update));
+				time_execution.flush();
+				time_execution.newLine();
 			}
+
 			evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
 			evaluation.flush();
 			evaluation.newLine();
@@ -144,10 +161,37 @@ public class TestClass{
 			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0;
 		}
 	}
-	public static void FromTreeToProlog(RecipeTree root, Prolog output, RecipeTree brokenTask) throws IOException, InvalidTheoryException{
+	private static void updateTheory(RecipeTree leaf, boolean update) throws MalformedGoalException{
+		if(update){
+			if(prolog_actions.contains(leaf)){
+				engine.solve("assert(strips_preconditions("
+						+ leaf.getHead().getName().toLowerCase() + ",["
+						+ leaf.getHead().getPreconditions().toLowerCase()+ "])).");
+				engine.solve("assert(strips_achieves("
+						+ leaf.getHead().getName().toLowerCase() + ","
+						+ leaf.getHead().getPostconditions().toLowerCase()
+						+ ")).");
+			}
+		}
+		else {
+			if(prolog_actions.contains(leaf)){
+				engine.solve("retract(strips_preconditions("
+						+ leaf.getHead().getName().toLowerCase() + ",["
+						+ leaf.getHead().getPreconditions().toLowerCase()+ "])).");
+				engine.solve("retract(strips_achieves("
+						+ leaf.getHead().getName().toLowerCase() + ","
+						+ leaf.getHead().getPostconditions().toLowerCase()
+						+ ")).");
+			}
+		}
+	}
+	public static ArrayList<RecipeTree> FromTreeToProlog(RecipeTree root, Prolog output) throws IOException, InvalidTheoryException{
 		int actionsNb =0;
-		for(RecipeTree leaf: root.getLeaves()){
-			if (leaf.getHead().getPostconditions() != null && leaf.getHead().getPreconditions() != null && !leaf.getHead().getName().equals(brokenTask.getHead().getName())) {
+		ArrayList<RecipeTree> prolog_actions = new ArrayList<RecipeTree>();
+		for(int i=1; i<root.getLeaves().size(); i++){
+			//for(RecipeTree leaf: primitiveTasks){
+			RecipeTree leaf= partialroot.getLeaves().get(i);
+			if (leaf.getHead().getPostconditions() != null && leaf.getHead().getPreconditions() != null) {
 				// --------------- Prolog writing -----------------------------
 				//Preconditions 
 				actionsNb ++;
@@ -158,6 +202,7 @@ public class TestClass{
 						+ leaf.getHead().getName().toLowerCase() + ","
 						+ leaf.getHead().getPostconditions().toLowerCase()
 						+ ")."));
+				prolog_actions.add(leaf);
 				if(!STRIPSconditions.contains(leaf.getHead().getPreconditions()))
 					STRIPSconditions.add( leaf.getHead().getPreconditions());
 				if(!STRIPSconditions.contains(leaf.getHead().getPostconditions()))
@@ -171,7 +216,7 @@ public class TestClass{
 					+ recipe.toLowerCase() + ","
 					+ "c"+recipe.toLowerCase()
 					+ ")."));
-			
+
 			if(!STRIPSconditions.contains("C"+recipe))
 				STRIPSconditions.add("C"+ recipe);
 		}
@@ -181,6 +226,8 @@ public class TestClass{
 		strips.write(""+actionsNb +"");
 		strips.flush();
 		strips.newLine();
+		return prolog_actions;
+
 	}
 	static BufferedWriter saveSolution(String adresse, boolean write){
 		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/recipes/"+adresse;
@@ -209,7 +256,7 @@ public class TestClass{
 		long mean = 0;
 		return mean;
 	}
-	public static Prolog initSTRIPS(RecipeTree brokenTask){
+	public static Prolog initSTRIPS(){
 		Prolog engine = new Prolog();
 		InputStream planner = Discolog.class
 				.getResourceAsStream("/test-2p/STRIPS_planner.pl");
@@ -218,13 +265,13 @@ public class TestClass{
 			theory = new Theory(planner);
 			engine.clearTheory();
 			engine.setTheory(theory);
-			FromTreeToProlog(TestClass.partialroot, engine, brokenTask);
+			prolog_actions= FromTreeToProlog(TestClass.partialroot, engine);
 		} catch (IOException | InvalidTheoryException e) {
 			e.printStackTrace();
 		}
 		return engine;
 	}
-	
+
 	public static  String BreakInit(RecipeTree root, String broken, String init) {
 		for(RecipeTree leaf : root.getLeaves()){
 			if(leaf.getHead().getName() == broken)
@@ -235,9 +282,9 @@ public class TestClass{
 		}
 		return init;
 	}
-	
+
 	public static String Init(List<String> coditions, RecipeTree root){
-		
+
 		String init = null;
 		Random rand = new Random();
 		if(coditions.get(0) =="P1")
@@ -278,8 +325,8 @@ public class TestClass{
 		}
 		return null;
 	}
-	
-	
+
+
 	public static void getHTNPath (RecipeTree root) {
 		if (!root.isLeaf()) {
 			// System.out.println(root.toString());

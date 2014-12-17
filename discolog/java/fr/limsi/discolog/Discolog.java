@@ -39,9 +39,9 @@ public class Discolog extends Agent {
 
 		TestClass.NbBreakdown ++;
 		//interaction.getDisco().history(System.out);
-		candidates.clear();
 		long find_candidates = System.currentTimeMillis();
 
+		candidates.clear();
 		findCandidates(interaction.getDisco().getTops());
 
 		long end_candidates = System.currentTimeMillis();
@@ -56,19 +56,28 @@ public class Discolog extends Agent {
 			e.printStackTrace();
 		}
 
-		long startplanRepair = System.currentTimeMillis();
 		System.out.println("Breakdown detected at " +interaction.getDisco().getFocus());
 		if (candidates.isEmpty()) {
 			System.out.println("No recovery candidates!");
 		} else {
-			interaction.getDisco();
+			long eval_conditions = System.currentTimeMillis();
 			TaskEngine d = TaskEngine.ENGINE;
 			List<String> init = EvalConditions(TestClass.conditions,d); 
+			long end_eval_conditions = System.currentTimeMillis();
+
+			long startplanRepair = System.currentTimeMillis();
+
 			Solution STRIPS = invokePlanner(candidates, init);
 
 			long endplanRepair = System.currentTimeMillis();
 			try {
-				TestClass.time_execution.write(" the plan repair procedure for the candidate : "+ 
+				TestClass.time_execution.write(" Conditions evaluation for the prolog init : "+ 
+
+						(end_eval_conditions - eval_conditions)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+
+				TestClass.time_execution.write(" the plan repair procedure for the candidates  : "+ 
 						interaction.getDisco().getFocus().getType().getId()+ "    :"+
 						(endplanRepair - startplanRepair)+"");
 				TestClass.time_execution.flush();
@@ -170,7 +179,7 @@ public class Discolog extends Agent {
 	//***************************************************************************************************************************************
 
 	private final List<Candidate> candidates = new ArrayList<Candidate>();
-//	private final Prolog localtheory = new Prolog();
+	//	private final Prolog localtheory = new Prolog();
 
 	private  class Candidate {
 		private final Plan plan;
@@ -269,7 +278,7 @@ public class Discolog extends Agent {
 	public  ArrayList<String> CallStripsPlanner(Prolog engine ,String Initial_state,
 			String Goal, TaskEngine d) {
 		Term Plan = null;
-
+		long init_strips = System.currentTimeMillis();
 		ArrayList<String> JavaPlan = new ArrayList<String>();
 		try {
 			engine.solve("discolog_init("+Initial_state+").");
@@ -280,17 +289,23 @@ public class Discolog extends Agent {
 		} catch (MalformedGoalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			
 		}
+		long end_init_strips = System.currentTimeMillis();
+
 		try {	
-			
+
 			long startFindPlan = System.currentTimeMillis();
 			Struct goal = new Struct("test1", new Var("X"));
 			SolveInfo info = engine.solve(goal);
 
 			long endFindPlan = System.currentTimeMillis();
 			try {
-				TestClass.time_execution.write(" FIND A PLAN FOR  "+  Goal + "  :" +
+				TestClass.time_execution.write(" init STRIPS for  "+  Goal + "  :" +
+
+						(end_init_strips - init_strips)+"");
+				TestClass.time_execution.flush();
+				TestClass.time_execution.newLine();
+				TestClass.time_execution.write(" TRYNIG TO FIND A PLAN FOR  "+  Goal + "  :" +
 
 						(endFindPlan - startFindPlan)+"");
 				TestClass.time_execution.flush();
@@ -352,23 +367,23 @@ public class Discolog extends Agent {
 
 
 	}
-//
-//	private  void Strips_Input(List<String> Initial_state, String Goal,
-//			Prolog engine) {
-//		try {
-//			for(String init : Initial_state){
-//				engine.addTheory(new Theory("strips_holds(" + init.toLowerCase() + ",init)."));
-//			}
-//			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
-//					+ Goal.toLowerCase() + "],"
-//					+(TestClass.partialroot.getLeaves().size()*2)+",Plan).");
-//			engine.addTheory(PlannerCall);
-//
-//		} catch (InvalidTheoryException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	//
+	//	private  void Strips_Input(List<String> Initial_state, String Goal,
+	//			Prolog engine) {
+	//		try {
+	//			for(String init : Initial_state){
+	//				engine.addTheory(new Theory("strips_holds(" + init.toLowerCase() + ",init)."));
+	//			}
+	//			Theory PlannerCall = new Theory("test1(Plan):- strips_solve(["
+	//					+ Goal.toLowerCase() + "],"
+	//					+(TestClass.partialroot.getLeaves().size()*2)+",Plan).");
+	//			engine.addTheory(PlannerCall);
+	//
+	//		} catch (InvalidTheoryException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//	}
 
 
 	public  List<String> EvalConditions(List<String> conditions, TaskEngine engine){
