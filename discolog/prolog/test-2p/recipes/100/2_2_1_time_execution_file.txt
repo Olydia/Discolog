@@ -1,0 +1,64 @@
+
+Complete HTN construction : 893
+Disco call: 0
+Partial Tree generation : 1
+ STRIPS knowledge: 185
+ ######################################################## primitive task :  a21   ########################################################
+ Finding candidates for the broken task : a21    :0
+conditions evaluation fot the prolog init 10
+ init STRIPS for  P2  :7
+ TRYNIG TO FIND A PLAN FOR  P2  :3
+ get Strips Planner  output 4
+ Call Strips Planner  for the candidate  a    :15
+ init STRIPS for  P3  :2
+ TRYNIG TO FIND A PLAN FOR  P3  :1
+ get Strips Planner  output 4
+ Call Strips Planner  for the candidate  a11    :7
+ init STRIPS for  P4  :1
+ TRYNIG TO FIND A PLAN FOR  P4  :3
+ Call Strips Planner  for the candidate  a21    :8
+ init STRIPS for  P3  :2
+ TRYNIG TO FIND A PLAN FOR  P3  :0
+ get Strips Planner  output 6
+ Call Strips Planner  for the candidate  a31    :9
+ Conditions evaluation for the prolog init : 10
+ the plan repair procedure for the candidates  : a21    :40
+ Complete recover procedure for the broken task : a21    :51
+Theory update : 3
+ ######################################################## primitive task :  a22   ########################################################
+ Finding candidates for the broken task : a22    :0
+conditions evaluation fot the prolog init 11
+ init STRIPS for  P2  :1
+ TRYNIG TO FIND A PLAN FOR  P2  :3
+ get Strips Planner  output 4
+ Call Strips Planner  for the candidate  a    :8
+ init STRIPS for  P3  :1
+ TRYNIG TO FIND A PLAN FOR  P3  :2
+ Call Strips Planner  for the candidate  a11    :7
+ init STRIPS for  P3  :1
+ TRYNIG TO FIND A PLAN FOR  P3  :2
+ Call Strips Planner  for the candidate  a22    :7
+ init STRIPS for  P3  :1
+ TRYNIG TO FIND A PLAN FOR  P3  :2
+ Call Strips Planner  for the candidate  a31    :7
+ Conditions evaluation for the prolog init : 11
+ the plan repair procedure for the candidates  : a22    :29
+ Complete recover procedure for the broken task : a22    :40
+Theory update : 3
+ ######################################################## primitive task :  a31   ########################################################
+ Finding candidates for the broken task : a31    :0
+conditions evaluation fot the prolog init 9
+ init STRIPS for  P2  :2
+ TRYNIG TO FIND A PLAN FOR  P2  :11
+ Call Strips Planner  for the candidate  a    :18
+ init STRIPS for  P2  :1
+ TRYNIG TO FIND A PLAN FOR  P2  :9
+ Call Strips Planner  for the candidate  a12    :14
+ init STRIPS for  P5  :1
+ TRYNIG TO FIND A PLAN FOR  P5  :3
+ Call Strips Planner  for the candidate  a31    :7
+ Conditions evaluation for the prolog init : 9
+ the plan repair procedure for the candidates  : a31    :39
+ Complete recover procedure for the broken task : a31    :48
+Theory update : 2
+Complete time execution : 1405

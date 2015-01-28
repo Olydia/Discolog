@@ -1,0 +1,63 @@
+	\begin{algorithmic}[]
+		\Procedure{Hybrid system}{DomainKnowlege,Goal}
+					\State $\pi \gets Reactive HTN \textit{(DomainKnowlege,Goal)}$
+					\If {$ \pi \gets\textit{Success} $} 
+					\State \Return $\textit{Success} $
+					\Else 	\State$ plan \gets Recover(Goal)$
+					\If {(plan $=$ \textit{null})}
+					\State \Return Failure
+					\Else 
+					\For{$ \textbf{each}$  action \textit{$a_i$} $\in$ plan }
+					\State  $\textit{Discolog} (HTN,a_i) $
+					\EndFor
+					\EndIf
+					\EndIf
+
+					\EndProcedure 
+\State
+					\Procedure{Recover}{Goal}
+					\State $\textit{Candidates}\gets\textit{findCandidate}{(G)} $
+					\If {$ \textit{Candidates = }\emptyset $} 
+					\State \Return $\textit{null} $
+					\Else 
+					\State $\Pi \gets \emptyset$
+					
+					\For{$ \textbf{each} \textit{ candidate} \in \textit{Candidates}$}
+					\State $\Pi += $ LinearPlanner(candidate, CurrentState)
+					\State  $Cost \gets \{ cost(\pi) | \pi \in  \Pi \} $
+					\EndFor
+					\EndIf
+					\State \Return $\pi \in \Pi$  with minimum cost$(\pi)$
+
+					\EndProcedure
+					\State
+					\Procedure{FindCandidates}{Goal}
+						\For{$ \textbf{each} \textit{ child} \in \textit{Goal}$}
+						\If {(precondition(child)$!=\emptyset$  and  \textit{ status} (child)$\notin\{Done, Live, Blocked\})}$
+						\State add precondition(child) to Candidates
+						
+						\ElsIf{(postcondition(child)$!=\emptyset $ and  \textit{ status} (child)$ \in \{Failed\}$}
+						\State add postcondition(child) to Candidates
+						\EndIf
+						\If {(\textit{status} $\in \{Live\}$ and nonPrimitive(child) and applicability(child)!=  $\emptyset)$}
+						\State add App-condition(child) to Candidates
+						\EndIf
+						\State $\textit{findCandidates} (children(child))$
+						\EndFor
+						\State\Return Candidates
+		
+						\EndProcedure 
+%					\Procedure{FindCandidates}{Goal}
+%					\For{$ \textbf{each} \textit{ child} \in \textit{Goal}$}
+%					
+%					\If {$ \textbf{ status}$ (child) = failed}
+%					\State   add condition(child) to Candidates
+%					\EndIf
+%				
+%					\State $\textit{findCandidates} (children(child))$
+%					\EndFor
+%					\State \Return Candidates
+%	
+%					\EndProcedure 
+	\end{algorithmic}
+	\end{algorithm}

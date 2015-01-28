@@ -1,0 +1,11 @@
+Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates
+50 98 98 294 196
+50 107 107 162 107
+50 0 0 0 0
+50 0 0 0 0
+50 48 48 144 50
+50 93 0 264 0
+50 137 137 395 219
+50 95 95 285 185
+50 0 0 0 0
+50 104 104 293 204

@@ -37,13 +37,14 @@ public class TestClass{
 	public static Prolog engine = null;
 	public static HashMap<String,String> recipeConditions = new HashMap<String,String> ();
 	public static BufferedWriter time_execution;
+	public static boolean DEBUG = false;
 
 	public static void main(String[] args) throws IOException {
-		int LEVEL = 50
+		int LEVEL = 75
 
 				; // 50, 75, 100
 		int debut = 1;
-		int fin = 1;	
+		int fin = 60;	
 		int depth = 4, 
 				taskBranching = 4, 
 				recipeBranching = 1;
@@ -57,110 +58,203 @@ public class TestClass{
 		RecipeTree root = new RecipeTree(A, child);
 
 		partialroot = new RecipeTree(A2, copyChild);
-		String time_execution_file = LEVEL +"/"+ depth+"_"+taskBranching+"_"+recipeBranching+"_"+"time_execution_file.txt";
-		long begin = System.currentTimeMillis();
 
-		// Define the complete domain knowledge 
-		root.DefineCompleteTree(depth, taskBranching, recipeBranching);
-		PlanConstructor test = new PlanConstructor();
-		TaskClass task = test.FromTreeToTask(root);
-		test.CreateBenshmark(root, task);
 
-		long endHTNConstruction = System.currentTimeMillis();
-
-		time_execution = saveSolution(time_execution_file, false);
-		time_execution.write("Complete HTN construction : "+(endHTNConstruction - begin)+"");
-		time_execution.flush();
-		time_execution.newLine();
-		long disco_call = System.currentTimeMillis();
-
-		test.interaction.start(false);
-
-		long end_disco_call = System.currentTimeMillis();
-		time_execution.write("Disco call: "+(end_disco_call - disco_call)+"");
-		time_execution.flush();
-		time_execution.newLine();
-
-		conditions = root.getKnowledge(conditions);
-		for(int i=debut;i<=fin;i++) {
-			run(LEVEL,i, root, depth, taskBranching, recipeBranching, test, task);
+		if (DEBUG) {
+			String time_execution_file = LEVEL + "/" + depth + "_"
+					+ taskBranching + "_" + recipeBranching + "_"
+					+ "time_execution_file.txt";
+			long begin = System.currentTimeMillis();
+			// Define the complete domain knowledge 
+			root.DefineCompleteTree(depth, taskBranching, recipeBranching);
+			PlanConstructor test = new PlanConstructor();
+			TaskClass task = test.FromTreeToTask(root);
+			test.CreateBenshmark(root, task);
+			long endHTNConstruction = System.currentTimeMillis();
+			time_execution = saveSolution(time_execution_file, false);
+			time_execution.write("Complete HTN construction : "
+					+ (endHTNConstruction - begin) + "");
+			time_execution.flush();
+			time_execution.newLine();
+			long disco_call = System.currentTimeMillis();
+			test.interaction.start(false);
+			long end_disco_call = System.currentTimeMillis();
+			time_execution.write("Disco call: " + (end_disco_call - disco_call)
+					+ "");
+			time_execution.flush();
+			time_execution.newLine();
+			conditions = root.getKnowledge(conditions);
+			for (int i = debut; i <= fin; i++) {
+				run(LEVEL, i, root, depth, taskBranching, recipeBranching,
+						test, task);
+			}
+			//	long HTN = endHTNConstruction-beginHTNConstruction;
+			//System.out.println("HTN Construction: "+ HTN);
+			test.interaction.interrupt();
+			long end = System.currentTimeMillis();
+			time_execution.write("Complete time execution : " + (end - begin)
+					+ "");
+			time_execution.flush();
+			time_execution.newLine();
 		}
-		//	long HTN = endHTNConstruction-beginHTNConstruction;
-		//System.out.println("HTN Construction: "+ HTN);
-
-		test.interaction.interrupt();
-
-		long end = System.currentTimeMillis();
-		time_execution.write("Complete time execution : "+(end - begin)+"");
-		time_execution.flush();
-		time_execution.newLine();
+		else {
+			// Define the complete domain knowledge 
+			root.DefineCompleteTree(depth, taskBranching, recipeBranching);
+			PlanConstructor test = new PlanConstructor();
+			TaskClass task = test.FromTreeToTask(root);
+			test.CreateBenshmark(root, task);
+			test.interaction.start(false);
+			conditions = root.getKnowledge(conditions);
+			for (int i = debut; i <= fin; i++) {
+				run(LEVEL, i, root, depth, taskBranching, recipeBranching,
+						test, task);
+			}
+			//	long HTN = endHTNConstruction-beginHTNConstruction;
+			//System.out.println("HTN Construction: "+ HTN);
+			test.interaction.interrupt();
+			
+		}
 
 	}
 	public static void run(int level, int numero, RecipeTree root, int depth, int length, int recipe, PlanConstructor test, TaskClass task) throws IOException {
-		long startRun = System.currentTimeMillis();
+		if (DEBUG) {
+			long startRun = System.currentTimeMillis();
+			String adresse = level + "/" + "test_" + depth + "_" + length + "_"
+					+ recipe + "_" + level + "_" + numero + ".txt";
+			evaluation = saveSolution(adresse, true);
+			// Remove knowledge from  the HTN 
+			//long startRun = System.currentTimeMillis();
+			root.DefinepartialTree(partialroot, 100 - level);
+			String adresse_strips_file = level + "/" + "STRIPS_Action" + "_"
+					+ numero + ".txt";
+			strips = saveSolution(adresse_strips_file, false);
+			long endRun = System.currentTimeMillis();
+			time_execution.write("Partial Tree generation : "
+					+ (endRun - startRun) + "");
+			time_execution.flush();
+			time_execution.newLine();
+			long start_strip_leaf = System.currentTimeMillis();
+			engine = initSTRIPS();
+			//System.out.println(engine.getTheory());
+			long strip_leaf = System.currentTimeMillis();
+			time_execution.write(" STRIPS knowledge: "
+					+ (strip_leaf - start_strip_leaf) + "");
+			time_execution.flush();
+			time_execution.newLine();
+			int Dinit = 10;
+			for (int j = 0; j < Dinit; j++) {
+				int z = 0;
+				String initState = Init(conditions, root);
+				System.out.println(initState);
+				// Get the HTN path 
+				//getHTNPath(root);
+				for (int i = 0; i < root.getLeaves().size() - 1; i++) {
+					//for(RecipeTree leaf: primitiveTasks){
+					RecipeTree leaf = partialroot.getLeaves().get(i);
+					time_execution
+							.write(" ######################################################## primitive task :  "
+									+ leaf.getHead().getName()
+									+ "   ########################################################");
+					time_execution.flush();
+					time_execution.newLine();
+					String init = BreakInit(root, leaf.getHead().getName(),
+							initState);
+					System.out.println(level + " - " + numero + " -  init # "
+							+ j + " - break # " + z++);
+					test.childTest(task, partialroot, leaf, init);
+					while (test.interaction.getSystem().respond(
+							test.interaction, false, true, false)) {
+					}
+					//System.out.println(engine.getTheory());
+					long update = System.currentTimeMillis();
 
-		String adresse = level +"/"+"test_"+depth+"_"+length+"_"+recipe +"_"+level+"_"+numero+".txt";
-		evaluation = saveSolution(adresse, true);
-		// Remove knowledge from  the HTN 
-		//long startRun = System.currentTimeMillis();
-		root.DefinepartialTree(partialroot, 100-level);
-		String adresse_strips_file = level +"/"+"STRIPS_Action"+"_"+numero+".txt";
-		strips = saveSolution(adresse_strips_file, false);
-		long endRun = System.currentTimeMillis();
-		time_execution.write("Partial Tree generation : "+(endRun - startRun)+"");
-		time_execution.flush();
-		time_execution.newLine();
-
-		long start_strip_leaf = System.currentTimeMillis();
-		engine = initSTRIPS();
-		//System.out.println(engine.getTheory());
-		long strip_leaf = System.currentTimeMillis();
-
-		time_execution.write(" STRIPS knowledge: "+(strip_leaf - start_strip_leaf)+"");
-		time_execution.flush();
-		time_execution.newLine();
-
-		int Dinit= 1;
-		for(int j=0; j< Dinit; j++){
-			int z=0;
-			String initState = Init(conditions, root);
-			System.out.println(initState);
-			// Get the HTN path 
-			//getHTNPath(root);
-			for(int i=0; i<root.getLeaves().size()-1; i++){
-				//for(RecipeTree leaf: primitiveTasks){
-				RecipeTree leaf= partialroot.getLeaves().get(i);
-				time_execution.write(" ######################################################## primitive task :  "+leaf.getHead().getName()
-						+"   ########################################################");
-				time_execution.flush();
-				time_execution.newLine();
-				String init = BreakInit(root, leaf.getHead().getName(), initState);
-				System.out.println(level + " - " + numero  + " -  init # "+j + " - break # " + z++);
-				test.childTest(task, partialroot, leaf, init);
-				while (test.interaction.getSystem().respond(test.interaction, false, true, false)) {
+					try {
+						updateTheory(leaf, true);
+						updateTheory(partialroot.getLeaves().get(i + 1), false);
+					} catch (MalformedGoalException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					long end_update = System.currentTimeMillis();
+					time_execution.write("Theory update : "
+							+ (end_update - update));
+					time_execution.flush();
+					time_execution.newLine();
 				}
-				//System.out.println(engine.getTheory());
-				long update = System.currentTimeMillis();
 
-				try {
-					updateTheory(leaf,true);
-					updateTheory(partialroot.getLeaves().get(i+1), false);
-				} catch (MalformedGoalException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();				}
-				long end_update = System.currentTimeMillis();
-				time_execution.write("Theory update : "+ (end_update - update));
-				time_execution.flush();
-				time_execution.newLine();
+				evaluation.write(level + " " + NbBreakdown + " " + NbRecover
+						+ " " + NbCandidates + " " + NbRecoveredCandidates);
+				evaluation.flush();
+				evaluation.newLine();
+				evaluation.flush();
+				NbBreakdown = 0;
+				NbRecover = 0;
+				NbCandidates = 0;
+				NbRecoveredCandidates = 0;
 			}
+		}
+		else{
+			String adresse = level + "/" + "test_" + depth + "_" + length + "_"
+					+ recipe + "_" + level + "_" + numero + ".txt";
+			evaluation = saveSolution(adresse, true);
+			// Remove knowledge from  the HTN 
+			//long startRun = System.currentTimeMillis();
+			root.DefinepartialTree(partialroot, 100 - level);
+			String adresse_strips_file = level + "/" + "STRIPS_Action" + "_"
+					+ numero + ".txt";
+			strips = saveSolution(adresse_strips_file, false);
+			engine = initSTRIPS();
+			//System.out.println(engine.getTheory());
+			
+			int Dinit = 10;
+			for (int j = 0; j < Dinit; j++) {
+				int z = 0;
+				String initState = Init(conditions, root);
+				System.out.println(initState);
+				// Get the HTN path 
+			//	getHTNPath(root);
+				ArrayList<RecipeTree> visitedTasks = new ArrayList<RecipeTree>();
+				if(recipe > 1) 
+					visitedTasks.addAll(primitiveTasks);
+				else 
+					visitedTasks.addAll(root.getLeaves());
+				for (int i = 0; i < visitedTasks.size()-1; i++) {
+				//for(RecipeTree leaf: primitiveTasks){
+					//RecipeTree leaf = primitiveTasks.get(i);
+					RecipeTree leaf = visitedTasks.get(i);
+					String init = BreakInit(root, leaf.getHead().getName(),
+							initState);
+					System.out.println(level + " - " + numero + " -  init # "
+							+ j + " - break # " + z++);
+					test.childTest(task, partialroot, leaf, init);
+					while (test.interaction.getSystem().respond(
+							test.interaction, false, true, false)) {
+					}
+					//System.out.println(engine.getTheory());
+					try {
+						updateTheory(leaf, true);
+						updateTheory(visitedTasks.get(i + 1), false);
+					} catch (MalformedGoalException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
-			evaluation.write(level +" " +NbBreakdown + " " + NbRecover + " " + NbCandidates + " " + NbRecoveredCandidates);
-			evaluation.flush();
-			evaluation.newLine();
-			evaluation.flush();
-			NbBreakdown = 0; NbRecover = 0; NbCandidates =0; NbRecoveredCandidates =0;
+				evaluation.write(level + " " + NbBreakdown + " " + NbRecover
+						+ " " + NbCandidates + " " + NbRecoveredCandidates);
+				evaluation.flush();
+				evaluation.newLine();
+				evaluation.flush();
+				NbBreakdown = 0;
+				NbRecover = 0;
+				NbCandidates = 0;
+				NbRecoveredCandidates = 0;
+			}
+		
 		}
 	}
+
+
 	private static void updateTheory(RecipeTree leaf, boolean update) throws MalformedGoalException{
 		if(update){
 			if(prolog_actions.contains(leaf)){
@@ -230,7 +324,7 @@ public class TestClass{
 
 	}
 	static BufferedWriter saveSolution(String adresse, boolean write){
-		String adressedufichier = System.getProperty("user.dir") + "/prolog/test-2p/recipes/"+adresse;
+		String adressedufichier = System.getProperty("user.dir") + "/experiments/"+adresse;
 		PrintWriter writer;
 		if(write){
 			try {
@@ -307,8 +401,8 @@ public class TestClass{
 			}
 		}
 		for(Map.Entry<String, String> recipe :root.getRecipeConditions(recipeConditions).entrySet()){
-			int cond= /*rand.nextInt(2)*/ 1;
-			if (cond== 1){
+			int cond= 2/*rand.nextInt(2)*/;
+			if (cond!= 1){
 				init += ", C" + recipe.getKey() +" =true";
 				viableRecipeConditions.add(recipe.getKey());
 			}

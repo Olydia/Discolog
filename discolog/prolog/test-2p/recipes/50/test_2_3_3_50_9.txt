@@ -1,0 +1,11 @@
+Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates
+50 0 0 0 0
+50 737 737 2211 737
+50 488 0 1464 0
+50 12 12 36 28
+50 749 0 2247 0
+50 773 0 2319 0
+50 512 512 1536 842
+50 515 0 1545 0
+50 0 0 0 0
+50 0 0 0 0

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  19 DEC 2014 15:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  28 JAN 2015 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -185,35 +185,89 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip46
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (./discolog_article.aux)
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen119
+\captionmargin@=\dimen120
+\captionwidth=\dimen121
+\caption@tempdima=\dimen122
+\caption@indent=\dimen123
+\caption@parindent=\dimen124
+\caption@hangindent=\dimen125
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\norma
+lfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace
+ {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptio
+nsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspac
+e \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\nor
+malfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\n
+ormalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONcon
+ference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }
+\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi 
+\fi .
+\c@ContinuedFloat=\count120
+Package caption Info: float package is loaded.
+)
+\c@subfigure=\count121
+\c@subtable=\count122
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen126
+\extrarowheight=\dimen127
+\NC@list=\toks19
+\extratabsurround=\skip47
+\backup@length=\skip48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/stfloats.sty
+Package: stfloats 2012/05/29 v1.1 Improve float mechanism and baselineskip sett
+ings
+\@dblbotnum=\count123
+\c@dblbotnumber=\count124
+)
+(./discolog_article.aux)
 \openout1 = `discolog_article.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 357.
-LaTeX Font Info:    ... okay on input line 357.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 359.
+LaTeX Font Info:    ... okay on input line 359.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count120
-\scratchdimen=\dimen119
+\scratchcounter=\count125
+\scratchdimen=\dimen128
 \scratchbox=\box29
-\nofMPsegments=\count121
-\nofMParguments=\count122
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count123
-\MPscratchDim=\dimen120
-\MPnumerator=\count124
-\makeMPintoPDFobject=\count125
-\everyMPtoPDFconversion=\toks20
+\nofMPsegments=\count126
+\nofMParguments=\count127
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count128
+\MPscratchDim=\dimen129
+\MPnumerator=\count129
+\makeMPintoPDFobject=\count130
+\everyMPtoPDFconversion=\toks21
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -262,65 +316,101 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 457.
+(Font)              <7> on input line 461.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 457.
-
-Underfull \hbox (badness 1565) in paragraph at lines 471--474
-\OT1/ptm/m/n/10 ning ap-proach called HTN (Hi-er-ar-chi-cal Task Net-work)
- []
+(Font)              <5> on input line 461.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Overfull \hbox (16.79999pt too wide) in paragraph at lines 544--545
-[][] 
- []
+
+Package caption Warning: \label without proper \caption on input line 519.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 517.
+
+<Figures/example1.png, id=11, 963.6pt x 303.38344pt>
+File: Figures/example1.png Graphic file (type png)
+
+<use Figures/example1.png>
+Package pdftex.def Info: Figures/example1.png used on input line 520.
+(pdftex.def)             Requested size: 516.0pt x 162.46361pt.
+
+
+Package caption Warning: \label without proper \caption on input line 519.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 524.
 
 [2]
 
-LaTeX Warning: Citation `rich2009building' on page 3 undefined on input line 61
-4.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 632.
+[3 <./Figures/example1.png>]
+Underfull \vbox (badness 2689) has occurred while \output is active []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 614.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 614.
+ [4]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 621.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 632.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 621.
 
-Underfull \hbox (badness 2443) in paragraph at lines 632--633
-[] \OT1/ptm/b/n/10 if $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 precondition\OT1/cmr/m
-/n/10 (\OML/cmm/m/it/10 child\OT1/cmr/m/n/10 )! = \OMS/cmsy/m/n/10 ;$ \OT1/ptm/
-m/n/10 and  \OT1/ptm/b/n/10 sta-tus
+<Figures/3.png, id=27, 364.36125pt x 216.81pt>
+File: Figures/3.png Graphic file (type png)
+ <use Figures/3.png>
+Package pdftex.def Info: Figures/3.png used on input line 652.
+(pdftex.def)             Requested size: 170.71652pt x 101.58311pt.
+
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 652--653
+[][] 
  []
 
+<Figures/4.png, id=28, 357.58594pt x 216.81pt>
+File: Figures/4.png Graphic file (type png)
+ <use Figures/4.png>
+Package pdftex.def Info: Figures/4.png used on input line 661.
+(pdftex.def)             Requested size: 170.71652pt x 103.50851pt.
 
-Underfull \hbox (badness 4582) in paragraph at lines 635--636
-[] \OT1/ptm/b/n/10 else if \OT1/ptm/m/n/10 (postcondition(child)!=$\OMS/cmsy/m/
-n/10 ;$ \OT1/ptm/m/n/10 and  \OT1/ptm/b/n/10 sta-tus
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 661--662
+ [][] 
  []
 
-[3] (./discolog_article.bbl
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 18.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 18.
+<Figures/1.png, id=29, 365.86688pt x 216.81pt>
+File: Figures/1.png Graphic file (type png)
+ <use Figures/1.png>
+Package pdftex.def Info: Figures/1.png used on input line 671.
+(pdftex.def)             Requested size: 170.71652pt x 101.16628pt.
 
-Underfull \hbox (badness 1803) in paragraph at lines 19--25
-[]\OT1/ptm/m/n/8 Eric Beaudry, Yan-nick Brosseau, Carle C[]ot[]e, Cl[]ement
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 671--672
+[][] 
  []
 
+<Figures/2.png, id=30, 357.58594pt x 216.81pt>
+File: Figures/2.png Graphic file (type png)
+ <use Figures/2.png>
+Package pdftex.def Info: Figures/2.png used on input line 680.
+(pdftex.def)             Requested size: 170.71652pt x 103.50851pt.
 
-Underfull \hbox (badness 1558) in paragraph at lines 19--25
-\OT1/ptm/m/n/8 Ra[]^^Pevsky, Do-minic L[]etourneau, Fro-d-u-ald Ka-banza, and
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 680--681
+ [][] 
  []
 
-)
-** WARNING: \IEEEbiography is locked out when in conference mode (line 749).
+[5 <./Figures/3.png> <./Figures/4.png>] (./discolog_article.bbl)
+** WARNING: \IEEEbiography is locked out when in conference mode (line 795).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -332,34 +422,33 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4] (./discolog_article.aux)
+[6 <./Figures/1.png> <./Figures/2.png>] (./discolog_article.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3045 strings out of 493304
- 47896 string characters out of 6139871
- 120487 words of memory out of 5000000
- 6470 multiletter control sequences out of 15000+600000
- 37073 words of font info for 70 fonts, out of 8000000 for 9000
+ 4221 strings out of 493304
+ 68830 string characters out of 6139871
+ 140105 words of memory out of 5000000
+ 7621 multiletter control sequences out of 15000+600000
+ 40814 words of font info for 74 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
- 37i,10n,24p,1285b,267s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,10n,40p,1297b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmri8a.pfb>
-Output written on discolog_article.pdf (4 pages, 131886 bytes).
+onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on discolog_article.pdf (6 pages, 180677 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 71 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

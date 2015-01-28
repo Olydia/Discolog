@@ -1,0 +1,45 @@
+
+Complete HTN construction : 1031
+disco_call: 0
+Partial Tree generation + STRIPS engine: 1
+ STRIPS knowledge for the broken primitive task: 86
+ Disco call for the broken primitive task: 20
+ Finding candidates for the broken task : a21    :1
+ theory Update :  14
+ fIND A PLAN FOR  P3  :12
+ ################################### a11    : ################################### 
+ Call Strips Planner  for  a11    :36
+ theory Update :  14
+ fIND A PLAN FOR  P4  :3
+ ################################### a21    : ################################### 
+ Call Strips Planner  for  a21    :28
+ theory Update :  15
+ fIND A PLAN FOR  P3  :6
+ ################################### a31    : ################################### 
+ Call Strips Planner  for  a31    :32
+ the plan repair procedure for the candidate : a21    :96
+ STRIPS knowledge for the broken primitive task: 75
+ Disco call for the broken primitive task: 18
+ Finding candidates for the broken task : a22    :1
+ theory Update :  21
+ fIND A PLAN FOR  P3  :3
+ ################################### a11    : ################################### 
+ Call Strips Planner  for  a11    :34
+ theory Update :  18
+ fIND A PLAN FOR  P3  :2
+ ################################### a22    : ################################### 
+ Call Strips Planner  for  a22    :35
+ theory Update :  19
+ fIND A PLAN FOR  P3  :2
+ ################################### a31    : ################################### 
+ Call Strips Planner  for  a31    :31
+ the plan repair procedure for the candidate : a22    :100
+ STRIPS knowledge for the broken primitive task: 75
+ Disco call for the broken primitive task: 20
+ Finding candidates for the broken task : a31    :1
+ theory Update :  12
+ fIND A PLAN FOR  P5  :2
+ ################################### a31    : ################################### 
+ Call Strips Planner  for  a31    :24
+ the plan repair procedure for the candidate : a31    :24
+Complete execution time: 1660

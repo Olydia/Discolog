@@ -1,0 +1,11 @@
+Level NbBreakdwon NbRecover NbCandidates NbRecoveredCandidates
+25 393 0 1048 0
+25 0 0 0 0
+25 1194 795 3449 795
+25 0 0 0 0
+25 0 0 0 0
+25 0 0 0 0
+25 810 0 2293 0
+25 1230 0 3414 0
+25 0 0 0 0
+25 420 0 1120 0

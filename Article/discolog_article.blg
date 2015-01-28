@@ -3,58 +3,63 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: discolog_article.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 53 of file Bibliography.bib
+Repeated entry---line 69 of file Bibliography.bib
  : @article{brom2005hierarchical
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 265 of file Bibliography.bib
+Repeated entry---line 389 of file Bibliography.bib
  : @inproceedings{firby1987investigation
  :                                      ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "rich2009building"
-Warning--can't use both volume and number fields in beaudry2005reactive
+Repeated entry---line 473 of file Bibliography.bib
+ : @article{brom2005hierarchical
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 485 of file Bibliography.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
 Warning--empty journal in bohus2003ravenclaw
-Warning--can't use both volume and number fields in bryson2001modularity
 Warning--empty journal in erol1996hierarchical
-You've used 19 entries,
+You've used 23 entries,
             2543 wiz_defined-function locations,
-            668 strings with 7922 characters,
-and the built_in function-call counts, 8877 in all, are:
-= -- 902
-> -- 391
-< -- 21
-+ -- 138
-- -- 135
-* -- 575
-:= -- 1365
-add.period$ -- 63
-call.type$ -- 19
-change.case$ -- 124
-chr.to.int$ -- 19
-cite$ -- 23
-duplicate$ -- 403
-empty$ -- 663
-format.name$ -- 158
-if$ -- 1909
+            686 strings with 8109 characters,
+and the built_in function-call counts, 9793 in all, are:
+= -- 995
+> -- 392
+< -- 25
++ -- 135
+- -- 131
+* -- 621
+:= -- 1520
+add.period$ -- 74
+call.type$ -- 23
+change.case$ -- 137
+chr.to.int$ -- 23
+cite$ -- 25
+duplicate$ -- 454
+empty$ -- 758
+format.name$ -- 164
+if$ -- 2088
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 20
-newline$ -- 99
-num.names$ -- 57
-pop$ -- 153
+missing$ -- 24
+newline$ -- 119
+num.names$ -- 69
+pop$ -- 170
 preamble$ -- 1
-purify$ -- 144
+purify$ -- 163
 quote$ -- 0
-skip$ -- 352
+skip$ -- 383
 stack$ -- 0
-substring$ -- 481
-swap$ -- 129
-text.length$ -- 21
-text.prefix$ -- 6
+substring$ -- 546
+swap$ -- 122
+text.length$ -- 25
+text.prefix$ -- 11
 top$ -- 0
-type$ -- 144
-warning$ -- 4
-while$ -- 84
-width$ -- 21
-write$ -- 252
-(There were 2 error messages)
+type$ -- 172
+warning$ -- 2
+while$ -- 94
+width$ -- 25
+write$ -- 301
+(There were 4 error messages)

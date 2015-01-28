@@ -15,14 +15,6 @@ N~Fazil Ayan, Ugur Kuter, Fusun Yaman, and Robert~P Goldman.
   Systems--Principles and Practices for Planning in Execution: Papers from the
   ICAPS Workshop. Providence, RI}, 2007.
 
-\bibitem[BBC{\etalchar{+}}05]{beaudry2005reactive}
-Eric Beaudry, Yannick Brosseau, Carle C{\^o}t{\'e}, Cl{\'e}ment Ra{\"\i}evsky,
-  Dominic L{\'e}tourneau, Froduald Kabanza, and Fran{\c{c}}ois Michaud.
-\newblock Reactive planning in a motivated behavioral architecture.
-\newblock In {\em Proceedings of the National Conference on Artificial
-  Intelligence}, volume~20, page 1242. Menlo Park, CA; Cambridge, MA; London;
-  AAAI Press; MIT Press; 1999, 2005.
-
 \bibitem[BD02]{boella2002replanning}
 Guido Boella and Rossana Damiano.
 \newblock A replanning algorithm for a reactive agent architecture.
@@ -41,11 +33,16 @@ Cyril Brom.
 \newblock {\em Proceedings of MNAS: Modelling Natural Action Selection.
   Edinburgh, Scotland}, 2005.
 
-\bibitem[BS01]{bryson2001modularity}
-Joanna~J Bryson and Lynn~Andrea Stein.
-\newblock Modularity and design in reactive intelligence.
-\newblock In {\em International Joint Conference on Artificial Intelligence},
-  volume~17, pages 1115--1120. LAWRENCE ERLBAUM ASSOCIATES LTD, 2001.
+\bibitem[Bry01]{bryson2001intelligence}
+Joanna~Joy Bryson.
+\newblock {\em Intelligence by design: principles of modularity and
+  coordination for engineering complex adaptive agents}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 2001.
+
+\bibitem[Byl94]{bylander1994computational}
+Tom Bylander.
+\newblock The computational complexity of propositional strips planning.
+\newblock {\em Artificial Intelligence}, 69(1):165--204, 1994.
 
 \bibitem[CGS98]{conte1998mas}
 Rosaria Conte, Nigel Gilbert, and Jaime~Sim{\~a}o Sichman.
@@ -77,6 +74,11 @@ Hisashi Hayashi, Seiji Tokura, Tetsuo Hasegawa, and Fumio Ozaki.
 \newblock In {\em Declarative Agent Languages and Technologies III}, pages
   171--187. Springer, 2006.
 
+\bibitem[Isl05]{isla2005handling}
+Damian Isla.
+\newblock Handling complexity in the halo 2 ai.
+\newblock In {\em Game Developers Conference}, volume~12, 2005.
+
 \bibitem[Mae90]{maes1990designing}
 Pattie Maes.
 \newblock {\em Designing autonomous agents: Theory and practice from biology to
@@ -90,10 +92,25 @@ Dana Nau, Yue Cao, Amnon Lotem, and Hector Mu{\~n}oz-Avila.
   Artificial intelligence-Volume 2}, pages 968--973. Morgan Kaufmann Publishers
   Inc., 1999.
 
+\bibitem[PGM98]{poole1998computational}
+David~I Poole, Randy~G Goebel, and Alan~K Mackworth.
+\newblock {\em Computational Intelligence}.
+\newblock Oxford University Press Oxford, 1998.
+
+\bibitem[Ric09]{rich2009building}
+Charles Rich.
+\newblock Building task-based user interfaces with ansi/cea-2018.
+\newblock {\em Computer}, 42(8):20--27, 2009.
+
 \bibitem[Sac75]{sacerdoti1975structure}
 Earl~D Sacerdoti.
 \newblock A structure for plans and behavior.
 \newblock Technical report, DTIC Document, 1975.
+
+\bibitem[Sch87]{schoppers1987universal}
+Marcel Schoppers.
+\newblock Universal plans for reactive robots in unpredictable environments.
+\newblock In {\em IJCAI}, volume~87, pages 1039--1046. Citeseer, 1987.
 
 \bibitem[VDKDW05]{van2005plan}
 Roman Van Der~Krogt and Mathijs De~Weerdt.
