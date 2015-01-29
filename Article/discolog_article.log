@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  28 JAN 2015 17:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  29 JAN 2015 18:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -326,91 +326,86 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
+] [2]
 
-Package caption Warning: \label without proper \caption on input line 519.
+Package caption Warning: \label without proper \caption on input line 524.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 517.
+LaTeX Warning: Reference `fig:ex' on page 3 undefined on input line 522.
 
-<Figures/example1.png, id=11, 963.6pt x 303.38344pt>
+<Figures/example1.png, id=14, 963.6pt x 303.38344pt>
 File: Figures/example1.png Graphic file (type png)
 
 <use Figures/example1.png>
-Package pdftex.def Info: Figures/example1.png used on input line 520.
+Package pdftex.def Info: Figures/example1.png used on input line 525.
 (pdftex.def)             Requested size: 516.0pt x 162.46361pt.
 
 
-Package caption Warning: \label without proper \caption on input line 519.
+Package caption Warning: \label without proper \caption on input line 524.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 524.
+LaTeX Warning: Reference `fig:ex' on page 3 undefined on input line 529.
 
-[2]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3 <./Figures/example1.png>]
-Underfull \vbox (badness 2689) has occurred while \output is active []
-
+[3]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 614.
+(Font)              <8> on input line 619.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 614.
- [4]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 621.
+(Font)              <6> on input line 619.
+ [4 <./Figures/example1.png>]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 626.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 621.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 626.
 
 <Figures/3.png, id=27, 364.36125pt x 216.81pt>
 File: Figures/3.png Graphic file (type png)
  <use Figures/3.png>
-Package pdftex.def Info: Figures/3.png used on input line 652.
+Package pdftex.def Info: Figures/3.png used on input line 649.
 (pdftex.def)             Requested size: 170.71652pt x 101.58311pt.
 
-Overfull \hbox (44.71652pt too wide) in paragraph at lines 652--653
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 649--650
 [][] 
  []
 
 <Figures/4.png, id=28, 357.58594pt x 216.81pt>
 File: Figures/4.png Graphic file (type png)
  <use Figures/4.png>
-Package pdftex.def Info: Figures/4.png used on input line 661.
+Package pdftex.def Info: Figures/4.png used on input line 658.
 (pdftex.def)             Requested size: 170.71652pt x 103.50851pt.
 
-Overfull \hbox (44.71652pt too wide) in paragraph at lines 661--662
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 658--659
  [][] 
  []
 
 <Figures/1.png, id=29, 365.86688pt x 216.81pt>
 File: Figures/1.png Graphic file (type png)
  <use Figures/1.png>
-Package pdftex.def Info: Figures/1.png used on input line 671.
+Package pdftex.def Info: Figures/1.png used on input line 668.
 (pdftex.def)             Requested size: 170.71652pt x 101.16628pt.
 
-Overfull \hbox (44.71652pt too wide) in paragraph at lines 671--672
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 668--669
 [][] 
  []
 
 <Figures/2.png, id=30, 357.58594pt x 216.81pt>
 File: Figures/2.png Graphic file (type png)
  <use Figures/2.png>
-Package pdftex.def Info: Figures/2.png used on input line 680.
+Package pdftex.def Info: Figures/2.png used on input line 677.
 (pdftex.def)             Requested size: 170.71652pt x 103.50851pt.
 
-Overfull \hbox (44.71652pt too wide) in paragraph at lines 680--681
+Overfull \hbox (44.71652pt too wide) in paragraph at lines 677--678
  [][] 
  []
 
-[5 <./Figures/3.png> <./Figures/4.png>] (./discolog_article.bbl)
-** WARNING: \IEEEbiography is locked out when in conference mode (line 795).
+[5 <./Figures/3.png> <./Figures/4.png> <./Figures/1.png> <./Figures/2.png>]
+(./discolog_article.bbl)
+** WARNING: \IEEEbiography is locked out when in conference mode (line 800).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -422,7 +417,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6 <./Figures/1.png> <./Figures/2.png>] (./discolog_article.aux)
+[6] (./discolog_article.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -445,7 +440,7 @@ onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on discolog_article.pdf (6 pages, 180677 bytes).
+Output written on discolog_article.pdf (6 pages, 181248 bytes).
 PDF statistics:
  71 PDF objects out of 1000 (max. 8388607)
  46 compressed objects within 1 object stream
