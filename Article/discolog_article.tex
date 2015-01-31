@@ -587,17 +587,18 @@
 	\par Once the list of candidates has been determined, the linear planning system is called for each candidate. As linear planning systems plan to reach a state rather than achieving goals, then each task's conditions candidate is considered as goal state to reach.  The linear planner plans  for each candidate and tries to return a list of possible plans to recover from the breakdown. The most promising plan is calculated to be executed. We define the most promising plan as the shortest plan (i.e the plan that contains the less actions) to ensure local task repair and prevent other breakdowns due to the execution of pre-constructed plan. Thus, in the example, the planner proposes to repair the failed recipe "HoldWithTwoArm". Thus, the proposing plan repair consists on using a, existing task "Separate the Object" to separate the object into two objects of 10 kilos and load them separately.
 	
 	\section{Implementation and experimental results}
-	We denote ($\alpha$, $\beta$, $\gamma$) pour l'annotation de l'arbre et revoir la phrase d'intro
-	\par The proposition presented in this paper has been implemented using a reactive HTN called  Disco \cite{rich2009building} and a simple linear STRIPS planner. The produced system is called \emph{Discolog}. 
-	\par  Disco uses the ANSI/CEA-2018 standard for the procedural definition of its domain knowledge and a Java-based reactive planning system. Tasks are modeled using XML format. Primitive tasks contains grounding script parameter defined	as JavaScript program which represent the effect of  primitive task execution in the environment. The STRIPS version used in \emph{Discolog} is an existing  Prolog implementation proposed in \cite{poole1998computational}. Prolog is based on inference engine  which allows STRIPS reasoning on the possible links between the predicates and deducts extra knowledge.
-	\par  The integration of STRIPS in the Disco system is performed using  \emph{tuProlog} \footnote{http://apice.unibo.it/xwiki/bin/view/Tuprolog/} framework. The use of  \emph{tuProlog} presents two mains advantages. First, \emph{tuProlog} is a Java-based framework that exploits a Prolog engine directly from a Java program. Thus, STRIPS can locally raised without any call to an external system. Second, it has specific libraries for the prolog predicates that helps with the conversion of recovery candidates from the procedural knowledge to symbolic knowledge. 
+	\subsection{Discolog implementation}
 	
-	\par  The aim of this  experiments is first to validate the hybrid architecture of Discolog system. Second, we want to test the contribution of the symbolic knowledge in the performances of recovery. We make the assumption that the effectiveness of the recovery process is relied to the level of knowledge in the symbolic domain knowledge. In fact, we assume that the more information STRIPS planner gets from the procedural domain knowledge, the more effective recover plans it can generates. The result of this experiment should proves that plan recovery follows a monotonic evolution in function of the level of knowledge defined in STRIPS.
+	\par The proposition presented in this paper has been implemented using a reactive HTN called  Disco \cite{rich2009building} and a simple linear STRIPS planner, the STRIPS version used in this system is an existing  Prolog implementation proposed in \cite{poole1998computational}. Thus, we named the produced system \emph{Discolog}. 
+	\par  Disco uses the ANSI/CEA-2018 standard for the procedural definition of its domain knowledge and a Java-based reactive planning system. Tasks are modeled using the XML format. Primitive tasks contain grounding script parameter defined	as JavaScript programs which represent the effect of  primitive task execution in the environment. 
+	\par  The integration of STRIPS in the Disco system is performed using  \emph{tuProlog} \footnote{http://apice.unibo.it/xwiki/bin/view/Tuprolog/} framework. The use of  \emph{tuProlog} presents two mains advantages. First, \emph{tuProlog} is a Java-based framework that exploits a Prolog engine directly from a Java program. Thus, STRIPS can locally raised without any call to an external system. Second, it has specific libraries for the prolog predicates that eases the conversion of recovery candidates from the procedural knowledge to symbolic knowledge. 
+	\subsection{Experiments and results}
+	\par  In this section, we present ou experiment with the \emph{Discolog} system. The aim of this  experiment is first to validate the hybrid architecture of Discolog system. Second, we want to test the contribution of the symbolic knowledge in the performances of recovery. We make the assumption that the effectiveness of the recovery process is relied to the level of knowledge in the symbolic domain knowledge. In fact, we assume that the more information STRIPS planner gets from the procedural domain knowledge, the more effective recover plans it can generates. The result of this experiment should proves that plan recovery follows a monotonic evolution in function of the level of knowledge defined in STRIPS.
 
 	\par In order to validate  Discolog, we had to test it on different HTNs domain knowledge and analyze its ability of recovery on every possible breakdown. Nevertheless, in the absence of accurate models including reactive and symbolic knowledge, we  implemented our own evaluation data. 
 	\par As theses primary tests purpose is to validate the hybrid architecture of Discolog, we actually don't need a domain knowledge with a semantic description of its tasks. Therefore, we defined a procedural domain knowledge based only on synthetic data  structured in such way to ensure a believable execution.  Each compound task (T) is defined with a set of recipes (R) and each recipe is constituted by a set of children tasks (C) to decompose the parent task (T). Preconditions of compound task are propagated to its first child in each recipe, and the postconditions are propagated to its last child. 
-	The rest of task children in each recipe are defined with chained conditions: The postconditions of the $task_i$ activate the preconditions of the $task_{i+1}$. Symbolic knowledge is extracted from the procedural one. The goal is to study the affect of the level of symbolic knowledge defined on recovery, we randomly extract primitive tasks from the HTN and vary the number of tasks extracted depending on a predefined level.  
-	\par We tested Discolog on different HTNs: (depth, number of recipes/task, number task children/recipe). For each HTN, we varied first, the level of symbolic knowledge to be extracted \{25\%, 50\%, 75\%\}. For each level of knowledge, we randomly extracted different symbolic domain knowledge.  Second, the initial state is randomly defined. This later affects the decomposition that the HTN will choose and the plan recover procedure. 
+	The rest of task children in each recipe are defined with chained conditions: The postconditions of the $task_i$ activate the preconditions of the $task_{i+1}$. Symbolic knowledge is extracted from the procedural one. Depending on the level of knowledge we want to study, we randomly extract primitive tasks from the HTN procedural knowledge.   The goal is to study the affect of the level of symbolic knowledge defined on recovery.
+	\par We tested Discolog on different HTNs model. We denote ($\alpha$, $\beta$, $\gamma$)  respectively the depth of the HTN, number of recipes per each task, number task children per recipe. For each HTN, we varied first, the level of symbolic knowledge to be extracted \{25\%, 50\%, 75\%\} \footnote{0 \% of symblic knowledge means no possible recovery and 100 \% is not realistic taking in account the dynamic definition of environment}. For each level of knowledge, we randomly extracted different symbolic domain knowledge.  Second, the initial state is randomly defined. This later affects the decomposition that the HTN will choose and the plan recover procedure. 
 	Once theses parameters are set, for each primitive task, a breakdown is caused and the plan recovery for this task is analyzed. The experiments have been done on two different HTN configuration as presented in table \ref{table}.
 		\begin{table}[h]
 				
@@ -611,8 +612,6 @@
 					(5,1,4) & 341 & 10 & 60  \\
 					\hline
 				\end{tabular}
-				
-				
 				\label{table} % is used to refer this table in the text
 			\end{table}
 			
@@ -656,47 +655,16 @@
 			\end{figure}	
 	\par  Figures \ref{Fig:Data3} and  \ref{Fig:Data1} display the recover rate for HTNs. We notice that the hybrid system is able to propose plans recovery and switch between the procedural and the symbolic environment. Moreover, the results confirm our assumption: the graph follows a monotonic assumption in function of the symbolic knowledge. Thus, the more symbolic knowledge Discolog has the more it can recover from breakdowns. 
 
-	The error bars defined in the graphs represent the standard deviations fo each execution in function of the level of symbolic knowledge.  We notice that the less symbolic knowledge Discolog has the bigger is the standard deviation.  For the same HTN, Discolog gets different rates of performances. For example for HTNs defined with the 25 \% of symbolic knowledge, Discolog performances varies from  0\% to 65\%  of recover. This is noticed in the case of HTN with 25 \% and 50 \% of defined symbolic knowledge. Thus, HTNs  defined with limited symbolic domain knowledge, are unable to cover all the possible breakdowns because of their lack of symbolic knowledge. 
+	The error bars defined in the graphs represent the standard deviations for each execution in function of the level of symbolic knowledge.  We notice that the less symbolic knowledge Discolog has the bigger is the standard deviation.  For the same HTN, Discolog gets different rates of performances. For example for HTNs defined with the 25 \% of symbolic knowledge, Discolog performances varies from  0\% to 65\%  of recover. This is noticed in the case of HTN with 25 \% and 50 \% of defined symbolic knowledge. Thus, HTNs  defined with limited symbolic domain knowledge, are unable to cover from all the possible breakdowns because of their lack of symbolic knowledge. 
 	
-
-	%		    (Expliquer que les bars d'erreurs dans le 1er graph montre qu'avec des domaine de connaissance limité le HTN n'a pa assez de connaissance pour pourvoir réparer tous les candidats qu'il peut rencontrer). Ensuite, presenter la reparation dans le cas des candidat. dire qu'ils suivent la meme evolution que les graph presenté dans les figure precedentes. Sinon les bars d'erreurs sont considérable ce qui souleve une nouvelle problematique. Meme avec un domaine de connaissance definis dans certain cas ce dernier n'est pas  assez général pour couvrir tous les cas ce qui soulevel le probleme de la qualité des données. ça fera l'objets de prochaines exp avec des données réelles.
-	 
-		 
-	
-	\par  Figures \ref{Fig:Data4} and \ref{Fig:Data3} demonstrate the average of the number of candidates repaired during the execution. The results for repairing  candidates also confirm our assumption. However, the error bars as demonstrated in graphs show that, Discolog performances varies for repairing all the possible candidates and this independently of the level of symbolic knowledge defined. 	Theses result raise a new question of the quality of the symbolic knowledge defined by the designer. Symbolic knowledge is limited, then it has to be expressive and very representative of the agent policy, or Discolog will not have the precise knowledge to recover from all the possible breakdowns. 
-	\par These tests are very promising but remains far from being definite experimental analysis. An extensive tests on a set of realistic domain knowledge is the object of futures works to detail the problematic of the quality of knowledge and test Discolog on real planning problems. 
-	 	
-	
-	%		 	Random HTNs with synthetic data. Breakdown caused in each primiive task. The purpose is to study the ability of Discolog to find a plan recovery for all possible breakdowns in the HTN. 
-	%%		     was constructed to generate different
-	%%		 types of HTN models.
-	%		 The evaluation HTN was constructed using synthetic data as demonstrated in the
-	%		
-	%		1. Approach of the expriments: Test the capability of Discolog to recover from a breakdown given a certain amount of symbolic knowlege. 
-	%	
-	%	
-	%		2. Benshmark creation:  
-	%		
-	%			Random HTNs with synthetic data. Breakdown caused in each primiive task. The purpose is to study the ability of Discolog to find a plan recovery for all possible breakdowns in the HTN. 
-	%			Symbolic data generation : the variation of the level of symbolic knowledge to insert in the linear planner domain knowledge
-	%	
-	%	
-	%		3. Present the obtained results and discuss them. 
-	%		
-	%		results obtaind of tree (5,4,1) (2,3,2) (3,3,3) 
-	%		
-	%		
-	%		Discuss the fact that the more symbolic knowledge we have the more recovery we get. 
-	%		Expose the fact that we can not have a 100 of symbolic knowledge and its is limited to the representation of the HTN hauthor which is also incomplete.
-	
-	
+	\par  Figures \ref{Fig:Data4} and \ref{Fig:Data2} show the average of the number of candidates repaired during the execution. The results for repairing  candidates also confirm our assumption. However, the error bars as demonstrated in graphs show that Discolog performances varies for repairing all the possible candidates and this independently of the level of symbolic knowledge defined. Theses result raise a new question of the quality of the symbolic knowledge defined by the designer. Symbolic knowledge is limited, then it has to be expressive and very representative of the agent policy, or Discolog will not have the precise knowledge to recover from all the possible breakdowns. 
+	\par These tests are very promising but remain far from being definite experimental analysis. An extensive tests on a set of realistic domain knowledge is the object of futures works to detail the problematic of the quality of knowledge and test Discolog on real planning problems. 
 	\section{Conclusion}
 	\par In this paper we have presented \emph{Discolog}, an algorithm to recover from breakdowns in reactive HTN planning systems.  Despite the ability of reactive planning  to deal with high dynamic world,  breakdowns might occur because of the lack of knowledge on the different possible changes in the world and the ineptitude  of reactive HTN to reason in long term to define a recover strategy. 
 	\par The proposed algorithm extends reactive HTNs with linear symbolic planner to produces a plan to recover from the breakdown. The symbolic knowledge is extracted from the procedural knowledge by the HTN designer. Thus if a breakdown is detected, the algorithm calculates the candidates (conditions which are not valid in the non-executed HTN tasks), then 
-	%		for the recovery by  defining all tasks affected by the breakdown, and using their internal state in the HTN, it detects the condition which is no longer supported due to the breakdown and determine it as candidate for the recovery.
 	STRIPS is called to propose plans to repair these conditions. The most promising plan is then converted to procedural formalism and executed. 
-	\par The solution have been implemented and validated. It combines a reactive HTN Disco with the symbolic linear planning system STRIPS in Prolog.  The
-	results of our preliminary experiments was promising and demonstrated, first, the ability of the hybrid planning system Discolog to propose viable plans recovery and for the different breakdowns. Second, the  contribution of symbolic knowledge in the performances of the recovery. Finally, the experiments raise another problematic of the quality of  knowledge in limited domain knowledge that we wish address. In addition, we intend to validate Discolog on real planning applications.  
+	\par The solution have been implemented. It combines a reactive HTN Disco with the symbolic linear planning system STRIPS in Prolog.  The
+	results of our preliminary experiments  demonstrated, first, the ability of the hybrid planning system Discolog to propose viable plans recovery and for the different breakdowns. Second, the  contribution of symbolic knowledge in the performances of the recovery. Finally, the experiments raise another problematic of the quality of  knowledge in limited domain knowledge that we wish address. In addition, we intend to validate Discolog on real  applications such as social dialog systems, we believe that with real applications, we can study the problem of the quality of the symbolic knowledge.  
 	\par Future prospects of this research are, first, to construct a modeling tool for HTN	model design. This tool will help the HTN designer in one hand to define the level of knowledge to integrate in the HTN. In the other hand, the system will use the history of breakdowns to propose adding knowledge in the HTN where breakdowns occurred. As second step, we propose to integrate Discolog in social dialog system between an agent and a human in order to support the dynamic nature of a social dialog.
 	
 	
