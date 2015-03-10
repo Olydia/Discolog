@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 MAR 2015 16:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 MAR 2015 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -488,16 +488,16 @@ Underfull \vbox (badness 1052) has occurred while \output is active []
 
  [8 <./Figures/1.png> <./Figures/3.png>] [9 <./Figures/2.png> <./Figures/4.png>
 ]
-(./AGiArtcile.bbl) [10] [11] (./AGiArtcile.aux)
+(./AGiArtcile.bbl) [10] (./AGiArtcile.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4453 strings out of 493304
- 64992 string characters out of 6139871
- 142678 words of memory out of 5000000
- 7836 multiletter control sequences out of 15000+600000
+ 4450 strings out of 493304
+ 64944 string characters out of 6139871
+ 142602 words of memory out of 5000000
+ 7833 multiletter control sequences out of 15000+600000
  10052 words of font info for 36 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,9n,38p,1908b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -517,10 +517,10 @@ hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on AGiArtcile.pdf (11 pages, 304741 bytes).
+Output written on AGiArtcile.pdf (10 pages, 303579 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
+ 114 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
