@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: AGiArtcile.aux
+The style file: alpha.bst
+Database file #1: bibliographie.bib
+Repeated entry---line 191 of file bibliographie.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 234 of file bibliographie.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in erol1996hierarchical
+You've used 15 entries,
+            2543 wiz_defined-function locations,
+            642 strings with 6836 characters,
+and the built_in function-call counts, 6465 in all, are:
+= -- 646
+> -- 266
+< -- 16
++ -- 93
+- -- 90
+* -- 403
+:= -- 1003
+add.period$ -- 47
+call.type$ -- 15
+change.case$ -- 91
+chr.to.int$ -- 15
+cite$ -- 16
+duplicate$ -- 303
+empty$ -- 501
+format.name$ -- 111
+if$ -- 1380
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 17
+newline$ -- 79
+num.names$ -- 45
+pop$ -- 119
+preamble$ -- 1
+purify$ -- 108
+quote$ -- 0
+skip$ -- 258
+stack$ -- 0
+substring$ -- 351
+swap$ -- 85
+text.length$ -- 16
+text.prefix$ -- 7
+top$ -- 0
+type$ -- 108
+warning$ -- 1
+while$ -- 61
+width$ -- 17
+write$ -- 195
+(There were 2 error messages)
