@@ -1,0 +1,24 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: discolog_article.aux
+The style file: alpha.bst
+Database file #1: Bibliography.bib
+Repeated entry---line 41 of file Bibliography.bib
+ : @article{brom2005hierarchical
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 201 of file Bibliography.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 243 of file Bibliography.bib
+ : @article{brom2005hierarchical
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 249 of file Bibliography.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in bohus2003ravenclaw
+Warning--empty journal in erol1996hierarchical
+Warning--empty journal in plchtowards
+Warning--empty year in plchtowards
+(There were 4 error messages)
