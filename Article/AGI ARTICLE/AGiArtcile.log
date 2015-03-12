@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  10 MAR 2015 16:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.24)  12 MAR 2015 15:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -442,49 +442,49 @@ Overfull \hbox (1.57681pt too wide) in paragraph at lines 83--84
 s the sta-tus "\OT1/cmr/m/it/10 Failed\OT1/cmr/m/n/10 ".
  []
 
-[5] [6] [7] <Figures/1.png, id=46, 364.36125pt x 213.04594pt>
+[5] [6] [7] <Figures/1.png, id=46, 423.08063pt x 242.40562pt>
 File: Figures/1.png Graphic file (type png)
 
 <use Figures/1.png>
 Package pdftex.def Info: Figures/1.png used on input line 165.
-(pdftex.def)             Requested size: 142.26378pt x 83.18184pt.
+(pdftex.def)             Requested size: 142.26378pt x 81.5106pt.
 
 Overfull \hbox (3.41649pt too wide) in paragraph at lines 165--166
  [][] 
  []
 
-<Figures/3.png, id=47, 364.36125pt x 213.04594pt>
+<Figures/3.png, id=47, 424.58624pt x 245.41687pt>
 File: Figures/3.png Graphic file (type png)
  <use Figures/3.png>
 Package pdftex.def Info: Figures/3.png used on input line 171.
-(pdftex.def)             Requested size: 142.26378pt x 83.18184pt.
+(pdftex.def)             Requested size: 142.26378pt x 82.23106pt.
 
 Overfull \hbox (3.41649pt too wide) in paragraph at lines 171--172
  [][] 
  []
 
-<Figures/2.png, id=48, 364.36125pt x 213.04594pt>
+<Figures/2.png, id=48, 424.58624pt x 243.15843pt>
 File: Figures/2.png Graphic file (type png)
  <use Figures/2.png>
 Package pdftex.def Info: Figures/2.png used on input line 185.
-(pdftex.def)             Requested size: 142.26378pt x 83.18184pt.
+(pdftex.def)             Requested size: 142.26378pt x 81.47433pt.
 
 Overfull \hbox (3.41649pt too wide) in paragraph at lines 185--186
  [][] 
  []
 
-<Figures/4.png, id=49, 364.36125pt x 213.04594pt>
+<Figures/4.png, id=49, 424.58624pt x 247.67531pt>
 File: Figures/4.png Graphic file (type png)
  <use Figures/4.png>
 Package pdftex.def Info: Figures/4.png used on input line 191.
-(pdftex.def)             Requested size: 142.26378pt x 83.18184pt.
+(pdftex.def)             Requested size: 142.26378pt x 82.9878pt.
 
 Overfull \hbox (3.41649pt too wide) in paragraph at lines 191--192
  [][] 
  []
 
 
-Underfull \vbox (badness 1052) has occurred while \output is active []
+Underfull \vbox (badness 1231) has occurred while \output is active []
 
  [8 <./Figures/1.png> <./Figures/3.png>] [9 <./Figures/2.png> <./Figures/4.png>
 ]
@@ -517,7 +517,7 @@ hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on AGiArtcile.pdf (10 pages, 303579 bytes).
+Output written on AGiArtcile.pdf (10 pages, 303394 bytes).
 PDF statistics:
  114 PDF objects out of 1000 (max. 8388607)
  76 compressed objects within 1 object stream
