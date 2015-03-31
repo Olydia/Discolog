@@ -235,19 +235,30 @@ public class Discolog extends Agent {
 		//check there is a prolog version of the goal condition
 		for (Plan plan : children) {
 			TaskClass type = plan.getGoal().getType();
-			if (type.getPrecondition() != null
-					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()) &&
-					TestClass.STRIPSconditions.contains(type.getPrecondition().getScript()))
+			if (type.getPrecondition() != null 
+					&& !(plan.isDone() || plan.isLive() || plan.isBlocked()||plan.isFailed()) 
+					//Check if this condition exists in the symbolic DN
+					&& TestClass.STRIPSconditions.contains(type.getPrecondition().getScript()))
+				
+				// Add the task and its failed precondition in the candidates list
 				candidates.add(new Candidate(plan, type.getPrecondition()));
+			
 			else if (type.getPostcondition() != null && plan.isFailed()
 					&& !type.isSufficient() 
-					&& TestClass.STRIPSconditions.contains(type.getPostcondition().getScript())) // post cond
+					&& TestClass.STRIPSconditions.contains(type.getPostcondition().getScript()))
+				
 				candidates.add(new Candidate(plan, type.getPostcondition()));
-			if (plan.isLive() && !plan.isPrimitive() && !plan.isDecomposed())
+			
+			if (plan.isLive() 
+					&& !plan.isPrimitive() 
+					&& !plan.isDecomposed())
+				
 				for (DecompositionClass c : plan.getType().getDecompositions()) {
-					if (c.getApplicable() != null && TestClass.STRIPSconditions.contains(c.getApplicable().getScript()))
+					if (c.getApplicable() != null 
+							&& TestClass.STRIPSconditions.contains(c.getApplicable().getScript()))
 						candidates.add(new Candidate(plan, c.getApplicable()));
 				}
+			// call this procedures to the task children. 
 			findCandidates(plan.getChildren());
 		}
 	}

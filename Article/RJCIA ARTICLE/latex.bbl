@@ -1,0 +1,57 @@
+\begin{thebibliography}{10}
+
+\bibitem{erol1996hierarchical}
+K.~Erol, ``Hierarchical task network planning: formalization, analysis, and
+  implementation,'' 1996.
+
+\bibitem{zhuo2009learning}
+H.~H. Zhuo, D.~H. Hu, C.~Hogg, Q.~Yang, and H.~Munoz-Avila, ``Learning htn
+  method preconditions and action models from partial observations.,'' in {\em
+  IJCAI}, pp.~1804--1810, 2009.
+
+\bibitem{maes1990designing}
+P.~Maes, {\em Designing autonomous agents: Theory and practice from biology to
+  engineering and back}.
+\newblock MIT press, 1990.
+
+\bibitem{firby1987investigation}
+R.~J. Firby, ``An investigation into reactive planning in complex domains.,''
+  in {\em AAAI}, vol.~87, pp.~202--206, 1987.
+
+\bibitem{nau1999shop}
+D.~Nau, Y.~Cao, A.~Lotem, and H.~Mu{\~n}oz-Avila, ``Shop: Simple hierarchical
+  ordered planner,'' in {\em Proceedings of the 16th international joint
+  conference on Artificial intelligence-Volume 2}, pp.~968--973, Morgan
+  Kaufmann Publishers Inc., 1999.
+
+\bibitem{wilkins1988practical}
+D.~E. Wilkins, {\em Practical planning: Extending the classical AI planning
+  paradigm}.
+\newblock Morgan Kaufmann Publishers Inc., 1988.
+
+\bibitem{boella2002replanning}
+G.~Boella and R.~Damiano, ``A replanning algorithm for a reactive agent
+  architecture,'' in {\em Artificial Intelligence: Methodology, Systems, and
+  Applications}, pp.~183--192, Springer, 2002.
+
+\bibitem{van2005plan}
+R.~Van Der~Krogt and M.~De~Weerdt, ``Plan repair as an extension of
+  planning.,'' in {\em ICAPS}, vol.~5, pp.~161--170, 2005.
+
+\bibitem{ayan2007hotride}
+N.~F. Ayan, U.~Kuter, F.~Yaman, and R.~P. Goldman, ``Hotride: Hierarchical
+  ordered task replanning in dynamic environments,'' in {\em Planning and Plan
+  Execution for Real-World Systems--Principles and Practices for Planning in
+  Execution: Papers from the ICAPS Workshop. Providence, RI}, 2007.
+
+\bibitem{warfield2007adaptation}
+I.~Warfield, C.~Hogg, S.~Lee-Urban, and H.~Munoz-Avila, ``Adaptation of
+  hierarchical task network plans.,'' in {\em FLAIRS Conference}, pp.~429--434,
+  2007.
+
+\bibitem{brom2005hierarchical}
+C.~Brom, ``Hierarchical reactive planning: Where is its limit,'' {\em
+  Proceedings of MNAS: Modelling Natural Action Selection. Edinburgh,
+  Scotland}, 2005.
+
+\end{thebibliography}
