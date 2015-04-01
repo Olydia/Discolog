@@ -520,10 +520,12 @@ knowledge may be useful.
 
 \noindent We have implemented the hybrid system described above in
 pure Java (see \fig{discolog}) using the ANSI/CEA-2018 standard
-\cite{CETask} for reactive HTNs and Disco \cite{RichSidner2012} as the HTN
-execution engine.  For the symbolic planner, we have used a simple
+\cite{CETask} for reactive HTNs and Disco \cite{RichSidner2012} as the
+HTN execution engine.  For the symbolic planner, we have used a simple
 implementation of STRIPS running in a pure Java implementation of
-Prolog.\footnote{See \url{http://tuprolog.apice.unibo.it}}
+Prolog.\footnote{See \url{http://tuprolog.apice.unibo.it}} Using
+Prolog will facilitate adding additional symbolic reasoning rules to
+the planning process.
 
 The ultimate evaluation of our proposed new approach is to
 build several agents that operate in complex, dynamic real-world
