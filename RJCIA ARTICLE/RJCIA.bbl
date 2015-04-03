@@ -1,0 +1,67 @@
+\begin{thebibliography}{10}
+
+\bibitem{erol1994htn}
+Kutluhan Erol, James Hendler, and Dana~S Nau.
+\newblock Htn planning: Complexity and expressivity.
+\newblock In {\em AAAI}, volume~94, pages 1123--1128, 1994.
+
+\bibitem{fikes1972strips}
+Richard~E Fikes and Nils~J Nilsson.
+\newblock Strips: A new approach to the application of theorem proving to
+  problem solving.
+\newblock {\em Artificial intelligence}, 2(3):189--208, 1972.
+
+\bibitem{boella2002replanning}
+Guido Boella and Rossana Damiano.
+\newblock A replanning algorithm for a reactive agent architecture.
+\newblock In {\em Artificial Intelligence: Methodology, Systems, and
+  Applications}, pages 183--192. Springer, 2002.
+
+\bibitem{van2005plan}
+Roman Van Der~Krogt and Mathijs De~Weerdt.
+\newblock Plan repair as an extension of planning.
+\newblock In {\em ICAPS}, volume~5, pages 161--170, 2005.
+
+\bibitem{ayan2007hotride}
+N~Fazil Ayan, Ugur Kuter, Fusun Yaman, and Robert~P Goldman.
+\newblock Hotride: Hierarchical ordered task replanning in dynamic
+  environments.
+\newblock In {\em Planning and Plan Execution for Real-World
+  Systems--Principles and Practices for Planning in Execution: Papers from the
+  ICAPS Workshop. Providence, RI}, 2007.
+
+\bibitem{warfield2007adaptation}
+Ian Warfield, Chad Hogg, Stephen Lee-Urban, and H{\'e}ctor Munoz-Avila.
+\newblock Adaptation of hierarchical task network plans.
+\newblock In {\em FLAIRS Conference}, pages 429--434, 2007.
+
+\bibitem{firby1987investigation}
+R~James Firby.
+\newblock An investigation into reactive planning in complex domains.
+\newblock In {\em AAAI}, volume~87, pages 202--206, 1987.
+
+\bibitem{brom2005hierarchical}
+Cyril Brom.
+\newblock Hierarchical reactive planning: Where is its limit.
+\newblock {\em Proceedings of MNAS: Modelling Natural Action Selection.
+  Edinburgh, Scotland}, 2005.
+
+\bibitem{ghallab1998pddl}
+Malik Ghallab, Craig Knoblock, David Wilkins, Anthony Barrett, Dave
+  Christianson, Marc Friedman, Chung Kwok, Keith Golden, Scott Penberthy,
+  David~E Smith, et~al.
+\newblock Pddl-the planning domain definition language.
+\newblock 1998.
+
+\bibitem{rich2009building}
+Charles Rich.
+\newblock Building task-based user interfaces with ansi/cea-2018.
+\newblock {\em Computer}, 42(8):20--27, 2009.
+
+\bibitem{rich2012using}
+Charles Rich and Candace~L Sidner.
+\newblock Using collaborative discourse theory to partially automate dialogue
+  tree authoring.
+\newblock In {\em Intelligent Virtual Agents}, pages 327--340. Springer, 2012.
+
+\end{thebibliography}

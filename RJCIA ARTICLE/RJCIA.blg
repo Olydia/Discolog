@@ -1,0 +1,13 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: RJCIA.aux
+The style file: unsrt.bst
+Database file #1: bibliography.bib
+Repeated entry---line 177 of file bibliography.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 223 of file bibliography.bib
+ : @inproceedings{firby1987investigation
+ :                                      ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in ghallab1998pddl
+(There were 2 error messages)
