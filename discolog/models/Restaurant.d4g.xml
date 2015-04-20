@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:disco.wpi.edu:models:Restaurant"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+
+<t:task id="ChooseRestaurant">
+  <t:subtasks id="talk">
+    <t:step name="intro" task="RestaurantIntro"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseJapaneseRestaurant">
+  <t:subtasks id="Japanese">
+    <t:step name="Food" task="JapaneseFood"/>
+    <t:step name="quality" task="QualityOfFood"/>
+    <t:step name="prices" task="Prices"/>
+    <t:step name="ambience" task="Ambience"/>
+    <t:step name="reseve" task="Reserve"/>
+    <t:step name="invite" task="Invite"/>
+    <t:step name="reservation" task="Reservation"/>
+  </t:subtasks>
+</t:task>
+
+<agent id="RestaurantIntro" text="Would you to go to dinner with me ?">
+	<user text="Sure.">
+   	  <agent text="What kind of food would you like?">
+      		<user text="I like Japanese food.">
+ 			<do task="ChooseJapaneseRestaurant"/>
+ 		</user>
+     		 <user text="I like Italian food.">
+        		<agent text="Oh. Sounds good, but I ate Italian food last night. I'd rather try Japanese food.">
+			<user text="Okay, Why not.">
+				<do task="ChooseJapaneseRestaurant"/>
+			</user>
+			<user text="I do not like japanese food.">
+				<do task="OnlineSearch"/>
+			</user>		
+        		</agent>
+      		</user>
+    	  </agent>
+  	</user>
+ 	<user text="No, thanks">
+		<do task="ClosingDialogue"/>
+  	</user>
+
+</agent>
+
+<agent id="JapaneseFood" text="I know a restaurant, shogun. Everyone I've spoken with says that it is great.">
+	<user text="I heard about that restaurant."/>
+     	<user text="I've never been there."/>
+</agent>
+
+<agent id="QualityOfFood" text=" I really like their sushis. The fish is fresh and tasty">
+	<user text="Yes, their sushis are delicious."/>
+     	<user text="their sushis is correct, I tested better."/>
+	<user text="I don't like sushis."/>
+</agent>
+
+<agent id="Prices" text="What do you think about the prices ?. I personnaly think that it's pricy">
+	<user text=" It has a correct value for its price."/>
+     	<user text="I don't know, I've never been there before."/>
+</agent>
+
+<agent id="Ambience" text="The restaurant is well situated and the ambience is cool">
+	<user text="It's true."/>
+     	<user text="It's very noisy, I hate noises in  restaurants."/>
+	<user text="Oh, Great!"/>		
+</agent>
+
+<agent id="Reserve" text="The only problem is that the restaurant is small and you must book before.">
+	<user text="It's the problem of restaurants in this town."/>
+     	<user text="It's not a big deal."/>
+</agent>
+
+<agent id="Invite" text="Would you like to go ?">
+	<user text="I would enjoy going there."/>
+     	<user text="I prefer to go to another restaurant.">
+		<do task="OnlineSearch"/>
+	</user>
+</agent>
+
+<agent id="Reservation" text="Okay, I'll call to book a table">
+	<user text="Perfect!"/>
+</agent>
+
+<agent id="ClosingDialogue" text="No problem, another day maybe">
+  <user text="Sure !."/>
+  <user text="yeah, I'll call you tommorow."/>
+</agent>
+
+<agent id="OnlineSearch" text="Okay, Let's look on line for a good restaurant!">
+	<user text="Good idea !"/>
+	<user text="No, I no longer want to go to the restaurant.">
+		<do task="ClosingDialogue"/>
+  	</user>
+
+</agent>
+
+</model>

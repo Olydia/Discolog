@@ -1,0 +1,71 @@
+    # Writing log to /tmp/Console.test...
+    # 20 avr. 2015 20:01:48 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Restaurant.xml
+  > say
+[1] Let's achieve ChooseRestaurant.
+  >> 1
+    User says "Let's achieve ChooseRestaurant."
+    Agent says "Would you to go to dinner with me ?"
+  > say
+[1] Sure.
+[2] No, thanks.
+  >> 1
+    User says "Sure."
+    Agent says "What kind of food would you like?"
+  > say
+[1] I like Japanese food.
+[2] I like Italian food.
+  >> 2
+    User says "I like Italian food."
+    Agent says "Oh. Sounds good, but I ate Italian food last night. I'd rather try Japanese food."
+  > say
+[1] Okay, Why not.
+[2] I do not like japanese food.
+  >> 1
+    User says "Okay, Why not."
+    Agent says "I know a restaurant, shogun. Everyone I've spoken with says that it is great."
+  > say
+[1] I heard about that restaurant.
+[2] I've never been there.
+  >> 2
+    User says "I've never been there."
+    Agent says " I really like their sushis. The fish is fresh and tasty."
+  > say
+[1] Yes, their sushis are delicious.
+[2] Their sushis is correct, I tested better.
+[3] I don't like sushis.
+  >> 3
+    User says "I don't like sushis."
+    Agent says "What do you think about the prices ?. I personnaly think that it's pricy."
+  > say
+[1]  It has a correct value for its price.
+[2] I don't know, I've never been there before.
+  >> 2
+    User says "I don't know, I've never been there before."
+    Agent says "The restaurant is well situated and the ambience is cool."
+  > say
+[1] It's true.
+[2] It's very noisy, I hate noises in  restaurants.
+[3] Oh, Great!
+  >> 3
+    User says "Oh, Great!"
+    Agent says "The only problem is that the restaurant is small and you must book before."
+  > say
+[1] It's the problem of restaurants in this town.
+[2] It's not a big deal.
+  >> 1
+    User says "It's the problem of restaurants in this town."
+    Agent says "Would you like to go ?"
+  > say
+[1] I would enjoy going there.
+[2] I prefer to go to another restaurant.
+  >> 1
+    User says "I would enjoy going there."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+  >> 1
+    User says "Perfect!"
+    Agent says "Ok."
+
