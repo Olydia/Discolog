@@ -24,11 +24,11 @@
 <t:task id="ChooseItalianRestaurant">
   <t:subtasks id="italian" ordered="false">
     <t:step name="itfood" task="ItalianFood"/>
-    <t:step name="itquality" task="QualityOfFoodItalian"/>
-    <t:step name="itprices" task="PricesItalian"/>
-    <t:step name="itambience" task="AmbienceItalian"/>
-    <t:step name="itreseve" task="ReserveItalian"/>
     <t:step name="itlocation" task="LocationItalian"/>
+    <t:step name="itquality" task="QualityOfFoodItalian"/>
+    <t:step name="itprices" task="PricesItalian" requires="itlocation"/>
+    <t:step name="itambience" task="AmbienceItalian"/>
+    <t:step name="itreseve" task="ReserveItalian" requires="itlocation"/>
     <t:step name="itinvite" task="Invite"/>
     <t:step name="reservation" task="Reservation"/>
   </t:subtasks>
@@ -44,11 +44,12 @@
 
 </agent>
 
+
   <t:task id="SetUserPreference">
     <t:input name="preference" type="Preference"/>
+    <t:binding slot="$this.external" value="false"/>
     <t:script> DefinePreference($this.preference) </t:script>
   </t:task>
-
 
 <t:task id="TypeOfFood">
   <t:subtasks id="type">
@@ -138,7 +139,7 @@
 </agent>
 
 
-<agent id="LocationItalian" text="The problem is that the restaurant is situated in a tourestic zone. ">
+<agent id="LocationItalian" text="The problem is that the restaurant is situated in a tourestic zone.">
 	<user text="Oh !."/>
 </agent>
 
@@ -167,11 +168,11 @@
 		  	dontcare : new Preference("I don't care !")
  			}
     
-    Preference.prototype.toString = function () { return this.name; }
+    Preference.prototype.toString = function () { return this.cuisine; }
 
-    function DefinePreference(pref){
-	if(pref == Preference.ENUM.dontcare) {$USERPREF = $AGENTPREF;} 
-	else {$USERPREF = pref;}
+    function DefinePreference (pref) {
+	if(pref == Preference.ENUM.dontcare) { $USERPREF = $AGENTPREF; } 
+	else { $USERPREF = pref; }
     }
 
     // a simple data base for restaurant

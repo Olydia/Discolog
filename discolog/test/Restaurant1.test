@@ -1,0 +1,124 @@
+  # Writing log to /tmp/Console.test...
+    # 28 avr. 2015 17:05:38 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Restaurant1.xml
+  > eval DEBUG = true;
+    # Returned 'true'
+  > eval $disco.addTop("ChooseRestaurant"); $AGENTPREF = Preference.ENUM.italian;
+    # Returned 'Italian'
+  > next
+    Agent says "Would you to go to dinner with me ?"
+  > say
+[1] Sure.
+[2] No, thanks.
+  >> 1     
+    User says "Sure."
+    Agent says "What kind of food would you like?"
+  > say
+[1] Japanese
+[2] Italian
+[3] I don't care !
+  >> 3
+    User says "I don't care !"
+    Agent execute SetUserPreference on I don't care !
+    Agent says "Personnally, I'm a huge fan of italian food. I know a restaurant called Roseval."
+  > say
+[1] I heard about that restaurant.
+[2] I've never been there.
+[3] I hate that restaurant !
+[4] I love that restaurant !
+  >> 2
+    User says "I've never been there."
+    Agent says "The problem is that the restaurant is situated in a tourestic zone. ."
+  > say
+[1] Oh !.
+  >> 1
+    User says "Oh !."
+    Agent says "The best part of this restaurant is the food. All of the dishes are delicious and with huge portions."
+  > say
+[1] Yes, and their Cabernet Sauvignon is good and not pricey !
+[2] That's what I've heard.
+[3] It seems good.
+  >> 3
+    User says "It seems good."
+    Agent says "As the restaurant is in a tourestic zone, it is really pricy."
+  > say
+[1] It's is predictible.
+[2] I don't know, I've never been there before.
+  >> 1
+    User says "It's is predictible."
+    Agent says "The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best."
+  > say
+[1] It's true.
+[2] It's very noisy, I hate noises in restaurants.
+[3] Oh, Great!
+  >> 3
+    User says "Oh, Great!"
+    Agent says " You must book before."
+  > say
+[1] It's the problem of tourestic restaurants.
+[2] It's not a big deal.
+  >> 1
+    User says "It's the problem of tourestic restaurants."
+    Agent says "Would you like to go ?"
+  > say
+[1] I would enjoy going there.
+[2] I prefer to go to another restaurant.
+  >> 1
+    User says "I would enjoy going there."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+  >> 1
+    User says "Perfect!"
+    Agent says "Ok."
+ > history
+
+[ ] -done
+   [Achieve RestaurantIntro] -done
+      Agent says "Would you to go to dinner with me ?"
+      [ ] -done
+         User says "Sure."
+         [Achieve TypeOfFood] -done
+            [Agent execute SetUserPreference on I don't care !] -done
+               [User says the SetUserPreference preference is I don't care !] -done
+                  Agent says "What kind of food would you like?"
+                  User says "I don't care !"
+               Agent execute SetUserPreference on I don't care !
+            [Achieve PreferenceFood] -done
+               [Achieve ChooseItalianRestaurant] -done
+                  [Achieve ItalianFood] -done
+                     Agent says "Personnally, I'm a huge fan of italian food. I know a restaurant called Roseval."
+                     [ ] -done
+                        User says "I've never been there."
+                  [Achieve LocationItalian] -done
+                     Agent says "The problem is that the restaurant is situated in a tourestic zone. ."
+                     [ ] -done
+                        User says "Oh !."
+                  [Achieve QualityOfFoodItalian] -done
+                     Agent says "The best part of this restaurant is the food. All of the dishes are delicious and with huge portions."
+                     [ ] -done
+                        User says "It seems good."
+                  [Achieve PricesItalian] -done
+                     Agent says "As the restaurant is in a tourestic zone, it is really pricy."
+                     [ ] -done
+                        User says "It's is predictible."
+                  [Achieve AmbienceItalian] -done
+                     Agent says "The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best."
+                     [ ] -done
+                        User says "Oh, Great!"
+                  [Achieve ReserveItalian] -done
+                     Agent says " You must book before."
+                     [ ] -done
+                        User says "It's the problem of tourestic restaurants."
+                  [Achieve Invite] -done
+                     Agent says "Would you like to go ?"
+                     [ ] -done
+                        User says "I would enjoy going there."
+                  [Achieve Reservation] -done
+                     Agent says "Okay, I'll call to book a table."
+                     [ ] -done <-focus
+                        User says "Perfect!"
+                        Agent says "Ok."
+
+  > 
