@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:disco.wpi.edu:models:Restaurant"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+
+<t:task id="ChooseRestaurant">
+  <t:subtasks id="talk">
+    <t:step name="intro" task="RestaurantIntro"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseJapaneseRestaurant">
+  <t:subtasks id="Japanese" ordered="false">
+    <t:step name="japfood" task="JapaneseFood"/>
+    <t:step name="japquality" task="QualityOfFood"/>
+    <t:step name="japprices" task="Prices"/>
+    <t:step name="japambience" task="Ambience"/>
+    <t:step name="japreseve" task="Reserve"/>
+    <t:step name="invite" task="Invite"/>
+    <t:step name="reservation" task="Reservation"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseItalianRestaurant">
+  <t:subtasks id="italian" ordered="false">
+    <t:step name="itfood" task="ItalianFood"/>
+    <t:step name="itquality" task="QualityOfFoodItalian"/>
+    <t:step name="itprices" task="PricesItalian"/>
+    <t:step name="itambience" task="AmbienceItalian"/>
+    <t:step name="itreseve" task="ReserveItalian"/>
+    <t:step name="itlocation" task="LocationItalian"/>
+    <t:step name="itinvite" task="Invite"/>
+    <t:step name="reservation" task="Reservation"/>
+  </t:subtasks>
+</t:task>
+
+<agent id="RestaurantIntro" text="Would you to go to dinner with me ?">
+	<user text="Sure.">
+ 		<do task="TypeOfFood"/>
+ 	</user>
+ 	<user text="No, thanks">
+		<do task="ClosingDialogue"/>
+  	</user>
+
+</agent>
+
+  <t:task id="SetUserPreference">
+    <t:input name="preference" type="Preference"/>
+    <t:script> DefinePreference($this.preference) </t:script>
+  </t:task>
+
+
+<t:task id="TypeOfFood">
+  <t:subtasks id="type">
+    <t:step name="userprefere" task="SetUserPreference"/>
+    <t:step name="choosepreference" task="PreferenceFood"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="PreferenceFood">
+  <t:subtasks id="japaneserestau">
+    <t:step name="japanesefood" task="ChooseJapaneseRestaurant"/>
+    <t:applicable> $USERPREF==Preference.ENUM.japanese </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="italianrestau">
+    <t:step name="italianfood" task="ChooseItalianRestaurant"/>
+    <t:applicable> $USERPREF==Preference.ENUM.italian </t:applicable>
+  </t:subtasks>
+</t:task>
+
+<agent id="JapaneseFood" text="I know a restaurant, shogun. Everyone I've spoken with says that it is great.">
+	<user text="I heard about that restaurant."/>
+     	<user text="I've never been there."/>
+</agent>
+
+<agent id="QualityOfFood" text=" I really like their sushis. The fish is fresh and tasty">
+	<user text="Yes, their sushis are delicious."/>
+     	<user text="their sushis is correct, I tested better."/>
+	<user text="I don't like sushis."/>
+</agent>
+
+<agent id="Prices" text="What do you think about the prices ?. I personnaly think that it's pricy">
+	<user text=" It has a correct value for its price."/>
+     	<user text="I don't know, I've never been there before."/>
+</agent>
+
+<agent id="Ambience" text="The restaurant is well situated and the ambience is cool">
+	<user text="It's true."/>
+     	<user text="It's very noisy, I hate noises in  restaurants."/>
+	<user text="Oh, Great!"/>		
+</agent>
+
+<agent id="Reserve" text="The only problem is that the restaurant is small and you must book before.">
+	<user text="It's the problem of restaurants in this town."/>
+     	<user text="It's not a big deal."/>
+</agent>
+
+<agent id="Invite" text="Would you like to go ?">
+	<user text="I would enjoy going there."/>
+     	<user text="I prefer to go to another restaurant.">
+		<do task="OnlineSearch"/>
+	</user>
+</agent>
+
+<agent id="Reservation" text="Okay, I'll call to book a table">
+	<user text="Perfect!"/>
+</agent>
+
+
+<agent id="ItalianFood" text="Personnally, I'm a huge fan of italian food. I know a restaurant called Roseval.">
+	<user text="I heard about that restaurant."/>
+     	<user text="I've never been there."/>
+	<user text="I hate that restaurant !"/>
+	<user text="I love that restaurant !"/>
+</agent>
+
+<agent id="QualityOfFoodItalian" text="The best part of this restaurant is the food. All of the dishes are delicious and with huge portions.">
+	<user text="Yes, and their Cabernet Sauvignon is good and not pricey !"/>
+     	<user text="That's what I've heard."/>
+     	<user text="It seems good."/>
+
+</agent>
+
+<agent id="PricesItalian" text="As the restaurant is in a tourestic zone, it is really pricy">
+	<user text="It's is predictible."/>
+     	<user text="I don't know, I've never been there before."/>
+</agent>
+
+<agent id="AmbienceItalian" text="The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best">
+	<user text="It's true."/>
+     	<user text="It's very noisy, I hate noises in restaurants."/>
+	<user text="Oh, Great!"/>		
+</agent>
+
+<agent id="ReserveItalian" text=" You must book before.">
+	<user text="It's the problem of tourestic restaurants."/>
+     	<user text="It's not a big deal."/>
+</agent>
+
+
+<agent id="LocationItalian" text="The problem is that the restaurant is situated in a tourestic zone. ">
+	<user text="Oh !."/>
+</agent>
+
+<agent id="ClosingDialogue" text="No problem, another day maybe">
+  <user text="Sure !."/>
+  <user text="yeah, I'll call you tommorow."/>
+</agent>
+
+<agent id="OnlineSearch" text="Okay, Let's look on line for a good restaurant!">
+	<user text="Good idea !"/>
+	<user text="No, I no longer want to go to the restaurant.">
+		<do task="ClosingDialogue"/>
+  	</user>
+
+</agent>
+
+ <t:script init="true"> 
+
+    var $USERPREF;
+    var $AGENTPREF;
+
+    function Preference (cuisine) { this.cuisine = cuisine; }
+    
+    Preference.ENUM = { japanese : new Preference("Japanese"), 
+                  	italian : new Preference("Italian"),
+		  	dontcare : new Preference("I don't care !")
+ 			}
+    
+    Preference.prototype.toString = function () { return this.name; }
+
+    function DefinePreference(pref){
+	if(pref == Preference.ENUM.dontcare) {$USERPREF = $AGENTPREF;} 
+	else {$USERPREF = pref;}
+    }
+
+    // a simple data base for restaurant
+    function Restaurant (name, location, type, quality, reservation, ambiance) { 
+        this.name = name; 
+        this.location = location;
+	this.type = type;
+	this.quality = quality;
+	this.reservation = reservation;
+	this.ambiance = ambiance;
+    }
+
+  </t:script>
+</model>
