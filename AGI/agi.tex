@@ -5,7 +5,7 @@
 \usepackage{usual}
 \usepackage{graphicx}
 \usepackage[rflt]{floatflt}
-\pagestyle{plain}
+%\pagestyle{plain}
 %
 \begin{document}
 \title{Plan Recovery in Reactive HTNs\\Using Symbolic Planning\vskip -10pt}
@@ -109,7 +109,7 @@ breakdown and recovery.  The basic idea of this example, shown in
 transport an object through a locked door.  In this HTN, the toplevel
 task, Transport, is decomposed into three steps: pickup, Navigate and
 putdown.  Navigate is further decomposed into three steps: unlock,
-open and walkthru.  Each of these tasks is represented by an oval in
+open and walkthrough.  Each of these tasks is represented by an oval in
 \fig{wind}.  (The square boxes in the HTN are there to support
 alternative decompositions, which can be ignored in this example.)
 
@@ -160,7 +160,7 @@ execution engine somehow had available the symbolic modeling
 knowledge shown in \fig{features}.  Recovering from the breakdown
 could then be formulated as a STRIPS planning problem (see
 \fig{planning}) in which the initial state is the \emph{current} world
-state, i.e., the door is not open and locked, and the final state is
+state, i.e., the door is not open and is locked, and the final state is
 the failed precondition of walkthru, i.e., the door is open.
 Simple backward-chaining would then quickly find the solution sequence of
 operators, namely unlock followed by open.  This recovery plan could
@@ -322,7 +322,7 @@ breakdown can be caused by an external, i.e., unmodeled, agency
 unexpectedly changing the environment (e.g., the wind in
 \sect{motivating}); or it can be due to a programming bug, such as
 incorrect tree structure or an incorrectly coded condition.  The fact
-these these different causes are indistinguishable in the breakdown is
+these different causes are indistinguishable in the breakdown is
 an inherent limitation of reactive HTNs.
 
 \defsubsection{algorithm}{Plan Recovery Algorithm}
@@ -539,7 +539,7 @@ provided, the better the recovery algorithm would perform.
 this hypothesis.  We tested trees of two RxSxD sizes, 3x3x3 and 1x5x4,
 where R is the decomposition (recipe) branching factor, S is task
 (step) branching factor, and D is the task depth (see \fig{dimen}).
-For each test, we randomly sampled from (the very large space of) all
+For each test, we randomly sampled from the very large space (millions) of all
 possible combinations of symbolic knowledge at three overall levels:
 25\%, 50\% and 75\% (percentage of conditions in the tree that are
 symbolically specified).  We did not test larger trees because the
