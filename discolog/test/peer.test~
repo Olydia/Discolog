@@ -1,0 +1,98 @@
+    # 16 juil. 2015 13:04:16 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Restaurant2v2.xml
+  > eval $disco.addTop("GoingOut"); $AGENTPREF = listPreferences[0]; $AGENTRELATION=Relation.ENUM.peer;
+    # Returned 'Peer'
+  > 
+  > next
+    Agent says "Shall we achieve DialogueIntro by peer?"
+  > say
+[1] Yes.
+[2] No.
+  >> 1
+    User says "Yes."
+    Agent says "Would you like to go out with me on the town tonight?"
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Would you enjoy having dinner with me?"
+  > say
+[1] Yes.
+  >> 1
+    User says "Yes."
+    Agent says "How about getting some Japanese food ?"
+  > say
+[1] Yeah. I love it.
+[2] No. I don't love this type of food.
+[3] Please do not execute ProposePreferences.
+  >> 2
+    User says "No. I don't love this type of food."
+    Agent execute ProposePreferences on No. I don't love this type of food.
+    Agent says "So, what kind of food would you like?"
+  > say
+[1] Japanese
+[2] Italian
+[3] Indian
+[4] Please do not execute DefinePreferences.
+  >> 2
+    User says "Italian."
+    Agent execute DefinePreferences on Italian.
+    Agent says "I know a restaurant called Roseval."
+  > say
+[1] I heard about that restaurant.
+[2] I've never been there.
+[3] I hate that restaurant !
+[4] I love that restaurant !
+  >> 1
+    User says "I heard about that restaurant."
+    Agent says "The problem is that the restaurant is situated in a tourestic zone."
+  > say
+[1] Oh !.
+  >> 1
+    User says "Oh !."
+    Agent says "The best part of this restaurant is the food. All of the dishes are delicious and with huge portions."
+  > say
+[1] Yes, and their Cabernet Sauvignon is good and not pricey !
+[2] That's what I've heard.
+[3] It seems good.
+  >> 2
+    User says "That's what I've heard."
+    Agent says "As the restaurant is in a tourestic zone, it is really pricy."
+  > say
+[1] It's is predictible.
+[2] I don't know, I've never been there before.
+  >> 2
+    User says "I don't know, I've never been there before."
+    Agent says "The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best."
+  > say
+[1] It's true.
+[2] It's very noisy, I hate noises in restaurants.
+[3] Oh, Great!
+  >> 3
+    User says "Oh, Great!"
+    Agent says " You must book before."
+  > say
+[1] It's the problem of tourestic restaurants.
+[2] It's not a big deal.
+  >> 2
+    User says "It's not a big deal."
+    Agent says "Would you like go to that restaurant?"
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+  >> 1
+    User says "Perfect!"
+    Agent says "See you there at 7:30 PM?"
+  > say
+[1] Great.
+  >> 1
+    User says "Great."
+    Agent says "Ok."
+  > 

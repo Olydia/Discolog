@@ -1,0 +1,9 @@
+Propose.ShouldNot(SetUserPreference)@generate = false
+propose.Should(SetUserPreference)@generate = false
+Propose.ShouldNot(TypeOfFood)@generate = false
+Ask.What(SetUserPreference,preference)@format = What kind of food would you like? 
+Ask.Should(ChooseRestaurant)@generate = false
+ChooseRestaurant@internal = true
+
+
+

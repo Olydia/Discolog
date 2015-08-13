@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:disco.wpi.edu:models:Restaurant"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+
+<t:task id="GoingOut">
+  <t:subtasks id="talk">
+    <t:step name="intro" task="DialogueIntro"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="InviteToDinner">
+  <t:subtasks id="dinnerpart">
+    <t:step name="introducedinner" task="IntroduceDinner"/>
+    <t:step name="preferences" task="DefinePreferences" /> <!-- (add sufficient postcondition restaurantfood != null) -->
+    <t:step name="restaurantchoice" task="ChooseRestaurant"/>
+    <t:step name="invitationrestau" task="InviteToRestaurant"/>
+    <t:step name="booking" task="BookTable"/>
+    <t:step name="rdv" task="RDV"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="DialogueIntro">
+  <t:subtasks id="_dominant">
+    <t:step name="dominvit" task="DominantInvitation"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.dominant </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="_peer">
+    <t:step name="peerinvit" task="PeerInvitation"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.peer </t:applicable>
+  </t:subtasks>
+    <t:subtasks id="_sub">
+    <t:step name="subinvit" task="SubmInvitation"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.submissive </t:applicable>
+  </t:subtasks>
+</t:task>
+
+<t:task id="BookTable">
+  <t:subtasks id="dominantbook">
+    <t:step name="dominbook" task="Booking"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.dominant || $AGENTRELATION==Relation.ENUM.peer</t:applicable>
+  </t:subtasks>
+    <t:subtasks id="subbooking">
+    <t:step name="subbook" task="SubmBooking"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.submissive </t:applicable>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseRestaurant">
+  <t:subtasks id="japaneserestau">
+    <t:step name="japanesefood" task="ChooseJapaneseRestaurant"/>
+    <t:applicable> $RESTOFOOD==listPreferences[0] || $RESTOFOOD== Preference.ENUM.japanese </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="italianrestau">
+    <t:step name="italianfood" task="ChooseItalianRestaurant"/>
+    <t:applicable> $RESTOFOOD==listPreferences[1] || $RESTOFOOD== Preference.ENUM.italian </t:applicable>
+  </t:subtasks>
+</t:task>
+
+<t:task id="SubmInvitation">
+  <t:subtasks id="invitesub">
+    <t:step name="ask" task="UserAvailable"/>
+	<t:step name="invitationstep" task="AskOutUser"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="IntroduceDinner">
+   <t:subtasks id="dominantdinner">
+    <t:step name="dominvitedinner" task="DomInviteDinner"/>
+    <t:step name="domindinner" task="FixPreferences" minOccurs="1" maxOccurs="2"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.dominant </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="peerdinner">
+    <t:step name="likedinner" task="InviteDinner"/>
+    <t:step name="proposepref" task="ProposePreferences"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.peer </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="submissivedinner">
+    <t:step name="subdinner" task="InviteDinner"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.submissive </t:applicable>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ProposePreferences">
+  <t:input name="preferencepeer" type="UserResponse"/>
+   <t:binding slot="$this.external" value="false"/>
+   <t:script> RequestPreference($this.preferencepeer) </t:script>
+</t:task>
+
+<t:task id="FixPreferences">
+  <t:input name="preferencedom" type="UserResponse"/>
+   <t:binding slot="$this.external" value="false"/>
+   <t:script> RequestDomPreference($this.preferencedom) </t:script>
+</t:task>
+
+<t:task id="DefinePreferences">
+  <t:input name="preference" type="Preference"/>
+   <t:binding slot="$this.external" value="false"/>
+  <t:postcondition sufficient="true"> $RESTOFOOD != null </t:postcondition>
+   <t:script> RestoPreference($this.preference) </t:script>
+</t:task>
+
+<t:task id="InviteToRestaurant">
+ <t:subtasks id="dominantrestauinvitation">
+    <t:step name="domindinvit" task="DominantRestaurantInvitation"/> 
+    <t:applicable> $AGENTRELATION==Relation.ENUM.dominant </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="peerdrestauinvitation">
+    <t:step name="likedinvitation" task="PeerRestaurantInvitation"/>
+    <t:applicable> $AGENTRELATION==Relation.ENUM.peer || $AGENTRELATION==Relation.ENUM.submissive</t:applicable>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseJapaneseRestaurant">
+  <t:subtasks id="Japanese" ordered="false">
+    <t:step name="japfood" task="JapaneseFood"/>
+    <t:step name="japquality" task="QualityOfFood"/>
+    <t:step name="japprices" task="Prices"/>
+    <t:step name="japambience" task="Ambience"/>
+    <t:step name="japreseve" task="Reserve"/>
+  </t:subtasks>
+</t:task>
+
+<t:task id="ChooseItalianRestaurant">
+  <t:subtasks id="italian" ordered="false">
+    <t:step name="itfood" task="ItalianFood"/>
+    <t:step name="itlocation" task="LocationItalian"/>
+    <t:step name="itquality" task="QualityOfFoodItalian"/>
+    <t:step name="itprices" task="PricesItalian" requires="itlocation"/>
+    <t:step name="itambience" task="AmbienceItalian"/>
+    <t:step name="itreseve" task="ReserveItalian" requires="itlocation"/>
+  </t:subtasks>
+</t:task>
+
+<agent id="DominantInvitation" text="Let's go out on the town tonight">
+	<user text="That would be great ! .">
+ 		<do task="InviteToDinner"/>
+ 	</user>
+ 	<user text="Sorry, not today">
+		<do task="Insist"/>
+  	</user>
+</agent>
+
+<agent id="DominantRestaurantInvitation" text="I would like go to that restaurant.">
+	<user text="That would be great ! .">
+ 	</user>
+ 	<user text="Sorry, not today">
+		<do task="ClosingDialogue"/>
+  	</user>
+</agent>
+
+<agent id="PeerRestaurantInvitation" text="Would you like go to that restaurant?">
+	<user text="That would be great ! .">
+ 	</user>
+ 	<user text="Sorry, not today">
+		<do task="ClosingDialogue"/>
+  	</user>
+</agent>
+
+
+<agent id="UserAvailable" text="Hi, hmmm... Are you available tonight ?">
+	<user text="Yes. I have no plan."/>
+</agent>
+
+<agent id="AskOutUser" text="I want to ask you to go out tonight">
+	<user text="That would be great ! ">
+	 	<do task="InviteToDinner"/>
+	</user>
+ 	<user text="Sorry, not today">
+		<do task="ClosingDialogue"/>
+  	</user>
+</agent>
+
+<agent id="PeerInvitation" text="Would you like to go out with me on the town tonight?">
+	<user text="That would be great ! .">
+ 		<do task="InviteToDinner"/>
+ 	</user>
+ 	<user text="Sorry, not today">
+		<do task="ClosingDialogue"/>
+  	</user>
+</agent>
+
+
+<agent id="Insist" text="Come on, You should come. I promise you'll have fun !">
+	<user text="Okay, sounds great !">
+ 		<do task="InviteToDinner"/>
+ 	</user>
+ 	<user text="I'm sorry, but I'm not coming">
+		<do task="ClosingDialogue"/>
+  	</user>
+</agent>
+
+<agent id="InviteDinner" text="Would you enjoy having dinner with me?">
+	<user text="yes."/>
+</agent> 
+
+<agent id="DomInviteDinner" text="I want to go have some dinner. Do you want to come with me?">
+	<user text="yes."/>
+</agent>
+
+<agent id="ClosingDialogue" text="No problem, another day maybe">
+  <user text="Sure !."/>
+  <user text="yeah, I'll call you tommorow."/>
+</agent> 
+
+<agent id="JapaneseFood" text="I know a restaurant, shogun. Everyone I've spoken with says that it is great.">
+	<user text="I heard about that restaurant."/>
+     	<user text="I've never been there."/>
+</agent>
+
+<agent id="QualityOfFood" text=" I really like their sushis. The fish is fresh and tasty">
+	<user text="Yes, their sushis are delicious."/>
+     	<user text="their sushis is correct, I tested better."/>
+	<user text="I don't like sushis."/>
+</agent>
+
+<agent id="Prices" text="What do you think about the prices ?. I personnaly think that it's pricy">
+	<user text=" It has a correct value for its price."/>
+     	<user text="I don't know, I've never been there before."/>
+</agent>
+
+<agent id="Ambience" text="The restaurant is well situated and the ambience is cool">
+	<user text="It's true."/>
+     	<user text="It's very noisy, I hate noises in  restaurants."/>
+	<user text="Oh, Great!"/>		
+</agent>
+
+<agent id="Reserve" text="The only problem is that the restaurant is small and you must book before.">
+	<user text="It's the problem of restaurants in this town."/>
+     	<user text="It's not a big deal."/>
+</agent>
+
+<agent id="SubmBooking" text="Would you prefer if I book a table">
+	<user text="Perfect!"/>
+	<user text="I'll handle it!"/>
+</agent>
+
+<agent id="Booking" text="Okay, I'll call to book a table">
+	<user text="Perfect!"/>
+</agent>
+
+<agent id="ItalianFood" text="I know a restaurant called Roseval.">
+	<user text="I heard about that restaurant."/>
+     	<user text="I've never been there."/>
+	<user text="I hate that restaurant !"/>
+	<user text="I love that restaurant !"/>
+</agent>
+
+<agent id="QualityOfFoodItalian" text="The best part of this restaurant is the food. All of the dishes are delicious and with huge portions.">
+	<user text="Yes, and their Cabernet Sauvignon is good and not pricey !"/>
+     	<user text="That's what I've heard."/>
+     	<user text="It seems good."/>
+
+</agent>
+
+<agent id="PricesItalian" text="As the restaurant is in a tourestic zone, it is really pricy">
+	<user text="It's is predictible."/>
+     	<user text="I don't know, I've never been there before."/>
+</agent>
+
+<agent id="AmbienceItalian" text="The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best">
+	<user text="It's true."/>
+     	<user text="It's very noisy, I hate noises in restaurants."/>
+	<user text="Oh, Great!"/>		
+</agent>
+
+<agent id="ReserveItalian" text=" You must book before.">
+	<user text="It's the problem of tourestic restaurants."/>
+     	<user text="It's not a big deal."/>
+</agent>
+
+
+<agent id="LocationItalian" text="The problem is that the restaurant is situated in a tourestic zone.">
+	<user text="Oh !."/>
+</agent>
+
+<agent id="RDV" text="See you there at 7:30 PM?">
+	<user text="Great."/>
+</agent>
+
+<t:script init="true"> 
+
+	var $USERPREF;
+	var $AGENTPREF;
+	var $AGENTRELATION;
+	var $RESTOFOOD;
+	var $X = 0;
+	var listPreferences =[new Preference("Japanese"), new Preference("Italian"), new Preference("Indian")];
+	
+	Preference.ENUM = { japanese : new Preference("Japanese"), 
+                  	italian : new Preference("Italian"),
+		  	indian : new Preference("Indian")
+ 			}
+
+	function Preference (cuisine) { this.cuisine = cuisine; }		
+	Preference.prototype.toString = function () { return this.cuisine; }
+
+	function UserResponse (like) { this.like = like; }
+
+	UserResponse.ENUM = { yes : new UserResponse("Yeah. I love it."), 
+			no : new UserResponse("No. I don't love this type of food.")
+			}
+
+	UserResponse.prototype.toString = function () { return this.like; }	
+
+	function RestoPreference (pref) { 
+	 $USERPREF=pref;
+	 $RESTOFOOD=pref;
+	}
+
+	function RequestDomPreference (response) {
+	if(response == UserResponse.ENUM.yes) { $USERPREF = $AGENTPREF; $RESTOFOOD = $AGENTPREF; } 
+	if(response == UserResponse.ENUM.no)  { $RESTOFOOD = null;
+						$X = $X+1;
+						$AGENTPREF = listPreferences[$X];
+		                              }
+	}
+
+	function RequestPreference (response) {
+	if(response == UserResponse.ENUM.yes) { $USERPREF = $AGENTPREF; $RESTOFOOD = $AGENTPREF; } 
+	if(response == UserResponse.ENUM.no)  { $RESTOFOOD = null;
+		                              }
+	}
+	function Relation (type) { this.type = type;}
+
+	Relation.ENUM = {dominant : new Relation("Dominant"), 
+		  	peer : new Relation("Peer"),
+			submissive : new Relation("Submissive")
+		  	}  
+	Relation.prototype.toString = function () { return this.type; }
+
+  </t:script>
+</model>

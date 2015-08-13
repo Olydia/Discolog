@@ -1,0 +1,14 @@
+Ask.What(ProposePreferences,preferencepeer)@format = How about getting some {$AGENTPREF} food ?
+Ask.What(DefinePreferences,preference)@format = So, what kind of food would you like? 
+Ask.What(FixPreferences,preferencedom)@format = I want to taste {$AGENTPREF} food.
+# Ask.Should(GoingOut)@generate = false
+# Ask.ShouldNot(DialogueIntro)@generate = false
+Ask.Should.Repeat(FixPreferences)@generate = false
+Propose.Stop(FixPreferences)@generate = false
+Propose.Stop(DominantInvitation)@generate = false
+Propose.Stop(Insist)@generate = false
+
+Propose.Should(GoingOut)@format = {$AGENTRELATION == Relation.ENUM.dominant ? "Let's go out the town tonight !" : $AGENTRELATION == Relation.ENUM.peer ? "Would you like to go out with me on the town tonight?" : "I was wondering if you would enjoy going out with me tonight?"}
+Accept(Propose.Should(GoingOut))@format = That would be great !
+Reject(Propose.Should(GoingOut))@format = Sorry, but not today.
+
