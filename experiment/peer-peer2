@@ -1,0 +1,65 @@
+I: peer
+O: peer
+Preferences I = { Spicy food, Italian / asiatic food, expensive restaurants}
+Preferences O = {japanese, Italian / spicy food} 
+
+[DSP 1:  Invite to go out]
+I: Would you like to go out with me on the town tonight?
+O: Sure, that would be very nice.
+O: Do you have something in mind ?
+[DSP 2:  go to dinner]
+I: How about get some dinner 
+O: Great idea !
+
+	[DSP 2.1: Indian restaurant]	
+	I: I heard about a new indian restaurant in town. I want to taste their food 
+	Everyone I've spoken with says that it is great.
+	O: I'm afraid I can't. I really don't support spicy food.
+	I: I understand. We can find something else. 
+
+	[DSP 2.2: Italian restaurant]
+	O: How about getting some pizza. I'm personnaly a huge fan of italian food. 
+	I: Good idea, I also like italian food. Do you know some good Italian restaurant?
+
+		[DSP 2.2.1 : choose a restaurant]
+		O: There's a restaurant called Ciasa Mia. It has good reviews on internet
+		I: I went there once,
+
+			[DSP 2.2.1.1 : review of the  Ciasa Mia restaurant]
+			I: I hated the food, and it was way too expensive for the quality.
+			In addition, the help (?waiters?) was'nt professional, 
+			I think we can find something better.
+			O: oh too bad, 
+			food writers and customers have raved about this restaurant on the Web.  
+			I: Yeah I went to that restaurant based on theses reviews but I've been really 	desappointed. 
+
+		[DSP 2.2.2 : choose another italian restaurant]
+		O: Do you know other restaurants ?
+		I: I know a little restaurant, AlPasta. 
+		O: I've never heard about this restaurant	
+			[DSP 2.2.2.1: review of the restaurant]
+			I: The pizza is delicisous and the ambiance is cosy.
+			I: I've been there with freinds last time.
+			O: what did you eat ?
+			I: I think that I ate a pizza with mozzarella and fresh basil. 
+			it was so delicious. 
+			I: In addition the personal was so professional.
+			O: It looks like that you really had good time
+			I: Yes, I remeber that I had fun there.
+			O: I hope it's not too expensive
+			I: not at all ! 
+
+	[DSP 2.3:Decide which restaurant]
+	O: It would be great to go there.  
+	I: Great, you will love it.
+
+		[DSP 2.3.1: Reservation]
+		O: Do you think we should book a table?
+		I: You are right, it is better. I'll make a reservation for 8 PM. Otherwise, it's impossible to get a place.
+		O: Sounds great.
+
+	[DSP 2.4: Giving RDV]
+	I: Then, we meet there at 8 PM
+	O: I could come pick you up if you like ?
+	I: That would be great. See you
+	O: see you

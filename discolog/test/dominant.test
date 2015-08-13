@@ -1,0 +1,113 @@
+    # 16 juil. 2015 11:58:51 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Restaurant2v2.xml
+  > eval $disco.addTop("GoingOut"); $AGENTPREF = listPreferences[0]; $AGENTRELATION=Relation.ENUM.dominant;
+    # Returned 'Dominant'
+  > 
+  > next
+    Agent says "Shall we achieve DialogueIntro by dominant?"
+  > say
+[1] Yes.
+[2] No.
+  >> 1
+    User says "Yes."
+    Agent says "Let's go out on the town tonight."
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 2
+    User says "Sorry, not today."
+    Agent says "Come on, You should come. I promise you'll have fun !"
+  > say
+[1] Okay, sounds great !
+[2] I'm sorry, but I'm not coming.
+  >> 1
+    User says "Okay, sounds great !"
+    Agent says "I want to go have some dinner. Do you want to come with me?"
+  > say
+[1] Yes.
+  >> 1
+    User says "Yes."
+    Agent says "I want to taste Japanese food."
+  > say
+[1] Yeah. I love it.
+[2] No. I don't love this type of food.
+[3] Please do not execute FixPreferences.
+  >> 2
+    User says "No. I don't love this type of food."
+    Agent execute FixPreferences on No. I don't love this type of food.
+    Agent says "Should I execute FixPreferences again?"
+  > say
+[1] Yes.
+[2] No.
+[3] Stop achieve InviteToDinner.
+[4] Stop achieve Insist.
+[5] Stop achieve DominantInvitation.
+  >> 1
+    User says "Yes."
+    Agent says "I want to taste Italian food."
+  > say
+[1] Yeah. I love it.
+[2] No. I don't love this type of food.
+[3] Please do not execute FixPreferences.
+  >> 1
+    User says "Yeah. I love it."
+    Agent execute FixPreferences on Yeah. I love it.
+    Agent says "I know a restaurant called Roseval."
+  > say
+[1] I heard about that restaurant.
+[2] I've never been there.
+[3] I hate that restaurant !
+[4] I love that restaurant !
+  >> 2
+    User says "I've never been there."
+    Agent says "The problem is that the restaurant is situated in a tourestic zone."
+  > say
+[1] Oh !.
+  >> 1
+    User says "Oh !."
+    Agent says "The best part of this restaurant is the food. All of the dishes are delicious and with huge portions."
+  > say
+[1] Yes, and their Cabernet Sauvignon is good and not pricey !
+[2] That's what I've heard.
+[3] It seems good.
+  >> 3
+    User says "It seems good."
+    Agent says "As the restaurant is in a tourestic zone, it is really pricy."
+  > say
+[1] It's is predictible.
+[2] I don't know, I've never been there before.
+  >> 2
+    User says "I don't know, I've never been there before."
+    Agent says "The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best."
+  > say
+[1] It's true.
+[2] It's very noisy, I hate noises in restaurants.
+[3] Oh, Great!
+  >> 3
+    User says "Oh, Great!"
+    Agent says " You must book before."
+  > say
+[1] It's the problem of tourestic restaurants.
+[2] It's not a big deal.
+  >> 2
+    User says "It's not a big deal."
+    Agent says "I would like go to that restaurant."
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+  >> 1
+    User says "Perfect!"
+    Agent says "See you there at 7:30 PM?"
+  > say
+[1] Great.
+  >> 1
+    User says "Great."
+    Agent says "Ok."
+  > quit
+    

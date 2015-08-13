@@ -1,0 +1,3 @@
+load models/Restaurant2v2.xml
+eval $disco.addTop("GoingOut"); $AGENTPREF = listPreferences[0]; $AGENTRELATION=Relation.ENUM.dominant;
+eval $disco.addTop("DialogueIntro");

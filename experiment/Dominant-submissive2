@@ -1,0 +1,68 @@
+I: dominant
+O: submissive
+Preferences I = { Spicy food, Italian / asiatic food, expensive restaurants}
+Preferences O = {japanese, Italian / spicy food} 
+
+[DSP 1:  Invite to go out]
+I: Let's go out on the town tonight
+O: Yes, thank you, that would be very nice.
+[DSP 2:  go to dinner]
+I: I want to go have some dinner
+O: Great idea !
+
+	[DSP 2.1: Indian restaurant]	
+	I: I heard about a new indian restaurant in town. I want to taste their food 
+	Everyone I've spoken with says that it is great.
+	O: Oh, sorry but I'm afraid I can't. I don't support spicy food.
+	I: But there are also sweet spices like curry it gives so much taste. 
+	I: We should taste it.
+	O: I believe you, but really I don't support spices. 
+	O: sorry ...
+
+	[DSP 2.2: Italian food]
+	I: It does't matter, but you miss something
+	I: Thus, we can try an italian restaurant. 
+	I: I'm sure you would like some pizza
+
+		[DSP 2.2.1 : choose a restaurant]
+		O: Good idea, I love Italian food. 
+		O: How about Ciasa Mia restaurant? 
+		I: Oh, nooo! I hate this restaurant
+
+			[DSP 2.2.1.1 : review of the  Ciasa Mia restaurant]
+			I: the food is disappointing,	 
+			the help (?waiters?) is irritating, 
+			and the prices are unjustified. 
+			I won’t ever go to that place again.
+			O: oh too bad, 
+			food writers and customers have raved about this restaurant on the Web.  
+			I: Yeah I went to that restaurant based on theses reviews but I've been really 	desappointed. 
+
+		[DSP 2.2.2 : choose another italian restaurant]
+		I: I'd rather prefer to go to AlPasta. 
+		O: I've never heard about this restaurant	
+			[DSP 2.2.2.1: review of the restaurant]
+			I: their pizza is delicisous and the ambiance is cosy.
+			I: I've been there with freinds last time.
+			O: what did you eat ?
+			I: I think that I ate a pizza with mozzarella and fresh basil. 
+			it was so delicious. 
+			I: In addition the personal was so professional.
+			O: It looks like that you really had good time
+			I: Yes, I remeber that I had fun there.
+
+	[DSP 2.3:Decide which restaurant]
+	O: I would enjoy going there with you
+	I: Great, you will love it.
+
+		[DSP 2.3.1: Reservation]
+		I: So, we have to book a table. Otherwise, it's impossible to get a place.
+		O: Do you want me to do it ?
+		I: No I'll do it. I'll resereve for 8 PM.
+		O: Sounds great.
+
+	[DSP 2.4: Giving RDV]
+	I: Then we meet there at 8 PM
+	O: I could come pick you up if you like ?
+	I: That would be great. See you
+	O: see you

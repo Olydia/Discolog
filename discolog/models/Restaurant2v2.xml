@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskModel xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext"
+           xmlns:disco="urn:disco.wpi.edu:Disco"
+           about="urn:disco.wpi.edu:models:Restaurant">
+   <task id="DominantInvitation">
+      <subtasks id="_DominantInvitation_subtasks">
+         <step name="_DominantInvitation_step" task="disco:Say"/>
+         <step name="_DominantInvitation_ref" task="_DominantInvitation_tree"/>
+         <binding slot="$_DominantInvitation_step.text"
+                  value="&#34;Let's go out on the town tonight&#34;"/>
+         <binding slot="$_DominantInvitation_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="DominantRestaurantInvitation">
+      <subtasks id="_DominantRestaurantInvitation_subtasks">
+         <step name="_DominantRestaurantInvitation_step" task="disco:Say"/>
+         <step name="_DominantRestaurantInvitation_ref"
+               task="_DominantRestaurantInvitation_tree"/>
+         <binding slot="$_DominantRestaurantInvitation_step.text"
+                  value="&#34;I would like go to that restaurant.&#34;"/>
+         <binding slot="$_DominantRestaurantInvitation_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="PeerRestaurantInvitation">
+      <subtasks id="_PeerRestaurantInvitation_subtasks">
+         <step name="_PeerRestaurantInvitation_step" task="disco:Say"/>
+         <step name="_PeerRestaurantInvitation_ref" task="_PeerRestaurantInvitation_tree"/>
+         <binding slot="$_PeerRestaurantInvitation_step.text"
+                  value="&#34;Would you like go to that restaurant?&#34;"/>
+         <binding slot="$_PeerRestaurantInvitation_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="UserAvailable">
+      <subtasks id="_UserAvailable_subtasks">
+         <step name="_UserAvailable_step" task="disco:Say"/>
+         <step name="_UserAvailable_ref" task="_UserAvailable_tree"/>
+         <binding slot="$_UserAvailable_step.text"
+                  value="&#34;Hi, hmmm... Are you available tonight ?&#34;"/>
+         <binding slot="$_UserAvailable_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="AskOutUser">
+      <subtasks id="_AskOutUser_subtasks">
+         <step name="_AskOutUser_step" task="disco:Say"/>
+         <step name="_AskOutUser_ref" task="_AskOutUser_tree"/>
+         <binding slot="$_AskOutUser_step.text" value="&#34;I want to ask you to go out tonight&#34;"/>
+         <binding slot="$_AskOutUser_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="PeerInvitation">
+      <subtasks id="_PeerInvitation_subtasks">
+         <step name="_PeerInvitation_step" task="disco:Say"/>
+         <step name="_PeerInvitation_ref" task="_PeerInvitation_tree"/>
+         <binding slot="$_PeerInvitation_step.text"
+                  value="&#34;Would you like to go out with me on the town tonight?&#34;"/>
+         <binding slot="$_PeerInvitation_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="Insist">
+      <subtasks id="_Insist_subtasks">
+         <step name="_Insist_step" task="disco:Say"/>
+         <step name="_Insist_ref" task="_Insist_tree"/>
+         <binding slot="$_Insist_step.text"
+                  value="&#34;Come on, You should come. I promise you'll have fun !&#34;"/>
+         <binding slot="$_Insist_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="InviteDinner">
+      <subtasks id="_InviteDinner_subtasks">
+         <step name="_InviteDinner_step" task="disco:Say"/>
+         <step name="_InviteDinner_ref" task="_InviteDinner_tree"/>
+         <binding slot="$_InviteDinner_step.text"
+                  value="&#34;Would you enjoy having dinner with me?&#34;"/>
+         <binding slot="$_InviteDinner_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="DomInviteDinner">
+      <subtasks id="_DomInviteDinner_subtasks">
+         <step name="_DomInviteDinner_step" task="disco:Say"/>
+         <step name="_DomInviteDinner_ref" task="_DomInviteDinner_tree"/>
+         <binding slot="$_DomInviteDinner_step.text"
+                  value="&#34;I want to go have some dinner. Do you want to come with me?&#34;"/>
+         <binding slot="$_DomInviteDinner_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="ClosingDialogue">
+      <subtasks id="_ClosingDialogue_subtasks">
+         <step name="_ClosingDialogue_step" task="disco:Say"/>
+         <step name="_ClosingDialogue_ref" task="_ClosingDialogue_tree"/>
+         <binding slot="$_ClosingDialogue_step.text" value="&#34;No problem, another day maybe&#34;"/>
+         <binding slot="$_ClosingDialogue_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="JapaneseFood">
+      <subtasks id="_JapaneseFood_subtasks">
+         <step name="_JapaneseFood_step" task="disco:Say"/>
+         <step name="_JapaneseFood_ref" task="_JapaneseFood_tree"/>
+         <binding slot="$_JapaneseFood_step.text"
+                  value="&#34;I know a restaurant, shogun. Everyone I've spoken with says that it is great.&#34;"/>
+         <binding slot="$_JapaneseFood_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="QualityOfFood">
+      <subtasks id="_QualityOfFood_subtasks">
+         <step name="_QualityOfFood_step" task="disco:Say"/>
+         <step name="_QualityOfFood_ref" task="_QualityOfFood_tree"/>
+         <binding slot="$_QualityOfFood_step.text"
+                  value="&#34; I really like their sushis. The fish is fresh and tasty&#34;"/>
+         <binding slot="$_QualityOfFood_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="Prices">
+      <subtasks id="_Prices_subtasks">
+         <step name="_Prices_step" task="disco:Say"/>
+         <step name="_Prices_ref" task="_Prices_tree"/>
+         <binding slot="$_Prices_step.text"
+                  value="&#34;What do you think about the prices ?. I personnaly think that it's pricy&#34;"/>
+         <binding slot="$_Prices_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="Ambience">
+      <subtasks id="_Ambience_subtasks">
+         <step name="_Ambience_step" task="disco:Say"/>
+         <step name="_Ambience_ref" task="_Ambience_tree"/>
+         <binding slot="$_Ambience_step.text"
+                  value="&#34;The restaurant is well situated and the ambience is cool&#34;"/>
+         <binding slot="$_Ambience_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="Reserve">
+      <subtasks id="_Reserve_subtasks">
+         <step name="_Reserve_step" task="disco:Say"/>
+         <step name="_Reserve_ref" task="_Reserve_tree"/>
+         <binding slot="$_Reserve_step.text"
+                  value="&#34;The only problem is that the restaurant is small and you must book before.&#34;"/>
+         <binding slot="$_Reserve_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="SubmBooking">
+      <subtasks id="_SubmBooking_subtasks">
+         <step name="_SubmBooking_step" task="disco:Say"/>
+         <step name="_SubmBooking_ref" task="_SubmBooking_tree"/>
+         <binding slot="$_SubmBooking_step.text" value="&#34;Would you prefer if I book a table&#34;"/>
+         <binding slot="$_SubmBooking_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="Booking">
+      <subtasks id="_Booking_subtasks">
+         <step name="_Booking_step" task="disco:Say"/>
+         <step name="_Booking_ref" task="_Booking_tree"/>
+         <binding slot="$_Booking_step.text" value="&#34;Okay, I'll call to book a table&#34;"/>
+         <binding slot="$_Booking_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="ItalianFood">
+      <subtasks id="_ItalianFood_subtasks">
+         <step name="_ItalianFood_step" task="disco:Say"/>
+         <step name="_ItalianFood_ref" task="_ItalianFood_tree"/>
+         <binding slot="$_ItalianFood_step.text" value="&#34;I know a restaurant called Roseval.&#34;"/>
+         <binding slot="$_ItalianFood_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="QualityOfFoodItalian">
+      <subtasks id="_QualityOfFoodItalian_subtasks">
+         <step name="_QualityOfFoodItalian_step" task="disco:Say"/>
+         <step name="_QualityOfFoodItalian_ref" task="_QualityOfFoodItalian_tree"/>
+         <binding slot="$_QualityOfFoodItalian_step.text"
+                  value="&#34;The best part of this restaurant is the food. All of the dishes are delicious and with huge portions.&#34;"/>
+         <binding slot="$_QualityOfFoodItalian_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="PricesItalian">
+      <subtasks id="_PricesItalian_subtasks">
+         <step name="_PricesItalian_step" task="disco:Say"/>
+         <step name="_PricesItalian_ref" task="_PricesItalian_tree"/>
+         <binding slot="$_PricesItalian_step.text"
+                  value="&#34;As the restaurant is in a tourestic zone, it is really pricy&#34;"/>
+         <binding slot="$_PricesItalian_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="AmbienceItalian">
+      <subtasks id="_AmbienceItalian_subtasks">
+         <step name="_AmbienceItalian_step" task="disco:Say"/>
+         <step name="_AmbienceItalian_ref" task="_AmbienceItalian_tree"/>
+         <binding slot="$_AmbienceItalian_step.text"
+                  value="&#34;The ambience is what you can expect from an Italian restaurant: cozy and clean, and their waiters are truly the best&#34;"/>
+         <binding slot="$_AmbienceItalian_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="ReserveItalian">
+      <subtasks id="_ReserveItalian_subtasks">
+         <step name="_ReserveItalian_step" task="disco:Say"/>
+         <step name="_ReserveItalian_ref" task="_ReserveItalian_tree"/>
+         <binding slot="$_ReserveItalian_step.text" value="&#34; You must book before.&#34;"/>
+         <binding slot="$_ReserveItalian_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="LocationItalian">
+      <subtasks id="_LocationItalian_subtasks">
+         <step name="_LocationItalian_step" task="disco:Say"/>
+         <step name="_LocationItalian_ref" task="_LocationItalian_tree"/>
+         <binding slot="$_LocationItalian_step.text"
+                  value="&#34;The problem is that the restaurant is situated in a tourestic zone.&#34;"/>
+         <binding slot="$_LocationItalian_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="RDV">
+      <subtasks id="_RDV_subtasks">
+         <step name="_RDV_step" task="disco:Say"/>
+         <step name="_RDV_ref" task="_RDV_tree"/>
+         <binding slot="$_RDV_step.text" value="&#34;See you there at 7:30 PM?&#34;"/>
+         <binding slot="$_RDV_step.external" value="false"/>
+      </subtasks>
+   </task>
+   <task id="_DominantInvitation_tree">
+      <subtasks id="_d4e107_subtasks">
+         <step name="_d4e107_step" task="disco:Say"/>
+         <step name="_d4e108_step" task="InviteToDinner"/>
+         <binding slot="$_d4e107_step.text" value="&#34;That would be great ! .&#34;"/>
+         <binding slot="$_d4e107_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e109_subtasks">
+         <step name="_d4e109_step" task="disco:Say"/>
+         <step name="_d4e110_step" task="Insist"/>
+         <binding slot="$_d4e109_step.text" value="&#34;Sorry, not today&#34;"/>
+         <binding slot="$_d4e109_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_DominantRestaurantInvitation_tree">
+      <subtasks id="_d4e112_subtasks">
+         <step name="_d4e112_step" task="disco:Say"/>
+         <binding slot="$_d4e112_step.text" value="&#34;That would be great ! .&#34;"/>
+         <binding slot="$_d4e112_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e113_subtasks">
+         <step name="_d4e113_step" task="disco:Say"/>
+         <step name="_d4e114_step" task="ClosingDialogue"/>
+         <binding slot="$_d4e113_step.text" value="&#34;Sorry, not today&#34;"/>
+         <binding slot="$_d4e113_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_PeerRestaurantInvitation_tree">
+      <subtasks id="_d4e116_subtasks">
+         <step name="_d4e116_step" task="disco:Say"/>
+         <binding slot="$_d4e116_step.text" value="&#34;That would be great ! .&#34;"/>
+         <binding slot="$_d4e116_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e117_subtasks">
+         <step name="_d4e117_step" task="disco:Say"/>
+         <step name="_d4e118_step" task="ClosingDialogue"/>
+         <binding slot="$_d4e117_step.text" value="&#34;Sorry, not today&#34;"/>
+         <binding slot="$_d4e117_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_UserAvailable_tree">
+      <subtasks id="_d4e120_subtasks">
+         <step name="_d4e120_step" task="disco:Say"/>
+         <binding slot="$_d4e120_step.text" value="&#34;Yes. I have no plan.&#34;"/>
+         <binding slot="$_d4e120_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_AskOutUser_tree">
+      <subtasks id="_d4e122_subtasks">
+         <step name="_d4e122_step" task="disco:Say"/>
+         <step name="_d4e123_step" task="InviteToDinner"/>
+         <binding slot="$_d4e122_step.text" value="&#34;That would be great ! &#34;"/>
+         <binding slot="$_d4e122_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e124_subtasks">
+         <step name="_d4e124_step" task="disco:Say"/>
+         <step name="_d4e125_step" task="ClosingDialogue"/>
+         <binding slot="$_d4e124_step.text" value="&#34;Sorry, not today&#34;"/>
+         <binding slot="$_d4e124_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_PeerInvitation_tree">
+      <subtasks id="_d4e127_subtasks">
+         <step name="_d4e127_step" task="disco:Say"/>
+         <step name="_d4e128_step" task="InviteToDinner"/>
+         <binding slot="$_d4e127_step.text" value="&#34;That would be great ! .&#34;"/>
+         <binding slot="$_d4e127_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e129_subtasks">
+         <step name="_d4e129_step" task="disco:Say"/>
+         <step name="_d4e130_step" task="ClosingDialogue"/>
+         <binding slot="$_d4e129_step.text" value="&#34;Sorry, not today&#34;"/>
+         <binding slot="$_d4e129_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_Insist_tree">
+      <subtasks id="_d4e132_subtasks">
+         <step name="_d4e132_step" task="disco:Say"/>
+         <step name="_d4e133_step" task="InviteToDinner"/>
+         <binding slot="$_d4e132_step.text" value="&#34;Okay, sounds great !&#34;"/>
+         <binding slot="$_d4e132_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e134_subtasks">
+         <step name="_d4e134_step" task="disco:Say"/>
+         <step name="_d4e135_step" task="ClosingDialogue"/>
+         <binding slot="$_d4e134_step.text" value="&#34;I'm sorry, but I'm not coming&#34;"/>
+         <binding slot="$_d4e134_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_InviteDinner_tree">
+      <subtasks id="_d4e137_subtasks">
+         <step name="_d4e137_step" task="disco:Say"/>
+         <binding slot="$_d4e137_step.text" value="&#34;yes.&#34;"/>
+         <binding slot="$_d4e137_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_DomInviteDinner_tree">
+      <subtasks id="_d4e139_subtasks">
+         <step name="_d4e139_step" task="disco:Say"/>
+         <binding slot="$_d4e139_step.text" value="&#34;yes.&#34;"/>
+         <binding slot="$_d4e139_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_ClosingDialogue_tree">
+      <subtasks id="_d4e142_subtasks">
+         <step name="_d4e142_step" task="disco:Say"/>
+         <binding slot="$_d4e142_step.text" value="&#34;Sure !.&#34;"/>
+         <binding slot="$_d4e142_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e143_subtasks">
+         <step name="_d4e143_step" task="disco:Say"/>
+         <binding slot="$_d4e143_step.text" value="&#34;yeah, I'll call you tommorow.&#34;"/>
+         <binding slot="$_d4e143_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_JapaneseFood_tree">
+      <subtasks id="_d4e145_subtasks">
+         <step name="_d4e145_step" task="disco:Say"/>
+         <binding slot="$_d4e145_step.text" value="&#34;I heard about that restaurant.&#34;"/>
+         <binding slot="$_d4e145_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e146_subtasks">
+         <step name="_d4e146_step" task="disco:Say"/>
+         <binding slot="$_d4e146_step.text" value="&#34;I've never been there.&#34;"/>
+         <binding slot="$_d4e146_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_QualityOfFood_tree">
+      <subtasks id="_d4e148_subtasks">
+         <step name="_d4e148_step" task="disco:Say"/>
+         <binding slot="$_d4e148_step.text" value="&#34;Yes, their sushis are delicious.&#34;"/>
+         <binding slot="$_d4e148_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e149_subtasks">
+         <step name="_d4e149_step" task="disco:Say"/>
+         <binding slot="$_d4e149_step.text" value="&#34;their sushis is correct, I tested better.&#34;"/>
+         <binding slot="$_d4e149_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e150_subtasks">
+         <step name="_d4e150_step" task="disco:Say"/>
+         <binding slot="$_d4e150_step.text" value="&#34;I don't like sushis.&#34;"/>
+         <binding slot="$_d4e150_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_Prices_tree">
+      <subtasks id="_d4e152_subtasks">
+         <step name="_d4e152_step" task="disco:Say"/>
+         <binding slot="$_d4e152_step.text" value="&#34; It has a correct value for its price.&#34;"/>
+         <binding slot="$_d4e152_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e153_subtasks">
+         <step name="_d4e153_step" task="disco:Say"/>
+         <binding slot="$_d4e153_step.text" value="&#34;I don't know, I've never been there before.&#34;"/>
+         <binding slot="$_d4e153_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_Ambience_tree">
+      <subtasks id="_d4e155_subtasks">
+         <step name="_d4e155_step" task="disco:Say"/>
+         <binding slot="$_d4e155_step.text" value="&#34;It's true.&#34;"/>
+         <binding slot="$_d4e155_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e156_subtasks">
+         <step name="_d4e156_step" task="disco:Say"/>
+         <binding slot="$_d4e156_step.text"
+                  value="&#34;It's very noisy, I hate noises in  restaurants.&#34;"/>
+         <binding slot="$_d4e156_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e157_subtasks">
+         <step name="_d4e157_step" task="disco:Say"/>
+         <binding slot="$_d4e157_step.text" value="&#34;Oh, Great!&#34;"/>
+         <binding slot="$_d4e157_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_Reserve_tree">
+      <subtasks id="_d4e159_subtasks">
+         <step name="_d4e159_step" task="disco:Say"/>
+         <binding slot="$_d4e159_step.text"
+                  value="&#34;It's the problem of restaurants in this town.&#34;"/>
+         <binding slot="$_d4e159_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e160_subtasks">
+         <step name="_d4e160_step" task="disco:Say"/>
+         <binding slot="$_d4e160_step.text" value="&#34;It's not a big deal.&#34;"/>
+         <binding slot="$_d4e160_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_SubmBooking_tree">
+      <subtasks id="_d4e162_subtasks">
+         <step name="_d4e162_step" task="disco:Say"/>
+         <binding slot="$_d4e162_step.text" value="&#34;Perfect!&#34;"/>
+         <binding slot="$_d4e162_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e163_subtasks">
+         <step name="_d4e163_step" task="disco:Say"/>
+         <binding slot="$_d4e163_step.text" value="&#34;I'll handle it!&#34;"/>
+         <binding slot="$_d4e163_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_Booking_tree">
+      <subtasks id="_d4e165_subtasks">
+         <step name="_d4e165_step" task="disco:Say"/>
+         <binding slot="$_d4e165_step.text" value="&#34;Perfect!&#34;"/>
+         <binding slot="$_d4e165_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_ItalianFood_tree">
+      <subtasks id="_d4e167_subtasks">
+         <step name="_d4e167_step" task="disco:Say"/>
+         <binding slot="$_d4e167_step.text" value="&#34;I heard about that restaurant.&#34;"/>
+         <binding slot="$_d4e167_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e168_subtasks">
+         <step name="_d4e168_step" task="disco:Say"/>
+         <binding slot="$_d4e168_step.text" value="&#34;I've never been there.&#34;"/>
+         <binding slot="$_d4e168_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e169_subtasks">
+         <step name="_d4e169_step" task="disco:Say"/>
+         <binding slot="$_d4e169_step.text" value="&#34;I hate that restaurant !&#34;"/>
+         <binding slot="$_d4e169_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e170_subtasks">
+         <step name="_d4e170_step" task="disco:Say"/>
+         <binding slot="$_d4e170_step.text" value="&#34;I love that restaurant !&#34;"/>
+         <binding slot="$_d4e170_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_QualityOfFoodItalian_tree">
+      <subtasks id="_d4e172_subtasks">
+         <step name="_d4e172_step" task="disco:Say"/>
+         <binding slot="$_d4e172_step.text"
+                  value="&#34;Yes, and their Cabernet Sauvignon is good and not pricey !&#34;"/>
+         <binding slot="$_d4e172_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e173_subtasks">
+         <step name="_d4e173_step" task="disco:Say"/>
+         <binding slot="$_d4e173_step.text" value="&#34;That's what I've heard.&#34;"/>
+         <binding slot="$_d4e173_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e174_subtasks">
+         <step name="_d4e174_step" task="disco:Say"/>
+         <binding slot="$_d4e174_step.text" value="&#34;It seems good.&#34;"/>
+         <binding slot="$_d4e174_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_PricesItalian_tree">
+      <subtasks id="_d4e176_subtasks">
+         <step name="_d4e176_step" task="disco:Say"/>
+         <binding slot="$_d4e176_step.text" value="&#34;It's is predictible.&#34;"/>
+         <binding slot="$_d4e176_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e177_subtasks">
+         <step name="_d4e177_step" task="disco:Say"/>
+         <binding slot="$_d4e177_step.text" value="&#34;I don't know, I've never been there before.&#34;"/>
+         <binding slot="$_d4e177_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_AmbienceItalian_tree">
+      <subtasks id="_d4e180_subtasks">
+         <step name="_d4e180_step" task="disco:Say"/>
+         <binding slot="$_d4e180_step.text" value="&#34;It's true.&#34;"/>
+         <binding slot="$_d4e180_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e181_subtasks">
+         <step name="_d4e181_step" task="disco:Say"/>
+         <binding slot="$_d4e181_step.text"
+                  value="&#34;It's very noisy, I hate noises in restaurants.&#34;"/>
+         <binding slot="$_d4e181_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e182_subtasks">
+         <step name="_d4e182_step" task="disco:Say"/>
+         <binding slot="$_d4e182_step.text" value="&#34;Oh, Great!&#34;"/>
+         <binding slot="$_d4e182_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_ReserveItalian_tree">
+      <subtasks id="_d4e184_subtasks">
+         <step name="_d4e184_step" task="disco:Say"/>
+         <binding slot="$_d4e184_step.text" value="&#34;It's the problem of tourestic restaurants.&#34;"/>
+         <binding slot="$_d4e184_step.external" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e185_subtasks">
+         <step name="_d4e185_step" task="disco:Say"/>
+         <binding slot="$_d4e185_step.text" value="&#34;It's not a big deal.&#34;"/>
+         <binding slot="$_d4e185_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_LocationItalian_tree">
+      <subtasks id="_d4e187_subtasks">
+         <step name="_d4e187_step" task="disco:Say"/>
+         <binding slot="$_d4e187_step.text" value="&#34;Oh !.&#34;"/>
+         <binding slot="$_d4e187_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_RDV_tree">
+      <subtasks id="_d4e189_subtasks">
+         <step name="_d4e189_step" task="disco:Say"/>
+         <binding slot="$_d4e189_step.text" value="&#34;Great.&#34;"/>
+         <binding slot="$_d4e189_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="GoingOut">
+      <subtasks id="talk">
+         <step name="intro" task="DialogueIntro"/>
+      </subtasks>
+   </task>
+   <task id="InviteToDinner">
+      <subtasks id="dinnerpart">
+         <step name="introducedinner" task="IntroduceDinner"/>
+         <step name="preferences" task="DefinePreferences"/>
+         <step name="restaurantchoice" task="ChooseRestaurant"/>
+         <step name="invitationrestau" task="InviteToRestaurant"/>
+         <step name="booking" task="BookTable"/>
+         <step name="rdv" task="RDV"/>
+      </subtasks>
+   </task>
+   <task id="DialogueIntro">
+      <subtasks id="_dominant">
+         <step name="dominvit" task="DominantInvitation"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.dominant </applicable>
+      </subtasks>
+      <subtasks id="_peer">
+         <step name="peerinvit" task="PeerInvitation"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.peer </applicable>
+      </subtasks>
+      <subtasks id="_sub">
+         <step name="subinvit" task="SubmInvitation"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.submissive </applicable>
+      </subtasks>
+   </task>
+   <task id="BookTable">
+      <subtasks id="dominantbook">
+         <step name="dominbook" task="Booking"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.dominant || $AGENTRELATION==Relation.ENUM.peer</applicable>
+      </subtasks>
+      <subtasks id="subbooking">
+         <step name="subbook" task="SubmBooking"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.submissive </applicable>
+      </subtasks>
+   </task>
+   <task id="ChooseRestaurant">
+      <subtasks id="japaneserestau">
+         <step name="japanesefood" task="ChooseJapaneseRestaurant"/>
+         <applicable> $RESTOFOOD==listPreferences[0] || $RESTOFOOD== Preference.ENUM.japanese </applicable>
+      </subtasks>
+      <subtasks id="italianrestau">
+         <step name="italianfood" task="ChooseItalianRestaurant"/>
+         <applicable> $RESTOFOOD==listPreferences[1] || $RESTOFOOD== Preference.ENUM.italian </applicable>
+      </subtasks>
+   </task>
+   <task id="SubmInvitation">
+      <subtasks id="invitesub">
+         <step name="ask" task="UserAvailable"/>
+         <step name="invitationstep" task="AskOutUser"/>
+      </subtasks>
+   </task>
+   <task id="IntroduceDinner">
+      <subtasks id="dominantdinner">
+         <step name="dominvitedinner" task="DomInviteDinner"/>
+         <step name="domindinner" task="FixPreferences" minOccurs="1" maxOccurs="2"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.dominant </applicable>
+      </subtasks>
+      <subtasks id="peerdinner">
+         <step name="likedinner" task="InviteDinner"/>
+         <step name="proposepref" task="ProposePreferences"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.peer </applicable>
+      </subtasks>
+      <subtasks id="submissivedinner">
+         <step name="subdinner" task="InviteDinner"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.submissive </applicable>
+      </subtasks>
+   </task>
+   <task id="ProposePreferences">
+      <input name="preferencepeer" type="UserResponse"/>
+      <binding slot="$this.external" value="false"/>
+      <script> RequestPreference($this.preferencepeer) </script>
+   </task>
+   <task id="FixPreferences">
+      <input name="preferencedom" type="UserResponse"/>
+      <binding slot="$this.external" value="false"/>
+      <script> RequestDomPreference($this.preferencedom) </script>
+   </task>
+   <task id="DefinePreferences">
+      <input name="preference" type="Preference"/>
+      <binding slot="$this.external" value="false"/>
+      <postcondition sufficient="true"> $RESTOFOOD != null </postcondition>
+      <script> RestoPreference($this.preference) </script>
+   </task>
+   <task id="InviteToRestaurant">
+      <subtasks id="dominantrestauinvitation">
+         <step name="domindinvit" task="DominantRestaurantInvitation"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.dominant </applicable>
+      </subtasks>
+      <subtasks id="peerdrestauinvitation">
+         <step name="likedinvitation" task="PeerRestaurantInvitation"/>
+         <applicable> $AGENTRELATION==Relation.ENUM.peer || $AGENTRELATION==Relation.ENUM.submissive</applicable>
+      </subtasks>
+   </task>
+   <task id="ChooseJapaneseRestaurant">
+      <subtasks id="Japanese" ordered="false">
+         <step name="japfood" task="JapaneseFood"/>
+         <step name="japquality" task="QualityOfFood"/>
+         <step name="japprices" task="Prices"/>
+         <step name="japambience" task="Ambience"/>
+         <step name="japreseve" task="Reserve"/>
+      </subtasks>
+   </task>
+   <task id="ChooseItalianRestaurant">
+      <subtasks id="italian" ordered="false">
+         <step name="itfood" task="ItalianFood"/>
+         <step name="itlocation" task="LocationItalian"/>
+         <step name="itquality" task="QualityOfFoodItalian"/>
+         <step name="itprices" task="PricesItalian" requires="itlocation"/>
+         <step name="itambience" task="AmbienceItalian"/>
+         <step name="itreseve" task="ReserveItalian" requires="itlocation"/>
+      </subtasks>
+   </task>
+   <script init="true"> 
+
+	var $USERPREF;
+	var $AGENTPREF;
+	var $AGENTRELATION;
+	var $RESTOFOOD;
+	var $X = 0;
+	var listPreferences =[new Preference("Japanese"), new Preference("Italian"), new Preference("Indian")];
+	
+	Preference.ENUM = { japanese : new Preference("Japanese"), 
+                  	italian : new Preference("Italian"),
+		  	indian : new Preference("Indian")
+ 			}
+
+	function Preference (cuisine) { this.cuisine = cuisine; }		
+	Preference.prototype.toString = function () { return this.cuisine; }
+
+	function UserResponse (like) { this.like = like; }
+
+	UserResponse.ENUM = { yes : new UserResponse("Yeah. I love it."), 
+			no : new UserResponse("No. I don't love this type of food.")
+			}
+
+	UserResponse.prototype.toString = function () { return this.like; }	
+
+	function RestoPreference (pref) { 
+	 $USERPREF=pref;
+	 $RESTOFOOD=pref;
+	}
+
+	function RequestDomPreference (response) {
+	if(response == UserResponse.ENUM.yes) { $USERPREF = $AGENTPREF; $RESTOFOOD = $AGENTPREF; } 
+	if(response == UserResponse.ENUM.no)  { $RESTOFOOD = null;
+						$X = $X+1;
+						$AGENTPREF = listPreferences[$X];
+		                              }
+	}
+
+	function RequestPreference (response) {
+	if(response == UserResponse.ENUM.yes) { $USERPREF = $AGENTPREF; $RESTOFOOD = $AGENTPREF; } 
+	if(response == UserResponse.ENUM.no)  { $RESTOFOOD = null;
+		                              }
+	}
+	function Relation (type) { this.type = type;}
+
+	Relation.ENUM = {dominant : new Relation("Dominant"), 
+		  	peer : new Relation("Peer"),
+			submissive : new Relation("Submissive")
+		  	}  
+	Relation.prototype.toString = function () { return this.type; }
+
+  </script>
+</taskModel>

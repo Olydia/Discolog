@@ -1,0 +1,89 @@
+    # 16 juil. 2015 13:09:09 - TaskEngine 1.6 / Disco 1.9
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Restaurant2v2.xml
+  > eval $disco.addTop("GoingOut"); $AGENTPREF = listPreferences[0]; $AGENTRELATION=Relation.ENUM.submissive;
+    # Returned 'Submissive'
+  > 
+  > next
+    Agent says "Shall we achieve DialogueIntro by sub?"
+  > say
+[1] Yes.
+[2] No.
+  >> 1
+    User says "Yes."
+    Agent says "Hi, hmmm... Are you available tonight ?"
+  > say
+[1] Yes. I have no plan.
+  >> 1
+    User says "Yes. I have no plan."
+    Agent says "I want to ask you to go out tonight."
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Would you enjoy having dinner with me?"
+  > say
+[1] Yes.
+  >> 1
+    User says "Yes."
+    Agent says "So, what kind of food would you like?"
+  > say
+[1] Japanese
+[2] Italian
+[3] Indian
+[4] Please do not execute DefinePreferences.
+  >> 1
+    User says "Japanese."
+    Agent execute DefinePreferences on Japanese.
+    Agent says "I know a restaurant, shogun. Everyone I've spoken with says that it is great."
+  > say
+[1] I heard about that restaurant.
+[2] I've never been there.
+  >> 2
+    User says "I've never been there."
+    Agent says " I really like their sushis. The fish is fresh and tasty."
+  > say
+[1] Yes, their sushis are delicious.
+[2] Their sushis is correct, I tested better.
+[3] I don't like sushis.
+  >> 2
+    User says "Their sushis is correct, I tested better."
+    Agent says "What do you think about the prices ?. I personnaly think that it's pricy."
+  > say
+[1]  It has a correct value for its price.
+[2] I don't know, I've never been there before.
+  >> 1
+    User says " It has a correct value for its price."
+    Agent says "The restaurant is well situated and the ambience is cool."
+  > say
+[1] It's true.
+[2] It's very noisy, I hate noises in  restaurants.
+[3] Oh, Great!
+  >> 1
+    User says "It's true."
+    Agent says "The only problem is that the restaurant is small and you must book before."
+  > say
+[1] It's the problem of restaurants in this town.
+[2] It's not a big deal.
+  >> 1
+    User says "It's the problem of restaurants in this town."
+    Agent says "Would you like go to that restaurant?"
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Would you prefer if I book a table."
+  > say
+[1] Perfect!
+[2] I'll handle it!
+  >> 2
+    User says "I'll handle it!"
+    Agent says "See you there at 7:30 PM?"
+  > say
+[1] Great.
+  >> 1
+    User says "Great."
+    Agent says "Ok."
+  > 

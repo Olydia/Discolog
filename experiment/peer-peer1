@@ -1,0 +1,62 @@
+[DSP 1:  Invite to go out]
+I: hey, do you want to go outside with me tonight ?
+O: Sure. 
+[DSP 2:  go to dinner]
+O: Where do you want to go ?
+I: I would like to go get some dinner with you 
+O: emm, great. 
+	[DSP 2.1: japanese restaurant ]
+	O: I know a nice japanese restaurant not far from here.
+	I: I ate suchis last night.
+ 	I rahter prefer eat something different. 
+	O: You're right. 
+	[DSP 2.2: Indian restaurant]
+	I: I heard about an indian restaurant in town. 
+	I: Everyone I've spoken with says that it is great.
+		[DSP 2.2.1: spicy food]
+		O: I don't like spicy food. 
+		O: it is hard to appreciate the taste of aliments. 
+		I: Okay, I understand. 
+	[DSP 2.3 : italian food]
+	O: So do you have any preferences ?
+	I: I like Italian food !
+	O: Good choice, 
+		[DSP 2.3.1: choose Italian restaurant]
+		O: How about Ciasa Mia restaurant? 
+		I: Based on my own experience, 
+			[DSP 2.3.1.1: review of the restaurant]
+			I:the food is disappointing, the help irritating, 
+			I:and the prices unjustified. 
+			I rather prefer to go elsewhere.
+			O: oh it is too bad, food writers and custemors have raved about this restaurant on the Web.  
+			I: Yeah I went to that restaurant based on theses reviews but I've been really desapointed. 
+		[DSP 2.3.2: choose another Italian restaurant]
+		O: I was thinking about a restaurant called AlPasta. 
+			[DSP 2.3.2.1: review of the restaurant]
+			O:their food are good and the ambiance is cosy
+			I: I've never heard about this restaurant.
+			[DSP 2.3.2.2: Ambiance of the restaurant]
+			O: I've been there with freinds last time, 
+			O: I remeber that we had good time.
+			[DSP 2.3.2.3: quality of food of the restaurant]
+			I: Oh great, what did you ate ?
+			O: I think that I ate a pizza with mozzarella and fresh basil. 
+			O: it was so delicious. 
+			[DSP 2.3.2.4: quality of prestation of the restaurant]		
+			O: In addition the personal was so professional.
+			[DSP 2.3.2.5: prices]
+			I: What is it expensive ?
+			O: Not really !
+	[DSP 2.4:Decide which restaurant]
+	I: I like to go to that restaurant 
+	O: Selled!.
+		[DSP 2.4.1: Reservation]
+		O:  We have to book before.
+		I: Can you do it ?
+		O: Yep. I'll resereve for 8 PM. Is that right ?
+		I: Perfect.
+	[DSP 2.5: Giving RDV]
+	O: See you later at the restaurant.
+	I: I could come pick you up if you like ?
+	O: That would be great. See you
+	I: see you
