@@ -57,17 +57,43 @@ The solidarity dimension is in the opposite of power dimension. It is a symmetri
 \subsection{Dialogue utterances}
 \par The first utterance is related to the expression of preferences. One of the behavior that shows up during the last experiment is that depending on the role of individual in relationship, he will introduce a discussion on preference in a particular way. For example, a powerful person will explicitly 
 talk about its preference. In the contrast a submissive person or individual that shares affect will ask the other if he shares the same preferences. 
+To define the utterances semantic, we will use the language definition defined in \cite{sidner}. \textbf{BEL} is short for belief, \textbf{INT} for intention and \textbf{MB} for mutual belief.
  \begin{itemize}
- \item StateStrongly.Preference(\textit{Pref}): I really like \textit{Pref}!
  \item State.Preference(\textit{Pref}) : I like \textit{Pref} 
+ \par Agent express \textit{Pref} to user. After communicating the message, the mental state of the agent will be updated as the following: 
+  \newline (Bel Agent \textit{Pref})
+  \newline (Bel Agent (communicated Agent \textit{Pref} User)).
+  
  \item Ask.Preference(\textit{Pref}) : Do you like \textit{Pref} ?
+ \newline  Here the intention of the agent is to identify if the user believes pref. 
+ \newline (INT Agent (Identify user \textit{Pref}))
  \item Propose.Preference(\textit{Pref}): I think that \textit{Pref} would be great.
- \item ProposeStrongly.Preference(\textit{Pref}): \textit{Pref} is the best choice for you.
- \item Accept.Preference(\textit{Pref}): Okay, let's choose \textit{Pref}.
- \item AcceptStrongly.Preference(\textit{Pref}): Yes of course. \textit{Pref} is a great choice.
+  \newline (Bel Agent \textit{Pref})
+  \newline(INT Agent (Achieve Agent(Bel User \textit{Pref})))
+  \newline (Bel Agent (communicated Agent \textit{Pref} User)).
+ \item Accept.Preference(\textit{Pref}): Okay, let's choose \textit{Pref}. After receiving a propose utterance from the user, the agent might accept the proposal. The mental state of the agent is: 
+ \newline (MB Agent User \textit{Pref})) 
+
  \item reject.Preference(\textit{Pref}): Sorry, I would choice something else.
- \item AcceptStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
+  \newline (Not (Bel Agent \textit{Pref}))
+  \newline (Bel Agent (communicated Agent (Not (Bel \textit{Pref})) User)).
+  
+\par 
+  	In the experiment and in the modeling of the first dialogue, the dominant was able to insist and propose several times the same proposition. I'm not sure if a special utterance will be needed or we can simply use the utterance \textit{ProposeStrongly}. 
+Dans la définition dans ces utterances. est que l'agent exprime dans ce cas sa dominance. et si c'est le cas, l'expression de sa dominance est implicite. 
+ \item StateStrongly.Preference(\textit{Pref}): I really like \textit{Pref}.
+ \item ProposeStrongly.Preference(\textit{Pref}): \textit{Pref} is the best choice for you.
+ \item AcceptStrongly.Preference(\textit{Pref}): Yes of course. \textit{Pref} is a great choice.
+  \item rejectStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
  \end{itemize} 
+ \subsection{Find utterances in dialogues}	
+ \subsection{Synthetic dialogue with utterances}
+ Synthetic dialogue to illustrate the language definition. The Agent and the user shared the goal to find a restaurant. The Agent has a predefined list of preferences of type of food (AgentPreferences = \{ +Japanese, +Italian, -spicy food\}) and the agent has no information on user preferences (UserPreferences = \{\}). In this example the Agent is peer with the user. 
+ 
+ 
+ dialogue without utterances and dialogue only with utterances
+
+
 \noindent 
 \vskip 4pt
 \bibliographystyle{plain}
