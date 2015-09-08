@@ -65,7 +65,7 @@ To define the utterances semantic, we will use the language definition defined i
   \newline (Bel Agent (communicated Agent \textit{Pref} User)).
   
  \item Ask.Preference(\textit{Pref}) : Do you like \textit{Pref} ?
- \newline  Here the intention of the agent is to identify if the user believes pref. 
+ \newline  Here the intention of the agent is to identify if the user believes \textit{pref}. 
  \newline (INT Agent (Identify user \textit{Pref}))
  \item Propose.Preference(\textit{Pref}): I think that \textit{Pref} would be great.
   \newline (Bel Agent \textit{Pref})
@@ -78,20 +78,52 @@ To define the utterances semantic, we will use the language definition defined i
   \newline (Not (Bel Agent \textit{Pref}))
   \newline (Bel Agent (communicated Agent (Not (Bel \textit{Pref})) User)).
   
-\par 
-  	In the experiment and in the modeling of the first dialogue, the dominant was able to insist and propose several times the same proposition. I'm not sure if a special utterance will be needed or we can simply use the utterance \textit{ProposeStrongly}. 
+\par In the experiment and in the modeling of the first dialogue, the dominant was able to insist and propose several times the same proposition. I'm not sure if a special utterance will be needed or we can simply use the utterance \textit{ProposeStrongly}. 
 Dans la définition dans ces utterances. est que l'agent exprime dans ce cas sa dominance. et si c'est le cas, l'expression de sa dominance est implicite. 
  \item StateStrongly.Preference(\textit{Pref}): I really like \textit{Pref}.
  \item ProposeStrongly.Preference(\textit{Pref}): \textit{Pref} is the best choice for you.
  \item AcceptStrongly.Preference(\textit{Pref}): Yes of course. \textit{Pref} is a great choice.
-  \item rejectStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
+  \item RejectStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
  \end{itemize} 
  \subsection{Find utterances in dialogues}	
  \subsection{Synthetic dialogue with utterances}
- Synthetic dialogue to illustrate the language definition. The Agent and the user shared the goal to find a restaurant. The Agent has a predefined list of preferences of type of food (AgentPreferences = \{ +Japanese, +Italian, -spicy food\}) and the agent has no information on user preferences (UserPreferences = \{\}). In this example the Agent is peer with the user. 
- 
- 
- dialogue without utterances and dialogue only with utterances
+ In this section, I present a synthetic dialogue to illustrate the language definition.Yhe goal of the agent is to invite the user to a restaurant. The Agent has a predefined list of preferences of types of food (AgentPreferences = \{ +Indian, +Italian, -Japanese\}) and the agent has no information on user preferences (UserPreferences = \{\}). In this example the Agent is peer with the user. 
+
+
+\begin{minipage}{0.45\textwidth}
+ \begin{enumerate}
+	\item A: Would like to have dinner with me ?
+	\item U: Yes, that would be great.
+	\item A: What kind of food do you prefer ?
+	\item U: I like Japanese food
+	\item A: Oh, I really don't like japanese food.
+	\item U: Ok. What do you prefer ?
+	\item A: I like italian food
+	\item U: Yeah, I like italian food too.
+	\item A: So let's have dinner at an italian restaurant. 
+	\item U: perfect for me!
+\end{enumerate}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.45\textwidth}
+ \begin{enumerate}
+	\item Propose.Preference(A,U,dinner).
+	\\
+	\item Accept.Preference(U,A,dinner).
+
+	\item Ask.Preferences(A,U,UserPreferences)
+	\\
+	\item State.Preference(U,Japanese)
+	\item RejectStrongly.Preference(A,U,Japaneese)
+			\\
+	\item Ask.Preferences(U,A,AgentPreferences)
+	\item State.Preference(A,italian).
+	\item State.Preference(U,italian).
+	\item Propose.Preference(A,U,Italian).
+		\\
+	\item Accept.Preference(U,A,Italian).
+\end{enumerate}
+\end{minipage}%
 
 
 \noindent 
