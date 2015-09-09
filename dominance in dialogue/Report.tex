@@ -86,6 +86,40 @@ Dans la définition dans ces utterances. est que l'agent exprime dans ce cas sa 
   \item RejectStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
  \end{itemize} 
  \subsection{Find utterances in dialogues}	
+ 
+ In the following I represented the utterances in the hand made dialogues. When analyzing the recorded dialogues, the utterances appears in a more implicit manner. For example, when Lauriane says: " Sinon j'aime bien japonais". here its a State.preference(Lauriane, leonor,japonais).Loenor perceives it as a propose and make a reject by saying : "Je n'aime pas du tout le japonais."
+ Dialogue	Utterance
+ \begin{tabular}{|c|c|}
+   \hline
+ I: Let's go out on the town tonight &	Propose.preference(I,O,out) \\
+   \hline
+ O: Yes, thank you, that would be very nice. &	Accept.preference(O,I,out)\\
+   \hline
+ I: I want to go have some dinner &	Propose.preference(I,O,Dinner)\\
+   \hline
+ O: Great idea ! &	Accept.preference(O,I,Dinner)\\
+   \hline
+ I: I heard about a new indian restaurant in town. I want to taste their food &	propose.preference(I,O,Indian)\\
+   \hline
+ O: Oh, sorry but I'm afraid I can't. I don't support spicy food.&	reject.preference(O,I,Indian)\\
+   \hline
+ I: But there are also sweet spices like curry it gives so much taste. 	\\
+   \hline
+ O: I believe you, but really I don't support spices.\\
+   \hline	
+ I: Thus, we can try an italian restaurant. &	Propose.preference(I,O,italian)\\
+   \hline
+ O: Good idea, I love Italian food. &	Accept.preference(O,I,italian)\\
+   \hline
+ O: How about Ciasa Mia restaurant? &	Propose.preference(O,I,mia restaurant)\\
+   \hline
+ I: Oh, nooo! I hate this restaurant&	reject.preference(O,I,mia restaurant)\\
+   \hline
+ I: I'd rather prefer to go to AlPasta. &	Propose.preference(I,O,AlPasta)\\
+   \hline
+ O: I would enjoy going there with you&	Accept.preference(O,i,AlPasta)\\
+   \hline
+\end{tabular}
  \subsection{Synthetic dialogue with utterances}
  In this section, I present a synthetic dialogue to illustrate the language definition.Yhe goal of the agent is to invite the user to a restaurant. The Agent has a predefined list of preferences of types of food (AgentPreferences = \{ +Indian, +Italian, -Japanese\}) and the agent has no information on user preferences (UserPreferences = \{\}). In this example the Agent is peer with the user. 
 
