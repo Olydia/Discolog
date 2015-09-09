@@ -3,7 +3,10 @@
 \usepackage{subcaption}
 \usepackage{subfig} 
 \usepackage{usual}
+\usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{eulervm}
+
 \usepackage[rflt]{floatflt}
 %\pagestyle{plain}
 %
@@ -55,9 +58,16 @@ This dimension represent the degree of liking that have one interact for the oth
 \subsubsection{Solidarity}
 The solidarity dimension is in the opposite of power dimension. It is a symmetrical dimension where two individuals share equal obligations and rights \cite{svennevig2000getting}. Is is identified as ‘like-mindedness’ \cite{bickmore2005establishing} where interactants have the same behaviors and share for example the same preferences.
 \subsection{Dialogue utterances}
-\par The first utterance is related to the expression of preferences. One of the behavior that shows up during the last experiment is that depending on the role of individual in relationship, he will introduce a discussion on preference in a particular way. For example, a powerful person will explicitly 
-talk about its preference. In the contrast a submissive person or individual that shares affect will ask the other if he shares the same preferences. 
+The utterances are the intentions to update the tuser /agent belief during the interaction. 
 To define the utterances semantic, we will use the language definition defined in \cite{sidner}. \textbf{BEL} is short for belief, \textbf{INT} for intention and \textbf{MB} for mutual belief.
+We define a preference as tuple \emph{\{P = (O, v) /O $\in$} \textit{Ontology} \emph{, v $\in$ \{+, -, ?\} \}}, where O is the object preferred. For example, if the agent like japanese restaurant then $P_{agent}$ = (Japanese, +). 
+Dominance $\in$ \{-, =, +\}, where dominance = +, means that the agent dominates the user. The knowledge base of the agent represent its beliefs(self representation, user representation) and intentions. Thus we note:
+\begin{itemize}
+\item belief $B_{agent}$ $\Pi$.
+\item belief $I_{agent}$ $\Pi$.
+\end{itemize} 
+We note $Pref_{i}$(p), where p is a preference and i $\in$ \{agent, user\}
+
  \begin{itemize}
  \item State.Preference(\textit{Pref}) : I like \textit{Pref} 
  \par Agent express \textit{Pref} to user. After communicating the message, the mental state of the agent will be updated as the following: 
@@ -89,37 +99,7 @@ Dans la définition dans ces utterances. est que l'agent exprime dans ce cas sa 
  
  In the following I represented the utterances in the hand made dialogues. When analyzing the recorded dialogues, the utterances appears in a more implicit manner. For example, when Lauriane says: " Sinon j'aime bien japonais". here its a State.preference(Lauriane, leonor,japonais).Loenor perceives it as a propose and make a reject by saying : "Je n'aime pas du tout le japonais."
  Dialogue	Utterance
- \begin{tabular}{|c|c|}
-   \hline
- I: Let's go out on the town tonight &	Propose.preference(I,O,out) \\
-   \hline
- O: Yes, thank you, that would be very nice. &	Accept.preference(O,I,out)\\
-   \hline
- I: I want to go have some dinner &	Propose.preference(I,O,Dinner)\\
-   \hline
- O: Great idea ! &	Accept.preference(O,I,Dinner)\\
-   \hline
- I: I heard about a new indian restaurant in town. I want to taste their food &	propose.preference(I,O,Indian)\\
-   \hline
- O: Oh, sorry but I'm afraid I can't. I don't support spicy food.&	reject.preference(O,I,Indian)\\
-   \hline
- I: But there are also sweet spices like curry it gives so much taste. 	\\
-   \hline
- O: I believe you, but really I don't support spices.\\
-   \hline	
- I: Thus, we can try an italian restaurant. &	Propose.preference(I,O,italian)\\
-   \hline
- O: Good idea, I love Italian food. &	Accept.preference(O,I,italian)\\
-   \hline
- O: How about Ciasa Mia restaurant? &	Propose.preference(O,I,mia restaurant)\\
-   \hline
- I: Oh, nooo! I hate this restaurant&	reject.preference(O,I,mia restaurant)\\
-   \hline
- I: I'd rather prefer to go to AlPasta. &	Propose.preference(I,O,AlPasta)\\
-   \hline
- O: I would enjoy going there with you&	Accept.preference(O,i,AlPasta)\\
-   \hline
-\end{tabular}
+
  \subsection{Synthetic dialogue with utterances}
  In this section, I present a synthetic dialogue to illustrate the language definition.Yhe goal of the agent is to invite the user to a restaurant. The Agent has a predefined list of preferences of types of food (AgentPreferences = \{ +Indian, +Italian, -Japanese\}) and the agent has no information on user preferences (UserPreferences = \{\}). In this example the Agent is peer with the user. 
 
