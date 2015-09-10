@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{eulervm}
+\usepackage{fontenc}
 
 \usepackage[rflt]{floatflt}
 %\pagestyle{plain}
@@ -58,15 +59,22 @@ This dimension represent the degree of liking that have one interact for the oth
 \subsubsection{Solidarity}
 The solidarity dimension is in the opposite of power dimension. It is a symmetrical dimension where two individuals share equal obligations and rights \cite{svennevig2000getting}. Is is identified as ‘like-mindedness’ \cite{bickmore2005establishing} where interactants have the same behaviors and share for example the same preferences.
 \subsection{Dialogue utterances}
-The utterances are the intentions to update the tuser /agent belief during the interaction. 
-To define the utterances semantic, we will use the language definition defined in \cite{sidner}. \textbf{BEL} is short for belief, \textbf{INT} for intention and \textbf{MB} for mutual belief.
-We define a preference as tuple \emph{\{P = (O, v) /O $\in$} \textit{Ontology} \emph{, v $\in$ \{+, -, ?\} \}}, where O is the object preferred. For example, if the agent like japanese restaurant then $P_{agent}$ = (Japanese, +). 
-Dominance $\in$ \{-, =, +\}, where dominance = +, means that the agent dominates the user. The knowledge base of the agent represent its beliefs(self representation, user representation) and intentions. Thus we note:
-\begin{itemize}
-\item belief $B_{agent}$ $\Pi$.
-\item belief $I_{agent}$ $\Pi$.
-\end{itemize} 
-We note $Pref_{i}$(p), where p is a preference and i $\in$ \{agent, user\}
+In this paper we are interested by modeling a collaborative negotiation of preference in the context od social dialogue. The negotiation takes its values during the dialogue, when messages are exchanged between interlocutors. A message \emph{M = $\textless i \rightarrow j, s(cont), F  \textgreater$} is defined as triple where \emph{i, j}$\in$ \{agent, user\} are the agents participating in the dialogue,\emph{s $\in \wp$}  $s$ is the utterance used to express a the message. $\wp = \{ Ask, Propose, Reject, Accept, State\}$  represent the set of utterances that agents can express to exchange messages. 
+ $F \in \Im $  where $\Im = \{ Strongly, weakly, yelling, with hesititation ...\}$ is a set of multimodal features that are applied to the utterance to express a personal linguistic style or social move.
+ 
+ \par The social relationship evolves during the interaction and influence this later. We focus on the relation of dominance in this paper. $Dom = \{+, -, =\}$. For example, when $Dom = +$ represents the fact that the agent is dominant and the user is submissive. 
+ We assume a social relationship: $2^\wp$ $x$  $context \rightarrow Dom $ that tells which feature says in term of social move. The context represent all the previous knowledge of the speaker. 
+ 
+\subsubsection{Preferences}
+\par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preference. We assume that the agent express its preference on a defined object based on one or multiple criteria.   
+ \begin{itemize}
+ \item Criteria $C$: a set of preferred objects. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. $\forall c \in C$, $D_{c}$ is its domain. For example $cuisine = \{chineese, italian\}$.
+ \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find the object restaurant.
+ \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of preference attributed for the object $o$ in the context of the criteria $c$. For example, Ginza is an expensive Japanese restaurant. Thus $v(prix, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
+ \item Lets now define interlocutor's preferences. $\forall agent_{i}$.Imagine hat the agent has to choose a restaurant, depending on the criteria that matters for him first and depending on those criteria, the 	agent will choose a restaurant. First, the agent has to know his preferences on criteria represented as follows: 
+ $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \textgreater _{c} price$ means that the criteria of cuisine is more important than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall c$ pre-odrerd in $D_{c}: pref_{i}(c) $. For example, the agent prefers the cuisine criteria, and for the cuisine the agent \emph{i}:  Japanese $ >_{cuisine} chinois$ , which means that the agent prefers the Japanese cuisine than the Chinese.  We conclude that the decision of preferences is a multi criteria decision. Suppose 
+ 
+ \end{itemize}
 
  \begin{itemize}
  \item State.Preference(\textit{Pref}) : I like \textit{Pref} 
