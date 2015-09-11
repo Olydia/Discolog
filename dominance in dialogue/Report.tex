@@ -68,13 +68,21 @@ In this paper we are interested by modeling a collaborative negotiation of prefe
 \subsubsection{Preferences}
 \par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preference. We assume that the agent express its preference on a defined object based on one or multiple criteria.   
  \begin{itemize}
- \item Criteria $C$: a set of preferred objects. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. $\forall c \in C$, $D_{c}$ is its domain. For example $cuisine = \{chineese, italian\}$.
- \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find the object restaurant.
- \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of preference attributed for the object $o$ in the context of the criteria $c$. For example, Ginza is an expensive Japanese restaurant. Thus $v(prix, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
- \item Lets now define interlocutor's preferences. $\forall agent_{i}$.Imagine hat the agent has to choose a restaurant, depending on the criteria that matters for him first and depending on those criteria, the 	agent will choose a restaurant. First, the agent has to know his preferences on criteria represented as follows: 
- $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \textgreater _{c} price$ means that the criteria of cuisine is more important than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall c$ pre-odrerd in $D_{c}: pref_{i}(c) $. For example, the agent prefers the cuisine criteria, and for the cuisine the agent \emph{i}:  Japanese $ >_{cuisine} chinois$ , which means that the agent prefers the Japanese cuisine than the Chinese.  We conclude that the decision of preferences is a multi criteria decision. Suppose 
- 
+ \item Criteria $C$: a set of criteria on a defined domain. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. $\forall c \in C$, $D_{c}$ is its domain. For example $cuisine = \{chineese, italian\}$.
+ \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find at which restaurant have dinner.
+ \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of preference attributed for the object $o$ in the context of a certain criteria $c$. For example, Ginza is an expensive Japanese restaurant. Thus $v(prix, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
+ \item Lets now define interlocutor's preferences. Imagine that the agent has to choose a restaurant, depending on the criteria that matters for him first, the agent will choose a restaurant. Therefore, the decision of preference is taked in two steps. First, the agent has to know his preferences on criteria represented as follows: 
+ $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \succ _{c} price$ means that the criteria of cuisine is more important than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall c$ pre-odrerd  $\in D_{c}: pref_{i}(c) $. For example, the agent prefers the cuisine criteria, and for the cuisine the agent \emph{i}:  $Japanese  \prec _{cuisine} chinese$ , which means that the agent prefers the Japanese cuisine than the Chinese.  We conclude that the decision of preferences is a multi criteria decision. Suppose  \emph{f} a function of decision such as $\forall o_{1},o_{2} \in OxO$, $f$ gives a partial order of preferences of these objects $\{o_{1}\prec o_{2}, o_{1} \succ o_{2}, o_{1} \approx o_{2}\}$    
  \end{itemize}
+\subsubsection{Belief base and intentions}
+In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Agents\}$
+\par We note $pref_{i} (c,v)$ to define the degree of agent preference for $v$ on the criteria $c$.
+
+ We define $ B_{i} \varphi$ the agent $i$  belief that an entity $\varphi$ is true. For example, $Agent_{i}$ like Chinese cuisine is represented $ B_{j} Pref_{i}(cuisine, Chinese)$.
+ 
+  $I_{i} \varphi$ means that the agent $i$ has the intention to do or communicate $\varphi$. We define: $U_{i} \varphi = \neg B_{i} \varphi \land \neg B_{i} \neg \varphi$, means that the agent $i$ has no belief on $\varphi$. For example What type of cuisine do you like? is represented $U_{j} Pref_{i}(cuisine,*)$. We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $
+ 
+\subsubsection{Utterances semantic}
 
  \begin{itemize}
  \item State.Preference(\textit{Pref}) : I like \textit{Pref} 
