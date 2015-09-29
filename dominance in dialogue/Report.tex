@@ -59,49 +59,46 @@ This dimension represent the degree of liking that have one interact for the oth
 \subsubsection{Solidarity}
 The solidarity dimension is in the opposite of power dimension. It is a symmetrical dimension where two individuals share equal obligations and rights \cite{svennevig2000getting}. Is is identified as ‘like-mindedness’ \cite{bickmore2005establishing} where interactants have the same behaviors and share for example the same preferences.
 \subsection{Dialogue utterances}
-In this paper we are interested by modeling a collaborative negotiation of preference in the context od social dialogue. The negotiation takes its values during the dialogue, when messages are exchanged between interlocutors. A message \emph{M = $\textless i \rightarrow j, s(cont), F  \textgreater$} is defined as triple where \emph{i, j}$\in$ \{agent, user\} are the agents participating in the dialogue,\emph{s $\in \wp$}  $s$ is the utterance used to express a the message. $\wp = \{ Ask, Propose, Reject, Accept, State\}$  represent the set of utterances that agents can express to exchange messages. 
+In this paper we are interested in  modeling a collaborative negotiation of preferences in the context of social dialogue. The negotiation takes its values during the dialogue when messages are exchanged between interlocutors. A message \emph{M = $\textless i \rightarrow j, s(cont), F  \textgreater$} is defined as triple where \emph{i, j}$\in$ \{agent, user\} are the agents participating in the dialogue,\emph{s $\in \wp$}  is the utterance used to express a message and $\wp = \{ Ask, Propose, Reject, Accept, State\}$  represents the set of utterances that agents can express to exchange messages. 
  $F \in \Im $  where $\Im = \{ Strongly, weakly, yelling, with hesititation ...\}$ is a set of multimodal features that are applied to the utterance to express a personal linguistic style or social move.
  
  \par The social relationship evolves during the interaction and influence this later. We focus on the relation of dominance in this paper. $Dom = \{+, -, =\}$. For example, when $Dom = +$ represents the fact that the agent is dominant and the user is submissive. 
  We assume a social relationship: $2^\wp$ $x$  $context \rightarrow Dom $ that tells which feature says in term of social move. The context represent all the previous knowledge of the speaker. 
  
 \subsubsection{Preferences}
-\par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preference. We assume that the agent express its preference on a defined object based on one or multiple criteria.   
+\par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preferences. We assume that the agent expresses its preference on a defined object based on one or multiple criteria.   
  \begin{itemize}
- \item Criteria $C$: a set of preferred objects. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. $\forall c \in C$, $D_{c}$ is its domain. For example $cuisine = \{chineese, italian\}$.
- \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find the object restaurant.
+ \item Objects $O$ : Set of all possible objects of preferences that interlocutors might negotiate. For example, negotiate to find restaurant for dinner.
+ \item Criteria $C$: represents the criteria or features of preferences on a specific object. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. Each criterion has its domain of values that we note: $\forall c \in C$, $D_{c}$ is its domain. For example $cuisine = \{chineese, italian\}$.
+
  \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of preference attributed for the object $o$ in the context of the criteria $c$. For example, Ginza is an expensive Japanese restaurant. Thus $v(prix, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
- \item Lets now define interlocutor's preferences. $\forall agent_{i}$.Imagine hat the agent has to choose a restaurant, depending on the criteria that matters for him first and depending on those criteria, the 	agent will choose a restaurant. First, the agent has to know his preferences on criteria represented as follows: 
- $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \textgreater _{c} price$ means that the criteria of cuisine is more important than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall c$ pre-odrerd in $D_{c}: pref_{i}(c) $. For example, the agent prefers the cuisine criteria, and for the cuisine the agent \emph{i}:  Japanese $ >_{cuisine} chinois$ , which means that the agent prefers the Japanese cuisine than the Chinese.  We conclude that the decision of preferences is a multi criteria decision. Suppose 
  
+ \item Lets now define interlocutor's preferences. $\forall agent_{i}$ that has to define its preference for an object, for example a restaurant. First, the agent has to know his preferences on quality criteria of this object represented as follows: 
+ $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \textgreater _{c} price$ means that the criteria of cuisine is more important for the $agent_{i}$  than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall v_{1} , v_{2} \in D_{C}$, the agent has a  partially ordered preference on these values noted $Pref_{i}^C (v_{1}, v_{2})$  can be represented as $v_{1}>_{C} v_{2}$ . For example, the agent prefers the cuisine criteria, and for the cuisine the $agent_{i}:  Pref_{i}^{cuisine} (Japanese , Chinese)$ , means that  $agent_{i}$ prefers the Japanese cuisine than the Chinese.  Second, once the criteria were defined, $agent_{i}$ can define its preferences on the object "restaurant". Based on what we defined above, we conclude that defining a preference on an object is a multi criteria decision. Assume a function of decision  $Dec$ such that $\forall o_{1}, o_{2} \in O x O, Dec$ define an order of preference on these objects where  $\{o_{1}\prec o_{2}, o_{1} \succ o_{2}, o_{1} \approx o_{2}\}$.   
  \end{itemize}
+\subsubsection{Belief base and intentions}
+In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Agents\}$
+\par We note $pref_{i} (c,v)$ to define the degree of agent preference for $v$ on the criteria $c$.
+
+ We define $ B_{i} \varphi$ the agent $i$  belief that an entity $\varphi$ is true. For example, $Agent_{i}$ like Chinese cuisine is represented $ B_{j} Pref_{i}(cuisine, Chinese)$.
+ 
+  $I_{i} \varphi$ means that the agent $i$ has the intention to do or communicate $\varphi$. We define: $U_{i} \varphi = \neg B_{i} \varphi \land \neg B_{i} \neg \varphi$, means that the agent $i$ has no belief on $\varphi$. For example What type of cuisine do you like? is represented $U_{j} Pref_{i}(cuisine,*)$. We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $
+ 
+\subsubsection{Utterances semantic}
 
  \begin{itemize}
- \item State.Preference(\textit{Pref}) : I like \textit{Pref} 
- \par Agent express \textit{Pref} to user. After communicating the message, the mental state of the agent will be updated as the following: 
-  \newline (Bel Agent \textit{Pref})
-  \newline (Bel Agent (communicated Agent \textit{Pref} User)).
-  
- \item Ask.Preference(\textit{Pref}) : Do you like \textit{Pref} ?
- \newline  Here the intention of the agent is to identify if the user believes \textit{pref}. 
- \newline (INT Agent (Identify user \textit{Pref}))
- \item Propose.Preference(\textit{Pref}): I think that \textit{Pref} would be great.
-  \newline (Bel Agent \textit{Pref})
-  \newline(INT Agent (Achieve Agent(Bel User \textit{Pref})))
-  \newline (Bel Agent (communicated Agent \textit{Pref} User)).
- \item Accept.Preference(\textit{Pref}): Okay, let's choose \textit{Pref}. After receiving a propose utterance from the user, the agent might accept the proposal. The mental state of the agent is: 
- \newline (MB Agent User \textit{Pref})) 
+ \item State.Preference(\textit{$P_{i}, P_{j}$}) : I prefer $P_{i}$ to $P_{j}$. We define two variant valuations on stating preferences as follows: 
+ \subitem State.Preference(\textit{$P_{i}, *$}): I prefer the most $P_{i}$.
+ \subitem State.Preference(\textit{$*, P_{i}$}): I don't like /hate $P_{i}$.
 
- \item reject.Preference(\textit{Pref}): Sorry, I would choice something else.
-  \newline (Not (Bel Agent \textit{Pref}))
-  \newline (Bel Agent (communicated Agent (Not (Bel \textit{Pref})) User)).
+ \item Ask.Preference(\textit{$P_{i}, P_{j}$}) : Do you prefer $P_{i}$ to $P_{j}$ ?. We define two variant valuations as follows: 
+ \subitem Ask.Preference(\textit{$P_{i}, *$}): Do you like $P_{i}$?
+ \subitem Ask.Preference(\textit{$*$}): What do you like ?. This case appear when the speaker has no belief on the hear preferences. 
+ 
+ \item Propose.Preference(\textit{Pref}): I think that \textit{Pref} would be great.
   
-\par In the experiment and in the modeling of the first dialogue, the dominant was able to insist and propose several times the same proposition. I'm not sure if a special utterance will be needed or we can simply use the utterance \textit{ProposeStrongly}. 
-Dans la définition dans ces utterances. est que l'agent exprime dans ce cas sa dominance. et si c'est le cas, l'expression de sa dominance est implicite. 
- \item StateStrongly.Preference(\textit{Pref}): I really like \textit{Pref}.
- \item ProposeStrongly.Preference(\textit{Pref}): \textit{Pref} is the best choice for you.
- \item AcceptStrongly.Preference(\textit{Pref}): Yes of course. \textit{Pref} is a great choice.
-  \item RejectStrongly.Preference(\textit{Pref}): I really don't like \textit{Pref}. I'd rather prefer something else.
+ \item Accept.Preference(\textit{Pref}): Okay, let's choose \textit{Pref}. After receiving a propose utterance from the user, the agent might accept the proposal. The 
+ \item Reject.Preference(\textit{Pref}): Sorry, I would choice something else.
  \end{itemize} 
  \subsection{Find utterances in dialogues}	
  
