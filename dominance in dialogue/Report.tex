@@ -77,30 +77,53 @@ In this paper we are interested in  modeling a collaborative negotiation of pref
  $Pref_{i}^C $ is a total ordered set of criteria.   $ cuisine \textgreater _{c} price$ means that the criteria of cuisine is more important for the $agent_{i}$  than the price. Second, when the criteria is defined, the agent\emph{i} defines his preferences on the domain of this criteria. Thus, $\forall v_{1} , v_{2} \in D_{C}$, the agent has a  partially ordered preference on these values noted $Pref_{i}^C (v_{1}, v_{2})$  can be represented as $v_{1}>_{C} v_{2}$ . For example, the agent prefers the cuisine criteria, and for the cuisine the $agent_{i}:  Pref_{i}^{cuisine} (Japanese , Chinese)$ , means that  $agent_{i}$ prefers the Japanese cuisine than the Chinese.  Second, once the criteria were defined, $agent_{i}$ can define its preferences on the object "restaurant". Based on what we defined above, we conclude that defining a preference on an object is a multi criteria decision. Assume a function of decision  $Dec$ such that $\forall o_{1}, o_{2} \in O x O, Dec$ define an order of preference on these objects where  $\{o_{1}\prec o_{2}, o_{1} \succ o_{2}, o_{1} \approx o_{2}\}$.   
  \end{itemize}
 \subsubsection{Belief base and intentions}
-In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Agents\}$
-\par We note $pref_{i} (c,v)$ to define the degree of agent preference for $v$ on the criteria $c$.
+In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Agents\}$.
 
- We define $ B_{i} \varphi$ the agent $i$  belief that an entity $\varphi$ is true. For example, $Agent_{i}$ like Chinese cuisine is represented $ B_{j} Pref_{i}(cuisine, Chinese)$.
+
+ We define $ B_{i} \varphi$ the fact that agent $i$  beliefs that an entity $\varphi$ is true. For example, $Agent_{i}$ like Chinese cuisine is represented $ B_{j} Pref_{i}^{cuisine}(Chinese)$.
  
-  $I_{i} \varphi$ means that the agent $i$ has the intention to do or communicate $\varphi$. We define: $U_{i} \varphi = \neg B_{i} \varphi \land \neg B_{i} \neg \varphi$, means that the agent $i$ has no belief on $\varphi$. For example What type of cuisine do you like? is represented $U_{j} Pref_{i}(cuisine,*)$. We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $
+  $I_{i} \varphi$ means that  agent $i$ has the intention to do or communicate $\varphi$. We define: $U_{i} \varphi = \neg B_{i} \varphi \land \neg B_{i} \neg \varphi$, means that the agent $i$ has no belief on $\varphi$. For example What type of cuisine do you like? is represented $U_{j} Pref_{i}^{cuisine}(*)$. We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $.
+  
  
 \subsubsection{Utterances semantic}
-
+Agents communicates using utterances that encapsulate the message and at each communicated utterance agents will update their beliefs about the preferences of the other agent. Therefore an utterance is communicated to a need to update a belief. In the following we suppose that $agent_{i}$ is the speaker and $agent_{j}$ is the hearer. 
  \begin{itemize}
- \item State.Preference(\textit{$P_{i}, P_{j}$}) : I prefer $P_{i}$ to $P_{j}$. We define two variant valuations on stating preferences as follows: 
+ \item State.Preference(\textit{$Pref_{i}(P_{1}, P_{2})$}) : I prefer $P_{1}$ over $P_{2}$.
+ \subitem (facultatif )Preconditions:  $ B_{i} U_{j} Pref_{i}(P_{1}, P_{2})$
+ \subitem Effects: $ B_{j} Pref_{i}(P_{1}, P_{2})$
+ \\ We define two variant valuations on stating preferences as follows: 
  \subitem State.Preference(\textit{$P_{i}, *$}): I prefer the most $P_{i}$.
  \subitem State.Preference(\textit{$*, P_{i}$}): I don't like /hate $P_{i}$.
-
- \item Ask.Preference(\textit{$P_{i}, P_{j}$}) : Do you prefer $P_{i}$ to $P_{j}$ ?. We define two variant valuations as follows: 
- \subitem Ask.Preference(\textit{$P_{i}, *$}): Do you like $P_{i}$?
+\subitem Example: State.Preference(\textit{$Pref_{i}^{cuisine} (Japanese , Chinese)$}) : I prefer japanese cuisine over chinese.
+ \item Ask.Preference(\textit{$Pref_{j}(P_{1}, P_{2})$}) : Do you prefer $P_{1}$ to $P_{2}$ ?. 
+  \subitem Preconditions:  $ U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ I_{i} B_{i} Pref_{j}(P_{1}, P_{2})$
+  \subitem Effects:  $B_{j} U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ B_{j} I_{i} B_{i}$
+ \\We define two variant valuations as follows: 
+ \subitem Ask.Preference(\textit{$Pref_{j}(P_{1}, *)$}): Do you like $P_{1}$?
  \subitem Ask.Preference(\textit{$*$}): What do you like ?. This case appear when the speaker has no belief on the hear preferences. 
+ \subitem Example: Ask.Preference(\textit{$Pref_{i}^{cuisine} (Japanese , Chinese)$}) : Do you prefer japanese cuisine or chinese?
  
- \item Propose.Preference(\textit{Pref}): I think that \textit{Pref} would be great.
+ \item Propose.Preference(\textit{V(criteria, value)}): I think that \textit{value}  would be great. 
+  \subitem Preconditions:  $ I_{i} Pref_{j}(V(criteria, value))$
+  \subitem Effects:  $B_{j} I_{i} Pref_{j}(V(criteria, value))$ ,  $ B_{j} Pref_{i}(V(criteria, value))$
+   \subitem Example: Propose.Preference(\textit{$V(cuisine,Japanese$}) : I want to taste japanese food.
+ \item Accept.Preference(\textit{V(criteria, value)}): Okay, let's choose \textit{value}. After receiving a propose utterance from the $agent_{j}$,  $agent_{i}$ might accept the proposal.
+   \subitem Effects:  $B_{i,j} Pref_{i,j}(V(criteria, value))$
+   
+ \item Reject.Preference(\textit{V(criteria, value)}): Sorry, I would choice something else.
+    \subitem Effects:  $B_{i} \neg  Pref_{j}(V(criteria, value))$
+ 
+  \item Propose.Object(\textit{V(object, value)}): I think that \textit{object value} would be great.
+  \subitem Preconditions:  $ I_{i} Pref_{j}(V(object, value))$
   
- \item Accept.Preference(\textit{Pref}): Okay, let's choose \textit{Pref}. After receiving a propose utterance from the user, the agent might accept the proposal. The 
- \item Reject.Preference(\textit{Pref}): Sorry, I would choice something else.
+  \subitem Effects:  $B_{j} I_{i} Pref_{j}(V(object, value))$ ,  $ B_{j} Pref_{i}(V(object, value))$  
+  \item Accept.Object(V(object, value)): Okay, let's choose \textit{value}.
+     \subitem Effects:  $B_{i,j} Pref_{i,j}(V(object, value))$ 
+  
+  \item Reject.Object(V(object, value)): Sorry, I would choice something else.
+      \subitem Effects:  $B_{i} \neg  Pref_{j}(V(object, value))$
  \end{itemize} 
- \subsection{Find utterances in dialogues}	
+ \subsection{Find utterances in dialogs}	
  
  In the following I represented the utterances in the hand made dialogues. When analyzing the recorded dialogues, the utterances appears in a more implicit manner. For example, when Lauriane says: " Sinon j'aime bien japonais". here its a State.preference(Lauriane, leonor,japonais).Loenor perceives it as a propose and make a reject by saying : "Je n'aime pas du tout le japonais."
  Dialogue	Utterance
