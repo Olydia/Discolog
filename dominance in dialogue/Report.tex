@@ -62,7 +62,7 @@ The solidarity dimension is in the opposite of power dimension. It is a symmetri
 In this paper we are interested in  modeling a collaborative negotiation on preferences in the context of social dialogue. The negotiation takes its values during the dialogue when messages are exchanged between interlocutors. In the following we present our model of dialogue.
 \subsubsection{Structure of messages}
 The basis structure of dialogue is a message that contain all the information that interlocutors exchange. We thus define a message as triple \emph{M = $\textless i \rightarrow j, s(cont), F  \textgreater$}, where \emph{i, j}$\in$ \{agent, user\} are the agents participating in the dialogue,\emph{s $\in \wp$}  is the utterance used to express a message. $\wp = \{ Ask, Propose, Reject, Accept, State\}$  represents the set of utterance types \cite{searle1969speech} that agents can express to exchange messages. 
- $F \in \Im $  where $\Im = \{ Strongly, Weakly, Yelling, With hesitation ...\}$ is a set of multimodal features that are applied to the utterance to express a personal linguistic style or social move. These features affect the perception of interlocutors about their relationship. Therefore, we define a social relationship function $SR$: $2^\Im  \times context \rightarrow Relationship $, that tells which feature say in term of social move. The context represents all the previous knowledge of the speaker. We focus on the relation of dominance in this paper. Thus $Relationship = Dom$ where  $Dom = \{+, -, =\}$ is a three values function. For example, two colleagues have a conversation, colleague \emph{A} speaks \textit{loudly with insurance}, while colleague \emph{A} shows \textit{hesitation} in his talking. Thus, based on the features used in their linguistic style, we can conclude that the colleague \emph{A}  dominates  the colleague \emph{B} (i.e $Dom_{A,B} = +$ and $Dom_{B,A} = -$)
+ $F \in \Im $  where $\Im = \{ Strongly, Weakly, Yelling, With hesitation ...\}$ is a set of multimodal features that are applied to the utterance to express a personal linguistic style or social move. These features affect the perception of interlocutors about their relationship. Therefore, we define a social relationship function $SR$: $2^\Im  \times context \rightarrow Relationship $, that tells which feature say in term of social move. The context represents all the previous knowledge of the speaker. We focus on the relation of dominance in this paper. Thus $Relationship = Dom$ where  $Dom = \{+, -, =\}$ is a three values function. For example, two colleagues have a conversation, colleague \emph{A} speaks \textit{loudly with insurance}, while colleague \emph{B} shows \textit{hesitation} in his talking. Thus, based on the features used in their linguistic style, we can conclude that the colleague \emph{A}  dominates  the colleague \emph{B} (i.e $Dom_{A,B} = +$ and $Dom_{B,A} = -$)
  
 \subsubsection{Preferences}
 \par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preferences. We assume that the agent expresses its preferences on a defined object based on one or multiple criteria.   
@@ -70,11 +70,11 @@ The basis structure of dialogue is a message that contain all the information th
  \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find at which restaurant have dinner.
  \item Criteria $C$: represents the criteria or features of preferences on a defined object. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. Each criterion has its domain of values that we note: $\forall c \in C$, $D_{c}$ is its domain. For example $D_{cuisine} = \{chineese, italian\}$.
 
- \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of preference attributed for the object $o$ in the context of the criteria $c$. For example, Ginza is an expensive Japanese restaurant. Thus $v(price, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
+ \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of the criterion $c$ attributed to the object $o$. For example, Ginza is an expensive Japanese restaurant. Thus $v(price, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
  
  \item Lets now define interlocutor's preferences. $\forall agent_{i}$ that has to define its preference for an object, for example a restaurant.
  \begin{itemize}
- \item Preferences on crietria of quality related to the object: $Pref_{i}^C (X,Y) $ is a total ordered set of criteria. For example, $ Pref_{i}^{restaurant} (cuisine,price)$ means that the criteria of cuisine is more important for the $agent_{i}$  than the price to choose a restaurant. (To discuss: preferences are a total / partial oredred ?)
+ \item Preferences on criteria of quality related to the object: $Pref_{i}^C (X,Y) $ is a total ordered set of criteria. For example, $ Pref_{i}^{restaurant} (cuisine,price)$ means that the criteria of cuisine is more important for the $agent_{i}$  than the price to choose a restaurant. (To discuss: preferences are a total / partial ordered ?)
  \item Once the criteria is defined, the $agent_{i}$ defines his preferences on the domain of this criteria. Thus, $\forall v_{1} , v_{2} \in D_{C}$, the agent has a  partially ordered preference on these values noted $Pref_{i}^C (v_{1}, v_{2})$  that can be represented as $v_{1}>_{C} v_{2}$ . For example, $agent_{i}:  Pref_{i}^{cuisine} (Japanese , Chinese)$ , means that  $agent_{i}$ prefers the Japanese cuisine over the Chinese. $v_{1} $ and $ v_{2}$ can take other values as presented : 
  \subitem $Pref_{i}^C (v_{1}, *)$ means that $agent_{i}$ prefers the most $v_{1}$. 
  \subitem $Pref_{i}^C (*,v_{2})$ means that $agent_{i}$ doesn't like  $v_{2}$. 
@@ -87,26 +87,26 @@ The basis structure of dialogue is a message that contain all the information th
 In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Interolocutors\}$.
 \par Following the BDI \cite{rao1991modeling}, we present the following definitions:
 \begin{itemize}
-	\item  $ B_{i} \varphi$ the fact that $agent_{i}$  believes that a proposition $\varphi$ is true. For example, $Agent_{i}$ likes Chinese cuisine is represented $ B_{j} Pref_{i}^{cuisine}(Chinese)$.
+	\item  $ B_{i} \varphi$ the fact that $agent_{i}$  believes that a proposition $\varphi$ is true. For example, $Agent_j$ believes that $Agent_{i}$ likes Chinese cuisine is represented $ B_{j} Pref_{i}^{cuisine}(Chinese)$.
 	\item  $U_{i} \varphi = \neg B_{i} \varphi \land \neg B_{i} \neg \varphi$, means that the $agent_{i}$ has no belief on $\varphi$.  For example, the fact that $agent_{j}$ ignores what type of cuisine the $agent_{i}$ prefers is formalized : $U_{j} Pref_{i}^{cuisine}(*,*)$.
-	\item $I_{i} \varphi$ means that  agent $i$ has the intention that $\varphi$ is true.
+	\item $I_{i} \varphi$ means that  $agent_i$ has the intention that $\varphi$ is true.
 
-	In our work, we focus on communication of preferences. Therefore, $\varphi = Pref_i^c(x,y)$ and we will consider formulas of the form: $B_j Pref_i^c(x,y)$ (possibly, $i=j$ if we represent an agent belief about its own preferences, and $i\neq j$ when it represents the beliefs about the interlocutor's preferences).
+	In our work, we focus on communication of preferences. Therefore, $\varphi = Pref_i^c(x,y)$. we will be considering formulas of the form: $B_j Pref_i^c(x,y)$ (possibly, $i=j$ if we represent an agent belief about its own preferences, and $i\neq j$ when it represents the beliefs about the interlocutor's preferences).
 	
 	The dialogue is a negotiation about preferences. Therefore, we do not modify the preferences of the other (to be discussed with Chuck). We only have intentions of the form $I_i B_j Pref_i^c(x,y)$: the agent has the intention to change a belief about a preference, with $i\neq j$, or $I_i B_i Pref_j^c(x,y)$, with $i\neq j$.
 	
-	In our model, these $I_i B_j \varphi$ or $I_i B_i \varphi$ correspond to communications: the agent $i$ has the intention to communicate a preference ($I_i B_j \varphi$) or to obtain the information about the interlocutor's preference ($I_i B_i \varphi$).
+	In our model, these $I_i B_j \varphi$ or $I_i B_i \varphi$ correspond to communications: the agent $i$ has the intention to communicate a preference ($I_i B_j \varphi$) or to obtain the information about the interlocutor's preference ($I_i B_i \varphi$). 
 	
-	Thus, we can write that $I_{i} \varphi$ means that  agent $i$ has the intention to communicate about $\varphi$ (in one way or the other: obtain or transmit a preference).
+	Thus, we can write that $I_{i} \varphi$ means that  $agent_i$ has the intention to communicate about $\varphi$ (in one way or the other: obtain or transmit a preference).
 	
 	We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $.
 	
-	In our model, actions are not built automatically by a planer: the plan is described in an HTN following the DISCO paradigm... Theses actions are modeled using Disco \cite{rich2009building} representation.  The action selection is done reactively, where the next action is selected based on the user response on the previous action. 
+	In our model, actions are not built automatically by a planer: the plan is described in an HTN following the Disco \cite{rich2009building} paradigm. Actions are represented hierarchically where complex actions are decomposed to more simpler ones. The action selection is done reactively, where the next action to be executed is selected based on the user response on the previous action. 
 	
 \end{itemize}
 
 \subsubsection{Utterances semantic}
-Agents communicates using utterances that encapsulate the message and after each communicated utterance, agents will update their beliefs about the preferences of the other agent. Therefore an utterance is communicated to a need to update a belief. In the following we suppose that $agent_{i}$ is the speaker and $agent_{j}$ is the hearer. As messages are actions, the are defined with precondition and effects on the belief. The preconditions are all optional, because the message selection depends first on the agent strategy. However, defining preconditions allow us to do inferences in order to know the reasons that make the agent choose the action. For example, If the agent changes the subject of discussion and talk about Chinese food, it allows us to conclude that the agent is dominant enough to lead the dialogue and change the subject of discussion. In addition, the effects are symmetric, we only represent the belief of the agent about its preferences and user preferences. We cannot represent the user belief, we can only represent the user perception of the user belief. For example, we situate our perception form the agent point of view, thus if the agent states that he likes Chinese food, thus, the agent believes that the user doesn't know the agent preference and the agent also has the intention to inform the user about its preferences. The effect of the statement is that now the agent believes that the user knows that the agent likes chinese food. 
+Agents communicates using utterances that encapsulate the message. After each communicated utterance, agents will update their beliefs about the preferences of the other agent. Therefore an utterance is communicated to a need to update a belief. In the following, we suppose that $agent_{i}$ is the speaker and $agent_{j}$ is the hearer. As messages are actions, they are defined with precondition and effects on the belief. The preconditions are all optional, because the message selection depends first on the agent strategy of conversation. However, defining preconditions allow us to do inferences in order to know the reasons that make the agent choose this action. For example, if the agent changes the subject of discussion and talks about Chinese food, then we can conclude that the agent is dominant enough to lead the dialogue and change the subject of discussion. In addition, the effects are symmetric, we only represent the  agent's belief about its preferences and user preferences. We cannot represent the user belief, we can only represent the agent perception of the user belief. For example, we situate our perception form the agent point of view. Suppose that the agent states that he likes Chinese food.  We can imagine that the reasons (precondition) that lead him  to state its preferences was that the agent believed that the user didn't know the agent preference and the agent also had the intention to inform the user about its preferences. The effect of the statement is that now the agent believes that the user knows that he likes chinese food. 
 
 In the following, we will be presenting  the utterances of dialogue, and we present the effect of this utterences on the agent belief in the case where the agent is either the hearer (\textit{i.e} Agent = $agent_i$) or  the listener(\textit{i.e} Agent = $agent_j$)
 
@@ -162,38 +162,11 @@ In the following, we will be presenting  the utterances of dialogue, and we pres
 
 
 \begin{minipage}{0.45\textwidth}
- \begin{enumerate}
-	\item A: Would like to have dinner with me ?
-	\item U: Yes, that would be great.
-	\item A: What kind of food do you prefer ?
-	\item U: I like Japanese food
-	\item A: Oh, I really don't like japanese food.
-	\item U: Ok. What do you prefer ?
-	\item A: I like italian food
-	\item U: Yeah, I like italian food too.
-	\item A: So let's have dinner at an italian restaurant. 
-	\item U: perfect for me!
-\end{enumerate}
+ 
 \end{minipage}%
 \hfill
 \begin{minipage}{0.45\textwidth}
- \begin{enumerate}
-	\item Propose.Preference(A,U,dinner).
-	\\
-	\item Accept.Preference(U,A,dinner).
 
-	\item Ask.Preferences(A,U,UserPreferences)
-	\\
-	\item State.Preference(U,Japanese)
-	\item RejectStrongly.Preference(A,U,Japaneese)
-			\\
-	\item Ask.Preferences(U,A,AgentPreferences)
-	\item State.Preference(A,italian).
-	\item State.Preference(U,italian).
-	\item Propose.Preference(A,U,Italian).
-		\\
-	\item Accept.Preference(U,A,Italian).
-\end{enumerate}
 \end{minipage}%
 
 
