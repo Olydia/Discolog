@@ -80,9 +80,15 @@ The basis structure of dialogue is a message that contain all the information th
  \subitem $Pref_{i}^C (*,v_{2})$ means that $agent_{i}$ doesn't like  $v_{2}$. 
  \subitem $Pref_{i}^C (*,*)$ means that $agent_{i}$ has no preference on $C$. 
  \item The last step consists in defining the agent preferences on the object "restaurant". Based on what we defined above, we conclude that defining a preference on an object is a multi criteria decision \cite{figueira2005multiple}. We denote a function of decision  $Dec$ such that $\forall o_{1}, o_{2} \in O x O, Dec$ define an order of preference on these objects where  $\{o_{1}\prec o_{2}, o_{1} \succ o_{2}, o_{1} \approx o_{2}\}$.
-
  \end{itemize} 
  \end{itemize}
+ 
+ In the end, the agents try to negociate a choice about an object. The final decision is to select an object (\emph{e.g.} let's go to Ginza), but during the negociation, agents can also propose values for criteria (\emph{e.g.} let's go to a Japanese restaurant). To represent these elements of decision, we will use the following notation:
+ \begin{itemize}
+   \item $Dec(o)$ represents the fact that the final decision is to choose object $o$ (eg: the Ginza restaurant)
+   \item $Dec(c,v)$ represents the fact that the final decision must choose an object that has value $v$ for criteria $c$ (eg: a silent restaurant)
+ \end{itemize}
+
 \subsubsection{Belief base and intentions}
 In this section we present the agent belief on his preferences. We situate our definition in the context of social conversation between two people. Suppose $i,j \in \{Interolocutors\}$.
 \par Following the BDI \cite{rao1991modeling}, we present the following definitions:
@@ -100,10 +106,19 @@ In this section we present the agent belief on his preferences. We situate our d
 	Thus, we can write that $I_{i} \varphi$ means that  $agent_i$ has the intention to communicate about $\varphi$ (in one way or the other: obtain or transmit a preference).
 	
 	We define axioms of cooperation that allows an agent to respond to a communication. Thus, $ B_{i} \varphi \land  B_{i} U_{j} \varphi \land  B_{i} I_{j}  B_{j} \varphi \implies I_{i}  B_{j} \varphi  $.
+	% déplacer après ?
 	
 	In our model, actions are not built automatically by a planer: the plan is described in an HTN following the Disco \cite{rich2009building} paradigm. Actions are represented hierarchically where complex actions are decomposed to more simpler ones. The action selection is done reactively, where the next action to be executed is selected based on the user response on the previous action. 
 	
+	% ajouter transition sur comment le plannificateur va utiliser les K (Bi) qu'on met à jour
+	
 \end{itemize}
+
+% ici axiomes:
+% - axiome de coopération
+% - axiome de propositions/décision
+% $B_i I_j Dec(x) et _cette décision est compatible avec mes prefs_ => I_i Dec(x)
+% ou alors à quel moment je rajoute un I_i Dec dans ma base pour faire un propose ?
 
 \subsubsection{Utterances semantic}
 Agents communicates using utterances that encapsulate the message. After each communicated utterance, agents will update their beliefs about the preferences of the other agent. Therefore an utterance is communicated to a need to update a belief. In the following, we suppose that $agent_{i}$ is the speaker and $agent_{j}$ is the hearer. As messages are actions, they are defined with precondition and effects on the belief. The preconditions are all optional, because the message selection depends first on the agent strategy of conversation. However, defining preconditions allow us to do inferences in order to know the reasons that make the agent choose this action. For example, if the agent changes the subject of discussion and talks about Chinese food, then we can conclude that the agent is dominant enough to lead the dialogue and change the subject of discussion. In addition, the effects are symmetric, we only represent the  agent's belief about its preferences and user preferences. We cannot represent the user belief, we can only represent the agent perception of the user belief. For example, we situate our perception form the agent point of view. Suppose that the agent states that he likes Chinese food.  We can imagine that the reasons (precondition) that lead him  to state its preferences was that the agent believed that the user didn't know the agent preference and the agent also had the intention to inform the user about its preferences. The effect of the statement is that now the agent believes that the user knows that he likes chinese food. 
@@ -114,11 +129,17 @@ In the following, we will be presenting  the utterances of dialogue, and we pres
 %- i=humain, j=agent: si l'humain me dit qu'il aime le chinois, je peux 1) déduire que, probablement, il croyait que je ne le savais pas, 2) il avait l'intention que je le sache (obtenu à partir des préconditions) et 3) qu'il croit que maintenant je le sais et surtout, que moi, maintenant, je le sais: je l'ajoute dans ma base.
 %- i=agent, j=humain: si je dis à l'humain que j'aime le chinois, c'est parce que je pensais qu'il ne le savait pas et j'avais envie qu'il le sache. Je ne peux rien dire sur ses croyances mais maintenant, je crois qu'il le sait: j'ajoute cette croyance dans ma base
 
+Keep in mind that:
+\begin{itemize}
+	\item We cannot change the values of Pref in the dialogue (no action can have any effect on the preferences of the interlocutor)
+	\item The effects of the sender of the message are always of the form $B_i Effects(j)$, but in some situation this does not bring any useful knowledge for the reactive planer.
+\end{itemize}
+
  \begin{itemize}
  \item State.Preference(\textit{$Pref_{i}(P_{1}, P_{2})$}) : I prefer $P_{1}$ over $P_{2}$.
  \subitem Preconditions(i):  $ B_{i} U_{j} Pref_{i}(P_{1}, P_{2}), I_{i} B_{j} Pref_{i}(P_{1}, P_{2})$
  \subitem Effects(j): $ B_{j} Pref_{i}(P_{1}, P_{2})$
- \subitem Effects(i): $ B_i Effect(j)$
+ \subitem Effects(i): $ B_i Effect(j)$ (not really useful for the agent to know that the user knows its preferences ?)
  \\ We define two variant valuations on stating preferences as follows: 
  \subitem State.Preference(\textit{$P_{i}, *$}): I prefer the most $P_{i}$.
  \subitem State.Preference(\textit{$*, P_{i}$}): I don't like /hate $P_{i}$.
@@ -126,20 +147,20 @@ In the following, we will be presenting  the utterances of dialogue, and we pres
  \item Ask.Preference(\textit{$Pref_{j}(P_{1}, P_{2})$}) : Do you prefer $P_{1}$ to $P_{2}$ ?. 
   \subitem Preconditions:  $ U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ I_{i} B_{i} Pref_{j}(P_{1}, P_{2})$
   \subitem Effects (j):  $B_{j} U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ B_{j} I_{i} B_{i}Pref_{j}(P_{1}, P_{2})$
-   \subitem Effects(i): $ B_i Effect(j)$ (Remark it can be redundant ?)
+   \subitem Effects(i): $ B_i Effect(j)$ (not really useful for the agent to know that the user knows that the agent wants to know, imho)
  \\We define two variant valuations as follows: 
  \subitem Ask.Preference(\textit{$Pref_{j}(P_{1}, *)$}): Do you like $P_{1}$?
  \subitem Ask.Preference(\textit{$*$}): What do you like ?. This case appear when the speaker has no belief on the hear preferences. 
  \subitem Example: Ask.Preference(\textit{$Pref_{i}^{cuisine} (Japanese , Chinese)$}) : Do you prefer japanese cuisine or chinese?
  
- \item Propose.Preference(\textit{V(criteria, value)}): I think that \textit{value}  would be great. 
-  \subitem Preconditions:  $ I_{i} Pref_{j}(V(criteria, value))$
-  \subitem Effects:  $B_{j} I_{i} Pref_{j}(V(criteria, value))$ ,  $ B_{j} Pref_{i}(V(criteria, value))$
+ \item Propose.Criteria(\textit{V(criteria, value)}): I think that \textit{value}  would be great. 
+  \subitem Preconditions:  $ I_{i} Dec(criteria, value) $
+  \subitem Effects:  $B_{j} I_{i} Dec(criteria, value)$
    \subitem Example: Propose.Preference(\textit{$V(cuisine,Japanese$}) : I want to taste japanese food.
- \item Accept.Preference(\textit{V(criteria, value)}): Okay, let's choose \textit{value}. After receiving a propose utterance from the $agent_{j}$,  $agent_{i}$ might accept the proposal.
+ \item Accept.Criteria(\textit{V(criteria, value)}): Okay, let's choose \textit{value}. After receiving a propose utterance from the $agent_{j}$,  $agent_{i}$ might accept the proposal.
    \subitem Effects:  $B_{i,j} Pref_{i,j}(V(criteria, value))$
    
- \item Reject.Preference(\textit{V(criteria, value)}): Sorry, I would choice something else.
+ \item Reject.Criteria(\textit{V(criteria, value)}): Sorry, I would choice something else.
     \subitem Effects:  $B_{i} \neg  Pref_{j}(V(criteria, value))$
  
   \item Propose.Object(\textit{V(object, value)}): I think that \textit{object value} would be great.
