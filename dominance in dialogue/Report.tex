@@ -68,10 +68,10 @@ The basis structure of dialogue is a message that contain all the information th
 \subsubsection{Preferences}
 \par Now, that  the model of communication is defined, we introduce the notion of negotiation on preferences. First, lets define the domain of preferences. We assume that the agent expresses its preferences on a defined object based on one or multiple criteria.   
  \begin{itemize}
- \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find at which restaurant have dinner.
- \item Criteria $C$: represents the criteria or features of preferences on a defined object. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. Each criterion has its domain of values that we note: $\forall c \in C$, $D_{c}$ is its domain. For example $D_{cuisine} = \{chineese, italian\}$.
+ \item Objects $O$ : Set of all possible objects of negotiation. For example, negotiate to find at which restaurant have dinner. Note that $O$ is a set of instance of the same type (restaurants in our example): $O=\{Ginza, LeDragonD'Or, Venezzia, \ldots\}$
+ \item Criteria $C$: set of criteria or features of preferences on objects. For example, we assume that we can choose a restaurant based on one or several of the following criteria = \{cuisine, ambiance, quality of food, price, location\}. Each criterion has its domain of values that we note: $\forall c \in C$, $D_{c}$ is its domain. For example $D_{cuisine} = \{chineese, italian\}$.
 
- \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of the criterion $c$ attributed to the object $o$. For example, Ginza is an expensive Japanese restaurant. Thus $v(price, Ginza) = exprensive$ and $(cuisine, Ginza) = japanese$. 
+ \item $\forall o \in O, \forall c \in C$, we define $v(c,o) \in D_{c}$ as the objective value of the criterion $c$ attributed to the object $o$. For example, Ginza is an expensive Japanese restaurant. Thus $v(price, Ginza) = expensive$ and $(cuisine, Ginza) = japanese$. 
  
  \item Lets now define interlocutor's preferences. $\forall agent_{i}$ that has to define its preference for an object, for example a restaurant.
  \begin{itemize}
@@ -164,14 +164,21 @@ Keep in mind that:
  \item Reject.Criteria(\textit{V(criteria, value)}): Sorry, I would choice something else.
     \subitem Effects:  $B_{i} \neg  Pref_{j}(V(criteria, value))$
  
-  \item Propose.Object(\textit{V(object, value)}): I think that \textit{object value} would be great.
+  \item Ask.Object(): Which restaurant do you want to choose
+  
+	 Note that Ask.Object has no content: since we consider a single-object negociation, the participants have to chose one single element in $O$. Ask.Object means that the sender
+	 asks the interlocutor to propose an instance $o\in O$.
+	 
+	 A TERMINER
+ 
+  \item Propose.Object(\textit{object}): I think that \textit{object value} would be great.
   \subitem Preconditions:  $ I_{i} Pref_{j}(V(object, value))$
   
   \subitem Effects:  $B_{j} I_{i} Pref_{j}(V(object, value))$ ,  $ B_{j} Pref_{i}(V(object, value))$  
-  \item Accept.Object(V(object, value)): Okay, let's choose \textit{value}.
+  \item Accept.Object(\textit{object}): Okay, let's choose \textit{value}.
      \subitem Effects:  $B_{i,j} Pref_{i,j}(V(object, value))$ 
   
-  \item Reject.Object(V(object, value)): Sorry, I would choice something else.
+  \item Reject.Object(\textit{object}): Sorry, I would choice something else.
       \subitem Effects:  $B_{i} \neg  Pref_{j}(V(object, value))$
  \end{itemize} 
  \subsection{Find utterances in dialogs}	
