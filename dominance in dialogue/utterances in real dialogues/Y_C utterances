@@ -1,0 +1,135 @@
+[DSP 0: Trouver un restaurant sur paris]
+	Yoren: tu n'aurais pas de bon resto à me conseiller sur paris 
+	Caroline: Bah écoutes ça fait super  longtemps que je ne suis pas sortie.
+	
+	[DSP 1: Connaitre les gouts de Yoren]
+		Je peux te conseiller, après ça dépends de quelle style tu aimes ?{Marginal influance}
+		Y: tant que tu peux m'éloigner de ce que j'aime à savoir de mc Do et quick à châtelet, déjà ça serait pas mal.
+		C: Ah non, mais la de toute façon ce n'est pas un restaurant {Disagreement}
+		Y: Voilà. je veux bien manger plus proprement.{Agreement}
+		
+	[DSP 2: Proposer un premier restaurant sur paris et vérifier que ça convient]
+		C: Un truc bien sympathique ...
+		Alors, Apres moi je sais que du côté de république y'a pas mal de restaurant sympa. {Marginal influance/establish credibility}
+		Par exemple: parigot  Brasserie classique avec un bon rapport qualité prix. 
+		
+		[DSP 2.1: Inconvénient du restaurant]
+			Bien qu'ils ont réduit la taille de leur café gourmand, Avant tu avais de gros gâteaux limite tu en avais trop.  
+			Y: peut-être parce qu'ils ont trop de monde ? 
+
+		[DSP 2.2: L'ambiance du restaurant]
+			C: C'est vrai qu'il y'a du monde mais l'ambiance est sympathique et ils ont du bon vin
+			c'est jamais un mal qu'on en boit évidement.
+					
+		[DSP 2.3: Réservation]
+			Y: tu me conseillerais de réserver pour y aller? {solidarity}
+			C: non, non,  pas vraiment. Mais si tu veux vraiment y manger effectivement il vaut mieux
+	
+	[DSP3: Mesurer la difficulté de trouver un bon restaurant végétarien]
+		C: C'est pas trop dure de trouver des restaurants sur paris quand on est végétariens ?
+		Y: Si, c'est super dur
+		J'en connais deux. Un où je ne suis jamais aller, on m'a dit que du bien mais tous les commentaires que j'ai lu sur internet  étaient mauvais. {establish credibility}
+		ils disaient que ça se dégradait, que c'était de moins en moins sympathique.  
+		C: Oula !
+		
+		[DSP 3.1: Donner un exemple de bon restaurant végétarien sur Paris]
+			Y: Il y'a un autre où j'ai été avec l'équipe, c'était y' a pas si longtemps, qui s'appelle le grenier de notre dame.{establish credibility}
+			C'est un petit restaurant très sympa, on y mange vraiment bien. 
+
+** NS ** Yoren revient sur la réservation (avant que Caro commente sur Paris), est-ce:
+	- revenir sur DSP 2.3 (impossible avec la structure hiérarchique)
+	- donner un inconvénient du resto végétarien (donc un DSP 3.1.1)
+	- revenir sur DSP4 (ce qui est proposé ci-dessous) 
+=> Je pense que c'est le cas 2: Yoren donne une info sur le resto et Caro en profite, de manière opportuniste, pour relancer le dialogue sur le point plus général des restos à Paris (DSP4)
+=> Lydia est d'accord: elle dit que dans la tâche "proposer un restaurant", on retrouve à chaque fois les sous-tâches "donner un avantage" et "donner un inconvénient" (parfois plusieurs).
+
+	[DSP 4: Mettre le point sur le problème de réservation sur paris]
+		Y: Par contre c'est réservation obligatoire. même  a 3 ou 4 t'es pas sur de rentrer. 
+		C: c'est vrai à paris, t'as beau avoir un max de restaurant, le problème des restau, les bons c'est  toujours difficile d'y rentrer au final. {agreement / solidarity}
+		Y: C'est un petit peu le soucis {Solidarity}
+
+** NS ** Je pense que ce qui cause le changement de sujet, c'est ici clairement un but social
+
+	[DSP 5: Parler des restaurants japonais sur paris]
+		Y: Apres, il y'a pas mal de de petits restaurants japonais du côté d'opéra  {Managerial Influence}
+		C: oui oui du côté de la rue Saint Anne. {establish credibility}
+	
+	[DSP 6: Donner des critères pour choisir les restaurants japonais/asiatiques]
+		C: Après c'est pareil, il faut connaitre y'a des japonais dans toute la rue, mais y'en a qui sont un peu pourri genre japonais commercial, et il y'en a qui sont vraiment très bien. 
+		Il faut y aller avec des gens qui connaissent un peu le coin. {establish credibility}
+		
+		[DSP 6.1: Le secteur joue dans le choix du restaurant]
+			Y: Genre c'est souvent par secteur, tu te bases dans un coins où il y'a que les restaurant coréens dans le coin. {establish credibility}
+			C: tout à fait {Agreement}
+			Y: et du coup quand tu ne connais pas tu regardes les noms des plats sur les cartes ...
+			C: oui tu n'es pas aidé {Agreement}
+	
+		C: Je sais pour les restaurants asiatiques, je le fais beaucoup, je regarde les gens qui y sont dedans, et en fait si il y'a d'autre gens qui ont l'air asiatique dedans,
+		mon dieu c'est absolument raciste comme critère. {establish credibility}
+		En général, c'est bon signe de voir les gens qui connaissent la cuisine aient y manger. {establish credibility}
+	
+	[DSP 7: Proposer un restaurant asiatique]
+		C: Y'a un thaï assez sympa, qui est dans le centre de paris. 
+		Alors, j'ai y vais avec une copine, pas végétarienne mais sa vie est un peu compliqué d'un point de vue nourriture 
+		Ils ont pas mal de plat qu'à base de légumes qui sont sympa. {Managerial Influence}
+		Par contre c'est assez épicé, il faut aimer.
+		Y: ça ne me dérange pas l'épicé.
+
+		[DSP 7.1: Savoir s'il est possible de manger végétarien dans un restaurant Thai]
+			Par contre, comme tu dis, tu peux demander des plats sans viandes. 
+			En général, les plats cuisinés à base de viande tournent autour de la viande. {establish credibility}
+			C: c'est un peu bizarre, juste les légumes leurs coutent comme même vachement moins cher.  
+			
+	[DSP8: Proposer un restaurant à thème]
+		Y: Je connais un restaurant c'est pareil restaurant-brasserie. {Managerial Influence}
+		Je ne sais pas si tu connais le HD-Dinner ? {Solidarity}
+		C: non ça ne me dit rien. 
+		Y: je crois qu'il y'en a 2 ou trois autour de châtelet. {establish credibility}
+		Et au fait, je ne connais pas vraiment la thématique c'est un peu geek, américain. {establish credibility}
+		Enfin c'est un peu bizarre, avec des boissons essentiellement porté et des plats originaux avec pas mal de choses végétariennes
+		C: c'est pas mal ça, et est qu'il y'a pas des serveuses en patins à roulettes ? Genre américain à l'ancienne. {As social goal I think that is Humour}
+		
+		[DSP8.1: Restaurant que Yoren aime : kawai café]
+		Y: non y'a pas. Par contre on m'a fait découvrir un restaurant où j'adore y aller avec des copains qui s'appelle kawai café. {establish credibility}
+		Je crois que c'est vers Montreuil et au fait c'est à thématique mangas jeu vidéo.
+		C: oui ! 
+		Y: dans le restaurant c'est une ambiance très roses, avec plein de figurines, t'as une console sur laquelle tu peux jouer consoles, même les lumières c'est des consoles et tous.
+		et t'as les serveuses sont habillées en mode soubrettes un peu japonaises. {establish credibility}
+		
+			[DSP8.2: Les habits des serveuses japonaises]
+			C: la totale, ça doit faire  exotique.
+			Parait que japon y'a pas mal de bars ou les serveuses sont court vêtus jamais plus. {establish credibility}	
+			Y: oui, c'est pas du tout vulgaire t'as l'impression qu'elle est là pour faire le ménage. 
+				
+		Y: Ils font des hamburgers végétariens au potirons qui sont pas mal et surtout des chips maison. A chaque fois que j'amène des gens pour les chips et ils ont demandé tout le temps quitte à 			ne pas prendre de dessert derrière.
+		et ce qui est aussi amusant c'est les menus, au fait c'est des boites jeux vidéo avec des noms bizarre. {establish credibility}
+		
+		[DSP 8.2: Réservation pour le restaurant kawai café]
+		Par contre c'est minuscule, surtout le samedi et dimanche c'est l'enfer pour y aller. T'es obligé d'appeler pour savoir s'ils ont de la place.
+		C: ils ne prennent pas de réservation ?
+		Y: je pense que tu peux leur demander de réserver, la dernière fois on était partis a 12 on a pris la moitié du restau. 
+		C: limite privatisation
+		Y: franchement c'était ça. Moi c'est comme ça que je l'ai connu, j'y suis retournée quelque fois et c'était sympa.
+
+** NS ** Ici aussi, on a changé de sujet avec un but social
+		
+	[DSP9: Parler des restaurants en province]
+		C: Par contre des restaurants fun comme ça sur paris j'en connais pas trop. J'en connais sur Lyon ou Montpellier.
+		Y: je suis passé une fois à Lyon mais une journée. Donc ça ne laisse pas beaucoup le temps pour tester. {establish credibility}
+
+		[DSP 9.1: Les restaurants sur paris sont plus chers qu'en province]
+			C: le problème de paris par rapport à la province est que si tu veux te faire un bon restaurant ou tu décides d'y mettre un peu d'argent tu es obligé de monter directement à 50 euros  le menu. {establish credibility}
+			alors que je sais que ça soit à Lyon ou à Montpellier on pouvait manger à 30, 35 euros quelque chose de très bon et ça c'est pas possible de le trouver à Paris. 
+			Y: oui c'est impossible, des restaurants que moi je connais c'est des restaurants où tu peux manger pour 30 euros avec une qualité bien inférieur,
+			au fait j'ai l'impression que c'est que tu trouves sur paris, genre restaurants populaires {agreement + Solidarity}
+			C: c'est vrai qu'il faut vite monter en prix, je comprends que le prix de la location est un peu cher à paris qu'ailleurs mais c'est un peu abusé. {Agreement}
+		
+	[DSP10: Présenter un restaurant qui était mauvais]
+	C:Je sais pour mon anniversaire l'année dernière avec de bon avis internet et tous, c'était l'enfer, tout était horrible, 
+	c'était bruyant, le service était désagréable. Oh mon dieu je pense que  c'était la pire soirée restaurant de ma vie.  {establish credibility}
+	 
+
+
+
+
+			

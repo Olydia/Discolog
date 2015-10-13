@@ -28,7 +28,7 @@ Worcester Polytechnic Institute\\ Worcester, Massachusetts, USA\\
 \maketitle 
 
 \section{Interpersonal relationship}
-Social relationship and its effects on behavior lies at the heart of social science. It was proved that understanding interpersonal relationship is crucial for social cognition \cite{reis2000relationship}. Most of the literature that get interested in the conceptual analysis of interpersonal relationship have agreed that the essence of relationship appears in the nature of interaction that occurs between relationship partners. Moreover, social relationship is a dynamic system that may develop and change continuously over interactions \cite{reis2000relationship,svennevig2000getting}.
+Social relationship and its effects on behavior lies at the heart of social science. It was proved that understanding interpersonal relationship is crucial for social cognition \cite{reis2000relationship}. Most of the literature that get interested in the conceptual analysis of interpersonal relationship have agreed that the essence of relationship appears in the nature of interaction that occurs between relationship partners. Moreover, social relationship is a dynamic ssorasorystem that may develop and change continuously over interactions \cite{reis2000relationship,svennevig2000getting}.
 Communication between relationship partner will grow in stages from the initial interaction where partners share superficial information to a more deeper relationship where partners can share more personal information. Therefore, the social relationship of partners affects their behavior and their strategy of dialogue.
 
 \section{Representation of interpersonal relationship}
@@ -82,7 +82,7 @@ The basis structure of dialogue is a message that contain all the information th
  \subitem $Pref_{i}^C (*,*)$ means that $agent_{i}$ has no preference on $C$. 
  \item The last step consists in defining the agent preferences on the object "restaurant". Based on what we defined above, we conclude that defining a preference on an object is a multi criteria decision \cite{figueira2005multiple}. We denote a function of decision  $Dec$ such that $\forall o_{1}, o_{2} \in O x O, Dec$ define an order of preference on these objects where  $\{o_{1}\prec o_{2}, o_{1} \succ o_{2}, o_{1} \approx o_{2}\}$.
  \end{itemize} 
- \end{itemize}
+ \end{itemize}nadi
  
  In the end, the agents try to negociate a choice about an object. The final decision is to select an object (\emph{e.g.} let's go to Ginza), but during the negociation, agents can also propose values for criteria (\emph{e.g.} let's go to a Japanese restaurant). To represent these elements of decision, we will use the following notation:
  \begin{itemize}
@@ -137,7 +137,7 @@ Keep in mind that:
 \end{itemize}
 
  \begin{itemize}
- \item State.Preference(\textit{$Pref_{i}(P_{1}, P_{2})$}) : I prefer $P_{1}$ over $P_{2}$.
+ \item State.Preference(\textit{$P_{1}, P_{2}$}) : I prefer $P_{1}$ over $P_{2}$.
  \subitem Preconditions(i):  $ B_{i} U_{j} Pref_{i}(P_{1}, P_{2}), I_{i} B_{j} Pref_{i}(P_{1}, P_{2})$
  \subitem Effects(j): $ B_{j} Pref_{i}(P_{1}, P_{2})$
  \subitem Effects(i): $ B_i Effect(j)$ (not really useful for the agent to know that the user knows its preferences ?)
@@ -145,7 +145,7 @@ Keep in mind that:
  \subitem State.Preference(\textit{$P_{i}, *$}): I prefer the most $P_{i}$.
  \subitem State.Preference(\textit{$*, P_{i}$}): I don't like /hate $P_{i}$.
 \subitem Example: State.Preference(\textit{$Pref_{i}^{cuisine} (Japanese , Chinese)$}) : I prefer japanese cuisine over chinese.
- \item Ask.Preference(\textit{$Pref_{j}(P_{1}, P_{2})$}) : Do you prefer $P_{1}$ to $P_{2}$ ?. 
+ \item Ask.Preference(\textit{$P_{1}, P_{2}$}) : Do you prefer $P_{1}$ to $P_{2}$ ?. 
   \subitem Preconditions:  $ U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ I_{i} B_{i} Pref_{j}(P_{1}, P_{2})$
   \subitem Effects (j):  $B_{j} U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ B_{j} I_{i} B_{i}Pref_{j}(P_{1}, P_{2})$
    \subitem Effects(i): $ B_i Effect(j)$ (not really useful for the agent to know that the user knows that the agent wants to know, imho)
@@ -153,6 +153,10 @@ Keep in mind that:
  \subitem Ask.Preference(\textit{$Pref_{j}(P_{1}, *)$}): Do you like $P_{1}$?
  \subitem Ask.Preference(\textit{$*$}): What do you like ?. This case appear when the speaker has no belief on the hear preferences. 
  \subitem Example: Ask.Preference(\textit{$Pref_{i}^{cuisine} (Japanese , Chinese)$}) : Do you prefer japanese cuisine or chinese?
+
+ \item Ask.Object(): Which "Object" do you want to choose ? For example we consider Object = Restaurant. Note that Ask.Object has no content. Since we consider a single-object negotiation, the participants have to chose one single element in $O$. The semantic of the utterance Ask.Object means that the sender asks the hearer to propose an instance $o\in O$.
+	\subitem Preconditions:  $ U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ I_{i} B_{i} Pref_{j}(P_{1}, P_{2})$
+  	\subitem Effects (j):  $B_{j} U_{i} Pref_{j}(P_{1}, P_{2})$ ,  $ B_{j} I_{i} B_{i}Pref_{j}(P_{1}, P_{2})$
  
  \item Propose.Criteria(\textit{V(criteria, value)}): I think that \textit{value}  would be great. 
   \subitem Preconditions:  $ I_{i} Dec(criteria, value) $
@@ -164,22 +168,15 @@ Keep in mind that:
  \item Reject.Criteria(\textit{V(criteria, value)}): Sorry, I would choice something else.
     \subitem Effects:  $B_{i} \neg  Pref_{j}(V(criteria, value))$
  
-  \item Ask.Object(): Which restaurant do you want to choose
+  \item Propose.Object(\textit{object}): I think that \textit{object} would be great.
+  \subitem Preconditions:  $ I_{i} Pref_{j}(object)$
   
-	 Note that Ask.Object has no content: since we consider a single-object negociation, the participants have to chose one single element in $O$. Ask.Object means that the sender
-	 asks the interlocutor to propose an instance $o\in O$.
-	 
-	 A TERMINER
- 
-  \item Propose.Object(\textit{object}): I think that \textit{object value} would be great.
-  \subitem Preconditions:  $ I_{i} Pref_{j}(V(object, value))$
-  
-  \subitem Effects:  $B_{j} I_{i} Pref_{j}(V(object, value))$ ,  $ B_{j} Pref_{i}(V(object, value))$  
+  \subitem Effects:  $B_{j} I_{i} Pref_{j}(object)$ ,  $ B_{j} Pref_{i}(object)$  
   \item Accept.Object(\textit{object}): Okay, let's choose \textit{value}.
-     \subitem Effects:  $B_{i,j} Pref_{i,j}(V(object, value))$ 
+     \subitem Effects:  $B_{i,j} Pref_{i,j}(object)$ 
   
   \item Reject.Object(\textit{object}): Sorry, I would choice something else.
-      \subitem Effects:  $B_{i} \neg  Pref_{j}(V(object, value))$
+      \subitem Effects:  $B_{i} \neg  Pref_{j}(object)$
  \end{itemize} 
  \subsection{Find utterances in dialogs}	
  
