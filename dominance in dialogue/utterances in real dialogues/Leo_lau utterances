@@ -1,25 +1,26 @@
 ﻿[DSP0: Où aller manger ce soir] Utterance / Style 
-Lauriane: ou est que tu veux aller manger ce soir ? ## Propose.object(*), Style : Neutral
-Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. ## Propose.criteria(cuisine,Breton), Style : weak ? 
+Lauriane: ou est que tu veux aller manger ce soir ? ## Ask.object(*), Style : Neutral
+Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. 
 
 	[DSP1: Proposition restaurant : crêperie/ Breton] 
 		Leo: Alors j'avoue  j'aime bien les restaus breton. ## State.preference^cuisine (Breton, *), Style : Strong 
 		Leo: J'aime bien manger des crêpes.
 		Lau; j'ai passé 3 ans à renne...
-		Leo: Souvent les bonnes crêperies sont a Montparnasse. ## State.preference^(location/cuisine=Breton) (Montparnasse, *), Style : Neutral 
+		Leo: Souvent les bonnes crêperies sont a Montparnasse. ## State.preference^(location/cuisine=Breton) (Montparnasse, *), Style : Neutral { Over simplification  -> ## State.preference^location (Montparnasse, *)}
 		Leo:je vais souvent a une crêperie qui s'appelle le Josselin et le petit Josselin. y'en a deux au fait.  ## Propose.Object^restaurant(Josselin) Style = Strong
 		Les crêpes sont très bonnes, oué. Elles sont costaux mais elles sont très bonnes.
 		
 
 		[DSP 1.1 : comparaison avec ce que lauriane connait]
-		Lau: Ayant passé 3 ans à Rennes. Les crêperies sur paris sont un peu moyennes. Reject.Object^restaurant(Josselin ) Or Reject.Criteria(location, Paris) and in this case all restaurant at PAis are rejected. We need to define a conditional reject to explain that we want to reject the "cuisine = Bretons and location = paris"
+		Lau: Ayant passé 3 ans à Rennes. Les crêperies sur paris sont un peu moyennes.  Reject.Object^restaurant(Josselin ) Style =weak { How to check that this is Reject where the name of restaurant or type of cuisine is nt explicitly said ?}   Or Reject.Criteria(location, Paris) and in this case all restaurant at PAis are rejected. We need to define a conditional reject to explain that we want to reject the "cuisine = Bretons and location = paris" 
+
 		Leonor: tu trouveras de meilleures crêperies à Rennes. 
 
 	[DSP2: Restaurants japonais]
-		Laur: Sinon j'aime bien japonais ## State.preferecne^Cuisine( japonais, breton). Style = Neutral
-		Leo: Je n'aime pas du tout le japonais. ##  State.preferecne^Cuisine(* , japonais), Style = Strong
+		Laur: Sinon j'aime bien japonais ## State.preference^Cuisine( japonais, breton). Style = Neutral
+		Leo: Je n'aime pas du tout le japonais. ##  State.preference^Cuisine(* , japonais). Style = Strong
 		Lau: tu n'aimes pas tous ce qui est poisson cru .. 
-		Leo: je n'aime pas trop la cuisine asiatique encore moins japonais. ## We will avoid representing utterances that imply a certain hierarchy of definition asitique -> japonais 
+		Leo: je n'aime pas trop la cuisine asiatique encore moins japonais. {We will avoid representing utterances that imply a certain hierarchy of definition asitique -> japonais }
 		Leo: Je n'aime pas trop les sushi déjà. Non je ne suis pas trop cuisine asiatique.
 		
 	[DSP 3: Changer le sujet des restau japonais: Solidarité ? ]
@@ -27,15 +28,15 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. #
 		Lau: à Orsay; y'a un restau brasserie qui s'appelle le gramophone à côté de la gare. ## Propose.Object(gramophone). Style = Neutral
 		
 	[DSP4: Proposition: restau africain + italien]
-		Leo: j'aime bien les restaus italiens et africains aussi. c'est très bon aussi.  ## State,preference^Cuisine(africain,*), State,preference^Cuisine(italien,*). Style = neutral
-		Laurianne: les restaus africains. je ne suis pas fan ## State,Preference^Cuisine (*,africain). Style = weak
+		Leo: j'aime bien les restaus italiens et africains aussi. c'est très bon aussi.  ## State.preference^Cuisine(africain,*), State,preference^Cuisine(italien,*). Style = neutral
+		Laurianne: les restaus africains. je ne suis pas fan ## State.Preference^Cuisine (*,africain). Style = weak
 		Leo : et les restaurants italiens ? ## Ask.Preference^cuisine(italien). Style = Neutral
 		Laur: oué ...  ## State.Preference^cuisine(italien,*). Style = Weak 
 
 	[DSP 5: Restaurant Aveyronnais : Dominance (Leonor)]
-		leonor: sinon il y'a un excellent restaurant. c'est  Aveyronnais a Bercy où il font de l'aligot. Tu vois ce que c'est ! ## Propose.preference^Cuisine(Aveyronnais), Propose,preference^location(Bercy). Style= Neutral/Strong ?
+		leonor: sinon il y'a un excellent restaurant. c'est  Aveyronnais a Bercy où il font de l'aligot. Tu vois ce que c'est ! ## Propose.preference^Cuisine(Aveyronnais), Propose.Preference^location(Bercy). Style= Neutral/Strong ? { We are not capturing the hole meaning we are talking about a single restaurant which is situated at Bercy}
 		lauriane: oui je vois
-		leonor: tu vois ce que c'est. Ah ça c'est bon l'aligot
+		leonor: tu vois ce que c'est ?. Ah ça c'est bon l'aligot
 		lauriane: de toute façon dès qu'il y'a du fromage..
 		leonor: Ils le font devant toi au fait. 
 		ils ramènent la casserole et ils la tire comme ça et ils te la servent devant. 
@@ -68,11 +69,11 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. #
 			A paris tu as toutes les spécialités. c'est ça qui est bien. 
 			
 	[dsp 7 ou 2: retour sur les restaus africain + italien}]	
-		Moi c'est vrai que je tourne autour des crêperies et des restau africain et italien.  ## State.Preference^Cuisine(africain,*), State.Preference^Cuisine(italien,*), State.Preference^Cuisine(Breton,*). Style = neutral
+		Moi c'est vrai que je tourne autour des crêperies et des restau africain et italien.  ## State.Preference^Cuisine(africain,*), State.Preference^Cuisine(italien,*), State.Preference^Cuisine(Breton,*). Style = neutral {We cannot capture this kind of disjunction (boolean operator OR) }
 		
 		[DSP 2/7 .1  Presentation/ plaidoirie: restaurant africain ]
-		lau: les restau africain ce n'est pas trop mon truc ## State.Preference^Cuisine(*,africain). Style = Neurtal limit Weak 
-		leo:  Alros africain ça dépend. Moi j'ai connu la cuisine africaine notamment la Camerounaise  et c'est vraiment très bon. ##  State.preference^Cuisine(africain, *) avoid specification Africain -> camrounais
+		lau: les restau africain ce n'est pas trop mon truc ## State.Preference^Cuisine(*,africain). Style = Weak 
+		leo:  Alors africain ça dépend. Moi j'ai connu la cuisine africaine notamment la Camerounaise  et c'est vraiment très bon. ##  State.preference^Cuisine(africain, *)  {avoid specification Africain -> camrounais }
 		ils utilisent des plantes  que tu ne connais même pas. 
 		y'a une plante qui s'appelle le Ndolé. 
 		ça ressemble beaucoup aux épinard et puis ça a beaucoup de gout, mélangé à la pate d'arachide  ect , du riz et des crevettes et c'est très très bon.
@@ -97,14 +98,14 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. #
 		il a fait un magret de canard au poivre et je n'ai pas trop supporté. 
 		leo: d'ailleurs les genrs qui arrivent ici trouvent que notre nourriture est fade parcequ'on n'utilise pas beaucoup d'épices en France.
 		Mais alors si tu n'aimes pas la cuisine épicée je suis alors que le restaurant Aveyronnais te plairait parcequ'il n'ya pas d'épices. 
-		c'est la cuisine bien française avec du bon fromage... ## Propose.Criteria(Cuisine,Aveyronnais)
+		c'est la cuisine bien française avec du bon fromage... ## Propose.Criteria(Cuisine,Aveyronnais) Style = Strong
 		
 		[DSP 7.1 : retour sur les retaus africains]
-			lau: mais c'est vrai que tester la nouveauté  où il n'y a pas beacoup d'epices comme le restau africain pourquoi pas. ## ContralProposal.criteria(cuisine, africain).Style = weak 				Leo: il faut juste choisir les plats qui ne sont pas épicés ou tu connais les ingeredients.
+			lau: mais c'est vrai que tester la nouveauté  où il n'y a pas beacoup d'epices comme le restau africain pourquoi pas. ## CounterProposal.critericuisine, africain).Style = weak 			Leo: il faut juste choisir les plats qui ne sont pas épicés ou tu connais les ingeredients.
 			lau: se faire guider.
 			
 		[DSP 7.2 : le secteur des restau africains sur paris]
-		                                              	leo: Principalement les restaurants africains sont dans le 19 eme près de gare de l'est. y'en a plein plein plein. 
+		 leo: Principalement les restaurants africains sont dans le 19 eme près de gare de l'est. y'en a plein plein plein. 
 			Ils ont pas mal de succes. 
 			y'a  les africains qui y vont mais aussi plein de parisiens qui y vont aussi.
 			Certain ont leur tables. moi c'est des copains  africains qui me le font fait découvrir. 
@@ -153,11 +154,13 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. #
 			Mais au moins quand tu vas au restaurant, tu as envie d'autre chose de qualité c'est la moindre des choses.
 
 [ Discussison hors sujet des restaurant mais toujours dans le cadre de la nourriture]
+	
+	[DSP12: Choisir un restaurant]
 
-Leo : bah alors soit on mange africain, soit thailandais aussi s'il y'a des bons du coté de place d'it. ## Propose.Criteria(Cuisine, africain) Propose.Criteria(Cuisine, thailandais)
-Laur: Le thailandais où je suis aller etait .... (hesitation) dans le nord de Paris mais je ne sais plus où exactement car je me suis laisser guider.
-Leo: C'est facilement retrouvable sur le net.
-Lau: Mais africain ça me tente bien, tu m'as bien vendu le truc.  ## Accept.Criteria(Cuisine,africain). style = neutral /strong
+	Leo : bah alors soit on mange africain, soit thailandais aussi s'il y'a des bons du coté de place d'it. ## Propose.Criteria(Cuisine, africain) Propose.Criteria(Cuisine, thailandais)
+	Laur: Le thailandais où je suis aller etait .... (hesitation) dans le nord de Paris mais je ne sais plus où exactement car je me suis laisser guider.
+	Leo: C'est facilement retrouvable sur le net.
+	Lau: Mais africain ça me tente bien, tu m'as bien vendu le truc.  ## Accept.Criteria(Cuisine,africain). style = neutral /strong
 
 
  

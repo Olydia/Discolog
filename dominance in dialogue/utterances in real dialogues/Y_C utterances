@@ -3,106 +3,99 @@
 	Caroline: Bah écoutes ça fait super  longtemps que je ne suis pas sortie.
 	
 	[DSP 1: Connaitre les gouts de Yoren]
-		Je peux te conseiller, après ça dépends de quelle style tu aimes ?{Marginal influance}
-		Y: tant que tu peux m'éloigner de ce que j'aime à savoir de mc Do et quick à châtelet, déjà ça serait pas mal.
-		C: Ah non, mais la de toute façon ce n'est pas un restaurant {Disagreement}
-		Y: Voilà. je veux bien manger plus proprement.{Agreement}
+		Je peux te conseiller, après ça dépends de quelle style tu aimes ? ##  Ask.Preference(*) Style: Strong 
+		Y: tant que tu peux m'éloigner de ce que j'aime à savoir de mc Do et quick à châtelet, déjà ça serait pas mal. ## State.Preference(*,McDo), State.Preference(*,quick). Style = Neutral
+		C: Ah non, mais la de toute façon ce n'est pas un restaurant 
+		Y: Voilà. je veux bien manger plus proprement.
 		
 	[DSP 2: Proposer un premier restaurant sur paris et vérifier que ça convient]
 		C: Un truc bien sympathique ...
-		Alors, Apres moi je sais que du côté de république y'a pas mal de restaurant sympa. {Marginal influance/establish credibility}
-		Par exemple: parigot  Brasserie classique avec un bon rapport qualité prix. 
+		Alors, Apres moi je sais que du côté de république y'a pas mal de restaurant sympa. ## State.Preference^location(Republique). Style = Neutral
+		Par exemple: parigot  Brasserie classique avec un bon rapport qualité prix. ## Propose.Object(Parigot). Style = Neutral
 		
 		[DSP 2.1: Inconvénient du restaurant]
 			Bien qu'ils ont réduit la taille de leur café gourmand, Avant tu avais de gros gâteaux limite tu en avais trop.  
 			Y: peut-être parce qu'ils ont trop de monde ? 
 
 		[DSP 2.2: L'ambiance du restaurant]
-			C: C'est vrai qu'il y'a du monde mais l'ambiance est sympathique et ils ont du bon vin
+			C: C'est vrai qu'il y'a du monde mais l'ambiance est sympathique et ils ont du bon vin. 
 			c'est jamais un mal qu'on en boit évidement.
 					
 		[DSP 2.3: Réservation]
-			Y: tu me conseillerais de réserver pour y aller? {solidarity}
+			Y: tu me conseillerais de réserver pour y aller? 
 			C: non, non,  pas vraiment. Mais si tu veux vraiment y manger effectivement il vaut mieux
 	
 	[DSP3: Mesurer la difficulté de trouver un bon restaurant végétarien]
 		C: C'est pas trop dure de trouver des restaurants sur paris quand on est végétariens ?
 		Y: Si, c'est super dur
-		J'en connais deux. Un où je ne suis jamais aller, on m'a dit que du bien mais tous les commentaires que j'ai lu sur internet  étaient mauvais. {establish credibility}
+		J'en connais deux. Un où je ne suis jamais aller, on m'a dit que du bien mais tous les commentaires que j'ai lu sur internet  étaient mauvais. 
 		ils disaient que ça se dégradait, que c'était de moins en moins sympathique.  
 		C: Oula !
 		
 		[DSP 3.1: Donner un exemple de bon restaurant végétarien sur Paris]
-			Y: Il y'a un autre où j'ai été avec l'équipe, c'était y' a pas si longtemps, qui s'appelle le grenier de notre dame.{establish credibility}
+			Y: Il y'a un autre où j'ai été avec l'équipe, c'était y' a pas si longtemps, qui s'appelle le grenier de notre dame. ## State.Preference(Le grenier de notre dame, *)
 			C'est un petit restaurant très sympa, on y mange vraiment bien. 
-
-** NS ** Yoren revient sur la réservation (avant que Caro commente sur Paris), est-ce:
-	- revenir sur DSP 2.3 (impossible avec la structure hiérarchique)
-	- donner un inconvénient du resto végétarien (donc un DSP 3.1.1)
-	- revenir sur DSP4 (ce qui est proposé ci-dessous) 
-=> Je pense que c'est le cas 2: Yoren donne une info sur le resto et Caro en profite, de manière opportuniste, pour relancer le dialogue sur le point plus général des restos à Paris (DSP4)
-=> Lydia est d'accord: elle dit que dans la tâche "proposer un restaurant", on retrouve à chaque fois les sous-tâches "donner un avantage" et "donner un inconvénient" (parfois plusieurs).
 
 	[DSP 4: Mettre le point sur le problème de réservation sur paris]
 		Y: Par contre c'est réservation obligatoire. même  a 3 ou 4 t'es pas sur de rentrer. 
-		C: c'est vrai à paris, t'as beau avoir un max de restaurant, le problème des restau, les bons c'est  toujours difficile d'y rentrer au final. {agreement / solidarity}
-		Y: C'est un petit peu le soucis {Solidarity}
+		C: c'est vrai à paris, t'as beau avoir un max de restaurant, le problème des restau, les bons c'est  toujours difficile d'y rentrer au final. 
+		Y: C'est un petit peu le soucis 
 
 ** NS ** Je pense que ce qui cause le changement de sujet, c'est ici clairement un but social
 
 	[DSP 5: Parler des restaurants japonais sur paris]
-		Y: Apres, il y'a pas mal de de petits restaurants japonais du côté d'opéra  {Managerial Influence}
-		C: oui oui du côté de la rue Saint Anne. {establish credibility}
+		Y: Apres, il y'a pas mal de de petits restaurants japonais du côté d'opéra  
+		C: oui oui du côté de la rue Saint Anne. 
 	
 	[DSP 6: Donner des critères pour choisir les restaurants japonais/asiatiques]
 		C: Après c'est pareil, il faut connaitre y'a des japonais dans toute la rue, mais y'en a qui sont un peu pourri genre japonais commercial, et il y'en a qui sont vraiment très bien. 
-		Il faut y aller avec des gens qui connaissent un peu le coin. {establish credibility}
+		Il faut y aller avec des gens qui connaissent un peu le coin. 
 		
 		[DSP 6.1: Le secteur joue dans le choix du restaurant]
-			Y: Genre c'est souvent par secteur, tu te bases dans un coins où il y'a que les restaurant coréens dans le coin. {establish credibility}
-			C: tout à fait {Agreement}
+			Y: Genre c'est souvent par secteur, tu te bases dans un coins où il y'a que les restaurant coréens dans le coin.
+			C: tout à fait 
 			Y: et du coup quand tu ne connais pas tu regardes les noms des plats sur les cartes ...
-			C: oui tu n'es pas aidé {Agreement}
+			C: oui tu n'es pas aidé 
 	
 		C: Je sais pour les restaurants asiatiques, je le fais beaucoup, je regarde les gens qui y sont dedans, et en fait si il y'a d'autre gens qui ont l'air asiatique dedans,
-		mon dieu c'est absolument raciste comme critère. {establish credibility}
-		En général, c'est bon signe de voir les gens qui connaissent la cuisine aient y manger. {establish credibility}
+		mon dieu c'est absolument raciste comme critère. 
+		En général, c'est bon signe de voir les gens qui connaissent la cuisine aient y manger. 
 	
 	[DSP 7: Proposer un restaurant asiatique]
 		C: Y'a un thaï assez sympa, qui est dans le centre de paris. 
 		Alors, j'ai y vais avec une copine, pas végétarienne mais sa vie est un peu compliqué d'un point de vue nourriture 
-		Ils ont pas mal de plat qu'à base de légumes qui sont sympa. {Managerial Influence}
+		Ils ont pas mal de plat qu'à base de légumes qui sont sympa. 
 		Par contre c'est assez épicé, il faut aimer.
 		Y: ça ne me dérange pas l'épicé.
 
 		[DSP 7.1: Savoir s'il est possible de manger végétarien dans un restaurant Thai]
 			Par contre, comme tu dis, tu peux demander des plats sans viandes. 
-			En général, les plats cuisinés à base de viande tournent autour de la viande. {establish credibility}
+			En général, les plats cuisinés à base de viande tournent autour de la viande.
 			C: c'est un peu bizarre, juste les légumes leurs coutent comme même vachement moins cher.  
 			
 	[DSP8: Proposer un restaurant à thème]
-		Y: Je connais un restaurant c'est pareil restaurant-brasserie. {Managerial Influence}
-		Je ne sais pas si tu connais le HD-Dinner ? {Solidarity}
+		Y: Je connais un restaurant c'est pareil restaurant-brasserie. 
+		Je ne sais pas si tu connais le HD-Dinner ?
 		C: non ça ne me dit rien. 
-		Y: je crois qu'il y'en a 2 ou trois autour de châtelet. {establish credibility}
-		Et au fait, je ne connais pas vraiment la thématique c'est un peu geek, américain. {establish credibility}
+		Y: je crois qu'il y'en a 2 ou trois autour de châtelet. 
+		Et au fait, je ne connais pas vraiment la thématique c'est un peu geek, américain. 
 		Enfin c'est un peu bizarre, avec des boissons essentiellement porté et des plats originaux avec pas mal de choses végétariennes
-		C: c'est pas mal ça, et est qu'il y'a pas des serveuses en patins à roulettes ? Genre américain à l'ancienne. {As social goal I think that is Humour}
+		C: c'est pas mal ça, et est qu'il y'a pas des serveuses en patins à roulettes ? Genre américain à l'ancienne. 
 		
 		[DSP8.1: Restaurant que Yoren aime : kawai café]
-		Y: non y'a pas. Par contre on m'a fait découvrir un restaurant où j'adore y aller avec des copains qui s'appelle kawai café. {establish credibility}
+		Y: non y'a pas. Par contre on m'a fait découvrir un restaurant où j'adore y aller avec des copains qui s'appelle kawai café. ## State.Preference(Kawai café, *). Style = Neutral /Strong
 		Je crois que c'est vers Montreuil et au fait c'est à thématique mangas jeu vidéo.
 		C: oui ! 
 		Y: dans le restaurant c'est une ambiance très roses, avec plein de figurines, t'as une console sur laquelle tu peux jouer consoles, même les lumières c'est des consoles et tous.
-		et t'as les serveuses sont habillées en mode soubrettes un peu japonaises. {establish credibility}
+		et t'as les serveuses sont habillées en mode soubrettes un peu japonaises. 
 		
 			[DSP8.2: Les habits des serveuses japonaises]
 			C: la totale, ça doit faire  exotique.
-			Parait que japon y'a pas mal de bars ou les serveuses sont court vêtus jamais plus. {establish credibility}	
+			Parait que japon y'a pas mal de bars ou les serveuses sont court vêtus jamais plus. 	
 			Y: oui, c'est pas du tout vulgaire t'as l'impression qu'elle est là pour faire le ménage. 
 				
 		Y: Ils font des hamburgers végétariens au potirons qui sont pas mal et surtout des chips maison. A chaque fois que j'amène des gens pour les chips et ils ont demandé tout le temps quitte à 			ne pas prendre de dessert derrière.
-		et ce qui est aussi amusant c'est les menus, au fait c'est des boites jeux vidéo avec des noms bizarre. {establish credibility}
+		et ce qui est aussi amusant c'est les menus, au fait c'est des boites jeux vidéo avec des noms bizarre. 
 		
 		[DSP 8.2: Réservation pour le restaurant kawai café]
 		Par contre c'est minuscule, surtout le samedi et dimanche c'est l'enfer pour y aller. T'es obligé d'appeler pour savoir s'ils ont de la place.
@@ -111,23 +104,37 @@
 		C: limite privatisation
 		Y: franchement c'était ça. Moi c'est comme ça que je l'ai connu, j'y suis retournée quelque fois et c'était sympa.
 
-** NS ** Ici aussi, on a changé de sujet avec un but social
 		
 	[DSP9: Parler des restaurants en province]
 		C: Par contre des restaurants fun comme ça sur paris j'en connais pas trop. J'en connais sur Lyon ou Montpellier.
-		Y: je suis passé une fois à Lyon mais une journée. Donc ça ne laisse pas beaucoup le temps pour tester. {establish credibility}
+		Y: je suis passé une fois à Lyon mais une journée. Donc ça ne laisse pas beaucoup le temps pour tester. 
 
 		[DSP 9.1: Les restaurants sur paris sont plus chers qu'en province]
 			C: le problème de paris par rapport à la province est que si tu veux te faire un bon restaurant ou tu décides d'y mettre un peu d'argent tu es obligé de monter directement à 50 euros  le menu. {establish credibility}
 			alors que je sais que ça soit à Lyon ou à Montpellier on pouvait manger à 30, 35 euros quelque chose de très bon et ça c'est pas possible de le trouver à Paris. 
 			Y: oui c'est impossible, des restaurants que moi je connais c'est des restaurants où tu peux manger pour 30 euros avec une qualité bien inférieur,
-			au fait j'ai l'impression que c'est que tu trouves sur paris, genre restaurants populaires {agreement + Solidarity}
-			C: c'est vrai qu'il faut vite monter en prix, je comprends que le prix de la location est un peu cher à paris qu'ailleurs mais c'est un peu abusé. {Agreement}
-		
+			au fait j'ai l'impression que c'est que tu trouves sur paris, genre restaurants populaires 
+			C: c'est vrai qu'il faut vite monter en prix, je comprends que le prix de la location est un peu cher à paris qu'ailleurs mais c'est un peu abusé. 
+
 	[DSP10: Présenter un restaurant qui était mauvais]
 	C:Je sais pour mon anniversaire l'année dernière avec de bon avis internet et tous, c'était l'enfer, tout était horrible, 
-	c'était bruyant, le service était désagréable. Oh mon dieu je pense que  c'était la pire soirée restaurant de ma vie.  {establish credibility}
+	c'était bruyant, le service était désagréable. Oh mon dieu je pense que  c'était la pire soirée restaurant de ma vie.  
 	 
+	Y: Tu sais niveau bruyance, j'etais allé à un restau ... c'etait où à Montparnasse qui s'appelle le Valstape 
+	C: Le Valstafe !
+	Y: oui le Valstave, tu connais ... Je crois que niveau bruyance tu vois ce que je veux dire 
+	C: oui tout a fait
+	Y: moi je crois au dessert j'ai fait je sors c'est plus possible. juste le niveau de la musique   ...   ## State.Preference(*,Vestafe). Style = Strong
+	C: c'est insuportable.. jy ai passé beaucoup de temps durant ma folle jeunesse quand j'etait a la fac parce que du cout je n'habitais pas loin. c'etait un peu notre point de RDV. 
+	L'avantage c'est que tu as une biere et quelque chose de correct à manger  pour un  prix parisien mais acceptable. 
+	Apres je ne sais pas si c'est moi qui vieillit ou c'est eux sui montent le son avec les années mais c'est de pire en pire.
+	Y: c'est possible moi je le connais pas depuis tres tres longtemps et je ne peux pas y retourner.
+	[DSP11: Le josselin]  ## C: State.Preference(Josselin).
+	C: D'ailleurs dans le même coin, c'était leonor qui nous avait emmené dans une crêprerie qui s'appelle le Josselin je crois, du coté de Montparnasse et qui es t super bonne. 
+	Il y'a plein de crêperies mais la qualité est aléatoire et là c'est vraiment ils font des crêpes traidtionnelles au blès noir, et ils font même des double crêpres vraiment c'est très bon. 
+	Y: C'est le josselin tu dis ?
+	C: oui oui. Mais il y'a toujours du monde ça ne se désemplit pas. Si tu as la motiv de faire la queu ça vaut le coup.
+  
 
 
 

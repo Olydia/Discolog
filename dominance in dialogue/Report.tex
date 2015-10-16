@@ -89,10 +89,9 @@ The basis structure of dialogue is a message that contain all the information th
  \begin{itemize}
 	 \item Propose an object: 
 	 	\subitem Let  $R$  be the set of rejected objects $o\in O$ such as Rej(o) means that the $o$ has been rejected during the dialogue. 
-	 	\subitem $O/R$ is the set of objects that don't have been rejected yet, and $o=max_i(O/R)$ is the most preferred object of $agent_i$ that has not been reject such as $choice_i= o$.
-	 
+	 	\subitem $O/R$ is the set of objects that don't have been rejected yet, and $o=max_i(O/R)$ is the most preferred object of $agent_i$ that has not been reject.Thus, $choice_i= o$.
 	\item Propose a criterion:   
-		\subitem Let $C$ be the set of criteria $c \in C$ where $FDec(c,*) $ c has no defined value. 
+		\subitem Let $C$ be the set of criteria $c \in C$ where $FDec(c,*) $ (\textit{i.e} $c$ has no defined value). 
    \item $Dec(o)$ represents the fact that the final decision is to choose object $o$ (eg: the Ginza restaurant)
    \item $Dec(c,v)$ represents the fact that the final decision must choose an object that has value $v$ for criteria $c$ (eg: a silent restaurant)
  \end{itemize}
