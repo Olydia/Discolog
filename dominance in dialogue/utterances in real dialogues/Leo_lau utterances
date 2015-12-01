@@ -5,7 +5,7 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 	[DSP1: Proposition restaurant : crêperie/ Breton] 
 		Leo: Alors j'avoue  j'aime bien les restaus breton. ## State.preference^cuisine (Breton, *), Style : Strong 
 		Leo: J'aime bien manger des crêpes.
-		Lau; j'ai passé 3 ans à renne...
+		Lau; j'ai passé 3 ans à rennes...
 		Leo: Souvent les bonnes crêperies sont a Montparnasse. ## State.preference^(location/cuisine=Breton) (Montparnasse, *), Style : Neutral { Over simplification  -> ## State.preference^location (Montparnasse, *)}
 		Leo:je vais souvent a une crêperie qui s'appelle le Josselin et le petit Josselin. y'en a deux au fait.  ## Propose.Object^restaurant(Josselin) Style = Strong
 		Les crêpes sont très bonnes, oué. Elles sont costaux mais elles sont très bonnes.

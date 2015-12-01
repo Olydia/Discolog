@@ -1,4 +1,9 @@
 package fr.limsi.negotiate;
+/**
+ * 
+ * @author Charles rich
+ * 	Option proposal
+ */
 
 public class OptionProposal extends Proposal {
    

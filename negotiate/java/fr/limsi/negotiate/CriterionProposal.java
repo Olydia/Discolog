@@ -1,5 +1,10 @@
 package fr.limsi.negotiate;
 
+/**
+ * 
+ * @author Charles rich
+ * 	Criterion proposal
+ */ 
 public class CriterionProposal extends Proposal {
    
    public final Criterion criterion;

@@ -74,9 +74,7 @@ public class Preference {
 	private int getPreferenceOnValue(Criterion c) {
 		int i = values.indexOf(c);
 		int somme = 0;
-		for(int j=0; j < preferences.length; j++){			
-			somme+=preferences[i][j];
-		}
+		getPreferenceOnValue(i);
 		return somme;
 	}
 

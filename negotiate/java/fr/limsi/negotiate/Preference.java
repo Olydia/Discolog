@@ -1,8 +1,21 @@
 package fr.limsi.negotiate;
-
+/**
+ * 
+ * @author Lydia
+ *
+ * @param <C>
+ */
 public class Preference<C extends Criterion> {
    
-   public final C less, more;
+   public C getLess() {
+		return less;
+	}
+
+	public C getMore() {
+		return more;
+	}
+
+public final C less, more;
    
    public Preference (C less, C more) {
       this.less = less;
