@@ -1,10 +1,10 @@
 package fr.limsi.negotiate;
 
-import java.util.List;
-
-import fr.limsi.negotiate.restaurant.Cuisine;
+/** Interface for a Criterion class (Enum).
+ * @see CriterionNegotiation for use.
+ *
+ */
 
 public interface Criterion {
 
-		List<Criterion> getValues();
 }
