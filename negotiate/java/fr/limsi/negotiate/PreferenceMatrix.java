@@ -10,6 +10,7 @@ public class PreferenceMatrix<T> {
 	public PreferenceMatrix(List<T> values) {
 		// TODO Auto-generated constructor stub
 		this.values = values;
+		preferences = new int [values.size()][values.size()];
 	}
 
 

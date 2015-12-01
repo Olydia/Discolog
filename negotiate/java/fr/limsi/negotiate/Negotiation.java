@@ -32,7 +32,10 @@ public class Negotiation<O extends Option> {
     
    public CriterionNegotiation<Criterion> getCriterionNegotiation(Class<? extends Criterion> c){
 	   for (CriterionNegotiation<Criterion> cn: criteriaNegotiation){
-		   if (cn.getCriterionType().equals(c.getClass()))
+		   Class<? extends Criterion> cnType = cn.getCriterionType();
+		   String cnname = cnType.getSimpleName();
+		   String cname = c.getSimpleName();
+		   if (cnType.equals(c))
 			   return cn;
 	   }
 	   return null;
@@ -46,6 +49,7 @@ public class Negotiation<O extends Option> {
 		 * 5. comparer
 		 */
 		int lessNote = 0, moreNote = 0;
+		// generates here an ordered list of preferences 
 		for (Class<? extends Criterion> c: lessOption.getCriteria()){
 			PreferenceMatrix<Class<? extends Criterion>> optioncriterion = optionCriteria.self.generateMatrix(lessOption.getCriteria());
 			int criterionNote = optioncriterion.getPreferenceOnValue(c);

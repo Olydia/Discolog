@@ -14,8 +14,8 @@ public class TestRestaurant {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		/*1. Define the  preferences on option criteria and model */	
-		Restaurant chez_chuck = new Restaurant(Cuisine.CHINESE, Cost.CHEAP);
-
+		Restaurant chez_chuck = Restaurant.CHEZ_CHUCK;
+		Restaurant parisien = Restaurant.LE_PARISIEN;
 		OptionPreferenceModel lydia_criteria = new OptionPreferenceModel(); 
 		OptionPreference p = new OptionPreference(Cuisine.class,Cost.class);
 		lydia_criteria.add(p);
@@ -27,6 +27,11 @@ public class TestRestaurant {
 		// 2.1. Preference model on cuisine
 		PreferenceModel<Cuisine> lydia_cuisine = new PreferenceModel<Cuisine>();
 		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
+		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
+		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
+		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
+		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
+	
 		// 2.2. Preference model on Cost
 		PreferenceModel<Cost> lydia_cost = new PreferenceModel<Cost>();
 		lydia_cost.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
@@ -35,19 +40,14 @@ public class TestRestaurant {
 		cuisine.setSelfPreferences(lydia_cuisine);	
 		
 		/*3. Create a nogotiation on restaurant with the criterionNegotiation and the OptionNegotiation*/
-		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>(new CriterionNegotiation[] {cost, cuisine}, lydia_optionNegotiation);
-//		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
-//		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
-//		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
-//		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
-//		
-
-//		System.out.println(lydia_cuisine.isPreferred(Cuisine.CHINESE, Cuisine.TURKISH));
-//		//System.out.println(restaurants.getPreferredOption()); // TODO
-//		System.out.println(Restaurant.CHEZ_CHUCK.getValue(Cuisine.class));
-		//System.out.println(cuisine.getCriterionType().getSimpleName());
-//		Restaurant res = restaurants.getPreferredOption(Restaurant.CHEZ_CHUCK, Restaurant.LE_PARISIEN);
-//		System.out.println(res.name());
+		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
+							(new CriterionNegotiation[] {cost, cuisine}, lydia_optionNegotiation);
+	
+		// Test the DFS preference method (it should return true 
+		System.out.println(lydia_cuisine.isPreferred(Cuisine.CHINESE, Cuisine.TURKISH));
+		// Test of the decision function and it returns CHEZ_CHUCK because cost is cheap and cost is more preferred to cuisine
+		Restaurant res = restaurants.getPreferredOption(Restaurant.CHEZ_CHUCK, Restaurant.LE_PARISIEN);
+		System.out.println(res.name());
 	}
 }
 
