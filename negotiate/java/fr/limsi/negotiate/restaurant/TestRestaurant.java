@@ -1,13 +1,18 @@
 package fr.limsi.negotiate.restaurant;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.OptionNegotiation;
 import fr.limsi.negotiate.OptionPreference;
 import fr.limsi.negotiate.OptionPreferenceModel;
 import fr.limsi.negotiate.Preference;
-import fr.limsi.negotiate.PreferenceModel;
+import fr.limsi.negotiate.CriterionPreferenceModel;
+import fr.limsi.negotiate.PreferenceMatrix;
 
 public class TestRestaurant {
 
@@ -25,7 +30,7 @@ public class TestRestaurant {
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<Cuisine>(Cuisine.class);
 		// 2.1. Preference model on cuisine
-		PreferenceModel<Cuisine> lydia_cuisine = new PreferenceModel<Cuisine>();
+		CriterionPreferenceModel<Cuisine> lydia_cuisine = new CriterionPreferenceModel<Cuisine>();
 		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
 		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
 		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
@@ -33,7 +38,7 @@ public class TestRestaurant {
 		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
 	
 		// 2.2. Preference model on Cost
-		PreferenceModel<Cost> lydia_cost = new PreferenceModel<Cost>();
+		CriterionPreferenceModel<Cost> lydia_cost = new CriterionPreferenceModel<Cost>();
 		lydia_cost.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
 		// 2.3. Add the agent(lydia) preference models  to their criterionNegotiation.
 		cost.setSelfPreferences(lydia_cost);
@@ -48,6 +53,11 @@ public class TestRestaurant {
 		// Test of the decision function and it returns CHEZ_CHUCK because cost is cheap and cost is more preferred to cuisine
 		Restaurant res = restaurants.getPreferredOption(Restaurant.CHEZ_CHUCK, Restaurant.LE_PARISIEN);
 		System.out.println(res.name());
+		PreferenceMatrix<Cost> c = cost.self.generateMatrix(Arrays.asList(Cost.values()));
+		ArrayList<Integer> test = c.getPreferenceOrderOfCriteria();
+		System.out.println(test.toString());
+		int minIndex = test.indexOf(Collections.min(test));
+	System.out.println(minIndex);
 	}
 }
 

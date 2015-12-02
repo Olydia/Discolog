@@ -57,8 +57,8 @@ public class Negotiation<O extends Option> {
 			PreferenceMatrix<Criterion> matrix = getCriterionNegotiation(c).self.generateMatrix(Arrays.asList(c.getEnumConstants()));
 			int lessnote = matrix.getPreferenceOnValue(lessOption.getValue(c));
 			int morenote = matrix.getPreferenceOnValue(moreOption.getValue(c));
-			lessNote += lessnote*(criterionNote);
-			moreNote += morenote*(criterionNote);
+			lessNote += lessnote+(criterionNote);
+			moreNote += morenote+(criterionNote);
 			
 		}
 		// 2. en regardant les proposals

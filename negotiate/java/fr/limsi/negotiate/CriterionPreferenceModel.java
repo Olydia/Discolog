@@ -15,7 +15,7 @@ import fr.limsi.negotiate.restaurant.Cuisine;
  * The object lydia_cuisine will be used as parameter to CriterionNegotiation to define the preferences of interlocutors.
  */
 
-public class PreferenceModel<C extends Criterion> {
+public class CriterionPreferenceModel<C extends Criterion> {
 
 	private final Set<Preference<C>> preferences = new HashSet<Preference<C>>();
 

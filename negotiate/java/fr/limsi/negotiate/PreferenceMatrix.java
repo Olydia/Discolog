@@ -14,29 +14,34 @@ public class PreferenceMatrix<T> {
 	}
 
 
-	public void addPreference(T mostPreferred, T lessPreferred) {
+	public void addPreference(T lessPreferred, T mostPreferred) {
 		
-		int i = values.indexOf(mostPreferred);
-		int j = values.indexOf(lessPreferred);
+		int i = values.indexOf(lessPreferred);
+		int j = values.indexOf(mostPreferred);
 		// add an exception in case where the index = -1
-		preferences[i][j]= 1;
-		preferences[j][i]= -1;
+		preferences[i][j]= -1 ;
+		preferences[j][i]= 1;
 		transitivity(i, j);
 		
 	}
 
-	public void transitivity (int indexMostPref, int indexLessPref){
+	public void transitivity (int indexLessPref, int indexMostPref){
 
 		for(int i=0; i< preferences.length; i++){
-			if(preferences[indexLessPref][i] == 1){
+			if(preferences[indexLessPref][i] == 1 && i != indexMostPref){
 				preferences[indexMostPref][i] =1;
 				preferences[i][indexMostPref] = -1;
 			}
-			if(preferences[indexMostPref][i] == -1){
+			if(preferences[indexMostPref][i] == -1 && i != indexLessPref){
 				preferences[indexLessPref][i] = -1;
 				preferences[i][indexLessPref] = 1;
 			}
 		}
+	}
+	public ArrayList<Integer> getNormalizedPreferenceOrder(){
+		ArrayList<Integer> preferencesOnCriteria = new ArrayList<>();
+		
+		return preferencesOnCriteria;
 	}
  // ordrer the values by their preference utility
 	public ArrayList<Integer> getPreferenceOrderOfCriteria(){

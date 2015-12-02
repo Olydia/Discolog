@@ -28,14 +28,14 @@ import java.lang.reflect.Type;
 
 public class CriterionNegotiation<C extends Criterion> {
    
-   public PreferenceModel<C> self,other;       
+   public CriterionPreferenceModel<C> self,other;       
    public Class<C> criterionType ; 
    
    public CriterionNegotiation (Class<C> type) {
 	   
 	   criterionType = type;
-	   self = new PreferenceModel<C>();
-	   other = new PreferenceModel<C>();
+	   self = new CriterionPreferenceModel<C>();
+	   other = new CriterionPreferenceModel<C>();
    }
    
    // does not work...
@@ -65,7 +65,7 @@ private final List<OptionProposal> proposals = new ArrayList<OptionProposal>();
    
    public void propose (OptionProposal proposal) { proposals.add(proposal); }
 
-   public void setSelfPreferences(PreferenceModel<C> selfPref) {
+   public void setSelfPreferences(CriterionPreferenceModel<C> selfPref) {
 	   self = selfPref;
    }
    
