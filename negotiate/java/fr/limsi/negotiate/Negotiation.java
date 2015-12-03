@@ -32,9 +32,7 @@ public class Negotiation<O extends Option> {
     
    public CriterionNegotiation<Criterion> getCriterionNegotiation(Class<? extends Criterion> c){
 	   for (CriterionNegotiation<Criterion> cn: criteriaNegotiation){
-		   Class<? extends Criterion> cnType = cn.getCriterionType();
-		   String cnname = cnType.getSimpleName();
-		   String cname = c.getSimpleName();
+		   Class<? extends Criterion> cnType = cn.getCriterionType();;
 		   if (cnType.equals(c))
 			   return cn;
 	   }

@@ -2,7 +2,6 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
-import fr.limsi.negotiate.restaurant.Cuisine;
 
 /** Stores the preferences about values for a given criterion C, i.e. a list of Preferences<C>, i.e. a list of couples (less,more)
  * with less and more values of an enum C that implements Criterion.
@@ -24,7 +23,7 @@ public class CriterionPreferenceModel<C extends Criterion> {
 	}
 
 	public PreferenceMatrix<C> generateMatrix (List<? extends Criterion> values){
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		PreferenceMatrix<C> matrix = new PreferenceMatrix (values);
 		for (Preference<C> preference : preferences) {
 			matrix.addPreference(preference.getLess(), preference.getMore());

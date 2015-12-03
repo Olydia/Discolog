@@ -1,7 +1,13 @@
 package fr.limsi.negotiate;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 
 public class PreferenceMatrix<T> {
 	List<T> values; 
@@ -38,16 +44,36 @@ public class PreferenceMatrix<T> {
 			}
 		}
 	}
-	public ArrayList<Integer> getNormalizedPreferenceOrder(){
-		ArrayList<Integer> preferencesOnCriteria = new ArrayList<>();
-		
+	public Hashtable<T, Integer> getNormalizedPreferenceOrder(){
+		Hashtable<T, Integer> preferencesOnCriteria = this.getPreferenceOrderOfCriteria();
+		this.sortValue(preferencesOnCriteria);
+		int k =0;
+		for(T  elem: preferencesOnCriteria.keySet())
+		{
+			preferencesOnCriteria.put(elem, k);
+			k++;
+		}
 		return preferencesOnCriteria;
 	}
+	
+	public  void sortValue(Hashtable<?, Integer> t){
+
+	       //Transfer as List and sort it
+	       ArrayList<Map.Entry<?, Integer>> l = new ArrayList<Entry<?, Integer>>(t.entrySet());
+	       Collections.sort(l, new Comparator<Map.Entry<?, Integer>>(){
+
+	         public int compare(Map.Entry<?, Integer> o1, Map.Entry<?, Integer> o2) {
+	            return o1.getValue().compareTo(o2.getValue());
+	        }});
+
+	       System.out.println(l);
+	    }
+	
  // ordrer the values by their preference utility
-	public ArrayList<Integer> getPreferenceOrderOfCriteria(){
-		ArrayList<Integer> preferencesOnCriteria = new ArrayList<>();
+	public Hashtable<T, Integer> getPreferenceOrderOfCriteria(){
+		Hashtable<T, Integer> preferencesOnCriteria = new Hashtable<T, Integer>();
 		for(int i=0; i < preferences.length; i++)
-			preferencesOnCriteria.add(i, getPreferenceOnValue(i));
+			preferencesOnCriteria.put(values.get(i), getPreferenceOnValue(i));
 		return preferencesOnCriteria;
 	}
 

@@ -1,6 +1,5 @@
 package fr.limsi.negotiate.restaurant;
-import java.util.Arrays;
-import java.util.List;
+
 
 import fr.limsi.negotiate.*;
 

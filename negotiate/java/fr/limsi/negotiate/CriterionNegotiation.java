@@ -2,7 +2,6 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
-import fr.limsi.negotiate.restaurant.Cost;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 

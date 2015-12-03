@@ -13,6 +13,7 @@ public enum Restaurant implements Option {
 	public final Cuisine cuisine;
 	public final Cost cost;
 
+	@SuppressWarnings("serial")
 	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(Cost.class); add(Cuisine.class); }};
 	
 	Restaurant (Cuisine cuisine, Cost cost) {
@@ -26,7 +27,6 @@ public enum Restaurant implements Option {
 			c == Cost.class ? cost : null; // throw error? 
 	}
 
-	@SuppressWarnings("serial")
 	@Override
 	public List<Class<? extends Criterion>> getCriteria() {
 
