@@ -1,0 +1,56 @@
+<taskModel about="urn:negotiate.limsi.fr:Negotiate"
+           xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+  <!--
+   This file contains the definitions for the utterance types used
+   in the negotiation model.  See Negotiate.properties for glossing.
+  -->
+
+  <!-- see Java class definition for StatePreference -->
+  
+  <task id="fr.limsi.negotiate.lang.StatePreference">   
+    <!-- NOTE:
+         
+         * null value for either input means the other input is
+           preferred to _all_ other possible criteria in that category
+         
+         * at most one input may have null value
+         
+         * null value for slot is _not_ the same as being undefined,
+           see Task.isDefinedSlot(String)
+    -->
+    <input name="less" type="Packages.fr.limsi.negotiate.Criterion"/>
+    <input name="more" type="Packages.fr.limsi.negotiate.Criterion"/> 
+
+    <precondition>
+      /* TODO: put JavaScript code here to check that preference between
+         $this.less and $this.more is not already in the preferences of other
+         about self.
+      */
+      $this.external ? null : STATE_PREFERENCE_TEST
+    </precondition>
+
+    <script>
+      if ( $this.external ) {
+        // TODO: put JavaScript code here for effects in hearer case
+      } else {
+        // TODO: put JavaScript code here for effects in speaker case
+        STATE_PREFERENCE_TEST = false;
+      }
+    </script>
+  </task>
+
+  <!-- TODO: add similar definitions for other utterance types -->
+
+  <script init="true"> 
+
+    // put convenient JavaScript functions to use conditions and scripts here
+
+    var $negotiation; // should be initialized elsewhere to current negotiation
+
+    // for testing precondition handling (see test/Example1.test)
+    var STATE_PREFERENCE_TEST = null; 
+    
+   </script>
+  
+</taskModel>
+ 
