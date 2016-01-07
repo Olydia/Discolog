@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:negotiate.limsi.fr:Example"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:disco="urn:disco.wpi.edu:Disco"
+       xmlns:n="urn:negotiate.limsi.fr:Negotiate"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+  <!--
+
+   This is a silly example dialogue to illustrate and test the use of the basic
+   programming facilities needed for this project.
+
+   This library must be loaded after negotiate/models/Negotiate.xml and
+   should be executed using negotiate/bin/negotiate batch file.
+   See negotiate/test/Example1.test
+   
+   NB: Make sure you use most recent version of d4g2018 to process this file.  This
+   can either be found in most recent develop branch of Disco repo, or in
+   negotiate/lib/disco/bin.
+
+  -->
+
+  <do id="_example" actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+      less="null" more="mostPreferredCuisine()">
+
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
+        less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
+        more="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN">
+
+      <!-- both of these options should initially be suppressed by
+           STATE_PREFERENCE_TEST precondition -->
+      
+      <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+          less="leastPreferredCuisine()" more="null"
+          applicable="APPLICABLE_TEST"/>
+
+      <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+          less="null" more="mostPreferredCuisine()"/> 
+
+    </do>
+
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
+        less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
+        more="Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE">
+
+      <agent text="Forget it. I am not going to dinner with you."/>
+
+    </do>
+
+    <user text="I don't feel like going out for dinner"/>
+      
+  </do>
+
+  <t:script init="true">
+
+    $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+
+    // TODO: following are stand-ins for various convenient JavaScript functions to use
+    //       in conditions and scripts above to access information from Java via $negotiation
+
+    function mostPreferredCuisine () {
+       return Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH;
+    }
+    
+    function leastPreferredCuisine () {
+       return Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
+    }
+
+    var APPLICABLE_TEST = null; // for testing
+    
+  </t:script>
+  
+</model>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskModel xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext"
+           xmlns:disco="urn:disco.wpi.edu:Disco"
+           xmlns:n="urn:negotiate.limsi.fr:Negotiate"
+           about="urn:negotiate.limsi.fr:Example">
+   <task id="_example">
+      <subtasks id="__example_subtasks">
+         <step name="__example_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="__example_ref" task="__example_tree"/>
+         <binding slot="$__example_step.external" value="false"/>
+         <binding slot="$__example_step.less" value="null"/>
+         <binding slot="$__example_step.more" value="mostPreferredCuisine()"/>
+      </subtasks>
+   </task>
+   <task id="__example_tree">
+      <subtasks id="_d4e4_subtasks">
+         <step name="_d4e4_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e4_ref" task="_d4e4_tree"/>
+         <binding slot="$_d4e4_step.external" value="true"/>
+         <binding slot="$_d4e4_step.less"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
+         <binding slot="$_d4e4_step.more"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"/>
+      </subtasks>
+      <subtasks id="_d4e8_subtasks">
+         <step name="_d4e8_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e9_step" task="disco:Say"/>
+         <binding slot="$_d4e8_step.external" value="true"/>
+         <binding slot="$_d4e8_step.less"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
+         <binding slot="$_d4e8_step.more"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE"/>
+         <binding slot="$_d4e9_step.text" value="&#34;Forget it. I am not going to dinner with you.&#34;"/>
+         <binding slot="$_d4e9_step.external" value="false"/>
+      </subtasks>
+      <subtasks id="_d4e10_subtasks">
+         <step name="_d4e10_step" task="disco:Say"/>
+         <binding slot="$_d4e10_step.text" value="&#34;I don't feel like going out for dinner&#34;"/>
+         <binding slot="$_d4e10_step.external" value="true"/>
+      </subtasks>
+   </task>
+   <task id="_d4e4_tree">
+      <subtasks id="_d4e6_subtasks">
+         <step name="_d4e6_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <applicable>APPLICABLE_TEST</applicable>
+         <binding slot="$_d4e6_step.external" value="false"/>
+         <binding slot="$_d4e6_step.less" value="leastPreferredCuisine()"/>
+         <binding slot="$_d4e6_step.more" value="null"/>
+      </subtasks>
+      <subtasks id="_d4e7_subtasks">
+         <step name="_d4e7_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <binding slot="$_d4e7_step.external" value="false"/>
+         <binding slot="$_d4e7_step.less" value="null"/>
+         <binding slot="$_d4e7_step.more" value="mostPreferredCuisine()"/>
+      </subtasks>
+   </task>
+   <script init="true">
+
+    $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+
+    // TODO: following are stand-ins for various convenient JavaScript functions to use
+    //       in conditions and scripts above to access information from Java via $negotiation
+
+    function mostPreferredCuisine () {
+       return Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH;
+    }
+    
+    function leastPreferredCuisine () {
+       return Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
+    }
+
+    var APPLICABLE_TEST = null; // for testing
+    
+  </script>
+</taskModel>

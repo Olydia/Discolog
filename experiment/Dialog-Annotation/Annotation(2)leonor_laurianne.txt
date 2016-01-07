@@ -1,37 +1,39 @@
-﻿[DSP0: Où aller manger ce soir]
-Lauriane: ou est que tu veux aller manger ce soir ?
-Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
+﻿[DSP0: Où aller manger ce soir] Utterance / Style 
+Lauriane: ou est que tu veux aller manger ce soir ? ## Propose.object(*), Style : Neutral
+Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait. ## Propose.criteria(cuisine,Breton), Style : weak ? 
 
 	[DSP1: Proposition restaurant : crêperie/ Breton] 
-		Leo: Alors j'avoue  j'aime bien les restaus breton.
+		Leo: Alors j'avoue  j'aime bien les restaus breton. ## State.preference^cuisine (Breton, *), Style : Strong 
 		Leo: J'aime bien manger des crêpes.
-		Lau; j'ai passé 3 ans a renne...
-		Leo: Souvent les bonnes crêperies sont a Montparnasse. 
-		Leo:je vais souvent a une crêperie qui s'appelle le Josselin et le petit Josselin. y'en a deux au fait.  
+		Lau; j'ai passé 3 ans à renne...
+		Leo: Souvent les bonnes crêperies sont a Montparnasse. ## State.preference^(location/cuisine=Breton) (Montparnasse, *), Style : Neutral 
+		Leo:je vais souvent a une crêperie qui s'appelle le Josselin et le petit Josselin. y'en a deux au fait.  ## Propose.Object^restaurant(Josselin) Style = Strong
 		Les crêpes sont très bonnes, oué. Elles sont costaux mais elles sont très bonnes.
 		
 
 		[DSP 1.1 : comparaison avec ce que lauriane connait]
-		Lau: Ayant passé 3 ans a Rennes. Les crêperies sur paris sont un peu moyennes. 
-		Leonor: tu trouveras de meilleures crêperies a Rennes. 
+		Lau: Ayant passé 3 ans à Rennes. Les crêperies sur paris sont un peu moyennes. Reject.Object^restaurant(Josselin ) Or Reject.Criteria(location, Paris) and in this case all restaurant at PAis are rejected. We need to define a conditional reject to explain that we want to reject the "cuisine = Bretons and location = paris"
+		Leonor: tu trouveras de meilleures crêperies à Rennes. 
 
 	[DSP2: Restaurants japonais]
-		Laur: Sinon j'aime bien japonais (Dominance)
-		Leo: Je n'aime pas du tout le japonais.
+		Laur: Sinon j'aime bien japonais ## State.preferecne^Cuisine( japonais, breton). Style = Neutral
+		Leo: Je n'aime pas du tout le japonais. ##  State.preferecne^Cuisine(* , japonais), Style = Strong
 		Lau: tu n'aimes pas tous ce qui est poisson cru .. 
-		Leo: je n'aime pas trop la cuisine asiatique encore moins japonais. 
+		Leo: je n'aime pas trop la cuisine asiatique encore moins japonais. ## We will avoid representing utterances that imply a certain hierarchy of definition asitique -> japonais 
 		Leo: Je n'aime pas trop les sushi déjà. Non je ne suis pas trop cuisine asiatique.
 		
 	[DSP 3: Changer le sujet des restau japonais: Solidarité ? ]
 		Lau: du coup pas crêperie, pas japonais. (au même temps avec leo).
-		Lau: A Orsay; y'a un restau brasserie qui s'appelle le gramophone a côté de la gare.
+		Lau: à Orsay; y'a un restau brasserie qui s'appelle le gramophone à côté de la gare. ## Propose.Object(gramophone). Style = Neutral
 		
 	[DSP4: Proposition: restau africain + italien]
-		Leo: j'aime bien les restaus italiens et africains aussi. c'est très bon aussi.
-		Laurianne: les restaus africains. je ne suis pas fan 
+		Leo: j'aime bien les restaus italiens et africains aussi. c'est très bon aussi.  ## State,preference^Cuisine(africain,*), State,preference^Cuisine(italien,*). Style = neutral
+		Laurianne: les restaus africains. je ne suis pas fan ## State,Preference^Cuisine (*,africain). Style = weak
+		Leo : et les restaurants italiens ? ## Ask.Preference^cuisine(italien). Style = Neutral
+		Laur: oué ...  ## State.Preference^cuisine(italien,*). Style = Weak 
 
 	[DSP 5: Restaurant Aveyronnais : Dominance (Leonor)]
-		leonor: sinon Ya un excellent restaurant. c'est  Aveyronnais a Bercy ou il font de l'aligot. Tu vois ce que c'est
+		leonor: sinon il y'a un excellent restaurant. c'est  Aveyronnais a Bercy où il font de l'aligot. Tu vois ce que c'est ! ## Propose.preference^Cuisine(Aveyronnais), Propose,preference^location(Bercy). Style= Neutral/Strong ?
 		lauriane: oui je vois
 		leonor: tu vois ce que c'est. Ah ça c'est bon l'aligot
 		lauriane: de toute façon dès qu'il y'a du fromage..
@@ -43,19 +45,19 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 		leonor: c'est léger mais si tu manges de une purée d'aligot, t'as plus faim après.
 		
 		[DSP 5.1: Restaurant avec fromage]
-			lauriane: si tu aimes le fromage y'a un restau a versaillais qui s'appelle le cheese club, et tous les plats (entrée, plat dessert) sont a base de fromage
-			leonor: avec le cheese cake a la fin 
-			lauriane: cheese cake a la fin mais il n'est pas forcement genial. bah moi le dessert m'a peu convaincu.
-			leonor: alors c'est a Versailles
+			lauriane: si tu aimes le fromage y'a un restau à versaillais qui s'appelle le cheese club, et tous les plats(entrée, plat dessert) sont à base de fromage. ContralPropose.Criteria(Cuisine,fromage)  ContralProposal.Criteria(location,Versailles).
+			leonor: avec le cheese cake à la fin 
+			lauriane: cheese cake à la fin mais il n'est pas forcement genial. bah moi le dessert m'a peu convaincu.
+			leonor: alors c'est à Versailles
 			lau: oui 
 			leo: il faut y aller. quoi
-			lau: mes parent habitent a côté c'est pour ça.  
+			lau: mes parent habitent à côté c'est pour ça.  
 		
 	[DSP 6: connaissance des restau sur Paris: Proximité(Laur) -> ligne (50:52)]
 		leo: t'es sur paris ?
 		lau: les restau sur paris je ne les connais pas. 
-		Je suis partie des que j'ai pu de la région parisienne. 
-		donc, en dehors de ceux qui sont a coté de mes parents. et renne, on peut partir ça fait loin. 
+		Je suis partie dés que j'ai pu de la région parisienne. 
+		donc, en dehors de ceux qui sont à coté de mes parents. et Renne, on peut partir ça fait loin. 
 		leo: Moi, je connais plus Finistère  sud dans le Jura.
 		lau: je vois mais je n'y suis jamais aller. 
 		
@@ -66,18 +68,18 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 			A paris tu as toutes les spécialités. c'est ça qui est bien. 
 			
 	[dsp 7 ou 2: retour sur les restaus africain + italien}]	
-		Moi c'est vrai que je tourne autour des crêperies et des restau africain et italien. 
+		Moi c'est vrai que je tourne autour des crêperies et des restau africain et italien.  ## State.Preference^Cuisine(africain,*), State.Preference^Cuisine(italien,*), State.Preference^Cuisine(Breton,*). Style = neutral
 		
 		[DSP 2/7 .1  Presentation/ plaidoirie: restaurant africain ]
-		lau: les restau africain ce n'est pas trop mon truc
-		leo: j'ai connu la cuisine africaine notamment la Camerounaise  et c'est vraiment très bon. 
+		lau: les restau africain ce n'est pas trop mon truc ## State.Preference^Cuisine(*,africain). Style = Neurtal limit Weak 
+		leo:  Alros africain ça dépend. Moi j'ai connu la cuisine africaine notamment la Camerounaise  et c'est vraiment très bon. ##  State.preference^Cuisine(africain, *) avoid specification Africain -> camrounais
 		ils utilisent des plantes  que tu ne connais même pas. 
 		y'a une plante qui s'appelle le Ndolé. 
-		ça ressemble beaucoup aux épinard et puis ça a beaucoup de gout, mélangé a la pate d'arachide  ect , du riz et des crevettes et c'est très très bon.
+		ça ressemble beaucoup aux épinard et puis ça a beaucoup de gout, mélangé à la pate d'arachide  ect , du riz et des crevettes et c'est très très bon.
 		lau: je n'aime pas les crevettes ça commence déjà mal.
 		leo: tu peux aussi le manger avec de la viande comme le poulet. ça a beaucoup de gout. 
 		jai été étonnée. Ce n'est pas forcément épicé. 
-		Tu choisis, les épices sont a part.ili y'a le maffé qui aussi très très bon. 
+		Tu choisis, les épices sont à part.il y'a le maffé qui aussi très très bon. 
 		c'est des plats que je ne connaissais pas du tout. 
 		enfin j'étais partie avec des aprioris en me disant non je ne vais pas aimé, ils mettent trop d'épices ect.
 	
@@ -86,34 +88,33 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 		Leo: oui j'étais surprise c'était meilleur que ce que je pensais.
 	
 	[DSP9: Restau afrique du nord]
-		j'avoue que j'aime aussi la nourriture de l'afrique du nord. j'aime beaucoup le couscous et le tajine.
-		Lau: on my a trainé une ou deux fois mais c'etait trop epicé.
-		
+		j'avoue que j'aime aussi la nourriture de l'afrique du nord. j'aime beaucoup le couscous et le tajine. 	##State,Preference^Cuisine (afrique du nord,*) Style = Neutral
+		Lau: on my a trainé une ou deux fois mais c'etait trop epicé. ##State,Preference^Cuisine (*,afrique du nord) Style = Neutral
+
 	[retour sur le DSP8]
 		Leo: c'est normal quand on est pas trop habitué aux epices. 
 		lau: c'est vrai que je ne suis pas habituée aux épices, meme le poivre ça ne passe pas. la 1ere fois que mon copain m'a fait la cuisine.
 		il a fait un magret de canard au poivre et je n'ai pas trop supporté. 
 		leo: d'ailleurs les genrs qui arrivent ici trouvent que notre nourriture est fade parcequ'on n'utilise pas beaucoup d'épices en France.
 		Mais alors si tu n'aimes pas la cuisine épicée je suis alors que le restaurant Aveyronnais te plairait parcequ'il n'ya pas d'épices. 
-		c'est la cuisine bien française avec du bon fromage...
+		c'est la cuisine bien française avec du bon fromage... ## Propose.Criteria(Cuisine,Aveyronnais)
 		
 		[DSP 7.1 : retour sur les retaus africains]
-			lau: mais c'est vrai que tester la nouveauté  où il n'y a pas beacoup d'epices comme le restau africain pourquoi pas. (solidarité)
-			Leo: il faut juste choisir les plats qui ne sont pas épicés ou tu connais les ingeredients.
+			lau: mais c'est vrai que tester la nouveauté  où il n'y a pas beacoup d'epices comme le restau africain pourquoi pas. ## ContralProposal.criteria(cuisine, africain).Style = weak 				Leo: il faut juste choisir les plats qui ne sont pas épicés ou tu connais les ingeredients.
 			lau: se faire guider.
 			
 		[DSP 7.2 : le secteur des restau africains sur paris]
-			leo: Principalement les restaurants africains sont dans le 19 eme près de gare de l'est. y'en a plein plein plein. 
+		                                              	leo: Principalement les restaurants africains sont dans le 19 eme près de gare de l'est. y'en a plein plein plein. 
 			Ils ont pas mal de succes. 
 			y'a  les africains qui y vont mais aussi plein de parisiens qui y vont aussi.
 			Certain ont leur tables. moi c'est des copains  africains qui me le font fait découvrir. 
 			j'ai commencé a en manger chez eux apres je suis partie au restaurant. 
-			c'est toujours plus sympa de découvrir a plusieurs, c'etait sympa. 
+			c'est toujours plus sympa de découvrir à plusieurs, c'etait sympa. 
 			
 	[DSP 9 :restaurant thai]
 		Laur: une amie m'a emmené comme ça chez un tailandais. j'avais peur. 
 		Pareil j'avais beaucoup d'appriori, ou je me suis dit que ça allait etre des trucs bizzares. mais au fait pas du tous.
-		Leo: au fait thailandais c'est bon. Moi aussi j'avais gouté cooréen aussi. Tu sais ou tu fais cuire ta viande sur un plat, donc tu vois ta viande cru, tu vois qu'elle a un bon aspect. Au fait tu vois ta bouffe avant de la manger c'est toujours agréable. 
+		Leo: au fait thailandais c'est bon. Moi aussi j'avais gouté cooréen aussi. Tu sais ou tu fais cuire ta viande sur un plat, donc tu vois ta viande cru, tu vois qu'elle a un bon aspect. Au fait tu vois ta bouffe avant de la manger c'est toujours agréable. ## State.Preference^cuisine(thailandais, *).  ## State.Preference^cuisine(Coreen, Japonais). Style = Strong
 		Mais tu vois je préfère ça au japonais.
 		
 	[DSP 10 : comparaison sur les restau japonais]	
@@ -121,7 +122,7 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 		y'a de vrai différences. 
 		
 		[DSP 10.1 : restau japonais a Tour]
-			Lau :je connais un a Tour, j'ai passé 2 ans à Tour, pour le prix on y va une fois dans l'année voir sur plusieurs années.
+			Lau :je connais un à Tour, j'ai passé 2 ans à Tour, pour le prix on y va une fois dans l'année voir sur plusieurs années.
 			Deja les suchis font la moitié de la part servis dans les restaurants en France, il fait la taille normale quoi car normalement un suchi c'est une bouchée 
 			et là tu le vois le cuisiner, tu  le vois sortir les poissons, tu le vois tous préparer du début à la fin sur place, le poisson fond sur la langue c'est super bon.
 			Leo: Au fait si tu veux manger un bon japonais il faut mettre le prix. 
@@ -129,8 +130,8 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 			
 		Leo: sinon c'est du fast food quoi. tu vois pour moi toute ces chaines de suchi c'est du fast food.
 		
-		[DSP 10.2 : japonais a paris]
-			Lau: il ne faut pas aller dans les chaines, mais a paris ça doit etre du coté de place d'italie où il y'en a énormement.
+		[DSP 10.2 : japonais à Paris]
+			Lau: il ne faut pas aller dans les chaines, mais à Paris ça doit être du côté de place d'italie où il y'en a énormement. State.Preferece^location/cuisine =japonais(place d'itakie, *)
 			y'en a plein au fait, il faut viser ceux qui ont font un seul plat au fait.
 			En général celà sont des vrai. Deja ils ne parlent pas français.
 			Il faut leur montrer sur la carte parcequ'ils ne comprennent pas ce que tu dis. Sinon c'est super bon.
@@ -141,12 +142,23 @@ Leonor: ..., bah moi je vais souvent manger au même restau à paris, au fait.
 		[DSP 11.1 : le principe du fait maison]
 			Leo : Notamment , à paris où ils te font une liste de menu assez importante, et au fait presque rien n'est fait maison.
 			c'est des plats sous vides qu'ils achetent a des sociétés et qu'ils réchauffent quoi. 
-			Du coup je vais toujours au meme restau ou je suis sure vraiment les plats qu'ils me proposent sont préparé sur place. 
+			Du coup je vais toujours au même restau où je suis sûre vraiment les plats qu'ils me proposent sont préparés sur place. 
 			Lau: C"est pour ça y'a de plus en plus de restau qui font cuisine ouverte, pour dire regardez c'est fait sur place.
 			Leo: ils ne le spécifient pas d'ailleurs l'appelation fait maison, ça ne veut rien dire. 
 			Si tu prends par EX un plat tous fait, tu le rechauffes et tu mets une herbe et  c'est bon c'est fait maison.
 			Laur: oui c'est vrai, ils ont prévu de faire un nouveau label pour ça (solidarité)
-			Leo:  oui. C'est vrai que là quand tu as envie d'aller au restaurant tu as envie de manger qlq chose qui est fait maison, pas préparé sous vide comme tu en manges chaque jour.
+			Leo:  oui. C'est vrai que là quand tu as envie d'aller au restaurant tu as envie de manger quelque chose qui est fait maison, pas préparé sous vide comme tu en manges chaque jour.
 			Lair: Personellement je fais la cuisine, je ne mange pas sous vide tout les jours.
 			Leo: Des fois tu n'as pas forcément le temps dans la semaine. 
 			Mais au moins quand tu vas au restaurant, tu as envie d'autre chose de qualité c'est la moindre des choses.
+
+[ Discussison hors sujet des restaurant mais toujours dans le cadre de la nourriture]
+
+Leo : bah alors soit on mange africain, soit thailandais aussi s'il y'a des bons du coté de place d'it. ## Propose.Criteria(Cuisine, africain) Propose.Criteria(Cuisine, thailandais)
+Laur: Le thailandais où je suis aller etait .... (hesitation) dans le nord de Paris mais je ne sais plus où exactement car je me suis laisser guider.
+Leo: C'est facilement retrouvable sur le net.
+Lau: Mais africain ça me tente bien, tu m'as bien vendu le truc.  ## Accept.Criteria(Cuisine,africain). style = neutral /strong
+
+
+ 
+
