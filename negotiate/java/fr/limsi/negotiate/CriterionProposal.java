@@ -1,5 +1,6 @@
 package fr.limsi.negotiate;
 
+
 /**
  * 
  * @author Charles rich

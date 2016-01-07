@@ -7,7 +7,7 @@ import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.OptionPrefModel;
 import fr.limsi.negotiate.ValuePreference;
 
-public class InitiateMentalState {
+public class InitiaterestauMentalState {
 
 	private  static Negotiation<Restaurant> restaurantNegotiation;
 

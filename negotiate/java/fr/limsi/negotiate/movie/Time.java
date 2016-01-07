@@ -2,13 +2,14 @@ package fr.limsi.negotiate.movie;
 
 import fr.limsi.negotiate.Criterion;
 
-public enum Cost implements Criterion {
+
+public enum Time implements Criterion {
 
 	   
-	   EXPENSIVE, CHEAP;
+	  H2MIN15, H1MIN30;
 
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
-		return (Cost.values());
+		return (Time.values());
 	}
 }

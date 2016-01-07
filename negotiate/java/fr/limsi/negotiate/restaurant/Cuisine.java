@@ -1,5 +1,5 @@
 package fr.limsi.negotiate.restaurant;
-import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Criterion;
 
 public enum Cuisine implements Criterion {
 

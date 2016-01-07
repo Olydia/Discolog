@@ -1,6 +1,7 @@
 package fr.limsi.negotiate;
 
 
+
 public class CriterionPreference extends Preference <Class<? extends Criterion>>{
 
 	public CriterionPreference(Class<? extends  Criterion> class1, Class<? extends  Criterion> class2) {

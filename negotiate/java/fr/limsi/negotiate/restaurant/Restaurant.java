@@ -1,8 +1,8 @@
 package fr.limsi.negotiate.restaurant;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.Option;
 
 public enum Restaurant implements Option {
 

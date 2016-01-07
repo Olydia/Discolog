@@ -2,6 +2,8 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+import fr.limsi.negotiate.Proposal.Status;
+
 /**
  * Class to define the mental state of the agent on preferences about a <b>criterion</b> 
  * (ie. its preferences and user preferences given by the dialogue).
@@ -24,7 +26,7 @@ import java.util.*;
 
 public class CriterionNegotiation<C extends Criterion> {
 
-	CriterionPrefModel<C> self,other;       
+	CriterionPrefModel<C> self,other,oas;       
 	public Class<C> criterionType ; 
 	private  List<CriterionProposal> proposals = new ArrayList<CriterionProposal>();
 
@@ -32,6 +34,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		criterionType = type;
 		self = new CriterionPrefModel<C>();
 		other = new CriterionPrefModel<C>();
+		oas = new CriterionPrefModel<C>();
 	}
 
 	public Class<C> getCriterionType() {
