@@ -2,9 +2,6 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
 /**
  * Class to define the mental state of the agent on preferences about a <b>criterion</b> 
  * (ie. its preferences and user preferences given by the dialogue).
@@ -26,46 +23,41 @@ import java.lang.reflect.Type;
  */
 
 public class CriterionNegotiation<C extends Criterion> {
-   
-   public CriterionPreferenceModel<C> self,other;       
-   public Class<C> criterionType ; 
-   
-   public CriterionNegotiation (Class<C> type) {
-	   
-	   criterionType = type;
-	   self = new CriterionPreferenceModel<C>();
-	   other = new CriterionPreferenceModel<C>();
-   }
-   
-   // does not work...
-   @SuppressWarnings("unchecked")
-   public Class<C> getGenericTypeClass() {
-       try {
-    	   Class<?> c1 = getClass();
-    	   ParameterizedType c2 = (ParameterizedType) c1.getGenericSuperclass();
-    	   Type[] c3 = c2.getActualTypeArguments();
-    	   String className = c3[0].getClass().getName();
-           //String className = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getClass().getName();
-           System.out.println(className);
-           Class<?> clazz = Class.forName(className);
-           return (Class<C>) clazz;
-       } catch (Exception e) {
-           throw new IllegalStateException("Class is not parametrized with generic type!!! Please use extends <> ");
-       }
-   } 
-   
 
-   public Class<C> getCriterionType() {
-	return criterionType;
-}
+	CriterionPrefModel<C> self,other;       
+	public Class<C> criterionType ; 
+	private  List<CriterionProposal> proposals = new ArrayList<CriterionProposal>();
+
+	public CriterionNegotiation (Class<C> type) {
+		criterionType = type;
+		self = new CriterionPrefModel<C>();
+		other = new CriterionPrefModel<C>();
+	}
+
+	public Class<C> getCriterionType() {
+		return criterionType;
+	}
+	public C getTheCurrentMostPreffered(){
+		@SuppressWarnings("unchecked")
+		ArrayList<C> values = (ArrayList<C>) Arrays.asList(self.type.getValues());
+		ArrayList<Integer> newScores = clearRejected(values, self.getPreferences());
+		int mostPref = Collections.max(newScores);
+		return( values.get(mostPref));
+	}
 
 
-private final List<OptionProposal> proposals = new ArrayList<OptionProposal>();
-   
-   public void propose (OptionProposal proposal) { proposals.add(proposal); }
+	public ArrayList<Integer> clearRejected(ArrayList<C> values, ArrayList<Integer> cScores) {
+		for ( CriterionProposal c: proposals) {
+			if(c.status.equals(Proposal.Status.REJECTED)) {
+				cScores.set(values.indexOf(c.criterion), Collections.min(cScores));
+			}
+		}
+		return cScores;
+	}
+	public void propose (CriterionProposal proposal) { proposals.add(proposal); }
 
-   public void setSelfPreferences(CriterionPreferenceModel<C> selfPref) {
-	   self = selfPref;
-   }
-   
+	public void setSelfPreferences(CriterionPrefModel<C> selfPref) {
+		self = selfPref;
+	}
+
 }

@@ -6,10 +6,10 @@ public enum Cuisine implements Criterion {
    FRENCH, CHINESE, ITALIAN, TURKISH, JAPANESE;
 
    
-//@Override
-//public List getValues() {
-//	// TODO Auto-generated method stub
-//	return (Arrays.asList(Cuisine.values()));
-//}
+@Override
+public Criterion[] getValues() {
+	// TODO Auto-generated method stub
+	return (Cuisine.values());
+}
    
 }

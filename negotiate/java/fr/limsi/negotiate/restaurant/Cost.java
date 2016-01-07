@@ -7,10 +7,9 @@ public enum Cost implements Criterion {
    
    EXPENSIVE, CHEAP;
 
-//@Override
-//public List getValues() {
-//	// TODO Auto-generated method stub
-//	return (Arrays.asList(Cost.values()));
-//}
+public Criterion[] getValues() {
+	// TODO Auto-generated method stub
+	return (Cost.values());
+}
 
 }

@@ -1,66 +1,67 @@
 package fr.limsi.negotiate.restaurant;
 
-
-import java.util.Arrays;
-import java.util.Hashtable;
-
 import fr.limsi.negotiate.CriterionNegotiation;
+import fr.limsi.negotiate.CriterionPrefModel;
+import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.OptionNegotiation;
-import fr.limsi.negotiate.OptionPreference;
-import fr.limsi.negotiate.OptionPreferenceModel;
-import fr.limsi.negotiate.Preference;
-import fr.limsi.negotiate.CriterionPreferenceModel;
-import fr.limsi.negotiate.PreferenceMatrix;
+import fr.limsi.negotiate.OptionPrefModel;
+import fr.limsi.negotiate.ValuePreference;
+
 
 public class TestRestaurant {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-		/*1. Define the  preferences on option criteria and model */	
-		OptionPreferenceModel lydia_criteria = new OptionPreferenceModel(); 
-		OptionPreference p = new OptionPreference(Cuisine.class,Cost.class);
-		lydia_criteria.add(p);
-		OptionNegotiation lydia_optionNegotiation = new OptionNegotiation();
-		lydia_optionNegotiation.setSelfPreferences(lydia_criteria);
-		/*2. Define the criteria preferences and model */		
-		CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
-		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<Cuisine>(Cuisine.class);
-		// 2.1. Preference model on cuisine
-		CriterionPreferenceModel<Cuisine> lydia_cuisine = new CriterionPreferenceModel<Cuisine>();
-		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
-		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
-		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
-		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
-		lydia_cuisine.add(new Preference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
+		// 1. Define lydia preference model on each criterion of restaurant
+		// 1.1. Preference model on cuisine
+		CriterionPrefModel<Cuisine> lydia_cuisine = new CriterionPrefModel<Cuisine>();
+		lydia_cuisine.setType(Cuisine.CHINESE);
+		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
+		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
+		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
+		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
+		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
 
 		// 2.2. Preference model on Cost
-		CriterionPreferenceModel<Cost> lydia_cost = new CriterionPreferenceModel<Cost>();
-		lydia_cost.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
-		// 2.3. Add the agent(lydia) preference models  to their criterionNegotiation.
+		CriterionPrefModel<Cost> lydia_cost = new CriterionPrefModel<Cost>();
+		lydia_cost.setType(Cost.CHEAP);
+		lydia_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
+
+		// 2.3 Preference model on Ambiance 
+		CriterionPrefModel<Ambiance> lydia_ambiance = new CriterionPrefModel<Ambiance>();
+		lydia_ambiance.setType(Ambiance.CALM);
+		lydia_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
+		/*1. Define the  preferences on Restaurant criteria */	
+
+		OptionPrefModel<Restaurant> lydia_criteria = new OptionPrefModel<Restaurant>(); 
+		lydia_criteria.setType(Restaurant.LE_PARISIEN); // Its is not the idial solution but I have to get the type of an option 
+		lydia_criteria.add(new CriterionPreference(Cuisine.class,Cost.class));
+		lydia_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));
+
+		//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
+		CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
 		cost.setSelfPreferences(lydia_cost);
-		cuisine.setSelfPreferences(lydia_cuisine);	
 
-		/*3. Create a nogotiation on restaurant with the criterionNegotiation and the OptionNegotiation*/
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<Cuisine>(Cuisine.class);
+		cuisine.setSelfPreferences(lydia_cuisine);
+
+		CriterionNegotiation<Ambiance> ambiance = new CriterionNegotiation<Ambiance>(Ambiance.class);
+		ambiance.setSelfPreferences(lydia_ambiance);
+
+		//
+		//		/*3. Create a nogotiation on restaurant */
 		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
-		(new CriterionNegotiation[] {cost, cuisine}, lydia_optionNegotiation);
+		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
+		//
+		//		// Test the DFS preference method (it should return true 
+		//		System.out.println("Chinses score: " + lydia_cuisine.getScore(Cuisine.ITALIAN)+ " Turkich Score: " + lydia_cuisine.getScore(Cuisine.TURKISH));
+		//		System.out.println(lydia_cuisine.isPreferred(Cuisine.CHINESE, Cuisine.TURKISH));
+		//		System.out.println(" Cost : " + lydia_criteria.getRank(Cost.class) + " Cuisine : " + lydia_criteria.getRank(Cuisine.class) + " Ambiance : " + lydia_criteria.getRank(Ambiance.class));
+		//		System.out.println(lydia_criteria.isPreferred(Ambiance.class, Cuisine.class));
+		//		// Test of the decision function and it returns CHEZ_CHUCK because cost is cheap and cost is more preferred to cuisine
 
-		// Test the DFS preference method (it should return true 
-		System.out.println(lydia_cuisine.isPreferred(Cuisine.CHINESE, Cuisine.TURKISH));
-		// Test of the decision function and it returns CHEZ_CHUCK because cost is cheap and cost is more preferred to cuisine
 		Restaurant res = restaurants.getPreferredOption(Restaurant.CHEZ_CHUCK, Restaurant.LE_PARISIEN);
 		System.out.println(res.name());
-		PreferenceMatrix<Cost> c = cost.self.generateMatrix(Arrays.asList(Cost.values()));
-		Hashtable<Cost, Integer> test = c.getPreferenceOrderOfCriteria();
 		
-		System.out.println(test);
 	}
 }
-
-/* TODO-list
- * mettre des commentaires dans le code de Chuck
- * ajouter la liste des prefs sur les criteres dans Negotiation
- * tester getPreferred sans proposal
- * ajouter des proposals
- * tester getPreferred avec proposals
- */

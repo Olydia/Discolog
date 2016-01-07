@@ -2,8 +2,9 @@ package fr.limsi.negotiate;
 /**
  * Defines a preference between two values of a given criterion (e.g. chinese cuisine is preferred to japanese cuisine)
  * for a negotiation.
+ *  C  = {Criterion, Class<Criterion>}
  */
-public class Preference<C extends Criterion> {
+public abstract class Preference<C> {
 
 	private final C less, more;
 
@@ -16,9 +17,9 @@ public class Preference<C extends Criterion> {
 	}
 
 
-	public Preference (C less, C more) {
-		this.less = less;
-		this.more = more;
+	public Preference (C class1, C class2) {
+		this.more = class1;
+		this.less = class2;
 	}
 
 	@Override
