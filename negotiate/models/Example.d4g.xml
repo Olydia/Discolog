@@ -50,6 +50,40 @@
       
   </do>
 
+  <!--
+
+    The dialogue tree below illustrates a subtle feature of D4g that
+    supports defining more complex dialogue logic without breaking out into
+    full ANSI/CEA-2018.  (But don't forget that D4g and 2018 can be mixed in
+    a single file!).
+
+    Although all of the inputs for an *agent* utterance must be specified,
+    it is allowed to leave out (undefined) some of the inputs to a user utterance.
+    In this case, because of the way unification is used in plan recognition, the
+    right recipe (dialogue subtree) will be chosen depending on what the user
+    actually says, as illustrated in test/Example2.test.
+
+  -->
+
+  <agent id="_another_example" text="What cuisine do you prefer?">
+
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
+        less="null" more="mostPreferredCuisine()">
+      
+      <agent text="That's my favorite, too!"/>
+      
+    </do>
+
+    <!-- this branch is chosen when user says anything else -->
+         
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
+
+      <agent text="Thanks!"/>
+
+    </do>
+         
+  </agent>
+
   <t:script init="true">
 
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();

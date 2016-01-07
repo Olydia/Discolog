@@ -12,6 +12,14 @@
          <binding slot="$__example_step.more" value="mostPreferredCuisine()"/>
       </subtasks>
    </task>
+   <task id="_another_example">
+      <subtasks id="__another_example_subtasks">
+         <step name="__another_example_step" task="disco:Say"/>
+         <step name="__another_example_ref" task="__another_example_tree"/>
+         <binding slot="$__another_example_step.text" value="&#34;What cuisine do you prefer?&#34;"/>
+         <binding slot="$__another_example_step.external" value="false"/>
+      </subtasks>
+   </task>
    <task id="__example_tree">
       <subtasks id="_d4e4_subtasks">
          <step name="_d4e4_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -52,6 +60,24 @@
          <binding slot="$_d4e7_step.external" value="false"/>
          <binding slot="$_d4e7_step.less" value="null"/>
          <binding slot="$_d4e7_step.more" value="mostPreferredCuisine()"/>
+      </subtasks>
+   </task>
+   <task id="__another_example_tree">
+      <subtasks id="_d4e13_subtasks">
+         <step name="_d4e13_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e14_step" task="disco:Say"/>
+         <binding slot="$_d4e13_step.external" value="true"/>
+         <binding slot="$_d4e13_step.less" value="null"/>
+         <binding slot="$_d4e13_step.more" value="mostPreferredCuisine()"/>
+         <binding slot="$_d4e14_step.text" value="&#34;That's my favorite, too!&#34;"/>
+         <binding slot="$_d4e14_step.external" value="false"/>
+      </subtasks>
+      <subtasks id="_d4e16_subtasks">
+         <step name="_d4e16_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e17_step" task="disco:Say"/>
+         <binding slot="$_d4e16_step.external" value="true"/>
+         <binding slot="$_d4e17_step.text" value="&#34;Thanks!&#34;"/>
+         <binding slot="$_d4e17_step.external" value="false"/>
       </subtasks>
    </task>
    <script init="true">
