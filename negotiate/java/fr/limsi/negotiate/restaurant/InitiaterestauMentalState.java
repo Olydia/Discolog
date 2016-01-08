@@ -4,7 +4,7 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionPrefModel;
 import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.OptionPrefModel;
+import fr.limsi.negotiate.CriteriaClassPrefModel;
 import fr.limsi.negotiate.ValuePreference;
 
 public class InitiaterestauMentalState {
@@ -34,7 +34,7 @@ public class InitiaterestauMentalState {
 				lydia_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
 				/*1. Define the  preferences on Restaurant criteria */	
 
-				OptionPrefModel<Restaurant> lydia_criteria = new OptionPrefModel<Restaurant>(); 
+				CriteriaClassPrefModel<Restaurant> lydia_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 				lydia_criteria.setType(Restaurant.LE_PARISIEN); // Its is not the idial solution but I have to get the type of an option 
 				lydia_criteria.add(new CriterionPreference(Cuisine.class,Cost.class));
 				lydia_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));

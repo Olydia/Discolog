@@ -17,10 +17,10 @@ public class Negotiation<O extends Option> {
 
    public  List<CriterionNegotiation<Criterion>> criteriaNegotiation;
    
-   public OptionPrefModel<O> criteriaPreferences; 
+   public CriteriaClassPrefModel<O> criteriaPreferences; 
 
    
-   public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, OptionPrefModel<O> criteriaPreferences) {
+   public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, CriteriaClassPrefModel<O> criteriaPreferences) {
       this.criteriaNegotiation = Arrays.asList(criteriaNegotiation);
       this.criteriaPreferences = criteriaPreferences;
       this.proposals = new ArrayList<OptionProposal>();

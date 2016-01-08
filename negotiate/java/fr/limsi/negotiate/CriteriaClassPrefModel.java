@@ -6,7 +6,7 @@ import java.util.*;
  * less and more extends Criteria.
  */
 
-public class OptionPrefModel<O extends Option> extends PreferenceModel<Class<? extends Criterion>>{
+public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Class<? extends Criterion>>{
 	public  O type; 
 	private final ArrayList<CriterionPreference> preferences = new ArrayList<CriterionPreference>();
 

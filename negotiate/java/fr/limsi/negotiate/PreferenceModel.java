@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class PreferenceModel<C>{
-
+	Preference<C> lastUpdate;
 	/** Generate a preference matrix in order to calculate preferences rate */ 
 	public PreferenceMatrix<C> generateMatrix (List<C> values, ArrayList<? extends Preference<C>> preferences){
 		PreferenceMatrix<C> matrix = new PreferenceMatrix<C> (values);
@@ -23,6 +23,9 @@ abstract public class PreferenceModel<C>{
 	 // A definir ici 
 	abstract public C getMostPreffered();
 	abstract public C getLeastPreffered();
+	 public void updateLastPreference(Preference<C> preference) {
+		lastUpdate = preference;
+	}
 	
 
 }
