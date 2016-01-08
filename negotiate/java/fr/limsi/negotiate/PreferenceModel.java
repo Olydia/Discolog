@@ -21,8 +21,8 @@ abstract public class PreferenceModel<C>{
 	 */
 	abstract public Boolean isPreferred (C more, C less);
 	 // A definir ici 
-	abstract public C getMostPreffered();
-	abstract public C getLeastPreffered();
+	abstract public C getMostPreferred();
+	abstract public C getLeastPreferred();
 	 public void updateLastPreference(Preference<C> preference) {
 		lastUpdate = preference;
 	}
