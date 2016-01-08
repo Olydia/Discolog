@@ -20,11 +20,9 @@
   -->
 
   <do id="_example" actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-      criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
       less="null" more="mostPreferredCuisine()">
 
     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
         less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
         more="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN">
 
@@ -32,18 +30,15 @@
            STATE_PREFERENCE_TEST precondition -->
       
       <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-          criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
           less="leastPreferredCuisine()" more="null"
           applicable="APPLICABLE_TEST"/>
 
       <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-          criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
           less="null" more="mostPreferredCuisine()"/> 
 
     </do>
 
     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
         less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
         more="Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE">
 
@@ -73,7 +68,6 @@
   <agent id="_another_example" text="What cuisine do you prefer?">
 
     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine"
         less="null" more="mostPreferredCuisine()">
       
       <agent text="That's my favorite, too!"/>
@@ -82,8 +76,7 @@
 
     <!-- this branch is chosen when user says anything else -->
          
-    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        criterion="Packages.fr.limsi.negotiate.restaurant.Cuisine">
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
 
       <agent text="Thanks!"/>
 

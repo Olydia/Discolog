@@ -8,8 +8,6 @@
          <step name="__example_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="__example_ref" task="__example_tree"/>
          <binding slot="$__example_step.external" value="false"/>
-         <binding slot="$__example_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$__example_step.less" value="null"/>
          <binding slot="$__example_step.more" value="mostPreferredCuisine()"/>
       </subtasks>
@@ -27,8 +25,6 @@
          <step name="_d4e4_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e4_ref" task="_d4e4_tree"/>
          <binding slot="$_d4e4_step.external" value="true"/>
-         <binding slot="$_d4e4_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e4_step.less"
                   value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
          <binding slot="$_d4e4_step.more"
@@ -38,8 +34,6 @@
          <step name="_d4e8_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e9_step" task="disco:Say"/>
          <binding slot="$_d4e8_step.external" value="true"/>
-         <binding slot="$_d4e8_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e8_step.less"
                   value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
          <binding slot="$_d4e8_step.more"
@@ -58,16 +52,12 @@
          <step name="_d4e6_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <applicable>APPLICABLE_TEST</applicable>
          <binding slot="$_d4e6_step.external" value="false"/>
-         <binding slot="$_d4e6_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e6_step.less" value="leastPreferredCuisine()"/>
          <binding slot="$_d4e6_step.more" value="null"/>
       </subtasks>
       <subtasks id="_d4e7_subtasks">
          <step name="_d4e7_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <binding slot="$_d4e7_step.external" value="false"/>
-         <binding slot="$_d4e7_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e7_step.less" value="null"/>
          <binding slot="$_d4e7_step.more" value="mostPreferredCuisine()"/>
       </subtasks>
@@ -77,8 +67,6 @@
          <step name="_d4e13_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e14_step" task="disco:Say"/>
          <binding slot="$_d4e13_step.external" value="true"/>
-         <binding slot="$_d4e13_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e13_step.less" value="null"/>
          <binding slot="$_d4e13_step.more" value="mostPreferredCuisine()"/>
          <binding slot="$_d4e14_step.text" value="&#34;That's my favorite, too!&#34;"/>
@@ -88,8 +76,6 @@
          <step name="_d4e16_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e17_step" task="disco:Say"/>
          <binding slot="$_d4e16_step.external" value="true"/>
-         <binding slot="$_d4e16_step.criterion"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine"/>
          <binding slot="$_d4e17_step.text" value="&#34;Thanks!&#34;"/>
          <binding slot="$_d4e17_step.external" value="false"/>
       </subtasks>

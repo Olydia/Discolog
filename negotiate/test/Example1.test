@@ -9,17 +9,17 @@
   > instance fr.limsi.negotiate.lang.StatePreference
   > eval $new.formatTask()
     # Returned 'I like something less than something'
-  > instance fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+  > instance fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
   > eval $new.formatTask()
     # Returned 'I like FRENCH less than something'
-  > instance fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine / / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+  > instance fr.limsi.negotiate.lang.StatePreference / / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
   > eval $new.formatTask()
     # Returned 'I like something less than FRENCH'
-  > execute fr.limsi.negotiate.lang.StatePreference /  Packages.fr.limsi.negotiate.restaurant.Cuisine / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE
     User says "I like FRENCH less than CHINESE."
-  > execute fr.limsi.negotiate.lang.StatePreference /  Packages.fr.limsi.negotiate.restaurant.Cuisine / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / null
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / null
     User says "I like FRENCH least."
-  > execute fr.limsi.negotiate.lang.StatePreference /  Packages.fr.limsi.negotiate.restaurant.Cuisine / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
     User says "I like FRENCH most."
     # turn automatic turn-taking back on
   > next true
@@ -57,18 +57,18 @@ Agent says "Ok."
   > debug
   > history
 
-fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],FRENCH,CHINESE)
-fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],FRENCH,null)
-fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],null,FRENCH)
+fr.limsi.negotiate.lang.StatePreference(user,FRENCH,CHINESE)
+fr.limsi.negotiate.lang.StatePreference(user,FRENCH,null)
+fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
 Ok(agent)
 [_example] -accepted -done
    Propose.Should(user,_example)
-   fr.limsi.negotiate.lang.StatePreference(agent,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],null,FRENCH)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
    [__example_tree by _d4e4_subtasks] -done
-      fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],FRENCH,ITALIAN)
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,ITALIAN)
       Ok(agent)
       [_d4e4_tree by _d4e6_subtasks] -done <-focus
-         fr.limsi.negotiate.lang.StatePreference(agent,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],ITALIAN,null)
+         fr.limsi.negotiate.lang.StatePreference(agent,ITALIAN,null)
 
   > debug false
     # clear discourse state (but not models)
@@ -108,12 +108,12 @@ Ok(agent)
 
 [_example] -accepted -done
    Propose.Should(user,_example)
-   fr.limsi.negotiate.lang.StatePreference(agent,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],null,FRENCH)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
    [__example_tree by _d4e4_subtasks] -done
-      fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],FRENCH,ITALIAN)
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,ITALIAN)
       Ok(agent)
       [_d4e4_tree by _d4e7_subtasks] -done <-focus
-         fr.limsi.negotiate.lang.StatePreference(agent,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],null,FRENCH)
+         fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
 
   > debug false
   > clear
@@ -143,9 +143,9 @@ Ok(agent)
 
 [_example] -accepted -done
    Propose.Should(user,_example)
-   fr.limsi.negotiate.lang.StatePreference(agent,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],null,FRENCH)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
    [__example_tree by _d4e8_subtasks] -done <-focus
-      fr.limsi.negotiate.lang.StatePreference(user,[JavaClass fr.limsi.negotiate.restaurant.Cuisine],FRENCH,JAPANESE)
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,JAPANESE)
       Say(agent,"Forget it. I am not going to dinner with you.")
 
   > debug false
