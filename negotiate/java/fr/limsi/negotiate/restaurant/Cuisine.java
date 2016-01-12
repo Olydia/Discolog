@@ -11,5 +11,8 @@ public Criterion[] getValues() {
 	// TODO Auto-generated method stub
 	return (Cuisine.values());
 }
+public Class <? extends Criterion> getClasse(){
+	return Cuisine.class;
+}
    
 }

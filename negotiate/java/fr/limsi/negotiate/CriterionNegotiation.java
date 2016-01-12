@@ -26,13 +26,15 @@ import fr.limsi.negotiate.Proposal.Status;
 
 public class CriterionNegotiation<C extends Criterion> {
 
-	CriterionPrefModel<C> self,other,oas;       
+	private CriterionPrefModel<C> self;
+	CriterionPrefModel<C> other;
+	CriterionPrefModel<C> oas;       
 	public Class<C> criterionType ; 
 	private  List<CriterionProposal> proposals = new ArrayList<CriterionProposal>();
 
 	public CriterionNegotiation (Class<C> type) {
 		criterionType = type;
-		self = new CriterionPrefModel<C>();
+		setSelf(new CriterionPrefModel<C>());
 		other = new CriterionPrefModel<C>();
 		oas = new CriterionPrefModel<C>();
 	}
@@ -42,8 +44,8 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	public C getTheCurrentMostPreffered(){
 		@SuppressWarnings("unchecked")
-		ArrayList<C> values = (ArrayList<C>) self.getValues();
-		ArrayList<Integer> newScores = clearRejected(values, self.getPreferences());
+		ArrayList<C> values = (ArrayList<C>) getSelf().getValues();
+		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferences());
 		int mostPref = Collections.max(newScores);
 		return( values.get(mostPref));
 	}
@@ -60,7 +62,15 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void propose (CriterionProposal proposal) { proposals.add(proposal); }
 
 	public void setSelfPreferences(CriterionPrefModel<C> selfPref) {
-		self = selfPref;
+		setSelf(selfPref);
+	}
+
+	public CriterionPrefModel<C> getSelf() {
+		return self;
+	}
+
+	public void setSelf(CriterionPrefModel<C> self) {
+		this.self = self;
 	}
 
 }

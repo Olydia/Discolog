@@ -92,7 +92,7 @@
     //       in conditions and scripts above to access information from Java via $negotiation
 
     function mostPreferredCuisine() {
-       return $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).getSelf().getMostPreferred();
+       return $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).self.getMostPreferred();
     }
     
     function leastPreferredCuisine () {

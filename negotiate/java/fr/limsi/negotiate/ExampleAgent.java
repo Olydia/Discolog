@@ -41,7 +41,7 @@ public class ExampleAgent extends Agent {
    /**
     * @return current negotiation object
     */
-   public Negotiation<? extends Option> getNegotiation () { return restaurant;}
+   public Negotiation<? extends Option> getNegotiation () { return restaurant; }
 
 
    //private final Negotiation<Movie> movie = InitiateMovieMentalState.Initialise();

@@ -58,8 +58,8 @@ public class InitiaterestauMentalState {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//Negotiation<Restaurant> restaurant = InitiateMentalState.Initialise(); 
-		
+		Negotiation<Restaurant> restaurant = InitiaterestauMentalState.Initialise(); 
+		System.out.println(restaurant.getCriterionNegotiation(Cuisine.class).getSelf().getMostPreferred());
 	}
 
 }

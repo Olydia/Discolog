@@ -44,8 +44,8 @@ public class Negotiation<O extends Option> {
 			// get the type of the criterion
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(c);
 			// Utility = Sum(rank(c) * score(v_c)) 
-			UtilityFirst += rank * criterion.self.getScore(firstOption.getValue(c));
-			UtilitySecond += rank * criterion.self.getScore(secondOption.getValue(c));
+			UtilityFirst += rank * criterion.getSelf().getScore(firstOption.getValue(c));
+			UtilitySecond += rank * criterion.getSelf().getScore(secondOption.getValue(c));
 		}
 		// 2. en regardant les proposals
 		return(UtilityFirst < UtilitySecond? secondOption: firstOption);

@@ -42,7 +42,6 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		try {
 			Method m = type.getDeclaredMethod("getValues");
 			Object[] consts = type.getEnumConstants();
-			System.out.println(consts[0]);
 		    Object[] v = (Object[])m.invoke(consts[0]);
 			return ((List<C>) (Arrays.asList(v)));
 
