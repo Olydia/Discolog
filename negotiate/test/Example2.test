@@ -5,7 +5,7 @@
   > task _another_example
     User says "Let's achieve _another_example."
     Agent says "What cuisine do you prefer?"
-  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH .
     User says "I like FRENCH most."
     Agent says "That's my favorite, too!"
   > history

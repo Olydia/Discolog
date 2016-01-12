@@ -1,7 +1,8 @@
 package fr.limsi.negotiate;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
-
 
 /** Stores the preferences about values for a given criterion C, i.e. a list of Preferences<C>, i.e. a list of couples (less,more)
  * with less and more values of an enum C that implements Criterion.
@@ -15,7 +16,7 @@ import java.util.*;
  */
 
 public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> {
-	C type; 
+	Class <C> type; 
 	// paired preferences on C values
 	private final ArrayList<ValuePreference<C>> preferences = new ArrayList<ValuePreference<C>>();
  	
@@ -23,8 +24,10 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	public void add (ValuePreference<C> preference) {
 		preferences.add(preference);
 	}
-
- 
+/* definir une methode qui prend en entrée deux criteres et crée */
+	public void add (C more, C less){
+		add(new ValuePreference<C>(more, less));
+	}
 	/**
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference. Can be used to respond to an ask.Preference(Less, More)
@@ -33,44 +36,65 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		return( getScore(less) < getScore(more)?  true :  false);
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	public List<C> getValues(){
+		
+		try {
+			Method m = type.getDeclaredMethod("getValues");
+			Object[] consts = type.getEnumConstants();
+			System.out.println(consts[0]);
+		    Object[] v = (Object[])m.invoke(consts[0]);
+			return ((List<C>) (Arrays.asList(v)));
+
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public int getScore(C value){
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix((List<C>) Arrays.asList(value.getValues()), preferences);
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferenceOnValue(value));
 	}
 
 	
-	@Override
-	public C getMostPreffered() {
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix((List<C>) Arrays.asList(type.getValues()), preferences);
+	public C getMostPreferred() {
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getMostPreffered());
 	}
 
 
-	@Override
-	public C getLeastPreffered() {
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix((List<C>) Arrays.asList(type.getValues()), preferences);
+	public C getLeastPreferred() {
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getLeastPreffered());
 	}
-
+	
 
 	@Override
 	public ArrayList<Integer> getPreferences() {
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix((List<C>) Arrays.asList(type.getValues()), preferences);
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferences());
 	}
 
 
-	public C getType() {
+	public Class<C> getType() {
 		return type;
 	}
 
 
-	public void setType(C type) {
+	public void setType(Class<C> type) {
 		this.type = type;
 	}
 }

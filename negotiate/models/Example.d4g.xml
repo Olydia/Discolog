@@ -91,7 +91,7 @@
     // TODO: following are stand-ins for various convenient JavaScript functions to use
     //       in conditions and scripts above to access information from Java via $negotiation
 
-    function mostPreferredCuisine () {
+    function mostPreferredCuisine() {
        return Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH;
     }
     

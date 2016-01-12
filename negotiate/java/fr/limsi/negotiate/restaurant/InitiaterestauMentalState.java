@@ -16,7 +16,7 @@ public class InitiaterestauMentalState {
 		// 1. Define lydia preference model on each criterion of restaurant
 				// 1.1. Preference model on cuisine
 				CriterionPrefModel<Cuisine> lydia_cuisine = new CriterionPrefModel<Cuisine>();
-				lydia_cuisine.setType(Cuisine.CHINESE);
+				lydia_cuisine.setType(Cuisine.class);
 				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
 				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
 				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
@@ -25,17 +25,17 @@ public class InitiaterestauMentalState {
 
 				// 2.2. Preference model on Cost
 				CriterionPrefModel<Cost> lydia_cost = new CriterionPrefModel<Cost>();
-				lydia_cost.setType(Cost.CHEAP);
+				lydia_cost.setType(Cost.class);
 				lydia_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
 
 				// 2.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> lydia_ambiance = new CriterionPrefModel<Ambiance>();
-				lydia_ambiance.setType(Ambiance.CALM);
+				lydia_ambiance.setType(Ambiance.class);
 				lydia_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
 				/*1. Define the  preferences on Restaurant criteria */	
 
 				CriteriaClassPrefModel<Restaurant> lydia_criteria = new CriteriaClassPrefModel<Restaurant>(); 
-				lydia_criteria.setType(Restaurant.LE_PARISIEN); // Its is not the idial solution but I have to get the type of an option 
+				lydia_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
 				lydia_criteria.add(new CriterionPreference(Cuisine.class,Cost.class));
 				lydia_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));
 

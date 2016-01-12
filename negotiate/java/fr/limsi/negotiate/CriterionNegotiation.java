@@ -42,7 +42,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	public C getTheCurrentMostPreffered(){
 		@SuppressWarnings("unchecked")
-		ArrayList<C> values = (ArrayList<C>) Arrays.asList(self.type.getValues());
+		ArrayList<C> values = (ArrayList<C>) self.getValues();
 		ArrayList<Integer> newScores = clearRejected(values, self.getPreferences());
 		int mostPref = Collections.max(newScores);
 		return( values.get(mostPref));
