@@ -61,7 +61,6 @@ public class InitiaterestauMentalState {
 		Negotiation<Restaurant> restaurant = InitiaterestauMentalState.Initialise(); 
 //		System.out.println(restaurant.getCriterionNegotiation(Cuisine.class).getSelf().getMostPreferred());
 		restaurant.printAllMentalState();
-//		restaurant.getCriterionNegotiation(Cuisine.class).addOther(more, less);
 //		System.out.println();
 	}
 

@@ -71,7 +71,8 @@
          <binding slot="$_d4e13_step.more" value="mostPreferredCuisine()"/>
          <binding slot="$_d4e16_step.text" value="&#34;That's my favorite, too!&#34;"/>
          <binding slot="$_d4e16_step.external" value="false"/>
-         <binding slot="$_d4e16_step.eval" value="&#34;testMentalState(mostPreferredCuisine(),null)&#34;"/>
+         <binding slot="$_d4e16_step.eval"
+                  value="&#34;updateOtherAboutSelfMS(mostPreferredCuisine(),null)&#34;"/>
       </subtasks>
       <subtasks id="_d4e18_subtasks">
          <step name="_d4e18_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -98,13 +99,18 @@
     function leastPreferredCuisine () {
        return Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
     }
+    function updateOtherMS (more, less){
+    	$negotiation.updateOtherMentalState(more, less);
+    	$negotiation.printAllMentalState();
+    }
+    
+    function updateOtherAboutSelfMS(more, less){
+    	$negotiation.updateOASMentalState(more, less);
+    	$negotiation.printAllMentalState();
+    }
 
     var APPLICABLE_TEST = null; // for testing
     
-    function testMentalState(more,less) {
-       $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).addOther(more, less);
-       $negotiation.printAllMentalState();
-    }
-    
+      
   </script>
 </taskModel>

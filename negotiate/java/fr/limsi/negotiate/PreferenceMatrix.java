@@ -16,27 +16,39 @@ public class PreferenceMatrix<T> {
 	}
 
 
-	public void addPreference(T mostPreferred, T lessPreferred) {
-		
-		int i = values.indexOf(mostPreferred);
-		int j = values.indexOf(lessPreferred);
-		// add an exception in case where the index = -1
-		preferences[i][j]= 1 ;
-		preferences[j][i]= -1;
-		transitivity(i, j);
+	public void addPreference(T more, T less) {
+		if(more.equals(null)){
+			int j = values.indexOf(less);
+
+		}
+		else if(less.equals(null)){
+			int i = values.indexOf(more);
+
+		}
+		else{
+			
+			int i = values.indexOf(more);
+			int j = values.indexOf(less);
+			// add an exception in case where the index = -1
+			preferences[i][j]= 1 ;
+			preferences[j][i]= -1;
+			transitivity(i, j);
+			
+		}
+	
 		
 	}
 
-	public void transitivity (int indexMostPref, int indexLessPref){
+	public void transitivity (int indexMore, int indexLess){
 
 		for(int i=0; i< preferences.length; i++){
-			if(preferences[indexLessPref][i] == 1 && i != indexMostPref){
-				preferences[indexMostPref][i] =1;
-				preferences[i][indexMostPref] = -1;
+			if(preferences[indexLess][i] == 1 && i != indexMore){
+				preferences[indexMore][i] =1;
+				preferences[i][indexMore] = -1;
 			}
-			if(preferences[indexMostPref][i] == -1 && i != indexLessPref){
-				preferences[indexLessPref][i] = -1;
-				preferences[i][indexLessPref] = 1;
+			if(preferences[indexMore][i] == -1 && i != indexLess){
+				preferences[indexLess][i] = -1;
+				preferences[i][indexLess] = 1;
 			}
 		}
 	}

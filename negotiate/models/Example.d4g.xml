@@ -68,11 +68,12 @@
   <agent id="_another_example" text="What cuisine do you prefer?">
 
     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        less="null" more="mostPreferredCuisine()">
-      
-<!--      <agent text="That's my favorite, too!" eval="testMentalState(more,less)"/> -->
+        less="null" more="mostPreferredCuisine()"  >
+ 
+ <!--      <agent text="That's my favorite, too!" eval="testMentalState(more,less)"/> -->
 <!-- TODO: how to get the values of more and less ? --> 
-      <agent text="That's my favorite, too!" eval="testMentalState(mostPreferredCuisine(),null)"/>     
+      <agent text="That's my favorite, too!" 
+      		eval="updateOtherAboutSelfMS(mostPreferredCuisine(),null)"/>     
     </do>
 
     <!-- this branch is chosen when user says anything else -->
@@ -102,14 +103,19 @@
     function leastPreferredCuisine () {
        return Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
     }
+    function updateOtherMS (more, less){
+    	$negotiation.updateOtherMentalState(more, less);
+    	$negotiation.printAllMentalState();
+    }
+    
+    function updateOtherAboutSelfMS(more, less){
+    	$negotiation.updateOASMentalState(more, less);
+    	$negotiation.printAllMentalState();
+    }
 
     var APPLICABLE_TEST = null; // for testing
     
-    function testMentalState(more,less) {
-       $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).addOther(more, less);
-       $negotiation.printAllMentalState();
-    }
-    
+      
   </t:script>
   
 </model>

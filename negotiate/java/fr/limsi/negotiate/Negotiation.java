@@ -60,6 +60,16 @@ public class Negotiation<O extends Option> {
 		// add the new proposal to the corresponding 	
 	}
 
+	public void updateOtherMentalState(Criterion more, Criterion less){
+		Class <? extends Criterion> type =more.getClass();
+		this.getCriterionNegotiation(type).addOther(more, less);
+	}
+	
+public void updateOASMentalState(Criterion more, Criterion less){
+		Class <? extends Criterion> type =more.getClass();
+		this.getCriterionNegotiation(type).addOAS(more, less);
+	}
+	
 	public void printAllMentalState() {
 		for(CriterionNegotiation<Criterion> c: criteriaNegotiation) {
 			c.printMentalState();
