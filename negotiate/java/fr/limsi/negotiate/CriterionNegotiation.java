@@ -37,6 +37,9 @@ public class CriterionNegotiation<C extends Criterion> {
 		setSelf(new CriterionPrefModel<C>());
 		other = new CriterionPrefModel<C>();
 		oas = new CriterionPrefModel<C>();
+		self.setType(type);
+		other.setType(type);
+		oas.setType(type);
 	}
 
 	public Class<C> getCriterionType() {
@@ -72,5 +75,31 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void setSelf(CriterionPrefModel<C> self) {
 		this.self = self;
 	}
+
+	public CriterionPrefModel<C> getOther() {
+		return other;
+	}
+
+	public void addOther(C more, C less) {
+		other.add(more,less);
+	}
+	
+	public void addOAS(C more, C less) {
+		oas.add(more,less);
+	}
+	
+	public CriterionPrefModel<C> getOas() {
+		return oas;
+	}
+
+	public void printMentalState() {
+		System.out.println("SELF preferences");
+		System.out.println(self);
+		System.out.println("OTHER preferences");
+		System.out.println(other);
+		System.out.println("OTHER-ABOUT-SELF preferences");
+		System.out.println(oas);
+	}
+	
 
 }

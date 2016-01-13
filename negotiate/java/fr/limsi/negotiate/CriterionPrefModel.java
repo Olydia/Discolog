@@ -16,7 +16,7 @@ import java.util.*;
  */
 
 public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> {
-	Class <C> type; 
+	private Class <C> type; 
 	// paired preferences on C values
 	private final ArrayList<ValuePreference<C>> preferences = new ArrayList<ValuePreference<C>>();
  	
@@ -96,4 +96,14 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	public void setType(Class<C> type) {
 		this.type = type;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("type " + type.getName());
+		for(ValuePreference<C> p : preferences)
+			sb.append(" "+p);
+		return sb.toString();
+	}
+	
 }

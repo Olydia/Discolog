@@ -57,10 +57,14 @@ public class Negotiation<O extends Option> {
 		// get the index of the criterionNegotiation of type
 		int indexList = criteriaNegotiation.indexOf(criterionNegotiation);
 		criteriaNegotiation.get(indexList).propose(propose);
-		// add the new proposal to the corresponding 
-		
-		
-		
+		// add the new proposal to the corresponding 	
 	}
 
+	public void printAllMentalState() {
+		for(CriterionNegotiation<Criterion> c: criteriaNegotiation) {
+			c.printMentalState();
+			System.out.println();
+		}
+	}
+	
 }

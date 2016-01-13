@@ -74,8 +74,17 @@ public class PreferenceMatrix<T> {
 
 	}
 	
+	private static final int maxIndex(ArrayList<Integer> a) {
+		int imax=0;
+		for(int i=1;i<a.size();i++)
+			if (a.get(i)>a.get(imax))
+				imax = i;
+		return imax;
+	}
+	
 	public T getMostPreffered() {
-		int  indexmax = Collections.max(getPreferences());
+		ArrayList<Integer> prefValues = getPreferences();
+		int  indexmax = maxIndex(prefValues);
 		return (values.get(indexmax));
 	}
 

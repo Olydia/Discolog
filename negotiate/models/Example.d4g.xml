@@ -70,8 +70,9 @@
     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
         less="null" more="mostPreferredCuisine()">
       
-      <agent text="That's my favorite, too!"/>
-      
+<!--      <agent text="That's my favorite, too!" eval="testMentalState(more,less)"/> -->
+<!-- TODO: how to get the values of more and less ? --> 
+      <agent text="That's my favorite, too!" eval="testMentalState(mostPreferredCuisine(),null)"/>     
     </do>
 
     <!-- this branch is chosen when user says anything else -->
@@ -91,6 +92,9 @@
     // TODO: following are stand-ins for various convenient JavaScript functions to use
     //       in conditions and scripts above to access information from Java via $negotiation
 
+
+	// TODO: see with Chuck how to get the class in javascript, without using ITALIAN.getClass
+
     function mostPreferredCuisine() {
        return $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).getSelf().getMostPreferred();
     }
@@ -100,6 +104,11 @@
     }
 
     var APPLICABLE_TEST = null; // for testing
+    
+    function testMentalState(more,less) {
+       $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).addOther(more, less);
+       $negotiation.printAllMentalState();
+    }
     
   </t:script>
   

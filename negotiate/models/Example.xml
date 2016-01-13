@@ -65,19 +65,20 @@
    <task id="__another_example_tree">
       <subtasks id="_d4e13_subtasks">
          <step name="_d4e13_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e14_step" task="disco:Say"/>
+         <step name="_d4e16_step" task="disco:Say$Eval"/>
          <binding slot="$_d4e13_step.external" value="true"/>
          <binding slot="$_d4e13_step.less" value="null"/>
          <binding slot="$_d4e13_step.more" value="mostPreferredCuisine()"/>
-         <binding slot="$_d4e14_step.text" value="&#34;That's my favorite, too!&#34;"/>
-         <binding slot="$_d4e14_step.external" value="false"/>
+         <binding slot="$_d4e16_step.text" value="&#34;That's my favorite, too!&#34;"/>
+         <binding slot="$_d4e16_step.external" value="false"/>
+         <binding slot="$_d4e16_step.eval" value="&#34;testMentalState(mostPreferredCuisine(),null)&#34;"/>
       </subtasks>
-      <subtasks id="_d4e16_subtasks">
-         <step name="_d4e16_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e17_step" task="disco:Say"/>
-         <binding slot="$_d4e16_step.external" value="true"/>
-         <binding slot="$_d4e17_step.text" value="&#34;Thanks!&#34;"/>
-         <binding slot="$_d4e17_step.external" value="false"/>
+      <subtasks id="_d4e18_subtasks">
+         <step name="_d4e18_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e19_step" task="disco:Say"/>
+         <binding slot="$_d4e18_step.external" value="true"/>
+         <binding slot="$_d4e19_step.text" value="&#34;Thanks!&#34;"/>
+         <binding slot="$_d4e19_step.external" value="false"/>
       </subtasks>
    </task>
    <script init="true">
@@ -86,6 +87,9 @@
 
     // TODO: following are stand-ins for various convenient JavaScript functions to use
     //       in conditions and scripts above to access information from Java via $negotiation
+
+
+	// TODO: see with Chuck how to get the class in javascript, without using ITALIAN.getClass
 
     function mostPreferredCuisine() {
        return $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).getSelf().getMostPreferred();
@@ -96,6 +100,11 @@
     }
 
     var APPLICABLE_TEST = null; // for testing
+    
+    function testMentalState(more,less) {
+       $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).addOther(more, less);
+       $negotiation.printAllMentalState();
+    }
     
   </script>
 </taskModel>

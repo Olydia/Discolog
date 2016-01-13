@@ -6,6 +6,11 @@ package fr.limsi.negotiate;
  */
 public abstract class Preference<C> {
 
+	@Override
+	public String toString() {
+		return "(" + more+ ">" + less+ ")";
+	}
+
 	private final C less, more;
 
 	public C getLess() {
