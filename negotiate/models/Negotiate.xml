@@ -7,6 +7,20 @@
 
   <!-- see Java class definition for StatePreference -->
   
+  <task id="fr.limsi.negotiate.lang.AskPreference">   
+
+    <input name="less" type="Packages.fr.limsi.negotiate.Criterion"/>
+    <input name="more" type="Packages.fr.limsi.negotiate.Criterion"/> 
+    <input name="criterion" type="java.lang.String"/> 
+    
+
+    <precondition>
+      !$negotiation.isInOther($this.more, $this.less);
+    </precondition>
+
+  </task>
+  
+  
   <task id="fr.limsi.negotiate.lang.StatePreference">   
     <!-- NOTE:
          
@@ -32,8 +46,10 @@
     <script>
       if ( $this.external ) {
         // TODO: put JavaScript code here for effects in hearer case
+        updateOtherMS ($this.more, $this.less);
       } else {
         // TODO: put JavaScript code here for effects in speaker case
+        updateOtherAboutSelfMS ($this.more, $this.less);
         STATE_PREFERENCE_TEST = false;
       }
     </script>
@@ -43,9 +59,20 @@
 
   <script init="true"> 
 
-    // put convenient JavaScript functions to use conditions and scripts here
+    $negotiation = $disco.getInteraction().getSystem().getNegotiation();
 
-    var $negotiation; // should be initialized elsewhere to current negotiation
+    // TODO: following are stand-ins for various convenient JavaScript functions to use
+    //       in conditions and scripts above to access information from Java via $negotiation
+
+    function updateOtherMS (more, less){
+    	$negotiation.updateOtherMentalState(more, less);
+    }
+    
+    function updateOtherAboutSelfMS(more, less){
+    	$negotiation.updateOASMentalState(more, less);
+    }
+
+    // put convenient JavaScript functions to use conditions and scripts here
 
     // for testing precondition handling (see test/Example1.test)
     var STATE_PREFERENCE_TEST = null; 
