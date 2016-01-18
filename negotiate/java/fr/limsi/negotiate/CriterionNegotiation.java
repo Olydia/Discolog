@@ -2,7 +2,6 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
-import fr.limsi.negotiate.Proposal.Status;
 
 /**
  * Class to define the mental state of the agent on preferences about a <b>criterion</b> 
@@ -46,7 +45,6 @@ public class CriterionNegotiation<C extends Criterion> {
 		return criterionType;
 	}
 	public C getTheCurrentMostPreffered(){
-		@SuppressWarnings("unchecked")
 		ArrayList<C> values = (ArrayList<C>) getSelf().getValues();
 		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferences());
 		int mostPref = Collections.max(newScores);

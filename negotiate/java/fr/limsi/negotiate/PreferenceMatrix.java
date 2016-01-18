@@ -15,7 +15,7 @@ public class PreferenceMatrix<T> {
 		preferences = new int [values.size()][values.size()];
 	}
 
-
+// TODO check if preference(less, more) is not already defined in order to avoid inconcisty and cycles
 	public void addPreference(T more, T less) {
 		if(more.equals(null)){
 			int j = values.indexOf(less);

@@ -3,14 +3,12 @@ package fr.limsi.negotiate.restaurant;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionPrefModel;
 import fr.limsi.negotiate.CriterionPreference;
-import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.CriteriaClassPrefModel;
 import fr.limsi.negotiate.ValuePreference;
 
 
 public class TestRestaurant {
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// 1. Define lydia preference model on each criterion of restaurant
 		// 1.1. Preference model on cuisine
@@ -51,8 +49,8 @@ public class TestRestaurant {
 
 		//
 		//		/*3. Create a nogotiation on restaurant */
-		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
-		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
+//		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
+//		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
 		//
 		//		// Test the DFS preference method (it should return true 
 		//		System.out.println("Chinses score: " + lydia_cuisine.getScore(Cuisine.ITALIAN)+ " Turkich Score: " + lydia_cuisine.getScore(Cuisine.TURKISH));
