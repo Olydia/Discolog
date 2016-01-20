@@ -4,6 +4,10 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionPrefModel;
 import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.CriteriaClassPrefModel;
+import fr.limsi.negotiate.CriterionProposal;
+import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.OptionProposal;
+import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ValuePreference;
 
 
@@ -48,9 +52,10 @@ public class TestRestaurant {
 		ambiance.setSelfPreferences(lydia_ambiance);
 
 		//
-		//		/*3. Create a nogotiation on restaurant */
-//		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
-//		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
+				/*3. Create a nogotiation on restaurant */
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
+		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
 		//
 		//		// Test the DFS preference method (it should return true 
 		//		System.out.println("Chinses score: " + lydia_cuisine.getScore(Cuisine.ITALIAN)+ " Turkich Score: " + lydia_cuisine.getScore(Cuisine.TURKISH));
@@ -65,7 +70,15 @@ public class TestRestaurant {
 	//	System.out.println(lydia_cuisine.getMostPreferred());
 		
 			
+		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
+		CriterionProposal c2 = new CriterionProposal(true, Ambiance.CALM);
 
-	
+		restaurants.addProposal(c);
+		//cuisine.propose(c);
+		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED, true);
+		System.out.println(restaurants.getProposals());
+		System.out.println(restaurants.checkProposalStatus(c));
+		
+
 	}
 }

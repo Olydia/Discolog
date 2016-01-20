@@ -2,6 +2,8 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+import fr.limsi.negotiate.Proposal.Status;
+
 
 /**
  * Class to define the mental state of the agent on preferences about a <b>criterion</b> 
@@ -31,6 +33,10 @@ public class CriterionNegotiation<C extends Criterion> {
 	public Class<C> criterionType ; 
 	private  List<CriterionProposal> proposals = new ArrayList<CriterionProposal>();
 
+	public List<CriterionProposal> getProposals() {
+		return proposals;
+	}
+
 	public CriterionNegotiation (Class<C> type) {
 		criterionType = type;
 		setSelf(new CriterionPrefModel<C>());
@@ -44,13 +50,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	public Class<C> getCriterionType() {
 		return criterionType;
 	}
+	
 	public C getTheCurrentMostPreffered(){
 		ArrayList<C> values = (ArrayList<C>) getSelf().getValues();
 		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferences());
 		int mostPref = Collections.max(newScores);
 		return( values.get(mostPref));
 	}
-
 
 	public ArrayList<Integer> clearRejected(ArrayList<C> values, ArrayList<Integer> cScores) {
 		for ( CriterionProposal c: proposals) {
@@ -60,6 +66,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return cScores;
 	}
+	
 	public void propose (CriterionProposal proposal) { proposals.add(proposal); }
 
 	public void setSelfPreferences(CriterionPrefModel<C> selfPref) {
@@ -90,6 +97,23 @@ public class CriterionNegotiation<C extends Criterion> {
 		return oas;
 	}
 
+	public boolean isProposed(CriterionProposal proposal){
+		Criterion cr = proposal.getValue() ;
+		for (CriterionProposal p: proposals)
+			if (p.criterion.equals(cr))
+				return true;
+		
+		return false;
+	}
+	
+	public Status checkStatus(CriterionProposal p) {
+		for(CriterionProposal prop : proposals) {
+			if(prop.getValue().equals(p.getValue()))
+				return prop.status;	
+		}
+		return null;
+	}
+	
 	public void printMentalState() {
 		System.out.println("SELF preferences");
 		System.out.println(self);
@@ -99,5 +123,17 @@ public class CriterionNegotiation<C extends Criterion> {
 		System.out.println(oas);
 	}
 	
+
+	public void updateProposal(CriterionProposal proposal, Proposal.Status status, boolean isSelf){
+		
+		for(CriterionProposal c: proposals){
+			if(proposal.getValue().equals(c.getValue())) {
+				c.setStatus(status);
+				c.setIsSelf(isSelf);
+			}
+				
+		}
+	}
+
 
 }

@@ -8,14 +8,24 @@ package fr.limsi.negotiate;
  */ 
 public class CriterionProposal extends Proposal {
    
-   public final Criterion criterion;
+   @Override
+	public String toString() {
+		return criterion.toString();
+	}
+
+public final Criterion criterion;
    
-   protected CriterionProposal (boolean isSelf, Criterion criterion) {
+   public CriterionProposal (boolean isSelf, Criterion criterion) {
       super(isSelf);
       this.criterion = criterion;
    }
 
 public Criterion getCriterion() {
+	return criterion;
+}
+
+@Override
+Criterion getValue() {
 	return criterion;
 }
    

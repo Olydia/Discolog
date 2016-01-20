@@ -7,26 +7,40 @@ package fr.limsi.negotiate;
  */
 public abstract class Proposal {
 
-   protected Status status = Status.OPEN;
-   protected Proposal counter;
-   public final boolean isSelf;
-   
-   protected Proposal (boolean isSelf) {
-      this.isSelf = isSelf;
-   }
-   
-   public void setStatus (Status status) {
-      this.status = status;
-   }
-   
-   public Status getStatus () { return status; }
-   
-   public void setCounter (Proposal counter) {
-      this.counter = counter;
-   }
-   
-   public Proposal getCounter () { return counter; }
-   
-   public static enum Status { OPEN, REJECTED, ACCEPTED }
-   
+	@Override
+	public String toString() {
+		return "status=" + status + ", counter=" + counter
+				+ ", isSelf=" + isSelf + "]";
+	}
+	protected Status status = Status.OPEN;
+	protected Proposal counter;
+	public boolean isSelf;
+
+	public boolean isSelf() {
+		return isSelf;
+	}
+
+	public void setIsSelf(boolean value){
+		this.isSelf = value;
+	}
+
+	protected Proposal (boolean isSelf) {
+		this.isSelf = isSelf;
+	}
+
+	public void setStatus (Status status) {
+		this.status = status;
+	}
+
+	public Status getStatus () { return status; }
+
+	public void setCounter (Proposal counter) {
+		this.counter = counter;
+	}
+
+	public Proposal getCounter () { return counter; }
+
+	abstract Object getValue();
+	public static enum Status { OPEN, REJECTED, ACCEPTED }
+
 }

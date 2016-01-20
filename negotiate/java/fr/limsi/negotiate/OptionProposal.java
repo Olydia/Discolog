@@ -6,11 +6,22 @@ package fr.limsi.negotiate;
  */
 
 public class OptionProposal extends Proposal {
-   
-   public final Option option;
-   
-   protected OptionProposal (boolean isSelf, Option option) {
-      super(isSelf);
-      this.option = option;
-   }
+
+	@Override
+	public String toString() {
+		return option.toString();
+	}
+
+	public final Option option;
+
+	public OptionProposal (boolean isSelf, Option option) {
+		super(isSelf);
+		this.option = option;
+	}
+
+	@Override
+	Option getValue() {
+
+		return option;
+	}
 }
