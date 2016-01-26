@@ -1,0 +1,95 @@
+    # 26 janv. 2016 15:20:49 - TaskEngine 1.9 / Disco 1.13
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > execute fr.limsi.negotiate.lang.AskPreference / Packages.fr.limsi.negotiate.restaurant.Cuisine / null / null / false
+    Agent says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+    User says "I like FRENCH most."
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) / false 
+    Agent says "Let's choose FRENCH."
+  > execute fr.limsi.negotiate.lang.Reject / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredCuisine() / false
+    Agent says "I like CHINESE most."
+  > execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(mostPreferredCuisine()) 
+    User says "Let's choose CHINESE."
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.Accept / createCriterionProposal(mostPreferredCuisine())
+    User says "Okay, let's choose CHINESE."
+    Agent says "Ok."
+  > eval printMS()
+#### Options proposals ####
+ 
+ 
+ #### Criteria mental model ####
+ **** SELF preferences *** 
+ 
+
+|(CHEAP>EXPENSIVE)
+
+ 
+*** OTHER preferences *** 
+ 
+
+
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+
+ **** SELF preferences *** 
+ 
+
+|(CHINESE>FRENCH)|(CHINESE>JAPANESE)|(JAPANESE>ITALIAN)|(FRENCH>ITALIAN)|(JAPANESE>TURKISH)
+
+ 
+*** OTHER preferences *** 
+ 
+
+|(FRENCH>null)
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+|(CHINESE>null)
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+( value= FRENCH, status=REJECTED)|( value= CHINESE, status=ACCEPTED)|
+ **** SELF preferences *** 
+ 
+
+|(CALM>NOISY)
+
+ 
+*** OTHER preferences *** 
+ 
+
+
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+
+    # Returned 'null'
+  > quit
+    
