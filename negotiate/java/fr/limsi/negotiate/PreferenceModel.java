@@ -14,17 +14,34 @@ abstract public class PreferenceModel<C>{
 		return matrix;
 	}
 	
-	abstract public ArrayList<Integer> getPreferences () ;
+	abstract public ArrayList<Integer> getPreferencesValues () ;
 	/**
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference. Can be used to respond to an ask.Preference(Less, More)
 	 */
 	abstract public Boolean isPreferred (C more, C less);
+	
+	abstract public List<C>getValues();
 	 // A definir ici 
 	
 	public void updateLastPreference(Preference<C> preference) {
 		lastUpdate = preference;
 	}
 	
+	public C getMostPreferred() {
+		@SuppressWarnings("unchecked")
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), getPreferences());
+		return (M.getMostPreffered());
+	}
+
+
+	public C getLeastPreferred() {
+		@SuppressWarnings("unchecked")
+		PreferenceMatrix<C> M = this.generateMatrix(getValues(), getPreferences());
+		return (M.getLeastPreffered());
+	}
+	
+	@SuppressWarnings("rawtypes")
+	abstract ArrayList  getPreferences();
 
 }

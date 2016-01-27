@@ -52,13 +52,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	
 	public C getTheCurrentMostPreffered(){
-		ArrayList<C> values = (ArrayList<C>) getSelf().getValues();
-		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferences());
-		int mostPref = Collections.max(newScores);
+		List<C> values = getSelf().getValues();
+		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferencesValues());
+		int mostPref = maxIndex(newScores);
 		return( values.get(mostPref));
 	}
 
-	public ArrayList<Integer> clearRejected(ArrayList<C> values, ArrayList<Integer> cScores) {
+	public ArrayList<Integer> clearRejected(List<C> values, ArrayList<Integer> cScores) {
 		for ( CriterionProposal c: proposals) {
 			if(c.status.equals(Proposal.Status.REJECTED)) {
 				cScores.set(values.indexOf(c.criterion), Collections.min(cScores));
@@ -67,7 +67,27 @@ public class CriterionNegotiation<C extends Criterion> {
 		return cScores;
 	}
 	
-	public void propose (CriterionProposal proposal) { proposals.add(proposal); }
+	private static final int maxIndex(ArrayList<Integer> a) {
+		int imax=0;
+		for(int i=1;i<a.size();i++)
+			if (a.get(i)>a.get(imax))
+				imax = i;
+		return imax;
+	}
+	
+	private static final int minIndex(ArrayList<Integer> a) {
+		int imin = a.get(0);
+		for(int i=1;i<a.size();i++)
+			if (a.get(i)<=a.get(imin))
+				imin = i;
+		return imin;
+	}
+	
+	public void propose (CriterionProposal proposal) { 
+		if(! proposals.contains(proposal))
+			proposals.add(proposal);
+		else 
+			updateProposal(proposal, Status.OPEN);}
 
 	public void setSelfPreferences(CriterionPrefModel<C> selfPref) {
 		setSelf(selfPref);
@@ -97,10 +117,10 @@ public class CriterionNegotiation<C extends Criterion> {
 		return oas;
 	}
 
-	public boolean isProposed(CriterionProposal proposal){
+	public boolean isProposed(CriterionProposal proposal, Status status){
 		Criterion cr = proposal.getValue() ;
 		for (CriterionProposal p: proposals)
-			if (p.criterion.equals(cr))
+			if (p.getValue().equals(cr) && p.getStatus().equals(status))
 				return true;
 		
 		return false;
@@ -115,21 +135,24 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	
 	public void printMentalState() {
-		System.out.println("SELF preferences");
+		System.out.println(" **** SELF preferences *** \n \n");
 		System.out.println(self);
-		System.out.println("OTHER preferences");
+		System.out.println("\n \n*** OTHER preferences *** \n \n");
 		System.out.println(other);
-		System.out.println("OTHER-ABOUT-SELF preferences");
+		System.out.println("\n \n*** OTHER-ABOUT-SELF preferences *** \n \n");
 		System.out.println(oas);
+		System.out.println("\n \n*** Dialogue context (proposals) *** \n \n");
+		for(CriterionProposal c : proposals)
+			System.out.print(c.print() + "|");
 	}
 	
 
-	public void updateProposal(CriterionProposal proposal, Proposal.Status status, boolean isSelf){
+	public void updateProposal(CriterionProposal proposal, Proposal.Status status){
 		
 		for(CriterionProposal c: proposals){
 			if(proposal.getValue().equals(c.getValue())) {
 				c.setStatus(status);
-				c.setIsSelf(isSelf);
+				//c.setIsSelf(isSelf);
 			}
 				
 		}

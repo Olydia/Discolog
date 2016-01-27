@@ -105,10 +105,7 @@
        		getSelf().getLeastPreferred();
     }
  
-   function printMS() {
-    	$negotiation.printAllMentalState();
-    	
-    }
+   
     var APPLICABLE_TEST = null; // for testing
     
       

@@ -23,6 +23,7 @@ public class TestRestaurant {
 		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
 		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
 		lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
+	//	lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.CHINESE));
 		
 		// 2.2. Preference model on Cost
 		CriterionPrefModel<Cost> lydia_cost = new CriterionPrefModel<Cost>();
@@ -67,17 +68,18 @@ public class TestRestaurant {
 //		Restaurant res = restaurants.getPreferredOption(Restaurant.CHEZ_CHUCK, Restaurant.LE_PARISIEN);
 //		System.out.println(res.name());
 	//	System.out.println("le res est " + restaurants.getCriterionNegotiation(Cuisine.class).getSelf().getMostPreferred());
-	//	System.out.println(lydia_cuisine.getMostPreferred());
+		System.out.println(lydia_cuisine.getMostPreferred());
+		System.out.println(restaurants.mostPreferredCriterion(Cuisine.class));
 		
 			
-		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
-		CriterionProposal c2 = new CriterionProposal(true, Ambiance.CALM);
-
-		restaurants.addProposal(c);
-		//cuisine.propose(c);
-		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED, true);
-		System.out.println(restaurants.getProposals());
-		System.out.println(restaurants.checkProposalStatus(c));
+//		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
+//		CriterionProposal c2 = new CriterionProposal(true, Ambiance.CALM);
+//
+//		restaurants.addProposal(c);
+//		//cuisine.propose(c);
+//		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED);
+//		System.out.println(restaurants.getProposals());
+//		System.out.println(restaurants.checkProposalStatus(c));
 		
 
 	}

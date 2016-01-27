@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+
 /** Stores the preferences about values for a given criterion C, i.e. a list of Preferences<C>, i.e. a list of couples (less,more)
  * with less and more values of an enum C that implements Criterion.
  * 
@@ -22,9 +23,14 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
  	
 	
 	public void add (ValuePreference<C> preference) {
+		ValuePreference<C> v = new ValuePreference<C>
+							(preference.getLess(), preference.getMore());
+		if(preferences.contains(v))
+			throw new RuntimeException("Cannot add P ("+v.getLess()+", " + v.getMore()+") "
+					+ " because P ("+v.getMore()+", " + v.getLess()+") exists in the preferences list");
 		preferences.add(preference);
 	}
-/* definir une methode qui prend en entrée deux criteres et crée */
+
 	public void add (C more, C less){
 		add(new ValuePreference<C>(more, less));
 	}
@@ -32,11 +38,13 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference. Can be used to respond to an ask.Preference(Less, More)
 	 */
+	@Override
 	public Boolean isPreferred (C more, C less) {
 		return( getScore(less) < getScore(more)?  true :  false);
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<C> getValues(){
 		
 		try {
@@ -69,20 +77,8 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	}
 
 	
-	public C getMostPreferred() {
-		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
-		return (M.getMostPreffered());
-	}
-
-
-	public C getLeastPreferred() {
-		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
-		return (M.getLeastPreffered());
-	}
-	
-
 	@Override
-	public ArrayList<Integer> getPreferences() {
+	public ArrayList<Integer> getPreferencesValues() {
 		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferences());
 	}
@@ -100,10 +96,15 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("type " + type.getName());
+		// sb.append("type " + type.getName());
 		for(ValuePreference<C> p : preferences)
-			sb.append(" "+p);
+			sb.append("|"+p);
 		return sb.toString();
+	}
+	@Override
+	ArrayList<ValuePreference<C>> getPreferences() {
+		// TODO Auto-generated method stub
+		return this.preferences;
 	}
 	
 }
