@@ -2,8 +2,10 @@ execute fr.limsi.negotiate.lang.AskPreference / Packages.fr.limsi.negotiate.rest
 execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
 execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) / false 
 execute fr.limsi.negotiate.lang.Reject / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH)
-execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredCuisine() / false
-execute fr.limsi.negotiate.lang.Propose / null / mostPreferredCuisine() 
-execute fr.limsi.negotiate.lang.Accept / createCriterionProposal(mostPreferredCuisine())
+execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue() / false
+execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(mostPreferredValue())  / false
+execute fr.limsi.negotiate.lang.Reject / createCriterionProposal(mostPreferredValue()) 
+
+execute fr.limsi.negotiate.lang.Accept / createCriterionProposal(mostPreferredValue())
 
 eval printMS()

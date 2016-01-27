@@ -159,10 +159,8 @@
 		Packages.fr.limsi.negotiate.Proposal.Status.REJECTED);
 		}
 
-		function mostPreferredCuisine() {
-		return $negotiation.getCriterionNegotiation(
-		Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).
-		getSelf().getMostPreferred();
+		function mostPreferredValue() {
+		return $negotiation.mostPreferredCriterion(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass());
 		}
 
 		function printMS() {
