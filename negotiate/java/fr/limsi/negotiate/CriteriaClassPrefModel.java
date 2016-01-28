@@ -21,7 +21,8 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Class<? extends Criterion>> getOptionCriteria(){
+	@Override
+	public List<Class<? extends Criterion>> getValues(){
 		try {
 			Method m = type.getDeclaredMethod("getCriteria");
 			Object[] v = type.getEnumConstants();
@@ -48,22 +49,30 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference.
 	 */
+	@Override
 	public Boolean isPreferred (Class<? extends Criterion> more, Class<? extends Criterion> less) {
 	
 		return( getRank(less) < getRank(more)?  true :  false);	}
 
 
 	public int getRank(Class<? extends Criterion> criterion){
-		int index = getOptionCriteria().indexOf(criterion);
-		PreferenceMatrix<Class<? extends Criterion>> M = this.generateMatrix(getOptionCriteria(), preferences);
+		int index = getValues().indexOf(criterion);
+		PreferenceMatrix<Class<? extends Criterion>> M = this.generateMatrix(getValues(), preferences);
 		 		
 		return (M.getRankedPreferences().get(index));
 	}
 
-
-	public ArrayList<Integer> getPreferences() {
+	@Override
+	public ArrayList<Integer> getPreferencesValues() {
 		// TODO Auto-generated method stub
-		PreferenceMatrix<Class<? extends Criterion>> M = this.generateMatrix(getOptionCriteria(), preferences);
+		PreferenceMatrix<Class<? extends Criterion>> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferences());
 	}
+
+	@Override
+	ArrayList<CriterionPreference> getPreferences() {
+		// TODO Auto-generated method stub
+		return preferences;
+	}
+
 }

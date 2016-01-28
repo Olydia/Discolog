@@ -7,13 +7,12 @@ package fr.limsi.negotiate;
  */
 public abstract class Proposal {
 
-	@Override
-	public String toString() {
-		return "status=" + status + ", counter=" + counter
-				+ ", isSelf=" + isSelf + "]";
+	public String print() {
+		return "( value= "+ this.getValue().toString() + ", status=" + status+ ")" ;
 	}
 	protected Status status = Status.OPEN;
 	protected Proposal counter;
+	// the flag is about who proposed the utterance 
 	public boolean isSelf;
 
 	public boolean isSelf() {
@@ -41,6 +40,7 @@ public abstract class Proposal {
 	public Proposal getCounter () { return counter; }
 
 	abstract Object getValue();
+	
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
 
 }
