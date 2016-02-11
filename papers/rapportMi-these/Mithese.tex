@@ -1,0 +1,136 @@
+			%%%% patron de format latex pour rfia 2000.
+			%%%% sans garanties. Plaintes \`a envoyer \`a \dev\null.
+			%%%% deux colonnes pas de num\'erotation et 10 points
+			%%%% necessite les fichiers a4.sty french.sty et rfia2000.sty
+			
+%%%% Pour \LaTeXe
+\documentclass[a4paper,french]{article}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[noend]{algpseudocode}
+\usepackage{subcaption}
+\usepackage{subfig} 
+\usepackage{usual}
+\usepackage{graphicx}
+\usepackage[rflt]{floatflt}
+\pagestyle{plain}
+			
+\begin{document}
+
+\section{Introduction}
+
+La modélisation d’agents conversationnels connaît un véritable essor dans différents domaines applicatifs où l'agent joue différents rôles tels que  le rôle de compagnon \cite{sidner2013always} ou encore de conseillé \cite{bickmore2005s}. 
+\par A l'origine les dialogues se centraient sur la collaboration avec l’utilisateur pour satisfaire des tâches communes. Cependant, un certain nombre de recherches ont montré que l’aspect social ne peut être ignoré dans un dialogue, car ce dernier est social par définition \cite{markopoulos2005case}. Par ailleurs, \cite{moon1998intimate} a démontré que les utilisateurs préfèrent interagir avec des agents dotés d'aptitudes sociales qui lui permettraient de construire une relation sur le long-terme avec l'utilisateur \cite{bickmore2005establishing}.
+ 
+\par Néanmoins, il existe encore peu de recherches qui s’intéressent à mettre en œuvre une modélisation explicite d’une relation sociale entre l’agent et l’utilisateur et qui soit dynamique (c-a-d évolue au cours de l'interaction). Les travaux existants se sont limités à une modélisation qui vise à améliorer la collaboration de l’agent et l'utilisateur sur une interaction limitée dans le temps. Dans le cadre d'une interaction sur long-terme ( par exemple: maison intelligente, compagnon artificiel pour personnes âgées), une modélisation explicite du comportement social de l’agent doit être mise en œuvre, car cette dernière influence le dialogue directement, en terme de contenue et de stratégies mise en place par l’agent pour satisfaire ses buts.
+
+\par La modélisation des comportements sociaux a été largement étudiée en psychologie sociale, où plusieurs travaux ont étudié les différentes dimensions qui peuvent affecter le comportement social dans le cadre d’une interaction humain/ humains. Ces notions peuvent être utilisées et adaptée pour le cas d’une interaction humain agent.
+\par Un des modèle de base de la psychologie sociale définit les relations en se basant sur l'ensemble des activités que deux personnes réalisent ensemble. De plus%\par De plus, Bickmore \cite{bickmore2012empirical} modélise la relation interpersonnelle par rapport aux nombre de tâches que deux interlocuteurs sont prêts à collaborer et ce à n'importe quel moment. 
+\cite{laver1981linguistic} définit le dialogue social comme un processus d'échange de préférences et opinions qui conduiraient ainsi les interlocuteur à mener des processus de négociation coopérative sur leurs préférences. Cette négociation est directement affecté par les relations établies entre les interlocuteurs.
+
+
+\par Le but de cette thèse est d'étudier l'impact des relations interpersonnelles sur les stratégies de dialogue des interlocuteurs et spécialement dans le cadre d'une négociation coopérative. Nous présenterons d'abord dans la section \ref{RW} les recherches qui ont étudié l'évolution du comportement sociale de l'agent par rapport aux relations interpersonnelles. Ensuite, dans la section \ref{contribution} nous présenterons notre modèle dialogique préliminaire ainsi que son implémentation. Nous terminerons par les perspectives de ces travaux ainsi qu'un plan prévisionnel de la thèse.
+
+%Plusieurs agents conversationnel intégrant une dimension sociale ou émotionnelle ont d’ores et déjà été proposés (e.g \cite{bickmore2012empirical, bickmore2005social}). nous proposons un modèle dialogique capable d'adapter les stratégies de dialogues de l'agent par rapport à sa perception de la relation interpersonnelle. 
+\section{État de l'art}
+\label{RW}
+Je vais d'abord parler des ACA sociaux existants dans la littérature qui arrivent à manipuler leurs relations avec l'utilisateur et ainsi adapter leur comportements dans la conversation. Par exemple, REA qui arrive à choisir entre une discussion sociale et tache.
+FitTrack \cite{bickmore2005s}, always \cite{sidner2013always}(agent pour les personnes âgées)
+Autom pour la perte de poids.
+
+De plus, \cite{bickmore2005social}  et \cite{laver1981linguistic} affirment que dans un dialogue social, on peut soit parler de sujets neutres ou partager des expériences personnelles,des préférences ou des opinions. Par conséquent, l’échange de préférence ou opinions peut mener les interlocuteurs à une négociation coopérative sur le sujet de conversation.
+
+
+Cependant, les travaux qui se sont intéresses à la négociation \cite{amgoud2000arguments,mcburney2004denotational,daskalopulu1998handling} dans le dialogue ignorent complètement l'aspect social du dialogue. , il a été prouvé que les relations sociales affectent directement le comportement des interlocuteurs \cite{bickmore2000weather, bickmore2005establishing, moon1998intimate, nass2000does} et par conséquent leurs stratégies dans le dialogue. 
+Exemple (dominant/soumis). 
+
+Nous présenterons dans ce qui suit les dimensions des relations interpersonnelles dans le dialogue. 
+(Reprendre le document rédigé su les dimensions sociales \cite {svennevig2000getting, haslam1994mental})
+
+
+\section{Contribution}
+\label{contribution}
+
+\par Afin de réaliser nos objectifs, nous avons d'abord enregistré des dialogues entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social. 
+Pour extraire et analyser ces comportements, nous nous sommes basés sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. L'analyse menée nous a permis de détecter et différencier les comportements communs et ceux liés aux relations interpersonnelles. Nous avons ensuite implémenté ces dialogues en D4G \cite{rich}. 
+\par Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle dialogique avec une modèle mental de l'environnement de l'agent, et un modèle lui permettant de mener une négociation coopérative. 
+En parallèle, nous avons modélisé un module de communication comportant cinq actes dialogiques qui lui permettent de dialoguer et négocier durant de le dialogue. 
+\par Nous présenterons dans cette partie nos travaux menés. En premier temps, nous présenterons plus en détails la collecte de données et son analyse. 
+	Nous présenterons ensuite notre modèle dialogique et ses différents modules ainsi que son implémentation sur Disco. 
+\subsection{Collecte de données}
+\par A l'origine, la collecte de donnée a été mené dans le but d'observer des interlocuteurs menant un dialogue social. Afin d'étudier la structure des dialogues enregistrés, nous nous sommes basés sur les travaux de Sidner \& Grosz \cite{grosz1986attention}  ....  la structure du dialogue se compose de trois composantes interdépendantes, à savoir la structure linguistique, la structure intentionnelle et la structure attentionnelle. L'analyse que nous avons effectués s'est limité à l'analyse linguistique et intentionnelle. 
+\par \textit{La structure linguistique} regroupe la structure des séquences d'actes de dialogues qui composent le dialogue. Ces actes de dialogues sont agrégées en \textbf{ segments de discours (SD)} (Discourse Segments), comme des mots qui composent une phrase. De plus, tous SD exercent certaines fonctions sur le dialogue et ont une relations entres eux.  
+\par La principale difficulté rencontrée lors de la définition de la structure linguistique réside dans la définition des délimitations entre segments de discours. 
+les relations entres les DS (structure intentionnelle)
+
+\par \textit{La structure intentionnelle} 
+%Toutefois, ces dialogues nous ont permis d’observer des  comportements intéressants à notre recherche. 
+
+\begin{enumerate}
+	\item Structure linguistique %-> Structure de la tâche de trouver un restaurant
+	\item Structure intentionnelle %-> comportement social dans la conversation 
+	\subitem Extraction des DSPs : Expliquer le processus de définition des DSP avec des exemples de textes $\rightarrow$ buts externes pour chaque DS.
+	\item \textbf{Résultats obtenus:}
+		\subitem Définition du processus de l’exécution de la tâche ``trouver un restaurant'', avec exemple. 
+		\subitem Identification de comportements dominants/ soumis VS comportement commun (quel interlocuteur initie le dialogue, le nombre de prise de paroles, la fréquence de propositions ... ), qui nous a permis d'analyser l'évolution de la relation de dominance dans les corpus. 
+		\subitem Identification d'actes de langage récurrents dans les dialogues (Définition informelle des actes de langages détectés)
+	\item Extraction des buts internes: Expliquer que les DSPs ne capturent pas les intentions internes de l'interlocuteur. Il a donc fallu faire une analyse des DSPs afin de détecter le but interne de chaque initiateur de DS. (Exemple dans le dialogue).
+	\item Conclusion: Les informations collectées nous ont permis de mettre en œuvre un modèle de dialogue. 
+	
+	
+\end{enumerate}
+\subsection{Modèle formel du dialogue}
+\par Pour cette partie, je compte reprendre ce que j'ai déjà rédigé pour le modèle de dialogue. 
+\subsubsection{Le modèle mentale}
+\begin{enumerate}
+\item Le modèle de préférences
+ 	\subitem les objets de préférence.(option $\rightarrow$ critères $\rightarrow$ valeurs)
+ 	\subitem Représentation des préférences :
+ 			\subsubitem Préférences sur les critères: préférences binaire partielle
+ 			\subsubitem Préférences sur les options: inférer directement à partir des préférences sur les critères (parler de la fonction de décision)
+ 	\subitem La représentation des préférences des interlocuteurs
+ 			\subsubitem Self, other and otheraboutself.
+\item le contexte du dialogue
+ 			\subitem Propositions faites dans la discussion : propositions ouvertes, rejetées et acceptée. 	
+\end{enumerate}
+
+\subsubsection{Sémantique des actes de dialogue}
+Présentation de chaque acte, ses préconditions et effets sur l'état mental
+
+\subsection{Implémentation du modèle en Disco}
+\begin{enumerate}
+\item Brève présentation de Disco : Les arbres de dialogues, les conditions de chaque tâche, architecture HTN, planification réactive
+\item Implémentation du modèle mentale.	
+\subsubitem implantation d'un modèle générique de dialogue
+\subsubitem algorithme ? quel module décrire la négociation(décision sur les options, mise a jours de l’état mental après un acte de langage, gestion des préférences circulaires... )
+\subsubitem Premier cadre d'application: les restaurants. 
+\item Développement des nouveaux actes de dialogues sur Disco. 
+\item Construction d'arbres de dialogue en D4g.
+\subitem Les premiers dialogues réalisés à partir  des corpus.
+\subsubitem Exemples de dialogues réalisés
+\subitem Implémentation de dialogues à base d'actes de dialogue. 
+\subsubitem Schéma d'arbre de dialogue sur le sujet des restaurants. 
+\end{enumerate}
+
+\section{Perspectives et travaux futurs}
+\label{pers}
+\begin{enumerate}
+\item La validation du premier système: expliquer la difficulté de mener une étude de validation.
+\item Rédactions d'articles.
+\item Insertion des relations interpersonnelles dans le système.
+\item Plan prévisionnel de la thèse
+ \subitem Première validation du modèle
+ 	\subsubitem mise en œuvre de l’expérimentation.
+ \subitem Soumission d'articles
+ \subitem généraliser le modèle aux autres dimensions sociales autre que la dominance
+\end{enumerate}
+% ====================================================================					
+	\vskip 4pt
+	\bibliographystyle{abbrv}
+	{\footnotesize
+			\bibliography{Library}} % The references (bibliography) information are stored in the file named "library.bib"
+	
+\end{document}
+			
+			
