@@ -27,6 +27,17 @@
 \pagestyle{plain}
 			
 \begin{document}
+	\title{\Large\bf Gestion opportuniste du dialogue sociale
+				       }
+			
+				\author{Lydia Ould Ouali${}^1$\\
+				 \\  LIMSI-CNRS, UPR 3251, Orsay, France \& Univ. Paris-Sud, Orsay, France \\
+				%Mon adresse complète \\
+				%Mon adresse électronique
+				}
+				\maketitle
+				%%%%  Pas de num\'erotation sur la page de titre
+				\thispagestyle{empty}
 
 \section{Introduction}
 
@@ -73,18 +84,20 @@ La seconde étape est la construction des relations avec l'utilisateur. En effet
 
 \subsubsection{Dimensions des relations interpersonnelles}
 La représentation dimensionnelle des relations est la représentation la plus courante dans la littérature qui consiste à représenter les relations dans un cercle de dimensions \emph{(c.f modèles de Wiggins)}. Par conséquent, toute relation peut être située et évaluée dans cet espace dimensionnel \textit{continue}. Un des modèles les plus connus est celui de Svennevig \cite{svennevig2000getting} qui divise les relations interpersonnelles sur quatre dimensions. 
-\par \textbf{Dominance: } Des chercheurs de différents domaines s'accordent pour définir la dominance ou le pouvoir comme la capacité d'influencer le comportement d'autrui. Le pouvoir peut être latent \cite{komter1989hidden} ce qui est en contradiction avec la définition d'une position dominante qui est inévitablement manifeste \cite{dunbar2005perceptions}. La dominance est une variable asymétrique dans lequel l'assertion de dominance manifestée chez un interlocuteur est satisfaite par l'acquiescement de l'autre \cite{rogers1979domineeringness}.
+\par \textbf{Dominance:} Des chercheurs de différents domaines s'accordent pour définir la dominance ou le pouvoir comme la capacité d'influencer le comportement d'autrui. Le pouvoir peut être latent \cite{komter1989hidden} ce qui est en contradiction avec la définition d'une position dominante qui est inévitablement manifeste \cite{dunbar2005perceptions}. La dominance est une variable asymétrique dans lequel l'assertion de dominance manifestée chez un interlocuteur est satisfaite par l'acquiescement de l'autre \cite{rogers1979domineeringness}.
 
-\par \textbf{Familiarité: } Dans le modèle relationnel de Svennevig, la définition de familiarité est basée sur la théorie de la pénétration sociale, qui décrit les étapes de l'évolution des relations à travers l'échange mutuel d'informations à la fois en profondeur (information superficielle à l'information personnelle et intime) et en largeur (de sujets étroits à un large éventail de sujets personnels).
+\par \textbf{Familiarité:} Dans le modèle relationnel de Svennevig, la définition de familiarité est basée sur la théorie de la pénétration sociale, qui décrit les étapes de l'évolution des relations à travers l'échange mutuel d'informations à la fois en profondeur (information superficielle à l'information personnelle et intime) et en largeur (de sujets étroits à un large éventail de sujets personnels).
 
-\par \textbf{Affect: } Cette dimension représente le degré de d'appréciation qu'a chaque interlocuteur pour l'autre. Cette dimension permet aux interlocuteurs de créer l'attachement personnel afin d'améliorer la relation entre les interlocuteurs\cite{nicholson2001role}.
+\par \textbf{Affect:} Cette dimension représente le degré de d'appréciation qu'a chaque interlocuteur pour l'autre. Cette dimension permet aux interlocuteurs de créer l'attachement personnel afin d'améliorer la relation entre les interlocuteurs\cite{nicholson2001role}.
 	
-\par \textbf{Solidarité: } La dimension de la solidarité est une dimension symétrique où deux individus partagent les mêmes obligations et les droits. Elle est identifiée comme une  relation  \emph{‘vision semblable’} où les interlocuteurs ont les mêmes comportements et partagent par exemple les mêmes préférences
+\par \textbf{Solidarité:} La dimension de la solidarité est une dimension symétrique où deux individus partagent les mêmes obligations et les droits. Elle est identifiée comme une  relation  \emph{‘vision semblable’} où les interlocuteurs ont les mêmes comportements et partagent par exemple les mêmes préférences
+
+\par L'objectif de la thèse est d'étudier l'impact des relations interpersonnelles sur les stratégies qu'emploient les interlocuteurs pour satisfaire leurs objectifs durant la négociation coopérative dans le dialogue.
 \section{Contribution}
 \label{contribution}
 
 \par Afin de réaliser nos objectifs, nous avons d'abord enregistré des dialogues entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social. 
-Pour extraire et analyser ces comportements, nous avons annotés et analysé les dialogues  en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. \par L'analyse menée nous a permis de détecter et différencier les comportements communs et ceux liés aux relations interpersonnelles. Nous avons ensuite reproduit dans des jeux de dialogues en D4G \cite{rich}. 
+Pour extraire et analyser ces comportements, nous avons annotés et analysé les dialogues  en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. \par L'analyse menée nous a permis de détecter et différencier les comportements communs et ceux liés aux relations interpersonnelles. Nous avons ensuite reproduit dans des jeux de dialogues en D4G \cite{rich2009building}. 
 
 \par Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle dialogique avec une modèle mental de l'environnement de l'agent, et un modèle lui permettant de mener une négociation coopérative. 
 En parallèle, nous avons modélisé un module de communication comportant cinq actes dialogiques qui lui permettent de dialoguer et négocier durant de le dialogue. 
@@ -92,7 +105,7 @@ En parallèle, nous avons modélisé un module de communication comportant cinq 
 	Nous présenterons ensuite notre modèle dialogique et ses différents modules ainsi que son implémentation sur Disco. 
 \subsection{Collecte de données}
 
-Explication du procédé (image sur le coté)
+%Explication du procédé (image sur le coté)
 
 Afin d'étudier la structure des dialogues enregistrés, nous nous sommes basés sur les travaux de Sidner \& Grosz \cite{grosz1986attention}  qui définit la structure du dialogue en trois composantes interdépendantes, à savoir la structure linguistique, la structure intentionnelle et la structure attentionnelle. L'analyse que nous avons effectués s'est cependant limitée à l'analyse linguistique et intentionnelle que nous présentons ci-dessous. 
 
@@ -100,13 +113,24 @@ Afin d'étudier la structure des dialogues enregistrés, nous nous sommes basés
 \par La principale difficulté rencontrée lors de la définition de la structure linguistique réside dans la définition des délimitations entre segments de discours. Une des solutions principales est d'utiliser des expressions linguistiques comme indicateurs de délimitations de SD, par exemple: premièrement, d'ailleurs... 
 \par Par ailleurs, des inducteurs plus subtiles tels que l'intonation ou des changements de temps et l'aspect, sont inclus comme des délimiteurs de SD. Le terme \textbf{"cue phrases"} est défini dans ce travail pour englober la notion de délimiteur de SD. 
 
-\textbf{Exemple}
+\textbf{Exemple} cet exemple illustre un extrait de segmentation de dialogue réalisé sur un des enregistrements
+
+\begin{figure}
+	\fbox{	\centerline{\includegraphics [width=4in]{figs/ds.pdf}}}
+	\vskip 8pt
+	\defig{modele}{Architecture du modèle de dialogue.}
+\end{figure}
 
 \subsubsection{La structure intentionnelle} 
 Les interlocuteurs peuvent avoir plus d'une raison pour participer à une conversation. Sidner \& Grozs distinguent premièrement, le but fondamental du dialogue noté (discourse purpose \textbf{DP}) qui représente le but principal qui amène les interlocuteurs a engager un dialogue (Exemple :). Deuxièmement, pour chaque segment de discours on peut isoler un seul but noté (\textbf{DSP} Discourse segment purpose). Ce dernier, spécifie la contribution du segment dans la satisfaction du DP globale du dialogue. De plus, les auteurs identifient deux types de relations entres les DSPs à savoir la \textbf{dominance} et \textbf{priorité de satisfaction}. Un segment qui satisfait une intention qu'on note DSP1 peut participer à la satisfaction d'une autre qu'on nommera DSP2. Dans ce cas, on notera que DSP1 \textit{contribue à} la satisfaction de DSP2. Inversement, on note DSP2 \textit{domine} DSP1. La relation de dominance est référencé à la dominance hiérarchique des DSP.
 
-\par \textbf{Exemple}: 
-partie du dialogue enregistré
+\par \textbf{Exemple}: L'analyse intentionnelle de ces SDs nous a révélé la structure de la tâche ``Choisir un restaurant"
+
+\begin{figure}
+	\fbox{	\centerline{\includegraphics [width=4in]{figs/dsp.pdf}}}
+	\vskip 8pt
+	\defig{modele}{Architecture du modèle de dialogue.}
+\end{figure}
 
 
 \par Un interlocuteur qui initie un dialogue peut avoir plusieurs intentions. Il est donc important de pouvoir distinguer les différents types d'intentions. Les intentions communicatives sont destinées à être reconnues. Par exemple, l'intention de complimenter l'autre n'est satisfaite que si elle est reconnue par l'autre interlocuteur. D'autres intentions sont au contraires privées et peuvent être la motivation première pour d'un interlocuteur pour initier un dialogue. Par exemple, un interlocuteur dont le but est d'impressionner l'autre et donc l'inviter au restaurant, dans ce cas l'initiateur ne veut pas que l'autre soit au courant de ses intentions (impressionner). Par conséquent, l'intention d'initier un dialogue peut être privée. En revanche, les DSPs sont communicatifs pas exemple inviter au restaurant. 
@@ -206,8 +230,8 @@ $  \textit{aucune n'est préférée}  $U(O_2) = U(O_1)\\
 
  \par \textbf{Exemple de décision}
 
-Suppose that an interlocutor intents to calculate a relation of preference  P(Clementine, Mogoroko), such that 
-\{Mogoroko, Clementine\} $\in$ Restaurant. Theses restaurants are described as follow: 
+On suppose que l'agent cherche à calculer la relation de préférence suivante:  P(Clementine, Mogoroko), tel que 
+\{Mogoroko, Clementine\} $\in$ Restaurant. La description des restaurants: 
 \begin{itemize}
 	\item Clementine=(Cuisine =\textit{Français}, Cost=\textit{Couteux}, Location=\textit{Paris02},
 	\\Ambiance=\textit{Calme}).
@@ -295,52 +319,29 @@ Afin de capturer ces informations, nous définissons les éléments suivants:
 \end{enumerate}
 
 \subsection{Implémentation du modèle de dialogue}
-
+\par Nous avons réalisé une première implémentation de notre système de dialogue où l'état mental de l'agent a été implémenté sous Java, alors que les actes de dialogue ont été implémenté sous Disco \cite{rich2009building}.
+\par Nous avons réalisé une implémentation générique de l'état mental de l'agent qui lui permet de mener une négociation dans le dialogue. Nous avons par ailleurs implémenté un exemple de négociation sur le sujet des restaurants.  L'implémentation des actes de langages est expliquée plus en détails dans ce qui suit.
 \subsubsection{Présentation de Disco}
+Disco est une implémentation d'un ``collaborative discourse manager"" inspiré d'une théorie de dialogue collaboratif comme Collagen.  Disco est un système qui permet la génération de dialogues orienté tâches. Il utilise le formalisme des HTNs pour la gestion des tâches implémenté avec un standard ANSI/CEA-2018.
+Chaque tâche est définit avec des préconditions, des effets et des postconditions. 
+\par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de langages. D4g est déja fourni avec un ensemble d'actes de langages. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section afin qu'il puisse supporter la négociation sur les préférences. 
 \subsubsection{Exemple d'implémentation en D4G}
-%\begin{enumerate}
-%\item Le modèle de préférences
-% 	\subitem les objets de préférence.(option $\rightarrow$ critères $\rightarrow$ valeurs)
-% 	\subitem Représentation des préférences :
-% 			\subsubitem Préférences sur les critères: préférences binaire partielle
-% 			\subsubitem Préférences sur les options: inférer directement à partir des préférences sur les critères (parler de la fonction de décision)
-% 	\subitem La représentation des préférences des interlocuteurs
-% 			\subsubitem Self, other and otheraboutself.
-%\item le contexte du dialogue
-% 			\subitem Propositions faites dans la discussion : propositions ouvertes, rejetées et acceptée. 	
-%\end{enumerate}
-%\subsubsection{title}
-%
-%\subsubsection{Sémantique des actes de dialogue}
-%Présentation de chaque acte, ses préconditions et effets sur l'état mental
-%
-%\subsection{Implémentation du modèle en Disco}
-%\begin{enumerate}
-%\item Brève présentation de Disco : Les arbres de dialogues, les conditions de chaque tâche, architecture HTN, planification réactive
-%\item Implémentation du modèle mentale.	
-%\subsubitem implantation d'un modèle générique de dialogue
-%\subsubitem algorithme ? quel module décrire la négociation(décision sur les options, mise a jours de l’état mental après un acte de langage, gestion des préférences circulaires... )
-%\subsubitem Premier cadre d'application: les restaurants. 
-%\item Développement des nouveaux actes de dialogues sur Disco. 
-%\item Construction d'arbres de dialogue en D4g.
-%\subitem Les premiers dialogues réalisés à partir  des corpus.
-%\subsubitem Exemples de dialogues réalisés
-%\subitem Implémentation de dialogues à base d'actes de dialogue. 
-%\subsubitem Schéma d'arbre de dialogue sur le sujet des restaurants. 
-%\end{enumerate}
+
 
 \section{Perspectives et travaux futurs}
 \label{pers}
-\begin{enumerate}
-\item La validation du premier système: expliquer la difficulté de mener une étude de validation.
-\item Rédactions d'articles.
-\item Insertion des relations interpersonnelles dans le système.
-\item Plan prévisionnel de la thèse
- \subitem Première validation du modèle
- 	\subsubitem mise en œuvre de l’expérimentation.
- \subitem Soumission d'articles
- \subitem généraliser le modèle aux autres dimensions sociales autre que la dominance
-\end{enumerate}
+
+Nous avons présenté dans ce rapport les travaux réalisés jusqu'à présent. Les six premiers mois de la thèse ont été consacré à la rédaction d'articles sur le travail réalisé durant le stage de Master. un premier article \cite{ouali2015reparation} publié à la conférence des Jeunes Chercheurs en Intelligence Artificielle (RJCIA 2015), et un second \cite{ouali2015plan} publié à AGI (Artificial General Intelligence). Ensuite, je me suis intéressée à la littérature afin de définir l'aspect social à étudier pour la gestion du dialogue, qui a aboutie sur le choix de l'analyse de relations interpersonnelles dans le dialogue. 
+
+\par Dans le but de concevoir un modèle formel de dialogue social qui prend en compte les relations interpersonnelles, j'ai d'abord réalisé une collecte de données afin d’observer le comportement des interlocuteurs dans le dialogue. L'analyse des dialogues collectés m'a guidé par la suite dans la conception de mon modèle dialogique, d'une part dans le choix de la négociation coopérative sur les préférences dans le dialogue et d'autre part dans la définition des actes de dialogue.  La travail réalisé a aboutie sur la conception d'un modèle de dialogue pour une négociation coopérative qui a été implémenté. 
+
+\par La prochaine étape consiste à tester le modèle de dialogue. Pour se faire, je dois concevoir un protocole de validation qui puisse analyser la perception de l'utilisateur sur sa relation avec l'agent. Cette validation nous orientera sur nos choix pour l'insertion des variables sociales dans les choix des stratégies de dialogue. En parallèle, je prépare un article à soumettre pour la conférence d'IVA. 
+
+\par Le plan des travaux à venir se présente comme suit: D'abord une validation du système actuelle doit être réalisé afin de pouvoir publier un article pour le mois de MAI. 
+Ensuite, l'arbre de dialogue existant doit être étendu afin qu'il puisse adapter les stratégies de l'agent dynamiquement par rapport à sa perception des relations interpersonnelles (sera réalisé pour l'été 2016). Une étude sur les raisonnements de l'utilisateur durant le dialogue doit être menée (théorie de l'esprit), pour pouvoir valider notre modèle dialogique pour lesquels nous attendons a avoir les résultats pour la fin de l'année 2016.
+Enfin la troisième année de thèse sera consacré à la rédaction du manuscrit de thèse et à la publication d'articles.
+
+
 % ====================================================================					
 	\vskip 4pt
 	\bibliographystyle{abbrv}
