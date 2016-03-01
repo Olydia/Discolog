@@ -17,6 +17,7 @@ import java.util.*;
  */
 
 public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> {
+	
 	private Class <C> type; 
 	// paired preferences on C values
 	private final ArrayList<ValuePreference<C>> preferences = new ArrayList<ValuePreference<C>>();
@@ -28,7 +29,8 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		if(preferences.contains(v))
 			throw new RuntimeException("Cannot add P ("+v.getLess()+", " + v.getMore()+") "
 					+ " because P ("+v.getMore()+", " + v.getLess()+") exists in the preferences list");
-		preferences.add(preference);
+		if(!preferences.contains(preference))
+			preferences.add(preference);
 	}
 
 	public void add (C more, C less){
@@ -71,6 +73,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		}
 		return null;
 	}
+	
 	public int getScore(C value){
 		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferenceOnValue(value));
@@ -93,6 +96,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		this.type = type;
 	}
 	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

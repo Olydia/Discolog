@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:negotiate.limsi.fr:Example"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:disco="urn:disco.wpi.edu:Disco"
+       xmlns:n="urn:negotiate.limsi.fr:Negotiate"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+
+
+
+ 
+
+  <t:script init="true">
+    var APPLICABLE_TEST = null; // for testing
+
+    $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+    $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
+    $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
+    $lastProposal = null;
+
+	function lastOpenProposal(){
+	
+		return $lastProposal;
+	}
+	
+	function updateProposal(proposal){
+		$lastProposal = proposal;
+	}
+	
+	function getPreference(criterion){
+		return ($negotiation.getCriterionNegotiation(criterion).getPreference());
+	}
+     
+  </t:script>
+  
+</model>

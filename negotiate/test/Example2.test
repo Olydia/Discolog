@@ -1,45 +1,22 @@
-    # Jan 7, 2016 4:49:52 PM - TaskEngine 1.9 / Disco 1.13
+    # 1 mars 2016 18:45:54 - TaskEngine 1.9 / Disco 1.13
     Welcome to Disco! (Type 'help' for command list)
   > load models/Negotiate.xml
-  > load models/Example.xml
-  > task _another_example
-    User says "Let's achieve _another_example."
-    Agent says "What cuisine do you prefer?"
-  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
-    User says "I like FRENCH most."
-    Agent says "That's my favorite, too!"
-  > history
-
-[ ] -accepted -done
-   User says "Let's achieve _another_example."
-   Agent says "What cuisine do you prefer?"
-   [ ] -done <-focus
-      User says "I like FRENCH most."
-      Agent says "That's my favorite, too!"
-
-  > task _another_example
-    User says "Let's achieve _another_example."
-    Agent says "What cuisine do you prefer?"
-  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
-    User says "I like FRENCH less than ITALIAN."
-    Agent says "Thanks!"
-  > history
-
-[ ] -accepted -done
-   User says "Let's achieve _another_example."
-   Agent says "What cuisine do you prefer?"
-   [ ] -done
-      User says "I like FRENCH most."
-      Agent says "That's my favorite, too!"
-[ ] -accepted -done
-   User says "Let's achieve _another_example."
-   Agent says "What cuisine do you prefer?"
-   [ ] -done <-focus
-      User says "I like FRENCH less than ITALIAN."
-      Agent says "Thanks!"
-
+  > load models/statePref.xml
+  > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue($cuisine) / false
+    Agent says "I like CHINESE most."
+  > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false 
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false
+    Agent says "I like JAPANESE less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) / false 
   > execute fr.limsi.negotiate.lang.AskPreference / Packages.fr.limsi.negotiate.restaurant.Cuisine / null / null
     User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
+    Agent says "Ok.
+    > execute fr.limsi.negotiate.lang.StatePreference / null /Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+    User says "I like FRENCH most."
     Agent says "Ok."
-  > quit
-  
+      > execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) / false 
+    > execute fr.limsi.negotiate.lang.Accept /createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) 
+    User says "Okay, let's choose FRENCH."
+    Agent says "Ok."
+    

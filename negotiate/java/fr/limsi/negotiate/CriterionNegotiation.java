@@ -51,6 +51,16 @@ public class CriterionNegotiation<C extends Criterion> {
 		return criterionType;
 	}
 	
+	public ValuePreference<C> getPreference(){
+		for (ValuePreference<C> value: self.getPreferences()){
+			if(!oas.getPreferences().contains(value))
+				return value;
+		}
+		return (self.getPreferences().
+				get(new Random().
+						nextInt(self.getPreferences().size()-1)));
+	}
+	
 	public C getTheCurrentMostPreffered(){
 		List<C> values = getSelf().getValues();
 		ArrayList<Integer> newScores = clearRejected(values, getSelf().getPreferencesValues());
