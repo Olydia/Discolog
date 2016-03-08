@@ -9,7 +9,7 @@
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
-    $lastProposal = null;
+    $lastProposal = $negotiation.userLastStatement;
 
 	function lastOpenProposal(){
 	
@@ -22,6 +22,11 @@
 	
 	function getPreference(criterion){
 		return ($negotiation.getCriterionNegotiation(criterion).getPreference());
+	}
+	
+	function getScore(preference){
+	
+		return();
 	}
      
   </script>

@@ -7,6 +7,41 @@
 
 
 
+<agent id="Invitation" text="Would you like to go out with me on the town tonight?">
+	<user text="That would be great ! .">
+		<do id="statePreference"/>
+		
+ 	</user>
+ 	<user text="No. I have plans for tonight">
+		<do task="CloseDialogue"/>
+  	</user>
+</agent>
+
+
+<agent id="CloseDialogue" text="No problem, another day maybe">
+  <user text="Sure !."/>
+  <user text="yeah, I'll call you tommorow."/>
+</agent> 
+
+  
+<do id="statePreference" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
+	<!-- State its preferences on the same values applicable only if the agent previous utterance is not about this preference-->
+    <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+    	less="getLastUserStatement().getLess()" more="getLastUserStatement().getMore()"/>
+   
+   <!-- State its preferences on different values -->
+   <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
+       	less="getLastUserStatement().getLess()" more="getLastUserStatement().getMore()"/>
+     
+          
+   <!-- Propose the stated preference get more and propose it -->
+    <do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
+          proposal=""/> 
+
+   <!-- State its preferences on different values -->
+   <do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"/>	 
+</do>
+
  
 
   <t:script init="true">
@@ -24,6 +59,10 @@
 	
 	function updateProposal(proposal){
 		$lastProposal = proposal;
+	}
+	
+	function getLastUserStatement(){
+		return $negotiation.getLastUserStatment();
 	}
 	
 	function getPreference(criterion){

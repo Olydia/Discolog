@@ -4,10 +4,7 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionPrefModel;
 import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.CriteriaClassPrefModel;
-import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.OptionProposal;
-import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ValuePreference;
 
 

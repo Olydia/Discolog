@@ -27,6 +27,7 @@
 		<script>
 			if ( $this.external ) {
 				updateOtherMS ($this.more, $this.less);
+				$lastUserStatement.more = new Packages.fr.limsi.negotiate.ValuePreference ($this.more, $this.less);
 			} 
 			else {
 				updateOtherAboutSelfMS ($this.more, $this.less);
