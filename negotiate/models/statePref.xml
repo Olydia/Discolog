@@ -3,13 +3,33 @@
            xmlns:disco="urn:disco.wpi.edu:Disco"
            xmlns:n="urn:negotiate.limsi.fr:Negotiate"
            about="urn:negotiate.limsi.fr:Example">
+   <task id="_example">
+      <subtasks id="__example_subtasks">
+         <step name="__example_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="__example_ref" task="__example_tree"/>
+         <binding slot="$__example_step.external" value="false"/>
+         <binding slot="$__example_step.less" value="getPreference($cuisine).getLess()"/>
+         <binding slot="$__example_step.more" value="getPreference($cuisine).getMore()"/>
+      </subtasks>
+   </task>
+   <task id="__example_tree">
+      <subtasks id="_d4e3_subtasks">
+         <step name="_d4e3_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <binding slot="$_d4e3_step.external" value="true"/>
+         <binding slot="$_d4e3_step.less"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
+         <binding slot="$_d4e3_step.more"
+                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"/>
+      </subtasks>
+   </task>
    <script init="true">
     var APPLICABLE_TEST = null; // for testing
-
+	$less =null;
+	$more = null;
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
-    $lastProposal = $negotiation.userLastStatement;
+    $lastProposal = null;
 
 	function lastOpenProposal(){
 	
@@ -20,14 +40,16 @@
 		$lastProposal = proposal;
 	}
 	
+	function getLastUserStatement(){
+		return $negotiation.getLastUserStatment();
+	}
+	
 	function getPreference(criterion){
 		return ($negotiation.getCriterionNegotiation(criterion).getPreference());
 	}
-	
-	function getScore(preference){
-	
-		return();
-	}
      
+    function reactUser(){
+    	return($negotiation.reactUserStatement(getLastUserStatement()));
+    }
   </script>
 </taskModel>

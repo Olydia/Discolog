@@ -6,10 +6,33 @@
        xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
 
 
+ <do id="_example" actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+      less="getPreference($cuisine).getLess()" more="getPreference($cuisine).getMore()">
+
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
+        less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
+        more="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"/>       
+
+    </do>
+<!-- 
+<do id="userStatePreference" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
+    <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+    	less="reactUser().getLess()" more="reactUser().getMore()"/>
+   
+   <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
+       	less="getPreference().getLess()" more="getPreference().getMore()"/>
+     
+          
+    <do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
+          proposal="createCriterionProposal(getLastUserStatement().getMore())"/> 
+
+   <do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
+   		less="getPreference().getLess()" more="getPreference().getMore()"/>
+</do>
 
 <agent id="Invitation" text="Would you like to go out with me on the town tonight?">
 	<user text="That would be great ! .">
-		<do id="statePreference"/>
+		<do task="userStatePreference"/>
 		
  	</user>
  	<user text="No. I have plans for tonight">
@@ -21,32 +44,15 @@
 <agent id="CloseDialogue" text="No problem, another day maybe">
   <user text="Sure !."/>
   <user text="yeah, I'll call you tommorow."/>
-</agent> 
+</agent>  
 
-  
-<do id="statePreference" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
-	<!-- State its preferences on the same values applicable only if the agent previous utterance is not about this preference-->
-    <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-    	less="getLastUserStatement().getLess()" more="getLastUserStatement().getMore()"/>
-   
-   <!-- State its preferences on different values -->
-   <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
-       	less="getLastUserStatement().getLess()" more="getLastUserStatement().getMore()"/>
-     
-          
-   <!-- Propose the stated preference get more and propose it -->
-    <do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
-          proposal=""/> 
-
-   <!-- State its preferences on different values -->
-   <do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"/>	 
-</do>
-
- 
+</model>
+ -->
 
   <t:script init="true">
     var APPLICABLE_TEST = null; // for testing
-
+	$less =null;
+	$more = null;
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
@@ -69,6 +75,9 @@
 		return ($negotiation.getCriterionNegotiation(criterion).getPreference());
 	}
      
+    function reactUser(){
+    	return($negotiation.reactUserStatement(getLastUserStatement()));
+    }
   </t:script>
   
 </model>
