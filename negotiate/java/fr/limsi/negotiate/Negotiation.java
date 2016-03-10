@@ -3,6 +3,7 @@ package fr.limsi.negotiate;
 import java.util.*;
 
 import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.restaurant.Cuisine;
 
 /**
  * This class defines the negotiation on a defined option (for example Restaurant) 
@@ -25,6 +26,7 @@ public class Negotiation<O extends Option> {
 		this.proposals = new ArrayList<OptionProposal>();
 		this.setListStatements(new ArrayList<Statement>());
 	}
+	
 	
 	public void propose (OptionProposal proposal) { 
 		if(!proposals.contains(proposal))
@@ -91,8 +93,11 @@ public class Negotiation<O extends Option> {
 		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
 		Class<? extends Criterion> c = (more == null ? less.getClass():
 											(less == null ? more.getClass(): null));
-		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (cn.getOas().getPreferencesValues().contains(p));
+		if(c !=null) {
+			CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
+			return (cn.getOas().getPreferencesValues().contains(p));
+		}
+		return false;
 	}
 
 	public void updateProposal(OptionProposal proposal, Status status){
@@ -259,42 +264,42 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 	
-	public ValuePreference<Criterion> reactUserStatement(ValuePreference<Criterion> userStatement){
+	public ValuePreference<Criterion> getRandomPreference (Class<? extends Criterion> c){
+		return (this.getCriterionNegotiation(c).getPreference());
+	}
+	
+	public ValuePreference<Criterion> reactUserStatement(){
 		
-		Class <? extends Criterion>  type = (userStatement.getMore() != null? userStatement.getMore().getClass() :
-			(userStatement.getLess() !=null?userStatement.getLess().getClass(): null ));
-		
-		if(userStatement.getLess() == null){
-			Criterion mostPref = this.getCriterionNegotiation(type).getSelf().
+		if (this.getLastUserStatment() != null) {
+			ValuePreference<Criterion> userStatement = getLastUserStatment();
+//			Class <? extends Criterion>  type = (userStatement.getMore() != null?
+//					userStatement.getMore().getClass() :
+//					userStatement.getLess().getClass());
+			
+			if(userStatement.getLess() == null){
+				Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
 					getMostPreferred();
-			return (mostPref.equals(userStatement.getMore())? userStatement: 
+				return (mostPref.equals(userStatement.getMore())? userStatement: 
 					new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
 			
-		}
+			}
 		
-		if(userStatement.getLess() == null){
-			Criterion mostPref = this.getCriterionNegotiation(type).getSelf().
-					getMostPreferred();
-			return (mostPref.equals(userStatement.getMore())? userStatement: 
-					new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
+				
+			if(userStatement.getMore() == null){
+				Criterion leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass()).getSelf().
+						getLeastPreferred();
+				return (leastPref.equals(userStatement.getLess())? userStatement: 
+					new ValuePreference<Criterion>(userStatement.getLess(), leastPref));
 			
-		}
+			}
 		
-//		if(userStatement.getMore() == null){
-//			Criterion mostPref = this.getCriterionNegotiation(type).getSelf().
-//					getMostPreferred();
-//			return (mostPref.equals(userStatement.getMore())? userStatement: 
-//					new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
-//			
-//		}
 		
-		if(type != null){
-			return(this.getCriterionNegotiation(type).getSelf().
+			return(this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
 					isPreferred(userStatement.getMore(), userStatement.getLess()) ? userStatement: 
 								new ValuePreference<Criterion>(userStatement.getLess(), userStatement.getMore()));
 		}
 			
-		return null;
+		return (new ValuePreference<Criterion>(Cuisine.CHINESE, Cuisine.ITALIAN));
 	}
 
 }

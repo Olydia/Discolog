@@ -18,20 +18,15 @@
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
-			
-			!$negotiation.isInOAS($this.more,
-			$this.less)
-			$this.external ? null : STATE_PREFERENCE_TEST
+			!$negotiation.isInOAS($this.more,$this.less)
 		</precondition>
 
 		<script>
 			if ( $this.external ) {
 				updateOtherMS ($this.more, $this.less);
-				$lastUserStatement.more = new Packages.fr.limsi.negotiate.ValuePreference ($this.more, $this.less);
 			} 
 			else {
 				updateOtherAboutSelfMS ($this.more, $this.less);
-				STATE_PREFERENCE_TEST = false;
 			}
 		</script>
 	</task>
@@ -51,8 +46,8 @@
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
-			!($negotiation.isInOther($this.more, $this.less) ||
-			$negotiation.isInOther($this.less, $this.more))
+<!-- 			!($negotiation.isInOther($this.more, $this.less) || -->
+<!-- 			$negotiation.isInOther($this.less, $this.more)) -->
 		</precondition>
 
 	</task>
@@ -63,8 +58,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-			! isProposed ($this.proposal,
-			Packages.fr.limsi.negotiate.Proposal.Status.OPEN)
+<!-- 			! isProposed ($this.proposal, -->
+<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN) -->
 		</precondition>
 
 		<script>
@@ -80,8 +75,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-			isProposed ($this.proposal,
-			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
+<!-- 			isProposed ($this.proposal, -->
+<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN); -->
 		</precondition>
 
 		<script>
@@ -97,8 +92,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-			isProposed ($this.proposal,
-			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
+<!-- 			isProposed ($this.proposal, -->
+<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN); -->
 		</precondition>
 
 		<script>

@@ -6,53 +6,31 @@
        xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
 
 
- <do id="_example" actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-      less="getPreference($cuisine).getLess()" more="getPreference($cuisine).getMore()">
-
-    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference"
-        less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"
-        more="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"/>       
-
-    </do>
-<!-- 
-<do id="userStatePreference" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
-    <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-    	less="reactUser().getLess()" more="reactUser().getMore()"/>
-   
-   <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
-       	less="getPreference().getLess()" more="getPreference().getMore()"/>
-     
-          
-    <do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
-          proposal="createCriterionProposal(getLastUserStatement().getMore())"/> 
-
-   <do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-   		less="getPreference().getLess()" more="getPreference().getMore()"/>
-</do>
 
 <agent id="Invitation" text="Would you like to go out with me on the town tonight?">
-	<user text="That would be great ! .">
-		<do task="userStatePreference"/>
+	<do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
 		
- 	</user>
- 	<user text="No. I have plans for tonight">
-		<do task="CloseDialogue"/>
-  	</user>
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+			less="reactUser().getLess()" more="reactUser().getMore()"/>
+
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
+			less="getPreference($cuisine).getLess()" more="getPreference($cuisine).getMore()"/>
+
+		  
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
+			proposal="createCriterionProposal(getLastUserStatement().getMore())"/> 
+
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
+			less="getPreference($cuisine).getLess()" more="getPreference($cuisine).getMore()"/>
+
+	</do>
+
 </agent>
+ 
 
-
-<agent id="CloseDialogue" text="No problem, another day maybe">
-  <user text="Sure !."/>
-  <user text="yeah, I'll call you tommorow."/>
-</agent>  
-
-</model>
- -->
-
-  <t:script init="true">
+<t:script init="true">
     var APPLICABLE_TEST = null; // for testing
-	$less =null;
-	$more = null;
+
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
@@ -72,7 +50,7 @@
 	}
 	
 	function getPreference(criterion){
-		return ($negotiation.getCriterionNegotiation(criterion).getPreference());
+		return ($negotiation.getRandomPreference(criterion));
 	}
      
     function reactUser(){
