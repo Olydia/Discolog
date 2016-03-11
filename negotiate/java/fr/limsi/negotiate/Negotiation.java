@@ -1,9 +1,7 @@
 package fr.limsi.negotiate;
 
 import java.util.*;
-
 import fr.limsi.negotiate.Proposal.Status;
-import fr.limsi.negotiate.restaurant.Cuisine;
 
 /**
  * This class defines the negotiation on a defined option (for example Restaurant) 
