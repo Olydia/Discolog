@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model about="urn:negotiate.limsi.fr:Example"
+       xmlns="http://www.cs.wpi.edu/~rich/d4g"
+       xmlns:disco="urn:disco.wpi.edu:Disco"
+       xmlns:n="urn:negotiate.limsi.fr:Negotiate"
+       xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+  <!--
+
+   This is a silly example dialogue to illustrate and test the use of the basic
+   programming facilities needed for this project.
+
+   This library must be loaded after negotiate/models/Negotiate.xml and
+   should be executed using negotiate/bin/negotiate batch file.
+   See negotiate/test/Example1.test
+   
+   NB: Make sure you use most recent version of d4g2018 to process this file.  This
+   can either be found in most recent develop branch of Disco repo, or in
+   negotiate/lib/disco/bin.
+
+  -->
+
+<!--   <do id="_example" actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--       less="null" more="mostPreferredCuisine()"> -->
+
+<!--     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--         less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH" -->
+<!--         more="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"> -->
+
+<!--       both of these options should initially be suppressed by -->
+<!--            STATE_PREFERENCE_TEST precondition -->
+      
+<!--       <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--           less="leastPreferredCuisine()" more="null" -->
+<!--           applicable="APPLICABLE_TEST"/> -->
+
+<!--       <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--           less="null" more="mostPreferredCuisine()"/>  -->
+
+<!--     </do> -->
+
+<!--     <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--         less="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH" -->
+<!--         more="Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE"> -->
+
+<!--       <agent text="Forget it. I am not going to dinner with you."/> -->
+
+<!--     </do> -->
+
+<!--     <user text="I don't feel like going out for dinner"/> -->
+      
+<!--   </do> -->
+
+  <!--
+
+    The dialogue tree below illustrates a subtle feature of D4g that
+    supports defining more complex dialogue logic without breaking out into
+    full ANSI/CEA-2018.  (But don't forget that D4g and 2018 can be mixed in
+    a single file!).
+
+    Although all of the inputs for an *agent* utterance must be specified,
+    it is allowed to leave out (undefined) some of the inputs to a user utterance.
+    In this case, because of the way unification is used in plan recognition, the
+    right recipe (dialogue subtree) will be chosen depending on what the user
+    actually says, as illustrated in test/Example2.test.
+
+  -->
+
+  <agent id="_another_example" text="What cuisine do you prefer?">
+
+
+
+    <!-- this branch is chosen when user says anything else -->
+         
+    <do actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
+
+       	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+        	less="reactUser().getLess()" more="reactUser().getMore()" applicable = "dom > 0"/>
+       			
+     	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
+			less="getPreference($cuisine).getLess()" more="getPreference($cuisine).getMore()" applicable = "dom > 0"/> 
+
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+			proposal="createCriterionProposal(getLastUserPref(), false)"/> 
+
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
+			less="askUserPref($cuisine).getLess()" more="askUserPref($cuisine).getMore()"/>
+    </do>
+         
+  </agent>
+
+  <t:script init="true">
+
+    var APPLICABLE_TEST = null; // for testing
+    var dom = 0;
+    $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+    $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
+    $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
+    $less = Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
+    $more = Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE;
+    $lastProposal = null;
+
+    function mostPreferredCuisine() {
+       return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);
+    }
+    
+    function leastPreferredCuisine () {   
+       		return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);  		
+    }
+    
+    function getLastUserPref() { 
+    	if (getLastUserStatement() !=null)
+    		return (getLastUserStatement().getStatedPreference());
+    	
+    	else 
+    		return null;
+    }
+    
+    function getLastUserStatement(){
+		return $negotiation.getLastUserStatement();
+	}
+	
+	 function getLastAgentStatement(){
+		return $negotiation.getLastAgentStatement();
+	}
+	
+	 function reactUser(){
+    	return($negotiation.reactUserStatement());
+    }
+ 
+ 	function lastOpenProposal(){
+	
+		return $lastProposal;
+	}
+	
+	function updateProposal(proposal){
+		$lastProposal = proposal;
+	}
+    
+    function getPreference(criterion){
+		return ($negotiation.getRandomPreference(criterion));
+	}
+	
+	function sameStatement(){
+		if (getLastUserStatement() == null ||  getLastAgentStatement () == null)
+			return false;		
+		return(getLastAgentStatement().equals(getLastUserStatement()));
+	}
+
+	function askUserPref(criterion){
+		return ($negotiation.askUserPreference(criterion));
+	}
+	
+	function createCriterionProposal(criterion, who) {
+			if (criterion == null)
+				return null;
+			else 		
+				return $negotiation.criterionProposal(criterion.getMore(), who);
+	}
+
+	function createOptionProposal (option, who) {
+		return $negotiation.optionProposal(option, who);
+	}
+      
+  </t:script>
+  
+</model>

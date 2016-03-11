@@ -75,24 +75,21 @@ public class Negotiation<O extends Option> {
 
 	public boolean isInOther(Criterion less, Criterion more) {
 		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
-		Class<? extends Criterion> c = (more == null ? less.getClass(): 
-											(less == null ? more.getClass(): null));
+		Class<? extends Criterion> c =  p.getType();
 		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
 		return (cn.getOther().getPreferencesValues().contains(p));
 	}
 
 	public boolean isInself(Criterion less, Criterion more) {
 		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
-		Class<? extends Criterion> c = (more == null ? less.getClass():
-											(less == null ? more.getClass(): null));
+		Class<? extends Criterion> c =  p.getType();
 		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
 		return (cn.getSelf().getPreferencesValues().contains(p));
 	}
 
 	public boolean isInOAS(Criterion less, Criterion more) {
 		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
-		Class<? extends Criterion> c = (more == null ? less.getClass():
-											(less == null ? more.getClass(): null));
+		Class<? extends Criterion> c =  p.getType();
 		if(c !=null) {
 			CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
 			return (cn.getOas().getPreferencesValues().contains(p));
@@ -119,8 +116,8 @@ public class Negotiation<O extends Option> {
 
 	public void updateOtherMentalState(Criterion more, Criterion less){
 
-		Class <? extends Criterion>  type = (more != null? more.getClass() :
-				(less !=null?less.getClass(): null ));
+		Class<? extends Criterion> type =  new ValuePreference<Criterion>(more, less).getType();
+
 		if(type != null){
 			this.getCriterionNegotiation(type).addOther(more, less);
 			this.listStatements.add(new Statement(more, less, true));
@@ -130,8 +127,8 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void updateOASMentalState(Criterion more, Criterion less){
-		Class <? extends Criterion>  type = (more != null? more.getClass() :
-			(less !=null?less.getClass(): null ));
+		Class<? extends Criterion> type =  new ValuePreference<Criterion>(more, less).getType();
+
 		if(type != null){
 			this.getCriterionNegotiation(type).addOAS(more, less);
 			this.listStatements.add(new Statement(more, less, false));
@@ -226,12 +223,16 @@ public class Negotiation<O extends Option> {
 
 	// testing functions 
 
-	public CriterionProposal criterionProposal(Criterion c){
-		return (new CriterionProposal(true, c));
+	public CriterionProposal criterionProposal(Criterion c, boolean external){
+		if(c == null)
+			return null;
+		return (new CriterionProposal(external, c));
 	}
 
-	public OptionProposal optionProposal(Option o){
-		return (new OptionProposal(true, o));
+	public OptionProposal optionProposal(Option o, boolean external){
+		if(o == null)
+			return null;
+		return (new OptionProposal(external, o));
 
 	}
 	
@@ -248,30 +249,38 @@ public class Negotiation<O extends Option> {
 		this.listStatements = listStatements;
 	}
 	
-	public ValuePreference<Criterion> getLastUserStatment(){
+	public Statement getLastUserStatement(){
 		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
 			if(listStatements.get(i).isExternal())
-				return(listStatements.get(i).getStatedPreference());
+				return(listStatements.get(i));
 		
 		return null;
+
 	}
 	
-	public ValuePreference<Criterion> getLastAgentStatment(){
+	public Statement getLastAgentStatement(){
 		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
 			if(!listStatements.get(i).isExternal())
-				return(listStatements.get(i).getStatedPreference());
+				return(listStatements.get(i));
 		
+		//return new Statement(null, null, false);
 		return null;
 	}
 	
 	public ValuePreference<Criterion> getRandomPreference (Class<? extends Criterion> c){
-		return (this.getCriterionNegotiation(c).getPreference());
+		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
+		return (model.getPreference(model.getSelf(),model.getOas()));
+	}
+	
+	public ValuePreference<Criterion> askUserPreference (Class<? extends Criterion> c){
+		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
+		return (model.getPreference(model.getSelf(),model.getOther()));
 	}
 	
 	public ValuePreference<Criterion> reactUserStatement(){
 		
-		if (this.getLastUserStatment() != null) {
-			ValuePreference<Criterion> userStatement = getLastUserStatment();
+		if (this.getLastUserStatement() != null) {
+			ValuePreference<Criterion> userStatement = getLastUserStatement().getStatedPreference();
 //			Class <? extends Criterion>  type = (userStatement.getMore() != null?
 //					userStatement.getMore().getClass() :
 //					userStatement.getLess().getClass());
@@ -282,6 +291,7 @@ public class Negotiation<O extends Option> {
 				return (mostPref.equals(userStatement.getMore())? userStatement: 
 					new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
 			
+				
 			}
 		
 				
@@ -299,7 +309,8 @@ public class Negotiation<O extends Option> {
 								new ValuePreference<Criterion>(userStatement.getLess(), userStatement.getMore()));
 		}
 			
-		return (new ValuePreference<Criterion>(Cuisine.CHINESE, Cuisine.ITALIAN));
+		else 
+			return (new ValuePreference<Criterion>(null, null));
 	}
 
 }

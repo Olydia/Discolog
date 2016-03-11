@@ -132,14 +132,6 @@
 		return $negotiation.checkProposalStatus(proposal);
 		}
 
-		function createCriterionProposal(criterion) {
-		return $negotiation.criterionProposal(criterion);
-		}
-
-		function createOptionProposal (option) {
-		return $negotiation.optionProposal(option);
-		}
-
 		function accept(value){
 		$negotiation.updateProposalStatus(value,
 		Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED);

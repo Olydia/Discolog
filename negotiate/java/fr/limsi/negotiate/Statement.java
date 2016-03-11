@@ -24,4 +24,30 @@ public class Statement {
 			return external;
 		}		
 		
+		@Override
+		public boolean equals (Object obj) {
+			
+			if (obj == null || this == null)
+				return false;
+			
+			if (this == obj)
+				return true;
+			
+			else{
+				Statement other = (Statement) obj;
+				if (this.preference.equals(other.getStatedPreference()))
+					return true;
+			}
+			return false;
+				
+		}
+
+		@Override
+		public int hashCode () {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((preference.getLess() == null) ? 0 : preference.getLess().hashCode());
+			result = prime * result + ((preference.getMore() == null) ? 0 : preference.getMore().hashCode());
+			return result;
+		}
 }
