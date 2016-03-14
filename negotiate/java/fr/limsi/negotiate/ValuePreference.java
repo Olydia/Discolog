@@ -12,4 +12,16 @@ public class ValuePreference<C extends Criterion>  extends Preference<C>{
 		super(more, less);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Class<? extends Criterion> getType(){
+		
+		if (getMore() == null){
+			if (getLess() == null) 
+				return null ;
+			else 
+				return getLess().getClass();
+		}	
+		else 
+			return getMore().getClass();
+	}
 }

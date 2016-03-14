@@ -15,14 +15,15 @@ public class Negotiation<O extends Option> {
 	private List<OptionProposal> proposals;
 	public List<CriterionNegotiation<Criterion>> criteriaNegotiation;
 	public CriteriaClassPrefModel<O> criteriaPreferences; 
-	private List <Statement> listStatements; 
+	public DialogueContext context ;
 
 	public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, 
 			CriteriaClassPrefModel<O> criteriaPreferences) {
 		this.criteriaNegotiation = Arrays.asList(criteriaNegotiation);
 		this.criteriaPreferences = criteriaPreferences;
 		this.proposals = new ArrayList<OptionProposal>();
-		this.setListStatements(new ArrayList<Statement>());
+		this.context = new DialogueContext();
+		
 	}
 	
 	
@@ -118,7 +119,7 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOther(more, less);
-			this.listStatements.add(new Statement(more, less, true));
+			this.context.getListStatements().add(new Statement(more, less, true));
 		}
 			
 
@@ -129,7 +130,7 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOAS(more, less);
-			this.listStatements.add(new Statement(more, less, false));
+			this.context.getListStatements().add(new Statement(more, less, false));
 
 		}
 		
@@ -239,32 +240,6 @@ public class Negotiation<O extends Option> {
 		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered());
 	}
 
-	public List <Statement> getListStatements() {
-		return listStatements;
-	}
-
-	public void setListStatements(List <Statement> listStatements) {
-		this.listStatements = listStatements;
-	}
-	
-	public Statement getLastUserStatement(){
-		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
-			if(listStatements.get(i).isExternal())
-				return(listStatements.get(i));
-		
-		return null;
-
-	}
-	
-	public Statement getLastAgentStatement(){
-		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
-			if(!listStatements.get(i).isExternal())
-				return(listStatements.get(i));
-		
-		//return new Statement(null, null, false);
-		return null;
-	}
-	
 	public ValuePreference<Criterion> getRandomPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
 		return (model.getPreference(model.getSelf(),model.getOas()));
@@ -277,8 +252,8 @@ public class Negotiation<O extends Option> {
 	
 	public ValuePreference<Criterion> reactUserStatement(){
 		
-		if (this.getLastUserStatement() != null) {
-			ValuePreference<Criterion> userStatement = getLastUserStatement().getStatedPreference();
+		if (this.context.getLastUserStatement() != null) {
+			ValuePreference<Criterion> userStatement = context.getLastUserStatement().getStatedPreference();
 //			Class <? extends Criterion>  type = (userStatement.getMore() != null?
 //					userStatement.getMore().getClass() :
 //					userStatement.getLess().getClass());

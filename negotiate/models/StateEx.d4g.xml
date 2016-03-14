@@ -19,25 +19,56 @@
         	less="reactUser().getLess()" more="reactUser().getMore()" >
         	<do task = "Ask"/>
         	<do task = "State"/>
-        	
-
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
        	</do>		
      	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
-			less="getPreference(getDiscussedCriterion()).getLess()" more="getPreference(getDiscussedCriterion()).getMore()" applicable = "dom > 0"/> 
+			less="getPreference(getDiscussedCriterion()).getLess()" more="getPreference(getDiscussedCriterion()).getMore()" applicable = "dom > 0">
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do> 
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref(), false)"/> 
+			proposal="createCriterionProposal(getLastUserPref(), false)"> 
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do>
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-			less="askUserPref(getDiscussedCriterion()).getLess()" more="askUserPref(getDiscussedCriterion()).getMore()"/>
+			less="askUserPref(getDiscussedCriterion()).getLess()" more="askUserPref(getDiscussedCriterion()).getMore()">
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do>
     </do>
     
 	<do id = "Ask" actor="user" task="n:fr.limsi.negotiate.lang.AskPreference">
        	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-        	less="reactUser().getLess()" more="reactUser().getMore()" applicable = "dom > 0"/>
+        	less="reactUser().getLess()" more="reactUser().getMore()" applicable = "dom > 0">
+        	<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do>
        			
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref(), false)"/> 
+			proposal="createCriterionProposal(getLastUserPref(), false)">
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do> 
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			less="askUserPref(getDiscussedCriterion()).getLess()" more="askUserPref(getDiscussedCriterion()).getMore()"/>

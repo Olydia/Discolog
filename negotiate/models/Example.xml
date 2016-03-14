@@ -3,15 +3,6 @@
            xmlns:disco="urn:disco.wpi.edu:Disco"
            xmlns:n="urn:negotiate.limsi.fr:Negotiate"
            about="urn:negotiate.limsi.fr:Example">
-   <task id="_example">
-      <subtasks id="__example_subtasks">
-         <step name="__example_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="__example_ref" task="__example_tree"/>
-         <binding slot="$__example_step.external" value="false"/>
-         <binding slot="$__example_step.less" value="null"/>
-         <binding slot="$__example_step.more" value="mostPreferredCuisine()"/>
-      </subtasks>
-   </task>
    <task id="_another_example">
       <subtasks id="__another_example_subtasks">
          <step name="__another_example_step" task="disco:Say"/>
@@ -20,97 +11,113 @@
          <binding slot="$__another_example_step.external" value="false"/>
       </subtasks>
    </task>
-   <task id="__example_tree">
-      <subtasks id="_d4e4_subtasks">
-         <step name="_d4e4_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e4_ref" task="_d4e4_tree"/>
-         <binding slot="$_d4e4_step.external" value="true"/>
-         <binding slot="$_d4e4_step.less"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
-         <binding slot="$_d4e4_step.more"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN"/>
+   <task id="_d4e27_tree">
+      <subtasks id="_d4e28_subtasks">
+         <step name="_d4e28_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <applicable>dom &gt; 0</applicable>
+         <binding slot="$_d4e28_step.external" value="false"/>
+         <binding slot="$_d4e28_step.less" value="reactUser().getLess()"/>
+         <binding slot="$_d4e28_step.more" value="reactUser().getMore()"/>
       </subtasks>
-      <subtasks id="_d4e8_subtasks">
-         <step name="_d4e8_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e9_step" task="disco:Say"/>
-         <binding slot="$_d4e8_step.external" value="true"/>
-         <binding slot="$_d4e8_step.less"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH"/>
-         <binding slot="$_d4e8_step.more"
-                  value="Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE"/>
-         <binding slot="$_d4e9_step.text" value="&#34;Forget it. I am not going to dinner with you.&#34;"/>
-         <binding slot="$_d4e9_step.external" value="false"/>
+      <subtasks id="_d4e29_subtasks">
+         <step name="_d4e29_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <applicable>dom &gt; 0</applicable>
+         <binding slot="$_d4e29_step.external" value="false"/>
+         <binding slot="$_d4e29_step.less" value="getPreference($cuisine).getLess()"/>
+         <binding slot="$_d4e29_step.more" value="getPreference($cuisine).getMore()"/>
       </subtasks>
-      <subtasks id="_d4e10_subtasks">
-         <step name="_d4e10_step" task="disco:Say"/>
-         <binding slot="$_d4e10_step.text" value="&#34;I don't feel like going out for dinner&#34;"/>
-         <binding slot="$_d4e10_step.external" value="true"/>
+      <subtasks id="_d4e30_subtasks">
+         <step name="_d4e30_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <binding slot="$_d4e30_step.external" value="false"/>
+         <binding slot="$_d4e30_step.proposal"
+                  value="createCriterionProposal(getLastUserPref(), false)"/>
       </subtasks>
-   </task>
-   <task id="_d4e4_tree">
-      <subtasks id="_d4e6_subtasks">
-         <step name="_d4e6_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <applicable>APPLICABLE_TEST</applicable>
-         <binding slot="$_d4e6_step.external" value="false"/>
-         <binding slot="$_d4e6_step.less" value="leastPreferredCuisine()"/>
-         <binding slot="$_d4e6_step.more" value="null"/>
-      </subtasks>
-      <subtasks id="_d4e7_subtasks">
-         <step name="_d4e7_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <binding slot="$_d4e7_step.external" value="false"/>
-         <binding slot="$_d4e7_step.less" value="null"/>
-         <binding slot="$_d4e7_step.more" value="mostPreferredCuisine()"/>
+      <subtasks id="_d4e31_subtasks">
+         <step name="_d4e31_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
+         <binding slot="$_d4e31_step.external" value="false"/>
+         <binding slot="$_d4e31_step.less" value="askUserPref($cuisine).getLess()"/>
+         <binding slot="$_d4e31_step.more" value="askUserPref($cuisine).getMore()"/>
       </subtasks>
    </task>
    <task id="__another_example_tree">
-      <subtasks id="_d4e13_subtasks">
-         <step name="_d4e13_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e16_step" task="disco:Say$Eval"/>
-         <binding slot="$_d4e13_step.external" value="true"/>
-         <binding slot="$_d4e13_step.less" value="null"/>
-         <binding slot="$_d4e13_step.more" value="mostPreferredCuisine()"/>
-         <binding slot="$_d4e16_step.text" value="&#34;That's my favorite, too!&#34;"/>
-         <binding slot="$_d4e16_step.external" value="false"/>
-         <binding slot="$_d4e16_step.eval"
-                  value="&#34;updateOtherAboutSelfMS(mostPreferredCuisine(),null)&#34;"/>
-      </subtasks>
-      <subtasks id="_d4e18_subtasks">
-         <step name="_d4e18_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e19_step" task="disco:Say"/>
-         <binding slot="$_d4e18_step.external" value="true"/>
-         <binding slot="$_d4e19_step.text" value="&#34;Thanks!&#34;"/>
-         <binding slot="$_d4e19_step.external" value="false"/>
+      <subtasks id="_d4e27_subtasks">
+         <step name="_d4e27_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e27_ref" task="_d4e27_tree"/>
+         <binding slot="$_d4e27_step.external" value="true"/>
       </subtasks>
    </task>
    <script init="true">
 
+    var APPLICABLE_TEST = null; // for testing
+    var dom = 0;
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
-
-    // TODO: following are stand-ins for various convenient JavaScript functions to use
-    //       in conditions and scripts above to access information from Java via $negotiation
-
-
-	// TODO: see with Chuck how to get the class in javascript, without using ITALIAN.getClass
+    $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
+    $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
+    $less = Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
+    $more = Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE;
+    $lastProposal = null;
 
     function mostPreferredCuisine() {
-       return $negotiation.getCriterionNegotiation(Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN.getClass()).getSelf().getMostPreferred();
+       return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);
     }
     
-    function leastPreferredCuisine () {
-       return Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
-    }
-    function updateOtherMS (more, less){
-    	$negotiation.updateOtherMentalState(more, less);
-    	$negotiation.printAllMentalState();
+    function leastPreferredCuisine () {   
+       		return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);  		
     }
     
-    function updateOtherAboutSelfMS(more, less){
-    	$negotiation.updateOASMentalState(more, less);
-    	$negotiation.printAllMentalState();
+    function getLastUserPref() { 
+    	if (getLastUserStatement() !=null)
+    		return (getLastUserStatement().getStatedPreference());
+    	
+    	else 
+    		return null;
     }
+    
+    function getLastUserStatement(){
+		return $negotiation.getLastUserStatement();
+	}
+	
+	 function getLastAgentStatement(){
+		return $negotiation.getLastAgentStatement();
+	}
+	
+	 function reactUser(){
+    	return($negotiation.reactUserStatement());
+    }
+ 
+ 	function lastOpenProposal(){
+	
+		return $lastProposal;
+	}
+	
+	function updateProposal(proposal){
+		$lastProposal = proposal;
+	}
+    
+    function getPreference(criterion){
+		return ($negotiation.getRandomPreference(criterion));
+	}
+	
+	function sameStatement(){
+		if (getLastUserStatement() == null ||  getLastAgentStatement () == null)
+			return false;		
+		return(getLastAgentStatement().equals(getLastUserStatement()));
+	}
 
-    var APPLICABLE_TEST = null; // for testing
-    
+	function askUserPref(criterion){
+		return ($negotiation.askUserPreference(criterion));
+	}
+	
+	function createCriterionProposal(criterion, who) {
+			if (criterion == null)
+				return null;
+			else 		
+				return $negotiation.criterionProposal(criterion.getMore(), who);
+	}
+
+	function createOptionProposal (option, who) {
+		return $negotiation.optionProposal(option, who);
+	}
       
   </script>
 </taskModel>

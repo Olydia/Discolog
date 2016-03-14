@@ -27,9 +27,9 @@ import fr.limsi.negotiate.Proposal.Status;
 
 public class CriterionNegotiation<C extends Criterion> {
 
-	private CriterionPrefModel<C> self;
-	CriterionPrefModel<C> other;
-	CriterionPrefModel<C> oas;       
+	private CriterionPrefModel<C> self = new CriterionPrefModel<C>();
+	CriterionPrefModel<C> other = new CriterionPrefModel<C>();
+	CriterionPrefModel<C> oas = new CriterionPrefModel<C>();      
 	public Class<C> criterionType ; 
 	private  List<CriterionProposal> proposals = new ArrayList<CriterionProposal>();
 
@@ -39,9 +39,6 @@ public class CriterionNegotiation<C extends Criterion> {
 
 	public CriterionNegotiation (Class<C> type) {
 		criterionType = type;
-		setSelf(new CriterionPrefModel<C>());
-		other = new CriterionPrefModel<C>();
-		oas = new CriterionPrefModel<C>();
 		self.setType(type);
 		other.setType(type);
 		oas.setType(type);
@@ -51,14 +48,14 @@ public class CriterionNegotiation<C extends Criterion> {
 		return criterionType;
 	}
 	
-	public ValuePreference<C> getPreference(){
-		for (ValuePreference<C> value: self.getPreferences()){
-			if(!oas.getPreferences().contains(value))
+	public ValuePreference<C> getPreference(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
+		for (ValuePreference<C> value: in.getPreferences()){
+			if(!out.getPreferences().contains(value))
 				return value;
 		}
-		return (self.getPreferences().
+		return (in.getPreferences().
 				get(new Random().
-						nextInt(self.getPreferences().size()-1)));
+						nextInt(in.getPreferences().size()-1)));
 	}
 	
 	public C getTheCurrentMostPreffered(){
@@ -167,6 +164,8 @@ public class CriterionNegotiation<C extends Criterion> {
 				
 		}
 	}
+
+
 
 
 }
