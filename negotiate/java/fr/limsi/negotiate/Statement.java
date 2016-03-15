@@ -4,16 +4,36 @@ public class Statement {
 
 		private ValuePreference<Criterion> preference;
 		private boolean external;
+		private Class<? extends Criterion> type;
+		public  String utteranceType;
 		
-		public Statement(ValuePreference<Criterion> preference, boolean external) {
-			this.preference = preference;
-			this.external = external;
+		public Class<? extends Criterion> getType() {
+			return type;
 		}
 
-		public Statement(Criterion more, Criterion less, boolean external){
+		public void setType(Class<? extends Criterion> type) {
+			this.type = type;
+		}
+
+		@Override
+		public String toString() {
+			return "Statement [preference=" + preference + ", external="
+					+ external + ", type=" + type + ", utteranceType="
+					+ utteranceType + "]";
+		}
+
+		public Statement(ValuePreference<Criterion> preference, boolean external, String utteranceType) {
+			this.preference = preference;
+			this.external = external;
+			this.utteranceType = utteranceType;
+		}
+
+		public Statement(Criterion more, Criterion less, boolean external, String utteranceType){
 			ValuePreference<Criterion> preference = new ValuePreference<Criterion>(more, less);
 			this.preference = preference;
 			this.external = external;
+			this.utteranceType = utteranceType;
+
 		}
 		
 		public ValuePreference<Criterion> getStatedPreference() {
