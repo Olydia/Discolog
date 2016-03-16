@@ -71,7 +71,7 @@
          <applicable>!isDom()</applicable>
          <binding slot="$_d4e22_step.external" value="false"/>
          <binding slot="$_d4e22_step.proposal"
-                  value="createCriterionProposal(getLastUserPref(), false) "/>
+                  value="createCriterionProposal(getLastUserPref()) "/>
       </subtasks>
       <subtasks id="_d4e28_subtasks">
          <step name="_d4e28_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -164,8 +164,7 @@
          <step name="_d4e41_ref" task="_d4e41_tree"/>
          <applicable>!isDom()</applicable>
          <binding slot="$_d4e41_step.external" value="false"/>
-         <binding slot="$_d4e41_step.proposal"
-                  value="createCriterionProposal(getLastUserPref(), false)"/>
+         <binding slot="$_d4e41_step.proposal" value="createCriterionProposal(getLastUserPref())"/>
       </subtasks>
       <subtasks id="_d4e47_subtasks">
          <step name="_d4e47_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -242,8 +241,7 @@
          <step name="_d4e61_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e61_ref" task="_d4e61_tree"/>
          <binding slot="$_d4e61_step.external" value="false"/>
-         <binding slot="$_d4e61_step.proposal"
-                  value="createCriterionProposal(getLastUserPref(), false)"/>
+         <binding slot="$_d4e61_step.proposal" value="createCriterionProposal(getLastUserPref())"/>
       </subtasks>
       <subtasks id="_d4e67_subtasks">
          <step name="_d4e67_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -583,7 +581,19 @@
    </task>
    <task id="_trees_tree">
       <subtasks id="_d4e4_subtasks">
-         <step name="_d4e4_step" task="Ask"/>
+         <step name="_d4e4_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e5_subtasks">
+         <step name="_d4e5_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e6_subtasks">
+         <step name="_d4e6_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e7_subtasks">
+         <step name="_d4e7_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e8_subtasks">
+         <step name="_d4e8_step" task="Reject"/>
       </subtasks>
    </task>
    <script init="true">
@@ -650,20 +660,26 @@
 		return ($negotiation.askUserPreference(criterion));
 	}
 	
-	function createCriterionProposal(preference, who) {
+	
+	function createProposal(criterion) {
+	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
+		if(criterion == null)
+			return null;
+		return $negotiation.criterionProposal(criterion);
+	}
+	
+	function createCriterionProposal(preference) {
 			if (preference == null)
 				return null;
 			else 		
-				return $negotiation.criterionProposal(preference.getMore(), who);
+				return $negotiation.criterionProposal(preference.getMore());
 	}
 	
-	function createOptionProposal(option, who) {
-		return $negotiation.optionProposal(option, who);
+	function createOptionProposal(option) {
+		return $negotiation.optionProposal(option);
 	}
 	
-	function createProposal(criterion, who) {
-		return $negotiation.criterionProposal(criterion, who);
-	}
+	
 	
 	function getDiscussedCriterion(){
 		return $negotiation.context.getDiscussedCriterion();
@@ -705,7 +721,18 @@
 	function isPeer(){
 		return(dom==0)
 	}
-      
+	
+	function isSub(){
+	if(!isDom()){
+		if(!isPeer())
+			return true;
+		else 
+			return false;
+	}
+	else 
+		return false;
+	
+	}      
     
   </script>
 </taskModel>

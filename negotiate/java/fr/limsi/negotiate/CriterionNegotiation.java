@@ -74,6 +74,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		return cScores;
 	}
 	
+
 	private static final int maxIndex(ArrayList<Integer> a) {
 		int imax=0;
 		for(int i=1;i<a.size();i++)
@@ -140,6 +141,8 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return null;
 	}
+	
+	
 	
 	public void printMentalState() {
 		System.out.println(" **** SELF preferences *** \n \n");

@@ -10,17 +10,17 @@
 
   <!-- this branch is chosen when user says anything else -->
          
-			<do task = "Ask"/>
-<!--         	<do task = "State"/> -->
-<!--         	<do task = "Propose"/> -->
-<!--         	<do task = "Accept"/> -->
-<!--         	<do task = "Reject"/> -->
+			<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
          
   </agent>
   
     <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
        	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-        	less="reactUser($state).getLess()" more="reactUser($state).getMore()" applicable = "isPeer() || isDom()">
+        	less="reactUser($state).getLess()" more="reactUser($state).getMore()" applicable = "isPeer()">
         	<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -38,7 +38,7 @@
         	<do task = "Reject"/>
        	</do>
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref(), false) " applicable = "!isDom()">
+			proposal="createCriterionProposal(getLastUserPref()) " applicable = "!isDom()">
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -71,7 +71,7 @@
        	</do>
        			
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref(), false)" applicable = "!isDom()">
+			proposal="createCriterionProposal(getLastUserPref())" applicable = "!isDom()">
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -108,7 +108,7 @@
       	<!-- Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC-->	
       		
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref(), false)" >
+			proposal="createCriterionProposal(getLastUserPref())" >
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -313,20 +313,26 @@
 		return ($negotiation.askUserPreference(criterion));
 	}
 	
-	function createCriterionProposal(preference, who) {
+	
+	function createProposal(criterion) {
+	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
+		if(criterion == null)
+			return null;
+		return $negotiation.criterionProposal(criterion);
+	}
+	
+	function createCriterionProposal(preference) {
 			if (preference == null)
 				return null;
 			else 		
-				return $negotiation.criterionProposal(preference.getMore(), who);
+				return $negotiation.criterionProposal(preference.getMore());
 	}
 	
-	function createOptionProposal(option, who) {
-		return $negotiation.optionProposal(option, who);
+	function createOptionProposal(option) {
+		return $negotiation.optionProposal(option);
 	}
 	
-	function createProposal(criterion, who) {
-		return $negotiation.criterionProposal(criterion, who);
-	}
+	
 	
 	function getDiscussedCriterion(){
 		return $negotiation.context.getDiscussedCriterion();
@@ -368,7 +374,16 @@
 	function isPeer(){
 		return(dom==0)
 	}
-      
+	
+	function isSub(){
+	if(!isDom()){
+		if(!isPeer())
+			return true;
+	}
+	else 
+		return false;
+	
+	}      
     
   </t:script>
   

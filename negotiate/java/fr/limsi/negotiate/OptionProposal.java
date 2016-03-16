@@ -18,6 +18,11 @@ public class OptionProposal extends Proposal {
 		super(isSelf);
 		this.option = option;
 	}
+	
+	public OptionProposal( Option option) {
+		super();
+		this.option = option;
+	}
 
 	@Override
 	public Option getValue() {

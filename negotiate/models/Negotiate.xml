@@ -29,6 +29,7 @@
 			else {
 				updateOtherAboutSelfMS ($this.more, $this.less);
 			}
+			print("Done")
 		</script>
 	</task>
 
@@ -52,10 +53,18 @@
 		</precondition>
 		
 		<script>
+			
+			$statement = createStatement($this.less, $this.more, $this.external,"Ask");
+			
 			if($this.criterion == null)
 				$negotiation.context.updateDiscussedCriterion($this.more,$this.less);
-			else 
-				$negotiation.context.updateDiscussedCriterion($this.criterion);				
+				
+			else {
+				$negotiation.context.updateDiscussedCriterion($this.criterion);
+				$statement.setType($this.criterion)		
+				}
+			$negotiation.context.getListStatements().add($statement);
+					
 		</script>
 
 	</task>
@@ -71,6 +80,7 @@
 		</precondition>
 
 		<script>
+			$this.proposal.setIsSelf(!$this.external);
 			propose ($this.proposal);
 			$lastProposal = ($this.proposal);
 		</script>
@@ -161,6 +171,11 @@
 		function getDiscussedCriterion(){
 			return $negotiation.context.getDiscussedCriterion();
 		}
+		
+		function createStatement (less, more, external,utteranceType){
+			return ($negotiation.context.createstatement(less, more, external,utteranceType));
+		}
+		
 		
 	</script>
 

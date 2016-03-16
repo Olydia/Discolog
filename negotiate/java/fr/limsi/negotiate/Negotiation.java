@@ -1,6 +1,7 @@
 package fr.limsi.negotiate;
 
 import java.util.*;
+
 import fr.limsi.negotiate.Proposal.Status;
 
 /**
@@ -114,14 +115,15 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void updateOtherMentalState(Criterion more, Criterion less){
-
+		System.out.println(more +", " +less);
 		Class<? extends Criterion> type =  new ValuePreference<Criterion>(more, less).getType();
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOther(more, less);
-			this.context.getListStatements().add(new Statement(more, less, true));
+			this.context.getListStatements().add(new Statement(more, less, true, "State"));
 		}
 			
+		System.out.println("updated");
 
 	}
 
@@ -130,7 +132,7 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOAS(more, less);
-			this.context.getListStatements().add(new Statement(more, less, false));
+			this.context.getListStatements().add(new Statement(more, less, false, "State"));
 
 		}
 		
@@ -170,6 +172,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void addProposal(Proposal proposal) {
+		context.updateProposals(proposal);
 		if (proposal instanceof CriterionProposal) 
 			addCriterionProposal((CriterionProposal) proposal);
 
@@ -222,22 +225,26 @@ public class Negotiation<O extends Option> {
 
 	// testing functions 
 
-	public CriterionProposal criterionProposal(Criterion c, boolean external){
+	public CriterionProposal criterionProposal(Criterion c){
 		if(c == null)
 			return null;
-		return (new CriterionProposal(external, c));
+		return (new CriterionProposal(c));
 	}
 
-	public OptionProposal optionProposal(Option o, boolean external){
+	public OptionProposal optionProposal(Option o){
 		if(o == null)
 			return null;
-		return (new OptionProposal(external, o));
+		return (new OptionProposal(o));
 
 	}
 	
 	public Criterion mostPreferredCriterion (Class <? extends Criterion> criterion) {
 		
 		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered());
+	}
+	
+	public CriterionProposal generateRandomProposal (Class <? extends Criterion> criterion){
+		return (new CriterionProposal(true, mostPreferredCriterion(criterion)));
 	}
 
 	public ValuePreference<Criterion> getRandomPreference (Class<? extends Criterion> c){
@@ -250,40 +257,55 @@ public class Negotiation<O extends Option> {
 		return (model.getPreference(model.getSelf(),model.getOther()));
 	}
 	
-	public ValuePreference<Criterion> reactUserStatement(){
+	public ValuePreference<Criterion> reactUserStatement(String uttType){
 		
-		if (this.context.getLastUserStatement() != null) {
-			ValuePreference<Criterion> userStatement = context.getLastUserStatement().getStatedPreference();
+		if (this.context.getLastStatement(uttType,true) != null) {
+			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
 //			Class <? extends Criterion>  type = (userStatement.getMore() != null?
 //					userStatement.getMore().getClass() :
 //					userStatement.getLess().getClass());
 			
-			if(userStatement.getLess() == null){
-				Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
-					getMostPreferred();
-				return (mostPref.equals(userStatement.getMore())? userStatement: 
-					new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
-			
-				
-			}
-		
-				
-			if(userStatement.getMore() == null){
-				Criterion leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass()).getSelf().
-						getLeastPreferred();
-				return (leastPref.equals(userStatement.getLess())? userStatement: 
-					new ValuePreference<Criterion>(userStatement.getLess(), leastPref));
-			
-			}
-		
-		
-			return(this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
-					isPreferred(userStatement.getMore(), userStatement.getLess()) ? userStatement: 
-								new ValuePreference<Criterion>(userStatement.getLess(), userStatement.getMore()));
+		return (getPref(userStatement));
 		}
 			
 		else 
 			return (new ValuePreference<Criterion>(null, null));
+	}
+	
+	
+	public ValuePreference<Criterion> getPrefOnCriterion(Criterion userStatement){
+		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(userStatement, null);
+		return (getPref(pref));
+	}
+	
+	public ValuePreference<Criterion> reactToProposal(CriterionProposal p){
+		Criterion criterion = p.getValue();
+		return (getPrefOnCriterion(criterion));
+	}
+	
+	
+	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){
+		if(userStatement.getLess() == null){
+			Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
+				getMostPreferred();
+			return (mostPref.equals(userStatement.getMore())? userStatement: 
+				new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
+		
+			
+		}
+		if(userStatement.getMore() == null){
+			Criterion leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass()).getSelf().
+					getLeastPreferred();
+			return (leastPref.equals(userStatement.getLess())? userStatement: 
+				new ValuePreference<Criterion>(userStatement.getLess(), leastPref));
+		
+		}
+	
+	
+		return(this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
+				isPreferred(userStatement.getMore(), userStatement.getLess()) ? userStatement: 
+							new ValuePreference<Criterion>(userStatement.getLess(), userStatement.getMore()));
+		
 	}
 
 }

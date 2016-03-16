@@ -14,12 +14,16 @@
   > execute fr.limsi.negotiate.lang.AskPreference / Packages.fr.limsi.negotiate.restaurant.Cuisine / null / null
     User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
     Agent says "Ok."
-  > execute fr.limsi.negotiate.lang.StatePreference / null /Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN /Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+  
+  > execute fr.limsi.negotiate.lang.AskPreference /  / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
+    > execute fr.limsi.negotiate.lang.AskPreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+  
     User says "I like FRENCH most."
     Agent says "Ok."
-  > execute fr.limsi.negotiate.lang.Propose / createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) / false 
+  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) 
     Agent says "Let's choose FRENCH."
-  > execute fr.limsi.negotiate.lang.Accept /createCriterionProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) 
+  > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH, false) 
     User says "Okay, let's choose FRENCH."
     Agent says "Ok."
   > eval printMS()

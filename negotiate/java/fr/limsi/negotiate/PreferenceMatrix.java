@@ -32,18 +32,21 @@ public class PreferenceMatrix<T> {
 		transitivity(i, j);
 	}
 	public void addPreference(T more, T less) {
-		if(more.equals(null)){
-			addLeastPreferred(less);
 
-		}
-		else if(less.equals(null)){
-			addMostPreferred(more);
-		}
-		else{
-			insertPreference(more, less);
+		if(!(more.equals(null) && less.equals(null))){
+			if(more.equals(null)){
+				addLeastPreferred(less);
+
+			}
+			if(less.equals(null)){
+				addMostPreferred(more);
+			}
+			else{
+				insertPreference(more, less);
+			}
 		}
 	}
-	
+
 	public void addMostPreferred(T value){
 		int j = values.indexOf(value);
 		for(int i=0; i< preferences.length; i++){
@@ -54,7 +57,7 @@ public class PreferenceMatrix<T> {
 			}
 		}
 	}
-	
+
 	public void addLeastPreferred(T value){
 		int j = values.indexOf(value);
 		for(int i=0; i< preferences.length; i++){
@@ -119,7 +122,7 @@ public class PreferenceMatrix<T> {
 				imax = i;
 		return imax;
 	}
-	
+
 	private static final int minIndex(ArrayList<Integer> a) {
 		int imin = a.get(0);
 		for(int i=1;i<a.size();i++)

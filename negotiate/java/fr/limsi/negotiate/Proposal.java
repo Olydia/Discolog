@@ -26,6 +26,10 @@ public abstract class Proposal {
 	protected Proposal (boolean isSelf) {
 		this.isSelf = isSelf;
 	}
+	
+	protected Proposal () {
+		this.isSelf = false;
+	}
 
 	public void setStatus (Status status) {
 		this.status = status;
@@ -36,7 +40,7 @@ public abstract class Proposal {
 	public void setCounter (Proposal counter) {
 		this.counter = counter;
 	}
-
+		
 	public Proposal getCounter () { return counter; }
 
 	abstract Object getValue();

@@ -19,6 +19,11 @@ public class CriterionProposal extends Proposal {
 		super(isSelf);
 		this.criterion = criterion;
 	}
+	
+	public CriterionProposal (Criterion criterion) {
+		super();
+		this.criterion = criterion;
+	}
 
 	public Criterion getCriterion() {
 		return criterion;

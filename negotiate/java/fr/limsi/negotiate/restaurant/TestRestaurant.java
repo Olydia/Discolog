@@ -4,7 +4,9 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionPrefModel;
 import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.CriteriaClassPrefModel;
+import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ValuePreference;
 
 
@@ -70,13 +72,21 @@ public class TestRestaurant {
 //		
 			
 //		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
-//		CriterionProposal c = new CriterionProposal(true, Cuisine.CHINESE);
+		CriterionProposal c = new CriterionProposal(true, Cuisine.CHINESE);
+		CriterionProposal c1 = new CriterionProposal(true, Cuisine.CHINESE);
+		c1.setStatus(Proposal.Status.REJECTED);
+
 ////
-//		restaurants.addProposal(c);
-//		//cuisine.propose(c);
+		restaurants.addProposal(c);
+		restaurants.addProposal(c1);
+		restaurants.addProposal(c1);
+
+
+		//cuisine.propose(c);
+		System.out.println(restaurants.context.getLastProposal("REJECTED"));
 //		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED);
 //		System.out.println(restaurants.mostPreferredCriterion(Cuisine.class));
-
+//
 //		System.out.println(restaurants.getProposals());
 //		System.out.println(restaurants.checkProposalStatus(c));
 		
