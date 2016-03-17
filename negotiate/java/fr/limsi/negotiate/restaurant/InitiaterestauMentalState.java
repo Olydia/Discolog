@@ -17,29 +17,29 @@ public class InitiaterestauMentalState {
 				// 1.1. Preference model on cuisine
 				CriterionPrefModel<Cuisine> lydia_cuisine = new CriterionPrefModel<Cuisine>();
 				lydia_cuisine.setType(Cuisine.class);
-				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
-				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.JAPANESE));
-				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
-				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
-				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
+				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.CHINESE));
+				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.CHINESE));
+				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.JAPANESE));
+				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
+				lydia_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.JAPANESE));
 
-				// 2.2. Preference model on Cost
+				// 1.2. Preference model on Cost
 				CriterionPrefModel<Cost> lydia_cost = new CriterionPrefModel<Cost>();
 				lydia_cost.setType(Cost.class);
-				lydia_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
+				lydia_cost.add(new ValuePreference<Cost>(Cost.EXPENSIVE, Cost.CHEAP));
 
-				// 2.3 Preference model on Ambiance 
+				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> lydia_ambiance = new CriterionPrefModel<Ambiance>();
 				lydia_ambiance.setType(Ambiance.class);
-				lydia_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
-				/*1. Define the  preferences on Restaurant criteria */	
-
+				lydia_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.CALM));
+				
+				//1.4. Define the  preferences on Restaurant criteria 
 				CriteriaClassPrefModel<Restaurant> lydia_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 				lydia_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
-				lydia_criteria.add(new CriterionPreference(Cuisine.class,Cost.class));
-				lydia_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));
+				lydia_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
+				lydia_criteria.add(new CriterionPreference(Ambiance.class, Cost.class));
 
-				//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
+				///2. Define the agent mental state on each criterion (self pref, user pref, proposals) 		
 				CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
 				cost.setSelfPreferences(lydia_cost);
 

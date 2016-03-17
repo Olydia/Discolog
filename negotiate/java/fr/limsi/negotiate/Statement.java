@@ -28,8 +28,8 @@ public class Statement {
 			this.utteranceType = utteranceType;
 		}
 
-		public Statement(Criterion more, Criterion less, boolean external, String utteranceType){
-			ValuePreference<Criterion> preference = new ValuePreference<Criterion>(more, less);
+		public Statement(Criterion less, Criterion more, boolean external, String utteranceType){
+			ValuePreference<Criterion> preference = new ValuePreference<Criterion>(less, more);
 			this.preference = preference;
 			this.external = external;
 			this.utteranceType = utteranceType;

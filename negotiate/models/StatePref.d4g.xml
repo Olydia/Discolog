@@ -12,12 +12,13 @@
          
 			<do task = "State"/>
         	<do task = "Propose"/>
-        	<do task = "Propose"/>
+        	<do task = "Ask"/>
         	<do task = "Accept"/>
         	<do task = "Reject"/>
          
   </agent>
   
+  <!-- User State Preference -->
     <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
        	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
         	less="reactUser($state).getLess()" more="reactUser($state).getMore()" applicable = "isPeer()">
@@ -38,7 +39,7 @@
         	<do task = "Reject"/>
        	</do>
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref()) " applicable = "!isDom()">
+			proposal="createCriterionProposal(getLastUserPref()) " applicable = "isSub()">
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -71,7 +72,7 @@
        	</do>
        			
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref())" applicable = "!isDom()">
+			proposal="createCriterionProposal(getLastUserPref())" applicable = "isSub()">
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -190,7 +191,7 @@
 	
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
        		less="reactToProposal(lastOpenProposal()).getLess()" 
-       		more="reactToProposal(lastOpenProposal()).getMore()" applicable = "isPeer()">
+       		more="reactToProposal(lastOpenProposal()).getMore()" applicable = "isSub()">
        		<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -212,7 +213,7 @@
       	<!-- Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC-->	
       		
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="generateRandomProposal(getDiscussedCriterion())" >
+			proposal="generateRandomProposal(getDiscussedCriterion())"  applicable = "isDom()">
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -221,7 +222,8 @@
        	</do> 
 	
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-			less="askUserPref(getDiscussedCriterion()).getLess()" more="askUserPref(getDiscussedCriterion()).getMore()">
+			less="askUserPref(getDiscussedCriterion()).getLess()" 
+			more="askUserPref(getDiscussedCriterion()).getMore()" >
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -376,11 +378,10 @@
 	}
 	
 	function isSub(){
-	if(!isDom()){
-		if(!isPeer())
-			return true;
-	}
-	else 
+		if(!isDom()){
+			if(!isPeer())
+				return true;
+		}
 		return false;
 	
 	}      
