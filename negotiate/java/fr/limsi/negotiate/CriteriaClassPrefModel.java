@@ -50,7 +50,7 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	 * if first argument is more preferred, or null if no preference.
 	 */
 	@Override
-	public Boolean isPreferred (Class<? extends Criterion> more, Class<? extends Criterion> less) {
+	public Boolean isPreferred (Class<? extends Criterion> less, Class<? extends Criterion> more) {
 	
 		return( getRank(less) < getRank(more)?  true :  false);	}
 

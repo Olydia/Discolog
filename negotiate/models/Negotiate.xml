@@ -18,18 +18,17 @@
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
-			!$negotiation.isInOAS($this.more,$this.less)
+			!$negotiation.isInOAS($this.less,$this.more)
 		</precondition>
 
 		<script>
-			$negotiation.context.updateDiscussedCriterion($this.more,$this.less);
+			$negotiation.context.updateDiscussedCriterion($this.less,$this.more);
 			if ( $this.external ) {
-				updateOtherMS ($this.more, $this.less);
+				updateOtherMS ($this.less, $this.more);
 			} 
 			else {
-				updateOtherAboutSelfMS ($this.more, $this.less);
+				updateOtherAboutSelfMS ($this.less, $this.more);
 			}
-			print("Done")
 		</script>
 	</task>
 
@@ -48,8 +47,8 @@
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
-<!-- 			!($negotiation.isInOther($this.more, $this.less) || -->
-<!-- 			$negotiation.isInOther($this.less, $this.more)) -->
+			!($negotiation.isInOther($this.less, $this.more) ||
+			$negotiation.isInOther($this.more, $this.less))
 		</precondition>
 		
 		<script>
@@ -57,7 +56,7 @@
 			$statement = createStatement($this.less, $this.more, $this.external,"Ask");
 			
 			if($this.criterion == null)
-				$negotiation.context.updateDiscussedCriterion($this.more,$this.less);
+				$negotiation.context.updateDiscussedCriterion($this.less,$this.more);
 				
 			else {
 				$negotiation.context.updateDiscussedCriterion($this.criterion);
@@ -75,8 +74,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-<!-- 			! isProposed ($this.proposal, -->
-<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN) -->
+			! isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN)
 		</precondition>
 
 		<script>
@@ -93,8 +92,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-<!-- 			isProposed ($this.proposal, -->
-<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN); -->
+			isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
 		</precondition>
 
 		<script>
@@ -110,8 +109,8 @@
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 		<precondition>
-<!-- 			isProposed ($this.proposal, -->
-<!-- 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN); -->
+			isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
 		</precondition>
 
 		<script>
@@ -130,16 +129,16 @@
 		$negotiation = 	$disco.getInteraction().getSystem().getNegotiation();
 		$lastProposal = null;
 
-		function updateOtherMS (more, less){
-		$negotiation.updateOtherMentalState(more, less);
+		function updateOtherMS (less, more){
+		$negotiation.updateOtherMentalState(less, more);
 		}
 
-		function updateOtherAboutSelfMS (more, less){
-		$negotiation.updateOASMentalState(more, less);
+		function updateOtherAboutSelfMS (less, more){
+		$negotiation.updateOASMentalState(less, more);
 		}
 
 		function isProposed	(proposal, status) {
-		return $negotiation.isProposed(proposal);
+		return $negotiation.isProposed(proposal, status);
 		}
 
 		function propose (proposal){

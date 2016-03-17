@@ -74,25 +74,25 @@ public class Negotiation<O extends Option> {
 	// Methods of the mental state
 
 	public boolean isInOther(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
+		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
 		Class<? extends Criterion> c =  p.getType();
 		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (cn.getOther().getPreferencesValues().contains(p));
+		return (cn.getOther().getPreferences().contains(p));
 	}
 
 	public boolean isInself(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
+		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
 		Class<? extends Criterion> c =  p.getType();
 		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (cn.getSelf().getPreferencesValues().contains(p));
+		return (cn.getSelf().getPreferences().contains(p));
 	}
 
 	public boolean isInOAS(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (more, less);
+		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
 		Class<? extends Criterion> c =  p.getType();
 		if(c !=null) {
 			CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-			return (cn.getOas().getPreferencesValues().contains(p));
+			return (cn.getOas().getPreferences().contains(p));
 		}
 		return false;
 	}
@@ -114,25 +114,25 @@ public class Negotiation<O extends Option> {
 		// add the new proposal to the corresponding 	
 	}
 
-	public void updateOtherMentalState(Criterion more, Criterion less){
-		System.out.println(more +", " +less);
-		Class<? extends Criterion> type =  new ValuePreference<Criterion>(more, less).getType();
+	public void updateOtherMentalState(Criterion less, Criterion more){
+		System.out.println(less +", " +more);
+		Class<? extends Criterion> type =  new ValuePreference<Criterion>(less, more).getType();
 
 		if(type != null){
-			this.getCriterionNegotiation(type).addOther(more, less);
-			this.context.getListStatements().add(new Statement(more, less, true, "State"));
+			this.getCriterionNegotiation(type).addOther(less, more);
+			this.context.getListStatements().add(new Statement(less, more, true, "State"));
 		}
 			
 		System.out.println("updated");
 
 	}
 
-	public void updateOASMentalState(Criterion more, Criterion less){
-		Class<? extends Criterion> type =  new ValuePreference<Criterion>(more, less).getType();
+	public void updateOASMentalState(Criterion less, Criterion more){
+		Class<? extends Criterion> type =  new ValuePreference<Criterion>(less, more).getType();
 
 		if(type != null){
-			this.getCriterionNegotiation(type).addOAS(more, less);
-			this.context.getListStatements().add(new Statement(more, less, false, "State"));
+			this.getCriterionNegotiation(type).addOAS(less, more);
+			this.context.getListStatements().add(new Statement(less, more, false, "State"));
 
 		}
 		
@@ -289,7 +289,7 @@ public class Negotiation<O extends Option> {
 			Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
 				getMostPreferred();
 			return (mostPref.equals(userStatement.getMore())? userStatement: 
-				new ValuePreference<Criterion>(mostPref,userStatement.getMore()));
+				new ValuePreference<Criterion>(userStatement.getMore(), mostPref));
 		
 			
 		}
@@ -297,7 +297,7 @@ public class Negotiation<O extends Option> {
 			Criterion leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass()).getSelf().
 					getLeastPreferred();
 			return (leastPref.equals(userStatement.getLess())? userStatement: 
-				new ValuePreference<Criterion>(userStatement.getLess(), leastPref));
+				new ValuePreference<Criterion>(leastPref,userStatement.getLess()));
 		
 		}
 	

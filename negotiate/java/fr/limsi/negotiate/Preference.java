@@ -23,8 +23,8 @@ public abstract class Preference<C> {
 
 
 	public Preference (C class1, C class2) {
-		this.more = class1;
-		this.less = class2;
+		this.less = class1;
+		this.more = class2;
 	}
 
 	@Override

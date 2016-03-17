@@ -25,7 +25,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	
 	public void add (ValuePreference<C> preference) {
 		ValuePreference<C> v = new ValuePreference<C>
-							(preference.getLess(), preference.getMore());
+							(preference.getMore(), preference.getLess());
 		if(preferences.contains(v))
 			throw new RuntimeException("Cannot add P ("+v.getLess()+", " + v.getMore()+") "
 					+ " because P ("+v.getMore()+", " + v.getLess()+") exists in the preferences list");
@@ -33,15 +33,15 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 			preferences.add(preference);
 	}
 
-	public void add (C more, C less){
-		add(new ValuePreference<C>(more, less));
+	public void add (C less, C more){
+		add(new ValuePreference<C>(less, more));
 	}
 	/**
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference. Can be used to respond to an ask.Preference(Less, More)
 	 */
 	@Override
-	public Boolean isPreferred (C more, C less) {
+	public Boolean isPreferred (C less, C more) {
 		return( getScore(less) < getScore(more)?  true :  false);
 	}
 	

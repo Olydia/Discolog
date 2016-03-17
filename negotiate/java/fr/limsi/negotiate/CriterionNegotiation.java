@@ -113,12 +113,12 @@ public class CriterionNegotiation<C extends Criterion> {
 		return other;
 	}
 
-	public void addOther(C more, C less) {
-		other.add(more,less);
+	public void addOther(C less, C more) {
+		other.add(less,more);
 	}
 	
-	public void addOAS(C more, C less) {
-		oas.add(more,less);
+	public void addOAS(C less, C more) {
+		oas.add(less, more);
 	}
 	
 	public CriterionPrefModel<C> getOas() {

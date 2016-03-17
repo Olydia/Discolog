@@ -8,8 +8,8 @@ package fr.limsi.negotiate;
  */
 public class ValuePreference<C extends Criterion>  extends Preference<C>{
    
-	public ValuePreference(C more, C less) {
-		super(more, less);
+	public ValuePreference(C less, C more) {
+		super(less, more);
 		// TODO Auto-generated constructor stub
 	}
 	

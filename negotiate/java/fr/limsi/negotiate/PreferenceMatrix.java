@@ -16,10 +16,10 @@ public class PreferenceMatrix<T> {
 	}
 
 	// TODO check if preference(less, more) is not already defined in order to avoid inconcisty and cycles
-	public void insertPreference(T more, T less) {
-		int i = values.indexOf(more);
-		int j = values.indexOf(less);
-		if(preferences[j][i] == 1)
+	public void insertPreference(T less, T more) {
+		int indexMore = values.indexOf(more);
+		int indexLess = values.indexOf(less);
+		if(preferences[indexLess][indexMore] == 1)
 			try {
 				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
 			} catch (Exception e) {
@@ -27,11 +27,11 @@ public class PreferenceMatrix<T> {
 				e.printStackTrace();
 			}
 		// add an exception in case where the index = -1
-		preferences[i][j]= 1 ;
-		preferences[j][i]= -1;
-		transitivity(i, j);
+		preferences[indexMore][indexLess]= 1 ;
+		preferences[indexLess][indexMore]= -1;
+		transitivity(indexLess, indexMore);
 	}
-	public void addPreference(T more, T less) {
+	public void addPreference(T less, T more) {
 
 		if(!(more.equals(null) && less.equals(null))){
 			if(more.equals(null)){
@@ -42,7 +42,7 @@ public class PreferenceMatrix<T> {
 				addMostPreferred(more);
 			}
 			else{
-				insertPreference(more, less);
+				insertPreference(less, more);
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class PreferenceMatrix<T> {
 			}
 		}
 	}
-	public void transitivity (int indexMore, int indexLess){
+	public void transitivity (int indexLess , int  indexMore){
 
 		for(int i=0; i< preferences.length; i++){
 			if(preferences[indexLess][i] == 1 && i != indexMore){

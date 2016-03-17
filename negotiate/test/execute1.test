@@ -1,7 +1,7 @@
     # 1 mars 2016 19:01:50 - TaskEngine 1.9 / Disco 1.13
     Welcome to Disco! (Type 'help' for command list)
   > load models/Negotiate.xml
-  > load models/statePref.xml
+  > load models/StatePref.xml
   > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue($cuisine) / false
     Agent says "I like CHINESE most."
   > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false 
@@ -16,7 +16,7 @@
     Agent says "Ok."
   > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN /Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
   
-  > execute fr.limsi.negotiate.lang.AskPreference /  / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
+  > execute fr.limsi.negotiate.lang.AskPreference / null / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
     > execute fr.limsi.negotiate.lang.AskPreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
   
     User says "I like FRENCH most."
