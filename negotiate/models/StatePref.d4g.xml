@@ -191,7 +191,7 @@
 	
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
        		less="reactToProposal(lastOpenProposal()).getLess()" 
-       		more="reactToProposal(lastOpenProposal()).getMore()" applicable = "isSub()">
+       		more="reactToProposal(lastOpenProposal()).getMore()" applicable = "isSub() &amp;&amp; lastOpenProposal() != null">
        		<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -200,15 +200,15 @@
        	</do>
       	
 
-      	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-       		less="getPreference(getDiscussedCriterion()).getLess()" 
-       		more="getPreference(getDiscussedCriterion()).getMore()" applicable = "isPeer()">
-       	<do task = "Ask"/>
-        	<do task = "State"/>
-        	<do task = "Propose"/>
-        	<do task = "Accept"/>
-        	<do task = "Reject"/>
-       	</do>
+<!--       	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!--        		less="getPreference(getDiscussedCriterion()).getLess()"  -->
+<!--        		more="getPreference(getDiscussedCriterion()).getMore()" applicable = "isPeer()"> -->
+<!--        	<do task = "Ask"/> -->
+<!--         	<do task = "State"/> -->
+<!--         	<do task = "Propose"/> -->
+<!--         	<do task = "Accept"/> -->
+<!--         	<do task = "Reject"/> -->
+<!--        	</do> -->
       	
       	<!-- Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC-->	
       		
@@ -378,12 +378,7 @@
 	}
 	
 	function isSub(){
-		if(!isDom()){
-			if(!isPeer())
-				return true;
-		}
-		return false;
-	
+		return (dom &lt; 0)
 	}      
     
   </t:script>

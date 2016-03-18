@@ -123,7 +123,6 @@ public class Negotiation<O extends Option> {
 			this.context.getListStatements().add(new Statement(less, more, true, "State"));
 		}
 			
-		System.out.println("updated");
 
 	}
 
@@ -172,7 +171,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void addProposal(Proposal proposal) {
-		context.updateProposals(proposal);
+		this.context.updateProposals(proposal);
 		if (proposal instanceof CriterionProposal) 
 			addCriterionProposal((CriterionProposal) proposal);
 
@@ -274,7 +273,7 @@ public class Negotiation<O extends Option> {
 	
 	
 	public ValuePreference<Criterion> getPrefOnCriterion(Criterion userStatement){
-		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(userStatement, null);
+		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, userStatement);
 		return (getPref(pref));
 	}
 	

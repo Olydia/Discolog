@@ -433,7 +433,7 @@
       <subtasks id="_d4e111_subtasks">
          <step name="_d4e111_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e111_ref" task="_d4e111_tree"/>
-         <applicable>isSub()</applicable>
+         <applicable>isSub() &amp;&amp; lastOpenProposal() != null</applicable>
          <binding slot="$_d4e111_step.external" value="false"/>
          <binding slot="$_d4e111_step.less" value="reactToProposal(lastOpenProposal()).getLess()"/>
          <binding slot="$_d4e111_step.more" value="reactToProposal(lastOpenProposal()).getMore()"/>
@@ -724,11 +724,8 @@
 	}
 	
 	function isSub(){
-		if(!isDom()){
-			if(!isPeer())
-				return true;
-		}
-		return false;
+		return (dom &lt; 0)
+		
 	
 	}      
     
