@@ -59,8 +59,8 @@
 				$negotiation.context.updateDiscussedCriterion($this.less,$this.more);
 				
 			else {
-				$negotiation.context.updateDiscussedCriterion($this.criterion);
-				$statement.setType($this.criterion)		
+				$negotiation.context.updateDiscussedCriterion($this.criterion.class);
+				$statement.setType($this.criterion.class)		
 				}
 			$negotiation.context.getListStatements().add($statement);
 					
