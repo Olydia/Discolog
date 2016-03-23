@@ -1,0 +1,59 @@
+\documentclass{llncs}
+
+\usepackage{subcaption}
+\usepackage{subfig} 
+\usepackage{usual}
+\usepackage{graphicx}
+\pagestyle{plain}
+
+%
+\begin{document}
+\title{Agent utterances in the dialogue}
+\maketitle 
+\section{State Preference}
+	\textbf{Specifier le critere !!!!!}
+	\par A user can state a preference on values of a certain criterion \emph{C}. As explained, the semantic of the utterance allows the speaker to express three different cases
+	\begin{itemize}
+		\item StatePreference(C, less, more) : I like "less" less than "more"
+		\item StatePreference(C, *, more): I like the most More
+		\item StatePreference(C, less, *): I like the least less. 
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item \textbf{StatePreference(less, more)}:The agent can react to the the stated values using a method reactToUserStatement(less, more). This utterance is selected if the agent's previous utterance doesn't concern a statement about (less, more).  Depending on the values of the input preference the method can retrun a preference. 
+			\subitem input: \textit{(*, more)} $\rightarrow$ 
+				output: \textit{(more, mostPreferred)} if \textit{more $\not = $ mostPreffered,} else \textit{(*, more)}.
+			\subitem input: \textit{(less, *)} $\rightarrow$ 
+				output: \textit{(leastPreferred,less)} if \textit{less $\not = $ leastPreffered,} else \textit{(less, *)}.
+			\subitem input: \textit{(less, more)} $\rightarrow$ Output:  \textit{(less, more)} if(score(less) $<$ score(more)), \textit{else (more,less)}.
+			
+		\item \textbf{StatePreference(less1, more1)}: The agent can state a preference about other values than expressed in the user utterance.
+		\item \textbf{AskPreference(less1,more1)}: The agent is not dominant enough to propose new values. Therefore, he uses the utterance ask to  invite the user to choose values.
+		\item  \textbf{Propose(more)}: the propose depends on the relationship on dominance : 
+			\subitem agent is not submissive; then  the condition \textit{more = mostPreferred} has be satisfied so the agent can propose more.
+			\subitem If the agent is submissive, he prioritizes the user preferences. 
+	\end{enumerate}
+
+\section{Ask Preference}
+	\par In the case of user asks the agent about a certain preference. The only response of the agent is to express its opinion about the asked preference.  The content of the state is generated using a method \emph{"reactToAsk"} that calculates the on appropriate response from the input of the ask utterance. We distinguish the following cases:
+		\begin{enumerate}
+			\item If \textit{(less, more)=(*,*)} thus \textit{reactToAsk(less,more) = mostPreferred}. The agent express its most preferred value of the criterion \emph{C}.
+				\subitem \textbf{For example :} 
+				\subitem U: what kind of cuisine do you prefer ?
+				\subitem A: I like Japanese cuisine. (which corresponds to the agent mostPreferred value for the criterion \textit{Cuisine}).
+ 
+			\item  If \textit{(less=*)} and \textit{(more $\not =$ *)}, thus \textit{reactToAsk(*,more)=(*,more) } if \textit{(more=mostPreferred)}, else textit{reactToAsk(*,more)=(*,mostPreferred)}.
+			\subitem For example : 
+				\subitem U: Do you like Chinese cuisine ?
+				\subitem A: I like Chinese less than Japanese cuisine. (which corresponds to the agent mostPreferred value for the criterion \textit{Cuisine}).
+			\item In the same idea, if \textit{(more=*)} and \textit{(less $\not =$ *)}, thus \textit{reactToAsk(less,*)=(less,*)} if \textit{(less=leastPreferred)}, else \textit{reactToAsk(less,*)=(leastPreferred,*)}.
+			
+		\end{enumerate}
+
+\section{Propose}
+	\par When the agent receive a proposal, he can either accept it or reject this proposal. However, we model different ways to express the rejection of a proposal that is influenced by the perception of the relationship. 
+		\begin{enumerate}
+			\item \textbf{StatePreference(C,value,*)}:
+		\end{enumerate}		
+
+\end{document}
