@@ -28,7 +28,7 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 			Object[] v = type.getEnumConstants();
 			m.setAccessible(true);
 			List<Class<? extends Criterion>> value = (List<Class<? extends Criterion>>)m.invoke(v[0]);
-			System.out.println(value);
+			return (value);
 		} catch (NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

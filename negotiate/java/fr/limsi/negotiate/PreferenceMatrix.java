@@ -1,8 +1,12 @@
 package fr.limsi.negotiate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class PreferenceMatrix<T> {
@@ -107,12 +111,17 @@ public class PreferenceMatrix<T> {
 
 	}
 	public ArrayList<Integer> getRankedPreferences(){
+		Map<Integer, Integer> mapValues = new HashMap<Integer, Integer>();
 		ArrayList<Integer> prefValues = getPreferences();
-		int min = Collections.min(prefValues);
-		for(int v : prefValues)
-			v= v+ Math.abs(min);
-		return prefValues;
+		for(int i=0; i<prefValues.size(); i++)
+			mapValues.put(prefValues.get(i), i);
 
+	    ArrayList<Integer> sortedRank = new ArrayList<Integer>(new TreeMap<Integer, Integer>(mapValues).values());
+		for(int elem : sortedRank)
+			prefValues.set(elem, sortedRank.indexOf(elem));
+		
+		return (prefValues);
+			
 	}
 
 	private static final int maxIndex(ArrayList<Integer> a) {

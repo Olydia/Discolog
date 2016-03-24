@@ -17,9 +17,6 @@
 		<input name="less" type="Packages.fr.limsi.negotiate.Criterion" />
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
-		<precondition>
-			!$negotiation.isInOAS($this.less,$this.more)
-		</precondition>
 
 		<script>
 			$negotiation.context.updateDiscussedCriterion($this.less,$this.more);

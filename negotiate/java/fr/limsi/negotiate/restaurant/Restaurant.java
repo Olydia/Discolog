@@ -8,7 +8,11 @@ public enum Restaurant implements Option {
 
 	LE_PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.CALM),
 
-	CHEZ_CHUCK (Cuisine.CHINESE, Cost.CHEAP, Ambiance.NOISY);
+	CHEZ_CHUCK (Cuisine.CHINESE, Cost.CHEAP, Ambiance.NOISY),
+	
+	SAMURA (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.NOISY),
+	
+	PAPELLI (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.CALM);
 
 	public final Cuisine cuisine;
 	public final Cost cost;

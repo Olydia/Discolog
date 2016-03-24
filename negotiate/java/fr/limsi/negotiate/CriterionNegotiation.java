@@ -53,9 +53,7 @@ public class CriterionNegotiation<C extends Criterion> {
 			if(!out.getPreferences().contains(value))
 				return value;
 		}
-		return (in.getPreferences().
-				get(new Random().
-						nextInt(in.getPreferences().size()-1)));
+		return null;
 	}
 	
 	public C getTheCurrentMostPreffered(){
@@ -142,7 +140,14 @@ public class CriterionNegotiation<C extends Criterion> {
 		return null;
 	}
 	
-	
+	public List<Criterion> getProposals(Proposal.Status status){
+		List<Criterion> prop = new ArrayList<Criterion>();
+		for (CriterionProposal p: proposals){
+			if(p.getStatus().equals(status))
+				prop.add(p.getValue());
+		}
+		return prop;
+	}
 	
 	public void printMentalState() {
 		System.out.println(" **** SELF preferences *** \n \n");

@@ -7,6 +7,7 @@ import fr.limsi.negotiate.CriterionPreference;
 import fr.limsi.negotiate.CriteriaClassPrefModel;
 import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.OptionProposal;
 import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ValuePreference;
 
@@ -36,8 +37,8 @@ public class TestRestaurant {
 
 		CriteriaClassPrefModel<Restaurant> lydia_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 		lydia_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
-		lydia_criteria.add(new CriterionPreference(Cuisine.class,Cost.class));
-		lydia_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));
+		lydia_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
+		lydia_criteria.add(new CriterionPreference(Ambiance.class,Cost.class));
 
 
 		//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
@@ -51,6 +52,9 @@ public class TestRestaurant {
 		ambiance.setSelfPreferences(lydia_ambiance);
 
 		//
+		
+		
+		
 				/*3. Create a nogotiation on restaurant */
 		@SuppressWarnings("unchecked")
 		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
@@ -70,18 +74,30 @@ public class TestRestaurant {
 //		System.out.println(restaurants.mostPreferredCriterion(Cuisine.class));
 //		
 			
+//		for(Cuisine v : Cuisine.values()){
+//			System.out.println(v + ": " + lydia_cuisine.getScore(v));
+//		}
+		
+
 //		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
 		CriterionProposal c = new CriterionProposal(true, Cuisine.JAPANESE);
 		CriterionProposal c1 = new CriterionProposal(true, Cuisine.CHINESE);
 		c1.setStatus(Proposal.Status.REJECTED);
 
-////
+		OptionProposal p = new OptionProposal(true, Restaurant.LE_PARISIEN);
+		p.setStatus(Proposal.Status.REJECTED);
+		restaurants.addProposal(p);
 		restaurants.addProposal(c);
-		System.out.println(restaurants.context.getListStatements());
+		//System.out.println(restaurants.context.getListStatements());
 
 		restaurants.addProposal(c1);
-		System.out.println("le dernier "+ restaurants.context.getLastStatement("REJECTED", true));
+		//System.out.println("le dernier "+ restaurants.context.getLastStatement("REJECTED", true));
+		for(Restaurant v : Restaurant.values()){
+			System.out.println(v + ": " + restaurants.optionUtility(v));
+		}
+		System.out.println(restaurants.getCriterionNegotiation(Cuisine.class).getProposals());
 
+		System.out.println("Sorted options :" + restaurants.sortOptions());
 //		//cuisine.propose(c);
 //		System.out.println(restaurants.context.getLastProposal("REJECTED"));
 ////		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED);
