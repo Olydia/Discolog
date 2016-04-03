@@ -8,7 +8,7 @@ public abstract class Preference<C> {
 
 	@Override
 	public String toString() {
-		return "(" + more+ ">" + less+ ")";
+		return "(" + less+ "<" + more+ ")";
 	}
 
 	private final C less, more;

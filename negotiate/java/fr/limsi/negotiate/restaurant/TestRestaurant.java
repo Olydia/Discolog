@@ -1,15 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
-import static org.junit.Assert.assertTrue;
-import fr.limsi.negotiate.CriterionNegotiation;
-import fr.limsi.negotiate.CriterionPrefModel;
-import fr.limsi.negotiate.CriterionPreference;
-import fr.limsi.negotiate.CriteriaClassPrefModel;
-import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.OptionProposal;
-import fr.limsi.negotiate.Proposal;
-import fr.limsi.negotiate.ValuePreference;
+import fr.limsi.negotiate.*;
+
 
 
 public class TestRestaurant {
@@ -85,20 +77,21 @@ public class TestRestaurant {
 		c1.setStatus(Proposal.Status.REJECTED);
 
 		OptionProposal p = new OptionProposal(true, Restaurant.LE_PARISIEN);
-		p.setStatus(Proposal.Status.REJECTED);
+		p.setStatus(Proposal.Status.OPEN);
 		restaurants.addProposal(p);
 		restaurants.addProposal(c);
 		//System.out.println(restaurants.context.getListStatements());
 
 		restaurants.addProposal(c1);
+		System.out.println(restaurants.reactToRejectedProp(c1));
 		//System.out.println("le dernier "+ restaurants.context.getLastStatement("REJECTED", true));
-		for(Restaurant v : Restaurant.values()){
-			System.out.println(v + ": " + restaurants.optionUtility(v));
-		}
-		System.out.println(restaurants.getCriterionNegotiation(Cuisine.class).getProposals());
-
-		System.out.println("Sorted options :" + restaurants.sortOptions());
-//		//cuisine.propose(c);
+//		for(Restaurant v : Restaurant.values()){
+//			System.out.println(v + ": " + restaurants.optionUtility(v));
+//		}
+//		System.out.println(restaurants.getCriterionNegotiation(Cuisine.class).getProposals());
+//
+//		System.out.println("Sorted options :" + restaurants.sortOptions());
+////		//cuisine.propose(c);
 //		System.out.println(restaurants.context.getLastProposal("REJECTED"));
 ////		restaurants.updateProposalStatus(c, Proposal.Status.REJECTED);
 ////		System.out.println(restaurants.mostPreferredCriterion(Cuisine.class));

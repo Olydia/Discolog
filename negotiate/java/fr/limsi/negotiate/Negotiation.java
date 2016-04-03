@@ -3,6 +3,7 @@ package fr.limsi.negotiate;
 import java.util.*;
 
 import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.restaurant.Cuisine;
 
 /**
  * This class defines the negotiation on a defined option (for example Restaurant) 
@@ -42,6 +43,15 @@ public class Negotiation<O extends Option> {
 	
 	public List<OptionProposal> getProposals() {
 		return proposals;
+	}
+	
+	public List<Option> getOptionsPropWithStatus(Proposal.Status status) {
+		List<Option> pStatus = new ArrayList<Option>();	
+		for (OptionProposal p: proposals){
+			if (p.getStatus().equals(status))
+				pStatus.add(p.getValue());
+		}
+		return pStatus;
 	}
 
 	public CriterionNegotiation<Criterion> getCriterionNegotiation(Class<? extends Criterion> c){
@@ -211,7 +221,8 @@ public class Negotiation<O extends Option> {
 		return false;
 	}
 
-	public boolean isAcceptable (Proposal proposal, Status status){
+	public boolean isAcceptable (Proposal proposal){
+		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
 
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
@@ -227,7 +238,7 @@ public class Negotiation<O extends Option> {
 			if(this.optionUtility(option)< 0)
 				return false;
 			else {
-				List<Option> sortedOptions = sortOptions();
+				List<Option> sortedOptions = sortOptions(options);
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/2);
 			}
 		}
@@ -235,22 +246,26 @@ public class Negotiation<O extends Option> {
 	}
 
 
-	public List<Option> sortOptions() {
-		ArrayList<Option> options = new ArrayList<Option>((List<Option>) Arrays.asList(this.getOptions()));
-		for (CriterionNegotiation<Criterion> CN : criteriaNegotiation) {
-			
-			List<Criterion> rejected = CN.getProposals(Proposal.Status.REJECTED);
-			Iterator<Option> it = options.iterator();
+	@SuppressWarnings("unchecked")
+	public ValuePreference<Criterion> reactToRejectedProp(Proposal proposal){
+		Criterion value = Cuisine.ITALIAN;
+		this.criteriaNegotiation.get(0).getSelf().getPreferences().get(0);
+		
+		if(proposal instanceof CriterionProposal){
+			 value = (Criterion) proposal.getValue();
 
-			while (it.hasNext()){
-				Option O = it.next();
-				if(rejected.contains(O.getValue(CN.getCriterionType()))){
-					System.out.println(options.indexOf(O));
-					it.remove();
 
-				}
-			}
 		}
+		if(proposal instanceof OptionProposal){
+			value = LeastScoredCriterion((O) proposal.getValue());
+
+		}
+		
+		return(new ValuePreference<Criterion>(value, currentMostPreferredCriterion(value)));
+
+			
+	}
+	public List<Option> sortOptions( ArrayList<Option> options) {
 		
 		// Supprimer les options qui contiennent au moins un critere rejeté.
 		// pour chaque critere recuper la liste de criteres rejeté.
@@ -262,6 +277,28 @@ public class Negotiation<O extends Option> {
 				return (optionUtility(o2) - optionUtility(o1));
 			}
 		});
+		return options;
+	}
+
+
+	private ArrayList<Option> getOptionsWithoutStatus(Proposal.Status status) {
+		ArrayList<Option> options = new ArrayList<Option>((List<Option>) 
+				Arrays.asList(this.getOptions()));
+		for (CriterionNegotiation<Criterion> CN : criteriaNegotiation) {
+			
+			List<Criterion> rejected = CN.getProposals(status);
+			Iterator<Option> it = options.iterator();
+
+			while (it.hasNext()){
+				Option O = it.next();
+				if(rejected.contains(O.getValue(CN.getCriterionType())) ||
+					getOptionsPropWithStatus(status).contains(O)){
+					
+					it.remove();
+
+				}
+			}
+		}
 		return options;
 	}
 	
@@ -342,8 +379,25 @@ public class Negotiation<O extends Option> {
 
 		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered());
 	}
+	
+	public Criterion currentMostPreferredCriterion (Criterion criterion) {
 
-	public CriterionProposal generateRandomProposal (Class <? extends Criterion> criterion){
+		return (getCriterionNegotiation(criterion.getClass()).getTheCurrentMostPreffered());
+	}
+	
+	public Option mostPreferredOption(){
+		ArrayList<Option> options = new ArrayList<Option>((List<Option>) 
+				Arrays.asList(this.getOptions()));
+		return(sortOptions(options).get(0));
+
+	}
+	
+	public Option currentMostPreferredOption(){
+		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
+		return(sortOptions(options).get(0));
+	}
+
+	public CriterionProposal generateRandomCriterionProposal (Class <? extends Criterion> criterion){
 		return (new CriterionProposal(true, currentMostPreferredCriterion(criterion)));
 	}
 
@@ -403,6 +457,7 @@ public class Negotiation<O extends Option> {
 		Criterion criterion = p.getValue();
 		return (getPrefOnCriterion(criterion));
 	}
+
 
 
 	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){

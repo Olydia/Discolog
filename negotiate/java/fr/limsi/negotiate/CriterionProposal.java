@@ -30,6 +30,7 @@ public class CriterionProposal extends Proposal {
 	}
 
 	@Override
+	public
 	Criterion getValue() {
 		return criterion;
 	}
