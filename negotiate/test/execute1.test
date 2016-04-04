@@ -2,7 +2,7 @@
     Welcome to Disco! (Type 'help' for command list)
   > load models/Negotiate.xml
   > load models/StatePref.xml
-  > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue($cuisine) / false
+  > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue($cuisine)
     Agent says "I like CHINESE most."
   > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false 
     Agent says "I like FRENCH less than CHINESE."
