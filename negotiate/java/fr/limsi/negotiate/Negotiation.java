@@ -394,13 +394,21 @@ public class Negotiation<O extends Option> {
 	
 	public Option currentMostPreferredOption(){
 		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
-		return(sortOptions(options).get(0));
+		if(!options.isEmpty())
+			return(sortOptions(options).get(0));
+		else 
+			return (mostPreferredOption());
 	}
 
 	public CriterionProposal generateRandomCriterionProposal (Class <? extends Criterion> criterion){
 		return (new CriterionProposal(true, currentMostPreferredCriterion(criterion)));
 	}
+	
+	public OptionProposal generateRandomOptionProposal(){
+		return (new OptionProposal(true, currentMostPreferredOption()));
 
+
+	}
 	public ValuePreference<Criterion> getRandomPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
 		if (model.getPreference(model.getSelf(),model.getOas()) == null){
@@ -439,8 +447,13 @@ public class Negotiation<O extends Option> {
 			//			Class <? extends Criterion>  type = (userStatement.getMore() != null?
 			//					userStatement.getMore().getClass() :
 			//					userStatement.getLess().getClass());
-
-			return (getPref(userStatement));
+			if(userStatement.getLess() == null && userStatement.getMore() == null){
+				Criterion mostPref = this.getCriterionNegotiation(context.getLastStatement(uttType,true).getType()).getSelf().
+						getMostPreferred();
+				return (new ValuePreference<Criterion>(null, mostPref));
+			}
+			else
+				return (getPref(userStatement));
 		}
 
 		else 
@@ -463,9 +476,8 @@ public class Negotiation<O extends Option> {
 	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){
 
 		if(userStatement.getLess() == null && userStatement.getMore() == null){
-			Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
-					getMostPreferred();
-			return (new ValuePreference<Criterion>(userStatement.getMore(), mostPref));
+			
+			return (new ValuePreference<Criterion>(null, null));
 
 		}
 

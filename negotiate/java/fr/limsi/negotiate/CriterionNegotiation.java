@@ -48,6 +48,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		return criterionType;
 	}
 	
+	// return a value which is in "in" but not in "out"
 	public ValuePreference<C> getPreference(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
 		for (ValuePreference<C> value: in.getPreferences()){
 			if(!out.getPreferences().contains(value))
