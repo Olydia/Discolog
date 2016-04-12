@@ -14,7 +14,7 @@
 \usepackage{array}
 \usepackage[rflt]{floatflt}
 \usepackage{makecell}
-
+\usepackage{usual}
 \renewcommand\theadalign{cb}
 \renewcommand\theadfont{\bfseries}
 \renewcommand\theadgape{\Gape[3pt]}
@@ -195,24 +195,30 @@ $  \textit{aucune n'est préférée}  $U(O_2) = U(O_1)\\
 \end{array}
 \right .\]
 
-
+{\color{red}
+Ajouter un exemple }
 \subsubsection{Contexte du dialogue}
 \par Durant le dialogue, les deux interlocuteurs échangent des informations sur leurs préférences et suggèrent des propositions pour le choix d'une option. par exemple, je préfère manger Indien ce soir, ou allons au restaurant Ginza ...
 
 Afin de capturer ces informations, nous définissons les éléments suivants:
 \begin{itemize}
 	\item Une proposition est définie comme un tuple $Proposal$ $(Type, Valeur)$ où $Type$ est soit le thème de négociation par exemple ''Restaurant``, soit un critère $c \in \mathcal{C}$ et $Valeur$:
-	\item -  une option $O \in \mathcal{O}$ si $Type \in Topic$ 
-	\item - une valeur de critère $v \in \emph{D}_c$ si $Type \in \mathcal{C}$
-	\item Afin de garder trace de toutes les propositions soumises durant le dialogue, nous définissons ces structures de données qui stockent une proposition a chaque cycle de vie. 
-	\item - $ Proposed$ est la liste de toutes les propositions ouvertes dans le dialogue.
-	\item - $ Rejected$  est la liste des propositions rejetées.
-	\item - $ Accepted$  est la liste des propositions acceptées. Il est a noté qu'il suffit qu'une option soit acceptée pour pouvoir clore la négociation. 
+	\begin{itemize}
+			\item Une option $O \in \mathcal{O}$ si $Type \in Topic$ 
+			\item Une valeur de critère $v \in \emph{D}_c$ si $Type \in \mathcal{C}$
+	\end{itemize}
+
+	\item Afin de garder trace de toutes les propositions soumises durant le dialogue, nous définissons ces structures de données qui stockent une proposition à chaque cycle de vie. 
+		\begin{itemize}
+			\item $ Proposed$ est la liste de toutes les propositions ouvertes dans le dialogue.
+			\item $ Rejected$  est la liste des propositions rejetées.
+			\item $ Accepted$  est la liste des propositions acceptées. Il est a noté qu'il suffit qu'une option soit acceptée pour pouvoir clore la négociation. 
+		\end{itemize}
 \end{itemize}
 
 \subsubsection{Sémantique des actes de dialogue}
 \par Les agents communiquent en utilisant des actes de dialogues. Les messages sont considérés comme des actions durant le dialogue. Ils sont donc définis avec des préconditions et des effets qui mettent à jours l'état mental de l'agent. Il est à noter que les préconditions sont toutes optionnelles, car le choix d'un message dépend en premier lieu de la stratégie de l'interlocuteur (i.e perception de la RI). Les effets d'un message modifient l'état mental de l'agent  mais en aucun cas ne changent les préférences de l'agent $\mathcal{P}_{self}$. 
-\par Nous avons définis un ensemble d'actes de dialogues illustrés dans le tableau \ref{tab: utt} qui sont assez génériques pour permettre à l'agent d'exprimer différentes préférences afin de participer de manière efficace dans la négociation. Par exemple, l'acte de dialogue "State.Preference" permet à l'agent d'exprimer une préférence sur n'importe quel domaine.Par exemple: \\ State.Preference$_{cuisine}(\textit{Japanese , Chinese})$ : ``I prefer japanese cuisine over Chinese''. 
+\par Nous avons définis un ensemble d'actes de dialogues illustrés dans le tableau \ref{tab: utt} qui sont assez génériques pour permettre à l'agent d'exprimer différentes préférences afin de participer de manière efficace dans la négociation. Par exemple, l'acte de dialogue "State.Preference" permet à l'agent d'exprimer une préférence sur n'importe quel domaine. Par exemple: \\ State.Preference$_{cuisine}(\textit{Japanese , Chinese})$ : ``I prefer japanese cuisine over Chinese''. 
 L'expéditeur de cet acte doit avoir cette préférence dans son modèle. Il est a noter par ailleurs que l'effet de cet acte diffère selon le rôle de l'agent (expéditeur/récepteur). En effet, si l'agent est l'expéditeur de ce message, il aura à mettre à jour le modèle contentant les informations que l'utilisateur détient sur l'agent. En parallèle, si l'agent est le récepteur de ce message, il aura à mettre à jour ses connaissances sur les préférences de l'utilisateur
 
 \begin{table*}
@@ -238,24 +244,38 @@ L'expéditeur de cet acte doit avoir cette préférence dans son modèle. Il est
 \end{table*}
 
 \subsection{Implémentation du modèle de dialogue}
-{\color{red}
-\par Nous avons réalisé une première implémentation de notre système de dialogue où l'état mental de l'agent a été implémenté sous Java, alors que les actes de dialogue ont été implémenté sous Disco \cite{rich2009building}.
-\par Nous avons réalisé une implémentation générique de l'état mental de l'agent qui lui permet de mener une négociation dans le dialogue. Nous avons par ailleurs implémenté un exemple de négociation sur le sujet des restaurants.  L'implémentation des actes de dialogue est expliquée plus en détails dans ce qui suit.}
 
-\subsubsection{Réponses de l'agent}
+\par Nous avons réalisé une première implémentation de notre système de dialogue avec un modèle générique de l'état mental qui permet à l'agent de mener une négociation dans un sujet de conversation donné. Un exemple sur le sujet des restaurants est déjà réalisé. Les actes de dialogue quand a eux sont implémenté avec le logiciel Disco \cite{rich2009building} qui supporte la création d'actes de dialogue ainsi que la génération d'arbres de dialogue.
+
 \subsubsection{Présentation de Disco}
-Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen.  Disco est un système qui permet la génération de dialogues orienté tâches. Il utilise le formalisme des HTNs pour la gestion des tâches implémenté avec un standard ANSI/CEA-2018.
+Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen.  Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs pour la gestion des tâches. implémenté avec le standard ANSI/CEA-2018.
 Chaque tâche est définit avec des préconditions, des effets et des postconditions. 
-\par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de langages. D4g est déjà fourni avec un ensemble d'actes de dialogue. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section afin \label{contribution}qu'il puisse supporter la négociation sur les préférences. 
-\subsubsection{Exemple d'implémentation en D4G} 
+\par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section \label{contribution} afin qu'il puisse supporter la négociation sur les préférences. 
+\subsubsection{Génération de dialogue} 
+ \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'été mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons donc implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par exemple les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la 
+ {\color{blue}
+ 
+ part de l'utilisateur est présenté dans la figure ... 
+ \\ ajouter explication des choix
+ \\ exemple d'execution avec eval dom = 3 
+ \\exectue user and agent
+}
 %\begin{figure}
 %	\fbox{	\centerline{\includegraphics [width=4in]{figs/exemple}}}
 %	\vskip 8pt
 %	\defig{ex}{Architecture du modèle de dialogue.}
 %\end{figure}
-\section{Conclusion et futurs travaux}
+\section{Perspectives de recherche}
 \label{conc}
+Dans cet article, nous avons présenté une architecture de dialogue qui permet à l'agent de mener une négociation coopérative et d'adapter sa stratégie de négociation en fonction de la relation interpersonnelle construite avec l'utilisateur. Nous avons effectué une première implémentation de ce système. 
 
+\par La prochaine étape de nos travaux se concentrera sur l’évaluation d’un tel système de dialogue social. Tout d'abord, nous souhaitons évaluer si le comportement de l'agent durant le dialogue traduit le comportement attendu. Ce type d'évaluation peut s'effectuer à l'aide de tests perceptifs avec les utilisateurs. 
+Ensuite, une évaluation du système durant les interactions doit être effectuée où nous cherchons à étudier l'impact des relations sociales sur la qualité du dialogue. Il s’agira alors de vérifier non seulement la perception par l’utilisateur des comportements sociaux de l’agent au cours de l'interaction mais aussi l’effet de tels comportements sur l’engagement de l’utilisateur et la qualité de la négociation menée durant le dialogue. L'hypothèse est que l'interaction est plus agréable avec un agent social et que la négociation sera plus rapide à converger.
+
+\par Outre les perspectives liées à la validation, nous souhaitons réaliser des améliorations sur le système. En effet, nous souhaitons étendre notre système avec un module de théorie de l'esprit. Un tel module permettra à l'agent de comprendre les intentions de l'utilisateur durant la négociation et ainsi, prédire le comportement futur de ce dernier.  De plus, un tel module permettrait d'avoir une meilleure  représentation de la pensée de l'utilisateur et donc une meilleure compréhension de son comportement. Cette connaissance supplémentaire sur l'utilisateur permettrait à l'agent d'avoir une meilleure perception de la relation sociale et ainsi d'adapter efficacement sa stratégie afin de générer une négociation coopérative la plus efficace possible.
+%de plus une évaluation avec
+%Ajouter un module de théorie de l'esprit afin de de comporendre les intentions communicative de l'utilisateur et ainsi pridir son comportement pour une meilleure négociation. 
+%=====================================================================================================
 \vskip 4pt
 \bibliographystyle{abbrv}
 \bibliography{Library}
