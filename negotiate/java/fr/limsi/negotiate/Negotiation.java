@@ -40,7 +40,15 @@ public class Negotiation<O extends Option> {
 		return (type.getEnumConstants()); 
 	}
 	
-	
+	public Option getOptionWithValue(Criterion criterion){
+		List<Option> options = sortOptions(getOptionsWithoutStatus(Proposal.Status.REJECTED));
+		Class<? extends Criterion> CriterionType = criterion.getClass();
+		for(Option p: options){
+			if(p.getValue(CriterionType).equals(criterion))
+				return p;
+		}
+		return options.get(0);
+	}
 	public List<OptionProposal> getProposals() {
 		return proposals;
 	}
@@ -444,9 +452,7 @@ public class Negotiation<O extends Option> {
 
 		if (this.context.getLastStatement(uttType,true) != null) {
 			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
-			//			Class <? extends Criterion>  type = (userStatement.getMore() != null?
-			//					userStatement.getMore().getClass() :
-			//					userStatement.getLess().getClass());
+
 			if(userStatement.getLess() == null && userStatement.getMore() == null){
 				Criterion mostPref = this.getCriterionNegotiation(context.getLastStatement(uttType,true).getType()).getSelf().
 						getMostPreferred();
@@ -501,8 +507,8 @@ public class Negotiation<O extends Option> {
 
 
 			return(this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
-					isPreferred(userStatement.getMore(), userStatement.getLess()) ? userStatement: 
-						new ValuePreference<Criterion>(userStatement.getLess(), userStatement.getMore()));
+					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
+						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 		}
 	}
 

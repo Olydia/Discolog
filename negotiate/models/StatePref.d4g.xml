@@ -20,6 +20,17 @@
   
   <!-- User State Preference -->
     <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
+    
+    	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+			proposal="proposalFromPreference(getLastUserPref()) "
+			applicable = "proposalFromUserState(getLastUserPref())">
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do>
+       	
        	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
         	less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
         	applicable = "!sameStatement($state)">
@@ -31,15 +42,6 @@
 
        	</do>		
        	
-       	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref()) "
-			applicable = "proposalFromUserState(getLastUserPref())">
-			<do task = "Ask"/>
-        	<do task = "State"/>
-        	<do task = "Propose"/>
-        	<do task = "Accept"/>
-        	<do task = "Reject"/>
-       	</do> 
        	
      	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
 			less="getPreference(getDiscussedCriterion()).getLess()" 
@@ -68,6 +70,7 @@
    
      
 	<do id = "Ask" actor="user" task="n:fr.limsi.negotiate.lang.AskPreference">
+       
        	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
         	less="reactUser($ask).getLess()" more="reactUser($ask).getMore()">
         	<do task = "Ask"/>
@@ -76,21 +79,22 @@
         	<do task = "Accept"/>
         	<do task = "Reject"/>
        	</do>
-       			
-
-<!-- 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"  -->
-<!-- 			less="askUserPref(getDiscussedCriterion()).getLess()"  -->
-<!-- 			more="askUserPref(getDiscussedCriterion()).getMore()" applicable = "isDom()"> -->
-<!-- 			<do task = "Ask"/> -->
-<!--         	<do task = "State"/> -->
-<!--         	<do task = "Propose"/> -->
-<!--         	<do task = "Accept"/> -->
-<!--         	<do task = "Reject"/> -->
-<!--        	</do> -->
+      			
 	</do>
 
 	
-	<do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
+		<do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
+		
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+				proposal="createOptionProposal(getOptionWithValue(lastAcceptedProposal().getValue()))"
+				applicable = "!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal())" >
+				<do task = "Ask"/>
+	        	<do task = "State"/>
+	        	<do task = "Propose"/>
+	        	<do task = "Accept"/>
+	        	<do task = "Reject"/>
+	     </do> 
+	
 
       	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
        		less="getPreference(openNewCriterion()).getLess()" 
@@ -102,10 +106,10 @@
         	<do task = "Reject"/>
        	</do>
       	
-<!--        	Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 --> 
       		
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-			proposal="createCriterionProposal(getLastUserPref())" >
+			proposal="createCriterionProposal(currentMostPreferred(openNewCriterion()))"
+			applicable = "isDom()" >
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
@@ -114,6 +118,7 @@
        	</do> 
 	
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
+			criterion ="null"
 			less="askUserPref(openNewCriterion()).getLess()" 
 			more="askUserPref(openNewCriterion()).getMore()" applicable = "isSub()">
 			<do task = "Ask"/>
@@ -130,41 +135,69 @@
 	<do id = "Reject" actor="user" task="n:fr.limsi.negotiate.lang.Reject">
 		<!--In the case where the agent is very dominant propose again the the proposal if it is the mostPref proposal -->
 		
-<!-- 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"  -->
-<!-- 			proposal="lastRejectedProposal() " -->
-<!-- 			applicable = " isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()" > -->
-<!-- 			<do task = "Ask"/> -->
-<!--         	<do task = "State"/> -->
-<!--         	<do task = "Propose"/> -->
-<!--         	<do task = "Accept"/> -->
-<!--         	<do task = "Reject"/> -->
-<!--        	</do> -->
-       	
-       			<!-- state(other preference)  -->  
-<!--        	 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
-<!--         	less="getPreference(getDiscussedCriterion()).getLess()"  -->
-<!--         	more="getPreference(getDiscussedCriterion()).getMore()" -->
-<!--         	applicable = "isPeer()"> -->
-<!--         	<do task = "Ask"/> -->
-<!--         	<do task = "State"/> -->
-<!--         	<do task = "Propose"/> -->
-<!--         	<do task = "Accept"/> -->
-<!--         	<do task = "Reject"/> -->
-<!--        	</do> -->
-       	
-       	<!-- Ask(other preference)   -->
-		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-			less="askUserPref(getDiscussedCriterion()).getLess()" 
-			more="askUserPref(getDiscussedCriterion()).getMore()"
-			applicable ="isDom()">
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+			proposal="lastRejectedProposal() "
+			applicable = " isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()" >
 			<do task = "Ask"/>
         	<do task = "State"/>
         	<do task = "Propose"/>
         	<do task = "Accept"/>
         	<do task = "Reject"/>
        	</do>
+       	
+       			<!-- state(other preference)  -->  
+       	 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+        	less="getPreference(getDiscussedCriterion()).getLess()" 
+        	more="getPreference(getDiscussedCriterion()).getMore()"
+        	applicable = "isPeer()">
+	        	<do task = "Ask"/>
+	        	<do task = "State"/>
+	        	<do task = "Propose"/>
+	        	<do task = "Accept"/>
+	        	<do task = "Reject"/>
+       	</do>
+       	
+       	<!-- Ask(other preference)   -->
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
+			criterion ="null"
+			less="askUserPref(getDiscussedCriterion()).getLess()" 
+			more="askUserPref(getDiscussedCriterion()).getMore()"
+			applicable ="isSub()">
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do>
+       	
+       	<!--       	Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
+<!--       	Propose(other proposal)  -->
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+			proposal="getRandCriterionProp(getDiscussedCriterion())"
+			applicable = "!isSub()" >
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do> 
+       	
+       	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+			proposal="getRandOptionProp()"
+			applicable = "!isSub()" >
+			<do task = "Ask"/>
+        	<do task = "State"/>
+        	<do task = "Propose"/>
+        	<do task = "Accept"/>
+        	<do task = "Reject"/>
+       	</do> 
       	
 	</do>
+	
+	
+	
+	
+	
 	
  	<do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 	
@@ -251,9 +284,9 @@
     
     function isMostPrefProposal(proposal){
     	if(isCriterionProposal(proposal))
-    		return(mostPreferredCriterion().equals(proposal));
+    		return(mostPreferredCriterion(proposal.getValue().getClass()).equals(proposal.getValue()));
 		if(isOptionProposal(proposal))
-    		return(mostPreferredOption().equals(proposal));
+    		return(mostPreferredOption().equals(proposal.getValue()));
     }
     
     
@@ -282,8 +315,8 @@
     			return true;
     	}
     		
-    	else 
-    		return false;
+  
+    	return false;
     	
     }
     
@@ -302,11 +335,11 @@
  	
 	function isCriterionProposal(proposal){
 	
-		return(proposal.getValue() instanceof Packages.fr.limsi.negotiate.Criterion);
+		return(proposal.class.equals(Packages.fr.limsi.negotiate.CriterionProposal.class));
 	}
 	
 	function isOptionProposal(proposal){
-		return(proposal.getValue() instanceof Packages.fr.limsi.negotiate.Option);
+		return(proposal.class.equals(Packages.fr.limsi.negotiate.OptionProposal.class));
 	}
 	
 	function updateProposal(proposal){
@@ -335,11 +368,20 @@
 		return $negotiation.criterionProposal(criterion);
 	}
 	
-	function createCriterionProposal(preference) {
+	function proposalFromPreference(preference) {
 			if (preference == null)
 				return null;
 			else 	{
-				return $negotiation.criterionProposal(preference.getMore());
+				return createCriterionProposal(preference.getMore());
+			}	
+				
+	}
+	
+	function createCriterionProposal(criterion) {
+			if (criterion == null)
+				return null;
+			else 	{
+				return $negotiation.criterionProposal(criterion);
 			}	
 				
 	}
@@ -360,10 +402,18 @@
 		return ($negotiation.context.getLastProposal("OPEN"));	
 	}
 	
-	function lastAcceptedCriterion(){
-			return ($negotiation.context.getLastProposal("ACCEPTED"));
-	
+	function lastAcceptedProposal(){
+			if($negotiation.context.getLastProposal("ACCEPTED")!=null)
+				return ($negotiation.context.getLastProposal("ACCEPTED"));
+			else
+				return createCriterionProposal($more);
 	}
+	
+	function getOptionWithValue(criterion){
+
+		return $negotiation.getOptionWithValue(criterion);
+	}
+	
 	// returns a new Critetion class  to discuss {cuisine, ambiance, cost}
 	function openNewCriterion(){
 		topic = $negotiation.openNewTopic();

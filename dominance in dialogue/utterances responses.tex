@@ -23,7 +23,7 @@ I'll first define the utterances arguments to make the document readable.
 \section{State Preference}
 In the dialogue, the user might state a preference on a value of a criterion named $X$. In this case, the agent can response with the utterances defined in the \fig{state}. 
 
-\begin{figure}[h]
+\begin{figure}[b]
 \centerline{\includegraphics[width=5in]{figs/state.PNG}}
 
 \defig{state}{state preference response.}
@@ -51,14 +51,18 @@ For example:
 
 
 \section{Ask Preference}
-
+\begin{figure} [t]
+	\centerline{\includegraphics[width=5in]{utterances/Diapositive1.PNG}}
+	\vskip 8pt
+	\defig{ask}{agent possible answers to an ask Preference}
+\end{figure}
 \begin{figure}
 \centerline{\includegraphics[width=5in]{figs/ask.PNG}}
 
 \defig{ask}{ask preference response.}
 \end{figure}
 
-When the agent receive an ask.Preference utterance, it can use the following utterances.
+When the agent receive an ask.Preference utterance, it can use the following utterances which are illustrated in \fig{ask}.
  \begin{enumerate}
  \item State.Preference($x$): This is the most logical response is to response with the agent preferences on $x$. In the dialogue with lauriane and leonor, I found this example:  
  \\ - leo: Ask.Preference(Italian).

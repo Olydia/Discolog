@@ -2,7 +2,7 @@
     Welcome to Disco! (Type 'help' for command list)
   > load models/Negotiate.xml
   > load models/StatePref.xml
-  > execute fr.limsi.negotiate.lang.StatePreference / null / mostPreferredValue($cuisine)
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
     Agent says "I like CHINESE most."
   > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false 
     Agent says "I like FRENCH less than CHINESE."
@@ -11,7 +11,7 @@
   > execute fr.limsi.negotiate.lang.Reject / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
     User says "Sorry, I'd rather choose something else."
     Agent says "Ok."
-  > execute fr.limsi.negotiate.lang.AskPreference / Packages.fr.limsi.negotiate.restaurant.Ambiance / null / null
+  > execute fr.limsi.negotiate.lang.AskPreference  / null / null / Packages.fr.limsi.negotiate.restaurant.Cost.CHEAP
     User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
     Agent says "Ok."
   > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN /Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
@@ -21,9 +21,9 @@
   
     User says "I like FRENCH most."
     Agent says "Ok."
-  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH) 
+  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) 
     Agent says "Let's choose FRENCH."
-  > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH, false) 
+  > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE, false) 
     User says "Okay, let's choose FRENCH."
     Agent says "Ok."
   > eval printMS()

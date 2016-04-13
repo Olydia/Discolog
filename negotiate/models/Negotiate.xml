@@ -79,6 +79,7 @@
 			$this.proposal.setIsSelf(!$this.external);
 			propose ($this.proposal);
 			$lastProposal = ($this.proposal);
+			$negotiation.context.updateDiscussedCriterion($this.proposal.getValue().getClass());
 		</script>
 
 	</task>

@@ -1,0 +1,17 @@
+Define the behaviour of a dominant person in dialogue
+
+-  Open new topics of dialogue
+-  Expresses its preferences 
+-  ability to reject strongly what is different to its preferences
+-  Asks a lot of questions ? (Zablotskaya et al. 2012+)
+
+
+
+--------------------
+
+1. Breakdown
+- U: state(A,B)
+- A: state(A,B)
+- U: state(A,B)
+- breakdown -> pourquoi ne prend-il pas la 4e option (= ask)
+
