@@ -53,7 +53,7 @@
 
 \maketitle
 \begin{abstract}
-
+\par dans cet article, nous proposons une architecture de système de dialogue social. Le modèle de dialogue proposé permet à l'agent de mener une négociation coopérative durant le dialogue. De plus, le système est capable d'adapter la stratégie de négociation par rapport à la relation interpersonnelle que construit l'agent avec l'utilisateur durant le dialogue. Les différents modules du systèmes sont présenté ainsi que son implémentation.  
 \end{abstract}
 
 
@@ -63,7 +63,7 @@
 
 
 %La modélisation d'agents conversationnels connaît un véritable essor dans différents domaines applicatifs où l'agent est muni d'un système de dialogue lui permettant de jouer différents rôles tels que  le rôle de compagnon \cite{sidner2013always} ou encore de conseiller \cite{bickmore2005s}. 
-Les agents conversationnels animés (ACA) sont utilisés dans de nombreuses applications de l'assistance utilisateur \cite{ref} au compagnon artificiel \cite{sidner2013always, riviere2014aca} en passant par le patient virtuel \cite{annesysteme} ou le recruteur virtuel \cite{jones2012affective}. Tous ces ACA sont munis d'un système de dialogue, plus ou moins élaboré; leur permettant de déterminer quelle phrase choisir en fonction de la situation observée.
+Les agents conversationnels animés (ACA) sont utilisés dans de nombreuses applications de l'assistance utilisateur \cite{sidner2013always} au compagnon artificiel \cite{sidner2013always, riviere2014aca} en passant par le patient virtuel \cite{annesysteme} ou le recruteur virtuel \cite{jones2012affective}. Tous ces ACA sont munis d'un système de dialogue, plus ou moins élaboré; leur permettant de déterminer quelle phrase choisir en fonction de la situation observée.
 
 Les systèmes de dialogues existants peuvent être divisés en deux catégories: les systèmes de dialogue orienté tâches et les systèmes de dialogue sociaux. Les systèmes de dialogues orienté tâches sont apparus en premier: ces dialogues se centrent exclusivement sur la collaboration avec l'utilisateur pour satisfaire des tâches communes \cite{allen1995spoken, allen1996robust}. Cependant, un certain nombre de recherches ont montré que l'aspect social ne peut être ignoré dans un dialogue, car ce dernier est social par définition \cite{markopoulos2005case}. Par ailleurs, \cite{moon1998intimate} a démontré que les utilisateurs préféraient interagir avec des agents dotés d'aptitudes sociales qui lui permettraient de construire une relation sur le long-terme avec l'utilisateur \cite{bickmore2005establishing}. Par conséquent, les chercheurs s'intéressent de plus en plus aux systèmes de dialogues sociaux qui prennent en compte, en plus des tâches à satisfaire, l'aspect social de la conversation dans la mise en œuvre de systèmes de dialogues. Néanmoins, il existe encore peu de recherches qui s'intéressent a la manière dont la relation sociale influence la stratégie de dialogue avec un agent conversationnel. Les travaux existants \cite{ref} se sont limités à une modélisation qui vise a améliorer la collaboration de l'agent et l'utilisateur sur une interaction limitée dans le temps. Dans le cadre d'une interaction sur long-terme (voir section \ref{RW}), une modélisation explicite du comportement social de l'agent doit être considérée, car cette dernière influence le dialogue directement, en terme de contenue et de stratégies mises en place par l'agent pour satisfaire ses buts \cite{bickmore2012empirical}. Cependant, deux observations peuvent être faites.
 
@@ -92,11 +92,11 @@ Notre travail s'inscrit donc dans la continuité de ces travaux sur les dialogue
 
 \subsection{Formalisme des relations interpersonnelles}
 \label{RI}
-Il existe de nombreuses représentations des relations interpersonnelles dans la littérature. Cependant, la représentation dimensionnelle demeure la plus courante. Elle consiste à projeter les relations dans un cercle de dimensions \cite{wiggins}. Par conséquent, toute relation peut être située et évaluée dans cet espace dimensionnel \textit{continu}. Un des modèles les plus connus est celui de Svennevig \cite{svennevig2000getting} qui divise les relations interpersonnelles sur quatre dimensions: dominance, familiarité, affect et solidarité. Nous nous intéressons plus particulièrement à la relation de dominance, qui est un comportement social typique qu'on peut observer dans les interactions humaines \cite{dunbar2005perceptions}. On retrouve différentes définitions de la relation de dominance dans la littérature mais elles convergent toutes à définir la dominance comme le pouvoir d'influencer le comportement d'autrui afin d'asseoir son autorité\cite{dunbar2005perceptions,rogers1979domineeringness,moon1998intimate}.
+Il existe de nombreuses représentations des relations interpersonnelles dans la littérature. Cependant, la représentation dimensionnelle demeure la plus courante. Elle consiste à projeter les relations dans un cercle de dimensions \cite{wiggins1985interpersonal}. Par conséquent, toute relation peut être située et évaluée dans cet espace dimensionnel \textit{continu}. Un des modèles les plus connus est celui de Svennevig \cite{svennevig2000getting} qui divise les relations interpersonnelles sur quatre dimensions: dominance, familiarité, affect et solidarité. Nous nous intéressons plus particulièrement à la relation de dominance, qui est un comportement social typique qu'on peut observer dans les interactions humaines \cite{dunbar2005perceptions}. On retrouve différentes définitions de la relation de dominance dans la littérature mais elles convergent toutes à définir la dominance comme le pouvoir d'influencer le comportement d'autrui afin d'asseoir son autorité\cite{dunbar2005perceptions,rogers1979domineeringness,moon1998intimate}.
 
-La position de dominance en terme de relation interpersonnelle peut être manifeste \cite{dunbar2005perceptions} lorsque l'assertion de dominance manifestée chez un interlocuteur rencontre forcement  l'acquiescement de l'autre \cite{rogers1979domineeringness}. Elle peut aussi être latente \cite{komter1989hidden} lorsque l'interlocuteur dominant n'a pas conscience de sa position de dominance. Ce genre de comportements peut affecter l'interaction de manière positive ou négative. L'apport positif consiste a permettre par exemple d'entretenir la conversation, d'orienter la tâche courante de l'interaction, de prendre des décisions rapides et efficaces et de définir des conclusions. Cependant, ce même comportement peut affecter l'interaction de façon négative: la personne dominante peut étouffer l'autre et ne pas lui laisser la possibilité d'exprimer ses opinions. Cette expression verbale de la dominance peut être perçue comme offensive et injustifié par l'autre et peut mener a des conflits dans le dialogue si les deux interlocuteurs sont dans une position de dominance avec des opinions différentes \cite{zablotskaya}.
+La position de dominance en terme de relation interpersonnelle peut être manifeste \cite{dunbar2005perceptions} lorsque l'assertion de dominance manifestée chez un interlocuteur rencontre forcement  l'acquiescement de l'autre \cite{rogers1979domineeringness}. Elle peut aussi être latente \cite{komter1989hidden} lorsque l'interlocuteur dominant n'a pas conscience de sa position de dominance. Ce genre de comportements peut affecter l'interaction de manière positive ou négative. L'apport positif consiste a permettre par exemple d'entretenir la conversation, d'orienter la tâche courante de l'interaction, de prendre des décisions rapides et efficaces et de définir des conclusions. Cependant, ce même comportement peut affecter l'interaction de façon négative: la personne dominante peut étouffer l'autre et ne pas lui laisser la possibilité d'exprimer ses opinions. Cette expression verbale de la dominance peut être perçue comme offensive et injustifié par l'autre et peut mener a des conflits dans le dialogue si les deux interlocuteurs sont dans une position de dominance avec des opinions différentes \cite{zablotskaya2012relating}.
 
-\par Plusieurs approches existent pour détecter les comportements de dominance dans l'interaction. Ces indicateurs peuvent être soit verbaux ou non verbaux. Les indicateurs non verbaux peuvent être vu dans les expressions faciales tels que le ratio de dominance visuel \cite{dunbar2005perceptions}. Le contrôle de la posture et les gestes sont aussi perçue comme une comportement dominant. \cite{carney-hall-lebeau-2005} ont montré que les personnes dominantes avaient tendance à plus utiliser les gestes tels qu'une poignée de main ou bien une plus grande fréquence "invasive touch". Les indicateurs verbaux incluent la fréquence d'intervention dans l'interaction, leurs durée (le nombre de mots utilisés et répétés) \cite{dunbar2005perceptions}, l'expression des opinions et la critique, suggestions, demandes, réactions, ignorance, etc \cite{zablotskaya2012relating} et enfin la capacité d'interrompre la conversation et changer le sujet de conversation.
+\par Plusieurs approches existent pour détecter les comportements de dominance dans l'interaction. Ces indicateurs peuvent être soit verbaux ou non verbaux. Les indicateurs non verbaux peuvent être vu dans les expressions faciales tels que le ratio de dominance visuel \cite{dunbar2005perceptions}. Le contrôle de la posture et les gestes sont aussi perçue comme une comportement dominant. \cite{hall2005nonverbal} ont montré que les personnes dominantes avaient tendance à plus utiliser les gestes tels qu'une poignée de main ou bien une plus grande fréquence "invasive touch". Les indicateurs verbaux incluent la fréquence d'intervention dans l'interaction, leurs durée (le nombre de mots utilisés et répétés) \cite{dunbar2005perceptions}, l'expression des opinions et la critique, suggestions, demandes, réactions, ignorance, etc \cite{zablotskaya2012relating} et enfin la capacité d'interrompre la conversation et changer le sujet de conversation.
 
 Notre objectif est donc de reproduire ces comportements liés à la relation de dominance dans un agents conversationnel animé. Dans cet article, nous nous limitons aux comportements verbaux et plus précisément éléments en rapport avec la gestion du dialogue.
 
@@ -130,14 +130,11 @@ En parallèle, nous avons défini un module de communication comportant cinq act
 
 \subsection{Modèle formel du dialogue}
 \par Le modèle proposé vise à concevoir un agent conversationnel capable mener une négociation coopérative sur un sujet de conversation sociale et être capable d'adapter ses stratégies de dialogue a sa perception de sa relation interpersonnelle avec l'utilisateur. L'architecture proposée (illustré dans
-% la \fig{modele} )
- se compose de trois principaux modules: un \textit{état mental} regroupant les préférences de l'agent et celles de l'utilisateur, un \textit{module de communication} comprenant les actes de langages que l'agent utilise pour dialoguer et enfin un module qui sauvegarde le \textit{contexte du dialogue} à savoir l'historique des informations échangées durant le dialogue (en termes de préférences et propositions échangées). Nous présentons dans cette section chaque module.
-
-%\begin{figure}
-%	\fbox{	\centerline{\includegraphics [width=4in]{figs/modele}}}
-%	\vskip 8pt
-%	\defig{modele}{Architecture du modèle de dialogue.}
-%\end{figure}
+ la \fig{modele}) se compose de trois principaux modules: un \textit{état mental} regroupant les préférences de l'agent et celles de l'utilisateur, un \textit{module de communication} comprenant les actes de langages que l'agent utilise pour dialoguer et enfin un module qui sauvegarde le \textit{contexte du dialogue} à savoir l'historique des informations échangées durant le dialogue (en termes de préférences et propositions échangées). Nous présentons dans cette section chaque module.
+\begin{figure}
+	\centerline{\includegraphics [width=3.25in]{figs/modele.pdf}}
+	\defig{modele}{Architecture du modèle de dialogue.}
+\end{figure}
 
 \subsubsection{L'état mental}
 \par Mener une négociation coopérative sur un sujet définis implique un processus décisionnel de la part des interlocuteurs  où les préférences de chacun sont censées régir ce processus décisionnel. Par conséquent, l'agent a besoin d'une modélisation formelle de cet environnement, à savoir ses préférences, ainsi que celles de l'utilisateur. Nous notons donc
@@ -203,8 +200,6 @@ $  \textit{aucune n'est préférée}  $U(O_2) = U(O_1)\\
 \end{array}
 \right .\]
 
-{\color{red}
-Ajouter un exemple }
 \subsubsection{Contexte du dialogue}
 \par Durant le dialogue, les deux interlocuteurs échangent des informations sur leurs préférences et suggèrent des propositions pour le choix d'une option. par exemple, je préfère manger Indien ce soir, ou allons au restaurant Ginza ...
 
@@ -253,27 +248,29 @@ L'expéditeur de cet acte doit avoir cette préférence dans son modèle. Il est
 
 \subsection{Implémentation du modèle de dialogue}
 
-\par Nous avons réalisé une première implémentation de notre système de dialogue avec un modèle générique de l'état mental qui permet à l'agent de mener une négociation dans un sujet de conversation donné. Un exemple sur le sujet des restaurants est déjà réalisé. Les actes de dialogue quand a eux sont implémenté avec le logiciel Disco \cite{rich2009building} qui supporte la création d'actes de dialogue ainsi que la génération d'arbres de dialogue.
+\par Nous avons réalisé une première implémentation de notre système de dialogue avec un modèle générique de l'état mental qui permet à l'agent de mener une négociation dans un sujet de conversation donné. Un exemple sur le sujet des restaurants est déjà implémenté. Les actes de dialogue sont implémenté avec le logiciel Disco \cite{rich2009building} qui gère la création d'actes de dialogue ainsi que la génération d'arbres de dialogue.
 
 \subsubsection{Présentation de Disco}
 Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen.  Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs pour la gestion des tâches. implémenté avec le standard ANSI/CEA-2018.
 Chaque tâche est définit avec des préconditions, des effets et des postconditions. 
 \par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section \ref{contribution} afin qu'il puisse supporter la négociation sur les préférences. 
 \subsubsection{Génération de dialogue} 
- \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'été mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présenté dans la \fig{state}.
- {\color{red} expliquer l'ordre de l'exécution}
+ \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'état mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par conséquent, pour chaque acte de dialogue reçu, l'agent possède un arbre de réponses. Chaque branche de l'arbre est définie avec une condition d’applicabilité qui doit être satisfaite avant son exécution. Disco déroule l'arbre de gauche à droite (en commençant par la branche la plus a gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
+ Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présenté dans la \fig{state}.
+
  \begin{figure} [h]
- 	\centerline{\includegraphics[width=3in]{figs/statePref_v2.png}}
+ 	\centerline{\includegraphics[width=3in]{figs/statePref.pdf}}
 	\vskip 8pt
  	\defig{state}{Les réponses générés suite à un StatePreference}
  \end{figure}
-\par {\color{red} introduction des choix...} 
-Le comportement standard qu'un agent adopte à la réception d'un StatePreference est de donner son opinion sur les valeurs exprimées (càd que l'agent calcule ses préférences sur \textit{less} et \textit{more}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir parlé d'autres valeurs. Cette condition est définie afin d'empêcher la circularité dans le dialogue.  
-Afin de générer une réponse, l'agent va évaluer sa relation courante. On retrouve principalement trois réponses possibles : 
+
+
+Le comportement standard qu'un agent adopte à la réception d'un StatePreference est de donner son opinion sur les valeurs exprimées (c-à-d que l'agent calcule ses préférences sur \textit{less} et \textit{more}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir parler d'autres valeurs. Cette condition est définie afin d'empêcher la circularité dans le dialogue.  
+Pour générer une réponse, l'agent va évaluer sa relation courante. On retrouve principalement trois réponses possibles : 
  \begin{itemize}
- 	\item Si l'agent est soumis dans sa relation avec l'utilisateur, il va prioriser les préférences de l'utilisateur et donc proposer de choisir la valeur préférée de l'utilisateur. Cependant, s'il n'est pas soumis, l'agent ne proposera la valeur \textit{more} que si la valeur qu'il prèfere le plus pour le critère \emph{C}.
- 	\item L'agent n'est pas dominant, il va vouloir en apprendre d'avantage sur l'utilisateur et donc lui demander ses préférences sur d'autre valeurs qu'il ignore encore.
- 	\item Enfin, si l'agent n'est pas soumis, il peut rederiger le dialogue et parler d'autre chose. Il exprime ses préférences sur d'autre valeurs du critère \emph{C} discuté. Dans le cas où il a déjà exprimé toutes ses préférences sur les valeurs du critère discuté, il va exprimé ses préférences sur un autre critère non discuté.
+ 	\item Si l'agent est soumis dans sa relation avec l'utilisateur, il va prioriser les préférences de l'utilisateur et donc proposer de choisir la valeur préférée de l'utilisateur. Cependant, s'il n'est pas soumis, l'agent ne proposera la valeur \textit{more} que si \textit{more} correspond à la valeur qu'il préfère le plus pour le critère \emph{C}. 
+ 	\item L'agent n'est pas dominant, il va donc vouloir en apprendre d'avantage sur  les préférences de l'utilisateur. Pour cela il le questionne sur les préférences qu'il peut avoir sur  d'autre valeurs que l'agent ignore encore.
+ 	\item Enfin, si l'agent n'est pas soumis, il peut rediriger le dialogue et parler d'autre chose. Il exprime ses préférences sur d'autre valeurs du critère \emph{C} discuté. Dans le cas où il a déjà exprimé toutes ses préférences sur les valeurs du critère discuté, il va énoncer ses préférences sur un autre critère non encore discuté.
  \end{itemize}
 \section{Perspectives de recherche}
 \label{conc}
@@ -286,7 +283,7 @@ Ensuite, une évaluation du système durant les interactions doit être effectu�
 %de plus une évaluation avec
 %Ajouter un module de théorie de l'esprit afin de de comporendre les intentions communicative de l'utilisateur et ainsi pridir son comportement pour une meilleure négociation. 
 %=====================================================================================================
-\vskip 4pt
+\vskip 5pt
 \bibliographystyle{abbrv}
 \bibliography{Library}
 
