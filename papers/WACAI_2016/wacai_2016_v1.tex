@@ -101,13 +101,13 @@ Pour l'étude de ces comportements, nous avons annotés et analysé les dialogue
  Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle dialogique avec une modèle mental de l'environnement de l'agent, et un modèle lui permettant de mener une négociation coopérative. 
 En parallèle, nous avons modélisé un module de communication comportant cinq actes dialogiques qui lui permettent de dialoguer et négocier. Nous présenterons dans cette partie nos travaux menés ainsi qu'une première implémentation de ce modèle.
 
-La première étape de notre contribution a pour but de mieux comprendre les comportements liés à la dominance qui peuvent émerger durant une négociation coopérative durant un dialogue. Nous avons donc enregistré deux dialogues dans lesquels les interlocuteurs avaient pour but de trouver un restaurant où dîner sur paris. Trois hypothèses tiré de la littérature (voir section \ref{RI}) ont guidé l'analyse de ces comportements: 
+{ \color{red}La première étape de notre contribution a pour but de mieux comprendre les comportements liés à la dominance qui peuvent émerger durant une négociation coopérative durant un dialogue. Nous avons donc enregistré deux dialogues dans lesquels les interlocuteurs avaient pour but de trouver un restaurant où dîner sur paris. Trois hypothèses tiré de la littérature (voir section \ref{RI}) ont guidé l'analyse de ces comportements: 
 \begin{itemize}
 \item \textbf{H1:} Un interlocuteur dominant a tendance à influencer le dialogue (capacité de diriger le dialogue).
 \item \textbf{H2:} Il prends la parole plus souvent et est capable d'exprimer explicitement ses opinions.
 \item \textbf{H3:} Un interlocuteur moins dominant chercherait un compromis entre les deux. 
 \end{itemize}
- Les dialogues enregistrés ont ensuite étaient annoté et analysé en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. Nous avons effectué une analyse de \textit{la structure linguistique}  en décomposant le dialogue en segments de dialogue (DS)  et chaque DS a était analysé afin d'extraire son but qui participait à la satisfaction du but global. cette étape est nommée l'analyse de \textit{la structure intentionnelle}. Les résultats de cette analyse sont expliqué ci-dessous: 
+ Les dialogues enregistrés ont ensuite étaient annoté et analysé en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. Nous avons effectué une analyse de \textit{la structure linguistique}  en décomposant le dialogue en segments de dialogue (DS)  et chaque DS a était analysé afin d'extraire son but qui participait à la satisfaction du but global. cette étape est nommée l'analyse de \textit{la structure intentionnelle}. Les résultats de cette analyse sont expliqué ci-dessous}: 
 
 \begin{itemize}
 
@@ -254,11 +254,12 @@ Chaque tâche est définit avec des préconditions, des effets et des postcondit
 \subsubsection{Génération de dialogue} 
  \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'été mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présenté dans la \fig{state}.
  \begin{figure} [h]
- 	\centerline{\includegraphics[width=4in]{figs/statePref_v2.png}}
+ 	\centerline{\includegraphics[width=3in]{figs/statePref_v2.png}}
 	\vskip 8pt
  	\defig{state}{Les réponses générés suite à un statePreference}
  \end{figure}
-
+\par {\color{red} introduction des choix...} 
+Le comportement standard qu'un agent adopte à la réception d'un statePreference est de donner son opinion sur les valeurs exprimées (càd que l'agent calcule ses préférences sur less et more). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir parlé d'autres valeurs. Cette condition est définie afin d’empêcher la circularité dans le dialogue.  
 \section{Perspectives de recherche}
 \label{conc}
 Dans cet article, nous avons présenté une architecture de dialogue qui permet à l'agent de mener une négociation coopérative et d'adapter sa stratégie de négociation en fonction de la relation interpersonnelle construite avec l'utilisateur. Nous avons effectué une première implémentation de ce système. 
