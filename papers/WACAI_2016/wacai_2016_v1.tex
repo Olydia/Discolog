@@ -252,19 +252,13 @@ Disco est une implémentation d'un ``collaborative discourse manager'' inspiré 
 Chaque tâche est définit avec des préconditions, des effets et des postconditions. 
 \par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section \label{contribution} afin qu'il puisse supporter la négociation sur les préférences. 
 \subsubsection{Génération de dialogue} 
- \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'été mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons donc implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par exemple les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la 
- {\color{blue}
- 
- part de l'utilisateur est présenté dans la figure ... 
- \\ ajouter explication des choix
- \\ exemple d'execution avec eval dom = 3 
- \\exectue user and agent
-}
-%\begin{figure}
-%	\fbox{	\centerline{\includegraphics [width=4in]{figs/exemple}}}
-%	\vskip 8pt
-%	\defig{ex}{Architecture du modèle de dialogue.}
-%\end{figure}
+ \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'été mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présenté dans la \fig{state}.
+ \begin{figure} [h]
+ 	\centerline{\includegraphics[width=4in]{figs/statePref_v2.png}}
+	\vskip 8pt
+ 	\defig{state}{Les réponses générés suite à un statePreference}
+ \end{figure}
+
 \section{Perspectives de recherche}
 \label{conc}
 Dans cet article, nous avons présenté une architecture de dialogue qui permet à l'agent de mener une négociation coopérative et d'adapter sa stratégie de négociation en fonction de la relation interpersonnelle construite avec l'utilisateur. Nous avons effectué une première implémentation de ce système. 
