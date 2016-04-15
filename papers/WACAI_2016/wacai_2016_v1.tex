@@ -53,11 +53,14 @@
 
 \maketitle
 \begin{abstract}
-\par dans cet article, nous proposons une architecture de système de dialogue social. Le modèle de dialogue proposé permet à l'agent de mener une négociation coopérative durant le dialogue. De plus, le système est capable d'adapter la stratégie de négociation par rapport à la relation interpersonnelle que construit l'agent avec l'utilisateur durant le dialogue. Les différents modules du systèmes sont présenté ainsi que son implémentation.  
+\par Dans cet article, nous proposons une architecture pour un système de dialogue social dans un contexte de négociation coopérative. Le modèle est basé sur 1) des arbres de dialogues, 2) la représentation des états mentaux des interlocuteurs et 3) la prise en compte de la relation sociale pour le choix du prochain acte de dialogue. Nous présentons notre méthodologie de conception de dialogue et l'implémentation de notre système sur un cas pratique de choix coopératif de restaurant.
+% But/contribution générale (sans redire le titre...)
+% Principaux éléments constitutifs
+% Principaux résultats
 \end{abstract}
 
 
-\keywords{Relation interpersonnelle;negociation coopérative, dialogue social}
+\keywords{Dialogue Social; Relation Interpersonnelle; Negociation Coopérative}
 
 \section{Introduction}
 
@@ -109,154 +112,133 @@ En parallèle, nous avons défini un module de communication comportant cinq act
 
 \subsection{Analyse de la structure du dialogue}
 
-{ \color{red}La première étape de notre contribution a pour but de mieux comprendre les comportements liés à la dominance qui peuvent émerger durant une négociation coopérative durant un dialogue. Nous avons donc enregistré deux dialogues dans lesquels les interlocuteurs avaient pour but de trouver un restaurant où dîner sur paris. Trois hypothèses tiré de la littérature (voir section \ref{RI}) ont guidé l'analyse de ces comportements: 
-\begin{itemize}
-\item \textbf{H1:} Un interlocuteur dominant a tendance à influencer le dialogue (capacité de diriger le dialogue).
-\item \textbf{H2:} Il prends la parole plus souvent et est capable d'exprimer explicitement ses opinions.
-\item \textbf{H3:} Un interlocuteur moins dominant chercherait un compromis entre les deux. 
-\end{itemize}
- Les dialogues enregistrés ont ensuite étaient annoté et analysé en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. Nous avons effectué une analyse de \textit{la structure linguistique}  en décomposant le dialogue en segments de dialogue (DS)  et chaque DS a était analysé afin d'extraire son but qui participait à la satisfaction du but global. cette étape est nommée l'analyse de \textit{la structure intentionnelle}. Les résultats de cette analyse sont expliqué ci-dessous}: 
+Pour mieux comprendre les comportements liés à la dominance qui peuvent apparaître durant une négociation coopérative, nous avons enregistré deux dialogues dans lesquels les interlocuteurs avaient pour but de trouver un restaurant où dîner sur Paris. Les dialogues enregistrés ont ensuite étaient annoté et analysé en se basant sur les travaux de Sidner \& Grosz \cite{grosz1986attention}. Nous avons effectué une analyse de \textit{la structure linguistique}  en décomposant le dialogue en segments de dialogue (DS). Cette segmentation du dialogue en DS nous a permis d'extraire un squelette de dialogue pour la tâche "choix d'un restaurant" et d'identifier les critères de la négociation dans ce domaine: le type de cuisine, l'ambiance, le prix et l'emplacement. Cela nous a aussi permis de définir un ensemble d'actes de dialogues pour notre agent, obtenus à partir des principaux actes de langages récurrents observés dans ces enregistrements.
 
-\begin{itemize}
-
-		\item  La segmentation du dialogue en DS nous a permis d'extraire le processus que suivaient les interlocuteurs dans l'exécution de la tâche  ``trouver un restaurant''. En effet, les interlocuteurs abordait systématiquement le type de la cuisine, l'ambiance, le prix, et la localisation. 
-		\item L'analyse intentionnelle nous a permis d'identifier les buts communicatifs et buts internes des interlocuteurs. Par exemple, détecter un comportement dominant dans le nombre de fois où il initie un nouveau sujet de conversation, le nombre de prise de paroles, ainsi que la fréquence d'initiation de DS et la fréquence de propositions, l'argumentation ... ), qui nous a permis d'analyser l'évolution de la relation de dominance dans ces dialogues. 
-		\item Identification d'actes de langage récurrents dans les dialogues qui nous ont aidé dans la définition d'acte de dialogue pour notre agent.	
-	
-\end{itemize}
-\par Cette analyse nous a aidé a mieux cibler notre contribution, à savoir étudier l'impact de la relation de dominance dans les stratégies de dialogue.
-
-
+Nous avons aussi pu vérifier les propositions de la littérature concernant l'impact de la dominance sur la stratégie de dialogue. Premièrement, l'interlocuteur dominant a effectivement tendance à influencer le dialogue, c'est-à-dire à initier de nouveaux DS. Deuxièmement, il prend la parole plus souvent et exprime explicitement ses opinions: cela se traduit par un nombre plus élevé d'actes de dialogue dans un même DS. Enfin, les interlocuteurs soumis ou neutres défendent leurs préférences moins âprement, c'est-à-dire qu'ils utilisent des tournures moins explicites pour exprimer leurs refus. Dans notre modèle, nous avons choisi pour l'instant de ne pas représenter le style linguistique et la partie argumentative dans le dialogue (\emph{c.-à-d.} la justification des choix) et de nous limiter aux actes de dialogue. Pour reproduire ce phénomène dans notre système, nous avons donc utilisé des actes de dialogues détournés comme répondre à une proposition par une expression de préférences ("ah, le chinois, je n'aime pas trop") plutôt qu'un refus ("non, pas le chinois").
 
 \subsection{Modèle formel du dialogue}
-\par Le modèle proposé vise à concevoir un agent conversationnel capable mener une négociation coopérative sur un sujet de conversation sociale et être capable d'adapter ses stratégies de dialogue a sa perception de sa relation interpersonnelle avec l'utilisateur. L'architecture proposée (illustré dans
- la \fig{modele}) se compose de trois principaux modules: un \textit{état mental} regroupant les préférences de l'agent et celles de l'utilisateur, un \textit{module de communication} comprenant les actes de langages que l'agent utilise pour dialoguer et enfin un module qui sauvegarde le \textit{contexte du dialogue} à savoir l'historique des informations échangées durant le dialogue (en termes de préférences et propositions échangées). Nous présentons dans cette section chaque module.
+\par Le modèle proposé vise à concevoir un agent conversationnel capable de mener une négociation coopérative sur un sujet de conversation sociale et d'adapter ses stratégies de dialogue en fonction de sa perception de la relation interpersonnelle avec l'utilisateur. L'architecture proposée (illustré dans
+ la \fig{modele}) se compose de trois principaux modules: un \textit{état mental} regroupant les préférences de l'agent et celles de l'utilisateur, un \textit{module de communication} comprenant les actes de langage que l'agent utilise pour dialoguer et enfin un module qui sauvegarde le \textit{contexte du dialogue} à savoir l'historique des informations échangées durant le dialogue (en termes de préférences et propositions échangées).
 \begin{figure}
 	\centerline{\includegraphics [width=3.25in]{figs/modele.pdf}}
 	\defig{modele}{Architecture du modèle de dialogue.}
 \end{figure}
 
 \subsubsection{L'état mental}
-\par Mener une négociation coopérative sur un sujet définis implique un processus décisionnel de la part des interlocuteurs  où les préférences de chacun sont censées régir ce processus décisionnel. Par conséquent, l'agent a besoin d'une modélisation formelle de cet environnement, à savoir ses préférences, ainsi que celles de l'utilisateur. Nous notons donc
- \begin{itemize}
- 	\item  $\mathcal{P}_{self}$ le modèle de préférences de l'agent.
- 	\item $\mathcal{P}_{other}$ le modèle de préférences de l'utilisateur que l'agent aura acquis durant le dialogue.
- 	\item De plus; l'agent conserve les préférences qu'il communique à l'utilisateur durant la négociation (un module de la théorie d'esprit) qu'on note $\mathcal{P}_{other-about-self}$.
- \end{itemize}
 
-% \par Dans ce qui suit, nous présenterons le modèle formel de préférences utilisé pour la représentation de l'état mental de l'agent.
+Mener une négociation coopérative sur un sujet défini implique un processus décisionnel de la part des interlocuteurs régi par les préférences de chacun \cite{laver1981linguistic}. C'est pourquoi nous définissons les éléments suivants.
 
-\par \textbf{Le domaine de préférence :}
-Le processus décisionnel d'une négociation  doit aboutir au choix d'une \emph{option} parmi un ensemble d'options qu'inclut le thème de la négociation (et donc de la conversation). Par exemple, pour une négociation sur le thème des ``Restaurants'', l'ensemble des options à choisir est l'ensemble des restaurants que les interlocuteurs connaissent.
- On note donc $\mathcal{O}$, l'ensemble des options définis pour un thème de négociation donnée. Les options sont définit avec un ensemble de critères qui reflètent leurs caractéristiques. Par exemple, les critères de choix d'un restaurant sont \{la cuisine, le prix, l'ambiance, la localisation\}. Nous notons $\mathcal{C}$ l'ensemble des critères des options définis dans $\mathcal{O}$.
- \par De plus, chaque critère a son domaine de valeurs \emph{D$_c$}. Par exemple, le domaine de valeurs du critère de la cuisine est noté $\emph{D}_{cuisine}$ = \{Chinois, Italien, Indien...\}.
+\paragraph{Le domaine de connaissances}
+Nous considérons un ensemble d'options $\mathcal{O}$ dans le domaine de négociation (par exemple, un ensemble de restaurants pour une négociation sur le choix de restaurants). L'objectif de la négociation coopérative est de choisir ensemble un élément de l'ensemble $\mathcal{O}$. Nous considérons de plus un ensemble de critères $\mathcal{C}$ qui reflètent leurs caractéristiques (par exemple, pour les restaurants, la cuisine, le prix, l'ambiance et l'emplacement). Pour chaque $o\in\mathcal{O}$ et pour chaque $c\in\mathcal{C}$, nous notons $v(o,c)$ la valeur attribuée à $o$ pour le critère $c$ (par exemple, Ginza est un restaurant japonais coûteux : $v(prix, Ginza) = couteux $ et $(cuisine, Ginza) = japonais$). Nous notons $\mathcal{D}_c$ le domaine de valeur du critère $c$.
 
-\par Par conséquent chaque option $O\in \mathcal{O}$ définit une valeur pour chaque critère : 
-$O = \{c_1=v_1,..., c_n=v_n\}$ avec $c_i \in \mathcal{C}, \forall i \in [1,n]$ et $v_i\in \emph{D}_{c_i}$, où $\{v(c,O) \in \emph{D}_{c} / \forall O \in \mathcal{O}, \forall c \in \mathcal{C}\}$ est la valeur \emph{objective} du critère $c$ attribué à l'option $O$. 
-%La valeur objective d'un critère est indépendante des préférences; les interlocuteurs affectent les mêmes valeurs au critères d'une option indépendamment de leurs préférences. 
-Par exemple, Ginza est un restaurant japonais coûteux : $v(prix, Ginza) = couteux $ et $(cuisine, Ginza) = japonais$. 
+\paragraph{Notion de préférence}
+L'agent est capable d'exprimer ses préférences sur le domaine de connaissance. Nous définissons une préférence $P$ comme une relation \emph{transitive} et \emph{antisymétrique} définit sur un ensemble d'éléments \emph{A}, tel que pour $(a,b) \in \emph{A}^2$, $P(a,b)$ représente le fait que $b$  est préféré à $a$. $P$ définit donc un ordre \emph{partiel}.
 
-
-\par L'agent est capable d'exprimer ses préférences sur ce domaine de connaissance avec une fonction de préférence. Nous définissons une préférence \emph{P} comme une relation \emph{transitive} et \emph{antisymétrique} définit sur un ensemble d'éléments \emph{A}, tel que:
-
-\[ \left \{
-\begin{array}{l}
-\emph{P(a,b)} $ : \emph{b}  est préféré à $\emph{a}. \emph{ a,b} \in \emph{A}\\
-\emph{P(b,a)} $:  \emph{a} est préféré à  $\emph{b}. \emph{ a,b} \in \emph{A}\\
-$Sinon, aucune . $\\
-\end{array}
-\right .\]
-
-Par exemple $P_{cuisine} (Italien, Japonais)$ signifie que l'agent préfère la cuisine japonaise à l'italienne. 
-
-\par Nous définissons des variantes pour la notion de préférences:
+Chaque agent dispose d'un ensemble de préférences sur les critères, notés $P_c$. Par exemple $P_{cuisine} (Italien, Japonais)$ signifie que l'agent préfère la cuisine japonaise à l'italienne. Nous définissons des éléments maximaux et minimaux pour la notion de préférences à l'aide de la notation:
 \begin{itemize}
 	\item  \emph{P(*,a)}  = \{$\forall$ \emph{x}$\in$\emph{A}, \emph{P(a,x)}\}, représente le fait que  \emph{a} est l'élément  \textit{le plus préféré} dans \emph{A}.
 	\item Par opposition, \emph{P(b,*)} = \{$\forall$ \emph{x}$\in$\emph{A}, \emph{P(x,b)}\} signifie que \emph{b} est l'élément \textit{le moins préféré} dans l'ensemble \emph{A}. 
 \end{itemize}
 
-\par Cette représentation de la relation de préférence nous permet de construire une base de préférences nommé $\mathcal{P}_{self}$ dans laquelle il stocke ses préférences sur les critères de $\mathcal{C}$ et ses préférences sur les valeurs de chaque $ c \in \mathcal{C}$. 
+\paragraph{Ensembles de préférences}
+Nous définissons alors une base de préférences de l'agent et de l'utilisateur qui comprend trois éléments:
+\begin{itemize}
+	\item Un ensemble $Pc$ de préférence sur les critères $C$ qui définit l'importance de chaque critère \emph{pour l'agent} dans la prise de décision.
+	\item Un ensemble $\mathcal{P}_{self}$ qui représente l'ensemble des $P_c$ de l'agent pour chaque critère $c$: c'est le modèle de préférences \emph{de l'agent}.
+	\item Un ensemble $\mathcal{P}_{other}$ qui représente le modèle de préférences \emph{de l'utilisateur} sur la base de ce que l'agent aura acquis au cours du dialogue.
+\end{itemize}
+
+De plus, l'agent conserve les préférences qu'il communique à l'utilisateur durant la négociation qu'on note $\mathcal{P}_{oas}$ (\textit{other about self}). En effet, il est important pour l'agent de savoir ce qu'il a déjà communiqué pour évaluer la relation de dominance avec l'utilisateur, en s'appuyant sur un petit module de la théorie d'esprit à base de règles simples comme, par exemple, ``si l'interlocuteur contredit une préférence que j'ai déjà énoncé, c'est qu'il est plutôt dominant''.
+
+% \par Dans ce qui suit, nous présenterons le modèle formel de préférences utilisé pour la représentation de l'état mental de l'agent.
+
+
 %
 %\par Notre but est de définir des préférences sur les options de la négociation.  Nous retrouvons dans la littérature plusieurs méthodes de calcul des préférences d'une option \cite{dodgson2009multi}. Ces méthodes nommées décision multi-critères calculent les préférences d'une option selon les performances de cette dernière sur l'ensemble des critères qui la définissent. Dans l'ensemble\cite{dodgson2009multi}, le calcul des préférences d'une option est fait par inférence à partir des préférences enregistrées sur les valeurs de ses critères. Cette inférence peut être réalisée grâce à différentes méthodes comme la fonction de somme pondérée \cite{yager2012ordered} ou encore les intégrales de Choquet \cite{chouquet1953}. \\
 %
-\par  \textbf{Processus décisionnel basé sur les préférences :} 
-Afin de trouver une option qui satisfasse les préférences des deux interlocuteur, l'agent doit être en mesure de calculer ses préférences sur les différentes options dans $\mathcal{O}$. La relation de préférence entre deux options est calculée par inférence à partir de $\mathcal{P}_{self}$ dont les connaissances lui permettent d'inférer l'utilité de chaque option grâce a une fonction de décision multi-critères. 
-Nous avons sélectionné pour notre modèle la fonction de somme pondérée \cite{yager2012ordered} qui offre une méthode pour agréger les préférences sur les valeurs de chaque  critère $c \in \mathcal{C}$ calculé individuellement afin d'obtenir un score d'utilité globale pour l'option.
- \begin{itemize}
- 	\item On note donc $score(v)$ le score de $v \in \mathcal{D}_{c}$ qui représente le nombre des successeurs de  $v$  dans le modèle de préférence $\mathcal{P}_{self}$, ce qui signifie que $|\{ \forall x \in \mathcal{D}_{c} / P (x,v) \in \mathcal{P}_{self}\}|$.
- 	\item $rang(c)$ le rang d'un critère $c \in \mathcal{C}$ qui est le score normalisé de $c$ calculé en triant les critères de $\mathcal{C}$ par ordre croissant de leurs scores.
- \end{itemize}
-Par conséquent, calculer l'utilité d'une option grâce à la fonction de somme pondéré est effectué comme suit:
 
-\[U(O) = \sum_{c_j \in \mathcal{C}}  rang_R(c_j) \times score\left( v(O, c_j) \right) \] 
+\subsubsection{Processus décisionnel basé sur les préférences}
+Afin de trouver une option qui satisfasse les préférences des deux interlocuteur, l'agent doit être en mesure de calculer ses préférences sur les différentes options dans $\mathcal{O}$. La relation de préférence entre deux options est calculée à partir des préférences de l'agent grâce a une fonction de décision multi-critères. Nous avons sélectionné pour notre modèle une fonction de somme pondérée par le rang de chaque critère \cite{yager2012ordered}.
+
+Pour toute relation de préférence $P$ et pour tout élément $a\in A$, nous définissons $score_A(a)$ le nombre de successeurs de $a$ dans $P$ (définis par transitivité de $P$). Nous définissons ensuite le rang $rang_A(a)$ à partir du score de tous les $a_i\in A$ et en les triant par score croissant.
+
+Soit $o\in \mathcal{O}$ une option. L'utilité de l'option pour l'agent est définie par:
+
+\[U(o) = \sum_{c \in \mathcal{C}}  rang_{\mathcal{C}}(c) \times score_{\mathcal{D}_c}\left( v(o, c) \right) \] 
 
 
 \par La relation de préférence entre deux options est donc calculée en comparant leurs utilités. 
-\[ P(O_1, O_2)  = \left \{
+\[ P(o_1, o_2)  = \left \{
 \begin{array}{l}
-P(O_1, O_2)$ \textit{if}  $U(O_1) < U(O_2) \\
-P(O_2, O_1)$  \textit{if} $U(O_1) > U(O_2)  \\
-$  \textit{aucune n'est préférée}  $U(O_2) = U(O_1)\\
+P(o_1, o_2)$ \textit{si} $U(o_1) < U(o_2) \\
+P(o_2, o_1)$ \textit{si} $U(o_1) > U(o_2) 
 \end{array}
 \right .\]
 
 \subsubsection{Contexte du dialogue}
-\par Durant le dialogue, les deux interlocuteurs échangent des informations sur leurs préférences et suggèrent des propositions pour le choix d'une option. par exemple, je préfère manger Indien ce soir, ou allons au restaurant Ginza ...
+\par Durant le dialogue, les deux interlocuteurs échangent des informations sur leurs préférences (par exemple "j'aime bien le japonais") et suggèrent des propositions pour le choix d'un critère (par exemple, "allons manger indien") ou sur les options ("allons au restaurant Ginza").
 
-Afin de capturer ces informations, nous définissons les éléments suivants:
+Afin de capturer ces informations, nous définissons une proposition comme un couple $(Type, Valeur)$ où $Type$ est soit le thème de négociation (''Restaurant`` dans notre exemple), soit un critère $c \in \mathcal{C}$, et $Valeur$ est
 \begin{itemize}
-	\item Une proposition est définie comme un tuple $Proposal$ $(Type, Valeur)$ où $Type$ est soit le thème de négociation par exemple ''Restaurant``, soit un critère $c \in \mathcal{C}$ et $Valeur$:
-	\begin{itemize}
-			\item Une option $O \in \mathcal{O}$ si $Type \in Topic$ 
-			\item Une valeur de critère $v \in \emph{D}_c$ si $Type \in \mathcal{C}$
-	\end{itemize}
+		\item Une option $O \in \mathcal{O}$ si $Type$ est le thème de la négociation; 
+		\item Une valeur de critère $v \in \mathcal{D}_c$ si $Type \in \mathcal{C}$.
+\end{itemize}
+Par exemple, $(Restaurant,Ginza)$ représente la proposition "allons au restaurant Ginza" alors que $(Cuisine,Indien)$ représente la proposition "allons manger indien".
 
-	\item Afin de garder trace de toutes les propositions soumises durant le dialogue, nous définissons ces structures de données qui stockent une proposition à chaque cycle de vie. 
-		\begin{itemize}
-			\item $ Proposed$ est la liste de toutes les propositions ouvertes dans le dialogue.
-			\item $ Rejected$  est la liste des propositions rejetées.
-			\item $ Accepted$  est la liste des propositions acceptées. Il est a noté qu'il suffit qu'une option soit acceptée pour pouvoir clore la négociation. 
-		\end{itemize}
+Afin de garder trace de toutes les propositions soumises durant le dialogue, nous définissons:
+\begin{itemize}
+	\item $ Proposed$ la liste de toutes les propositions ouvertes dans le dialogue.
+	\item $ Rejected$ la liste des propositions rejetées.
+	\item $ Accepted$ la liste des propositions acceptées. Notons qu'il suffit qu'une seule \emph{option} soit acceptée pour clore la négociation coopérative.
 \end{itemize}
 
-\subsubsection{Sémantique des actes de dialogue}
-\par Les agents communiquent en utilisant des actes de dialogues. Les messages sont considérés comme des actions durant le dialogue. Ils sont donc définis avec des préconditions et des effets qui mettent à jours l'état mental de l'agent. Il est à noter que les préconditions sont toutes optionnelles, car le choix d'un message dépend en premier lieu de la stratégie de l'interlocuteur (i.e perception de la RI). Les effets d'un message modifient l'état mental de l'agent  mais en aucun cas ne changent les préférences de l'agent $\mathcal{P}_{self}$. 
-\par Nous avons définis un ensemble d'actes de dialogues illustrés dans le tableau \ref{tab: utt} qui sont assez génériques pour permettre à l'agent d'exprimer différentes préférences afin de participer de manière efficace dans la négociation. Par exemple, l'acte de dialogue "State.Preference" permet à l'agent d'exprimer une préférence sur n'importe quel domaine. Par exemple: \\ State.Preference$_{cuisine}(\textit{Japanese , Chinese})$ : ``I prefer japanese cuisine over Chinese''. 
-L'expéditeur de cet acte doit avoir cette préférence dans son modèle. Il est a noter par ailleurs que l'effet de cet acte diffère selon le rôle de l'agent (expéditeur/récepteur). En effet, si l'agent est l'expéditeur de ce message, il aura à mettre à jour le modèle contentant les informations que l'utilisateur détient sur l'agent. En parallèle, si l'agent est le récepteur de ce message, il aura à mettre à jour ses connaissances sur les préférences de l'utilisateur
+\subsubsection{Module de communication}
 
-\begin{table*}
-	
-	\caption{\label{tab: utt} Sémantique des actes de dialogue}
-	\begin{tabular} {|m{0.40cm}|m{4cm}|m{2cm}|m{2.5cm}|m{3cm}|m{2.5cm}|}
+\paragraph{Actes de dialogue}
+\par Dans notre système, l'agent et l'utilisateur communiquent en utilisant des actes de dialogues au sens de Searle \cite{searle1969speech}. Chaque acte de dialogue est muni de préconditions et d'effets qui mettent à jours l'état mental de l'agent à propos des préférences de l'interlocuteur et de l'état des propositions (les ensembles $\mathcal{P}_{self}$ et $Pc$ ne sont jamais modifiés, contrairement à ce qui serait fait en théorie de l'argumentation, par exemple). 
+
+Le tableau \ref{tab: utt} décrit l'ensemble des actes de dialogue que nous avons retenus pour notre modèle de négociation coopérative. À titre d'exemple l'acte de dialogue "State.Preference" permet à l'agent d'exprimer une préférence sur n'importe quel domaine (par exemple: "je préfère le chinois au japonais" est exprimé par State.Preference$_{cuisine}(\textit{Japanese , Chinese})$). 
+
+\begin{table*}	
+	\centering
+	\begin{tabular} {|m{4cm}|m{2cm}|m{2.5cm}|m{3cm}|m{2.5cm}|}
 		
 		\hline 
-		N & \thead{Utterance} & \multicolumn{2}{c|} {\thead{Preconditions}  } &  \multicolumn{2}{c|} {\thead{Effects}  } \\
+		\thead{Utterance} & \multicolumn{2}{c|} {\thead{Preconditions}  } &  \multicolumn{2}{c|} {\thead{Effects}  } \\
 		\hline 
-		1 & \makecell{State.Preference(\textit{$a,b$}):\\ ``I prefer $a$ over $b$''}& \multicolumn{2}{c|} {\makecell{ $(a,b)\in$ $\mathcal{P}_{self}$  \\ $(a,b) \notin$ $\mathcal{P}_{oas}$} }&\makecell{ \textit{(hearer case)} \\ $add((a,b)$, $\mathcal{P}_{other})$ } & \makecell{\textit{(speaker case)} \\ $add((a,b)$, $\mathcal{P}_{oas})$}  \\
+		\makecell{State.Preference(\textit{$a,b$}):\\ ``I prefer $a$ over $b$''}& \multicolumn{2}{c|} {\makecell{ $(a,b)\in$ $\mathcal{P}_{self}$ } }&\makecell{ \textit{(hearer case)} \\ $add((a,b)$, $\mathcal{P}_{other})$ } & \makecell{\textit{(speaker case)} \\ $add((a,b)$, $\mathcal{P}_{oas})$}  \\
 		\hline
-		2 & \makecell{Ask.Preference(\textit{$a,b$}):\\``Do you prefer $a$ to $b$'' ?}& \multicolumn{2}{c|} {\makecell{ $ (a,b) \notin \mathcal{P}_{other} $} }&
+		\makecell{Ask.Preference(\textit{$a,b$}):\\``Do you prefer $a$ to $b$'' ?}& \multicolumn{2}{c|} {\makecell{ $ (a,b) \notin \mathcal{P}_{other} $} }&
 		\multicolumn{2}{c|} {\makecell{None} } \\
 		\hline
-		3 & \makecell{Propose(\textit{Proposal(T,V)}):\\``Let's choose  \textit{V}''}& \multicolumn{2}{c|} {\makecell{$ Proposal(T,V) \notin  Proposed$} }&\multicolumn{2}{c|} {\makecell{ $add(Proposal(T,V), Proposed)$ }} \\
+		\makecell{Propose(\textit{Proposal(T,V)}):\\``Let's choose  \textit{V}''}& \multicolumn{2}{c|} {\makecell{$ Proposal(T,V) \notin  Proposed$} }&\multicolumn{2}{c|} {\makecell{ $add(Proposal(T,V), Proposed)$ }} \\
 		\hline
-		4 & \makecell{Accept(\textit{Proposal(T,V)}):\\``Okay, let's choose \\ \textit{V} for \textit{T}''}& \multicolumn{2}{c|} {\makecell{$Proposal(T,V) \in Proposed$ \\ $ Proposal(T,V)\notin Accepted$} } & \multicolumn{2}{c|} { \makecell{$add(Proposal(T,V), Accepted)$\\$ remove(Value, Proposed)$}  }  \\
+		\makecell{Accept(\textit{Proposal(T,V)}):\\``Okay, let's choose \\ \textit{V} for \textit{T}''}& \multicolumn{2}{c|} {\makecell{$Proposal(T,V) \in Proposed$ \\ $ Proposal(T,V)\notin Accepted$} } & \multicolumn{2}{c|} { \makecell{$add(Proposal(T,V), Accepted)$\\$ remove(Value, Proposed)$}  }  \\
 		\hline
-		5 & \makecell{Reject(\textit{Proposal(T,V)}):\\`` Sorry, I would choice \\ something else.''}& \multicolumn{2}{c|} { \makecell{$Proposal(T,V) \in Proposed$ \\$Proposal(T,V)\notin Rejected$}  } & \multicolumn{2}{c|} {\makecell{ $add(Proposal(T,V),Rejected)$ \\$remove(Proposal(T,V), Proposed)$}} \\
+		\makecell{Reject(\textit{Proposal(T,V)}):\\`` Sorry, I would choice \\ something else.''}& \multicolumn{2}{c|} { \makecell{$Proposal(T,V) \in Proposed$ \\$Proposal(T,V)\notin Rejected$}  } & \multicolumn{2}{c|} {\makecell{ $add(Proposal(T,V),Rejected)$ \\$remove(Proposal(T,V), Proposed)$}} \\
 		\hline
 	\end{tabular}
+	\caption{\label{tab: utt} Sémantique des actes de dialogue}
 \end{table*}
+
+\paragraph{Arbres de dialogue}
+La gestion du dialogue se fait à l'aide d'arbres qui décrivent, pour chaque acte de dialogue, l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte Propose, l'agent peut répondre par un Accept, un Reject ou un autre Propose ("User: Allons au Chinois. Agent: Et si nous allions plutôt au Japonais?"). En plus des préconditions de chaque acte, ces arbres définissent des conditions sur la relation de dominance pour décider quelle réponse est adoptée. Dans l'exemple précédent, l'agent doit être dominant pour répondre à un Propose par un autre Propose. Ces conditions sont définies d'après les observations de la littérature présentées dans la section\ref{RI}.
+
 
 \subsection{Implémentation du modèle de dialogue}
 
-\par Nous avons réalisé une première implémentation de notre système de dialogue avec un modèle générique de l'état mental qui permet à l'agent de mener une négociation dans un sujet de conversation donné. Un exemple sur le sujet des restaurants est déjà implémenté. Les actes de dialogue sont implémenté avec le logiciel Disco \cite{rich2009building} qui gère la création d'actes de dialogue ainsi que la génération d'arbres de dialogue.
+\par Nous avons réalisé une première implémentation de notre système de dialogue à l'aide du logiciel Disco \cite{rich2009building} qui gère la création d'actes de dialogue ainsi que la génération d'arbres de dialogue. Nous avons implémenté un modèle générique de l'état mental et nous l'avons instancié sur la tâche de choix d'un restaurant.
 
 \subsubsection{Présentation de Disco}
-Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen.  Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs pour la gestion des tâches. implémenté avec le standard ANSI/CEA-2018.
-Chaque tâche est définit avec des préconditions, des effets et des postconditions. 
-\par De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue. Cependant, nous l'avons étendu avec les actes de dialogues présenté dans la section \ref{contribution} afin qu'il puisse supporter la négociation sur les préférences. 
+Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen \cite{collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs \cite{htn} pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
+
+De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue.
+
+Nous avons complété ce système avec les actes de dialogues présenté dans la section précédente afin qu'il puisse supporter la négociation sur les préférences. Les conditions des actes de dialogue sont exprimées par des préconditions sur les tâches et le choix de l'acte suivant la relation de dominance est implémenté dans les recettes.
+
 \subsubsection{Génération de dialogue} 
- \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Par conséquent, l'agent doit être en mesure de produire une réponse adéquate qui respecte l'état mental courant ainsi que la RI perçue peu importe l'acte de dialogue généré par l'utilisateur. Nous avons implémenté des sous arbres de dialogue qui peuvent adapter la réponse de l'agent en fonction de  l'acte de dialogue choisi par l'utilisateur ainsi que son observation de l'environnement. Par conséquent, pour chaque acte de dialogue reçu, l'agent possède un arbre de réponses. Chaque branche de l'arbre est définie avec une condition d’applicabilité qui doit être satisfaite avant son exécution. Disco déroule l'arbre de gauche à droite (en commençant par la branche la plus a gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
- Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présenté dans la \fig{state}.
+ \par Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus a gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
+ Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présentées dans la \fig{state}.
 
  \begin{figure} [h]
  	\centerline{\includegraphics[width=3in]{figs/statePref.pdf}}
@@ -264,22 +246,39 @@ Chaque tâche est définit avec des préconditions, des effets et des postcondit
  	\defig{state}{Les réponses générés suite à un StatePreference}
  \end{figure}
 
-
-Le comportement standard qu'un agent adopte à la réception d'un StatePreference est de donner son opinion sur les valeurs exprimées (c-à-d que l'agent calcule ses préférences sur \textit{less} et \textit{more}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir parler d'autres valeurs. Cette condition est définie afin d'empêcher la circularité dans le dialogue.  
-Pour générer une réponse, l'agent va évaluer sa relation courante. On retrouve principalement trois réponses possibles : 
+Le comportement standard qu'un agent adopte à la réception d'un StatePreference est de donner son opinion sur les valeurs exprimées (c-à-d que l'agent calcule ses préférences sur \textit{less} et \textit{more}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale:
  \begin{itemize}
- 	\item Si l'agent est soumis dans sa relation avec l'utilisateur, il va prioriser les préférences de l'utilisateur et donc proposer de choisir la valeur préférée de l'utilisateur. Cependant, s'il n'est pas soumis, l'agent ne proposera la valeur \textit{more} que si \textit{more} correspond à la valeur qu'il préfère le plus pour le critère \emph{C}. 
- 	\item L'agent n'est pas dominant, il va donc vouloir en apprendre d'avantage sur  les préférences de l'utilisateur. Pour cela il le questionne sur les préférences qu'il peut avoir sur  d'autre valeurs que l'agent ignore encore.
- 	\item Enfin, si l'agent n'est pas soumis, il peut rediriger le dialogue et parler d'autre chose. Il exprime ses préférences sur d'autre valeurs du critère \emph{C} discuté. Dans le cas où il a déjà exprimé toutes ses préférences sur les valeurs du critère discuté, il va énoncer ses préférences sur un autre critère non encore discuté.
+ 	\item Si l'agent est soumis ou si il a la même préférence que l'utilisateur, il va proposer de choisir la valeur préférée de l'utilisateur
+ 	\item Sinon, si l'agent est soumis ou neutre, il va vouloir en apprendre d'avantage sur  les préférences de l'utilisateur.
+ 	\item Enfin, si l'agent est neutre ou dominant, il exprime ses préférences sur d'autre valeurs du critère \emph{C} discuté ou, dans le cas où il a déjà exprimé toutes ses préférences sur les valeurs du critère discuté, sur un autre critère non encore discuté.
  \end{itemize}
-\section{Perspectives de recherche}
+ 
+\paragraph{Exemple de dialogue}
+Voici un exemple de dialogue produit par le système. Les réponses de l'utilisateur sont pour l'instant traduites manuellement en commandes \emph{execute} en Disco:
+{\small
+\begin{verbatim}
+Agent says "What type of cuisine do you prefer?"
+> execute StatePreference / null / restaurant.Cuisine.FRENCH
+User says "I like FRENCH most."
+
+Agent says "I like FRENCH less than CHINESE."
+> execute Propose / CreateProposal(restaurant.Cuisine.CHINESE)
+User says "Let's choose CHINESE."
+
+Agent says "Okay, let's choose CHINESE."
+...
+\end{verbatim}
+}
+
+\section{Conclusions et perspectives}
 \label{conc}
 Dans cet article, nous avons présenté une architecture de dialogue qui permet à l'agent de mener une négociation coopérative et d'adapter sa stratégie de négociation en fonction de la relation interpersonnelle construite avec l'utilisateur. Nous avons effectué une première implémentation de ce système. 
 
-\par La prochaine étape de nos travaux se concentrera sur l'évaluation d'un tel système de dialogue social. Tout d'abord, nous souhaitons évaluer si le comportement de l'agent durant le dialogue traduit le comportement attendu. Ce type d'évaluation peut s'effectuer à l'aide de tests perceptifs avec les utilisateurs. 
-Ensuite, une évaluation du système durant les interactions doit être effectuée où nous cherchons à étudier l'impact des relations sociales sur la qualité du dialogue. Il s'agira alors de vérifier non seulement la perception par l'utilisateur des comportements sociaux de l'agent au cours de l'interaction mais aussi l'effet de tels comportements sur l'engagement de l'utilisateur et la qualité de la négociation menée durant le dialogue. L'hypothèse est que l'interaction est plus agréable avec un agent social et que la négociation sera plus rapide à converger.
+\par La prochaine étape de nos travaux se concentrera sur l'évaluation d'un tel système de dialogue social. Tout d'abord, nous souhaitons évaluer si le comportement de l'agent durant le dialogue traduit le comportement attendu. Ce type d'évaluation peut s'effectuer à l'aide de tests perceptifs avec des observateurs externes \cite{perceptif-si-on-a-de-la-place}.
 
-\par Outre les perspectives liées à la validation, nous souhaitons réaliser des améliorations sur le système. En effet, nous souhaitons étendre notre système avec un module de théorie de l'esprit. Un tel module permettra à l'agent de comprendre les intentions de l'utilisateur durant la négociation et ainsi, prédire le comportement futur de ce dernier.  De plus, un tel module permettrait d'avoir une meilleure  représentation de la pensée de l'utilisateur et donc une meilleure compréhension de son comportement. Cette connaissance supplémentaire sur l'utilisateur permettrait à l'agent d'avoir une meilleure perception de la relation sociale et ainsi d'adapter efficacement sa stratégie afin de générer une négociation coopérative la plus efficace possible.
+\par Ensuite, nous voudrions étudier l'impact de la prise en compte des relations sociales sur la qualité du dialogue: il s'agit alors de vérifier, au cours d'une interaction avec l'agent, non seulement que l'agent perçoit la présence comportement sociaux de l'agent, mais aussi que ces comportements ont un impact sur l'engagement de l'utilisateur et la qualité de la négociation menée durant le dialogue. L'hypothèse est que l'interaction est plus agréable avec un agent social et que la négociation sera plus rapide à converger.
+
+\par Outre ces perspectives liées à la validation, nous souhaitons réaliser des améliorations sur le système. En effet, nous souhaitons étendre notre système avec un module de théorie de l'esprit. Un tel module permettra à l'agent de comprendre les intentions de l'utilisateur durant la négociation et ainsi de prédire le comportement futur de ce dernier. De plus, un tel module permettrait d'avoir une meilleure  représentation de la pensée de l'utilisateur et donc une meilleure compréhension de son comportement. Cette connaissance supplémentaire sur l'utilisateur permettrait à l'agent d'avoir une meilleure perception de la relation sociale et ainsi d'adapter efficacement sa stratégie afin de générer une négociation coopérative la plus efficace possible.
 %de plus une évaluation avec
 %Ajouter un module de théorie de l'esprit afin de de comporendre les intentions communicative de l'utilisateur et ainsi pridir son comportement pour une meilleure négociation. 
 %=====================================================================================================
