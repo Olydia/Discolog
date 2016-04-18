@@ -1,0 +1,85 @@
+    # 18 avr. 2016 12:23:29 - TaskEngine 1.9 / Disco 1.13
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/StatePref.xml
+  > task trees
+    User says "Let's achieve trees."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+null, FRENCH
+    User says "I like FRENCH most."
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) 
+    User says "Let's choose CHINESE."
+    Agent says "Okay, let's choose CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Ambiance.CALM
+null, CALM
+    User says "I like CALM most."
+    Agent says "Ok."
+  > HISTORY
+
+[Achieve trees] -accepted -live
+   User says "Let's achieve trees."
+   Agent says "What type of cuisine do you prefer?"
+   [ ] -live
+      [Achieve State] -live
+         User says "I like FRENCH most."
+         [ ] -live
+            Agent says "I like FRENCH less than CHINESE."
+            [ ] -live
+               [Achieve Propose] -live <-focus
+                  User says "Let's choose CHINESE."
+                  Agent says "Okay, let's choose CHINESE."
+                  User says "I like CALM most."
+                  Agent says "Ok."
+                  [ ] -live
+
+  > CLEAR
+  > task trees
+    User says "Let's achieve trees."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+null, FRENCH
+    User says "I like FRENCH most."
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
+    User says "Let's choose CHINESE."
+    Agent says "Okay, let's choose CHINESE."
+  > history
+
+[Achieve trees] -accepted -live
+   User says "Let's achieve trees."
+   Agent says "What type of cuisine do you prefer?"
+   [ ] -live
+      [Achieve State] -live
+         User says "I like FRENCH most."
+         [ ] -live
+            Agent says "I like FRENCH less than CHINESE."
+            [ ] -live
+               [Achieve Propose] -live <-focus
+                  User says "Let's choose CHINESE."
+                  Agent says "Okay, let's choose CHINESE."
+                  [ ] -live
+
+  > execute fr.limsi.negotiate.lang.Propose / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.DRAGON)
+    User says "Let's choose DRAGON."
+    Agent says "Okay, let's choose DRAGON."
+  > history
+
+[Achieve trees] -accepted -live
+   User says "Let's achieve trees."
+   Agent says "What type of cuisine do you prefer?"
+   [ ] -live
+      [Achieve State] -live
+         User says "I like FRENCH most."
+         [ ] -live
+            Agent says "I like FRENCH less than CHINESE."
+            [ ] -live
+               [Achieve Propose] -live <-focus
+                  User says "Let's choose CHINESE."
+                  Agent says "Okay, let's choose CHINESE."
+                  User says "Let's choose DRAGON."
+                  Agent says "Okay, let's choose DRAGON."
+                  [ ] -live
+
+  > 

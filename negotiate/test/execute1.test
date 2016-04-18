@@ -11,7 +11,7 @@
   > execute fr.limsi.negotiate.lang.Reject / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
     User says "Sorry, I'd rather choose something else."
     Agent says "Ok."
-  > execute fr.limsi.negotiate.lang.AskPreference  / null / null / Packages.fr.limsi.negotiate.restaurant.Cost.CHEAP
+  > execute fr.limsi.negotiate.lang.AskPreference  / null / Packages.fr.limsi.negotiate.restaurant.Cost.EXPENSIVE / Packages.fr.limsi.negotiate.restaurant.Cost.CHEAP
     User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
     Agent says "Ok."
   > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN /Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
