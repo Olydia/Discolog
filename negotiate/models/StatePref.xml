@@ -563,7 +563,6 @@
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
     $less = Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
     $more = Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE;
-    $lastProposal = null;
 
     function currentMostPreferred(criterion) {
        return ($negotiation.currentMostPreferredCriterion(criterion));
@@ -637,10 +636,6 @@
 	
 	function isOptionProposal(proposal){
 		return(proposal.class.equals(Packages.fr.limsi.negotiate.OptionProposal.class));
-	}
-	
-	function updateProposal(proposal){
-		$lastProposal = proposal;
 	}
     
     function getPreference(criterion){

@@ -1,20 +1,24 @@
 package fr.limsi.negotiate.lang;
 
-import edu.wpi.cetask.Decomposition;
-import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
-import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.Proposal;
 
-public class Accept extends Utterance{
-	
-	 public static TaskClass CLASS;
+public class Accept extends ProposalUtterance {
 
-	   // for TaskClass.newStep
-	   public Accept (Disco disco, Decomposition decomp, String name, boolean repeat) { 
-	      super(Accept.class, disco, decomp, name, repeat);
-	   }
-	   
-	   public Accept (Disco disco, Boolean external) { 
-	      super(Accept.class, disco, external);
-	   }
+   public static TaskClass CLASS;
+
+   // for TaskClass.newStep
+   public Accept (Disco disco, Decomposition decomp, String name, boolean repeat) { 
+      super(Accept.class, disco, decomp, name, repeat);
+   }
+
+   public Accept (Disco disco, Boolean external, Proposal proposal) { 
+      super(Accept.class, disco, external, proposal);
+   }
+
+   @Override
+   protected void interpret () {
+      getNegotiation().updateProposalStatus(getProposal(), Proposal.Status.ACCEPTED);
+   }
 }

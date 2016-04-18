@@ -5,9 +5,7 @@
 	<!-- This file contains the definitions for the utterance types used in 
 		the negotiation model. See Negotiate.properties for glossing. -->
 
-	<!-- see Java class definition for StatePreference -->
-
-
+	<!-- see semantics in interpret() method in Java class definition for StatePreference, etc. -->
 
 	<task id="fr.limsi.negotiate.lang.StatePreference">
 		<!-- NOTE: * null value for either input means the other input is preferred 
@@ -17,16 +15,6 @@
 		<input name="less" type="Packages.fr.limsi.negotiate.Criterion" />
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
-
-		<script>
-			$negotiation.context.updateDiscussedCriterion($this.less,$this.more);
-			if ( $this.external ) {
-				updateOtherMS ($this.less, $this.more);
-			} 
-			else {
-				updateOtherAboutSelfMS ($this.less, $this.more);
-			}
-		</script>
 	</task>
 
 
@@ -47,22 +35,7 @@
 			!($negotiation.isInOther($this.less, $this.more) ||
 			$negotiation.isInOther($this.more, $this.less))
 		</precondition>
-		
-		<script>
-			
-			$statement = createStatement($this.less, $this.more, $this.external,"Ask");
-			
-			if($this.criterion == null)
-				$negotiation.context.updateDiscussedCriterion($this.less,$this.more);
-				
-			else {
-				$negotiation.context.updateDiscussedCriterion($this.criterion.class);
-				$statement.setType($this.criterion.class)		
-				}
-			$negotiation.context.getListStatements().add($statement);
-					
-		</script>
-
+	
 	</task>
 
 
@@ -74,12 +47,6 @@
 			! isProposed ($this.proposal,
 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN)
 		</precondition>
-
-		<script>
-			$this.proposal.setIsSelf(!$this.external);
-			propose ($this.proposal);
-			$lastProposal = ($this.proposal);
-		</script>
 
 	</task>
 
@@ -93,11 +60,6 @@
 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
 		</precondition>
 
-		<script>
-			accept($this.proposal);
-
-		</script>
-
 	</task>
 
 
@@ -110,50 +72,19 @@
 			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
 		</precondition>
 
-		<script>
-
-			reject($this.proposal);
-
-		</script>
-
 	</task>
-
-	<!-- TODO: add similar definitions for other utterance types -->
 
 	<script init="true">
 
 		var STATE_PREFERENCE_TEST = null;
 		$negotiation = 	$disco.getInteraction().getSystem().getNegotiation();
-		$lastProposal = null;
 
-		function updateOtherMS (less, more){
-		$negotiation.updateOtherMentalState(less, more);
-		}
-
-		function updateOtherAboutSelfMS (less, more){
-		$negotiation.updateOASMentalState(less, more);
-		}
-
-		function isProposed	(proposal, status) {
+		function isProposed (proposal, status) {
 		return $negotiation.isProposed(proposal, status);
-		}
-
-		function propose (proposal){
-		$negotiation.addProposal(proposal);
 		}
 
 		function getStatus (proposal) {
 		return $negotiation.checkProposalStatus(proposal);
-		}
-
-		function accept(value){
-		$negotiation.updateProposalStatus(value,
-		Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED);
-		}
-
-		function reject(value){
-		$negotiation.updateProposalStatus(value,
-		Packages.fr.limsi.negotiate.Proposal.Status.REJECTED);
 		}
 		
 		function mostPreferredValue(criterion) {
@@ -167,11 +98,6 @@
 		function getDiscussedCriterion(){
 			return $negotiation.context.getDiscussedCriterion();
 		}
-		
-		function createStatement (less, more, external,utteranceType){
-			return ($negotiation.context.createstatement(less, more, external,utteranceType));
-		}
-		
 		
 	</script>
 

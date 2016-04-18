@@ -1,21 +1,26 @@
 package fr.limsi.negotiate.lang;
 
-import edu.wpi.cetask.Decomposition;
-import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
-import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.Proposal;
 
-public class Propose extends Utterance{
+public class Propose extends ProposalUtterance {
+   
+   public static TaskClass CLASS;
 
+   // for TaskClass.newStep
+   public Propose (Disco disco, Decomposition decomp, String name, boolean repeat) { 
+      super(Propose.class, disco, decomp, name, repeat);
+   }
 
-	 public static TaskClass CLASS;
-	   
-	   // for TaskClass.newStep
-	   public Propose (Disco disco, Decomposition decomp, String name, boolean repeat) { 
-	      super(Propose.class, disco, decomp, name, repeat);
-	   }
-	   
-	   public Propose (Disco disco, Boolean external) { 
-	      super(Propose.class, disco, external);
-	   }
+   public Propose (Disco disco, Boolean external, Proposal proposal) { 
+      super(Propose.class, disco, external, proposal);
+   }
+
+   @Override
+   protected void interpret () {
+      getProposal().setIsSelf(!getExternal());
+      getNegotiation().addProposal(getProposal());
+      getNegotiation().context.setLastProposal(getProposal());
+   }
 }

@@ -12,7 +12,11 @@ public class DialogueContext {
 	public Class<? extends Criterion> currentDiscussedCriterion; 	
 
 	private Stack<Proposal> proposals;
+	
+	private Proposal lastProposal;
 
+	public void setLastProposal (Proposal proposal) { lastProposal = proposal; }
+	public Proposal getLastProposal () { return lastProposal; }
 
 	public DialogueContext() {
 		this.listStatements =new ArrayList<Statement>();
@@ -29,7 +33,7 @@ public class DialogueContext {
 		return currentDiscussedCriterion;
 	}
 
-	public Statement createstatement (Criterion less, Criterion more, boolean external, String utteranceType){
+	public Statement createStatement (Criterion less, Criterion more, boolean external, String utteranceType){
 		return(new Statement(less, more, external, utteranceType));
 	}
 
@@ -53,7 +57,7 @@ public class DialogueContext {
 		this.listStatements = listStatements;
 	} 
 
-	public Statement getLastStatement(String statementType, boolean external){
+	public Statement getLastStatement(String statementType, boolean external) {
 		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
 			if(listStatements.get(i).isExternal()== external && 
 			listStatements.get(i).utteranceType.equals(statementType))
@@ -80,7 +84,7 @@ public class DialogueContext {
 		this.proposals.push(proposal);
 	}
 
-	public Proposal getLastProposal( String status){
+	public Proposal getLastProposal(String status) {
 		for(int i= proposals.size()-1; i>=0; i --){
 			if(proposals.get(i).getStatus().toString().equals(status))
 				return proposals.get(i);

@@ -1,11 +1,10 @@
 package fr.limsi.negotiate.lang;
 
-import edu.wpi.cetask.Decomposition;
-import edu.wpi.cetask.TaskClass;
+import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
-import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.*;
 
-public class AskPreference extends Utterance {
+public class AskPreference extends PreferenceUtterance {
 
 	 public static TaskClass CLASS;
 	   
@@ -14,7 +13,20 @@ public class AskPreference extends Utterance {
 	      super(AskPreference.class, disco, decomp, name, repeat);
 	   }
 	   
-	   public AskPreference (Disco disco, Boolean external) { 
-	      super(AskPreference.class, disco, external);
+	   public AskPreference (Disco disco, Boolean external, Class<? extends Criterion> criterion,
+	         Criterion less, Criterion more) { 
+	      super(AskPreference.class, disco, external, criterion, less, more);
+	   }
+	   
+	   @Override
+	   protected void interpret () {
+	      Statement statement = getNegotiation().context.createStatement(getLess(), getMore(), getExternal(),"Ask");
+         if ( getCriterion() == null) 
+            getNegotiation().context.updateDiscussedCriterion(getLess(), getMore());
+         else {
+            getNegotiation().context.updateDiscussedCriterion(getCriterion());
+            statement.setType(getCriterion());    
+         }
+         getNegotiation().context.getListStatements().add(statement);
 	   }
 }
