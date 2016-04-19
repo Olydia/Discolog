@@ -1,0 +1,22 @@
+  > load models/Negotiate.xml
+  > load models/StatePref.xml 
+  >   > task trees
+    User says "Let's achieve trees."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+null, FRENCH
+    User says "I like FRENCH most."
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
+CHINESE, ITALIAN
+    User says "I like CHINESE less than ITALIAN."
+    Agent says "I like ITALIAN less than CHINESE."
+  > execute fr.limsi.negotiate.lang.AskPreference / null / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+    User says "Do you like JAPANESE?"
+    Agent says "I like JAPANESE less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) 
+    User says "Let's choose CHINESE."
+    Agent says "Okay, let's choose CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.DRAGON)
+    User says "Let's choose DRAGON."
+    Agent says "Okay, let's choose DRAGON."

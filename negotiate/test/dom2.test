@@ -1,0 +1,44 @@
+    # 19 avr. 2016 16:15:48 - TaskEngine 1.9 / Disco 1.15
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/Negotiation.xml
+  > task GoingOut
+    User says "Let's achieve GoingOut."
+    Agent says "Would you like to go out with me on the town tonight?"
+  > say
+[1] That would be great ! .
+[2] Sorry, not today.
+  >> 1
+    User says "That would be great ! ."
+    Agent says "Would you enjoy having dinner with me?"
+  > say
+[1] Yes.
+  >> 1
+    User says "Yes."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference/ null / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+null, JAPANESE
+    User says "I like JAPANESE most."
+    Agent says "I like JAPANESE less than CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference /Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN 
+CHINESE, ITALIAN
+    User says "I like CHINESE less than ITALIAN."
+    Agent says "I like ITALIAN less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
+    User says "Let's choose CHINESE."
+    Agent says "Okay, let's choose CHINESE."
+  > execute fr.limsi.negotiate.lang.AskPreference  / null / null / Packages.fr.limsi.negotiate.restaurant.Cost.CHEAP
+    User says "Do you like CHEAP?"
+    Agent says "I like CHEAP most."
+  > execute fr.limsi.negotiate.lang.Propose /createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.DRAGON)
+    User says "Let's choose DRAGON."
+    Agent says "Okay, let's choose DRAGON."
+  > execute fr.limsi.negotiate.lang.Accept /createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.DRAGON)
+    User says "Okay, let's choose DRAGON."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+  >> 1
+    User says "Perfect!"
+    Agent says "Ok."
+  > quit
