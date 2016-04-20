@@ -12,6 +12,8 @@ public enum Restaurant implements Option {
 	
 	SAMURA (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.NOISY),
 	
+	TOKYO  (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.CALM),
+
 	PAPELLI (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.CALM);
 
 	public final Cuisine cuisine;

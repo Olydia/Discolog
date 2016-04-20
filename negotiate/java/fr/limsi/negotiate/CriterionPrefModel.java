@@ -85,7 +85,32 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		PreferenceMatrix<C> M = this.generateMatrix(getValues(), preferences);
 		return (M.getPreferences());
 	}
+	
+	public List<C> sortCriterions() {
+		List<C> criterions = this.getValues();
+		criterions.sort(new Comparator<C>() {
+			@Override
+			public int compare(C o1, C o2){
+				return (getScore(o2) - getScore(o1));
+			}
+		});
+		return criterions;
+	}
 
+	public ValuePreference<C> reactToCriterion(C criterion){
+		if(criterion.equals(getMostPreferred()))
+			return new ValuePreference<C> (null, criterion);
+		if(criterion.equals(getLeastPreferred()))
+			return new ValuePreference<C> (criterion, null);
+		else{
+			List<C> criterions = sortCriterions();
+			criterions.indexOf(criterion);
+			int index = new Random().nextInt(criterions.indexOf(criterion));
+			return new ValuePreference<C> (criterion, criterions.get(index));
+		}
+			
+
+	}
 
 	public Class<C> getType() {
 		return type;
@@ -110,5 +135,16 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		// TODO Auto-generated method stub
 		return this.preferences;
 	}
+
+	@Override
+	public C getMostPreferred() {
+		return sortCriterions().get(0);
+	}
+
+	@Override
+	public C getLeastPreferred() {	
+		List<C> crit = sortCriterions();
+		return crit.get(crit.size()-1);
+}
 	
 }

@@ -64,15 +64,32 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 
 	@Override
 	public ArrayList<Integer> getPreferencesValues() {
-		// TODO Auto-generated method stub
-		PreferenceMatrix<Class<? extends Criterion>> M = this.generateMatrix(getValues(), preferences);
-		return (M.getPreferences());
+		 ArrayList<Integer> ranks = new ArrayList<Integer>();
+		 for(Class<? extends Criterion> c : getValues())
+			 ranks.add(getRank(c));
+		 return ranks;
 	}
 
 	@Override
 	ArrayList<CriterionPreference> getPreferences() {
 		// TODO Auto-generated method stub
 		return preferences;
+	}
+
+	@Override
+	public Class<? extends Criterion> getMostPreferred() {
+		for(int i : getPreferencesValues())
+			if(i == 0)
+				return (getValues().get(i));
+		return null;
+	}
+
+	@Override
+	public Class<? extends Criterion> getLeastPreferred() {
+		for(int i : getPreferencesValues())
+			if(i == (getPreferencesValues().size()-1))
+				return (getValues().get(i));
+		return null;		
 	}
 
 }

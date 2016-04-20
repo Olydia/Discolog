@@ -174,7 +174,6 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void updateOtherMentalState(Criterion less, Criterion more){
-		System.out.println(less +", " +more);
 		Class<? extends Criterion> type =  new ValuePreference<Criterion>(less, more).getType();
 
 		if(type != null){
@@ -229,16 +228,17 @@ public class Negotiation<O extends Option> {
 		return false;
 	}
 
-	public boolean isAcceptable (Proposal proposal){
+	public boolean isAcceptable (Proposal proposal, int dom){
 		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
 
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			CriterionNegotiation<Criterion> criterionNegotiation =	
 					getCriterionNegotiation(criterion);
-			
+			int bestScore = criterionNegotiation.getSelf().getScore(criterionNegotiation.getSelf().getMostPreferred());
+			int proposalScore = criterionNegotiation.getSelf().getScore(criterion);
 			// get the index of the criterionNegotiation of type
-			return (criterionNegotiation.getSelf().getScore(criterion)>= 0);
+			return (dom <=0 ? proposalScore>= 0 : proposalScore>= bestScore *0.7);
 		}
 
 		if(proposal instanceof OptionProposal){
@@ -247,7 +247,7 @@ public class Negotiation<O extends Option> {
 				return false;
 			else {
 				List<Option> sortedOptions = sortOptions(options);
-				return (sortedOptions.indexOf(option)< sortedOptions.size()/2);
+				return (dom<=0 ? sortedOptions.indexOf(option)< sortedOptions.size()/2 : sortedOptions.indexOf(option)< sortedOptions.size()/4);
 			}
 		}
 		return false;
@@ -310,10 +310,14 @@ public class Negotiation<O extends Option> {
 		return options;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addProposal(Proposal proposal) {
 		this.context.updateProposals(proposal);
-		if (proposal instanceof CriterionProposal) 
+		if (proposal instanceof CriterionProposal) {
 			addCriterionProposal((CriterionProposal) proposal);
+			this.context.updateDiscussedCriterion((Class<? extends Criterion>) proposal.getValue().getClass());
+
+		}
 
 		if(proposal instanceof OptionProposal)
 			this.propose((OptionProposal) proposal);
@@ -478,35 +482,31 @@ public class Negotiation<O extends Option> {
 	}
 
 
-
+// Heeeeeeeeeeere
 	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){
 
-		if(userStatement.getLess() == null && userStatement.getMore() == null){
-			
+		if(userStatement.getLess() == null && userStatement.getMore() == null)
 			return (new ValuePreference<Criterion>(null, null));
-
-		}
 
 		else{
 			
 			if(userStatement.getLess() == null){
-				Criterion mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
-						getMostPreferred();
-				return (mostPref.equals(userStatement.getMore())? userStatement: 
-					new ValuePreference<Criterion>(userStatement.getMore(), mostPref));
-
-
+				CriterionNegotiation<Criterion> mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass());
+				return (mostPref.getSelf().reactToCriterion(userStatement.getMore()));
 			}
 			if(userStatement.getMore() == null){
-				Criterion leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass()).getSelf().
-						getLeastPreferred();
-				return (leastPref.equals(userStatement.getLess())? userStatement: 
-					new ValuePreference<Criterion>(leastPref,userStatement.getLess()));
-
+				CriterionNegotiation<Criterion> leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass());
+				return (leastPref.getSelf().reactToCriterion(userStatement.getLess()));
 			}
-
-
-			return(this.getCriterionNegotiation(userStatement.getMore().getClass()).getSelf().
+			
+			CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(userStatement.getMore().getClass());
+			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()))
+				return (new ValuePreference<Criterion>(null, userStatement.getMore()));
+			
+			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()))
+				return (new ValuePreference<Criterion>(userStatement.getMore(), null));
+			
+			return(model.getSelf().
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 		}

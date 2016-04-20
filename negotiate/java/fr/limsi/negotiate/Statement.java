@@ -55,7 +55,9 @@ public class Statement {
 			
 			else{
 				Statement other = (Statement) obj;
-				if (this.preference.equals(other.getStatedPreference()))
+				ValuePreference<Criterion> inverse = new ValuePreference<Criterion>
+						(other.getStatedPreference().getMore(), other.getStatedPreference().getLess());
+				if (this.preference.equals(other.getStatedPreference()) || this.preference.equals(inverse))
 					return true;
 			}
 			return false;

@@ -28,18 +28,9 @@ abstract public class PreferenceModel<C>{
 		lastUpdate = preference;
 	}
 	
-	public C getMostPreferred() {
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix(getValues(), getPreferences());
-		return (M.getMostPreffered());
-	}
-
-
-	public C getLeastPreferred() {
-		@SuppressWarnings("unchecked")
-		PreferenceMatrix<C> M = this.generateMatrix(getValues(), getPreferences());
-		return (M.getLeastPreffered());
-	}
+	abstract public C getMostPreferred() ;
+		
+	abstract public C getLeastPreferred() ;
 	
 	@SuppressWarnings("rawtypes")
 	abstract ArrayList  getPreferences();
