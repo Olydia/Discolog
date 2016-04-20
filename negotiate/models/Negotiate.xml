@@ -22,12 +22,12 @@
 
 		<!-- Note: The 'criterion' input below is to support asking about a criterion 
 			in general, i.e., with both the 'less' and 'more' inputs null. The value 
-			provided should be Java class object (which is technically a function in 
-			JavaScript) that is a subtype of fr.limsi.negotiate.Criterion and the values 
-			provided for 'less' and 'more', if non-null, should be instances of this 
-			class. The criterion input itself is not optional. -->
+			provided should be Java class object that is a subtype of 
+			fr.limsi.negotiate.Criterion and the values provided for 'less' and 'more', 
+			if non-null, should be instances of this class. The criterion input itself is 
+			not optional. -->
 
-		<input name="criterion" type="function" />
+		<input name="criterion" type="object" />
 		<input name="less" type="Packages.fr.limsi.negotiate.Criterion" />
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
