@@ -779,9 +779,7 @@
 	}
 	
 	function sameStatement(uttType){
-		if (getLastUserStatement(uttType) == null ||  getLastAgentStatement (uttType) == null)
-			return false;		
-		return(getLastAgentStatement(uttType).equals(getLastUserStatement(uttType)));
+		return($negotiation.testStatement(uttType));
 	}
 
 	function askUserPref(criterion){

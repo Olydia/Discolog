@@ -30,7 +30,10 @@ The dialogue model constructed so far allows the user to choose any utterance of
 	
 	\par The agent will analyses the value of the received utterance and depending on the perception of the relationship, the agent will choose  an adequate answer. The possibles responses are depicted in \fig{state}, and explained in the following: 
 	\begin{enumerate}
-		\item \textbf{StatePreference (C, less, more)}:The agent can react to the the stated values by observing its preferences on the stated criteria. This utterance is selected if the agent's previous utterance doesn't concern a statement about (less, more). This condition avoid the agent to fall in infinite loop.  Depending on the values of the input preference, the agent will respond with one the the following values. 
+		\item \textbf{StatePreference (C, less, more)}:The agent can react to the the stated values by observing its preferences on the stated criteria. This utterance is selected if the agent's previous utterance doesn't concern a statement about (less, more). 
+		The condition "sameStatement" is computed with the following algorithm: 
+		
+		This condition avoid the agent to fall in infinite loop.  Depending on the values of the input preference, the agent will respond with one the the following values. 
 			\subitem input: \textit{(*, more)} $\rightarrow$ 
 				output: \textit{(more, mostPreferred)} if \textit{more $\not = $ mostPreffered,} else \textit{(*, more)}.
 			\subitem input: \textit{(less, *)} $\rightarrow$ 

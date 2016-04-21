@@ -4,6 +4,7 @@ import java.util.*;
 
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.restaurant.Cuisine;
+import fr.limsi.negotiate.restaurant.Restaurant;
 
 /**
  * This class defines the negotiation on a defined option (for example Restaurant) 
@@ -510,6 +511,34 @@ public class Negotiation<O extends Option> {
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 		}
+	}
+	
+	
+	public  boolean testStatement (String uttType) {
+		Statement agent  = context.getLastStatement(uttType, false);
+		Statement user  = context.getLastStatement(uttType, true);
+	
+		if (user == null ||  agent == null)
+			return false;
+					
+		if(agent.getStatedPreference().getMore() == null)
+			return (agent.getStatedPreference().getLess() == user.getStatedPreference().getLess() 
+				|| agent.getStatedPreference().getLess() == user.getStatedPreference().getMore()) ;
+		
+		if(agent.getStatedPreference().getLess() == null)
+			return (agent.getStatedPreference().getMore() == user.getStatedPreference().getLess() 
+				|| agent.getStatedPreference().getMore() == user.getStatedPreference().getMore()) ;
+		
+		if(user.getStatedPreference().getMore() == null)
+			return (user.getStatedPreference().getLess() == agent.getStatedPreference().getLess() 
+				|| user.getStatedPreference().getLess() == agent.getStatedPreference().getMore()) ;
+		
+		if(user.getStatedPreference().getLess() == null)
+			return (user.getStatedPreference().getMore() == agent.getStatedPreference().getLess() 
+				|| user.getStatedPreference().getMore() == agent.getStatedPreference().getMore()) ;
+		
+		 
+		return(agent.equals(user));
 	}
 
 }

@@ -6,6 +6,33 @@ import fr.limsi.negotiate.*;
 
 public class TestRestaurant {
 
+	public static boolean testStatement (String uttType, Negotiation<Restaurant> n) {
+		Statement agent  = n.context.getLastStatement(uttType, false);
+		Statement user  = n.context.getLastStatement(uttType, true);
+	
+		if (user == null ||  agent == null)
+			return false;
+					
+		if(agent.getStatedPreference().getMore() == null)
+			return (agent.getStatedPreference().getLess() == user.getStatedPreference().getLess() 
+				|| agent.getStatedPreference().getLess() == user.getStatedPreference().getMore()) ;
+		
+		if(agent.getStatedPreference().getLess() == null)
+			return (agent.getStatedPreference().getMore() == user.getStatedPreference().getLess() 
+				|| agent.getStatedPreference().getMore() == user.getStatedPreference().getMore()) ;
+		
+		if(user.getStatedPreference().getMore() == null)
+			return (user.getStatedPreference().getLess() == agent.getStatedPreference().getLess() 
+				|| user.getStatedPreference().getLess() == agent.getStatedPreference().getMore()) ;
+		
+		if(user.getStatedPreference().getLess() == null)
+			return (user.getStatedPreference().getMore() == agent.getStatedPreference().getLess() 
+				|| user.getStatedPreference().getMore() == agent.getStatedPreference().getMore()) ;
+		
+		 
+		return(agent.equals(user));
+	}
+	
 	public static void main(String[] args) {
 		// 1. Define lydia preference model on each criterion of restaurant
 		CriterionPrefModel<Cuisine> lydia_cuisine = new CriterionPrefModel<Cuisine>();
@@ -51,7 +78,18 @@ public class TestRestaurant {
 		@SuppressWarnings("unchecked")
 		Negotiation<Restaurant> restaurants = new Negotiation<Restaurant>
 		(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
-		System.out.println(restaurants.getPref(new ValuePreference<Criterion>(Cuisine.CHINESE, Cuisine.ITALIAN)));
+		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
+		(Cost.CHEAP, null), true, "State"));
+		
+		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
+		(null,Cost.CHEAP), false, "State"));
+		
+		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
+		(Cost.CHEAP, null), true, "State"));
+		
+//		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
+//		(Cost.EXPENSIVE,Cost.CHEAP), false, "State"));
+
 		//
 		//		// Test the DFS preference method (it should return true 
 		//		System.out.println("Chinses score: " + lydia_cuisine.getScore(Cuisine.ITALIAN)+ " Turkich Score: " + lydia_cuisine.getScore(Cuisine.TURKISH));
@@ -78,9 +116,7 @@ public class TestRestaurant {
 
 		//OptionProposal p = new OptionProposal(false, Restaurant.CHEZ_CHUCK);
 
-		restaurants.addProposal(c);
 		//System.out.println(restaurants.context.getListStatements());
-		System.out.println(restaurants.currentMostPreferredCriterion(Cost.class));
 
 		//System.out.println("le dernier "+ restaurants.context.getLastStatement("REJECTED", true));
 //		for(Restaurant v : Restaurant.values()){
