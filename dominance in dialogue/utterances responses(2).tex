@@ -1,10 +1,13 @@
 \documentclass{llncs}
 
+\usepackage[noend]{algpseudocode}
 \usepackage{subcaption}
 \usepackage{subfig} 
 \usepackage{usual}
 \usepackage{graphicx}
 \pagestyle{plain}
+\usepackage{color}
+
 
 %
 \begin{document}
@@ -16,7 +19,7 @@ The dialogue model constructed so far allows the user to choose any utterance of
 \par In the following, I present the agent possible responses for each utterance. 
 \section{State Preference (C, less, more)}
 \begin{figure}[b]
-	\centerline{\includegraphics[width=5in]{utterances/Diapositive2.PNG}}
+	\centerline{\includegraphics[width=5in]{utterances/StatePref.pdf}}
 	\vskip 8pt
 	\defig{state}{agent possible answers to a state Preference}
 \end{figure}
@@ -28,9 +31,55 @@ The dialogue model constructed so far allows the user to choose any utterance of
 		\item StatePreference(C, less, *): I like the least less. 
 	\end{itemize}
 	
-	\par The agent will analyses the value of the received utterance and depending on the perception of the relationship, the agent will choose  an adequate answer. The possibles responses are depicted in \fig{state}, and explained in the following: 
+	\par The agent analyses the values of the received utterance. First, the agent checks that its last utterance is not a ``StatePreference'' about the expressed values, which is done with the method \emph{isTheSameStatement}. The algorithm of this method is depicted bellow: 
+	
+	\begin{figure}[h]
+		
+		\begin{algorithmic}[1]\small
+			
+			\Procedure{isTheSameStatement}{$(less, more)$}
+
+			\State $lastAgentUtt\gets$ $getLastAgentUtterance() $
+			\State $lastUserUtt\gets$ $getLastUserUtterance() $
+			\If{$(lastAgentUtt == null)$ and $(lastUserUtt == null)$} return $false$
+			\EndIf
+			\If{$(lastAgentUtt.getMore() == null$)}
+				\If{$lastAgentUtt.getLess() == lastUserUtt.getLess()$ or 
+				 $lastAgentUtt.getLess() == lastUserUtt.getMore()$}
+					return $true$
+				\EndIf
+			\EndIf
+			
+			\If{$(lastUserUtt.getMore() == null$)}
+				\If{$lastUserUtt.getLess() == lastAgentUtt.getLess()$ or 
+				$lastUserUtt.getLess() == lastAgentUtt.getMore()$}
+			return $true$
+				\EndIf
+			\EndIf
+			
+			\If{$(lastAgentUtt.getLess() == null$)}
+				\If{$lastAgentUtt.getMore() == lastUserUtt.getLess()$ or 
+				$lastAgentUtt.getMore() == lastUserUtt.getMore()$}
+			return $true$
+				\EndIf
+			\EndIf
+			
+			
+			\If{$(lastUserUtt.getLess() == null$)}
+				\If{$lastUserUtt.getMore() == lastAgentUtt.getLess()$ or 
+					$lastUserUtt.getMore() == lastAgentUtt.getMore()$}
+				return $true$
+				\EndIf
+			\EndIf
+			\EndProcedure
+	  \end{algorithmic}
+	  \vskip 8pt
+	  \defig{pseudo}{Pseudocode for hybrid reactive HTN execution and recovery system.}
+	\end{figure} 
+	
+	to and depending on the perception of the relationship, the agent will choose  an adequate answer. The possibles responses are depicted in \fig{state}, and explained in the following: 
 	\begin{enumerate}
-		\item \textbf{StatePreference (C, less, more)}:The agent can react to the the stated values by observing its preferences on the stated criteria. This utterance is selected if the agent's previous utterance doesn't concern a statement about (less, more). 
+{ \color{red}		\item \textbf{StatePreference (C, less, more)}:The agent can react to the the stated values by observing its preferences on the stated criteria. This utterance is selected if the agent's previous utterance doesn't concern a statement about (less, more). 
 		The condition "sameStatement" is computed with the following algorithm: 
 		
 		This condition avoid the agent to fall in infinite loop.  Depending on the values of the input preference, the agent will respond with one the the following values. 
@@ -39,7 +88,7 @@ The dialogue model constructed so far allows the user to choose any utterance of
 			\subitem input: \textit{(less, *)} $\rightarrow$ 
 				output: \textit{(leastPreferred,less)} if \textit{less $\not = $ leastPreffered,} else \textit{(less, *)}.
 			\subitem input: \textit{(less, more)} $\rightarrow$ Output:  \textit{(less, more)} if(score(less) $<$ score(more)), \textit{else (more,less)}.
-			
+	}	
 		\item \textbf{StatePreference (C, less1, more1)}: The agent can state a preference about other values than expressed in the user utterance provided that the agent is not submissive. In the case of all the preferences related to the criterion \emph{C} are already expressed (all the preferences are in OAS). The agent expresses a preference about another criterion \emph{C1} such that $\emph{C} \not = \emph{C1}$.
 		
 		\item \textbf{AskPreference(C, less1, more1)}: THis response is chosen in the case where the agent is submissive so he doesn't want to propose new values. Therefore, he uses the utterance ask to invite the user to choose values. In the same way as the previous responses, if the agent is aware of all the user preferences about the criterion \emph{C}, he will ask the user about his preferences about another criterion \emph{C1}.

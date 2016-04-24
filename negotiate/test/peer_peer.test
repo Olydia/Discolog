@@ -35,15 +35,6 @@ null, EXPENSIVE
     Agent says "Okay, let's choose TOKYO."
   > execute fr.limsi.negotiate.lang.Accept / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.TOKYO)
     User says "Okay, let's choose TOKYO."
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
-WARNING: _d4e90_subtasks ignoring external binding of non-primitive task $_d4e90_step.external
     Agent says "Okay, I'll call to book a table."
   > say
 [1] Perfect!
