@@ -108,6 +108,10 @@
 <do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 
 	<!--Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
+	<do actor="agent" task ="Booking"
+		applicable ="isOptionProposal(lastOpenProposal())  &amp;&amp; isAcceptable(lastOpenProposal(), dom)" 
+	/>
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Accept" 
 		proposal="lastOpenProposal()"
 		applicable = "isAcceptable(lastOpenProposal(), dom)">
@@ -117,6 +121,26 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do> 
+	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="getRandCriterionProp(getDiscussedCriterion())" 
+		applicable = "isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do> 
+	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="getRandOptionProp()"
+		applicable = "isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)" >
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
 		proposal="lastOpenProposal()"  
@@ -139,25 +163,6 @@
 		<do task = "Reject"/>
 	</do>
 	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="getRandCriterionProp(getDiscussedCriterion())" 
-		applicable = "isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do> 
-	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="getRandOptionProp()"
-		applicable = "isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)" >
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
 
 </do>
 
@@ -166,6 +171,17 @@
 	<do actor="agent" task ="Booking"
 		applicable ="isOptionProposal(lastAcceptedProposal())"
 	/>
+	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="createOptionProposal($negotiation.computeAcceptedOption())"
+		applicable = "isSub() &amp;&amp; $negotiation.allCriteriaAccepted()" >
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do> 
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="createOptionProposal(getOptionWithValue(lastAcceptedProposal().getValue()))"
 		applicable = "!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal())" >

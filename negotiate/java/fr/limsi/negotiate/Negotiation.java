@@ -457,7 +457,7 @@ public class Negotiation<O extends Option> {
 
 		if (this.context.getLastStatement(uttType,true) != null) {
 			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
-
+			
 			if(userStatement.getLess() == null && userStatement.getMore() == null){
 				Criterion mostPref = this.getCriterionNegotiation(context.getLastStatement(uttType,true).getType()).getSelf().
 						getMostPreferred();
@@ -467,8 +467,7 @@ public class Negotiation<O extends Option> {
 				return (getPref(userStatement));
 		}
 
-		else 
-			return (new ValuePreference<Criterion>(null, null));
+		else return null;
 	}
 
 
@@ -483,13 +482,7 @@ public class Negotiation<O extends Option> {
 	}
 
 
-// Heeeeeeeeeeere
 	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){
-
-		if(userStatement.getLess() == null && userStatement.getMore() == null)
-			return (new ValuePreference<Criterion>(null, null));
-
-		else{
 			
 			if(userStatement.getLess() == null){
 				CriterionNegotiation<Criterion> mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass());
@@ -510,35 +503,46 @@ public class Negotiation<O extends Option> {
 			return(model.getSelf().
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
+		
+	}
+	
+	public boolean allCriteriaAccepted(){
+		for (CriterionNegotiation<Criterion> n: this.criteriaNegotiation){
+			if(n.getProposals(Proposal.Status.ACCEPTED).isEmpty())
+				return false;
 		}
+		return true;
+	}
+	// Called only after cheking that allCriteriaAccepted() is true
+	public ArrayList<Criterion> lastAcceptedValues(){
+		ArrayList<Criterion> accepted = new ArrayList<Criterion>();
+		for (CriterionNegotiation<Criterion> n: this.criteriaNegotiation){
+			int index = n.getProposals(Proposal.Status.ACCEPTED).size() -1;
+			if(index>=0)
+				accepted.add(n.getProposals(Proposal.Status.ACCEPTED).get(index));
+		}
+		return accepted;
 	}
 	
-	
-	public  boolean testStatement (String uttType) {
-		Statement agent  = context.getLastStatement(uttType, false);
-		Statement user  = context.getLastStatement(uttType, true);
-	
-		if (user == null ||  agent == null)
-			return false;
-					
-		if(agent.getStatedPreference().getMore() == null)
-			return (agent.getStatedPreference().getLess() == user.getStatedPreference().getLess() 
-				|| agent.getStatedPreference().getLess() == user.getStatedPreference().getMore()) ;
+	public Option computeAcceptedOption(){
+		ArrayList<Criterion> accepted = lastAcceptedValues();
+		if(accepted.isEmpty())
+			return null;
+		for (Option O : getOptions()){
+			int i = 0;
+			boolean match = true;
+			while (i<accepted.size() && match){
+				Criterion value = O.getValue(accepted.get(i).getClass());
+				if(!accepted.get(i).equals(value))
+					match = false;
+				i++;
+			}
+			if(match)
+				return O;
+		}
 		
-		if(agent.getStatedPreference().getLess() == null)
-			return (agent.getStatedPreference().getMore() == user.getStatedPreference().getLess() 
-				|| agent.getStatedPreference().getMore() == user.getStatedPreference().getMore()) ;
-		
-		if(user.getStatedPreference().getMore() == null)
-			return (user.getStatedPreference().getLess() == agent.getStatedPreference().getLess() 
-				|| user.getStatedPreference().getLess() == agent.getStatedPreference().getMore()) ;
-		
-		if(user.getStatedPreference().getLess() == null)
-			return (user.getStatedPreference().getMore() == agent.getStatedPreference().getLess() 
-				|| user.getStatedPreference().getMore() == agent.getStatedPreference().getMore()) ;
-		
-		 
-		return(agent.equals(user));
-	}
 
+	
+	return null;
+}
 }

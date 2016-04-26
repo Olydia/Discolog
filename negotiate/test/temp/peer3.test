@@ -37,9 +37,6 @@ null, CHEAP
   > execute fr.limsi.negotiate.lang.Propose /createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.SAMURA)
     User says "Let's choose SAMURA."
     Agent says "Okay, let's choose SAMURA."
-  > execute fr.limsi.negotiate.lang.aCCEPT /createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.SAMURA)
-java.lang.IllegalArgumentException: Unknown task id fr.limsi.negotiate.lang.aCCEPT
-at edu.wpi.cetask.Shell.processTask(Shell.java:530)
   > execute fr.limsi.negotiate.lang.Accept /createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.SAMURA)
     User says "Okay, let's choose SAMURA."
     Agent says "Okay, I'll call to book a table."

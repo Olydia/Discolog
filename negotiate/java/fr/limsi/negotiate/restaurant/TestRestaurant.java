@@ -111,8 +111,17 @@ public class TestRestaurant {
 		
 
 //		OptionProposal c = new OptionProposal(true, Restaurant.CHEZ_CHUCK);
-		CriterionProposal c = new CriterionProposal(false, Cost.EXPENSIVE);
-		c.setStatus(Proposal.Status.REJECTED);
+		CriterionProposal costy = new CriterionProposal(false, Cost.EXPENSIVE);
+		costy.setStatus(Proposal.Status.ACCEPTED);
+		CriterionProposal cuisiny = new CriterionProposal(false, Cuisine.CHINESE);
+		cuisiny.setStatus(Proposal.Status.ACCEPTED);
+		CriterionProposal c = new CriterionProposal(false, Ambiance.NOISY);
+		c.setStatus(Proposal.Status.ACCEPTED);
+		restaurants.addProposal(c);
+		restaurants.addProposal(cuisiny);
+		restaurants.addProposal(costy);
+
+		System.out.println(restaurants.computeAcceptedOption());
 
 		//OptionProposal p = new OptionProposal(false, Restaurant.CHEZ_CHUCK);
 
