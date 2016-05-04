@@ -12,4 +12,9 @@ public enum Category  implements Criterion{
 		return null;
 	}
 
+	@Override
+	public String getFrVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -78,18 +78,26 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 
 	@Override
 	public Class<? extends Criterion> getMostPreferred() {
-		for(int i : getPreferencesValues())
-			if(i == 0)
-				return (getValues().get(i));
-		return null;
+		return sortCriteria().get(0);
 	}
 
+//	@Override
+//	public Class<? extends Criterion> getLeastPreferred() {
+//		for(int i : getPreferencesValues())
+//			if(i == (getPreferencesValues().size()-1))
+//				return (getValues().get(i));
+//		return null;		
+//	}
 	@Override
-	public Class<? extends Criterion> getLeastPreferred() {
-		for(int i : getPreferencesValues())
-			if(i == (getPreferencesValues().size()-1))
-				return (getValues().get(i));
-		return null;		
+	public List<Class<? extends Criterion> > sortCriteria() {
+		List<Class<? extends Criterion> > criterions = this.getValues();
+		criterions.sort(new Comparator<Class<? extends Criterion> >() {
+			@Override
+			public int compare(Class<? extends Criterion>  o1, Class<? extends Criterion>  o2){
+				return (getRank(o2) - getRank(o1));
+			}
+		});
+		return criterions;
 	}
 
 }

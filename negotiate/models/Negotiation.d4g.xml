@@ -12,6 +12,17 @@
 	</t:subtasks>
 </t:task>
 
+<t:task id="Trees">
+  <t:subtasks id="askC">
+    <t:step name="ask" task="AskCriterion"/>
+    <t:applicable> !isDom() </t:applicable>
+  </t:subtasks>
+  <t:subtasks id="proposeC">
+    <t:step name="propose" task="ProposeCriterion"/>
+    <t:applicable> isDom() </t:applicable>
+  </t:subtasks>
+</t:task>
+
 <agent id="InviteOut" text="Would you like to go out with me on the town tonight?">
 	<user text="That would be great ! .">
 		<do task="InviteToDinner"/>
@@ -23,7 +34,7 @@
 
 <agent id="InviteToDinner" text="Would you enjoy having dinner with me?">
 	<user text="yes.">
-		<do task="trees"/>
+		<do task="Trees"/>
 	</user>
 </agent> 
 
@@ -36,13 +47,25 @@
 	<user text="Perfect!"/>
 </agent> 
 
-<agent id="trees" text="What type of cuisine do you prefer?">       
+<do id="AskCriterion" actor = "agent"  task="n:fr.limsi.negotiate.lang.AskPreference"
+		criterion ="$mostPrefCriterion" less="null"	more="null" 
+		 applicable = "!isDom()">       
 	<do task = "State"/>
     <do task = "Propose"/>
    	<do task = "Ask"/>
    	<do task = "Accept"/>
    	<do task = "Reject"/>      
-</agent>
+</do>
+
+<do id="ProposeCriterion"  actor = "agent"  task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="proposalFromPreference(getLastUserPref()) "
+		applicable = "isDom()">       
+	<do task = "State"/>
+    <do task = "Propose"/>
+   	<do task = "Ask"/>
+   	<do task = "Accept"/>
+   	<do task = "Reject"/>      
+</do>
 
 <!-- User State Preference -->
 <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
@@ -322,8 +345,9 @@
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
-    $less = Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN;
-    $more = Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE;
+    $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
+    $leastPrefCriterion = $negotiation.criteriaPreferences.getLeastPreferred();
+    
 
     function currentMostPreferred(criterion) {
        return ($negotiation.currentMostPreferredCriterion(criterion));

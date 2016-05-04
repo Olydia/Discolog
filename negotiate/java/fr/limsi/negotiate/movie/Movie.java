@@ -32,6 +32,11 @@ public enum Movie implements Option{
 
 		return CRITERIA;
 	}
+	@Override
+	public String getFrVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

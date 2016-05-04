@@ -86,7 +86,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		return (M.getPreferences());
 	}
 	
-	public List<C> sortCriterions() {
+	public List<C> sortCriteria() {
 		List<C> criterions = this.getValues();
 		criterions.sort(new Comparator<C>() {
 			@Override
@@ -103,7 +103,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		if(criterion.equals(getLeastPreferred()))
 			return new ValuePreference<C> (criterion, null);
 		else{
-			List<C> criterions = sortCriterions();
+			List<C> criterions = sortCriteria();
 			criterions.indexOf(criterion);
 			int index = new Random().nextInt(criterions.indexOf(criterion));
 			return new ValuePreference<C> (criterion, criterions.get(index));
@@ -136,14 +136,14 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		return this.preferences;
 	}
 
-	@Override
-	public C getMostPreferred() {
-		return sortCriterions().get(0);
-	}
+//	@Override
+//	public C getMostPreferred() {
+//		return sortCriteria().get(0);
+//	}
 
 	@Override
 	public C getLeastPreferred() {	
-		List<C> crit = sortCriterions();
+		List<C> crit = sortCriteria();
 		return crit.get(crit.size()-1);
 }
 	

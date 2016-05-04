@@ -12,4 +12,10 @@ public enum Time implements Criterion {
 		// TODO Auto-generated method stub
 		return (Time.values());
 	}
+
+	@Override
+	public String getFrVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

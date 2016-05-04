@@ -3,8 +3,7 @@ package fr.limsi.negotiate;
 import java.util.*;
 
 import fr.limsi.negotiate.Proposal.Status;
-import fr.limsi.negotiate.restaurant.Cuisine;
-import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.restaurant.*;
 
 /**
  * This class defines the negotiation on a defined option (for example Restaurant) 
@@ -28,7 +27,6 @@ public class Negotiation<O extends Option> {
 		this.proposals = new ArrayList<OptionProposal>();
 		this.context = new DialogueContext();
 		this.type = criteriaPreferences.type;
-
 	}
 
 
@@ -52,6 +50,7 @@ public class Negotiation<O extends Option> {
 	}
 	public List<OptionProposal> getProposals() {
 		return proposals;
+		
 	}
 	
 	public List<Option> getOptionsPropWithStatus(Proposal.Status status) {
@@ -543,6 +542,29 @@ public class Negotiation<O extends Option> {
 		
 
 	
-	return null;
-}
+		return null;
+	}
+	
+	public String getOptionFrVersion(String optionSimpleName){
+		String fr = "";
+		switch(optionSimpleName) {
+        case "Cuisine":
+        	fr = "la cuisine";
+        break;
+        case "Cost":
+        	fr = "le prix";
+        break;
+        case "Ambiance":
+        	fr = "l'ambiance";
+        break;
+        case "Restaurant":
+        	fr = "le restaurant";
+        break;
+        default:
+        System.out.println("THE VALUE "+ optionSimpleName+" DOESN'T EXIST");
+        break;
+     }
+		return fr;
+	}
+	
 }

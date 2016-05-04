@@ -1,11 +1,6 @@
 package fr.limsi.negotiate.restaurant;
 
-import fr.limsi.negotiate.CriterionNegotiation;
-import fr.limsi.negotiate.CriterionPrefModel;
-import fr.limsi.negotiate.CriterionPreference;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.CriteriaClassPrefModel;
-import fr.limsi.negotiate.ValuePreference;
+import fr.limsi.negotiate.*;
 
 public class InitiaterestauMentalState {
 
@@ -55,6 +50,8 @@ public class InitiaterestauMentalState {
 				(new CriterionNegotiation[] {cost, cuisine, ambiance}, lydia_criteria);
 				return (restaurantNegotiation);
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

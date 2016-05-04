@@ -32,8 +32,10 @@
 		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
+			if($this.less!= null &amp;&amp; $this.more != null){
 			!($negotiation.isInOther($this.less, $this.more) ||
 			$negotiation.isInOther($this.more, $this.less))
+			}
 		</precondition>
 	
 	</task>

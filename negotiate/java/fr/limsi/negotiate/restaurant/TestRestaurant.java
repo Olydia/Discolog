@@ -6,32 +6,7 @@ import fr.limsi.negotiate.*;
 
 public class TestRestaurant {
 
-	public static boolean testStatement (String uttType, Negotiation<Restaurant> n) {
-		Statement agent  = n.context.getLastStatement(uttType, false);
-		Statement user  = n.context.getLastStatement(uttType, true);
-	
-		if (user == null ||  agent == null)
-			return false;
-					
-		if(agent.getStatedPreference().getMore() == null)
-			return (agent.getStatedPreference().getLess() == user.getStatedPreference().getLess() 
-				|| agent.getStatedPreference().getLess() == user.getStatedPreference().getMore()) ;
-		
-		if(agent.getStatedPreference().getLess() == null)
-			return (agent.getStatedPreference().getMore() == user.getStatedPreference().getLess() 
-				|| agent.getStatedPreference().getMore() == user.getStatedPreference().getMore()) ;
-		
-		if(user.getStatedPreference().getMore() == null)
-			return (user.getStatedPreference().getLess() == agent.getStatedPreference().getLess() 
-				|| user.getStatedPreference().getLess() == agent.getStatedPreference().getMore()) ;
-		
-		if(user.getStatedPreference().getLess() == null)
-			return (user.getStatedPreference().getMore() == agent.getStatedPreference().getLess() 
-				|| user.getStatedPreference().getMore() == agent.getStatedPreference().getMore()) ;
-		
-		 
-		return(agent.equals(user));
-	}
+
 	
 	public static void main(String[] args) {
 		// 1. Define lydia preference model on each criterion of restaurant
@@ -59,7 +34,7 @@ public class TestRestaurant {
 		lydia_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
 		lydia_criteria.add(new CriterionPreference(Ambiance.class,Cost.class));
 
-
+		//System.out.println(lydia_criteria.getMostPreferred() + "  " + lydia_criteria.getLeastPreferred());
 		//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
 		cost.setSelfPreferences(lydia_cost);
@@ -86,6 +61,9 @@ public class TestRestaurant {
 		
 		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
 		(Cost.CHEAP, null), true, "State"));
+		
+		System.out.println(cost.getSelf().getMostPreferred().getFrVersion());
+		System.out.println(restaurants.getOptionFrVersion(Cuisine.class.getSimpleName()));
 		
 //		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
 //		(Cost.EXPENSIVE,Cost.CHEAP), false, "State"));

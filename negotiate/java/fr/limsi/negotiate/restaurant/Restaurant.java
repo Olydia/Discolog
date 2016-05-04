@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 import java.util.ArrayList;
 import java.util.List;
+
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Option;
 
@@ -73,6 +74,12 @@ public enum Restaurant implements Option {
 	
 	public Restaurant[] getRestaurants(){
 		return Restaurant.values();
+	}
+
+	@Override
+	public String getFrVersion() {
+		// TODO Auto-generated method stub
+		return  this.toString();
 	}
 
 

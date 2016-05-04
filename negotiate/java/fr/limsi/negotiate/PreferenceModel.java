@@ -28,11 +28,20 @@ abstract public class PreferenceModel<C>{
 		lastUpdate = preference;
 	}
 	
-	abstract public C getMostPreferred() ;
+	public C getMostPreferred() {
+		return sortCriteria().get(0);
+
+	}
 		
-	abstract public C getLeastPreferred() ;
+	 public C getLeastPreferred()  {	
+		List<C> crit = sortCriteria();
+		return crit.get(crit.size()-1);
+}
+
 	
 	@SuppressWarnings("rawtypes")
 	abstract ArrayList  getPreferences();
+	
+	abstract List<C> sortCriteria();
 
 }
