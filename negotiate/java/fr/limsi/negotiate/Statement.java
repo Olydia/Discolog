@@ -1,7 +1,5 @@
 package fr.limsi.negotiate;
 
-import fr.limsi.negotiate.restaurant.Cost;
-
 public class Statement {
 
 		private ValuePreference<Criterion> preference;

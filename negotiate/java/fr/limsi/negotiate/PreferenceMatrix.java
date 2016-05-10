@@ -1,13 +1,6 @@
 package fr.limsi.negotiate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
+import java.util.*;
 
 public class PreferenceMatrix<T> {
 	List<T> values; 
@@ -132,13 +125,13 @@ public class PreferenceMatrix<T> {
 		return imax;
 	}
 
-	private static final int minIndex(ArrayList<Integer> a) {
-		int imin = a.get(0);
-		for(int i=1;i<a.size();i++)
-			if (a.get(i)<=a.get(imin))
-				imin = i;
-		return imin;
-	}
+//	private static final int minIndex(ArrayList<Integer> a) {
+//		int imin = a.get(0);
+//		for(int i=1;i<a.size();i++)
+//			if (a.get(i)<=a.get(imin))
+//				imin = i;
+//		return imin;
+//	}
 
 	public T getMostPreffered() {
 		ArrayList<Integer> prefValues = getPreferences();

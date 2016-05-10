@@ -228,27 +228,30 @@ public class Negotiation<O extends Option> {
 		return false;
 	}
 
-	public boolean isAcceptable (Proposal proposal, int dom){
+	public boolean isAcceptableOption(Option option, int dom){
+
 		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
+		if(this.optionUtility(option)< 0)
+			return false;
+		else {
+			List<Option> sortedOptions = sortOptions(options);
+			return (dom<=0 ? sortedOptions.indexOf(option)< sortedOptions.size()/2 : 
+				sortedOptions.indexOf(option)< sortedOptions.size()/4);
+		}
+	
+	}
+	public boolean isAcceptable (Proposal proposal, int dom){
 
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			CriterionNegotiation<Criterion> criterionNegotiation =	
 					getCriterionNegotiation(criterion);
-			int bestScore = criterionNegotiation.getSelf().getScore(criterionNegotiation.getSelf().getMostPreferred());
-			int proposalScore = criterionNegotiation.getSelf().getScore(criterion);
-			// get the index of the criterionNegotiation of type
-			return (dom <=0 ? proposalScore>= 0 : proposalScore>= bestScore *0.7);
+			return (criterionNegotiation.isAcceptableCriterion(criterion, dom));
 		}
 
 		if(proposal instanceof OptionProposal){
 			Option option = (Option) proposal.getValue();
-			if(this.optionUtility(option)< 0)
-				return false;
-			else {
-				List<Option> sortedOptions = sortOptions(options);
-				return (dom<=0 ? sortedOptions.indexOf(option)< sortedOptions.size()/2 : sortedOptions.indexOf(option)< sortedOptions.size()/4);
-			}
+			return(isAcceptableOption(option, dom));
 		}
 		return false;
 	}
@@ -292,6 +295,8 @@ public class Negotiation<O extends Option> {
 	private ArrayList<Option> getOptionsWithoutStatus(Proposal.Status status) {
 		ArrayList<Option> options = new ArrayList<Option>((List<Option>) 
 				Arrays.asList(this.getOptions()));
+		
+		List<Option> optionsWithStatus = getOptionsPropWithStatus(status);
 		for (CriterionNegotiation<Criterion> CN : criteriaNegotiation) {
 			
 			List<Criterion> rejected = CN.getProposals(status);
@@ -300,14 +305,24 @@ public class Negotiation<O extends Option> {
 			while (it.hasNext()){
 				Option O = it.next();
 				if(rejected.contains(O.getValue(CN.getCriterionType())) ||
-					getOptionsPropWithStatus(status).contains(O)){
-					
+						optionsWithStatus.contains(O)){		
 					it.remove();
-
 				}
 			}
 		}
 		return options;
+	}
+	
+	// getAcceptableOptions computes the utility of all the remaining options that are not rejected yet and returns
+	//whom are acceptables following the agent preferences
+	
+	public ArrayList<Option> getAcceptableOptions (int dom){
+		ArrayList<Option> acceptableOptions = new ArrayList<Option>();
+		for (Option O: getOptionsWithoutStatus(Proposal.Status.REJECTED)){
+			if(isAcceptableOption(O, dom))
+				acceptableOptions.add(O);
+		}
+		return acceptableOptions;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -323,6 +338,7 @@ public class Negotiation<O extends Option> {
 			this.propose((OptionProposal) proposal);
 	}
 
+	
 	public void updateProposalStatus(Proposal proposal, Status status) {
 		if (proposal instanceof CriterionProposal) {
 			CriterionNegotiation<Criterion> criterionNegotiation = 
@@ -335,8 +351,6 @@ public class Negotiation<O extends Option> {
 		if(proposal instanceof OptionProposal){
 			updateProposal((OptionProposal)proposal, status);
 		}
-
-
 	}
 
 	public Status checkStatus(OptionProposal p) {
@@ -355,7 +369,7 @@ public class Negotiation<O extends Option> {
 			// get the index of the criterionNegotiation of type
 			int indexList = criteriaNegotiation.indexOf(criterionNegotiation);
 			status = criteriaNegotiation.get(indexList).checkStatus((CriterionProposal) proposal);
-			//
+		
 		}
 
 		if(proposal instanceof OptionProposal){
@@ -437,8 +451,6 @@ public class Negotiation<O extends Option> {
 //				 return (model.getSelf().getPreferences().
 //							get(new Random().
 //									nextInt(model.getSelf().getPreferences().size()-1)));
-				
-
 		}
 		else 
 			return model.getPreference(model.getSelf(),model.getOas()) ;
@@ -539,10 +551,15 @@ public class Negotiation<O extends Option> {
 			if(match)
 				return O;
 		}
-		
-
-	
 		return null;
+	}
+	
+	public boolean negotiationFailure(int dom){
+		if(dom >= 0)
+			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());
+		
+			else
+				return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
 	
 	public String getOptionFrVersion(String optionSimpleName){

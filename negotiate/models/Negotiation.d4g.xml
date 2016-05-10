@@ -43,6 +43,11 @@
 	<user text="yeah, I'll call you tommorow."/>
 </agent>
 
+<agent id="ClosingNegotiation" text="Sorry, but I no longer want to go for dinner. You rejected all the restaurants that I like">
+	<user text="Too bad."/>
+	<user text="No problem."/>
+</agent>
+
 <agent id="Booking" text="Okay, I'll call to book a table">
 	<user text="Perfect!"/>
 </agent> 
@@ -69,7 +74,10 @@
 
 <!-- User State Preference -->
 <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
-	
+
+	<do actor="agent" task = "ClosingNegotiation" 
+		applicable = "$negotiation.negotiationFailure(dom)" />
+		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="proposalFromPreference(getLastUserPref()) "
 		applicable = "proposalFromUserState(getLastUserPref())">
@@ -116,6 +124,9 @@
 
 <do id = "Ask" actor="user" task="n:fr.limsi.negotiate.lang.AskPreference">
 
+	<do actor="agent" task = "ClosingNegotiation" 
+		applicable = "$negotiation.negotiationFailure(dom)" />
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="reactUser($ask).getLess()" more="reactUser($ask).getMore()">
 		<do task = "Ask"/>
@@ -130,6 +141,9 @@
 
 <do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 
+	<do actor="agent" task = "ClosingDialogue" 
+		applicable = "$negotiation.negotiationFailure(dom)" />
+	
 	<!--Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<do actor="agent" task ="Booking"
 		applicable ="isOptionProposal(lastOpenProposal())  &amp;&amp; isAcceptable(lastOpenProposal(), dom)" 
@@ -190,10 +204,12 @@
 </do>
 
 <do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
-
+	
+	<do actor="agent" task = "ClosingNegotiation" 
+		applicable = "$negotiation.negotiationFailure(dom)" />
+	
 	<do actor="agent" task ="Booking"
-		applicable ="isOptionProposal(lastAcceptedProposal())"
-	/>
+		applicable ="isOptionProposal(lastAcceptedProposal())"/>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="createOptionProposal($negotiation.computeAcceptedOption())"
@@ -252,7 +268,9 @@
 
 <do id = "Reject" actor="user" task="n:fr.limsi.negotiate.lang.Reject">
 <!--In the case where the agent is very dominant propose again the the proposal if it is the mostPref proposal -->
-
+	<do actor="agent" task = "ClosingNegotiation" 
+		applicable = "$negotiation.negotiationFailure(dom)" />
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="lastRejectedProposal() "
 		applicable = " isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()" >
@@ -368,9 +386,7 @@
     		return(mostPreferredCriterion(proposal.getValue().getClass()).equals(proposal.getValue()));
 		if(isOptionProposal(proposal))
     		return(mostPreferredOption().equals(proposal.getValue()));
-    }
-    
-    
+    }   
     
     function Preferred(criterion) {   
        		return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);  		
@@ -395,11 +411,9 @@
     		if (!isSub() &amp;&amp; isAcceptable(createProposal(more)))
     			return true;
     	}
-    		
-  
-    	return false;
-    	
+    	return false;  	
     }
+    
     
     function getLastUserStatement(uttType){
 		return $negotiation.context.getLastStatement(uttType, true);

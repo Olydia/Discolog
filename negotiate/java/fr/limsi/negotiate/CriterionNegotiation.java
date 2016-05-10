@@ -84,14 +84,14 @@ public class CriterionNegotiation<C extends Criterion> {
 		return imax;
 	}
 	
-	private static final int minIndex(ArrayList<Integer> a) {
-		int imin = a.get(0);
-		for(int i=1;i<a.size();i++)
-			if (a.get(i)<=a.get(imin))
-				imin = i;
-		return imin;
-	}
-	
+//	private static final int minIndex(ArrayList<Integer> a) {
+//		int imin = a.get(0);
+//		for(int i=1;i<a.size();i++)
+//			if (a.get(i)<=a.get(imin))
+//				imin = i;
+//		return imin;
+//	}
+//	
 	public void propose (CriterionProposal proposal) { 
 		if(! proposals.contains(proposal))
 			proposals.add(proposal);
@@ -171,12 +171,16 @@ public class CriterionNegotiation<C extends Criterion> {
 			if(proposal.getValue().equals(c.getValue())) {
 				c.setStatus(status);
 				//c.setIsSelf(isSelf);
-			}
-				
+			}	
 		}
 	}
 
-
+	public boolean isAcceptableCriterion(C c, int dom) {
+		int bestScore = this.getSelf().getScore(this.getSelf().getMostPreferred());
+		int proposalScore = this.getSelf().getScore(c);
+		// R
+		return (dom <=0 ? proposalScore>= 0 : proposalScore>= bestScore *0.7);
+	}
 
 
 }
