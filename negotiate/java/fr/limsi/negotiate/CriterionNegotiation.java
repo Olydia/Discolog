@@ -179,7 +179,19 @@ public class CriterionNegotiation<C extends Criterion> {
 		int bestScore = this.getSelf().getScore(this.getSelf().getMostPreferred());
 		int proposalScore = this.getSelf().getScore(c);
 		// R
-		return (dom <=0 ? proposalScore>= 0 : proposalScore>= bestScore *0.7);
+		if (dom > 0)
+			return (proposalScore>= bestScore *0.7);
+		
+		if (dom ==0 )
+			return( proposalScore>= 0);
+		
+		else {
+			
+			return (proposalScore>= 0 ||
+			 (checkStatus(new CriterionProposal(c)).equals(Proposal.Status.OPEN) && this.getOas().getScore(c)< 0 ));
+			
+		}
+		
 	}
 
 

@@ -310,21 +310,21 @@
          <binding slot="$_d4e94_step.proposal" value="getRandOptionProp()"/>
       </subtasks>
       <subtasks id="_d4e100_subtasks">
-         <step name="_d4e100_step" task="n:fr.limsi.negotiate.lang.Reject"/>
+         <step name="_d4e100_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e100_ref" task="_d4e100_tree"/>
-         <applicable>!(isSub() &amp;&amp; isAcceptable(lastOpenProposal(), dom))</applicable>
+         <applicable>isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)</applicable>
          <binding slot="$_d4e100_step.external" value="false"/>
-         <binding slot="$_d4e100_step.proposal" value="lastOpenProposal()"/>
+         <binding slot="$_d4e100_step.less"
+                  value="reactToRejectedProp(lastOpenProposal()).getLess()"/>
+         <binding slot="$_d4e100_step.more"
+                  value="reactToRejectedProp(lastOpenProposal()).getMore()"/>
       </subtasks>
       <subtasks id="_d4e106_subtasks">
-         <step name="_d4e106_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e106_step" task="n:fr.limsi.negotiate.lang.Reject"/>
          <step name="_d4e106_ref" task="_d4e106_tree"/>
-         <applicable>isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>!(isSub() &amp;&amp; isAcceptable(lastOpenProposal(), dom))</applicable>
          <binding slot="$_d4e106_step.external" value="false"/>
-         <binding slot="$_d4e106_step.less"
-                  value="reactToRejectedProp(lastOpenProposal()).getLess()"/>
-         <binding slot="$_d4e106_step.more"
-                  value="reactToRejectedProp(lastOpenProposal()).getMore()"/>
+         <binding slot="$_d4e106_step.proposal" value="lastOpenProposal()"/>
       </subtasks>
    </task>
    <task id="_d4e82_tree">
@@ -836,9 +836,7 @@
     		return(mostPreferredCriterion(proposal.getValue().getClass()).equals(proposal.getValue()));
 		if(isOptionProposal(proposal))
     		return(mostPreferredOption().equals(proposal.getValue()));
-    }
-    
-    
+    }   
     
     function Preferred(criterion) {   
        		return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);  		
@@ -863,11 +861,9 @@
     		if (!isSub() &amp;&amp; isAcceptable(createProposal(more)))
     			return true;
     	}
-    		
-  
-    	return false;
-    	
+    	return false;  	
     }
+    
     
     function getLastUserStatement(uttType){
 		return $negotiation.context.getLastStatement(uttType, true);

@@ -230,13 +230,20 @@ public class Negotiation<O extends Option> {
 
 	public boolean isAcceptableOption(Option option, int dom){
 
-		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
-		if(this.optionUtility(option)< 0)
+	List<Option> options =	(List<Option>) (Arrays.asList(getOptions()));
+				//getOptionsWithoutStatus(Proposal.Status.REJECTED);
+		if(this.optionUtility(option)< 0 && dom>=0)
 			return false;
 		else {
 			List<Option> sortedOptions = sortOptions(options);
-			return (dom<=0 ? sortedOptions.indexOf(option)< sortedOptions.size()/2 : 
-				sortedOptions.indexOf(option)< sortedOptions.size()/4);
+			if (dom==0)
+				 return sortedOptions.indexOf(option)< sortedOptions.size()/2 ;
+				
+			if (dom >0) 
+				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
+			else 
+				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
+						checkStatus(new OptionProposal(option)).equals(Proposal.Status.OPEN));
 		}
 	
 	}
@@ -276,7 +283,7 @@ public class Negotiation<O extends Option> {
 
 			
 	}
-	public List<Option> sortOptions( ArrayList<Option> options) {
+	public List<Option> sortOptions( List<Option> options) {
 		
 		// Supprimer les options qui contiennent au moins un critere rejeté.
 		// pour chaque critere recuper la liste de criteres rejeté.
