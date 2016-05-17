@@ -6,15 +6,12 @@
     User says "Let's achieve trees."
     Agent says "What type of cuisine do you prefer?"
   > execute fr.limsi.negotiate.lang.StatePreference/ null / Packages.fr.limsi.negotiate.restaurant.Cuisine.TURKISH
-null, TURKISH
     User says "I like TURKISH most."
     Agent says "I like TURKISH less than CHINESE."
   > execute fr.limsi.negotiate.lang.StatePreference/ Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
-CHINESE, ITALIAN
     User says "I like CHINESE less than ITALIAN."
     Agent says "I like ITALIAN least."
   > execute fr.limsi.negotiate.lang.StatePreference/ Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
-ITALIAN, JAPANESE
     User says "I like ITALIAN less than JAPANESE."
     Agent says "Let's choose JAPANESE."
   > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE)
@@ -24,7 +21,6 @@ ITALIAN, JAPANESE
     User says "Sorry, I'd rather choose something else."
     Agent says "Do you like EXPENSIVE less than CHEAP?"
   >  execute fr.limsi.negotiate.lang.StatePreference  / null/ Packages.fr.limsi.negotiate.restaurant.Cost.EXPENSIVE
-null, EXPENSIVE
     User says "I like EXPENSIVE most."
     Agent says "I like EXPENSIVE least."
   > execute fr.limsi.negotiate.lang.AskPreference/ null / null/ Packages.fr.limsi.negotiate.restaurant.Ambiance.CALM
