@@ -243,7 +243,7 @@ public class Negotiation<O extends Option> {
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
 			else 
 				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
-						checkStatus(new OptionProposal(option)).equals(Proposal.Status.OPEN));
+						checkStatus(option).equals(Proposal.Status.OPEN));
 		}
 	
 	}
@@ -360,9 +360,9 @@ public class Negotiation<O extends Option> {
 		}
 	}
 
-	public Status checkStatus(OptionProposal p) {
+	public Status checkStatus(Option p) {
 		for(OptionProposal prop : proposals) {
-			if(prop.getValue().equals(p.getValue()))
+			if(prop.getValue().equals(p))
 				return prop.status;	
 		}
 		return null;
@@ -375,12 +375,12 @@ public class Negotiation<O extends Option> {
 					getCriterionNegotiation((Criterion)proposal.getValue());
 			// get the index of the criterionNegotiation of type
 			int indexList = criteriaNegotiation.indexOf(criterionNegotiation);
-			status = criteriaNegotiation.get(indexList).checkStatus((CriterionProposal) proposal);
+			status = criteriaNegotiation.get(indexList).checkStatus((Criterion) proposal.getValue());
 		
 		}
 
 		if(proposal instanceof OptionProposal){
-			status = this.checkStatus((OptionProposal) proposal);
+			status = this.checkStatus((Option)proposal.getValue());
 		}
 
 		if(status == null)  throw 

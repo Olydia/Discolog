@@ -811,8 +811,10 @@
     $state ="State";
     $ask ="Ask";
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
-    $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
-    $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
+    var ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
+   	var cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
+    var cost = Packages.fr.limsi.negotiate.restaurant.Cost;
+    var restautant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $leastPrefCriterion = $negotiation.criteriaPreferences.getLeastPreferred();
     

@@ -135,9 +135,9 @@ public class CriterionNegotiation<C extends Criterion> {
 		return false;
 	}
 	
-	public Status checkStatus(CriterionProposal p) {
+	public Status checkStatus(C p) {
 		for(CriterionProposal prop : proposals) {
-			if(prop.getValue().equals(p.getValue()))
+			if(prop.getValue().equals(p))
 				return prop.status;	
 		}
 		return null;
@@ -188,7 +188,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		else {
 			
 			return (proposalScore>= 0 ||
-			 (checkStatus(new CriterionProposal(c)).equals(Proposal.Status.OPEN) && this.getOas().getScore(c)< 0 ));
+			 (checkStatus(c).equals(Proposal.Status.OPEN) && this.getOas().getScore(c)< 0 ));
 			
 		}
 		
