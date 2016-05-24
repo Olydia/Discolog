@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ModelOfPReferences.aux
+The style file: plain.bst
+Database file #1: abbrevs.bib
+Database file #2: Library.bib
+Warning--there's a number but no volume in chouquet1953
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            1405 strings with 19924 characters,
+and the built_in function-call counts, 885 in all, are:
+= -- 80
+> -- 43
+< -- 0
++ -- 18
+- -- 14
+* -- 58
+:= -- 158
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 14
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 35
+empty$ -- 72
+format.name$ -- 14
+if$ -- 178
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 5
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 23
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 18
+stack$ -- 0
+substring$ -- 41
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 1
+while$ -- 8
+width$ -- 4
+write$ -- 33
+(There was 1 warning)

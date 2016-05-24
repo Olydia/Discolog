@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Mithese.aux
+The style file: abbrv.bst
+Database file #1: Library.bib
+Warning--empty journal in daskalopulu1998handling
+Warning--there's a number but no volume in chouquet1953
+Warning--empty booktitle in ouali2015reparation
+Warning--empty year in ouali2015reparation
+Warning--there's a number but no volume in rich2009building
+You've used 29 entries,
+            2118 wiz_defined-function locations,
+            668 strings with 8726 characters,
+and the built_in function-call counts, 9839 in all, are:
+= -- 968
+> -- 446
+< -- 7
++ -- 181
+- -- 146
+* -- 658
+:= -- 1610
+add.period$ -- 92
+call.type$ -- 29
+change.case$ -- 155
+chr.to.int$ -- 0
+cite$ -- 34
+duplicate$ -- 402
+empty$ -- 803
+format.name$ -- 146
+if$ -- 2084
+int.to.chr$ -- 0
+int.to.str$ -- 29
+missing$ -- 34
+newline$ -- 147
+num.names$ -- 58
+pop$ -- 194
+preamble$ -- 1
+purify$ -- 131
+quote$ -- 0
+skip$ -- 265
+stack$ -- 0
+substring$ -- 571
+swap$ -- 87
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 106
+warning$ -- 5
+while$ -- 98
+width$ -- 31
+write$ -- 314
+(There were 5 warnings)
