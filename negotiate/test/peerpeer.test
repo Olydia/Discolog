@@ -1,0 +1,42 @@
+    # Writing log to /tmp/Console.test...
+    # 25 mai 2016 16:52:29 - TaskEngine 1.10 / Disco 1.16
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/Negotiation.xml  > 
+  > task Trees
+    User says "Let's achieve Trees."
+    Agent says "What kind of Cuisine do you like?"
+  > execute fr.limsi.negotiate.lang.StatePreference/ null / cuisine.TURKISH
+    User says "TURKISH is my favorite Cuisine."
+    Agent says "I prefer FRENCH over TURKISH."
+  > execute fr.limsi.negotiate.lang.StatePreference/ cuisine.FRENCH/ null 
+    User says "FRENCH is my least preferred Cuisine."
+    Agent says "I prefer CHINESE over FRENCH."
+  > execute fr.limsi.negotiate.lang.StatePreference/ cuisine.FRENCH/ cuisine.CHINESE
+    User says "I prefer CHINESE over FRENCH."
+    Agent says "I propose that we choose CHINESE Cuisine."
+  > execute fr.limsi.negotiate.lang.Reject/ createProposal(cuisine.CHINESE)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "I prefer CHINESE over JAPANESE."
+  > execute fr.limsi.negotiate.lang.StatePreference/ null / cuisine.JAPANESE
+    User says "JAPANESE is my favorite Cuisine."
+    Agent says "I propose that we choose JAPANESE Cuisine."
+  > execute fr.limsi.negotiate.lang.Accept/ createProposal(cuisine.JAPANESE)
+    User says "Okay, let's choose JAPANESE."
+    Agent says "I propose that we choose SAMURA Restaurant."
+  > execute fr.limsi.negotiate.lang.Accept/ createOptionProposal(restaurant.SAMURA)
+    User says "Okay, let's choose SAMURA."
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e113_subtasks ignoring external binding of non-primitive task $_d4e113_step.external
+WARNING: _d4e113_subtasks ignoring external binding of non-primitive task $_d4e113_step.external
+WARNING: _d4e113_subtasks ignoring external binding of non-primitive task $_d4e113_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+WARNING: _d4e114_subtasks ignoring external binding of non-primitive task $_d4e114_step.external
+    Agent says "Okay, I'll call to book a table."
+    > quit
