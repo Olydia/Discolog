@@ -1,0 +1,178 @@
+Ce papier propose un modèle reativement simple pour choisir un acte de dialogue dans un arbre de dialogue int&égrant dse 
+alternatives qui tiennet compet des préférences de chacun et de leur relation sociale (dominance essentiellement).
+Il est dommage que ce travail soit basé sur l'observation de deux dialogues sur la négociation simulée d'une réservation de restaurant. 
+On retombe sur la problématique de l'évaluation où il est difficile de revenir sur une vérité terrain, étant donné la pauvreté des données recueillies. 
+On retombe sur le cycle un peu trop classique modélisation ad hoc - évaluation subjective (qui est d'ailleurs évoquée en perspective).
+Il aurait été intérresant de comparer - pour une fois - ce formalisme de décision très sommaire (on déclenche la première branche applicable) 
+avec des modèles probabilistes (type DBN par ex) permettant de maximiser le succès de la prise de décision.
+Quelques suggestions:
+- Fig.1: L'arc qui part de "contexte du dialogue" doit aller vers "Choix(valeurs)" et être orienté
+- Faire une évaluation (La prochaine étape de nos travaux se concentrera sur l’évaluation d’un tel système de dialogue social) sommaire sur vos (2) dialogues...
+
+- revoir refs 3, 4, 8 (j'aime bien UUP Uk), 10 et 29 (pas de nom de conf)
+
+
+----------- Review -----------
+Dans cet article, les auteurs proposent un modèle de dialogue social 
+pour permettre un ACA de négocier. Cet article est donc pertinent pour 
+le WACAI.
+
+L'objectif du travail est d'étudier l'impact des relations
+interpersonnelles sur les stratégies. À cette intention, l'agent
+doit :
+1. prendre en compte la dimension social dans le choix des énoncés ;
+2. percevoir sa relation avec l'utilisateur et adapter sa stratégie ;
+3. s'adapter dynamiquement à l'évolution de la relation interpersonnelle ;
+Dans cette perspective, le modèle présenté est préliminaire car il ne
+répond explicitement qu'au premier objectif.
+
+De plus, le modèle proposé est peu expressif. D'une part, on peut
+regretter que la relation interpersonnelle envisagé se limite à la
+dimension de dominance et ignore les dimensions suivantes :
+familiarité, affect et solidarité. Quels pourraient être des
+comportement de négociation associé à ces traits ?  D'autre part, le
+modèle de préférence ne permet pas d'exprimer l'indifférence et
+l'incomparabilité.
+
+Le modèle a été implémenté à l'aide de Disco, une implémentation du
+modèle Collagen et testé sur un exemple jouet.
+
+L'état de l'art est complet et exhaustif. Toutefois, on peut regretter
+que l'article ne mentionne pas les travaux récents de la communauté WACAI
+sur la négociation agent-humain :
+
+@inproceedings{abdelnaby10waca,
+  TITLE = {{Business-Driven Negotiation Strategies for Proactive Embodied Conversational Agents in E-Commerce.}},
+  AUTHOR = {Abdel-Naby, Sameh and Beaufils, Bruno and Morge, Maxime},
+  BOOKTITLE = {{WACA'2010 -- Lille (France) -- 25 et 26 novembre 2010}},
+  ADDRESS = {France},
+  PAGES = {127-144},
+  YEAR = {2010}
+}
+
+@incollection{delecroix13at,
+  TITLE = {A Virtual Selling Agent which is Persuasive and Adaptive},
+  AUTHOR = {Delecroix, Fabien and Morge, Maxime and Routier, Jean-Christophe},
+  BOOKTITLE = {Agreement Technologies},
+  PUBLISHER = {Springer},
+  PAGES = {625-645},
+  YEAR = {2013}
+}
+
+Par exemples dans~\cite{delecroix13at}, la stratégie de l'Agent
+Dialogique Proactif (ADP) évolue en fonction du profil d'utilisateur
+perçu au cours de la conversation. Ainsi, L'ADP répond aux trois
+objectifs énoncés précédemment. Les auteurs doivent donc mettre en
+avant ce en quoi leur modèle est original.
+
+L'article est bien écrit et correctement structuré. Le modèle est
+bien présenté et illustré avec un exemple. Il est correct.
+
+Il pourrait être intéressant de faire jouer des agents entre eux pour
+comparer la trace et sa taille en fonction des traits de
+personnalité des agents.
+
+En résumé, je considère que le papier est d'une qualité suffisante
+pour faire l'objet d'une présentation longue au WACAI 2016.
+
+* Commentaire détaillés
+
+** Abstract
+
+"Abstract"->"Résumé"
+
+le terme d'architecture est peut-être excessif car, même si le
+papier contient un schéma général, cela reste un modèle.
+
+** Introduction
+
+RAS
+
+** Travaux connexes
+
+Les références [3,8] ne me semble pas les plus représentatif des 
+modèles de dialogue argumentatif. On peut mentionner :
+
+@Inbook{Amgoud2002,
+author={Amgoud, Leila and Parsons, Simon},
+editor={Meyer, John-Jules Ch. and Tambe, Milind},
+chapter={Agent Dialogues with Conflicting Preferences},
+title={Intelligent Agents VIII: Agent Theories, Architectures, and Languages 8th International Workshop, ATAL 2001 Seattle,WA, USA, August 1--3, 2001 Revised Papers},
+year={2002},
+publisher={Springer Berlin Heidelberg},
+address={Berlin, Heidelberg},
+pages={190--205}
+}
+
+@Article{morge06ail,
+  author =      {Maxime Morge},
+  title =      {Collective Decision making process to compose divergent
+                  interests and perspectives},
+  journal =      {Special issue of Artificial Intelligence and Law on Argumentation in Artificial Intelligence and Law},
+  year =      {2006}, 
+  pages =      {75-92},
+  month =      {Jan.},
+}
+
+ 
+
+"L’interaction se fait via un dialogue textuel et l’utilisateur
+choisit sa re´ponse a` partir d’un menu. Dans notre mode`le, nous
+souhaitons permettre a` l’utilisateur de formuler n’importe quelle
+proposition (dans le vocabulaire de´fini a` l’aide des actes de
+dialogues)."  Est-ce vraiment différent. Dans le premier cas,
+l'utilisateur peut choisir un coup parmi un ensemble fini dans le
+second il peut composer ce coup (locution + contenu). À reformuler.
+
+
+"Les indicateurs verbaux incluent la fre´quence d’intervention dans
+l’interaction, leurs dure´e (le nombre de mots utilise´s et
+re´pe´te´s) [9], l’expression des opinions et la critique, suggestions,
+demandes, re´actions, ignorance, etc [29] et enfin la capacite´
+d’interrompre la conversation et changer le sujet de conversation."->
+"Les indicateurs verbaux incluent : la fre´quence d’intervention dans
+l’interaction, leurs dure´e (comme dans [9]), l’expression des opinions
+et la critique, les suggestions, les demandes, les re´actions, les
+aveux d'ignorance (comme dans [29]), les interruption ou les
+changements de conversation."
+
+
+** Contributions
+
+"Le mode`le propose´ vise a` concevoir un agent conversationnel capable
+de mener une ne´gociation coope´rative sur un sujet de conversation
+sociale et d’adapter ses strate´gies de dialogue en fonction de sa
+perception de la relation interpersonnelle avec l’utilisateur."
+La formulation est trompeuse. La RI n'est pas perçue.
+
+
+"deux interlocuteur"->"deux interlocuteurs"
+
+"Afin de capturer ces informations, nous de´finissons une proposition
+comme un couple (Type,Valeur) ou` Type est soit le the`me de ne´gociation
+(”Restaurant“ dans notre exemple), soit un crite`re c ? C, et Valeur
+est 
+—  Une option O ? O si Type est le the`me de la ne´gociation ; 
+— Une valeur de crite`re v ? Dc si Type ? C."
+->
+"Afin de capturer ces informations, nous de´finissons une proposition
+comme un couple (Type,Valeur) ou` :
+- soit Type est le the`me de ne´gociation (”Restaurant“ dans notre exemple)
+et Valeur est une option O ? O ;
+- soit Type est un crite`re c ? C et et Valeur est valeur de crite`re v ? Dc."
+
+
+"a gauche"->"à gauche"
+
+** Conclusion
+
+"RI" Cet acronyme n'est pas défini précédemment.
+
+** References
+
+"References"->"Références"
+
+[4] est incomplet.
+
+"aca"->"{{ACA}}"
+
