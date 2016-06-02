@@ -347,6 +347,8 @@ public class Negotiation<O extends Option> {
 
 	
 	public void updateProposalStatus(Proposal proposal, Status status) {
+		// update the dialogue context
+		context.updateProposals(proposal);
 		if (proposal instanceof CriterionProposal) {
 			CriterionNegotiation<Criterion> criterionNegotiation = 
 					getCriterionNegotiation((Criterion)proposal.getValue());

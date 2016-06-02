@@ -21,6 +21,6 @@ public class Propose extends ProposalUtterance {
    protected void interpret () {
       getProposal().setIsSelf(!getExternal());
       getNegotiation().addProposal(getProposal());
-      getNegotiation().context.setLastProposal(getProposal());
+      getNegotiation().context.updateProposals(getProposal());
    }
 }

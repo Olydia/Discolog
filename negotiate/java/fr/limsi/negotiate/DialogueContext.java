@@ -13,10 +13,8 @@ public class DialogueContext {
 
 	private Stack<Proposal> proposals;
 	
-	private Proposal lastProposal;
+	//private Proposal lastProposal;
 
-	public void setLastProposal (Proposal proposal) { lastProposal = proposal; }
-	public Proposal getLastProposal () { return lastProposal; }
 
 	public DialogueContext() {
 		this.listStatements =new ArrayList<Statement>();

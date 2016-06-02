@@ -814,7 +814,7 @@
     var ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
    	var cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
     var cost = Packages.fr.limsi.negotiate.restaurant.Cost;
-    var restautant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
+    var restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $leastPrefCriterion = $negotiation.criteriaPreferences.getLeastPreferred();
     
