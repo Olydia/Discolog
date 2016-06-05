@@ -19,6 +19,8 @@ public class Accept extends ProposalUtterance {
 
    @Override
    protected void interpret () {
-      getNegotiation().updateProposalStatus(getProposal(), Proposal.Status.ACCEPTED);
+	   getProposal().setIsSelf(!getExternal());
+	   getNegotiation().context.updateProposals(getProposal());
+	   getNegotiation().updateProposalStatus(getProposal(), Proposal.Status.ACCEPTED);
    }
 }

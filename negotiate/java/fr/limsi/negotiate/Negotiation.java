@@ -127,7 +127,8 @@ public class Negotiation<O extends Option> {
 	public O getPreferredOption(O firstOption, O secondOption) {
 
 		// 2. en regardant les proposals
-		return(optionUtility(firstOption) < optionUtility(secondOption)? secondOption: firstOption);
+		return(optionUtility(firstOption) < optionUtility(secondOption)? secondOption:
+			firstOption);
 	}
 
 	// Methods of the mental state
@@ -157,7 +158,6 @@ public class Negotiation<O extends Option> {
 	}
 
 	public void updateProposal(OptionProposal proposal, Status status){
-
 		for(OptionProposal c: proposals){
 			if(proposal.getValue().equals(c.getValue())) {
 				c.setStatus(status);
@@ -334,7 +334,6 @@ public class Negotiation<O extends Option> {
 	
 	@SuppressWarnings("unchecked")
 	public void addProposal(Proposal proposal) {
-		this.context.updateProposals(proposal);
 		if (proposal instanceof CriterionProposal) {
 			addCriterionProposal((CriterionProposal) proposal);
 			this.context.updateDiscussedCriterion((Class<? extends Criterion>) proposal.getValue().getClass());
@@ -348,7 +347,6 @@ public class Negotiation<O extends Option> {
 	
 	public void updateProposalStatus(Proposal proposal, Status status) {
 		// update the dialogue context
-		context.updateProposals(proposal);
 		if (proposal instanceof CriterionProposal) {
 			CriterionNegotiation<Criterion> criterionNegotiation = 
 					getCriterionNegotiation((Criterion)proposal.getValue());
@@ -474,7 +472,10 @@ public class Negotiation<O extends Option> {
 	}
 
 	public ValuePreference<Criterion> reactUserStatement(String uttType){
-
+		// trier par order de préfence 
+		// get score des elements de lastStaement 
+		// enlever ceux qui sont dans oas
+		
 		if (this.context.getLastStatement(uttType,true) != null) {
 			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
 			

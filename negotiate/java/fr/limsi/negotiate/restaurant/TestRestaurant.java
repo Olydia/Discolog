@@ -62,9 +62,8 @@ public class TestRestaurant {
 		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
 		(Cost.CHEAP, null), true, "State"));
 		
-		System.out.println(cost.getSelf().getMostPreferred().getFrVersion());
-		System.out.println(restaurants.getOptionFrVersion(Cuisine.class.getSimpleName()));
-		
+		CriterionProposal cui = new CriterionProposal(Cuisine.FRENCH);
+		System.out.println(cui.isSelf());
 //		restaurants.context.getListStatements().add(new Statement(new ValuePreference<Criterion>
 //		(Cost.EXPENSIVE,Cost.CHEAP), false, "State"));
 

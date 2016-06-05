@@ -10,7 +10,6 @@ public class DialogueContext {
 	private List <Statement> listStatements;
 	private ArrayList<Class<? extends Criterion>> discussedCriteria ;
 	public Class<? extends Criterion> currentDiscussedCriterion; 	
-
 	private Stack<Proposal> proposals;
 	
 	//private Proposal lastProposal;

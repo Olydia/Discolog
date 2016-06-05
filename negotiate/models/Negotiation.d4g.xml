@@ -488,8 +488,7 @@
 				return null;
 			else 	{
 				return createCriterionProposal(preference.getMore());
-			}	
-				
+			}		
 	}
 	
 	function createCriterionProposal(criterion) {
