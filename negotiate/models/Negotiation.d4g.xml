@@ -89,8 +89,7 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
-		applicable = "!sameStatement($state)">
+		less="reactUser($state).getLess()" more="reactUser($state).getMore()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -98,15 +97,15 @@
 		<do task = "Reject"/>        	
 	</do>		
 
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" 
-		less="getPreference(getDiscussedCriterion()).getLess()" 
-		more="getPreference(getDiscussedCriterion()).getMore()" applicable = "!isSub()"> 
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
+<!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"  -->
+<!-- 		less="getPreference(getDiscussedCriterion()).getLess()"  -->
+<!-- 		more="getPreference(getDiscussedCriterion()).getMore()" applicable = "!isSub()">  -->
+<!-- 		<do task = "Ask"/> -->
+<!-- 		<do task = "State"/> -->
+<!-- 		<do task = "Propose"/> -->
+<!-- 		<do task = "Accept"/> -->
+<!-- 		<do task = "Reject"/> -->
+<!-- 	</do> -->
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference" criterion ="null"
 		less="askUserPref(getDiscussedCriterion()).getLess()"
@@ -362,12 +361,16 @@
     var dom = 0;
     $state ="State";
     $ask ="Ask";
+    
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
-    $cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine.class ;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant.class ;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $leastPrefCriterion = $negotiation.criteriaPreferences.getLeastPreferred();
+    var ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
+   	var cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
+    var cost = Packages.fr.limsi.negotiate.restaurant.Cost;
+    var restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     
 
     function currentMostPreferred(criterion) {
@@ -408,10 +411,7 @@
     	less = getLastUserPref().getLess();
     	mostPref = currentMostPreferred(getDiscussedCriterion());
     	if(more!= null){
-    		if(isSub())
-    			return true;
-    		
-    		if (!isSub() &amp;&amp; isAcceptable(createProposal(more)))
+    		if (isAcceptable(createProposal(more)))
     			return true;
     	}
     	return false;  	
@@ -488,7 +488,8 @@
 				return null;
 			else 	{
 				return createCriterionProposal(preference.getMore());
-			}		
+			}	
+				
 	}
 	
 	function createCriterionProposal(criterion) {

@@ -472,7 +472,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public ValuePreference<Criterion> reactUserStatement(String uttType){
-		// trier par order de préfence 
+		// trier par order de prï¿½fence 
 		// get score des elements de lastStaement 
 		// enlever ceux qui sont dans oas
 		
@@ -504,27 +504,35 @@ public class Negotiation<O extends Option> {
 
 
 	public ValuePreference<Criterion> getPref(ValuePreference<Criterion> userStatement){
-			
+
 			if(userStatement.getLess() == null){
-				CriterionNegotiation<Criterion> mostPref = this.getCriterionNegotiation(userStatement.getMore().getClass());
-				return (mostPref.getSelf().reactToCriterion(userStatement.getMore()));
+				CriterionNegotiation<Criterion> modelFromMore = this.getCriterionNegotiation(userStatement.getMore().getClass());
+				return (modelFromMore.reactToCriterion(userStatement.getMore()));
 			}
 			if(userStatement.getMore() == null){
-				CriterionNegotiation<Criterion> leastPref = this.getCriterionNegotiation(userStatement.getLess().getClass());
-				return (leastPref.getSelf().reactToCriterion(userStatement.getLess()));
+				CriterionNegotiation<Criterion> modelFromLess = this.getCriterionNegotiation(userStatement.getLess().getClass());
+				return (modelFromLess.reactToCriterion(userStatement.getLess()));
 			}
 			
 			CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(userStatement.getMore().getClass());
-			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()))
-				return (new ValuePreference<Criterion>(null, userStatement.getMore()));
-			
-			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()))
-				return (new ValuePreference<Criterion>(userStatement.getMore(), null));
-			
-			return(model.getSelf().
+			// deja exprimÃ© dans get reactToCriterion
+//			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()))
+//				return (new ValuePreference<Criterion>(null, userStatement.getMore()));
+//			
+//			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()))
+//				return (new ValuePreference<Criterion>(userStatement.getMore(), null));
+//			
+			ValuePreference<Criterion> c = (model.getSelf().
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
-		
+			if (!model.getOas().getPreferences().contains(c))
+				return c;
+			else {
+				 if (model.getSelf().isPreferred(userStatement.getLess(), userStatement.getMore()))
+						return(model.reactToCriterion(userStatement.getMore()));
+				 else 
+					 return (model.reactToCriterion(userStatement.getLess()));
+			}
 	}
 	
 	public boolean allCriteriaAccepted(){

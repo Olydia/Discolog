@@ -193,6 +193,28 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		
 	}
-
+	/** take as input a criterion value and returns the agent preference on it
+	  **/
+	
+	public ValuePreference<C> reactToCriterion(C criterion){
+		if(criterion.equals(this.getSelf().getMostPreferred()))
+			return new ValuePreference<C> (null, criterion);
+		if(criterion.equals(this.getSelf().getLeastPreferred()))
+			return new ValuePreference<C> (criterion, null);
+		else{
+			List<C> criteria = this.getSelf().sortCriteria();
+			for(int i = 0; i<criteria.indexOf(criterion); i++){
+				ValuePreference<C> v = new ValuePreference<C>(criterion, criteria.get(i));
+				if(!oas.getPreferences().contains(v))
+					return v;
+			}
+			for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
+				ValuePreference<C> v = new ValuePreference<C>(criteria.get(i), criterion);
+				if(!oas.getPreferences().contains(v))
+					return v;
+			}
+			return null;	
+		}		
+	}
 
 }

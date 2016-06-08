@@ -97,21 +97,6 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		return criterions;
 	}
 
-	public ValuePreference<C> reactToCriterion(C criterion){
-		if(criterion.equals(getMostPreferred()))
-			return new ValuePreference<C> (null, criterion);
-		if(criterion.equals(getLeastPreferred()))
-			return new ValuePreference<C> (criterion, null);
-		else{
-			List<C> criterions = sortCriteria();
-			criterions.indexOf(criterion);
-			int index = new Random().nextInt(criterions.indexOf(criterion));
-			return new ValuePreference<C> (criterion, criterions.get(index));
-		}
-			
-
-	}
-
 	public Class<C> getType() {
 		return type;
 	}
