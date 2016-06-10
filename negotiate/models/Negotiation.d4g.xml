@@ -199,9 +199,6 @@
 		<do task = "Reject"/>
 	</do> 
 
-
-	
-
 </do>
 
 <do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
@@ -417,7 +414,6 @@
     function proposalFromUserState(){
     	more = getLastUserPref().getMore();
     	less = getLastUserPref().getLess();
-    	mostPref = currentMostPreferred(getDiscussedCriterion());
     	if(more!= null){
     		if (isAcceptable(createProposal(more)))
     			return true;
@@ -440,7 +436,6 @@
  
  	
 	function isCriterionProposal(proposal){
-	
 		return(proposal.class.equals(Packages.fr.limsi.negotiate.CriterionProposal.class));
 	}
 	
