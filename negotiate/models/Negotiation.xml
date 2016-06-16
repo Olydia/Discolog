@@ -139,7 +139,7 @@
    <task id="_State_tree">
       <subtasks id="_d4e44_subtasks">
          <step name="_d4e44_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(dom)</applicable>
+         <applicable>$negotiation.negotiationFailure(dominant)</applicable>
          <binding slot="$_d4e44_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e45_subtasks">
@@ -220,7 +220,7 @@
    <task id="_Ask_tree">
       <subtasks id="_d4e75_subtasks">
          <step name="_d4e75_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(dom)</applicable>
+         <applicable>$negotiation.negotiationFailure(dominant)</applicable>
          <binding slot="$_d4e75_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e76_subtasks">
@@ -251,25 +251,25 @@
    <task id="_Propose_tree">
       <subtasks id="_d4e83_subtasks">
          <step name="_d4e83_step" task="ClosingDialogue"/>
-         <applicable>$negotiation.negotiationFailure(dom)</applicable>
+         <applicable>$negotiation.negotiationFailure(dominant)</applicable>
          <binding slot="$_d4e83_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e85_subtasks">
          <step name="_d4e85_step" task="Booking"/>
-         <applicable>isOptionProposal(lastOpenProposal())  &amp;&amp; isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>isOptionProposal(lastOpenProposal())  &amp;&amp; isAcceptable(lastOpenProposal(), dominant)</applicable>
          <binding slot="$_d4e85_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e86_subtasks">
          <step name="_d4e86_step" task="n:fr.limsi.negotiate.lang.Accept"/>
          <step name="_d4e86_ref" task="_d4e86_tree"/>
-         <applicable>isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>isAcceptable(lastOpenProposal(), dominant)</applicable>
          <binding slot="$_d4e86_step.external" value="false"/>
          <binding slot="$_d4e86_step.proposal" value="lastOpenProposal()"/>
       </subtasks>
       <subtasks id="_d4e92_subtasks">
          <step name="_d4e92_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e92_ref" task="_d4e92_tree"/>
-         <applicable>isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dominant)</applicable>
          <binding slot="$_d4e92_step.external" value="false"/>
          <binding slot="$_d4e92_step.proposal"
                   value="getRandCriterionProp(getDiscussedCriterion())"/>
@@ -277,14 +277,14 @@
       <subtasks id="_d4e98_subtasks">
          <step name="_d4e98_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e98_ref" task="_d4e98_tree"/>
-         <applicable>isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), dominant)</applicable>
          <binding slot="$_d4e98_step.external" value="false"/>
          <binding slot="$_d4e98_step.proposal" value="getRandOptionProp()"/>
       </subtasks>
       <subtasks id="_d4e104_subtasks">
          <step name="_d4e104_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e104_ref" task="_d4e104_tree"/>
-         <applicable>isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), dom)</applicable>
+         <applicable>isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), dominant)</applicable>
          <binding slot="$_d4e104_step.external" value="false"/>
          <binding slot="$_d4e104_step.less"
                   value="reactToRejectedProp(lastOpenProposal()).getLess()"/>
@@ -294,7 +294,7 @@
       <subtasks id="_d4e110_subtasks">
          <step name="_d4e110_step" task="n:fr.limsi.negotiate.lang.Reject"/>
          <step name="_d4e110_ref" task="_d4e110_tree"/>
-         <applicable>!(isSub() &amp;&amp; isAcceptable(lastOpenProposal(), dom))</applicable>
+         <applicable>!(isSub() &amp;&amp; isAcceptable(lastOpenProposal(), dominant))</applicable>
          <binding slot="$_d4e110_step.external" value="false"/>
          <binding slot="$_d4e110_step.proposal" value="lastOpenProposal()"/>
       </subtasks>
@@ -387,7 +387,7 @@
    <task id="_Accept_tree">
       <subtasks id="_d4e117_subtasks">
          <step name="_d4e117_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(dom)</applicable>
+         <applicable>$negotiation.negotiationFailure(dominant)</applicable>
          <binding slot="$_d4e117_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e118_subtasks">
@@ -525,7 +525,7 @@
    <task id="_Reject_tree">
       <subtasks id="_d4e151_subtasks">
          <step name="_d4e151_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(dom)</applicable>
+         <applicable>$negotiation.negotiationFailure(dominant)</applicable>
          <binding slot="$_d4e151_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e152_subtasks">
@@ -779,10 +779,9 @@
    <script init="true">
 
     var APPLICABLE_TEST = null; // for testing
-    var dom = 0;
+    var dom;
     $state ="State";
-    $ask ="Ask";
-    
+    $ask ="Ask";    
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant.class ;
@@ -974,8 +973,8 @@
 			return getPreference($cuisine);
 	}
 	
-	function isAcceptable(proposal, dom){
-		return $negotiation.isAcceptable(proposal, dom);
+	function isAcceptable(proposal, dominant){
+		return $negotiation.isAcceptable(proposal, dominant);
 	}
 	
 	function reactToRejectedProp(proposal){
@@ -983,16 +982,16 @@
 	}
 	
 	function isDom(){
-		return(dom &gt; 0)
+		return(dominant == true)
 	}
 	
 	function isPeer(){
 		//print("ISPEER"); // pourquoi il affiche ça 4 fois quand il passe dans le 1er State ?
-		return(dom==0)
+		return(dominant== null)
 	}
 	
 	function isSub(){
-		return (dom &lt; 0)
+		return (dominant == false)
 	}      
  
 </script>

@@ -1,0 +1,10 @@
+Afficher les preferences de l'utilisateur et l'agent au début de la négociation
+l'agent soumis ne propose pas qlq chose qu'il n'aime pas
+state preference (getRandPrefence)
+Un agent dominant exprime toujours sont mostPref
+et decroit si deja ennoncé
+correction interro BD
+Traduction de la presentation WACAI
+
+
+

@@ -228,15 +228,15 @@ public class Negotiation<O extends Option> {
 		return false;
 	}
 
-	public boolean isAcceptableOption(Option option, int dom){
+	public boolean isAcceptableOption(Option option, boolean dom){
 
 	List<Option> options =	(List<Option>) (Arrays.asList(getOptions()));
 				//getOptionsWithoutStatus(Proposal.Status.REJECTED);
-		if(this.optionUtility(option)< 0 && dom>=0)
+		if(this.optionUtility(option)< 0 && dom)
 			return false;
 		else {
 			List<Option> sortedOptions = sortOptions(options);
-			if (dom==0)
+			if (dom== null)
 				 return sortedOptions.indexOf(option)< sortedOptions.size()/2 ;
 				
 			if (dom >0) 
@@ -323,7 +323,7 @@ public class Negotiation<O extends Option> {
 	// getAcceptableOptions computes the utility of all the remaining options that are not rejected yet and returns
 	//whom are acceptables following the agent preferences
 	
-	public ArrayList<Option> getAcceptableOptions (int dom){
+	public ArrayList<Option> getAcceptableOptions (boolean dom){
 		ArrayList<Option> acceptableOptions = new ArrayList<Option>();
 		for (Option O: getOptionsWithoutStatus(Proposal.Status.REJECTED)){
 			if(isAcceptableOption(O, dom))
@@ -572,8 +572,8 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 	
-	public boolean negotiationFailure(int dom){
-		if(dom >= 0)
+	public boolean negotiationFailure(boolean dom){
+		if(dom)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());
 		
 			else
