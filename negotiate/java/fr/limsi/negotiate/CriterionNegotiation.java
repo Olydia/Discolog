@@ -182,11 +182,11 @@ public class CriterionNegotiation<C extends Criterion> {
 		if (dom > 0)
 			return (proposalScore>= bestScore *0.7);
 		
-		if (dom ==0 )
+		if (dom ==0)
 			return( proposalScore>= 0);
 		
 		else {
-			
+			// if the proposal has already been proposed then accept it in the case of submissive agent
 			return (proposalScore>= 0 ||
 			 (checkStatus(c).equals(Proposal.Status.OPEN) && this.getOas().getScore(c)< 0 ));
 			
