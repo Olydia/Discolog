@@ -785,9 +785,10 @@
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant.class ;
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
-   	var cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
+   	$cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
     $cost = Packages.fr.limsi.negotiate.restaurant.Cost;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
+    $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $relation=0;
  	var RI = {
   		DOMINANT : 1, 
