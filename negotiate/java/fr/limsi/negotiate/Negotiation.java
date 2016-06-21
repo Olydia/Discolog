@@ -563,6 +563,14 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 	
+	public void printPrefs(){
+		
+		System.out.println(criteriaPreferences.printPreferences());
+		
+		for(CriterionNegotiation<Criterion> cr : criteriaNegotiation)
+			System.out.println(cr.getSelf().printPreferences());
+		
+	}
 	public boolean negotiationFailure(int dom){
 		if(dom>0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());

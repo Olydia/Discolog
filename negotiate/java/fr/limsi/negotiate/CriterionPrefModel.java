@@ -131,5 +131,14 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		List<C> crit = sortCriteria();
 		return crit.get(crit.size()-1);
 }
+
+	@Override
+	String printPreferences() {
+		String pref = type.getSimpleName()+ ": \n" ;// TODO Auto-generated method stub
+		for (ValuePreference<C> p: preferences){
+			pref = pref + p + "\n";
+		}
+		return pref;
+	}
 	
 }
