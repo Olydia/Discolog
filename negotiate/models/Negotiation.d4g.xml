@@ -63,7 +63,7 @@
 </do>
 
 <do id="ProposeCriterion"  actor = "agent"  task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="proposalFromPreference(getLastUserPref()) "
+		proposal="createProposal($introMostPrefValue) "
 		applicable = "isDom()">       
 	<do task = "State"/>
     <do task = "Propose"/>
@@ -96,16 +96,6 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>        	
 	</do>		
-
-<!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"  -->
-<!-- 		less="getPreference(getDiscussedCriterion()).getLess()"  -->
-<!-- 		more="getPreference(getDiscussedCriterion()).getMore()" applicable = "!isSub()">  -->
-<!-- 		<do task = "Ask"/> -->
-<!-- 		<do task = "State"/> -->
-<!-- 		<do task = "Propose"/> -->
-<!-- 		<do task = "Accept"/> -->
-<!-- 		<do task = "Reject"/> -->
-<!-- 	</do> -->
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference" criterion ="null"
 		less="askUserPref(getDiscussedCriterion()).getLess()"
@@ -365,6 +355,7 @@
     $cost = Packages.fr.limsi.negotiate.restaurant.Cost;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
+    $introMostPrefValue = $negotiation.getCriterionNegotiation($mostPrefCriterion).getTheCurrentMostPreffered();
     $relation=0;
  	var RI = {
   		DOMINANT : 1, 
@@ -472,7 +463,9 @@
 	}
 
 	function askUserPref(criterion){
-		return ($negotiation.askUserPreference(criterion));
+		if ($negotiation.askUserPreference(criterion) == null);
+			criterion = openNewCriterion();
+		return($negotiation.askUserPreference(criterion));
 	}
 	
 	

@@ -4,7 +4,7 @@ Cuisine:
 	P(Italian, Japanese)
 	P(Italian, Turikish)
 	P(Chinese, Italian)
-	P(French, *)
+	P(French, Chinese)
 
 Ambiance
 	P(*,Calm)

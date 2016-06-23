@@ -63,7 +63,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		newScores = clearRejected(values, getSelf().getPreferencesValues());
 
 		int mostPref = maxIndex(newScores);
-		return( values.get(mostPref));
+		return(values.get(mostPref));
 	}
 
 	public ArrayList<Integer> clearRejected(List<C> values, ArrayList<Integer> cScores) {

@@ -475,7 +475,7 @@ public class Negotiation<O extends Option> {
 		// trier par order de pr�fence 
 		// get score des elements de lastStaement 
 		// enlever ceux qui sont dans oas
-		
+	
 		if (this.context.getLastStatement(uttType,true) != null) {
 			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
 			
