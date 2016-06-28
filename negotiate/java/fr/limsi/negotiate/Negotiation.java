@@ -516,9 +516,13 @@ public class Negotiation<O extends Option> {
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 			// If the preference is not expressed 
 			if (model.getOas().getPreferences().contains(c)){
-				if (model.reactToCriterion(c.getMore())!= null)
-					return model.reactToCriterion(c.getMore());
-				if(model.reactToCriterion(c.getLess())!= null)
+				ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
+				if ( more != null)
+					return more;
+				
+				ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
+
+				if(less != null)
 					return model.reactToCriterion(c.getLess());
 			} 
 				return c;

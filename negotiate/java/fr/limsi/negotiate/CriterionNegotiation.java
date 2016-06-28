@@ -197,9 +197,11 @@ public class CriterionNegotiation<C extends Criterion> {
 	  **/
 	
 	public ValuePreference<C> reactToCriterion(C criterion){
-		if(criterion.equals(this.getSelf().getMostPreferred()))
+		if(criterion.equals(this.getSelf().getMostPreferred()) && 
+				!oas.getPreferences().contains(new ValuePreference<C>(null, criterion)))
 			return new ValuePreference<C> (null, criterion);
-		if(criterion.equals(this.getSelf().getLeastPreferred()))
+		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
+				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null)))
 			return new ValuePreference<C> (criterion, null);
 		else{
 			List<C> criteria = this.getSelf().sortCriteria();
