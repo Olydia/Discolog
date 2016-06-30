@@ -477,7 +477,8 @@ public class Negotiation<O extends Option> {
 		// enlever ceux qui sont dans oas
 	
 		if (this.context.getLastStatement(uttType,true) != null) {
-			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).getStatedPreference();
+			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).
+																getStatedPreference();
 			
 			if(userStatement.getLess() == null && userStatement.getMore() == null){
 				Criterion mostPref = this.getCriterionNegotiation(context.getLastStatement(uttType,true).getType()).getSelf().
@@ -487,8 +488,12 @@ public class Negotiation<O extends Option> {
 			else
 				return (computePreference(userStatement));
 		}
+		// if there is no statement to react to, state the mostPreferred value 
+		// of the current discussed criterion.
+	
+		Criterion best = this.getCriterionNegotiation(this.context.getCurrentDiscussedCriterion()).getTheCurrentMostPreffered();
+		return new ValuePreference<Criterion>(null, best);
 
-		else return null;
 	}
 
 	public ValuePreference<Criterion> reactToProposal(CriterionProposal p){
