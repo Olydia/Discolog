@@ -253,7 +253,9 @@ public class Negotiation<O extends Option> {
 			Criterion criterion = (Criterion) proposal.getValue();
 			CriterionNegotiation<Criterion> criterionNegotiation =	
 					getCriterionNegotiation(criterion);
-			return (criterionNegotiation.isAcceptableCriterion(criterion, dom));
+			boolean value = criterionNegotiation.isAcceptableCriterion(criterion, dom);
+			//System.out.println("criterion: "+ criterion+ " is acceptable ?: "+ value);
+			return (value);
 		}
 
 		if(proposal instanceof OptionProposal){
@@ -522,15 +524,17 @@ public class Negotiation<O extends Option> {
 			// If the preference is not expressed 
 			if (model.getOas().getPreferences().contains(c)){
 				ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
-				if ( more != null)
+				if ( more == null){
+					ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
+					if(less == null)
+						return c;
+					else 
+						return less;
+				}
 					return more;
-				
-				ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
-
-				if(less != null)
-					return model.reactToCriterion(c.getLess());
-			} 
-				return c;
+			
+			}
+			return c; 
 					
 		}
 
