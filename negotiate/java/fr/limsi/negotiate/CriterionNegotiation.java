@@ -187,8 +187,11 @@ public class CriterionNegotiation<C extends Criterion> {
 		
 		else {
 			// if the proposal has already been proposed then accept it in the case of submissive agent
-			return (proposalScore>= 0 ||
-			 (checkStatus(c).equals(Proposal.Status.OPEN) && this.getOas().getScore(c)< 0 ));
+			//if(this.getOas().getValues())
+			if(this.proposals.contains(c) && this.getOas().containsPrefabout(c))
+				return true;
+			return (proposalScore>= 0);
+
 			
 		}
 		
@@ -201,8 +204,11 @@ public class CriterionNegotiation<C extends Criterion> {
 				!oas.getPreferences().contains(new ValuePreference<C>(null, criterion)))
 			return new ValuePreference<C> (null, criterion);
 		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
-				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null)))
+				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null))){
+			System.out.println("je dois etre ici");
 			return new ValuePreference<C> (criterion, null);
+
+		}
 		else{
 			List<C> criteria = this.getSelf().sortCriteria();
 			for(int i = 0; i<criteria.indexOf(criterion); i++){

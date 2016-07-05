@@ -80,7 +80,7 @@
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="proposalFromPreference(getLastUserPref()) "
-		applicable = "proposalFromUserState(getLastUserPref())">
+		applicable = "proposalFromUserState(getLastUserPref(), relation)">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -399,12 +399,11 @@
     		return getPreference($cuisine);
     }
     
-    function proposalFromUserState(){
-    	more = getLastUserPref().getMore();
-    	less = getLastUserPref().getLess();
+    function proposalFromUserState(userPref, relation){
+    	more = userPref.getMore();
+    	less = userPref.getLess();
     	if(more!= null){
-    		if (isAcceptable(createProposal(more)))
-    			return true;
+    		return (isAcceptable(createProposal(more), relation));
     	}
     	return false;  	
     }

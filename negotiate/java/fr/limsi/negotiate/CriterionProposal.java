@@ -25,10 +25,6 @@ public class CriterionProposal extends Proposal {
 		this.criterion = criterion;
 	}
 
-	public Criterion getCriterion() {
-		return criterion;
-	}
-
 	@Override
 	public
 	Criterion getValue() {

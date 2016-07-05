@@ -145,7 +145,7 @@
       <subtasks id="_d4e45_subtasks">
          <step name="_d4e45_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e45_ref" task="_d4e45_tree"/>
-         <applicable>proposalFromUserState(getLastUserPref())</applicable>
+         <applicable>proposalFromUserState(getLastUserPref(), relation)</applicable>
          <binding slot="$_d4e45_step.external" value="false"/>
          <binding slot="$_d4e45_step.proposal" value="proposalFromPreference(getLastUserPref()) "/>
       </subtasks>
@@ -833,12 +833,11 @@
     		return getPreference($cuisine);
     }
     
-    function proposalFromUserState(){
-    	more = getLastUserPref().getMore();
-    	less = getLastUserPref().getLess();
+    function proposalFromUserState(userPref, relation){
+    	more = userPref.getMore();
+    	less = userPref.getLess();
     	if(more!= null){
-    		if (isAcceptable(createProposal(more)))
-    			return true;
+    		return (isAcceptable(createProposal(more), relation));
     	}
     	return false;  	
     }

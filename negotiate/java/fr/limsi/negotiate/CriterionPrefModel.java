@@ -37,6 +37,18 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		add(new ValuePreference<C>(less, more));
 	}
 	/**
+	 * Return Boolean.TRUE if there is a preference about criterion, or Boolean.FALSE otherwise
+	 */
+
+	public boolean containsPrefabout(C criterion){
+
+		for(ValuePreference<C> pref: this.preferences){
+			if(pref.getLess().equals(criterion) || pref.getMore().equals(criterion))
+				return true;
+		}
+		return false;
+	}
+	/**
 	 * Return Boolean.TRUE if first argument is less preferred, or Boolean.FALSE
 	 * if first argument is more preferred, or null if no preference. Can be used to respond to an ask.Preference(Less, More)
 	 */
