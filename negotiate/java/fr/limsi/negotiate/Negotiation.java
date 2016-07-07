@@ -152,7 +152,8 @@ public class Negotiation<O extends Option> {
 		Class<? extends Criterion> c =  p.getType();
 		if(c !=null) {
 			CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-			return (cn.getOas().getPreferences().contains(p));
+			ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, more);
+			return (cn.getOas().getPreferences().contains(p) || cn.getOas().getPreferences().contains(pref));
 		}
 		return false;
 	}
@@ -517,12 +518,30 @@ public class Negotiation<O extends Option> {
 			}
 			
 			CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(userStatement.getMore().getClass());
+			// Check if its is equal to the mostPref value and it is not stated 
+			
+			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()) && 
+					!this.isInOAS(null, userStatement.getMore()))
+				return new ValuePreference<Criterion> (null, userStatement.getMore());
+			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()) && 
+					!isInOAS(userStatement.getMore(), null))
+				//System.out.println("je dois etre ici");
+				return new ValuePreference<Criterion> (userStatement.getMore(), null);
+			
+			if(userStatement.getLess().equals(model.getSelf().getMostPreferred()) && 
+					!isInOAS(null, userStatement.getLess()))
+				return new ValuePreference<Criterion> (null, userStatement.getLess());
+			if(userStatement.getLess().equals(model.getSelf().getLeastPreferred()) && 
+					!isInOAS(userStatement.getLess(), null))
+				//System.out.println("je dois etre ici");
+				return new ValuePreference<Criterion> (userStatement.getLess(), null);
+			
 //			// The agent reacts to the stated Preference
 			ValuePreference<Criterion> c = (model.getSelf().
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 			// If the preference is not expressed 
-			if (model.getOas().getPreferences().contains(c)){
+			if (isInOAS(c.getLess(),c.getMore())){
 				ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
 				if ( more == null){
 					ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
