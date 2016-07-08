@@ -133,30 +133,7 @@ public class Negotiation<O extends Option> {
 
 	// Methods of the mental state
 
-	public boolean isInOther(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
-		Class<? extends Criterion> c =  p.getType();
-		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (cn.getOther().getPreferences().contains(p));
-	}
 
-	public boolean isInself(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
-		Class<? extends Criterion> c =  p.getType();
-		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (cn.getSelf().getPreferences().contains(p));
-	}
-
-	public boolean isInOAS(Criterion less, Criterion more) {
-		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
-		Class<? extends Criterion> c =  p.getType();
-		if(c !=null) {
-			CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-			ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, more);
-			return (cn.getOas().getPreferences().contains(p) || cn.getOas().getPreferences().contains(pref));
-		}
-		return false;
-	}
 
 	public void updateProposal(OptionProposal proposal, Status status){
 		for(OptionProposal c: proposals){
@@ -242,9 +219,11 @@ public class Negotiation<O extends Option> {
 				
 			if (dom >0) 
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
-			else 
+			else {
 				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
-						checkStatus(option).equals(Proposal.Status.OPEN));
+						isProposed(new OptionProposal(option), Proposal.Status.OPEN));
+			}
+				
 		}
 	
 	}
@@ -521,19 +500,18 @@ public class Negotiation<O extends Option> {
 			// Check if its is equal to the mostPref value and it is not stated 
 			
 			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()) && 
-					!this.isInOAS(null, userStatement.getMore()))
+					!model.isInOAS(null, userStatement.getMore()))
 				return new ValuePreference<Criterion> (null, userStatement.getMore());
 			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()) && 
-					!isInOAS(userStatement.getMore(), null))
+					!model.isInOAS(userStatement.getMore(), null))
 				//System.out.println("je dois etre ici");
 				return new ValuePreference<Criterion> (userStatement.getMore(), null);
 			
 			if(userStatement.getLess().equals(model.getSelf().getMostPreferred()) && 
-					!isInOAS(null, userStatement.getLess()))
+					!model.isInOAS(null, userStatement.getLess()))
 				return new ValuePreference<Criterion> (null, userStatement.getLess());
 			if(userStatement.getLess().equals(model.getSelf().getLeastPreferred()) && 
-					!isInOAS(userStatement.getLess(), null))
-				//System.out.println("je dois etre ici");
+					!model.isInOAS(userStatement.getLess(), null))
 				return new ValuePreference<Criterion> (userStatement.getLess(), null);
 			
 //			// The agent reacts to the stated Preference
@@ -541,7 +519,7 @@ public class Negotiation<O extends Option> {
 					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 			// If the preference is not expressed 
-			if (isInOAS(c.getLess(),c.getMore())){
+			if (model.isInOAS(c.getLess(),c.getMore())){
 				ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
 				if ( more == null){
 					ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());

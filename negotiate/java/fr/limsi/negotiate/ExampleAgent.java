@@ -33,8 +33,8 @@ public class ExampleAgent extends Agent {
       // for agent to "look ahead" to utterance choices (as in user menus) 
       new DecompositionPlugin(agenda, 25, true, true);
    }
- 
-   private final Negotiation<Restaurant> restaurant = InitiaterestauMentalState.Initialise();
+   InitiaterestauMentalState mental = new InitiaterestauMentalState();
+   private final Negotiation<Restaurant> restaurant = mental.D1() ;
    
    /**
     * @return current negotiation object

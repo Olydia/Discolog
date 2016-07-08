@@ -155,9 +155,13 @@ public class TestRestaurant {
 	public static void main(String[] args) {
 		Negotiation<Restaurant> d2 = D2();
 		Negotiation<Restaurant> s2 = S2();
-		Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
-		ne.updateOASMentalState(Cuisine.CHINESE, Cuisine.ITALIAN);
-		System.out.println(ne.getCriterionNegotiation(Cost.class).isAcceptableCriterion(Cost.EXPENSIVE, -1));
+	//	Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
+		
+		//ne.updateOASMentalState(null, Cuisine.CHINESE);
+		for (Restaurant r: Restaurant.values()){
+			System.out.println(r.name()+":  "+d2.isAcceptableOption(r, -1));
+		}
+		//System.out.println(ne.getCriterionNegotiation(Cost.class).isAcceptableCriterion(Cost.EXPENSIVE, -1));
 		//System.out.println(ne.isAcceptable(new CriterionProposal(Cost.EXPENSIVE), -1));
 //		Negotiation<Restaurant> user =  user();
 //		DistanceNegotiation<Restaurant> euclide = new DistanceNegotiation<Restaurant>(restaurants, user);

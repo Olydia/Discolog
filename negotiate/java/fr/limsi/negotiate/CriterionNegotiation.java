@@ -196,15 +196,42 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		
 	}
+	
+	public boolean isInOther(C less, C more) {
+		ValuePreference<C> p = new ValuePreference<C> (less, more);
+		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, more);
+		ValuePreference<Criterion> prefLess = new ValuePreference<Criterion>(less,null);
+		return (getOther().getPreferences().contains(p)|| getOther().getPreferences().contains(pref)
+				|| getOther().getPreferences().contains(prefLess));
+	}
+
+	public boolean isInself(C less, C more) {
+		ValuePreference<C> p = new ValuePreference<C> (less, more);
+		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, more);
+		ValuePreference<Criterion> prefLess = new ValuePreference<Criterion>(less,null);
+		return (getSelf().getPreferences().contains(p)|| getSelf().getPreferences().contains(pref)
+				|| getSelf().getPreferences().contains(prefLess));
+	}
+
+	public boolean isInOAS(Criterion less, Criterion more) {
+		ValuePreference<Criterion> p = new ValuePreference<Criterion> (less, more);
+		ValuePreference<Criterion> pref = new ValuePreference<Criterion>(null, more);
+		ValuePreference<Criterion> prefLess = new ValuePreference<Criterion>(less,null);
+
+			return (getOas().getPreferences().contains(p) || getOas().getPreferences().contains(pref)
+					|| getOas().getPreferences().contains(prefLess));
+	}
+	
 	/** take as input a criterion value and returns the agent preference on it
 	  **/
 	
 	public ValuePreference<C> reactToCriterion(C criterion){
+		
 		if(criterion.equals(this.getSelf().getMostPreferred()) && 
-				!oas.getPreferences().contains(new ValuePreference<C>(null, criterion)))
+				!isInOAS(null, criterion))
 			return new ValuePreference<C> (null, criterion);
 		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
-				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null))){
+				!!isInOAS(criterion, null)){
 			//System.out.println("je dois etre ici");
 			return new ValuePreference<C> (criterion, null);
 
@@ -212,14 +239,12 @@ public class CriterionNegotiation<C extends Criterion> {
 		else{
 			List<C> criteria = this.getSelf().sortCriteria();
 			for(int i = 0; i<criteria.indexOf(criterion); i++){
-				ValuePreference<C> v = new ValuePreference<C>(criterion, criteria.get(i));
-				if(!oas.getPreferences().contains(v))
-					return v;
+				if(!isInOAS(criterion, criteria.get(i)))
+					return new ValuePreference<C>(criterion, criteria.get(i));
 			}
 			for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
-				ValuePreference<C> v = new ValuePreference<C>(criteria.get(i), criterion);
-				if(!oas.getPreferences().contains(v))
-					return v;
+				if(!isInOAS(criteria.get(i), criterion))
+					return new ValuePreference<C>(criteria.get(i), criterion);
 			}
 			return null;	
 		}		
