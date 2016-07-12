@@ -6,11 +6,11 @@
        xmlns:t="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
 
 
-<t:task id="GoingOut">
+<!-- <t:task id="GoingOut">
 	<t:subtasks id="talk">
 		<t:step name="intro" task="InviteOut"/>
 	</t:subtasks>
-</t:task>
+</t:task> -->
 
 <t:task id="Trees">
   <t:subtasks id="askC">
@@ -53,8 +53,7 @@
 </agent> 
 
 <do id="AskCriterion" actor = "agent"  task="n:fr.limsi.negotiate.lang.AskPreference"
-		criterion ="$mostPrefCriterion" less="null"	more="null" 
-		 applicable = "!isDom()">       
+		criterion ="$mostPrefCriterion" less="null"	more="null">       
 	<do task = "State"/>
     <do task = "Propose"/>
    	<do task = "Ask"/>
@@ -63,8 +62,7 @@
 </do>
 
 <do id="ProposeCriterion"  actor = "agent"  task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($introMostPrefValue) "
-		applicable = "isDom()">       
+		proposal="createProposal($introMostPrefValue) ">    
 	<do task = "State"/>
     <do task = "Propose"/>
    	<do task = "Ask"/>
@@ -356,12 +354,13 @@
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $introMostPrefValue = $negotiation.getCriterionNegotiation($mostPrefCriterion).getTheCurrentMostPreffered();
-    $relation=0;
- 	var RI = {
+    var RI = {
   		DOMINANT : 1, 
   		PEER: 0, 
   		SUBMISSIVE : -1
 		};
+    var relation =RI.DOMINANT;
+ 	
 
     function currentMostPreferred(criterion) {
        return ($negotiation.currentMostPreferredCriterion(criterion));

@@ -1,7 +1,6 @@
 package fr.limsi.negotiate;
 
 //import java.util.Random;
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
@@ -15,11 +14,16 @@ public class NegotiatorAgent extends Agent {
 
 	private Negotiation<Restaurant> restaurant ;
 
-	// use this instead of Disco.main().  See negotiate/bin/negotiate
+
 	public static void main (String[] args) {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
-		new Dual( new NegotiatorAgent("Agent1", model.D1()), new NegotiatorAgent("Agent2", model.S2()), true).start();
+		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.D1()), new NegotiatorAgent("Agent2", model.S2()), true);
+		dual.interaction1.load("models/Negotiate.xml");
+		dual.interaction1.load("models/Negotiation.xml");
+		dual.interaction2.load("models/Negotiate.xml");
+		dual.interaction2.load("models/Negotiation.xml");
 
+		dual.start();
 	}
 
 	public NegotiatorAgent (String name, Negotiation<Restaurant> model) { 
