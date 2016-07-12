@@ -79,7 +79,7 @@ When the user states a preference that we note StatePreference(less,more), where
 					\defig{react}{Function to react to a preference (less,more)}
 				\end{figure}
 		
-		\item \textbf{AskPreference(less, more)}:
+		\item \textbf{AskPreference(less, more)}: I defined an AskPreference in the case of the submissive agent. However, when considering the structure of the tree, this branch is never executed. 
 
 		
 		
@@ -87,8 +87,12 @@ When the user states a preference that we note StatePreference(less,more), where
 %
 
 \section{AskPreference (less,more): } 
-		When the user asks the agent about a preference, the agent calls the function reactToUser to compute a preference.
-		
+		When the user asks the agent about a preference, the agent calls the function reactToUser to compute a preference from the values of the askPreference.
+		\begin{figure}[]
+				\centerline{\includegraphics[width=3in]{figs/utterances_v2/askPref.png}}
+				\vskip 8pt
+				\defig{ask}{Tree of agent possible responses for an ask input.}
+		\end{figure}
 \section{Propose(proposal)}
 	the user can either propose a value for a criterion or an option from the set of options of the topic of conversation. Thus, we define a proposal as a tuple $Proposal(Type, Value)$ where  $Type$ is either the the topic (for example Restaurants) or a criterion $c \in \mathcal{C}$ and value is:
 	\begin{itemize}
@@ -139,7 +143,7 @@ When the user states a preference that we note StatePreference(less,more), where
 	\begin{figure}[]
 			\centerline{\includegraphics[width=3in]{figs/utterances_v2/RejectCrite.png}}
 			\vskip 8pt
-			\defig{accept}{Tree of agent possible responses for a reject criterion input.}
+			\defig{rejectX}{Tree of agent possible responses for a reject criterion input.}
 	\end{figure}
 	
 	\subsection{Reject(Option)}
@@ -155,7 +159,7 @@ When the user states a preference that we note StatePreference(less,more), where
 \begin{figure}[]
 		\centerline{\includegraphics[width=3in]{figs/utterances_v2/RejectOption.png}}
 		\vskip 8pt
-		\defig{accept}{Tree of agent possible responses for a reject option input.}
+		\defig{RejectO}{Tree of agent possible responses for a reject option input.}
 \end{figure}
 
 \textbf{Note:} Each produced tree is defined with an exit condition, that checks if the negotiation is at an dead end and there is no possible remaining compromise to find.
