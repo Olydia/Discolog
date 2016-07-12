@@ -1,0 +1,46 @@
+    # 22 juin 2016 09:01:59 - TaskEngine 1.10 / Disco 1.16
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/Negotiation.xml
+  > eval relation = RI.PEER
+    # Returned '0'
+  > eval $negotiation.printPrefs()
+Restaurant :
+ (class fr.limsi.negotiate.restaurant.Cost<class fr.limsi.negotiate.restaurant.Cuisine)
+(class fr.limsi.negotiate.restaurant.Ambiance<class fr.limsi.negotiate.restaurant.Cost)
+
+Cost: 
+(EXPENSIVE<CHEAP)
+
+Cuisine: 
+(FRENCH<CHINESE)
+(JAPANESE<CHINESE)
+(ITALIAN<JAPANESE)
+(ITALIAN<FRENCH)
+(TURKISH<JAPANESE)
+
+Ambiance: 
+(NOISY<CALM)
+
+    # Returned 'null'
+  > task Trees
+    User says "Let's achieve Trees."
+    Agent says "What kind of Cuisine do you like?"
+  > execute fr.limsi.negotiate.lang.StatePreference/ null /$cuisine.TURKISH
+    User says "TURKISH is my favorite Cuisine."
+    Agent says "I prefer CHINESE over TURKISH."
+  > execute fr.limsi.negotiate.lang.StatePreference/$cuisine.CHINESE/ $cuisine.TURKISH
+    User says "I prefer TURKISH over CHINESE."
+    Agent says "CHINESE is my favorite Cuisine."
+  > execute fr.limsi.negotiate.lang.StatePreference/$cuisine.CHINESE/$cuisine.JAPANESE
+    User says "I prefer JAPANESE over CHINESE."
+    Agent says "I propose that we choose JAPANESE Cuisine."
+  >  execute fr.limsi.negotiate.lang.Accept/createProposal($cuisine.JAPANESE)
+    User says "Okay, let's choose JAPANESE."
+    Agent says "I propose that we choose SAMURA Restaurant."
+  > execute fr.limsi.negotiate.lang.Accept/createOptionProposal($restaurant.SAMURA)
+    User says "Okay, let's choose SAMURA."
+WARNING: _d4e118_subtasks ignoring external binding of non-primitive task $_d4e118_step.external
+    Agent says "Okay, I'll call to book a table."
+  > quit
+    

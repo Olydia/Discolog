@@ -280,11 +280,11 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
-	
+	<!-- Revoir la methode ce n'est certainement pas askUserPref  -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="askUserPref(openNewCriterion()).getLess()" 
 		more="askUserPref(openNewCriterion()).getMore()"
-		applicable ="isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())">
+		applicable ="isPeer()&amp;&amp; isOptionProposal(lastRejectedProposal())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
