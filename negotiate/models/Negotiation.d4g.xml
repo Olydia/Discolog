@@ -11,16 +11,49 @@
 		<t:step name="intro" task="InviteOut"/>
 	</t:subtasks>
 </t:task> -->
+<t:task id="Top">
 
-<t:task id="Trees">
+  <t:subtasks id="agentFirst">
+    <t:step name="first" task="AgentFirst"/>
+    <t:applicable> !isSub() </t:applicable>
+  </t:subtasks>
+
+  <t:subtasks id="userFirst">
+    <t:step name="first" task="UserFirst"/>
+    <t:applicable> isSub() </t:applicable>
+  </t:subtasks>
+
+</t:task>
+  
+  
+<t:task id="AgentFirst">
+
   <t:subtasks id="askC">
     <t:step name="ask" task="AskCriterion"/>
     <t:applicable> !isDom() </t:applicable>
   </t:subtasks>
+  
   <t:subtasks id="proposeC">
     <t:step name="propose" task="ProposeCriterion"/>
     <t:applicable> isDom() </t:applicable>
   </t:subtasks>
+  
+</t:task>
+
+<t:task id="UserFirst">
+
+  <t:subtasks id="userAsk">
+    <t:step name="Uask" task="Ask"/>
+  </t:subtasks>
+  
+  <t:subtasks id="UserPropose">
+    <t:step name="Upropose" task="Propose"/>
+  </t:subtasks>
+  
+  <t:subtasks id="UserState">
+    <t:step name="Ustate" task="State"/>
+  </t:subtasks>
+  
 </t:task>
 
 <agent id="InviteOut" text="Would you like to go out with me on the town tonight?">
@@ -34,7 +67,7 @@
 
 <agent id="InviteToDinner" text="Would you enjoy having dinner with me?">
 	<user text="yes.">
-		<do task="Trees"/>
+		<do task="AgentFirst"/>
 	</user>
 </agent> 
 
