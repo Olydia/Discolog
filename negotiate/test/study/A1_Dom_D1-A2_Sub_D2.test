@@ -1,0 +1,23 @@
+   Agent1 says "I propose that we choose CHINESE Cuisine."
+  > next
+    Agent2 says "I prefer FRENCH over CHINESE."
+  > next
+    Agent1 says "CHINESE is my favorite Cuisine."
+  > next
+    Agent2 says "I prefer TURKISH over CHINESE."
+  > next
+    Agent1 says "I prefer CHINESE over TURKISH."
+  > next
+    Agent2 says "I prefer FRENCH over TURKISH."
+  > next
+    Agent1 says "I prefer FRENCH over TURKISH."
+  > next
+    Agent2 says "I propose that we choose FRENCH Cuisine."
+  > next
+    Agent1 says "I propose that we choose DRAGON Restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > next
+    Agent1 says "Ok."
+  > next
+    Agent2 says "Ok."
