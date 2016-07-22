@@ -1,5 +1,9 @@
     # 21 juil. 2016 16:42:56 - TaskEngine 1.11 / Disco 1.17
     Welcome to Disco! (Type 'help' for command list)
+#Agent 1 is peer, its preference model is S1
+#Agent 2 is peer, its preference model is S2.
+#please check the file 'PREF.pdf'  for the preference models
+
     Agent1 says "Should we achieve Top?"
   > NEXT
     Agent2 says "Let's achieve Top."

@@ -1,4 +1,8 @@
-   Agent1 says "I propose that we choose CHINESE Cuisine."
+#Agent 1 is dominant, its preference model is D1
+#Agent 2 is submissive, its preference model is D2.
+#please check the file 'PREF.pdf'  for the preference models 
+
+  Agent1 says "I propose that we choose CHINESE Cuisine."
   > next
     Agent2 says "I prefer FRENCH over CHINESE."
   > next
