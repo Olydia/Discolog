@@ -1,55 +1,10 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: wacai_2016_v1.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: wacai_2016_v1.aux
 The style file: abbrv.bst
 Database file #1: Library.bib
-Warning--I didn't find a database entry for "ref"
-Warning--I didn't find a database entry for "perceptif-si-on-a-de-la-place"
+Warning--can't use both author and editor fields in Amgoud2002
 Warning--empty journal in annesysteme
 Warning--empty year in annesysteme
 Warning--empty journal in daskalopulu1998handling
-Warning--empty journal in erol1996hierarchical
 Warning--there's a number but no volume in rich2009building
 Warning--empty journal in zablotskaya2012relating
-You've used 29 entries,
-            2118 wiz_defined-function locations,
-            671 strings with 8836 characters,
-and the built_in function-call counts, 9572 in all, are:
-= -- 944
-> -- 440
-< -- 7
-+ -- 178
-- -- 144
-* -- 642
-:= -- 1591
-add.period$ -- 91
-call.type$ -- 29
-change.case$ -- 155
-chr.to.int$ -- 0
-cite$ -- 35
-duplicate$ -- 382
-empty$ -- 759
-format.name$ -- 144
-if$ -- 2004
-int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 33
-newline$ -- 147
-num.names$ -- 58
-pop$ -- 179
-preamble$ -- 1
-purify$ -- 130
-quote$ -- 0
-skip$ -- 261
-stack$ -- 0
-substring$ -- 552
-swap$ -- 77
-text.length$ -- 7
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 108
-warning$ -- 6
-while$ -- 96
-width$ -- 31
-write$ -- 312
-(There were 8 warnings)
+(There were 6 warnings)

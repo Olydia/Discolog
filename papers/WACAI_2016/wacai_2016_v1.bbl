@@ -13,10 +13,13 @@ J.~F. Allen, B.~W. Miller, E.~K. Ringger, and T.~Sikorski.
   Computational Linguistics}, pages 62--70. Association for Computational
   Linguistics, 1996.
 
-\bibitem{amgoud2000arguments}
-L.~Amgoud, S.~Parsons, and N.~Maudet.
-\newblock Arguments, dialogue, and negotiation.
-\newblock {\em a a}, 10(11):02, 2000.
+\bibitem{Amgoud2002}
+L.~Amgoud and S.~Parsons.
+\newblock {\em Intelligent Agents VIII: Agent Theories, Architectures, and
+  Languages 8th International Workshop, ATAL 2001 Seattle,WA, USA, August 1--3,
+  2001 Revised Papers}, chapter Agent Dialogues with Conflicting Preferences,
+  pages 190--205.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2002.
 
 \bibitem{annesysteme}
 L.~C.-L. D.~B. Anne, L.~Ligozat, {\'E}.~B.~P. Zweigenbaum, and S.~Rosset.
@@ -41,7 +44,7 @@ T.~W. Bickmore and R.~W. Picard.
   12(2):293--327, 2005.
 
 \bibitem{daskalopulu1998handling}
-A.~Daskalopulu, C.~Reed, and U.~U.~P. Uk.
+A.~Daskalopulu and a.~Reed.
 \newblock Handling preferences in negotiation dialogue frames.
 \newblock 1998.
 
@@ -52,11 +55,10 @@ N.~E. Dunbar and J.~K. Burgoon.
 \newblock {\em Journal of Social and Personal Relationships}, 22(2):207--233,
   2005.
 
-\bibitem{erol1996hierarchical}
-K.~Erol.
-\newblock Hierarchical task network planning: formalization, analysis, and
-  implementation.
-\newblock 1996.
+\bibitem{erol1994htn}
+K.~Erol, J.~Hendler, and D.~S. Nau.
+\newblock Htn planning: Complexity and expressivity.
+\newblock In {\em AAAI}, volume~94, pages 1123--1128, 1994.
 
 \bibitem{grosz1986attention}
 B.~J. Grosz and C.~L. Sidner.
