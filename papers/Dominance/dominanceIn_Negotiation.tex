@@ -23,15 +23,26 @@
 \begin{document}
 \title{ Interpersonal dominance in dialogue of cooperative negotiation}
 \maketitle 
+\section{Introduction}
+Dialogue systems are artificial systems capable to hold a conversation with a human user, usually to achieve certain objective or fulfill a task.
+% Existing conversational agents provided with dialogue system play different roles like 
 
-\par Dominance have been regarded by psychology research as a fundamental dimension of interpersonal relationships \cite{burgoon}. 
+During a human-human dialogue, interlocutors establish a social relationship that affect their behaviors. Previous researches have shown that people tend to respond to computers as social actor [bickmore], which lead the community to assess the psychosocial relationship between the person and the agent during their interaction. 
+A growing body of research is investigating the use of appropriate social behavior for virtual agents in different roles and types of user-computer relationship.
+For example, Bickmore studied the impact of trust ...
+
+
+In this paper we are interested in modeling a dialogue system for social dialogue in which user and agent cooperate in order to achieve a common objective.  We believe that individuals that collaborate to fulfill an objective (for example: find a restaurant for dinner), have both preferences in the way to do it, which lead them to conduct a \emph{cooperative negotiation} about their preferences in order to determine a trade-off that satisfy both interlocutors. Moreover, scholars in psychology and communication investigated the impact interactive effects of relations and emotion in negotiation, and proved that  \emph{interpersonal dominance} adopt particular strategies depending on their perception of the relation of dominance. Our objective is to define an agent that can perceive the established relation of dominance and adapt its strategy of negotiation to the relation. 
+ 
+We present in section 1 our model of negotiation on preferences. In section 2, we present the agent strategies of negotiation during the dialogue. 
+%
+%We present our model of dialogue for a cooperative negotiation, where the agent is defined with a panel of behaviors related to his representation of his relation with the user. We present in section 1, section 2 etc 
+%\par Dominance have been regarded by psychology research as a fundamental dimension of interpersonal relationships \cite{burgoon}. 
 %social influence the strategies of dialogue
-%collaborative negotiation which is mainly oriented by interlocutors preferences.
-% Mental state : pretoferences and vision of the other and relationship
-% Agent express their belief and preferences through the utterance they perform
+
 
 \section{Model of negotiation on preferences}
-\subsection{Objects of negotiation}
+
 \par The overall goal of a negotiation in our dialogue model is to choose an \textbf{option} in a set of possible options for a given topic. For instance, on the topic ``Restaurant'', we have a set of options: ``Chuck's cake'', ``The ducking Duck'', ``Ginza sushis''\ldots 
 \par Each interlocutor makes its decision by consulting its preferences about these different options. Let $\mathcal{O}$ be the set of options.
 
@@ -64,15 +75,13 @@ For example $P_{cuisine} (Japanese, French)$ means that the interlocutor prefers
 
 \par  We define the notation \emph{P(a,*)}  = \{$\forall$ \emph{x}$\in$\emph{A}, \emph{P(a,x)}\}, which means that \emph{a} is the \textit{most preferred} element in \emph{A}. 
 By opposition, \emph{P(*,b)} = \{$\forall$ \emph{x}$\in$\emph{A}, \emph{P(x,b)}\} means that \emph{b} is the \textit{least preferred} element in \emph{A}.
-
-
  
 \par Our goal is to be able to define preferences over options of negotiation. 
 In the literature \cite{dodgson2009multi}, preference of one option over others depends on the options performances on the set of criteria. This is called multi-criteria decision. In general \cite{dodgson2009multi}, preferences on options are built by inference from preferences over criteria values. This inference can be done using different methods such as ordered weight average (OWA \cite{yager2012ordered}) or Choquet's integrals \cite{chouquet1953}.
 
 
 \subsection{Decision based on preferences in our model}
-\par To produce  dialogues with cooperative negotiation, interlocutors have to take coherent decisions about their preferences over options of a certain topic. Decision on options imply comparing theses options based on interlocutors preferences.  
+\par To produce dialogue with cooperative negotiation, interlocutors have to take coherent decisions about their preferences over options of a certain topic. Decision on options imply comparing theses options based on interlocutors preferences.  
  Since defining preferences over options is a multi criteria decision that involves calculating how well each option performs on its set of criteria. We have to build a \textbf{preference model }that contains interlocutors preferences on criteria, from which we can infer option preferences.  
 In the following, we present the different elements of the preference model noted \textbf{$\mathcal{P}$} : 
 \begin{itemize}
@@ -176,7 +185,7 @@ After calculating both restaurants utilities: U(Clementine)=-3 and U(Mogoroko)=5
 
  
 \subsubsection{Dialogue context}
- 
+ % explain the notion of preferences models and how they are communicated in the conversation
 During dialogue, interlocutors  negotiate  about a topic and its criteria. The final decision is to select an option (\emph{e.g.} let's go to Ginza restaurant). Therefore, interlocutors share information about their preferences and propose decisions to their negotiation (\emph{e.g.} let's go to a Japanese restaurant, we can't afford expensive restaurant, or let's go to Ginza). To represent these elements of negotiation, we use the following notations to define the status of proposals.
 
 We first define a proposal as a tuple $Proposal(Type, Value)$ where  $Type$ is either the the topic (for example Restaurants) or a criterion $c \in \mathcal{C}$ and value is:
@@ -259,11 +268,11 @@ Henley, 1995; Olson \& Cromwell, 1975; Rollins \& Bahr, 1976). Dominance is gene
  \subsection{Behaviors of dominance in dialogue}
   Several scholars studied behaviors related to the dominance in order to gain a better understanding to social relations. During a conversation, dominance can be perceived through verbal and nonverbal behaviors. We present in this section behaviors related to dominance that can be perceived in a conversation of cooperative negotiation.
  \subsubsection{Non-verbal behavior}
-At the non-verbal level, a wide range of behaviors have been associated with dominance. (Dunbar \& Burgoon) divide non-verbal behaviors into classes such (kinesics, vocalic, ). First, kinesics behaviors are considered as the richest of all the codes that includes facial expression, body movements, gestures. Indeed, dominant individuals are related with high visual ratio (high looking while speaking / listening)(burgoon).  Second, voice cues of dominance are speaking duration, speaking intensity, voice control and pitch. 
+At the non-verbal level, a wide range of behaviors have been associated with dominance. (Dunbar \& Burgoon) divide non-verbal behaviors into classes such (kinesics, vocalic, ). First, kinesics behaviors are considered as the richest of all the codes that includes facial expression, body movements, gestures. Indeed, dominant individuals are related with high visual ratio (high looking while speaking / listening)(burgoon).  Furthermore, (Dunbar, Burgoon 2005) found that the more body control an individual had the more observers perceived her as dominant. In addition, dominant individual are more susceptible to use gesture when they talk.  
+\par  Second, voice cues of dominance manifest by speaking duration, speaking intensity, voice control and pitch. Dominant individuals speak loudly and more frequently and might cause interruption while other are talking (Dunbar, Burgoon 2005).
  \subsubsection{Verbal behavior}
-verbal behavior of dominance in the dialogue is related to the type of strategies that individuals choose in order to take control of the other. Therefore, several 
-action orientation 
-pay attention to other
+verbal behavior of dominance in the dialogue is related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. Therefore, dominant negotiators tend to end up with the larger share of the pie (Giebels, De Dreu, \& Van de Vliert, 2000). 
+\par A considerable body of research has documented the effects of dominance on negotiation behaviors and outcomes. First, dominant negotiator have higher aspirations, demands more and concede less(De Dreu, 1995). Second, dominant negotiator control the flow of the negotiation. Indeed, dominant behavior increase task orientation and goal-directed behaviour (Galinsky,Gruenfeld, \& Magee, 2003). Finally, dominant negotiator tend to not pay attention to less dominant negotiators Fiske (1993). The idea is that high-dominant individuals have many resources and can often act at will without serious consequences, while submissive individuals, have to be more careful because they are more dependent on other people. In addition, they are motivated to gain or regain control over their outcomes by paying close attention to the people on whom they depend.
 
 \subsubsection{Dominance behaviors implemented}
 \noindent 
