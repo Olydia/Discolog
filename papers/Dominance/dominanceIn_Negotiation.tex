@@ -270,11 +270,31 @@ Henley, 1995; Olson \& Cromwell, 1975; Rollins \& Bahr, 1976). Dominance is gene
  \subsubsection{Non-verbal behavior}
 At the non-verbal level, a wide range of behaviors have been associated with dominance. (Dunbar \& Burgoon) divide non-verbal behaviors into classes such (kinesics, vocalic, ). First, kinesics behaviors are considered as the richest of all the codes that includes facial expression, body movements, gestures. Indeed, dominant individuals are related with high visual ratio (high looking while speaking / listening)(burgoon).  Furthermore, (Dunbar, Burgoon 2005) found that the more body control an individual had the more observers perceived her as dominant. In addition, dominant individual are more susceptible to use gesture when they talk.  
 \par  Second, voice cues of dominance manifest by speaking duration, speaking intensity, voice control and pitch. Dominant individuals speak loudly and more frequently and might cause interruption while other are talking (Dunbar, Burgoon 2005).
+
  \subsubsection{Verbal behavior}
 verbal behavior of dominance in the dialogue is related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. Therefore, dominant negotiators tend to end up with the larger share of the pie (Giebels, De Dreu, \& Van de Vliert, 2000). 
 \par A considerable body of research has documented the effects of dominance on negotiation behaviors and outcomes. First, dominant negotiator have higher aspirations, demands more and concede less(De Dreu, 1995). Second, dominant negotiator control the flow of the negotiation. Indeed, dominant behavior increase task orientation and goal-directed behaviour (Galinsky,Gruenfeld, \& Magee, 2003). Finally, dominant negotiator tend to not pay attention to less dominant negotiators Fiske (1993). The idea is that high-dominant individuals have many resources and can often act at will without serious consequences, while submissive individuals, have to be more careful because they are more dependent on other people. In addition, they are motivated to gain or regain control over their outcomes by paying close attention to the people on whom they depend.
 
-\subsubsection{Dominance behaviors implemented}
+\par We are interested in this paper to the verbal behaviors for two main reasons. First, verbal behaviors are directly related to \emph{the strategies} deployed during the negotiation. In addition our dialogue system is text oriented, which make the non-verbal behavior impossible to reflect during the dialogue. 
+We present in the next section the decision model based on dominance behaviors.
+
+\section{Decision in negotiation of preferences}
+During the dialogue, agent and user enunciate utterances, in order to express and negotiate about their preferences. Therefore, at each talk turn, the agent has to reason about the utterance to choose, by observing  the current state of the negotiation and its perception of the relation of dominance. In addition, the user is allowed to choose any of the five utterance. We, thus built a model based on dialogue trees that consider all theses parameter to compute the best agent response. 
+
+\par For each possible utterance chosen by the user, we define a dialogue tree with all the agent possible responses. The tree root is the user utterance. The branches of the tree aim to reflect the possible behaviors related to the dominance in negotiation. 
+ The verbal behaviors of dominance that we represent in our model cover three principals:
+
+\begin{enumerate}
+	\item Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. While, the submissive negotiator is dependent and take in consideration the other negotiator preferences  to make a decision.
+	\item Dominant negotiator is very demanding and  refuse to make concessions, while the submissive agent is the opposite.
+	\item Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation. 
+\end{enumerate}
+
+We note that a peer negotiator, since it is a \emph{cooperative negotiation} adopts a behavior in which he tries to find a threshold between its preferences and the other negotiator preferences.
+
+\par We explicit in the following our dialogue trees and explain how they capture the specific behaviors of dominance. First, each branch of a tree  is defined with an applicability condition that respects the perceived relation of the dominance in addition to the current state of the negotiation. 
+
+ 
 \noindent 
 \vskip 4pt
 \bibliographystyle{plain}
