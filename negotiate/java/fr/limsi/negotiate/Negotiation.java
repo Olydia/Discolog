@@ -525,7 +525,6 @@ public class Negotiation<O extends Option> {
 				return new ValuePreference<Criterion> (null, userStatement.getMore());
 			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()) && 
 					!isInOAS(userStatement.getMore(), null))
-				//System.out.println("je dois etre ici");
 				return new ValuePreference<Criterion> (userStatement.getMore(), null);
 			
 			if(userStatement.getLess().equals(model.getSelf().getMostPreferred()) && 
@@ -533,7 +532,6 @@ public class Negotiation<O extends Option> {
 				return new ValuePreference<Criterion> (null, userStatement.getLess());
 			if(userStatement.getLess().equals(model.getSelf().getLeastPreferred()) && 
 					!isInOAS(userStatement.getLess(), null))
-				//System.out.println("je dois etre ici");
 				return new ValuePreference<Criterion> (userStatement.getLess(), null);
 			
 //			// The agent reacts to the stated Preference

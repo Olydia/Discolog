@@ -81,6 +81,7 @@ In the literature \cite{dodgson2009multi}, preference of one option over others 
 
 
 \subsection{Decision based on preferences in our model}
+\label{scores}
 \par To produce dialogue with cooperative negotiation, interlocutors have to take coherent decisions about their preferences over options of a certain topic. Decision on options imply comparing theses options based on interlocutors preferences.  
  Since defining preferences over options is a multi criteria decision that involves calculating how well each option performs on its set of criteria. We have to build a \textbf{preference model }that contains interlocutors preferences on criteria, from which we can infer option preferences.  
 In the following, we present the different elements of the preference model noted \textbf{$\mathcal{P}$} : 
@@ -294,7 +295,86 @@ We note that a peer negotiator, since it is a \emph{cooperative negotiation} ado
 
 \par We explicit in the following our dialogue trees and explain how they capture the specific behaviors of dominance. First, each branch of a tree  is defined with an applicability condition that respects the perceived relation of the dominance in addition to the current state of the negotiation. 
 
+\par The first principal we investigate is the level of demand and concession of the agent depending on the relation of dominance. Indeed, in our model of negotiation, the agent is able to rate each criterion and option using functions presented in section \ref{scores}. We define a function (depicted in \fig{pseudo}) that calculates either a value is acceptable for the agent. A dominant agent only likes values with the best scores. Whereas, a submissive agent make concession. Thus, if the other agent insists on a value, the agent will feel obliged to accept this value, because he is dependent to the other. This function is used in several trees in order to compute either a discussed might be accepted.
+
+ 	\begin{figure}[]
+ 		\begin{algorithmic}[1]\small
+ 			\Function{isAcceptable}{$value$, $relation$}
+ 			
+ 			\If{($relation = dominant$)} 
+ 			\State return $(score(value)> bestScoreOfPreference \times 0.7)$
+ 			\EndIf
+ 			\If{($relation = peer$)} 
+ 			\State return $(score(value)> 0)$
+ 			\EndIf
+ 			\If{($relation = sub$)} 
+ 			\State return $(score(value)> 0$  or $isInOAS(value))$
+ 			\EndIf
+ 			\EndFunction
+ 		\end{algorithmic}
+ 		\vskip 8pt
+ 		\defig{pseudo}{Function to compute the acceptability of a value of preference}
+ 	\end{figure} 
+ 	
+\subsection{StatePreference (less,more)}
+When the user states a preference that we note StatePreference(less,more), where $less, more \in C$.  We modeled the tree of choices, where each branch depends on the satisfiability of an applicability condition. Each branch of the trees is explained bellow:
+ 		\subsubsection{Propose(More):} The agent might propose the stated value. A propose is made only if the value is \emph{acceptable} for the agent. The acceptability of a value is computed with the function \emph{isAcceptable} (see \fig{pseudo}) as explained previously. Furthermore, this behavior reproduce the first principal of dominant behavior, the dominant agent only proposes something he likes, whereas the submissive agent is able to make concession if the other keeps proposing this value. 
+ 		
+ 		\subsubsection{StatePreference(less', more')} :If the stated preference don't meet the agent preferences. The agent will express its preferences about the expressed preferences using the algorithm depicted in \fig{react}, in order to make the dialogue going and share knowledge with the other.
+ 	\begin{figure}[h]
+ 		\begin{algorithmic}[1]\small
+ 			\Function{reactToUser}{$less$, $more$}
+ 			
+ 			\If{($more = MostPrefferedValue()$ and $ (*, more) \notin OAS$)} 
+ 			\State return $(*, more)$
+ 			\EndIf
+ 			\If{($more = LeastPrefferedValue()$ and $ (more, *) \notin OAS$)} 
+ 			\State return $(more, *) $
+ 			\EndIf
+ 			\State The conditions $(2,4)$ are also applied for $less$
+ 			\State $(less',more') = computePreference(less,more)$
+ 			\If {$(less',more') \in OAS$}
+ 			\State $(less1,more1)= reactToCriterion(more)$
+ 			\If {$(less1,more1)=null$}
+ 			\State $(less2,more2)= reactToCriterion(less)$
+ 			\If{ $(less2,more2)=null$}
+ 			\State return $(less',more')$
+ 			\Else  
+ 			return $(less2,more2)$
+ 			\EndIf
+ 			\EndIf
+ 			\EndIf
+ 			\State return $(less', more')$
+ 			\EndFunction
+ 			
+ 		\end{algorithmic}
+ 		\vskip 8pt
+ 		\defig{react}{Function to react to a preference (less,more)}
+ 	\end{figure}
  
+ \subsection{Propose(Proposal)}
+ 
+ \subsubsection{Booking:} In the case where the other proposes an option which \emph{isAcceptable} for the agent, this later calls the task \textit{Booking}, to ask the user to book a table for the restaurant. In addition, the agent has to be dominant, which represents the third principal, where the agent controls the flow the conversation.
+ 
+ \subsubsection{Accept(Proposal):} the user proposes a value for a criterion that \emph{isAcceptable} for the agent. Thus, the agent expresses an accept.
+ 
+ 
+ \subsubsection{Propose(Proposal'):} The other proposes a proposal which is not acceptable for the agent. This branch is applicable only if the agent is dominant. Indeed, the dominant agent is demanding and self centered. He will thus try to control the flow of the negotiation in order to satisfy his preferences and  make other proposal which he's susceptible to accept.
+ 
+ \subsubsection{StatePreference(less,more):} The user proposes a proposal which is not acceptable for the agent, and the agent is submissive and dependent in its relation with the user. Instead of expressing a reject, the submissive agent will express a statement to express that the proposed value doesn't suit its preferences. In the case of an option, the agent computes the least scored value of this option to explain why he doesn't accept the proposal.
+ 
+ \subsubsection{Reject(Proposal):} In the same case where the proposed value is not acceptable but the agent has not to be submissive to express his reject.
+ 
+ \subsection{Accept(Proposal)}
+ \subsubsection{Booking: } When the other accepts an option proposal , the agent closes the negotiation by proposing to book a table for the accepted restaurant (option).
+ 
+ \subsubsection{Propose(ProposalO):} With respect of the third principal, when a user accepts a criterion proposal, a non-submissive agent keeps  the negotiation going and proposes an option that is defined with the accepted value. Moreover, the proposed option suits it preferences as presented in the first principal. 
+ \par A submissive agent will only propose an option, if he collects the preferences of the other on all the values for each criterion of the topic.  The proposed option is defined with all the accepted values.
+ \par after accepting a value for a criterion, the agent opens a negotiation about another criterion of the topic to keep going on the negotiation. Wi distinguish three different responses with respect of the first principal of dominant behavior, that we present in the next sections.
+ 
+ \subsubsection{StatePreference(less,more)}:  A peer agent opens a new subtopic or a negotiation on a criterion by expressing his preferences on this criterion.
+ \subsubsection{AskPreference(less,more)}:  A submissive agent considers the preferences of the other in his decision making. Thus, to open a new negotiation on a criterion, he asks the other about his preferences on this criterion.
+ \subsubsection {Propose(Proposal):} a dominant agent only considers his preferences. Thus, he directs the negotiation to satisfy them, by proposing his most preferred value on the new criterion. 
 \noindent 
 \vskip 4pt
 \bibliographystyle{plain}
