@@ -315,7 +315,14 @@ We note that a peer negotiator, since it is a \emph{cooperative negotiation} ado
  		\vskip 8pt
  		\defig{pseudo}{Function to compute the acceptability of a value of preference}
  	\end{figure} 
- 	
+\subsection{Open a negotiation}
+When a cooperative negotiate starts, the agent and the other will follow a specific strategy depending on their perception of their relation of dominance. Therefore, we defined a tree dialogue that define how the agent opens a negotiation with respect of its perception of the relation.
+\subsubsection{Dominant / submissive start}
+
+The third principal of dominance explains that a dominant agent tend to control the conversation and the first one explains that he only cares about his preferences. Therefore, a dominant agent will propose his most preferred value to open the negotiation. In the contrary, a submissive agent is dependent. Therefore, he will wait to the other to open the negotiation.
+
+\subsubsection{Peer start} Since, the negotiation is cooperative, a peer agent will tend to share his knowledge in order to find 
+the best compromise between both preferences. Thus, a peer agent will state his preferences about his most preferred or important criterion.
 \subsection{StatePreference (less,more)}
 When the user states a preference that we note StatePreference(less,more), where $less, more \in C$.  We modeled the tree of choices, where each branch depends on the satisfiability of an applicability condition. Each branch of the trees is explained bellow:
  		\subsubsection{Propose(More):} The agent might propose the stated value. A propose is made only if the value is \emph{acceptable} for the agent. The acceptability of a value is computed with the function \emph{isAcceptable} (see \fig{pseudo}) as explained previously. Furthermore, this behavior reproduce the first principal of dominant behavior, the dominant agent only proposes something he likes, whereas the submissive agent is able to make concession if the other keeps proposing this value. 
@@ -369,12 +376,47 @@ When the user states a preference that we note StatePreference(less,more), where
  \subsubsection{Booking: } When the other accepts an option proposal , the agent closes the negotiation by proposing to book a table for the accepted restaurant (option).
  
  \subsubsection{Propose(ProposalO):} With respect of the third principal, when a user accepts a criterion proposal, a non-submissive agent keeps  the negotiation going and proposes an option that is defined with the accepted value. Moreover, the proposed option suits it preferences as presented in the first principal. 
- \par A submissive agent will only propose an option, if he collects the preferences of the other on all the values for each criterion of the topic.  The proposed option is defined with all the accepted values.
- \par after accepting a value for a criterion, the agent opens a negotiation about another criterion of the topic to keep going on the negotiation. Wi distinguish three different responses with respect of the first principal of dominant behavior, that we present in the next sections.
+ \par A submissive agent will only propose an option, if he collects knowledge on the preferences of the other for all the values of each criterion of the topic.  The proposed option is defined with all the accepted values.
+ \par after accepting a value for a criterion, the agent opens a negotiation about another criterion of the topic. We distinguish three different responses with respect of the first principal of dominant behavior, that we present in the next sections.
  
  \subsubsection{StatePreference(less,more)}:  A peer agent opens a new subtopic or a negotiation on a criterion by expressing his preferences on this criterion.
  \subsubsection{AskPreference(less,more)}:  A submissive agent considers the preferences of the other in his decision making. Thus, to open a new negotiation on a criterion, he asks the other about his preferences on this criterion.
  \subsubsection {Propose(Proposal):} a dominant agent only considers his preferences. Thus, he directs the negotiation to satisfy them, by proposing his most preferred value on the new criterion. 
+ 
+ \subsection{Reject(Proposal)}
+ 	When the other rejects an agent proposal, the agent reacts differently if the proposal is either is an option or a criterion proposal.
+ 		\subsubsection{Reject(criterion)}
+ 		\begin{itemize}
+ 			\item \textbf{Propose(Proposal):} This branch of the tree is called if the rejected proposal value is the agent most preferred value for the discussed criterion, in addition, the agent is dominant. Therefore, with respect of all the principals of dominant behaviors , the agent will repropose over the rejected proposal.
+ 			\item \textbf{AskPreference(less,more):} In the opposite of the previous branch, when a submissive agent receives a reject, and because of his dependence to the other. he will assume that his knowledge is not sufficient to negotiate. Therefore, he asks the user about his preferences on the current discussed negotiation. 
+ 			\item \textbf{StatePreference(less,more):} A peer agent will keep the negotiation going by sharing his preferences on the current discussed criterion.
+ 			\item\textbf{Propose(Proposal'):} A dominant agent leads the negotiation and keeps on proposing values on the discussed criterion. This behavior respects out third principal of dominant behavior.
+ 			
+ 		\end{itemize}
+
+ 		
+ 		\subsubsection{Reject(Option)}
+ 		\begin{itemize}
+ 			\item \textbf{Propose(Proposal):} If the reject option is the most preferred option of the agent, and the agent is dominant, he will keep proposing this option, which depicted the first and third principals of dominant behaviors.
+ 			
+ 			\item \textbf{AskPreference(less,more)}: An option proposal is always proposed by the agent when at least a criterion proposal has been accepted. Therefore, if the user rejects an option proposal, means that the agent still ignores the other preferences about the different criteria of an option. The submissive agent which is dependent to the other will try to gather more knowledge.
+ 			
+ 			\item \textbf{StatePreference(less,more)} : the peer agent follows the same behavior of gathering knowledge on preferences about the remaining  criteria oh the options. Therefore, he opens the negotiation by stating his preferences on the new discussed criterion. By consequence, the agent manages the flow of the negotiation. 
+ 			
+ 			\item \textbf{Propose(Proposal'):} when a non submissive agent receive a reject, he will want to continue the negotiation by proposing other proposals. The agent continues the negotiation by proposing other proposals, which the third principal.
+	\end{itemize}
+\subsection{AskPreference(less, more)} Inependently to the relation of dominance, when the agent has been asked to express his preferences. The only possible response is to state his preferences \textbf{StatePreference(less, more)}.
+
+
+
+\section{Procedure of validation}
+We defined in our model a set of behaviors related to the dominance. We aim in this study to validate the perception of these behaviors and their coherence during the dialogue.
+\par we thus conduct a first study in which participants analyze the behavior of  two agents (agentA, agentB)  that participate to a cooperative negotiation on the topic of restaurants. Each agent runs our model of negotiation and share a perception of their relation of dominance. We present in this section the conditions of our study.
+
+\subsection{Conditions of the study}
+We define two conditions for our study. Fist, the perception of the relation of dominance which is asymmetric and static in time. Second, the difference between the preferences of both agents. Indeed, agents which share similar preferences will tend to converge easily to a solution. 
+
+
 \noindent 
 \vskip 4pt
 \bibliographystyle{plain}
