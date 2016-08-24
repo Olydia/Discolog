@@ -3,23 +3,36 @@
 #Agent 1 is peer, its preference model is D2
 #Agent 2 is peer, its preference model is D1.
 #please check the file 'PREF.pdf' for the preference models
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
+
+# FLOW, Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation.
+
+#DEMAND,Dominant negotiator is very demanding and refuse to make concessions,while the submissive agent is the opposite.
+
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
 
     Agent1 says "Should we achieve Top?"
   > next
     Agent2 says "Let's achieve Top."
   > next
+#OTHER : a peer agent tries to find an option that suits both agent preferences. Therefore he strats by collecting information about agent2 preferences
     Agent1 says "What kind of Ambiance do you like?"
   > next
-    Agent2 says "CALM is my favorite Ambiance."
+    Agent2 says "calm is my favorite Ambiance."
   > next
-    Agent1 says "I propose that we choose CALM Ambiance."
+#FLOW
+    Agent1 says "I propose that we choose calm Ambiance."
   > next
-    Agent2 says "Okay, let's choose CALM."
+    Agent2 says "Okay, let's choose calm."
   > next
-    Agent1 says "I propose that we choose LE_PARISIEN Restaurant."
+    Agent1 says "I propose that we choose le parisien restaurant."
   > next
+#DEMAND: the proposed value is not acceptable so, he refuses it
     Agent2 says "Sorry, I'd rather choose something else."
   > next
+#OTHER + FLOW: After a reject, agent  will try to know better what agent 2 likes about the other criteria.
     Agent1 says "For Cuisine, do you prefer TURKISH or CHINESE?"
   > next
     Agent2 says "CHINESE is my favorite Cuisine."

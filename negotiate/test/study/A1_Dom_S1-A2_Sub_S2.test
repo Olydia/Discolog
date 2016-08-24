@@ -3,9 +3,16 @@
 #Agent 1 is dominant, its preference model is S1
 #Agent 2 is submissive, its preference model is S2.
 #please check the file 'PREF.pdf'  for the preference models
+#Agent 1 is dominant, its preference model is S2
+#Agent 2 is submissive, its preference model is S1.
+#please check the file 'PREF.pdf'  for the preference models
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
 
     Agent1 says "Should we achieve Top?"
   > next
+#(see A1_DOM_S2-Sub-s1.test for the annotation. Same principals showed in the dialogue)
     Agent2 says "Let's achieve Top."
   > next
     Agent1 says "I propose that we choose CHINESE Cuisine."

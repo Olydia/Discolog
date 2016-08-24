@@ -3,17 +3,30 @@
 #Agent 1 is dominant, its preference model is D2
 #Agent 2 is submissive, its preference model is D1.
 #please check the file 'PREF.pdf'  for the preference models
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
+
+# FLOW, Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation.
+
+#DEMAND,Dominant negotiator is very demanding and refuse to make concessions,while the submissive agent is the opposite.
+
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
 
     Agent1 says "Should we achieve Top?"
   > next
     Agent2 says "Let's achieve Top."
   > next
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
     Agent1 says "I propose that we choose CALM Ambiance."
   > next
+#DEMAND: as the proposed value is acceptable for agent2, he accepts it
     Agent2 says "Okay, let's choose CALM."
   > next
+#FLOW: agent1 continues to lead the negotiation by proposing a calm restaurant that he likes
     Agent1 says "I propose that we choose LE_PARISIEN Restaurant."
   > next
+#DEMAND
     Agent2 says "Okay, I'll call to book a table."
   > history
 
