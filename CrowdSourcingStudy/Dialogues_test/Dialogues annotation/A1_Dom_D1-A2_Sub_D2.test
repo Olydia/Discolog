@@ -1,0 +1,45 @@
+#Agent 1 is dominant, its preference model is D1
+#Agent 2 is submissive, its preference model is D2.
+#please check the file 'PREF.pdf'  for the preference models 
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
+
+# FLOW, Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation.
+
+#DEMAND,Dominant negotiator is very demanding and refuse to make concessions,while the submissive agent is the opposite.
+
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
+
+  Agent1 says "I propose that we choose chinese cuisine."
+
+
+#DEMAND + OTHER: agent 2 is dependent to agent 1, instead of rejecting the proposal he justify the fact that he likes something else. 
+
+    Agent2 says "I prefer french over chinese."
+
+# Preferences exchange is independant of the relation of dominance. It respects the flow of the negotiation
+
+    Agent1 says "chinese is my favorite cuisine."
+
+    Agent2 says "I prefer turkish over chinese."
+
+    Agent1 says "I prefer chinese over turkish."
+
+    Agent2 says "I prefer french over turkish."
+
+# DEMAND: here agent 1 expresses that he preferes F over T. However, F is not an acceptable value (SEE section that explains the acceptablity of a value), which explains the fact that agent 1 did not propose f. 
+    Agent1 says "I prefer french over turkish."
+
+# OTHER: agent 2 likes F and thinks that agent 1 does too. Therefore, he proposes the value.
+    Agent2 says "I propose that we choose french cuisine."
+
+# DEMAND, OTHER, FLOW: In this case, agent 1 counter proposes a value that he prefers the most which show that he's demanding and he want to control the flow of the negotiation, the counter proposal is different from agent 2 proposal which proves that he ignore him in the decision making.
+    Agent1 says "I propose that we choose DRAGON restaurant."
+
+# DEMAND: Agent 2 is not very demanding. Therefore he accepts this option proposal which close the negotiation
+    Agent2 says "Okay, I'll call to book a table."
+
+    Agent1 says "Ok."
+
+    Agent2 says "Ok."

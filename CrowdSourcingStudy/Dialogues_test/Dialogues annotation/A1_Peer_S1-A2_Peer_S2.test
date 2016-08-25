@@ -3,37 +3,43 @@
 #Agent 1 is peer, its preference model is S1
 #Agent 2 is peer, its preference model is S2.
 #please check the file 'PREF.pdf'  for the preference models
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
+# FLOW, Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation.
+#DEMAND,Dominant negotiator is very demanding and refuse to make concessions,while the submissive agent is the opposite.
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
 
     Agent1 says "Should we achieve Top?"
-  > NEXT
+
     Agent2 says "Let's achieve Top."
-  > next
+#OTHER: agent1 cares about agent2 preferences in order to take a decision
     Agent1 says "What kind of cuisine do you like?"
-  > next
+
     Agent2 says "japanese is my favorite cuisine."
-  > next
+#FLOW + OTHER: agent1 knows that agent2 likes french and agent1 too, so he proposes the value
     Agent1 says "I propose that we choose japanese cuisine."
-  > next
+
     Agent2 says "Okay, let's choose japanese."
-  > next
+#FLOW
     Agent1 says "I propose that we choose samura restaurant."
-  > next
+#DEMAND
     Agent2 says "Sorry, I'd rather choose something else."
-  > next
+#OTHER
     Agent1 says "For ambiance, do you prefer calm or noisy?"
-  > next
+
     Agent2 says "calm is my favorite ambiance."
-  > next
+#FLOW
     Agent1 says "I propose that we choose calm ambiance."
-  > next
+
     Agent2 says "Okay, let's choose calm."
-  > next
+#FLOW
     Agent1 says "I propose that we choose jiliya restaurant."
-  > next
+
     Agent2 says "Okay, I'll call to book a table."
-  > next
+
     Agent1 says "Ok."
-  > next
+
     Agent2 says "Ok."
-  > quit
+
     

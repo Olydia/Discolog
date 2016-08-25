@@ -1,0 +1,17 @@
+
+1. Dialogue moves :
+
+	1.1 Dominant behavior: A dominant agent is self centered, it leads the dialogue to satisfy its own preferences,For example, if the user states a preference, the dominant agent proposes the user preferred value only if it meets its preferences. In the same principal, the dominant agent accepts a  proposals only if it meets its preferences.
+	1.2. a submissive agent directs the dialogue in order to satisfy the user preferences at the expense of its preferences. For example, the agent proposes directly a value if its is stated by the user.
+	1.3. Open a negotiation about a new criterion: 
+		1.3.1 The dominant agent will either propose a value or state a preference that concenrs its preferences.
+		1.3.2 The submissive will instead collect more knowledge about the user preferences. Thus, it asks the user about his preferences on the new criterion.
+
+
+2. Linguistic style :
+	2.1 Dominant behavior: The agent is able to express several times the same statement or a proposal, if this later is its most preferred value. In addition, its able to express a reject if a value is not preferred, or it counterproposes a more preferred value.
+
+	2.2. Submissive behavior: the agent expresses its preferences only if the user ask him. In the case where the user proposes a proposal that doesn't meet the agent preferences, the agent will express a preference to make know that he doesnt like the proposal rather than a clear reject. 
+
+
+

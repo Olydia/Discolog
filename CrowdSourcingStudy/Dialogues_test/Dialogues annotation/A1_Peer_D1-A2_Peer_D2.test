@@ -1,0 +1,39 @@
+    # 21 juil. 2016 15:50:04 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+#Agent 1 is peer, its preference model is D1
+#Agent 2 is peer, its preference model is D2.
+#please check the file 'PREF.pdf'  for the preference models
+
+#Principals: 
+#OTHER, Dominant negotiator tends to not pay attention to the other negotiator and is only concerned by satisfying its preferences. 
+#While, the submissive negotiator is dependent and take in consideration the other negotiator preferences to make a decision
+
+# FLOW, Dominant negotiator tends to take the control of the dialogue, in term of controlling the flow of the dialogue and orient the negotiation.
+
+#DEMAND,Dominant negotiator is very demanding and refuse to make concessions,while the submissive agent is the opposite.
+
+#OTHER + FLOW : its always the dominant agent who opens the negotiation. He opens the negotiation by proposing a value that he likes the most for its most important criterion.
+
+
+    Agent1 says "Should we achieve Top?"
+  >  next
+    Agent2 says "Let's achieve Top."
+
+#OTHER : a peer agent tries to find an option that suits both agent preferences. Therefore he strats by collecting information about agent2 preferences
+    Agent1 says "What kind of Cuisine do you like?"
+
+    Agent2 says "FRENCH is my favorite Cuisine."
+
+#OTHER + DEMAND: both agent take in consideration the preferences of the other
+    Agent1 says "I propose that we choose FRENCH Cuisine."
+
+    Agent2 says "Okay, let's choose FRENCH."
+#FLOW
+    Agent1 says "I propose that we choose VICTOR Restaurant."
+
+    Agent2 says "Okay, I'll call to book a table."
+
+    Agent1 says "Ok."
+
+    Agent2 says "Ok."
+  
