@@ -205,7 +205,6 @@ public class CriterionNegotiation<C extends Criterion> {
 			return new ValuePreference<C> (null, criterion);
 		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
 				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null))){
-			//System.out.println("je dois etre ici");
 			return new ValuePreference<C> (criterion, null);
 
 		}
@@ -221,8 +220,9 @@ public class CriterionNegotiation<C extends Criterion> {
 				if(!oas.getPreferences().contains(v))
 					return v;
 			}
-			return null;	
 		}		
+		return (getPreference(getSelf(),getOas()));
+
 	}
 
 }

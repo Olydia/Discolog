@@ -38,7 +38,7 @@ public class Negotiation<O extends Option> {
 	public Option[] getOptions(){
 		return (type.getEnumConstants()); 
 	}
-	
+
 	public Option getOptionWithValue(Criterion criterion){
 		List<Option> options = sortOptions(getOptionsWithoutStatus(Proposal.Status.REJECTED));
 		Class<? extends Criterion> CriterionType = criterion.getClass();
@@ -50,9 +50,9 @@ public class Negotiation<O extends Option> {
 	}
 	public List<OptionProposal> getProposals() {
 		return proposals;
-		
+
 	}
-	
+
 	public List<Option> getOptionsPropWithStatus(Proposal.Status status) {
 		List<Option> pStatus = new ArrayList<Option>();	
 		for (OptionProposal p: proposals){
@@ -100,30 +100,30 @@ public class Negotiation<O extends Option> {
 		}
 		return Utility;
 	}
-	
+
 	public Criterion LeastScoredCriterion (O option){
 		// initialiser la valeur de minUtility
 		Class<? extends Criterion> min= option.getCriteria().get(0);
 		Criterion leastScored = option.getValue(min);
 		int minUtility = criteriaPreferences.getRank(min) * 
 				getCriterionNegotiation(min).getSelf().getScore(option.getValue(min));
-		
+
 		for (Class<? extends Criterion> cr: option.getCriteria()){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(cr);
-//			// get the type of the criterion
+			//			// get the type of the criterion
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(cr);
 			int utility = rank * criterion.getSelf().getScore(option.getValue(cr));
 			if(minUtility < utility){
 				minUtility = utility;
 				leastScored = option.getValue(cr);
-				
+
 			}
-				
+
 		}
 		return leastScored;
 	}
-	
+
 	public O getPreferredOption(O firstOption, O secondOption) {
 
 		// 2. en regardant les proposals
@@ -231,22 +231,22 @@ public class Negotiation<O extends Option> {
 
 	public boolean isAcceptableOption(Option option, int dom){
 
-	List<Option> options =	(List<Option>) (Arrays.asList(getOptions()));
-				//getOptionsWithoutStatus(Proposal.Status.REJECTED);
+		List<Option> options =	(Arrays.asList(getOptions()));
+		//getOptionsWithoutStatus(Proposal.Status.REJECTED);
 		if(this.optionUtility(option)< 0 && dom>0)
 			return false;
 		else {
 			List<Option> sortedOptions = sortOptions(options);
 			if (dom== 0)
-				 return sortedOptions.indexOf(option)< sortedOptions.size()/2 ;
-				
+				return sortedOptions.indexOf(option)< sortedOptions.size()/2 ;
+
 			if (dom >0) 
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
 			else 
 				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
 						checkStatus(option).equals(Proposal.Status.OPEN));
 		}
-	
+
 	}
 	public boolean isAcceptable (Proposal proposal, int dom){
 
@@ -271,9 +271,9 @@ public class Negotiation<O extends Option> {
 	public ValuePreference<Criterion> reactToRejectedProp(Proposal proposal){
 		Criterion value = Cuisine.ITALIAN;
 		this.criteriaNegotiation.get(0).getSelf().getPreferences().get(0);
-		
+
 		if(proposal instanceof CriterionProposal){
-			 value = (Criterion) proposal.getValue();
+			value = (Criterion) proposal.getValue();
 
 
 		}
@@ -281,17 +281,17 @@ public class Negotiation<O extends Option> {
 			value = LeastScoredCriterion((O) proposal.getValue());
 
 		}
-		
+
 		return(new ValuePreference<Criterion>(value, currentMostPreferredCriterion(value)));
 
-			
+
 	}
 	public List<Option> sortOptions( List<Option> options) {
-		
+
 		// Supprimer les options qui contiennent au moins un critere rejeté.
 		// pour chaque critere recuper la liste de criteres rejeté.
 		// pour chaque valeur de l'option voir si elle appartient a cette liste de critere rejeté si oui remove lement
-		
+
 		options.sort(new Comparator<Option>() {
 			@Override
 			public int compare(Option o1, Option o2){
@@ -303,12 +303,11 @@ public class Negotiation<O extends Option> {
 
 
 	private ArrayList<Option> getOptionsWithoutStatus(Proposal.Status status) {
-		ArrayList<Option> options = new ArrayList<Option>((List<Option>) 
-				Arrays.asList(this.getOptions()));
-		
+		ArrayList<Option> options = new ArrayList<Option>(Arrays.asList(this.getOptions()));
+
 		List<Option> optionsWithStatus = getOptionsPropWithStatus(status);
 		for (CriterionNegotiation<Criterion> CN : criteriaNegotiation) {
-			
+
 			List<Criterion> rejected = CN.getProposals(status);
 			Iterator<Option> it = options.iterator();
 
@@ -322,10 +321,10 @@ public class Negotiation<O extends Option> {
 		}
 		return options;
 	}
-	
+
 	// getAcceptableOptions computes the utility of all the remaining options that are not rejected yet and returns
 	//whom are acceptables following the agent preferences
-	
+
 	public ArrayList<Option> getAcceptableOptions (int dom){
 		ArrayList<Option> acceptableOptions = new ArrayList<Option>();
 		for (Option O: getOptionsWithoutStatus(Proposal.Status.REJECTED)){
@@ -334,7 +333,7 @@ public class Negotiation<O extends Option> {
 		}
 		return acceptableOptions;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void addProposal(Proposal proposal) {
 		if (proposal instanceof CriterionProposal) {
@@ -347,7 +346,7 @@ public class Negotiation<O extends Option> {
 			this.propose((OptionProposal) proposal);
 	}
 
-	
+
 	public void updateProposalStatus(Proposal proposal, Status status) {
 		// update the dialogue context
 		if (proposal instanceof CriterionProposal) {
@@ -379,7 +378,7 @@ public class Negotiation<O extends Option> {
 			// get the index of the criterionNegotiation of type
 			int indexList = criteriaNegotiation.indexOf(criterionNegotiation);
 			status = criteriaNegotiation.get(indexList).checkStatus((Criterion) proposal.getValue());
-		
+
 		}
 
 		if(proposal instanceof OptionProposal){
@@ -410,24 +409,23 @@ public class Negotiation<O extends Option> {
 
 		return (getCriterionNegotiation(criterion).getSelf().getMostPreferred());
 	}
-	
+
 	public Criterion currentMostPreferredCriterion (Class <? extends Criterion> criterion) {
 
 		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered());
 	}
-	
+
 	public Criterion currentMostPreferredCriterion (Criterion criterion) {
 
 		return (getCriterionNegotiation(criterion.getClass()).getTheCurrentMostPreffered());
 	}
-	
+
 	public Option mostPreferredOption(){
-		ArrayList<Option> options = new ArrayList<Option>((List<Option>) 
-				Arrays.asList(this.getOptions()));
+		ArrayList<Option> options = new ArrayList<Option>(Arrays.asList(this.getOptions()));
 		return(sortOptions(options).get(0));
 
 	}
-	
+
 	public Option currentMostPreferredOption(){
 		ArrayList<Option> options =	getOptionsWithoutStatus(Proposal.Status.REJECTED);
 		if(!options.isEmpty())
@@ -439,7 +437,7 @@ public class Negotiation<O extends Option> {
 	public CriterionProposal generateRandomCriterionProposal (Class <? extends Criterion> criterion){
 		return (new CriterionProposal(true, currentMostPreferredCriterion(criterion)));
 	}
-	
+
 	public OptionProposal generateRandomOptionProposal(){
 		return (new OptionProposal(true, currentMostPreferredOption()));
 
@@ -451,22 +449,22 @@ public class Negotiation<O extends Option> {
 			Class<? extends Criterion> topic =  openNewTopic();
 			if(topic!= null)
 				return getRandomPreference(topic) ;
-				 
-			 else {
-				 int criterionModel = new Random().nextInt((this.criteriaNegotiation.size()));
-				 CriterionNegotiation<Criterion> randomCN =this.criteriaNegotiation.get(criterionModel);
-				 int index = new Random().nextInt((randomCN.getSelf().getPreferences().size()));
-				 return (randomCN.getSelf().getPreferences().get(index));
-			 }
-//				 return (model.getSelf().getPreferences().
-//							get(new Random().
-//									nextInt(model.getSelf().getPreferences().size()-1)));
+
+			else {
+				int criterionModel = new Random().nextInt((this.criteriaNegotiation.size()));
+				CriterionNegotiation<Criterion> randomCN =this.criteriaNegotiation.get(criterionModel);
+				int index = new Random().nextInt((randomCN.getSelf().getPreferences().size()));
+				return (randomCN.getSelf().getPreferences().get(index));
+			}
+			//				 return (model.getSelf().getPreferences().
+			//							get(new Random().
+			//									nextInt(model.getSelf().getPreferences().size()-1)));
 		}
 		else 
 			return model.getPreference(model.getSelf(),model.getOas()) ;
-		
-		
-				
+
+
+
 	}
 
 	public ValuePreference<Criterion> askUserPreference (Class<? extends Criterion> c){
@@ -478,11 +476,11 @@ public class Negotiation<O extends Option> {
 		// trier par order de pr�fence 
 		// get score des elements de lastStaement 
 		// enlever ceux qui sont dans oas
-	
+
 		if (this.context.getLastStatement(uttType,true) != null) {
 			ValuePreference<Criterion> userStatement = context.getLastStatement(uttType,true).
-																getStatedPreference();
-			
+					getStatedPreference();
+
 			if(userStatement.getLess() == null && userStatement.getMore() == null){
 				Criterion mostPref = this.getCriterionNegotiation(context.getLastStatement(uttType,true).getType()).getSelf().
 						getMostPreferred();
@@ -493,69 +491,72 @@ public class Negotiation<O extends Option> {
 		}
 		// if there is no statement to react to, state the mostPreferred value 
 		// of the current discussed criterion.
-	
-		Criterion best = this.getCriterionNegotiation(this.context.getCurrentDiscussedCriterion()).getTheCurrentMostPreffered();
+
+		Criterion best = this.getCriterionNegotiation(this.context.getCurrentDiscussedCriterion()).
+				getTheCurrentMostPreffered();
 		return new ValuePreference<Criterion>(null, best);
 
 	}
 
 	public ValuePreference<Criterion> reactToProposal(CriterionProposal p){
 		Criterion criterion = p.getValue();
-	
+
 		return (computePreference(new ValuePreference<Criterion>(null,criterion)));
 	}
 
 
 	public ValuePreference<Criterion> computePreference(ValuePreference<Criterion> userStatement){
-
-			if(userStatement.getLess() == null){
-				CriterionNegotiation<Criterion> modelFromMore = this.getCriterionNegotiation(userStatement.getMore().getClass());
-				return (modelFromMore.reactToCriterion(userStatement.getMore()));
-			}
-			if(userStatement.getMore() == null){
-				CriterionNegotiation<Criterion> modelFromLess = this.getCriterionNegotiation(userStatement.getLess().getClass());
-				return (modelFromLess.reactToCriterion(userStatement.getLess()));
-			}
-			
-			CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(userStatement.getMore().getClass());
-			// Check if its is equal to the mostPref value and it is not stated 
-			
-			if(userStatement.getMore().equals(model.getSelf().getMostPreferred()) && 
-					!this.isInOAS(null, userStatement.getMore()))
-				return new ValuePreference<Criterion> (null, userStatement.getMore());
-			if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()) && 
-					!isInOAS(userStatement.getMore(), null))
-				return new ValuePreference<Criterion> (userStatement.getMore(), null);
-			
-			if(userStatement.getLess().equals(model.getSelf().getMostPreferred()) && 
-					!isInOAS(null, userStatement.getLess()))
-				return new ValuePreference<Criterion> (null, userStatement.getLess());
-			if(userStatement.getLess().equals(model.getSelf().getLeastPreferred()) && 
-					!isInOAS(userStatement.getLess(), null))
-				return new ValuePreference<Criterion> (userStatement.getLess(), null);
-			
-//			// The agent reacts to the stated Preference
-			ValuePreference<Criterion> c = (model.getSelf().
-					isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
-						new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
-			// If the preference is not expressed 
-			if (isInOAS(c.getLess(),c.getMore())){
-				ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
-				if ( more == null){
-					ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
-					if(less == null)
-						return c;
-					else 
-						return less;
-				}
-					return more;
-			
-			}
-			return c; 
-					
+		
+		if(userStatement.getLess() == null){
+			CriterionNegotiation<Criterion> modelFromMore = this.getCriterionNegotiation
+					(userStatement.getMore().getClass());
+			return (modelFromMore.reactToCriterion(userStatement.getMore()));
+		}
+		if(userStatement.getMore() == null){
+			CriterionNegotiation<Criterion> modelFromLess = this.getCriterionNegotiation
+					(userStatement.getLess().getClass());
+			return (modelFromLess.reactToCriterion(userStatement.getLess()));
 		}
 
-	
+		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation
+				(userStatement.getMore().getClass());
+		// Check if its is equal to the mostPref value and it is not stated 
+
+		if(userStatement.getMore().equals(model.getSelf().getMostPreferred()) && 
+				!this.isInOAS(null, userStatement.getMore()))
+			return new ValuePreference<Criterion> (null, userStatement.getMore());
+		if(userStatement.getMore().equals(model.getSelf().getLeastPreferred()) && 
+				!isInOAS(userStatement.getMore(), null))
+			return new ValuePreference<Criterion> (userStatement.getMore(), null);
+
+		if(userStatement.getLess().equals(model.getSelf().getMostPreferred()) && 
+				!isInOAS(null, userStatement.getLess()))
+			return new ValuePreference<Criterion> (null, userStatement.getLess());
+		if(userStatement.getLess().equals(model.getSelf().getLeastPreferred()) && 
+				!isInOAS(userStatement.getLess(), null))
+			return new ValuePreference<Criterion> (userStatement.getLess(), null);
+
+		//			// The agent reacts to the stated Preference
+		ValuePreference<Criterion> c = (model.getSelf().
+				isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
+					new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
+		// If the preference is not expressed 
+		if (isInOAS(c.getLess(),c.getMore())){
+			ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
+			if ( more == null){
+				ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
+				if(less == null)
+					return c;
+				else 
+					return less;
+			}
+			return more;
+		}
+		return c; 
+
+	}
+
+
 	public boolean allCriteriaAccepted(){
 		for (CriterionNegotiation<Criterion> n: this.criteriaNegotiation){
 			if(n.getProposals(Proposal.Status.ACCEPTED).isEmpty())
@@ -573,7 +574,7 @@ public class Negotiation<O extends Option> {
 		}
 		return accepted;
 	}
-	
+
 	public Option computeAcceptedOption(){
 		ArrayList<Criterion> accepted = lastAcceptedValues();
 		if(accepted.isEmpty())
@@ -592,43 +593,43 @@ public class Negotiation<O extends Option> {
 		}
 		return null;
 	}
-	
+
 	public void printPrefs(){
-		
+
 		System.out.println(criteriaPreferences.printPreferences());
-		
+
 		for(CriterionNegotiation<Criterion> cr : criteriaNegotiation)
 			System.out.println(cr.getSelf().printPreferences());
-		
+
 	}
 	public boolean negotiationFailure(int dom){
 		if(dom>0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());
-		
-			else
-				return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
+
+		else
+			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
-	
+
 	public String getOptionFrVersion(String optionSimpleName){
 		String fr = "";
 		switch(optionSimpleName) {
-        case "Cuisine":
-        	fr = "la cuisine";
-        break;
-        case "Cost":
-        	fr = "le prix";
-        break;
-        case "Ambiance":
-        	fr = "l'ambiance";
-        break;
-        case "Restaurant":
-        	fr = "le restaurant";
-        break;
-        default:
-        System.out.println("THE VALUE "+ optionSimpleName+" DOESN'T EXIST");
-        break;
-     }
+		case "Cuisine":
+			fr = "la cuisine";
+			break;
+		case "Cost":
+			fr = "le prix";
+			break;
+		case "Ambiance":
+			fr = "l'ambiance";
+			break;
+		case "Restaurant":
+			fr = "le restaurant";
+			break;
+		default:
+			System.out.println("THE VALUE "+ optionSimpleName+" DOESN'T EXIST");
+			break;
+		}
 		return fr;
 	}
-	
+
 }
