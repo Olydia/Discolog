@@ -121,14 +121,25 @@
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
-		applicable = "$negotiation.statedValues(currentDiscussedCriterion())">
+		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) ">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
 		<do task = "Reject"/>        	
 	</do>		
-
+	<!-- If there is nothing to say on the current discussed criterion, generate a preference from another criterion-->
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		less="getPreference(openNewCriterion()).getLess()" 
+		more="getPreference(openNewCriterion()).getMore()" 
+		applicable = "$openNewCriterion()!= null &amp;&amp;$negotiation.statedValues($negotiation.openNewTopic())">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>        	
+	</do>
+	<!-- Ajouter le cas où les deux ne sot pas executer ajouter un cas de propose et de Ask (Non encore fait) -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference" criterion ="null"
 		less="askUserPref(getDiscussedCriterion()).getLess()"
 		more="askUserPref(getDiscussedCriterion()).getMore()" 
