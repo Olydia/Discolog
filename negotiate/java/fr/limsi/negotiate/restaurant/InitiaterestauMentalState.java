@@ -140,7 +140,61 @@ public class InitiaterestauMentalState {
 				return (user_restaurants);
 
 	}
+	//-----------------------------------------------------------------------------------------
 
+	public  Negotiation<Restaurant> D_A(){
+		CriterionPrefModel<Cuisine> user_cuisine = new CriterionPrefModel<Cuisine>();
+		user_cuisine.setType(Cuisine.class);
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
+		//user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.FRENCH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.CHINESE));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.FRENCH));
+		//user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.TURKISH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.ITALIAN));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.TURKISH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.ITALIAN));
+
+
+
+	
+		// 1.2. Preference model on Cost
+				CriterionPrefModel<Cost> user_cost = new CriterionPrefModel<Cost>();
+				user_cost.setType(Cost.class);
+				user_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
+
+				// 1.3 Preference model on Ambiance 
+				CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
+				user_ambiance.setType(Ambiance.class);
+				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
+				/*1. Define the  preferences on Restaurant criteria */	
+
+				CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
+				user_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
+				user_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
+				user_criteria.add(new CriterionPreference(Cuisine.class,Ambiance.class));
+				
+
+				//System.out.println(lydia_criteria.getMostPreferred() + "  " + lydia_criteria.getLeastPreferred());
+				//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
+				CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
+				cost.setSelfPreferences(user_cost);
+
+				CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<Cuisine>(Cuisine.class);
+				cuisine.setSelfPreferences(user_cuisine);
+
+				CriterionNegotiation<Ambiance> ambiance = new CriterionNegotiation<Ambiance>(Ambiance.class);
+				ambiance.setSelfPreferences(user_ambiance);
+				
+						/*3. Create a nogotiation on restaurant */
+				@SuppressWarnings("unchecked")
+				Negotiation<Restaurant> user_restaurants = new Negotiation<Restaurant>
+				(new CriterionNegotiation[] {cost, cuisine, ambiance}, user_criteria);
+				
+				return (user_restaurants);
+
+	}
+
+//-----------------------------------------------------------------------------------------
 	
 	public  Negotiation<Restaurant> D3(){
 		CriterionPrefModel<Cuisine> user_cuisine = new CriterionPrefModel<Cuisine>();
@@ -192,6 +246,23 @@ public class InitiaterestauMentalState {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public static void main (String[] args) {
+		InitiaterestauMentalState model = new InitiaterestauMentalState();
+		System.out.println("Cuisine");
+		Negotiation<Restaurant> s2 = model.D_A();
+		//Negotiation<Restaurant> d2 = model.D2();
+		for(Cuisine c: Cuisine.values()){
+			System.out.println(c.name() + " :" +
+		s2.getCriterionNegotiation(Cuisine.class).getSelf().getScore(c));
+		}
+		for(Ambiance c: Ambiance.values()){
+			System.out.println(c.name() + " :" +
+		s2.getCriterionNegotiation(Ambiance.class).getSelf().getScore(c));
+		}
+		for(Cost c: Cost.values()){
+			System.out.println(c.name() + " :" +
+		s2.getCriterionNegotiation(Cost.class).getSelf().getScore(c));
+		}
+	}
 
 }

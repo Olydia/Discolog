@@ -51,7 +51,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	// return a value which is in "in" but not in "out"
 	public ValuePreference<C> getPreference(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
 		for (ValuePreference<C> value: in.getPreferences()){
-			if(!out.getPreferences().contains(value))
+			if(!this.isIn(out, value))
 				return value;
 		}
 		return null;
@@ -174,7 +174,31 @@ public class CriterionNegotiation<C extends Criterion> {
 			}	
 		}
 	}
+	public boolean isIn(CriterionPrefModel<C> model, ValuePreference<C> pref){
+		ValuePreference<Criterion>leastPref = new ValuePreference<Criterion> (pref.getLess(), null);
+		ValuePreference<Criterion>MostPref = new ValuePreference<Criterion> (null, pref.getMore());
+		return (model.getPreferences().contains(pref) 
+				||model.getPreferences().contains(MostPref)	
+				||model.getPreferences().contains(leastPref));
+		
+	}
+	public boolean isInOther(C less, C more) {
+		ValuePreference<C> p = new ValuePreference<C> (less, more);
+//		Class<? extends Criterion> c =  p.getType();
+//		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
+		return (isIn(this.getOther(), p));
+	}
+	
+	public boolean isInself(C less, C more) {
+		ValuePreference<C> p = new ValuePreference<C> (less, more);
+		return (isIn(this.getSelf(), p));
+	}
 
+	public boolean isInOAS(C less, C more) {
+		ValuePreference<C> p = new ValuePreference<C> (less, more);
+			return (isIn(this.getOas(),p));
+		
+	}
 	public boolean isAcceptableCriterion(C c, int dom) {
 		int bestScore = this.getSelf().getScore(this.getSelf().getMostPreferred());
 		int proposalScore = this.getSelf().getScore(c);
@@ -201,24 +225,22 @@ public class CriterionNegotiation<C extends Criterion> {
 	
 	public ValuePreference<C> reactToCriterion(C criterion){
 		if(criterion.equals(this.getSelf().getMostPreferred()) && 
-				!oas.getPreferences().contains(new ValuePreference<C>(null, criterion)))
+				!isInOAS(null, criterion))
 			return new ValuePreference<C> (null, criterion);
 		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
-				!oas.getPreferences().contains(new ValuePreference<C>(criterion, null))){
+				!isInOAS(criterion, null)){
 			return new ValuePreference<C> (criterion, null);
 
 		}
 		else{
 			List<C> criteria = this.getSelf().sortCriteria();
 			for(int i = 0; i<criteria.indexOf(criterion); i++){
-				ValuePreference<C> v = new ValuePreference<C>(criterion, criteria.get(i));
-				if(!oas.getPreferences().contains(v))
-					return v;
+				if(!isInOAS(criterion, criteria.get(i)))
+					return new ValuePreference<C>(criterion, criteria.get(i));
 			}
 			for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
-				ValuePreference<C> v = new ValuePreference<C>(criteria.get(i), criterion);
-				if(!oas.getPreferences().contains(v))
-					return v;
+				if(!isInOAS(criteria.get(i), criterion))
+					return  new ValuePreference<C>(criteria.get(i), criterion);
 			}
 		}		
 		return (getPreference(getSelf(),getOas()));

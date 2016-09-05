@@ -120,7 +120,8 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="reactUser($state).getLess()" more="reactUser($state).getMore()" >
+		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
+		applicable = "$negotiation.statedValues(currentDiscussedCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -440,7 +441,9 @@
     	return false;  	
     }
     
-    
+    function currentDiscussedCriterion(){
+    	return ($negotiation.context.getCurrentDiscussedCriterion());
+    }
     function getLastUserStatement(uttType){
 		return $negotiation.context.getLastStatement(uttType, true);
 	}

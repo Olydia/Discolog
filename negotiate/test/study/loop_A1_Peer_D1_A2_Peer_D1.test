@@ -1,0 +1,56 @@
+    # Writing log to C:\Users\Lydia\AppData\Local\Temp\Console1.test...
+    # 1 sept. 2016 22:55:45 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "What kind of Cuisine do you like?"
+  > next
+    Agent2 says "ITALIAN is my favorite Cuisine."
+  > next
+    Agent1 says "ITALIAN is my least preferred Cuisine."
+  > next
+    Agent2 says "I like ITALIAN over JAPANESE."
+  > next
+    Agent1 says "I like JAPANESE over ITALIAN."
+  > next
+    Agent2 says "JAPANESE is my least preferred Cuisine."
+  > next
+    Agent1 says "I like CHINESE over JAPANESE."
+  > next
+    Agent2 says "I like CHINESE over JAPANESE."
+  > next
+    Agent1 says "I propose that we choose CHINESE Cuisine."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "I like CHINESE over FRENCH."
+  > next
+    Agent2 says "I like FRENCH over CHINESE."
+  > next
+    Agent1 says "I propose that we choose FRENCH Cuisine."
+  > next
+    Agent2 says "Okay, let's choose FRENCH."
+  > next
+    Agent1 says "I propose that we choose VICTOR Restaurant."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "For Ambiance, do you prefer CALM or NOISY?"
+  > next
+    Agent2 says "CALM is my least preferred Ambiance."
+  > next
+    Agent1 says "CALM is my favorite Ambiance."
+  > next
+    Agent2 says "I like NOISY over CALM."
+  > next
+    Agent1 says "NOISY is my least preferred Ambiance."
+  > next
+    Agent2 says "NOISY is my favorite Ambiance."
+  > next
+    Agent1 says "I like CALM over NOISY."
+  > next
+    Agent2 says "I like NOISY over CALM."
+  > next
+    Agent1 says "I like CALM over NOISY."
