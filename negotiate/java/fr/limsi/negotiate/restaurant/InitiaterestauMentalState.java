@@ -1,5 +1,8 @@
 package fr.limsi.negotiate.restaurant;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fr.limsi.negotiate.*;
 
 public class InitiaterestauMentalState {
@@ -246,23 +249,29 @@ public class InitiaterestauMentalState {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public static void printOptions(Negotiation<Restaurant> n, int relation){
+		List<Option> options =	(Arrays.asList(n.getOptions()));
+		for(Option o: options)
+			System.out.println(n.isAcceptableOption(o, relation));
+	}
 	public static void main (String[] args) {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
-		System.out.println("Cuisine");
 		Negotiation<Restaurant> s2 = model.D_A();
+		printOptions(s2, 2);
+		//System.out.println("Cuisine");
 		//Negotiation<Restaurant> d2 = model.D2();
-		for(Cuisine c: Cuisine.values()){
-			System.out.println(c.name() + " :" +
-		s2.getCriterionNegotiation(Cuisine.class).getSelf().getScore(c));
-		}
-		for(Ambiance c: Ambiance.values()){
-			System.out.println(c.name() + " :" +
-		s2.getCriterionNegotiation(Ambiance.class).getSelf().getScore(c));
-		}
-		for(Cost c: Cost.values()){
-			System.out.println(c.name() + " :" +
-		s2.getCriterionNegotiation(Cost.class).getSelf().getScore(c));
-		}
+//		for(Cuisine c: Cuisine.values()){
+//			System.out.println(c.name() + " :" +
+//		s2.getCriterionNegotiation(Cuisine.class).getSelf().getScore(c));
+//		}
+//		for(Ambiance c: Ambiance.values()){
+//			System.out.println(c.name() + " :" +
+//		s2.getCriterionNegotiation(Ambiance.class).getSelf().getScore(c));
+//		}
+//		for(Cost c: Cost.values()){
+//			System.out.println(c.name() + " :" +
+//		s2.getCriterionNegotiation(Cost.class).getSelf().getScore(c));
+//		}
 	}
 
 }

@@ -53,6 +53,7 @@ public class Negotiation<O extends Option> {
 
 	}
 
+
 	public List<Option> getOptionsPropWithStatus(Proposal.Status status) {
 		List<Option> pStatus = new ArrayList<Option>();	
 		for (OptionProposal p: proposals){
@@ -223,7 +224,7 @@ public class Negotiation<O extends Option> {
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
 			else 
 				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
-						checkStatus(option).equals(Proposal.Status.OPEN));
+						this.context.isInspeakerProposals(option, false, Proposal.Status.OPEN));
 		}
 
 	}

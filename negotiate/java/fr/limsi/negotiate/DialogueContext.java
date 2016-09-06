@@ -3,6 +3,8 @@ package fr.limsi.negotiate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.restaurant.Cuisine;
 
 public class DialogueContext {
@@ -88,6 +90,21 @@ public class DialogueContext {
 
 		}
 		return null;
+	}
+	public List<Proposal> getSpeakerProposals(boolean who){
+		List<Proposal> whoProp = new ArrayList<Proposal>();
+		for(Proposal p: this.getProposals())
+			if(p.isSelf()==(who))
+				whoProp.add(p);
+		
+		return whoProp;
+	}
+	
+	public boolean isInspeakerProposals(Object o, boolean who, Status status){
+		for(Proposal p: this.getSpeakerProposals(who)){
+			return (p.getValue().equals(o)&& p.getStatus().equals(status));
+		}
+		return false;
 	}
 
 }
