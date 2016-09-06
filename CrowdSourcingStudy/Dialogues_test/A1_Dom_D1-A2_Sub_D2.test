@@ -1,28 +1,23 @@
+	A: "I propose that we choose chinese Cuisine."
+		
+		B: "I prefer french over chinese."
+		
+	A: "chinese is my favorite Cuisine."
+		
+		B: "I prefer turkish over chinese."
 
-#Agent 1 is dominant, its preference model is D1
-#Agent 2 is submissive, its preference model is D2.
-#please check the file 'PREF.pdf'  for the preference models 
+	A: "I prefer chinese over turkish."
+		
+		B: "I prefer french over turkish."
+		
+	A: "I prefer french over turkish."
+		
+		B: "I propose that we choose french Cuisine."
+		
+	A: "I propose that we choose DRAGON restaurant."
+		
+		B: "Okay, I'll call to book a table."
+		
+	A: "Ok."
 
-  Agent1 says "I propose that we choose chinese Cuisine."
-  > next
-    Agent2 says "I prefer french over chinese."
-  > next
-    Agent1 says "chinese is my favorite Cuisine."
-  > next
-    Agent2 says "I prefer turkish over chinese."
-  > next
-    Agent1 says "I prefer chinese over turkish."
-  > next
-    Agent2 says "I prefer french over turkish."
-  > next
-    Agent1 says "I prefer french over turkish."
-  > next
-    Agent2 says "I propose that we choose french Cuisine."
-  > next
-    Agent1 says "I propose that we choose DRAGON restaurant."
-  > next
-    Agent2 says "Okay, I'll call to book a table."
-  > next
-    Agent1 says "Ok."
-  > next
-    Agent2 says "Ok.
+		B: "Ok.

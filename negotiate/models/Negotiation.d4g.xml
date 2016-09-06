@@ -120,8 +120,9 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) "
 		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
-		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) ">
+		>
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -132,7 +133,7 @@
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="getPreference(openNewCriterion()).getLess()" 
 		more="getPreference(openNewCriterion()).getMore()" 
-		applicable = "$openNewCriterion()!= null &amp;&amp;$negotiation.statedValues($negotiation.openNewTopic())">
+		applicable = "$negotiation.statedValues(openNewCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>

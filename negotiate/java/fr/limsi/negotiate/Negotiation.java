@@ -85,6 +85,10 @@ public class Negotiation<O extends Option> {
 			if(!context.getDiscussedCriteria().contains(elem))
 				return elem;
 		}
+		for (Class<? extends Criterion> elem: this.criteriaPreferences.getValues()){
+			if(this.statedValues(elem))
+				return elem;
+		}
 		return null;
 	}
 
@@ -392,7 +396,7 @@ public class Negotiation<O extends Option> {
 
 	public Criterion currentMostPreferredCriterion (Criterion criterion) {
 
-		return (getCriterionNegotiation(criterion.getClass()).getTheCurrentMostPreffered());
+		return (getCriterionNegotiation(criterion.getClass()).getMostPreffered());
 	}
 
 	public Option mostPreferredOption(){
@@ -485,7 +489,7 @@ public class Negotiation<O extends Option> {
 	public boolean statedValues(Class<? extends Criterion> criterion){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation
 				(criterion);
-		return(model.getPreference(model.getSelf(), model.getOas())== null);
+		return(model.getPreference(model.getSelf(), model.getOas()) != null);
 	}
  
 	public ValuePreference<Criterion> computePreference(ValuePreference<Criterion> userStatement){
@@ -493,12 +497,14 @@ public class Negotiation<O extends Option> {
 		if(userStatement.getLess() == null){
 			CriterionNegotiation<Criterion> modelFromMore = this.getCriterionNegotiation
 					(userStatement.getMore().getClass());
-			return (modelFromMore.reactToCriterion(userStatement.getMore()));
+			return modelFromMore.reactToCriterion(userStatement.getMore()).
+					orElse(new ValuePreference<Criterion> (null, modelFromMore.getSelf().getMostPreferred()));
 		}
 		if(userStatement.getMore() == null){
 			CriterionNegotiation<Criterion> modelFromLess = this.getCriterionNegotiation
 					(userStatement.getLess().getClass());
-			return (modelFromLess.reactToCriterion(userStatement.getLess()));
+			return modelFromLess.reactToCriterion(userStatement.getLess()).
+					orElse(new ValuePreference<Criterion> (null, modelFromLess.getSelf().getMostPreferred()));
 		}
 
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation
@@ -526,19 +532,12 @@ public class Negotiation<O extends Option> {
 				isPreferred(userStatement.getLess(), userStatement.getMore()) ? userStatement: 
 					new ValuePreference<Criterion>(userStatement.getMore(), userStatement.getLess()));
 		// If the preference is not expressed 
-		if (model.isInOAS(c.getLess(),c.getMore())){
-			ValuePreference<Criterion>  more =  model.reactToCriterion(c.getMore());
-			if ( more == null){
-				ValuePreference<Criterion> less = model.reactToCriterion(c.getLess());
-				if(less == null)
-					return c;
-				else 
-					return less;
-			}
-			return more;
-		}
-		return c; 
-
+		if (model.isInOAS(c.getLess(),c.getMore()))
+			//ValuePreference<Criterion>  more =  
+		return model.reactToCriterion(c.getMore()).
+			  	orElse(model.reactToCriterion(c.getLess()).
+			  			orElse(c));	
+		return c;
 	}
 
 
@@ -588,7 +587,7 @@ public class Negotiation<O extends Option> {
 
 	}
 	public boolean negotiationFailure(int dom){
-		if(dom>0)
+		if(dom>=0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());
 
 		else

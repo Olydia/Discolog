@@ -158,7 +158,7 @@
       <subtasks id="_d4e73_subtasks">
          <step name="_d4e73_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e73_ref" task="_d4e73_tree"/>
-         <applicable>$openNewCriterion()!= null &amp;&amp;$negotiation.statedValues($negotiation.openNewTopic())</applicable>
+         <applicable>$negotiation.statedValues(openNewCriterion())</applicable>
          <binding slot="$_d4e73_step.external" value="false"/>
          <binding slot="$_d4e73_step.less" value="getPreference(openNewCriterion()).getLess()"/>
          <binding slot="$_d4e73_step.more" value="getPreference(openNewCriterion()).getMore()"/>
@@ -177,6 +177,7 @@
       <subtasks id="_d4e61_subtasks">
          <step name="_d4e61_step" task="Ask"/>
       </subtasks>
+      
       <subtasks id="_d4e62_subtasks">
          <step name="_d4e62_step" task="State"/>
       </subtasks>

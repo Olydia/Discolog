@@ -223,28 +223,42 @@ public class CriterionNegotiation<C extends Criterion> {
 	/** take as input a criterion value and returns the agent preference on it
 	  **/
 	
-	public ValuePreference<C> reactToCriterion(C criterion){
+	public Optional<ValuePreference<C>> reactToCriterion(C criterion){
 		if(criterion.equals(this.getSelf().getMostPreferred()) && 
 				!isInOAS(null, criterion))
-			return new ValuePreference<C> (null, criterion);
+			return Optional.of(new ValuePreference<C> (null, criterion));
 		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
 				!isInOAS(criterion, null)){
-			return new ValuePreference<C> (criterion, null);
+			return Optional.of(new ValuePreference<C> (criterion, null));
 
 		}
 		else{
 			List<C> criteria = this.getSelf().sortCriteria();
 			for(int i = 0; i<criteria.indexOf(criterion); i++){
 				if(!isInOAS(criterion, criteria.get(i)))
-					return new ValuePreference<C>(criterion, criteria.get(i));
+					return Optional.of(new ValuePreference<C>(criterion, criteria.get(i)));
 			}
 			for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
 				if(!isInOAS(criteria.get(i), criterion))
-					return  new ValuePreference<C>(criteria.get(i), criterion);
+					return  Optional.of(new ValuePreference<C>(criteria.get(i), criterion));
 			}
-		}		
-		return (getPreference(getSelf(),getOas()));
+		}	
+		// Everything has been said 
+		if (getPreference(getSelf(),getOas()) == null){
+			// Etudier la relation
+				return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
+		}
+		else return Optional.empty();
 
+
+	}
+
+	public C getMostPreffered() {
+		return this.getSelf().getMostPreferred();
+	}
+	
+	public C getLeastPreffered() {
+		return this.getSelf().getLeastPreferred();
 	}
 
 }

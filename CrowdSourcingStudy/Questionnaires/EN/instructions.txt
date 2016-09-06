@@ -1,0 +1,62 @@
+Below is the transcript of a dialogue between two friends who are
+trying to decide which restaurant to go to for dinner together this
+evening.
+
+They both know about the following four restaurants:
+
+[CR: make sure information below is correct!  Are both French
+restaurants quiet and expensive?  Is that a good choice?]
+
+Chez Victor: a quiet, expensive French restaurant
+Le Parisien: a quiet, cheap French restaurant
+Dragon: a noisy, cheap Chinese restaurant
+Adaggio: a cheap, quiet Italian restauran
+t
+
+Please read this dialogue and answer the questions following.
+
+[CR: I added indentation to make it easier to pick out two threads
+of the conversation]
+
+[CR: Note rewording to simpler, more natural English--could easily be
+done in Disco formats, but ok to just change in questionnaire]
+
+    A: "Let's eat Chinese food tonight."
+  
+       B: "I like French food more than Chinese food.
+  
+    A: "Chinese is my favorite food." 
+  
+       B: "I like Turkish food more than Chinese food." 
+  
+    A: "I like Chinese food more than Turkish food." 
+  
+       B: "Let's eat French food tonight." 
+  
+    A: "Let's go to the Dragon restaurant." 
+  
+       B: "Okay, I'll call to book a table." 
+
+[CR: make *all* questions Likert and *mix* in the manipulation check questions, so
+they don't know which they are!]
+
+?. The speakers decided to go to the Dragon restaurant.
+
+Strongly disagree 	Disagree      Neither agree nor disagree	 Agree	     Strongly agree
+
+[CR: This is poor test question for this dialogue, since Japanese does not appear.]
+
+?. Speaker B likes Japanese food better than French food.
+
+Strongly disagree 	Disagree      Neither agree nor disagree	 Agree	     Strongly agree
+
+?. Speaker A takes the preferences of the other speaker into account in choosing a restaurant. 
+
+Strongly disagree 	Disagree      Neither agree nor disagree	 Agree	     Strongly agree
+
+?. Speaker A is flexible in his choice of restaurant.  
+
+Strongly disagree 	Disagree      Neither agree nor disagree	 Agree	     Strongly agree
+
+[CR: there are more questions, right?]
+
