@@ -23,6 +23,12 @@ public abstract class Preference<C> {
 
 
 	public Preference (C class1, C class2) {
+//		if(class1==class2)
+//			try {
+//				throw new Exception("Less value has to be different to more");
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 		this.less = class1;
 		this.more = class2;
 	}

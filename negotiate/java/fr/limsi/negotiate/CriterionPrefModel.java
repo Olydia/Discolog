@@ -54,6 +54,10 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	 */
 	@Override
 	public Boolean isPreferred (C less, C more) {
+		if(less == null)
+			return true;
+		if(more == null)
+			return false;
 		return( getScore(less) < getScore(more)?  true :  false);
 	}
 	

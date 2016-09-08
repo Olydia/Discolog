@@ -175,6 +175,8 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 	}
 	public boolean isIn(CriterionPrefModel<C> model, ValuePreference<C> pref){
+//		pref = (model.isPreferred(pref.getLess(), pref.getMore())? pref:
+//							new ValuePreference<C>(pref.getMore(), pref.getLess()));
 		ValuePreference<Criterion>leastPref = new ValuePreference<Criterion> (pref.getLess(), null);
 		ValuePreference<Criterion>MostPref = new ValuePreference<Criterion> (null, pref.getMore());
 		return (model.getPreferences().contains(pref) 
@@ -244,11 +246,12 @@ public class CriterionNegotiation<C extends Criterion> {
 			}
 		}	
 		// Everything has been said 
-		if (getPreference(getSelf(),getOas()) == null){
-			// Etudier la relation
-				return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
-		}
-		else return Optional.empty();
+//		if (getPreference(getSelf(),getOas()) == null){
+//			// Etudier la relation
+//				//return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
+//			return Optional.empty();
+//		}
+		 return Optional.empty();
 
 
 	}

@@ -1,13 +1,7 @@
 package JunitTests;
 
-import static org.junit.Assert.*;
 
-import org.junit.Test;
-
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.restaurant.Cuisine;
 import fr.limsi.negotiate.restaurant.InitiaterestauMentalState;
-import fr.limsi.negotiate.restaurant.Restaurant;
 
 public class MentalStateUpdate {
 

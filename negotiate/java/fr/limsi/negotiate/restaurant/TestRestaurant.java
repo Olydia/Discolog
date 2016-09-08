@@ -153,7 +153,7 @@ public class TestRestaurant {
 	}
 	
 	public static void main(String[] args) {
-		Negotiation<Restaurant> d2 = D2();
+		//Negotiation<Restaurant> d2 = D2();
 		Negotiation<Restaurant> s2 = S2();
 		//Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
 		s2.updateOASMentalState(Cuisine.CHINESE, Cuisine.ITALIAN);
