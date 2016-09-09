@@ -103,16 +103,17 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	}
 	
 	public List<C> sortCriteria() {
-		List<C> criterions = this.getValues();
-		criterions.sort(new Comparator<C>() {
+		List<C> criteria = this.getValues();
+		criteria.sort(new Comparator<C>() {
 			@Override
 			public int compare(C o1, C o2){
 				return (getScore(o2) - getScore(o1));
 			}
 		});
-		return criterions;
+		return criteria;
 	}
 
+	
 	public Class<C> getType() {
 		return type;
 	}

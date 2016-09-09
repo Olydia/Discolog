@@ -18,6 +18,8 @@ public class Negotiation<O extends Option> {
 	public DialogueContext context ;
 	public Class<O> type; 
 
+
+
 	public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, 
 			CriteriaClassPrefModel<O> criteriaPreferences) {
 		this.criteriaNegotiation = Arrays.asList(criteriaNegotiation);
@@ -136,7 +138,7 @@ public class Negotiation<O extends Option> {
 						getCriterionNegotiation(c2).getSelf().getScore(c2));
 			}
 		});
-		return nonAcceptedCriteria.get(0);
+		return nonAcceptedCriteria.get(nonAcceptedCriteria.size()-1);
 	}
 
 	public O getPreferredOption(O firstOption, O secondOption) {
@@ -197,6 +199,7 @@ public class Negotiation<O extends Option> {
 			System.out.println();
 		}
 	}
+	
 	// Proposals methods 
 //	public boolean isProposed (Proposal proposal, Status status){
 //
@@ -410,14 +413,14 @@ public class Negotiation<O extends Option> {
 		return (getCriterionNegotiation(criterion).getSelf().getMostPreferred());
 	}
 
-	public Criterion currentMostPreferredCriterion (Class <? extends Criterion> criterion) {
+	public Criterion currentMostPreferredCriterion (Class <? extends Criterion> criterion, int dom) {
 
-		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered());
+		return (getCriterionNegotiation(criterion).getTheCurrentMostPreffered(dom));
 	}
 
-	public Criterion currentMostPreferredCriterion (Criterion criterion) {
+	public Criterion currentMostPreferredCriterion (Criterion criterion, int relation) {
 
-		return (getCriterionNegotiation(criterion.getClass()).getTheCurrentMostPreffered());
+		return (getCriterionNegotiation(criterion.getClass()).getTheCurrentMostPreffered(relation));
 	}
 
 	public Option mostPreferredOption(){
@@ -434,8 +437,8 @@ public class Negotiation<O extends Option> {
 			return (mostPreferredOption());
 	}
 
-	public CriterionProposal generateRandomCriterionProposal (Class <? extends Criterion> criterion){
-		return (new CriterionProposal(true, currentMostPreferredCriterion(criterion)));
+	public CriterionProposal generateRandomCriterionProposal (Class <? extends Criterion> criterion, int dom){
+		return (new CriterionProposal(true, currentMostPreferredCriterion(criterion, dom)));
 	}
 
 	public OptionProposal generateRandomOptionProposal(){
@@ -495,7 +498,7 @@ public class Negotiation<O extends Option> {
 		// of the current discussed criterion.
 
 		Criterion best = this.getCriterionNegotiation(this.context.getCurrentDiscussedCriterion()).
-				getTheCurrentMostPreffered();
+				getMostPreffered();
 		return new ValuePreference<Criterion>(null, best);
 
 	}

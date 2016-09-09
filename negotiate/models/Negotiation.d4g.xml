@@ -119,6 +119,16 @@
 		<do task = "Reject"/>
 	</do>
 	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="proposalFromPreference(currentMostPreferred(currentDiscussedCriterion()))"
+		applicable = "isDom()">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) "
 		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
@@ -206,7 +216,7 @@
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="getRandCriterionProp(getDiscussedCriterion())" 
+		proposal="getRandCriterionProp(getDiscussedCriterion(), relation)" 
 		applicable = "isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -378,7 +388,7 @@
 	<!--       	Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<!--       	Propose(other proposal)  -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="getRandCriterionProp(getDiscussedCriterion())"
+		proposal="getRandCriterionProp(getDiscussedCriterion(), relation)"
 		applicable = "!isSub()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -421,8 +431,8 @@
     var relation =RI.DOMINANT;
  	
 
-    function currentMostPreferred(criterion) {
-       return ($negotiation.currentMostPreferredCriterion(criterion));
+    function currentMostPreferred(criterion, relation) {
+       return ($negotiation.currentMostPreferredCriterion(criterion, relation));
     }
     
     function mostPreferredCriterion(criterion){
@@ -590,8 +600,8 @@
 			return topic; 
 	}
 	
-	function getRandCriterionProp(criterion){
-		return ($negotiation.generateRandomCriterionProposal(criterion));
+	function getRandCriterionProp(criterion, relation){
+		return ($negotiation.generateRandomCriterionProposal(criterion, relation));
 	}
 	
 	function getRandOptionProp(){

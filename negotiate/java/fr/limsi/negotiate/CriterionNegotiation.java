@@ -57,32 +57,49 @@ public class CriterionNegotiation<C extends Criterion> {
 		return null;
 	}
 	
-	public C getTheCurrentMostPreffered(){
-		List<C> values = getSelf().getValues();
-		ArrayList<Integer> newScores = new ArrayList<Integer>();
-		newScores = clearRejected(values, getSelf().getPreferencesValues());
-
-		int mostPref = maxIndex(newScores);
-		return(values.get(mostPref));
+	public C getTheCurrentMostPreffered(int dom){
+		List<C> newScores = selfAcceptableCriteria(dom);
+		newScores = clearRejected(newScores);
+		if(newScores.isEmpty())
+			return this.getMostPreffered();
+		return(sortListOfCriteria(newScores).get(0));
 	}
 
-	public ArrayList<Integer> clearRejected(List<C> values, ArrayList<Integer> cScores) {
+	public List<C> selfAcceptableCriteria(int dom){
+		List<C> accepted = new ArrayList<C>();
+		for(C criterion: self.getValues())
+			if(isAcceptableCriterion(criterion, dom))
+				accepted.add(criterion);
+		return accepted;
+	}
+	public List<C> clearRejected(List<C> values) {
 		for ( CriterionProposal c: proposals) {
 			if(c.status.equals(Proposal.Status.REJECTED)) {
-				cScores.set(values.indexOf(c.criterion), Collections.min(cScores));
+				values.remove(c);
 			}
 		}
-		return cScores;
+		return values;
+	}
+	
+	public List<C> sortListOfCriteria (List<C> criteria){
+		criteria.sort(new Comparator<C>() {
+			@Override
+			public int compare(C o1, C o2){
+				return (self.getScore(o2) - self.getScore(o1));
+			}
+		});
+		return criteria;
+		
 	}
 	
 
-	private static final int maxIndex(ArrayList<Integer> a) {
-		int imax=0;
-		for(int i=1;i<a.size();i++)
-			if (a.get(i)>a.get(imax))
-				imax = i;
-		return imax;
-	}
+//	private static final int maxIndex(ArrayList<Integer> a) {
+//		int imax=0;
+//		for(int i=1;i<a.size();i++)
+//			if (a.get(i)>a.get(imax))
+//				imax = i;
+//		return imax;
+//	}
 	
 //	private static final int minIndex(ArrayList<Integer> a) {
 //		int imin = a.get(0);

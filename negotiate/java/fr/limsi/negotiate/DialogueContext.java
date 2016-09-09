@@ -3,7 +3,6 @@ package fr.limsi.negotiate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.restaurant.Cuisine;
 
@@ -98,6 +97,18 @@ public class DialogueContext {
 				whoProp.add(p);
 		
 		return whoProp;
+	}
+//	public List<Criterion> ComminicatedValues (boolean accptable, boolean who){
+//		List<Proposal> values = new ArrayList<Proposal>();
+//	}
+	
+	public boolean isAcceptable(Object o, boolean who){
+		return (isInspeakerProposals(o, who, Status.OPEN) || 
+				isInspeakerProposals(o, who, Status.ACCEPTED));
+	}
+	
+	public boolean isNotAcceptable(Object o, boolean who){
+		return (isInspeakerProposals(o, who, Status.REJECTED));
 	}
 	
 	public boolean isInspeakerProposals(Object o, boolean who, Status status){
