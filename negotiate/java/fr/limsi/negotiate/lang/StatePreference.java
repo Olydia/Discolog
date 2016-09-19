@@ -31,7 +31,7 @@ public class StatePreference extends NegotiationUtterance {
 
    @Override
    public void interpret () {
-      getNegotiation().context.updateDiscussedCriterion(getLess(), getMore());
+      getNegotiation().getContext().updateDiscussedCriterion(getLess(), getMore());
       if ( getExternal() ) getNegotiation().updateOtherMentalState(getLess(), getMore());
       else getNegotiation().updateOASMentalState(getLess(), getMore());
    }

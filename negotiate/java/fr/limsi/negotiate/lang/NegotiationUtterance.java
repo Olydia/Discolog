@@ -21,6 +21,7 @@ abstract class NegotiationUtterance extends Utterance {
 
    public Negotiation<?> getNegotiation () {
       return ((NegotiatorAgent) getDisco().getInteraction().getSystem()).getNegotiation();
+      
    }
 
 }

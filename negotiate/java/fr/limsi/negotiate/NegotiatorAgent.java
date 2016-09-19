@@ -25,7 +25,6 @@ public class NegotiatorAgent extends Agent {
 		dual.interaction2.load("models/Negotiation.xml");
 		dual.interaction1.eval("relation = RI.DOMINANT", "NegotiatorAgent");
 		dual.interaction2.eval("relation = RI.SUBMISSIVE", "NegotiatorAgent");
-
 		dual.interaction1.getDisco().addTop("Top");
 		dual.start();
 	}

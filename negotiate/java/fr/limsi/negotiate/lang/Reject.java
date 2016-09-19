@@ -20,7 +20,7 @@ public class Reject extends ProposalUtterance {
    @Override
    protected void interpret () {
 	   getProposal().setIsSelf(!getExternal());
-	  getNegotiation().context.updateProposals(getProposal());
+	  getNegotiation().getContext().updateProposals(getProposal());
       getNegotiation().updateProposalStatus(getProposal(), Proposal.Status.REJECTED);
    }
 }

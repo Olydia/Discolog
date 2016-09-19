@@ -68,7 +68,15 @@ public class CriterionNegotiation<C extends Criterion> {
 	public List<C> selfAcceptableCriteria(int dom){
 		List<C> accepted = new ArrayList<C>();
 		for(C criterion: self.getValues())
-			if(isAcceptableCriterion(criterion, dom))
+			if(isSelfAcceptableCriterion(criterion, dom))
+				accepted.add(criterion);
+		return accepted;
+	}
+	
+	public List<C> acceptableCriteria(int dom, CriterionPrefModel<C> s){
+		List<C> accepted = new ArrayList<C>();
+		for(C criterion: s.getValues())
+			if(isAcceptableCriterion(criterion, dom, s))
 				accepted.add(criterion);
 		return accepted;
 	}
@@ -218,36 +226,40 @@ public class CriterionNegotiation<C extends Criterion> {
 			return (isIn(this.getOas(),p));
 		
 	}
-	public boolean isAcceptableCriterion(C c, int dom) {
-		int bestScore = this.getSelf().getScore(this.getSelf().getMostPreferred());
-		int proposalScore = this.getSelf().getScore(c);
+	public boolean isSelfAcceptableCriterion(C c, int dom){
+		if(dom>=0)
+			return isAcceptableCriterion(c, dom, getSelf());
+		else {
+		// if the proposal has already been proposed then accept it in the case of submissive agent
+		//if(this.getOas().getValues())
+		if(this.proposals.contains(c) && this.getOas().containsPrefabout(c))
+			return true;
+		return ( getSelf().getScore(c)>= 0);
+
+		
+	}
+		
+	}
+	public boolean isAcceptableCriterion(C c, int dom, CriterionPrefModel<C> model) {
+		int bestScore = model.getScore(model.getMostPreferred());
+		int proposalScore = model.getScore(c);
 		// R
 		if (dom > 0)
 			return (proposalScore>= bestScore *0.7);
 		
-		if (dom ==0)
-			return( proposalScore>= 0);
-		
-		else {
-			// if the proposal has already been proposed then accept it in the case of submissive agent
-			//if(this.getOas().getValues())
-			if(this.proposals.contains(c) && this.getOas().containsPrefabout(c))
-				return true;
-			return (proposalScore>= 0);
-
-			
-		}
-		
+		else
+			return( proposalScore>= 0);		
 	}
 	/** take as input a criterion value and returns the agent preference on it
 	  **/
 	
-	public Optional<ValuePreference<C>> reactToCriterion(C criterion){
-		if(criterion.equals(this.getSelf().getMostPreferred()) && 
-				!isInOAS(null, criterion))
+	public Optional<ValuePreference<C>> reactToCriterion(C criterion, List<C> negotiatedCriteria){
+		if(criterion.equals(this.getSelf().getMostPreferred()))
+				if(!isInOAS(null, criterion)|| negotiatedCriteria.contains(criterion))
 			return Optional.of(new ValuePreference<C> (null, criterion));
-		if(criterion.equals(this.getSelf().getLeastPreferred()) && 
-				!isInOAS(criterion, null)){
+		if(criterion.equals(this.getSelf().getLeastPreferred()))
+			if(!isInOAS(criterion, null)|| negotiatedCriteria.contains(criterion))
+{
 			return Optional.of(new ValuePreference<C> (criterion, null));
 
 		}

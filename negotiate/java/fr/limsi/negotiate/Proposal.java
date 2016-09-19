@@ -21,6 +21,7 @@ public abstract class Proposal {
 
 	public void setIsSelf(boolean value){
 		this.isSelf = value;
+
 	}
 
 	protected Proposal (boolean isSelf) {
@@ -43,7 +44,7 @@ public abstract class Proposal {
 		
 	public Proposal getCounter () { return counter; }
 
-	abstract Object getValue();
+	public abstract Object getValue();
 	
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
 

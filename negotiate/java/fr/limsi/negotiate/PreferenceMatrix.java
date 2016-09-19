@@ -30,12 +30,12 @@ public class PreferenceMatrix<T> {
 	}
 	public void addPreference(T less, T more) {
 
-		if(!(more.equals(null) && less.equals(null))){
-			if(more.equals(null)){
+		if(!(more == null && less == null)){
+			if(more == null){
 				addLeastPreferred(less);
 
 			}
-			if(less.equals(null)){
+			if(less == null){
 				addMostPreferred(more);
 			}
 			else{

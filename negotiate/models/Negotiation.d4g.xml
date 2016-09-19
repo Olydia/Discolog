@@ -95,7 +95,7 @@
 </do>
 
 <do id="ProposeCriterion"  actor = "agent"  task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($introMostPrefValue) ">    
+		proposal="createProposal($introMostPrefValue, true) ">    
 	<do task = "State"/>
     <do task = "Propose"/>
    	<do task = "Ask"/>
@@ -110,7 +110,7 @@
 		applicable = "$negotiation.negotiationFailure(relation)" />
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="proposalFromPreference(getLastUserPref()) "
+		proposal="proposalFromPreference(getLastUserPref(), true) "
 		applicable = "proposalFromUserState(getLastUserPref(), relation)">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -120,7 +120,8 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="proposalFromPreference(currentMostPreferred(currentDiscussedCriterion()))"
+		proposal="createProposal(currentMostPreferred(
+								currentDiscussedCriterion(), relation), true)"
 		applicable = "isDom()">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -141,7 +142,7 @@
 	</do>		
 	<!-- Before to open a nex criterion propose an option -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createOptionProposal($negotiation.currentMostPreferredOption()) "
+		proposal="createProposal($negotiation.currentMostPreferredOption(), true) "
 		applicable = "!isSub()">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -267,7 +268,7 @@
 		applicable ="isOptionProposal(lastAcceptedProposal())"/>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createOptionProposal($negotiation.computeAcceptedOption())"
+		proposal="createProposal($negotiation.computeAcceptedOption(), true)"
 		applicable = "isSub() &amp;&amp; $negotiation.allCriteriaAccepted()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -277,7 +278,7 @@
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createOptionProposal(getOptionWithValue(lastAcceptedProposal().getValue()))"
+		proposal="createProposal(getOptionWithValue(lastAcceptedProposal().getValue()), true)"
 		applicable = "!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal())" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -298,7 +299,7 @@
 
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createCriterionProposal(currentMostPreferred(openNewCriterion()))"
+		proposal="createProposal(currentMostPreferred(openNewCriterion(), relation), true)"
 		applicable = "isDom()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -422,7 +423,7 @@
     $cost = Packages.fr.limsi.negotiate.restaurant.Cost;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
-    $introMostPrefValue = $negotiation.getCriterionNegotiation($mostPrefCriterion).getTheCurrentMostPreffered();
+    $introMostPrefValue =currentMostPreferred($mostPrefCriterion, relation);
     var RI = {
   		DOMINANT : 1, 
   		PEER: 0, 
@@ -471,20 +472,20 @@
     	more = userPref.getMore();
     	less = userPref.getLess();
     	if(more!= null){
-    		return (isAcceptable(createProposal(more), relation));
+    		return (isAcceptable(createProposal(more,true), relation));
     	}
     	return false;  	
     }
     
     function currentDiscussedCriterion(){
-    	return ($negotiation.context.getCurrentDiscussedCriterion());
+    	return ($negotiation.getContext().getCurrentDiscussedCriterion());
     }
     function getLastUserStatement(uttType){
-		return $negotiation.context.getLastStatement(uttType, true);
+		return $negotiation.getContext().getLastStatement(uttType, true);
 	}
 	
 	 function getLastAgentStatement(uttType){
-		return $negotiation.context.getLastStatement(uttType, false);
+		return $negotiation.getContext().getLastStatement(uttType, false);
 	}
 	
 	 function reactUser(uttType){
@@ -538,52 +539,38 @@
 	}
 	
 	
-	function createProposal(criterion) {
+	function createProposal(value, isSelf) {
 	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
-		if(criterion == null)
+		if(value == null)
 			return null;
-		return $negotiation.criterionProposal(criterion);
+		return $negotiation.createProposal(value,isSelf);
 	}
 	
-	function proposalFromPreference(preference) {
+	function proposalFromPreference(preference, isSelf) {
 			if (preference == null)
 				return null;
 			else 	{
-				return createCriterionProposal(preference.getMore());
-			}	
-				
-	}
-	
-	function createCriterionProposal(criterion) {
-			if (criterion == null)
-				return null;
-			else 	{
-				return $negotiation.criterionProposal(criterion);
-			}	
-				
-	}
-	
-	function createOptionProposal(option) {
-		return $negotiation.optionProposal(option);
+				return createProposal(preference.getMore(), isSelf);
+			}			
 	}
 	
 	function getDiscussedCriterion(){
-		return $negotiation.context.getCurrentDiscussedCriterion();
+		return $negotiation.getContext().getCurrentDiscussedCriterion();
 	}
 		
 	function lastRejectedProposal (){
-		return ($negotiation.context.getLastProposal("REJECTED"));
+		return ($negotiation.getContext().getLastProposal("REJECTED"));
 	}
 	
 	function lastOpenProposal (){
-		return ($negotiation.context.getLastProposal("OPEN"));	
+		return ($negotiation.getContext().getLastProposal("OPEN"));	
 	}
 	
 	function lastAcceptedProposal(){
-			if($negotiation.context.getLastProposal("ACCEPTED")!=null)
-				return ($negotiation.context.getLastProposal("ACCEPTED"));
+			if($negotiation.getContext().getLastProposal("ACCEPTED")!=null)
+				return ($negotiation.getContext().getLastProposal("ACCEPTED"));
 			else
-				return createCriterionProposal($more);
+				return createProposal($more, true);
 	}
 	
 	function getOptionWithValue(criterion){

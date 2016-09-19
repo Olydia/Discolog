@@ -156,8 +156,11 @@ public class TestRestaurant {
 		//Negotiation<Restaurant> d2 = D2();
 		Negotiation<Restaurant> s2 = S2();
 		//Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
-		s2.updateOASMentalState(Cuisine.CHINESE, Cuisine.ITALIAN);
-		System.out.println(s2.getCriterionNegotiation(Cost.class).isAcceptableCriterion(Cost.EXPENSIVE, -1));
+		s2.updateOtherMentalState(null, Cuisine.FRENCH);
+		s2.updateOtherMentalState(Cuisine.JAPANESE, Cuisine.ITALIAN);
+
+		CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Cuisine.class);
+		System.out.println(v.acceptableCriteria(5,v.getOther()));
 		//System.out.println(ne.isAcceptable(new CriterionProposal(Cost.EXPENSIVE), -1));
 //		Negotiation<Restaurant> user =  user();
 //		DistanceNegotiation<Restaurant> euclide = new DistanceNegotiation<Restaurant>(restaurants, user);
