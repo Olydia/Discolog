@@ -120,8 +120,17 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(currentMostPreferred(
-								currentDiscussedCriterion(), relation), true)"
+		proposal="createProposal($negotiation.computeAcceptableOption(relation), true) "
+		applicable = "isDom()">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
+	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"
 		applicable = "isDom()">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -132,29 +141,19 @@
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) "
-		less="reactUser($state).getLess()" more="reactUser($state).getMore()" 
-		>
+		less="reactUser($state).getLess()"
+		 more="reactUser($state).getMore()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
 		<do task = "Reject"/>        	
 	</do>		
-	<!-- Before to open a nex criterion propose an option -->
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.currentMostPreferredOption(), true) "
-		applicable = "!isSub()">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
+
 	
 	<!-- If there is nothing to say on the current discussed criterion, generate a preference from another criterion-->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-				criterion = "openNewCriterion()"
-		
+		criterion = "openNewCriterion()"
 		less="null" 
 		more="null" 
 		applicable ="isSub() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
@@ -164,17 +163,16 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>        	
 	</do>
-	<!-- Ajouter le cas où les deux ne sot pas executer ajouter un cas de propose et de Ask (Non encore fait) -->
-<!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference" criterion ="null"
-		less="askUserPref(getDiscussedCriterion()).getLess()"
-		more="askUserPref(getDiscussedCriterion()).getMore()" 
-		applicable = "!isDom()">
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		less="getPreference(openNewCriterion()).getLess()" 
+		more="getPreference(openNewCriterion()).getMore()"
+		applicable ="isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
-		<do task = "Reject"/>        
-	</do> -->		
+		<do task = "Reject"/>        	
+	</do>		
 
 </do>
 
@@ -289,7 +287,8 @@
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="getPreference(openNewCriterion()).getLess()" 
-		more="getPreference(openNewCriterion()).getMore()" applicable = "isPeer()">
+		more="getPreference(openNewCriterion()).getMore()"
+		applicable = "isPeer()">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>

@@ -16,13 +16,13 @@ public class PreferenceMatrix<T> {
 	public void insertPreference(T less, T more) {
 		int indexMore = values.indexOf(more);
 		int indexLess = values.indexOf(less);
-		if(preferences[indexLess][indexMore] == 1)
-			try {
-				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		if(preferences[indexLess][indexMore] == 1)
+//			try {
+//				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		// add an exception in case where the index = -1
 		preferences[indexMore][indexLess]= 1 ;
 		preferences[indexLess][indexMore]= -1;
@@ -35,7 +35,7 @@ public class PreferenceMatrix<T> {
 				addLeastPreferred(less);
 
 			}
-			if(less == null){
+			else if(less == null){
 				addMostPreferred(more);
 			}
 			else{

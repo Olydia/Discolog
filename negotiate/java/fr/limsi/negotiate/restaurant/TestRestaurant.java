@@ -111,7 +111,7 @@ public class TestRestaurant {
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 				user_ambiance.setType(Ambiance.class);
-				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.CALM));
+				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, null));
 				/*1. Define the  preferences on Restaurant criteria */	
 
 				CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -154,13 +154,12 @@ public class TestRestaurant {
 	
 	public static void main(String[] args) {
 		//Negotiation<Restaurant> d2 = D2();
-		Negotiation<Restaurant> s2 = S2();
+		Negotiation<Restaurant> s2 = D2();
 		//Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
-		s2.updateOtherMentalState(null, Cuisine.FRENCH);
-		s2.updateOtherMentalState(Cuisine.JAPANESE, Cuisine.ITALIAN);
-
-		CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Cuisine.class);
-		System.out.println(v.acceptableCriteria(5,v.getOther()));
+		s2.updateOtherMentalState(Ambiance.NOISY, null);
+		//CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Ambiance.class);
+		//System.out.println(v.acceptableCriteria(-5,v.getOther()));
+		System.out.println(s2.getCriterionNegotiation(Ambiance.class).getOther().getMostPreferred());
 		//System.out.println(ne.isAcceptable(new CriterionProposal(Cost.EXPENSIVE), -1));
 //		Negotiation<Restaurant> user =  user();
 //		DistanceNegotiation<Restaurant> euclide = new DistanceNegotiation<Restaurant>(restaurants, user);

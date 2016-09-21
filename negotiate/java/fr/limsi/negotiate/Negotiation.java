@@ -623,7 +623,8 @@ public class Negotiation<O extends Option> {
 	}
 	public boolean negotiationFailure(int dom){
 		if(dom>=0)
-			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || getAcceptableOptions(dom).isEmpty());
+			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || 
+					getAcceptableOptions(dom).isEmpty());
 
 		else
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
@@ -651,27 +652,40 @@ public class Negotiation<O extends Option> {
 		return fr;
 	}
 // This method is Nullable
-	@SuppressWarnings("unchecked")
 	public Option computeAcceptableOption(int dom){
-		// step one: compute acceptable options
-		// delete proposed options
-		// take an option with values acceptable by the user
+		// Step1: compute acceptable options
+		// Step2: delete proposed options
+		// Step3: take an option with values acceptable by the user
 		List<Option> accOptions = getAcceptableOptions(dom);
-		ArrayList<Option> otherAcceptable = new ArrayList<Option>();
+		ArrayList<Criterion> otherAcceptable = new ArrayList<Criterion>();
 		ArrayList<Option> acceptable = new ArrayList<Option>();
+		ArrayList<Option> removables = new ArrayList<Option>();
+
 
 		for(Option op: accOptions){
 			if(this.getContext().getProposals().contains(new OptionProposal(op)))
-				accOptions.remove(op);
+				removables.add(op);
 		}
+		accOptions.removeAll(removables);
 		for(CriterionNegotiation<Criterion> cn: this.criteriaNegotiation ){
-			otherAcceptable.addAll((Collection<? extends Option>) cn.acceptableCriteria(dom, cn.other));
+			otherAcceptable.addAll(cn.acceptableCriteria(-dom, cn.other));
 		}
+		if(otherAcceptable.isEmpty())
+			return (this.sortOptions(accOptions).get(0));
+
 		for(Option o: accOptions){
-			//o.
+			for(Criterion oc: otherAcceptable){
+				if(o.getValue(oc.getClass()).equals(oc))
+					acceptable.add(o);
+			}
 		}
+		acceptable.sort(new Comparator<Option>() {
+			@Override
+			public int compare(Option o1, Option o2){
+				return (Collections.frequency(acceptable, o2) - Collections.frequency(acceptable,o1));
+			}
+		});
 		
-		return (this.sortOptions(accOptions).get(0));
-		
+		return acceptable.get(0);
 	}
 }
