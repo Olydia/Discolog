@@ -118,10 +118,9 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
-	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.computeAcceptableOption(relation), true) "
-		applicable = "isDom()">
+		proposal="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"
+		applicable = "isDom()&amp;&amp; $negotiation.getPossibleProposalOptions(relation).isEmpty()">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -130,7 +129,7 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"
+		proposal="createProposal($negotiation.getPossibleProposalOptions(relation).get(0), true) "
 		applicable = "isDom()">
 		<do task = "Ask"/>
 		<do task = "State"/>

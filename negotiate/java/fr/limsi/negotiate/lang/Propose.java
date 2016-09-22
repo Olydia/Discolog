@@ -19,7 +19,6 @@ public class Propose extends ProposalUtterance {
 
    @Override
    protected void interpret () {
-	   System.out.println(getProposal().hashCode());
 	  Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
 	  // getProposal().setIsSelf();
       getNegotiation().getContext().updateProposals(p);
