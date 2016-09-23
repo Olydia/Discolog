@@ -20,7 +20,7 @@ public class AskPreference extends PreferenceUtterance {
 	   
 	   @Override
 	   protected void interpret () {
-	      Statement statement = getNegotiation().getContext().createStatement(getLess(), getMore(), getExternal(),"Ask");
+	      PreferenceStatement statement = getNegotiation().getContext().createStatement(getLess(), getMore(), getExternal(),"Ask");
 	      if (getCriterion() == null) 
             getNegotiation().getContext().updateDiscussedCriterion(getLess(), getMore());
 	      else {

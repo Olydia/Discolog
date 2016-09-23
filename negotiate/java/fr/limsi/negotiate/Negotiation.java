@@ -175,7 +175,7 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOther(less, more);
-			this.context.getListStatements().add(new Statement(less, more, true, "State"));
+			this.context.getListStatements().add(new PreferenceStatement(less, more, true, "State"));
 		}
 
 
@@ -186,7 +186,7 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOAS(less, more);
-			this.context.getListStatements().add(new Statement(less, more, false, "State"));
+			this.context.getListStatements().add(new PreferenceStatement(less, more, false, "State"));
 
 		}
 

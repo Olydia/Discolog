@@ -7,12 +7,13 @@ import fr.limsi.negotiate.Proposal.Status;
 
 public class DialogueContext {
 
-	private List <Statement> listStatements;
+	private List <PreferenceStatement> listStatements;
 	private ArrayList<Class<? extends Criterion>> discussedCriteria ;
 	public Class<? extends Criterion> currentDiscussedCriterion; 	
 	private Stack<Proposal> proposals;
 	private ArrayList<CommunicatedProp> acceptedValues;
 	private ArrayList<CommunicatedProp> NonacceptedValues;
+	private List<Statement> history;
 
 	//private Proposal lastProposal;
 
@@ -22,10 +23,11 @@ public class DialogueContext {
 	}
 	@SuppressWarnings("serial")
 	public DialogueContext() {
-		this.listStatements =new ArrayList<Statement>();
+		this.listStatements =new ArrayList<PreferenceStatement>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		//this.currentDiscussedCriterion = Cuisine.class;
 		this.proposals = new Stack<Proposal>();
+		this.history = new ArrayList<Statement>();
 		// communicatedProposal values attributions: oas: true / other: false
 		this.acceptedValues = new ArrayList<CommunicatedProp>()
 								{{add(new CommunicatedProp(true));
@@ -38,13 +40,17 @@ public class DialogueContext {
 		return discussedCriteria;
 	}
 
-
+	public void addStatement(Statement utt){
+		history.add(utt);
+		//if(utt.getUtteranceType().equals("State") || utt.getUtteranceType().equals("Ask") )
+			
+	}
 	public Class<? extends Criterion> getCurrentDiscussedCriterion() {
 		return currentDiscussedCriterion;
 	}
 
-	public Statement createStatement (Criterion less, Criterion more, boolean external, String utteranceType){
-		return(new Statement(less, more, external, utteranceType));
+	public PreferenceStatement createStatement (Criterion less, Criterion more, boolean external, String utteranceType){
+		return(new PreferenceStatement(less, more, external, utteranceType));
 	}
 
 	public void updateDiscussedCriterion(Class<? extends Criterion> discussedCriterion) {
@@ -59,15 +65,15 @@ public class DialogueContext {
 	}
 
 
-	public List<Statement> getListStatements() {
+	public List<PreferenceStatement> getListStatements() {
 		return listStatements;
 	}
 
-	public void setListStatements(List<Statement> listStatements) {
+	public void setListStatements(List<PreferenceStatement> listStatements) {
 		this.listStatements = listStatements;
 	} 
 
-	public Statement getLastStatement(String statementType, boolean external) {
+	public PreferenceStatement getLastStatement(String statementType, boolean external) {
 		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
 			if(listStatements.get(i).isExternal()== external && 
 			listStatements.get(i).utteranceType.equals(statementType))
