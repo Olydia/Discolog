@@ -31,8 +31,16 @@ public class StatePreference extends NegotiationUtterance {
 
    @Override
    public void interpret () {
-      getNegotiation().getContext().updateDiscussedCriterion(getLess(), getMore());
-      if ( getExternal() ) getNegotiation().updateOtherMentalState(getLess(), getMore());
-      else getNegotiation().updateOASMentalState(getLess(), getMore());
+	  PreferenceStatement statement = new PreferenceStatement
+			  							(getLess(), getMore(), getExternal(),"State");
+	  ValuePreference<Criterion> pref = new ValuePreference<Criterion> 
+	  									(getLess(), getMore());
+	  statement.setType(pref.getType());
+      getNegotiation().getContext().addStatement(statement);
+
+      if (getExternal()) 
+    	  getNegotiation().updateOtherMentalState(getLess(), getMore());
+      else 
+    	  getNegotiation().updateOASMentalState(getLess(), getMore());
    }
 }

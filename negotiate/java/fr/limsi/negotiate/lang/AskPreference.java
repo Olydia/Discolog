@@ -20,13 +20,15 @@ public class AskPreference extends PreferenceUtterance {
 	   
 	   @Override
 	   protected void interpret () {
-	      PreferenceStatement statement = getNegotiation().getContext().createStatement(getLess(), getMore(), getExternal(),"Ask");
+	      PreferenceStatement statement = new PreferenceStatement
+	    		  							(getLess(), getMore(), getExternal(),"Ask");
 	      if (getCriterion() == null) 
-            getNegotiation().getContext().updateDiscussedCriterion(getLess(), getMore());
-	      else {
-            getNegotiation().getContext().updateDiscussedCriterion(getCriterion());
+	    	  statement.setType(
+	    			  		new ValuePreference<Criterion> (getLess(), getMore()).
+	    			  			getType());
+		  else 
             statement.setType(getCriterion());    
-	      }
-	      getNegotiation().getContext().getListStatements().add(statement);
+	      
+	      getNegotiation().getContext().addStatement(statement);
 	   }
 }

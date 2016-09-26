@@ -3,6 +3,7 @@ package fr.limsi.negotiate.lang;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.Proposal;
+import fr.limsi.negotiate.ProposalStatement;
 
 public class Reject extends ProposalUtterance {
 
@@ -19,8 +20,9 @@ public class Reject extends ProposalUtterance {
 
    @Override
    protected void interpret () {
-	   getProposal().setIsSelf(!getExternal());
-	  getNegotiation().getContext().updateProposals(getProposal());
-      getNegotiation().updateProposalStatus(getProposal(), Proposal.Status.REJECTED);
+	  Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
+      getNegotiation().updateProposalStatus(p, Proposal.Status.REJECTED);
+      getNegotiation().getContext().
+	  	addStatement(new ProposalStatement(getExternal(),"Reject",p));
    }
 }

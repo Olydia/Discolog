@@ -175,7 +175,6 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOther(less, more);
-			this.context.getListStatements().add(new PreferenceStatement(less, more, true, "State"));
 		}
 
 
@@ -186,7 +185,6 @@ public class Negotiation<O extends Option> {
 
 		if(type != null){
 			this.getCriterionNegotiation(type).addOAS(less, more);
-			this.context.getListStatements().add(new PreferenceStatement(less, more, false, "State"));
 
 		}
 
@@ -469,9 +467,6 @@ public class Negotiation<O extends Option> {
 		}
 		else 
 			return model.getPreference(model.getSelf(),model.getOas()) ;
-
-
-
 	}
 
 	public ValuePreference<Criterion> askUserPreference (Class<? extends Criterion> c){
@@ -480,7 +475,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public ValuePreference<Criterion> reactUserStatement(String uttType){
-		// trier par order de pr�fence 
+		// trier par order de preference 
 		// get score des elements de lastStaement 
 		// enlever ceux qui sont dans oas
 

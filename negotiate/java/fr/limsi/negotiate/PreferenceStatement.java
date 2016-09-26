@@ -29,18 +29,12 @@ public class PreferenceStatement extends Statement {
 			super(external,utteranceType );
 			ValuePreference<Criterion> preference = new ValuePreference<Criterion>(less, more);
 			this.preference = preference;
-			
-
 		}
-		
 	
-
 		public ValuePreference<Criterion> getStatedPreference() {
 			return preference;
 		}
-		
 				
-		
 		@Override
 		public boolean equals (Object obj) {
 			

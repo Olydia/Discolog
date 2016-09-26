@@ -39,18 +39,20 @@ public class DialogueContext {
 	public ArrayList<Class<? extends Criterion>> getDiscussedCriteria() {
 		return discussedCriteria;
 	}
-
+	// 
 	public void addStatement(Statement utt){
 		history.add(utt);
-		//if(utt.getUtteranceType().equals("State") || utt.getUtteranceType().equals("Ask") )
-			
+		if(utt instanceof PreferenceStatement){
+			getListStatements().add((PreferenceStatement) utt);
+            updateDiscussedCriterion(((PreferenceStatement) utt).getType());
+		}
+		
+		if(utt instanceof ProposalStatement)	
+			this.updateProposals(((ProposalStatement) utt).getProp());
 	}
+	
 	public Class<? extends Criterion> getCurrentDiscussedCriterion() {
 		return currentDiscussedCriterion;
-	}
-
-	public PreferenceStatement createStatement (Criterion less, Criterion more, boolean external, String utteranceType){
-		return(new PreferenceStatement(less, more, external, utteranceType));
 	}
 
 	public void updateDiscussedCriterion(Class<? extends Criterion> discussedCriterion) {
@@ -58,12 +60,6 @@ public class DialogueContext {
 			this.discussedCriteria.add(discussedCriterion);
 		currentDiscussedCriterion = discussedCriterion;
 	}
-
-	public void updateDiscussedCriterion(Criterion more, Criterion less) {
-		ValuePreference<Criterion> pref = new ValuePreference<Criterion> (more, less);
-		updateDiscussedCriterion(pref.getType());
-	}
-
 
 	public List<PreferenceStatement> getListStatements() {
 		return listStatements;
