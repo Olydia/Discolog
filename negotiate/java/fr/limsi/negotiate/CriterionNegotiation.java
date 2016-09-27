@@ -73,12 +73,28 @@ public class CriterionNegotiation<C extends Criterion> {
 		return accepted;
 	}
 	
-	public List<C> acceptableCriteria(int dom, CriterionPrefModel<C> s){
+	/** Calculates the acceptable values for the preference model
+	 *  which can be either Other or OAS 
+	 *  @return List of values that are acceptable**/ 
+	public List<C> acceptableCriteria(int dom, CriterionPrefModel<C> model){
 		List<C> accepted = new ArrayList<C>();
-		for(C criterion: s.getValues())
-			if(isAcceptableCriterion(criterion, dom, s))
+		for(C criterion: model.getValues())
+			if(isAcceptableCriterion(criterion, dom, model))
 				accepted.add(criterion);
 		return accepted;
+	}
+	
+	/**
+	 * 
+	 * @param dominance value
+	 * @return a proposal
+	 */
+	public CriterionProposal computeProposal(int dom){
+		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
+		C mostPref = sortListOfCriteria(otherAcceptable).get(0);
+		if(isSelfAcceptableCriterion(mostPref, dom))
+			return new CriterionProposal(true,mostPref);
+		return null;
 	}
 	public List<C> clearRejected(List<C> values) {
 		for ( CriterionProposal c: proposals) {

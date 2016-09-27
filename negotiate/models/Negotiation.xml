@@ -151,18 +151,17 @@
       <subtasks id="_d4e66_subtasks">
          <step name="_d4e66_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e66_ref" task="_d4e66_tree"/>
-         <applicable>isDom() &amp;&amp; $negotiation.getPossibleProposalOptions(relation).isEmpty()</applicable>
+         <applicable>isMaxStated()</applicable>
          <binding slot="$_d4e66_step.external" value="false"/>
-         <binding slot="$_d4e66_step.proposal"
-                  value="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"/>
+         <binding slot="$_d4e66_step.proposal" value="$negotiation.computeProposal(relation)"/>
       </subtasks>
       <subtasks id="_d4e72_subtasks">
          <step name="_d4e72_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e72_ref" task="_d4e72_tree"/>
-         <applicable>isDom()</applicable>
+         <applicable>isDom()&amp;&amp; $negotiation.getPossibleProposalOptions(relation).isEmpty()</applicable>
          <binding slot="$_d4e72_step.external" value="false"/>
          <binding slot="$_d4e72_step.proposal"
-                  value="createProposal($negotiation.getPossibleProposalOptions(relation).get(0), true) "/>
+                  value="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"/>
       </subtasks>
       <subtasks id="_d4e78_subtasks">
          <step name="_d4e78_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -170,7 +169,7 @@
          <applicable>isDom()</applicable>
          <binding slot="$_d4e78_step.external" value="false"/>
          <binding slot="$_d4e78_step.proposal"
-                  value="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"/>
+                  value="createProposal($negotiation.getPossibleProposalOptions(relation).get(0), true) "/>
       </subtasks>
       <subtasks id="_d4e84_subtasks">
          <step name="_d4e84_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -913,7 +912,15 @@
 		};
     var relation =RI.DOMINANT;
  	
-
+	function isMaxStated(){
+		thsld = 0;
+		if(isPeer())
+			thsld= 2;
+		else if(isSub())
+			thsld= 4;
+		return ($negotiation.getContext().getCmpState()&gt;= thsld )
+	}
+	
     function currentMostPreferred(criterion, relation) {
        return ($negotiation.currentMostPreferredCriterion(criterion, relation));
     }

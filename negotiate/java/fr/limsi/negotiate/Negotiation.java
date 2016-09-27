@@ -617,6 +617,8 @@ public class Negotiation<O extends Option> {
 
 	}
 	public boolean negotiationFailure(int dom){
+		if (getContext().getHistory().size()> 10)
+			return true;
 		if(dom>=0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || 
 					getAcceptableOptions(dom).isEmpty());
@@ -682,6 +684,16 @@ public class Negotiation<O extends Option> {
 		});
 
 		return acceptable;
+	}
+	
+	public Proposal computeProposal (int dom){
+		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
+											getContext().getCurrentDiscussedCriterion());
+		if (cr.computeProposal(dom) == null){
+			cr = getCriterionNegotiation(openNewTopic());
+			return cr.computeProposal(dom);
+		}
+		else return cr.computeProposal(dom);
 	}
 }
 

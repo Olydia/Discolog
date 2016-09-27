@@ -156,13 +156,10 @@ public class TestRestaurant {
 		//Negotiation<Restaurant> d2 = D2();
 		Negotiation<Restaurant> s2 = D2();
 		//Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
-		s2.updateOtherMentalState(Ambiance.NOISY, null);
-		//CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Ambiance.class);
-		//System.out.println(v.acceptableCriteria(-5,v.getOther()));
-		System.out.println(s2.getCriterionNegotiation(Ambiance.class).getOther().getMostPreferred());
-		//System.out.println(ne.isAcceptable(new CriterionProposal(Cost.EXPENSIVE), -1));
-//		Negotiation<Restaurant> user =  user();
-//		DistanceNegotiation<Restaurant> euclide = new DistanceNegotiation<Restaurant>(restaurants, user);
-//		System.out.println(euclide.finalDistance());
+		s2.updateOtherMentalState(Ambiance.CALM, null);
+		CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Ambiance.class);
+		System.out.println(v.acceptableCriteria(0,v.getOther()));
+		System.out.println(v.getOther().getScore(Ambiance.CALM));
+		
 	}
 }

@@ -118,6 +118,17 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
+	
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
+		proposal="$negotiation.computeProposal(relation)"
+		applicable = "isMaxStated()">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
+	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"
 		applicable = "isDom()&amp;&amp; $negotiation.getPossibleProposalOptions(relation).isEmpty()">
@@ -429,7 +440,15 @@
 		};
     var relation =RI.DOMINANT;
  	
-
+	function isMaxStated(){
+		thsld = 0;
+		if(isPeer())
+			thsld= 2;
+		else if(isSub())
+			thsld= 4;
+		return ($negotiation.getContext().getCmpState()>= thsld )
+	}
+	
     function currentMostPreferred(criterion, relation) {
        return ($negotiation.currentMostPreferredCriterion(criterion, relation));
     }

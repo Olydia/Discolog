@@ -7,7 +7,6 @@ public class PreferenceMatrix<T> {
 	private int [] [] preferences; 
 
 	public PreferenceMatrix(List<T> values) {
-		// TODO Auto-generated constructor stub
 		this.values = values;
 		preferences = new int [values.size()][values.size()];
 	}
@@ -49,7 +48,7 @@ public class PreferenceMatrix<T> {
 		for(int i=0; i< preferences.length; i++){
 			if(i !=j) {
 				preferences[j][i] = 1;
-				preferences[i][i] = -1;
+				preferences[i][j] = -1;
 				transitivity(j, i);
 			}
 		}
@@ -60,7 +59,7 @@ public class PreferenceMatrix<T> {
 		for(int i=0; i< preferences.length; i++){
 			if(i !=j) {
 				preferences[j][i] = - 1;
-				preferences[i][i] = 1;
+				preferences[i][j] = 1;
 				transitivity(i, j);
 			}
 		}

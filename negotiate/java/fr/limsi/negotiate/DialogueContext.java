@@ -14,6 +14,9 @@ public class DialogueContext {
 	private ArrayList<CommunicatedProp> acceptedValues;
 	private ArrayList<CommunicatedProp> NonacceptedValues;
 	private List<Statement> history;
+	
+
+	private int cmpState = 0;
 
 	//private Proposal lastProposal;
 
@@ -36,12 +39,20 @@ public class DialogueContext {
 									{{add(new CommunicatedProp(true));
 									  add(new CommunicatedProp(false)); }};
 	}
+	public List<Statement> getHistory() {
+		return history;
+	}
 	public ArrayList<Class<? extends Criterion>> getDiscussedCriteria() {
 		return discussedCriteria;
 	}
 	// 
 	public void addStatement(Statement utt){
 		history.add(utt);
+		if(utt.getUtteranceType().equals("State"))
+			setCmpState(getCmpState() + 1);
+		else 
+			setCmpState(0);
+		
 		if(utt instanceof PreferenceStatement){
 			getListStatements().add((PreferenceStatement) utt);
             updateDiscussedCriterion(((PreferenceStatement) utt).getType());
@@ -152,6 +163,13 @@ public class DialogueContext {
 
 	public ArrayList<CommunicatedProp> getAcceptedValues() {
 		return acceptedValues;
+	}
+
+	public int getCmpState() {
+		return cmpState;
+	}
+	public void setCmpState(int cmpState) {
+		this.cmpState = cmpState;
 	}
 
 	public class CommunicatedProp {
