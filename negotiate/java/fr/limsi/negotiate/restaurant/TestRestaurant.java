@@ -155,11 +155,14 @@ public class TestRestaurant {
 	public static void main(String[] args) {
 		//Negotiation<Restaurant> d2 = D2();
 		Negotiation<Restaurant> s2 = D2();
-		//Negotiation<Restaurant> ne = InitiaterestauMentalState.Initialise();
-		s2.updateOtherMentalState(Ambiance.CALM, null);
-		CriterionNegotiation<Criterion> v = s2.getCriterionNegotiation(Ambiance.class);
-		System.out.println(v.acceptableCriteria(0,v.getOther()));
-		System.out.println(v.getOther().getScore(Ambiance.CALM));
+ 
+		Negotiation<Restaurant> ne = new InitiaterestauMentalState().D_A();
+		ne.updateOtherMentalState(Ambiance.NOISY, null);
+		ne.updateOtherMentalState(Cuisine.ITALIAN, null);
+
+		CriterionNegotiation<Criterion> v = ne.getCriterionNegotiation(Cuisine.class);
+		System.out.println(v.acceptableCriteria(-2,v.getOther()));
+		//System.out.println(v.getOther().getScore(Ambiance.CALM));
 		
 	}
 }

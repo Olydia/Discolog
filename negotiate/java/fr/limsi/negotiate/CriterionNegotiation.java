@@ -91,9 +91,10 @@ public class CriterionNegotiation<C extends Criterion> {
 	 */
 	public CriterionProposal computeProposal(int dom){
 		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
-		C mostPref = sortListOfCriteria(otherAcceptable).get(0);
-		if(isSelfAcceptableCriterion(mostPref, dom))
-			return new CriterionProposal(true,mostPref);
+		for(C pref: sortListOfCriteria(otherAcceptable)){
+		if(isSelfAcceptableCriterion(pref, dom))
+			return new CriterionProposal(true,pref);
+		}
 		return null;
 	}
 	public List<C> clearRejected(List<C> values) {
