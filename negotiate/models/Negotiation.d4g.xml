@@ -277,16 +277,26 @@
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="getPreference(openNewCriterion()).getLess()" 
-		more="getPreference(openNewCriterion()).getMore()"
-		applicable = "isPeer()">
+		less="leastPreferredCriterion(currentDiscussedCriterion())" 
+		more="currentMostPreferred(currentDiscussedCriterion(), relation)"
+		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
-
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		less="leastPreferredCriterion(openNewCriterion())" 
+		more="currentMostPreferred(openNewCriterion(), relation)"
+		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
+	
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="createProposal(currentMostPreferred(openNewCriterion(), relation), true)"
@@ -365,16 +375,27 @@
 	</do>
 	
 	<!-- state(other preference)  -->  
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="getPreference(getDiscussedCriterion()).getLess()" 
-		more="getPreference(getDiscussedCriterion()).getMore()"
-		applicable = "isPeer()">
+<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		less="leastPreferredCriterion(currentDiscussedCriterion())" 
+		more="currentMostPreferred(currentDiscussedCriterion(), relation)"
+		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
+	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
+		less="leastPreferredCriterion(openNewCriterion())" 
+		more="currentMostPreferred(openNewCriterion(), relation)"
+		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do>
+
 
 	<!--       	Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<!--       	Propose(other proposal)  -->
@@ -436,6 +457,10 @@
     
     function mostPreferredCriterion(criterion){
     	return ($negotiation.mostPreferredCriterion(criterion));
+    }
+    //*******************
+    function leastPreferredCriterion(criterion){
+    	return($negotiation.getCriterionNegotiation(criterion).getLeastPreffered());
     }
     
     function currentMostPreferredOption() {

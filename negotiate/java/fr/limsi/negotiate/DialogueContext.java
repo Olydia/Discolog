@@ -20,10 +20,7 @@ public class DialogueContext {
 
 	//private Proposal lastProposal;
 
-
-	public List<CommunicatedProp> getNonacceptedValues() {
-		return NonacceptedValues;
-	}
+	
 	@SuppressWarnings("serial")
 	public DialogueContext() {
 		this.listStatements =new ArrayList<PreferenceStatement>();
@@ -39,8 +36,17 @@ public class DialogueContext {
 									{{add(new CommunicatedProp(true));
 									  add(new CommunicatedProp(false)); }};
 	}
+	
+	public List<CommunicatedProp> getNonacceptedValues() {
+		return NonacceptedValues;
+	}
+	
 	public List<Statement> getHistory() {
 		return history;
+	}
+	
+	public Statement getLastStatement(){
+		return history.get(history.size()-1);
 	}
 	public ArrayList<Class<? extends Criterion>> getDiscussedCriteria() {
 		return discussedCriteria;

@@ -50,6 +50,11 @@ public class CriterionNegotiation<C extends Criterion> {
 	
 	// return a value which is in "in" but not in "out"
 	public ValuePreference<C> getPreference(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
+		List<C> values =sortListOfCriteria(this.getSelf().getValues());
+		ValuePreference<C> mostPRef = new ValuePreference<C>(null, values.get(0));
+		if(!this.isIn(out, mostPRef))
+			return mostPRef;
+
 		for (ValuePreference<C> value: in.getPreferences()){
 			if(!this.isIn(out, value))
 				return value;
@@ -93,8 +98,9 @@ public class CriterionNegotiation<C extends Criterion> {
 		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
 		List<CriterionProposal>  proposals = new ArrayList<CriterionProposal>();
 		for(C pref: sortListOfCriteria(otherAcceptable)){
-		if(isSelfAcceptableCriterion(pref, dom))
-			proposals.add(new CriterionProposal(true,pref));
+			CriterionProposal prop = new CriterionProposal(pref);
+			if(!(isProposed(prop, Status.ACCEPTED) || isProposed(prop, Status.REJECTED)) && isSelfAcceptableCriterion(pref, dom))
+					proposals.add(new CriterionProposal(true,pref));
 		}
 		return proposals;
 	}
