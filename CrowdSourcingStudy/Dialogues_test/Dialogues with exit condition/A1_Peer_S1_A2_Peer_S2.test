@@ -1,0 +1,32 @@
+    # Writing log to C:\Users\Lydia\AppData\Local\Temp\Console1.test...
+    # 4 oct. 2016 11:01:53 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "What kind of Cuisine do you like?"
+  > next
+    Agent2 says "JAPANESE is my favorite Cuisine."
+  > next
+    Agent1 says "I propose that we choose JAPANESE Cuisine."
+  > next
+    Agent2 says "Okay, let's choose JAPANESE."
+  > next
+    Agent1 says "I propose that we choose SAMURA Restaurant."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "For Ambiance, do you prefer CALM or NOISY?"
+  > next
+    Agent2 says "CALM is my favorite Ambiance."
+  > next
+    Agent1 says "I propose that we choose CALM Ambiance."
+  > next
+    Agent2 says "Okay, let's choose CALM."
+  > next
+    Agent1 says "I propose that we choose JILIYA Restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > next
+    Agent1 says "Ok."
