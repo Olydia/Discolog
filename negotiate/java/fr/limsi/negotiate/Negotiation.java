@@ -617,7 +617,7 @@ public class Negotiation<O extends Option> {
 
 	}
 	public boolean negotiationFailure(int dom){
-		if (getContext().getHistory().size()> 10)
+		if (getContext().getHistory().size()> 11)
 			return true;
 		if(dom>=0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || 
@@ -688,12 +688,24 @@ public class Negotiation<O extends Option> {
 	
 	public Proposal computeProposal (int dom){
 		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
-											getContext().getCurrentDiscussedCriterion());
-		if (cr.computeProposal(dom) == null){
-			cr = getCriterionNegotiation(openNewTopic());
-			return cr.computeProposal(dom);
+				getContext().getCurrentDiscussedCriterion());
+
+		if (cr.computeProposal(dom).isEmpty()){
+			// First propose an option if there is any open new topic
+			List<Option> options = getPossibleProposalOptions(dom);
+			if(options.isEmpty()){
+				cr = getCriterionNegotiation(openNewTopic());
+				List<CriterionProposal> values= cr.computeProposal(dom);
+				if(values.isEmpty())
+				return new OptionProposal(computeAcceptedOption());
+				else
+					return values.get(0);
+			}
+			else
+				return  new OptionProposal(true, options.get(0));
+				
 		}
-		else return cr.computeProposal(dom);
+		else return cr.computeProposal(dom).get(0);
 	}
 }
 

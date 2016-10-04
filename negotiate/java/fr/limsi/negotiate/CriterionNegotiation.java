@@ -87,15 +87,16 @@ public class CriterionNegotiation<C extends Criterion> {
 	/**
 	 * 
 	 * @param dominance value
-	 * @return a proposal
+	 * @return a list of proposals that can be proposed in the dialogue
 	 */
-	public CriterionProposal computeProposal(int dom){
+	public List<CriterionProposal> computeProposal(int dom){
 		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
+		List<CriterionProposal>  proposals = new ArrayList<CriterionProposal>();
 		for(C pref: sortListOfCriteria(otherAcceptable)){
 		if(isSelfAcceptableCriterion(pref, dom))
-			return new CriterionProposal(true,pref);
+			proposals.add(new CriterionProposal(true,pref));
 		}
-		return null;
+		return proposals;
 	}
 	public List<C> clearRejected(List<C> values) {
 		for ( CriterionProposal c: proposals) {

@@ -76,7 +76,7 @@
 	<user text="yeah, I'll call you tommorow."/>
 </agent>
 
-<agent id="ClosingNegotiation" text="Sorry, but I no longer want to go for dinner. You rejected all the restaurants that I like">
+<agent id="ClosingNegotiation" text="Sorry, but I no longer want to go for dinner!!">
 	<user text="Too bad."/>
 	<user text="No problem."/>
 </agent>
@@ -129,25 +129,6 @@
 		<do task = "Reject"/>
 	</do>
 	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(currentMostPreferred(currentDiscussedCriterion(), relation), true)"
-		applicable = "isDom()&amp;&amp; $negotiation.getPossibleProposalOptions(relation).isEmpty()">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
-	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.getPossibleProposalOptions(relation).get(0), true) "
-		applicable = "isDom()">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		applicable = "$negotiation.statedValues(currentDiscussedCriterion()) "
@@ -206,7 +187,7 @@
 
 <do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 
-	<do actor="agent" task = "ClosingDialogue" 
+	<do actor="agent" task = "ClosingNegotiation" 
 		applicable = "$negotiation.negotiationFailure(relation)" />
 	
 	<!--Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->

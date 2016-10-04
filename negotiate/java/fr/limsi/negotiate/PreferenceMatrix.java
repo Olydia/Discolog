@@ -49,7 +49,6 @@ public class PreferenceMatrix<T> {
 			if(i !=j) {
 				preferences[j][i] = 1;
 				preferences[i][j] = -1;
-				transitivity(j, i);
 			}
 		}
 	}
@@ -60,7 +59,6 @@ public class PreferenceMatrix<T> {
 			if(i !=j) {
 				preferences[j][i] = - 1;
 				preferences[i][j] = 1;
-				//transitivity(i, j);
 			}
 		}
 	}
