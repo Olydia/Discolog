@@ -1,30 +1,12 @@
-    # Writing log to C:\Users\Lydia\AppData\Local\Temp\Console1.test...
-    # 4 oct. 2016 17:09:46 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-    Agent1 says "Should we achieve Top?"
-  > next
-    Agent2 says "Let's achieve Top."
-  > next
-    Agent1 says "What kind of Cuisine do you like?"
-  > next
-    Agent2 says "ITALIAN is my favorite Cuisine."
-  > next
-    Agent1 says "ITALIAN is my least preferred Cuisine."
-  > next
-    Agent2 says "I propose that we choose TURKISH Cuisine."
-  > next
-    Agent1 says "Sorry, I'd rather choose something else."
-  > next
-    Agent2 says "I like ITALIAN over JAPANESE."
-  > next
-    Agent1 says "I like JAPANESE over ITALIAN."
-  > next
-    Agent2 says "I propose that we choose FRENCH Cuisine."
-  > next
-    Agent1 says "Okay, let's choose FRENCH."
-  > next
-    Agent2 says "I propose that we choose LE_GRAMOPHONE Restaurant."
-  > next
-    Agent1 says "Sorry, I'd rather choose something else."
-  > next
-    Agent2 says "Sorry, but I no longer want to go for dinner!!"
+A: "What kind of food do you like?" 
+	B:"Italian is my favorite food."
+A: "Italian is my least preferred food."
+	B: "Let's eat Turkish food tonight."
+A: "Sorry, I'd rather choose something else.	
+	B: "I prefer Italian food over Japanese."
+A: "I prefer Japanese food over Italian."
+	B: "Let's eat French food tonight."
+A: "Okay, let's choose French food."
+	B: "Let's go to the Le Gramophone Restaurant."
+A: "Sorry, I'd rather choose something else."
+	B:"Sorry, but I no longer want to go for dinner!!"

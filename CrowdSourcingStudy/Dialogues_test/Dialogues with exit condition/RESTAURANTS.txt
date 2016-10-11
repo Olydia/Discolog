@@ -1,0 +1,13 @@
+In this job you will see the transcript of a dialogue between two friends (called A and B bellow) who are trying to decide which restaurant to go to for dinner together. They both know about the following five restaurants:
+	- Beaurepaire: a noisy, cheap French restaurant.
+	- Le Gramophone: a noisy, expensive French restaurant.
+	- Victor: a quiet, cheap French restaurant.
+	- Cappadoce: a noisy, cheap Turkish restaurant.
+	- Le Janissaire: a noisy, expensive Turkish restaurant.
+	- Dragon: a noisy, cheap Chinese restaurant.
+	- Jiliya: a quiet, cheap Chinese restaurant.
+	- Ying: a noisy, expensive Chinese restaurant.
+	- Papelli: a noisy, cheap Italian restaurant.
+	- Salento: a noisy, expensive Italian restaurant.
+	- Samura: a noisy, cheap Japanese restaurant.
+	- Tokyo: a quit, expensive Japanese restaurant.

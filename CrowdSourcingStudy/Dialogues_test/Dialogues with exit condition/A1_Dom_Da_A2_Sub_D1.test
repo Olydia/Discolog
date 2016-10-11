@@ -1,35 +1,14 @@
-    # Writing log to C:\Users\Lydia\AppData\Local\Temp\Console2.test...
-    # 3 oct. 2016 22:43:27 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-
-    Agent1 says "Should we achieve Top?"
-  > next
-    Agent2 says "Let's achieve Top."
-  > next
-    Agent1 says "I propose that we choose NOISY Ambiance."
-  > next
-    Agent2 says "NOISY is my least preferred Ambiance."
-  > next
-    Agent1 says "I propose that we choose LE_GRAMOPHONE Restaurant."
-  > next
-    Agent2 says "I like CALM over NOISY."
-  > next
-    Agent1 says "I propose that we choose PAPELLI Restaurant."
-  > next
-    Agent2 says "I like CALM over NOISY."
-  > next
-    Agent1 says "I propose that we choose SALENTO Restaurant."
-  > next
-    Agent2 says "I like CALM over NOISY."
-  > next
-    Agent1 says "I propose that we choose CAPPADOCE Restaurant."
-  > next
-    Agent2 says "I like CALM over NOISY."
-  > next
-    Agent1 says "I propose that we choose LEJANISSAIRE Restaurant."
-  > next
-    Agent2 says "I like CALM over NOISY."
-  > next
-    Agent1 says "Sorry, but I no longer want to go for dinner!!"
-  > next
-    Agent2 says "Ok."
+A: "Let's choose a noisy restaurant."
+	B: "Noisy is my least preferred ambiance."
+A: "Let's go to the Le Gramophone restaurant."
+	B: "I prefer quit restaurants over noisy."
+A: "Let's go to the Papelli restaurant."
+	B: "I prefer quit restaurants over noisy."
+A: "Let's go to the Salento restaurant."
+	B: "I prefer quit restaurants over noisy."
+A: "Let's go to the Cappadoce restaurant."
+	B: "I prefer quit restaurants over noisy."
+A: "Let's go to the Le Janissaire restaurant."
+	B: "I prefer quit restaurants over noisy."
+A: "Sorry, but I no longer want to go for dinner!!"
+	B: "Ok."

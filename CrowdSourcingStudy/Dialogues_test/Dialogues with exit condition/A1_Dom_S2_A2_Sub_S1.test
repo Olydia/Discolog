@@ -1,16 +1,5 @@
-    # Writing log to C:\Users\Lydia\AppData\Local\Temp\Console1.test...
-    # 4 oct. 2016 10:58:31 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-    Agent1 says "Should we achieve Top?"
-  > next
-    Agent2 says "Let's achieve Top."
-  > next
-    Agent1 says "I propose that we choose CALM Ambiance."
-  > next
-    Agent2 says "Okay, let's choose CALM."
-  > next
-    Agent1 says "I propose that we choose VICTOR Restaurant."
-  > next
-    Agent2 says "Okay, I'll call to book a table."
-  > next
-    Agent1 says "Ok."
+A: " Let's go to a quiet restaurant." 
+    B: "Okay, let's choose a quiet restaurant. 
+A: "Let's go to the Victor restaurant"
+	B: "Okay, I'll call to book a table."
+A: "Ok."
