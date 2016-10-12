@@ -499,7 +499,7 @@ public class Negotiation<O extends Option> {
 		Criterion best = this.getCriterionNegotiation(this.context.getCurrentDiscussedCriterion()).
 				getMostPreffered();
 		return new ValuePreference<Criterion>(null, best);
-		
+
 
 	}
 
@@ -621,7 +621,7 @@ public class Negotiation<O extends Option> {
 		Statement lastUtterance = this.getContext().getLastStatement();
 		if (getContext().getHistory().size()>= 11 && 
 				!(lastUtterance.getUtteranceType().equals("Propose") || lastUtterance.getUtteranceType().equals("Accept")))
-			
+
 			return true;
 		if(dom>=0)
 			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty() || 
@@ -675,11 +675,12 @@ public class Negotiation<O extends Option> {
 			return (this.sortOptions(accOptions));
 
 		for(Option o: accOptions){
-			for(Criterion oc: otherAcceptable){
-				if(o.getValue(oc.getClass()).equals(oc))
-					acceptable.add(o);
+				for(Criterion oc: otherAcceptable){
+					if(o.getValue(oc.getClass()).equals(oc) && !acceptable.contains(o))
+						acceptable.add(o);
+				}
 			}
-		}
+		
 		acceptable.sort(new Comparator<Option>() {
 			@Override
 			public int compare(Option o1, Option o2){
@@ -689,7 +690,7 @@ public class Negotiation<O extends Option> {
 
 		return acceptable;
 	}
-	
+
 	public Proposal computeProposal (int dom){
 		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
 				getContext().getCurrentDiscussedCriterion());
