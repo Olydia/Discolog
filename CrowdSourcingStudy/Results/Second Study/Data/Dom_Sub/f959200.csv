@@ -1,0 +1,151 @@
+_unit_id,_created_at,_id,_started_at,_tainted,_channel,_trust,_worker_id,_country,_region,_city,_ip,if_you_had_difficulties_answering_these_questions_please_explain_here_why,speaker_a__leads_the_dialogue,speaker_a_considers_only_hisher_own_preferences_in_choosing_a_restaurant,speaker_a_is_being_guided_by_the_other_speaker_during_the_dialogue,speaker_a_is_flexible_in_the_choice_of_the_restaurant,speaker_a_is_inflexible_in_the_choice_of_the_restaurant,speaker_a_takes_into_account_the_preferences_of_the_other_speaker_in_choosing_a_restaurant,speaker_b_considers_only_hisher_own_preferences_in_choosing_a_restaurant,speaker_b_is_being_guided_by_the_other_speaker_during_the_dialogue,speaker_b_is_flexible_in_the_choice_of_the_restaurant,speaker_b_is_inflexible_in_the_choice_of_the_restaurant,speaker_b_leads_the_dialogue,speaker_b_likes__noisy_restaurants,speaker_b_takes_into_account_the_preferences_of_the_other_speaker_in_choosing_a_restaurant,the_two_friends_chose_a_french_restaurant,content,if_you_had_difficulties_answering_these_questions_please_explain_here_why_gold,speaker_a__leads_the_dialogue_gold,speaker_a_considers_only_hisher_own_preferences_in_choosing_a_restaurant_gold,speaker_a_is_being_guided_by_the_other_speaker_during_the_dialogue_gold,speaker_a_is_flexible_in_the_choice_of_the_restaurant_gold,speaker_a_is_inflexible_in_the_choice_of_the_restaurant_gold,speaker_a_takes_into_account_the_preferences_of_the_other_speaker_in_choosing_a_restaurant_gold,speaker_b_considers_only_hisher_own_preferences_in_choosing_a_restaurant_gold,speaker_b_is_being_guided_by_the_other_speaker_during_the_dialogue_gold,speaker_b_is_flexible_in_the_choice_of_the_restaurant_gold,speaker_b_is_inflexible_in_the_choice_of_the_restaurant_gold,speaker_b_leads_the_dialogue_gold,speaker_b_likes__noisy_restaurants_gold,speaker_b_takes_into_account_the_preferences_of_the_other_speaker_in_choosing_a_restaurant_gold,the_two_friends_chose_a_french_restaurant_gold
+1062425201,10/13/2016 12:31:02,2167246978,10/13/2016 12:30:37,false,prizerebel,1.0,39985456,USA,IL,Chicago,216.104.36.236,"Labore pariatur? Ratione reprehenderit et et sit officia neque fuga. Pariatur? Voluptatem quo odio suscipit sapiente laboriosam, consequatur id.",2,3,4,5,4,2,3,3,3,3,1,5,3,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:33:06,2167249614,10/13/2016 12:30:29,false,neodev,0.6429,39924284,NGA,"","",105.112.16.72,,5,3,3,4,2,2,4,2,3,2,2,2,2,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:33:23,2167249948,10/13/2016 12:30:46,false,neodev,0.5952,35136279,BGD,"","",103.230.107.16,,4,3,3,4,4,3,3,3,2,4,3,2,2,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:33:47,2167250557,10/13/2016 12:30:48,false,clixsense,0.5179,34686939,VEN,"","",201.248.141.224,"Whoever makes the first choice, B differs only in one, I think. It is difficult when there are ambiguities in the responses of B.",4,4,2,2,4,2,4,2,2,3,2,4,2,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:34:17,2167251246,10/13/2016 12:29:09,false,clixsense,0.5286,18185361,MKD,41,Skopje,79.125.216.34,"No difficulties, everything was clear and easy.",4,2,4,4,2,4,4,2,2,4,3,2,2,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:34:56,2167252197,10/13/2016 12:30:44,false,elite,0.5595,33017350,IND,09,Vadodara,103.254.200.115,,3,3,3,4,4,3,3,2,2,3,3,2,3,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:37:37,2167256248,10/13/2016 12:29:53,false,neodev,0.2755,39558095,GRC,35,Athens,79.107.179.61,no is very easy,5,5,5,5,5,5,5,2,4,5,4,5,5,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 12:41:19,2167262126,10/13/2016 12:30:37,false,clixsense,0.2054,39729086,BRA,16,Belém,191.0.81.114,,5,1,5,5,1,5,5,1,1,5,1,1,1,1,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 13:03:22,2167285846,10/13/2016 12:59:13,false,clixsense,0.3413,32850705,RUS,08,Ufa,145.255.1.160,,5,2,2,4,2,4,4,2,4,2,1,2,4,1,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
+1062425201,10/13/2016 13:04:28,2167286649,10/13/2016 13:00:26,false,clixsense,0.3143,16526976,BIH,01,Sarajevo,92.36.163.8,,5,5,2,2,5,4,2,5,4,2,2,2,5,2,"   <b> <br><b>A</b>: ""Let's choose a noisy restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Noisy is my least preferred ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Le Gramophone restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer Japanese over French."" <br>
+    <br><b>A</b>: ""Let's choose Italian food."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Okay, let's choose Italian."" <br>
+    <br><b>A</b>: ""Let's choose the Papelli restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Let's choose the Salento restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I don't like expensive restaurants."" <br>
+    <br><b>A</b>: ""Let's choose Cappadoce restaurant."" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""I prefer quiet over noisy ambiance."" <br>
+    <br><b>A</b>: ""Sorry, but I no longer want to go for dinner!!"" <br>
+    <br>&nbsp&nbsp&nbsp&nbsp<b>B</b>: ""Ok."" <br> </b>
+",,,,,,,,,,,,,,,
