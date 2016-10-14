@@ -1,6 +1,4 @@
 package fr.limsi.negotiate.restaurant;
-
-
 import fr.limsi.negotiate.Criterion;
 
 public enum Cost implements Criterion {

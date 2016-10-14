@@ -5,6 +5,7 @@ import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.movie.InitiateMovieMentalState;
 import fr.limsi.negotiate.restaurant.*;
 
 // TODO: Make small movie dialogue example to verify modularity
@@ -17,9 +18,13 @@ public class NegotiatorAgent extends Agent {
 
 	public static void main (String[] args) {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
-		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.D_A()), 
-						new NegotiatorAgent("Agent2", model.D1()), true);
-		
+		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.D1()), 
+				new NegotiatorAgent("Agent2", model.S2()), true);
+//		InitiateMovieMentalState model = new InitiateMovieMentalState();
+//
+//		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.P1()), 
+//						new NegotiatorAgent("Agent2", model.P2()), true);
+//		
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction1.load("models/Negotiation.xml");
 		dual.interaction2.load("models/Negotiate.xml");

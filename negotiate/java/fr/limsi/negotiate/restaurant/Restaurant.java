@@ -71,10 +71,7 @@ public enum Restaurant implements Option {
 
 		return CRITERIA;
 	}
-	
-	public Restaurant[] getRestaurants(){
-		return Restaurant.values();
-	}
+
 
 	@Override
 	public String getFrVersion() {

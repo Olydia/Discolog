@@ -2,15 +2,14 @@ package fr.limsi.negotiate.movie;
 
 import fr.limsi.negotiate.Criterion;
 
-
-public enum Category  implements Criterion{
-	//ACTION, ROMANTIC, 
-	ANIMATION, COMEDY, HORROR; 
+public enum Year implements Criterion {
+	//THE_SEXTIES, THE_SEVENTIES, 
+	THE_EIGHTIES, THE_NINETIES, RECENT;
 
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
-		return (Category.values());
+		return null;
 	}
 
 	@Override
@@ -18,4 +17,5 @@ public enum Category  implements Criterion{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

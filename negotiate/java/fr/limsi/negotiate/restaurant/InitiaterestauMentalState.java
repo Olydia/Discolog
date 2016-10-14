@@ -7,8 +7,6 @@ import fr.limsi.negotiate.*;
 
 public class InitiaterestauMentalState {
 
-	//private  Negotiation<Restaurant> restaurantNegotiation;
-
 	@SuppressWarnings("unchecked")
 	public  Negotiation<Restaurant> D1 () {
 		Negotiation<Restaurant> restaurant;
@@ -254,24 +252,24 @@ public class InitiaterestauMentalState {
 		for(Option o: options)
 			System.out.println(n.isAcceptableOption(o, relation));
 	}
-	public static void main (String[] args) {
-		InitiaterestauMentalState model = new InitiaterestauMentalState();
-		Negotiation<Restaurant> s2 = model.D_A();
-		printOptions(s2, 2);
-		//System.out.println("Cuisine");
-		//Negotiation<Restaurant> d2 = model.D2();
-//		for(Cuisine c: Cuisine.values()){
-//			System.out.println(c.name() + " :" +
-//		s2.getCriterionNegotiation(Cuisine.class).getSelf().getScore(c));
-//		}
-//		for(Ambiance c: Ambiance.values()){
-//			System.out.println(c.name() + " :" +
-//		s2.getCriterionNegotiation(Ambiance.class).getSelf().getScore(c));
-//		}
-//		for(Cost c: Cost.values()){
-//			System.out.println(c.name() + " :" +
-//		s2.getCriterionNegotiation(Cost.class).getSelf().getScore(c));
-//		}
-	}
+//	public static void main (String[] args) {
+//		InitiaterestauMentalState model = new InitiaterestauMentalState();
+//		Negotiation<Restaurant> s2 = model.D_A();
+//		printOptions(s2, 2);
+//		//System.out.println("Cuisine");
+//		//Negotiation<Restaurant> d2 = model.D2();
+////		for(Cuisine c: Cuisine.values()){
+////			System.out.println(c.name() + " :" +
+////		s2.getCriterionNegotiation(Cuisine.class).getSelf().getScore(c));
+////		}
+////		for(Ambiance c: Ambiance.values()){
+////			System.out.println(c.name() + " :" +
+////		s2.getCriterionNegotiation(Ambiance.class).getSelf().getScore(c));
+////		}
+////		for(Cost c: Cost.values()){
+////			System.out.println(c.name() + " :" +
+////		s2.getCriterionNegotiation(Cost.class).getSelf().getScore(c));
+////		}
+//	}
 
 }
