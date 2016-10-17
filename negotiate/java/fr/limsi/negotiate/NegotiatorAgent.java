@@ -13,7 +13,7 @@ import fr.limsi.negotiate.restaurant.*;
 
 public class NegotiatorAgent extends Agent {
 
-	private Negotiation<Restaurant> restaurant ;
+	private Negotiation<Restaurant> model ;
 
 
 	public static void main (String[] args) {
@@ -37,7 +37,7 @@ public class NegotiatorAgent extends Agent {
 
 	public NegotiatorAgent (String name, Negotiation<Restaurant> model) { 
 		super(name); 
-		this.restaurant = model;
+		this.model = model;
 		// since agent has multiple choices, add DecompositionPlugin in order
 		// for agent to "look ahead" to utterance choices (as in user menus) 
 		new DecompositionPlugin(agenda, 25, true, true);
@@ -47,7 +47,7 @@ public class NegotiatorAgent extends Agent {
 	/**
 	 * @return current negotiation object
 	 */
-	public Negotiation<? extends Option> getNegotiation() { return restaurant; }
+	public Negotiation<? extends Option> getNegotiation() { return model; }
 
 
 	//private final Negotiation<Movie> movie = InitiateMovieMentalState.Initialise();

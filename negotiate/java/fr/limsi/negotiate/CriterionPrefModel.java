@@ -1,7 +1,6 @@
 package fr.limsi.negotiate;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+
 import java.util.*;
 
 
@@ -66,26 +65,20 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 	public List<C> getValues(){
 		
 		try {
-			Method m = type.getDeclaredMethod("getValues");
+			//Method m = type.getDeclaredMethod("getValues");
 			Object[] consts = type.getEnumConstants();
-		    Object[] v = (Object[])m.invoke(consts[0]);
-			return ((List<C>) (Arrays.asList(v)));
+		    //Object[] v = (Object[])m.invoke(consts[0]);
+			return ((List<C>) (Arrays.asList(consts)));
 
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		return null;
 	}

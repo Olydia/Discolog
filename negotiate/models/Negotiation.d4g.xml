@@ -427,12 +427,21 @@
     $state ="State";
     $ask ="Ask";   
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
-    $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance.class ;
-    $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant.class ;
+    // *********  restaurant criteria *********
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
    	$cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
     $cost = Packages.fr.limsi.negotiate.restaurant.Cost;
     $restaurant = Packages.fr.limsi.negotiate.restaurant.Restaurant;
+    
+    // ****************************************
+    
+    // *********  restaurant criteria *********
+    $country = Packages.fr.limsi.negotiate.movie.Country ;
+   	$category = Packages.fr.limsi.negotiate.movie.Category ;
+    $Year = Packages.fr.limsi.negotiate.movie.Year;
+    $movie = Packages.fr.limsi.negotiate.movie.Movie;
+    
+    // ****************************************;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
     $introMostPrefValue =currentMostPreferred($mostPrefCriterion, relation);
     var RI = {
@@ -479,10 +488,7 @@
     		return(mostPreferredOption().equals(proposal.getValue()));
     }   
     
-    function Preferred(criterion) {   
-       		return (Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN);  		
-    }
-    
+
     function getLastUserPref() { 
     	if (getLastUserStatement("State") !=null)
     		return (getLastUserStatement("State").getStatedPreference());

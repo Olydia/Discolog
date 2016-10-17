@@ -5,6 +5,7 @@ import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 
 // TODO: Make small movie dialogue example to verify modularity
@@ -21,6 +22,10 @@ public class ExampleAgent extends Agent {
             args.length > 0 && args[0].length() > 0 ? args[0] : null);
       // do not guess recipes, since using DecompositionPlugin below
       interaction.setGuess(false); 
+      interaction.load("models/Negotiate.xml");
+      interaction.load("models/Negotiation.xml");
+      interaction.eval("relation = RI.PEER", "ExampleAgent");
+      //interaction.getDisco().addTop("Top");
       // TODO: enable random choice among applicable utterances (disabled
       //       for now to make debugging easier
       // Agent.RANDOM = new Random(12345);
@@ -34,12 +39,13 @@ public class ExampleAgent extends Agent {
       new DecompositionPlugin(agenda, 25, true, true);
    }
    
-   private final Negotiation<Restaurant> restaurant = new InitiaterestauMentalState().D1();
-   
+   private final Negotiation<Movie> model = new InitiateMovieMentalState().P1();
+   //private final Negotiation<Restaurant> model = new InitiaterestauMentalState().D1();
+
    /**
     * @return current negotiation object
     */
-   public Negotiation<? extends Option> getNegotiation() { return restaurant; }
+   public Negotiation<? extends Option> getNegotiation() { return model; }
 
 
    //private final Negotiation<Movie> movie = InitiateMovieMentalState.Initialise();
