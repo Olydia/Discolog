@@ -7,4 +7,5 @@ package fr.limsi.negotiate;
 public interface Criterion {
 	Criterion [] getValues();
 	String getFrVersion();
+	
 }

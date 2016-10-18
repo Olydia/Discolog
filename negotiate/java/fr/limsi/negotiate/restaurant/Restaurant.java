@@ -7,43 +7,43 @@ import fr.limsi.negotiate.Option;
 
 public enum Restaurant implements Option {
 
-	LE_PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.CALM),
+	LE_PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.QUIET),
 	
 	LE_GRAMOPHONE (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.NOISY),
 	
-	VICTOR(Cuisine.FRENCH, Cost.CHEAP, Ambiance.CALM),
+	VICTOR(Cuisine.FRENCH, Cost.CHEAP, Ambiance.QUIET),
 	
 	BEAUREPAIRE(Cuisine.FRENCH, Cost.CHEAP, Ambiance.NOISY),
 	
 	MAGOROKO (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.NOISY),
 	
-	TOKYO (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.CALM),
+	TOKYO (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.QUIET),
 	
 	SAMURA (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.NOISY),
 	
-	MIZUSHI (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.CALM),
+	MIZUSHI (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.QUIET),
 	
 	DRAGON (Cuisine.CHINESE, Cost.CHEAP, Ambiance.NOISY),
 	
 	YING (Cuisine.CHINESE, Cost.EXPENSIVE, Ambiance.NOISY),
 	
-	YONG (Cuisine.CHINESE, Cost.EXPENSIVE, Ambiance.CALM),
+	YONG (Cuisine.CHINESE, Cost.EXPENSIVE, Ambiance.QUIET),
 		
-	JILIYA (Cuisine.CHINESE, Cost.CHEAP, Ambiance.CALM),
+	JILIYA (Cuisine.CHINESE, Cost.CHEAP, Ambiance.QUIET),
 	
 	PAPELLI (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.NOISY),
 	
 	SALENTO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.NOISY),
 	
-	AL_BACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.CALM),
+	AL_BACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.QUIET),
 		
-	CIASA_MIA (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.CALM),
+	CIASA_MIA (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.QUIET),
 	
 	CAPPADOCE (Cuisine.TURKISH, Cost.CHEAP, Ambiance.NOISY),
 		
-	SIZIN (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.CALM),
+	SIZIN (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.QUIET),
 		
-	BARAK (Cuisine.TURKISH, Cost.CHEAP, Ambiance.CALM),
+	BARAK (Cuisine.TURKISH, Cost.CHEAP, Ambiance.QUIET),
 	
 	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.NOISY);
 	

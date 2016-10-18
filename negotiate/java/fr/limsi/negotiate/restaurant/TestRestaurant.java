@@ -28,7 +28,7 @@ public class TestRestaurant {
 		// 1.3 Preference model on Ambiance 
 		CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 		user_ambiance.setType(Ambiance.class);
-		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.CALM, Ambiance.NOISY));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.NOISY));
 		/*1. Define the  preferences on Restaurant criteria */	
 
 		CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -72,7 +72,6 @@ public class TestRestaurant {
 	public static void main(String[] args) {
 		InitiaterestauMentalState mv = new InitiaterestauMentalState();
 		Negotiation<Restaurant> nmv= mv.D1();
-		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getSelf().getScore(Cuisine.CHINESE));
-
+		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getTheCurrentMostPreffered(0));
 	}
 }

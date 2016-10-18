@@ -9,7 +9,7 @@ public class OptionProposal extends Proposal {
 
 	@Override
 	public String toString() {
-		return option.toString();
+		return option.toString().toLowerCase();
 	}
 
 	public final Option option;

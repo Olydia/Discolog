@@ -10,7 +10,7 @@ public class CriterionProposal extends Proposal {
 
 	@Override
 	public String toString() {
-		return criterion.toString()/*+ " isSelf: "+ isSelf*/;
+		return criterion.toString().toLowerCase()/*+ " isSelf: "+ isSelf*/;
 	}
 
 	public final Criterion criterion;
