@@ -224,6 +224,15 @@
 		<do task = "Accept"/>
 		<do task = "Reject"/>
 	</do>
+		<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
+		proposal="lastOpenProposal()"  
+		applicable = "isPeer() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
+		<do task = "Ask"/>
+		<do task = "State"/>
+		<do task = "Propose"/>
+		<do task = "Accept"/>
+		<do task = "Reject"/>
+	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="reactToRejectedProp(lastOpenProposal()).getLess()" 
@@ -236,15 +245,7 @@
 		<do task = "Reject"/>
 	</do>
 	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
-		proposal="lastOpenProposal()"  
-		applicable = "!(isSub() &amp;&amp; isAcceptable(lastOpenProposal(), relation))">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do> 
+
 
 </do>
 

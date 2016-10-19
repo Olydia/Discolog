@@ -286,7 +286,7 @@ public class Negotiation<O extends Option> {
 
 		}
 		CriterionNegotiation<Criterion> model = getCriterionNegotiation(value.getClass());
-		// revoir cette méthode c'est fu n'importe quoi !! 
+		// revoir cette mï¿½thode c'est fu n'importe quoi !! 
 		return(model.reactToCriterion(value, context.comminicatedProposals(true,model.getCriterionType())).
 				orElse(new ValuePreference<Criterion>(value,
 						model.getMostPreffered())));
