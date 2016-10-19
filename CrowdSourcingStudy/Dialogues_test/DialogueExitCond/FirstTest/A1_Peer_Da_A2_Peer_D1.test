@@ -1,6 +1,6 @@
 A: "What kind of ambiance do you like?"
-	B: "I prefer quiet restaurants"
-A: "Quiet is my least preferred ambiance."
+	B: "I like quiet restaurants"
+A: "I don't like quiet restaurants."
 	B: "Let's go to the Beaurepaire restaurant."
 A: "Okay, I'll call to book a table."
 	B: "Ok."
