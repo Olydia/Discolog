@@ -47,19 +47,21 @@ public class CriterionNegotiation<C extends Criterion> {
 	public Class<C> getCriterionType() {
 		return criterionType;
 	}
+	// return a value which is in "in" but not in "out"
 	
 	// return a value which is in "in" but not in "out"
-	public ValuePreference<C> getPreference(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
+	public List<ValuePreference<C>> getSelectedPreferences(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
+		List<ValuePreference<C>> elems = new ArrayList<ValuePreference<C>>();
 		List<C> values =sortListOfCriteria(this.getSelf().getValues());
 		ValuePreference<C> mostPRef = new ValuePreference<C>(null, values.get(0));
 		if(!this.isIn(out, mostPRef))
-			return mostPRef;
+			elems.add(mostPRef);
 
 		for (ValuePreference<C> value: in.getPreferences()){
 			if(!this.isIn(out, value))
-				return value;
+				elems.add(value);
 		}
-		return null;
+		return elems;
 	}
 	
 	public C getTheCurrentMostPreffered(int dom){
@@ -94,15 +96,30 @@ public class CriterionNegotiation<C extends Criterion> {
 	 * @param dominance value
 	 * @return a list of proposals that can be proposed in the dialogue
 	 */
-	public List<CriterionProposal> computeProposal(int dom){
+	public List<CriterionProposal> computeProposal(int dom, DialogueContext context){
+		// dominant only cares about his preferences
+		
 		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
 		List<CriterionProposal>  proposals = new ArrayList<CriterionProposal>();
-		for(C pref: sortListOfCriteria(otherAcceptable)){
-			CriterionProposal prop = new CriterionProposal(pref);
-			if(!(isProposed(prop, Status.ACCEPTED) || isProposed(prop, Status.REJECTED)) && isSelfAcceptableCriterion(pref, dom))
-					proposals.add(new CriterionProposal(true,pref));
+		if(dom > 0){
+			List<C> selfAcc = selfAcceptableCriteria(dom);
+			for(C cr: selfAcc){
+				CriterionProposal p =new CriterionProposal(cr);
+				if(!context.isProposed(p))
+					proposals.add(p);
+			}
+			return proposals;
 		}
-		return proposals;
+		else {
+			for(C pref: sortListOfCriteria(otherAcceptable)){
+				CriterionProposal prop = new CriterionProposal(pref);
+				if(!(isProposed(prop, Status.ACCEPTED) || isProposed(prop, Status.REJECTED)) 
+				   && isSelfAcceptableCriterion(pref, dom))
+						proposals.add(new CriterionProposal(true,pref));
+			}
+			return proposals;
+		}
+
 	}
 	public List<C> clearRejected(List<C> values) {
 		for ( CriterionProposal c: proposals) {

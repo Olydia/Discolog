@@ -17,10 +17,19 @@ public class DialogueContext {
 	
 
 	private int cmpState = 0;
+	private int cmpProposal =0;
 
 	//private Proposal lastProposal;
 
 	
+	public int getCmpProposal() {
+		return cmpProposal;
+	}
+
+	public void setCmpProposal(int cmpProposal) {
+		this.cmpProposal = cmpProposal;
+	}
+
 	@SuppressWarnings("serial")
 	public DialogueContext() {
 		this.listStatements =new ArrayList<PreferenceStatement>();
@@ -95,6 +104,23 @@ public class DialogueContext {
 		return null;
 
 	}
+	
+	public boolean isProposed(Proposal proposal){
+		for(Proposal p: proposals){
+			if(p.getValue().equals(proposal.getValue()))
+					return true;
+		}
+		return false;
+	}
+	
+	public boolean isProposed (Proposal proposal, Status status){
+		for(Proposal p: proposals){
+			if(p.getValue().equals(proposal.getValue()) && p.getStatus().equals(proposal.getStatus()))
+					return true;
+		}
+		return false;
+
+	}
 
 	//	public Statement getLastAgentStatement(){
 	//		for (int i = listStatements.size() - 1 ; i >= 0 ; i--)
@@ -110,6 +136,12 @@ public class DialogueContext {
 	}
 
 	public void updateProposals(Proposal proposal) {
+		if(!this.proposals.isEmpty()){
+			if(this.proposals.peek().status.equals(Status.OPEN) && proposal.status.equals(Status.OPEN))
+				setCmpProposal(cmpProposal +1);
+			else 
+				setCmpProposal(0);
+		}
 		this.proposals.push(proposal);
 		if(proposal.getStatus().equals(Status.OPEN)|| proposal.getStatus().equals(Status.ACCEPTED))
 			updateCommunicatedProp(acceptedValues, proposal);
@@ -208,6 +240,14 @@ public class DialogueContext {
 			this.prop = prop;
 		}
 		
+	}
+	public int takedTurns(boolean external){
+		int cmp =0;
+		for(Statement st: history){
+			if(st.isExternal() == external)
+				cmp ++;
+		}
+		return cmp;
 	}
 
 }
