@@ -510,7 +510,7 @@
          <applicable>!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal())</applicable>
          <binding slot="$_d4e154_step.external" value="false"/>
          <binding slot="$_d4e154_step.proposal"
-                  value="createProposal(getOptionWithValue(lastAcceptedProposal().getValue()), true)"/>
+                  value="createProposal($negotiation.computeAcceptableOptions(relation).get(0), true)"/>
       </subtasks>
       <subtasks id="_d4e160_subtasks">
          <step name="_d4e160_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -669,7 +669,7 @@
          <step name="_d4e194_ref" task="_d4e194_tree"/>
          <applicable>!isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())</applicable>
          <binding slot="$_d4e194_step.external" value="false"/>
-         <binding slot="$_d4e194_step.criterion" value="null"/>
+         <binding slot="$_d4e194_step.criterion" value="openNewCriterion()"/>
          <binding slot="$_d4e194_step.less" value="askUserPref(openNewCriterion()).getLess()"/>
          <binding slot="$_d4e194_step.more" value="askUserPref(openNewCriterion()).getMore()"/>
       </subtasks>
@@ -987,7 +987,7 @@
 	}
 	
 	function isMaxProp(){
-		return ($negotiation.getContext().getCmpProposal()&gt;= 3)
+		return ($negotiation.getContext().getCmpProposal()&gt;= 2)
 	}
 	
     function currentMostPreferred(criterion, relation) {

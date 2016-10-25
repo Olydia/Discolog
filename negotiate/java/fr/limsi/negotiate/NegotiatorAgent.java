@@ -5,7 +5,6 @@ import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
-import fr.limsi.negotiate.movie.InitiateMovieMentalState;
 import fr.limsi.negotiate.restaurant.*;
 
 // TODO: Make small movie dialogue example to verify modularity

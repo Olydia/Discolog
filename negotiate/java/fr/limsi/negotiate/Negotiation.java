@@ -463,7 +463,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public ValuePreference<Criterion> reactAsk(int dom){
-		 
+
 		PreferenceStatement user = null;
 
 		if (this.context.getLastStatement("Ask",true) != null) {
@@ -620,6 +620,39 @@ public class Negotiation<O extends Option> {
 				accepted.add(n.getProposals(Proposal.Status.ACCEPTED).get(index));
 		}
 		return accepted;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Option> computeAcceptableOptions(int dom){
+		ArrayList<Option> acceptedOptions= new ArrayList<Option>();
+		ArrayList<Option> optionProposals = (ArrayList<Option>) getPossibleProposalOptions(dom);
+		Map<Class<? extends Criterion>, List<Criterion>>  acceptedCriteria = this.acceptedCriteria();
+		for(Class<? extends Criterion> cr : acceptedCriteria.keySet()){
+			if(!acceptedCriteria.get(cr).isEmpty()){
+				for(Option op: optionProposals){
+					if(acceptedCriteria.get(cr).contains(op.getValue(cr)))
+						acceptedOptions.add(op);
+				}
+				optionProposals.clear();
+				optionProposals = (ArrayList<Option>) acceptedOptions.clone();
+				acceptedOptions.clear();
+
+			}
+			
+			//if(!acceptedOptions.isEmpty())
+		}
+		if(optionProposals.isEmpty())
+			optionProposals.add(getOptionWithValue((Criterion)this.context.getLastCriterionProposal(Status.ACCEPTED).getValue()));
+
+		return optionProposals;
+	}
+
+	public Map<Class<? extends Criterion>, List<Criterion>> acceptedCriteria(){
+		Map<Class<? extends Criterion>, List<Criterion>> acceptedCriteria = 
+				new HashMap<Class<? extends Criterion>, List<Criterion>>();
+		for (CriterionNegotiation<Criterion> cr : this.criteriaNegotiation){
+			acceptedCriteria.put(cr.criterionType, cr.getProposals(Status.ACCEPTED));
+		}
+		return acceptedCriteria;
 	}
 
 	public Option computeAcceptedOption(){

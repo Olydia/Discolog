@@ -293,7 +293,7 @@
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(getOptionWithValue(lastAcceptedProposal().getValue()), true)"
+		proposal="createProposal($negotiation.computeAcceptableOptions(relation).get(0), true)"
 		applicable = "!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal())" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -364,7 +364,7 @@
 	</do>
 	<!-- In the case where an option is rejected open a new Criterion   -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-		criterion ="null"
+		criterion ="openNewCriterion()"
 		less="askUserPref(openNewCriterion()).getLess()" 
 		more="askUserPref(openNewCriterion()).getMore()"
 		applicable ="!isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())">
@@ -487,7 +487,7 @@
 	}
 	
 	function isMaxProp(){
-		return ($negotiation.getContext().getCmpProposal()>= 3)
+		return ($negotiation.getContext().getCmpProposal()>= 2)
 	}
 	
     function currentMostPreferred(criterion, relation) {

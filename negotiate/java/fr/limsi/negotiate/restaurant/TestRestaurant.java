@@ -3,6 +3,7 @@ package fr.limsi.negotiate.restaurant;
 import javax.imageio.metadata.IIOInvalidTreeException;
 
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.movie.Category;
 import fr.limsi.negotiate.movie.InitiateMovieMentalState;
 import fr.limsi.negotiate.movie.Movie;
@@ -72,6 +73,25 @@ public class TestRestaurant {
 	public static void main(String[] args) {
 		InitiaterestauMentalState mv = new InitiaterestauMentalState();
 		Negotiation<Restaurant> nmv= mv.D1();
-		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getTheCurrentMostPreffered(0));
+		Negotiation<Restaurant> nmv1= mv.D_A();
+//		CriterionProposal p1 = new CriterionProposal(true, Cuisine.JAPANESE);
+//		p1.setStatus(Status.ACCEPTED);
+//		nmv.addProposal(p1);
+//		System.out.println(nmv.computeAcceptableOptions(0));
+//		OptionProposal p2 = new OptionProposal(false, Restaurant.MAGOROKO);
+//		p2.setStatus(Status.REJECTED);
+//		nmv.addProposal(p2);
+//		nmv.updateProposalStatus(p2,Status.REJECTED);
+//		CriterionProposal p3 = new CriterionProposal(true, Ambiance.QUIET);
+//		p3.setStatus(Status.ACCEPTED);
+//		nmv.addProposal(p3);
+//		System.out.println(nmv.computeAcceptableOptions(0));
+
+		System.out.println(nmv.getAcceptableOptions(1));
+		System.out.println(nmv1.getAcceptableOptions(-1));
+	
+		
+
+		//System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getTheCurrentMostPreffered(0));
 	}
 }

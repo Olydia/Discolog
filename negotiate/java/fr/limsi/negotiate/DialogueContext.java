@@ -164,6 +164,16 @@ public class DialogueContext {
 		}
 		return null;
 	}
+	
+	public Proposal getLastCriterionProposal(Status status) {
+		for(int i= proposals.size()-1; i>=0; i --){
+			if(proposals.get(i) instanceof CriterionProposal && proposals.get(i).getStatus().toString().equals(status))
+				return proposals.get(i);
+
+		}
+		return null;
+	}
+	
 	public List<Proposal> getSpeakerProposals(boolean who){
 		List<Proposal> whoProp = new ArrayList<Proposal>();
 		for(Proposal p: this.getProposals())
