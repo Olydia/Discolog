@@ -107,7 +107,7 @@
 <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "$negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="proposalFromPreference(getLastUserPref(), true) "
@@ -171,7 +171,7 @@
 <do id = "Ask" actor="user" task="n:fr.limsi.negotiate.lang.AskPreference">
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "$negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="$negotiation.reactAsk(relation).getLess()" 
@@ -188,7 +188,7 @@
 <do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "$negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
 	
 	<!--Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<do actor="agent" task ="Booking"
@@ -277,7 +277,7 @@
 <do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
 	
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "$negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
 	
 	<do actor="agent" task ="Booking"
 		applicable ="isOptionProposal(lastAcceptedProposal())"/>
@@ -335,7 +335,7 @@
 	</do> 
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
-		criterion ="null"
+		criterion ="openNewCriterion()"
 		less="askUserPref(openNewCriterion()).getLess()" 
 		more="askUserPref(openNewCriterion()).getMore()" applicable = "isSub()">
 		<do task = "Ask"/>
@@ -351,7 +351,7 @@
 <do id = "Reject" actor="user" task="n:fr.limsi.negotiate.lang.Reject">
 <!--In the case where the agent is very dominant propose again the the proposal if it is the mostPref proposal -->
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "$negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="lastRejectedProposal() "

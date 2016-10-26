@@ -9,7 +9,7 @@ public class OptionProposal extends Proposal {
 
 	@Override
 	public String toString() {
-		return option.toString().toLowerCase();
+		return option.toString();
 	}
 
 	public final Option option;
@@ -53,6 +53,12 @@ public class OptionProposal extends Proposal {
 		int result = 1;
 		result = prime * result + ((option == null) ? 0 : option.hashCode());
 		return result;
+	}
+
+	@Override
+	public String printValue() {
+		// TODO Auto-generated method stub
+		return this.getValue().print();
 	}
 
 }

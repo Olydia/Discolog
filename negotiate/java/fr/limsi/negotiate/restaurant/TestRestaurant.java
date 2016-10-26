@@ -73,7 +73,7 @@ public class TestRestaurant {
 	public static void main(String[] args) {
 		InitiaterestauMentalState mv = new InitiaterestauMentalState();
 		Negotiation<Restaurant> nmv= mv.D1();
-		Negotiation<Restaurant> nmv1= mv.D_A();
+		Negotiation<Restaurant> nmv1= mv.V2();
 //		CriterionProposal p1 = new CriterionProposal(true, Cuisine.JAPANESE);
 //		p1.setStatus(Status.ACCEPTED);
 //		nmv.addProposal(p1);
@@ -85,11 +85,15 @@ public class TestRestaurant {
 //		CriterionProposal p3 = new CriterionProposal(true, Ambiance.QUIET);
 //		p3.setStatus(Status.ACCEPTED);
 //		nmv.addProposal(p3);
-//		System.out.println(nmv.computeAcceptableOptions(0));
-
+		System.out.println(Restaurant.PAPELLI.print());
+		System.out.println(Cost.CHEAP + "  "+Ambiance.NOISY);
+		System.out.println("\n\nDOM_D1  SUB V2");
 		System.out.println(nmv.getAcceptableOptions(1));
 		System.out.println(nmv1.getAcceptableOptions(-1));
-	
+		System.out.println("\n\n DOM_V2  SUB D1");
+		System.out.println(nmv1.getAcceptableOptions(1));
+		System.out.println(nmv.getAcceptableOptions(-1));
+
 		
 
 		//System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getTheCurrentMostPreffered(0));

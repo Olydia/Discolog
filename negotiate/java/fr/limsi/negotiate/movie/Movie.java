@@ -67,6 +67,12 @@ public enum Movie implements Option{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String print() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

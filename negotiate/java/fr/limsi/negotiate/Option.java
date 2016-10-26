@@ -8,5 +8,6 @@ public interface Option {
     // return the values of 
     List<Class<? extends Criterion>> getCriteria();
     String getFrVersion();
+    String print();
 
 }

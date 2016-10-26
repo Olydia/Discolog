@@ -7,9 +7,9 @@ import fr.limsi.negotiate.Option;
 
 public enum Restaurant implements Option {
 
-	LE_PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.QUIET),
+	PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.QUIET),
 	
-	LE_GRAMOPHONE (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.NOISY),
+	GRAMOPHONE (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.NOISY),
 	
 	VICTOR(Cuisine.FRENCH, Cost.CHEAP, Ambiance.QUIET),
 	
@@ -35,7 +35,7 @@ public enum Restaurant implements Option {
 	
 	SALENTO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.NOISY),
 	
-	AL_BACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.QUIET),
+	ALBACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.QUIET),
 		
 	CIASA_MIA (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.QUIET),
 	
@@ -72,6 +72,15 @@ public enum Restaurant implements Option {
 		return CRITERIA;
 	}
 
+	public String capitalize(String input){
+		String output = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+		return output;
+
+	}
+	
+	public String print(){
+		  return "[" + this.toString()+": a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant]" ;
+	}
 
 	@Override
 	public String getFrVersion() {
@@ -79,6 +88,9 @@ public enum Restaurant implements Option {
 		return  this.toString();
 	}
 
-
+	@Override
+	public String toString(){
+		return this.capitalize(this.name());
+	}
 
 }

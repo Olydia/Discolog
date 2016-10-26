@@ -1,0 +1,34 @@
+    # Writing log to /tmp/Console1.test...
+    # Oct 25, 2016 5:53:58 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "What kind of cuisine do you like?"
+  > next
+    Agent2 says "Japanese is my favorite cuisine."
+  > next
+    Agent1 says "Let's choose japanese cuisine."
+  > next
+    Agent2 says "Okay, let's choose japanese."
+  > next
+    Agent1 says "Let's choose magoroko restaurant."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "What kind of ambiance do you like?"
+  > next
+    Agent2 says "Quiet is my favorite ambiance."
+  > next
+    Agent1 says "Let's choose quiet ambiance."
+  > next
+    Agent2 says "Okay, let's choose quiet."
+  > next
+    Agent1 says "Let's choose tokyo restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > next
+    Agent1 says "Ok."
+  > quit
+    

@@ -10,7 +10,7 @@ public class CriterionProposal extends Proposal {
 
 	@Override
 	public String toString() {
-		return criterion.toString().toLowerCase()/*+ " isSelf: "+ isSelf*/;
+		return criterion.toString()/*+ " isSelf: "+ isSelf*/;
 	}
 
 	public final Criterion criterion;
@@ -55,6 +55,12 @@ public class CriterionProposal extends Proposal {
 		int result = 1;
 		result = prime * result + ((criterion == null) ? 0 : criterion.hashCode());
 		return result;
+	}
+
+	@Override
+	public String printValue() {
+		// TODO Auto-generated method stub
+		return this.toString();
 	}
 
 

@@ -46,6 +46,8 @@ public abstract class Proposal {
 
 	public abstract Object getValue();
 	
+	public abstract String printValue();
+	
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
 
 }

@@ -9,6 +9,11 @@ public enum Cost implements Criterion {
 	// TODO Auto-generated method stub
 	return (Cost.values());
    }
+   
+	@Override
+	public String toString(){
+		return this.name().toLowerCase();
+	}
 
 	public String getFrVersion(){
 		String fr = "";

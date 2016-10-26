@@ -1,0 +1,23 @@
+    # Writing log to /tmp/Console1.test...
+    # Oct 26, 2016 2:52:23 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "Let's choose chinese cuisine."
+  > next
+    Agent2 says "I don't like chinese cuisine."
+  > next
+    Agent1 says "Let's choose quiet ambiance."
+  > next
+    Agent2 says "I don't like quiet ambiance."
+  > next
+    Agent1 says "Let's choose cheap cost."
+  > next
+    Agent2 says "Okay, let's choose cheap."
+  > next
+    Agent1 says "Let's choose samura restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > quit
