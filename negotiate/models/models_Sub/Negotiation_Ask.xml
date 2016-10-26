@@ -137,7 +137,7 @@
    <task id="_State_tree">
       <subtasks id="_d4e59_subtasks">
          <step name="_d4e59_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
          <binding slot="$_d4e59_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e60_subtasks">
@@ -269,7 +269,7 @@
    <task id="_Ask_tree">
       <subtasks id="_d4e92_subtasks">
          <step name="_d4e92_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
          <binding slot="$_d4e92_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e93_subtasks">
@@ -300,7 +300,7 @@
    <task id="_Propose_tree">
       <subtasks id="_d4e100_subtasks">
          <step name="_d4e100_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
          <binding slot="$_d4e100_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e102_subtasks">
@@ -488,7 +488,7 @@
    <task id="_Accept_tree">
       <subtasks id="_d4e146_subtasks">
          <step name="_d4e146_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
          <binding slot="$_d4e146_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e147_subtasks">
@@ -544,7 +544,7 @@
          <step name="_d4e178_ref" task="_d4e178_tree"/>
          <applicable>isSub()</applicable>
          <binding slot="$_d4e178_step.external" value="false"/>
-         <binding slot="$_d4e178_step.criterion" value="null"/>
+         <binding slot="$_d4e178_step.criterion" value="openNewCriterion()"/>
          <binding slot="$_d4e178_step.less" value="askUserPref(openNewCriterion()).getLess()"/>
          <binding slot="$_d4e178_step.more" value="askUserPref(openNewCriterion()).getMore()"/>
       </subtasks>
@@ -654,7 +654,7 @@
    <task id="_Reject_tree">
       <subtasks id="_d4e186_subtasks">
          <step name="_d4e186_step" task="ClosingNegotiation"/>
-         <applicable>$negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
          <binding slot="$_d4e186_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e187_subtasks">
