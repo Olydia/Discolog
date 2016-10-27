@@ -86,14 +86,18 @@ public class Negotiation<O extends Option> {
 	}
 
 	public Class<? extends Criterion> openNewTopic(){
+		//if(context.getDiscussedCriteria().containsAll(this.criteriaPreferences.getValues()))
+		ArrayList<Class<? extends Criterion>> nonAccepted = new ArrayList<Class<? extends Criterion>>();
 		for (Class<? extends Criterion> elem: this.criteriaPreferences.getValues()){
 			if(!context.getDiscussedCriteria().contains(elem))
 				return elem;
+			if(getCriterionNegotiation(elem).getProposals(Status.ACCEPTED).isEmpty())
+				nonAccepted.add(elem);
 		}
-		for (Class<? extends Criterion> elem: this.criteriaPreferences.getValues()){
+		for (Class<? extends Criterion> elem: nonAccepted)
 			if(this.statedValues(elem))
 				return elem;
-		}
+	
 		return null;
 	}
 
@@ -637,7 +641,7 @@ public class Negotiation<O extends Option> {
 				acceptedOptions.clear();
 
 			}
-			
+
 			//if(!acceptedOptions.isEmpty())
 		}
 		if(optionProposals.isEmpty())
@@ -654,9 +658,17 @@ public class Negotiation<O extends Option> {
 		}
 		return acceptedCriteria;
 	}
+	public Option computeAcceptedOption(Criterion c, int dom){
+		List<Option> accepted = computeAcceptableOptions(dom);
+		for (Option o: accepted){
+			if(o.getValue(c.getClass()).equals(c))
+				return o;
+		}
+		return accepted.get(0);
+	}
 
 	public Option computeAcceptedOption(){
-		ArrayList<Criterion> accepted = lastAcceptedValues();
+		List<Criterion> accepted = lastAcceptedValues();
 		if(accepted.isEmpty())
 			return null;
 		for (Option O : getOptions()){
@@ -776,29 +788,18 @@ public class Negotiation<O extends Option> {
 		}
 		return false;
 	}
+	
 	public Proposal computeProposal (int dom){
 		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
 				getContext().getCurrentDiscussedCriterion());
 
-		if (cr.computeProposal(dom, context).isEmpty()){
-			//			// First propose an option if there is any open new topic
-			//			List<Option> options = getPossibleProposalOptions(dom);
-			//			if(options.isEmpty()){
-			//				cr = getCriterionNegotiation(openNewTopic());
-			//				List<CriterionProposal> values= cr.computeProposal(dom);
-			//				if(values.isEmpty())
-			//				return new OptionProposal(computeAcceptedOption());
-			//				
-			//			}
-			//			else
-			//				return  new OptionProposal(true, options.get(0));
-			//				
+		if (cr.computeProposal(dom, context).isEmpty()){				
 			cr = getCriterionNegotiation(openNewTopic());
 			List<CriterionProposal> values= cr.computeProposal(dom, context);
 			if(values.isEmpty()){
 				List<Option> options = getPossibleProposalOptions(dom);
 				if(options.isEmpty())
-					return new OptionProposal(computeAcceptedOption());
+					return new OptionProposal(computeAcceptableOptions(dom).get(0));
 				else
 					return new OptionProposal(true, options.get(0));		
 			}
