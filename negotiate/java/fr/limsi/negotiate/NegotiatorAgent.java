@@ -18,7 +18,7 @@ public class NegotiatorAgent extends Agent {
 	public static void main (String[] args) {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
 		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.S2()), 
-				new NegotiatorAgent("Agent2", model.D2()), true);
+				new NegotiatorAgent("Agent2", model.D1()), true);
 //		InitiateMovieMentalState model = new InitiateMovieMentalState();
 //
 //		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.P1()), 

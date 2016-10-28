@@ -280,16 +280,16 @@
 		<do task = "Reject"/>
 	</do> 
 	
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="leastPreferredCriterion(currentDiscussedCriterion())" 
-		more="currentMostPreferred(currentDiscussedCriterion(), relation)"
-		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
+<!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!-- 		less="leastPreferredCriterion(currentDiscussedCriterion())"  -->
+<!-- 		more="currentMostPreferred(currentDiscussedCriterion(), relation)" -->
+<!-- 		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())"> -->
+<!-- 		<do task = "Ask"/> -->
+<!-- 		<do task = "State"/> -->
+<!-- 		<do task = "Propose"/> -->
+<!-- 		<do task = "Accept"/> -->
+<!-- 		<do task = "Reject"/> -->
+<!-- 	</do> -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="leastPreferredCriterion(openNewCriterion())" 
 		more="currentMostPreferred(openNewCriterion(), relation)"

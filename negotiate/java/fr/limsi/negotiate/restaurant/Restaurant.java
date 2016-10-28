@@ -79,7 +79,7 @@ public enum Restaurant implements Option {
 	}
 	
 	public String print(){
-		  return "[" + this.toString()+": a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant]" ;
+		  return "It' a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant" ;
 	}
 
 	@Override

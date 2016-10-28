@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class CrowdProcessing {
 	public static void main(String args[]) {
 		String path = "/people/ouldouali/git/Discolog/CrowdSourcingStudy/Dialogues_test/Dialogues_Ask/new_dialogues";
-		String fileName = path+"/Dom_S2_SUB_D2.test";
+		String fileName = path+"/DOM_S2_SUB_D1.test";
 
 		//read file into stream, try-with-resources
 		try (Stream<String> input = Files.lines(Paths.get(fileName));
