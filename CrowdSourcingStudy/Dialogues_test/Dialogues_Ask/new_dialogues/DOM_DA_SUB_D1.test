@@ -1,0 +1,37 @@
+ 
+   Agent1 says "Let's go to a noisy restaurant."
+  > next
+    Agent2 says "I don't like noisy restaurants."
+  > next
+    Agent1 says "Let's go to a Italian restaurant."
+  > next
+    Agent2 says "I don't like Italian restaurants."
+  > next
+    Agent1 says "Let's go to a expensive restaurant."
+  > next
+    Agent2 says "What kind of Cuisine do you prefer?"
+  > next
+    Agent1 says "Italian restaurants are my favorite."
+  > next
+    Agent2 says "Chinese restaurants are my favorite."
+  > next
+    Agent1 says "Let's go to the Gramophone restaurant. It' a noisy, expensive French restaurant."
+  > next
+    Agent2 says "Do you prefer Japanese or Turkish restaurant?"
+  > next
+    Agent1 says "I prefer Turkish over Japanese restaurants."
+  > next
+    Agent2 says "I prefer Japanese over Turkish restaurants."
+  > next
+    Agent1 says "Let's go to the Papelli restaurant. It' a noisy, cheap Italian restaurant."
+  > next
+    Agent2 says "What kind of Cost do you prefer?"
+  > next
+    Agent1 says "Expensive restaurants are my favorite."
+  > next
+    Agent2 says "I don't like expensive restaurants."
+  > next
+    Agent1 says "Sorry, but I no longer want to go for dinner!!"
+  > next
+    Agent2 says "Ok."
+

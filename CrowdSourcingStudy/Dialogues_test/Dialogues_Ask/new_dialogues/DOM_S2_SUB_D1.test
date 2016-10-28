@@ -1,19 +1,20 @@
     # Writing log to /tmp/Console2.test...
-    # Oct 27, 2016 6:14:32 PM - TaskEngine 1.11 / Disco 1.17
+    # Oct 28, 2016 8:45:49 PM - TaskEngine 1.11 / Disco 1.17
     Welcome to Disco! (Type 'help' for command list)
 
     Agent1 says "Should we achieve Top?"
   > next
     Agent2 says "Let's achieve Top."
   > next
-    Agent1 says "Let's choose quiet ambiance."
+    Agent1 says "Let's go to a quiet restaurant."
   > next
-    Agent2 says "Okay, let's choose quiet."
+    Agent2 says "Okay ."
   > next
-    Agent1 says "Let's choose Victor restaurant. [Victor: a quiet, cheap French restaurant]."
+    Agent1 says "Let's go to the Victor restaurant. It' a quiet, cheap French restaurant."
   > next
-    Agent2 says "Okay, let's choose Victor."
+    Agent2 says "Okay let's go to the Victor restaurant."
   > next
     Agent1 says "Okay, I'll call to book a table."
   > next
     Agent2 says "Ok."
+

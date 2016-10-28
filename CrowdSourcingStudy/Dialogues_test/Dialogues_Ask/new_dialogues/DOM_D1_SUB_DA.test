@@ -1,0 +1,39 @@
+    # Writing log to /tmp/Console1.test...
+    # Oct 28, 2016 8:08:51 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "Let's go to a Chinese restaurant."
+  > next
+    Agent2 says "I prefer Italian over Chinese restaurants."
+  > next
+    Agent1 says "Let's go to a quiet restaurant."
+  > next
+    Agent2 says "I don't like quiet restaurants."
+  > next
+    Agent1 says "Let's go to a cheap restaurant."
+  > next
+    Agent2 says "What kind of Ambiance do you prefer?"
+  > next
+    Agent1 says "Quiet restaurants are my favorite."
+  > next
+    Agent2 says "Noisy restaurants are my favorite."
+  > next
+    Agent1 says "Let's go to the Samura restaurant. It' a noisy, cheap Japanese restaurant."
+  > next
+    Agent2 says "What kind of Cuisine do you prefer?"
+  > next
+    Agent1 says "Chinese restaurants are my favorite."
+  > next
+    Agent2 says "Italian restaurants are my favorite."
+  > next
+    Agent1 says "Let's go to the Dragon restaurant. It' a noisy, cheap Chinese restaurant."
+  > next
+    Agent2 says "Okay let's go to the Dragon restaurant."
+  > next
+    Agent1 says "Okay, I'll call to book a table."
+  > next
+    Agent2 says "Ok."
+  > 
