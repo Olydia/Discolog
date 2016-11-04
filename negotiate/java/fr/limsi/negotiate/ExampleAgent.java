@@ -4,7 +4,6 @@ package fr.limsi.negotiate;
 import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 

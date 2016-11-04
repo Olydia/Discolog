@@ -1,20 +1,18 @@
 
     Agent1 says "Let's go to a Chinese restaurant."
-    Agent2 says "Okay ."
   > next
-    Agent1 says "Let's go to the Dragon restaurant. It' a noisy, cheap Chinese restaurant."
+    Agent2 says "Okay ! ."
   > next
-    Agent2 says "I don't like noisy restaurants."
+    Agent1 says "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
+  > next
+    Agent2 says "I don't like lively restaurants."
   > next
     Agent1 says "Let's go to a quiet restaurant."
   > next
-    Agent2 says "Okay ."
+    Agent2 says "Okay ! ."
   > next
-    Agent1 says "Let's go to the Yong restaurant. It' a quiet, expensive Chinese restaurant."
+    Agent1 says "Let's go to the Yong restaurant. It's a quiet, expensive Chinese restaurant."
   > next
-    Agent2 says "Okay let's go to the Yong restaurant."
+    Agent2 says "Okay ! let's go to the Yong restaurant."
   > next
     Agent1 says "Okay, I'll call to book a table."
-  > next
-    Agent2 says "Ok."
-

@@ -4,7 +4,7 @@ import fr.limsi.negotiate.Criterion;
 
 public enum Ambiance implements Criterion{
 
-	NOISY, QUIET;
+	LIVELY, QUIET;
 
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
@@ -19,8 +19,8 @@ public enum Ambiance implements Criterion{
 	public String getFrVersion(){
 		String fr = "";
 		switch(this) {
-		case NOISY:
-			fr = "BRUYANT";
+		case LIVELY:
+			fr = "ANIMÉ";
 			break;
 		case QUIET:
 			fr = "CALME";

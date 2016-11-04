@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class CrowdProcessing {
 	public static void main(String args[]) {
 		String path = "/people/ouldouali/git/Discolog/CrowdSourcingStudy/Dialogues_test/Dialogues_Ask/new_dialogues";
-		String fileName = path+"/DOM_S2_SUB_D1.test";
+		String fileName = path+"/DOM_D1_SUB_S2.test";
 
 		//read file into stream, try-with-resources
 		try (Stream<String> input = Files.lines(Paths.get(fileName));
@@ -27,8 +27,6 @@ public class CrowdProcessing {
 			String elem = line.replaceAll("  > next", "");
 			elem = elem.replaceAll("Agent1 says", "A:");
 			elem = elem.replaceAll("Agent2 says", "&nbsp&nbsp&nbsp&nbspB:");
-			// elem = elem.replaceAll("."+"\"", "."+"\"<br>");
-			//elem = elem.replaceAll("\?\"", "?\"<br>");
 			elem = elem.replaceAll("\\[", "<small> &nbsp&nbsp[");
 			elem = elem.replaceAll("]", "] </small> ");
 			elem = elem + "<br>";

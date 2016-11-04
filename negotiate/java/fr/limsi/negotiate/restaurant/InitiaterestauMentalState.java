@@ -28,7 +28,7 @@ public class InitiaterestauMentalState {
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> d1_ambiance = new CriterionPrefModel<Ambiance>();
 				d1_ambiance.setType(Ambiance.class);
-				d1_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.QUIET));
+				d1_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
 				
 				//1.4. Define the  preferences on Restaurant criteria 
 				CriteriaClassPrefModel<Restaurant> d1_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -70,7 +70,7 @@ public class InitiaterestauMentalState {
 		// 1.3 Preference model on Ambiance 
 		CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 		user_ambiance.setType(Ambiance.class);
-		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.QUIET));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
 		/*1. Define the  preferences on Restaurant criteria */	
 
 		CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -114,7 +114,7 @@ public class InitiaterestauMentalState {
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 				user_ambiance.setType(Ambiance.class);
-				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.QUIET));
+				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
 				/*1. Define the  preferences on Restaurant criteria */	
 
 				CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -166,7 +166,7 @@ public class InitiaterestauMentalState {
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 				user_ambiance.setType(Ambiance.class);
-				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.NOISY));
+				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.LIVELY));
 				/*1. Define the  preferences on Restaurant criteria */	
 
 				CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -214,7 +214,7 @@ public class InitiaterestauMentalState {
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 				user_ambiance.setType(Ambiance.class);
-				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.NOISY));
+				user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.LIVELY));
 				/*1. Define the  preferences on Restaurant criteria */	
 
 				CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -264,7 +264,7 @@ public class InitiaterestauMentalState {
 					// 1.3 Preference model on Ambiance 
 					CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 					user_ambiance.setType(Ambiance.class);
-					user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.NOISY, Ambiance.QUIET));
+					user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
 					/*1. Define the  preferences on Restaurant criteria */	
 
 					CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 

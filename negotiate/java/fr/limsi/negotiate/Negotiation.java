@@ -746,7 +746,7 @@ public class Negotiation<O extends Option> {
 		}
 		accOptions.removeAll(removables);
 		for(CriterionNegotiation<Criterion> cn: this.criteriaNegotiation ){
-			otherAcceptable.addAll(cn.acceptableCriteria(-dom, cn.other));
+			otherAcceptable.addAll(cn.acceptableCriteria(-dom, cn.getOther()));
 		}
 		if(otherAcceptable.isEmpty())
 			return (this.sortOptions(accOptions));

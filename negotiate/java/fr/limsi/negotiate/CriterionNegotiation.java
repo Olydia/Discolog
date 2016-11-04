@@ -123,7 +123,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	public List<C> clearRejected(List<C> values) {
 		for ( CriterionProposal c: proposals) {
-			if(c.status.equals(Proposal.Status.REJECTED)) {
+			if(c.getStatus().equals(Proposal.Status.REJECTED)) {
 				values.remove(c);
 			}
 		}
@@ -204,7 +204,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public Status checkStatus(C p) {
 		for(CriterionProposal prop : proposals) {
 			if(prop.getValue().equals(p))
-				return prop.status;	
+				return prop.getStatus();	
 		}
 		return null;
 	}

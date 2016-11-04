@@ -29,7 +29,7 @@ public class TestRestaurant {
 		// 1.3 Preference model on Ambiance 
 		CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 		user_ambiance.setType(Ambiance.class);
-		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.NOISY));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.LIVELY));
 		/*1. Define the  preferences on Restaurant criteria */	
 
 		CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
@@ -86,7 +86,7 @@ public class TestRestaurant {
 //		p3.setStatus(Status.ACCEPTED);
 //		nmv.addProposal(p3);
 		System.out.println(Restaurant.PAPELLI.print());
-		System.out.println(Cost.CHEAP + "  "+Ambiance.NOISY);
+		System.out.println(Cost.CHEAP + "  "+Ambiance.LIVELY);
 		System.out.println("\n\nDOM_D1  SUB V2");
 		System.out.println(nmv.getAcceptableOptions(1));
 		System.out.println(nmv1.getAcceptableOptions(-1));

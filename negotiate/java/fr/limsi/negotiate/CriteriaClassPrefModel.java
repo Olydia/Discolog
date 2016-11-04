@@ -101,7 +101,7 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	}
 
 	@Override
-	String printPreferences() {
+	public String printPreferences() {
 		String pref = type.getSimpleName()+ " :\n ";
 		for(CriterionPreference cr : preferences)
 			pref = pref + cr.toString()+ "\n";

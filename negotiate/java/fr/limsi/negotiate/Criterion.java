@@ -1,4 +1,5 @@
 package fr.limsi.negotiate;
+
 /** Interface for a Criterion class (Enum).
  * @see CriterionNegotiation for use.
  *

@@ -126,7 +126,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		return sb.toString();
 	}
 	@Override
-	ArrayList<ValuePreference<C>> getPreferences() {
+	public ArrayList<ValuePreference<C>> getPreferences() {
 		// TODO Auto-generated method stub
 		return this.preferences;
 	}
@@ -143,7 +143,7 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 }
 
 	@Override
-	String printPreferences() {
+	public String printPreferences() {
 		String pref = type.getSimpleName()+ ": \n" ;// TODO Auto-generated method stub
 		for (ValuePreference<C> p: preferences){
 			pref = pref + p + "\n";
