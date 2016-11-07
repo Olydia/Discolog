@@ -696,7 +696,7 @@ public class Negotiation<O extends Option> {
 	}
 	public boolean negotiationFailure(int dom){
 		Statement lastUtterance = this.getContext().getLastStatement();
-		if (getContext().getHistory().size()>= 15 && 
+		if (getContext().getHistory().size()>= 20 && 
 				!(lastUtterance.getUtteranceType().equals("Propose") || lastUtterance.getUtteranceType().equals("Accept")))
 
 			return true;

@@ -17,16 +17,16 @@ public class NegotiatorAgent extends Agent {
 	public static void main (String[] args) {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
 		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.D1()), 
-				new NegotiatorAgent("Agent2", model.S2()), true);
+				new NegotiatorAgent("Agent2", model.D_A()), true);
 //		InitiateMovieMentalState model = new InitiateMovieMentalState();
 //
 //		Dual dual = new Dual( new NegotiatorAgent("Agent1", model.P1()), 
 //						new NegotiatorAgent("Agent2", model.P2()), true);
 //		
-		dual.interaction1.load("models/models_Sub/Negotiate.xml");
-		dual.interaction1.load("models/models_Sub/Negotiation.xml");
-		dual.interaction2.load("models/models_Sub/Negotiate.xml");
-		dual.interaction2.load("models/models_Sub/Negotiation.xml");
+		dual.interaction1.load("models/currentModel/Negotiate.xml");
+		dual.interaction1.load("models/currentModel/Negotiation.xml");
+		dual.interaction2.load("models/currentModel/Negotiate.xml");
+		dual.interaction2.load("models/currentModel/Negotiation.xml");
 		dual.interaction1.eval("relation = RI.DOMINANT", "NegotiatorAgent");
 		dual.interaction2.eval("relation = RI.SUBMISSIVE", "NegotiatorAgent");
 		dual.interaction1.getDisco().addTop("Top");
