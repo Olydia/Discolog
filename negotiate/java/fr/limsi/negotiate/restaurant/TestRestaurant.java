@@ -74,33 +74,29 @@ public class TestRestaurant {
 		InitiaterestauMentalState mv = new InitiaterestauMentalState();
 		Negotiation<Restaurant> nmv= mv.D1();
 		Negotiation<Restaurant> nmv1= mv.V2();
-		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).selfAcceptableCriteria(2));
-//		CriterionProposal p1 = new CriterionProposal(true, Cuisine.JAPANESE);
-//		p1.setStatus(Status.ACCEPTED);
-//		nmv.addProposal(p1);
-//		System.out.println(nmv.computeAcceptableOptions(0));
-//		OptionProposal p2 = new OptionProposal(false, Restaurant.MAGOROKO);
-//		p2.setStatus(Status.REJECTED);
-//		nmv.addProposal(p2);
-//		nmv.updateProposalStatus(p2,Status.REJECTED);
-//		CriterionProposal p3 = new CriterionProposal(true, Ambiance.QUIET);
-//		p3.setStatus(Status.ACCEPTED);
-//		nmv.addProposal(p3);
-//		System.out.println(Restaurant.PAPELLI.print());
-//		System.out.println(Cost.CHEAP + "  "+Ambiance.LIVELY);
-//		System.out.println("\n\nDOM_D1  SUB V2");
-		
-		for(Option o: nmv.sortOptions(nmv.getAcceptableOptions(1)))
-			System.out.println(o + ": " +o.print());
-		for(Option o:nmv.getAcceptableOptions(1))
-			System.out.println(o + ": " +o.print());
-//		System.out.println(nmv1.getAcceptableOptions(-1));
-//		System.out.println("\n\n DOM_V2  SUB D1");
-//		System.out.println(nmv1.getAcceptableOptions(1));
-//		System.out.println(nmv.getAcceptableOptions(-1));
+//		Cuisine [] cuisine = {Cuisine.MIXICAN, Cuisine.COREAN};
+//		Cost[] cost = Cost.values();//{Cost.AFFRODABLE};
+//		Ambiance [] ambiance = Ambiance.values();//{Ambiance.ROMANTIC, Ambiance.FAMILIAL};
+//		int cp = 0;
+//		for(Cuisine i: cuisine){
+//			for(Cost j: cost){
+//				for(Ambiance x: ambiance){
+//					System.out.println("n"+cp+ "(Cuisine."+i.toString().toUpperCase()+", Cost." 
+//							+j.toString().toUpperCase()+", Ambiance." +
+//							x.toString().toUpperCase()+"), \n");
+//					cp ++;
+//				}
+//			}
+//		}
+
+
 
 		
 
-		//System.out.println(nmv.getCriterionNegotiation(Cuisine.class).getTheCurrentMostPreffered(0));
+		CriterionPrefModel<Criterion> model =nmv.getCriterionNegotiation(Cuisine.class).getSelf();
+
+		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).acceptableCriteria(2, model));
+		System.out.println(nmv.getCriterionNegotiation(Cuisine.class).acceptableCriteria(-2, model));
+
 	}
 }

@@ -14,22 +14,30 @@ public class InitiaterestauMentalState {
 				// 1.1. Preference model on cuisine
 				CriterionPrefModel<Cuisine> d1_cuisine = new CriterionPrefModel<Cuisine>();
 				d1_cuisine.setType(Cuisine.class);
-				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.CHINESE));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.CHINESE));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.CHINESE));
-				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.JAPANESE));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.COREAN));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.JAPANESE));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.MIXICAN, Cuisine.TURKISH));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.MIXICAN, Cuisine.FRENCH));
+
 
 				// 1.2. Preference model on Cost
 				CriterionPrefModel<Cost> d1_cost = new CriterionPrefModel<Cost>();
 				d1_cost.setType(Cost.class);
-				d1_cost.add(new ValuePreference<Cost>(Cost.EXPENSIVE, Cost.CHEAP));
+				d1_cost.add(new ValuePreference<Cost>(Cost.EXPENSIVE, Cost.AFFRODABLE));
+				d1_cost.add(new ValuePreference<Cost>(Cost.AFFRODABLE, Cost.CHEAP));
+
 
 				// 1.3 Preference model on Ambiance 
 				CriterionPrefModel<Ambiance> d1_ambiance = new CriterionPrefModel<Ambiance>();
 				d1_ambiance.setType(Ambiance.class);
 				d1_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
-				
+				d1_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.ROMANTIC));
+				d1_ambiance.add(new ValuePreference<Ambiance>(Ambiance.ROMANTIC, Ambiance.FAMILIAL));
+
+
 				//1.4. Define the  preferences on Restaurant criteria 
 				CriteriaClassPrefModel<Restaurant> d1_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 				d1_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
@@ -56,27 +64,37 @@ public class InitiaterestauMentalState {
 	public  Negotiation<Restaurant> D2(){
 		CriterionPrefModel<Cuisine> user_cuisine = new CriterionPrefModel<Cuisine>();
 		user_cuisine.setType(Cuisine.class);
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.TURKISH));
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.TURKISH));
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.ITALIAN));
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.FRENCH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.MIXICAN, Cuisine.ITALIAN));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.MIXICAN));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.TURKISH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.TURKISH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.MIXICAN));
+
 	
 		// 1.2. Preference model on Cost
 		CriterionPrefModel<Cost> user_cost = new CriterionPrefModel<Cost>();
 		user_cost.setType(Cost.class);
 		user_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
+		user_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.AFFRODABLE));
+
 
 		// 1.3 Preference model on Ambiance 
 		CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
 		user_ambiance.setType(Ambiance.class);
 		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.LIVELY, Ambiance.QUIET));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.ROMANTIC, Ambiance.QUIET));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.ROMANTIC, Ambiance.FAMILIAL));
+		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.FAMILIAL, Ambiance.LIVELY));
+
+
 		/*1. Define the  preferences on Restaurant criteria */	
 
 		CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 		user_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
-		user_criteria.add(new CriterionPreference(Cuisine.class, Cost.class));
-		user_criteria.add(new CriterionPreference(Cost.class,Ambiance.class));
+		user_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
+		user_criteria.add(new CriterionPreference(Cuisine.class,Ambiance.class));
 
 		//System.out.println(lydia_criteria.getMostPreferred() + "  " + lydia_criteria.getLeastPreferred());
 		//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		

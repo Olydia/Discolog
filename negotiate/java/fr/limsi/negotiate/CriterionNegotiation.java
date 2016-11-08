@@ -88,7 +88,8 @@ public class CriterionNegotiation<C extends Criterion> {
 		for(C criterion: model.getValues())
 			if(isAcceptableCriterion(criterion, dom, model))
 				accepted.add(criterion);
-		return accepted;
+		
+		return sortListOfCriteria(accepted);
 	}
 	
 	/**
@@ -284,12 +285,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	public boolean isAcceptableCriterion(C c, int dom, CriterionPrefModel<C> model) {
 		int bestScore = model.getScore(model.getMostPreferred());
 		int proposalScore = model.getScore(c);
+		List<C> sortedCriteria = (self.sortCriteria());
 		// R
 		if (dom > 0)
-			return (proposalScore>= bestScore *0.7);
+			return (sortedCriteria.indexOf(c)< sortedCriteria.size() *.3);
 		
 		else
-			return( proposalScore>= 0);		
+			return( proposalScore>= 0 );		
 	}
 	/** take as input a criterion value and returns the agent preference on it
 	  **/

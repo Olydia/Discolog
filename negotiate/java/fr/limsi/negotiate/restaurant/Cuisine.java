@@ -3,7 +3,7 @@ import fr.limsi.negotiate.Criterion;
 
 public enum Cuisine implements Criterion {
 
-   FRENCH, CHINESE, ITALIAN, TURKISH, JAPANESE;
+   FRENCH, CHINESE, ITALIAN, TURKISH, JAPANESE, COREAN, MIXICAN;
 
    
 	@Override

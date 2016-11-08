@@ -45,7 +45,75 @@ public enum Restaurant implements Option {
 		
 	BARAK (Cuisine.TURKISH, Cost.CHEAP, Ambiance.QUIET),
 	
-	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.LIVELY);
+	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.LIVELY),
+	
+	ALBERT (Cuisine.FRENCH, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	GASTON (Cuisine.FRENCH, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+
+	TAOKAN (Cuisine.CHINESE, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	KIGNA (Cuisine.CHINESE, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+
+	TAVOLINO (Cuisine.ITALIAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	TRINFO (Cuisine.ITALIAN, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+
+	OTTOMAN(Cuisine.TURKISH, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	KIBELLE(Cuisine.TURKISH, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+
+	YOSHI (Cuisine.JAPANESE, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	SAKURA (Cuisine.JAPANESE, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	 
+	 n0(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.LIVELY), 
+
+	 n1(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.QUIET), 
+
+	 n2(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.ROMANTIC), 
+
+	 n3(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.FAMILIAL), 
+
+	 n4(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.LIVELY), 
+
+	 n5(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.QUIET), 
+
+	 n6(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.ROMANTIC), 
+
+	 n7(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.FAMILIAL), 
+
+	 n8(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.LIVELY), 
+
+	 n9(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.QUIET), 
+
+	 n10(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	 n11(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+
+	 n12(Cuisine.COREAN, Cost.EXPENSIVE, Ambiance.LIVELY), 
+
+	 n13(Cuisine.COREAN, Cost.EXPENSIVE, Ambiance.QUIET), 
+
+	 n14(Cuisine.COREAN, Cost.EXPENSIVE, Ambiance.ROMANTIC), 
+
+	 n15(Cuisine.COREAN, Cost.EXPENSIVE, Ambiance.FAMILIAL), 
+
+	 n16(Cuisine.COREAN, Cost.CHEAP, Ambiance.LIVELY), 
+
+	 n17(Cuisine.COREAN, Cost.CHEAP, Ambiance.QUIET), 
+
+	 n18(Cuisine.COREAN, Cost.CHEAP, Ambiance.ROMANTIC), 
+
+	 n19(Cuisine.COREAN, Cost.CHEAP, Ambiance.FAMILIAL), 
+
+	 n20(Cuisine.COREAN, Cost.AFFRODABLE, Ambiance.LIVELY), 
+
+	 n21(Cuisine.COREAN, Cost.AFFRODABLE, Ambiance.QUIET), 
+
+	 n22(Cuisine.COREAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+
+	 n23(Cuisine.COREAN, Cost.AFFRODABLE, Ambiance.FAMILIAL);
 	
 	public final Cuisine cuisine;
 	public final Cost cost;
