@@ -11,20 +11,14 @@ import fr.limsi.negotiate.Proposal.Status;
  */
 
 public class Negotiation<O extends Option> {
-
 	private List<OptionProposal> proposals;
 	public List<CriterionNegotiation<Criterion>> criteriaNegotiation;
 	public CriteriaClassPrefModel<O> criteriaPreferences; 
 	private DialogueContext context ;
 	private int maxTurns;
-	public DialogueContext getContext() {
-		return context;
-	}
+	private int dom;
 
-	public Class<O> type; 
-
-
-
+	
 	public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, 
 			CriteriaClassPrefModel<O> criteriaPreferences) {
 		this.criteriaNegotiation = Arrays.asList(criteriaNegotiation);
@@ -33,6 +27,28 @@ public class Negotiation<O extends Option> {
 		this.context = new DialogueContext();
 		this.type = criteriaPreferences.type;
 	}
+
+	public  void initiateNegotiation (int dominance, int maxTurn){
+		setDom(dominance);
+		setMaxTurns(maxTurn);
+		
+	}
+	public int getDom() {
+		return dom;
+	}
+
+	public void setDom(int dom) {
+		this.dom = dom;
+	}
+
+	public DialogueContext getContext() {
+		return context;
+	}
+
+	public Class<O> type; 
+
+
+
 
 	public void setMaxTurns (int turns){
 		maxTurns = turns;
@@ -109,9 +125,9 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 
-	public int optionUtility (Option option){
+	public int optionUtility (Option option, List<Class<? extends Criterion>> priorCriteria){
 		int Utility = 0;
-		for (Class<? extends Criterion> c: option.getCriteria()){
+		for (Class<? extends Criterion> c:priorCriteria){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(c);
 			
@@ -124,22 +140,16 @@ public class Negotiation<O extends Option> {
 
 	public Criterion leastScoredCriterion (O option, int dom){
 		ArrayList<Criterion> nonAcceptedCriteria = new ArrayList<Criterion> ();
+		// initialiser la valeur de minUtility
+		//		Class<? extends Criterion> min= option.getCriteria().get(0);
+		//		Criterion leastScored = option.getValue(min);
+		//		int minUtility = criteriaPreferences.getRank(min) * 
+		//				getCriterionNegotiation(min).getSelf().getScore(option.getValue(min));
 
 		for (Class<? extends Criterion> cr: option.getCriteria()){
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(cr);
 			if(!criterion.isSelfAcceptableCriterion(option.getValue(cr), dom))
 				nonAcceptedCriteria.add(option.getValue(cr));
-
-			//			// get the criterion rank 
-			//			int rank = criteriaPreferences.getRank(cr);
-			//			//			// get the type of the criterion
-			//			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(cr);
-			//			int utility = rank * criterion.getSelf().getScore(option.getValue(cr));
-			//			if(minUtility < utility){
-			//				minUtility = utility;
-			//				leastScored = option.getValue(cr);
-
-			//			}
 
 		}
 		nonAcceptedCriteria.sort(new Comparator<Criterion>() {
@@ -152,12 +162,6 @@ public class Negotiation<O extends Option> {
 		return nonAcceptedCriteria.get(nonAcceptedCriteria.size()-1);
 	}
 
-	public O getPreferredOption(O firstOption, O secondOption) {
-
-		// 2. en regardant les proposals
-		return(optionUtility(firstOption) < optionUtility(secondOption)? secondOption:
-			firstOption);
-	}
 
 	// Methods of the mental state
 
@@ -231,7 +235,7 @@ public class Negotiation<O extends Option> {
 		}
 
 	}
-	public boolean isAcceptableProposal (Proposal proposal, int dom){
+	public boolean isAcceptable (Proposal proposal, int dom){
 		int turnleft = (getMaxTurns() - this.context.getHistory().size()) /2;
 		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(dom, turnleft);
 		if (proposal instanceof CriterionProposal) {
@@ -283,7 +287,7 @@ public class Negotiation<O extends Option> {
 						model.getMostPreffered())));
 
 	}
-	public List<Option> sortOptions( List<Option> options) {
+	public List<Option> sortOptions( List<Option> options, List<Class<? extends Criterion>> priorCriteria) {
 
 		// Supprimer les options qui contiennent au moins un critere rejeté.
 		// pour chaque critere recuper la liste de criteres rejeté.
@@ -292,7 +296,7 @@ public class Negotiation<O extends Option> {
 		options.sort(new Comparator<Option>() {
 			@Override
 			public int compare(Option o1, Option o2){
-				return (optionUtility(o2) - optionUtility(o1));
+				return (optionUtility(o2, priorCriteria) - optionUtility(o1, priorCriteria));
 			}
 		});
 		return options;

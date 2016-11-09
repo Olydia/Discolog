@@ -675,7 +675,7 @@
 	}
 	
 	function isAcceptable(proposal, relation){
-		return $negotiation.isAcceptableProposal(proposal, relation);
+		return $negotiation.isAcceptable(proposal, relation);
 	}
 	
 	function reactToRejectedProp(proposal){
