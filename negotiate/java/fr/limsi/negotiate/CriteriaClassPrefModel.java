@@ -28,6 +28,7 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 			Object[] v = type.getEnumConstants();
 			m.setAccessible(true);
 			List<Class<? extends Criterion>> value = (List<Class<? extends Criterion>>)m.invoke(v[0]);
+			
 			return (value);
 		} catch (NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
@@ -90,14 +91,14 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 //	}
 	@Override
 	public List<Class<? extends Criterion> > sortCriteria() {
-		List<Class<? extends Criterion> > criterions = this.getValues();
-		criterions.sort(new Comparator<Class<? extends Criterion> >() {
+		List<Class<? extends Criterion> > criteria = this.getValues();
+		criteria.sort(new Comparator<Class<? extends Criterion> >() {
 			@Override
 			public int compare(Class<? extends Criterion>  o1, Class<? extends Criterion>  o2){
 				return (getRank(o2) - getRank(o1));
 			}
 		});
-		return criterions;
+		return criteria;
 	}
 
 	@Override
@@ -106,6 +107,32 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 		for(CriterionPreference cr : preferences)
 			pref = pref + cr.toString()+ "\n";
 		return pref;
+	}
+	
+	/** IsImportantCriterion (criterion, dom) calculates in function of the relation of dominance whether a criterion 
+	 * is important to choose an option
+	 * The calcul depends on the rank of the criterion
+	 * nbTurns in function of the number of turns left in the negotiation
+	 * 
+	 */
+	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom, int nbTurns){
+		List <Class<? extends Criterion>>criteria = sortCriteria();
+		if (dom > 0 || nbTurns < 2)
+			return true;
+		if(dom == 0)
+			return (criteria.indexOf(criterion)!= criteria.size()-1	);
+		else
+			return (criteria.indexOf(criterion)<= criteria.size()-1 /(nbTurns));
+			
+	}
+	
+	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbTurns){
+		List<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
+		for(Class<? extends Criterion> elm: this.sortCriteria()){
+			if(this.IsImportantCriterion(elm, dom, nbTurns))
+				importantC.add(elm);
+		}
+		return importantC;
 	}
 
 }

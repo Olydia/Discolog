@@ -237,7 +237,8 @@ public class CriterionNegotiation<C extends Criterion> {
 		for(CriterionProposal c: proposals){
 			if(proposal.getValue().equals(c.getValue())) {
 				c.setStatus(status);
-				//c.setIsSelf(isSelf);
+				c.setIsSelf(proposal.isSelf);
+		System.out.println(c + " "+ c.status + " "+ c.isSelf());
 			}	
 		}
 	}
@@ -283,7 +284,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		
 	}
 	public boolean isAcceptableCriterion(C c, int dom, CriterionPrefModel<C> model) {
-		int bestScore = model.getScore(model.getMostPreferred());
+		//int bestScore = model.getScore(model.getMostPreferred());
 		int proposalScore = model.getScore(c);
 		List<C> sortedCriteria = (self.sortCriteria());
 		// R

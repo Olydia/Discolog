@@ -209,7 +209,7 @@
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
 		proposal="lastOpenProposal()"  
-		applicable = "isPeer() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
+		applicable = "!isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -229,16 +229,16 @@
 		<do task = "Reject"/>
 	</do>
 
-	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="reactToRejectedProp(lastOpenProposal()).getLess()" 
-		more="reactToRejectedProp(lastOpenProposal()).getMore()" 
-		applicable = "isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
-		<do task = "Ask"/>
-		<do task = "State"/>
-		<do task = "Propose"/>
-		<do task = "Accept"/>
-		<do task = "Reject"/>
-	</do>
+<!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
+<!-- 		less="reactToRejectedProp(lastOpenProposal()).getLess()"  -->
+<!-- 		more="reactToRejectedProp(lastOpenProposal()).getMore()"  -->
+<!-- 		applicable = "isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)"> -->
+<!-- 		<do task = "Ask"/> -->
+<!-- 		<do task = "State"/> -->
+<!-- 		<do task = "Propose"/> -->
+<!-- 		<do task = "Accept"/> -->
+<!-- 		<do task = "Reject"/> -->
+<!-- 	</do> -->
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="counterPropose()" 
@@ -476,15 +476,30 @@
     }
     
     function canAcceptProposal(){
-    	return((!isDom() &amp;&amp; isAcceptable(lastOpenProposal(), relation))||
-    		(isSub() &amp;&amp; $negotiation.getContext().takedTurns(false)>= 7));
+    	if(!isDom() &amp;&amp; isAcceptable(lastOpenProposal(), relation)) 
+    	// ||	$negotiation.criteriaPreferences.IsImportantCriterion(lastOpenProposal().class, relation))
+    		return true
+    		
+    	else
+    		return (isSub() &amp;&amp; $negotiation.getContext().takedTurns(false)>= 7);
     	
     }
+    
+    
+    function justify(proposal){
+    		if(proposal instanceof Packages.fr.limsi.negotiate.OptionProposal)
+    			    return  $negotiation.leastScoredCriterion(proposal.getValue(), relation);
+    			
+    		else 
+    			return proposal.getValue();
+    
+        }
     
     function counterPropose(){
     	if(!isAcceptable(lastOpenProposal(), relation)){
     		return $negotiation.computeProposal(relation);
     	}
+    	
     	if(isAcceptable(lastOpenProposal(), relation) &amp;&amp; isCriterionProposal(lastOpenProposal())){
     		//ComputeOptionProposalWithValue
     		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue(),relation), true);
@@ -660,7 +675,7 @@
 	}
 	
 	function isAcceptable(proposal, relation){
-		return $negotiation.isAcceptable(proposal, relation);
+		return $negotiation.isAcceptableProposal(proposal, relation);
 	}
 	
 	function reactToRejectedProp(proposal){

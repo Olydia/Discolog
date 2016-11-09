@@ -16,6 +16,7 @@ public class Negotiation<O extends Option> {
 	public List<CriterionNegotiation<Criterion>> criteriaNegotiation;
 	public CriteriaClassPrefModel<O> criteriaPreferences; 
 	private DialogueContext context ;
+	private int maxTurns;
 	public DialogueContext getContext() {
 		return context;
 	}
@@ -33,6 +34,13 @@ public class Negotiation<O extends Option> {
 		this.type = criteriaPreferences.type;
 	}
 
+	public void setMaxTurns (int turns){
+		maxTurns = turns;
+	}
+
+	public int getMaxTurns() {
+		return maxTurns;
+	}
 
 	public void propose (OptionProposal proposal) { 
 		if(!proposals.contains(proposal))
@@ -88,7 +96,7 @@ public class Negotiation<O extends Option> {
 	public Class<? extends Criterion> openNewTopic(){
 		//if(context.getDiscussedCriteria().containsAll(this.criteriaPreferences.getValues()))
 		ArrayList<Class<? extends Criterion>> nonAccepted = new ArrayList<Class<? extends Criterion>>();
-		for (Class<? extends Criterion> elem: this.criteriaPreferences.getValues()){
+		for (Class<? extends Criterion> elem: this.criteriaPreferences.sortCriteria()){
 			if(!context.getDiscussedCriteria().contains(elem))
 				return elem;
 			if(getCriterionNegotiation(elem).getProposals(Status.ACCEPTED).isEmpty())
@@ -106,21 +114,16 @@ public class Negotiation<O extends Option> {
 		for (Class<? extends Criterion> c: option.getCriteria()){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(c);
+			
 			// get the type of the criterion
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(c);
-			// Utility = Sum(rank(c) * score(v_c)) 
 			Utility += rank * criterion.getSelf().getScore(option.getValue(c));
 		}
 		return Utility;
 	}
 
-	public Criterion LeastScoredCriterion (O option, int dom){
+	public Criterion leastScoredCriterion (O option, int dom){
 		ArrayList<Criterion> nonAcceptedCriteria = new ArrayList<Criterion> ();
-		// initialiser la valeur de minUtility
-		//		Class<? extends Criterion> min= option.getCriteria().get(0);
-		//		Criterion leastScored = option.getValue(min);
-		//		int minUtility = criteriaPreferences.getRank(min) * 
-		//				getCriterionNegotiation(min).getSelf().getScore(option.getValue(min));
 
 		for (Class<? extends Criterion> cr: option.getCriteria()){
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(cr);
@@ -228,10 +231,14 @@ public class Negotiation<O extends Option> {
 		}
 
 	}
-	public boolean isAcceptable (Proposal proposal, int dom){
-
+	public boolean isAcceptableProposal (Proposal proposal, int dom){
+		int turnleft = (getMaxTurns() - this.context.getHistory().size()) /2;
+		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(dom, turnleft);
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
+			if(!importantCriteria.contains(criterion.getClass()))
+					return true;
+			
 			CriterionNegotiation<Criterion> criterionNegotiation =	
 					getCriterionNegotiation(criterion);
 			boolean value = criterionNegotiation.
@@ -266,7 +273,7 @@ public class Negotiation<O extends Option> {
 
 		}
 		if(proposal instanceof OptionProposal){
-			value = LeastScoredCriterion((O) proposal.getValue(), dom);
+			value = leastScoredCriterion((O) proposal.getValue(), dom);
 
 		}
 		CriterionNegotiation<Criterion> model = getCriterionNegotiation(value.getClass());
@@ -455,14 +462,14 @@ public class Negotiation<O extends Option> {
 
 	public ValuePreference<Criterion> askUserPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
-		if (model.getOther().getPreferences().isEmpty())
-			return new ValuePreference<Criterion>(null, null);
-		else {
+//		if (model.getOther().getPreferences().isEmpty())
+//			return new ValuePreference<Criterion>(null, null);
+//		else {
 			for(ValuePreference<Criterion> pref :model.getSelectedPreferences(model.getSelf(),model.getOther())){
 				if(!model.isIn(model.getOas(), pref))
 					return pref;
 			}
-		}
+		//}
 		return (model.getSelectedPreferences(model.getSelf(),model.getOther())).get(0);
 	}
 
