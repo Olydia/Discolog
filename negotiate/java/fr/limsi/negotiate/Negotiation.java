@@ -124,8 +124,8 @@ public class Negotiation<O extends Option> {
 
 	public int optionUtility (Option option){
 		int Utility = 0;
-		int turnleft = (getMaxTurns() - this.context.getHistory().size()) /2;
-		List<Class<? extends Criterion>> priorCriteria = this.criteriaPreferences.importantCriteria(getDom(), turnleft);
+		int rejectedProps = this.context.getProposals(Status.REJECTED).size();
+		List<Class<? extends Criterion>> priorCriteria = this.criteriaPreferences.importantCriteria(getDom(), rejectedProps);
 		for (Class<? extends Criterion> c:priorCriteria ){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(c);
@@ -228,14 +228,14 @@ public class Negotiation<O extends Option> {
 				return (sortedOptions.indexOf(option)< sortedOptions.size()/4);
 			else 
 				return ((sortedOptions.indexOf(option)< sortedOptions.size()/2)  || 
-						(this.context.isInspeakerProposals(option, false, Proposal.Status.OPEN)&&
-								!context.getLastProposal("OPEN").getValue().equals(option)));
+						(this.context.isInspeakerProposals(option, false, Status.OPEN)&&
+								!context.getLastProposal(Status.OPEN).getValue().equals(option)));
 		}
 
 	}
 	public boolean isAcceptable (Proposal proposal){
-		int turnleft = (getMaxTurns() - this.context.getProposals().size());
-		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), turnleft);
+		int rejectedProps = this.context.getProposals(Status.REJECTED).size();
+		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), rejectedProps);
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			if(!importantCriteria.contains(criterion.getClass()))
@@ -329,7 +329,7 @@ public class Negotiation<O extends Option> {
 			if(isAcceptableOption(O))
 				acceptableOptions.add(O);
 		}
-		return acceptableOptions;
+		return (ArrayList<Option>) sortOptions(acceptableOptions);
 	}
 
 	@SuppressWarnings("unchecked")

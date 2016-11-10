@@ -4,6 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import fr.limsi.negotiate.restaurant.Ambiance;
+import fr.limsi.negotiate.restaurant.Cost;
+import fr.limsi.negotiate.restaurant.Cuisine;
+
 /** Stores the preferences about criteria, i.e. a list of OptionPreferences, i.e. a list of couples (less,more) with
  * less and more extends Criteria.
  */
@@ -90,8 +94,8 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 //		return null;		
 //	}
 	@Override
-	public List<Class<? extends Criterion> > sortCriteria() {
-		List<Class<? extends Criterion> > criteria = this.getValues();
+	public ArrayList<Class<? extends Criterion> > sortCriteria() {
+		ArrayList<Class<? extends Criterion> > criteria = (ArrayList<Class<? extends Criterion>>) this.getValues();
 		criteria.sort(new Comparator<Class<? extends Criterion> >() {
 			@Override
 			public int compare(Class<? extends Criterion>  o1, Class<? extends Criterion>  o2){
@@ -120,14 +124,18 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 		if (dom > 0 || nbProposals < 2)
 			return true;
 		else
-			return (criteria.indexOf(criterion)!= criteria.size()-(nbProposals/2));
+			return (criteria.indexOf(criterion)<= (criteria.size()-1)-(nbProposals/2));
 		
 			
 	}
 	
 	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbProposals){
-		List<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
-		for(Class<? extends Criterion> elm: this.sortCriteria()){
+		ArrayList<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
+		@SuppressWarnings("unchecked")
+		ArrayList<Class<? extends Criterion>> criteria = (ArrayList<Class<? extends Criterion>>) sortCriteria().clone();
+        Iterator<Class<? extends Criterion>> it = criteria.iterator();
+		while(it.hasNext()){
+			Class<? extends Criterion> elm = it.next();
 			if(this.IsImportantCriterion(elm, dom, nbProposals))
 				importantC.add(elm);
 		}

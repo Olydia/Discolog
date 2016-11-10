@@ -1,6 +1,7 @@
 package fr.limsi.negotiate;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Stack;
 import fr.limsi.negotiate.Proposal.Status;
@@ -11,11 +12,7 @@ public class DialogueContext {
 	private ArrayList<Class<? extends Criterion>> discussedCriteria ;
 	public Class<? extends Criterion> currentDiscussedCriterion; 	
 	private Stack<Proposal> proposals;
-	private ArrayList<CommunicatedProp> acceptedValues;
-	private ArrayList<CommunicatedProp> NonacceptedValues;
 	private List<Statement> history;
-	
-
 	private int cmpState = 0;
 	private int cmpProposal =0;
 
@@ -30,7 +27,6 @@ public class DialogueContext {
 		this.cmpProposal = cmpProposal;
 	}
 
-	@SuppressWarnings("serial")
 	public DialogueContext() {
 		this.listStatements =new ArrayList<PreferenceStatement>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
@@ -38,16 +34,7 @@ public class DialogueContext {
 		this.proposals = new Stack<Proposal>();
 		this.history = new ArrayList<Statement>();
 		// communicatedProposal values attributions: oas: true / other: false
-		this.acceptedValues = new ArrayList<CommunicatedProp>()
-								{{add(new CommunicatedProp(true));
-								  add(new CommunicatedProp(false)); }};
-		this.NonacceptedValues = new ArrayList<CommunicatedProp>()
-									{{add(new CommunicatedProp(true));
-									  add(new CommunicatedProp(false)); }};
-	}
-	
-	public List<CommunicatedProp> getNonacceptedValues() {
-		return NonacceptedValues;
+		
 	}
 	
 	public List<Statement> getHistory() {
@@ -134,6 +121,14 @@ public class DialogueContext {
 	public Stack<Proposal> getProposals() {
 		return proposals;
 	}
+	public List<Proposal> getProposals(Status status){
+		List<Proposal> props = new ArrayList<Proposal>();
+		for(Proposal proposal: proposals){
+			if(proposal.getStatus().equals(status))
+				props.add(proposal);
+		}
+		return props;
+	}
 
 	public void updateProposals(Proposal proposal) {
 		if(!this.proposals.isEmpty()){
@@ -143,22 +138,12 @@ public class DialogueContext {
 				setCmpProposal(0);
 		}
 		this.proposals.push(proposal);
-		if(proposal.getStatus().equals(Status.OPEN)|| proposal.getStatus().equals(Status.ACCEPTED))
-			updateCommunicatedProp(acceptedValues, proposal);
-		if(proposal.getStatus().equals(Status.REJECTED))
-			updateCommunicatedProp(NonacceptedValues, proposal);
 		
 	}
-	
-	public void updateCommunicatedProp(ArrayList<CommunicatedProp> propos, Proposal p){
-		for(CommunicatedProp cp: propos){
-			if(cp.isSelf() == p.isSelf)
-				cp.getProp().add(p);
-		}
-	}
-	public Proposal getLastProposal(String status) {
+
+	public Proposal getLastProposal(Status status) {
 		for(int i= proposals.size()-1; i>=0; i --){
-			if(proposals.get(i).getStatus().toString().equals(status))
+			if(proposals.get(i).getStatus().equals(status))
 				return proposals.get(i);
 
 		}
@@ -182,6 +167,7 @@ public class DialogueContext {
 
 		return whoProp;
 	}
+	
 	public List<Criterion> comminicatedProposals (boolean who, Class<?extends Criterion> type){
 		List<Criterion> values = new ArrayList<Criterion>();
 		for(Proposal p: this.getSpeakerProposals(who)){
@@ -206,11 +192,6 @@ public class DialogueContext {
 			return (p.getValue().equals(o)&& p.getStatus().equals(status));
 		}
 		return false;
-	}
-
-
-	public ArrayList<CommunicatedProp> getAcceptedValues() {
-		return acceptedValues;
 	}
 
 	public int getCmpState() {

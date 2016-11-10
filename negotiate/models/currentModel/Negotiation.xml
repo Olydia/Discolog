@@ -137,13 +137,13 @@
    <task id="_State_tree">
       <subtasks id="_d4e59_subtasks">
          <step name="_d4e59_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
          <binding slot="$_d4e59_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e60_subtasks">
          <step name="_d4e60_step" task="n:fr.limsi.negotiate.lang.Propose"/>
          <step name="_d4e60_ref" task="_d4e60_tree"/>
-         <applicable>proposalFromUserState(getLastUserPref(), relation)</applicable>
+         <applicable>proposalFromUserState(getLastUserPref())</applicable>
          <binding slot="$_d4e60_step.external" value="false"/>
          <binding slot="$_d4e60_step.proposal"
                   value="proposalFromPreference(getLastUserPref(), true) "/>
@@ -153,7 +153,7 @@
          <step name="_d4e66_ref" task="_d4e66_tree"/>
          <applicable>isMaxStated()</applicable>
          <binding slot="$_d4e66_step.external" value="false"/>
-         <binding slot="$_d4e66_step.proposal" value="$negotiation.computeProposal(relation)"/>
+         <binding slot="$_d4e66_step.proposal" value="$negotiation.computeProposal()"/>
       </subtasks>
       <subtasks id="_d4e72_subtasks">
          <step name="_d4e72_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -269,15 +269,15 @@
    <task id="_Ask_tree">
       <subtasks id="_d4e92_subtasks">
          <step name="_d4e92_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
          <binding slot="$_d4e92_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e93_subtasks">
          <step name="_d4e93_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e93_ref" task="_d4e93_tree"/>
          <binding slot="$_d4e93_step.external" value="false"/>
-         <binding slot="$_d4e93_step.less" value="$negotiation.reactAsk(relation).getLess()"/>
-         <binding slot="$_d4e93_step.more" value="$negotiation.reactAsk(relation).getMore()"/>
+         <binding slot="$_d4e93_step.less" value="$negotiation.reactAsk().getLess()"/>
+         <binding slot="$_d4e93_step.more" value="$negotiation.reactAsk().getMore()"/>
       </subtasks>
    </task>
    <task id="_d4e93_tree">
@@ -300,12 +300,12 @@
    <task id="_Propose_tree">
       <subtasks id="_d4e100_subtasks">
          <step name="_d4e100_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
          <binding slot="$_d4e100_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e102_subtasks">
          <step name="_d4e102_step" task="Booking"/>
-         <applicable>!isSub &amp;&amp;       isOptionProposal(lastOpenProposal())      &amp;&amp; isAcceptable(lastOpenProposal(), relation)</applicable>
+         <applicable>!isSub &amp;&amp;       isOptionProposal(lastOpenProposal())      &amp;&amp; isAcceptable(lastOpenProposal())</applicable>
          <binding slot="$_d4e102_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e103_subtasks">
@@ -316,22 +316,22 @@
          <binding slot="$_d4e103_step.proposal" value="lastOpenProposal()"/>
       </subtasks>
       <subtasks id="_d4e109_subtasks">
-         <step name="_d4e109_step" task="n:fr.limsi.negotiate.lang.Reject"/>
+         <step name="_d4e109_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
          <step name="_d4e109_ref" task="_d4e109_tree"/>
-         <applicable>!isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)</applicable>
+         <applicable>isSub() &amp;&amp; isMaxProp()</applicable>
          <binding slot="$_d4e109_step.external" value="false"/>
-         <binding slot="$_d4e109_step.proposal" value="lastOpenProposal()"/>
+         <binding slot="$_d4e109_step.criterion" value="openNewCriterion()"/>
+         <binding slot="$_d4e109_step.less"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getLess()"/>
+         <binding slot="$_d4e109_step.more"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getMore()"/>
       </subtasks>
       <subtasks id="_d4e115_subtasks">
-         <step name="_d4e115_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
+         <step name="_d4e115_step" task="n:fr.limsi.negotiate.lang.Reject"/>
          <step name="_d4e115_ref" task="_d4e115_tree"/>
-         <applicable>isSub() &amp;&amp; isMaxProp()</applicable>
+         <applicable>!isDom() &amp;&amp; !isAcceptable(lastOpenProposal())</applicable>
          <binding slot="$_d4e115_step.external" value="false"/>
-         <binding slot="$_d4e115_step.criterion" value="openNewCriterion()"/>
-         <binding slot="$_d4e115_step.less"
-                  value="$negotiation.askUserPreference(openNewCriterion()).getLess()"/>
-         <binding slot="$_d4e115_step.more"
-                  value="$negotiation.askUserPreference(openNewCriterion()).getMore()"/>
+         <binding slot="$_d4e115_step.proposal" value="lastOpenProposal()"/>
       </subtasks>
       <subtasks id="_d4e132_subtasks">
          <step name="_d4e132_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -412,7 +412,7 @@
    <task id="_Accept_tree">
       <subtasks id="_d4e139_subtasks">
          <step name="_d4e139_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
          <binding slot="$_d4e139_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e140_subtasks">
@@ -434,7 +434,7 @@
          <applicable>canPropose()</applicable>
          <binding slot="$_d4e147_step.external" value="false"/>
          <binding slot="$_d4e147_step.proposal"
-                  value="createProposal($negotiation.computeAcceptableOptions(relation).get(0), true)"/>
+                  value="createProposal($negotiation.computeAcceptableOptions().get(0), true)"/>
       </subtasks>
       <subtasks id="_d4e164_subtasks">
          <step name="_d4e164_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -442,8 +442,7 @@
          <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
          <binding slot="$_d4e164_step.external" value="false"/>
          <binding slot="$_d4e164_step.less" value="leastPreferredCriterion(openNewCriterion())"/>
-         <binding slot="$_d4e164_step.more"
-                  value="currentMostPreferred(openNewCriterion(), relation)"/>
+         <binding slot="$_d4e164_step.more" value="currentMostPreferred(openNewCriterion())"/>
       </subtasks>
       <subtasks id="_d4e170_subtasks">
          <step name="_d4e170_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -451,7 +450,7 @@
          <applicable>isDom()</applicable>
          <binding slot="$_d4e170_step.external" value="false"/>
          <binding slot="$_d4e170_step.proposal"
-                  value="createProposal(currentMostPreferred(openNewCriterion(), relation), true)"/>
+                  value="createProposal(currentMostPreferred(openNewCriterion()), true)"/>
       </subtasks>
       <subtasks id="_d4e176_subtasks">
          <step name="_d4e176_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -551,7 +550,7 @@
    <task id="_Reject_tree">
       <subtasks id="_d4e184_subtasks">
          <step name="_d4e184_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)</applicable>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
          <binding slot="$_d4e184_step.external" value="false"/>
       </subtasks>
       <subtasks id="_d4e185_subtasks">
@@ -597,7 +596,7 @@
          <binding slot="$_d4e213_step.less"
                   value="leastPreferredCriterion(currentDiscussedCriterion())"/>
          <binding slot="$_d4e213_step.more"
-                  value="currentMostPreferred(currentDiscussedCriterion(), relation)"/>
+                  value="currentMostPreferred(currentDiscussedCriterion())"/>
       </subtasks>
       <subtasks id="_d4e220_subtasks">
          <step name="_d4e220_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -605,8 +604,7 @@
          <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
          <binding slot="$_d4e220_step.external" value="false"/>
          <binding slot="$_d4e220_step.less" value="leastPreferredCriterion(openNewCriterion())"/>
-         <binding slot="$_d4e220_step.more"
-                  value="currentMostPreferred(openNewCriterion(), relation)"/>
+         <binding slot="$_d4e220_step.more" value="currentMostPreferred(openNewCriterion())"/>
       </subtasks>
       <subtasks id="_d4e228_subtasks">
          <step name="_d4e228_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -614,7 +612,7 @@
          <applicable>!isSub()</applicable>
          <binding slot="$_d4e228_step.external" value="false"/>
          <binding slot="$_d4e228_step.proposal"
-                  value="getRandCriterionProp(getDiscussedCriterion(), relation)"/>
+                  value="getRandCriterionProp(getDiscussedCriterion())"/>
       </subtasks>
       <subtasks id="_d4e234_subtasks">
          <step name="_d4e234_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -866,7 +864,7 @@
     
     // ****************************************;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
-    $introMostPrefValue =currentMostPreferred($mostPrefCriterion, relation);
+    $introMostPrefValue =currentMostPreferred($mostPrefCriterion);
     var RI = {
   		DOMINANT : 1, 
   		PEER: 0, 
@@ -892,16 +890,15 @@
 		return ($negotiation.getContext().getCmpProposal()&gt;= 2)
 	}
 	
-    function currentMostPreferred(criterion, relation) {
-       return ($negotiation.currentMostPreferredCriterion(criterion, relation));
+    function currentMostPreferred(criterion) {
+       return ($negotiation.currentMostPreferredCriterion(criterion));
     }
     function canPropose(){
     	return (!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal()) || isSub() &amp;&amp; openNewCriterion() == null)
     }
     
     function canAcceptProposal(){
-    	if(!isDom() &amp;&amp; isAcceptable(lastOpenProposal(), relation)) 
-    	// ||	$negotiation.criteriaPreferences.IsImportantCriterion(lastOpenProposal().class, relation))
+    	if(!isDom() &amp;&amp; isAcceptable(lastOpenProposal())) 
     		return true
     		
     	else
@@ -912,7 +909,7 @@
     
     function justify(proposal){
     		if(proposal instanceof Packages.fr.limsi.negotiate.OptionProposal)
-    			    return  $negotiation.leastScoredCriterion(proposal.getValue(), relation);
+    			    return  $negotiation.leastScoredCriterion(proposal.getValue());
     			
     		else 
     			return proposal.getValue();
@@ -920,13 +917,13 @@
         }
     
     function counterPropose(){
-    	if(!isAcceptable(lastOpenProposal(), relation)){
-    		return $negotiation.computeProposal(relation);
+    	if(!isAcceptable(lastOpenProposal())){
+    		return $negotiation.computeProposal();
     	}
     	
-    	if(isAcceptable(lastOpenProposal(), relation) &amp;&amp; isCriterionProposal(lastOpenProposal())){
+    	if(isAcceptable(lastOpenProposal()) &amp;&amp; isCriterionProposal(lastOpenProposal())){
     		//ComputeOptionProposalWithValue
-    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue(),relation), true);
+    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true);
     	}
     
     }
@@ -964,11 +961,11 @@
     		return getPreference($cuisine);
     }
     
-    function proposalFromUserState(userPref, relation){
+    function proposalFromUserState(userPref){
     	more = userPref.getMore();
     	less = userPref.getLess();
     	if(more!= null){
-    		return (isAcceptable(createProposal(more,true), relation));
+    		return (isAcceptable(createProposal(more,true)));
     	}
     	return false;  	
     }
@@ -1055,16 +1052,16 @@
 	}
 		
 	function lastRejectedProposal (){
-		return ($negotiation.getContext().getLastProposal("REJECTED"));
+		return ($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.REJECTED));
 	}
 	
 	function lastOpenProposal (){
-		return ($negotiation.getContext().getLastProposal("OPEN"));	
+		return ($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.OPEN));	
 	}
 	
 	function lastAcceptedProposal(){
-			if($negotiation.getContext().getLastProposal("ACCEPTED")!=null)
-				return ($negotiation.getContext().getLastProposal("ACCEPTED"));
+			if($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED)!=null)
+				return ($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED));
 			else
 				return createProposal($more, true);
 	}
@@ -1083,8 +1080,8 @@
 			return topic; 
 	}
 	
-	function getRandCriterionProp(criterion, relation){
-		return ($negotiation.generateRandomCriterionProposal(criterion, relation));
+	function getRandCriterionProp(criterion){
+		return ($negotiation.generateRandomCriterionProposal(criterion));
 	}
 	
 	function getRandOptionProp(){
@@ -1098,8 +1095,8 @@
 			return getPreference($cuisine);
 	}
 	
-	function isAcceptable(proposal, relation){
-		return $negotiation.isAcceptable(proposal, relation);
+	function isAcceptable(proposal){
+		return $negotiation.isAcceptable(proposal);
 	}
 	
 	function reactToRejectedProp(proposal){
