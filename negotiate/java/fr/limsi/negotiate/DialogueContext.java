@@ -246,7 +246,7 @@ public class DialogueContext {
 		}
 		
 		public CommunicatedProp(boolean isSelf, ArrayList<Proposal> prop) {
-			this.isSelf = isSelf;
+			this.isSelf = isSelf; 
 			this.prop = prop;
 		}
 		

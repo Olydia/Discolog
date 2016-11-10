@@ -18,8 +18,6 @@ public class NegotiatorAgent extends Agent {
 		InitiaterestauMentalState model = new InitiaterestauMentalState();
 		Negotiation<? extends Option> agent1= model.D1();
 		Negotiation<? extends Option>  agent2 = model.D2();
-		agent1.setMaxTurns(20);
-		agent2.setMaxTurns(20);
 		Dual dual = new Dual( new NegotiatorAgent("Agent1", agent1), 
 				new NegotiatorAgent("Agent2", agent2), true);
 //		InitiateMovieMentalState model = new InitiateMovieMentalState();
@@ -31,8 +29,8 @@ public class NegotiatorAgent extends Agent {
 		dual.interaction1.load("models/currentModel/Negotiation.xml");
 		dual.interaction2.load("models/currentModel/Negotiate.xml");
 		dual.interaction2.load("models/currentModel/Negotiation.xml");
-		dual.interaction1.eval("relation = RI.DOMINANT", "NegotiatorAgent");
-		dual.interaction2.eval("relation = RI.SUBMISSIVE", "NegotiatorAgent");
+		dual.interaction1.eval("initiateNegotiation(15,RI.DOMINANT)", "NegotiatorAgent");
+		dual.interaction2.eval("initiateNegotiation(15,RI.SUBMISSIVE)", "NegotiatorAgent");
 		dual.interaction1.getDisco().addTop("Top");
 		dual.start();
 	}

@@ -107,11 +107,11 @@
 <do id = "State" actor="user" task="n:fr.limsi.negotiate.lang.StatePreference">
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="proposalFromPreference(getLastUserPref(), true) "
-		applicable = "proposalFromUserState(getLastUserPref(), relation)">
+		applicable = "proposalFromUserState(getLastUserPref())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -120,7 +120,7 @@
 	</do>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="$negotiation.computeProposal(relation)"
+		proposal="$negotiation.computeProposal()"
 		applicable = "isMaxStated()">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -171,11 +171,11 @@
 <do id = "Ask" actor="user" task="n:fr.limsi.negotiate.lang.AskPreference">
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-		less="$negotiation.reactAsk(relation).getLess()" 
-		more="$negotiation.reactAsk(relation).getMore()">
+		less="$negotiation.reactAsk().getLess()" 
+		more="$negotiation.reactAsk().getMore()">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -188,13 +188,13 @@
 <do id = "Propose" actor="user" task="n:fr.limsi.negotiate.lang.Propose"> 
 
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 	
 	<!--Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<do actor="agent" task ="Booking"
 		applicable ="!isSub &amp;&amp; 
 					isOptionProposal(lastOpenProposal())
-					&amp;&amp; isAcceptable(lastOpenProposal(), relation)" />	
+					&amp;&amp; isAcceptable(lastOpenProposal())" />	
 					
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Accept" 
@@ -209,7 +209,7 @@
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
 		proposal="lastOpenProposal()"  
-		applicable = "!isDom() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)">
+		applicable = "!isDom() &amp;&amp; !isAcceptable(lastOpenProposal())">
 		<do task = "Ask"/>
 		<do task = "State"/>
 		<do task = "Propose"/>
@@ -232,7 +232,7 @@
 <!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
 <!-- 		less="reactToRejectedProp(lastOpenProposal()).getLess()"  -->
 <!-- 		more="reactToRejectedProp(lastOpenProposal()).getMore()"  -->
-<!-- 		applicable = "isSub() &amp;&amp; !isAcceptable(lastOpenProposal(), relation)"> -->
+<!-- 		applicable = "isSub() &amp;&amp; !isAcceptable(lastOpenProposal())"> -->
 <!-- 		<do task = "Ask"/> -->
 <!-- 		<do task = "State"/> -->
 <!-- 		<do task = "Propose"/> -->
@@ -255,7 +255,7 @@
 <do id = "Accept" actor="user" task="n:fr.limsi.negotiate.lang.Accept">
 	
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 	
 	<do actor="agent" task ="Booking"
 		applicable ="isOptionProposal(lastAcceptedProposal())"/>
@@ -267,11 +267,11 @@
 		<do task = "State"/>
 		<do task = "Propose"/>
 		<do task = "Accept"/>
-		<do task = "Reject"/>
+		<do task = "Reject"/> 
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.computeAcceptableOptions(relation).get(0), true)"
+		proposal="createProposal($negotiation.computeAcceptableOptions().get(0), true)"
 		applicable = "canPropose()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -282,7 +282,7 @@
 	
 <!-- 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference" -->
 <!-- 		less="leastPreferredCriterion(currentDiscussedCriterion())"  -->
-<!-- 		more="currentMostPreferred(currentDiscussedCriterion(), relation)" -->
+<!-- 		more="currentMostPreferred(currentDiscussedCriterion())" -->
 <!-- 		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())"> -->
 <!-- 		<do task = "Ask"/> -->
 <!-- 		<do task = "State"/> -->
@@ -292,7 +292,7 @@
 <!-- 	</do> -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="leastPreferredCriterion(openNewCriterion())" 
-		more="currentMostPreferred(openNewCriterion(), relation)"
+		more="currentMostPreferred(openNewCriterion())"
 		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -303,7 +303,7 @@
 	
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(currentMostPreferred(openNewCriterion(), relation), true)"
+		proposal="createProposal(currentMostPreferred(openNewCriterion()), true)"
 		applicable = "isDom()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -329,7 +329,7 @@
 <do id = "Reject" actor="user" task="n:fr.limsi.negotiate.lang.Reject">
 <!--In the case where the agent is very dominant propose again the the proposal if it is the mostPref proposal -->
 	<do actor="agent" task = "ClosingNegotiation" 
-		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure(relation)" />
+		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
 		proposal="lastRejectedProposal() "
@@ -381,7 +381,7 @@
 	<!-- state(other preference)  -->  
 <do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="leastPreferredCriterion(currentDiscussedCriterion())" 
-		more="currentMostPreferred(currentDiscussedCriterion(), relation)"
+		more="currentMostPreferred(currentDiscussedCriterion())"
 		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -391,7 +391,7 @@
 	</do>
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 		less="leastPreferredCriterion(openNewCriterion())" 
-		more="currentMostPreferred(openNewCriterion(), relation)"
+		more="currentMostPreferred(openNewCriterion())"
 		applicable = "isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -404,7 +404,7 @@
 	<!--       	Ajouter une condition qui vérifie que la proposition doit etre diff de actuel et statut diff de Rej ou ACC	 -->
 	<!--       	Propose(other proposal)  -->
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="getRandCriterionProp(getDiscussedCriterion(), relation)"
+		proposal="getRandCriterionProp(getDiscussedCriterion())"
 		applicable = "!isSub()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -447,7 +447,7 @@
     
     // ****************************************;
     $mostPrefCriterion = $negotiation.criteriaPreferences.getMostPreferred();
-    $introMostPrefValue =currentMostPreferred($mostPrefCriterion, relation);
+    $introMostPrefValue =currentMostPreferred($mostPrefCriterion);
     var RI = {
   		DOMINANT : 1, 
   		PEER: 0, 
@@ -455,6 +455,11 @@
 		};
     var relation =RI.DOMINANT;
  	
+ 	function initiateNegotiation(maxTurns, dominance){
+ 		relation = dominance;
+ 		$negotiation.setDom(dominance);
+ 		$negotiation.setMaxTurns(maxTurns);
+ 	}
 	function isMaxStated(){
 		thsld = 0;
 		if(isPeer())
@@ -468,15 +473,15 @@
 		return ($negotiation.getContext().getCmpProposal()>= 2)
 	}
 	
-    function currentMostPreferred(criterion, relation) {
-       return ($negotiation.currentMostPreferredCriterion(criterion, relation));
+    function currentMostPreferred(criterion) {
+       return ($negotiation.currentMostPreferredCriterion(criterion));
     }
     function canPropose(){
     	return (!isSub() &amp;&amp; isCriterionProposal(lastAcceptedProposal()) || isSub() &amp;&amp; openNewCriterion() == null)
     }
     
     function canAcceptProposal(){
-    	if(!isDom() &amp;&amp; isAcceptable(lastOpenProposal(), relation)) 
+    	if(!isDom() &amp;&amp; isAcceptable(lastOpenProposal())) 
     	// ||	$negotiation.criteriaPreferences.IsImportantCriterion(lastOpenProposal().class, relation))
     		return true
     		
@@ -488,7 +493,7 @@
     
     function justify(proposal){
     		if(proposal instanceof Packages.fr.limsi.negotiate.OptionProposal)
-    			    return  $negotiation.leastScoredCriterion(proposal.getValue(), relation);
+    			    return  $negotiation.leastScoredCriterion(proposal.getValue());
     			
     		else 
     			return proposal.getValue();
@@ -496,13 +501,13 @@
         }
     
     function counterPropose(){
-    	if(!isAcceptable(lastOpenProposal(), relation)){
-    		return $negotiation.computeProposal(relation);
+    	if(!isAcceptable(lastOpenProposal())){
+    		return $negotiation.computeProposal();
     	}
     	
-    	if(isAcceptable(lastOpenProposal(), relation) &amp;&amp; isCriterionProposal(lastOpenProposal())){
+    	if(isAcceptable(lastOpenProposal()) &amp;&amp; isCriterionProposal(lastOpenProposal())){
     		//ComputeOptionProposalWithValue
-    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue(),relation), true);
+    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true);
     	}
     
     }
@@ -540,11 +545,11 @@
     		return getPreference($cuisine);
     }
     
-    function proposalFromUserState(userPref, relation){
+    function proposalFromUserState(userPref){
     	more = userPref.getMore();
     	less = userPref.getLess();
     	if(more!= null){
-    		return (isAcceptable(createProposal(more,true), relation));
+    		return (isAcceptable(createProposal(more,true)));
     	}
     	return false;  	
     }
@@ -659,8 +664,8 @@
 			return topic; 
 	}
 	
-	function getRandCriterionProp(criterion, relation){
-		return ($negotiation.generateRandomCriterionProposal(criterion, relation));
+	function getRandCriterionProp(criterion){
+		return ($negotiation.generateRandomCriterionProposal(criterion));
 	}
 	
 	function getRandOptionProp(){
@@ -674,8 +679,8 @@
 			return getPreference($cuisine);
 	}
 	
-	function isAcceptable(proposal, relation){
-		return $negotiation.isAcceptable(proposal, relation);
+	function isAcceptable(proposal){
+		return $negotiation.isAcceptable(proposal);
 	}
 	
 	function reactToRejectedProp(proposal){

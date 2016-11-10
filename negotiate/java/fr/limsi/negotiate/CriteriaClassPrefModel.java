@@ -115,21 +115,20 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	 * nbTurns in function of the number of turns left in the negotiation
 	 * 
 	 */
-	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom, int nbTurns){
+	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom, int nbProposals){
 		List <Class<? extends Criterion>>criteria = sortCriteria();
-		if (dom > 0 || nbTurns < 2)
+		if (dom > 0 || nbProposals < 2)
 			return true;
-		if(dom == 0)
-			return (criteria.indexOf(criterion)!= criteria.size()-1	);
 		else
-			return (criteria.indexOf(criterion)<= criteria.size()-1 /(nbTurns));
+			return (criteria.indexOf(criterion)!= criteria.size()-(nbProposals/2));
+		
 			
 	}
 	
-	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbTurns){
+	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbProposals){
 		List<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
 		for(Class<? extends Criterion> elm: this.sortCriteria()){
-			if(this.IsImportantCriterion(elm, dom, nbTurns))
+			if(this.IsImportantCriterion(elm, dom, nbProposals))
 				importantC.add(elm);
 		}
 		return importantC;

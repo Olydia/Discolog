@@ -874,6 +874,11 @@
 		};
     var relation =RI.DOMINANT;
  	
+ 	function initiateNegotiation(maxTurns, dominance){
+ 		relation = dominance;
+ 		$negotiation.setDom(dominance);
+ 		$negotiation.setMaxTurns(maxTurns);
+ 	}
 	function isMaxStated(){
 		thsld = 0;
 		if(isPeer())
