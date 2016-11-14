@@ -116,27 +116,27 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	/** IsImportantCriterion (criterion, dom) calculates in function of the relation of dominance whether a criterion 
 	 * is important to choose an option
 	 * The calcul depends on the rank of the criterion
-	 * nbTurns in function of the number of turns left in the negotiation
+	 * nbTurns in function of the number of turns spoken in the negotiation
 	 * 
 	 */
-	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom, int nbProposals){
+	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom, int spokenTurns){
 		List <Class<? extends Criterion>>criteria = sortCriteria();
-		if (dom > 0 || nbProposals < 2)
+		if (dom > 0 || spokenTurns < 2)
 			return true;
 		else
-			return (criteria.indexOf(criterion)<= (criteria.size()-1)-(nbProposals/2));
+			return (criteria.indexOf(criterion)<= (criteria.size())-(spokenTurns/2));
 		
 			
 	}
 	
-	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbProposals){
+	public List<Class<? extends Criterion>> importantCriteria(int dom, int spokenTurns){
 		ArrayList<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
 		@SuppressWarnings("unchecked")
 		ArrayList<Class<? extends Criterion>> criteria = (ArrayList<Class<? extends Criterion>>) sortCriteria().clone();
         Iterator<Class<? extends Criterion>> it = criteria.iterator();
 		while(it.hasNext()){
 			Class<? extends Criterion> elm = it.next();
-			if(this.IsImportantCriterion(elm, dom, nbProposals))
+			if(this.IsImportantCriterion(elm, dom, spokenTurns))
 				importantC.add(elm);
 		}
 		return importantC;

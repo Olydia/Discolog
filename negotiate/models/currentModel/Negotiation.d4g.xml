@@ -95,7 +95,7 @@
 </do>
 
 <do id="ProposeCriterion"  actor = "agent"  task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($introMostPrefValue, true) ">    
+		proposal="createProposal($introMostPrefValue, true, $OPEN) ">    
 	<do task = "State"/>
     <do task = "Propose"/>
    	<do task = "Ask"/>
@@ -197,7 +197,7 @@
 					&amp;&amp; isAcceptable(lastOpenProposal())" />	
 		
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Accept" 
-		proposal="lastOpenProposal()"
+		proposal="createProposal(lastOpenProposal().getValue(), true, $ACCEPTED)"
 		applicable = "canAcceptProposal()">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -218,7 +218,7 @@
 		<do task = "Reject"/>
 	</do>
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Reject" 
-		proposal="lastOpenProposal()"  
+		proposal="createProposal(lastOpenProposal().getValue(), true, $REJECTED)"  
 		applicable = "!isDom() &amp;&amp; !isAcceptable(lastOpenProposal())">
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -261,7 +261,7 @@
 		applicable ="isOptionProposal(lastAcceptedProposal())"/>
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.computeAcceptedOption(), true)"
+		proposal="createProposal($negotiation.computeAcceptedOption(), true, $OPEN)"
 		applicable = "isSub() &amp;&amp; $negotiation.allCriteriaAccepted()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -271,7 +271,7 @@
 	</do> 
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal($negotiation.computeAcceptableOptions().get(0), true)"
+		proposal="createProposal($negotiation.computeAcceptableOptions().get(0), true, $OPEN)"
 		applicable = "canPropose()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -303,7 +303,7 @@
 	
 
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="createProposal(currentMostPreferred(openNewCriterion()), true)"
+		proposal="createProposal(currentMostPreferred(openNewCriterion()), true, $OPEN)"
 		applicable = "isDom()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -332,7 +332,7 @@
 		applicable = "!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 	
 	<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose" 
-		proposal="lastRejectedProposal() "
+		proposal="createProposal(lastRejectedProposal().getValue(), true, $OPEN) "
 		applicable = " isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()" >
 		<do task = "Ask"/>
 		<do task = "State"/>
@@ -431,6 +431,9 @@
     $state ="State";
     $ask ="Ask";   
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+    $OPEN = Packages.fr.limsi.negotiate.Proposal.Status.OPEN;
+    var $REJECTED = Packages.fr.limsi.negotiate.Proposal.Status.REJECTED;
+    var $ACCEPTED = Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED;
     // *********  restaurant criteria *********
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
    	$cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
@@ -470,7 +473,7 @@
 	}
 	
 	function isMaxProp(){
-		return ($negotiation.getContext().getCmpProposal()>= 2)
+		return ($negotiation.getContext().isMaxProposals(true))
 	}
 	
     function currentMostPreferred(criterion) {
@@ -506,7 +509,7 @@
     	
     	if(isAcceptable(lastOpenProposal()) &amp;&amp; isCriterionProposal(lastOpenProposal())){
     		//ComputeOptionProposalWithValue
-    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true);
+    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true, $OPEN);
     	}
     
     }
@@ -615,13 +618,19 @@
 	}
 	
 	
+	function createProposal(value, isSelf, status) {
+	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
+		if(value == null)
+			return null;
+		return $negotiation.createProposal(value,isSelf,status);
+	}
+	
 	function createProposal(value, isSelf) {
 	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
 		if(value == null)
 			return null;
 		return $negotiation.createProposal(value,isSelf);
 	}
-	
 	function proposalFromPreference(preference, isSelf) {
 			if (preference == null)
 				return null;

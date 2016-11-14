@@ -124,8 +124,8 @@ public class Negotiation<O extends Option> {
 
 	public int optionUtility (Option option){
 		int Utility = 0;
-		int rejectedProps = this.context.getProposals(Status.REJECTED).size();
-		List<Class<? extends Criterion>> priorCriteria = this.criteriaPreferences.importantCriteria(getDom(), rejectedProps);
+		int spokenTurns = this.context.getSpeakerStatements(false).size();
+		List<Class<? extends Criterion>> priorCriteria = this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
 		for (Class<? extends Criterion> c:priorCriteria ){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(c);
@@ -234,8 +234,8 @@ public class Negotiation<O extends Option> {
 
 	}
 	public boolean isAcceptable (Proposal proposal){
-		int rejectedProps = this.context.getProposals(Status.REJECTED).size();
-		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), rejectedProps);
+		int spokenTurns = this.context.getSpeakerStatements(false).size();
+		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			if(!importantCriteria.contains(criterion.getClass()))
@@ -399,6 +399,16 @@ public class Negotiation<O extends Option> {
 			return (new OptionProposal(isSelf,(Option) o));
 
 		return null;
+
+	}
+	public Proposal createProposal(Object o, boolean isSelf, Status status){
+		if(o == null)
+			return null;
+		else{
+			Proposal p = createProposal(o, isSelf);
+			p.setStatus(status);
+			return p;
+		}
 
 	}
 
@@ -655,7 +665,7 @@ public class Negotiation<O extends Option> {
 		if(optionProposals.isEmpty())
 			optionProposals.add(getOptionWithValue((Criterion)this.context.getLastCriterionProposal(Status.ACCEPTED).getValue()));
 
-		return optionProposals;
+		return sortOptions(optionProposals);
 	}
 
 	public Map<Class<? extends Criterion>, List<Criterion>> acceptedCriteria(){
@@ -814,14 +824,14 @@ public class Negotiation<O extends Option> {
 	public Proposal computeProposal (){
 		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
 				getContext().getCurrentDiscussedCriterion());
-
-		if (cr.computeProposal(getDom(), context).isEmpty()){				
+		List<CriterionProposal> currentProposals=cr.computeProposal(getDom(), context);
+		if (currentProposals.isEmpty()){				
 			cr = getCriterionNegotiation(openNewTopic());
 			List<CriterionProposal> values= cr.computeProposal(getDom(), context);
 			if(values.isEmpty()){
 				List<Option> options = getPossibleProposalOptions();
 				if(options.isEmpty())
-					return new OptionProposal(computeAcceptableOptions().get(0));
+					return new OptionProposal(true,computeAcceptableOptions().get(0));
 				else
 					return new OptionProposal(true, options.get(0));		
 			}
@@ -829,7 +839,7 @@ public class Negotiation<O extends Option> {
 				return values.get(0);
 
 		}
-		else return cr.computeProposal(getDom(), context).get(0);
+		else return currentProposals.get(0);
 	}
 }
 

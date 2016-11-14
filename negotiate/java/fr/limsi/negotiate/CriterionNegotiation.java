@@ -48,7 +48,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		return criterionType;
 	}
 	// return a value which is in "in" but not in "out"
-	
+
 	// return a value which is in "in" but not in "out"
 	public List<ValuePreference<C>> getSelectedPreferences(CriterionPrefModel<C> in, CriterionPrefModel<C> out){
 		List<ValuePreference<C>> elems = new ArrayList<ValuePreference<C>>();
@@ -63,7 +63,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return elems;
 	}
-	
+
 	public C getTheCurrentMostPreffered(int dom){
 		List<C> newScores = selfAcceptableCriteria(dom);
 		newScores = clearRejected(newScores);
@@ -79,7 +79,7 @@ public class CriterionNegotiation<C extends Criterion> {
 				accepted.add(criterion);
 		return accepted;
 	}
-	
+
 	/** Calculates the acceptable values for the preference model
 	 *  which can be either Other or OAS 
 	 *  @return List of values that are acceptable**/ 
@@ -88,10 +88,10 @@ public class CriterionNegotiation<C extends Criterion> {
 		for(C criterion: model.getValues())
 			if(isAcceptableCriterion(criterion, dom, model))
 				accepted.add(criterion);
-		
+
 		return sortListOfCriteria(accepted);
 	}
-	
+
 	/**
 	 * 
 	 * @param dominance value
@@ -99,13 +99,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	 */
 	public List<CriterionProposal> computeProposal(int dom, DialogueContext context){
 		// dominant only cares about his preferences
-		
+
 		List<C> otherAcceptable = acceptableCriteria(-dom, this.getOther());
 		List<CriterionProposal>  proposals = new ArrayList<CriterionProposal>();
 		if(dom > 0){
 			List<C> selfAcc = selfAcceptableCriteria(dom);
 			for(C cr: selfAcc){
-				CriterionProposal p =new CriterionProposal(cr);
+				CriterionProposal p =new CriterionProposal(true, cr);
 				if(!context.isProposed(p))
 					proposals.add(p);
 			}
@@ -115,8 +115,8 @@ public class CriterionNegotiation<C extends Criterion> {
 			for(C pref: sortListOfCriteria(otherAcceptable)){
 				CriterionProposal prop = new CriterionProposal(pref);
 				if(!(isProposed(prop, Status.ACCEPTED) || isProposed(prop, Status.REJECTED)) 
-				   && isSelfAcceptableCriterion(pref, dom))
-						proposals.add(new CriterionProposal(true,pref));
+						&& isSelfAcceptableCriterion(pref, dom))
+					proposals.add(new CriterionProposal(true,pref));
 			}
 			return proposals;
 		}
@@ -130,7 +130,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return values;
 	}
-	
+
 	public List<C> sortListOfCriteria (List<C> criteria){
 		criteria.sort(new Comparator<C>() {
 			@Override
@@ -139,26 +139,26 @@ public class CriterionNegotiation<C extends Criterion> {
 			}
 		});
 		return criteria;
-		
-	}
-	
 
-//	private static final int maxIndex(ArrayList<Integer> a) {
-//		int imax=0;
-//		for(int i=1;i<a.size();i++)
-//			if (a.get(i)>a.get(imax))
-//				imax = i;
-//		return imax;
-//	}
-	
-//	private static final int minIndex(ArrayList<Integer> a) {
-//		int imin = a.get(0);
-//		for(int i=1;i<a.size();i++)
-//			if (a.get(i)<=a.get(imin))
-//				imin = i;
-//		return imin;
-//	}
-//	
+	}
+
+
+	//	private static final int maxIndex(ArrayList<Integer> a) {
+	//		int imax=0;
+	//		for(int i=1;i<a.size();i++)
+	//			if (a.get(i)>a.get(imax))
+	//				imax = i;
+	//		return imax;
+	//	}
+
+	//	private static final int minIndex(ArrayList<Integer> a) {
+	//		int imin = a.get(0);
+	//		for(int i=1;i<a.size();i++)
+	//			if (a.get(i)<=a.get(imin))
+	//				imin = i;
+	//		return imin;
+	//	}
+	//	
 	public void propose (CriterionProposal proposal) { 
 		if(! proposals.contains(proposal))
 			proposals.add(proposal);
@@ -184,11 +184,11 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void addOther(C less, C more) {
 		other.add(less,more);
 	}
-	
+
 	public void addOAS(C less, C more) {
 		oas.add(less, more);
 	}
-	
+
 	public CriterionPrefModel<C> getOas() {
 		return oas;
 	}
@@ -198,10 +198,10 @@ public class CriterionNegotiation<C extends Criterion> {
 		for (CriterionProposal p: proposals)
 			if (p.getValue().equals(cr) && p.getStatus().equals(status))
 				return true;
-		
+
 		return false;
 	}
-	
+
 	public Status checkStatus(C p) {
 		for(CriterionProposal prop : proposals) {
 			if(prop.getValue().equals(p))
@@ -209,7 +209,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return null;
 	}
-	
+
 	public List<Criterion> getProposals(Proposal.Status status){
 		List<Criterion> prop = new ArrayList<Criterion>();
 		for (CriterionProposal p: proposals){
@@ -218,7 +218,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return prop;
 	}
-	
+
 	public void printMentalState() {
 		System.out.println(" **** SELF preferences *** \n \n");
 		System.out.println(self);
@@ -230,35 +230,34 @@ public class CriterionNegotiation<C extends Criterion> {
 		for(CriterionProposal c : proposals)
 			System.out.print(c.print() + "|");
 	}
-	
+
 
 	public void updateProposal(CriterionProposal proposal, Proposal.Status status){
-		
+
 		for(CriterionProposal c: proposals){
 			if(proposal.getValue().equals(c.getValue())) {
 				c.setStatus(status);
 				c.setIsSelf(proposal.isSelf);
-		System.out.println(c + " "+ c.status + " "+ c.isSelf());
 			}	
 		}
 	}
 	public boolean isIn(CriterionPrefModel<C> model, ValuePreference<C> pref){
-//		pref = (model.isPreferred(pref.getLess(), pref.getMore())? pref:
-//							new ValuePreference<C>(pref.getMore(), pref.getLess()));
+		//		pref = (model.isPreferred(pref.getLess(), pref.getMore())? pref:
+		//							new ValuePreference<C>(pref.getMore(), pref.getLess()));
 		ValuePreference<Criterion>leastPref = new ValuePreference<Criterion> (pref.getLess(), null);
 		ValuePreference<Criterion>MostPref = new ValuePreference<Criterion> (null, pref.getMore());
 		return (model.getPreferences().contains(pref) 
 				||model.getPreferences().contains(MostPref)	
 				||model.getPreferences().contains(leastPref));
-		
+
 	}
 	public boolean isInOther(C less, C more) {
 		ValuePreference<C> p = new ValuePreference<C> (less, more);
-//		Class<? extends Criterion> c =  p.getType();
-//		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
+		//		Class<? extends Criterion> c =  p.getType();
+		//		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
 		return (isIn(this.getOther(), p));
 	}
-	
+
 	public boolean isInself(C less, C more) {
 		ValuePreference<C> p = new ValuePreference<C> (less, more);
 		return (isIn(this.getSelf(), p));
@@ -266,22 +265,22 @@ public class CriterionNegotiation<C extends Criterion> {
 
 	public boolean isInOAS(C less, C more) {
 		ValuePreference<C> p = new ValuePreference<C> (less, more);
-			return (isIn(this.getOas(),p));
-		
+		return (isIn(this.getOas(),p));
+
 	}
 	public boolean isSelfAcceptableCriterion(C c, int dom){
 		if(dom>=0)
 			return isAcceptableCriterion(c, dom, getSelf());
 		else {
-		// if the proposal has already been proposed then accept it in the case of submissive agent
-		//if(this.getOas().getValues())
-		if(this.proposals.contains(c) && this.getOas().containsPrefabout(c))
-			return true;
-		return ( getSelf().getScore(c)>= 0);
+			// if the proposal has already been proposed then accept it in the case of submissive agent
+			//if(this.getOas().getValues())
+			if(this.proposals.contains(c) && this.getOas().containsPrefabout(c))
+				return true;
+			return ( getSelf().getScore(c)>= 0);
 
-		
-	}
-		
+
+		}
+
 	}
 	public boolean isAcceptableCriterion(C c, int dom, CriterionPrefModel<C> model) {
 		//int bestScore = model.getScore(model.getMostPreferred());
@@ -290,41 +289,41 @@ public class CriterionNegotiation<C extends Criterion> {
 		// R
 		if (dom > 0)
 			return (sortedCriteria.indexOf(c)< sortedCriteria.size() *.3);
-		
+
 		else
 			return( proposalScore>= 0 );		
 	}
 	/** take as input a criterion value and returns the agent preference on it
-	  **/
-	
+	 **/
+
 	public Optional<ValuePreference<C>> reactToCriterion(C criterion, List<C> negotiatedCriteria){
 		if(criterion.equals(this.getSelf().getMostPreferred()))
-				if(!isInOAS(null, criterion)|| negotiatedCriteria.contains(criterion))
-			return Optional.of(new ValuePreference<C> (null, criterion));
+			if(!isInOAS(null, criterion)|| negotiatedCriteria.contains(criterion))
+				return Optional.of(new ValuePreference<C> (null, criterion));
 		if(criterion.equals(this.getSelf().getLeastPreferred()))
 			if(!isInOAS(criterion, null)|| negotiatedCriteria.contains(criterion))
-{
-			return Optional.of(new ValuePreference<C> (criterion, null));
+			{
+				return Optional.of(new ValuePreference<C> (criterion, null));
 
-		}
-		else{
-			List<C> criteria = this.getSelf().sortCriteria();
-			for(int i = 0; i<criteria.indexOf(criterion); i++){
-				if(!isInOAS(criterion, criteria.get(i)))
-					return Optional.of(new ValuePreference<C>(criterion, criteria.get(i)));
 			}
-			for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
-				if(!isInOAS(criteria.get(i), criterion))
-					return  Optional.of(new ValuePreference<C>(criteria.get(i), criterion));
-			}
-		}	
+			else{
+				List<C> criteria = this.getSelf().sortCriteria();
+				for(int i = 0; i<criteria.indexOf(criterion); i++){
+					if(!isInOAS(criterion, criteria.get(i)))
+						return Optional.of(new ValuePreference<C>(criterion, criteria.get(i)));
+				}
+				for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
+					if(!isInOAS(criteria.get(i), criterion))
+						return  Optional.of(new ValuePreference<C>(criteria.get(i), criterion));
+				}
+			}	
 		// Everything has been said 
-//		if (getPreference(getSelf(),getOas()) == null){
-//			// Etudier la relation
-//				//return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
-//			return Optional.empty();
-//		}
-		 return Optional.empty();
+		//		if (getPreference(getSelf(),getOas()) == null){
+		//			// Etudier la relation
+		//				//return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
+		//			return Optional.empty();
+		//		}
+		return Optional.empty();
 
 
 	}
@@ -332,7 +331,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public C getMostPreffered() {
 		return this.getSelf().getMostPreferred();
 	}
-	
+
 	public C getLeastPreffered() {
 		return this.getSelf().getLeastPreferred();
 	}

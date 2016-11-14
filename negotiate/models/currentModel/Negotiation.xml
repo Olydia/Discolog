@@ -62,7 +62,7 @@
          <step name="_ProposeCriterion_ref" task="_ProposeCriterion_tree"/>
          <binding slot="$_ProposeCriterion_step.external" value="false"/>
          <binding slot="$_ProposeCriterion_step.proposal"
-                  value="createProposal($introMostPrefValue, true) "/>
+                  value="createProposal($introMostPrefValue, true, $OPEN) "/>
       </subtasks>
    </task>
    <task id="State">
@@ -313,7 +313,8 @@
          <step name="_d4e103_ref" task="_d4e103_tree"/>
          <applicable>canAcceptProposal()</applicable>
          <binding slot="$_d4e103_step.external" value="false"/>
-         <binding slot="$_d4e103_step.proposal" value="lastOpenProposal()"/>
+         <binding slot="$_d4e103_step.proposal"
+                  value="createProposal(lastOpenProposal().getValue(), true, $ACCEPTED)"/>
       </subtasks>
       <subtasks id="_d4e109_subtasks">
          <step name="_d4e109_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -331,7 +332,8 @@
          <step name="_d4e115_ref" task="_d4e115_tree"/>
          <applicable>!isDom() &amp;&amp; !isAcceptable(lastOpenProposal())</applicable>
          <binding slot="$_d4e115_step.external" value="false"/>
-         <binding slot="$_d4e115_step.proposal" value="lastOpenProposal()"/>
+         <binding slot="$_d4e115_step.proposal"
+                  value="createProposal(lastOpenProposal().getValue(), true, $REJECTED)"/>
       </subtasks>
       <subtasks id="_d4e132_subtasks">
          <step name="_d4e132_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -426,7 +428,7 @@
          <applicable>isSub() &amp;&amp; $negotiation.allCriteriaAccepted()</applicable>
          <binding slot="$_d4e141_step.external" value="false"/>
          <binding slot="$_d4e141_step.proposal"
-                  value="createProposal($negotiation.computeAcceptedOption(), true)"/>
+                  value="createProposal($negotiation.computeAcceptedOption(), true, $OPEN)"/>
       </subtasks>
       <subtasks id="_d4e147_subtasks">
          <step name="_d4e147_step" task="n:fr.limsi.negotiate.lang.Propose"/>
@@ -434,7 +436,7 @@
          <applicable>canPropose()</applicable>
          <binding slot="$_d4e147_step.external" value="false"/>
          <binding slot="$_d4e147_step.proposal"
-                  value="createProposal($negotiation.computeAcceptableOptions().get(0), true)"/>
+                  value="createProposal($negotiation.computeAcceptableOptions().get(0), true, $OPEN)"/>
       </subtasks>
       <subtasks id="_d4e164_subtasks">
          <step name="_d4e164_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
@@ -450,7 +452,7 @@
          <applicable>isDom()</applicable>
          <binding slot="$_d4e170_step.external" value="false"/>
          <binding slot="$_d4e170_step.proposal"
-                  value="createProposal(currentMostPreferred(openNewCriterion()), true)"/>
+                  value="createProposal(currentMostPreferred(openNewCriterion()), true, $OPEN)"/>
       </subtasks>
       <subtasks id="_d4e176_subtasks">
          <step name="_d4e176_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -558,7 +560,8 @@
          <step name="_d4e185_ref" task="_d4e185_tree"/>
          <applicable> isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()</applicable>
          <binding slot="$_d4e185_step.external" value="false"/>
-         <binding slot="$_d4e185_step.proposal" value="lastRejectedProposal() "/>
+         <binding slot="$_d4e185_step.proposal"
+                  value="createProposal(lastRejectedProposal().getValue(), true, $OPEN) "/>
       </subtasks>
       <subtasks id="_d4e192_subtasks">
          <step name="_d4e192_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -848,6 +851,9 @@
     $state ="State";
     $ask ="Ask";   
     $negotiation = $disco.getInteraction().getSystem().getNegotiation();
+    $OPEN = Packages.fr.limsi.negotiate.Proposal.Status.OPEN;
+    var $REJECTED = Packages.fr.limsi.negotiate.Proposal.Status.REJECTED;
+    var $ACCEPTED = Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED;
     // *********  restaurant criteria *********
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
    	$cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
@@ -887,7 +893,7 @@
 	}
 	
 	function isMaxProp(){
-		return ($negotiation.getContext().getCmpProposal()&gt;= 2)
+		return ($negotiation.getContext().isMaxProposals(true))
 	}
 	
     function currentMostPreferred(criterion) {
@@ -923,7 +929,7 @@
     	
     	if(isAcceptable(lastOpenProposal()) &amp;&amp; isCriterionProposal(lastOpenProposal())){
     		//ComputeOptionProposalWithValue
-    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true);
+    		return createProposal($negotiation.computeAcceptedOption(lastOpenProposal().getValue()), true, $OPEN);
     	}
     
     }
@@ -1032,13 +1038,19 @@
 	}
 	
 	
+	function createProposal(value, isSelf, status) {
+	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
+		if(value == null)
+			return null;
+		return $negotiation.createProposal(value,isSelf,status);
+	}
+	
 	function createProposal(value, isSelf) {
 	// Enlever le  il doit etre uniquement specifier dans la maj de l'etat mental
 		if(value == null)
 			return null;
 		return $negotiation.createProposal(value,isSelf);
 	}
-	
 	function proposalFromPreference(preference, isSelf) {
 			if (preference == null)
 				return null;

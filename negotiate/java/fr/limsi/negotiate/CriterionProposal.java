@@ -9,7 +9,8 @@ public class CriterionProposal extends Proposal {
 
 	@Override
 	public String toString() {
-		return criterion.toString()/*+ " isSelf: "+ isSelf*/;
+		return criterion.toString()/*+ " isSelf: "+ isSelf
+				+ "Status: "+status*/;
 	}
 
 	public final Criterion criterion;

@@ -318,7 +318,7 @@ public class InitiaterestauMentalState {
 	public static void printOptions(Negotiation<Restaurant> n, int relation){
 		List<Option> options =	(Arrays.asList(n.getOptions()));
 		for(Option o: options)
-			System.out.println(n.isAcceptableOption(o, relation));
+			System.out.println(n.isAcceptableOption(o));
 	}
 //	public static void main (String[] args) {
 //		InitiaterestauMentalState model = new InitiaterestauMentalState();
