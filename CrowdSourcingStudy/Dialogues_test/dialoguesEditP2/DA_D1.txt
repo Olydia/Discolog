@@ -1,0 +1,25 @@
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "Let's go to a lively restaurant."
+  > next
+    Agent2 says "Sorry,I cannot go to this restaurant because I don't like lively restaurants."
+  > next
+    Agent1 says "Let's go to a lively restaurant."
+  > next
+    Agent2 says "Do you like Chinese restaurants?"
+  > next
+    Agent1 says "I like Italian more than Chinese restaurants."
+  > next
+    Agent2 says "I like Chinese restaurants."
+  > next
+    Agent1 says "Let's go to a French restaurant."
+  > next
+    Agent2 says "Okay."
+  > next
+    Agent1 says "Let's go to the Gramophone restaurant. It's a lively, expensive French restaurant."
+  > next
+    Agent2 says "Okay. Let's go to the Gramophone restaurant."
+  > next
+    Agent1 says "Okay, I'll call to book a table."

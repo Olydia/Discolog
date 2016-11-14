@@ -1,0 +1,37 @@
+    # Writing log to C:\Users\PC\AppData\Local\Temp\Console2.test...
+    # 14 nov. 2016 23:05:17 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "Let's go to a Chinese restaurant."
+  > next
+    Agent2 says "Sorry,I cannot go to this restaurant because I don't like Chinese restaurants."
+  > next
+    Agent1 says "Let's go to a Chinese restaurant."
+  > next
+    Agent2 says "Do you like lively restaurants?"
+  > next
+    Agent1 says "I don't like lively restaurants."
+  > next
+    Agent2 says "I like lively restaurants."
+  > next
+    Agent1 says "Let's go to a quiet restaurant."
+  > next
+    Agent2 says "Do you like expensive restaurants?"
+  > next
+    Agent1 says "I don't like expensive restaurants."
+  > next
+    Agent2 says "I like expensive restaurants."
+  > next
+    Agent1 says "Let's go to a cheap restaurant."
+  > next
+    Agent2 says "Okay."
+  > next
+    Agent1 says "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
+  > next
+    Agent2 says "Okay. Let's go to the Dragon restaurant."
+  > next
+    Agent1 says "Okay, I'll call to book a table."
