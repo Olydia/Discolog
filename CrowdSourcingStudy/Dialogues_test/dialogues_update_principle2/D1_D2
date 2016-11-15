@@ -1,0 +1,21 @@
+Agent1 says "Let's go to a Chinese restaurant."
+
+	Agent2 says "Sorry,I cannot go to this restaurant because I don't like Chinese restaurants."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+	Agent2 says "Sorry,I cannot go to this restaurant because I don't like Chinese restaurants."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+	Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I like quiet more than lively restaurants."
+
+	Agent2 says "Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Mizushi restaurant. It's a quiet, cheap Japanese restaurant."
+
+	Agent2 says "Okay. Let's go to the Mizushi restaurant."
+
+Agent1 says "Okay, I'll call to book a table."

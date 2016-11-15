@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Stack;
+
+import org.omg.Messaging.SyncScopeHelper;
+
 import fr.limsi.negotiate.Proposal.Status;
 
 public class DialogueContext {
@@ -11,7 +14,7 @@ public class DialogueContext {
 	private List <PreferenceStatement> listStatements;
 	private ArrayList<Class<? extends Criterion>> discussedCriteria ;
 	public Class<? extends Criterion> currentDiscussedCriterion; 	
-	private Stack<Proposal> proposals;
+	private ArrayList<Proposal> proposals;
 	private List<Statement> history;
 	private int cmpState = 0;
 
@@ -40,12 +43,15 @@ public class DialogueContext {
 		return (cpt>=1);
 
 	}
+	public void setProposals(ArrayList<Proposal> proposals) {
+		this.proposals = proposals;
+	}
 
 	public DialogueContext() {
 		this.listStatements =new ArrayList<PreferenceStatement>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		//this.currentDiscussedCriterion = Cuisine.class;
-		this.proposals = new Stack<Proposal>();
+		this.proposals = new ArrayList<Proposal>();
 		this.history = new ArrayList<Statement>();
 		// communicatedProposal values attributions: oas: true / other: false
 
@@ -132,7 +138,7 @@ public class DialogueContext {
 	//		return null;
 	//	}
 
-	public Stack<Proposal> getProposals() {
+	public ArrayList<Proposal> getProposals() {
 		return proposals;
 	}
 	public List<Proposal> getProposals(Status status){
@@ -151,8 +157,7 @@ public class DialogueContext {
 		//			else 
 		//				setCmpProposal(0);
 		//		}
-		this.proposals.push(proposal);
-
+		this.proposals.add(proposal);
 	}
 
 	public Proposal getLastProposal(Status status) {
@@ -168,7 +173,6 @@ public class DialogueContext {
 		for(int i= proposals.size()-1; i>=0; i --){
 			if(proposals.get(i) instanceof CriterionProposal && proposals.get(i).getStatus().toString().equals(status))
 				return proposals.get(i);
-
 		}
 		return null;
 	}

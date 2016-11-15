@@ -20,7 +20,7 @@ public class Negotiation<O extends Option> {
 	public Class<O> type; 
 
 
-	
+
 	public Negotiation (CriterionNegotiation<Criterion>[] criteriaNegotiation, 
 			CriteriaClassPrefModel<O> criteriaPreferences) {
 		this.criteriaNegotiation = Arrays.asList(criteriaNegotiation);
@@ -33,7 +33,7 @@ public class Negotiation<O extends Option> {
 	public  void initiateNegotiation (int dominance, int maxTurn){
 		setDom(dominance);
 		setMaxTurns(maxTurn);
-		
+
 	}
 	public int getDom() {
 		return dom;
@@ -57,8 +57,10 @@ public class Negotiation<O extends Option> {
 
 	public void propose (OptionProposal proposal) { 
 		if(!proposals.contains(proposal))
-			proposals.add(proposal); 
-		updateProposal(proposal, Status.OPEN);}
+			proposals.add(proposal);
+		else
+			updateProposal(proposal);
+	}
 
 	public Option[] getOptions(){
 		return (type.getEnumConstants()); 
@@ -86,6 +88,32 @@ public class Negotiation<O extends Option> {
 				pStatus.add(p.getValue());
 		}
 		return pStatus;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Proposal> getProposalsWithStatus(Status status){
+		List<Proposal> prop =new ArrayList<Proposal>();
+		for(CriterionNegotiation<Criterion> c: this.criteriaNegotiation){
+			prop.addAll((Collection<? extends Proposal>) c.getProposals(status));
+		}
+		for (OptionProposal p: proposals){
+			if (p.getStatus().equals(status))
+				prop.add(p);
+		}
+		return prop;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Proposal> getProposalsWithoutStatus(Status status){
+		List<Proposal> prop =new ArrayList<Proposal>();
+		for(CriterionNegotiation<Criterion> c: this.criteriaNegotiation){
+			prop.addAll((Collection<? extends Proposal>) c.getProposalswithoutStatus(status));
+		}
+		for (OptionProposal p: proposals){
+			if (!p.getStatus().equals(status))
+				prop.add(p);
+		}
+		return prop;
 	}
 
 	public CriterionNegotiation<Criterion> getCriterionNegotiation(Class<? extends Criterion> c){
@@ -118,18 +146,18 @@ public class Negotiation<O extends Option> {
 		for (Class<? extends Criterion> elem: nonAccepted)
 			if(this.statedValues(elem))
 				return elem;
-	
+
 		return null;
 	}
 
 	public int optionUtility (Option option){
 		int Utility = 0;
-		int spokenTurns = this.context.getSpeakerStatements(false).size();
+		int spokenTurns = getProposalsWithoutStatus(Status.ACCEPTED).size();
 		List<Class<? extends Criterion>> priorCriteria = this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
 		for (Class<? extends Criterion> c:priorCriteria ){
 			// get the criterion rank 
 			int rank = criteriaPreferences.getRank(c);
-			
+
 			// get the type of the criterion
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(c);
 			Utility += rank * criterion.getSelf().getScore(option.getValue(c));
@@ -139,10 +167,6 @@ public class Negotiation<O extends Option> {
 
 	public Criterion leastScoredCriterion (O option){
 		ArrayList<Criterion> nonAcceptedCriteria = new ArrayList<Criterion> ();
-		// initialiser la valeur de minUtility
-		//		Class<? extends Critsterion leastScored = option.getValue(min);
-		//		int minUtility = criteriaPreferences.getRank(min) * 
-		//				getCriterionNegotiation(min).getSelf().getScore(option.getValue(min));
 
 		for (Class<? extends Criterion> cr: option.getCriteria()){
 			CriterionNegotiation<Criterion> criterion = getCriterionNegotiation(cr);
@@ -163,11 +187,11 @@ public class Negotiation<O extends Option> {
 
 	// Methods of the mental state
 
-	public void updateProposal(OptionProposal proposal, Status status){
+	public void updateProposal(OptionProposal proposal){
 		for(OptionProposal c: proposals){
 			if(proposal.getValue().equals(c.getValue())) {
-				c.setStatus(status);
-				//c.setIsSelf(value);
+				int index = proposals.indexOf(c);
+				proposals.set(index, proposal);
 			}
 		}
 	}
@@ -234,13 +258,13 @@ public class Negotiation<O extends Option> {
 
 	}
 	public boolean isAcceptable (Proposal proposal){
-		int spokenTurns = this.context.getSpeakerStatements(false).size();
+		int spokenTurns = getProposalsWithoutStatus(Status.ACCEPTED).size();
 		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			if(!importantCriteria.contains(criterion.getClass()))
-					return true;
-			
+				return true;
+
 			CriterionNegotiation<Criterion> criterionNegotiation =	
 					getCriterionNegotiation(criterion);
 			boolean value = criterionNegotiation.
@@ -345,7 +369,7 @@ public class Negotiation<O extends Option> {
 	}
 
 
-	public void updateProposalStatus(Proposal proposal, Status status) {
+	public void updateProposal(Proposal proposal) {
 		// update the dialogue context
 		if (proposal instanceof CriterionProposal) {
 			CriterionNegotiation<Criterion> criterionNegotiation = 
@@ -353,10 +377,10 @@ public class Negotiation<O extends Option> {
 			// get the index of the criterionNegotiation of type
 			int indexList = criteriaNegotiation.indexOf(criterionNegotiation);
 			criteriaNegotiation.get(indexList).
-			updateProposal((CriterionProposal) proposal, status);		
+			updateProposal((CriterionProposal) proposal);		
 		}
 		if(proposal instanceof OptionProposal){
-			updateProposal((OptionProposal)proposal, status);
+			updateProposal((OptionProposal)proposal);
 		}
 	}
 
@@ -473,13 +497,13 @@ public class Negotiation<O extends Option> {
 
 	public ValuePreference<Criterion> askUserPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
-//		if (model.getOther().getPreferences().isEmpty())
-//			return new ValuePreference<Criterion>(null, null);
-//		else {
-			for(ValuePreference<Criterion> pref :model.getSelectedPreferences(model.getSelf(),model.getOther())){
-				if(!model.isIn(model.getOas(), pref))
-					return pref;
-			}
+		//		if (model.getOther().getPreferences().isEmpty())
+		//			return new ValuePreference<Criterion>(null, null);
+		//		else {
+		for(ValuePreference<Criterion> pref :model.getSelectedPreferences(model.getSelf(),model.getOther())){
+			if(!model.isIn(model.getOas(), pref))
+				return pref;
+		}
 		//}
 		return (model.getSelectedPreferences(model.getSelf(),model.getOther())).get(0);
 	}
@@ -676,7 +700,7 @@ public class Negotiation<O extends Option> {
 		}
 		return acceptedCriteria;
 	}
-	
+
 	/**
 	 * computes an option defined with a criterion c 
 	 * from the list of acceptable options. 
@@ -691,7 +715,7 @@ public class Negotiation<O extends Option> {
 		}
 		return accepted.get(0);
 	}
-	
+
 	/**
 	 * computeAcceptedOption computes from the list of accepted values during the negotiation
 	 * an option that contains all the accepted values 
@@ -820,7 +844,7 @@ public class Negotiation<O extends Option> {
 		}
 		return false;
 	}
-	
+
 	public Proposal computeProposal (){
 		CriterionNegotiation<Criterion> cr = getCriterionNegotiation(
 				getContext().getCurrentDiscussedCriterion());

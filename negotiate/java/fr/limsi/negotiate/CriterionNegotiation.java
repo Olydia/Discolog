@@ -163,7 +163,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		if(! proposals.contains(proposal))
 			proposals.add(proposal);
 		else 
-			updateProposal(proposal, Status.OPEN);}
+			updateProposal(proposal);}
 
 	public void setSelfPreferences(CriterionPrefModel<C> selfPref) {
 		setSelf(selfPref);
@@ -219,6 +219,14 @@ public class CriterionNegotiation<C extends Criterion> {
 		return prop;
 	}
 
+	public List<Criterion> getProposalswithoutStatus (Status status){
+		List<Criterion> prop = new ArrayList<Criterion>();
+		for (CriterionProposal p: proposals){
+			if(!p.getStatus().equals(status))
+				prop.add(p.getValue());
+		}
+		return prop;
+	}
 	public void printMentalState() {
 		System.out.println(" **** SELF preferences *** \n \n");
 		System.out.println(self);
@@ -232,12 +240,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 
 
-	public void updateProposal(CriterionProposal proposal, Proposal.Status status){
+	public void updateProposal(CriterionProposal proposal){
 
 		for(CriterionProposal c: proposals){
-			if(proposal.getValue().equals(c.getValue())) {
-				c.setStatus(status);
-				c.setIsSelf(proposal.isSelf);
+			if(proposal.getValue().equals(c.getValue())){
+				int index = proposals.indexOf(c);
+				proposals.set(index, proposal);
+
 			}	
 		}
 	}

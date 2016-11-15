@@ -1,0 +1,25 @@
+Agent1 says "Let's go to a quiet restaurant."
+
+	Agent2 says "Okay."
+
+Agent1 says "Let's go to the Parisien restaurant. It's a quiet, expensive French restaurant."
+
+	Agent2 says "Sorry,I cannot go to this restaurant because I don't like expensive restaurants."
+
+Agent1 says "Let's go to the Parisien restaurant. It's a quiet, expensive French restaurant."
+
+	Agent2 says "Sorry,I cannot go to this restaurant because I don't like expensive restaurants."
+
+Agent1 says "Let's go to the Parisien restaurant. It's a quiet, expensive French restaurant."
+
+	Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I like French more than Chinese restaurants."
+
+	Agent2 says "Let's go to a French restaurant."
+
+Agent1 says "Let's go to the Victor restaurant. It's a quiet, cheap French restaurant."
+
+	Agent2 says "Okay. Let's go to the Victor restaurant."
+
+

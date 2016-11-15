@@ -41,8 +41,8 @@ public class InitiaterestauMentalState {
 				//1.4. Define the  preferences on Restaurant criteria 
 				CriteriaClassPrefModel<Restaurant> d1_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 				d1_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
-				d1_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
 				d1_criteria.add(new CriterionPreference(Ambiance.class, Cost.class));
+				d1_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
 
 				///2. Define the agent mental state on each criterion (self pref, user pref, proposals) 		
 				CriterionNegotiation<Cost> cost = new CriterionNegotiation<Cost>(Cost.class);
