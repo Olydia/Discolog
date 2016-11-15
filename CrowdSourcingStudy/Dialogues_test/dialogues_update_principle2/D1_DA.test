@@ -1,0 +1,34 @@
+    Agent1 says "Let's go to a Chinese restaurant."
+
+    Agent2 says "Sorry,I cannot go to this restaurant because I don't like Chinese restaurants."
+
+    Agent1 says "Let's go to a Chinese restaurant."
+
+    Agent2 says "Do you like lively restaurants?"
+
+# After the second proposal the submissive agent don't reject the proposal. Instead, he collects more information about other preferences
+
+    Agent1 says "I don't like lively restaurants."
+
+    Agent2 says "I like lively restaurants."
+
+    Agent1 says "Let's go to a quiet restaurant."
+
+    Agent2 says "Do you like expensive restaurants?"
+
+    Agent1 says "I don't like expensive restaurants."
+
+    Agent2 says "I like expensive restaurants."
+
+    Agent1 says "Let's go to a cheap restaurant."
+
+    Agent2 says "Okay."
+
+# At this level only the criterion Ambiance is important for agent 2.
+
+    Agent1 says "Let's go to the Jiliya restaurant. It's a quiet, cheap Chinese restaurant."
+
+    Agent2 says "Okay. Let's go to the Jiliya restaurant."
+
+    Agent1 says "Okay, I'll call to book a table."
+
