@@ -26,20 +26,17 @@ public class DialogueContext {
 	 * @return if the max of proposals defined to minimum 2 is reached
 	 */
 	public boolean isMaxProposals(boolean external) {
-		List<Statement> speaker = getSpeakerStatements(external);
 		int cpt = 0;
-		if(speaker.size()<2)
+		if(history.size()<=2)
 			return false;
 		else{
-			for(int i=speaker.size()-1; i>0; i--){
-				if(speaker.get(i).getUtteranceType().equals("Propose")&&
-					speaker.get(i-1).getUtteranceType().equals("Propose"))
-					cpt++;
-				else
-					cpt =0;
-					
+			int i=history.size()-1;
+			if(history.get(i).getUtteranceType().equals("Propose")&&
+					!history.get(i-1).getUtteranceType().equals("Accept")&&
+					history.get(i-2).getUtteranceType().equals("Propose"))
+				cpt++;		
 			}
-		}
+		
 		return (cpt>=1);
 
 	}

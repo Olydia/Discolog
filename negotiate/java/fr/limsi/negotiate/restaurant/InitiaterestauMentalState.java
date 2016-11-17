@@ -14,9 +14,9 @@ public class InitiaterestauMentalState {
 				// 1.1. Preference model on cuisine
 				CriterionPrefModel<Cuisine> d1_cuisine = new CriterionPrefModel<Cuisine>();
 				d1_cuisine.setType(Cuisine.class);
-				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.CHINESE));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.KOREAN, Cuisine.CHINESE));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.CHINESE));
-				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.COREAN));
+				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.FRENCH, Cuisine.KOREAN));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.JAPANESE));
 				d1_cuisine.add(new ValuePreference<Cuisine>(Cuisine.MIXICAN, Cuisine.TURKISH));
@@ -67,8 +67,8 @@ public class InitiaterestauMentalState {
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.TURKISH, Cuisine.FRENCH));
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.ITALIAN, Cuisine.FRENCH));
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.MIXICAN, Cuisine.ITALIAN));
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.MIXICAN));
-		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.COREAN, Cuisine.TURKISH));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.KOREAN, Cuisine.MIXICAN));
+		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.KOREAN, Cuisine.TURKISH));
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.CHINESE, Cuisine.TURKISH));
 		user_cuisine.add(new ValuePreference<Cuisine>(Cuisine.JAPANESE, Cuisine.MIXICAN));
 
