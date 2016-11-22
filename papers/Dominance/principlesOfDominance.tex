@@ -1,0 +1,99 @@
+	\documentclass{llncs}
+	\usepackage[noend]{algpseudocode}
+	\usepackage{subcaption}
+	\usepackage{subfig} 
+	\usepackage{usual}
+	\usepackage{amsmath}
+	\usepackage{graphicx}
+	\usepackage{eulervm}
+	\usepackage{fontenc}
+	\usepackage{mathrsfs}
+	\usepackage{multirow}
+	\usepackage{array}
+	\usepackage[rflt]{floatflt}
+	\usepackage{makecell}
+	
+	\renewcommand\theadalign{cb}
+	\renewcommand\theadfont{\bfseries}
+	\renewcommand\theadgape{\Gape[4pt]}
+	\renewcommand\cellgape{\Gape[4pt]}
+	%\pagestyle{plain}
+	%
+	\begin{document}
+	\title{\vskip -10pt}
+	
+	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
+	Nicolas Sabouret\inst{1} }
+	
+	\institute{LIMSI-CNRS, UPR 3251, Orsay, France \\
+	Universit\'e Paris-Sud, Orsay, France \\
+	\email{\{ouldouali, nicolas.sabouret\}@limsi.fr}
+	\and
+	Worcester Polytechnic Institute\\ Worcester, Massachusetts, USA\\
+	\email{rich@wpi.edu}
+	}
+	\maketitle 
+	\begin{abstract}\vskip -20pt
+	  
+	\end{abstract}
+	
+\section{Principle of dominance in negotiation}
+\par Dominance as a property of interpersonal relationship is defined as the power to produce intended effects, and the ability to influence the behavior of other person in the conversation. (BBurgoon et al.,1998).
+Moreover, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.(Rogers-Millar and Millar, 1979,Dunba and Burgoon, 2005). 
+
+\par Such behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contribution may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified (K,Zablotskaya). Giving these contributions to the conversation, several researches get interested to detect  behaviors related to the dominance during the conversation. In our work, we focus essentially on the context of conversations of negotiation, where several researches already proved the impact of dominance on the negotiation(VAN KLEEF, 2005, De Dreu, 1995). 
+
+\par Scholars of social psychology dedicated to the negotiation, already proved that the relation of dominance impact negotiators strategies in different ways. We distinguish these behaviors in two main categories or principles.
+\subsection{Principle 2: Self Vs Other}
+In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
+\begin{itemize}
+	\item Dominant negotiators show a higher level of demands than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
+	\item Submissive negotiators give a lower level of demand to low priority issues.
+	\item Submissive negotiator consider well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being. This concerns also decision making in the negotiation. 
+\end{itemize}  
+
+\subsection{Implementation}
+\begin{enumerate}
+	\item Dominant negotiators show a higher level of demands than the submissive ones.
+	
+	We propose to have a parameter $\alpha$ to compute the level of acceptability
+	
+	$\alpha = \{ 1/4$ if dominant, $1/2$ if peer or submissive$\}$ 
+	
+	\item In addition, submissive negotiator's demand decrease over time. 
+	
+	$ \alpha$ increases over the negotiation if submissive
+	
+	\item Submissive negotiators give a lower level of demand to low priority issues.
+	
+	We propose to have a parameter $\beta$ to ignore low ranked criteria 
+	
+	$\beta = n/2$ if submissive, $0$ otherwise
+\end{enumerate}
+
+Concretely, let $o$ be an option of the form $(v_1,\ldots,v_n)$ for criteria $(c_1,\ldots,c_n)$. We compute:
+\begin{itemize}
+	\item $value(o) = \sum_i rank_\beta(c_i)\times score(v_i)$
+	
+	with $rank_\beta(c_i)\in[1,n]$ as follows:
+	
+	let $rank(c_i)\in[1,n]$ the position of $c_i$ in the ascending list of $c_i$ (1 for the least important criteria, $n$ for the most important), based on the list of preferences. Then, $rank_\beta(c_i)\in[0,n] = 0$ if $rank(c_i)\leq \beta$, $rank(c_i)$ otherwise.
+	
+	\item $acceptable(o) = true$ iff $o$ is in the $\alpha$ upper part of the list of options sorted by descending $value(o)$.
+\end{itemize}
+
+ADD AN EXAMPLE
+
+Now, for criteria values only, we define $acceptable(v)$ as: $true$ if $rank_\beta(c)=0$, $true$ if $v$ is in the $\alpha$ upper part of the list of options sorted by descending $score(v)$, $false$ otherwise
+
+
+ADD AN EXAMPLE
+
+\subsection{Principle1: Lead of the negotiation}
+\begin{itemize}
+	\item powerful negotiators tend to make the first move.
+\end{itemize}  	
+	\vskip 4pt
+	\bibliographystyle{plain}
+	\bibliography{abbrevs,Library}
+	\end{document}
