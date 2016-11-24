@@ -44,29 +44,34 @@ Moreover, in the context of communication, dominance is a dyadic variable where 
 \par Such behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contribution may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified (K,Zablotskaya). Giving these contributions to the conversation, several researches get interested to detect  behaviors related to the dominance during the conversation. In our work, we focus essentially on the context of conversations of negotiation, where several researches already proved the impact of dominance on the negotiation(VAN KLEEF, 2005, De Dreu, 1995). 
 
 \par Scholars of social psychology dedicated to the negotiation, already proved that the relation of dominance impact negotiators strategies in different ways. We distinguish these behaviors in two main categories or principles.
+
 \subsection{Principle 2: Self Vs Other}
-In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
-\begin{itemize}
-	\item Dominant negotiators show a higher level of demands than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
-	\item Submissive negotiators give a lower level of demand to low priority issues.
-	\item Submissive negotiator consider well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being. This concerns also decision making in the negotiation. 
-\end{itemize}  
+In DeDreu works, Submissive negotiator consider well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being. 
+
+
+=> w_self * score_s(u) + w_other * score_s(u)
+
+score \in [0,1]
+
+\section{Principle 1}
+
+=> revoir pour coder deux parties : 1) choix du type , 2) choix du renoncement ?
 
 \subsection{Implementation}
 \begin{enumerate}
 	\item Dominant negotiators show a higher level of demands than the submissive ones.
 	
-	We propose to have a parameter $\alpha$ to compute the level of acceptability
+	We propose to define a parameter $\alpha$ to compute the level of acceptability
 	
 	$\alpha = \{ 1/4$ if dominant, $1/2$ if peer or submissive$\}$ 
 	
 	\item In addition, submissive negotiator's demand decrease over time. 
 	
-	$ \alpha$ increases over the negotiation if submissive
+	$ \alpha$ increases over the negotiation if submissive, which means that the range of acceptable values increase over time.
 	
 	\item Submissive negotiators give a lower level of demand to low priority issues.
 	
-	We propose to have a parameter $\beta$ to ignore low ranked criteria 
+	We propose to define a parameter $\beta$ to ignore low ranked criteria 
 	
 	$\beta = n/2$ if submissive, $0$ otherwise
 \end{enumerate}
@@ -80,20 +85,74 @@ Concretely, let $o$ be an option of the form $(v_1,\ldots,v_n)$ for criteria $(c
 	let $rank(c_i)\in[1,n]$ the position of $c_i$ in the ascending list of $c_i$ (1 for the least important criteria, $n$ for the most important), based on the list of preferences. Then, $rank_\beta(c_i)\in[0,n] = 0$ if $rank(c_i)\leq \beta$, $rank(c_i)$ otherwise.
 	
 	\item $acceptable(o) = true$ iff $o$ is in the $\alpha$ upper part of the list of options sorted by descending $value(o)$.
+	\item For the change of $\alpha$ over time, we propose a simple linear function: after $nb\_min$ proposals, the agent will increase $\alpha$ every $nb\_new$ proposals, in a manner that it reaches $1$ after $nb\_criteria$ increments, where $nb\_criteria = |C|$ is the number possible criteria in the negotiation.
+	
+	This leads to the following formula, with $n$ the current number of proposals in the dialogue:
+	$$\alpha(n) = \alpha + (1-\alpha)\times\frac{max(0,\frac{n-nb\_min}{nb\_new})}{nb\_criteria}$$
 \end{itemize}
 
-ADD AN EXAMPLE
-
-Now, for criteria values only, we define $acceptable(v)$ as: $true$ if $rank_\beta(c)=0$, $true$ if $v$ is in the $\alpha$ upper part of the list of options sorted by descending $score(v)$, $false$ otherwise
-
-
-ADD AN EXAMPLE
-
-\subsection{Principle1: Lead of the negotiation}
+\par For example, consider, four restaurants with the following values:
 \begin{itemize}
-	\item powerful negotiators tend to make the first move.
-\end{itemize}  	
-	\vskip 4pt
-	\bibliographystyle{plain}
-	\bibliography{abbrevs,Library}
-	\end{document}
+	\item	Dragon = Quiet, cheap, Chinese restaurant.
+	\item	CASA = Quiet, cheap, Italian restaurant.
+	\item	Salento = Lively, expensive, Italian restaurant.
+	\item   Jiliya = Lively, cheap Chinese restaurant.
+\end{itemize}
+
+The preference model contains the list of ranked preferences $C = \{Cost, Ambiance, Cuisine\}$. Each criterion is defined with preferences for its domain values: $ Cost = \{P(Cheap, Expensive)\}$ (which means that Cheap is less preferred than Expensive), $Ambiance= \{P(Lively, Quiet)\}$, and $Cuisine= \{P(Chinese, Italian)\}$.
+
+In order to calculate the acceptability of the restaurants above, we use the function $acceptable(o)$, for both the relation of dominant and submissive. We first compute the value of each option:
+\begin{itemize}
+	\item \emph{Dominant:}	Value(Dragon) = 2 $\times$ 1 + 1 $\times$ -1 + 3 $\times$-1 = -2
+	\\ \emph{Submissive:} Value(Dragon) = 2 $\times$ 1 + 0 + 3 $\times$-1 = -1
+	
+	\item \emph{Dominant:}	Value(Casa) = 2 $\times$ 1 + 1 $\times$ -1 + 3 $\times$1 = 4
+	\\ \emph{Submissive:} Value(Dragon) = 2 $\times$ 1 + 0 + 3 $\times$ 1 = 5
+	
+	 \emph{Dominant:}	Value(Salento) = 2 $\times$ -1 + 1 $\times$ 1 + 3 $\times$ 1 = 2
+	 \\ \emph{Submissive:} Value(Salento) = 2 $\times$ -1 + 0 + 3 $\times$ 1 = 1
+	 
+	\item \emph{Dominant:}	Value(Jiliya) = 2 $\times$ -1 + 1 $\times$ -1 + 3 $\times$-1 = -6
+	\\ \emph{Submissive:} Value(Jiliya) = 2 $\times$ -1 + 0 + 3 $\times$-1 = -5
+\end{itemize}
+We obtain the ordered list of preferences on options (i.e the same for both relations dominant vs submissive) $option$ = {Casa, Salento, Dragon, Jiliya}.
+
+Therefore, with  the function $acceptable(o)$, we can compute the acceptable restaurants from the list $options$. $Acceptables_{Restaurant}(Dominant) = \{$Casa$\}.$ If dominant, only Casa restaurant is an acceptable restaurant. While, if submissive $Acceptables_{Restaurant}(submissive) = \{$Casa, Salento$\}.$ With this toy example, wa can show that dominant negotiators in our model are more demanding than submissive one.
+
+
+Now, for criteria values only, we define $acceptable(v)$ as: $true$ if $rank_\beta(c)=0$, $true$ if $v$ is in the $\alpha$ upper part of the list of criterion values sorted by descending $score(v)$, $false$ otherwise.
+
+\par For example, suppose the following list of preferences $ Cost = \{$P(Cheap, Expensive), P(Affordable, Expensive )$\}$.
+We obtain the sorted list of scores for each value of cuisine   $Cost{Scores}= \{Expensive=2; Affordable= -1; Cheap= -1;\}$.
+We can compute the acceptable values for the criteria cuisine with the function $acceptable(v)$ presented above. 
+For the submissive agent, because the criterion $Cost$ isn't important, all its values are acceptable: $Acceptables_{Cost}(submissive) = \{$Expensive, Affordable, Cheap$\}.$. However, for the dominant agent, the list of acceptable values is as follow: $Acceptables_{Cost}(submissive) = \{$Expensive$\}.$.
+
+\section{Principle: Lead of the negotiation}
+
+In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
+\begin{itemize}
+	\item Dominant negotiators show a higher level of demands than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
+	\item Submissive negotiators give a lower level of demand to low priority issues.
+\end{itemize} 
+
+\begin{itemize}
+	\item Powerful negotiators tend to make the first move.
+	
+	$\rightarrow$ The dominant agent always starts the dialogue
+	
+	\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
+		
+	$\rightarrow$ when receiving an acceptable proposal, if there still are better non-rejected proposals, the dominant agent should make a counter-propose first.
+	
+	\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+	
+	$\rightarrow$ the dominant agent makes proposals, the submissive one makes asks, the peer agent should do both. To this purpose, we define a parameter $max\_stated$ that is the minimum of information required before making a proposal.\footnote{In addition, agents always propose if the agent states that a value is acceptable and it is also acceptable for itself} Moreover, a submissive agent will only make a propose if it knows an acceptable value for each criteria.
+\end{itemize} 
+
+
+% BIBLIO %
+
+\vskip 4pt
+\bibliographystyle{plain}
+\bibliography{abbrevs,Library}
+\end{document}

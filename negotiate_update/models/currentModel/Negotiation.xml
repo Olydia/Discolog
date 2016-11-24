@@ -160,8 +160,8 @@
          <step name="_d4e72_ref" task="_d4e72_tree"/>
          <applicable>$negotiation.statedValues(currentDiscussedCriterion()) </applicable>
          <binding slot="$_d4e72_step.external" value="false"/>
-         <binding slot="$_d4e72_step.less" value="reactUser($state).getLess()"/>
-         <binding slot="$_d4e72_step.more" value="reactUser($state).getMore()"/>
+         <binding slot="$_d4e72_step.value" value="reactUser($state).getStatedValue()"/>
+         <binding slot="$_d4e72_step.likable" value="reactUser($state).getIsLikable()"/>
       </subtasks>
       <subtasks id="_d4e79_subtasks">
          <step name="_d4e79_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
@@ -177,8 +177,8 @@
          <step name="_d4e85_ref" task="_d4e85_tree"/>
          <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
          <binding slot="$_d4e85_step.external" value="false"/>
-         <binding slot="$_d4e85_step.less" value="getPreference(openNewCriterion()).getLess()"/>
-         <binding slot="$_d4e85_step.more" value="getPreference(openNewCriterion()).getMore()"/>
+         <binding slot="$_d4e85_step.value" value="getStatement(openNewCriterion())"/>
+         <binding slot="$_d4e85_step.likable" value="isLikable(getStatement(openNewCriterion()))"/>
       </subtasks>
    </task>
    <task id="_d4e60_tree">
@@ -276,8 +276,8 @@
          <step name="_d4e93_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e93_ref" task="_d4e93_tree"/>
          <binding slot="$_d4e93_step.external" value="false"/>
-         <binding slot="$_d4e93_step.less" value="$negotiation.reactAsk().getLess()"/>
-         <binding slot="$_d4e93_step.more" value="$negotiation.reactAsk().getMore()"/>
+         <binding slot="$_d4e93_step.value" value="negotiation.reactAsk().getStatedValue()"/>
+         <binding slot="$_d4e93_step.likable" value="negotiation.reactAsk().getIsLikable()"/>
       </subtasks>
    </task>
    <task id="_d4e93_tree">
@@ -321,11 +321,12 @@
          <step name="_d4e109_ref" task="_d4e109_tree"/>
          <applicable>isSub() &amp;&amp; isMaxProp()</applicable>
          <binding slot="$_d4e109_step.external" value="false"/>
-         <binding slot="$_d4e109_step.criterion" value="openNewCriterion()"/>
+         <binding slot="$_d4e109_step.criterion"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getType()"/>
          <binding slot="$_d4e109_step.less"
-                  value="$negotiation.askUserPreference(getDiscussedCriterion()).getLess()"/>
+                  value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"/>
          <binding slot="$_d4e109_step.more"
-                  value="$negotiation.askUserPreference(getDiscussedCriterion()).getMore()"/>
+                  value="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"/>
       </subtasks>
       <subtasks id="_d4e115_subtasks">
          <step name="_d4e115_step" task="n:fr.limsi.negotiate.lang.Reject"/>
@@ -335,12 +336,12 @@
          <binding slot="$_d4e115_step.proposal"
                   value="createProposal(lastOpenProposal().getValue(), true, $REJECTED)"/>
       </subtasks>
-      <subtasks id="_d4e132_subtasks">
-         <step name="_d4e132_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e132_ref" task="_d4e132_tree"/>
+      <subtasks id="_d4e121_subtasks">
+         <step name="_d4e121_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e121_ref" task="_d4e121_tree"/>
          <applicable>isDom()</applicable>
-         <binding slot="$_d4e132_step.external" value="false"/>
-         <binding slot="$_d4e132_step.proposal" value="counterPropose()"/>
+         <binding slot="$_d4e121_step.external" value="false"/>
+         <binding slot="$_d4e121_step.proposal" value="counterPropose()"/>
       </subtasks>
    </task>
    <task id="_d4e103_tree">
@@ -394,108 +395,240 @@
          <step name="_d4e120_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e132_tree">
-      <subtasks id="_d4e133_subtasks">
-         <step name="_d4e133_step" task="Ask"/>
+   <task id="_d4e121_tree">
+      <subtasks id="_d4e122_subtasks">
+         <step name="_d4e122_step" task="Ask"/>
       </subtasks>
-      <subtasks id="_d4e134_subtasks">
-         <step name="_d4e134_step" task="State"/>
+      <subtasks id="_d4e123_subtasks">
+         <step name="_d4e123_step" task="State"/>
       </subtasks>
-      <subtasks id="_d4e135_subtasks">
-         <step name="_d4e135_step" task="Propose"/>
+      <subtasks id="_d4e124_subtasks">
+         <step name="_d4e124_step" task="Propose"/>
       </subtasks>
-      <subtasks id="_d4e136_subtasks">
-         <step name="_d4e136_step" task="Accept"/>
+      <subtasks id="_d4e125_subtasks">
+         <step name="_d4e125_step" task="Accept"/>
       </subtasks>
-      <subtasks id="_d4e137_subtasks">
-         <step name="_d4e137_step" task="Reject"/>
+      <subtasks id="_d4e126_subtasks">
+         <step name="_d4e126_step" task="Reject"/>
       </subtasks>
    </task>
    <task id="_Accept_tree">
-      <subtasks id="_d4e139_subtasks">
-         <step name="_d4e139_step" task="ClosingNegotiation"/>
+      <subtasks id="_d4e128_subtasks">
+         <step name="_d4e128_step" task="ClosingNegotiation"/>
          <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
-         <binding slot="$_d4e139_step.external" value="false"/>
+         <binding slot="$_d4e128_step.external" value="false"/>
       </subtasks>
-      <subtasks id="_d4e140_subtasks">
-         <step name="_d4e140_step" task="Booking"/>
+      <subtasks id="_d4e129_subtasks">
+         <step name="_d4e129_step" task="Booking"/>
          <applicable>isOptionProposal(lastAcceptedProposal())</applicable>
-         <binding slot="$_d4e140_step.external" value="false"/>
+         <binding slot="$_d4e129_step.external" value="false"/>
       </subtasks>
-      <subtasks id="_d4e141_subtasks">
-         <step name="_d4e141_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e141_ref" task="_d4e141_tree"/>
+      <subtasks id="_d4e130_subtasks">
+         <step name="_d4e130_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e130_ref" task="_d4e130_tree"/>
          <applicable>isSub() &amp;&amp; $negotiation.allCriteriaAccepted()</applicable>
-         <binding slot="$_d4e141_step.external" value="false"/>
-         <binding slot="$_d4e141_step.proposal"
+         <binding slot="$_d4e130_step.external" value="false"/>
+         <binding slot="$_d4e130_step.proposal"
                   value="createProposal($negotiation.computeAcceptedOption(), true, $OPEN)"/>
       </subtasks>
-      <subtasks id="_d4e147_subtasks">
-         <step name="_d4e147_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e147_ref" task="_d4e147_tree"/>
+      <subtasks id="_d4e136_subtasks">
+         <step name="_d4e136_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e136_ref" task="_d4e136_tree"/>
          <applicable>canPropose()</applicable>
-         <binding slot="$_d4e147_step.external" value="false"/>
-         <binding slot="$_d4e147_step.proposal"
+         <binding slot="$_d4e136_step.external" value="false"/>
+         <binding slot="$_d4e136_step.proposal"
                   value="createProposal($negotiation.computeAcceptableOptions().get(0), true, $OPEN)"/>
       </subtasks>
-      <subtasks id="_d4e164_subtasks">
-         <step name="_d4e164_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e164_ref" task="_d4e164_tree"/>
+      <subtasks id="_d4e142_subtasks">
+         <step name="_d4e142_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e142_ref" task="_d4e142_tree"/>
          <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
-         <binding slot="$_d4e164_step.external" value="false"/>
-         <binding slot="$_d4e164_step.less" value="leastPreferredCriterion(openNewCriterion())"/>
-         <binding slot="$_d4e164_step.more" value="currentMostPreferred(openNewCriterion())"/>
+         <binding slot="$_d4e142_step.external" value="false"/>
+         <binding slot="$_d4e142_step.value" value="currentMostPreferred(openNewCriterion())"/>
+         <binding slot="$_d4e142_step.likable" value="new Boolean(true)"/>
       </subtasks>
-      <subtasks id="_d4e170_subtasks">
-         <step name="_d4e170_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e170_ref" task="_d4e170_tree"/>
+      <subtasks id="_d4e148_subtasks">
+         <step name="_d4e148_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e148_ref" task="_d4e148_tree"/>
          <applicable>isDom()</applicable>
-         <binding slot="$_d4e170_step.external" value="false"/>
-         <binding slot="$_d4e170_step.proposal"
+         <binding slot="$_d4e148_step.external" value="false"/>
+         <binding slot="$_d4e148_step.proposal"
                   value="createProposal(currentMostPreferred(openNewCriterion()), true, $OPEN)"/>
       </subtasks>
-      <subtasks id="_d4e176_subtasks">
-         <step name="_d4e176_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
-         <step name="_d4e176_ref" task="_d4e176_tree"/>
+      <subtasks id="_d4e154_subtasks">
+         <step name="_d4e154_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
+         <step name="_d4e154_ref" task="_d4e154_tree"/>
          <applicable>isSub()</applicable>
-         <binding slot="$_d4e176_step.external" value="false"/>
-         <binding slot="$_d4e176_step.criterion" value="openNewCriterion()"/>
-         <binding slot="$_d4e176_step.less" value="askUserPref(openNewCriterion()).getLess()"/>
-         <binding slot="$_d4e176_step.more" value="askUserPref(openNewCriterion()).getMore()"/>
+         <binding slot="$_d4e154_step.external" value="false"/>
+         <binding slot="$_d4e154_step.criterion"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getType()"/>
+         <binding slot="$_d4e154_step.less"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"/>
+         <binding slot="$_d4e154_step.more"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"/>
       </subtasks>
    </task>
-   <task id="_d4e141_tree">
-      <subtasks id="_d4e142_subtasks">
-         <step name="_d4e142_step" task="Ask"/>
+   <task id="_d4e130_tree">
+      <subtasks id="_d4e131_subtasks">
+         <step name="_d4e131_step" task="Ask"/>
       </subtasks>
+      <subtasks id="_d4e132_subtasks">
+         <step name="_d4e132_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e133_subtasks">
+         <step name="_d4e133_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e134_subtasks">
+         <step name="_d4e134_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e135_subtasks">
+         <step name="_d4e135_step" task="Reject"/>
+      </subtasks>
+   </task>
+   <task id="_d4e136_tree">
+      <subtasks id="_d4e137_subtasks">
+         <step name="_d4e137_step" task="Ask"/>
+      </subtasks>
+      <subtasks id="_d4e138_subtasks">
+         <step name="_d4e138_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e139_subtasks">
+         <step name="_d4e139_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e140_subtasks">
+         <step name="_d4e140_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e141_subtasks">
+         <step name="_d4e141_step" task="Reject"/>
+      </subtasks>
+   </task>
+   <task id="_d4e142_tree">
       <subtasks id="_d4e143_subtasks">
-         <step name="_d4e143_step" task="State"/>
+         <step name="_d4e143_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e144_subtasks">
-         <step name="_d4e144_step" task="Propose"/>
+         <step name="_d4e144_step" task="State"/>
       </subtasks>
       <subtasks id="_d4e145_subtasks">
-         <step name="_d4e145_step" task="Accept"/>
+         <step name="_d4e145_step" task="Propose"/>
       </subtasks>
       <subtasks id="_d4e146_subtasks">
-         <step name="_d4e146_step" task="Reject"/>
+         <step name="_d4e146_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e147_subtasks">
+         <step name="_d4e147_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e147_tree">
-      <subtasks id="_d4e148_subtasks">
-         <step name="_d4e148_step" task="Ask"/>
-      </subtasks>
+   <task id="_d4e148_tree">
       <subtasks id="_d4e149_subtasks">
-         <step name="_d4e149_step" task="State"/>
+         <step name="_d4e149_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e150_subtasks">
-         <step name="_d4e150_step" task="Propose"/>
+         <step name="_d4e150_step" task="State"/>
       </subtasks>
       <subtasks id="_d4e151_subtasks">
-         <step name="_d4e151_step" task="Accept"/>
+         <step name="_d4e151_step" task="Propose"/>
       </subtasks>
       <subtasks id="_d4e152_subtasks">
-         <step name="_d4e152_step" task="Reject"/>
+         <step name="_d4e152_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e153_subtasks">
+         <step name="_d4e153_step" task="Reject"/>
+      </subtasks>
+   </task>
+   <task id="_d4e154_tree">
+      <subtasks id="_d4e155_subtasks">
+         <step name="_d4e155_step" task="Ask"/>
+      </subtasks>
+      <subtasks id="_d4e156_subtasks">
+         <step name="_d4e156_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e157_subtasks">
+         <step name="_d4e157_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e158_subtasks">
+         <step name="_d4e158_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e159_subtasks">
+         <step name="_d4e159_step" task="Reject"/>
+      </subtasks>
+   </task>
+   <task id="_Reject_tree">
+      <subtasks id="_d4e162_subtasks">
+         <step name="_d4e162_step" task="ClosingNegotiation"/>
+         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
+         <binding slot="$_d4e162_step.external" value="false"/>
+      </subtasks>
+      <subtasks id="_d4e164_subtasks">
+         <step name="_d4e164_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
+         <step name="_d4e164_ref" task="_d4e164_tree"/>
+         <applicable>!isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())</applicable>
+         <binding slot="$_d4e164_step.external" value="false"/>
+         <binding slot="$_d4e164_step.criterion"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getType()"/>
+         <binding slot="$_d4e164_step.less"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"/>
+         <binding slot="$_d4e164_step.more"
+                  value="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"/>
+      </subtasks>
+      <subtasks id="_d4e171_subtasks">
+         <step name="_d4e171_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
+         <step name="_d4e171_ref" task="_d4e171_tree"/>
+         <applicable>isSub()</applicable>
+         <binding slot="$_d4e171_step.external" value="false"/>
+         <binding slot="$_d4e171_step.criterion"
+                  value="$negotiation.askUserPreference(getDiscussedCriterion()).getType()"/>
+         <binding slot="$_d4e171_step.less"
+                  value="$negotiation.askUserPreference(getDiscussedCriterion()).getStatedValue()"/>
+         <binding slot="$_d4e171_step.more"
+                  value="$negotiation.askUserPreference(getDiscussedCriterion()).getOtherStatedValue()"/>
+      </subtasks>
+      <subtasks id="_d4e178_subtasks">
+         <step name="_d4e178_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e178_ref" task="_d4e178_tree"/>
+         <applicable>isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())</applicable>
+         <binding slot="$_d4e178_step.external" value="false"/>
+         <binding slot="$_d4e178_step.value"
+                  value="currentMostPreferred(currentDiscussedCriterion())"/>
+         <binding slot="$_d4e178_step.likable" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e184_subtasks">
+         <step name="_d4e184_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
+         <step name="_d4e184_ref" task="_d4e184_tree"/>
+         <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
+         <binding slot="$_d4e184_step.external" value="false"/>
+         <binding slot="$_d4e184_step.value" value="currentMostPreferred(openNewCriterion())"/>
+         <binding slot="$_d4e184_step.likable" value="true"/>
+      </subtasks>
+      <subtasks id="_d4e190_subtasks">
+         <step name="_d4e190_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e190_ref" task="_d4e190_tree"/>
+         <applicable> isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()</applicable>
+         <binding slot="$_d4e190_step.external" value="false"/>
+         <binding slot="$_d4e190_step.proposal"
+                  value="createProposal(lastRejectedProposal().getValue(), true, $OPEN) "/>
+      </subtasks>
+      <subtasks id="_d4e196_subtasks">
+         <step name="_d4e196_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e196_ref" task="_d4e196_tree"/>
+         <applicable>isDom()  &amp;&amp; isCriterionProposal(lastRejectedProposal())</applicable>
+         <binding slot="$_d4e196_step.external" value="false"/>
+         <binding slot="$_d4e196_step.proposal" value="$negotiation.computeProposal()"/>
+      </subtasks>
+      <subtasks id="_d4e203_subtasks">
+         <step name="_d4e203_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e203_ref" task="_d4e203_tree"/>
+         <applicable>isDom()  &amp;&amp; isCriterionProposal(lastRejectedProposal())</applicable>
+         <binding slot="$_d4e203_step.external" value="false"/>
+         <binding slot="$_d4e203_step.proposal"
+                  value="createProposal($negotiation.computeAcceptableOptions().get(0))"/>
+      </subtasks>
+      <subtasks id="_d4e210_subtasks">
+         <step name="_d4e210_step" task="n:fr.limsi.negotiate.lang.Propose"/>
+         <step name="_d4e210_ref" task="_d4e210_tree"/>
+         <applicable>!isSub()</applicable>
+         <binding slot="$_d4e210_step.external" value="false"/>
+         <binding slot="$_d4e210_step.proposal" value="$negotiation.computeProposal()"/>
       </subtasks>
    </task>
    <task id="_d4e164_tree">
@@ -515,249 +648,123 @@
          <step name="_d4e169_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e170_tree">
-      <subtasks id="_d4e171_subtasks">
-         <step name="_d4e171_step" task="Ask"/>
-      </subtasks>
+   <task id="_d4e171_tree">
       <subtasks id="_d4e172_subtasks">
-         <step name="_d4e172_step" task="State"/>
+         <step name="_d4e172_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e173_subtasks">
-         <step name="_d4e173_step" task="Propose"/>
+         <step name="_d4e173_step" task="State"/>
       </subtasks>
       <subtasks id="_d4e174_subtasks">
-         <step name="_d4e174_step" task="Accept"/>
+         <step name="_d4e174_step" task="Propose"/>
       </subtasks>
       <subtasks id="_d4e175_subtasks">
-         <step name="_d4e175_step" task="Reject"/>
+         <step name="_d4e175_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e176_subtasks">
+         <step name="_d4e176_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e176_tree">
-      <subtasks id="_d4e177_subtasks">
-         <step name="_d4e177_step" task="Ask"/>
-      </subtasks>
-      <subtasks id="_d4e178_subtasks">
-         <step name="_d4e178_step" task="State"/>
-      </subtasks>
+   <task id="_d4e178_tree">
       <subtasks id="_d4e179_subtasks">
-         <step name="_d4e179_step" task="Propose"/>
+         <step name="_d4e179_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e180_subtasks">
-         <step name="_d4e180_step" task="Accept"/>
+         <step name="_d4e180_step" task="State"/>
       </subtasks>
       <subtasks id="_d4e181_subtasks">
-         <step name="_d4e181_step" task="Reject"/>
+         <step name="_d4e181_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e182_subtasks">
+         <step name="_d4e182_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e183_subtasks">
+         <step name="_d4e183_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_Reject_tree">
-      <subtasks id="_d4e184_subtasks">
-         <step name="_d4e184_step" task="ClosingNegotiation"/>
-         <applicable>!isSub() &amp;&amp; $negotiation.negotiationFailure()</applicable>
-         <binding slot="$_d4e184_step.external" value="false"/>
+   <task id="_d4e184_tree">
+      <subtasks id="_d4e185_subtasks">
+         <step name="_d4e185_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e186_subtasks">
-         <step name="_d4e186_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
-         <step name="_d4e186_ref" task="_d4e186_tree"/>
-         <applicable>!isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())</applicable>
-         <binding slot="$_d4e186_step.external" value="false"/>
-         <binding slot="$_d4e186_step.criterion" value="openNewCriterion()"/>
-         <binding slot="$_d4e186_step.less" value="askUserPref(openNewCriterion()).getLess()"/>
-         <binding slot="$_d4e186_step.more" value="askUserPref(openNewCriterion()).getMore()"/>
+         <step name="_d4e186_step" task="State"/>
       </subtasks>
-      <subtasks id="_d4e193_subtasks">
-         <step name="_d4e193_step" task="n:fr.limsi.negotiate.lang.AskPreference"/>
-         <step name="_d4e193_ref" task="_d4e193_tree"/>
-         <applicable>isSub()</applicable>
-         <binding slot="$_d4e193_step.external" value="false"/>
-         <binding slot="$_d4e193_step.criterion" value="getDiscussedCriterion()"/>
-         <binding slot="$_d4e193_step.less"
-                  value="askUserPref(getDiscussedCriterion()).getLess()"/>
-         <binding slot="$_d4e193_step.more"
-                  value="askUserPref(getDiscussedCriterion()).getMore()"/>
-      </subtasks>
-      <subtasks id="_d4e200_subtasks">
-         <step name="_d4e200_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e200_ref" task="_d4e200_tree"/>
-         <applicable>isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())</applicable>
-         <binding slot="$_d4e200_step.external" value="false"/>
-         <binding slot="$_d4e200_step.less"
-                  value="leastPreferredCriterion(currentDiscussedCriterion())"/>
-         <binding slot="$_d4e200_step.more"
-                  value="currentMostPreferred(currentDiscussedCriterion())"/>
-      </subtasks>
-      <subtasks id="_d4e206_subtasks">
-         <step name="_d4e206_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
-         <step name="_d4e206_ref" task="_d4e206_tree"/>
-         <applicable>isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())</applicable>
-         <binding slot="$_d4e206_step.external" value="false"/>
-         <binding slot="$_d4e206_step.less" value="leastPreferredCriterion(openNewCriterion())"/>
-         <binding slot="$_d4e206_step.more" value="currentMostPreferred(openNewCriterion())"/>
-      </subtasks>
-      <subtasks id="_d4e212_subtasks">
-         <step name="_d4e212_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e212_ref" task="_d4e212_tree"/>
-         <applicable> isMostPrefProposal(lastRejectedProposal()) &amp;&amp; isDom()</applicable>
-         <binding slot="$_d4e212_step.external" value="false"/>
-         <binding slot="$_d4e212_step.proposal"
-                  value="createProposal(lastRejectedProposal().getValue(), true, $OPEN) "/>
-      </subtasks>
-      <subtasks id="_d4e218_subtasks">
-         <step name="_d4e218_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e218_ref" task="_d4e218_tree"/>
-         <applicable>isDom()  &amp;&amp; isCriterionProposal(lastRejectedProposal())</applicable>
-         <binding slot="$_d4e218_step.external" value="false"/>
-         <binding slot="$_d4e218_step.proposal" value="$negotiation.computeProposal()"/>
-      </subtasks>
-      <subtasks id="_d4e225_subtasks">
-         <step name="_d4e225_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e225_ref" task="_d4e225_tree"/>
-         <applicable>isDom()  &amp;&amp; isCriterionProposal(lastRejectedProposal())</applicable>
-         <binding slot="$_d4e225_step.external" value="false"/>
-         <binding slot="$_d4e225_step.proposal"
-                  value="createProposal($negotiation.computeAcceptableOptions().get(0))"/>
-      </subtasks>
-      <subtasks id="_d4e232_subtasks">
-         <step name="_d4e232_step" task="n:fr.limsi.negotiate.lang.Propose"/>
-         <step name="_d4e232_ref" task="_d4e232_tree"/>
-         <applicable>!isSub()</applicable>
-         <binding slot="$_d4e232_step.external" value="false"/>
-         <binding slot="$_d4e232_step.proposal" value="$negotiation.computeProposal()"/>
-      </subtasks>
-   </task>
-   <task id="_d4e186_tree">
       <subtasks id="_d4e187_subtasks">
-         <step name="_d4e187_step" task="Ask"/>
+         <step name="_d4e187_step" task="Propose"/>
       </subtasks>
       <subtasks id="_d4e188_subtasks">
-         <step name="_d4e188_step" task="State"/>
+         <step name="_d4e188_step" task="Accept"/>
       </subtasks>
       <subtasks id="_d4e189_subtasks">
-         <step name="_d4e189_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e190_subtasks">
-         <step name="_d4e190_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e191_subtasks">
-         <step name="_d4e191_step" task="Reject"/>
+         <step name="_d4e189_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e193_tree">
+   <task id="_d4e190_tree">
+      <subtasks id="_d4e191_subtasks">
+         <step name="_d4e191_step" task="Ask"/>
+      </subtasks>
+      <subtasks id="_d4e192_subtasks">
+         <step name="_d4e192_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e193_subtasks">
+         <step name="_d4e193_step" task="Propose"/>
+      </subtasks>
       <subtasks id="_d4e194_subtasks">
-         <step name="_d4e194_step" task="Ask"/>
+         <step name="_d4e194_step" task="Accept"/>
       </subtasks>
       <subtasks id="_d4e195_subtasks">
-         <step name="_d4e195_step" task="State"/>
+         <step name="_d4e195_step" task="Reject"/>
       </subtasks>
-      <subtasks id="_d4e196_subtasks">
-         <step name="_d4e196_step" task="Propose"/>
-      </subtasks>
+   </task>
+   <task id="_d4e196_tree">
       <subtasks id="_d4e197_subtasks">
-         <step name="_d4e197_step" task="Accept"/>
+         <step name="_d4e197_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e198_subtasks">
-         <step name="_d4e198_step" task="Reject"/>
+         <step name="_d4e198_step" task="State"/>
+      </subtasks>
+      <subtasks id="_d4e199_subtasks">
+         <step name="_d4e199_step" task="Propose"/>
+      </subtasks>
+      <subtasks id="_d4e200_subtasks">
+         <step name="_d4e200_step" task="Accept"/>
+      </subtasks>
+      <subtasks id="_d4e201_subtasks">
+         <step name="_d4e201_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e200_tree">
-      <subtasks id="_d4e201_subtasks">
-         <step name="_d4e201_step" task="Ask"/>
-      </subtasks>
-      <subtasks id="_d4e202_subtasks">
-         <step name="_d4e202_step" task="State"/>
-      </subtasks>
-      <subtasks id="_d4e203_subtasks">
-         <step name="_d4e203_step" task="Propose"/>
-      </subtasks>
+   <task id="_d4e203_tree">
       <subtasks id="_d4e204_subtasks">
-         <step name="_d4e204_step" task="Accept"/>
+         <step name="_d4e204_step" task="Ask"/>
       </subtasks>
       <subtasks id="_d4e205_subtasks">
-         <step name="_d4e205_step" task="Reject"/>
+         <step name="_d4e205_step" task="State"/>
       </subtasks>
-   </task>
-   <task id="_d4e206_tree">
+      <subtasks id="_d4e206_subtasks">
+         <step name="_d4e206_step" task="Propose"/>
+      </subtasks>
       <subtasks id="_d4e207_subtasks">
-         <step name="_d4e207_step" task="Ask"/>
+         <step name="_d4e207_step" task="Accept"/>
       </subtasks>
       <subtasks id="_d4e208_subtasks">
-         <step name="_d4e208_step" task="State"/>
-      </subtasks>
-      <subtasks id="_d4e209_subtasks">
-         <step name="_d4e209_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e210_subtasks">
-         <step name="_d4e210_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e211_subtasks">
-         <step name="_d4e211_step" task="Reject"/>
+         <step name="_d4e208_step" task="Reject"/>
       </subtasks>
    </task>
-   <task id="_d4e212_tree">
+   <task id="_d4e210_tree">
+      <subtasks id="_d4e211_subtasks">
+         <step name="_d4e211_step" task="Ask"/>
+      </subtasks>
+      <subtasks id="_d4e212_subtasks">
+         <step name="_d4e212_step" task="State"/>
+      </subtasks>
       <subtasks id="_d4e213_subtasks">
-         <step name="_d4e213_step" task="Ask"/>
+         <step name="_d4e213_step" task="Propose"/>
       </subtasks>
       <subtasks id="_d4e214_subtasks">
-         <step name="_d4e214_step" task="State"/>
+         <step name="_d4e214_step" task="Accept"/>
       </subtasks>
       <subtasks id="_d4e215_subtasks">
-         <step name="_d4e215_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e216_subtasks">
-         <step name="_d4e216_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e217_subtasks">
-         <step name="_d4e217_step" task="Reject"/>
-      </subtasks>
-   </task>
-   <task id="_d4e218_tree">
-      <subtasks id="_d4e219_subtasks">
-         <step name="_d4e219_step" task="Ask"/>
-      </subtasks>
-      <subtasks id="_d4e220_subtasks">
-         <step name="_d4e220_step" task="State"/>
-      </subtasks>
-      <subtasks id="_d4e221_subtasks">
-         <step name="_d4e221_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e222_subtasks">
-         <step name="_d4e222_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e223_subtasks">
-         <step name="_d4e223_step" task="Reject"/>
-      </subtasks>
-   </task>
-   <task id="_d4e225_tree">
-      <subtasks id="_d4e226_subtasks">
-         <step name="_d4e226_step" task="Ask"/>
-      </subtasks>
-      <subtasks id="_d4e227_subtasks">
-         <step name="_d4e227_step" task="State"/>
-      </subtasks>
-      <subtasks id="_d4e228_subtasks">
-         <step name="_d4e228_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e229_subtasks">
-         <step name="_d4e229_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e230_subtasks">
-         <step name="_d4e230_step" task="Reject"/>
-      </subtasks>
-   </task>
-   <task id="_d4e232_tree">
-      <subtasks id="_d4e233_subtasks">
-         <step name="_d4e233_step" task="Ask"/>
-      </subtasks>
-      <subtasks id="_d4e234_subtasks">
-         <step name="_d4e234_step" task="State"/>
-      </subtasks>
-      <subtasks id="_d4e235_subtasks">
-         <step name="_d4e235_step" task="Propose"/>
-      </subtasks>
-      <subtasks id="_d4e236_subtasks">
-         <step name="_d4e236_step" task="Accept"/>
-      </subtasks>
-      <subtasks id="_d4e237_subtasks">
-         <step name="_d4e237_step" task="Reject"/>
+         <step name="_d4e215_step" task="Reject"/>
       </subtasks>
    </task>
    <task id="_InviteOut_tree">
@@ -910,6 +917,9 @@
     		return (isSub() &amp;&amp; $negotiation.getContext().takedTurns(false)&gt;= 7);
     	
     }
+    function isLikable(criterion){
+    	return $negotiation.getCriterionNegotiation(criterion).getSelf().isAcceptable(criterion, relation);
+    }
     
     
     function justify(proposal){
@@ -961,9 +971,7 @@
     function getLastUserPref() { 
     	if (getLastUserStatement("State") !=null)
     		return (getLastUserStatement("State").getStatedPreference());
-    	
-    	else 
-    		return getPreference($cuisine);
+    	return null;
     }
     
     function proposalFromUserState(userPref){
@@ -999,9 +1007,9 @@
 		return(proposal.class.equals(Packages.fr.limsi.negotiate.OptionProposal.class));
 	}
     
-    function getPreference(criterion){
-		return ($negotiation.getRandomPreference(criterion));
-	}
+   function getStatement(criterion){
+   		return $negotiation.getCriterionNegotiation(criterion).getnewStatement();
+   }
 	
 	function sameStatement(uttType){
 		 $agent  = getLastAgentStatement(uttType);
@@ -1102,8 +1110,7 @@
 	function reactToProposal(proposal){
 		if (proposal != null)
 			return ($negotiation.reactToProposal(proposal));
-		else
-			return getPreference($cuisine);
+		
 	}
 	
 	function isAcceptable(proposal){
