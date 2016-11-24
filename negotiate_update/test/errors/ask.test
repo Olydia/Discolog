@@ -1,0 +1,9 @@
+    # Writing log to /tmp/Console.test...
+    # 20 avr. 2016 18:11:38 - TaskEngine 1.9 / Disco 1.15
+    Welcome to Disco! (Type 'help' for command list)
+  >  load models/Negotiate.xml
+  > load models/Negotiation.xml  
+  > execute fr.limsi.negotiate.lang.AskPreference/Packages.fr.limsi.negotiate.restaurant.Ambiance/null/null
+java.lang.ClassCastException: jdk.internal.dynalink.beans.StaticClass cannot be cast to java.lang.Classfr.limsi.negotiate.lang.PreferenceUtterance.getCriterion(PreferenceUtterance.java:30)
+  > 
+at quit

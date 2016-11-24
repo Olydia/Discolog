@@ -1,0 +1,42 @@
+    # 20 avr. 2016 15:28:04 - TaskEngine 1.9 / Disco 1.15
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/Negotiation.xml
+  > task trees
+    User says "Let's achieve trees."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference/ null / Packages.fr.limsi.negotiate.restaurant.Cuisine.TURKISH
+    User says "I like TURKISH most."
+    Agent says "I like TURKISH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference/ Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
+    User says "I like CHINESE less than ITALIAN."
+    Agent says "I like ITALIAN least."
+  > execute fr.limsi.negotiate.lang.StatePreference/ Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+    User says "I like ITALIAN less than JAPANESE."
+    Agent says "Let's choose JAPANESE."
+  > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE)
+    User says "Okay, let's choose JAPANESE."
+    Agent says "Let's choose SAMURA."
+  >  execute fr.limsi.negotiate.lang.Reject / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.SAMURA)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "Do you like EXPENSIVE less than CHEAP?"
+  >  execute fr.limsi.negotiate.lang.StatePreference  / null/ Packages.fr.limsi.negotiate.restaurant.Cost.EXPENSIVE
+    User says "I like EXPENSIVE most."
+    Agent says "I like EXPENSIVE least."
+  > execute fr.limsi.negotiate.lang.AskPreference/ null / null/ Packages.fr.limsi.negotiate.restaurant.Ambiance.CALM
+    User says "Do you like CALM?"
+    Agent says "I like CALM most."
+  >  execute fr.limsi.negotiate.lang.Propose / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.TOKYO)
+    User says "Let's choose TOKYO."
+    Agent says "Okay, let's choose TOKYO."
+  > execute fr.limsi.negotiate.lang.Accept / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.TOKYO)
+    User says "Okay, let's choose TOKYO."
+    Agent says "Okay, I'll call to book a table."
+  > say
+[1] Perfect!
+[2] Let's achieve GoingOut.
+  >> 1
+    User says "Perfect!"
+    Agent says "Ok."
+  > quit
+    

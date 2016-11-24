@@ -1,0 +1,50 @@
+ # 21 juil. 2016 15:50:04 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+#Agent 1 is peer, its preference model is D1
+#Agent 2 is peer, its preference model is D2.
+#please check the file 'PREF.pdf'  for the preference models
+
+    Agent1 says "Should we achieve Top?"
+  >  next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "What kind of Cuisine do you like?"
+  > next
+    Agent2 says "french is my favorite Cuisine."
+  > next
+    Agent1 says "I propose that we choose french cuisine."
+  > next
+    Agent2 says "Okay, let's choose french."
+  > next
+    Agent1 says "I propose that we choose victor restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > next
+    Agent1 says "Ok."
+  > next
+    Agent2 says "Ok."
+  > history
+
+[Achieve Top by agentFirst] -accepted -live
+   [Agent2 says let's achieve Top] -done
+      Agent1 says "Should we achieve Top?"
+      Agent2 says "Let's achieve Top."
+   [Achieve AgentFirst by askC] -live
+      [Achieve AskCriterion] -live
+         Agent1 says "What kind of Cuisine do you like?"
+         [ ] -live
+            [Achieve State] -live
+               Agent2 says "french is my favorite Cuisine."
+               [ ] -live
+                  Agent1 says "I propose that we choose french Cuisine."
+                  [ ] -live
+                     [Yes] -live
+                        Agent2 says "Okay, let's choose french."
+                        [ ] -live <-focus
+                           Agent1 says "I propose that we choose VICTOR restaurant."
+                           Agent2 says "Okay, I'll call to book a table."
+                           Agent1 says "Ok."
+                           Agent2 says "Ok."
+                           [ ] -live
+
+  > quit

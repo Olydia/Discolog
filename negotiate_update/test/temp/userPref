@@ -1,0 +1,14 @@
+User preference model
+
+Cuisine:
+	P(Italian, Japanese)
+	P(Italian, Turikish)
+	P(Chinese, Italian)
+	P(French, Chinese)
+
+Ambiance
+	P(*,Calm)
+
+Cost
+	P(Expensive, Cheap)
+

@@ -1,0 +1,30 @@
+    # Writing log to /tmp/Console.test...
+    # 25 mai 2016 17:05:12 - TaskEngine 1.10 / Disco 1.16
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/Negotiation.xml
+  >   > task Trees
+    User says "Let's achieve Trees."
+    Agent says "What kind of Cuisine do you like?"
+  > eval dom = 3
+    # Returned '3'
+  > execute fr.limsi.negotiate.lang.StatePreference/ null / cuisine.TURKISH
+    User says "TURKISH is my favorite Cuisine."
+    Agent says "I prefer FRENCH over TURKISH."
+  > execute fr.limsi.negotiate.lang.StatePreference/ cuisine.FRENCH/ null
+    User says "FRENCH is my least preferred Cuisine."
+    Agent says "I prefer CHINESE over FRENCH."
+  > execute fr.limsi.negotiate.lang.StatePreference/ cuisine.FRENCH/ cuisine.CHINESE
+    User says "I prefer CHINESE over FRENCH."
+    Agent says "I propose that we choose CHINESE Cuisine."
+  > execute fr.limsi.negotiate.lang.Reject/ createProposal(cuisine.CHINESE)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "I propose that we choose CHINESE Cuisine."
+  > execute fr.limsi.negotiate.lang.Reject/ createProposal(cuisine.CHINESE)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "I propose that we choose CHINESE Cuisine."
+  > execute fr.limsi.negotiate.lang.Reject/ createProposal(cuisine.CHINESE)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "I propose that we choose CHINESE Cuisine."
+  > quit
+    
