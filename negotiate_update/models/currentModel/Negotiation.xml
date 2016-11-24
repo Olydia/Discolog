@@ -276,8 +276,8 @@
          <step name="_d4e93_step" task="n:fr.limsi.negotiate.lang.StatePreference"/>
          <step name="_d4e93_ref" task="_d4e93_tree"/>
          <binding slot="$_d4e93_step.external" value="false"/>
-         <binding slot="$_d4e93_step.value" value="negotiation.reactAsk().getStatedValue()"/>
-         <binding slot="$_d4e93_step.likable" value="negotiation.reactAsk().getIsLikable()"/>
+         <binding slot="$_d4e93_step.value" value="$negotiation.reactAsk().getStatedValue()"/>
+         <binding slot="$_d4e93_step.likable" value="$negotiation.reactAsk().getIsLikable()"/>
       </subtasks>
    </task>
    <task id="_d4e93_tree">

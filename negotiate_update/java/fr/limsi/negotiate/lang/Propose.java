@@ -2,6 +2,8 @@ package fr.limsi.negotiate.lang;
 
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
+import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ProposalStatement;
 import fr.limsi.negotiate.Proposal.Status;
@@ -26,5 +28,12 @@ public class Propose extends ProposalUtterance {
 	  getNegotiation().addProposal(p);
 	  getNegotiation().getContext().
 	  	addStatement(new ProposalStatement(p, "Propose"));
+	  
+	  if(getProposal() instanceof CriterionProposal){
+			if (getExternal()) 
+				getNegotiation().updateOtherMentalState((Criterion) getProposal().getValue(), Boolean.TRUE);
+			else 
+				getNegotiation().updateOASMentalState((Criterion)getProposal().getValue(), Boolean.TRUE);
+		}
    }
 }

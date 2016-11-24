@@ -481,15 +481,24 @@ public class Negotiation<O extends Option> {
 
 	public AskStatement askUserPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
-		if(model.getOther().getAcceptableValues().isEmpty() && model.getOther().getNonAcceptableValues().isEmpty())
-			return new AskStatement(null, null, null, false, "Ask");
+		if(model.getOther().getAcceptableValues().isEmpty() && model.getOther().getNonAcceptableValues().isEmpty()){
+			AskStatement ask =  new AskStatement(null, null, null, false, "Ask");
+			ask.setType(c);
+			return ask;
+		}
 		else{
 			for(Criterion crit: model.getSelf().sortCriteria()){
-				if(!model.getOther().getAcceptableValues().contains(c) || !model.getOther().getNonAcceptableValues().contains(c))
-					return new AskStatement(crit, null, null, false, "Ask");
+				if(!model.getOther().getAcceptableValues().contains(c) || !model.getOther().getNonAcceptableValues().contains(c)){
+					AskStatement ask =  new AskStatement(crit, null, null, false, "Ask");
+					ask.setType(c);
+					return ask;
+				}
+		 
 			}
 		}
-		return new AskStatement(null, null, null, false, "Ask");
+		AskStatement ask =  new AskStatement(null, null, null, false, "Ask");
+		ask.setType(c);
+		return ask;
 
 	}
 

@@ -172,8 +172,8 @@
 			applicable="!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
-			value="negotiation.reactAsk().getStatedValue()" 
-			likable="negotiation.reactAsk().getIsLikable()">
+			value="$negotiation.reactAsk().getStatedValue()" 
+			likable="$negotiation.reactAsk().getIsLikable()">
 			<do task="Ask" />
 			<do task="State" />
 			<do task="Propose" />
