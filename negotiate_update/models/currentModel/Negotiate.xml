@@ -13,7 +13,7 @@
 			have null value * null value for slot is _not_ the same as being undefined, 
 			see Task.isDefinedSlot(String) -->
 		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
-		<input name="likable" type="Boolean" />
+		<input name="likable" type="Packages.fr.limsi.negotiate.PreferenceStatement.Acceptable" />
 
 	</task>
 
@@ -28,13 +28,11 @@
 			not optional. -->
 
 		<input name="criterion" type="object" />
-		<input name="less" type="Packages.fr.limsi.negotiate.Criterion" />
-		<input name="more" type="Packages.fr.limsi.negotiate.Criterion" />
+		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
 
 		<precondition>
-			if($this.less!= null &amp;&amp; $this.more != null){
-			!($negotiation.getCriterionNegotiation($this.less.getClass()).isInOther($this.less, $this.more) ||
-			$negotiation.getCriterionNegotiation($this.less.getClass()).isInOther($this.more, $this.less))
+			if($this.value!= null){
+				!($negotiation.getCriterionNegotiation($this.value.getClass()).isInOther($this.value))
 			}
 		</precondition>
 	

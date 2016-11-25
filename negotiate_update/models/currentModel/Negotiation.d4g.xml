@@ -82,7 +82,7 @@
 
 	<do id="AskCriterion" actor="agent"
 		task="n:fr.limsi.negotiate.lang.AskPreference" criterion="$mostPrefCriterion"
-		less="null" more="null">
+		value="null">
 		<do task="State" />
 		<do task="Propose" />
 		<do task="Ask" />
@@ -106,7 +106,7 @@
 			applicable="!isSub() &amp;&amp; $negotiation.negotiationFailure()" />
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.Propose"
-			proposal="proposalFromPreference(getLastUserPref(), true) "
+			proposal="createProposal(getLastUserPref(), true) "
 			applicable="proposalFromUserState(getLastUserPref())">
 			<do task="Ask" />
 			<do task="State" />
@@ -141,8 +141,7 @@
 			a preference from another criterion -->
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			criterion="openNewCriterion()" 
-			less="null" 
-			more="null"
+			value="null" 
 			applicable="isSub() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 			<do task="Ask" />
 			<do task="State" />
@@ -208,8 +207,7 @@
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			criterion="$negotiation.askUserPreference(openNewCriterion()).getType()"
-			less="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
-			more="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"
+			value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
 			applicable="isSub() &amp;&amp; isMaxProp()">
 			<do task="Ask" />
 			<do task="State" />
@@ -269,7 +267,7 @@
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 			value="currentMostPreferred(openNewCriterion())"
-			likable= "new Boolean(true)"
+			likable= "$ACCEPTABLE"
 			applicable="isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 			<do task="Ask" />
 			<do task="State" />
@@ -291,8 +289,7 @@
 
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			criterion="$negotiation.askUserPreference(openNewCriterion()).getType()"
-			less="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
-			more="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"
+			value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
 			applicable="isSub()">
 			<do task="Ask" />
 			<do task="State" />
@@ -314,8 +311,7 @@
 		<!-- In the case where an option is rejected open a new Criterion -->
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			criterion="$negotiation.askUserPreference(openNewCriterion()).getType()"
-			less="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
-			more="$negotiation.askUserPreference(openNewCriterion()).getOtherStatedValue()"
+			value="$negotiation.askUserPreference(openNewCriterion()).getStatedValue()"
 			applicable="!isDom()&amp;&amp; isOptionProposal(lastRejectedProposal())">
 			<do task="Ask" />
 			<do task="State" />
@@ -327,8 +323,7 @@
 		<!-- Ask(other preference) -->
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.AskPreference"
 			criterion="$negotiation.askUserPreference(getDiscussedCriterion()).getType()"
-			less="$negotiation.askUserPreference(getDiscussedCriterion()).getStatedValue()"
-			more="$negotiation.askUserPreference(getDiscussedCriterion()).getOtherStatedValue()"
+			value="$negotiation.askUserPreference(getDiscussedCriterion()).getStatedValue()"
 			applicable="isSub()">
 			<do task="Ask" />
 			<do task="State" />
@@ -340,7 +335,7 @@
 		<!-- state(other preference) pEER CASE -->
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 			value="currentMostPreferred(currentDiscussedCriterion())"
-			likable="true"
+			likable="$ACCEPTABLE"
 			applicable="isPeer() &amp;&amp; $negotiation.statedValues(currentDiscussedCriterion())">
 			<do task="Ask" />
 			<do task="State" />
@@ -351,7 +346,7 @@
 		
 		<do actor="agent" task="n:fr.limsi.negotiate.lang.StatePreference"
 			value="currentMostPreferred(openNewCriterion())"
-			likable="true"
+			likable="$ACCEPTABLE"
 			applicable="isPeer() &amp;&amp; $negotiation.statedValues(openNewCriterion())">
 			<do task="Ask" />
 			<do task="State" />
@@ -409,6 +404,9 @@
     $OPEN = Packages.fr.limsi.negotiate.Proposal.Status.OPEN;
     var $REJECTED = Packages.fr.limsi.negotiate.Proposal.Status.REJECTED;
     var $ACCEPTED = Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED;
+   	var $ACCEPTABLE = Packages.fr.limsi.negotiate.PreferenceStatement.Acceptable.TRUE;
+   	var $NOTACCEPTABLE = Packages.fr.limsi.negotiate.PreferenceStatement.Acceptable.FALSE;
+   	
     // *********  restaurant criteria *********
     $ambiance = Packages.fr.limsi.negotiate.restaurant.Ambiance ;
    	$cuisine = Packages.fr.limsi.negotiate.restaurant.Cuisine ;
@@ -466,8 +464,16 @@
     		return (isSub() &amp;&amp; $negotiation.getContext().takedTurns(false)>= 7);
     	
     }
+    // returns if a criterion is acceptable using the status of preferenceStatement
     function isLikable(criterion){
-    	return $negotiation.getCriterionNegotiation(criterion).getSelf().isAcceptable(criterion, relation);
+    	acceptable = $negotiation.getCriterionNegotiation(criterion).getSelf().isAcceptable(criterion, relation);
+    	if(acceptable == null)
+    		return Packages.fr.limsi.negotiate.PreferenceStatement.Acceptable.UNKNOWN;
+    	else if(acceptable)
+    		return $ACCEPTABLE;
+    	else 
+    		return $NOTACCEPTABLE;
+    	
     }
     
     
@@ -519,15 +525,13 @@
 
     function getLastUserPref() { 
     	if (getLastUserStatement("State") !=null)
-    		return (getLastUserStatement("State").getStatedPreference());
+    		return (getLastUserStatement("State").getStatedValue());
     	return null;
     }
     
     function proposalFromUserState(userPref){
-    	more = userPref.getMore();
-    	less = userPref.getLess();
-    	if(more!= null){
-    		return (isAcceptable(createProposal(more,true)));
+    	if(userPref!= null){
+    		return (isAcceptable(createProposal(userPref,true)));
     	}
     	return false;  	
     }
@@ -564,27 +568,8 @@
 		 $agent  = getLastAgentStatement(uttType);
 		 $user  = getLastUserStatement(uttType);
 	
-		if ($user == null ||  $agent == null)
-			return false;
-					
-		if($agent.getStatedPreference().getMore() == null)
-			return ($agent.getStatedPreference().getLess() == $user.getStatedPreference().getLess() 
-				|| $agent.getStatedPreference().getLess() == $user.getStatedPreference().getMore()) ;
+		return ($agent.getStatedValue().equals($user.getStatedValue()));
 		
-		if($agent.getStatedPreference().getLess() == null)
-			return ($agent.getStatedPreference().getMore() == $user.getStatedPreference().getLess() 
-				|| $agent.getStatedPreference().getMore() == $user.getStatedPreference().getMore()) ;
-		
-		if($user.getStatedPreference().getMore() == null)
-			return ($user.getStatedPreference().getLess() == $agent.getStatedPreference().getLess() 
-				|| $user.getStatedPreference().getLess() == $agent.getStatedPreference().getMore()) ;
-		
-		if($user.getStatedPreference().getLess() == null)
-			return ($user.getStatedPreference().getMore() == $agent.getStatedPreference().getLess() 
-				|| $user.getStatedPreference().getMore() == $agent.getStatedPreference().getMore()) ;
-		
-		 
-		return($agent.equals($user));
 	}
 
 	function askUserPref(criterion){
@@ -607,13 +592,6 @@
 			return null;
 		return $negotiation.createProposal(value,isSelf);
 	}
-	function proposalFromPreference(preference, isSelf) {
-			if (preference == null)
-				return null;
-			else 	{
-				return createProposal(preference.getMore(), isSelf);
-			}			
-	}
 	
 	function getDiscussedCriterion(){
 		return $negotiation.getContext().getCurrentDiscussedCriterion();
@@ -630,8 +608,6 @@
 	function lastAcceptedProposal(){
 			if($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED)!=null)
 				return ($negotiation.getContext().getLastProposal(Packages.fr.limsi.negotiate.Proposal.Status.ACCEPTED));
-			else
-				return createProposal($more, true);
 	}
 	
 	function getOptionWithValue(criterion){
@@ -656,19 +632,9 @@
 		return ($negotiation.generateRandomOptionProposal());
 	}
 	
-	function reactToProposal(proposal){
-		if (proposal != null)
-			return ($negotiation.reactToProposal(proposal));
-		
-	}
-	
 	function isAcceptable(proposal){
 		return $negotiation.isAcceptable(proposal);
-	}
-	
-	function reactToRejectedProp(proposal){
-		return $negotiation.reactToRejectedProp(proposal);
-	}
+	}	
 	
 	function isDom(){
 		return(relation> 0)

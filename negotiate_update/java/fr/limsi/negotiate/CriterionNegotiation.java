@@ -2,6 +2,7 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+import fr.limsi.negotiate.PreferenceStatement.Acceptable;
 import fr.limsi.negotiate.Proposal.Status;
 
 
@@ -133,11 +134,11 @@ public class CriterionNegotiation<C extends Criterion> {
 		return other;
 	}
 
-	public void addOther(C criterion, Boolean isLikable) {
+	public void addOther(C criterion, Acceptable isLikable) {
 		this.getOther().addValue(criterion, isLikable);
 	}
 
-	public void addOAS(C criterion, Boolean isLikable) {
+	public void addOAS(C criterion, Acceptable isLikable) {
 		getOas().addValue(criterion, isLikable);
 	}
 
@@ -212,11 +213,8 @@ public class CriterionNegotiation<C extends Criterion> {
 				||model.getPreferences().contains(leastPref));
 
 	}
-	public boolean isInOther(C less, C more) {
-		ValuePreference<C> p = new ValuePreference<C> (less, more);
-		//		Class<? extends Criterion> c =  p.getType();
-		//		CriterionNegotiation<Criterion> cn = this.getCriterionNegotiation(c);
-		return (isIn(this.getOther(), p));
+	public boolean isInOther(C less) {
+		return (this.getOther().getAcceptableValues().contains(less) ||this.getOther().getNonAcceptableValues().contains(less) );
 	}
 
 	public boolean isInself(C less, C more) {
@@ -224,9 +222,10 @@ public class CriterionNegotiation<C extends Criterion> {
 		return (isIn(this.getSelf(), p));
 	}
 
-	public boolean isInOAS(C less, C more) {
-		ValuePreference<C> p = new ValuePreference<C> (less, more);
-		return (isIn(this.getOas(),p));
+	public boolean isInOAS(C less) {
+		return (this.getOas().getAcceptableValues().contains(less) ||
+				this.getOas().getNonAcceptableValues().contains(less) );
+
 
 	}
 
@@ -241,38 +240,6 @@ public class CriterionNegotiation<C extends Criterion> {
 
 	/** take as input a criterion value and returns the agent preference on it
 	 **/
-
-	public Optional<ValuePreference<C>> reactToCriterion(C criterion, List<C> negotiatedCriteria){
-		if(criterion.equals(this.getSelf().getMostPreferred()))
-			if(!isInOAS(null, criterion)|| negotiatedCriteria.contains(criterion))
-				return Optional.of(new ValuePreference<C> (null, criterion));
-		if(criterion.equals(this.getSelf().getLeastPreferred()))
-			if(!isInOAS(criterion, null)|| negotiatedCriteria.contains(criterion))
-			{
-				return Optional.of(new ValuePreference<C> (criterion, null));
-
-			}
-			else{
-				List<C> criteria = this.getSelf().sortCriteria();
-				for(int i = 0; i<criteria.indexOf(criterion); i++){
-					if(!isInOAS(criterion, criteria.get(i)))
-						return Optional.of(new ValuePreference<C>(criterion, criteria.get(i)));
-				}
-				for(int i = criteria.size()-1; i<criteria.indexOf(criterion) ; i--){
-					if(!isInOAS(criteria.get(i), criterion))
-						return  Optional.of(new ValuePreference<C>(criteria.get(i), criterion));
-				}
-			}	
-		// Everything has been said 
-		//		if (getPreference(getSelf(),getOas()) == null){
-		//			// Etudier la relation
-		//				//return Optional.of(new ValuePreference<C>(null, getMostPreffered()));
-		//			return Optional.empty();
-		//		}
-		return Optional.empty();
-
-
-	}
 
 	public C getMostPreffered() {
 		return this.getSelf().getMostPreferred();

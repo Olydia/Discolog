@@ -3,6 +3,8 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+import fr.limsi.negotiate.PreferenceStatement.Acceptable;
+
 
 /** Stores the preferences about values for a given criterion C, i.e. a list of Preferences<C>, i.e. a list of couples (less,more)
  * with less and more values of an enum C that implements Criterion.
@@ -50,11 +52,11 @@ public class CriterionPrefModel<C extends Criterion> extends PreferenceModel<C> 
 		add(new ValuePreference<C>(less, more));
 	}
 	
-	public void addValue(C value, Boolean isLikable){
-		if(isLikable)
-			getAcceptableValues().add(value);
-		else
+	public void addValue(C value, Acceptable isLikable){
+		if(isLikable.equals(Acceptable.FALSE))
 			getNonAcceptableValues().add(value);
+		else
+			getAcceptableValues().add(value);
 	}
 	/**
 	 * Return Boolean.TRUE if there is a preference about criterion, or Boolean.FALSE otherwise

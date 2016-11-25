@@ -19,16 +19,14 @@ abstract class PreferenceUtterance extends NegotiationUtterance {
 
    // for extensions
    protected PreferenceUtterance (Class<? extends PreferenceUtterance> cls, Disco disco, Boolean external, 
-         Class<? extends Criterion> criterion, Criterion less, Criterion more) { 
+         Class<? extends Criterion> criterion, Criterion value) { 
       super(cls, disco, external);
       if ( criterion != null ) setSlotValue("criterion", criterion);
-      if ( less != null ) setSlotValue("less", less);
-      if ( more != null ) setSlotValue("more", less);
+      if ( value != null ) setSlotValue("value", value);
    }
 
    @SuppressWarnings("unchecked")
    public Class<? extends Criterion> getCriterion () { return (Class<? extends Criterion>) getSlotValue("criterion"); }
-   public Criterion getLess () { return (Criterion) getSlotValue("less"); }
-   public Criterion getMore () { return (Criterion) getSlotValue("more"); }
+   public Criterion getValue () { return (Criterion) getSlotValue("value"); }
 
 }

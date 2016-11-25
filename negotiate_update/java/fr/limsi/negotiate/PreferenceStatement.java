@@ -3,7 +3,7 @@ package fr.limsi.negotiate;
 public class PreferenceStatement extends Statement {
 
 		private Criterion value;
-		private Boolean isLikable;
+		private Acceptable isLikable;
 		
 
 		private Class<? extends Criterion> type;
@@ -18,15 +18,21 @@ public class PreferenceStatement extends Statement {
 
 		@Override
 		public String toString() {
-			return "Statement [preference=" + value + ", external="
+			return "Statement [preference=" + value +  ", isAcceptable =" + isLikable + ", external="
 					+ external + ", type=" + type + ", utteranceType="
 					+ utteranceType + "]";
 		}
 
-		public PreferenceStatement(Criterion preference, Boolean isLikable, boolean external, String utteranceType) {
+		public PreferenceStatement(Criterion preference, Acceptable isLikable, boolean external, String utteranceType) {
 			super(external,utteranceType );
 			this.value = preference;
 			this.isLikable = isLikable;
+		}
+		public PreferenceStatement(Criterion preference, Boolean isLikable, boolean external, String utteranceType) {
+			super(external,utteranceType );
+			this.value = preference;
+			setIsLikable(isLikable);
+			
 		}
 	
 		public Criterion getStatedValue() {
@@ -34,13 +40,23 @@ public class PreferenceStatement extends Statement {
 		}
 		
 			
-		public Boolean getIsLikable() {
+		public Acceptable getIsLikable() {
 			return isLikable;
 		}
 
 		public void setIsLikable(Boolean isLikable) {
+			if (isLikable == null)
+				this.isLikable = Acceptable.TRUE;
+			else if(isLikable)
+				this.isLikable = Acceptable.UNKNOWN;
+				else 
+					this.isLikable = Acceptable.FALSE;
+		}
+		
+		public void setIsLikable(Acceptable isLikable) {
 			this.isLikable = isLikable;
 		}
+		
 		@Override
 		public boolean equals (Object obj) {
 			
@@ -67,4 +83,7 @@ public class PreferenceStatement extends Statement {
 			result = prime * result + ((isLikable == null) ? 0 : isLikable.hashCode());
 			return result;
 		}
+		
+		public static enum Acceptable { TRUE, FALSE, UNKNOWN }
+		
 }

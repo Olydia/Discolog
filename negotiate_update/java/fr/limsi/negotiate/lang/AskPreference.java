@@ -3,6 +3,7 @@ package fr.limsi.negotiate.lang;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.PreferenceStatement.Acceptable;
 
 public class AskPreference extends PreferenceUtterance {
 
@@ -14,16 +15,15 @@ public class AskPreference extends PreferenceUtterance {
 	   }
 	   
 	   public AskPreference (Disco disco, Boolean external, Class<? extends Criterion> criterion,
-	         Criterion less, Criterion more) { 
-	      super(AskPreference.class, disco, external, criterion, less, more);
+	         Criterion value) { 
+	      super(AskPreference.class, disco, external, criterion, value);
 	   }
 	   
 	   @Override
 	   protected void interpret () {
-	      PreferenceStatement statement = new AskStatement(getLess(), getMore(), null, getExternal(),"Ask");
-	      if (getCriterion() == null) 
-	    	  statement.setType(new ValuePreference<Criterion> (getLess(), getMore()).
-	    			  			getType());
+		   PreferenceStatement statement = new PreferenceStatement(getValue(),Acceptable.UNKNOWN , getExternal(),"Ask");
+		   if (getCriterion() == null) 
+	    	  statement.setType(getValue().getClass());
 		  else 
             statement.setType(getCriterion());    
 	      

@@ -1,6 +1,8 @@
 package fr.limsi.negotiate;
 
 import java.util.*;
+
+import fr.limsi.negotiate.PreferenceStatement.Acceptable;
 import fr.limsi.negotiate.Proposal.Status;
 
 /**
@@ -209,7 +211,7 @@ public class Negotiation<O extends Option> {
 	 * @param isLikable
 	 */
 
-	public void updateOtherMentalState(Criterion criterion, Boolean isLikable){
+	public void updateOtherMentalState(Criterion criterion, PreferenceStatement.Acceptable isLikable){
 		Class<? extends Criterion> type =  criterion.getClass();
 		if(type != null)
 			this.getCriterionNegotiation(type).addOther(criterion, isLikable);
@@ -221,7 +223,7 @@ public class Negotiation<O extends Option> {
 	 * @param isLikable
 	 */
 
-	public void updateOASMentalState(Criterion criterion, Boolean isLikable){
+	public void updateOASMentalState(Criterion criterion, PreferenceStatement.Acceptable isLikable){
 		Class<? extends Criterion> type =  criterion.getClass();
 
 		if(type != null)
@@ -293,26 +295,6 @@ public class Negotiation<O extends Option> {
 	 * This method allows to a submissive agent to react to a non acceptable proposal.
 	 */
 
-	@SuppressWarnings("unchecked")
-	public ValuePreference<Criterion> reactToRejectedProp(Proposal proposal){
-		Criterion value = null;
-		//this.criteriaNegotiation.get(0).getSelf().getPreferences().get(0);
-
-		if(proposal instanceof CriterionProposal){
-			value = (Criterion) proposal.getValue();
-
-
-		}
-		if(proposal instanceof OptionProposal){
-			value = leastScoredCriterion((O) proposal.getValue());
-
-		}
-		CriterionNegotiation<Criterion> model = getCriterionNegotiation(value.getClass());
-		return(model.reactToCriterion(value, context.comminicatedProposals(true,model.getCriterionType())).
-				orElse(new ValuePreference<Criterion>(value,
-						model.getMostPreffered())));
-
-	}
 	public List<Option> sortOptions( List<Option> options) {
 
 		// Supprimer les options qui contiennent au moins un critere rejeté.
@@ -479,24 +461,24 @@ public class Negotiation<O extends Option> {
 
 	}
 
-	public AskStatement askUserPreference (Class<? extends Criterion> c){
+	public PreferenceStatement askUserPreference (Class<? extends Criterion> c){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation(c);
 		if(model.getOther().getAcceptableValues().isEmpty() && model.getOther().getNonAcceptableValues().isEmpty()){
-			AskStatement ask =  new AskStatement(null, null, null, false, "Ask");
+			PreferenceStatement ask =  new PreferenceStatement(null, Acceptable.UNKNOWN, false, "Ask");
 			ask.setType(c);
 			return ask;
 		}
 		else{
 			for(Criterion crit: model.getSelf().sortCriteria()){
 				if(!model.getOther().getAcceptableValues().contains(c) || !model.getOther().getNonAcceptableValues().contains(c)){
-					AskStatement ask =  new AskStatement(crit, null, null, false, "Ask");
+					PreferenceStatement ask =  new PreferenceStatement(crit, Acceptable.UNKNOWN, false, "Ask");
 					ask.setType(c);
 					return ask;
 				}
 		 
 			}
 		}
-		AskStatement ask =  new AskStatement(null, null, null, false, "Ask");
+		PreferenceStatement ask =  new PreferenceStatement(null, Acceptable.UNKNOWN, false, "Ask");
 		ask.setType(c);
 		return ask;
 
@@ -504,47 +486,29 @@ public class Negotiation<O extends Option> {
 
 	public PreferenceStatement reactAsk(){
 
-		AskStatement user = null;
+		PreferenceStatement user = null;
 
 		if (this.context.getLastStatement("Ask",true) != null) {
-			user = (AskStatement) context.getLastStatement("Ask",true);
+			user = context.getLastStatement("Ask",true);
 
 		}
 		Class<? extends Criterion> utype = user.getType();
 		CriterionNegotiation<Criterion> model = getCriterionNegotiation(utype);
-		Criterion userStatement1 = user.getStatedValue();
-		Criterion userStatement2 = user.value2;
+		Criterion userStatement = user.getStatedValue();
 
 		// what kind of type do you like ?
-		if(userStatement1 == null && userStatement2 == null) {
+		if(userStatement == null) {
 			return (new PreferenceStatement(model.getTheCurrentMostPreffered(getDom()),
-					Boolean.TRUE, false, "State"));
+					new Boolean(true), false, "State"));
 			
 		}
 		// do you like c ?
-		if(userStatement1 == null || userStatement2 == null) {
-			Criterion c= null;
-			if (userStatement1 == null)
-				c =userStatement2;
-			if (userStatement2 == null)
-				c =userStatement1;
-			return (new PreferenceStatement(c,model.getSelf().isAcceptable(c, getDom()), false, "State"));
+		else  {
+			
+			return (new PreferenceStatement(userStatement,new Boolean(model.getSelf().isAcceptable(userStatement, getDom())), false, "State"));
 			
 		}
-		int moreScore = model.getSelf().getScore(userStatement1);
-		int lessScore = model.getSelf().getScore(userStatement2);
-		if(model.getSelf().isAcceptable(userStatement1, getDom()) || model.getSelf().isAcceptable(userStatement1, getDom())){
-		//do you like less or more ?
-			if(moreScore >= lessScore)
-				return (new PreferenceStatement(userStatement1,Boolean.TRUE, false, "State"));
-			else 
-				return (new PreferenceStatement(userStatement2,Boolean.TRUE, false, "State"));
-		}
-		else 
-			return (new PreferenceStatement(userStatement1,Boolean.FALSE, false, "State"));
-
 		
-
 	}
 
 	public PreferenceStatement reactUserStatement(String uttType){
@@ -574,15 +538,6 @@ public class Negotiation<O extends Option> {
 		return (new PreferenceStatement(best, Boolean.TRUE, false, "State"));
 	}
 
-	public ValuePreference<Criterion> reactToProposal(CriterionProposal p){
-		Criterion criterion = p.getValue();
-		CriterionNegotiation<Criterion> model = getCriterionNegotiation(criterion);
-
-		return (model.reactToCriterion(criterion, 
-				context.comminicatedProposals(true, model.criterionType)).
-				orElse(new ValuePreference<Criterion>(null, model.getMostPreffered())));
-	}
-
 	// This method checks for a criterion, if all the values have been stated in the dialogue.
 	public boolean statedValues(Class<? extends Criterion> criterion){
 		CriterionNegotiation<Criterion> model = this.getCriterionNegotiation
@@ -590,9 +545,9 @@ public class Negotiation<O extends Option> {
 		for(Criterion c: model.getSelf().getValues()){
 			if(!model.getOas().getAcceptableValues().contains(c) ||
 					!model.getOas().getNonAcceptableValues().contains(c))
-				return false;
+				return true;
 		}
-		return true;
+		return false;
 	}
 
 

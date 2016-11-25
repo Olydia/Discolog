@@ -12,7 +12,10 @@
 	\usepackage{array}
 	\usepackage[rflt]{floatflt}
 	\usepackage{makecell}
-	
+
+	\usepackage{xcolor, soul}
+	\sethlcolor{yellow}	
+
 	\renewcommand\theadalign{cb}
 	\renewcommand\theadfont{\bfseries}
 	\renewcommand\theadgape{\Gape[4pt]}
@@ -36,7 +39,68 @@
 	\begin{abstract}\vskip -20pt
 	  
 	\end{abstract}
-	
+
+\section{Preliminary introduction: what would the dialogue be without dominance}
+
+\subsection{Data structure: preferences for self}
+Let $P_{self}$ be the preferences of the agent, represented as set of directed acyclic graphs (DAG) for each criterion, computed from the list of binary preferences.
+
+For each value $v_i$ attached to criteria $c_i$ in proposal $x=(v_0,v_1,\ldots,v_m)$, $value(v_i)\in[-(n_i-1),(n-1)]$ is the score attached to $v_i$ in the preference graph (number of successors minus number of predecessors), with $n=card(D_{c_i})$
+
+E.g.: assume Dragon is a quiet and cheap Chinese restaurant. The utterance "Let us go the Dragon restaurant" corresponds to $propose(x)$ with $x=(quiet,cheap,chinese)$. "Let us go to a cheap restaurant" corresponds to $propose(x)$ with $x=(cheap)$.
+
+\subsection{Data structure: representation of other}
+Let $A_{other}$ be the list of acceptability values, computed from the previous interactions. Each element in $A_{other}$ is a triple $<criterion,value,acceptability>$ where $value\in D_{criterion}$ and $acceptability\in\{true,false,unknown\}$. The acceptability value is $true$ if and only if the agent knows, from a previous $state$ utterance in the negotiation, that the corresponding value for the given criterion is acceptable. Similarly, it is false only if the agent knows that this value is not acceptable.
+
+Similarly, let $A_{oas}$ (other about self) represent the set of acceptability values that have been comunicated \textbf{by the agent to its interlocutor} during the dialogue.
+
+For simplification, we note $A_{zzz}(x)$ the acceptability value for $x$ in the referenced model $zzz$ (other or oas).
+
+\subsection{Acceptability for self}
+
+We can compute a direct value for the acceptability for self:
+
+$$acceptability_{self}(x) = true\ iff\ \left(\sum_{i[1,card(x)]} rank(c_i)\times score(v_i)\right)\geq0, false\ otherwise$$
+
+Similarly to other and oas, we denote $A_{self}$ the acceptability set for self.
+
+\subsection{Basic decision}
+
+The basic decision algorithm for a given utterance $u$ with value $x$, given the current mental state $(A_s,A_o,A_oas...)$ would be the following:
+
+\begin{itemize}
+	\item If $u=ask$
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	\item If $u=state$
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	\item If $u=propose$
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	\item If $u=accept$
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	\item If $u=reject$
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+\end{itemize}
+
+\subsection{Dominance}
+
+However, we want to introduce the dominance. See next section.
+
+
 \section{Principle of dominance in negotiation}
 \par Dominance as a property of interpersonal relationship is defined as the power to produce intended effects, and the ability to influence the behavior of other person in the conversation. (BBurgoon et al.,1998).
 Moreover, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.(Rogers-Millar and Millar, 1979,Dunba and Burgoon, 2005). 
@@ -45,17 +109,79 @@ Moreover, in the context of communication, dominance is a dyadic variable where 
 
 \par Scholars of social psychology dedicated to the negotiation, already proved that the relation of dominance impact negotiators strategies in different ways. We distinguish these behaviors in two main categories or principles.
 
-\subsection{Principle 2: Self Vs Other}
-In DeDreu works, Submissive negotiator consider well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being. 
+\hl{Preliminary note: we have changed the order: principle 1 is now "self vs other", because it is much simpler than principle 2}
 
 
-=> w_self * score_s(u) + w_other * score_s(u)
+\section{Principle 1: Self Vs Other}
+In DeDreu works, submissive negotiator consider well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being. We propose implement this mechanism by balancing the satisfaction of self-preferences with the satisfaction of the other, during the decision making process.
 
-score \in [0,1]
+\subsection{Implementation}
+For a given utterance $u(x)$ that is a negotiation move ($propose(x)$, $reject(x)$ or $accept(x)$), we compute $score_s(u(x))\in[0,1]$ such that $score_s(u(x))=0$ when the proposed option of value $x$ is one of the least preferred choice and $1$ when it is one of the most preferred choice.
 
-\section{Principle 1}
+We then compute: 
 
-=> revoir pour coder deux parties : 1) choix du type , 2) choix du renoncement ?
+$$score_s(u(x)) = \frac{1}{\sum_{i[1,card(x)]} i} \sum_{i[1,card(x)]} rank(c_i)\times \frac{1}{card(D_{c_i})-1} \frac{score(v_i)+card(D_{c_i})-1}{2} $$
+
+or simply:
+
+$$score_s(u(x)) = normalize \left( \sum_{i[1,card(x)]} rank(c_i)\times normalize ( score(v_i) ) \right) $$
+
+
+Similarly, we compute:
+
+$$score_o(u(x)) = \left\{\begin{array}{ll}
+1 & \mathrm{if\ }A_{other}(x)\neq false\\
+0 & \mathrm{otherwise}
+\end{array}\right.$$
+
+Then, we compute decision value for the first principle as follows:
+
+$$principle1(u(x),P_{self},A_{other},dominance) = w_{self} * score_s(u(x)) + w_{other} * score_s(u(x))$$
+
+with $w_{self}$ and $w_{other}$ are values in $[0,1]$ defined after the dominance value such that:
+
+$$dominance = \frac{w_{self}}{w_{self}+w_{other}}$$
+
+Concretely, $w_{self}>>w_{other}$ when the agent is dominant, whereas $w_{self}\simeq w_{other}$ for a peer or submissive agent.
+
+
+\hl{Lydia would prefer to work in -1,1 : the formulaes would be easier and this does not change anything but it would be easier for the code}
+
+\hl{Lydia thinks that, maybe, $\alpha$ and $\beta$ (see below) could also be considered for Principle 1}
+
+
+\section{Principle 2}
+
+In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
+\begin{itemize}
+	\item Dominant negotiators show a higher level of demands than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
+	\item Submissive negotiators give a lower level of demand to low priority issues.
+\end{itemize} 
+
+Moreover, the literature shows that:
+\begin{itemize}
+	\item Powerful negotiators tend to make the first move. \hl{[refs]}
+	
+	$\rightarrow$ The dominant agent always starts the dialogue
+	
+	\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
+	
+	$\rightarrow$ when receiving an acceptable proposal, if there still are better non-rejected proposals, the dominant agent should make a counter-propose first.
+	
+	\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+	
+	$\rightarrow$ the dominant agent makes proposals, the submissive one makes asks, the peer agent should do both. To this purpose, we define a parameter $max\_stated$ that is the minimum of information required before making a proposal.\footnote{In addition, agents always propose if the agent states that a value is acceptable and it is also acceptable for itself} Moreover, a submissive agent will only make a propose if it knows an acceptable value for each criteria.
+\end{itemize} 
+
+
+\hl{Lydia and Nicolas are still not sure that it is possible to compute separately the utterance type and the utterance value... let's try!}
+
+\subsection{Choosing the utterance type}
+
+??
+
+
+\subsection{Choosing the utterance values}
 
 \subsection{Implementation}
 \begin{enumerate}
@@ -127,27 +253,12 @@ We obtain the sorted list of scores for each value of cuisine   $Cost{Scores}= \
 We can compute the acceptable values for the criteria cuisine with the function $acceptable(v)$ presented above. 
 For the submissive agent, because the criterion $Cost$ isn't important, all its values are acceptable: $Acceptables_{Cost}(submissive) = \{$Expensive, Affordable, Cheap$\}.$. However, for the dominant agent, the list of acceptable values is as follow: $Acceptables_{Cost}(submissive) = \{$Expensive$\}.$.
 
-\section{Principle: Lead of the negotiation}
 
-In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
-\begin{itemize}
-	\item Dominant negotiators show a higher level of demands than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
-	\item Submissive negotiators give a lower level of demand to low priority issues.
-\end{itemize} 
+\section{Decision}
 
-\begin{itemize}
-	\item Powerful negotiators tend to make the first move.
-	
-	$\rightarrow$ The dominant agent always starts the dialogue
-	
-	\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
-		
-	$\rightarrow$ when receiving an acceptable proposal, if there still are better non-rejected proposals, the dominant agent should make a counter-propose first.
-	
-	\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
-	
-	$\rightarrow$ the dominant agent makes proposals, the submissive one makes asks, the peer agent should do both. To this purpose, we define a parameter $max\_stated$ that is the minimum of information required before making a proposal.\footnote{In addition, agents always propose if the agent states that a value is acceptable and it is also acceptable for itself} Moreover, a submissive agent will only make a propose if it knows an acceptable value for each criteria.
-\end{itemize} 
+Finally, the agent decides for the utterance based on the relative weight of principle 1 and principle 2. For each utterance type $u$ and for each possible utterance value $x$, we can compute the utility of the utterance:
+
+$$utility(u(x)) = w_1 * principle1(u(x),P_{self},A_{other},dominance) + w_2 * principle2(u(x),dominance,mental\_state)$$
 
 
 % BIBLIO %

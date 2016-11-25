@@ -4,6 +4,7 @@ import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionProposal;
+import fr.limsi.negotiate.PreferenceStatement.Acceptable;
 import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.ProposalStatement;
 import fr.limsi.negotiate.Proposal.Status;
@@ -31,9 +32,9 @@ public class Propose extends ProposalUtterance {
 	  
 	  if(getProposal() instanceof CriterionProposal){
 			if (getExternal()) 
-				getNegotiation().updateOtherMentalState((Criterion) getProposal().getValue(), Boolean.TRUE);
+				getNegotiation().updateOtherMentalState((Criterion) getProposal().getValue(), Acceptable.TRUE);
 			else 
-				getNegotiation().updateOASMentalState((Criterion)getProposal().getValue(), Boolean.TRUE);
+				getNegotiation().updateOASMentalState((Criterion)getProposal().getValue(), Acceptable.TRUE);
 		}
    }
 }
