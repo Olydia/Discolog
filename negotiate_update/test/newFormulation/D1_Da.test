@@ -1,0 +1,30 @@
+Agent1 says "Let's go to a Chinese restaurant."
+
+	Agent2 says "Sorry, I'd rather choose something else, because I don't like Chinese restaurants."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+	Agent2 says "What kind of ambiance do you like?"
+
+Agent1 says "I like familial restaurants."
+
+	Agent2 says "I don't like familial restaurants."
+
+Agent1 says "Let's go to a familial restaurant."
+
+	Agent2 says "Sorry, I'd rather choose something else, because I don't like familial restaurants."
+
+Agent1 says "Let's go to a familial restaurant."
+
+	Agent2 says "What kind of cost do you like?"
+
+Agent1 says "I like cheap restaurants."
+
+	Agent2 says "Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+	Agent2 says "Okay. Let's go to the Jiliya."
+
+Agent1 says "Okay, I'll call to book a table."
+

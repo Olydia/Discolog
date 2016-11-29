@@ -120,7 +120,7 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	 * @param nbProposals: the number of opened proposals which has not been accepted yet
 	 */
 	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom,  int nbProposals){
-		int minProposals = 2; 
+		int minProposals = 1; 
 		int limitProps=1;
 		List <Class<? extends Criterion>>criteria = sortCriteria();
 		if (dom > 0 || nbProposals < minProposals)
