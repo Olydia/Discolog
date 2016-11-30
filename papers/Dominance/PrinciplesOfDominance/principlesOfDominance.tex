@@ -1,4 +1,4 @@
-	\documentclass{llncs}
+	\documentclass{article}
 	\usepackage[noend]{algpseudocode}
 	\usepackage{subcaption}
 	\usepackage{subfig} 
@@ -28,14 +28,7 @@
 	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
 	Nicolas Sabouret\inst{1} }
 	
-	\institute{LIMSI-CNRS, UPR 3251, Orsay, France \\
-	Universit\'e Paris-Sud, Orsay, France \\
-	\email{\{ouldouali, nicolas.sabouret\}@limsi.fr}
-	\and
-	Worcester Polytechnic Institute\\ Worcester, Massachusetts, USA\\
-	\email{rich@wpi.edu}
-	}
-	\maketitle 
+
 	\begin{abstract}\vskip -20pt
 	  
 	\end{abstract}
@@ -60,7 +53,7 @@ For simplification, we note $A_{model}(x)$ the acceptability value for $x$ in th
 
 We can compute a direct value for the acceptability for self:
 
-$$acceptability_{self}(x) = true\ iff\ \left(\sum_{i[1,card(x)]} rank(c_i)\times score(v_i)\right)\geq0, false\ otherwise$$
+$$acceptability_{self}(x) = \left(\sum_{i[1,card(x)]} rank(c_i)\times score(v_i)\right)\geq0$$
 
 Similarly to other and OAS, we denote $A_{self}$ the acceptability set for self.
 
@@ -150,7 +143,7 @@ $$score_o(u(x)) = \left\{\begin{array}{ll}
 
 Then, we compute a decision value for the first principle as follows:
 
-$$principle1(u(x),P_{self},A_{other},dominance) = w_{self} * score_s(u(x)) + w_{other} * score_s(u(x))$$
+$$principle1(u(x),P_{self},A_{other},dominance) = w_{self} * score_o(u(x)) + w_{other} * score_s(u(x))$$
 
 with $w_{self}$ and $w_{other}$ are values in $[0,1]$ defined after the dominance value such that:
 
@@ -167,31 +160,30 @@ Concretely, $w_{self}>>w_{other}$ when the agent is dominant, whereas $w_{self}\
 \section{Principle 2}
 
 In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
+
+
+\textbf{Representation of demands}
 \begin{itemize}
 	\item Dominant negotiators show a higher level of demand than the submissive ones. In addition, submissive negotiator's demand decrease over time. 
 	\item Submissive negotiators give a lower level of demand to low priority issues.
 \end{itemize} 
 
-Moreover, the literature shows that:
+
+
+\textbf{Control the flow of the negotiation}
 \begin{itemize}
 	\item Powerful negotiators tend to make the first move. \cite{magee2007power}
-	
-	$\rightarrow$ The dominant agent always starts the dialogue
-	
+
 	\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
-	
-	$\rightarrow$ when receiving an acceptable proposal, if there still are better non-rejected proposals, the dominant agent should make a counter-propose first.
-	
+
 	\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
 	
-	$\rightarrow$ the dominant agent makes proposals, the submissive one makes asks, the peer agent should do both. To this purpose, we define a parameter $max\_stated$ that is the minimum of information required before making a proposal.\footnote{In addition, agents always propose if the agent states that a value is acceptable and it is also acceptable for itself} Moreover, a submissive agent will only make a propose if it knows an acceptable value for each criteria.
 \end{itemize} 
 
+\subsection{Implementation}
+We propose to implement values that reproduce agent level of demand with respect of its perception of dominance. Dominant agent is more demanding and restricted list of preferences whereas, submissive agent is has a larger set of preferences. Moreover, his level of demand decreases over time.
 
-\hl{Lydia and Nicolas are still not sure that it is possible to compute separately the utterance type and the utterance value... let's try!}
-
-
-\subsection{Choosing the utterance type}
+\subsubsection{Choosing the utterance type}
 The decision tree proposed here is inspired from the current implementation. 
 
 \begin{itemize}
@@ -284,7 +276,7 @@ The decision tree proposed here is inspired from the current implementation.
 - $OpenNewCriterion$: opens a new topic of negotiation, which is a new criterion to choose an option.
 
 
-\subsection{Choosing the utterance values}
+\subsubsection{Choosing the utterance values}
 The choice of the utterance value, depends both on the current state of negotiation (the mental state) and the representation of preferences. We present first how the preferences on values are computed during the negotiation with respect of principles extracted for psychology scholars. 
 Second, we present how the values of utterances are affected with respect of the current state of the negotiation.
 \subsubsection{Implementation: compute a value of preferences}

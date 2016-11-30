@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[noend]{algpseudocode}
+\usepackage{subcaption}
+\usepackage{subfig} 
+\usepackage{usual}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{eulervm}
+\usepackage{fontenc}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[rflt]{floatflt}
+\usepackage{makecell}
+
+\usepackage{xcolor, soul}
+\sethlcolor{yellow}	
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+%\pagestyle{plain}
+%
+\begin{document}
+	\title{\vskip -10pt}
+	
+	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
+		Nicolas Sabouret\inst{1} }
+	
+	
+	\begin{abstract}\vskip -20pt
+		
+	\end{abstract}
+	\begin{itemize}
+\item If $u =ask $ 
+\begin{itemize}
+	\item\textbf{state}
+	\subitem $utility(ask) = 1$ \textbf{ if } $ isSub_{self}$ \textbf{ and } {$\forall x \in C_{x} /$ $ A_{Other} (x) = unkown$ }
+
+	
+	\item \textbf{propose}	
+	\subitem $utility(ask) = 1$ \textbf{ if } $isSub_{Self}$ \textbf{ and } $isMaxProposed()$ (see the definition bellow)
+
+	
+	\item \textbf{accept}	
+	\subitem $utility(ask) = 1$ \textbf{ if } $isSub_{Self}$
+
+	
+	\item \textbf{reject}	
+	\subitem $utility(ask) =1 $ \textbf{ if } $\neg isDom_{Self}$ \textbf{ and } $x^{-1}$ is an option.
+
+\end{itemize}
+\item If $u =state$
+\begin{itemize}
+		\item $utility(ask) = 1$
+		\item \textbf{state}
+			\subitem $utility(state) = 1$ \textbf{ if } $ \exists y \in C_{x^{-1}} / A_{OAS} (x) = unkown$ \textbf{ and } $ (isSub_{self}$  \textbf{ or } $\neg maxStatements)$
+
+		\item \textbf{accept}
+			\subitem $utility(state) = 1$ \textbf{ if } $isPeer_{Self}$
+
+		\item \textbf{reject}
+			\subitem $utility(state) = 1$ \textbf{ if } $isPeer_{Self}$
+				\item \textbf{state}
+				
+
+\end{itemize}	
+
+	\item If $u =propose$
+	\begin{itemize}
+		\item \textbf{state}
+			\subitem $utility(propose) = 1$ \textbf{ if } $\neg isSub_{self}$ \textbf{ and } ($maxStatements$ \textbf{ or } $A_{Self} (x^{-1}) = true$
+
+		\item \textbf{propose}
+			\subitem $utility(propose) = 1$ \textbf{ if } $A_{Self} (x^{-1})= false$ \textbf{ and } $isDom_{self}$
+
+		\item \textbf{accept}
+			\subitem $utility(propose) = 1$ \textbf{ if } $ \neg isisSub_{Self}$ \textbf{ and } $x^{-1}$ is a value of criterion. 
+			\subitem $utility(propose) = 0$  \textbf{ if } $isSub_{Self}$ \textbf{ and } $OpenNewCriterion \not= null$.
+		\item \textbf{reject}
+		\subitem $utility(propose) = 1$ \textbf{ if } $isDom_{Self}$
+
+		
+		
+	\end{itemize}
+	
+		\item If $u =accept$
+		\begin{itemize}
+				\item \textbf{propose}	
+				\subitem $utility(accept) = 1$ \textbf{ if } $ \neg isDom_{Self}$ \textbf{ and }  $A_{Self} (x^{-1}) = true$ 
+
+			
+		\end{itemize}
+
+\item If $u =reject$
+\begin{itemize}
+	\item \textbf{propose}	
+	\subitem $utility(reject) = 1$  \textbf{ if } $A_{Self} (x^{-1}) = false$ \textbf{ and } $\neg isDom_{Self}$.
+
+
+\end{itemize}
+
+
+\end{itemize}
+\end{document}
