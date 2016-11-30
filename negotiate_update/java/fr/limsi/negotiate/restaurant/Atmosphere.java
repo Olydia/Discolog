@@ -2,13 +2,13 @@ package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.Criterion;
 
-public enum Ambiance implements Criterion{
+public enum Atmosphere implements Criterion{
 
-	LIVELY, QUIET, ROMANTIC, FAMILIAL ;
+	LIVELY, QUIET, ROMANTIC, FAMILY ;
 
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
-		return (Ambiance.values());
+		return (Atmosphere.values());
 	}
 
 	@Override

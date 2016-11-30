@@ -28,15 +28,15 @@ public class TestRestaurant {
 		user_cost.add(new ValuePreference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
 
 		// 1.3 Preference model on Ambiance 
-		CriterionPrefModel<Ambiance> user_ambiance = new CriterionPrefModel<Ambiance>();
-		user_ambiance.setType(Ambiance.class);
-		user_ambiance.add(new ValuePreference<Ambiance>(Ambiance.QUIET, Ambiance.LIVELY));
+		CriterionPrefModel<Atmosphere> user_ambiance = new CriterionPrefModel<Atmosphere>();
+		user_ambiance.setType(Atmosphere.class);
+		user_ambiance.add(new ValuePreference<Atmosphere>(Atmosphere.QUIET, Atmosphere.LIVELY));
 		/*1. Define the  preferences on Restaurant criteria */	
 
 		CriteriaClassPrefModel<Restaurant> user_criteria = new CriteriaClassPrefModel<Restaurant>(); 
 		user_criteria.setType(Restaurant.class); // Its is not the idial solution but I have to get the type of an option 
 		user_criteria.add(new CriterionPreference(Cost.class, Cuisine.class));
-		user_criteria.add(new CriterionPreference(Ambiance.class,Cost.class));
+		user_criteria.add(new CriterionPreference(Atmosphere.class,Cost.class));
 
 		//System.out.println(lydia_criteria.getMostPreferred() + "  " + lydia_criteria.getLeastPreferred());
 		//		/*2. Define the agent mental state on each criterion (self pref, user pref, proposals */		
@@ -46,7 +46,7 @@ public class TestRestaurant {
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<Cuisine>(Cuisine.class);
 		cuisine.setSelfPreferences(user_cuisine);
 
-		CriterionNegotiation<Ambiance> ambiance = new CriterionNegotiation<Ambiance>(Ambiance.class);
+		CriterionNegotiation<Atmosphere> ambiance = new CriterionNegotiation<Atmosphere>(Atmosphere.class);
 		ambiance.setSelfPreferences(user_ambiance);
 
 		/*3. Create a nogotiation on restaurant */

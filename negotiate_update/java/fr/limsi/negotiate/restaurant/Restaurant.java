@@ -7,122 +7,122 @@ import fr.limsi.negotiate.Option;
 
 public enum Restaurant implements Option {
 
-	PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.QUIET),
+	PARISIEN (Cuisine.FRENCH, Cost.EXPENSIVE, Atmosphere.QUIET),
 	
-	GRAMOPHONE (Cuisine.FRENCH, Cost.EXPENSIVE, Ambiance.LIVELY),
+	GRAMOPHONE (Cuisine.FRENCH, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	VICTOR(Cuisine.FRENCH, Cost.CHEAP, Ambiance.QUIET),
+	VICTOR(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET),
 	
-	BEAUREPAIRE(Cuisine.FRENCH, Cost.CHEAP, Ambiance.LIVELY),
+	BEAUREPAIRE(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.LIVELY),
 	
-	MAGOROKO (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.LIVELY),
+	MAGOROKO (Cuisine.JAPANESE, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	TOKYO (Cuisine.JAPANESE, Cost.EXPENSIVE, Ambiance.QUIET),
+	TOKYO (Cuisine.JAPANESE, Cost.EXPENSIVE, Atmosphere.QUIET),
 	
-	SAMURA (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.LIVELY),
+	SAMURA (Cuisine.JAPANESE, Cost.CHEAP, Atmosphere.LIVELY),
 	
-	MIZUSHI (Cuisine.JAPANESE, Cost.CHEAP, Ambiance.QUIET),
+	MIZUSHI (Cuisine.JAPANESE, Cost.CHEAP, Atmosphere.QUIET),
 	
-	DRAGON (Cuisine.CHINESE, Cost.CHEAP, Ambiance.LIVELY),
+	DRAGON (Cuisine.CHINESE, Cost.CHEAP, Atmosphere.LIVELY),
 	
-	YING (Cuisine.CHINESE, Cost.EXPENSIVE, Ambiance.LIVELY),
+	YING (Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	YONG (Cuisine.CHINESE, Cost.EXPENSIVE, Ambiance.QUIET),
+	YONG (Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.QUIET),
 		
-	JILIYA (Cuisine.CHINESE, Cost.CHEAP, Ambiance.QUIET),
+	JILIYA (Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET),
 	
-	PAPELLI (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.LIVELY),
+	PAPELLI (Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.LIVELY),
 	
-	SALENTO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.LIVELY),
+	SALENTO (Cuisine.ITALIAN, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	ALBACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Ambiance.QUIET),
+	ALBACIO (Cuisine.ITALIAN, Cost.EXPENSIVE, Atmosphere.QUIET),
 		
-	CIASA_MIA (Cuisine.ITALIAN, Cost.CHEAP, Ambiance.QUIET),
+	CIASA_MIA (Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.QUIET),
 	
-	CAPPADOCE (Cuisine.TURKISH, Cost.CHEAP, Ambiance.LIVELY),
+	CAPPADOCE (Cuisine.TURKISH, Cost.CHEAP, Atmosphere.LIVELY),
 		
-	SIZIN (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.QUIET),
+	SIZIN (Cuisine.TURKISH, Cost.EXPENSIVE, Atmosphere.QUIET),
 		
-	BARAK (Cuisine.TURKISH, Cost.CHEAP, Ambiance.QUIET),
+	BARAK (Cuisine.TURKISH, Cost.CHEAP, Atmosphere.QUIET),
 	
-	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Ambiance.LIVELY),
+	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	ALBERT (Cuisine.FRENCH, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	ALBERT (Cuisine.FRENCH, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	GASTON (Cuisine.FRENCH, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	GASTON (Cuisine.FRENCH, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
-	TAOKAN (Cuisine.CHINESE, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	TAOKAN (Cuisine.CHINESE, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	KIGNA (Cuisine.CHINESE, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	KIGNA (Cuisine.CHINESE, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
-	TAVOLINO (Cuisine.ITALIAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	TAVOLINO (Cuisine.ITALIAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	TRINFO (Cuisine.ITALIAN, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	TRINFO (Cuisine.ITALIAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
-	OTTOMAN(Cuisine.TURKISH, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	OTTOMAN(Cuisine.TURKISH, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	KIBELLE(Cuisine.TURKISH, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	KIBELLE(Cuisine.TURKISH, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
-	YOSHI (Cuisine.JAPANESE, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	YOSHI (Cuisine.JAPANESE, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	SAKURA (Cuisine.JAPANESE, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	SAKURA (Cuisine.JAPANESE, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 	 
-	 ANAHUACALLI(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.LIVELY), 
+	 ANAHUACALLI(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 
-	 AZTECA(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.QUIET), 
+	 AZTECA(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.QUIET), 
 
-	 BOCAMEXA(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.ROMANTIC), 
+	 BOCAMEXA(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.ROMANTIC), 
 
-	 PAPPASITOS(Cuisine.MIXICAN, Cost.EXPENSIVE, Ambiance.FAMILIAL), 
+	 PAPPASITOS(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.FAMILY), 
 
-	 FAJITAS(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.LIVELY), 
+	 FAJITAS(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.LIVELY), 
 
-	 CHIPOTLE(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.QUIET), 
+	 CHIPOTLE(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.QUIET), 
 
-	 OMIXICO(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.ROMANTIC), 
+	 OMIXICO(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.ROMANTIC), 
 
-	 ELRANCHO(Cuisine.MIXICAN, Cost.CHEAP, Ambiance.FAMILIAL), 
+	 ELRANCHO(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.FAMILY), 
 
-	 CHIDO(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.LIVELY), 
+	 CHIDO(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
 
-	 ELNOPAL(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.QUIET), 
+	 ELNOPAL(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
 
-	 OTACOS(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	 OTACOS(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	 ELGRINGO(Cuisine.MIXICAN, Cost.AFFRODABLE, Ambiance.FAMILIAL), 
+	 ELGRINGO(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
-	 ITO(Cuisine.KOREAN, Cost.EXPENSIVE, Ambiance.LIVELY), 
+	 ITO(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 
-	 SOURA(Cuisine.KOREAN, Cost.EXPENSIVE, Ambiance.QUIET), 
+	 SOURA(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.QUIET), 
 
-	 SONGSAN(Cuisine.KOREAN, Cost.EXPENSIVE, Ambiance.ROMANTIC), 
+	 SONGSAN(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.ROMANTIC), 
 
-	 ODORI(Cuisine.KOREAN, Cost.EXPENSIVE, Ambiance.FAMILIAL), 
+	 ODORI(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.FAMILY), 
 
-	 JANTCHI(Cuisine.KOREAN, Cost.CHEAP, Ambiance.LIVELY), 
+	 JANTCHI(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.LIVELY), 
 
-	 KOHYANG(Cuisine.KOREAN, Cost.CHEAP, Ambiance.QUIET), 
+	 KOHYANG(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.QUIET), 
 
-	 MAROU(Cuisine.KOREAN, Cost.CHEAP, Ambiance.ROMANTIC), 
+	 MAROU(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.ROMANTIC), 
 
-	 SODAM(Cuisine.KOREAN, Cost.CHEAP, Ambiance.FAMILIAL), 
+	 SODAM(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY), 
 
-	 SAMBUJA(Cuisine.KOREAN, Cost.AFFRODABLE, Ambiance.LIVELY), 
+	 SAMBUJA(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
 
-	 SEOUL(Cuisine.KOREAN, Cost.AFFRODABLE, Ambiance.QUIET), 
+	 SEOUL(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
 
-	 DOKKEBI(Cuisine.KOREAN, Cost.AFFRODABLE, Ambiance.ROMANTIC), 
+	 DOKKEBI(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	 SEJONG(Cuisine.KOREAN, Cost.AFFRODABLE, Ambiance.FAMILIAL);
+	 SEJONG(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.FAMILY);
 	
 	public final Cuisine cuisine;
 	public final Cost cost;
-	public final Ambiance ambiance;
+	public final Atmosphere ambiance;
 
 	@SuppressWarnings("serial")
-	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(Cost.class); add(Cuisine.class); add(Ambiance.class); }};
+	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(Cost.class); add(Cuisine.class); add(Atmosphere.class); }};
 	
-	Restaurant (Cuisine cuisine, Cost cost, Ambiance ambiance) {
+	Restaurant (Cuisine cuisine, Cost cost, Atmosphere ambiance) {
 		this.cuisine = cuisine;
 		this.cost = cost;
 		this.ambiance = ambiance;
@@ -131,7 +131,7 @@ public enum Restaurant implements Option {
 	@Override
 	public Criterion getValue (Class<? extends Criterion> c) {
 		return c == Cuisine.class ? cuisine :
-			c == Cost.class ? cost : c == Ambiance.class? ambiance : null; // throw error? 
+			c == Cost.class ? cost : c == Atmosphere.class? ambiance : null; // throw error? 
 	}
 
 	@Override
