@@ -1,170 +1,230 @@
-\documentclass{article}
-	\usepackage[noend]{algpseudocode}
-	\usepackage{subcaption}
-	\usepackage{subfig} 
-	\usepackage{usual}
-	\usepackage{amsmath}
-	\usepackage{graphicx}
-	\usepackage{eulervm}
-	\usepackage{fontenc}
-	\usepackage{mathrsfs}
-	\usepackage{multirow}
-	\usepackage{array}
-	\usepackage[rflt]{floatflt}
-	\usepackage{makecell}
-	\usepackage{breqn}
-	\usepackage{xcolor, soul}
-	\sethlcolor{yellow}	
-
-	\renewcommand\theadalign{cb}
-	\renewcommand\theadfont{\bfseries}
-	\renewcommand\theadgape{\Gape[4pt]}
-	\renewcommand\cellgape{\Gape[4pt]}
-	%\pagestyle{plain}
-	%
-	\begin{document}
-	\title{\vskip -10pt}
+	\documentclass{article}
+		\usepackage[noend]{algpseudocode}
+		\usepackage{subcaption}
+		\usepackage{subfig} 
+		\usepackage{usual}
+		\usepackage{amsmath}
+		\usepackage{graphicx}
+		\usepackage{eulervm}
+		\usepackage{fontenc}
+		\usepackage{mathrsfs}
+		\usepackage{multirow}
+		\usepackage{array}
+		\usepackage[rflt]{floatflt}
+		\usepackage{makecell}
+		\usepackage{breqn}
+		\usepackage{xcolor, soul}
+		\sethlcolor{yellow}	
+		\usepackage{pbox}
 	
-	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
-	Nicolas Sabouret\inst{1} }
+		\renewcommand\theadalign{cb}
+		\renewcommand\theadfont{\bfseries}
+		\renewcommand\theadgape{\Gape[4pt]}
+		\renewcommand\cellgape{\Gape[4pt]}
+		%\pagestyle{plain}
+		%
+		\begin{document}
+		\title{\vskip -10pt}
+		
+		\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
+		Nicolas Sabouret\inst{1} }
+		
 	
-
-\section{Data structures}
-
-\subsection{Preferences for self}
-Let $P_{self}$ be the preferences of the agent, represented as set of directed acyclic graphs (DAG) for each criterion, computed from the list of binary preferences.
-
-For each value $v_i$ attached to criteria $c_i$ in proposal $x=(v_0,v_1,\ldots,v_m)$, $Satisfaction_{self}(v_i)\in[0, 1]$ is the score of satisfiability attached to $v_i$ in the preference graph, such that $Satisfaction_{self}(v_i) =0$ if $xv_i$ is the least preferred value and $1$ when it is the most preferred value.
-
-$$Satisfaction_{self}(v_i) = 1 - \left(\frac{|v_j / i \not= j, P(v_i,v_j) \in P_{self}|}{n-1}\right)$$
-, with $n=card(D_{c_i})$. 
-
-Options are represented as a set of values for each criterion. For example $Dragon=(quiet,cheap,chinese)$. We thus compute the satisfaction of an option as the aggregation  of the criteria satisfaction:  
-$$Satisfaction_{self}(o) = \left(\sum_{i[1,card(x)]} Satisfaction_{self}(c_i)\times  Satisfaction_{self}(v_i)\right)$$
-
-
-
-
-\subsection{Representation of other}
-Let $P_{other}$ be the list of other preferences, computed from the previous interactions. Each element in $P_{Other}$ is a triple $<criterion,value,satisfaction>$ where $value\in D_{criterion}$ and $satisfaction\in\{true,false,unknown\}$. The satisfaction value is $true$ if and only if the agent knows, from a previous $state$ utterance in the negotiation, that the corresponding value for the given criterion satisfies other preferences . Similarly, it is false only if the agent knows that this value is not satisfiable.
-
-Similarly, let $P_{OAS}$ (other about self) represent the set of values that have been communicated \textbf{by the agent to its interlocutor} during the dialogue.
-
-
-We compute the $Satisfaction(x)$ in the $Other, OAS$ from preceding knowledge:
-	$$Satisfaction_{model}(x) = \left\{\begin{array}{ll}
-		0 & \mathrm{if\ }P_{model}(x)= false\\
-		1 & \mathrm{otherwise}
-		\end{array}\right.$$, with $ model \in \{Other, OAS\}$.
-
-%		\subsection{Acceptability for self}
-%		
-%		We can compute a direct value for the acceptability for self:
-%		
-%		$$acceptability_{self}(x) = \left(\sum_{i[1,card(x)]} rank(c_i)\times score(v_i)\right)\geq0$$
-%		
-%		Similarly to other and OAS, we denote $A_{self}$ the acceptability set for self.
-%		
-
-
-\section{Principle of dominance in negotiation}
-\par Dominance as a property of interpersonal relationship is defined as the \textbf{power} to produce intended effects, and the ability to influence the behavior of other person in the conversation. (Burgoon et al.,1998).
-Moreover, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.(Rogers-Millar and Millar, 1979,Dunba and Burgoon, 2005). 
-
-\par Such behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contribution may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified (K,Zablotskaya). Giving these contributions to the conversation, several researches get interested to detect  behaviors related to the dominance during the conversation. In our work, we focus essentially on the context of conversations of negotiation, where several researches already proved the impact of dominance on the negotiation(VAN KLEEF, 2005, De Dreu, 1995). 
-
-\par Scholars of social psychology dedicated to the negotiation, already proved that the relation of dominance impact negotiators strategies in different ways. We distinguish these behaviors in two main categories or principles.
-
-%\hl{Preliminary note: we have changed the order: principle 1 is now "self vs other", because it is much simpler than principle 2}
-
-
-\section{Principle 1: Self Vs Other}
-Scholars in psychology already demonstrate that the relation of dominance affect their motivation in maximizing self preferences versus other preferences. We took an interest in DeDreu work in social value orientation \textit{(i.e  individual differences in	how people evaluate outcomes for themselves and others	in interdependent situation)} on negotiator behavior. We keep three main mechanisms:
-\begin{enumerate}
-	\item Submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.
-	\item Dominant negotiators show a greater levels of demand than the submissive one. Moreover, submissive negotiators show a \textbf{greater decline} of their preferences after the second round of negotiation. 
-	\item Submissive negotiators conceded more on low priority issues.
-\end{enumerate}   
-
-
-
-
-\subsection{Implementation}
-We propose an implementation for each mechanism:
-
-\textbf{1.} For the first mechanism we propose to implement a function capable to balance the satisfaction of self-preferences with the satisfaction of the other, during the decision making process.
-We define $w_{Self}, w_{Other}  \in [0, 1]$ as the weight the agent assign to the satisfaction of respectively  self preferences and other preferences, such that $w_{Self}+ w_{Other} = 1$. Thus, the relation of dominance $dom = w_{Self}$.
-
-Therefore, for a given value $x$,  we compute a decision value as follows:
-\begin{dmath}
-$$principle1(x,P_{Self},P_{Other}) = w_{Self} * Satisfaction_{Self}(x) + w_{Other} * Satisfaction_{Other}(x))$$
-\end{dmath}
-
-\textbf{2.} When the negotiation is not converging, the agent should make concessions in his decision making, which can be interpreted as reducing the weight of its self satisfaction. We propose thus, to update $ w_{Self}$ to reduce over negotiation rounds. 
-
-
-	$$w_{Self} (t) = \left\{\begin{array}{ll}
-	max(0.5,dom) & \mathrm{if\ }(t<=n)\\
-	max(0, \frac{-k}{dom} (t-n)+ max(0.5,dom)) & \mathrm{otherwise}
-	\end{array}\right.$$ With: 
+	\section{Data structures}
+	
+	\subsection{Preferences for self}
+	Let $P_{self}$ be the preferences of the agent, represented as set of directed acyclic graphs (DAG) for each criterion, computed from the list of binary preferences.
+	
+	For each value $v_i$ attached to criteria $c_i$ in proposal $x=(v_0,v_1,\ldots,v_m)$, $Satisfaction_{self}(v_i)\in[0, 1]$ is the score of satisfiability attached to $v_i$ in the preference graph, such that $Satisfaction_{self}(v_i) =0$ if $xv_i$ is the least preferred value and $1$ when it is the most preferred value.
+	
+	$$Satisfaction_{self}(v_i) = 1 - \left(\frac{|v_j / i \not= j, P(v_i,v_j) \in P_{self}|}{n-1}\right)$$
+	, with $n=card(D_{c_i})$. 
+	
+	Options are represented as a set of values for each criterion. For example $Dragon=(quiet,cheap,chinese)$. We thus compute the satisfaction of an option as the aggregation  of the criteria satisfaction:  
+	$$Satisfaction_{self}(o) = \left(\sum_{i[1,card(x)]} Satisfaction_{self}(c_i)\times  Satisfaction_{self}(v_i)\right)$$
+	
+	
+	
+	
+	\subsection{Representation of other}
+	Let $P_{other}$ be the list of other preferences, computed from the previous interactions. Each element in $P_{Other}$ is a triple $<criterion,value,satisfaction>$ where $value\in D_{criterion}$ and $satisfaction\in\{true,false,unknown\}$. The satisfaction value is $true$ if and only if the agent knows, from a previous $state$ utterance in the negotiation, that the corresponding value for the given criterion satisfies other preferences . Similarly, it is false only if the agent knows that this value is not satisfiable.
+	
+	Similarly, let $P_{OAS}$ (other about self) represent the set of values that have been communicated \textbf{by the agent to its interlocutor} during the dialogue.
+	
+	
+	We compute the $Satisfaction(x)$ in the $Other, OAS$ from preceding knowledge:
+		$$Satisfaction_{model}(x) = \left\{\begin{array}{ll}
+			0 & \mathrm{if\ }P_{model}(x)= false\\
+			1 & \mathrm{otherwise}
+			\end{array}\right.$$, with $ model \in \{Other, OAS\}$.
+	
+	%		\subsection{Acceptability for self}
+	%		
+	%		We can compute a direct value for the acceptability for self:
+	%		
+	%		$$acceptability_{self}(x) = \left(\sum_{i[1,card(x)]} rank(c_i)\times score(v_i)\right)\geq0$$
+	%		
+	%		Similarly to other and OAS, we denote $A_{self}$ the acceptability set for self.
+	%		
+	
+	
+	\section{Principles of dominance in negotiation}
+	%	\par Dominance as a property of interpersonal relationship is defined as the \textbf{power} to produce intended effects, and the ability to influence the behavior of other person in the conversation. (Burgoon et al.,1998).
+	%	Moreover, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.(Rogers-Millar and Millar, 1979,Dunba and Burgoon, 2005). 
+	%	
+	%	\par Such behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contribution may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified (K,Zablotskaya). Giving these contributions to the conversation, several researches get interested to detect  behaviors related to the dominance during the conversation. In our work, we focus essentially on the context of conversations of negotiation, where several researches already proved the impact of dominance on the negotiation(VAN KLEEF, 2005, De Dreu, 1995). 
+	%	
+	%	\par Scholars of social psychology dedicated to the negotiation, already proved that the relation of dominance impact negotiators strategies in different ways. We distinguish these behaviors in two main categories or principles.
+	
+	%\hl{Preliminary note: we have changed the order: principle 1 is now "self vs other", because it is much simpler than principle 2}
+	
+	
+	\subsection{Principle 1: Satisfaction of Self preferences Vs Other preferences}
+	Scholars in psychology already demonstrate that the relation of dominance affect negotiator's motivation in maximizing self preferences versus other preferences. We took an interest in DeDreu work in which he studies the impact of social value orientation \textit{(i.e  individual differences in	how people evaluate outcomes for themselves and others	in interdependent situation)} on negotiator behavior. We keep three main mechanisms:
+	\begin{enumerate}
+		\item Submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.
+		\item Dominant negotiators show a greater levels of demand than the submissive one. Moreover, submissive negotiators show a \textbf{greater decline} of their preferences after the second round of negotiation. 
+		\item Submissive negotiators conceded more on low priority issues.
+	\end{enumerate}   
+	
+	
+	
+	
+	\subsection{Implementation}
+	We propose an implementation for each mechanism:
+	
+	\textbf{1.} For the first mechanism we propose to implement a function capable to balance the satisfaction of self-preferences with the satisfaction of the other, during the decision making process.
+	We define $w_{Self}, w_{Other}  \in [0, 1]$ as the weight the agent assign to the satisfaction of respectively  self preferences and other preferences, such that $w_{Self}+ w_{Other} = 1$. Thus, the relation of dominance $dom = w_{Self}$.
+	
+	Therefore, for a given value $x$,  we compute a decision value as follows:
+	\begin{dmath}
+	$$Satisfiabiliy(x,P_{Self},P_{Other}) = w_{Self} * Satisfaction_{Self}(x) + w_{Other} * Satisfaction_{Other}(x))$$
+	\end{dmath}
+	
+	\textbf{2.} When the negotiation is not converging, the agent should make concessions in his decision making, which can be interpreted as reducing the weight of its self satisfaction. We propose thus, to update $ w_{Self}$ to reduce over negotiation rounds. 
+	
+	
+		$$w_{Self} (t) = \left\{\begin{array}{ll}
+		max(0.5,dom) & \mathrm{if\ }(t<=n)\\
+		max(0, \frac{-k}{dom} (t-n)+ max(0.5,dom)) & \mathrm{otherwise}
+		\end{array}\right.$$ With: 
+		\begin{itemize}
+			\item $t$ is the number of proposals which have not been accepted (negotiation moves except Accept).
+			\item $n$ is the minimum number of negotiation moves to start make concessions.
+			\item $w_{Other} (t) = 1 - w_{Self} (t)$ 
+			\item $dom = w_{Self} (0)$ initialized to  
+					$dom = \left\{\begin{array}{ll}
+					0.8 & \mathrm{if\ } dominant \\
+					0.5 & \mathrm{if\ } peer \\
+					0.2 & \mathrm{if\ } submissive 
+					\end{array}\right.$
+		 \end{itemize}
+	
+	
+	
+	\textbf{3. } \hl{The proposed implementation is not validated yet. Start to wonder on the importance to model this mechanism}.
+	
+	The agent should present greater concessions on the values whose criterion type is not considered as important (or with high issue).
+	
+	$$Satisfaction^{'}_{Self} (x,dom) = \left\{\begin{array}{ll}
+	1 & \mathrm{if\ }(dom<0.5) , Satisfaction(c_x) < th.\\
+	Satisfaction_{Self}(x) & \mathrm{otherwise}.
+	\end{array}\right.$$
+	
+	We obtain the following function that capture the different mechanisms of principle 1. 
+	\begin{dmath}
+	$$Satisfiabiliy(x,P_{Self},P_{Other}) = w_{Self}(t) * Satisfaction_{Self}(x) + (1 - w_{Self}(t)) * Satisfaction_{Other}(x))$$
+	\end{dmath}
+	
+	In order to choose a value to state in an utterance, an agent computes a value that maximizes its satisfiability. Let $X$ be a set of possible values to choose, in a current state of a negotiation. 
+	\begin{dmath}
+	$$ ChooseValue(X,P_{Self},P_{Other}) = \operatorname*{arg\,max}_{x \in X} Satisfiabiliy(x,P_{Self},P_{Other})$$ 
+	\end{dmath}
+	\section{Principle 2: Lead of the negotiation}
+	
+	
 	\begin{itemize}
-		\item $t$ is the number of proposals which have not been accepted (negotiation moves except Accept).
-		\item $n$ is the minimum number of negotiation moves to start make concessions.
-		\item $w_{Other} (t) = 1 - w_{Self} (t)$ 
-		\item $dom = w_{Self} (0)$ initialized to  
-				$dom = \left\{\begin{array}{ll}
-				0.8 & \mathrm{if\ } dominant \\
-				0.5 & \mathrm{if\ } peer \\
-				0.2 & \mathrm{if\ } submissive 
-				\end{array}\right.$
-	 \end{itemize}
-
-
-
-\textbf{3. } \hl{The proposed implementation is not validated yet. Start to wonder on the importance to model this mechanism}.
-
-The agent should present greater concessions on the values whose criterion type is not considered as important (or with high issue).
-
-$$Satisfaction^{'}_{Self} (x,dom) = \left\{\begin{array}{ll}
-1 & \mathrm{if\ }(dom<0.5) , Satisfaction(c_x) < th.\\
-Satisfaction_{Self}(x) & \mathrm{otherwise}.
-\end{array}\right.$$
-
-Finally, we obtain the following function that capture the different mechanisms of principle 1. 
-\begin{dmath}
-$$principle1(x,P_{Self},P_{Other}) = w_{Self}(t) * Satisfaction_{Self}(x) + (1 - w_{Self}(t)) * Satisfaction_{Other}(x))$$
-\end{dmath}
-\section{Principle 2}
-
-In DeDreu works, powerful or dominator negotiators adopt different strategies comparing to less powerful negotiators. He demonstrates a panel of different behaviors in a negotiation as presented bellow:
+		\item Powerful negotiators tend to make the first move. %\cite{magee2007power}
 	
-\textbf{Control the flow of the negotiation}
-\begin{itemize}
-	\item Powerful negotiators tend to make the first move. \cite{magee2007power}
-
-	\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
-
-	\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+		\item Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
 	
-\end{itemize} 
+		\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+		
+	\end{itemize} 
+	
 
-\subsection{Implementation}
-
-$$principle2(u(x),dominance,mental\_state) = utility(TypeOf(u(x))) + utility(instance(u(x)))$$
-\section{Decision}
-
-Finally, the agent decides for the utterance based on the relative weight of principle 1 and principle 2. For each utterance type $u$ and for each possible utterance value $x$, we can compute the utility of the utterance:
-
-$utility(u(x)) = w_1 * principle1(u(x),P_{self},A_{other},dominance)$
-
-       $ + w_2 * principle2(u(x),dominance,mental\_state)$
-
-such that $w_2 > w_1$: in the context of cooperative negotiation, we should give a higher level to the success of negotiation. \hl{ to confirm ?}
-
-
-% BIBLIO %
-
-\vskip 4pt
-\bibliographystyle{plain}
-\bibliography{abbrevs,Library}
-\end{document}
+	
+	\subsection{Implementation}
+	In order to choose an utterance, it has to satisfy one of the set of applicability conditions:
+	We define first, a possible branching independent from the relation of dominance, which is agent state a preference if other asks him about. we name this condition $OtherAsks$.
+	
+	\begin{itemize}
+		\item Let be $ACCEPTED$ the list of proposals which have been accepted in the negotiation. (After an accept utterance).
+		\item Let be $REJECTED$ the list of proposals which have been rejected in the negotiation.(After a reject utterance).
+		\item Let be $OPEN$ the list of proposals which have been proposed in the negotiation.(after a propose utterance).
+		\item We note $Threshold$ a value that cut the spectrum of dominance in two. if $dominance >= Threshold$ means that agent is dominant. otherwise the agent is submissive.
+		\item $Th_s$ is a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation.
+	\end{itemize}
+	\subsubsection{Relation (\textbf{dominance $>=$ Threshold})}
+	\begin{tabular}{|p{3cm}|p{9cm}|}
+		\hline
+		\textbf{Utterance type} & Condition \\
+		\hline
+		 Negotiation success &  $\exists x/ x$ is an option \emph{and} $x \in \{ACCEPTED\}$  \newline \emph{OR} \newline $x \in \{OPEN\}$ and $Satisfiability(x, P_{Self}, P_{Other}) >= Th_s$ \\
+		\hline
+		Negotiation failure & $ \forall x \notin \{REJECTED\}, Satisfiability(x, P_{Self}, P_{Other}) < Th_s $ \\
+		\hline
+		State & $OtherAsks$ \\
+		\hline
+		Propose & $\exists v / Satisfiability(v, P_{Self}, P_{Other}) >= Th_s $   \emph{and}  \newline $[ $  \hl{Not sure to keep the conditions bellow, because theses conditions just condition the value to propose. The most important is that it remains satisfiable values to propose}
+		\newline ($\exists x \in \{OPEN\} /$ 
+		 $ Satisfiability(x, P_{Self}, P_{Other}) < Th_s$) 
+		\newline \emph{OR}
+		 \newline( $ \exists x \in \{REJECTED\} /$ 
+		\newline$ Satisfiability(x, P_{Self}, P_{Other}) >= Th_s)$ 
+		\newline \emph{OR} 
+		\newline  ($\exists x \in \{ACCEPTED\} $) \newline$]$ \\
+		
+	\hline
+	\end{tabular}
+	
+	\subsubsection{Relation (\textbf{dominance $<=$ Threshold})}
+	\begin{tabular}{|p{3cm}|p{9cm}|}
+		\hline
+		\textbf{Utterance type} & Condition \\
+		\hline
+		Negotiation success &  $\exists x/ x$ is an option \emph{and} $x \in \{ACCEPTED\}$ \\
+		\hline
+		Accept & $\exists x \in \{OPEN\} /$  $Satisfiability(x, P_{Self}, P_{Other}) >= Th_s$ \\
+		\hline
+		Reject & $\exists x \in \{OPEN\} / Satisfiability(x, P_{Self}, P_{Other}) < Th_s$  \emph{and} $t<n$ (see Principle1).\\
+		\hline
+		Propose & $\exists x$ / $P_{Other} (x)= true $  \emph{and}
+		\newline $Satisfiability(x, P_{Self}, P_{Other}) >= Th_s$
+		\newline \emph{OR}  
+		\newline $\forall c \in \mathcal{C}$, $\exists v_c \in \mathcal{D}_c / v_c \in \{ACCEPTED\}$\\
+		\hline
+		Ask &  ($t>n,$ \emph{and} 
+		\newline $\exists x \in \{OPEN\} /  Satisfiability(x, P_{Self}, P_{Other}) < Th_s $) 
+		\newline \emph{OR}
+		\newline $ \forall v_c \in \mathcal{D}_c, P_{Other}(v_c) = Unkown$
+		\newline \emph{OR} 
+		\newline ($\exists x \in \{ACCEPTED, REJECTED\}$ / 
+		\newline $Satisfiability(x, P_{Self}, P_{Other}) >= Th_s$ ) \\
+		\hline
+		
+		State & $OtherAsks$
+		\newline \emph{OR}
+		\newline $\exists x,P_{Other}(x) \not = Unkown $ and $P_{OAS}(x) = Unkown$ 
+		\newline \emph{OR}
+		\newline $ \exists v_c \in \mathcal{D}_c, P_{Other}(v_c) = Unkown$
+		\\
+		\hline
+	\end{tabular}
+	
+%	% BIBLIO %
+%	
+%	\vskip 4pt
+%	\bibliographystyle{plain}
+%	\bibliography{abbrevs,Library}
+	\end{document}
