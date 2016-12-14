@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="discolog/java"/>
+	<classpathentry kind="src" path="negotiate_update/java"/>
+	<classpathentry kind="src" path="negotiate/java"/>
+	<classpathentry kind="lib" path="discolog/lib/2p.jar"/>
+	<classpathentry kind="lib" path="discolog/lib/disco.jar"/>
+	<classpathentry kind="lib" path="discolog/lib/tuprolog.jar"/>
+	<classpathentry kind="lib" path="negotiate_update/lib/disco/d4g/saxon9he.jar"/>
+	<classpathentry kind="lib" path="negotiate_update/lib/disco/lib/disco.jar"/>
+	<classpathentry kind="lib" path="negotiate/lib/disco/d4g/saxon9he.jar"/>
+	<classpathentry kind="lib" path="negotiate/lib/disco/lib/disco.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="negotiate/class"/>
+</classpath>
