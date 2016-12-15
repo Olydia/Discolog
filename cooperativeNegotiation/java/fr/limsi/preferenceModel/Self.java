@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class CriteriaPreferences <C> {
+public class Self <C> {
 
 	private ArrayList<Preference<C>> selfPreferences; 
 	private Class<C> type;
 	private MatrixOfPref<C> matrix;
 	
-	public CriteriaPreferences(Class<C> type) {
+	public Self(Class<C> type) {
 		setSelfPreferences(new ArrayList<Preference<C>>());
 		this.type = type;
 		List<C> values = Arrays.asList(type.getEnumConstants());
