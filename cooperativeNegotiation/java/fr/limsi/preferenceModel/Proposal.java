@@ -11,7 +11,6 @@ public abstract class Proposal {
 		return "( value= "+ this.getValue().toString() + ", status=" + status+ ")" ;
 	}
 	protected Status status = Status.OPEN;
-	protected Proposal counter;
 	// the flag is about who proposed the utterance 
 	public boolean isSelf;
 
@@ -37,13 +36,7 @@ public abstract class Proposal {
 	}
 
 	public Status getStatus () { return status; }
-
-	public void setCounter (Proposal counter) {
-		this.counter = counter;
-	}
 		
-	public Proposal getCounter () { return counter; }
-
 	public abstract Object getValue();
 	
 	public abstract String printValue();
