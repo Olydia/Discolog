@@ -18,7 +18,7 @@ public class Self <C> {
 		matrix = new MatrixOfPref<>(values);
 	}
 
-	public float Satisfaction(C value){
+	public float satisfaction(C value){
 		float score = matrix.getScoreOf(value);
 		return (1-score);
 	}
@@ -51,6 +51,8 @@ public class Self <C> {
 		}
 	}
 	
-
+	public List<C> getElements (){
+		return Arrays.asList(this.type.getEnumConstants());
+	}
 
 }

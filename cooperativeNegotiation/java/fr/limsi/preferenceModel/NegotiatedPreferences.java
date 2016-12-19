@@ -32,7 +32,7 @@ public class NegotiatedPreferences <C>{
 		preferences.add(new NegotiatedPreference<C>(value, status));
 	}
 
-	public float Satisfaction(C value){
+	public float satisfaction(C value){
 		if(this.getStatus(value).equals(Satisfiable.FALSE))
 			return 0;
 		else return 1;

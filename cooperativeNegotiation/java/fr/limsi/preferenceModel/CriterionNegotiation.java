@@ -1,11 +1,12 @@
 package fr.limsi.preferenceModel;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.List;
 import fr.limsi.preferenceModel.NegotiatedPreferences.Satisfiable;
 import fr.limsi.preferenceModel.Proposal.Status;
 
-public class CriterionNegotiation<C> {
+public class CriterionNegotiation<C extends Criterion> {
 	private Self<C> self;
 	private NegotiatedPreferences<C> other;
 	private NegotiatedPreferences<C> oas;
@@ -73,6 +74,10 @@ public class CriterionNegotiation<C> {
 	public boolean isRejected(C value){
 		return isStatus(value, Status.REJECTED);		
 	}
+	public List<C> getElements (){
+		return Arrays.asList(this.type.getEnumConstants());
+	}
+
 }	
 
 
