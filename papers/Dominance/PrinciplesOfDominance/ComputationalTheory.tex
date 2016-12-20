@@ -30,14 +30,14 @@
 		Nicolas Sabouret\inst{1} }
 		
 	
-	\section{Data structures}
+	\section{Domain model}
 	Negotiation is based on choosing the best value from a set of options which concerns the topic of negotiation. We note $\mathcal{O}$ the set of possible options to negotiate about. $\forall o \in \mathcal{O}$ is defined with \textbf{criteria} that reflect options characteristics.
 	Let $\mathcal{C}$ be the set of criteria. For example, criteria for choosing a restaurant could be cuisine, ambiance, price, and location, while the criteria for choosing a movie could be type and location. 
 	
 	Furthermore, each criterion has to be measurable, in the sense that it must be possible to rate an option even in qualitative way. Therefore, $\forall$ \emph{c $\in\mathcal{ C}$},  we note $\mathcal{D}_c$ its  domain of values. For example, the domain  values of the criterion cuisine is noted $\emph{D}_{cuisine} = \{chineese, italian\}$.
 	
 	Therefore, we note an option $o\in \mathcal{O}$:
-	$o = \{c_1=v_1,..., c_n=v_n\}$ with $c_i \in \mathcal{C}, \forall i \in [1,n]$ and $v_i\in \emph{D}_{c_i}$. 
+	$o = \{c_1=v_1,..., c_n=v_n\}$ with $c_i \in \mathcal{C}, \forall i \in [1,n]$ and $v_i\in \emph{D}_{c_i} $. 
 	
 	\subsection{Preferences for self}
 	$\forall c \in \mathcal{C}$ , an agent has a preference set $P_{self}(c)$, represented as set of directed acyclic graphs (DAG), computed from the list of binary,transitive and antisymmetric preferences on the values of $\mathcal{D}_c$.
