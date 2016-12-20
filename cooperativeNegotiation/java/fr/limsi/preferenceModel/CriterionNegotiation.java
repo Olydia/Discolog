@@ -23,6 +23,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
 	}
+	
 	public void addInOther(C value ,Satisfiable s){
 		other.addPreference(value, s);
 	}
