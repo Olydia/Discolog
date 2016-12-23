@@ -1,0 +1,251 @@
+	\documentclass{article}
+		\usepackage[noend]{algpseudocode}
+		\usepackage{subfig} 
+		\usepackage{usual}
+		\usepackage{amsmath}
+		\usepackage{graphicx}
+		\usepackage{eulervm}
+		\usepackage{fontenc}
+		\usepackage{mathrsfs}
+		\usepackage{multirow}
+		\usepackage{array}
+		\usepackage[rflt]{floatflt}
+		\usepackage{makecell}
+		\usepackage{breqn}
+		\usepackage{xcolor, soul}
+		\sethlcolor{yellow}	
+		\usepackage{pbox}
+	
+		\renewcommand\theadalign{cb}
+		\renewcommand\theadfont{\bfseries}
+		\renewcommand\theadgape{\Gape[4pt]}
+		\renewcommand\cellgape{\Gape[4pt]}
+		%\pagestyle{plain}
+		%
+		\begin{document}
+		\title{\vskip -10pt}
+		
+		\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
+		Nicolas Sabouret\inst{1} }
+		
+	
+	\section{Domain model}
+		Consider a sequence of criterion sets $C_1, C_2, ..., C_n$ and an options set defined as the cross-product:
+				$O = C_1 \times C_2 \times \ldots C_n$.
+		
+		For example, for restaurants, the criteria might be: \\
+			Cuisine = \{Chinese, French, ...\} \\
+			Cost = \{cheap, expensive, ...\} \\
+			Atmosphere = \{quiet, lively, ...\} \\
+		
+	\par and a restaurant options might be: 
+		\begin{itemize}
+			\item $[Chinese, cheap, lively]$. 
+			 \item $[Chinese, expensive, quit]$.   
+			 \item $[Chinese, expensive, lively]$.
+			 \item $[French, cheap, quit]$.  
+			 \item $[French, expensive, quit]$.   
+			 \item $[Chinese, expensive, lively]\ldots$ 
+		\end{itemize}
+  
+	 
+	
+	\subsection{Preferences for self}
+	Preferences are pre-orders (transitive, antisymmetric binary
+	relations) on the criterion sets.  The preference relation on the
+	criterion set $C_i$ is denoted by $\prec_i$.
+	
+	Let $\prec$ denotes the sequence of preferences $\{ \prec_i, \prec_2, ..., \prec_n\}$
+	
+		\subsubsection{	Self satisfaction function} 
+	
+	Satisfaction is a function normalized to [0,1] that evaluates an element of a criterion set relative to the corresponding preference relation, defined as follows.
+	
+		For $c \in C_i$ and $\prec_i$:
+	
+	$$sat(c, \prec_i) =	1 - \left( \frac{|\{d : d \neq c \  \wedge \ (c \prec_i d)\}| }{( |C_i| - 1 )}\right)  $$
+	
+	Satisfaction is generalized to options as a weighted sum.
+	For $o \in O$ and where $o_i$ is the i-th element of $o$ and $\prec_i$ the i-th element of $\prec$.
+	
+	$$sat(o, \prec) = \frac{\sum_{i}^{n} sat(o_i, \prec_i) }{n} $$
+	
+	
+	\subsection{Acceptability for other}
+	
+	We do not have detailed knowledge of the preferences of the other; the agent only knows which criteria values the other has said are acceptable or unacceptable.
+
+
+	Let the collection of $A_i \subseteq C_i$ be the criterion values that are acceptable to the other, and $U_i \subseteq C_i$ be the criteria values that are unacceptable.  We assume $A_i \cap U_i = \emptyset$.  Note	that some values are thus unknown.
+
+	Then the acceptability of a criterion $c \in C_i$ is a function normalized to [0,1] and defined as follows.
+
+%		 = if c \epsilon A_i then 1
+%		else if c \epsilon U_i then 0
+%		else 0.5
+	$$ other(c, A_i, U_i)= \left\{\begin{array}{ll}
+		1	 & \mathrm{if\ }  c \in A_i\\
+		0    & \mathrm{if\ }c \in U_i\\
+		0.5	 & \mathrm{otherwise}
+		\end{array}\right.$$
+	This function is generalized to options as a weighted sum.
+
+	$$other(o, A, U) = \frac{ \sum_{i}^{n} other(o_i, A_i, U_i) } {n}$$ 
+	
+	
+	\section{Principles of dominance in negotiation}
+	
+	\subsection{Principle 1: Satisfaction of Self preferences Vs Other preferences}
+%	Scholars in psychology already demonstrate that the relation of dominance affect negotiator's motivation in maximizing self preferences versus other preferences. We took an interest in DeDreu work in which he studies the impact of social value orientation \textit{(i.e  individual differences in	how people evaluate outcomes for themselves and others	in interdependent situation)} on negotiator behavior. We keep three main mechanisms:
+%	\begin{enumerate}
+%		\item Submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.
+%		\item Dominant negotiators show a greater levels of demand than the submissive one. Moreover, submissive negotiators show a \textbf{greater decline} of their preferences after the second round of negotiation. 
+%		\item Submissive negotiators conceded more on low priority issues.
+%	\end{enumerate}   
+	
+	\subsubsection{Dominance and concession}
+	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the 	relationship.  It is a constant for a given agent in a given	relationship.
+	
+	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a time-varying function normalized to 	[0,1] of its dominance, defined as below.
+		$$self(dom, t) = \left\{\begin{array}{ll}
+		dom & \mathrm{if\ } (t \leq \tau)\\
+		max(0, dom - (\frac{\delta}{dom} . (t - \tau))) & \mathrm{otherwise}
+		\end{array}\right.$$
+		
+	
+	where is $t \geq 0$ is the number of open or rejected proposals.
+	
+	This is called the "concession curve", where $\tau > 0$ and $\delta > 0$
+	are parameters of the theory in general and are initially assumed to
+	be 2 and 0.1, respectively.
+	\subsubsection{Acceptability for self}
+
+	The self-acceptability of a criterion $c \in C_i$ is a function	normalized to [0,1] and defined as below.
+	
+	$$acc(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i) \ +\  (1 - self(dom, t)) . other(c, A_i, U_i)$$
+	
+	Acceptability is generalized to options as a weighted sum.
+	
+	$$acc(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} acc(dom, t, o_i, \prec_i, A_i, U_i) } {n}$$ 
+	
+	
+	\section{Principle 2: Lead of the negotiation}
+%	
+	
+%	\begin{itemize}
+%		\item Powerful negotiators tend to make the first move. %\cite{magee2007power}
+%	
+%		\item Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
+%	
+%		\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+%		
+%	\end{itemize} 
+	
+	\subsection{Choosing an utterance type}
+		
+		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria.
+
+	
+		We present in the following the possible responses and their applicability conditions. Note that each line (utterance)  assumes that the previous one are already not applicable.
+	
+	$ chooseUtterance(dom, t, V, \prec, A, U) = $ \\
+	\textbf{if(\textbf{dom  $>\sigma$})} \\
+	\begin{tabular}{|p{3cm}|p{9cm}|}
+		\hline
+		\textbf{Utterance type} & Condition \\
+		\hline
+	 Negotiation success &  $\exists x/ x \in O$  \emph{and} $x \in \{ACCEPTED\}$  \newline \emph{OR} \newline $x \in \{OPEN\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+		\hline
+		Negotiation failure & $ \forall x \notin \{REJECTED\}$, \newline  $acc(dom,t,x,\prec,A,U) < \beta $ \\
+		\hline
+		State & $OtherAsks$ \\
+		\hline
+		Propose & $\exists y \notin \{REJECTED\}$ such that \newline $acc(dom,t,y,\prec,A,U) \geq \beta $  \\
+		
+	\hline
+	\end{tabular}
+	\\ \\
+		
+	\textbf{if(\textbf{dom  $<\sigma$})} \\
+	\begin{tabular}{|p{3cm}|p{9cm}|}
+		\hline
+		\textbf{Utterance type} & Condition \\
+		\hline
+		Negotiation success &  $\exists x/ x \in O$ \emph{and} $x \in \{ACCEPTED\}$ \\
+		\hline
+		Accept & $\exists x \in \{OPEN\} /$ \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+		\hline
+		Reject & $\exists x \in \{OPEN\} /$ \newline $ acc(dom,t,x,\prec,A,U) < \beta$  \emph{and} $t<\tau$.\\
+		\hline
+		Propose & $\exists x$ / $other(x, A_i, U_i) \not = 1 $  \emph{and}
+		\newline ($acc(dom,t,x,\prec,A,U) \geq \beta$
+		\newline \emph{OR}  
+		\newline $\forall c \in C_i$,  $c \in \{ACCEPTED\}$)\\
+		\hline
+		Ask &  \textbf{(}$t> \tau,$ \emph{and} 
+		\newline $\exists x \in \{OPEN\} /$
+		\newline $ acc(dom,t,x,\prec,A,U) < \beta $\textbf{) }
+		\newline \emph{OR}
+		\newline \textbf{(}$ \forall c \in C_i,other(c, A_i, U_i)=0.5$
+		\newline \emph{OR} 
+		\newline \textbf{(}$\exists x \in \{ACCEPTED, REJECTED\}$ / 
+		\newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \textbf{)} \\
+		\hline
+		
+		State & $OtherAsks$
+		\newline \emph{OR}
+		\newline $\exists x,other(x, A_i, U_i) \not = 0.5 $ 
+		\newline \emph{OR}
+		\newline $ \exists c \in \mathcal{C}, , A_i(c) = Unkown$
+		\\
+		\hline
+	\end{tabular}
+	
+
+	\subsection{Choosing a value for an utterance}
+	
+%	Note that argmax may not be unique.  This function may be used to help 	decide utterance type and/or choose the argument after the utterance
+%	type is chosen.	
+	%(Note: V may change during negotiation, e.g., by removing rejected	options, but I think this can be an implementation code
+	%issue---discussed at next level of detail?)
+	
+	The following function returns the most acceptable element of V.
+
+	 $$ chooseValue(dom, t, V, \prec, A, U) =	\operatorname*{arg\,max}_{v \in V} acc(dom, t, option(v), \prec, A, U) $$
+	
+	Note that argmax may not be unique.  The following function returns the most acceptable element of	criterion $C_i$.
+	
+	$$chooseCriterion(dom, t, V, \prec, A, U, C_i) = chooseValue(dom, t, V, \prec, A, U_i$$
+	
+%	(Note: this is a perhaps overly simple solution.  The obvious simple
+%	alternative below has the bug that it may lead to a "dead" end, where
+%	there is no actual value with combination of most acceptable
+%	criterion, in which case a more complex search is required.  Let's
+%	not bother for now!)
+	
+	$$chooseCriterion'(dom, t, V, \prec, A, U, C_i) =	\operatorname*{arg\,max}_{c\in C_i} acc(dom, t, c, \prec, A, U)$$
+	
+	These functions may be used to help decide utterance type and/or choose the argument after the utterance type is chosen.
+	
+	\section{Summary of general parameters }
+	\begin{itemize}
+
+		\item $\sigma \in $[0,1] : boundary between submissive and dominant used in
+				choosing an utterance type
+		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation.
+		\item $\tau > 0$ : the minimum number of open or rejected proposals before
+				concession begins
+		\item $\delta > 0$ : parameter in slope of concession curve
+		\item Let be $ACCEPTED$ the list of proposals which have been accepted in the negotiation. (After an accept utterance).
+		\item Let be $REJECTED$ the list of proposals which have been rejected in the negotiation.(After a reject utterance).
+		\item Let be $OPEN$ the list of proposals which have been proposed in the negotiation.(after a propose utterance).
+		
+	\end{itemize}
+
+	
+%	% BIBLIO %
+%	
+%	\vskip 4pt
+%	\bibliographystyle{plain}
+%	\bibliography{abbrevs,Library}
+	\end{document}

@@ -1,4 +1,4 @@
-package fr.limsi.PreferenceModel.restaurant;
+package fr.limsi.preferenceModel.restaurant;
 
 import fr.limsi.preferenceModel.Criterion;
 

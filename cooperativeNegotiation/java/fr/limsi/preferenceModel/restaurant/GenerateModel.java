@@ -1,4 +1,4 @@
-package fr.limsi.PreferenceModel.restaurant;
+package fr.limsi.preferenceModel.restaurant;
 
 import java.util.*;
 import fr.limsi.preferenceModel.*;
@@ -10,8 +10,8 @@ public class GenerateModel {
 		OptionNegotiation<Restaurant> model1; 
 		
 		Self<Restaurant> d1_criteria = new Self<Restaurant>(Restaurant.class);
-		d1_criteria.addPreference(new Preference(Atmosphere.class, Cost.class));
-		d1_criteria.addPreference(new Preference(Cost.class, Cuisine.class));
+//		d1_criteria.addPreference(new Preference(Atmosphere.class, Cost.class));
+//		d1_criteria.addPreference(new Preference(Cost.class, Cuisine.class));
 		
 		Self<Cuisine> d1_cuisine = new Self <Cuisine>(Cuisine.class);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.CHINESE);

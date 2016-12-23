@@ -1,4 +1,4 @@
-package fr.limsi.PreferenceModel.restaurant;
+package fr.limsi.preferenceModel.restaurant;
 import java.util.ArrayList;
 import java.util.List;
 
