@@ -52,7 +52,7 @@
 	\section{Self model} 
 	
 	\subsection{Preferences for self}
-	Preferences are pre-orders (transitive, antisymmetric binary relations) on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.
+	Preferences are partial orders (transitive, asymmetric binary relations) on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.
 	
 	Let $\prec$ denotes the sequence of preferences $\{ \prec_i, \prec_2, ..., \prec_n\}$
 	
@@ -87,17 +87,25 @@
 	
 		$$other(o, A, U) = \frac{ \sum_{i}^{n} other(o_i, A_i, U_i) } {n}$$ 
 	
-	\subsection{Negotiation history}
-		In order to generate coherent dialogues, the agent keeps in memory its previous statements .
-		Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue.
+	\subsection{Negotiation state}
+		During a dialogue, negotiators exchange two types of information; they either state their preferences or negotiate about options. In order to produce coherent dialogues, the agent keeps in memory the different states of the dialogue: 
 		
-		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria. 
-		During the negotiation, proposals are made. Thoses proposals can either be accepted or rejected with respect of the decisional model(See section \ref{decision}). 
+		Where $\prec_i$ and $\prec_i'$ are *total* orders on $C_i$
 		
-		 
-		 Let be $ACCEPTED$ the list of proposals which have been accepted in the negotiation. (After an accept utterance).
-		 Let be $REJECTED$ the list of proposals which have been rejected in the negotiation.(After a reject utterance).
-		Let be $OPEN$ the list of proposals which have been proposed in the negotiation.(after a propose utterance).
+		$distance(prec_i, prec_i') = | { (x, y) : x,y \epsilon C_i \wedge x \prec_i y \wedge y \prec_i' x} |$
+		
+		Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue. We note $S$ the sequence of the agent stated values for all the criteria $\{S_1, S_2,..., S_n\}$
+		
+		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria.			
+		
+		Proposals which are made during the dialogue by both negotiators can have differents status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}). We define thus:
+		\begin{itemize}
+			\item the collection $Op \subset V$ the options which have been proposed in the negotiation.
+			\item the collection $Ac \subset V$  the options which have been accepted in the negotiation.
+			\item the collection $Rej \subset V$  the options which have been rejected in the negotiation.
+			
+		\end{itemize} 
+
 	\section{Decision based on dominance in negotiation}
 	\label{decision}
 	\subsection{Satisfaction of Self preferences Vs Other preferences}
@@ -156,13 +164,13 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-	 Negotiation success &  $\exists x/ x \in O$  \emph{and} $x \in \{ACCEPTED\}$  \newline \emph{OR} \newline $x \in \{OPEN\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+	 Negotiation success &  $\exists x \in V$  \emph{and} $x \in \{Acc\}$  \newline \emph{OR} \newline $x \in \{Op\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
 		\hline
-		Negotiation failure & $ \forall x \notin \{REJECTED\}$, \newline  $acc(dom,t,x,\prec,A,U) < \beta $ \\
+		Negotiation failure & $ \forall x \notin \{Rej\}$, \newline  $acc(dom,t,x,\prec,A,U) < \beta $ \\
 		\hline
 		State & $OtherAsks$ \\
 		\hline
-		Propose & $\exists y \notin \{REJECTED\}$ such that \newline $acc(dom,t,y,\prec,A,U) \geq \beta $  \\
+		Propose & $\exists y \notin \{Rej\}$ such that \newline $acc(dom,t,y,\prec,A,U) \geq \beta $  \\
 		
 	\hline
 	\end{tabular}
@@ -173,24 +181,24 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-		Negotiation success &  $\exists x/ x \in O$ \emph{and} $x \in \{ACCEPTED\}$ \\
+		Negotiation success &  $\exists x \in V$ \emph{and} $x \in \{Acc\}$ \\
 		\hline
-		Accept & $\exists x \in \{OPEN\} /$ \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+		Accept & $\exists x \in \{Op\} /$ \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
 		\hline
-		Reject & $\exists x \in \{OPEN\} /$ \newline $ acc(dom,t,x,\prec,A,U) < \beta$  \emph{and} $t<\tau$.\\
+		Reject & $\exists x \in \{Op\} /$ \newline $ acc(dom,t,x,\prec,A,U) < \beta$  \emph{and} $t<\tau$.\\
 		\hline
 		Propose & $\exists x$ / $other(x, A_i, U_i) \not = 1 $  \emph{and}
 		\newline ($acc(dom,t,x,\prec,A,U) \geq \beta$
 		\newline \emph{OR}  
-		\newline $\forall c \in C_i$,  $c \in \{ACCEPTED\}$)\\
+		\newline $\forall c \in C_i$,  $c \in \{Ac\}$)\\
 		\hline
 		Ask &  \textbf{(}$t> \tau,$ \emph{and} 
-		\newline $\exists x \in \{OPEN\} /$
+		\newline $\exists x \in \{Op\} /$
 		\newline $ acc(dom,t,x,\prec,A,U) < \beta $\textbf{) }
 		\newline \emph{OR}
 		\newline \textbf{(}$ \forall c \in C_i,other(c, A_i, U_i)=0.5$
 		\newline \emph{OR} 
-		\newline \textbf{(}$\exists x \in \{ACCEPTED, REJECTED\}$ / 
+		\newline \textbf{(}$\exists x \in \{Ac, Rej\}$ / 
 		\newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \textbf{)} \\
 		\hline
 		

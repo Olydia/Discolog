@@ -1,0 +1,87 @@
+% -*- Mode: LaTeX -*-
+% Usual Latex2e macros for Rich
+\makeatletter
+
+% usually place figures manually
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\floatpagefraction}{0.8} % must be less than \topfraction
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.9}
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+\setcounter{totalnumber}{10}
+\setcounter{dbltopnumber}{10}
+
+% useful for squeezing space
+%\setlength\titlebox{1.5in}
+%\abovedisplayskip 7pt plus2pt minus5pt
+%\belowdisplayskip \abovedisplayskip
+%\abovedisplayshortskip 0pt plus3pt
+%\belowdisplayshortskip 4pt plus3pt minus3pt
+\setlength\belowcaptionskip{0pt}
+%\setlength\abovecaptionskip{0pt}
+\setlength\dbltextfloatsep{8pt}
+\setlength\dblfloatsep{8pt}
+\setlength\textfloatsep{6pt}
+\setlength\floatsep{8pt}
+
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                       {-12\p@ \@plus -4\p@ \@minus -4\p@}%
+                       {8\p@ \@plus 4\p@ \@minus 4\p@}%
+                       {\normalfont\large\bfseries\boldmath
+                        \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                       {-12\p@ \@plus -4\p@ \@minus -4\p@}%
+                       {8\p@ \@plus 4\p@ \@minus 4\p@}%
+                       {\normalfont\normalsize\bfseries\boldmath
+                        \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+
+% figures
+
+\def\defig#1#2{\vskip -10pt\caption{#2}\label{fig:#1}}
+
+\def\fig#1{{\def\thefigure{\fignum{#1}}\fnum@figure}}
+\def\fignum#1{\ref{fig:#1}}
+
+\def\deftab#1#2{\vskip -10pt\caption{#2}\label{tab:#1}}
+
+\def\tab#1{{\def\thetable{\tabnum{#1}}\fnum@table}}
+\def\tabnum#1{\ref{tab:#1}}
+
+\newcommand{\defigraphics}[3][\columnwidth]{%
+  \begin{figure}[!t]\centering
+     \includegraphics[width=#1]{#2}%
+     \defig{#2}{#3}
+  \end{figure}
+}
+
+\newcommand{\defigraphicsdbl}[3][\textwidth]{%
+  \begin{figure*}[!t]\centering
+     \includegraphics[width=#1]{#2}%
+     \defig{#2}{#3}
+  \end{figure*}
+}
+
+% sections
+
+\def\defchapter#1#2{\chapter{#2}\label{chap:#1}}
+\def\defsection#1#2{\section{#2}\label{sect:#1}}
+\def\defsubsection#1#2{\subsection{#2}\label{sect:#1}}
+\def\defsubsubsection#1#2{\subsubsection{#2}\label{sect:#1}}
+
+\def\chap#1{Chapter~\chapnum{#1}}
+\def\sect#1{Section~\sectnum{#1}}
+
+\def\sectnum#1{{\let\secfnt\relax\let\subsecfnt\relax\ref{sect:#1}}}
+\def\chapnum#1{\ref{chap:#1}}
+
+\makeatother
+
+\def\TM{$\!^{\hbox{\tiny\sffamily TM}}$}
+\def\tinyskip{\vspace{2pt}}
+\def\hugeskip{\vspace{3\bigskipamount}}
+
+\def\comment#1{\fbox{\footnotesize #1}}
+\def\commentbox#1{\par\noindent\framebox[\columnwidth][c]{\parbox{\columnwidth}{\footnotesize #1}}}

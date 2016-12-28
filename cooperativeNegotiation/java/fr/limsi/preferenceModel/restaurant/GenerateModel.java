@@ -6,8 +6,8 @@ import fr.limsi.preferenceModel.*;
 public class GenerateModel {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static OptionNegotiation<Restaurant>  model1(){
-		OptionNegotiation<Restaurant> model1; 
+	public static Negotiation<Restaurant>  model1(){
+		Negotiation<Restaurant> model1; 
 		
 		Self<Restaurant> d1_criteria = new Self<Restaurant>(Restaurant.class);
 //		d1_criteria.addPreference(new Preference(Atmosphere.class, Cost.class));
@@ -34,10 +34,6 @@ public class GenerateModel {
 		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFRODABLE);
 		d1_cost.addPreference(Cost.AFFRODABLE, Cost.CHEAP);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
-		@SuppressWarnings("serial")
-		ArrayList<CriterionNegotiation<? extends Criterion>> values = new ArrayList<CriterionNegotiation<? extends Criterion>> (){{
-			add(cuisine); add(cost); add(atmospher);
-		}};
 
 		return null;
 
