@@ -1,6 +1,6 @@
-package fr.limsi.preferenceModel.restaurant;
+package fr.limsi.negotiate.restaurant;
 
-import fr.limsi.preferenceModel.Criterion;
+import fr.limsi.negotiate.Criterion;
 
 public enum Atmosphere implements Criterion{
 

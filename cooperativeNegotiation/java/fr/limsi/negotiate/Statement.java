@@ -1,4 +1,4 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 
 public class Statement <L> {
 	private L value;

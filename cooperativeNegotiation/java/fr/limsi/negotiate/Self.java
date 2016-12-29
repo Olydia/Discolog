@@ -1,4 +1,4 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 
 import java.util.ArrayList;
 import java.util.Arrays;

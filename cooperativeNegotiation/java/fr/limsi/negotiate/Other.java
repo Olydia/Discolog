@@ -1,8 +1,8 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 
 import java.util.*;
 
-import fr.limsi.preferenceModel.Statement.Satisfiable;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class Other <C>{
 

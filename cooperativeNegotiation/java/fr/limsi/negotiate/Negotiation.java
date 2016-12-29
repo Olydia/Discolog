@@ -1,19 +1,21 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 
 import java.util.*;
+
+import fr.limsi.negotiate.Proposal.Status;
 
 public class Negotiation<O extends Option> {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
 	private ArrayList<OptionProposal> proposals;
 	private int dominance=0; 
 
-	
+
 	public Negotiation(List<CriterionNegotiation<Criterion>> valueNegotiation,
-							Self<Class<? extends Criterion>> criteriaNegotiation) {
+			Self<Class<? extends Criterion>> criteriaNegotiation) {
 		this.valueNegotiation = valueNegotiation;
 		this.proposals = new ArrayList<OptionProposal>();
 	}
-	
+
 
 	public CriterionNegotiation<Criterion> getValueNegotiation(Class<? extends Criterion> type){
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
@@ -22,12 +24,12 @@ public class Negotiation<O extends Option> {
 		}
 		return null;
 	}
- 
-	
+
+
 	public void propose(OptionProposal p){
 		this.proposals.add(p);
 	}
-	
+
 	public boolean isOther (Option option){
 		for(OptionProposal p : proposals){
 			if(p.getValue().equals(option) && !p.isSelf())
@@ -35,7 +37,7 @@ public class Negotiation<O extends Option> {
 		}
 		return false;
 	}
-	
+
 	public boolean isSelf (Option option){
 		for(OptionProposal p : proposals){
 			if(p.getValue().equals(option) && p.isSelf())
@@ -51,7 +53,7 @@ public class Negotiation<O extends Option> {
 	public void setDominance(int dominance) {
 		this.dominance = dominance;
 	}
-	
+
 	public float satisfiability(O option) {
 		float satisfaction = 0;
 		for(Class<? extends Criterion> criterion : option.getCriteria()){
@@ -60,17 +62,43 @@ public class Negotiation<O extends Option> {
 		}
 		return satisfaction;
 	}
-	
+
 	public float other(O option) {
 		float satisfaction = 0;
 		for(Class<? extends Criterion> criterion : option.getCriteria()){
 			CriterionNegotiation<Criterion> value = this.getValueNegotiation(criterion);
 			satisfaction += value.getOther().other(option.getValue(criterion));
 		}
-		
+
 		return satisfaction;
 	}
+	// t is the number of non accepted proposals
 	public double self(){
-		return 0;
+		int t = 0;
+		for(CriterionNegotiation<Criterion> value: valueNegotiation){
+			t = t + (value.getProposals().size() - value.getProposalsWithStatus(Status.ACCEPTED).size());
+		}
+
+		double s=0;
+		if( t< NegotiationParameters.tau)
+			return this.dominance;
+		else{
+			s= dominance - ((NegotiationParameters.delta/dominance) *(t-NegotiationParameters.tau));
+			return Math.max(0, s);
+		}
+	}
+
+	public float acceptability(Option o){
+		float acc =0;
+		for(CriterionNegotiation<Criterion> value: valueNegotiation){
+			Criterion c = o.getValue(value.getType());
+			acc = acc+value.acceptability(c, self());
+		}
+		return acc/valueNegotiation.size();
+	}
+	
+	public void addStatement(Statement<Criterion> s, boolean external){
+		Criterion elem = s.getValue();
+		getValueNegotiation(elem.getClass()).addStatement(s, external);
 	}
 }

@@ -1,10 +1,11 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import fr.limsi.preferenceModel.Statement.Satisfiable;
-import fr.limsi.preferenceModel.Proposal.Status;
+
+import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class CriterionNegotiation<C extends Criterion> {
 	private Self<C> self;
@@ -20,10 +21,19 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.selfStatements = new ArrayList<Statement<C>>();
 	}
 
+	public float acceptability(C value, double self){
+		return (float) ((self*getSelf().satisfaction(value))+ ((1-self)*getOther().other(value)));
+	}
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
 	}
-	
+	public void addStatement(Statement<C> s, boolean external){
+		if(external){
+			this.addInOther(s.getValue(), s.getStatus());
+		}
+		else
+			updateStatement(s);
+	}
 	public void updateStatement(Statement<C> s){
 		this.selfStatements.add(s);
 	}
@@ -76,6 +86,15 @@ public class CriterionNegotiation<C extends Criterion> {
 
 	public boolean isRejected(C value){
 		return isStatus(value, Status.REJECTED);		
+	}
+	@SuppressWarnings("unchecked")
+	public ArrayList<C> getProposalsWithStatus(Status status){
+		ArrayList<C> props = new ArrayList<C>();
+		for(CriterionProposal p: proposals){
+			if(p.getStatus().equals(status))
+				props.add((C) p.getValue());	
+		}
+		return props;
 	}
 	public List<C> getElements (){
 		return Arrays.asList(this.type.getEnumConstants());

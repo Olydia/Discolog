@@ -1,4 +1,4 @@
-package fr.limsi.preferenceModel.jUnit;
+package fr.limsi.negotiate.jUnit;
 
 import static org.junit.Assert.*;
 

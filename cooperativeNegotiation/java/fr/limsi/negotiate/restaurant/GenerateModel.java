@@ -1,7 +1,8 @@
-package fr.limsi.preferenceModel.restaurant;
+package fr.limsi.negotiate.restaurant;
 
 import java.util.*;
-import fr.limsi.preferenceModel.*;
+
+import fr.limsi.negotiate.*;
 
 public class GenerateModel {
 

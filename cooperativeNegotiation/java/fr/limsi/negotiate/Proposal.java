@@ -1,4 +1,4 @@
-package fr.limsi.preferenceModel;
+package fr.limsi.negotiate;
 /**
  * 
  * define  propositions made  during dialogue. For each proposition, we define its status for the begining open, counter represent the

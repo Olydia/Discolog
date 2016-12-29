@@ -1,9 +1,9 @@
-package fr.limsi.preferenceModel.restaurant;
+package fr.limsi.negotiate.restaurant;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.limsi.preferenceModel.Criterion;
-import fr.limsi.preferenceModel.Option;
+import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.Option;
 
 public enum Restaurant implements Option {
 
