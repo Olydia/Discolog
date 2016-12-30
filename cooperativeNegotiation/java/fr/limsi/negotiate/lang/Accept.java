@@ -2,12 +2,9 @@ package fr.limsi.negotiate.lang;
 
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.PreferenceStatement.Acceptable;
-import fr.limsi.negotiate.Proposal;
+import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
-import fr.limsi.negotiate.ProposalStatement;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class Accept extends ProposalUtterance {
 
@@ -24,17 +21,20 @@ public class Accept extends ProposalUtterance {
 
    @Override
    protected void interpret () {
-	   Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
-	   p.setStatus(Status.ACCEPTED);
-	   getNegotiation().updateProposal(p);
-	   getNegotiation().getContext().
-	  	addStatement(new ProposalStatement(p, "Accept"));
-	   
-	   if(getProposal() instanceof CriterionProposal){
-			if (getExternal()) 
-				getNegotiation().updateOtherMentalState((Criterion) getProposal().getValue(), Acceptable.TRUE);
-			else 
-				getNegotiation().updateOASMentalState((Criterion)getProposal().getValue(), Acceptable.TRUE);
+	   NegotiationMove acc = new NegotiationMove(getProposal(), getExternal(), Utterance.UtType.ACCEPT);
+	   getNegotiation().getContext().addUtt(acc);
+		if(getProposal() instanceof CriterionProposal){
+			Criterion value = (Criterion) getProposal().getValue();
+			CriterionProposal p = new CriterionProposal(!getExternal(), value);
+			p.setStatus(Status.ACCEPTED);
+			CriterionNegotiation<Criterion>cn =getNegotiation().getValueNegotiation(value.getClass());
+			cn.updateProposal((CriterionProposal)getProposal());
+			 getNegotiation().addStatement(new Statement<Criterion>(value,Satisfiable.TRUE), getExternal());
+			}
+		if(getProposal() instanceof OptionProposal){
+			OptionProposal p = new OptionProposal(!getExternal(), (Option)getProposal().getValue());
+			p.setStatus(Status.ACCEPTED);
+			getNegotiation().updateProposal(p);
 		}
    }
 }

@@ -2,6 +2,7 @@ package fr.limsi.negotiate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import fr.limsi.negotiate.Proposal.Status;
@@ -24,8 +25,30 @@ public class CriterionNegotiation<C extends Criterion> {
 	public float acceptability(C value, double self){
 		return (float) ((self*getSelf().satisfaction(value))+ ((1-self)*getOther().other(value)));
 	}
+	
+	public Criterion chooseValue(List<C> V, final double self){
+		V.sort(new Comparator<C>() {
+			@Override
+			public int compare(C c1, C c2){
+				return (int)(acceptability(c1, self) - acceptability(c1, self));
+			}
+		});
+		return V.get(0);
+	}
+	
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
+	}
+	
+	public void updateProposal(CriterionProposal proposal){
+
+		for(CriterionProposal c: proposals){
+			if(proposal.getValue().equals(c.getValue())){
+				int index = proposals.indexOf(c);
+				proposals.set(index, proposal);
+
+			}	
+		}
 	}
 	public void addStatement(Statement<C> s, boolean external){
 		if(external){

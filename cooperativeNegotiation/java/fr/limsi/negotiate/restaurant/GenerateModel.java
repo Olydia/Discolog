@@ -1,16 +1,13 @@
 package fr.limsi.negotiate.restaurant;
 
-import java.util.*;
-
 import fr.limsi.negotiate.*;
 
 public class GenerateModel {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Negotiation<Restaurant>  model1(){
-		Negotiation<Restaurant> model1; 
+	public  Negotiation<Restaurant>  model1(){
+		 
 		
-		Self<Restaurant> d1_criteria = new Self<Restaurant>(Restaurant.class);
+		//Self<Restaurant> d1_criteria = new Self<Restaurant>(Restaurant.class);
 //		d1_criteria.addPreference(new Preference(Atmosphere.class, Cost.class));
 //		d1_criteria.addPreference(new Preference(Cost.class, Cuisine.class));
 		
@@ -35,8 +32,11 @@ public class GenerateModel {
 		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFRODABLE);
 		d1_cost.addPreference(Cost.AFFRODABLE, Cost.CHEAP);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
-
-		return null;
+		
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher}, Restaurant.class);
+		return model1;
 
 	}
 	public static void main (String[] args)  {
