@@ -1,10 +1,10 @@
 package fr.limsi.negotiate;
 
-public abstract class Utterance {
+public abstract class NegoUtterance {
 	private boolean isExtrenal;
 	private UtType type;
 	
-	public Utterance(boolean external, UtType type) {
+	public NegoUtterance(boolean external, UtType type) {
 		this.type = type;
 		this.isExtrenal= external;
 	}

@@ -9,28 +9,29 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class CriterionNegotiation<C extends Criterion> {
-	private Self<C> self;
+	private Self_Ci<C> self;
 	private Other<C> other;
 	private Class<C> type; 
 	private List<Statement<C>> selfStatements;
 	private ArrayList<CriterionProposal> proposals;
 
-	public CriterionNegotiation(Self<C> selfPreferences) {
+	public CriterionNegotiation(Self_Ci<C> selfPreferences) {
 		this.self = selfPreferences;
 		this.other = new Other<C>(type);
 		this.proposals = new ArrayList<CriterionProposal>();
 		this.selfStatements = new ArrayList<Statement<C>>();
+		this.type = selfPreferences.getType();
 	}
 
 	public float acceptability(C value, double self){
-		return (float) ((self*getSelf().satisfaction(value))+ ((1-self)*getOther().other(value)));
+		return (float) ((self*getSelf().satisfaction(value)) + ((1-self)*getOther().other(value)));
 	}
 	
 	public Criterion chooseValue(List<C> V, final double self){
 		V.sort(new Comparator<C>() {
 			@Override
 			public int compare(C c1, C c2){
-				return (int)(acceptability(c1, self) - acceptability(c1, self));
+				return Float.compare(acceptability(c2, self), acceptability(c1, self));
 			}
 		});
 		return V.get(0);
@@ -70,11 +71,11 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	
 
-	public Self<C> getSelf() {
+	public Self_Ci<C> getSelf() {
 		return self;
 	}
 
-	public void setSelf(Self<C> self) {
+	public void setSelf(Self_Ci<C> self) {
 		this.self = self;
 	}
 

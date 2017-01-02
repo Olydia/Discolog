@@ -4,23 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class Self <C> {
+public class Self_Ci <C> extends Self<C> {
 
 	private ArrayList<Preference<C>> selfPreferences; 
 	private Class<C> type;
-	private MatrixOfPref<C> matrix;
 	
-	public Self(Class<C> type) {
+
+	public Self_Ci(Class<C> type) {
 		setSelfPreferences(new ArrayList<Preference<C>>());
 		this.type = type;
 		List<C> values = Arrays.asList(type.getEnumConstants());
 		matrix = new MatrixOfPref<>(values);
-	}
-
-	public float satisfaction(C value){
-		float score = matrix.getScoreOf(value);
-		return (1-score);
 	}
 
 	public ArrayList<Preference<C>> getSelfPreferences() {
@@ -39,6 +33,7 @@ public class Self <C> {
 		this.type = type;
 	}
 
+	
 	public void addPreference (C less, C more){
 		Preference<C> v = new Preference<C> (more, less);
 		if(selfPreferences.contains(v))
@@ -51,8 +46,11 @@ public class Self <C> {
 		}
 	}
 	
+
 	public List<C> getElements (){
 		return Arrays.asList(this.type.getEnumConstants());
 	}
+
+
 
 }

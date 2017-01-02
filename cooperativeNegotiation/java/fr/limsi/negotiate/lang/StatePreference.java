@@ -10,7 +10,7 @@ import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.Utterance.UtType;
+import fr.limsi.negotiate.NegoUtterance.UtType;
 
 public class StatePreference extends NegotiationUtterance {
 

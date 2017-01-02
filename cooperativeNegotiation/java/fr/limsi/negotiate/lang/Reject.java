@@ -22,7 +22,7 @@ public class Reject extends ProposalUtterance {
 
 	@Override
 	protected void interpret () {
-		NegotiationMove rej = new NegotiationMove(getProposal(), getExternal(), Utterance.UtType.REJECT);
+		NegotiationMove rej = new NegotiationMove(getProposal(), getExternal(), NegoUtterance.UtType.REJECT);
 		getNegotiation().getContext().addUtt(rej);
 
 		if(getProposal() instanceof CriterionProposal){

@@ -37,7 +37,7 @@ public class Other <C>{
 			return 0;
 		else  if (this.getStatus(value).equals(Satisfiable.TRUE))
 			return 1;
-		else return 0;
+		else return (float) 0.5;
 	}
 
 
@@ -48,7 +48,11 @@ public class Other <C>{
 		}
 		return Satisfiable.UNKOWN;
 	}
-
+	
+	
+//	public boolean isAcceptable(C value){
+//		return (this.other(value) >= NegotiationParameters.beta);
+//	}
 
 
 }

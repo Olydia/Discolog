@@ -2,31 +2,39 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
-import fr.limsi.negotiate.Utterance.UtType;
+
 
 public class Negotiation<O extends Option> {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
+	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
 	private int relation=0; 
 	private DialogueContext context ;
 
 
-	public Negotiation(List<CriterionNegotiation<Criterion>> valueNegotiation,
-			Self<Class<? extends Criterion>> criteriaNegotiation, Class<O> topic) {
-		this.valueNegotiation = valueNegotiation;
+	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation,
+			Self_C<O>  criteriaNegotiation, Class<O> topic) {
+		
+		this.valueNegotiation = Arrays.asList(valueNegotiation);
 		this.proposals = new ArrayList<OptionProposal>();
 		this.setContext(new DialogueContext());
 		this.topic=topic;
+		setCriteria(criteriaNegotiation);
 	}
+//
+//	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {
+//		this.valueNegotiation = Arrays.asList(valueNegotiation);
+//		this.proposals = new ArrayList<OptionProposal>();
+//		this.topic=topic;
+//	}
 
-	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {
-		this.valueNegotiation = Arrays.asList(valueNegotiation);
-		this.proposals = new ArrayList<OptionProposal>();
-		this.topic=topic;
+	public Class<O> getTopic() {
+		return topic;
 	}
-
 	public CriterionNegotiation<Criterion> getValueNegotiation(Class<? extends Criterion> type){
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
 			if(value.getType().equals(type))
@@ -162,17 +170,28 @@ public class Negotiation<O extends Option> {
 	public void setContext(DialogueContext contex) {
 		this.context = contex;
 	}
-	public O chooseValue(List<O> V){
+	
+	public O chooseValue(List<Criterion> V){
+		
 		V.sort(new Comparator<O>() {
 			@Override
 			public int compare(O c1, O c2){
-				return (int)(acceptability(c1) - acceptability(c1));
+				return Float.compare(acceptability(c2), acceptability(c1));
 			}
 		});
 		return V.get(0);
 	}
+	
+	public List<Option> getOptionsWithCriteria(List<Criterion> V){
+		
+		for(Option o: getOptions()){
+			
+		}
+	}
+	
+	
 	public boolean negotiationFailure(){
-		Utterance lastUtterance = this.getContext().getLastMove();
+		NegoUtterance lastUtterance = this.getContext().getLastMove();
 		List<Option> remainOptions = new ArrayList<Option>();
 		if (getContext().getHistory().size()>= 20 && 
 				!(lastUtterance.getType().equals(UtType.PROPOSE) || lastUtterance.getType().equals(UtType.ACCEPT)))
@@ -200,6 +219,18 @@ public class Negotiation<O extends Option> {
 				prop.add(p);
 		}
 		return prop;
+	}
+	
+	public Object chooseValue(Utterance utterance){
+		return null;
+	}
+
+	public Self_C<O> getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(Self_C<O> criteria) {
+		this.criteria = criteria;
 	}
 
 }

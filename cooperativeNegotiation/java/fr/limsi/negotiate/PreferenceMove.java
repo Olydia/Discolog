@@ -1,7 +1,7 @@
 package fr.limsi.negotiate;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
-public class PreferenceMove extends Utterance {
+public class PreferenceMove extends NegoUtterance {
 	 private Statement<Criterion> value;
 	 Class<? extends Criterion> statementType; // only for ask
 	 

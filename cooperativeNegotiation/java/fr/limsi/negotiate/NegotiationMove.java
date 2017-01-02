@@ -1,6 +1,6 @@
 package fr.limsi.negotiate;
 
-public class NegotiationMove extends Utterance{
+public class NegotiationMove extends NegoUtterance{
 	private	Proposal proposal;
 	
 	public NegotiationMove(Proposal proposal, boolean external, UtType type) {

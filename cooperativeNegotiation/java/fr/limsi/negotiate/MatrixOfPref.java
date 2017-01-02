@@ -52,7 +52,10 @@ public class MatrixOfPref<C> {
 			//indexMore < i
 			if(preferences[indexMore][i] == 1 && i != indexMore){
 				preferences[indexLess][i] =1; // indexLess< i
-			}		
+			}
+			if(preferences[i][indexLess] == 1 && i != indexLess){
+				preferences[i][indexMore] =1; // indexLess< i
+			}
 		}
 	}
 	
@@ -62,6 +65,8 @@ public class MatrixOfPref<C> {
 		for(int i=0; i< preferences.length; i++){
 			score = score + preferences[index][i];
 		}
+		//System.out.println(score + " "+ value);
+
 		return(float) score/(values.size()-1);
 		
 

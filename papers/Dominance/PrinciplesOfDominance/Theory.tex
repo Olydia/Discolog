@@ -71,7 +71,7 @@
 	
 	
 	\section{Dialogue model}
-	during the dialogue, self and other exchanges information about their preferences. We present in the following the agent knoweldge processed from the dialogue.
+	during the dialogue, self and other exchanges information about their preferences. We present in the following the agent knowledge processed from the dialogue.
 	\subsection{Other model}
 		We do not have detailed knowledge of the preferences of the other; the agent only knows which criteria values the other has said are acceptable or unacceptable.
 
@@ -98,7 +98,7 @@
 		
 		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria.			
 		
-		Proposals which are made during the dialogue by both negotiators can have differents status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}). We define thus:
+		Proposals which are made during the dialogue by both negotiators can have different status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}). We define thus:
 		\begin{itemize}
 			\item the collection $Op \subset V$ the options which have been proposed in the negotiation.
 			\item the collection $Ac \subset V$  the options which have been accepted in the negotiation.
@@ -164,7 +164,7 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-	 Negotiation success &  $\exists x \in V$  \emph{and} $x \in \{Acc\}$  \newline \emph{OR} \newline $x \in \{Op\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+	 Negotiation success &  $\exists x \in \{Acc\}$  \newline \emph{OR} \newline $x \in \{Op\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
 		\hline
 		Negotiation failure & $ \forall x \notin \{Rej\}$, \newline  $acc(dom,t,x,\prec,A,U) < \beta $ \\
 		\hline
@@ -181,7 +181,7 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-		Negotiation success &  $\exists x \in V$ \emph{and} $x \in \{Acc\}$ \\
+		Negotiation success &  $\exists x \in \{Acc\}$ \\
 		\hline
 		Accept & $\exists x \in \{Op\} /$ \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
 		\hline

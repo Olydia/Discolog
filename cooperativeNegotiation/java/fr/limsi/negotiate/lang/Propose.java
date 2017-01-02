@@ -6,7 +6,7 @@ import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.NegotiationMove;
 import fr.limsi.negotiate.Proposal;
 import fr.limsi.negotiate.Statement;
-import fr.limsi.negotiate.Utterance;
+import fr.limsi.negotiate.NegoUtterance;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
@@ -28,7 +28,7 @@ public class Propose extends ProposalUtterance {
 		Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
 		p.setStatus(Status.OPEN);
 		
-		NegotiationMove prop = new NegotiationMove(p, getExternal(), Utterance.UtType.PROPOSE);
+		NegotiationMove prop = new NegotiationMove(p, getExternal(), NegoUtterance.UtType.PROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		
 		getNegotiation().addProposal(p);

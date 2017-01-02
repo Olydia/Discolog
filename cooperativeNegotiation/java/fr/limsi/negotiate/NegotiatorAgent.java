@@ -5,6 +5,8 @@ import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.lang.Utterance;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.plugin.DecompositionPlugin;
+import fr.limsi.negotiate.NegoUtterance.UtType;
+import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.*;
 
@@ -52,8 +54,8 @@ public class NegotiatorAgent extends Agent {
 				true);
 
 		// note not loading Negotiotion.xml!
-		dual.interaction1.load("models/models_Sub/Negotiate.xml");
-		dual.interaction2.load("models/models_Sub/Negotiate.xml");
+		dual.interaction1.load("models/Negotiate.xml");
+		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
 		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		((NegotiatorAgent) dual.interaction1.getSystem()).getNegotiation().setDominance(DOMINANT);
@@ -87,74 +89,63 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-
 		if ( utterance == null ) {
-			// compute an utterance intro dom vs submissive
-			return null;
+			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
-		} else if ( negotiation.negotiationFailure() )
+			if(relation == DOMINANT){
+				Criterion value = getNegotiation().getValueNegotiation(opent).getSelf().sortValues().get(0);
+				return new Propose(disco, false, new CriterionProposal(true, value));
+			} else if(relation == SUBMISSIVE){
+				return new AskPreference(disco, false, opent, null);
+			}
+		} else if (negotiation.negotiationFailure()){
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
 
-		else {
-			if ( utterance instanceof StatePreference ) {
-				 if ( proposalFromUserState(getLastUserPref()) )
-					return new Propose(disco, false, proposalFromPreference(getLastUserPref(), true));
+		} else if ( utterance instanceof AskPreference ) {
+			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
+			Statement<Criterion> state = respondToAsk(ask);
+			return new StatePreference(disco, false, state.getValue(), state.getStatus());
 
-				// fill in similarly for rest of cases
+		} else if ( utterance instanceof Propose ) {
+			// fill in similarly
+			return null;
 
-				else return null;            
+		} else if ( utterance instanceof Accept ) {
+			// fill in similarly
+			return null;
 
-			} else if ( utterance instanceof AskPreference ) {
-				// fill in similarly
-				return null;
+		} else if ( utterance instanceof Reject ) {
+			// fill in similarly
+			return null;
 
-			} else if ( utterance instanceof Propose ) {
-				// fill in similarly
-				return null;
-
-			} else if ( utterance instanceof Accept ) {
-				// fill in similarly
-				return null;
-
-			} else if ( utterance instanceof Reject ) {
-				// fill in similarly
-				return null;
-
-			} else if ( utterance instanceof StatePreference ) {
-				// fill in similarly
-				return null;
-
-			} else return null;
+		} else if ( utterance instanceof StatePreference) {
+			// fill in similarly
+			if(relation == DOMINANT){
+				
+			}
 		}
+		return null;
+
+
 	}
 
 	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
-	//   private boolean proposalFromUserState (ValuePreference<Criterion> userPref) {
-	//      Criterion more = userPref.getMore();
-	//      return more != null && negotiation.isAcceptable(createProposal(more, true), relation);
-	//   }
-	//
-	//   private Proposal proposalFromPreference (ValuePreference<Criterion> preference, boolean isSelf) {
-	//      return preference == null ? null : createProposal(preference.getMore(), isSelf);
-	//   }
-	//
-	//   private Proposal createProposal (Object value, boolean isSelf) {
-	//      if ( value == null ) return null;
-	//      return negotiation.createProposal(value, isSelf);
-	//   }
-	//
-	//   private ValuePreference<Criterion> getLastUserPref () { 
-	//      PreferenceStatement last = getLastUserStatement("State");
-	//      return last != null ? last.getStatedPreference() : getPreference(Cuisine.class);
-	//   }
-	//
-	//   private PreferenceStatement getLastUserStatement (String type) {
-	//      return negotiation.getContext().getLastStatement(type, true);
-	//   }
-	//
-	//   private ValuePreference<Criterion> getPreference (Class<? extends Criterion> criterion) {
-	//      return negotiation.getRandomPreference(criterion);
-	//   }
+	public boolean otherAsks(){
+		return (getNegotiation().getContext().getLastMove(true).getType().equals(UtType.ASK));
+	}
+
+
+	public Statement<Criterion> respondToAsk(PreferenceMove ask){
+		if(ask.getValue() == null){
+			Criterion value = getNegotiation().getValueNegotiation(ask.getStatementType()).getSelf().sortValues().get(0);
+			return new Statement<Criterion>(value, Satisfiable.TRUE);
+		}
+		else{
+			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getStatementType()).
+					getSelf().isSatisfiable(ask.getValue().getValue());
+			return new Statement<Criterion>(ask.getValue().getValue(), sat);
+		}
+	}
 
 }
