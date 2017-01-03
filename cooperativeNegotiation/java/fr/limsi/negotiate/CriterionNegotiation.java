@@ -111,6 +111,13 @@ public class CriterionNegotiation<C extends Criterion> {
 	public boolean isRejected(C value){
 		return isStatus(value, Status.REJECTED);		
 	}
+	
+	public boolean isStated(C value){
+		if(selfStatements.contains(new Statement<C>(value)))
+			return true;
+		return false;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public ArrayList<C> getProposalsWithStatus(Status status){
 		ArrayList<C> props = new ArrayList<C>();
@@ -131,8 +138,25 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void setSelfStatements(List<Statement<C>> selfStatements) {
 		this.selfStatements = selfStatements;
 	}
-	
-	
+	/** returns the set of values that did not occur during the negotiation (not stated, not rejected nor accepted)
+	 *  
+	 */
+	public List<C> remainProposals (){
+		List<C> values = new ArrayList<C>();
+		for (C elem: getElements()){
+			if(!isAccepted(elem) && !isRejected(elem))
+				values.add(elem);
+		}
+		return values;
+	}
+	public List<C> remainValues(){
+		List<C> values = new ArrayList<C>();
+		for (C elem: getElements()){
+			if(!isAccepted(elem) && !isStated(elem))
+				values.add(elem);
+		}
+		return values;
+	}
 
 }	
 

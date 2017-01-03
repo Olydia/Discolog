@@ -171,44 +171,88 @@ public class Negotiation<O extends Option> {
 		this.context = contex;
 	}
 	
-	public O chooseValue(List<Criterion> V){
-		
-		V.sort(new Comparator<O>() {
-			@Override
-			public int compare(O c1, O c2){
-				return Float.compare(acceptability(c2), acceptability(c1));
+	public List<Option> remainOptions(){
+		List<Option> options = nonRejectedOptions();
+		ArrayList<Option> removable = new ArrayList<Option>();
+		for(CriterionNegotiation<Criterion> elm: valueNegotiation){
+			for(Option o: options){
+				if(elm.isRejected(o.getValue(elm.getType())))
+					removable.add(o);
 			}
-		});
-		return V.get(0);
-	}
-	
-	public List<Option> getOptionsWithCriteria(List<Criterion> V){
-		
-		for(Option o: getOptions()){
-			
+			options.removeAll(removable);
 		}
+		return options;
+		
 	}
-	
+	public List<Proposal> remainProposals(){
+		List<Proposal> prop = new ArrayList<Proposal>();
+		for(Option o: remainOptions()){
+			if(acceptability(o)>= NegotiationParameters.beta)
+				prop.add(new OptionProposal(true, o));
+
+		}
+		for(CriterionNegotiation<Criterion> elm: valueNegotiation){
+			for(Criterion c: elm.remainProposals())
+				if(elm.acceptability(c, self())>= NegotiationParameters.beta)
+					prop.add(new CriterionProposal(true, c));
+		}
+		return prop;
+	}
+//	public O chooseValue(List<Criterion> V){
+//		
+//		V.sort(new Comparator<O>() {
+//			@Override
+//			public int compare(O c1, O c2){
+//				return Float.compare(acceptability(c2), acceptability(c1));
+//			}
+//		});
+//		return V.get(0);
+//	}
+//	
+//	public List<Option> getOptionsWithCriteria(List<Criterion> V){
+//		
+//		for(Option o: getOptions()){
+//			
+//		}
+//	}
 	
 	public boolean negotiationFailure(){
 		NegoUtterance lastUtterance = this.getContext().getLastMove();
-		List<Option> remainOptions = new ArrayList<Option>();
 		if (getContext().getHistory().size()>= 20 && 
 				!(lastUtterance.getType().equals(UtType.PROPOSE) || lastUtterance.getType().equals(UtType.ACCEPT)))
 			return true;
 
 		//if(getDominance()>=0){
-			List<OptionProposal> rejected = getOptionsProposals(Status.REJECTED);
-			for(Option o: getOptions()){
-				if(!rejected.contains(o))
-					remainOptions.add(o);
-			}
+		List<Option> remainOptions=nonRejectedOptions();
 			return (remainOptions.isEmpty());
 					//|| 
 				//	getAcceptableOptions().isEmpty());
 		//}
 //		else
 //			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
+	}
+
+	public Option negotiationSuccess(int relation){
+			if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
+				return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
+			if(relation == NegotiatorAgent.DOMINANT){
+				for(OptionProposal o: getOptionsProposals(Status.OPEN)){
+					if(!o.isSelf() && acceptability(o.getValue())>= NegotiationParameters.beta)
+						return o.getValue();
+				}
+			}
+			return null;
+	}
+	
+	
+	private List<Option>  nonRejectedOptions() {
+		List<Option> remainOptions = new ArrayList<Option>();
+		List<OptionProposal> rejected = getOptionsProposals(Status.REJECTED);
+		for(Option o: getOptions()){
+			if(!rejected.contains(new OptionProposal(o)))
+				remainOptions.add(o);
+		}
+		return remainOptions;
 	}
 
 	public List<OptionProposal>  getOptionsProposals(Status status){

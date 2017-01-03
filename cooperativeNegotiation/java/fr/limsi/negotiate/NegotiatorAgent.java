@@ -90,6 +90,7 @@ public class NegotiatorAgent extends Agent {
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
 		if ( utterance == null ) {
+			
 			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
 			if(relation == DOMINANT){
@@ -98,32 +99,53 @@ public class NegotiatorAgent extends Agent {
 			} else if(relation == SUBMISSIVE){
 				return new AskPreference(disco, false, opent, null);
 			}
+			
+			
 		} else if (negotiation.negotiationFailure()){
+			
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
 
+		} else if (negotiation.negotiationSuccess(relation)!= null){
+			Option o = negotiation.negotiationSuccess(relation);
+			return new Say(disco, false, "Let' book a table at the" + o.print() + " " + o.getClass().getSimpleName());
+			
 		} else if ( utterance instanceof AskPreference ) {
+			
 			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
 			Statement<Criterion> state = respondToAsk(ask);
 			return new StatePreference(disco, false, state.getValue(), state.getStatus());
-
-		} else if ( utterance instanceof Propose ) {
-			// fill in similarly
-			return null;
-
-		} else if ( utterance instanceof Accept ) {
-			// fill in similarly
-			return null;
-
-		} else if ( utterance instanceof Reject ) {
-			// fill in similarly
-			return null;
-
-		} else if ( utterance instanceof StatePreference) {
-			// fill in similarly
-			if(relation == DOMINANT){
-				
-			}
 		}
+		switch (relation){
+		case(DOMINANT):{
+			if(!getNegotiation().remainProposals().isEmpty())
+				return new Propose(disco, false, new Proposal());
+		}
+		case(SUBMISSIVE):{
+			
+		}
+		default :
+			return null;
+		
+		}
+
+//		} else if ( utterance instanceof Propose ) {
+//			// fill in similarly
+//			return null;
+//
+//		} else if ( utterance instanceof Accept ) {
+//			// fill in similarly
+//			return null;
+//
+//		} else if ( utterance instanceof Reject ) {
+//			// fill in similarly
+//			return null;
+//
+//		} else if ( utterance instanceof StatePreference) {
+//			// fill in similarly
+//			if(relation == DOMINANT){
+//				
+//			}
+//		}
 		return null;
 
 
