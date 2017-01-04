@@ -2,12 +2,7 @@ package fr.limsi.negotiate.lang;
 
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.NegotiationMove;
-import fr.limsi.negotiate.Proposal;
-import fr.limsi.negotiate.Statement;
-import fr.limsi.negotiate.NegoUtterance;
-import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class Propose extends ProposalUtterance {
@@ -25,8 +20,13 @@ public class Propose extends ProposalUtterance {
 
 	@Override
 	protected void interpret () {
-		Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
-		p.setStatus(Status.OPEN);
+		
+		Proposal p;
+		if(getProposal() instanceof CriterionProposal)
+			p = new CriterionProposal(!getExternal(), (Criterion)getProposal().getValue());
+		else 
+			p = new OptionProposal(!getExternal(), (Option)getProposal().getValue());
+		
 		
 		NegotiationMove prop = new NegotiationMove(p, getExternal(), NegoUtterance.UtType.PROPOSE);
 		getNegotiation().getContext().addUtt(prop);

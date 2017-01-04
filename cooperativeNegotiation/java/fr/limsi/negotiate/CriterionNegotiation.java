@@ -112,8 +112,11 @@ public class CriterionNegotiation<C extends Criterion> {
 		return isStatus(value, Status.REJECTED);		
 	}
 	
-	public boolean isStated(C value){
-		if(selfStatements.contains(new Statement<C>(value)))
+	public boolean isStated(C value, boolean isSelf){
+		
+		if(isSelf && selfStatements.contains(new Statement<C>(value)))
+			return true;
+		else if(!isSelf && other.getStatus(value)!= Satisfiable.UNKOWN)
 			return true;
 		return false;
 	}
@@ -152,7 +155,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public List<C> remainValues(){
 		List<C> values = new ArrayList<C>();
 		for (C elem: getElements()){
-			if(!isAccepted(elem) && !isStated(elem))
+			if(!isAccepted(elem) && !isStated(elem, true))
 				values.add(elem);
 		}
 		return values;
