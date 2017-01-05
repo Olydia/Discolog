@@ -6,6 +6,12 @@ public class NegotiationMove extends NegoUtterance{
 	public NegotiationMove(Proposal proposal, boolean external, UtType type) {
 		super(external, type);
 		this.setProposal(proposal);
+		if(proposal instanceof CriterionProposal){
+			@SuppressWarnings("unchecked")
+			Class<? extends Criterion> t = (Class<? extends Criterion>)proposal.getValue().getClass();
+			this.setValueType(t);
+
+		}
 	}
 
 	public Proposal getProposal() {

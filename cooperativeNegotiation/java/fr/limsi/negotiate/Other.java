@@ -43,12 +43,30 @@ public class Other <C>{
 
 	public Satisfiable getStatus(C value){
 		for(Statement<C> elem : preferences){
-			if(elem.equals(value))
+			if(elem.getValue().equals(value))
 				return (elem.getStatus());
 		}
 		return Satisfiable.UNKOWN;
 	}
 	
+	public List<C> getPreferences(Satisfiable status){
+		List<C> un = new ArrayList<C>();
+		System.out.println(type);
+		List<C> elemenets =  Arrays.asList(this.type.getEnumConstants());
+		if(status.equals(Satisfiable.UNKOWN)){
+			for(C e: elemenets){
+				if(getStatus(e).equals(Satisfiable.UNKOWN))
+					un.add(e);
+			}
+			return un;
+		}
+		List<C> values = new ArrayList<C>();
+		for(Statement<C> elem: preferences){
+			if(elem.getStatus().equals(status))
+				values.add(elem.getValue());
+		}
+		return values;
+	}
 	
 //	public boolean isAcceptable(C value){
 //		return (this.other(value) >= NegotiationParameters.beta);

@@ -96,19 +96,23 @@ public class NegotiatorAgent extends Agent {
 
 			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
-			if(relation == DOMINANT){
+			if(relation > NegotiationParameters.sigma){
+
 				Criterion value = getNegotiation().getValueNegotiation(opent).getSelf().sortValues().get(0);
 				return new Propose(disco, false, new CriterionProposal(true, value));
-			} else if(relation == SUBMISSIVE){
+
+			} else if(relation <= NegotiationParameters.sigma){
+
 				return new AskPreference(disco, false, opent, null);
 			}
 
 
-		} else if (relation == DOMINANT && negotiation.negotiationFailure(utterance)){
+		} else if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance)){
 
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
 
 		} else if (negotiation.negotiationSuccess(relation)!= null){
+
 			Option o = negotiation.negotiationSuccess(relation);
 			return new Say(disco, false, "Let' book a table at the" + o.print() + " " + o.getClass().getSimpleName());
 
@@ -117,38 +121,117 @@ public class NegotiatorAgent extends Agent {
 			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
 			Statement<Criterion> state = respondToAsk(ask);
 			return new StatePreference(disco, false, state.getValue(), state.getStatus());
-		}
-		else if (relation > NegotiationParameters.sigma){
+
+		}else if (relation > NegotiationParameters.sigma){
+
 			if(!getNegotiation().remainProposals().isEmpty())
 				return new Propose(disco, false, createProposal(getNegotiation().chooseProposal(utterance), true));
-		}
-		else if (relation <= NegotiationParameters.sigma){
-			// Accept
+
+		}else if (relation <= NegotiationParameters.sigma){
+			// REJECT
 			if(utterance instanceof Propose){
+
+				Proposal p = (Proposal)utterance.getSlotValue("proposal");
+				if(acceptablity(p)< NegotiationParameters.beta && getNegotiation().computeT()< NegotiationParameters.tau){
+					p.setStatus(Status.REJECTED);
+					return new Reject(disco, false,p);
+				}	
+			} else {
+
 				Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
-				Proposal p = getAcceptableProposals(c);
-				return new Accept(disco, false,  createProposal(p, true));
+				Proposal p = getAcceptableProposal(c);
+				if(p != null){
+					p.setStatus(Status.ACCEPTED);
+
+					return new Accept(disco, false, p);
+
+				} else if(canPropose() != null) {
+					// Propose
+					return new Propose (disco, false, canPropose());
+
+				} else{
+					//Ask
+					PreferenceMove ask = ask();
+					if (ask!= null){
+						return new AskPreference(disco, false, ask.getValueType(), ask.getValue().getValue());
+
+					} else {
+						// do a statement from the remain values !
+						
+					}
+					
+					
+				}
+				// State
 			}
-			//Reject
-			// Propose
-			//Ask
-			// State
+			// Accept
+
+
 		}
-		
-
-
 	}
 
-	private Proposal getAcceptableProposals(Class<? extends Criterion> c) {
-		List<Criterion> proposals = getNegotiation().getValueNegotiation(c).getProposalsWithStatus(Status.OPEN);
-		for(int i= proposals.size()-1; i>= 0; i++){
-			if(getNegotiation().getValueNegotiation(c).
-					acceptability(proposals.get(i), getNegotiation().self())> NegotiationParameters.beta)
-						return new CriterionProposal(true, proposals.get(i));
+
+
+
+	public Proposal canPropose() {
+		List<Criterion> oStats = getOtherStatements(Satisfiable.TRUE);
+		if(!oStats.isEmpty()){
+
+			for(Criterion c: oStats){
+
+				if (getNegotiation().getValueNegotiation
+						(c.getClass()).acceptability(c, getNegotiation().self())>= NegotiationParameters.beta)
+					return new CriterionProposal(true, c);
+			}
+
+		} else {
+
+			List<Criterion> elem = new ArrayList<Criterion> ();
+
+			for(CriterionNegotiation<Criterion> nego: getNegotiation().getValuesNegotiation()){
+				if(nego.getProposalsWithStatus(Status.ACCEPTED).isEmpty())
+					return null;
+				else 
+					elem.add(nego.getProposalsWithStatus(Status.ACCEPTED).get(0).getValue());
+			}
+
+			Option o = getNegotiation().computeOption(elem);
+
+			if(o != null)
+				return new OptionProposal(true, o);
 		}
+
 		return null;
 	}
-	private Proposal getaccProposals 
+
+	private Proposal getAcceptableProposal(Class<? extends Criterion> c) {
+
+		//1. Check acceptable values in the current discussed criterion
+		List<Proposal> proposals = new ArrayList<Proposal>();
+		proposals.addAll(getNegotiation().getValueNegotiation(c).getProposalsWithStatus(Status.OPEN));
+
+		for(Proposal p: sortProposals(proposals)){
+			if(acceptablity(p)>= NegotiationParameters.beta)
+				return p;
+
+		}
+		//2. if 1 is not valid, check acceptable proposals in the previous discussed criteria
+
+		List<Proposal> previousP = new ArrayList<Proposal>();
+
+		for( int i =0; i< getNegotiation().getContext().getRemainDiscussedCrt().size()-1; i++ ){
+			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
+			previousP.addAll(getNegotiation().getValueNegotiation(discussed).getProposalsWithStatus(Status.OPEN));
+		}
+
+		previousP.addAll(getNegotiation().getOptionsProposals(Status.OPEN));
+		Proposal p = sortProposals(previousP).get(0);
+		if(acceptablity(p)>= NegotiationParameters.beta)
+			return p;
+
+		//3. Otherwise there is nothing to accept
+		return null;		
+	}
 
 	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
@@ -159,16 +242,16 @@ public class NegotiatorAgent extends Agent {
 
 	public Statement<Criterion> respondToAsk(PreferenceMove ask){
 		if(ask.getValue() == null){
-			Criterion value = getNegotiation().getValueNegotiation(ask.getStatementType()).getSelf().sortValues().get(0);
+			Criterion value = getNegotiation().getValueNegotiation(ask.getValueType()).getSelf().sortValues().get(0);
 			return new Statement<Criterion>(value, Satisfiable.TRUE);
 		}
 		else{
-			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getStatementType()).
+			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getValueType()).
 					getSelf().isSatisfiable(ask.getValue().getValue());
 			return new Statement<Criterion>(ask.getValue().getValue(), sat);
 		}
 	}
-	
+
 	public Proposal createProposal(Object o, boolean isSelf){
 		if(o == null)
 			return null;
@@ -190,6 +273,55 @@ public class NegotiatorAgent extends Agent {
 		}
 
 	}
-	
+	public float acceptablity(Proposal p){
+		if(p.getValue() instanceof CriterionProposal){
+			@SuppressWarnings("unchecked")
+			CriterionNegotiation<Criterion> model = this.getNegotiation().getValueNegotiation(
+					(Class<? extends Criterion>) p.getValue().getClass());
+			return model.acceptability((Criterion)p.getValue(), getNegotiation().self());
+		}
+		else 
+			return getNegotiation().acceptability((Option)p.getValue());
+	}
+
+
+	public List<Proposal> sortProposals(List<Proposal> props){
+		props.sort(new Comparator<Proposal>(){
+			public int compare(Proposal p1, Proposal p2){
+				return Float.compare(acceptablity(p2), acceptablity(p1));
+			}
+		});
+		return props;
+	}
+	/**
+	 * Returns the list of other statements which has not been Rejected or Accepted
+	 * @param status
+	 * @return 
+	 */
+	public List<Criterion> getOtherStatements(Satisfiable status){
+		List<Criterion> statements = new ArrayList<Criterion> ();
+		for( int i = getNegotiation().getContext().getRemainDiscussedCrt().size()-1; i>=0 ; i--){
+			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
+			CriterionNegotiation<Criterion> cn = getNegotiation().getValueNegotiation(discussed);
+			for(Criterion c: cn.getOther().getPreferences(status)){
+				if(!cn.isAccepted(c) && !cn.isRejected(c))
+					statements.add(c);
+			}
+		}
+		return statements;
+	}
+
+	public PreferenceMove ask(){
+		Class<? extends Criterion> c;
+		c=getNegotiation().getContext().getCurrentDisucussedCriterion();
+		Criterion currentAsk = getNegotiation().getValueNegotiation(c).ask();
+		if(currentAsk == null){
+			c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().getElements());
+			if(c == null)
+				return null;
+		}
+
+		return new PreferenceMove(new Statement<Criterion>(currentAsk),c, false, UtType.ASK);
+	}
 
 }

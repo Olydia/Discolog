@@ -7,6 +7,8 @@ import fr.limsi.negotiate.Proposal.Status;
 
 public class Negotiation<O extends Option> {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
+	
+
 	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
@@ -33,6 +35,10 @@ public class Negotiation<O extends Option> {
 	public Class<O> getTopic() {
 		return topic;
 	}
+	public List<CriterionNegotiation<Criterion>> getValuesNegotiation() {
+		return valueNegotiation;
+	}
+	
 	public CriterionNegotiation<Criterion> getValueNegotiation(Class<? extends Criterion> type){
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
 			if(value.getType().equals(type))
@@ -92,10 +98,7 @@ public class Negotiation<O extends Option> {
 	}
 	// t is the number of non accepted proposals
 	public double self(){
-		int t = 0;
-		for(CriterionNegotiation<Criterion> value: valueNegotiation){
-			t = t + (value.getProposals().size() - value.getProposalsWithStatus(Status.ACCEPTED).size());
-		}
+		int t = computeT();
 
 		double s=0;
 		if( t< NegotiationParameters.tau)
@@ -104,6 +107,14 @@ public class Negotiation<O extends Option> {
 			s= relation - ((NegotiationParameters.delta/relation) *(t-NegotiationParameters.tau));
 			return Math.max(0, s);
 		}
+	}
+
+	public int computeT() {
+		int t = 0;
+		for(CriterionNegotiation<Criterion> value: valueNegotiation){
+			t = t + (value.getProposals().size() - value.getProposalsWithStatus(Status.ACCEPTED).size());
+		}
+		return t;
 	}
 
 	public float acceptability(Option o){
@@ -280,6 +291,21 @@ public class Negotiation<O extends Option> {
 		this.criteria = criteria;
 	}
 
+	public Option computeOption(List<Criterion> accepted){
+		for (Option O : getOptions()){
+			int i = 0;
+			boolean match = true;
+			while (i<accepted.size() && match){
+				Criterion value = O.getValue(accepted.get(i).getClass());
+				if(!accepted.get(i).equals(value))
+					match = false;
+				i++;
+			}
+			if(match)
+				return O;
+		}
+		return null;
+	}
 	
 
 }

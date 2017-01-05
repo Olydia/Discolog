@@ -16,11 +16,11 @@ public class CriterionNegotiation<C extends Criterion> {
 	private ArrayList<CriterionProposal> proposals;
 
 	public CriterionNegotiation(Self_Ci<C> selfPreferences) {
+		this.type = selfPreferences.getType();
 		this.self = selfPreferences;
 		this.other = new Other<C>(type);
 		this.proposals = new ArrayList<CriterionProposal>();
 		this.selfStatements = new ArrayList<Statement<C>>();
-		this.type = selfPreferences.getType();
 	}
 
 	public float acceptability(C value, double self){
@@ -121,15 +121,26 @@ public class CriterionNegotiation<C extends Criterion> {
 		return false;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ArrayList<C> getProposalsWithStatus(Status status){
-		ArrayList<C> props = new ArrayList<C>();
-		for(CriterionProposal p: proposals){
+	public ArrayList<CriterionProposal> getProposalsWithStatus(Status status){
+		ArrayList<CriterionProposal> props = new ArrayList<CriterionProposal>();
+		for(int i=proposals.size()-1; i>=0; i--){
+			CriterionProposal p = proposals.get(i);
 			if(p.getStatus().equals(status))
-				props.add((C) p.getValue());	
+				props.add(p);	
 		}
 		return props;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<C> getValusProposals(List<CriterionProposal> prop){
+		ArrayList<C> values = new ArrayList<C>();
+		for(CriterionProposal p: prop){
+			values.add((C)p.getValue());
+		}
+		return values;
+	}
+	
 	public List<C> getElements (){
 		return Arrays.asList(this.type.getEnumConstants());
 	}
@@ -155,12 +166,33 @@ public class CriterionNegotiation<C extends Criterion> {
 	public List<C> remainValues(){
 		List<C> values = new ArrayList<C>();
 		for (C elem: getElements()){
-			if(!isAccepted(elem) && !isStated(elem, true))
+			if(!isStated(elem, true) && !isRejected(elem))
 				values.add(elem);
 		}
 		return values;
 	}
+	
+	public Criterion ask(){
+		List<C> otherUnkw = this.getOther().getPreferences(Satisfiable.UNKOWN);
+		List<C> remain = remainProposals();
+		List<C> keept = new ArrayList<C>();
+		for(C elem: otherUnkw){
+			if(remain.contains(elem))
+				keept.add(elem);
+				
+		}
+		if(keept.isEmpty())
+			return null;
+		else {
+			keept.sort(new Comparator<C> (){
+				public int compare (C c1, C c2){
+					return Float.compare(getSelf().satisfaction(c2), getSelf().satisfaction(c2));
+				}
+			});
+		}
+		return keept.get(0);
 
+	}
 }	
 
 

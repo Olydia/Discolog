@@ -16,19 +16,20 @@ public class remainValues {
 		Negotiation<Restaurant> m = new GenerateModel().model1();
 		Statement<Criterion> s1 = new Statement<Criterion>(Cuisine.CHINESE, Satisfiable.TRUE);
 		//Statement<Cuisine> s2 = new Statement<Cuisine>(Cuisine.CHINESE, Satisfiable.FALSE);
-		m.getValueNegotiation(Cuisine.class).addStatement(s1, false);
-		assertFalse(m.getValueNegotiation(Cuisine.class).remainValues().contains(Cuisine.CHINESE));
+		m.getValueNegotiation(Cuisine.class).addStatement(s1, true);
+		System.out.println(m.getValueNegotiation(Cuisine.class).getOther().getPreferences(Satisfiable.UNKOWN));
+		assertFalse(m.getValueNegotiation(Cuisine.class).getOther().getPreferences(Satisfiable.UNKOWN).contains(Cuisine.CHINESE));
 		// TEST FOR OPTIONS
-		CriterionProposal pc = new CriterionProposal(false, Cuisine.FRENCH);
-		pc.setStatus(Status.REJECTED);
-		m.addProposal(pc);
-		
-		OptionProposal po = new OptionProposal(false, Restaurant.ALBACIO);
-		po.setStatus(Status.REJECTED);
-		m.addProposal(po);
-		//assertFalse(m.remainOptions().contains(Restaurant.ALBACIO));
-		//assertTrue(m.getValueNegotiation(Cuisine.class).isRejected(value))
-		assertFalse(m.remainOptions().contains(Restaurant.BEAUREPAIRE));
+//		CriterionProposal pc = new CriterionProposal(false, Cuisine.FRENCH);
+//		pc.setStatus(Status.REJECTED);
+//		m.addProposal(pc);
+//		
+//		OptionProposal po = new OptionProposal(false, Restaurant.ALBACIO);
+//		po.setStatus(Status.REJECTED);
+//		m.addProposal(po);
+//		//assertFalse(m.remainOptions().contains(Restaurant.ALBACIO));
+//		//assertTrue(m.getValueNegotiation(Cuisine.class).isRejected(value))
+//		assertFalse(m.remainOptions().contains(Restaurant.BEAUREPAIRE));
 	}
 
 }

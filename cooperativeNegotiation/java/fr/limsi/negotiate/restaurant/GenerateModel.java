@@ -1,5 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
+import java.util.ArrayList;
+
 import fr.limsi.negotiate.*;
 
 public class GenerateModel {
@@ -41,7 +43,7 @@ public class GenerateModel {
 	}
 	public static void main (String[] args)  {
 		GenerateModel m = new GenerateModel();
-		System.out.println(m.model1().getCriteria().sortValues());
+		//System.out.println(m.model1().getCriteria().sortValues());
 	}
 
 }
