@@ -21,4 +21,10 @@ public class NegotiationMove extends NegoUtterance{
 	public void setProposal(Proposal proposal) {
 		this.proposal = proposal;
 	}
+
+	@Override
+	public Object getValue() {
+		// TODO Auto-generated method stub
+		return proposal;
+	}
 }

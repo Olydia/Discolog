@@ -53,8 +53,8 @@ public class NegotiatorAgent extends Agent {
 
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model1()), 
-				false);
+				new NegotiatorAgent("Agent2", model.model2()), 
+				true);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
@@ -92,6 +92,7 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
+
 		if ( utterance == null ) {
 
 			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
@@ -101,93 +102,84 @@ public class NegotiatorAgent extends Agent {
 				Criterion value = getNegotiation().getValueNegotiation(opent).getSelf().sortValues().get(0);
 				return new Propose(disco, false, new CriterionProposal(true, value));
 
-		}
-			//	else
-//
-//				return new AskPreference(disco, false, opent, null);
+			} else
+				return new AskPreference(disco, false, opent, null);				
+
+		}else if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance)){
+
+			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
+
+		} else if (negotiation.negotiationSuccess(relation)!= null){
+
+			Option o = negotiation.negotiationSuccess(relation);
+			return new Say(disco, false, "Let' book a table at the" + o.print() + " " + o.getClass().getSimpleName());
+
+		} else if ( utterance instanceof AskPreference ) {
+
+			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
+			Statement<Criterion> state = respondToAsk(ask);
+			return new StatePreference(disco, false, state.getValue(), state.getStatus());
+
+		} else if(isLastStatement(utterance)){
+
+			List<Proposal> proposals = getNegotiation().remainProposals();
+			if(proposals.isEmpty())
+				return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
+
+			else
+				return new Propose(disco, false, createProposal(sortProposals(proposals).get(0), true));
+
+			// DOMINANT case only propose !		
+		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
+
+			return new Propose(disco, false, createProposal(getNegotiation().chooseProposal(utterance), true));
+
+			//SUBMISSIVE cases
+		}else { 
+			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
+			// REJECT
+			if(canReject(utterance)) {
+				Proposal p = (Proposal)utterance.getSlotValue("proposal");
+				p.setStatus(Status.REJECTED);
+				return new Reject(disco, false,p);
+
+				//ACCEPT
+			}else if(getAcceptableProposal(c)!= null){
+				
+				Proposal p = getAcceptableProposal(c);
+				p.setStatus(Status.ACCEPTED);
+				return new Accept(disco, false, p);
+				
+			}else if(canPropose() != null) {
+
+				// PROPOSE
+				return new Propose (disco, false, canPropose());
 			
+				//ASK
+			}else if (ask()!= null){
+				
+				return new AskPreference(disco, false, ask().getValueType(), ask().getValue().getValue());
 
+				// STATE
+			}else {
+				List<Criterion> sts = getPossibleStatements();
+				if(sts.isEmpty())
+
+					return finalStatement(disco);
+
+				else {
+					// do a statement from the remain values !
+					Criterion  value = sts.get(0);
+					Satisfiable status = getNegotiation().getValueNegotiation(value.getClass()).getSelf().isSatisfiable(value);
+					return new StatePreference(disco, false, value, status);
+				}
+			}
 
 		}
-//		else if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance)){
-//
-//			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
-//
-//		} else if (negotiation.negotiationSuccess(relation)!= null){
-//
-//			Option o = negotiation.negotiationSuccess(relation);
-//			return new Say(disco, false, "Let' book a table at the" + o.print() + " " + o.getClass().getSimpleName());
-//
-//		} else if ( utterance instanceof AskPreference ) {
-//
-//			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
-//			Statement<Criterion> state = respondToAsk(ask);
-//			return new StatePreference(disco, false, state.getValue(), state.getStatus());
-//
-//		} else if(isLastStatement(utterance)){
-//			
-//			List<Proposal> proposals = getNegotiation().remainProposals();
-//				if(proposals.isEmpty())
-//					return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
-//				
-//				else
-//					return new Propose(disco, false, createProposal(sortProposals(proposals).get(0), true));
-//		
-//		// DOMINANT case only propose !		
-//		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
-//
-//				return new Propose(disco, false, createProposal(getNegotiation().chooseProposal(utterance), true));
-//		
-//		//SUBMISSIVE cases
-//		}else {
-//			// REJECT
-//			if(utterance instanceof Propose){
-//
-//				Proposal p = (Proposal)utterance.getSlotValue("proposal");
-//				if(acceptablity(p)< NegotiationParameters.beta && getNegotiation().computeT()< NegotiationParameters.tau){
-//					p.setStatus(Status.REJECTED);
-//					return new Reject(disco, false,p);
-//				}
-//	
-//			} else {
-//				// ACCEPT
-//				Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
-//				Proposal p = getAcceptableProposal(c);
-//				if(p != null){
-//					p.setStatus(Status.ACCEPTED);
-//
-//					return new Accept(disco, false, p);
-//
-//				} else if(canPropose() != null) {
-//					
-//					// Propose
-//					return new Propose (disco, false, canPropose());
-//
-//				} else{
-//					
-//					//Ask
-//					PreferenceMove ask = ask();
-//					if (ask!= null){
-//						return new AskPreference(disco, false, ask.getValueType(), ask.getValue().getValue());
-//
-//					} else {
-//						List<Criterion> sts = getPossibleStatements();
-//						if(sts.isEmpty())
-//							
-//							return finalStatement(disco);
-//						
-//						else {
-//						// do a statement from the remain values !
-//							Criterion  value = sts.get(0);
-//							Satisfiable status = getNegotiation().getValueNegotiation(value.getClass()).getSelf().isSatisfiable(value);
-//							return new StatePreference(disco, false, value, status);
-//						}
-//					}
-//				}
-//			}
-//		}
-		return null;
 	}
+
+	// JavasScript helpers from Negotiation.d4g.xml translated to Java
+
 
 	public Utterance finalStatement(Disco disco){
 		return new Say(disco, true, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
@@ -223,6 +215,17 @@ public class NegotiatorAgent extends Agent {
 		}
 
 		return null;
+	}
+
+
+	private boolean canReject(Utterance utterance){
+		if(utterance instanceof Propose){
+			Proposal p = (Proposal)utterance.getSlotValue("proposal");
+			if(acceptablity(p)< NegotiationParameters.beta && getNegotiation().computeT()< NegotiationParameters.tau)
+				return true;
+
+		}
+		return false; 
 	}
 
 	private Proposal getAcceptableProposal(Class<? extends Criterion> c) {
@@ -291,10 +294,11 @@ public class NegotiatorAgent extends Agent {
 
 	}
 	public float acceptablity(Proposal p){
-		if(p.getValue() instanceof CriterionProposal){
+		if(p instanceof CriterionProposal){
 			@SuppressWarnings("unchecked")
 			CriterionNegotiation<Criterion> model = this.getNegotiation().getValueNegotiation(
 					(Class<? extends Criterion>) p.getValue().getClass());
+
 			return model.acceptability((Criterion)p.getValue(), getNegotiation().self());
 		}
 		else 
@@ -346,9 +350,9 @@ public class NegotiatorAgent extends Agent {
 		List<Criterion> statements = new ArrayList<Criterion>();
 		Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 		statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
-		
+
 		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().getElements());
-		
+
 		if(c != null)
 			statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
 
@@ -358,13 +362,13 @@ public class NegotiatorAgent extends Agent {
 
 	public boolean isLastStatement(Utterance utterance){
 		if(utterance instanceof Say){
-			
-		 Say utt = (Say) utterance;
-		 
-		if(utt.getText().equals("I've told you all I like about "+ 
-				getNegotiation().getTopic().getSimpleName() + "s !"))
-				
-			return true;
+
+			Say utt = (Say) utterance;
+
+			if(utt.getText().equals("I've told you all I like about "+ 
+					getNegotiation().getTopic().getSimpleName() + "s !"))
+
+				return true;
 		}
 		return false;
 	}
