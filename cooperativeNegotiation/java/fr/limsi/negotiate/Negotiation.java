@@ -7,7 +7,7 @@ import fr.limsi.negotiate.Proposal.Status;
 
 public class Negotiation<O extends Option> {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
-	
+
 
 	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
@@ -18,19 +18,19 @@ public class Negotiation<O extends Option> {
 
 	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation,
 			Self_C<O>  criteriaNegotiation, Class<O> topic) {
-		
+
 		this.valueNegotiation = Arrays.asList(valueNegotiation);
 		this.proposals = new ArrayList<OptionProposal>();
 		this.setContext(new DialogueContext());
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
 	}
-//
-//	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {
-//		this.valueNegotiation = Arrays.asList(valueNegotiation);
-//		this.proposals = new ArrayList<OptionProposal>();
-//		this.topic=topic;
-//	}
+	//
+	//	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {
+	//		this.valueNegotiation = Arrays.asList(valueNegotiation);
+	//		this.proposals = new ArrayList<OptionProposal>();
+	//		this.topic=topic;
+	//	}
 
 	public Class<O> getTopic() {
 		return topic;
@@ -38,7 +38,7 @@ public class Negotiation<O extends Option> {
 	public List<CriterionNegotiation<Criterion>> getValuesNegotiation() {
 		return valueNegotiation;
 	}
-	
+
 	public CriterionNegotiation<Criterion> getValueNegotiation(Class<? extends Criterion> type){
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
 			if(value.getType().equals(type))
@@ -159,7 +159,7 @@ public class Negotiation<O extends Option> {
 	public void setContext(DialogueContext contex) {
 		this.context = contex;
 	}
-	
+
 
 	public boolean negotiationFailure(Utterance utterance){
 		if (getContext().getHistory().size()>= 30 && 
@@ -168,27 +168,27 @@ public class Negotiation<O extends Option> {
 
 		//if(getDominance()>=0){
 		List<Option> remainOptions=nonRejectedOptions();
-			return (remainOptions.isEmpty());
-					//|| 
-				//	getAcceptableOptions().isEmpty());
+		return (remainOptions.isEmpty());
+		//|| 
+		//	getAcceptableOptions().isEmpty());
 		//}
-//		else
-//			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
+		//		else
+		//			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
 
 	public Option negotiationSuccess(double relation){
-			if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
-				return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
-			if(relation == NegotiatorAgent.DOMINANT){
-				for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-					if(!o.isSelf() && acceptability(o.getValue())>= NegotiationParameters.beta)
-						return o.getValue();
-				}
+		if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
+			return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
+		if(relation == NegotiatorAgent.DOMINANT){
+			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
+				if(!o.isSelf() && acceptability(o.getValue())>= NegotiationParameters.beta)
+					return o.getValue();
 			}
-			return null;
+		}
+		return null;
 	}
-	
-	
+
+
 	private List<Option>  nonRejectedOptions() {
 		List<Option> remainOptions = new ArrayList<Option>();
 		List<OptionProposal> rejected = getOptionsProposals(Status.REJECTED);
@@ -208,7 +208,8 @@ public class Negotiation<O extends Option> {
 		}
 		return prop;
 	}
-	
+
+
 	public List<Option> remainOptions(){
 		List<Option> options = nonRejectedOptions();
 		ArrayList<Option> removable = new ArrayList<Option>();
@@ -220,30 +221,31 @@ public class Negotiation<O extends Option> {
 			options.removeAll(removable);
 		}
 		return options;
-		
+
 	}
-	
+
 	private List<CriterionProposal> remainCriterionProposals() {
 		List<CriterionProposal> prop = new ArrayList<CriterionProposal>();
 		for(CriterionNegotiation<Criterion> elm: valueNegotiation){
 			for(Criterion c: elm.remainProposals())
 				//if(elm.acceptability(c, self())>= NegotiationParameters.beta)
-					prop.add(new CriterionProposal(true, c));
+				prop.add(new CriterionProposal(true, c));
 		}
 		return prop;
 	}
-	
+
 	public List<Proposal> remainProposals(){
 		List<Proposal> prop = new ArrayList<Proposal>();
 		prop.addAll(remainCriterionProposals());
-		for(Option o: remainOptions()){
-			//if(acceptability(o)>= NegotiationParameters.beta)
-				prop.add(new OptionProposal(true, o));
+		//for(Option o: remainOptions()){
+		//if(acceptability(o)>= NegotiationParameters.beta)
+		for(Option o: nonRejectedOptions()){
+			prop.add(new OptionProposal(true, o));
 
 		}		return prop;
 	}
-	
-	
+
+
 	public Option chooseOption(List<Option> V){
 		V.sort(new Comparator<Option>() {
 			@Override
@@ -253,12 +255,12 @@ public class Negotiation<O extends Option> {
 		});
 		return V.get(0);
 	}
-	
+
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
 		for(CriterionNegotiation<Criterion> elm: valueNegotiation)
 			argmax.add(elm.chooseValue(elm.remainProposals(),this.self()));
-		
+
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
 			public int compare(Criterion c1, Criterion c2){
@@ -267,20 +269,20 @@ public class Negotiation<O extends Option> {
 				return Float.compare(cn2.acceptability(c2, self()), cn1.acceptability(c1, self()));
 			}
 		});
-		
+
 		return argmax.get(0);
 	}
-	
+
 	public Proposal chooseProposal(Utterance utterance) {
 		Option bestOption = chooseOption(remainOptions());
 		Criterion bestCriterion = chooseCriterionProposal();
 		if(utterance instanceof Accept)
 			return new OptionProposal(true,bestOption);
-		
+
 		else
 			return(acceptability(bestOption) > getValueNegotiation(bestCriterion.getClass()).acceptability(bestCriterion, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, bestCriterion));
-		
+
 	}
 
 	public Self_C<O> getCriteria() {
@@ -306,6 +308,6 @@ public class Negotiation<O extends Option> {
 		}
 		return null;
 	}
-	
+
 
 }

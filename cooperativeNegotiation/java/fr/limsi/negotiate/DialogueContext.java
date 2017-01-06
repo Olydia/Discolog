@@ -80,7 +80,7 @@ public class DialogueContext {
 
 	public void updateDiscussion(NegoUtterance newUtt){
 		
-		if(newUtt.getValueType()!= null){
+		if(newUtt.getValueType()!= null && !discussedCriteria.contains(newUtt.getValueType())){
 			if(newUtt.getType().equals(UtType.ACCEPT))
 				this.updateClosed(newUtt.getValueType());
 			

@@ -165,7 +165,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 	public List<C> remainValues(){
 		List<C> values = new ArrayList<C>();
-		for (C elem: getElements()){
+		for (C elem: getSelf().sortValues()){
 			if(!isStated(elem, true) && !isRejected(elem))
 				values.add(elem);
 		}
