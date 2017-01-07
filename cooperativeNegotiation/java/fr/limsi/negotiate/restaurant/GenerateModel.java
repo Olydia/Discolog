@@ -49,14 +49,14 @@ public class GenerateModel {
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
 		d1_cuisine.setType(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.ITALIAN);
-		//d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH));
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.CHINESE);
-		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.ITALIAN);
 		//d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.TURKISH));
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MIXICAN);
+		d1_cuisine.addPreference(Cuisine.MIXICAN, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
 
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
@@ -80,6 +80,18 @@ public class GenerateModel {
 	}
 	public static void main (String[] args)  {
 		GenerateModel m = new GenerateModel();
+		Negotiation<Restaurant> m1 = m.model1();
+		Negotiation<Restaurant> m2 = m.model2();
+		m1.setDominance(0.9);
+		m2.setDominance(0.1);
+		System.out.println(m1.self());
+		System.out.println(m2.self());
+		for(Cost elem: Cost.values()){
+			System.out.println(" M1: " +elem.toString() +" "+ m1.getValueNegotiation(elem.getClass()).acceptability(elem, m1.self()));
+			System.out.println(" M2:  "+elem.toString() +" "+ m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self()));
+
+		}
+		
 		//System.out.println(m.model1().getCriteria().sortValues());
 	}
 

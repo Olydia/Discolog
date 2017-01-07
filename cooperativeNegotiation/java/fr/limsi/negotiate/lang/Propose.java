@@ -22,8 +22,10 @@ public class Propose extends ProposalUtterance {
 	protected void interpret () {
 		
 		Proposal p;
-		if(getProposal() instanceof CriterionProposal)
+		if(getProposal() instanceof CriterionProposal){
 			p = new CriterionProposal(!getExternal(), (Criterion)getProposal().getValue());
+			getNegotiation().addStatement(new Statement<Criterion>((Criterion)p.getValue(),Satisfiable.TRUE), getExternal());
+		}
 		else 
 			p = new OptionProposal(!getExternal(), (Option)getProposal().getValue());
 		
@@ -32,7 +34,6 @@ public class Propose extends ProposalUtterance {
 		getNegotiation().getContext().addUtt(prop);
 		
 		getNegotiation().addProposal(p);
-		getNegotiation().addStatement(new Statement<Criterion>((Criterion)p.getValue(),Satisfiable.TRUE), getExternal());
 
 
 

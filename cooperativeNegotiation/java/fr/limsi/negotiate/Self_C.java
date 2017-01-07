@@ -48,7 +48,8 @@ public class Self_C  <O extends Option> extends Self<Class<? extends Criterion>>
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;		}
+			return null;		
+		}
 
 		@Override
 		public void addPreference(Class<? extends Criterion> less, Class<? extends Criterion> more) {

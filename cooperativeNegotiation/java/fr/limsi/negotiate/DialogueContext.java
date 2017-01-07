@@ -1,5 +1,7 @@
 package fr.limsi.negotiate;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 import fr.limsi.negotiate.NegoUtterance.UtType;
@@ -9,13 +11,14 @@ public class DialogueContext {
 	private List<NegoUtterance> history;
 	private List<Class<? extends Criterion>> discussedCriteria; 
 	private List<Class<? extends Criterion>> closedCriteria; 
+	private Class<? extends Option> topic;
 
-
-	public DialogueContext() {
+	public DialogueContext(Class<? extends Option> topic) {
 
 		this.history =new ArrayList<NegoUtterance>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
+		this.setTopic(topic);
 	}
 
 	public List<Class<? extends Criterion>> getRemainDiscussedCrt() {
@@ -116,6 +119,39 @@ public class DialogueContext {
 
 	public void  updateClosed(Class<? extends Criterion> criterion){
 		this.discussedCriteria.add(criterion);
+		if(criterion.equals(getCurrentDisucussedCriterion()))
+			openNewDiscussion(getElements());
 	}
 
+	public Class<? extends Option> getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Class<? extends Option> topic) {
+		this.topic = topic;
+	}
+	public List<Class<? extends Criterion>> getElements() {
+		try {
+			Method m = topic.getDeclaredMethod("getCriteria");
+			Object[] v = topic.getEnumConstants();
+			m.setAccessible(true);
+			@SuppressWarnings("unchecked")
+			List<Class<? extends Criterion>> value = (List<Class<? extends Criterion>>)m.invoke(v[0]);
+
+			return (value);
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;		
+	}
 }

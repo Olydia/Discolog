@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.restaurant.*;
 

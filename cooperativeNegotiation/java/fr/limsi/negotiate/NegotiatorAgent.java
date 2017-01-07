@@ -95,7 +95,7 @@ public class NegotiatorAgent extends Agent {
 
 		if ( utterance == null ) {
 
-			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+			Class<? extends Criterion> opent = Cost.class;
 
 			if(relation > NegotiationParameters.sigma){
 
@@ -112,7 +112,7 @@ public class NegotiatorAgent extends Agent {
 		} else if (negotiation.negotiationSuccess(relation)!= null){
 
 			Option o = negotiation.negotiationSuccess(relation);
-			return new Say(disco, false, "Let' book a table at the" + o.print() + " " + o.getClass().getSimpleName());
+			return new Say(disco, false, "Let's book a table at the" + o.print() + " " + o.getClass().getSimpleName());
 
 		} else if ( utterance instanceof AskPreference ) {
 
@@ -132,7 +132,7 @@ public class NegotiatorAgent extends Agent {
 			// DOMINANT case only propose !		
 		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
 
-			return new Propose(disco, false, createProposal(getNegotiation().chooseProposal(utterance), true));
+			return new Propose(disco, false, getNegotiation().chooseProposal(utterance));
 
 			//SUBMISSIVE cases
 		}else { 

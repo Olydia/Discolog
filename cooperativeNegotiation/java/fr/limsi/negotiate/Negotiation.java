@@ -21,7 +21,7 @@ public class Negotiation<O extends Option> {
 
 		this.valueNegotiation = Arrays.asList(valueNegotiation);
 		this.proposals = new ArrayList<OptionProposal>();
-		this.setContext(new DialogueContext());
+		this.setContext(new DialogueContext(topic));
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
 	}
@@ -258,9 +258,12 @@ public class Negotiation<O extends Option> {
 
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
-		for(CriterionNegotiation<Criterion> elm: valueNegotiation)
+		List<Class<? extends Criterion>> discussions = getContext().getRemainDiscussedCrt();
+		//argmax.addAll(getValueNegotiation(getContext().getCurrentDisucussedCriterion()));
+		for(int i = discussions.size() -1; i>0; i--){
+		CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
 			argmax.add(elm.chooseValue(elm.remainProposals(),this.self()));
-
+		}
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
 			public int compare(Criterion c1, Criterion c2){
