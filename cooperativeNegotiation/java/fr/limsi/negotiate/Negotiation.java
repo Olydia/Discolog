@@ -114,6 +114,7 @@ public class Negotiation<O extends Option> {
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
 			t = t + (value.getProposals().size() - value.getProposalsWithStatus(Status.ACCEPTED).size());
 		}
+		t = t + (proposals.size() - getOptionsProposals(Status.ACCEPTED).size());
 		return t;
 	}
 
