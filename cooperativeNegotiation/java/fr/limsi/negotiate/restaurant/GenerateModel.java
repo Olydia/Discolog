@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class GenerateModel {
 
@@ -83,15 +84,26 @@ public class GenerateModel {
 		Negotiation<Restaurant> m1 = m.model1();
 		Negotiation<Restaurant> m2 = m.model2();
 		m1.setDominance(0.9);
-		m2.setDominance(0.1);
+		m2.setDominance(0.35);
 		System.out.println(m1.self());
 		System.out.println(m2.self());
+		double thre = 0.6;
 		for(Cost elem: Cost.values()){
-			System.out.println(" M1: " +elem.toString() +" "+ m1.getValueNegotiation(elem.getClass()).acceptability(elem, m1.self()));
-			System.out.println(" M2:  "+elem.toString() +" "+ m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self()));
-
+			//System.out.println(" M1: " +elem.toString() +" "+ m1.getValueNegotiation(elem.getClass()).acceptability(elem, m1.self()));
+			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
+			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>=thre ;
+			System.out.println(elem.toString() +" "+ v);
 		}
-		
+		for(Cuisine elem: Cuisine.values()){
+			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
+			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>= thre;
+			System.out.println(elem.toString() +" "+ v);
+		}
+		for(Atmosphere elem: Atmosphere.values()){
+			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
+			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>= thre;
+			System.out.println(elem.toString() +" "+ v);
+		}
 		//System.out.println(m.model1().getCriteria().sortValues());
 	}
 

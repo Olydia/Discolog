@@ -10,6 +10,14 @@ public class Other <C>{
 	private Class<C> type;
 
 
+	public ArrayList<Statement<C>> getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(ArrayList<Statement<C>> preferences) {
+		this.preferences = preferences;
+	}
+	
 	public Class<C> getType() {
 		return type;
 	}

@@ -13,7 +13,7 @@
 			have null value * null value for slot is _not_ the same as being undefined, 
 			see Task.isDefinedSlot(String) -->
 		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
-		<input name="likable" type="Packages.fr.limsi.negotiate.PreferenceStatement.Acceptable" />
+		<input name="likable" type="Packages.fr.limsi.negotiate.Statement.Satisfiable" />
 
 	</task>
 

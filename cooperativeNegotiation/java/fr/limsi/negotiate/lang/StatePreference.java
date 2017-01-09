@@ -9,8 +9,8 @@ package fr.limsi.negotiate.lang;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.NegoUtterance.UtType;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class StatePreference extends NegotiationUtterance {
 
@@ -24,7 +24,7 @@ public class StatePreference extends NegotiationUtterance {
 	public StatePreference (Disco disco, Boolean external, Criterion value, Satisfiable likable) { 
 		super(StatePreference.class, disco, external);
 		if ( value != null ) setSlotValue("value", value);
-		if ( likable != null ) setSlotValue("likable", likable);
+		setSlotValue("likable", likable);
 	}
 
 	public Criterion getValue () { return (Criterion) getSlotValue("value"); }

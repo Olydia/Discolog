@@ -278,14 +278,18 @@ public class Negotiation<O extends Option> {
 	}
 
 	public Proposal chooseProposal(Utterance utterance) {
+		Criterion c = chooseCriterionProposal();
+		if(getContext().getClosedCriteria().isEmpty()){
+			return new CriterionProposal(true,c);
+		}
+			
 		Option bestOption = chooseOption(remainOptions());
-		Criterion bestCriterion = chooseCriterionProposal();
 		if(utterance instanceof Accept)
 			return new OptionProposal(true,bestOption);
 
 		else
-			return(acceptability(bestOption) > getValueNegotiation(bestCriterion.getClass()).acceptability(bestCriterion, self())?
-					new OptionProposal(true, bestOption): new CriterionProposal(true, bestCriterion));
+			return(acceptability(bestOption) > getValueNegotiation(c.getClass()).acceptability(c, self())?
+					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
 
 	}
 

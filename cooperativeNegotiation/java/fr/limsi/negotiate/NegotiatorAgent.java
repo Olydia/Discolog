@@ -145,20 +145,20 @@ public class NegotiatorAgent extends Agent {
 
 				//ACCEPT
 			}else if(getAcceptableProposal(c)!= null){
-				
+
 				Proposal p = getAcceptableProposal(c);
 				p.setStatus(Status.ACCEPTED);
 				return new Accept(disco, false, p);
-				
+
 			}else if(canPropose() != null) {
 
 				// PROPOSE
 				return new Propose (disco, false, canPropose());
-			
+
 				//ASK
-			}else if (ask()!= null){
-				
-				return new AskPreference(disco, false, ask().getValueType(), ask().getValue().getValue());
+			}else if (canAsk()!= null){
+				PreferenceMove askValue = ask(canAsk());
+				return new AskPreference(disco, false, askValue.getValueType(), askValue.getValue().getValue());
 
 				// STATE
 			}else {
@@ -218,6 +218,7 @@ public class NegotiatorAgent extends Agent {
 	}
 
 
+
 	private boolean canReject(Utterance utterance){
 		if(utterance instanceof Propose){
 			Proposal p = (Proposal)utterance.getSlotValue("proposal");
@@ -261,7 +262,7 @@ public class NegotiatorAgent extends Agent {
 
 
 	public Statement<Criterion> respondToAsk(PreferenceMove ask){
-		if(ask.getValue() == null){
+		if(ask.getValue().getValue() == null){
 			Criterion value = getNegotiation().getValueNegotiation(ask.getValueType()).getSelf().sortValues().get(0);
 			return new Statement<Criterion>(value, Satisfiable.TRUE);
 		}
@@ -282,6 +283,9 @@ public class NegotiatorAgent extends Agent {
 
 		return null;
 
+	}
+	public fr.limsi.negotiate.Statement.Satisfiable Satisfiable (Criterion c){
+		return getNegotiation().getValueNegotiation(c.getClass()).getSelf().isSatisfiable(c);
 	}
 	public Proposal createProposal(Object o, boolean isSelf, Status status){
 		if(o == null)
@@ -332,17 +336,28 @@ public class NegotiatorAgent extends Agent {
 		return statements;
 	}
 
-	public PreferenceMove ask(){
-		Class<? extends Criterion> c;
-		c=getNegotiation().getContext().getCurrentDisucussedCriterion();
+	public PreferenceMove ask(Class <? extends Criterion> c){
 		Criterion currentAsk = getNegotiation().getValueNegotiation(c).ask();
-		if(currentAsk == null){
-			c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().getElements());
-			if(c == null)
-				return null;
-		}
 
 		return new PreferenceMove(new Statement<Criterion>(currentAsk),c, false, UtType.ASK);
+	}
+	
+	
+	public Class <? extends Criterion> canAsk(){
+		Class<? extends Criterion> c = getNegotiation().getContext().getCurrentDisucussedCriterion();
+		if(!getNegotiation().getValueNegotiation(c).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
+			return c;
+		
+		else {
+			List<Class<? extends Criterion>> discussions = getNegotiation().getCriteria().getElements();
+			for(Class<? extends Criterion> dis: getNegotiation().getContext().getPossibleDiscussions(discussions))
+				if(!getNegotiation().getValueNegotiation(dis).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
+					return dis;
+			
+		}
+			
+		return null;
+				
 	}
 
 	public List<Criterion> getPossibleStatements(){

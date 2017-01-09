@@ -26,7 +26,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public float acceptability(C value, double self){
 		return (float) ((self*getSelf().satisfaction(value)) + ((1-self)*getOther().other(value)));
 	}
-	
+
 	public Criterion chooseValue(List<C> V, final double self){
 		V.sort(new Comparator<C>() {
 			@Override
@@ -36,11 +36,11 @@ public class CriterionNegotiation<C extends Criterion> {
 		});
 		return V.get(0);
 	}
-	
+
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
 	}
-	
+
 	public void updateProposal(CriterionProposal proposal){
 
 		for(CriterionProposal c: proposals){
@@ -61,15 +61,15 @@ public class CriterionNegotiation<C extends Criterion> {
 	public void updateStatement(Statement<C> s){
 		this.selfStatements.add(s);
 	}
-	
+
 	public void updateStatements(C value, Satisfiable s) {
 		this.selfStatements.add(new Statement<C>(value, s));
 	}
-	
+
 	public void addInOther(C value ,Satisfiable s){
 		other.addPreference(value, s);
 	}
-	
+
 
 	public Self_Ci<C> getSelf() {
 		return self;
@@ -111,16 +111,16 @@ public class CriterionNegotiation<C extends Criterion> {
 	public boolean isRejected(C value){
 		return isStatus(value, Status.REJECTED);		
 	}
-	
+
 	public boolean isStated(C value, boolean isSelf){
-		
+
 		if(isSelf && selfStatements.contains(new Statement<C>(value)))
 			return true;
 		else if(!isSelf && other.getStatus(value)!= Satisfiable.UNKOWN)
 			return true;
 		return false;
 	}
-	
+
 	public ArrayList<CriterionProposal> getProposalsWithStatus(Status status){
 		ArrayList<CriterionProposal> props = new ArrayList<CriterionProposal>();
 		for(int i=proposals.size()-1; i>=0; i--){
@@ -130,8 +130,8 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return props;
 	}
-	
-	
+
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<C> getValusProposals(List<CriterionProposal> prop){
 		ArrayList<C> values = new ArrayList<C>();
@@ -140,7 +140,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return values;
 	}
-	
+
 	public List<C> getElements (){
 		return Arrays.asList(this.type.getEnumConstants());
 	}
@@ -171,28 +171,24 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return values;
 	}
-	
+
 	public Criterion ask(){
-		List<C> otherUnkw = this.getOther().getPreferences(Satisfiable.UNKOWN);
-		List<C> remain = remainProposals();
-		List<C> keept = new ArrayList<C>();
-		for(C elem: otherUnkw){
-			if(remain.contains(elem))
-				keept.add(elem);
-				
-		}
-		if(keept.isEmpty())
+		if(this.getOther().getPreferences().isEmpty())
 			return null;
-		else {
-			keept.sort(new Comparator<C> (){
+		
+		
+		List<C> otherUnkw = this.getOther().getPreferences(Satisfiable.UNKOWN);
+
+		otherUnkw.sort(new Comparator<C> (){
 				public int compare (C c1, C c2){
 					return Float.compare(getSelf().satisfaction(c2), getSelf().satisfaction(c2));
 				}
 			});
-		}
-		return keept.get(0);
+			//}
+			return otherUnkw.get(0);
 
 	}
+
 }	
 
 

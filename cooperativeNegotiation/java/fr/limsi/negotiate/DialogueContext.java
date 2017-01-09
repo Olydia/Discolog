@@ -95,7 +95,7 @@ public class DialogueContext {
 
 	}
 
-	public Class<? extends Criterion> openNewDiscussion(List <Class<? extends Criterion>> criteria){
+	public List<Class<? extends Criterion>> getPossibleDiscussions(List <Class<? extends Criterion>> criteria){
 		List <Class<? extends Criterion>> crit = new ArrayList <Class<? extends Criterion>> ();
 		for(Class<? extends Criterion> c: criteria){
 			if(! getDiscussedCriteria().contains(c))
@@ -103,10 +103,14 @@ public class DialogueContext {
 		}
 		crit.addAll(getRemainDiscussedCrt());
 
-		if(crit.isEmpty())
-			return null ;
-
-		return crit.get(0);
+		return crit;
+	}
+	Class<? extends Criterion> openNewDiscussion(List <Class<? extends Criterion>> criteria){
+		List<Class<? extends Criterion>> discussions = getPossibleDiscussions(criteria);
+		if(discussions.isEmpty())
+			return null;
+		else
+			return discussions.get(0);
 	}
 
 	public List<Class<? extends Criterion>> getClosedCriteria() {

@@ -3,16 +3,23 @@ package fr.limsi.negotiate;
 public class Statement <L> {
 	private L value;
 	private Satisfiable status;
-	
+
 	public Statement(L value){
 		this.value = value;
 		this.status = Satisfiable.UNKOWN;
 	}
-	
+
 	public Statement(L value, Satisfiable status){
 		this.value = value;
 		this.status = status;
 	}
+
+	public Statement(L value, boolean status){
+		this.value = value;
+		if(status) this.status = Satisfiable.TRUE;
+		else this.status = Satisfiable.FALSE;
+	}
+
 	public L getValue() {
 		return value;
 	}
@@ -25,9 +32,13 @@ public class Statement <L> {
 		return status;
 	}
 	
+	public boolean getLikable(){
+		return this.status == Satisfiable.TRUE;
+	}
+
 	public static enum Satisfiable { TRUE, FALSE, UNKOWN }
-	
-	
+
+
 	@Override
 	public boolean equals(Object obj){
 		if ( this == obj )
@@ -46,7 +57,7 @@ public class Statement <L> {
 
 		return true;
 	}
-	
+
 	@Override
 	public int hashCode () {
 		final int prime = 31;
