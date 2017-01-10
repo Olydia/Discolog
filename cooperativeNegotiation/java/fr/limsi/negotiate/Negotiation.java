@@ -220,6 +220,17 @@ public class Negotiation<O extends Option> {
 					removable.add(o);
 			}
 			options.removeAll(removable);
+//			List<Class<? extends Criterion>> closed = getContext().getClosedCriteria();
+//			if(!closed.isEmpty()){
+//				for(Option o: options){
+//					int i = 0; boolean correspond = true;
+//					while(i<closed.size() && correspond){
+//						CriterionNegotiation<Criterion> c = getValueNegotiation(closed.get(i));
+//					}
+//				}
+//
+//				
+//			}
 		}
 		return options;
 
@@ -261,7 +272,7 @@ public class Negotiation<O extends Option> {
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
 		List<Class<? extends Criterion>> discussions = getContext().getRemainDiscussedCrt();
 		//argmax.addAll(getValueNegotiation(getContext().getCurrentDisucussedCriterion()));
-		for(int i = discussions.size() -1; i>0; i--){
+		for(int i = discussions.size()-1; i>=0; i--){
 		CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
 			argmax.add(elm.chooseValue(elm.remainProposals(),this.self()));
 		}
@@ -282,11 +293,12 @@ public class Negotiation<O extends Option> {
 		if(getContext().getClosedCriteria().isEmpty()){
 			return new CriterionProposal(true,c);
 		}
-			
+		
 		Option bestOption = chooseOption(remainOptions());
-		if(utterance instanceof Accept)
+		if(utterance instanceof fr.limsi.negotiate.lang.Accept || utterance instanceof fr.limsi.negotiate.lang.Propose)
 			return new OptionProposal(true,bestOption);
 
+		
 		else
 			return(acceptability(bestOption) > getValueNegotiation(c.getClass()).acceptability(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));

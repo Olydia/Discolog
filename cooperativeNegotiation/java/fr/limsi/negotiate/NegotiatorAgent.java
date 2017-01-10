@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.1;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.3;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		GenerateModel model = new GenerateModel();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
+				new NegotiatorAgent("Agent1", model.model2()), 
+				new NegotiatorAgent("Agent2", model.model1()), 
 				true);
 
 		// note not loading Negotiotion.xml!
@@ -95,7 +95,7 @@ public class NegotiatorAgent extends Agent {
 
 		if ( utterance == null ) {
 
-			Class<? extends Criterion> opent = Cost.class;
+			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
 			if(relation > NegotiationParameters.sigma){
 
@@ -112,7 +112,7 @@ public class NegotiatorAgent extends Agent {
 		} else if (negotiation.negotiationSuccess(relation)!= null){
 
 			Option o = negotiation.negotiationSuccess(relation);
-			return new Say(disco, false, "Let's book a table at the" + o.print() + " " + o.getClass().getSimpleName());
+			return new Say(disco, false, "Let's book a table at the" + o.toString() + " " + o.getClass().getSimpleName());
 
 		} else if ( utterance instanceof AskPreference ) {
 
@@ -222,7 +222,8 @@ public class NegotiatorAgent extends Agent {
 	private boolean canReject(Utterance utterance){
 		if(utterance instanceof Propose){
 			Proposal p = (Proposal)utterance.getSlotValue("proposal");
-			if(acceptablity(p)< NegotiationParameters.beta && getNegotiation().computeT()< NegotiationParameters.tau)
+			if(acceptablity(p)< NegotiationParameters.beta && 
+						getNegotiation().computeT()< NegotiationParameters.tau)
 				return true;
 
 		}

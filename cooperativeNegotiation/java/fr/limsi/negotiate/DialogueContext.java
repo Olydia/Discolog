@@ -87,7 +87,7 @@ public class DialogueContext {
 			this.discussedCriteria.add(newUtt.getValueType());
 
 		else if(newUtt.getType().equals(UtType.ACCEPT))
-			this.updateClosed(newUtt.getValueType());
+			this.closeDiscussion(newUtt.getValueType());
 
 		else if(!discussedCriteria.contains(newUtt.getValueType()))
 			this.discussedCriteria.add(newUtt.getValueType());
@@ -109,8 +109,11 @@ public class DialogueContext {
 		List<Class<? extends Criterion>> discussions = getPossibleDiscussions(criteria);
 		if(discussions.isEmpty())
 			return null;
-		else
-			return discussions.get(0);
+		else{
+			Class<? extends Criterion> newD = discussions.get(0);
+			this.discussedCriteria.add(newD);
+			return newD;
+		}
 	}
 
 	public List<Class<? extends Criterion>> getClosedCriteria() {
@@ -121,8 +124,8 @@ public class DialogueContext {
 		this.closedCriteria = closedCriteria;
 	}
 
-	public void  updateClosed(Class<? extends Criterion> criterion){
-		this.discussedCriteria.add(criterion);
+	public void  closeDiscussion(Class<? extends Criterion> criterion){
+		this.closedCriteria.add(criterion);
 		if(criterion.equals(getCurrentDisucussedCriterion()))
 			openNewDiscussion(getElements());
 	}
