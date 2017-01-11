@@ -1,7 +1,6 @@
 package fr.limsi.negotiate.restaurant;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
@@ -115,10 +114,16 @@ public class GenerateModel {
 
 	}
 	public static void main (String[] args)  {
+		
 		GenerateModel m = new GenerateModel();
 		Negotiation<Restaurant> m1 = m.model1();
 		Negotiation<Restaurant> m2 = m.model2();
-		finalCalcul(m1);
+		for(Restaurant r :Restaurant.values()){
+			System.out.println(r.toString() + ", "+ m1.satisfiability(r) + ", "+m2.satisfiability(r));
+		}
+
+		
+		//finalCalcul(m1);
 //		
 //		m1.setDominance(0.8);
 //		m2.setDominance(0.4);

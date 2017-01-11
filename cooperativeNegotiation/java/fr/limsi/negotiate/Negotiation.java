@@ -80,21 +80,24 @@ public class Negotiation<O extends Option> {
 
 	public float satisfiability(O option) {
 		float satisfaction = 0;
+		int n=0;
 		for(Class<? extends Criterion> criterion : option.getCriteria()){
 			CriterionNegotiation<Criterion> value = this.getValueNegotiation(criterion);
 			satisfaction += value.getSelf().satisfaction(option.getValue(criterion));
+			n++;
 		}
-		return satisfaction;
+		return satisfaction/n;
 	}
 
 	public float other(O option) {
 		float satisfaction = 0;
+		int n=0;
 		for(Class<? extends Criterion> criterion : option.getCriteria()){
 			CriterionNegotiation<Criterion> value = this.getValueNegotiation(criterion);
 			satisfaction += value.getOther().other(option.getValue(criterion));
 		}
 
-		return satisfaction;
+		return satisfaction/n;
 	}
 	// t is the number of non accepted proposals
 	public double self(){
@@ -182,14 +185,28 @@ public class Negotiation<O extends Option> {
 			return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
 		if(relation == NegotiatorAgent.DOMINANT){
 			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-				if(!o.isSelf() && acceptability(o.getValue())>= NegotiationParameters.beta)
+				if(!o.isSelf() && isAcceptable(o))
 					return o.getValue();
 			}
 		}
 		return null;
 	}
 
-	//
+	// test of acceptability
+	
+	public boolean isAcceptable(Proposal p){
+		float satisfiability =0;
+		if(p instanceof CriterionProposal){
+			Criterion c = (Criterion)p.getValue();
+			satisfiability= getValueNegotiation(c.getClass()).getSelf().satisfaction(c);
+		}
+		if(p instanceof OptionProposal){
+			@SuppressWarnings("unchecked")
+			O o =(O) p.getValue();
+			satisfiability= satisfiability(o);
+		}
+		return satisfiability>=getDominance();
+	}
 
 	private List<Option>  nonRejectedOptions() {
 		List<Option> remainOptions = new ArrayList<Option>();

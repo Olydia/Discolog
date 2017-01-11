@@ -221,7 +221,7 @@ public class NegotiatorAgent extends Agent {
 		if(utterance instanceof Propose){
 			Proposal p = (Proposal)utterance.getSlotValue("proposal");
 			if(!isAcceptable(p) && 
-						getNegotiation().computeT()< NegotiationParameters.tau)
+					getNegotiation().computeT()< NegotiationParameters.tau)
 				return true;
 
 		}
@@ -309,9 +309,10 @@ public class NegotiatorAgent extends Agent {
 	}
 
 	public boolean isAcceptable(Proposal c){
-		return (acceptablity(c)>= NegotiationParameters.alfa);
+		//return (acceptablity(c)>= NegotiationParameters.alfa);
+		return getNegotiation().isAcceptable(c);
 	}
-	
+
 	public List<Proposal> sortProposals(List<Proposal> props){
 		props.sort(new Comparator<Proposal>(){
 			public int compare(Proposal p1, Proposal p2){
@@ -343,23 +344,23 @@ public class NegotiatorAgent extends Agent {
 
 		return new PreferenceMove(new Statement<Criterion>(currentAsk),c, false, UtType.ASK);
 	}
-	
-	
+
+
 	public Class <? extends Criterion> canAsk(){
 		Class<? extends Criterion> c = getNegotiation().getContext().getCurrentDisucussedCriterion();
 		if(!getNegotiation().getValueNegotiation(c).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 			return c;
-		
+
 		else {
 			List<Class<? extends Criterion>> discussions = getNegotiation().getCriteria().getElements();
 			for(Class<? extends Criterion> dis: getNegotiation().getContext().getPossibleDiscussions(discussions))
 				if(!getNegotiation().getValueNegotiation(dis).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 					return dis;
-			
+
 		}
-			
+
 		return null;
-				
+
 	}
 
 	public List<Criterion> getPossibleStatements(){
