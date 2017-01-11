@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.3;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		GenerateModel model = new GenerateModel();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model2()), 
-				new NegotiatorAgent("Agent2", model.model1()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model2()), 
 				true);
 
 		// note not loading Negotiotion.xml!
@@ -217,12 +217,10 @@ public class NegotiatorAgent extends Agent {
 		return null;
 	}
 
-
-
 	private boolean canReject(Utterance utterance){
 		if(utterance instanceof Propose){
 			Proposal p = (Proposal)utterance.getSlotValue("proposal");
-			if(acceptablity(p)< NegotiationParameters.beta && 
+			if(!isAcceptable(p) && 
 						getNegotiation().computeT()< NegotiationParameters.tau)
 				return true;
 
@@ -237,7 +235,7 @@ public class NegotiatorAgent extends Agent {
 		proposals.addAll(getNegotiation().getValueNegotiation(c).getProposalsWithStatus(Status.OPEN));
 
 		for(Proposal p: sortProposals(proposals)){
-			if(acceptablity(p)>= NegotiationParameters.beta)
+			if(isAcceptable(p))
 				return p;
 
 		}
@@ -252,7 +250,7 @@ public class NegotiatorAgent extends Agent {
 
 		previousP.addAll(getNegotiation().getOptionsProposals(Status.OPEN));
 		Proposal p = sortProposals(previousP).get(0);
-		if(acceptablity(p)>= NegotiationParameters.beta)
+		if(isAcceptable(p))
 			return p;
 
 		//3. Otherwise there is nothing to accept
@@ -310,7 +308,10 @@ public class NegotiatorAgent extends Agent {
 			return getNegotiation().acceptability((Option)p.getValue());
 	}
 
-
+	public boolean isAcceptable(Proposal c){
+		return (acceptablity(c)>= NegotiationParameters.alfa);
+	}
+	
 	public List<Proposal> sortProposals(List<Proposal> props){
 		props.sort(new Comparator<Proposal>(){
 			public int compare(Proposal p1, Proposal p2){

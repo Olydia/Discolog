@@ -1,5 +1,8 @@
 package fr.limsi.negotiate.restaurant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
@@ -79,14 +82,54 @@ public class GenerateModel {
 		return model2;
 
 	}
+	
+	public static void printPreferences(Negotiation<Restaurant> m){
+		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
+			System.out.println("\t *********** " + v.getType().getSimpleName()+ " *********** ");
+			for(Criterion value: v.getElements())	
+				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+ " | is Satifiable: "+ v.getSelf().isSatisfiable(value));
+		}
+	}
+	
+	public static void finalCalcul(Negotiation<Restaurant> m){
+		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
+			for(Criterion value: v.getElements())
+				calculateElem(value, m);
+		}
+	}
+	
+	public static void calculateElem(Criterion value, Negotiation<Restaurant> m1){
+		Satisfiable[]other ={Satisfiable.FALSE, Satisfiable.UNKOWN, Satisfiable.TRUE}; 
+		double[]dt ={0.8, 0.5, 0.4, 0.2}; 
+		CriterionNegotiation<Criterion> c = m1.getValueNegotiation(value.getClass());
+		for(double d : dt){
+			m1.setDominance(d);
+			for(Satisfiable o: other){
+				c.getOther().addPreference(value,o);
+				System.out.println(value+","+d +"," +c.getSelf().satisfaction(value)+","+ c.getOther().other(value) +","+ c.acceptability(value, m1.self()));
+				c.getOther().getPreferences().clear();
+
+			}
+		}
+		
+
+	}
 	public static void main (String[] args)  {
 		GenerateModel m = new GenerateModel();
 		Negotiation<Restaurant> m1 = m.model1();
 		Negotiation<Restaurant> m2 = m.model2();
-		m1.setDominance(0.9);
-		m2.setDominance(0.35);
-		System.out.println(m1.self());
-		System.out.println(m2.self());
+		finalCalcul(m1);
+//		
+//		m1.setDominance(0.8);
+//		m2.setDominance(0.4);
+//		System.out.println(m1.self());
+//		System.out.println(m2.self());
+//		
+//		printPreferences(m1);
+//		System.out.println("--------------------------- m2 ------------------------------");
+//		printPreferences(m2);
+		//calculateElem(Cuisine.CHINESE, m1);
+
 //		double thre = 0.6;
 //		for(Cost elem: Cost.values()){
 //			//System.out.println(" M1: " +elem.toString() +" "+ m1.getValueNegotiation(elem.getClass()).acceptability(elem, m1.self()));

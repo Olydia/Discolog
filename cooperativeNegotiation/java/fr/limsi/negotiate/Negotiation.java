@@ -189,6 +189,7 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 
+	//
 
 	private List<Option>  nonRejectedOptions() {
 		List<Option> remainOptions = new ArrayList<Option>();
