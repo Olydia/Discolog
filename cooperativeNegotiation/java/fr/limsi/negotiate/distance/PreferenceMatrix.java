@@ -1,6 +1,8 @@
-package fr.limsi.negotiate;
+package fr.limsi.negotiate.distance;
 
 import java.util.*;
+
+import fr.limsi.negotiate.Preference;
 
 public class PreferenceMatrix<T> {
 	List<T> values; 
@@ -43,6 +45,11 @@ public class PreferenceMatrix<T> {
 		}
 	}
 
+	public void builtPreferences(ArrayList<Preference<T>> selfPreferences){
+		for(Preference<T> elem : selfPreferences)
+			insertPreference(elem.getLess(), elem.getMore());
+	}
+	
 	public void addMostPreferred(T value){
 		int j = values.indexOf(value);
 		for(int i=0; i< preferences.length; i++){
@@ -92,54 +99,20 @@ public class PreferenceMatrix<T> {
 		}
 		return somme;
 	}
-	public ArrayList<Integer> getPreferences(){
-		ArrayList<Integer> prefValues = new ArrayList<Integer>();
-		for(int i=0; i < preferences.length; i++){
-			prefValues.add(getPreferenceOnValue(values.get(i)));
+	public int[][] getPreferences(){
+		return this.preferences;
+	}
+
+	public List<Preference<T>> nonRelatedCriteria(){
+		List<Preference<T>> elems = new ArrayList<Preference<T>>();
+		for(int i=0; i< preferences.length; i++){
+			for(int j=i+1; j< preferences.length; j++){
+				if(preferences[i][j] == 0)
+					elems.add(new Preference<T> (values.get(i), values.get(j)));
+			}
 		}
-		return prefValues;
+		return elems;
 
-	}
-	//In order to keep the original indexes of the values, we transfer the preferences scores in a map
-	public ArrayList<Integer> getRankedPreferences(){
-		Map<Integer, Integer> mapValues = new HashMap<Integer, Integer>();
-		ArrayList<Integer> prefValues = getPreferences();
-		for(int i=0; i<prefValues.size(); i++)
-			mapValues.put(prefValues.get(i), i);
-
-	    ArrayList<Integer> sortedRank = new ArrayList<Integer>(new TreeMap<Integer, Integer>(mapValues).values());
-		for(int elem : sortedRank)
-			prefValues.set(elem, sortedRank.indexOf(elem));
-		return (prefValues);
-			
-	}
-
-	private static final int maxIndex(ArrayList<Integer> a) {
-		int imax=0;
-		for(int i=1;i<a.size();i++)
-			if (a.get(i)>a.get(imax))
-				imax = i;
-		return imax;
-	}
-
-//	private static final int minIndex(ArrayList<Integer> a) {
-//		int imin = a.get(0);
-//		for(int i=1;i<a.size();i++)
-//			if (a.get(i)<=a.get(imin))
-//				imin = i;
-//		return imin;
-//	}
-
-	public T getMostPreffered() {
-		ArrayList<Integer> prefValues = getPreferences();
-		int  indexmax = maxIndex(prefValues);
-		return (values.get(indexmax));
-	}
-
-
-	public T getLeastPreffered() {
-		int  indexmin = Collections.min(getPreferences());
-		return (values.get(indexmin));
 	}
 
 }

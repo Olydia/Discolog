@@ -11,6 +11,12 @@ public abstract class Self<C> {
 	protected MatrixOfPref<C> matrix;
 
 	
+	public MatrixOfPref<C> getMatrix() {
+		return matrix;
+	}
+
+
+
 	public Satisfiable isSatisfiable(C value){
 		if (this.satisfaction(value) >= NegotiationParameters.beta)
 			return Satisfiable.TRUE;
