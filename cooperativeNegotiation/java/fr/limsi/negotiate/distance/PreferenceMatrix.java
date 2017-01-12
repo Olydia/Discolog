@@ -14,40 +14,36 @@ public class PreferenceMatrix<T> {
 	}
 
 	// TODO check if preference(less, more) is not already defined in order to avoid inconcisty and cycles
-	public void insertPreference(T less, T more) {
-		int indexMore = values.indexOf(more);
-		int indexLess = values.indexOf(less);
-		if(preferences[indexLess][indexMore] == 1)
-			try {
-				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public boolean insertPreference(int indexLess, int indexMore) {
+		
+		if(preferences[indexLess][indexMore] == 1){
+			System.out.println("Contradiction: P ("+values.get(indexLess)+", " + values.get(indexMore) +") exists in the preferences list");
+			return false;
+		}
+//			try {
+			
+//				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		// add an exception in case where the index = -1
 		preferences[indexMore][indexLess]= 1 ;
 		preferences[indexLess][indexMore]= -1;
-		transitivity(indexLess, indexMore);
+		return true;
 	}
 	public void addPreference(T less, T more) {
+		int indexMore = values.indexOf(more);
+		int indexLess = values.indexOf(less);
+		boolean insert = insertPreference(indexLess, indexMore);
+		if(insert)
+			transitivity(indexLess, indexMore);
 
-		if(!(more == null && less == null)){
-			if(more == null){
-				addLeastPreferred(less);
-
-			}
-			else if(less == null){
-				addMostPreferred(more);
-			}
-			else{
-				insertPreference(less, more);
-			}
-		}
 	}
 
 	public void builtPreferences(ArrayList<Preference<T>> selfPreferences){
 		for(Preference<T> elem : selfPreferences)
-			insertPreference(elem.getLess(), elem.getMore());
+			addPreference(elem.getLess(), elem.getMore());
 	}
 	
 	public void addMostPreferred(T value){
@@ -113,6 +109,15 @@ public class PreferenceMatrix<T> {
 		}
 		return elems;
 
+	}
+	
+	public List<ArrayList<Preference<T>>> allPossibleComination(ArrayList<Preference<T>> nonRelated){
+		List<ArrayList<Preference<T>>> extensions = new ArrayList<ArrayList<Preference<T>>>();
+		extensions.add(nonRelated);
+		for(Preference<T> elm : nonRelated){
+			
+		}
+		return extensions;
 	}
 
 }
