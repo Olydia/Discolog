@@ -32,12 +32,19 @@ public class PreferenceMatrix<T> {
 		preferences[indexLess][indexMore]= -1;
 		return true;
 	}
-	public void addPreference(T less, T more) {
+	public boolean addPreference(T less, T more) {
+		 int [] [] pref = this.preferences.clone();
 		int indexMore = values.indexOf(more);
 		int indexLess = values.indexOf(less);
 		boolean insert = insertPreference(indexLess, indexMore);
-		if(insert)
-			transitivity(indexLess, indexMore);
+		if(insert && transitivity(indexLess, indexMore)) 
+			return true;
+		else{
+			// undo add 
+			this.preferences = pref;
+			return false;
+
+		}
 
 	}
 
@@ -46,37 +53,29 @@ public class PreferenceMatrix<T> {
 			addPreference(elem.getLess(), elem.getMore());
 	}
 	
-	public void addMostPreferred(T value){
-		int j = values.indexOf(value);
-		for(int i=0; i< preferences.length; i++){
-			if(i !=j) {
-				preferences[j][i] = 1;
-				preferences[i][j] = -1;
-			}
-		}
-	}
 
-	public void addLeastPreferred(T value){
-		int j = values.indexOf(value);
-		for(int i=0; i< preferences.length; i++){
-			if(i !=j) {
-				preferences[j][i] = - 1;
-				preferences[i][j] = 1;
-			}
-		}
-	}
-	public void transitivity (int indexLess , int  indexMore){
-
+	public boolean transitivity (int indexLess , int  indexMore){
+		boolean more = false, less = false;
 		for(int i=0; i< preferences.length; i++){
 			if(preferences[indexLess][i] == 1 && i != indexMore){
-				preferences[indexMore][i] =1;
-				preferences[i][indexMore] = -1;
+				 more = insertPreference(i, indexMore);
+				 if(more == false){
+					 System.out.println("erreur");
+					 return false;
+
+				 }
 			}
 			if(preferences[indexMore][i] == -1 && i != indexLess){
-				preferences[indexLess][i] = -1;
-				preferences[i][indexLess] = 1;
+				 less = insertPreference(indexLess, i);
+				 if(less == false){
+					 System.out.println("erreur");
+
+					 return false;
+
+				 }
 			}
 		}
+		return true;
 	}
 	// Move to the CriteriaPreferences
 
