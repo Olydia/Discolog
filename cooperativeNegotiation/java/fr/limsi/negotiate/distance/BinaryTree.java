@@ -2,9 +2,11 @@ package fr.limsi.negotiate.distance;
 
 import java.util.*;
 
+import fr.limsi.negotiate.Preference;
 
-public class BinaryTree {
-	List<List<Integer>>  result = new ArrayList<List<Integer>>();
+
+public class BinaryTree<T> {
+	List<List<Preference<T>>>  result = new ArrayList<List<Preference<T>>>();
 //	public static List<Integer> extension (List<Integer> input, List<Integer> previous){
 //		List<Integer> ext = new ArrayList<Integer>();
 //		
@@ -24,7 +26,7 @@ public class BinaryTree {
 //		
 //	}
 	
-	public void extension (List<Integer> input, int cmp){
+	public void extension (List<Preference<T>> input, int cmp){
 		
 		
 		if (cmp >= input.size()){
@@ -32,16 +34,16 @@ public class BinaryTree {
 				result.add(input);
 		}
 		else {
-			int current_value= input.get(cmp);
+			Preference<T> current_value= input.get(cmp);
 			
-			List<Integer> possible_value = new ArrayList<Integer>();
+			List<Preference<T>> possible_value = new ArrayList<Preference<T>>();
 			
 			possible_value.add(current_value);
-			possible_value.add(- current_value);
+			possible_value.add(new Preference<T>(current_value.getMore(), current_value.getLess()));
 			
-			for (int val : possible_value){
-				List<Integer> tmp = new ArrayList<>();
-				for(int a : input){
+			for (Preference<T> val : possible_value){
+				List<Preference<T>> tmp = new ArrayList<>();
+				for(Preference<T> a : input){
 					tmp.add(a);
 				}
 				tmp.set(cmp, val);

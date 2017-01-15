@@ -114,27 +114,12 @@ public class GenerateModel {
 		
 
 	}
-	public static void generateMatrix(Self_Ci<Criterion> self){
-		PreferenceMatrix<Criterion> cuisine = new PreferenceMatrix<Criterion>(self.getElements());
-		cuisine.builtPreferences(self.getSelfPreferences());
-		int [] [] preferences = cuisine.getPreferences();
-		System.out.println(self.getMatrix().getValues());
-		for(int i=0; i<preferences.length; i++){
-			System.out.print(self.getMatrix().getValues().get(i)+"\t|\t");
-			for(int j = 0; j<preferences.length; j++){
-				
-				System.out.print(preferences[i][j] +" | ");
-			}
-			System.out.println(" ");
-		}
-		System.out.println(cuisine.nonRelatedCriteria());
-	}
+	
 	public static void main (String[] args)  {
 		
 		GenerateModel m = new GenerateModel();
 		Negotiation<Restaurant> m1 = m.model1();
 		Negotiation<Restaurant> m2 = m.model2();
-		generateMatrix(m1.getValueNegotiation(Cuisine.class).getSelf());
 //		for(Restaurant r :Restaurant.values()){
 //			System.out.println(r.toString() + ", "+ m1.satisfiability(r) + ", "+m2.satisfiability(r));
 //		}

@@ -1,23 +1,32 @@
 package fr.limsi.negotiate.distance;
 
 import java.util.*;
-
 import fr.limsi.negotiate.Preference;
 
 public class PreferenceMatrix<T> {
-	List<T> values; 
+	private List<T> values; 
 	private int [] [] preferences; 
+	private ArrayList<Preference<T>> selfPreferences;
 
-	public PreferenceMatrix(List<T> values) {
-		this.values = values;
-		preferences = new int [values.size()][values.size()];
+	public ArrayList<Preference<T>> getSelfPreferences() {
+		return selfPreferences;
+	}
+
+	public void setSelfPreferences(ArrayList<Preference<T>> selfPreferences) {
+		this.selfPreferences = selfPreferences;
+	}
+
+	public PreferenceMatrix(List<T> values, ArrayList<Preference<T>> selfPreferences) {
+		this.setValues(values);
+		this.preferences = new int [values.size()][values.size()];
+		this.selfPreferences = selfPreferences;
 	}
 
 	// TODO check if preference(less, more) is not already defined in order to avoid inconcisty and cycles
 	public boolean insertPreference(int indexLess, int indexMore) {
 
-		if(preferences[indexLess][indexMore] == 1){
-			System.out.println("Contradiction: P ("+values.get(indexLess)+", " + values.get(indexMore) +") exists in the preferences list");
+		if(preferences[indexLess][indexMore] == 1 || preferences[indexMore][indexLess] == -1){
+			//System.out.println("Contradiction: P ("+getValues().get(indexLess)+", " + getValues().get(indexMore) +") exists in the preferences list");
 			return false;
 		}
 		//			try {
@@ -34,8 +43,8 @@ public class PreferenceMatrix<T> {
 	}
 	public boolean addPreference(T less, T more) {
 		int [] [] pref = this.preferences.clone();
-		int indexMore = values.indexOf(more);
-		int indexLess = values.indexOf(less);
+		int indexMore = getValues().indexOf(more);
+		int indexLess = getValues().indexOf(less);
 		boolean insert = insertPreference(indexLess, indexMore);
 		if(insert && transitivity(indexLess, indexMore)) 
 			return true;
@@ -48,9 +57,14 @@ public class PreferenceMatrix<T> {
 
 	}
 
-	public void builtPreferences(ArrayList<Preference<T>> selfPreferences){
-		for(Preference<T> elem : selfPreferences)
-			addPreference(elem.getLess(), elem.getMore());
+	public boolean builtPreferences(){
+		boolean insertionSuccess = true;
+		for(Preference<T> elem : this.selfPreferences){
+			insertionSuccess=addPreference(elem.getLess(), elem.getMore());
+			if(insertionSuccess == false)
+				return insertionSuccess;
+		}
+		return true;
 	}
 
 
@@ -87,7 +101,7 @@ public class PreferenceMatrix<T> {
 		return somme;
 	}
 	public int getPreferenceOnValue(T c) {
-		int i = values.indexOf(c);
+		int i = getValues().indexOf(c);
 		int somme = 0;
 		for(int j=0; j < preferences.length; j++){			
 			somme+=preferences[i][j];
@@ -103,10 +117,20 @@ public class PreferenceMatrix<T> {
 		for(int i=0; i< preferences.length; i++){
 			for(int j=i+1; j< preferences.length; j++){
 				if(preferences[i][j] == 0)
-					elems.add(new Preference<T> (values.get(i), values.get(j)));
+					elems.add(new Preference<T> (getValues().get(i), getValues().get(j)));
 			}
 		}
 		return elems;
 
+	}
+
+	
+
+	public List<T> getValues() {
+		return values;
+	}
+
+	public void setValues(List<T> values) {
+		this.values = values;
 	}
 }

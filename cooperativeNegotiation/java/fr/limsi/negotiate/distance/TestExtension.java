@@ -2,6 +2,7 @@ package fr.limsi.negotiate.distance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Negotiation;
@@ -21,11 +22,18 @@ public class TestExtension {
 		//		System.out.println(ext.extension(self.getSelfPreferences()));
 
 //		Extension<Criterion> ext = new Extension<>(matrix);
-		ArrayList<Preference<Cost>> e = new ArrayList<Preference<Cost>>();
-		e.add(new Preference<Cost> (Cost.EXPENSIVE, Cost.AFFRODABLE));
-		e.add(new Preference<Cost>(Cost.AFFRODABLE, Cost.CHEAP));
-		e.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
-		PreferenceMatrix<Cost> matrix= new PreferenceMatrix<Cost>(Arrays.asList(Cost.values()));
-		matrix.builtPreferences(e);
+		GenerateModel m = new GenerateModel();
+		Self_Ci<Criterion> e = m.model1().getValueNegotiation(Cuisine.class).getSelf();
+		//e.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
+		PreferenceMatrix<Criterion> matrix= new PreferenceMatrix<Criterion>(e.getElements(), e.getSelfPreferences());
+		matrix.builtPreferences();
+		Extension<Criterion> ext = new Extension<Criterion>(matrix);
+
+		
+//
+		for(ArrayList<Preference<Criterion>> ex : ext.extensions()){
+			System.out.println(ex);
+		}
+		//SSystem.out.println(ext.extension(matrix.values));
 	}
 }
