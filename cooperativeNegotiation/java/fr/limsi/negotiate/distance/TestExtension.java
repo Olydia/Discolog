@@ -1,39 +1,37 @@
 package fr.limsi.negotiate.distance;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.Preference;
-import fr.limsi.negotiate.Self_Ci;
-import fr.limsi.negotiate.restaurant.Cost;
-import fr.limsi.negotiate.restaurant.Cuisine;
-import fr.limsi.negotiate.restaurant.GenerateModel;
-import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.restaurant.*;
+
+
 
 public class TestExtension {
+	
+	public static ArrayList<Preference<Criterion>> inverse (){
+		ArrayList<Preference<Criterion>> inverseM1 = new ArrayList<Preference<Criterion>>();
+		inverseM1.add(new Preference<Criterion>(Cuisine.CHINESE, Cuisine.KOREAN));
+		inverseM1.add(new Preference<Criterion>(Cuisine.CHINESE, Cuisine.JAPANESE));
+		inverseM1.add(new Preference<Criterion>(Cuisine.KOREAN, Cuisine.FRENCH));
+		inverseM1.add(new Preference<Criterion>(Cuisine.JAPANESE, Cuisine.TURKISH));
+		inverseM1.add(new Preference<Criterion>(Cuisine.FRENCH, Cuisine.MIXICAN));
+		inverseM1.add(new Preference<Criterion>(Cuisine.FRENCH, Cuisine.ITALIAN));
+		inverseM1.add(new Preference<Criterion>(Cuisine.TURKISH, Cuisine.MIXICAN));
+
+
+	return inverseM1;
+	}
+	
 	public static void main(String[] args) {
-//		GenerateModel m = new GenerateModel();
-//		Negotiation<Restaurant> m1 = m.model1();
-//		Self_Ci<Criterion> self= m1.getValueNegotiation(Cuisine.class).getSelf();
-//		PreferenceMatrix<Criterion> matrix= new PreferenceMatrix<Criterion>(self.getElements());
-		//		System.out.println(ext.extension(self.getSelfPreferences()));
-
-//		Extension<Criterion> ext = new Extension<>(matrix);
 		GenerateModel m = new GenerateModel();
-		Self_Ci<Criterion> e = m.model1().getValueNegotiation(Cuisine.class).getSelf();
-		//e.add(new Preference<Cost>(Cost.CHEAP, Cost.EXPENSIVE));
-		PreferenceMatrix<Criterion> matrix= new PreferenceMatrix<Criterion>(e.getElements(), e.getSelfPreferences());
-		matrix.builtPreferences();
-		Extension<Criterion> ext = new Extension<Criterion>(matrix);
-
-		
-//
-		for(ArrayList<Preference<Criterion>> ex : ext.extensions()){
-			System.out.println(ex);
-		}
-		//SSystem.out.println(ext.extension(matrix.values));
+//		Self_Ci<Criterion> e = m.model1().getValueNegotiation(Cuisine.class).getSelf();
+//		Self_Ci<Criterion> e2 = m.model2().getValueNegotiation(Cuisine.class).getSelf();
+//		List<Criterion> values =e.getElements();
+//		Distance d = new Distance(e.getSelfPreferences(), e.getSelfPreferences(), values);
+//		System.out.println(d.distance());
+//		System.out.println(d.Knn());
+		NegotiationDistance distance = new NegotiationDistance(m.model1(), m.model1());
+		System.out.println(distance.distance());
 	}
 }

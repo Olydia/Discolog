@@ -30,16 +30,17 @@ public class Extension<T> {
 
 	}
 
-	public List<ArrayList<Preference<T>>> extensions(){
-		List<ArrayList<Preference<T>>> totalExtensions = new ArrayList<ArrayList<Preference<T>>>();
+	public List<PreferenceMatrix<T>> extensions(){
+		List<PreferenceMatrix<T>> totalExtensions = new ArrayList<PreferenceMatrix<T>>();
 		// extensions is defined with all the possible extensions
 		this.getPossibleExtensions(matrix.nonRelatedCriteria(), 0);
 		for(List<Preference<T>> nonRelated : extensions){
 			ArrayList<Preference<T>> extension = new ArrayList<Preference<T>>(matrix.getSelfPreferences());
 				//List<Preference<T>> nonRelated = matrix.nonRelatedCriteria();
 			extension.addAll(nonRelated);
-			if(isPlausibleExtension(extension, matrix.getValues()))
-				totalExtensions.add(extension);
+			PreferenceMatrix<T> m = new PreferenceMatrix<T>(matrix.getValues(), extension);
+			if(isPlausibleExtension(m))
+				totalExtensions.add(m);
 			
 		}
 		return totalExtensions;
@@ -78,5 +79,9 @@ public class Extension<T> {
 			
 	}
 
+	public boolean isPlausibleExtension(PreferenceMatrix<T> m){
+		return (m.builtPreferences());
+			
+	}
 
 }

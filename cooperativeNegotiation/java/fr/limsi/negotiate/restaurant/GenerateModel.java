@@ -1,10 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
-import java.util.*;
-
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.distance.PreferenceMatrix;
 
 public class GenerateModel {
 
@@ -44,6 +41,43 @@ public class GenerateModel {
 
 	}
 
+	public   Negotiation<Restaurant>  inverseModel1(){
+
+
+		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
+		d1_criteria.addPreference(Cuisine.class, Cost.class);
+		d1_criteria.addPreference(Cost.class, Atmosphere.class);
+
+		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.MIXICAN);
+		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MIXICAN);
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
+
+		Self_Ci<Atmosphere> d1_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
+		d1_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.ROMANTIC);
+		d1_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.LIVELY);
+		d1_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.LIVELY);
+		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
+
+
+		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
+		d1_cost.addPreference(Cost.CHEAP, Cost.AFFRODABLE);
+		d1_cost.addPreference(Cost.AFFRODABLE, Cost.EXPENSIVE);
+		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
+
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d1_criteria, Restaurant.class);
+		return model1;
+
+	}
+	
+	
 	public   Negotiation<Restaurant>  model2(){
 
 
@@ -82,6 +116,7 @@ public class GenerateModel {
 		return model2;
 
 	}
+	
 	
 	public static void printPreferences(Negotiation<Restaurant> m){
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
