@@ -1,0 +1,37 @@
+--------------------------- m1 ------------------------------
+	 *********** Cost *********** 
+expensive  0.0 | is Satifiable: FALSE
+cheap  1.0 | is Satifiable: TRUE
+affrodable  0.5 | is Satifiable: FALSE
+	 *********** Cuisine *********** 
+French  0.6666666 | is Satifiable: TRUE
+Chinese  1.0 | is Satifiable: TRUE
+Italian  0.5 | is Satifiable: FALSE
+Turkish  0.6666666 | is Satifiable: TRUE
+Japanese  0.8333333 | is Satifiable: TRUE
+Korean  0.8333333 | is Satifiable: TRUE
+Mixican  0.16666669 | is Satifiable: FALSE
+	 *********** Atmosphere *********** 
+lively  0.0 | is Satifiable: FALSE
+quiet  1.0 | is Satifiable: TRUE
+romantic  0.6666666 | is Satifiable: TRUE
+family  1.0 | is Satifiable: TRUE
+--------------------------- m2 ------------------------------
+	 *********** Cost *********** 
+expensive  1.0 | is Satifiable: TRUE
+cheap  0.0 | is Satifiable: FALSE
+affrodable  0.5 | is Satifiable: FALSE
+	 *********** Cuisine *********** 
+French  1.0 | is Satifiable: TRUE
+Chinese  0.5 | is Satifiable: FALSE
+Italian  0.8333333 | is Satifiable: TRUE
+Turkish  1.0 | is Satifiable: TRUE
+Japanese  0.6666666 | is Satifiable: TRUE
+Korean  0.3333333 | is Satifiable: FALSE
+Mixican  0.8333333 | is Satifiable: TRUE
+	 *********** Atmosphere *********** 
+lively  1.0 | is Satifiable: TRUE
+quiet  0.6666666 | is Satifiable: TRUE
+romantic  0.6666666 | is Satifiable: TRUE
+family  0.3333333 | is Satifiable: FALSE
+
