@@ -31,7 +31,7 @@ public class TestExtension {
 //		Distance d = new Distance(e.getSelfPreferences(), e.getSelfPreferences(), values);
 //		System.out.println(d.distance());
 //		System.out.println(d.Knn());
-		NegotiationDistance distance = new NegotiationDistance(m.model1(), m.model1());
+		NegotiationDistance distance = new NegotiationDistance(m.model2(), m.model1());
 		System.out.println(distance.distance());
 	}
 }

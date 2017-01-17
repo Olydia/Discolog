@@ -1,0 +1,30 @@
+    # Distance(D1, Inv) = -0.55
+
+
+    Agent1 says "Let's go to a Italian restaurant."
+  > next
+    Agent2 says "Okay. Let's go to an Italian restaurant."
+  > next
+    Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "Let's go to a lively restaurant."
+  > next
+    Agent2 says "Do you like quiet restaurants?"
+  > next
+    Agent1 says "I like quiet restaurants."
+  > next
+    Agent2 says "Let's go to a quiet restaurant."
+  > next
+    Agent1 says "Let's go to the Albacio. It's a quiet, expensive Italian restaurant."
+  > next
+    Agent2 says "Okay. Let's go to an lively restaurant."
+  > next
+    Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mixican restaurant."
+  > next
+    Agent2 says "Okay. Let's go to the Albacio Restaurant."
+  > next
+    Agent1 says "Let's book a table at the Albacio Restaurant."
+  > quit
+    

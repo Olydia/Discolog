@@ -1,0 +1,15 @@
+    # Writing log to /tmp/Console1.test...
+    # Jan 17, 2017 1:42:04 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Let's go to a lively restaurant."
+  > next
+    Agent2 says "Okay."
+  > next
+    Agent1 says "Let's go to the Gramophone. It's a lively, expensive French restaurant."
+  > next
+    Agent2 says "Okay. Let's go to the Gramophone."
+  > next
+    Agent1 says "Let's book a table at the Gramophone Restaurant."
+  > next
+    Agent2 says "Okay!"
+  > quit

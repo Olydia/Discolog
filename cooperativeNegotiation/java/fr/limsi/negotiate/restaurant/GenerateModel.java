@@ -4,7 +4,35 @@ import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class GenerateModel {
+	
+	public   Negotiation<Restaurant>  emptyModel(){
 
+
+		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
+		d1_criteria.addPreference(Atmosphere.class, Cost.class);
+		d1_criteria.addPreference(Cost.class, Cuisine.class);
+
+		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
+
+		Self_Ci<Atmosphere> d1_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
+
+		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
+
+
+		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
+
+		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
+
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d1_criteria, Restaurant.class);
+		return model1;
+
+	}
+
+	
 	public   Negotiation<Restaurant>  model1(){
 
 
