@@ -71,7 +71,8 @@
 	
 	
 	\section{Dialogue model}
-	during the dialogue, self and other exchanges information about their preferences. We present in the following the agent knowledge processed from the dialogue.
+	 We present in the section the knowledge that the agent gather and processed from the dialogue.
+
 	\subsection{Other model}
 		We do not have detailed knowledge of the preferences of the other; the agent only knows which criteria values the other has said are acceptable or unacceptable.
 
@@ -88,32 +89,33 @@
 		$$other(o, A, U) = \frac{ \sum_{i}^{n} other(o_i, A_i, U_i) } {n}$$ 
 	
 	\subsection{Negotiation state}
-		During a dialogue, negotiators exchange two types of information; they either state their preferences or negotiate about options. In order to produce coherent dialogues, the agent keeps in memory the different states of the dialogue: 
+		During a negotiation, negotiators express two types of utterances: %that we name \emph{statement moves} and \emph{negotiation moves}. 
 		
-		Where $\prec_i$ and $\prec_i'$ are *total* orders on $C_i$
-		
-		Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue. We note $S$ the sequence of the agent stated values for all the criteria $\{S_1, S_2,..., S_n\}$
-		
-		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria.			
-		
-		Proposals which are made during the dialogue by both negotiators can have different status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}). We define thus:
 		\begin{itemize}
-			\item the collection $Op \subset V$ the options which have been proposed in the negotiation.
-			\item the collection $Ac \subset V$  the options which have been accepted in the negotiation.
-			\item the collection $Rej \subset V$  the options which have been rejected in the negotiation.
-			
-		\end{itemize} 
+			\item \emph{Statement move:} Speaker share information about its preferences (StatePreference) or ask other about his preferences (askPreferences).
+			\item \emph{Negotiation move:} Interlocutors negotiate about the different options of a topic (Propose, accept or reject proposals).
+		\end{itemize}
+	
+	
+		 In order to produce coherent dialogues, the agent keeps track about the different states of the dialogue, that each move updates. 
+		
+		The negotiation might focus on each criterion of the discussed topic. For example, in a negotiation on restaurants, they might negotiate about the type of \textit{cuisine}, and the \textit{ambiance} to choose.  We note $D$ the set of criteria which have been discussed during the dialogue. When interlocutors agree on a value of a criterion to choose, the negotiation on this criterion is then considered as \textit{closed}. We note $Cl$ the set of closed criteria.
+		
+		For each discussed criterion $C_i \in D$, the agent register the following information:		
+		\begin{itemize}
+			\item Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue.
+			\item Proposals which are made during the negotiation by both negotiators might have different status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}).
+				\subitem - $Op_i$ is the set of  values which have been proposed in the negotiation.
+				\subitem - $Ac_i$  is the set of values which have been accepted in the negotiation.
+				\subitem - $Rej_i$  is the set of values which have been rejected in the negotiation.
+		\end{itemize}
+		
+	Moreover, interlocutors are allowed to make proposals of options. Therefore we define the same structure of proposals for the options; $Op_o, Rej_o, Ac_o$
 
 	\section{Decision based on dominance in negotiation}
 	\label{decision}
 	\subsection{Satisfaction of Self preferences Vs Other preferences}
-%	Scholars in psychology already demonstrate that the relation of dominance affect negotiator's motivation in maximizing self preferences versus other preferences. We took an interest in DeDreu work in which he studies the impact of social value orientation \textit{(i.e  individual differences in	how people evaluate outcomes for themselves and others	in interdependent situation)} on negotiator behavior. We keep three main mechanisms:
-%	\begin{enumerate}
-%		\item Submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.
-%		\item Dominant negotiators show a greater levels of demand than the submissive one. Moreover, submissive negotiators show a \textbf{greater decline} of their preferences after the second round of negotiation. 
-%		\item Submissive negotiators conceded more on low priority issues.
-%	\end{enumerate}   
-	
+
 	\subsubsection{Dominance and concession}
 	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the 	relationship.  It is a constant for a given agent in a given relationship.
 	
@@ -141,76 +143,72 @@
 	
 	
 	\section{Lead of the negotiation}
-%	
-	
-%	\begin{itemize}
-%		\item Powerful negotiators tend to make the first move. %\cite{magee2007power}
-%	
-%		\item Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for	greater rewards than were initially offered to them.)
-%	
-%		\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
-%		
-%	\end{itemize} 
+
 	
 	\subsection{Choosing an utterance type}
+		Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$	i.e., each value is a "name" for an option.  For example, V is the set of restaurants that are mutually known to the participants. This can be a many-to-one function, e.g., there could be two restaurants with same criteria.		
 		
-		We present in the following the possible responses and their applicability conditions. Note that each line (utterance)  assumes that the previous one are already not applicable.
+		We present in the following the possible responses and their applicability conditions. Note that each line (utterance)  assumes that the previous ones are already not applicable.
 	
 	$ chooseUtterance(dom, t, V, \prec, A, U) = $ \\
+	
+	
 	\textbf{if(\textbf{dom  $>\sigma$})} \\
 	\begin{tabular}{|p{3cm}|p{9cm}|}
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-	 Negotiation success &  $\exists x \in \{Acc\}$  \newline \emph{OR} \newline $x \in \{Op\}$ and \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+	 Negotiation success & $\exists o \in Acc_o$   \emph{OR} $o \in Op_o$ such that  $sat(o, \prec) \geq \beta$ \\
 		\hline
-		Negotiation failure & $ \forall x \notin \{Rej\}$, \newline  $acc(dom,t,x,\prec,A,U) < \beta $ \\
+		Negotiation failure & $ \forall c \in C_i$,  $c \in Rej_i$\\
 		\hline
-		State & $OtherAsks$ \\
+		State & $type(u^{-1}) = AskPreference$ \\
 		\hline
-		Propose & $\exists y \notin \{Rej, Ac\}$ such that \newline $acc(dom,t,y,\prec,A,U) \geq \beta $  \\
+		Propose & Otherwise  \\
 		
 	\hline
 	\end{tabular}
 	\\ \\
 		
 	\textbf{if(\textbf{dom  $<\sigma$})} \\
+	
 	\begin{tabular}{|p{3cm}|p{9cm}|}
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-		Negotiation success &  $\exists x \in \{Acc\}$ \\
+		Negotiation success &  $\exists o \in Acc_o$ such that $o \in Acc_o$ \\
 		\hline
-		Accept & $\exists x \in \{Op\} /$ \newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \\
+		Accept & $\exists c \in Op_i$, $sat(c, \prec_i) \geq \beta$ \newline \emph{OR}   \newline $ \exists o \in Op_o$ ,  $sat(c, \prec_i) \geq \beta$ \\
 		\hline
-		Reject & $\exists x \in \{Op\} /$ \newline $ acc(dom,t,x,\prec,A,U) < \beta$  \emph{and} $t<\tau$.\\
+		Reject & $\exists c \in Op_i$, $sat(c, \prec_i) < \beta$  \emph{OR}   $ \exists o \in Op_o$ ,  $sat(c, \prec_i) < \beta$ \newline  \emph{AND} $t<\tau$.\\
 		\hline
-		Propose & $\exists x$ / $other(x, A_i, U_i)  = 1 $  \emph{and}
-		\newline ($acc(dom,t,x,\prec,A,U) \geq \beta$
+		Propose & $\exists c$ / $other(c, A_i, U_i)  = 1 $  \emph{and}
+		\newline ($sat(c, \prec_i) \geq \beta$
 		\newline \emph{OR}  
-		\newline $\forall c \in C_i$,  $c \in \{Ac\}$)\\
+		\newline $\forall c \in C_i$,  $c \in Ac_i$\\
 		\hline
 		Ask &  \textbf{(}$t> \tau,$ \emph{and} 
-		\newline $\exists x \in \{Op\} /$
-		\newline $ acc(dom,t,x,\prec,A,U) < \beta $\textbf{) }
+		$\exists c \in Op_i /$
+		 $ sat(c, \prec_i) < \beta $\textbf{) }
 		\newline \emph{OR}
 		\newline \textbf{(}$ \forall c \in C_i,other(c, A_i, U_i)=0.5$
 		\newline \emph{OR} 
-		\newline \textbf{(}$\exists x \in \{Ac, Rej\}$ / 
-		\newline $acc(dom,t,x,\prec,A,U) \geq \beta$ \textbf{)} \\
+		\newline \textbf{(}$\exists c \in \{Ac_i, Rej_i\}$ / 
+		$sat(c, \prec_i) \geq \beta$ \textbf{)} \\
 		\hline
 		
-		State & $OtherAsks$
+		State & $type(u^{-1}) = AskPreference$
 		\newline \emph{OR}
 		\newline $\exists x,other(x, A_i, U_i) \not = 0.5 $ 
 		\newline \emph{OR}
-		\newline $ \exists c \in \mathcal{C}, , A_i(c) = Unkown$
+		\newline $ \exists C \in \mathcal{C}, A_i(C) = Unkown$
 		\\
 		\hline
 	\end{tabular}
 	
 
 	\subsection{Choosing a value for an utterance}
+	
 	
 %	Note that argmax may not be unique.  This function may be used to help 	decide utterance type and/or choose the argument after the utterance
 %	type is chosen.	
@@ -225,25 +223,21 @@
 	
 	$$chooseCriterion(dom, t, V, \prec, A, U, C_i) = option(chooseValue(dom, t, V, \prec, A, U, C_i))_i$$
 	
-%	(Note: this is a perhaps overly simple solution.  The obvious simple
-%	alternative below has the bug that it may lead to a "dead" end, where
-%	there is no actual value with combination of most acceptable
-%	criterion, in which case a more complex search is required.  Let's
-%	not bother for now!)
-	
+
 	$$chooseCriterion'(dom, t, V, \prec, A, U, C_i) =	\operatorname*{arg\,max}_{c\in C_i} acc(dom, t, c, \prec, A, U)$$
 	
-	These functions may be used to help decide utterance type and/or choose the argument after the utterance type is chosen.
+	These functions may be used to help choose the argument of a proposal for the Propose utterance.
 	
 	\section{Summary of general parameters }
 	\begin{itemize}
 
 		\item $\sigma \in $[0,1] : boundary between submissive and dominant used in
 				choosing an utterance type
-		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation.
-		\item $\tau > 0$ : the minimum number of open or rejected proposals before
+		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
+		\item $\tau > 0$ : the minimum number of open or rejected proposals before.
 				concession begins
-		\item $\delta > 0$ : parameter in slope of concession curve
+		\item $\delta > 0$ : parameter in slope of concession curve.
+		\item $u^{-1}$ refers to the previous utterance.
 		
 		
 	\end{itemize}
