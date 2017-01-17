@@ -1,0 +1,28 @@
+      agent 1 = 0.8
+   agent2 = 0.5
+    
+    # Writing log to /tmp/Console1.test...
+    # Jan 11, 2017 3:51:42 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Agent1 says "Let's go to a cheap restaurant."
+  > next
+    Agent2 says "Sorry, I'd rather choose something else."
+  > next
+    Agent1 says "Let's go to a affrodable restaurant."
+  > next
+    Agent2 says "Okay."
+  > next
+    Agent1 says "Let's go to the Kigna. It's a family, affrodable Chinese restaurant."
+  > next
+    Agent2 says "What kind of cuisine do you like?"
+  > next
+    Agent1 says "I like Chinese restaurants."
+  > next
+    Agent2 says "Let's go to a Chinese restaurant."
+  > next
+    Agent1 says "Let's go to the Kigna. It's a family, affrodable Chinese restaurant."
+  > next
+    Agent2 says "Okay."
+  >
+  
+   
