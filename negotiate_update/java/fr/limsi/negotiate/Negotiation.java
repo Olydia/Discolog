@@ -475,7 +475,7 @@ public class Negotiation<O extends Option> {
 					ask.setType(c);
 					return ask;
 				}
-		 
+
 			}
 		}
 		PreferenceStatement ask =  new PreferenceStatement(null, Acceptable.UNKNOWN, false, "Ask");
@@ -500,15 +500,15 @@ public class Negotiation<O extends Option> {
 		if(userStatement == null) {
 			return (new PreferenceStatement(model.getTheCurrentMostPreffered(getDom()),
 					new Boolean(true), false, "State"));
-			
+
 		}
 		// do you like c ?
 		else  {
-			
+
 			return (new PreferenceStatement(userStatement,new Boolean(model.getSelf().isAcceptable(userStatement, getDom())), false, "State"));
-			
+
 		}
-		
+
 	}
 
 	public PreferenceStatement reactUserStatement(String uttType){
@@ -519,7 +519,7 @@ public class Negotiation<O extends Option> {
 		if (this.context.getLastStatement(uttType,true) != null) {
 			PreferenceStatement statement = context.getLastStatement(uttType,true);
 			Criterion userStatement = statement.getStatedValue();
-			
+
 			CriterionNegotiation<Criterion> model = getCriterionNegotiation(userStatement);
 			if(userStatement != null) {
 				// reactToCriterion

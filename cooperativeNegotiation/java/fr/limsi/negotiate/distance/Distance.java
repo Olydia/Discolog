@@ -11,19 +11,27 @@ public class Distance {
 	ArrayList<Preference<Criterion>> secondModel;
 	List<Criterion> values;
 
+	
 	public Distance (ArrayList<Preference<Criterion>> firstModel, ArrayList<Preference<Criterion>> secondModel, List<Criterion> value){
 		this.firstModel = firstModel;
 		this.secondModel = secondModel;
 		this.values = value;
 	}
 
+	
 	public List<PreferenceMatrix<Criterion>> generateExtension( ArrayList<Preference<Criterion>> model, List<Criterion> value){
 		PreferenceMatrix<Criterion> matrix= new PreferenceMatrix<Criterion>(value, model);
 		matrix.builtPreferences();
 		Extension<Criterion> ext = new Extension<Criterion>(matrix);
 		return ext.extensions();
 	}
-
+	
+	/**
+	 * calculate the kendall distance between two total ordered set of preferences
+	 * @param firstModel model of preferences
+	 * @param secondModel model of preferences
+	 * @return kendall tau distance
+	 */
 	public double kendallTau(PreferenceMatrix<Criterion> firstModel, PreferenceMatrix<Criterion> secondModel){
 		double discordant = 0;
 		double concordant = 0;
@@ -45,6 +53,11 @@ public class Distance {
 		return  (result);
 	}
 
+	/**
+	 * 
+	 * Compute the kendall distance between two partial ordered set of preferences
+	 * @return Knn distance
+	 */
 	public double Knn(){
 		double min = -1;
 
@@ -84,6 +97,10 @@ public class Distance {
 
 	}
 	
+	/**
+	 * Compute the Hausdorff distance
+	 * @return
+	 */
 	public double distance (){
 		List<PreferenceMatrix<Criterion>> first = generateExtension(firstModel, values);
 		List<PreferenceMatrix<Criterion>> second = generateExtension(secondModel, values);

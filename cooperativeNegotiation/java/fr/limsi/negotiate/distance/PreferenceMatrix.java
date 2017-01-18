@@ -3,6 +3,13 @@ package fr.limsi.negotiate.distance;
 import java.util.*;
 import fr.limsi.negotiate.Preference;
 
+/**
+ * 
+ * @author ouldouali
+ *
+ * @param <T> type of the criterion
+ * This class calculate an Adjacency matrix for a set of preferences (selfPreferences) 
+ */
 public class PreferenceMatrix<T> {
 	private List<T> values; 
 	private int [] [] preferences; 
@@ -22,25 +29,25 @@ public class PreferenceMatrix<T> {
 		this.selfPreferences = selfPreferences;
 	}
 
-	// TODO check if preference(less, more) is not already defined in order to avoid inconcisty and cycles
+	/**
+	 * 
+	 * @param indexLess
+	 * @param indexMore
+	 * @return true : if the insertion doesn't generate a cycle.
+	 */
 	public boolean insertPreference(int indexLess, int indexMore) {
 
 		if(preferences[indexLess][indexMore] == 1 || preferences[indexMore][indexLess] == -1){
-			//System.out.println("Contradiction: P ("+getValues().get(indexLess)+", " + getValues().get(indexMore) +") exists in the preferences list");
 			return false;
 		}
-		//			try {
 
-		//				throw new Exception("Contradiction: P ("+less+", " + more +") exists in the preferences list");
-		//			} catch (Exception e) {
-		//				// TODO Auto-generated catch block
-		//				e.printStackTrace();
-		//			}
 		// add an exception in case where the index = -1
 		preferences[indexMore][indexLess]= 1 ;
 		preferences[indexLess][indexMore]= -1;
 		return true;
 	}
+	
+	
 	public boolean addPreference(T less, T more) {
 		int [] [] pref = this.preferences.clone();
 		int indexMore = getValues().indexOf(more);
@@ -57,6 +64,10 @@ public class PreferenceMatrix<T> {
 
 	}
 
+	/**
+	 * 
+	 * construct the adjancy matrix form a list of binary preferences
+	 */
 	public boolean builtPreferences(){
 		boolean insertionSuccess = true;
 		for(Preference<T> elem : this.selfPreferences){
@@ -67,7 +78,7 @@ public class PreferenceMatrix<T> {
 		return true;
 	}
 
-
+	
 	public boolean transitivity (int indexLess , int  indexMore){
 		boolean more = false, less = false;
 		for(int i=0; i< preferences.length; i++){
@@ -91,27 +102,12 @@ public class PreferenceMatrix<T> {
 		}
 		return true;
 	}
-	// Move to the CriteriaPreferences
 
-	public int getPreferenceOnValue(int i) {
-		int somme = 0;
-		for(int j=0; j < preferences.length; j++){			
-			somme+=preferences[i][j];
-		}
-		return somme;
-	}
-	public int getPreferenceOnValue(T c) {
-		int i = getValues().indexOf(c);
-		int somme = 0;
-		for(int j=0; j < preferences.length; j++){			
-			somme+=preferences[i][j];
-		}
-		return somme;
-	}
-	public int[][] getPreferences(){
-		return this.preferences;
-	}
-
+	/**
+	 * computes the pair of values that are not related by a preference 
+	 * there is not path from u to v (not Preference(u,v) or Preference(v,u))
+	 * @return list of pairs (u,v).
+	 */
 	public List<Preference<T>> nonRelatedCriteria(){
 		List<Preference<T>> elems = new ArrayList<Preference<T>>();
 		for(int i=0; i< preferences.length; i++){
@@ -123,8 +119,11 @@ public class PreferenceMatrix<T> {
 		return elems;
 
 	}
-
 	
+	public int[][] getPreferences(){
+		return this.preferences;
+	}
+
 
 	public List<T> getValues() {
 		return values;

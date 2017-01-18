@@ -1,0 +1,78 @@
+
+Cost
+
+expensive, 0.0
+cheap, 1.0
+affrodable, 0.5
+
+Cuisine
+
+French, 0.6666666
+Chinese, 1.0
+Italian, 0.5
+Turkish, 0.6666666
+Japanese, 0.8333333
+Korean, 0.8333333
+Mixican, 0.16666669
+
+Atmosphere
+
+lively, 0.0
+quiet, 1.0
+romantic, 0.6666666
+family, 1.0
+
+Parisien , 0.5555555
+Gramophone , 0.22222221
+Victor , 0.88888884
+Beaurepaire , 0.5555555
+Magoroko , 0.27777776
+Tokyo , 0.6111111
+Samura , 0.6111111
+Mizushi , 0.9444444
+Dragon , 0.6666667
+Ying , 0.33333334
+Yong , 0.6666667
+Jiliya , 1.0
+Papelli , 0.5
+Salento , 0.16666667
+Albacio , 0.5
+Ciasa_mia , 0.8333333
+Cappadoce , 0.5555555
+Sizin , 0.5555555
+Barak , 0.88888884
+Lejanissaire , 0.22222221
+Albert , 0.6111111
+Gaston , 0.72222215
+Taokan , 0.72222215
+Kigna , 0.8333333
+Tavolino , 0.5555555
+Trinfo , 0.6666667
+Ottoman , 0.6111111
+Kibelle , 0.72222215
+Yoshi , 0.6666666
+Sakura , 0.77777773
+Anahuacalli , 0.055555563
+Azteca , 0.38888893
+Bocamexa , 0.27777776
+Pappasitos , 0.38888893
+Fajitas , 0.38888893
+Chipotle , 0.72222227
+Omixico , 0.6111111
+Elrancho , 0.72222227
+Chido , 0.22222222
+Elnopal , 0.5555556
+Otacos , 0.44444442
+Elgringo , 0.5555556
+Ito , 0.27777776
+Soura , 0.6111111
+Songsan , 0.5
+Odori , 0.6111111
+Jantchi , 0.6111111
+Kohyang , 0.9444444
+Marou , 0.8333333
+Sodam , 0.9444444
+Sambuja , 0.44444442
+Seoul , 0.77777773
+Dokkebi , 0.6666666
+Sejong , 0.77777773
