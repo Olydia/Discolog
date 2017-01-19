@@ -183,41 +183,13 @@ public class GenerateModel {
 		GenerateModel m = new GenerateModel();
 		Negotiation<Restaurant> m1 = m.model1();
 		Negotiation<Restaurant> m2 = m.model2();
-//		for(Restaurant r :Restaurant.values()){
-//			System.out.println(r.toString() + ", "+ m1.satisfiability(r) + ", "+m2.satisfiability(r));
-//		}
+		m1.addStatement(new Statement<Criterion>(Atmosphere.QUIET, Satisfiable.TRUE), true);
+		m1.addStatement(new Statement<Criterion>(Cuisine.CHINESE, Satisfiable.TRUE), true);
+		System.out.println(m1.getValueNegotiation(Cuisine.class).ask());
 
+
+		//test Ask 
 		
-		//finalCalcul(m1);
-//		
-//		m1.setDominance(0.8);
-//		m2.setDominance(0.4);
-//		System.out.println(m1.self());
-//		System.out.println(m2.self());
-//		
-//		printPreferences(m1);
-//		System.out.println("--------------------------- m2 ------------------------------");
-//		printPreferences(m2);
-		//calculateElem(Cuisine.CHINESE, m1);
-
-//		double thre = 0.6;
-//		for(Cost elem: Cost.values()){
-//			//System.out.println(" M1: " +elem.toString() +" "+ m1.getValueNegotiation(elem.getClass()).acceptability(elem, m1.self()));
-//			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
-//			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>=thre ;
-//			System.out.println(elem.toString() +" "+ v);
-//		}
-//		for(Cuisine elem: Cuisine.values()){
-//			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
-//			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>= thre;
-//			System.out.println(elem.toString() +" "+ v);
-//		}
-//		for(Atmosphere elem: Atmosphere.values()){
-//			//m2.getValueNegotiation(elem.getClass()).addInOther(elem, Satisfiable.TRUE);
-//			boolean v = 	m2.getValueNegotiation(elem.getClass()).acceptability(elem, m2.self())>= thre;
-//			System.out.println(elem.toString() +" "+ v);
-//		}
-		//System.out.println(m.model1().getCriteria().sortValues());
 	}
 
 }

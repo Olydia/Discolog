@@ -20,7 +20,7 @@ public class NegotiationDistance {
 			CriterionNegotiation<Criterion> cr1 = model.getValueNegotiation(criterion);
 			CriterionNegotiation<Criterion> cr2 = model2.getValueNegotiation(criterion);
 			Distance current = new Distance (cr1.getSelf().getSelfPreferences(), cr2.getSelf().getSelfPreferences(), cr1.getElements());
-			sum+= current.Knn();
+			//sum+= current.Knn();
 			cmp ++;
 		}
 		//Distance criteria = new Distance(model.getCriteria().getPreferences(),model2.getCriteria().getPreferences(),model.getCriteria().getElements());

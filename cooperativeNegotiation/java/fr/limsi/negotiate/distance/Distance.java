@@ -34,23 +34,23 @@ public class Distance {
 	 */
 	public double kendallTau(PreferenceMatrix<Criterion> firstModel, PreferenceMatrix<Criterion> secondModel){
 		double discordant = 0;
-		double concordant = 0;
-		double normalize = (values.size()*(values.size()-1))/2;
+
+		//System.out.println("model 1" + firstModel.getSelfPreferences());
+//		
+		//System.out.println("model 2" + secondModel.getSelfPreferences());
 
 		for(int i = 0; i<values.size(); i++){
 			for(int j = i; j<values.size(); j++){
 				if(i!=j){
 					if(firstModel.getPreferences()[i][j] != secondModel.getPreferences()[i][j])
 						discordant ++;
-					else
-						concordant ++;
 				}
 			}
 		}
 
-		double result =(concordant - discordant)/ normalize;
-		//System.out.println(result);
-		return  (result);
+		//double result =(concordant - discordant)/ normalize;
+		System.out.println(discordant);
+		return  discordant;
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class Distance {
 	 * Compute the kendall distance between two partial ordered set of preferences
 	 * @return Knn distance
 	 */
-	public double Knn(){
-		double min = -1;
+	public void Knn(){
+		double min = 0;
 
 		List<PreferenceMatrix<Criterion>> first = generateExtension(firstModel, values);
 		List<PreferenceMatrix<Criterion>> second = generateExtension(secondModel, values);
@@ -71,16 +71,15 @@ public class Distance {
 					min = kendal;	
 			}
 		}
-
-		return min;
-
+		
 	}
 	
 	public double K_H(List<PreferenceMatrix<Criterion>> first, List<PreferenceMatrix<Criterion>> second){
+		
 		List<Double> maximum = new ArrayList<Double>();
 		
 		for(PreferenceMatrix<Criterion> firstElem : first){
-			double min = 1;
+			double min = firstElem.getSelfPreferences().size();
 			for(PreferenceMatrix<Criterion> secondElem : second){
 				double kendal = kendallTau(firstElem, secondElem);
 				if(kendal <= min)
@@ -88,7 +87,8 @@ public class Distance {
 			}
 			maximum.add(min);
 		}
-		System.out.println(maximum);
+		
+		System.out.println("first model" + maximum);
 
 		Collections.sort(maximum);
 		Collections.reverse(maximum);
