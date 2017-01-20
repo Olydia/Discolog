@@ -1,33 +1,45 @@
 package fr.limsi.negotiate.lang;
 
 import edu.wpi.cetask.Decomposition;
+import edu.wpi.cetask.TaskClass;
 import edu.wpi.disco.Disco;
-import fr.limsi.negotiate.Proposal;
+import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Statement.Satisfiable;
 
-public class RejectPropose extends NegotiationUtterance {
+public class RejectPropose  extends Reject {
 
+	public static TaskClass CLASS;
 
+	// for TaskClass.newStep
 	public RejectPropose (Disco disco, Decomposition decomp, String name, boolean repeat) { 
-		super(Propose.class, disco, decomp, name, repeat);
+		super(disco, decomp, name, repeat);
 	}
 
-	public RejectPropose (Disco disco, Boolean external, Proposal proposal, Proposal rejected) { 
-		super(Propose.class, disco, external);
-		
-		if(proposal != null) setSlotValue("proposal", proposal);
-		if(rejected != null) setSlotValue("rejected", rejected);
-
+	public RejectPropose (Disco disco, Boolean external, Proposal proposal, Proposal counter) { 
+		super(disco, external, proposal);
+		if(counter!= null) setSlotValue("counter", counter);
 	}
-	
-	public Proposal getRejectedProposal(){ return (Proposal) getSlotValue("rejected");}
-	public Proposal getProposal () { return (Proposal) getSlotValue("proposal"); }
 
-	
+	public Proposal getCounter () { return (Proposal) getSlotValue("counter"); }
+
 	@Override
-	public void interpret () {
-//		new Reject(getDisco(), getExternal(), getRejectedProposal());
-//		new Propose(getDisco(), getExternal(), getProposal());
-		System.out.println("success");
-	}
+	protected void interpret () {
+		super.mentalStateUpdate();
+		// add the new proposal
+		Proposal p;
+		if(getCounter() instanceof CriterionProposal){
+			p = new CriterionProposal(!getExternal(), (Criterion)getCounter().getValue());
+			getNegotiation().addStatement(new Statement<Criterion>((Criterion)p.getValue(),Satisfiable.TRUE), 
+					getExternal());
+		}
+		else 
+			p = new OptionProposal(!getExternal(), (Option)getCounter().getValue());
+		
+		
+		RejectMove prop = new RejectMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
+		getNegotiation().getContext().addUtt(prop);
+		
+		getNegotiation().addProposal(p);
 
+	}
 }
