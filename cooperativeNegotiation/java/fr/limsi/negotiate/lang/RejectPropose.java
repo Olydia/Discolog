@@ -24,7 +24,7 @@ public class RejectPropose  extends Reject {
 
 	@Override
 	protected void interpret () {
-		super.mentalStateUpdate();
+		super.rejectUpdate();
 		// add the new proposal
 		Proposal p;
 		if(getCounter() instanceof CriterionProposal){

@@ -9,7 +9,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 
 
 
-public class RejectState  extends Reject {
+public class RejectState  extends ProposalUtterance {
 	public static TaskClass CLASS;
 
 	// for TaskClass.newStep
@@ -19,7 +19,7 @@ public class RejectState  extends Reject {
 	
 	public RejectState(Disco disco, Boolean external, Proposal proposal, Criterion value) {
 		super(disco, external, proposal);
-	    if ( value != null ) setSlotValue("value", proposal);
+	    if ( value != null ) setSlotValue("value", value);
 
 	}
 
@@ -27,7 +27,7 @@ public class RejectState  extends Reject {
 	
 	@Override
 	public void interpret () {
-		super.mentalStateUpdate();
+		super.rejectUpdate();
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),Satisfiable.FALSE);
 		RejectMove st = new RejectMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);
 		getNegotiation().getContext().addUtt(st);
