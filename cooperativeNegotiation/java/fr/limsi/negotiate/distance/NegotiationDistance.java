@@ -1,5 +1,7 @@
 package fr.limsi.negotiate.distance;
 import  fr.limsi.negotiate.*;
+import fr.limsi.negotiate.restaurant.GenerateModel;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiationDistance {
 	private Negotiation<? extends Option> model;
@@ -17,10 +19,13 @@ public class NegotiationDistance {
 		double sum = 0;
 		int cmp =0;
 		for(Class<? extends Criterion> criterion: model.getCriteria().getElements()){
+			
 			CriterionNegotiation<Criterion> cr1 = model.getValueNegotiation(criterion);
+			
 			CriterionNegotiation<Criterion> cr2 = model2.getValueNegotiation(criterion);
+			
 			Distance current = new Distance (cr1.getSelf().getSelfPreferences(), cr2.getSelf().getSelfPreferences(), cr1.getElements());
-			//sum+= current.Knn();
+			sum+= current.distance();
 			cmp ++;
 		}
 		//Distance criteria = new Distance(model.getCriteria().getPreferences(),model2.getCriteria().getPreferences(),model.getCriteria().getElements());
@@ -28,6 +33,14 @@ public class NegotiationDistance {
 		
 	return sum/cmp ;
 	
+	}
+	
+	public static void main(String[] args) {
+		
+		totalOrderedModels tm = new totalOrderedModels();
+		NegotiationDistance distance = new NegotiationDistance(tm.model2(), tm.model1());
+		
+		System.out.println(distance.distance());
 	}
 
 }

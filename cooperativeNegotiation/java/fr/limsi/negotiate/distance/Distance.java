@@ -34,7 +34,7 @@ public class Distance {
 	 */
 	public double kendallTau(PreferenceMatrix<Criterion> firstModel, PreferenceMatrix<Criterion> secondModel){
 		double discordant = 0;
-
+		int cmp = 0;
 		//System.out.println("model 1" + firstModel.getSelfPreferences());
 //		
 		//System.out.println("model 2" + secondModel.getSelfPreferences());
@@ -42,6 +42,7 @@ public class Distance {
 		for(int i = 0; i<values.size(); i++){
 			for(int j = i; j<values.size(); j++){
 				if(i!=j){
+					cmp ++;
 					if(firstModel.getPreferences()[i][j] != secondModel.getPreferences()[i][j])
 						discordant ++;
 				}
@@ -49,8 +50,8 @@ public class Distance {
 		}
 
 		//double result =(concordant - discordant)/ normalize;
-		System.out.println(discordant);
-		return  discordant;
+		//System.out.println(discordant);
+		return  discordant/cmp;
 	}
 
 	/**
@@ -88,8 +89,6 @@ public class Distance {
 			maximum.add(min);
 		}
 		
-		System.out.println("first model" + maximum);
-
 		Collections.sort(maximum);
 		Collections.reverse(maximum);
 
@@ -111,5 +110,7 @@ public class Distance {
 
 		
 	}
+	
+	
 
 }

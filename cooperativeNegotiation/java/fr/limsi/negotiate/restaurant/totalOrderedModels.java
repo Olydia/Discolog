@@ -22,11 +22,9 @@ public class totalOrderedModels {
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.JAPANESE);
 		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.TURKISH);
-
-
 
 		
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
@@ -93,6 +91,54 @@ public class totalOrderedModels {
 		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
 		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d1_criteria, Restaurant.class);
 		return model1;
+
+	}
+	
+	
+	public   Negotiation<Restaurant>  model2(){
+
+
+		Self_C<Restaurant>  d2_criteria = new Self_C<Restaurant> (Restaurant.class);
+		d2_criteria.addPreference(Cost.class, Cuisine.class);
+		d2_criteria.addPreference(Cuisine.class,Atmosphere.class);
+
+		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+		d1_cuisine.setType(Cuisine.class);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MEXICAN);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.CHINESE);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.ITALIAN);
+
+
+
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
+
+		Self_Ci<Atmosphere> d2_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
+		d2_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.LIVELY);
+		d2_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.LIVELY);
+		d2_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.ROMANTIC);
+		d2_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.ROMANTIC);
+		d2_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.QUIET);
+
+
+		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d2_atmosphere);
+
+
+		Self_Ci<Cost> d2_cost = new Self_Ci<Cost>(Cost.class);
+		d2_cost.addPreference(Cost.CHEAP, Cost.AFFRODABLE);
+		d2_cost.addPreference(Cost.AFFRODABLE, Cost.EXPENSIVE);
+		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d2_cost);
+
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model2 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d2_criteria, Restaurant.class);
+		return model2;
 
 	}
 

@@ -24,7 +24,6 @@ public class TestExtension {
 	}
 	
 	public static void main(String[] args) {
-		GenerateModel m = new GenerateModel();
 		ArrayList<Preference<Criterion>> m1 = new ArrayList<Preference<Criterion>>();
 		m1.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFRODABLE));
 		m1.add(new Preference<Criterion>(Cost.CHEAP, Cost.EXPENSIVE));
