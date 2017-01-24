@@ -14,11 +14,11 @@ public class RejectState  extends ProposalUtterance {
 
 	// for TaskClass.newStep
 	public  RejectState(Disco disco, Decomposition decomp, String name, boolean repeat) { 
-		super(disco, decomp, name, repeat);
+		super(RejectState.class, disco, decomp, name, repeat);
 	}
 	
 	public RejectState(Disco disco, Boolean external, Proposal proposal, Criterion value) {
-		super(disco, external, proposal);
+		super(RejectState.class, disco, external, proposal);
 	    if ( value != null ) setSlotValue("value", value);
 
 	}

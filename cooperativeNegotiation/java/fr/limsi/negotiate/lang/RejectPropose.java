@@ -6,17 +6,17 @@ import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
-public class RejectPropose  extends Reject {
+public class RejectPropose  extends ProposalUtterance {
 
 	public static TaskClass CLASS;
 
 	// for TaskClass.newStep
 	public RejectPropose (Disco disco, Decomposition decomp, String name, boolean repeat) { 
-		super(disco, decomp, name, repeat);
+		super(RejectPropose.class, disco, decomp, name, repeat);
 	}
 
 	public RejectPropose (Disco disco, Boolean external, Proposal proposal, Proposal counter) { 
-		super(disco, external, proposal);
+		super(RejectPropose.class, disco, external, proposal);
 		if(counter!= null) setSlotValue("counter", counter);
 	}
 
@@ -24,18 +24,14 @@ public class RejectPropose  extends Reject {
 
 	@Override
 	protected void interpret () {
+		
+		// add the rejected proposal
 		super.rejectUpdate();
-		// add the new proposal
-		Proposal p;
-		if(getCounter() instanceof CriterionProposal){
-			p = new CriterionProposal(!getExternal(), (Criterion)getCounter().getValue());
-			getNegotiation().addStatement(new Statement<Criterion>((Criterion)p.getValue(),Satisfiable.TRUE), 
-					getExternal());
-		}
-		else 
-			p = new OptionProposal(!getExternal(), (Option)getCounter().getValue());
 		
+		// add the counter proposal
+		Proposal p =super.proposeUpdate(getCounter());
 		
+		// history update
 		RejectMove prop = new RejectMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		

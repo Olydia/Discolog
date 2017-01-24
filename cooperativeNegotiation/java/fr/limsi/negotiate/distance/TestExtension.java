@@ -15,9 +15,9 @@ public class TestExtension {
 		inverseM1.add(new Preference<Criterion>(Cuisine.CHINESE, Cuisine.JAPANESE));
 		inverseM1.add(new Preference<Criterion>(Cuisine.KOREAN, Cuisine.FRENCH));
 		inverseM1.add(new Preference<Criterion>(Cuisine.JAPANESE, Cuisine.TURKISH));
-		inverseM1.add(new Preference<Criterion>(Cuisine.FRENCH, Cuisine.MIXICAN));
+		inverseM1.add(new Preference<Criterion>(Cuisine.FRENCH, Cuisine.MEXICAN));
 		inverseM1.add(new Preference<Criterion>(Cuisine.FRENCH, Cuisine.ITALIAN));
-		inverseM1.add(new Preference<Criterion>(Cuisine.TURKISH, Cuisine.MIXICAN));
+		inverseM1.add(new Preference<Criterion>(Cuisine.TURKISH, Cuisine.MEXICAN));
 
 
 	return inverseM1;

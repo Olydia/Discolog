@@ -46,8 +46,8 @@ public class GenerateModel {
 		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.KOREAN);
 		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
-		d1_cuisine.addPreference(Cuisine.MIXICAN, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.MIXICAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
 		Self_Ci<Atmosphere> d1_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
@@ -81,9 +81,9 @@ public class GenerateModel {
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.FRENCH);
 		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.MIXICAN);
+		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MIXICAN);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MEXICAN);
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
 		Self_Ci<Atmosphere> d1_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
@@ -120,8 +120,8 @@ public class GenerateModel {
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.ITALIAN);
 		//d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.TURKISH));
-		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MIXICAN);
-		d1_cuisine.addPreference(Cuisine.MIXICAN, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MEXICAN);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
 		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
 
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
@@ -150,7 +150,7 @@ public class GenerateModel {
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
 			System.out.println("\t *********** " + v.getType().getSimpleName()+ " *********** ");
 			for(Criterion value: v.getElements())	
-				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+ " | is Satifiable: "+ v.getSelf().isSatisfiable(value));
+				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+ " | is Satifiable: "+ v.getSelf().isSatisfiable(value, m.self()));
 		}
 	}
 	
