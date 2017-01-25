@@ -15,4 +15,8 @@ public class NegotiationParameters {
 	 
 	 // threshold of the acceptability
 	 public static final double alfa = 0.6;
+	 
+	 // maximum number of preferences moves to take back the lead of negotiation
+	 public static final int lead = 4;
+
 }

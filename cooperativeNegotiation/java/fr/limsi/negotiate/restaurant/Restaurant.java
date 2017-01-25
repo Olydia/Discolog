@@ -67,29 +67,29 @@ public enum Restaurant implements Option {
 
 	SAKURA (Cuisine.JAPANESE, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 	 
-	 ANAHUACALLI(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
+	 ANAHUACALLI(Cuisine.MEXICAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 
-	 AZTECA(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.QUIET), 
+	 AZTECA(Cuisine.MEXICAN, Cost.EXPENSIVE, Atmosphere.QUIET), 
 
-	 BOCAMEXA(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.ROMANTIC), 
+	 BOCAMEXA(Cuisine.MEXICAN, Cost.EXPENSIVE, Atmosphere.ROMANTIC), 
 
-	 PAPPASITOS(Cuisine.MIXICAN, Cost.EXPENSIVE, Atmosphere.FAMILY), 
+	 PAPPASITOS(Cuisine.MEXICAN, Cost.EXPENSIVE, Atmosphere.FAMILY), 
 
-	 FAJITAS(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.LIVELY), 
+	 FAJITAS(Cuisine.MEXICAN, Cost.CHEAP, Atmosphere.LIVELY), 
 
-	 CHIPOTLE(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.QUIET), 
+	 CHIPOTLE(Cuisine.MEXICAN, Cost.CHEAP, Atmosphere.QUIET), 
 
-	 OMIXICO(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.ROMANTIC), 
+	 OMIXICO(Cuisine.MEXICAN, Cost.CHEAP, Atmosphere.ROMANTIC), 
 
-	 ELRANCHO(Cuisine.MIXICAN, Cost.CHEAP, Atmosphere.FAMILY), 
+	 ELRANCHO(Cuisine.MEXICAN, Cost.CHEAP, Atmosphere.FAMILY), 
 
-	 CHIDO(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
+	 CHIDO(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
 
-	 ELNOPAL(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
+	 ELNOPAL(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
 
-	 OTACOS(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	 OTACOS(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
 
-	 ELGRINGO(Cuisine.MIXICAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	 ELGRINGO(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
 
 	 ITO(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 

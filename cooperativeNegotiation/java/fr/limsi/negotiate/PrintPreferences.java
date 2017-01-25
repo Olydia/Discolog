@@ -14,6 +14,7 @@ public class PrintPreferences<O extends Option> {
 
 	public void printSatisfiability(){
 		for (CriterionNegotiation<Criterion> cr: model.getValuesNegotiation()){
+			// add the new commit
 			System.out.println("\n" + cr.getType().getSimpleName()+"\n");
 			Self_Ci<Criterion> self = cr.getSelf();
 			for(Criterion c: self.getElements()){

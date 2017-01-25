@@ -3,7 +3,6 @@ package fr.limsi.negotiate.lang;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class Propose extends ProposalUtterance {
 
@@ -21,21 +20,16 @@ public class Propose extends ProposalUtterance {
 	@Override
 	protected void interpret () {
 		
-		Proposal p;
-		if(getProposal() instanceof CriterionProposal){
-			p = new CriterionProposal(!getExternal(), (Criterion)getProposal().getValue());
-			getNegotiation().addStatement(new Statement<Criterion>((Criterion)p.getValue(),Satisfiable.TRUE), getExternal());
-		}
-		else 
-			p = new OptionProposal(!getExternal(), (Option)getProposal().getValue());
+		Proposal p = proposeUpdate(getProposal());
 		
 		
 		NegotiationMove prop = new NegotiationMove(p, getExternal(), NegoUtterance.UtType.PROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		
-		getNegotiation().addProposal(p);
 
 
 
 	}
+
+
 }

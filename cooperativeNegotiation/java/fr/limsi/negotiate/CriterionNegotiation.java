@@ -132,6 +132,16 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 
 
+	public ArrayList<CriterionProposal> getProposalsWithStatus(Status status, boolean isSelf){
+		ArrayList<CriterionProposal> props = new ArrayList<CriterionProposal>();
+		for(int i=proposals.size()-1; i>=0; i--){
+			CriterionProposal p = proposals.get(i);
+			if(p.getStatus().equals(status) && p.isSelf == isSelf)
+				props.add(p);	
+		}
+		return props;
+	}
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<C> getValusProposals(List<CriterionProposal> prop){
 		ArrayList<C> values = new ArrayList<C>();
@@ -181,7 +191,7 @@ public class CriterionNegotiation<C extends Criterion> {
 
 		otherUnkw.sort(new Comparator<C> (){
 				public int compare (C c1, C c2){
-					return Float.compare(getSelf().satisfaction(c2), getSelf().satisfaction(c2));
+					return Float.compare(getSelf().satisfaction(c2), getSelf().satisfaction(c1));
 				}
 			});
 			//}

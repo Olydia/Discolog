@@ -61,6 +61,12 @@ public class OptionProposal extends Proposal {
 		// TODO Auto-generated method stub
 		return this.getValue().print();
 	}
+	
+	@Override
+	public String printProposal() {
+		// TODO Auto-generated method stub
+		return "the " + getValue();
+	}
 
 }
 

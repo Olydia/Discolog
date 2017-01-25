@@ -63,5 +63,11 @@ public class CriterionProposal extends Proposal {
 		return this.toString();
 	}
 
+	@Override
+	public String printProposal() {
+		// TODO Auto-generated method stub
+		return "a " + getValue();
+	}
+
 
 }

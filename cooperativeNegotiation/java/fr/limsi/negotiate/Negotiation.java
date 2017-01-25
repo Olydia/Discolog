@@ -1,8 +1,10 @@
 package fr.limsi.negotiate;
 
 import java.util.*;
-import edu.wpi.disco.lang.*;
+
+import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.lang.*;
 
 
 public class Negotiation<O extends Option> {
@@ -47,7 +49,7 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 
-	public Option[] getOptions(){
+	public O[] getOptions(){
 		return (topic.getEnumConstants()); 
 	}
 	public void propose(OptionProposal p){
@@ -114,10 +116,23 @@ public class Negotiation<O extends Option> {
 
 	public int computeT() {
 		int t = 0;
-		for(CriterionNegotiation<Criterion> value: valueNegotiation){
-			t = t + (value.getProposals().size() - value.getProposalsWithStatus(Status.ACCEPTED).size());
+		List<Proposal> proposal = getContext().getNegotiationMoves();
+
+		for(CriterionNegotiation<Criterion> value: valueNegotiation ){
+			 proposal.removeAll(value.getProposalsWithStatus(Status.ACCEPTED));
+			 List<CriterionProposal> rejected = value.getProposalsWithStatus(Status.REJECTED);
+			 proposal.removeAll(rejected);
+			 t += rejected.size();
+
+			 
 		}
-		t = t + (proposals.size() - getOptionsProposals(Status.ACCEPTED).size());
+		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
+		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
+		 proposal.removeAll(optionRejected);
+		 
+		 t+= optionRejected.size();
+		 
+		 t+= proposal.size();
 		return t;
 	}
 
@@ -180,12 +195,18 @@ public class Negotiation<O extends Option> {
 		//			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
 
-	public Option negotiationSuccess(double relation){
+	public Option negotiationSuccess(double relation, Utterance utt){
+		if(utt instanceof Accept){
+			Proposal p = ((Accept) utt).getProposal();
+			if( p instanceof OptionProposal)
+				return (Option) p.getValue();
+		}
+			
 		if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
 			return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
 		if(relation == NegotiatorAgent.DOMINANT){
 			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-				if(!o.isSelf() && isAcceptable(o))
+				if(!o.isSelf() && isSatisfiable(o))
 					return o.getValue();
 			}
 		}
@@ -194,7 +215,7 @@ public class Negotiation<O extends Option> {
 
 	// test of acceptability
 	
-	public boolean isAcceptable(Proposal p){
+	public boolean isSatisfiable(Proposal p){
 		float satisfiability =0;
 		if(p instanceof CriterionProposal){
 			Criterion c = (Criterion)p.getValue();
@@ -205,7 +226,7 @@ public class Negotiation<O extends Option> {
 			O o =(O) p.getValue();
 			satisfiability= satisfiability(o);
 		}
-		return satisfiability>=getDominance();
+		return satisfiability >= self();
 	}
 
 	private List<Option>  nonRejectedOptions() {
@@ -264,6 +285,11 @@ public class Negotiation<O extends Option> {
 		return prop;
 	}
 
+	/**
+	 * Used to compute the condition of negotiation failure, in the case where all the remain proposals are
+	 * no longer satisfiable for the agent.
+	 * @return
+	 */
 	public List<Proposal> remainProposals(){
 		List<Proposal> prop = new ArrayList<Proposal>();
 		prop.addAll(remainCriterionProposals());
@@ -288,11 +314,13 @@ public class Negotiation<O extends Option> {
 
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
-		List<Class<? extends Criterion>> discussions = getContext().getRemainDiscussedCrt();
-		//argmax.addAll(getValueNegotiation(getContext().getCurrentDisucussedCriterion()));
+		
+		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().getElements());
+
+		
 		for(int i = discussions.size()-1; i>=0; i--){
 		CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
-			argmax.add(elm.chooseValue(elm.remainProposals(),this.self()));
+			argmax.add(elm.chooseValue(elm.getElements(),this.self()));
 		}
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
@@ -305,20 +333,34 @@ public class Negotiation<O extends Option> {
 
 		return argmax.get(0);
 	}
+	
+	public Criterion chooseCriterionProposal(List<Criterion> oStats){
+		//ArrayList<Criterion> argmax = new ArrayList<Criterion>();
+		
+	
+		oStats.sort(new Comparator<Criterion>() {
+			@Override
+			public int compare(Criterion c1, Criterion c2){
+				CriterionNegotiation<Criterion> cn1 = getValueNegotiation(c1.getClass());
+				CriterionNegotiation<Criterion> cn2 = getValueNegotiation(c2.getClass());
+				return Float.compare(cn2.acceptability(c2, self()), cn1.acceptability(c1, self()));
+			}
+		});
 
-	public Proposal chooseProposal(Utterance utterance) {
+		return oStats.get(0);
+	}
+	
+	
+
+	public Proposal chooseProposal() {
 		Criterion c = chooseCriterionProposal();
 		if(getContext().getClosedCriteria().isEmpty()){
 			return new CriterionProposal(true,c);
 		}
 		
-		Option bestOption = chooseOption(remainOptions());
-		if(utterance instanceof fr.limsi.negotiate.lang.Accept || utterance instanceof fr.limsi.negotiate.lang.Propose)
-			return new OptionProposal(true,bestOption);
-
-		
-		else
-			return(acceptability(bestOption) > getValueNegotiation(c.getClass()).acceptability(c, self())?
+		Option bestOption = chooseOption(nonRejectedOptions());
+	
+		return(acceptability(bestOption) > getValueNegotiation(c.getClass()).acceptability(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
 
 	}
@@ -347,5 +389,30 @@ public class Negotiation<O extends Option> {
 		return null;
 	}
 
+	public Criterion justifyReject(Proposal p){
+		if(p instanceof CriterionProposal)
+			return (Criterion)p.getValue();
+		
+		else {
+			double min = 1;
+			Criterion least = null;
+			Option option = (Option) p.getValue();
+			for (Class<? extends Criterion> cr: option.getCriteria()){
+				double sat = getValueNegotiation(cr).getSelf().satisfaction(option.getValue(cr));
+				if(sat<= min) {
+					min = sat;
+					least = option.getValue(cr);
+				}
+			}
+			
+			return least;
+		}
+	}
+	
+	// used to compute the Accept utterance format
+	
+	public boolean isLastProposal(Proposal accepted){
+		return getContext().getLastProposal().equals(accepted);
+	}
 
 }

@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 import fr.limsi.negotiate.NegoUtterance.UtType;
+import fr.limsi.negotiate.Proposal.Status;
 
 public class DialogueContext {
 
@@ -77,28 +78,34 @@ public class DialogueContext {
 		return null;
 	}
 
+
+
 	public Class<? extends Criterion> getCurrentDisucussedCriterion(){
 
 		return this.discussedCriteria.get(discussedCriteria.size() -1);
 	}
 
 	public void updateDiscussion(NegoUtterance newUtt){
+		Class<? extends Criterion> newDi = newUtt.getValueType();
 		if(discussedCriteria.isEmpty())
-			this.discussedCriteria.add(newUtt.getValueType());
+			this.discussedCriteria.add(newDi);
 
 		else if(newUtt.getType().equals(UtType.ACCEPT))
-			this.closeDiscussion(newUtt.getValueType());
+			this.closeDiscussion(newDi);
 
-		else if(!discussedCriteria.contains(newUtt.getValueType()))
-			this.discussedCriteria.add(newUtt.getValueType());
+		else if(discussedCriteria.contains(newDi)){
+			discussedCriteria.remove(newDi);
+			this.discussedCriteria.add(newDi);
 
+		}
+		else 	this.discussedCriteria.add(newDi);
 
 	}
 
 	public List<Class<? extends Criterion>> getPossibleDiscussions(List <Class<? extends Criterion>> criteria){
 		List <Class<? extends Criterion>> crit = new ArrayList <Class<? extends Criterion>> ();
 		for(Class<? extends Criterion> c: criteria){
-			if(! getDiscussedCriteria().contains(c))
+			if(!getDiscussedCriteria().contains(c))
 				crit.add(c);
 		}
 		crit.addAll(getRemainDiscussedCrt());
@@ -160,5 +167,47 @@ public class DialogueContext {
 			e.printStackTrace();
 		}
 		return null;		
+	}
+
+	public NegoUtterance getLastUtterance(boolean isExternal, UtType type){
+		for (int i = history.size()-1; i>= 0; i--){
+			NegoUtterance utt = history.get(i);
+			if(utt.isExtrenal() == isExternal && utt.getType().equals(type))
+				return utt;
+		}
+		return null;
+
+	}
+
+	public Proposal getLastProposal(boolean isExternal, Status status){
+		Proposal p = null;
+		if(status.equals(Status.OPEN))
+			p= (Proposal) getLastUtterance(isExternal, UtType.PROPOSE).getValue();
+		else if(status.equals(Status.ACCEPTED))
+			p= (Proposal) getLastUtterance(isExternal, UtType.ACCEPT).getValue();
+		else if(status.equals(Status.REJECTED))
+			p= (Proposal) getLastUtterance(isExternal, UtType.REJECT).getValue();
+
+		return p;
+
+	}
+	
+	public Proposal getLastProposal(){
+		for (int i = history.size()-1; i>= 0; i--){
+			NegoUtterance utt = history.get(i);
+			if(utt.getType().equals(UtType.PROPOSE))
+			return  (Proposal) utt.getValue();
+		}
+		return null;
+
+	}
+	
+	public List<Proposal> getNegotiationMoves(){
+		List<Proposal> moves = new ArrayList<Proposal>();
+		for (NegoUtterance utt : history){
+			if(utt instanceof NegotiationMove)
+				moves.add((Proposal)utt.getValue());
+		}
+		return moves;	
 	}
 }

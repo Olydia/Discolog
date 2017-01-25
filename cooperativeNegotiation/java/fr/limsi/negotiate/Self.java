@@ -17,8 +17,8 @@ public abstract class Self<C> {
 
 
 
-	public Satisfiable isSatisfiable(C value){
-		if (this.satisfaction(value) >= NegotiationParameters.beta)
+	public Satisfiable isSatisfiable(C value, double self){
+		if (this.satisfaction(value) >= self)
 			return Satisfiable.TRUE;
 		else 
 			return Satisfiable.FALSE;

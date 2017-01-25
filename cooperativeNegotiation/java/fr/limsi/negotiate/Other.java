@@ -59,7 +59,6 @@ public class Other <C>{
 	
 	public List<C> getPreferences(Satisfiable status){
 		List<C> un = new ArrayList<C>();
-		System.out.println(type);
 		List<C> elemenets =  Arrays.asList(this.type.getEnumConstants());
 		if(status.equals(Satisfiable.UNKOWN)){
 			for(C e: elemenets){
