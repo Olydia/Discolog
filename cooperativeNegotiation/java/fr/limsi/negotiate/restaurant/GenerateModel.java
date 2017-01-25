@@ -180,9 +180,9 @@ public class GenerateModel {
 	
 	public static void main (String[] args)  {
 		
-		GenerateModel m = new GenerateModel();
+		totalOrderedModels m = new totalOrderedModels();
 		Negotiation<Restaurant> m1 = m.model1();
-		Negotiation<Restaurant> m2 = m.model2();
+		Negotiation<Restaurant> m2 = m.model3();
 		m1.addStatement(new Statement<Criterion>(Atmosphere.QUIET, Satisfiable.TRUE), true);
 		m1.addStatement(new Statement<Criterion>(Cuisine.CHINESE, Satisfiable.TRUE), true);
 		System.out.println(m1.getValueNegotiation(Cuisine.class).ask());

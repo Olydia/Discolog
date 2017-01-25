@@ -1,6 +1,5 @@
 package fr.limsi.negotiate.distance;
 import  fr.limsi.negotiate.*;
-import fr.limsi.negotiate.restaurant.GenerateModel;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiationDistance {
@@ -38,7 +37,7 @@ public class NegotiationDistance {
 	public static void main(String[] args) {
 		
 		totalOrderedModels tm = new totalOrderedModels();
-		NegotiationDistance distance = new NegotiationDistance(tm.model2(), tm.model1());
+		NegotiationDistance distance = new NegotiationDistance(tm.model3(), tm.model2());
 		
 		System.out.println(distance.distance());
 	}

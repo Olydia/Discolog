@@ -50,7 +50,7 @@ public class totalOrderedModels {
 
 	}
 	
-	public   Negotiation<Restaurant>  inverseModel1(){
+	public   Negotiation<Restaurant>  model3(){
 
 
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
@@ -110,10 +110,10 @@ public class totalOrderedModels {
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.ITALIAN);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.CHINESE);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.ITALIAN);
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.JAPANESE);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.FRENCH);
 
 
 
