@@ -37,9 +37,15 @@ public class NegotiationDistance {
 	public static void main(String[] args) {
 		
 		totalOrderedModels tm = new totalOrderedModels();
-		NegotiationDistance distance = new NegotiationDistance(tm.model3(), tm.model2());
-		
-		System.out.println(distance.distance());
+		NegotiationDistance distance24 = new NegotiationDistance(tm.model4(), tm.model2());
+		NegotiationDistance distance14 = new NegotiationDistance(tm.model1(), tm.model4());
+		NegotiationDistance distance34 = new NegotiationDistance(tm.model3(), tm.model4());
+
+		System.out.println(distance14.distance());
+		System.out.println(distance24.distance());
+		System.out.println(distance34.distance());
+
+
 	}
 
 }

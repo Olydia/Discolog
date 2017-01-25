@@ -2,6 +2,7 @@ package fr.limsi.negotiate;
 
 import fr.limsi.negotiate.restaurant.GenerateModel;
 import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class PrintPreferences<O extends Option> {
 	
@@ -29,8 +30,8 @@ public class PrintPreferences<O extends Option> {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GenerateModel m = new GenerateModel();
-		PrintPreferences<Restaurant> p = new PrintPreferences<Restaurant>(m.inverseModel1());
+		totalOrderedModels m = new totalOrderedModels();
+		PrintPreferences<Restaurant> p = new PrintPreferences<Restaurant>(m.model2());
 		p.printSatisfiability();
 		
 	}

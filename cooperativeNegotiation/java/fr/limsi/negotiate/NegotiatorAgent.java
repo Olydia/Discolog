@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Dominant", model.model3()), 
-				new NegotiatorAgent("Submissive", model.model2()), 
+				new NegotiatorAgent("Dominant", model.model1()), 
+				new NegotiatorAgent("Submissive", model.model4()), 
 				true);
 
 		// note not loading Negotiotion.xml!
@@ -105,12 +105,12 @@ public class NegotiatorAgent extends Agent {
 				return new AskPreference(disco, false, opent, null);				
 
 		}else if(endDialogue(utterance)) {
-			return new Say(disco, false, "Okay!");
+			return new Say(disco, false, "Okay");
 
 		}else if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance)){
 
 
-			return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
+			return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 
 		} else if (negotiation.negotiationSuccess(relation, utterance)!= null){
 
