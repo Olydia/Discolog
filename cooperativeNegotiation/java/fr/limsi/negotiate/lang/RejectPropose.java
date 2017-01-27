@@ -32,7 +32,7 @@ public class RejectPropose  extends ProposalUtterance {
 		Proposal p =super.proposeUpdate(getCounter());
 		
 		// history update
-		RejectMove prop = new RejectMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
+		ProposalMove prop = new ProposalMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		
 		getNegotiation().addProposal(p);

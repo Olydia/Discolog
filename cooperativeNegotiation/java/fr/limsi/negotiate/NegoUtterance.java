@@ -36,6 +36,6 @@ public abstract class NegoUtterance {
 	
 	public abstract Object getValue();
 	
-	public static enum UtType { STATE, ASK, PROPOSE, ACCEPT, REJECT, REJECTPROPOSE, REJECTSTATE}
+	public static enum UtType { STATE, ASK, PROPOSE, ACCEPT, REJECT, REJECTPROPOSE,ACCEPTPROPOSE, REJECTSTATE}
 
 }

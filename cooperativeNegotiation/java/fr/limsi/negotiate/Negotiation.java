@@ -136,11 +136,11 @@ public class Negotiation<O extends Option> {
 		return t;
 	}
 
-	public float acceptability(Option o){
+	public float tolerable(Option o){
 		float acc =0;
 		for(CriterionNegotiation<Criterion> value: valueNegotiation){
 			Criterion c = o.getValue(value.getType());
-			acc = acc+value.acceptability(c, self());
+			acc = acc+value.tolerable(c, self());
 		}
 		return acc/valueNegotiation.size();
 	}
@@ -206,7 +206,7 @@ public class Negotiation<O extends Option> {
 			return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
 		if(relation == NegotiatorAgent.DOMINANT){
 			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-				if(!o.isSelf() && isSatisfiable(o))
+				if(!o.isSelf() && isAcceptable(o))
 					return o.getValue();
 			}
 		}
@@ -215,7 +215,7 @@ public class Negotiation<O extends Option> {
 
 	// test of acceptability
 	
-	public boolean isSatisfiable(Proposal p){
+	public boolean isAcceptable(Proposal p){
 		float satisfiability =0;
 		if(p instanceof CriterionProposal){
 			Criterion c = (Criterion)p.getValue();
@@ -306,7 +306,7 @@ public class Negotiation<O extends Option> {
 		V.sort(new Comparator<Option>() {
 			@Override
 			public int compare(Option o1, Option o2){
-				return Float.compare(acceptability(o2), acceptability(o1));
+				return Float.compare(tolerable(o2), tolerable(o1));
 			}
 		});
 		return V.get(0);
@@ -327,7 +327,7 @@ public class Negotiation<O extends Option> {
 			public int compare(Criterion c1, Criterion c2){
 				CriterionNegotiation<Criterion> cn1 = getValueNegotiation(c1.getClass());
 				CriterionNegotiation<Criterion> cn2 = getValueNegotiation(c2.getClass());
-				return Float.compare(cn2.acceptability(c2, self()), cn1.acceptability(c1, self()));
+				return Float.compare(cn2.tolerable(c2, self()), cn1.tolerable(c1, self()));
 			}
 		});
 
@@ -343,7 +343,7 @@ public class Negotiation<O extends Option> {
 			public int compare(Criterion c1, Criterion c2){
 				CriterionNegotiation<Criterion> cn1 = getValueNegotiation(c1.getClass());
 				CriterionNegotiation<Criterion> cn2 = getValueNegotiation(c2.getClass());
-				return Float.compare(cn2.acceptability(c2, self()), cn1.acceptability(c1, self()));
+				return Float.compare(cn2.tolerable(c2, self()), cn1.tolerable(c1, self()));
 			}
 		});
 
@@ -360,7 +360,7 @@ public class Negotiation<O extends Option> {
 		
 		Option bestOption = chooseOption(nonRejectedOptions());
 	
-		return(acceptability(bestOption) > getValueNegotiation(c.getClass()).acceptability(c, self())?
+		return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
 
 	}

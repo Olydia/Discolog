@@ -58,7 +58,7 @@ public class DialogueContext {
 	}
 
 	public void addUtt (NegoUtterance ut){
-		if  (!(ut.getValue() instanceof OptionProposal))
+		if  (!(ut.getValue() instanceof OptionProposal && !ut.getType().equals(UtType.ACCEPTPROPOSE)))
 			updateDiscussion(ut);
 
 		this.history.add(ut);
@@ -90,9 +90,10 @@ public class DialogueContext {
 		if(discussedCriteria.isEmpty())
 			this.discussedCriteria.add(newDi);
 
-		else if(newUtt.getType().equals(UtType.ACCEPT))
+		else if(newUtt.getType().equals(UtType.ACCEPT) || newUtt.getType().equals(UtType.ACCEPTPROPOSE))
 			this.closeDiscussion(newDi);
-
+		
+	
 		else if(discussedCriteria.contains(newDi)){
 			discussedCriteria.remove(newDi);
 			this.discussedCriteria.add(newDi);

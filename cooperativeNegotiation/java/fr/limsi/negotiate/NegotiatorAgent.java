@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Dominant", model.model1()), 
-				new NegotiatorAgent("Submissive", model.model4()), 
+				new NegotiatorAgent("Dominant", model.model3()), 
+				new NegotiatorAgent("Submissive", model.model1()), 
 				true);
 
 		// note not loading Negotiotion.xml!
@@ -139,9 +139,9 @@ public class NegotiatorAgent extends Agent {
 				Proposal p = getNegotiation().chooseProposal();
 
 				Proposal u = ((Propose) utterance).getProposal();
-				if(getNegotiation().isSatisfiable(u)){
+				if(getNegotiation().isAcceptable(u)){
 					Option bestOption = getNegotiation().chooseOption(getNegotiation().remainOptions());
-					return new Propose(disco, false, createProposal(bestOption, false));
+					return new AcceptPropose(disco, false, createProposal(bestOption, false), (CriterionProposal)u);
 
 				} else 
 					return new RejectPropose(disco, false,u, p);
@@ -257,7 +257,7 @@ public class NegotiatorAgent extends Agent {
 	private boolean canReject(Utterance utterance){
 		if(utterance instanceof Propose){
 			Proposal p = (Proposal)utterance.getSlotValue("proposal");
-			if(!getNegotiation().isSatisfiable(p) && 
+			if(!getNegotiation().isAcceptable(p) && 
 					getNegotiation().computeT()< NegotiationParameters.tau)
 				return true;
 
@@ -272,7 +272,7 @@ public class NegotiatorAgent extends Agent {
 		proposals.addAll(getNegotiation().getValueNegotiation(c).getProposalsWithStatus(Status.OPEN, false));
 
 		for(Proposal p: sortProposals(proposals)){
-			if(getNegotiation().isSatisfiable(p))
+			if(getNegotiation().isAcceptable(p))
 				return p;
 
 		}
@@ -291,7 +291,7 @@ public class NegotiatorAgent extends Agent {
 		if(!previousP.isEmpty()){
 
 			Proposal p = sortProposals(previousP).get(0);
-			if(getNegotiation().isSatisfiable(p))
+			if(getNegotiation().isAcceptable(p))
 				return p;
 		}
 
@@ -344,10 +344,10 @@ public class NegotiatorAgent extends Agent {
 			CriterionNegotiation<Criterion> model = this.getNegotiation().getValueNegotiation(
 					(Class<? extends Criterion>) p.getValue().getClass());
 
-			return model.acceptability((Criterion)p.getValue(), getNegotiation().self());
+			return model.tolerable((Criterion)p.getValue(), getNegotiation().self());
 		}
 		else 
-			return getNegotiation().acceptability((Option)p.getValue());
+			return getNegotiation().tolerable((Option)p.getValue());
 	}
 
 
@@ -456,6 +456,6 @@ public class NegotiatorAgent extends Agent {
 			
 		}
 		
-		return  (nbPreferences > NegotiationParameters.lead);
+		return  (nbPreferences >= NegotiationParameters.alpha);
 	}
 }

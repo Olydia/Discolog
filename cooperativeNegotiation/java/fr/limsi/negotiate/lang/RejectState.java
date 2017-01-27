@@ -29,7 +29,7 @@ public class RejectState  extends ProposalUtterance {
 	public void interpret () {
 		super.rejectUpdate();
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),Satisfiable.FALSE);
-		RejectMove st = new RejectMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);
+		ProposalMove st = new ProposalMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);
 		getNegotiation().getContext().addUtt(st);
 		getNegotiation().addStatement(statement, getExternal());
 	}

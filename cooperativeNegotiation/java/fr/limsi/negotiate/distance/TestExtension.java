@@ -25,12 +25,12 @@ public class TestExtension {
 	
 	public static void main(String[] args) {
 		ArrayList<Preference<Criterion>> m1 = new ArrayList<Preference<Criterion>>();
-		m1.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFRODABLE));
+		m1.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFORDABLE));
 		m1.add(new Preference<Criterion>(Cost.CHEAP, Cost.EXPENSIVE));
 
 		ArrayList<Preference<Criterion>> m2 = new ArrayList<Preference<Criterion>>();
-		m2.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFRODABLE));
-		m2.add(new Preference<Criterion>(Cost.AFFRODABLE, Cost.EXPENSIVE));
+		m2.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFORDABLE));
+		m2.add(new Preference<Criterion>(Cost.AFFORDABLE, Cost.EXPENSIVE));
 		List<Criterion> values = Arrays.asList(Cost.values());
 
 

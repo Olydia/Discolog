@@ -11,9 +11,9 @@
   > next
     Dominant says "I don't like expensive restaurants."
   > next
-    Submissive says "Do you like affrodable restaurants?"
+    Submissive says "Do you like affordable restaurants?"
   > next
-    Dominant says "I don't like affrodable restaurants."
+    Dominant says "I don't like affordable restaurants."
   > next
     Submissive says "What kind of cuisine do you like?"
   > next
@@ -50,4 +50,6 @@
     Submissive says "Okay."
   > next
     Dominant says "Let's book a table at the Jiliya Restaurant."
+   > next
+    Submissive says "Okay."
 

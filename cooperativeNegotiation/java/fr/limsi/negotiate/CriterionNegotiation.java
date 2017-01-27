@@ -23,7 +23,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.selfStatements = new ArrayList<Statement<C>>();
 	}
 
-	public float acceptability(C value, double self){
+	public float tolerable(C value, double self){
 		return (float) ((self*getSelf().satisfaction(value)) + ((1-self)*getOther().other(value)));
 	}
 
@@ -31,7 +31,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		V.sort(new Comparator<C>() {
 			@Override
 			public int compare(C c1, C c2){
-				return Float.compare(acceptability(c2, self), acceptability(c1, self));
+				return Float.compare(tolerable(c2, self), tolerable(c1, self));
 			}
 		});
 		return V.get(0);

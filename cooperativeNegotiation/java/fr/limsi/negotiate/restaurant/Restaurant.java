@@ -47,25 +47,25 @@ public enum Restaurant implements Option {
 	
 	LEJANISSAIRE (Cuisine.TURKISH, Cost.EXPENSIVE, Atmosphere.LIVELY),
 	
-	ALBERT (Cuisine.FRENCH, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	ALBERT (Cuisine.FRENCH, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	GASTON (Cuisine.FRENCH, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	GASTON (Cuisine.FRENCH, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 
-	TAOKAN (Cuisine.CHINESE, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	TAOKAN (Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	KIGNA (Cuisine.CHINESE, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	KIGNA (Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 
-	TAVOLINO (Cuisine.ITALIAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	TAVOLINO (Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	TRINFO (Cuisine.ITALIAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	TRINFO (Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 
-	OTTOMAN(Cuisine.TURKISH, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	OTTOMAN(Cuisine.TURKISH, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	KIBELLE(Cuisine.TURKISH, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	KIBELLE(Cuisine.TURKISH, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 
-	YOSHI (Cuisine.JAPANESE, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	YOSHI (Cuisine.JAPANESE, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	SAKURA (Cuisine.JAPANESE, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	SAKURA (Cuisine.JAPANESE, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 	 
 	 ANAHUACALLI(Cuisine.MEXICAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 
@@ -83,13 +83,13 @@ public enum Restaurant implements Option {
 
 	 ELRANCHO(Cuisine.MEXICAN, Cost.CHEAP, Atmosphere.FAMILY), 
 
-	 CHIDO(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
+	 CHIDO(Cuisine.MEXICAN, Cost.AFFORDABLE, Atmosphere.LIVELY), 
 
-	 ELNOPAL(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
+	 ELNOPAL(Cuisine.MEXICAN, Cost.AFFORDABLE, Atmosphere.QUIET), 
 
-	 OTACOS(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	 OTACOS(Cuisine.MEXICAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	 ELGRINGO(Cuisine.MEXICAN, Cost.AFFRODABLE, Atmosphere.FAMILY), 
+	 ELGRINGO(Cuisine.MEXICAN, Cost.AFFORDABLE, Atmosphere.FAMILY), 
 
 	 ITO(Cuisine.KOREAN, Cost.EXPENSIVE, Atmosphere.LIVELY), 
 
@@ -107,13 +107,13 @@ public enum Restaurant implements Option {
 
 	 SODAM(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY), 
 
-	 SAMBUJA(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.LIVELY), 
+	 SAMBUJA(Cuisine.KOREAN, Cost.AFFORDABLE, Atmosphere.LIVELY), 
 
-	 SEOUL(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.QUIET), 
+	 SEOUL(Cuisine.KOREAN, Cost.AFFORDABLE, Atmosphere.QUIET), 
 
-	 DOKKEBI(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.ROMANTIC), 
+	 DOKKEBI(Cuisine.KOREAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC), 
 
-	 SEJONG(Cuisine.KOREAN, Cost.AFFRODABLE, Atmosphere.FAMILY);
+	 SEJONG(Cuisine.KOREAN, Cost.AFFORDABLE, Atmosphere.FAMILY);
 	
 	public final Cuisine cuisine;
 	public final Cost cost;

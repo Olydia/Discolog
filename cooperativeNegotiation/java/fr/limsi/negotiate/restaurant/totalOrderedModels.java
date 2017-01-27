@@ -39,8 +39,8 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
-		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFRODABLE);
-		d1_cost.addPreference(Cost.AFFRODABLE, Cost.CHEAP);
+		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFORDABLE);
+		d1_cost.addPreference(Cost.AFFORDABLE, Cost.CHEAP);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
 
 		@SuppressWarnings("unchecked")
@@ -83,8 +83,8 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
-		d1_cost.addPreference(Cost.CHEAP, Cost.AFFRODABLE);
-		d1_cost.addPreference(Cost.AFFRODABLE, Cost.EXPENSIVE);
+		d1_cost.addPreference(Cost.CHEAP, Cost.AFFORDABLE);
+		d1_cost.addPreference(Cost.AFFORDABLE, Cost.EXPENSIVE);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
 
 		@SuppressWarnings("unchecked")
@@ -131,8 +131,8 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cost> d2_cost = new Self_Ci<Cost>(Cost.class);
-		d2_cost.addPreference(Cost.CHEAP, Cost.AFFRODABLE);
-		d2_cost.addPreference(Cost.AFFRODABLE, Cost.EXPENSIVE);
+		d2_cost.addPreference(Cost.CHEAP, Cost.AFFORDABLE);
+		d2_cost.addPreference(Cost.AFFORDABLE, Cost.EXPENSIVE);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d2_cost);
 
 		@SuppressWarnings("unchecked")
@@ -175,8 +175,8 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
-		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFRODABLE);
-		d1_cost.addPreference(Cost.AFFRODABLE, Cost.CHEAP);
+		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFORDABLE);
+		d1_cost.addPreference(Cost.AFFORDABLE, Cost.CHEAP);
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
 
 		@SuppressWarnings("unchecked")
