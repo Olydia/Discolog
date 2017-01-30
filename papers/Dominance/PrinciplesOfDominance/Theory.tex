@@ -1,7 +1,6 @@
 	\documentclass{article}
 		\usepackage[noend]{algpseudocode}
 		\usepackage{subfig} 
-		\usepackage{usual}
 		\usepackage{amsmath}
 		\usepackage{graphicx}
 		\usepackage{eulervm}
@@ -99,25 +98,25 @@
 	
 		 In order to produce coherent dialogues, the agent keeps track about the different states of the dialogue, that each move updates. 
 		
-		The negotiation might focus on each criterion of the discussed topic. For example, in a negotiation on restaurants, they might negotiate about the type of \textit{cuisine}, and the \textit{ambiance} to choose.  We note $D$ the set of criteria which have been discussed during the dialogue. When interlocutors agree on a value of a criterion to choose, the negotiation on this criterion is then considered as \textit{closed}. We note $Cl$ the set of closed criteria.
+		The negotiation might focus on each criterion of the discussed topic. For example, in a negotiation on restaurants, speakers might negotiate about the type of \textit{cuisine}, and the \textit{ambiance} to choose.  We note $D$ the set of criteria which have been discussed during the dialogue. When speakers agree on a value of a criterion to choose, the negotiation on this criterion is considered as \textit{closed}. We note $Cl$ the set of closed criteria.
 		
 		For each discussed criterion $C_i \in D$, the agent register the following information:		
 		\begin{itemize}
 			\item Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue.
 			\item Proposals which are made during the negotiation by both negotiators might have different status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}).
-				\subitem - $Op_i$ is the set of  values which have been proposed in the negotiation.
-				\subitem - $Ac_i$  is the set of values which have been accepted in the negotiation.
-				\subitem - $Rej_i$  is the set of values which have been rejected in the negotiation.
+				\subitem - $P_i$ is the set of  values which have been proposed in the negotiation.
+				\subitem - $T_i$  is the set of values which have been accepted in the negotiation.
+				\subitem - $R_i$  is the set of values which have been rejected in the negotiation.
 		\end{itemize}
 		
-	Moreover, interlocutors are allowed to make proposals of options. Therefore we define the same structure of proposals for the options; $Op_o, Rej_o, Ac_o$
+	Moreover, interlocutors are allowed to make proposals of options. Therefore we define the same structure of proposals for the options; $P, R, T$
 
 	\section{Decision based on dominance in negotiation}
 	\label{decision}
 	\subsection{Satisfaction of Self preferences Vs Other preferences}
 
 	\subsubsection{Dominance and concession}
-	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the 	relationship.  It is a constant for a given agent in a given relationship.
+	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the relationship.  It is a constant for a given agent in a given relationship.
 	
 	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a time-varying function normalized to 	[0,1] of its dominance, defined as below.
 		$$self(dom, t) = \left\{\begin{array}{ll}
@@ -131,15 +130,17 @@
 	This is called the "concession curve", where $\tau > 0$ and $\delta > 0$
 	are parameters of the theory in general and are initially assumed to
 	be 2 and 0.1, respectively.
+	
+	Therefore, the acceptability of a value $v$ is relative to the weight an agent gives to its self satisfaction. We note 
 	\subsubsection{Acceptability for self}
 
 	The self-acceptability of a criterion $c \in C_i$ is a function	normalized to [0,1] and defined as below.
 	
-	$$acc(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i) \ +\  (1 - self(dom, t)) . other(c, A_i, U_i)$$
+	$$tolerable(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i) \ +\  (1 - self(dom, t)) . other(c, A_i, U_i)$$
 	
 	Acceptability is generalized to options as a weighted sum.
 	
-	$$acc(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} acc(dom, t, o_i, \prec_i, A_i, U_i) } {n}$$ 
+	$$tolerable(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} acc(dom, t, o_i, \prec_i, A_i, U_i) } {n}$$ 
 	
 	
 	\section{Lead of the negotiation}
@@ -233,7 +234,7 @@
 
 		\item $\sigma \in $[0,1] : boundary between submissive and dominant used in
 				choosing an utterance type
-		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
+%		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
 		\item $\tau > 0$ : the minimum number of open or rejected proposals before.
 				concession begins
 		\item $\delta > 0$ : parameter in slope of concession curve.
