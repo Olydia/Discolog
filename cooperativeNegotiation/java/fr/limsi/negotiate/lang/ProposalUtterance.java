@@ -29,7 +29,8 @@ abstract class ProposalUtterance extends NegotiationUtterance {
 
    public Proposal getProposal () { return (Proposal) getSlotValue("proposal"); }
    
-   //update
+   
+   //Propose postCondition
    protected Proposal proposeUpdate(Proposal input) {
 		Proposal p;
 		if(input instanceof CriterionProposal){
@@ -44,6 +45,8 @@ abstract class ProposalUtterance extends NegotiationUtterance {
 		return p;
 	}
    
+   //Reject postCondition
+
    protected void rejectUpdate() {
 		if(getProposal() instanceof CriterionProposal){
 			Criterion value = (Criterion) getProposal().getValue();

@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.3;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Dominant", model.model3()), 
-				new NegotiatorAgent("Submissive", model.model1()), 
+				new NegotiatorAgent("Dominant", model.model1()), 
+				new NegotiatorAgent("Submissive", model.model3()), 
 				true);
 
 		// note not loading Negotiotion.xml!
@@ -73,6 +73,7 @@ public class NegotiatorAgent extends Agent {
 	public Plugin.Item respondIf (Interaction interaction, boolean guess) {
 		Disco disco = interaction.getDisco();
 		return Agenda.newItem(respond((Utterance) disco.getLastOccurrence(), disco), null);
+		
 	}
 
 	@Override

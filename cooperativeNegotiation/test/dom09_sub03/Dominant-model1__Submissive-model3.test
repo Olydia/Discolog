@@ -1,0 +1,45 @@
+    # Jan 30, 2017 1:57:51 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Dominant says "Let's go to a quiet restaurant."
+  > next
+    Submissive says "I don't like quiet restaurants, let's choose something else."
+  > next
+    Dominant says "Let's go to a cheap restaurant."
+  > next
+    Submissive says "Do you like expensive restaurants?"
+  > next
+    Dominant says "I don't like expensive restaurants."
+  > next
+    Submissive says "Do you like affordable restaurants?"
+  > next
+    Dominant says "Let's go to a cheap restaurant."
+  > next
+    Submissive says "Okay."
+  > next
+    Dominant says "Let's go to a Chinese restaurant."
+  > next
+    Submissive says "Do you like Italian restaurants?"
+  > next
+    Dominant says "I don't like Italian restaurants."
+  > next
+    Submissive says "Do you like Mexican restaurants?"
+  > next
+    Dominant says "Let's go to a Chinese restaurant."
+  > next
+    Submissive says "Okay."
+  > next
+    Dominant says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+  > next
+    Submissive says "Do you like lively restaurants?"
+  > next
+    Dominant says "I don't like lively restaurants."
+  > next
+    Submissive says "Do you like romantic restaurants?"
+  > next
+    Dominant says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+  > next
+    Submissive says "Okay."
+  > next
+    Dominant says "Let's book a table at the Jiliya Restaurant."
+  > next
+    Submissive says "Okay."

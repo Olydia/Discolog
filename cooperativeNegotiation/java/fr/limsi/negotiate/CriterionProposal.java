@@ -65,8 +65,11 @@ public class CriterionProposal extends Proposal {
 
 	@Override
 	public String printProposal() {
-		// TODO Auto-generated method stub
-		return "a " + getValue();
+		String value = getValue().toString();
+		if("AEIOUaeiou".indexOf(value.charAt(0)) != -1)
+			return "an " + value;
+		
+		return "a " + value;
 	}
 
 
