@@ -4,7 +4,6 @@ import edu.wpi.cetask.Decomposition;
 import edu.wpi.cetask.TaskClass;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class RejectPropose  extends ProposalUtterance {
 
@@ -35,7 +34,5 @@ public class RejectPropose  extends ProposalUtterance {
 		ProposalMove prop = new ProposalMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		
-		getNegotiation().addProposal(p);
-
 	}
 }

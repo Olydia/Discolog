@@ -113,9 +113,7 @@
 
 	\section{Decision based on dominance in negotiation}
 	\label{decision}
-	\subsection{Satisfaction of Self preferences Vs Other preferences}
-
-	\subsubsection{Dominance and concession}
+	\subsection {Dominance and concession}
 	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the relationship.  It is a constant for a given agent in a given relationship.
 	
 	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a time-varying function normalized to 	[0,1] of its dominance, defined as below.
@@ -133,18 +131,12 @@
 	
 	Therefore, the acceptability of a value $c \in C$  is relative to the weight an agent gives to its self satisfaction:
 	
-	 $$Acceptable(c, t) = sat(c, \prec_i) \geq  \beta \times Self(t)$$
-	 with $\beta > 0 $
-	\subsubsection{Acceptability for self}
-
-	The self-acceptability of a criterion $c \in C_i$ is a function	normalized to [0,1] and defined as below.
-	
-	$$tolerable(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i) \ +\  (1 - self(dom, t)) . other(c, A_i, U_i)$$
-	
-	Acceptability is generalized to options as a weighted sum.
-	
-	$$tolerable(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} acc(dom, t, o_i, \prec_i, A_i, U_i) } {n}$$ 
-	
+	 $$acc(c, t) = sat(c, \prec_i) \geq  \beta \times Self(t)$$
+	 with $\beta > 0 $.
+	 
+	 This function is generalized to options:
+	  $$acc(o, t) = sat(o, \prec) \geq  \beta \times Self(t)$$
+	 
 	
 	\section{Lead of the negotiation}
 
@@ -162,11 +154,12 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-	 Negotiation success & $\exists o \in Acc_o$   \emph{OR} $o \in Op_o$ such that  $sat(o, \prec) \geq \beta$ \\
+	 Negotiation success & $\exists o \in T$   \emph{OR} $o \in P$ such that  $acc(o,t) = true$ \\
 		\hline
-		Negotiation failure & $ \forall c \in C_i$,  $c \in Rej_i$\\
+		Negotiation failure & $ \forall c \in C_i$,  $c \in R_i$\\
 		\hline
-		State & $type(u^{-1}) = AskPreference$ \\
+		State & $type(u^{-1}) = AskPreference$  \textit{ and }
+		$n < \alpha$ (with $n$ the number of successive statement moves)\\
 		\hline
 		Propose & Otherwise  \\
 		
@@ -180,25 +173,22 @@
 		\hline
 		\textbf{Utterance type} & Condition \\
 		\hline
-		Negotiation success &  $\exists o \in Acc_o$ such that $o \in Acc_o$ \\
+		Negotiation success &  $\exists o \in T$ \\
 		\hline
-		Accept & $\exists c \in Op_i$, $sat(c, \prec_i) \geq \beta$ \newline \emph{OR}   \newline $ \exists o \in Op_o$ ,  $sat(c, \prec_i) \geq \beta$ \\
+		Accept & $\exists c \in P_i$, $acc(c, t)=true $ \newline \emph{OR}   \newline $ \exists o \in P$ ,  $acc(o, t) =true$ \\
 		\hline
-		Reject & $\exists c \in Op_i$, $sat(o, \prec) < \beta$  \emph{OR}   $ \exists o \in Op_o$ ,  $sat(c, \prec_i) < \beta$ \newline  \emph{AND} $t<\tau$.\\
+		Reject & $ [\exists c \in P_i$, $acc(c, t)= false $  \emph{OR}   $ \exists o \in P$ ,  $acc(o, t)=false]$ \newline  \emph{AND} $t<\tau$.\\
 		\hline
 		Propose & $\exists c$ / $other(c, A_i, U_i)  = 1 $  \emph{and}
-		\newline ($sat(c, \prec_i) \geq \beta$
+		\newline $acc(c, t)=true$
 		\newline \emph{OR}  
-		\newline $\forall c \in C_i$,  $c \in Ac_i$\\
+		\newline $\forall c \in C_i$,  $c \in T_i$\\
 		\hline
 		Ask &  \textbf{(}$t> \tau,$ \emph{and} 
-		$\exists c \in Op_i /$
-		 $ sat(c, \prec_i) < \beta $\textbf{) }
+		$\exists c \in P_i /$
+		 $ acc(c, t)=false$\textbf{) }
 		\newline \emph{OR}
-		\newline \textbf{(}$ \forall c \in C_i,other(c, A_i, U_i)=0.5$
-		\newline \emph{OR} 
-		\newline \textbf{(}$\exists c \in \{Ac_i, Rej_i\}$ / 
-		$sat(c, \prec_i) \geq \beta$ \textbf{)} \\
+		\newline $ \forall c \in C_i,other(c, A_i, U_i)=0.5$ \\
 		\hline
 		
 		State & $type(u^{-1}) = AskPreference$
@@ -212,26 +202,32 @@
 	
 
 	\subsection{Choosing a value for an utterance}
+	Let be $\{V' \subset V$ / $\forall v \in V'$ $ acc(v,t) = true\}$ be the list of agent's acceptable values. 
 	
+	The value for a proposal should be tolerable for both interlocutors. Therefore,  in addition to self preferences, the agent should considers other preferences. 
 	
-%	Note that argmax may not be unique.  This function may be used to help 	decide utterance type and/or choose the argument after the utterance
-%	type is chosen.	
-	%(Note: V may change during negotiation, e.g., by removing rejected	options, but I think this can be an implementation code
-	%issue---discussed at next level of detail?)
-	
-	The following function returns the most acceptable element of V.
+	   We define a tolerance function of a criterion $c \in C_i$ as a function normalized to [0,1] and defined as below.
+	 
+	 $$tolerable(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i) \ +\  (1 - self(dom, t)) . other(c, A_i, U_i)$$
+	 
+	 Tolerance is generalized to options as a weighted sum.
+	 
+	 $$tolerable(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} tolerable(dom, t, o_i, \prec_i, A_i, U_i) } {n}$$ 
+	 
+	 
+	 
+		The following function returns the most tolerable element of $V'$ to make a proposal.
 
-	 $$ chooseValue(dom, t, V, \prec, A, U) =	\operatorname*{arg\,max}_{name \in V} acc(dom, t, option(name), \prec, A, U) $$
+	 $$ chooseValue(dom, t, V, \prec, A, U) =	\operatorname*{arg\,max}_{name \in V} tolerable(dom, t, option(name), \prec, A, U) $$
 	
-	Note that argmax may not be unique.  The following function returns the most acceptable element of	criterion $C_i$.
+	Note that argmax may not be unique.  The following function returns the most tolerable element of	criterion $C_i$.
 	
 	$$chooseCriterion(dom, t, V, \prec, A, U, C_i) = option(chooseValue(dom, t, V, \prec, A, U, C_i))_i$$
 	
 
-	$$chooseCriterion'(dom, t, V, \prec, A, U, C_i) =	\operatorname*{arg\,max}_{c\in C_i} acc(dom, t, c, \prec, A, U)$$
+	$$chooseCriterion'(dom, t, V, \prec, A, U, C_i) =	\operatorname*{arg\,max}_{c\in C_i} tolerable(dom, t, c, \prec, A, U)$$
 	
-	These functions may be used to help choose the argument of a proposal for the Propose utterance.
-	
+
 	\section{Summary of general parameters }
 	\begin{itemize}
 
@@ -242,6 +238,7 @@
 				concession begins
 		\item $\delta > 0$ : parameter in slope of concession curve.
 		\item $u^{-1}$ refers to the previous utterance.
+		\item $\alpha> 0$: the maximum number of successive statement moves.
 		
 		
 	\end{itemize}
