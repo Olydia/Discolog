@@ -92,8 +92,8 @@ public class DialogueContext {
 
 		else if(newUtt.getType().equals(UtType.ACCEPT) || newUtt.getType().equals(UtType.ACCEPTPROPOSE))
 			this.closeDiscussion(newDi);
-		
-	
+
+
 		else if(discussedCriteria.contains(newDi)){
 			discussedCriteria.remove(newDi);
 			this.discussedCriteria.add(newDi);
@@ -192,17 +192,18 @@ public class DialogueContext {
 		return p;
 
 	}
-	
+
 	public Proposal getLastProposal(){
 		for (int i = history.size()-1; i>= 0; i--){
 			NegoUtterance utt = history.get(i);
 			if(utt.getType().equals(UtType.PROPOSE))
-			return  (Proposal) utt.getValue();
+				return  (Proposal) utt.getValue();
 		}
 		return null;
 
 	}
-	
+
+
 	public List<Proposal> getNegotiationMoves(){
 		List<Proposal> moves = new ArrayList<Proposal>();
 		for (NegoUtterance utt : history){
@@ -211,4 +212,34 @@ public class DialogueContext {
 		}
 		return moves;	
 	}
+
+	public List<Proposal> getNonAcceptedProposals(){
+		List<Proposal> moves = new ArrayList<Proposal>();
+
+		for (NegoUtterance utt : history){
+			if(utt instanceof NegotiationMove && !(utt.getType().equals(UtType.REJECT) || utt.getType().equals(UtType.REJECTSTATE))){
+				Proposal p = null;
+				
+				if(utt.getType().equals(UtType.ACCEPT))
+					
+					p = ((NegotiationMove) utt).getProposal();
+				
+				else if(utt.getType().equals(UtType.ACCEPTPROPOSE)){
+					
+					p = (Proposal) ((ProposalMove) utt).getOther();
+					moves.add(((ProposalMove) utt).getProposal());
+				}
+				// not an Accept nor AcceptPropose
+				if(p == null)
+					moves.add(((NegotiationMove) utt).getProposal());
+				
+				else{
+					int index = moves.lastIndexOf(p);
+					moves.remove(index);
+				}
+			}
+		}
+		return moves;
+	}
+
 }

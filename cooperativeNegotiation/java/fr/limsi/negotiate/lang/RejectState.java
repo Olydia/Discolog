@@ -27,7 +27,7 @@ public class RejectState  extends ProposalUtterance {
 	
 	@Override
 	public void interpret () {
-		super.rejectUpdate();
+		super.rejectUpdate(getProposal());
 		
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),Satisfiable.FALSE);
 		ProposalMove st = new ProposalMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);

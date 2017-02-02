@@ -2,6 +2,8 @@ package fr.limsi.negotiate;
 
 public class NegotiationMove extends NegoUtterance{
 	private	Proposal proposal;
+	private Statement<Criterion> justify;
+	
 	
 	public NegotiationMove(Proposal proposal, boolean external, UtType type) {
 		super(external, type);
@@ -27,4 +29,5 @@ public class NegotiationMove extends NegoUtterance{
 		// TODO Auto-generated method stub
 		return proposal;
 	}
+
 }

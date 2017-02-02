@@ -1,0 +1,15 @@
+This file contains the file tests with the current implementation.
+
+The files name indicates the initial preferences of each agent=> "Dominant-Preferences__Submissive-Preferences"
+
+The initial valuation of dominance of each agent is as follow:
+
+Dominant = 0.9
+Submissive = 0.3
+
+The presentation of initial preferences is here (presented with kendall distance between each peer of preferences set)
+
+https://docs.google.com/presentation/d/1CNePG3xbnwXwVphAXCUEoREJDkn6qoDLqKqopI640W0/edit?usp=sharing
+
+ 
+

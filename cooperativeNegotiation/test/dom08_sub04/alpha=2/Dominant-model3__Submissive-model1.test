@@ -1,19 +1,20 @@
-    # Writing log to /tmp/Console1.test...
-    # Jan 27, 2017 5:54:38 PM - TaskEngine 1.11 / Disco 1.17
+ # Writing log to /tmp/Console2.test...
+    # Feb 1, 2017 1:42:58 PM - TaskEngine 1.11 / Disco 1.17
     Welcome to Disco! (Type 'help' for command list)
-    Dominant says "Let's go to a Italian restaurant."
+
+    Dominant says "Let's go to an Italian restaurant."
   > next
     Submissive says "I don't like Italian restaurants, let's choose something else."
   > next
-    Dominant says "Let's go to a expensive restaurant."
+    Dominant says "Let's go to an expensive restaurant."
   > next
     Submissive says "Do you like cheap restaurants?"
   > next
     Dominant says "I don't like cheap restaurants."
   > next
-next
     Submissive says "Do you like affordable restaurants?"
-  >     Dominant says "Let's go to a expensive restaurant."
+  > next
+    Dominant says "Let's go to an expensive restaurant."
   > next
     Submissive says "Do you like affordable restaurants?"
   > next
@@ -23,11 +24,11 @@ next
   > next
     Dominant says "Let's go to a lively restaurant."
   > next
-    Submissive says "Okay."
+    Submissive says "Okay, Let's go to a lively restaurant."
   > next
     Dominant says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
   > next
-    Submissive says "Okay, Let's go to a expensive restaurant."
+    Submissive says "In the end, I prefer to go to an expensive restaurant."
   > next
     Dominant says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
   > next
@@ -39,7 +40,11 @@ next
   > next
     Dominant says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
   > next
-    Submissive says "Okay, Let's go to the Salento restaurant."
+    Submissive says "In the end, I prefer to go to the Salento restaurant."
+  > next
+    Dominant says "Let's book a table at the Salento Restaurant."
+  > next
+    Submissive says "Okay."
   > next
     Dominant says "Let's book a table at the Salento Restaurant."
   > next

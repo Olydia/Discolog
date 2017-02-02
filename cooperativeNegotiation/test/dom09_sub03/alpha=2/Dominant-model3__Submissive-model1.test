@@ -1,4 +1,4 @@
-    # Jan 30, 2017 12:27:05 PM - TaskEngine 1.11 / Disco 1.17
+    # Feb 1, 2017 6:20:19 PM - TaskEngine 1.11 / Disco 1.17
     Welcome to Disco! (Type 'help' for command list)
     Dominant says "Let's go to an Italian restaurant."
   > next
@@ -12,21 +12,17 @@
   > next
     Submissive says "Do you like affordable restaurants?"
   > next
+    Dominant says "I don't like affordable restaurants."
+  > next
+    Submissive says "What kind of atmosphere do you like?"
+  > next
+    Dominant says "Let's go to a lively restaurant."
+  > next
+    Submissive says "Okay, Let's go to a lively restaurant."
+  > next
     Dominant says "Let's go to an expensive restaurant."
   > next
-    Submissive says "Okay."
-  > next
-    Dominant says "Let's go to a lively restaurant."
-  > next
-    Submissive says "Do you like quiet restaurants?"
-  > next
-    Dominant says "I don't like quiet restaurants."
-  > next
-    Submissive says "Do you like family restaurants?"
-  > next
-    Dominant says "Let's go to a lively restaurant."
-  > next
-    Submissive says "Okay."
+    Submissive says "Okay, Let's go to an expensive restaurant."
   > next
     Dominant says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
   > next
@@ -36,9 +32,14 @@
   > next
     Submissive says "Do you like Japanese restaurants?"
   > next
+    Dominant says "I don't like Japanese restaurants."
+  > next
+    Submissive says "Do you like Turkish restaurants?"
+  > next
     Dominant says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
   > next
-    Submissive says "Okay."
+    Submissive says "Okay, Let's go to the Salento restaurant."
   > next
     Dominant says "Let's book a table at the Salento Restaurant."
   > next
+    Submissive says "Okay."

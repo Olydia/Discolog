@@ -7,9 +7,9 @@ import java.util.stream.Stream;
 
 public class CrowdProcessing {
 	public static void main(String args[]) {
-		String domModel = "model2";
+		String domModel = "model3";
 		String subModel = "model1";
-		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/dom08_sub04";
+		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/dom09_sub03/alpha=2";
 		String fileName = path+"/Dominant-"+domModel+"__Submissive-"+subModel+".test";
 
 		//read file into stream, try-with-resources

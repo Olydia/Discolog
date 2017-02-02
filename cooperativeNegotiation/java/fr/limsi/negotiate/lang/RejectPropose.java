@@ -14,24 +14,24 @@ public class RejectPropose  extends ProposalUtterance {
 		super(RejectPropose.class, disco, decomp, name, repeat);
 	}
 
-	public RejectPropose (Disco disco, Boolean external, Proposal proposal, Proposal counter) { 
+	public RejectPropose (Disco disco, Boolean external, Proposal rejected, Proposal proposal) { 
 		super(RejectPropose.class, disco, external, proposal);
-		if(counter!= null) setSlotValue("counter", counter);
+		if(rejected!= null) setSlotValue("rejected", rejected);
 	}
 
-	public Proposal getCounter () { return (Proposal) getSlotValue("counter"); }
+	public Proposal getReject () { return (Proposal) getSlotValue("rejected"); }
 
 	@Override
 	protected void interpret () {
 		
 		// add the rejected proposal
-		super.rejectUpdate();
+		super.rejectUpdate(getReject());
 		
 		// add the counter proposal
-		Proposal p =super.proposeUpdate(getCounter());
+		Proposal p =super.proposeUpdate(getProposal());
 		
 		// history update
-		ProposalMove prop = new ProposalMove(getProposal(), p, getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
+		ProposalMove prop = new ProposalMove(p, getReject(), getExternal(), NegoUtterance.UtType.REJECTPROPOSE);
 		getNegotiation().getContext().addUtt(prop);
 		
 	}

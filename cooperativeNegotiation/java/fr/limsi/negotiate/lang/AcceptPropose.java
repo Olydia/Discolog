@@ -22,7 +22,7 @@ public class AcceptPropose  extends ProposalUtterance {
 		super(AcceptPropose.class, disco, decomp, name, repeat);
 	}
 
-	public AcceptPropose (Disco disco, Boolean external, Proposal proposal, CriterionProposal accepted) { 
+	public AcceptPropose (Disco disco, Boolean external, CriterionProposal accepted, Proposal proposal) { 
 		super(AcceptPropose.class, disco, external, proposal);
 		if(accepted!= null) setSlotValue("accepted", accepted);
 	}
@@ -32,7 +32,7 @@ public class AcceptPropose  extends ProposalUtterance {
 	@Override
 	protected void interpret () {
 		
-		// add the rejected proposal
+		// add the proposal 
 		Proposal proposal = super.proposeUpdate(getProposal());
 		
 		// add the accepted proposal
@@ -43,6 +43,7 @@ public class AcceptPropose  extends ProposalUtterance {
 		CriterionNegotiation<Criterion>cn =getNegotiation().getValueNegotiation(value.getClass());
 		cn.updateProposal(acc);
 		getNegotiation().addStatement(new Statement<Criterion>(value,Satisfiable.TRUE), getExternal());
+		
 		
 		// history update
 		ProposalMove prop = new ProposalMove(proposal, getAccepted(), getExternal(), NegoUtterance.UtType.ACCEPTPROPOSE);

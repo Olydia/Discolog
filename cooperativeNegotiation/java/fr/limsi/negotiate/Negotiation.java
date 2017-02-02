@@ -3,6 +3,7 @@ package fr.limsi.negotiate;
 import java.util.*;
 
 import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.lang.*;
 
@@ -104,7 +105,6 @@ public class Negotiation<O extends Option> {
 	// t is the number of non accepted proposals
 	public double self(){
 		int t = computeT();
-
 		double s=0;
 		if( t< NegotiationParameters.tau)
 			return this.relation;
@@ -115,25 +115,26 @@ public class Negotiation<O extends Option> {
 	}
 
 	public int computeT() {
-		int t = 0;
-		List<Proposal> proposal = getContext().getNegotiationMoves();
-
-		for(CriterionNegotiation<Criterion> value: valueNegotiation ){
-			 proposal.removeAll(value.getProposalsWithStatus(Status.ACCEPTED));
-			 List<CriterionProposal> rejected = value.getProposalsWithStatus(Status.REJECTED);
-			 proposal.removeAll(rejected);
-			 t += rejected.size();
-
-			 
-		}
-		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
-		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
-		 proposal.removeAll(optionRejected);
-		 
-		 t+= optionRejected.size();
-		 
-		 t+= proposal.size();
-		return t;
+//		int t = 0;
+//		List<Proposal> proposal = getContext().getNegotiationMoves();
+//
+//		for(CriterionNegotiation<Criterion> value: valueNegotiation ){
+//			 proposal.removeAll(value.getProposalsWithStatus(Status.ACCEPTED));
+//			 List<CriterionProposal> rejected = value.getProposalsWithStatus(Status.REJECTED);
+//			 proposal.removeAll(rejected);
+//			 t += rejected.size();
+//
+//			 
+//		}
+//		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
+//		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
+//		 proposal.removeAll(optionRejected);
+//		 
+//		 t+= optionRejected.size();
+//		 
+//		 t+= proposal.size();
+//		return t;
+		return getContext().getNonAcceptedProposals().size();
 	}
 
 	public float tolerable(Option o){
@@ -417,6 +418,18 @@ public class Negotiation<O extends Option> {
 	
 	public boolean isLastProposal(Proposal accepted){
 		return getContext().getLastProposal().equals(accepted);
+	}
+	// check if the last utterance is a Propose
+	public boolean isPropose(){
+		NegoUtterance uttOther = getContext().getLastMove(true);
+		NegoUtterance uttSelf = getContext().getLastMove(false);
+		return (isLastProposal(uttSelf) || isLastProposal(uttOther));
+
+		
+	}
+	public boolean isLastProposal(NegoUtterance utterance){
+		UtType last = utterance.getType();
+		return (last.equals(UtType.PROPOSE) ||last.equals(UtType.REJECTPROPOSE) || last.equals(UtType.ACCEPTPROPOSE));
 	}
 
 }

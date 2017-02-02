@@ -85,16 +85,16 @@
 
 
 	<task id="fr.limsi.negotiate.lang.RejectPropose">
-
+	
+		<input name="rejected" type="Packages.fr.limsi.negotiate.Proposal" />
 		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
-		<input name="counter" type="Packages.fr.limsi.negotiate.Proposal" />
 
 	</task>
 	
 		<task id="fr.limsi.negotiate.lang.AcceptPropose">
-
-		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+		
 		<input name="accepted" type="Packages.fr.limsi.negotiate.CriterionProposal" />
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
 
 	</task>
 

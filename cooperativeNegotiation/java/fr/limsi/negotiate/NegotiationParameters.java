@@ -13,7 +13,6 @@ public class NegotiationParameters {
 	 // parameter of the concession loop
 	 public static final double delta = 0.1;
 	 
-	 
 	 // maximum number of preferences moves to take back the lead of negotiation
 	 public static final int alpha = 2;
 
