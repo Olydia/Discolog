@@ -8,7 +8,7 @@ public class NegotiationParameters {
 	 public static final int tau = 2;
 	 
 	 // threshold of the satisfiability
-	 public static final double beta = 0.65;
+	 public static final double beta = 1;
 	 
 	 // parameter of the concession loop
 	 public static final double delta = 0.1;

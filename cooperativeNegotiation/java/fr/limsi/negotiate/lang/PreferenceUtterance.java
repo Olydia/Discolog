@@ -9,7 +9,7 @@ import edu.wpi.cetask.Decomposition;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.Criterion;
 
-abstract class PreferenceUtterance extends NegotiationUtterance {
+public abstract class PreferenceUtterance extends NegotiationUtterance {
 
    // for extensions
    protected PreferenceUtterance (Class<? extends PreferenceUtterance> cls, Disco disco, Decomposition decomp, 

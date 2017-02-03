@@ -196,13 +196,17 @@ public class DialogueContext {
 	public Proposal getLastProposal(){
 		for (int i = history.size()-1; i>= 0; i--){
 			NegoUtterance utt = history.get(i);
-			if(utt.getType().equals(UtType.PROPOSE))
+			if(isProposal(utt))
 				return  (Proposal) utt.getValue();
 		}
 		return null;
 
 	}
 
+	public boolean isProposal(NegoUtterance utterance){
+		UtType last = utterance.getType();
+		return (last.equals(UtType.PROPOSE) ||last.equals(UtType.REJECTPROPOSE) || last.equals(UtType.ACCEPTPROPOSE));
+	}
 
 	public List<Proposal> getNegotiationMoves(){
 		List<Proposal> moves = new ArrayList<Proposal>();

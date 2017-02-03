@@ -3,7 +3,6 @@ package fr.limsi.negotiate;
 import java.util.*;
 
 import edu.wpi.disco.lang.Utterance;
-import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.lang.*;
 
@@ -196,38 +195,47 @@ public class Negotiation<O extends Option> {
 		//			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
 
-	public Option negotiationSuccess(double relation, Utterance utt){
-		if(utt instanceof Accept){
-			Proposal p = ((Accept) utt).getProposal();
-			if( p instanceof OptionProposal)
-				return (Option) p.getValue();
-		}
+	
+	// used to compute the value for booktable task
+	public boolean negotiationSuccess(){
+		//double relation = getDominance();
+//		if(utt instanceof Accept){
+//			Proposal p = ((Accept) utt).getProposal();
+//			if( p instanceof OptionProposal)
+//				return (Option) p.getValue();
+//		}
 			
 		if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
-			return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
-		if(relation == NegotiatorAgent.DOMINANT){
-			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-				if(!o.isSelf() && isAcceptable(o))
-					return o.getValue();
-			}
-		}
-		return null;
+			//return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
+			return true;
+//		if(relation == NegotiatorAgent.DOMINANT){
+//			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
+//				if(!o.isSelf() && isAcceptable(o))
+//					return o.getValue();
+//			}
+//		}
+		return false;
 	}
 
+	@SuppressWarnings("unchecked")
+	boolean isAcceptable(Option option){
+		double satisfiability= satisfiability((O)option);
+		return satisfiability >= NegotiationParameters.beta * self();
+	}
 	// test of acceptability
 	
 	public boolean isAcceptable(Proposal p){
-		float satisfiability =0;
+		
 		if(p instanceof CriterionProposal){
 			Criterion c = (Criterion)p.getValue();
-			satisfiability= getValueNegotiation(c.getClass()).getSelf().satisfaction(c);
+			return getValueNegotiation(c.getClass()).isAcceptable(c, self());
 		}
+		
 		if(p instanceof OptionProposal){
-			@SuppressWarnings("unchecked")
-			O o =(O) p.getValue();
-			satisfiability= satisfiability(o);
+			return isAcceptable((Option)p.getValue());
 		}
-		return satisfiability >= self();
+		
+		return false;
 	}
 
 	private List<Option>  nonRejectedOptions() {
@@ -318,10 +326,12 @@ public class Negotiation<O extends Option> {
 		
 		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().getElements());
 
+		double self = this.self();
 		
 		for(int i = discussions.size()-1; i>=0; i--){
 		CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
-			argmax.add(elm.chooseValue(elm.getElements(),this.self()));
+		List<Criterion> acc = elm.getAcceptableValues(elm.remainProposals(), self);
+			argmax.add(elm.chooseValue(acc,self));
 		}
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
@@ -332,39 +342,36 @@ public class Negotiation<O extends Option> {
 			}
 		});
 
-		return argmax.get(0);
-	}
-	
-	public Criterion chooseCriterionProposal(List<Criterion> oStats){
-		//ArrayList<Criterion> argmax = new ArrayList<Criterion>();
+		if(!argmax.isEmpty())
+			return argmax.get(0);
 		
-	
-		oStats.sort(new Comparator<Criterion>() {
-			@Override
-			public int compare(Criterion c1, Criterion c2){
-				CriterionNegotiation<Criterion> cn1 = getValueNegotiation(c1.getClass());
-				CriterionNegotiation<Criterion> cn2 = getValueNegotiation(c2.getClass());
-				return Float.compare(cn2.tolerable(c2, self()), cn1.tolerable(c1, self()));
-			}
-		});
-
-		return oStats.get(0);
+		return null;
 	}
-	
-	
+	public List<Option> getAcceptableOptions(List<Option> options){
+		List<Option> acceptables = new ArrayList<Option>();
+		for(Option o: options){
+			if(isAcceptable(o))
+				acceptables.add(o);
+		}
+		return acceptables;
+	}
 
 	public Proposal chooseProposal() {
-		Option bestOption = chooseOption(nonRejectedOptions());
+		// get the agent acceptable options which have not been rejected during the negotiation
+		List<Option> acceptables = getAcceptableOptions(nonRejectedOptions());
+		Option bestOption = chooseOption(acceptables);
 		
+		// All the criteria have been discussed and closed (a value was accepted)
 		if(getContext().getPossibleDiscussions(this.getCriteria().getElements()).isEmpty())
 			return new OptionProposal(true, bestOption);
 		
 		Criterion c = chooseCriterionProposal();
+		//Any value is accepted yet 
 		if(getContext().getClosedCriteria().isEmpty()){
 			return new CriterionProposal(true,c);
 		}
 		
-	
+		// Otherwise
 		return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
 
@@ -423,13 +430,10 @@ public class Negotiation<O extends Option> {
 	public boolean isPropose(){
 		NegoUtterance uttOther = getContext().getLastMove(true);
 		NegoUtterance uttSelf = getContext().getLastMove(false);
-		return (isLastProposal(uttSelf) || isLastProposal(uttOther));
+		return (getContext().isProposal(uttSelf) || getContext().isProposal(uttOther));
 
 		
 	}
-	public boolean isLastProposal(NegoUtterance utterance){
-		UtType last = utterance.getType();
-		return (last.equals(UtType.PROPOSE) ||last.equals(UtType.REJECTPROPOSE) || last.equals(UtType.ACCEPTPROPOSE));
-	}
+
 
 }

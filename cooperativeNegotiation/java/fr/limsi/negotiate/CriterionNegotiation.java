@@ -36,7 +36,19 @@ public class CriterionNegotiation<C extends Criterion> {
 		});
 		return V.get(0);
 	}
+	
+	public List<C> getAcceptableValues(List<C> V, final double self){
+		List<C> acc = new ArrayList<C> ();
+		for(C value: V){
+	
+			if(isAcceptable(value, self))
+				acc.add(value);	
+		}
+		
+		return acc;
+	}
 
+	
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
 	}
@@ -168,7 +180,7 @@ public class CriterionNegotiation<C extends Criterion> {
 	public List<C> remainProposals (){
 		List<C> values = new ArrayList<C>();
 		for (C elem: getElements()){
-			if(!isAccepted(elem) && !isRejected(elem))
+			if( !isRejected(elem))
 				values.add(elem);
 		}
 		return values;
@@ -181,7 +193,12 @@ public class CriterionNegotiation<C extends Criterion> {
 		}
 		return values;
 	}
+	
+		
 
+	public boolean isAcceptable(C c, double self){
+		 return getSelf().satisfaction(c)>= NegotiationParameters.beta * self;
+	}
 	public Criterion ask(){
 		if(this.getOther().getPreferences().isEmpty())
 			return null;

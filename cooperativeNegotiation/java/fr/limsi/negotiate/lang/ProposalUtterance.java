@@ -12,7 +12,7 @@ import fr.limsi.negotiate.Statement;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
-abstract class ProposalUtterance extends NegotiationUtterance {
+public abstract class ProposalUtterance extends NegotiationUtterance {
 
    // for extensions
    protected ProposalUtterance (Class<? extends ProposalUtterance> cls, Disco disco, Decomposition decomp, 

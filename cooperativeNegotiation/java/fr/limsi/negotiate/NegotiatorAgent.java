@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.7;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.9;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Dominant", model.model1()), 
-				new NegotiatorAgent("Submissive", model.model3()), 
+				new NegotiatorAgent("Dominant", model.model3()), 
+				new NegotiatorAgent("Submissive", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -136,17 +136,27 @@ public class NegotiatorAgent extends Agent {
 			if(proposals.isEmpty())
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner!");
 
-			else
-				return new Propose(disco, false, createProposal(sortProposals(proposals).get(0), true));
+			else{
+				Proposal p = sortProposals(proposals).get(0);
+				return new Propose(disco, false, p);
+
+			}
 
 
 			// DOMINANT case only propose !		
 		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
-			if(utterance instanceof Propose){
+			if(isProposition(utterance)){
+				
+				// if the proposal is an optionProposal  and its acceptable accept
+				// Otherwise 
+				Proposal u = ((ProposalUtterance) utterance).getProposal();
+
 				Proposal p = getNegotiation().chooseProposal();
 
-				Proposal u = ((Propose) utterance).getProposal();
 				if(getNegotiation().isAcceptable(u)){
+					if(u instanceof OptionProposal)
+						return new Accept(disco, false, u);
+					
 					Option bestOption = getNegotiation().chooseOption(getNegotiation().remainOptions());
 					return new AcceptPropose(disco, false, (CriterionProposal)u, createProposal(bestOption, false));
 
@@ -162,7 +172,7 @@ public class NegotiatorAgent extends Agent {
 
 			//SUBMISSIVE cases
 		}else { 
-			System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
+		//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 
 			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 			
@@ -195,8 +205,7 @@ public class NegotiatorAgent extends Agent {
 				List<Criterion> sts = getPossibleStatements();
 				if(sts.isEmpty())
 
-					return finalStatement(disco);
-
+					return new Say(disco, false, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
 				else {
 					// do a statement from the remain values !
 					Criterion  value = sts.get(0);
@@ -210,6 +219,12 @@ public class NegotiatorAgent extends Agent {
 
 	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
+
+	private boolean isProposition(Utterance utterance) {
+		if(utterance instanceof Propose || utterance instanceof RejectPropose || utterance instanceof AcceptPropose)
+			return true;
+		return false;
+	}
 
 	public Utterance finalStatement(Disco disco){
 		return new Say(disco, true, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
@@ -257,8 +272,8 @@ public class NegotiatorAgent extends Agent {
 	}
 
 	private boolean canReject(Utterance utterance){
-		if(utterance instanceof Propose){
-			Proposal p = (Proposal)utterance.getSlotValue("proposal");
+		if(isProposition(utterance)){
+			Proposal p = (Proposal) utterance.getSlotValue("proposal");
 			if(!getNegotiation().isAcceptable(p) && 
 					getNegotiation().computeT()< NegotiationParameters.tau)
 				return true;
@@ -447,8 +462,6 @@ public class NegotiatorAgent extends Agent {
 	
 	public boolean closeNegotiation(Utterance utterance){
 		
-		if(negotiation.negotiationSuccess(relation, utterance)!= null)
-			return true;
 		if(utterance instanceof Say){
 
 			Say utt = (Say) utterance;
@@ -456,13 +469,14 @@ public class NegotiatorAgent extends Agent {
 			return (utt.getText().contains("Okay"));
 
 		}
-		return false;
-	}
+		
+		return (negotiation.negotiationSuccess());
+		}
 	
 	public boolean takeThelead(){
 		int nbPreferences =0;
 		
-		if(getNegotiation().self()< NegotiationParameters.sigma)
+		if(getNegotiation().self()<= NegotiationParameters.sigma)
 			return false;
 		
 		for(NegoUtterance utt : getNegotiation().getContext().getHistory()){
