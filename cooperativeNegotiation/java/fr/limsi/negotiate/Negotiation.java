@@ -114,25 +114,25 @@ public class Negotiation<O extends Option> {
 	}
 
 	public int computeT() {
-//		int t = 0;
-//		List<Proposal> proposal = getContext().getNegotiationMoves();
-//
-//		for(CriterionNegotiation<Criterion> value: valueNegotiation ){
-//			 proposal.removeAll(value.getProposalsWithStatus(Status.ACCEPTED));
-//			 List<CriterionProposal> rejected = value.getProposalsWithStatus(Status.REJECTED);
-//			 proposal.removeAll(rejected);
-//			 t += rejected.size();
-//
-//			 
-//		}
-//		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
-//		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
-//		 proposal.removeAll(optionRejected);
-//		 
-//		 t+= optionRejected.size();
-//		 
-//		 t+= proposal.size();
-//		return t;
+		//		int t = 0;
+		//		List<Proposal> proposal = getContext().getNegotiationMoves();
+		//
+		//		for(CriterionNegotiation<Criterion> value: valueNegotiation ){
+		//			 proposal.removeAll(value.getProposalsWithStatus(Status.ACCEPTED));
+		//			 List<CriterionProposal> rejected = value.getProposalsWithStatus(Status.REJECTED);
+		//			 proposal.removeAll(rejected);
+		//			 t += rejected.size();
+		//
+		//			 
+		//		}
+		//		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
+		//		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
+		//		 proposal.removeAll(optionRejected);
+		//		 
+		//		 t+= optionRejected.size();
+		//		 
+		//		 t+= proposal.size();
+		//		return t;
 		return getContext().getNonAcceptedProposals().size();
 	}
 
@@ -186,7 +186,7 @@ public class Negotiation<O extends Option> {
 			return true;
 
 		//if(getDominance()>=0){
-		List<Option> remainOptions=nonRejectedOptions();
+		List<Option> remainOptions= getAcceptableOptions(nonRejectedOptions());
 		return (remainOptions.isEmpty());
 		//|| 
 		//	getAcceptableOptions().isEmpty());
@@ -195,25 +195,25 @@ public class Negotiation<O extends Option> {
 		//			return (getOptionsWithoutStatus(Proposal.Status.REJECTED).isEmpty());
 	}
 
-	
+
 	// used to compute the value for booktable task
 	public boolean negotiationSuccess(){
 		//double relation = getDominance();
-//		if(utt instanceof Accept){
-//			Proposal p = ((Accept) utt).getProposal();
-//			if( p instanceof OptionProposal)
-//				return (Option) p.getValue();
-//		}
-			
+		//		if(utt instanceof Accept){
+		//			Proposal p = ((Accept) utt).getProposal();
+		//			if( p instanceof OptionProposal)
+		//				return (Option) p.getValue();
+		//		}
+
 		if(!getOptionsProposals(Status.ACCEPTED).isEmpty())
 			//return getOptionsProposals(Status.ACCEPTED).get(0).getValue();
 			return true;
-//		if(relation == NegotiatorAgent.DOMINANT){
-//			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
-//				if(!o.isSelf() && isAcceptable(o))
-//					return o.getValue();
-//			}
-//		}
+		//		if(relation == NegotiatorAgent.DOMINANT){
+		//			for(OptionProposal o: getOptionsProposals(Status.OPEN)){
+		//				if(!o.isSelf() && isAcceptable(o))
+		//					return o.getValue();
+		//			}
+		//		}
 		return false;
 	}
 
@@ -223,18 +223,18 @@ public class Negotiation<O extends Option> {
 		return satisfiability >= NegotiationParameters.beta * self();
 	}
 	// test of acceptability
-	
+
 	public boolean isAcceptable(Proposal p){
-		
+
 		if(p instanceof CriterionProposal){
 			Criterion c = (Criterion)p.getValue();
 			return getValueNegotiation(c.getClass()).isAcceptable(c, self());
 		}
-		
+
 		if(p instanceof OptionProposal){
 			return isAcceptable((Option)p.getValue());
 		}
-		
+
 		return false;
 	}
 
@@ -268,17 +268,17 @@ public class Negotiation<O extends Option> {
 					removable.add(o);
 			}
 			options.removeAll(removable);
-//			List<Class<? extends Criterion>> closed = getContext().getClosedCriteria();
-//			if(!closed.isEmpty()){
-//				for(Option o: options){
-//					int i = 0; boolean correspond = true;
-//					while(i<closed.size() && correspond){
-//						CriterionNegotiation<Criterion> c = getValueNegotiation(closed.get(i));
-//					}
-//				}
-//
-//				
-//			}
+			//			List<Class<? extends Criterion>> closed = getContext().getClosedCriteria();
+			//			if(!closed.isEmpty()){
+			//				for(Option o: options){
+			//					int i = 0; boolean correspond = true;
+			//					while(i<closed.size() && correspond){
+			//						CriterionNegotiation<Criterion> c = getValueNegotiation(closed.get(i));
+			//					}
+			//				}
+			//
+			//				
+			//			}
 		}
 		return options;
 
@@ -323,15 +323,21 @@ public class Negotiation<O extends Option> {
 
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
-		
+
 		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().getElements());
 
 		double self = this.self();
-		
+
 		for(int i = discussions.size()-1; i>=0; i--){
-		CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
-		List<Criterion> acc = elm.getAcceptableValues(elm.remainProposals(), self);
-			argmax.add(elm.chooseValue(acc,self));
+			CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
+			List<Criterion> acc = elm.getAcceptableValues(elm.remainProposals(), self);
+			if(acc.isEmpty())	
+				return null;
+
+			Criterion value = elm.chooseValue(acc,self);
+			argmax.add(value);
+
+
 		}
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
@@ -342,10 +348,8 @@ public class Negotiation<O extends Option> {
 			}
 		});
 
-		if(!argmax.isEmpty())
-			return argmax.get(0);
-		
-		return null;
+		return argmax.get(0);
+
 	}
 	public List<Option> getAcceptableOptions(List<Option> options){
 		List<Option> acceptables = new ArrayList<Option>();
@@ -360,20 +364,23 @@ public class Negotiation<O extends Option> {
 		// get the agent acceptable options which have not been rejected during the negotiation
 		List<Option> acceptables = getAcceptableOptions(nonRejectedOptions());
 		Option bestOption = chooseOption(acceptables);
-		
+
 		// All the criteria have been discussed and closed (a value was accepted)
 		if(getContext().getPossibleDiscussions(this.getCriteria().getElements()).isEmpty())
 			return new OptionProposal(true, bestOption);
-		
+
 		Criterion c = chooseCriterionProposal();
+		if(c!=null){
 		//Any value is accepted yet 
-		if(getContext().getClosedCriteria().isEmpty()){
-			return new CriterionProposal(true,c);
-		}
-		
-		// Otherwise
-		return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
+			if(getContext().getClosedCriteria().isEmpty() && c != null){
+				return new CriterionProposal(true,c);
+			}
+			
+			// Otherwise
+			return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
+		}
+		return new OptionProposal(true, bestOption);
 
 	}
 
@@ -404,7 +411,7 @@ public class Negotiation<O extends Option> {
 	public Criterion justifyReject(Proposal p){
 		if(p instanceof CriterionProposal)
 			return (Criterion)p.getValue();
-		
+
 		else {
 			double min = 1;
 			Criterion least = null;
@@ -416,13 +423,13 @@ public class Negotiation<O extends Option> {
 					least = option.getValue(cr);
 				}
 			}
-			
+
 			return least;
 		}
 	}
-	
+
 	// used to compute the Accept utterance format
-	
+
 	public boolean isLastProposal(Proposal accepted){
 		return getContext().getLastProposal().equals(accepted);
 	}
@@ -432,7 +439,7 @@ public class Negotiation<O extends Option> {
 		NegoUtterance uttSelf = getContext().getLastMove(false);
 		return (getContext().isProposal(uttSelf) || getContext().isProposal(uttOther));
 
-		
+
 	}
 
 

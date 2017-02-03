@@ -28,6 +28,8 @@ public class CriterionNegotiation<C extends Criterion> {
 	}
 
 	public Criterion chooseValue(List<C> V, final double self){
+		if(V.isEmpty())
+			return null;
 		V.sort(new Comparator<C>() {
 			@Override
 			public int compare(C c1, C c2){

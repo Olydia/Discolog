@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.9;
+	public static double  DOMINANT = 0.4, SUBMISSIVE = 0.4;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Dominant", model.model3()), 
-				new NegotiatorAgent("Submissive", model.model1()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -145,6 +145,7 @@ public class NegotiatorAgent extends Agent {
 
 			// DOMINANT case only propose !		
 		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
+			System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 			if(isProposition(utterance)){
 				
 				// if the proposal is an optionProposal  and its acceptable accept
@@ -203,14 +204,19 @@ public class NegotiatorAgent extends Agent {
 				// STATE
 			}else {
 				List<Criterion> sts = getPossibleStatements();
-				if(sts.isEmpty())
-
-					return new Say(disco, false, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
-				else {
+				if(!sts.isEmpty()){
 					// do a statement from the remain values !
+
 					Criterion  value = sts.get(0);
 					Satisfiable status = getNegotiation().getValueNegotiation(value.getClass()).getSelf().isSatisfiable(value, getNegotiation().self());
 					return new StatePreference(disco, false, value, status);
+				}
+
+					//return new Say(disco, false, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
+				else {
+					Proposal p = getNegotiation().chooseProposal();
+					return new Propose (disco, false, p);
+					
 				}
 			}
 
