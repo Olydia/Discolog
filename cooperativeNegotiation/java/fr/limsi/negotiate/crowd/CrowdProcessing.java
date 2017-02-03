@@ -9,8 +9,8 @@ public class CrowdProcessing {
 	public static void main(String args[]) {
 		String domModel = "model3";
 		String subModel = "model1";
-		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/dom09_sub03/alpha=2";
-		String fileName = path+"/Dominant-"+domModel+"__Submissive-"+subModel+".test";
+		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/dom09_sub04";
+		String fileName = path+"/Dominant-"+domModel+"__Submissive-"+subModel;
 
 		//read file into stream, try-with-resources
 		try (Stream<String> input = Files.lines(Paths.get(fileName));
@@ -29,8 +29,6 @@ public class CrowdProcessing {
 			String elem = line.replaceAll("  > next", "");
 			elem = elem.replaceAll("Dominant says", "A:");
 			elem = elem.replaceAll("Submissive says", "&nbsp&nbsp&nbsp&nbspB:");
-			elem = elem.replaceAll("\\[", "<small> &nbsp&nbsp[");
-			elem = elem.replaceAll("]", "] </small> ");
 			elem = elem + "<br>";
 			return elem;
 	}

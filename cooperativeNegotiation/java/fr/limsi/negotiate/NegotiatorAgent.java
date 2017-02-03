@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.4, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.3;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model3()), 
+				new NegotiatorAgent("Dominant", model.model3()), 
+				new NegotiatorAgent("Submissive", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -145,7 +145,7 @@ public class NegotiatorAgent extends Agent {
 
 			// DOMINANT case only propose !		
 		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
-			System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
+			//System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 			if(isProposition(utterance)){
 				
 				// if the proposal is an optionProposal  and its acceptable accept
