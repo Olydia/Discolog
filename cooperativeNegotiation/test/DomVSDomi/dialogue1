@@ -1,6 +1,9 @@
 # dom(Agent1) = 0.9
 # dom(Agent2) = 0.9
 
+#model(Agent1)= model1
+#model(Agent1)= model3
+
 Agent1 says "Let's go to a quiet restaurant."
 
 Agent2 says "I don't want to go to a quiet. 
