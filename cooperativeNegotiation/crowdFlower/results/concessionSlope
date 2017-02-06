@@ -1,0 +1,93 @@
+======================== Before =================================
+Dominant says "Let's go to a quiet restaurant."
+
+t =1  Self(t) =0.3
+Submissive says "I don't like quiet restaurants, let's choose something
+else."
+
+Dominant says "Let's go to a cheap restaurant."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like expensive restaurants?"
+
+Dominant says "I don't like expensive restaurants."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like affordable restaurants?"
+
+Dominant says "Let's go to a cheap restaurant."
+
+t =3  Self(t) =0.0
+Submissive says "Okay, Let's go to a cheap restaurant."
+
+Dominant says "Let's go to a Chinese restaurant."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like Italian restaurants?"
+
+Dominant says "I don't like Italian restaurants."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like Mexican restaurants?"
+
+Dominant says "Let's go to a Chinese restaurant."
+
+t =3  Self(t) =0.0
+Submissive says "Okay, Let's go to a Chinese restaurant."
+
+Dominant says "Let's go to the Jiliya. It's a quiet, cheap Chinese
+restaurant."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like lively restaurants?"
+
+Dominant says "I don't like lively restaurants."
+
+t =2  Self(t) =0.3
+Submissive says "Do you like romantic restaurants?"
+
+Dominant says "Let's go to the Jiliya. It's a quiet, cheap Chinese
+restaurant."
+
+t =3  Self(t) =0.0
+Submissive says "Okay, Let's go to the Jiliya restaurant."
+
+
+=========================== After =======================================
+
+Dominant says "Let's go to a quiet restaurant."
+
+1  Self(t) =0.3
+Submissive says "I don't like quiet restaurants, let's choose something
+else."
+
+Dominant says "Let's go to a cheap restaurant."
+
+2  Self(t) =0.3
+Submissive says "Do you like expensive restaurants?"
+
+Dominant says "I don't like expensive restaurants."
+
+2  Self(t) =0.3
+Submissive says "Do you like affordable restaurants?"
+
+Dominant says "I don't like affordable restaurants."
+
+2  Self(t) =0.3
+Submissive says "What kind of cuisine do you like?"
+
+Dominant says "Let's go to a Chinese restaurant."
+
+3  Self(t) =0.0
+Submissive says "Okay, Let's go to a Chinese restaurant."
+
+Dominant says "Let's go to a cheap restaurant."
+
+3  Self(t) =0.0
+Submissive says "Okay, Let's go to a cheap restaurant."
+
+Dominant says "Let's go to the Jiliya. It's a quiet, cheap Chinese
+restaurant."
+
+3  Self(t) =0.0
+Submissive says "Okay, Let's go to the Jiliya restaurant." 
