@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.6;
+	public static double  DOMINANT = 1, SUBMISSIVE = 0.1;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model3()), 
+				new NegotiatorAgent("Agent1", model.model5()), 
+				new NegotiatorAgent("Agent2", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -93,9 +93,13 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-		if ( utterance != null )System.out.println(utterance.format() + "\n");
+		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
+			 if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance))
 
+				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
+			 else{
+			 
 			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
 			if(relation > NegotiationParameters.sigma){
@@ -103,12 +107,15 @@ public class NegotiatorAgent extends Agent {
 				return new Propose(disco, false, getNegotiation().chooseProposal());
 
 			} else
-				return new AskPreference(disco, false, opent, null);				
+				return new AskPreference(disco, false, opent, null);	
+			 }
 			
 		}
 		else if(closeNegotiation(utterance)){
-			System.exit(0);
-			return null;
+			//System.exit(0);
+			disco.getInteraction().exit();
+		
+			return new Say(disco, false, "Okay");
 			
 		}else if(endDialogue(utterance)) {
 			return new Say(disco, false, "Okay");
@@ -458,8 +465,9 @@ public class NegotiatorAgent extends Agent {
 		if(utterance instanceof Say){
 
 			Say utt = (Say) utterance;
+			System.out.println(utt.getText());
 
-			if(utt.getText().equals("Sorry, but I no longer want to do for dinner!"))
+			if(utt.getText().contains("Sorry, but I no longer want to do for dinner"))
 
 				return true;
 		}

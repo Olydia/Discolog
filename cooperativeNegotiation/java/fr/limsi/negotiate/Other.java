@@ -81,5 +81,8 @@ public class Other <C>{
 //		return (this.other(value) >= NegotiationParameters.beta);
 //	}
 
+	public void clearNegotiation(){
+		this.preferences.clear();
+	}
 
 }

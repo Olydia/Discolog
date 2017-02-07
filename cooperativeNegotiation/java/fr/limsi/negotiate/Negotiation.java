@@ -441,6 +441,14 @@ public class Negotiation<O extends Option> {
 
 
 	}
+	
+	public void clearNegotiation(){
+		this.proposals.clear();
+		this.context.clearNegotiation();
+		for(CriterionNegotiation<Criterion> cn : getValuesNegotiation())
+			cn.clearNegotiation();
+	}
+
 
 
 }

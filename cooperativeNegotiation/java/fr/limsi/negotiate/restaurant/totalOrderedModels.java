@@ -1,5 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
+import java.util.ArrayList;
+
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Self_C;
@@ -141,9 +143,50 @@ public class totalOrderedModels {
 		return model2;
 
 	}
+	public   Negotiation<Restaurant>  model4(){
+
+
+		Self_C<Restaurant>  d4_criteria = new Self_C<Restaurant> (Restaurant.class);
+		d4_criteria.addPreference(Atmosphere.class, Cost.class);
+		d4_criteria.addPreference(Cost.class, Cuisine.class);
+
+		Self_Ci<Cuisine> d4_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+		d4_cuisine.addPreference(Cuisine.KOREAN, Cuisine.FRENCH);
+		d4_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
+		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.TURKISH);
+		d4_cuisine.addPreference(Cuisine.FRENCH, Cuisine.MEXICAN);
+		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.MEXICAN);
+		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.CHINESE);
+		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.JAPANESE);
+		d4_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
+		d4_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.CHINESE);
+
+		
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d4_cuisine);
+
+		Self_Ci<Atmosphere> d4_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
+		d4_atmosphere.addPreference(Atmosphere.LIVELY, Atmosphere.ROMANTIC);
+		d4_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.FAMILY);
+		d4_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.QUIET);
+		d4_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.QUIET);
+
+		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d4_atmosphere);
+
+
+		Self_Ci<Cost> d4_cost = new Self_Ci<Cost>(Cost.class);
+		d4_cost.addPreference(Cost.EXPENSIVE, Cost.AFFORDABLE);
+		d4_cost.addPreference(Cost.AFFORDABLE, Cost.CHEAP);
+		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d4_cost);
+
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d4_criteria, Restaurant.class);
+		return model1;
+
+	}
 	
 	// similar to model 1
-	public   Negotiation<Restaurant>  model4(){
+	public   Negotiation<Restaurant>  model5(){
 
 
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
@@ -185,5 +228,23 @@ public class totalOrderedModels {
 		return model1;
 
 	}
+	
+	public ArrayList<Negotiation<Restaurant>> getModels(){
+		ArrayList<Negotiation<Restaurant>> models = new ArrayList<Negotiation<Restaurant>>();
+		models.add(this.model1());
+		models.add(this.model2());
+		models.add(this.model3());
+		models.add(this.model4());
+		models.add(this.model5());
+		
+		return models;
+	}
+	
+	public static void main (String[] args)  {
+		
+	}
+	
+
+		
 
 }

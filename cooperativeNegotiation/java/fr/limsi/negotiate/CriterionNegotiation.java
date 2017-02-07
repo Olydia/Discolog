@@ -218,6 +218,11 @@ public class CriterionNegotiation<C extends Criterion> {
 
 	}
 
+	public void clearNegotiation(){
+		this.proposals.clear();
+		this.selfStatements.clear();
+		this.getOther().clearNegotiation();
+	}
 }	
 
 

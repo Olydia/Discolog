@@ -69,7 +69,7 @@ public class GenerateModel {
 
 	}
 
-	public   Negotiation<Restaurant>  inverseModel1(){
+	public   Negotiation<Restaurant>  model3(){
 
 
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);

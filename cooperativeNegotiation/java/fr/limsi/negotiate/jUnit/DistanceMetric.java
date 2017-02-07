@@ -18,7 +18,7 @@ public class DistanceMetric {
 	public void test() {
 		GenerateModel m = new GenerateModel();
 		ArrayList<Preference<Criterion>> m1 = m.model1().getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences();
-		ArrayList<Preference<Criterion>> m2 = m.inverseModel1().getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences();
+		ArrayList<Preference<Criterion>> m2 = m.model3().getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences();
 
 		Distance d = new Distance(m1, m2, m.model1().getValueNegotiation(Atmosphere.class).getSelf().getElements());
 		double distance = d.distance();

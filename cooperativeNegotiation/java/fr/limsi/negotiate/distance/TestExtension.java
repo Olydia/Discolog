@@ -32,10 +32,10 @@ public class TestExtension {
 		m2.add(new Preference<Criterion>(Cost.CHEAP, Cost.AFFORDABLE));
 		m2.add(new Preference<Criterion>(Cost.AFFORDABLE, Cost.EXPENSIVE));
 		List<Criterion> values = Arrays.asList(Cost.values());
-
-
-		Distance d = new Distance(m1, m2, values);
-		System.out.println(d.distance());
+		totalOrderedModels m = new totalOrderedModels();
+		NegotiationDistance e = new NegotiationDistance(m.model1(), m.model4());
+		//Distance d = new Distance(m1, m2, values);
+		System.out.println(e.distance());
 
 	}
 }

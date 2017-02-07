@@ -245,5 +245,13 @@ public class DialogueContext {
 		}
 		return moves;
 	}
+	
+	public void clearNegotiation(){
+		this.history.clear();
+		this.discussedCriteria.clear();
+		this.closedCriteria.clear();
+	}
+
+		
 
 }
