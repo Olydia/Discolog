@@ -232,10 +232,10 @@ public class totalOrderedModels {
 	public ArrayList<Negotiation<Restaurant>> getModels(){
 		ArrayList<Negotiation<Restaurant>> models = new ArrayList<Negotiation<Restaurant>>();
 		models.add(this.model1());
-		models.add(this.model2());
+	//	models.add(this.model2());
 		models.add(this.model3());
 		models.add(this.model4());
-		models.add(this.model5());
+	//	models.add(this.model5());
 		
 		return models;
 	}

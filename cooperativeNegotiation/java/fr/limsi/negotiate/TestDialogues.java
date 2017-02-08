@@ -14,23 +14,28 @@ public class TestDialogues {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		double relationAgent1 =1;
-		double relationAgent2 = 0.1;
+		//		double relationAgent1 =1;
+		//		double relationAgent2 = 0.1;
 		totalOrderedModels models = new totalOrderedModels();
 		ArrayList<Negotiation<Restaurant>> negotiation = models.getModels();
 
-		for(int i= 0; i<5; i++){
-			relationAgent2 = 0.1;
-			for(int j= 0; j<5; j++){
-				for(Negotiation<Restaurant> modelA1:negotiation ){
-					for(Negotiation<Restaurant> modelA2: negotiation){
-						int indexA =  negotiation.indexOf(modelA1);
-						int indexB =  negotiation.indexOf(modelA2);
 
+		for(Negotiation<Restaurant> modelA1:negotiation ){
+			for(Negotiation<Restaurant> modelA2: negotiation){
+				// Initiate the model of preferences 
+				int indexA =  negotiation.indexOf(modelA1);
+				int indexB =  negotiation.indexOf(modelA2);
+				//initiate the relation of dominance
+				double relationAgent1 =1;
+				double relationAgent2 = 0.1;
+
+				for(int i= 0; i<5; i++){
+					relationAgent2 = 0.1;
+					for(int j= 0; j<5; j++){
 
 						if(indexA != indexB){
-							System.out.println("-------------------------------------Dominant-model" + indexA+ 
-									"___Submissive-model"+  indexB+ "   " +relationAgent1 + "__" + relationAgent2 +" ------------------------------------");
+							System.out.println("-------------------------------------Dominant-model" + (indexA+1)+ 
+									"___Submissive-model"+  (indexB+1)+ "   " +relationAgent1 + "__" + relationAgent2 +" ------------------------------------");
 
 							Dual dual = new Dual(
 									new NegotiatorAgent("Agent1", modelA1), 
@@ -61,19 +66,13 @@ public class TestDialogues {
 
 						modelA1.clearNegotiation();
 						modelA2.clearNegotiation();
-
+						//increase the submissive relation
+						relationAgent2 = relationAgent2 +0.1;
 					}
+					//decrease the dominant relation
+					relationAgent1 = relationAgent1 -0.1;
 				}
-				//increase the submissive relation
-				relationAgent2 = relationAgent2 +0.1;
-
 			}
-			//decrease the dominant relation
-			relationAgent1 = relationAgent1 -0.1;
-
 		}
-
-
 	}
-
 }

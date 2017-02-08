@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 1, SUBMISSIVE = 0.1;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.5;
 
 	private double relation = DOMINANT;
 
@@ -52,8 +52,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model5()), 
-				new NegotiatorAgent("Agent2", model.model1()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -93,7 +93,7 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-		//if ( utterance != null )System.out.println(utterance.format() + "\n");
+		if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			 if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance))
 
@@ -110,8 +110,7 @@ public class NegotiatorAgent extends Agent {
 				return new AskPreference(disco, false, opent, null);	
 			 }
 			
-		}
-		else if(closeNegotiation(utterance)){
+		}else if(closeNegotiation(utterance)){
 			//System.exit(0);
 			disco.getInteraction().exit();
 		
