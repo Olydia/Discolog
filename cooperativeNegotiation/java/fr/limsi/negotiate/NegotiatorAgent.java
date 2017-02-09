@@ -93,7 +93,7 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-		if ( utterance != null )System.out.println(utterance.format() + "\n");
+		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			 if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance))
 
@@ -489,7 +489,7 @@ public class NegotiatorAgent extends Agent {
 	public boolean takeThelead(){
 		int nbPreferences =0;
 		
-		if(getNegotiation().self()<= NegotiationParameters.sigma)
+		if(getNegotiation().getDominance()<= NegotiationParameters.sigma)
 			return false;
 		
 		for(NegoUtterance utt : getNegotiation().getContext().getHistory()){
