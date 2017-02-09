@@ -1,4 +1,20 @@
 -------------------------------------Dominant-model1___Submissive-model2   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -11,6 +27,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -25,13 +43,31 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "I don't like quiet restaurants, let's choose something else."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Do you like lively restaurants?"
+Agent2 says "Do you like lively restaurants?"Agent1 says "Okay."
+
+
 Agent1 says "I don't like lively restaurants."
 Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
@@ -51,6 +87,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -63,6 +115,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -77,8 +131,34 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
+Agent1 says "Okay."
+
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "I don't like quiet restaurants, let's choose something else."
@@ -111,11 +191,45 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "I don't like quiet restaurants, let's choose something else."
+Agent1 says "Okay."
+
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Do you like lively restaurants?"
 Agent1 says "I don't like lively restaurants."
@@ -153,6 +267,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -165,6 +295,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -179,6 +311,24 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
+
+Agent1 says "Okay."
 
 Agent1 Interaction
 
@@ -205,12 +355,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "I don't like quiet restaurants, let's choose something else."
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Do you like lively restaurants?"
 Agent1 says "I don't like lively restaurants."
 Agent2 says "Do you like romantic restaurants?"
@@ -231,6 +399,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -247,6 +439,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -265,6 +459,60 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "What kind of cost do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
+
+Agent1 Interaction
+
+Agent1 says "Let's go to a quiet restaurant."
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent2 says "Do you like lively restaurants?"
+Agent1 says "I don't like lively restaurants."
+Agent2 says "Do you like romantic restaurants?"
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent2 says "Do you like romantic restaurants?"
+Agent1 says "I don't like romantic restaurants."
+Agent2 says "Do you like family restaurants?"
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent2 says "Do you like family restaurants?"
+Agent1 says "I don't like family restaurants."
+Agent2 says "What kind of cost do you like?"
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -286,27 +534,23 @@ Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
-
-Agent1 Interaction
-
-Agent1 says "Let's go to a quiet restaurant."
-Agent2 says "I don't like quiet restaurants, let's choose something else."
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Do you like lively restaurants?"
-Agent1 says "I don't like lively restaurants."
-Agent2 says "Do you like romantic restaurants?"
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Do you like romantic restaurants?"
-Agent1 says "I don't like romantic restaurants."
-Agent2 says "Do you like family restaurants?"
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Do you like family restaurants?"
-Agent1 says "I don't like family restaurants."
-Agent2 says "What kind of cost do you like?"
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Okay, Let's go to the Jiliya restaurant."
-Agent1 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -319,6 +563,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -333,12 +579,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "I don't like quiet restaurants, let's choose something else."
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Do you like lively restaurants?"
 Agent1 says "I don't like lively restaurants."
 Agent2 says "Do you like romantic restaurants?"
@@ -359,6 +623,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -371,6 +651,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -385,6 +667,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -401,6 +707,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -419,6 +727,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I like family restaurants."
+
+Agent2 says "Let's go to a family restaurant."
+
+Agent1 says "Okay. Let's go to the Sodam. It's a family, cheap Korean restaurant."
+
+Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -439,6 +779,8 @@ Agent2 says "Let's go to a family restaurant."
 Agent1 says "Okay. Let's go to the Sodam. It's a family, cheap Korean restaurant."
 Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -461,6 +803,22 @@ Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -473,6 +831,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -487,6 +847,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -499,6 +875,8 @@ Agent2 says "Do you like romantic restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -513,10 +891,28 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Okay."
+
 Agent2 says "I don't like quiet restaurants, let's choose something else."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Do you like lively restaurants?"
@@ -539,6 +935,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -559,6 +987,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -581,6 +1011,50 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Do you like Italian restaurants?"
+
+Agent1 says "I don't like Italian restaurants."
+
+Agent2 says "Do you like Mexican restaurants?"
+
+Agent1 says "I don't like Mexican restaurants."
+
+Agent2 says "Do you like French restaurants?"
+
+Agent1 says "I don't like French restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "I like Turkish restaurants."
+
+Agent2 says "Let's go to a Turkish restaurant."
+
+Agent1 says "Okay. Let's go to the Kibelle. It's a family, affordable Turkish restaurant."
+
+Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -607,6 +1081,8 @@ Agent2 says "Let's go to a Turkish restaurant."
 Agent1 says "Okay. Let's go to the Kibelle. It's a family, affordable Turkish restaurant."
 Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -635,6 +1111,30 @@ Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -651,6 +1151,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -669,6 +1171,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Do you like Italian restaurants?"
+
+Agent1 says "I don't like Italian restaurants."
+
+Agent2 says "Do you like Mexican restaurants?"
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -685,6 +1211,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -703,10 +1231,36 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Okay."
+
 Agent2 says "I don't like quiet restaurants, let's choose something else."
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Do you like expensive restaurants?"
@@ -737,6 +1291,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Do you like Italian restaurants?"
+
+Agent1 says "I don't like Italian restaurants."
+
+Agent2 says "Do you like Mexican restaurants?"
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Do you like Mexican restaurants?"
+
+Agent1 says "I don't like Mexican restaurants."
+
+Agent2 says "Do you like French restaurants?"
+
+Agent1 says "I don't like French restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "I like Turkish restaurants."
+
+Agent2 says "Let's go to a Turkish restaurant."
+
+Agent1 says "Okay. Let's go to the Kibelle. It's a family, affordable Turkish restaurant."
+
+Agent2 says "Okay, Let's go to the Kibelle restaurant."
+
 
 Agent1 Interaction
 
@@ -757,6 +1343,8 @@ Agent2 says "Let's go to a Turkish restaurant."
 Agent1 says "Okay. Let's go to the Kibelle. It's a family, affordable Turkish restaurant."
 Agent2 says "Okay, Let's go to the Kibelle restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -779,6 +1367,30 @@ Agent2 says "Okay, Let's go to the Kibelle restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model2   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "I don't like quiet restaurants, let's choose something else."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Kigna restaurant."
+
 
 Agent1 Interaction
 
@@ -795,6 +1407,8 @@ Agent2 says "Let's go to an affordable restaurant."
 Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
 Agent2 says "Okay, Let's go to the Kigna restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -813,10 +1427,28 @@ Agent2 says "Okay, Let's go to the Kigna restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
-Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Let's go to a quiet restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Okay, Let's go to a cheap restaurant."
@@ -839,10 +1471,28 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
-Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Let's go to a quiet restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to a Chinese restaurant."
 Agent2 says "Okay, Let's go to a Chinese restaurant."
@@ -865,6 +1515,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -877,6 +1543,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -891,6 +1559,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -903,6 +1587,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -917,10 +1603,28 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
-Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Let's go to a quiet restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Okay, Let's go to a cheap restaurant."
@@ -943,6 +1647,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -951,6 +1663,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -961,6 +1675,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -969,6 +1691,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -979,6 +1703,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -987,6 +1719,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -997,6 +1731,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1005,6 +1747,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1015,8 +1759,18 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "Okay, Let's go to a quiet restaurant."
@@ -1033,6 +1787,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1041,6 +1803,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1051,6 +1815,24 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
+
+Agent1 Interaction
+
+Agent1 says "Let's go to a quiet restaurant."
+Agent1 says "Okay."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+Agent1 says "Okay."
 
 Agent2 Interaction
 
@@ -1060,15 +1842,15 @@ Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
-
-Agent1 Interaction
-
-Agent1 says "Let's go to a quiet restaurant."
-Agent2 says "Okay, Let's go to a quiet restaurant."
-Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
-Agent2 says "Okay, Let's go to the Jiliya restaurant."
-Agent1 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1077,6 +1859,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1087,8 +1871,18 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "Okay, Let's go to a quiet restaurant."
@@ -1105,8 +1899,18 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a quiet restaurant."
 Agent2 says "Okay, Let's go to a quiet restaurant."
@@ -1123,6 +1927,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1131,6 +1943,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1141,6 +1955,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1149,6 +1971,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1159,6 +1983,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1167,6 +1999,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1177,6 +2011,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1185,6 +2027,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1195,6 +2039,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1203,6 +2055,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1213,6 +2067,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1221,6 +2083,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1231,6 +2095,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1239,6 +2111,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1249,6 +2123,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1257,6 +2139,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1267,6 +2151,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1275,6 +2167,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1285,6 +2179,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model1___Submissive-model3   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -1293,6 +2195,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1303,6 +2207,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1315,6 +2235,8 @@ Agent2 says "Do you like Japanese restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1329,6 +2251,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1341,6 +2279,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1355,6 +2295,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1367,6 +2323,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1381,8 +2339,34 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "I don't like Japanese restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an Italian restaurant."
 Agent2 says "I don't like Italian restaurants, let's choose something else."
@@ -1415,6 +2399,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "I like Italian restaurants."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1435,6 +2451,8 @@ Agent2 says "Do you like Chinese restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1457,6 +2475,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1469,6 +2503,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1483,8 +2519,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an Italian restaurant."
 Agent2 says "I don't like Italian restaurants, let's choose something else."
@@ -1509,8 +2563,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "I don't like expensive restaurants, let's choose something else."
@@ -1535,8 +2607,34 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -1569,8 +2667,46 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "I don't like Japanese restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "In the end, I prefer to go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an Italian restaurant."
 Agent2 says "I don't like Italian restaurants, let's choose something else."
@@ -1615,8 +2751,26 @@ Agent2 says "In the end, I prefer to go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "I don't like expensive restaurants, let's choose something else."
@@ -1641,8 +2795,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -1667,6 +2839,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1683,6 +2879,8 @@ Agent2 says "Okay, Let's go to a lively restaurant."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1701,6 +2899,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1717,6 +2939,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1735,6 +2959,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I like romantic restaurants."
+
+Agent2 says "Let's go to a romantic restaurant."
+
+Agent1 says "Okay. Let's go to the Bocamexa. It's a romantic, expensive Mexican restaurant."
+
+Agent2 says "In the end, I prefer to go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1755,6 +3011,8 @@ Agent2 says "Let's go to a romantic restaurant."
 Agent1 says "Okay. Let's go to the Bocamexa. It's a romantic, expensive Mexican restaurant."
 Agent2 says "In the end, I prefer to go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1777,6 +3035,26 @@ Agent2 says "In the end, I prefer to go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -1791,6 +3069,8 @@ Agent2 says "Okay, Let's go to an expensive restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1807,6 +3087,22 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1819,6 +3115,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1833,6 +3131,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1845,6 +3159,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1859,6 +3175,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "In the end, I prefer to go to an expensive restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -1879,6 +3227,8 @@ Agent2 says "In the end, I prefer to go to an expensive restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -1901,6 +3251,50 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "I like Italian restaurants."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "I don't like Japanese restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "I like Turkish restaurants."
+
+Agent2 says "Let's go to a Turkish restaurant."
+
+Agent1 says "Okay. Let's go to the Ottoman. It's a romantic, affordable Turkish restaurant."
+
+Agent2 says "In the end, I prefer to go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1915,7 +3309,9 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "I don't like affordable restaurants."
 Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
-Agent2 says "What kind of cuisine do you like?"
+Agent2 says "What kind of cuisine do you like?"Agent1 says "Okay."
+
+
 Agent1 says "I like Italian restaurants."
 Agent2 says "Do you like Chinese restaurants?"
 Agent1 says "I don't like Chinese restaurants."
@@ -1955,6 +3351,30 @@ Agent2 says "In the end, I prefer to go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -1970,6 +3390,8 @@ Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "Okay, Let's go to an expensive restaurant."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
+Agent1 says "Okay."
+
 Agent1 says "Okay."
 
 Agent2 Interaction
@@ -1989,6 +3411,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -2003,6 +3445,8 @@ Agent2 says "Okay, Let's go to an expensive restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2019,6 +3463,22 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2031,6 +3491,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2045,8 +3507,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "I don't like Japanese restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "I like Turkish restaurants."
+
+Agent2 says "Let's go to a Turkish restaurant."
+
+Agent1 says "Okay. Let's go to the Ottoman. It's a romantic, affordable Turkish restaurant."
+
+Agent2 says "Okay, Let's go to the Ottoman restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -2083,8 +3575,34 @@ Agent2 says "Okay, Let's go to the Ottoman restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model1   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Chido. It's a lively, affordable Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Chido restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an Italian restaurant."
 Agent2 says "I don't like Italian restaurants, let's choose something else."
@@ -2117,6 +3635,14 @@ Agent2 says "Okay, Let's go to the Chido restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2125,6 +3651,8 @@ Agent2 says "I don't like expensive restaurants, let's choose something else."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2135,6 +3663,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2147,6 +3691,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2161,6 +3707,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2175,6 +3741,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2191,6 +3759,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2207,6 +3799,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2225,8 +3819,34 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -2259,6 +3879,14 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2267,6 +3895,8 @@ Agent2 says "Okay, Let's go to an Italian restaurant."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2277,8 +3907,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "I don't like expensive restaurants, let's choose something else."
@@ -2303,8 +3951,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -2329,6 +3995,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Chinese restaurants?"
+
+Agent1 says "I don't like Chinese restaurants."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like Japanese restaurants?"
+
+Agent1 says "I don't like Japanese restaurants."
+
+Agent2 says "Do you like Turkish restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2349,6 +4047,8 @@ Agent2 says "Okay, Let's go to a lively restaurant."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2371,6 +4071,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2387,6 +4111,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2405,6 +4131,14 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2413,6 +4147,8 @@ Agent2 says "I don't like lively restaurants, let's choose something else."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2423,6 +4159,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -2439,6 +4199,8 @@ Agent2 says "Okay, Let's go to a lively restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2457,8 +4219,26 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "I don't like expensive restaurants, let's choose something else."
@@ -2483,10 +4263,36 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
-Agent1 says "Let's go to a lively restaurant."
+Agent1 says "Let's go to a lively restaurant."Agent1 says "Okay."
+
+
 Agent2 says "I don't like lively restaurants, let's choose something else."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Do you like quiet restaurants?"
@@ -2517,6 +4323,46 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "In the end, I prefer to go to an expensive restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -2541,6 +4387,8 @@ Agent2 says "In the end, I prefer to go to an expensive restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2567,6 +4415,14 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2575,6 +4431,8 @@ Agent2 says "I don't like expensive restaurants, let's choose something else."
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2585,6 +4443,22 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2597,6 +4471,8 @@ Agent2 says "Do you like family restaurants?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2611,6 +4487,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "Okay, Let's go to a lively restaurant."
+
+Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
+
 
 Agent1 Interaction
 
@@ -2627,6 +4527,8 @@ Agent2 says "Okay, Let's go to a lively restaurant."
 Agent1 says "Let's go to the Anahuacalli. It's a lively, expensive Mexican restaurant."
 Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2645,6 +4547,30 @@ Agent2 says "Okay, Let's go to the Anahuacalli restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
@@ -2661,6 +4587,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2679,8 +4607,38 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like quiet restaurants?"
+
+Agent1 says "I don't like quiet restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I don't like family restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "In the end, I prefer to go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -2717,12 +4675,22 @@ Agent2 says "In the end, I prefer to go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
 
 Agent1 says "Let's go to an Italian restaurant."
 Agent2 says "Okay, Let's go to an Italian restaurant."
-Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."Agent1 says "Okay."
+
+
 Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 
@@ -2735,8 +4703,26 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to an expensive restaurant."
 Agent2 says "I don't like expensive restaurants, let's choose something else."
@@ -2761,8 +4747,34 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a lively restaurant."
+
+Agent2 says "I don't like lively restaurants, let's choose something else."
+
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "Okay, Let's go to an Italian restaurant."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Okay, Let's go to an expensive restaurant."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Okay, Let's go to the Salento restaurant."
+
 
 Agent1 Interaction
+
+Agent1 says "Okay."
 
 Agent1 says "Let's go to a lively restaurant."
 Agent2 says "I don't like lively restaurants, let's choose something else."
@@ -2795,6 +4807,30 @@ Agent2 says "Okay, Let's go to the Salento restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to an Italian restaurant."
+
+Agent2 says "I don't like Italian restaurants, let's choose something else."
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Chido. It's a lively, affordable Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Chido restaurant."
+
 
 Agent1 Interaction
 
@@ -2810,6 +4846,8 @@ Agent1 says "I like affordable restaurants."
 Agent2 says "Let's go to an affordable restaurant."
 Agent1 says "Okay. Let's go to the Chido. It's a lively, affordable Mexican restaurant."
 Agent2 says "Okay, Let's go to the Chido restaurant."
+Agent1 says "Okay."
+
 Agent1 says "Okay."
 
 Agent2 Interaction
@@ -2829,6 +4867,30 @@ Agent2 says "Okay, Let's go to the Chido restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model2___Submissive-model3   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to an expensive restaurant."
+
+Agent2 says "I don't like expensive restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like cheap restaurants?"
+
+Agent1 says "I don't like cheap restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Salento. It's a lively, expensive Italian restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Chido. It's a lively, affordable Mexican restaurant."
+
+Agent2 says "Okay, Let's go to the Chido restaurant."
+
 
 Agent1 Interaction
 
@@ -2843,6 +4905,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "I like affordable restaurants."
 Agent2 says "Let's go to an affordable restaurant."
 Agent1 says "Okay. Let's go to the Chido. It's a lively, affordable Mexican restaurant."
+Agent1 says "Okay."
+
 Agent2 says "Okay, Let's go to the Chido restaurant."
 Agent1 says "Okay."
 
@@ -2863,6 +4927,22 @@ Agent2 says "Okay, Let's go to the Chido restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -2875,6 +4955,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2889,6 +4971,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -2901,6 +4999,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2915,6 +5015,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -2927,6 +5043,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2941,6 +5059,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -2953,6 +5087,8 @@ Agent2 says "Okay, Let's go to a quiet restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2967,6 +5103,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to a quiet restaurant."
+
+Agent2 says "Okay, Let's go to a quiet restaurant."
+
+Agent1 says "Let's go to a Chinese restaurant."
+
+Agent2 says "Okay, Let's go to a Chinese restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -2979,6 +5131,8 @@ Agent2 says "Okay, Let's go to a Chinese restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -2993,6 +5147,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3001,6 +5163,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3011,6 +5175,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3019,6 +5191,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3029,6 +5203,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3037,6 +5219,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3047,6 +5231,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3055,6 +5247,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3065,6 +5259,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3073,6 +5275,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3083,6 +5287,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3091,6 +5303,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3101,6 +5315,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3109,6 +5331,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3119,6 +5343,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3127,6 +5359,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3137,6 +5371,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3145,6 +5387,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3155,6 +5399,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3163,6 +5415,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3173,6 +5427,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3181,6 +5443,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3191,6 +5455,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3199,6 +5471,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3209,6 +5483,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3217,6 +5499,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3227,6 +5511,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3235,6 +5527,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3245,6 +5539,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3253,6 +5555,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3263,6 +5567,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3271,6 +5583,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3281,6 +5595,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3289,6 +5611,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3299,6 +5623,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3307,6 +5639,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3317,6 +5651,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3325,6 +5667,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3335,6 +5679,14 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model1   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "Okay, Let's go to a cheap restaurant."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3343,6 +5695,8 @@ Agent2 says "Okay, Let's go to a cheap restaurant."
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3353,6 +5707,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   1.0__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3365,6 +5735,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3379,6 +5751,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   1.0__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3391,6 +5779,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3405,6 +5795,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   1.0__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3417,6 +5823,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3431,6 +5839,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   1.0__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3447,6 +5879,8 @@ Agent2 says "What kind of atmosphere do you like?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3465,6 +5899,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   1.0__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "I like Chinese restaurants."
+
+Agent2 says "Do you like Italian restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3485,6 +5951,8 @@ Agent2 says "Do you like Italian restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3507,6 +5975,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.9__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3519,6 +6003,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3533,6 +6019,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.9__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3545,6 +6047,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3559,6 +6063,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.9__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3571,6 +6091,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3585,6 +6107,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.9__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3601,6 +6147,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3619,6 +6167,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.9__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "I like quiet restaurants."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3639,6 +6219,8 @@ Agent2 says "Do you like lively restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3661,6 +6243,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.8__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3673,6 +6271,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3687,6 +6287,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.8__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3699,6 +6315,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3713,6 +6331,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.8__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3725,6 +6359,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3739,6 +6375,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.8__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3755,6 +6415,8 @@ Agent2 says "What kind of atmosphere do you like?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3773,6 +6435,38 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.8__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "I like Chinese restaurants."
+
+Agent2 says "Do you like Italian restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3793,6 +6487,8 @@ Agent2 says "Do you like Italian restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3815,6 +6511,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.7000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3827,6 +6539,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3841,6 +6555,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.7000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3853,6 +6583,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3867,6 +6599,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.7000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3879,6 +6627,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3893,6 +6643,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.7000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of cuisine do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3909,6 +6683,8 @@ Agent2 says "What kind of cuisine do you like?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3927,6 +6703,50 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.7000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I don't like affordable restaurants."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "What kind of atmosphere do you like?"
+
+Agent1 says "I like quiet restaurants."
+
+Agent2 says "Do you like lively restaurants?"
+
+Agent1 says "I don't like lively restaurants."
+
+Agent2 says "Do you like romantic restaurants?"
+
+Agent1 says "I don't like romantic restaurants."
+
+Agent2 says "Do you like family restaurants?"
+
+Agent1 says "I like family restaurants."
+
+Agent2 says "Let's go to a family restaurant."
+
+Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
+
+Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3953,6 +6773,8 @@ Agent2 says "Let's go to a family restaurant."
 Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
 Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -3981,6 +6803,22 @@ Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.6000000000000001__0.1 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -3993,6 +6831,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -4007,6 +6847,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.6000000000000001__0.2 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -4019,6 +6875,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -4033,6 +6891,22 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.6000000000000001__0.30000000000000004 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -4045,6 +6919,8 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
 Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -4059,6 +6935,30 @@ Agent2 says "Okay, Let's go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.6000000000000001__0.4 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
+
+Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
+
 
 Agent1 Interaction
 
@@ -4075,6 +6975,8 @@ Agent2 says "Let's go to an affordable restaurant."
 Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
 Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
@@ -4093,6 +6995,30 @@ Agent2 says "In the end, I prefer to go to the Jiliya restaurant."
 Agent1 says "Okay."
 Agent2 says "Okay."
 -------------------------------------Dominant-model3___Submissive-model2   0.6000000000000001__0.5 ------------------------------------
+Agent1 says "Let's go to a cheap restaurant."
+
+Agent2 says "I don't like cheap restaurants, let's choose something else."
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like expensive restaurants?"
+
+Agent1 says "I don't like expensive restaurants."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+
+Agent2 says "Do you like affordable restaurants?"
+
+Agent1 says "I like affordable restaurants."
+
+Agent2 says "Let's go to an affordable restaurant."
+
+Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
+
+Agent2 says "Okay, Let's go to the Kigna restaurant."
+
 
 Agent1 Interaction
 
@@ -4109,6 +7035,8 @@ Agent2 says "Let's go to an affordable restaurant."
 Agent1 says "Okay. Let's go to the Kigna. It's a family, affordable Chinese restaurant."
 Agent2 says "Okay, Let's go to the Kigna restaurant."
 Agent1 says "Okay."
+Agent1 says "Okay."
+
 
 Agent2 Interaction
 
