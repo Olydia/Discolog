@@ -1,0 +1,116 @@
+    # 1 mars 2016 19:01:50 - TaskEngine 1.9 / Disco 1.13
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/StatePref.xml
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+    Agent says "I like CHINESE most."
+  > execute fr.limsi.negotiate.lang.StatePreference / getPreference($cuisine).getLess() / getPreference($cuisine).getMore() / false 
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) / false 
+    Agent says "Let's choose CHINESE."
+  > execute fr.limsi.negotiate.lang.Reject / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
+    User says "Sorry, I'd rather choose something else."
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.AskPreference  / null / Packages.fr.limsi.negotiate.restaurant.Cost.EXPENSIVE / Packages.fr.limsi.negotiate.restaurant.Cost.CHEAP
+    User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN /Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+  
+  > execute fr.limsi.negotiate.lang.AskPreference / null / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.ITALIAN
+    > execute fr.limsi.negotiate.lang.AskPreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.JAPANESE
+  
+    User says "I like FRENCH most."
+    Agent says "Ok."
+  > execute fr.limsi.negotiate.lang.Propose /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) 
+    Agent says "Let's choose FRENCH."
+  > execute fr.limsi.negotiate.lang.Accept /createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE, false) 
+    User says "Okay, let's choose FRENCH."
+    Agent says "Ok."
+  > eval printMS()
+#### Options proposals ####
+ 
+ 
+ #### Criteria mental model ####
+ **** SELF preferences *** 
+ 
+
+|(CHEAP>EXPENSIVE)
+
+ 
+*** OTHER preferences *** 
+ 
+
+
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+
+ **** SELF preferences *** 
+ 
+
+|(CHINESE>FRENCH)|(CHINESE>JAPANESE)|(JAPANESE>ITALIAN)|(FRENCH>ITALIAN)|(JAPANESE>TURKISH)
+
+ 
+*** OTHER preferences *** 
+ 
+
+|(FRENCH>null)
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+|(CHINESE>null)|(CHINESE>FRENCH)
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+( value= CHINESE, status=REJECTED)|( value= FRENCH, status=ACCEPTED)|
+ **** SELF preferences *** 
+ 
+
+|(CALM>NOISY)
+
+ 
+*** OTHER preferences *** 
+ 
+
+
+
+ 
+*** OTHER-ABOUT-SELF preferences *** 
+ 
+
+
+
+ 
+*** Dialogue context (proposals) *** 
+ 
+
+
+    # Returned 'null'
+  > history
+
+Agent says "I like CHINESE most."
+Agent says "I like FRENCH less than CHINESE."
+Agent says "Let's choose CHINESE."
+User says "Sorry, I'd rather choose something else."
+Agent says "Ok."
+User says "What kind of [JavaClass fr.limsi.negotiate.restaurant.Cuisine] do you like?"
+Agent says "Ok."
+User says "I like FRENCH most."
+Agent says "Ok."
+Agent says "Let's choose FRENCH."
+User says "Okay, let's choose FRENCH."
+Agent says "Ok."
+
+  > 

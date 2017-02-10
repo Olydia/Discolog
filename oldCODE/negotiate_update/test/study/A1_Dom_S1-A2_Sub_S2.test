@@ -1,0 +1,42 @@
+    # 21 juil. 2016 16:37:49 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+#Agent 1 is dominant, its preference model is S1
+#Agent 2 is submissive, its preference model is S2.
+#please check the file 'PREF.pdf'  for the preference models
+
+    Agent1 says "Should we achieve Top?"
+  > next
+    Agent2 says "Let's achieve Top."
+  > next
+    Agent1 says "I propose that we choose CHINESE Cuisine."
+  > next
+    Agent2 says "Okay, let's choose CHINESE."
+  > next
+    Agent1 says "I propose that we choose DRAGON Restaurant."
+  > next
+    Agent2 says "Okay, I'll call to book a table."
+  > next
+    Agent1 says "Ok."
+  > next
+    Agent2 says "Ok."
+  > history
+
+[Achieve Top by agentFirst] -accepted -live
+   [Agent2 says let's achieve Top] -done
+      Agent1 says "Should we achieve Top?"
+      Agent2 says "Let's achieve Top."
+   [Achieve AgentFirst by proposeC] -live
+      [Achieve ProposeCriterion] -live
+         Agent1 says "I propose that we choose CHINESE Cuisine."
+         [ ] -live
+            [Yes] -live
+               Agent2 says "Okay, let's choose CHINESE."
+               [ ] -live <-focus
+                  Agent1 says "I propose that we choose DRAGON Restaurant."
+                  Agent2 says "Okay, I'll call to book a table."
+                  Agent1 says "Ok."
+                  Agent2 says "Ok."
+                  [ ] -live
+
+  > quit
+    

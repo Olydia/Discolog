@@ -1,0 +1,153 @@
+    # Dec 23, 2015 6:32:58 AM - TaskEngine 1.9 / Disco 1.13
+    Welcome to Disco! (Type 'help' for command list)
+    # this test case to be run with negotiate/bin/negotiate command
+  > load models/Negotiate.xml
+  > load models/Example.xml
+    # turn off automatic turn-taking
+  > next false
+    # test glossing code (in Negotiate.properties)
+  > instance fr.limsi.negotiate.lang.StatePreference
+  > eval $new.formatTask()
+    # Returned 'I like something less than something'
+  > instance fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+  > eval $new.formatTask()
+    # Returned 'I like FRENCH less than something'
+  > instance fr.limsi.negotiate.lang.StatePreference / / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH 
+  > eval $new.formatTask()
+    # Returned 'I like something less than FRENCH'
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE
+    User says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH / null
+    User says "I like FRENCH least."
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+    User says "I like FRENCH most."
+    # turn automatic turn-taking back on
+  > next true
+    Agent says "Ok."
+  > task _example
+    User says "Let's achieve _example."
+    Agent says "I like FRENCH most."
+  > say
+[1] I like FRENCH less than ITALIAN.
+[2] I like FRENCH less than JAPANESE.
+[3] I don't feel like going out for dinner.
+  >> 1
+    User says "I like FRENCH less than ITALIAN."
+    Agent says "Ok."
+    # clear flag preventing agent from stating preference again
+  > eval STATE_PREFERENCE_TEST = null
+    # Returned 'null'
+  > next
+    Agent says "I like ITALIAN least."
+  > history
+
+User says "I like FRENCH less than CHINESE."
+User says "I like FRENCH least."
+User says "I like FRENCH most."
+Agent says "Ok."
+[ ] -accepted -done
+   User says "Let's achieve _example."
+   Agent says "I like FRENCH most."
+   [ ] -done
+      User says "I like FRENCH less than ITALIAN."
+      Agent says "Ok."
+      [ ] -done <-focus
+         Agent says "I like ITALIAN least."
+
+  > debug
+  > history
+
+fr.limsi.negotiate.lang.StatePreference(user,FRENCH,CHINESE)
+fr.limsi.negotiate.lang.StatePreference(user,FRENCH,null)
+fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
+Ok(agent)
+[_example] -accepted -done
+   Propose.Should(user,_example)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
+   [__example_tree by _d4e4_subtasks] -done
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,ITALIAN)
+      Ok(agent)
+      [_d4e4_tree by _d4e6_subtasks] -done <-focus
+         fr.limsi.negotiate.lang.StatePreference(agent,ITALIAN,null)
+
+  > debug false
+    # clear discourse state (but not models)
+  > clear
+  > eval STATE_PREFERENCE_TEST = null 
+    # Returned 'null'
+  > task _example
+    User says "Let's achieve _example."
+    Agent says "I like FRENCH most."
+  > say
+[1] I like FRENCH less than ITALIAN.
+[2] I like FRENCH less than JAPANESE.
+[3] I don't feel like going out for dinner.
+  >> 1
+    User says "I like FRENCH less than ITALIAN."
+    Agent says "Ok."
+  > eval STATE_PREFERENCE_TEST = null 
+    # Returned 'null'
+    # make first agent choice not applicable
+  > eval APPLICABLE_TEST = false 
+    # Returned 'false'
+  > next
+    Agent says "I like FRENCH most."
+  > history
+
+[ ] -accepted -done
+   User says "Let's achieve _example."
+   Agent says "I like FRENCH most."
+   [ ] -done
+      User says "I like FRENCH less than ITALIAN."
+      Agent says "Ok."
+      [ ] -done <-focus
+         Agent says "I like FRENCH most."
+
+  > debug
+  > history
+
+[_example] -accepted -done
+   Propose.Should(user,_example)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
+   [__example_tree by _d4e4_subtasks] -done
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,ITALIAN)
+      Ok(agent)
+      [_d4e4_tree by _d4e7_subtasks] -done <-focus
+         fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
+
+  > debug false
+  > clear
+  > eval STATE_PREFERENCE_TEST = null
+    # Returned 'null'
+  > task _example
+    User says "Let's achieve _example."
+    Agent says "I like FRENCH most."
+  > say
+[1] I like FRENCH less than ITALIAN.
+[2] I like FRENCH less than JAPANESE.
+[3] I don't feel like going out for dinner.
+  >> 2
+    User says "I like FRENCH less than JAPANESE."
+    Agent says "Forget it. I am not going to dinner with you."
+  > history
+
+[ ] -accepted -done
+   User says "Let's achieve _example."
+   Agent says "I like FRENCH most."
+   [ ] -done <-focus
+      User says "I like FRENCH less than JAPANESE."
+      Agent says "Forget it. I am not going to dinner with you."
+
+  > debug
+  > history
+
+[_example] -accepted -done
+   Propose.Should(user,_example)
+   fr.limsi.negotiate.lang.StatePreference(agent,null,FRENCH)
+   [__example_tree by _d4e8_subtasks] -done <-focus
+      fr.limsi.negotiate.lang.StatePreference(user,FRENCH,JAPANESE)
+      Say(agent,"Forget it. I am not going to dinner with you.")
+
+  > debug false
+  > quit
+    

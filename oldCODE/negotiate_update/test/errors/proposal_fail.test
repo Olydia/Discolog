@@ -1,0 +1,96 @@
+    # Apr 18, 2016 6:08:33 PM - TaskEngine 1.9 / Disco 1.15
+    Welcome to Disco! (Type 'help' for command list)
+  > load models/Negotiate.xml
+  > load models/StatePref.xml
+  > task trees
+    User says "Let's achieve trees."
+    Agent says "What type of cuisine do you prefer?"
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+null, FRENCH
+    User says "I like FRENCH most."
+    Agent says "I like FRENCH less than CHINESE."
+  > execute fr.limsi.negotiate.lang.Propose / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE) 
+    User says "Let's choose CHINESE."
+    Agent says "Okay, let's choose CHINESE."
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Ambiance.CALM
+null, CALM
+    User says "I like CALM most."
+    Agent says "I like CALM most."
+  > debug
+  > HISTORY
+
+[trees] -accepted -live
+   Propose.Should(user,trees)
+   Say(agent,"What type of cuisine do you prefer?")
+   [_trees_tree by _d4e4_subtasks] -live
+      [State] -live
+         fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
+         [_State_tree by _d4e11_subtasks] -live
+            fr.limsi.negotiate.lang.StatePreference(agent,FRENCH,CHINESE)
+            [_d4e11_tree by _d4e14_subtasks] -live
+               [Propose] -live
+                  fr.limsi.negotiate.lang.Propose(user,CHINESE)
+                  [_Propose_tree by _d4e44_subtasks] -live
+                     fr.limsi.negotiate.lang.Accept(agent,CHINESE)
+                     [_d4e44_tree by _d4e46_subtasks] -live
+                        [State] -live
+                           fr.limsi.negotiate.lang.StatePreference(user,null,CALM)
+                           [_State_tree by _d4e11_subtasks] -live <-focus
+                              fr.limsi.negotiate.lang.StatePreference(agent,null,CALM)
+                              [_d4e11_tree] -live
+
+  > CLEAR
+  > task trees
+    Propose.Should(user,trees)
+    Say(agent,"What type of cuisine do you prefer?")
+  > execute fr.limsi.negotiate.lang.StatePreference / null / Packages.fr.limsi.negotiate.restaurant.Cuisine.FRENCH
+null, FRENCH
+    fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
+    fr.limsi.negotiate.lang.StatePreference(agent,FRENCH,CHINESE)
+  > execute fr.limsi.negotiate.lang.Propose / createProposal(Packages.fr.limsi.negotiate.restaurant.Cuisine.CHINESE)
+    fr.limsi.negotiate.lang.Propose(user,CHINESE)
+    fr.limsi.negotiate.lang.Accept(agent,CHINESE)
+  > history
+
+[trees] -accepted -live
+   Propose.Should(user,trees)
+   Say(agent,"What type of cuisine do you prefer?")
+   [_trees_tree by _d4e4_subtasks] -live
+      [State] -live
+         fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
+         [_State_tree by _d4e11_subtasks] -live
+            fr.limsi.negotiate.lang.StatePreference(agent,FRENCH,CHINESE)
+            [_d4e11_tree by _d4e14_subtasks] -live
+               [Propose] -live
+                  fr.limsi.negotiate.lang.Propose(user,CHINESE)
+                  [_Propose_tree by _d4e44_subtasks] -live <-focus
+                     fr.limsi.negotiate.lang.Accept(agent,CHINESE)
+                     [_d4e44_tree] -live
+
+  > execute fr.limsi.negotiate.lang.Propose / createOptionProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.DRAGON)
+    fr.limsi.negotiate.lang.Propose(user,DRAGON)
+    fr.limsi.negotiate.lang.Accept(agent,DRAGON)
+  > history
+
+[trees] -accepted -live
+   Propose.Should(user,trees)
+   Say(agent,"What type of cuisine do you prefer?")
+   [_trees_tree by _d4e4_subtasks] -live
+      [State] -live
+         fr.limsi.negotiate.lang.StatePreference(user,null,FRENCH)
+         [_State_tree by _d4e11_subtasks] -live
+            fr.limsi.negotiate.lang.StatePreference(agent,FRENCH,CHINESE)
+            [_d4e11_tree by _d4e14_subtasks] -live
+               [Propose] -live
+                  fr.limsi.negotiate.lang.Propose(user,CHINESE)
+                  [_Propose_tree by _d4e44_subtasks] -live
+                     fr.limsi.negotiate.lang.Accept(agent,CHINESE)
+                     [_d4e44_tree by _d4e47_subtasks] -live
+                        [Propose] -live
+                           fr.limsi.negotiate.lang.Propose(user,DRAGON)
+                           [_Propose_tree by _d4e44_subtasks] -live <-focus
+                              fr.limsi.negotiate.lang.Accept(agent,DRAGON)
+                              [_d4e44_tree] -live
+
+  > quit
+    
