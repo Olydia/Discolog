@@ -12,6 +12,7 @@ abstract class NegotiationUtterance extends Utterance {
          String step, boolean repeat) { 
       super(cls, disco, decomp, step, repeat);
    }
+   
 
    // for extensions
    protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Boolean external) { 

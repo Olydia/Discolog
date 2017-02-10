@@ -1,9 +1,11 @@
 package fr.limsi.negotiate;
+
 /**
  * Defines a preference between two values of a given criterion (e.g. chinese cuisine is preferred to japanese cuisine)
  * for a negotiation.
  *  C  = {Criterion, Class<Criterion>}
  */
+
 public abstract class Preference<C> {
 
 	@Override

@@ -21,7 +21,6 @@ abstract public class PreferenceModel<C>{
 	abstract public Boolean isPreferred (C less, C more);
 	
 	abstract public List<C>getValues();
-	 // A definir ici 
 	
 
 	public C getMostPreferred() {

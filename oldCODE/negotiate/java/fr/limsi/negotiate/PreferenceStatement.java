@@ -63,4 +63,5 @@ public class PreferenceStatement extends Statement {
 			result = prime * result + ((preference.getMore() == null) ? 0 : preference.getMore().hashCode());
 			return result;
 		}
+		
 }

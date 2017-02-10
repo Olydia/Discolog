@@ -27,4 +27,5 @@ public class Accept extends ProposalUtterance {
 	   getNegotiation().getContext().
 	  	addStatement(new ProposalStatement(p, "Accept"));
    }
+   
 }

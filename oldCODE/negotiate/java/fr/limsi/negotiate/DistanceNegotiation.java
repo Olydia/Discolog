@@ -1,5 +1,6 @@
 package fr.limsi.negotiate;
 
+
 import java.util.List;
 
 public class DistanceNegotiation <O extends Option> {

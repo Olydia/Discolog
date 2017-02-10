@@ -3,7 +3,6 @@ package fr.limsi.negotiate;
  * 
  * define  propositions made  during dialogue. For each proposition, we define its status for the begining open, counter represent the
  * counter proposition that the other interlocutor may do and finally isSelf is true if the proposition is made by the agent
- *
  */
 public abstract class Proposal {
 

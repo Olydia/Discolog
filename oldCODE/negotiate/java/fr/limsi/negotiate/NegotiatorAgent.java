@@ -7,7 +7,6 @@ import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.restaurant.*;
 
 // TODO: Make small movie dialogue example to verify modularity
-//import fr.limsi.negotiate.movie.*;
 
 public class NegotiatorAgent extends Agent {
 

@@ -20,6 +20,7 @@ public class AskPreference extends PreferenceUtterance {
 	   
 	   @Override
 	   protected void interpret () {
+		   
 	      PreferenceStatement statement = new PreferenceStatement
 	    		  							(getLess(), getMore(), getExternal(),"Ask");
 	      if (getCriterion() == null) 

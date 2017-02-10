@@ -18,6 +18,7 @@ abstract class ProposalUtterance extends NegotiationUtterance {
       super(cls, disco, external);
       if ( proposal != null ) setSlotValue("proposal", proposal);
    }
+   
 
    public Proposal getProposal () { return (Proposal) getSlotValue("proposal"); }
 

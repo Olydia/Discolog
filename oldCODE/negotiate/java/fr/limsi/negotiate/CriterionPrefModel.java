@@ -1,6 +1,5 @@
 package fr.limsi.negotiate;
 
-
 import java.util.*;
 
 

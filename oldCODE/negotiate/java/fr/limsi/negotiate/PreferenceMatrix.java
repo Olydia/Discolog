@@ -2,6 +2,7 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+
 public class PreferenceMatrix<T> {
 	List<T> values; 
 	private int [] [] preferences; 

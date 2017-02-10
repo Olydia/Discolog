@@ -27,4 +27,5 @@ public class Reject extends ProposalUtterance {
       getNegotiation().getContext().
 	  	addStatement(new ProposalStatement(p, "Reject"));
    }
+   
 }

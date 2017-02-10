@@ -4,10 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
-import fr.limsi.negotiate.restaurant.Ambiance;
-import fr.limsi.negotiate.restaurant.Cost;
-import fr.limsi.negotiate.restaurant.Cuisine;
-
 /** Stores the preferences about criteria, i.e. a list of OptionPreferences, i.e. a list of couples (less,more) with
  * less and more extends Criteria.
  */

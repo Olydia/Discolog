@@ -27,6 +27,7 @@ public class StatePreference extends NegotiationUtterance {
    }
    
    public Criterion getLess () { return (Criterion) getSlotValue("less"); }
+   
    public Criterion getMore () { return (Criterion) getSlotValue("more"); }
 
    @Override

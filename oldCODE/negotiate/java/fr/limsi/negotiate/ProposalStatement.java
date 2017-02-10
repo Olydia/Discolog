@@ -13,5 +13,4 @@ public class ProposalStatement extends Statement {
 		return prop;
 	}
 
-
 }

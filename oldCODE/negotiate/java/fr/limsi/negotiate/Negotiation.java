@@ -7,7 +7,6 @@ import fr.limsi.negotiate.Proposal.Status;
  * This class defines the negotiation on a defined option (for example Restaurant) 
  * To negotiate we defined the list of propositions on table Proposal
  * 
- * 
  */
 
 public class Negotiation<O extends Option> {

@@ -1,6 +1,7 @@
 package fr.limsi.negotiate;
 
 public class Statement {
+	
 	protected boolean external;
 	protected  String utteranceType;
 	

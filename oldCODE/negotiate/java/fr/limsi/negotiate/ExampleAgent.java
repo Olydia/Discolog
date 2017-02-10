@@ -1,11 +1,9 @@
 package fr.limsi.negotiate;
 
-//import java.util.Random;
 import edu.wpi.disco.*;
 import edu.wpi.disco.plugin.*;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.movie.*;
-import fr.limsi.negotiate.restaurant.*;
 
 // TODO: Make small movie dialogue example to verify modularity
 //import fr.limsi.negotiate.movie.*;

@@ -3,9 +3,6 @@ package fr.limsi.negotiate;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.Stack;
-
-import org.omg.Messaging.SyncScopeHelper;
 
 import fr.limsi.negotiate.Proposal.Status;
 

@@ -1,5 +1,6 @@
 package fr.limsi.negotiate;
 
+
 import java.util.*;
 
 import fr.limsi.negotiate.Proposal.Status;

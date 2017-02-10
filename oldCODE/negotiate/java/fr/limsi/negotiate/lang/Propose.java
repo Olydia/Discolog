@@ -19,6 +19,7 @@ public class Propose extends ProposalUtterance {
       super(Propose.class, disco, external, proposal);
    }
 
+   
    @Override
    protected void interpret () {
 	  Proposal p= getNegotiation().createProposal(getProposal().getValue(), !getExternal());
