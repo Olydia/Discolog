@@ -21,6 +21,7 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.other = new Other<C>(type);
 		this.proposals = new ArrayList<CriterionProposal>();
 		this.selfStatements = new ArrayList<Statement<C>>();
+		// test
 	}
 
 	public float tolerable(C value, double self){
