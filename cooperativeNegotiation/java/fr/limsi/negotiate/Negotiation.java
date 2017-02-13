@@ -434,11 +434,12 @@ public class Negotiation<O extends Option> {
 		return getContext().getLastProposal().equals(accepted);
 	}
 	// check if the last utterance is a Propose
-	public boolean isPropose(){
-		NegoUtterance uttOther = getContext().getLastMove(true);
-		NegoUtterance uttSelf = getContext().getLastMove(false);
-		return (getContext().isProposal(uttSelf) || getContext().isProposal(uttOther));
-
+	public boolean isPropose(boolean isSelf){
+		NegoUtterance uttSelf = getContext().getLastMove(!isSelf);
+		boolean is = getContext().isProposal(uttSelf);
+		System.out.println(is);
+				
+		return (is);
 
 	}
 	

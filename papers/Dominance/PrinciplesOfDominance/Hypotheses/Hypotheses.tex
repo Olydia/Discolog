@@ -1,0 +1,101 @@
+	\documentclass{article}
+		\usepackage[noend]{algpseudocode}
+		\usepackage{subcaption}
+		\usepackage{subfig} 
+		\usepackage{amsmath}
+		\usepackage{graphicx}
+		\usepackage{eulervm}
+		\usepackage{fontenc}
+		\usepackage{mathrsfs}
+		\usepackage{multirow}
+		\usepackage{array}
+		\usepackage[rflt]{floatflt}
+		\usepackage{makecell}	
+		\usepackage{xcolor, soul}
+		\sethlcolor{yellow}	
+		
+	\begin{document}
+		\title{\vskip -10pt Hypotheses on the impact of dominance in dialogue of cooperative negotiation}
+		\maketitle
+		
+		
+		\section{Introduction}
+			The major objective of the present research is to investigate the impact of interpersonal dominance on interaction, specially in the context of cooperative negotiation. For that purpose, we examined existing works in social psychology whom get interested in studying the impact of dominance on negotiators behaviors. We extracted three mains principles related below:
+			\begin{enumerate}
+				\item \textbf{Principle 1: Self Vs Other}\\
+				Submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.\cite{van2006power}
+				
+				\item \textbf{Principle 2: Negotiation strategies} \\
+				\textit{Level of demands}
+				\begin{itemize}
+					\item Dominant negotiators show a higher level of demand than the submissive ones. In addition, submissive negotiator's demand decrease over time. \cite{de1995impact}
+					\item Submissive negotiators give a lower level of demand to low priority issues. \cite{de1995impact}
+				\end{itemize} 
+				
+				
+				\textit{Control the flow of the negotiation}
+				\begin{itemize}
+					\item Powerful negotiators tend to make the first move. \cite{magee2007power}
+					
+					\item %Based on Carsten, De Dreu and Van Kleef
+					It has been demonstrated that high powerful negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain for greater rewards than were initially offered to them.)\cite{van2006power}
+					
+					\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.\cite{de2004influence}
+					
+				\end{itemize} 
+		
+			\end{enumerate}
+			\par Theses behaviors were implemented, allowing a conversational agent to adapt its strategy of negotiation depending on the initial representation of dominance. 
+			
+		\section{First Study: Perception of behaviors related to dominance}
+			 			
+			 The aim of this study is to investigate the perception of external participants of the implemented negotiators behaviors related to dominance. 
+
+			Bernstein (1980) argued that dominance relationships can never be assumed but must be demonstrated in each application. Therefore, we aim to validate the implemented behaviors by investigating a perceptual experiment in which participants have to determine the behaviors of two agents during a negotiation. 
+			
+			\subsection{Hypotheses}
+			
+			In order to validate the implemented behaviors of dominance, we investigated three main hypotheses related to those behaviors. 
+			
+			\par First, we support the claim that the dominant agent will be perceived as being individualist, whereas the submissive agent takes in consideration the other when he takes his decisions \textbf{(H1)}. 
+			
+			\par Second, we hypothesize that submissive agent will perceived as having a lower level of demand comparing to the dominant agent. In addition, the submissive agent will make larger concessions than the dominant agent \textbf{(H2)}.
+			
+			\par Third, dominant agent is more likely to take the lead of the negotiation than the submissive agent. In addition the dominant agent adopt a goal-directed behavior \textbf{(H3)}. 
+			
+			\subsection{Participants and experimental design}
+				A total of 100 subjects participated to the experiment. They were recruited through the platform \emph{Crowdflower.com}, for which each subject received \textbf{X} cents for the task.
+				
+				In this experiment, we generated dialogues of negotiation on the topic of Restaurants. For each task, we generated four dialogues, where we randomized two variables. 
+				
+				First, the relation of dominance. The dominance is represented in the interval [0,1], and was initialized to be complementary between the two agents, for example (dom(Agent 1)=0.7; dom(Agent 2)=0.3). 
+				
+				Second, we defined three models of preferences, which were used to define agent's preferences. These models were meant to be different in order to produce richer negotiations. We present bellow the values of distance between each two models of preferences used for this experiment. The distance metric used is the \textbf{Kendall distance for partial orders}, which computes a distance between [0,1] where zero means that the two models are identical \cite{bra2013Kendall}. \hl{Would be better to present the kendall distance in the section where we present the model of preferences?}
+				\begin{table} 
+					\centering
+					\begin{tabular}{|c|c|}
+						\hline
+						Models & Distance \\
+						\hline
+						(Model1, Model2) & 0.98\\
+						(Model2, Model3) & 0.90 \\
+						\hline
+					\end{tabular}
+					\caption{Kendall distance between the models of preferences}
+				\end{table}
+				
+
+			\subsection{Procedure}
+			The agents in the dialogue were described as two friends trying to find a restaurant where to have dinner. We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
+			
+			Participants were asked to carefully read the dialogues, and respond to the questionnaire about the agents behaviors in each dialogue, in addition to some manipulation check questions.
+			\hl{Should we present the questions ?}
+			
+
+			
+			
+% ================== BIBLIO ===============
+\vskip 4pt
+\bibliographystyle{plain}
+\bibliography{Library}
+	\end{document}

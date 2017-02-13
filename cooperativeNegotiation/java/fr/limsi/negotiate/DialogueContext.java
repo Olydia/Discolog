@@ -223,20 +223,20 @@ public class DialogueContext {
 		for (NegoUtterance utt : history){
 			if(utt instanceof NegotiationMove && !(utt.getType().equals(UtType.REJECT) || utt.getType().equals(UtType.REJECTSTATE))){
 				Proposal p = null;
-				
+
 				if(utt.getType().equals(UtType.ACCEPT))
-					
+
 					p = ((NegotiationMove) utt).getProposal();
-				
+
 				else if(utt.getType().equals(UtType.ACCEPTPROPOSE)){
-					
+
 					p = (Proposal) ((ProposalMove) utt).getOther();
 					moves.add(((ProposalMove) utt).getProposal());
 				}
 				// not an Accept nor AcceptPropose
 				if(p == null)
 					moves.add(((NegotiationMove) utt).getProposal());
-				
+
 				else{
 					int index = moves.lastIndexOf(p);
 					moves.remove(index);
@@ -245,13 +245,27 @@ public class DialogueContext {
 		}
 		return moves;
 	}
-	
+
 	public void clearNegotiation(){
 		this.history.clear();
 		this.discussedCriteria.clear();
 		this.closedCriteria.clear();
 	}
 
-		
+	public Proposal otherProposal(Proposal current){
+		boolean isExternal = !current.isSelf;
+		if(current instanceof CriterionProposal){
+			Proposal previous = (Proposal)getLastMove(isExternal).getValue();
+			if(previous instanceof OptionProposal){
+				@SuppressWarnings("unchecked")
+				Class<? extends Criterion> type = (Class<? extends Criterion>) current.getValue().getClass();
+				Option o = (Option)previous.getValue();
+				if(o.getValue(type).equals(current.getValue()))
+					return previous;
+			}
+		}
+		return null;
+	}
+
 
 }
