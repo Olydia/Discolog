@@ -11,7 +11,7 @@ import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.*;
+import fr.limsi.negotiate.movie.GenerateMovieModel;
 
 // TODO:  Further optimizations:
 //
@@ -26,7 +26,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.6, SUBMISSIVE = 0.3;
 
 	private double relation = DOMINANT;
 
@@ -49,10 +49,10 @@ public class NegotiatorAgent extends Agent {
 	}
 
 	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
-
+		//totalOrderedModels model = new totalOrderedModels();
+		GenerateMovieModel model = new GenerateMovieModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model3()), 
+				new NegotiatorAgent("Agent1", model.model2()), 
 				new NegotiatorAgent("Agent2", model.model1()), 
 				false);
 
@@ -93,7 +93,7 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-		if ( utterance != null )System.out.println(utterance.format() + "\n");
+		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			 if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance))
 

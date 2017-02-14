@@ -181,12 +181,12 @@ public class Negotiation<O extends Option> {
 
 
 	public boolean negotiationFailure(Utterance utterance){
-		if (getContext().getHistory().size()>= 30 && 
+		if (getContext().getHistory().size()>= 40 && 
 				!(utterance instanceof Propose || utterance instanceof Accept))
 			return true;
 
 		//if(getDominance()>=0){
-		List<Option> remainOptions= getAcceptableOptions(nonRejectedOptions());
+		List<Option> remainOptions= nonRejectedOptions();//getAcceptableOptions(nonRejectedOptions());
 		return (remainOptions.isEmpty());
 		//|| 
 		//	getAcceptableOptions().isEmpty());
@@ -435,9 +435,9 @@ public class Negotiation<O extends Option> {
 	}
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
-		NegoUtterance uttSelf = getContext().getLastMove(!isSelf);
+		NegoUtterance uttSelf =  getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
+		
 		boolean is = getContext().isProposal(uttSelf);
-		System.out.println(is);
 				
 		return (is);
 

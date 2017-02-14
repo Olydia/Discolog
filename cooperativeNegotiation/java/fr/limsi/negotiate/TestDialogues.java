@@ -3,6 +3,8 @@ package fr.limsi.negotiate;
 import java.util.ArrayList;
 
 import edu.wpi.disco.Dual;
+import fr.limsi.negotiate.movie.GenerateMovieModel;
+import fr.limsi.negotiate.movie.Movie;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
@@ -18,15 +20,16 @@ public class TestDialogues {
 		//		double relationAgent2 = 0.1;
 		totalOrderedModels models = new totalOrderedModels();
 		ArrayList<Negotiation<Restaurant>> negotiation = models.getModels();
+//		GenerateMovieModel models = new GenerateMovieModel();
+//		ArrayList<Negotiation<Movie>> negotiation = models.getModels();
 
-
-		for(Negotiation<Restaurant> modelA1:negotiation ){
-			for(Negotiation<Restaurant> modelA2: negotiation){
+		for(Negotiation<? extends Option> modelA1:negotiation ){
+			for(Negotiation<? extends Option> modelA2: negotiation){
 				// Initiate the model of preferences 
 				int indexA =  negotiation.indexOf(modelA1);
 				int indexB =  negotiation.indexOf(modelA2);
 				//initiate the relation of dominance
-				double relationAgent1 =1;
+				double relationAgent1 =0.5;
 				double relationAgent2 = 0.1;
 
 				for(int i= 0; i<5; i++){
