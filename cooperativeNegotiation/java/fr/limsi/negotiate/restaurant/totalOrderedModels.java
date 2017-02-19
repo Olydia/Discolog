@@ -241,7 +241,6 @@ public class totalOrderedModels {
 	}
 	
 	public static void main (String[] args)  {
-		
 	}
 	
 
