@@ -2,13 +2,13 @@ package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.Criterion;
 
-public enum Location implements Criterion{
-	;
+public enum Arrondissement implements Criterion{
+	I, II, IV, IIX, IX, XII ;
 
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
-		return Location.values();
+		return Arrondissement.values();
 	}
 
 	@Override
