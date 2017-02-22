@@ -15,6 +15,8 @@ public class totalOrderedModels {
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
 		d1_criteria.addPreference(Atmosphere.class, Cost.class);
 		d1_criteria.addPreference(Cost.class, Cuisine.class);
+		d1_criteria.addPreference(Cuisine.class, Arrondissement.class);
+
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.CHINESE);
@@ -39,15 +41,23 @@ public class totalOrderedModels {
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
-
+		Self_Ci<Arrondissement> d1_location =  new Self_Ci<>(Arrondissement.class);
+		d1_location.addPreference(Arrondissement.XII, Arrondissement.IX);
+		d1_location.addPreference(Arrondissement.XII,Arrondissement.IV);
+		d1_location.addPreference(Arrondissement.IV, Arrondissement.II);
+		d1_location.addPreference(Arrondissement.IV, Arrondissement.I);
+		d1_location.addPreference(Arrondissement.I, Arrondissement.II);
+		CriterionNegotiation<Arrondissement> location = new CriterionNegotiation<>(d1_location);
+		
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
 		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFORDABLE);
 		d1_cost.addPreference(Cost.AFFORDABLE, Cost.CHEAP);
+		
 		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
 
 		@SuppressWarnings("unchecked")
 		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
-		(new CriterionNegotiation[] {cost, cuisine, atmospher}, d1_criteria, Restaurant.class);
+		(new CriterionNegotiation[] {cost, cuisine, atmospher, location}, d1_criteria, Restaurant.class);
 		return model1;
 
 	}
