@@ -39,7 +39,7 @@ public abstract class Proposal {
 	public abstract Object getValue();
 	
 	public abstract String printValue();
-	public abstract String printProposal() ;
+	public abstract String printProposal(String topic) ;
 	
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
 

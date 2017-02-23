@@ -14,6 +14,12 @@ public enum Cost implements Criterion {
 	public String toString(){
 		return this.name().toLowerCase();
 	}
+	
+	@Override
+	public String print(String topic) {
+		// TODO Auto-generated method stub
+		return this.toString() +" "+ topic;
+	}
 
 	public String getFrVersion(){
 		String fr = "";

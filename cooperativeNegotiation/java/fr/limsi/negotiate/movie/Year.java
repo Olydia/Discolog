@@ -22,4 +22,10 @@ public enum Year implements Criterion {
 		return this.name().toLowerCase();
 	}
 	
+	@Override
+	public String print(String topic) {
+		// TODO Auto-generated method stub
+		return this.toString() +" "+ topic;
+	}
+	
 }

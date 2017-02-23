@@ -20,4 +20,11 @@ public enum Country implements Criterion{
 	public String toString(){
 		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
 	}
+	
+	@Override
+	public String print(String topic) {
+		// TODO Auto-generated method stub
+		return this.toString() +" "+ topic;
+	}
+	
 }

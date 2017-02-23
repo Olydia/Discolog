@@ -37,13 +37,24 @@ public class NegotiationDistance {
 	public static void main(String[] args) {
 		
 		totalOrderedModels tm = new totalOrderedModels();
-		NegotiationDistance distance24 = new NegotiationDistance(tm.model4(), tm.model2());
+		
+		NegotiationDistance distance12 = new NegotiationDistance(tm.model1(), tm.model2());
+		NegotiationDistance distance13 = new NegotiationDistance(tm.model1(), tm.model3());
 		NegotiationDistance distance14 = new NegotiationDistance(tm.model1(), tm.model4());
+		
+		NegotiationDistance distance23 = new NegotiationDistance(tm.model2(), tm.model3());
+		NegotiationDistance distance24 = new NegotiationDistance(tm.model2(), tm.model4());
+
 		NegotiationDistance distance34 = new NegotiationDistance(tm.model3(), tm.model4());
 
-		System.out.println(distance14.distance());
-		System.out.println(distance24.distance());
-		System.out.println(distance34.distance());
+		System.out.println( "1, 2: " + distance12.distance());
+		System.out.println( "1, 3: " + distance13.distance());
+		System.out.println("1, 4: " + distance14.distance());
+		
+		System.out.println( "2, 3: " +distance23.distance());
+		System.out.println("2, 4: " +distance24.distance());
+		
+		System.out.println("3, 4: " +distance34.distance());
 
 
 	}

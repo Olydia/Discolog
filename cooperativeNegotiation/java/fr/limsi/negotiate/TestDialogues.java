@@ -10,18 +10,12 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class TestDialogues {
 
-	public TestDialogues() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//		double relationAgent1 =1;
-		//		double relationAgent2 = 0.1;
+
+		
 		totalOrderedModels models = new totalOrderedModels();
 		ArrayList<Negotiation<Restaurant>> negotiation = models.getModels();
-//		GenerateMovieModel models = new GenerateMovieModel();
-//		ArrayList<Negotiation<Movie>> negotiation = models.getModels();
+
 
 		for(Negotiation<? extends Option> modelA1:negotiation ){
 			for(Negotiation<? extends Option> modelA2: negotiation){
@@ -29,12 +23,12 @@ public class TestDialogues {
 				int indexA =  negotiation.indexOf(modelA1);
 				int indexB =  negotiation.indexOf(modelA2);
 				//initiate the relation of dominance
-				double relationAgent1 =0.5;
-				double relationAgent2 = 0.1;
+				double relationAgent1 =0.9;
+				double relationAgent2 ;
 
-				for(int i= 0; i<5; i++){
-					relationAgent2 = 0.1;
-					for(int j= 0; j<5; j++){
+				for(int i= 0; i<4; i++){
+					relationAgent2 = 0.3;
+					for(int j= 0; j<3; j++){
 
 						if(indexA != indexB){
 							System.out.println("-------------------------------------Dominant-model" + (indexA+1)+ 

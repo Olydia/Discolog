@@ -53,7 +53,7 @@ public enum Restaurant implements Option {
 	FINDI(Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IV),
 	FINZI_1(Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IIX),
 	FOGGIA_RISTORANTE(Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IX),
-	GABRIELE_RISTORANTE_ITALIANO(Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.XII),
+	GABRIERISTORANTE_ITALIANO(Cuisine.ITALIAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.XII),
 	GIOVANYS_RISTORANTE(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.I),
 	IL_CARPACCIO(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.II),
 	IL_COCCODRILLO(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.IV),
@@ -70,7 +70,7 @@ public enum Restaurant implements Option {
 	CONTINI(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.II),
 	L_GARBINO(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.IV),
 	LESTERINA(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.IIX),
-	LE_VISCONTI(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.IX),
+	VISCONTI(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.IX),
 	LES_PICHOLINES(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.ROMANTIC, Arrondissement.XII),
 	LES_SERENADES(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.FAMILY, Arrondissement.I),
 	MANCINI(Cuisine.ITALIAN, Cost.AFFORDABLE, Atmosphere.FAMILY, Arrondissement.II),
@@ -238,10 +238,10 @@ public enum Restaurant implements Option {
 	CHO_GAO(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.II),
 	DAI_DUONG(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.IV),
 	DONG(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.IIX),
-	DRAGON_(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.IX),
-	DRAGON_DOR(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.XII),
-	ESCALE_DE_CHINE(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.I),
-	ETOILE_DE_CHINE(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.II),
+	DRAGON(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.IX),
+	IMPERIAL_DRAGON(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.ROMANTIC, Arrondissement.XII),
+	ESCADE_CHINE(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.I),
+	ETOIDE_CHINE(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.II),
 	GOLD_DRAGON(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.IV),
 	HAO_HAO(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.IIX),
 	HENG_LAY(Cuisine.CHINESE, Cost.EXPENSIVE, Atmosphere.FAMILY, Arrondissement.IX),
@@ -253,11 +253,11 @@ public enum Restaurant implements Option {
 	KAWLOON(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.LIVELY, Arrondissement.IX),
 	KEN(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.LIVELY, Arrondissement.XII),
 	KINGA(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.I),
-	LE_DRAGON_DOR(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.II),
-	LE_LAC_DE_CHINE(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IV),
-	LE_SAÏGON(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IIX),
-	LE_SHANGHAI(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IX),
-	LE_YANG_TSE(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.XII),
+	DRAGON_DOR(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.II),
+	LAC_DE_CHINE(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IV),
+	SAÏGON(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IIX),
+	SHANGHAI(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.IX),
+	YANG_TSE(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.QUIET, Arrondissement.XII),
 	LIDO(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.ROMANTIC, Arrondissement.I),
 	LIN(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.ROMANTIC, Arrondissement.II),
 	LION_(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.ROMANTIC, Arrondissement.IV),
@@ -272,10 +272,10 @@ public enum Restaurant implements Option {
 	CHINA(Cuisine.CHINESE, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.XII),
 	PEKIN_EXPRESS(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.I),
 	NEW_FULI(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.II),
-	NOODLE_KING(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.IV),
+	NOODKING(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.IV),
 	OASIS_(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.IIX),
 	PEKIN(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.IX),
-	PERLE_DE_CHINE(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.XII),
+	PERDE_CHINE(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.LIVELY, Arrondissement.XII),
 	PHENIX_(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.QUIET, Arrondissement.I),
 	PHOU_KHET(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.QUIET, Arrondissement.II),
 	PHU_DO(Cuisine.CHINESE, Cost.AFFORDABLE, Atmosphere.QUIET, Arrondissement.IV),
@@ -482,7 +482,7 @@ public enum Restaurant implements Option {
 	KWON_SOOK_SOO(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.ROMANTIC, Arrondissement.XII),
 	LA_YEON(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.I),
 	LAB(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.II),
-	LITTLE_SEOU(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IV),
+	LITTSEOU(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IV),
 	MATSUBICHI(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IIX),
 	MIDAM(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.IX),
 	MINGLES(Cuisine.KOREAN, Cost.CHEAP, Atmosphere.FAMILY, Arrondissement.XII),
@@ -517,7 +517,7 @@ public enum Restaurant implements Option {
 	public final Atmosphere ambiance;
 	public final Arrondissement arrondissement;
 	@SuppressWarnings("serial")
-	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(Cost.class); add(Cuisine.class); add(Atmosphere.class); }};
+	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(Cost.class); add(Cuisine.class); add(Atmosphere.class); add(Arrondissement.class); }};
 	
 	Restaurant (Cuisine cuisine, Cost cost, Atmosphere ambiance, Arrondissement arrondissement) {
 		this.cuisine = cuisine;
@@ -529,7 +529,7 @@ public enum Restaurant implements Option {
 	@Override
 	public Criterion getValue (Class<? extends Criterion> c) {
 		return c == Cuisine.class ? cuisine :
-			c == Cost.class ? cost : c == Atmosphere.class? ambiance : null; // throw error? 
+			c == Cost.class ? cost : c == Atmosphere.class? ambiance : c == Arrondissement.class ? arrondissement :null; // throw error? 
 	}
 
 	@Override
@@ -539,13 +539,14 @@ public enum Restaurant implements Option {
 	}
 
 	public String capitalize(String input){
+		input = input.replace("_", " ");
 		String output = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
 		return output;
 
 	}
 	
 	public String print(){
-		  return "Its a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant, situated in the " + this.arrondissement +"arrondissement";
+		  return "Its a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant, situated in the " + this.arrondissement +" arrondissement";
 	}
 
 	@Override

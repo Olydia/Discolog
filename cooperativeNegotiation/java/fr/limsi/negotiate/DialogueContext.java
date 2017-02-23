@@ -12,14 +12,14 @@ public class DialogueContext {
 	private List<NegoUtterance> history;
 	private List<Class<? extends Criterion>> discussedCriteria; 
 	private List<Class<? extends Criterion>> closedCriteria; 
-	private Class<? extends Option> topic;
+	private List<Class<? extends Criterion>> topicValues;
 
-	public DialogueContext(Class<? extends Option> topic) {
+	public DialogueContext(List<Class<? extends Criterion>> topicValues) {
 
 		this.history =new ArrayList<NegoUtterance>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
-		this.setTopic(topic);
+		this.setTopicValues(topicValues);
 	}
 
 	public List<Class<? extends Criterion>> getRemainDiscussedCrt() {
@@ -135,39 +135,7 @@ public class DialogueContext {
 	public void  closeDiscussion(Class<? extends Criterion> criterion){
 		this.closedCriteria.add(criterion);
 		if(criterion.equals(getCurrentDisucussedCriterion()))
-			openNewDiscussion(getElements());
-	}
-
-	public Class<? extends Option> getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Class<? extends Option> topic) {
-		this.topic = topic;
-	}
-	public List<Class<? extends Criterion>> getElements() {
-		try {
-			Method m = topic.getDeclaredMethod("getCriteria");
-			Object[] v = topic.getEnumConstants();
-			m.setAccessible(true);
-			@SuppressWarnings("unchecked")
-			List<Class<? extends Criterion>> value = (List<Class<? extends Criterion>>)m.invoke(v[0]);
-
-			return (value);
-		} catch (NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;		
+			openNewDiscussion(this.topicValues);
 	}
 
 	public NegoUtterance getLastUtterance(boolean isExternal, UtType type){
@@ -265,6 +233,14 @@ public class DialogueContext {
 			}
 		}
 		return null;
+	}
+
+	public List<Class<? extends Criterion>> getTopicValues() {
+		return topicValues;
+	}
+
+	public void setTopicValues(List<Class<? extends Criterion>> topicValues) {
+		this.topicValues = topicValues;
 	}
 
 

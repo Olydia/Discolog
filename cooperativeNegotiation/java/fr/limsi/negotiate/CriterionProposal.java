@@ -64,8 +64,8 @@ public class CriterionProposal extends Proposal {
 	}
 
 	@Override
-	public String printProposal() {
-		String value = getValue().toString();
+	public String printProposal(String topic) {
+		String value = getValue().print(topic);
 		if("AEIOUaeiou".indexOf(value.charAt(0)) != -1)
 			return "an " + value;
 		

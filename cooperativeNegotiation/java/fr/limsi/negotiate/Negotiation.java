@@ -23,9 +23,10 @@ public class Negotiation<O extends Option> {
 
 		this.valueNegotiation = Arrays.asList(valueNegotiation);
 		this.proposals = new ArrayList<OptionProposal>();
-		this.setContext(new DialogueContext(topic));
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
+		this.context = new DialogueContext(criteria.sortValues());
+
 	}
 	//
 	//	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {

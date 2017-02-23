@@ -12,6 +12,7 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.movie.GenerateMovieModel;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 // TODO:  Further optimizations:
 //
@@ -26,7 +27,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.6, SUBMISSIVE = 0.3;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
 
 	private double relation = DOMINANT;
 
@@ -49,11 +50,11 @@ public class NegotiatorAgent extends Agent {
 	}
 
 	public static void main (String[] args) {
-		//totalOrderedModels model = new totalOrderedModels();
-		GenerateMovieModel model = new GenerateMovieModel();
+		totalOrderedModels model = new totalOrderedModels();
+		//GenerateMovieModel model = new GenerateMovieModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model2()), 
-				new NegotiatorAgent("Agent2", model.model1()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -437,7 +438,7 @@ public class NegotiatorAgent extends Agent {
 		Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 		statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
 
-		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().getElements());
+		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().sortValues());
 
 		if(c != null)
 			statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
