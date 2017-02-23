@@ -546,7 +546,7 @@ public enum Restaurant implements Option {
 	}
 	
 	public String print(){
-		  return "Its a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant, situated in the " + this.arrondissement +" arrondissement";
+		  return "Its a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant in the " + this.arrondissement +" arrondissement";
 	}
 
 	@Override
