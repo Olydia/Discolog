@@ -1,0 +1,27 @@
+Dialogues I like:
+----------------------------------------------------------------
+	Initpref(Agent1) = model1 -Init pref(Agent2) = model 3 
+	dom(Agent1)=0.9, dom(Agent2) = 0.4
+----------------------------------------------------------------
+
+Agent1 says "Let's go to a Chinese restaurant."
+Agent2 says "I don't like Chinese restaurants, let's choose something else."
+Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
+Agent2 says "Do you like Italian restaurants?"
+Agent1 says "I don't like Italian restaurants."
+Agent2 says "Do you like Mexican restaurants?"
+Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
+Agent2 says "Do you like Mexican restaurants?"
+Agent1 says "I don't like Mexican restaurants."
+Agent2 says "Do you like French restaurants?"
+Agent1 says "Let's go to a cheap restaurant."
+Agent2 says "Okay, Let's go to a cheap restaurant."
+Agent1 says "Let's go to a restaurant in the II arrondissement."
+Agent2 says "Okay, Let's go to a restaurant in the II arrondissement."
+Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
+Agent2 says "Okay, Let's go to the Dragon dor restaurant."
+
+I like the submissive agent strategy, chinese was refuse but still he proposed the "dragon dor" restaurant which is chinese ... Agent 2 ignores this proposal.
+Thus, the dominant negotiate on each criterion of the restaurant "dragon dor" and made the agent 2 accepts it in the end. 
+(We can clearly see that agent 2 made concessions while agent 1 no).
+
