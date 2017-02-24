@@ -325,8 +325,8 @@ public class Negotiation<O extends Option> {
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
 
-		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().getElements());
-
+		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().sortValues());
+		discussions = getCriteria().sortValues(discussions);
 		double self = this.self();
 
 		for(int i = discussions.size()-1; i>=0; i--){

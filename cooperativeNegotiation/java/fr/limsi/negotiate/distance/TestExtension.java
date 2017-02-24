@@ -33,6 +33,7 @@ public class TestExtension {
 		m2.add(new Preference<Criterion>(Cost.AFFORDABLE, Cost.EXPENSIVE));
 		List<Criterion> values = Arrays.asList(Cost.values());
 		totalOrderedModels m = new totalOrderedModels();
+		System.out.println(m.model1().getOptions().length);
 		NegotiationDistance e = new NegotiationDistance(m.model1(), m.model2());
 		//Distance d = new Distance(m1, m2, values);
 		System.out.println(e.distance());

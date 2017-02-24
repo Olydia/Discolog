@@ -30,7 +30,7 @@ public class CreatOptions {
 
 			for(Cost cost: Cost.values()){
 				for (Atmosphere ambiance: Atmosphere.values()){
-					for (Arrondissement arr : Arrondissement.values()){
+					for (District arr : District.values()){
 							System.out.println(restau.get(cuisine)[i].toUpperCase()+"(Cuisine."+cuisine+ ", Cost." + cost.name()+ ", Atmosphere." +
 									ambiance.name() + ", Arrondissement." + arr.name()+"),");
 							i++;

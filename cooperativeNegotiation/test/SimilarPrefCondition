@@ -1,0 +1,17 @@
+----------------------------------------------------------------
+	Initpref(Agent1) = model 2 -Init pref(Agent2) = model 4 
+	 
+	 For all the possible initialization of dom(Agent) > 0.5 and
+	  dom(Agent 2)<=0.5
+----------------------------------------------------------------
+
+Agent1 says "Let's go to a restaurant in the IV district."
+Agent2 says "Okay, Let's go to a restaurant in the IV district."
+Agent1 says "Let's go to the Couture. Its a lively, expensive French restaurant in the IV district."
+Agent2 says "Okay, Let's go to the Couture restaurant."
+
+# You can see that the negotiation converges after 4 utterances.
+#
+
+
+

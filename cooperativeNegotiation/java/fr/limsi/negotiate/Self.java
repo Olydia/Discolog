@@ -28,6 +28,10 @@ public abstract class Self<C> {
 
 	public List<C> sortValues(){
 		List<C> elems = getElements();
+		return (sortValues(elems));
+	}
+	
+	public List<C> sortValues(List<C> elems){
 		elems.sort(new Comparator<C>() {
 			@Override
 			public int compare(C o1, C o2){
@@ -37,7 +41,6 @@ public abstract class Self<C> {
 		});
 		return elems;
 	}
-	
 	
 	public float satisfaction(C value){
 		float score = matrix.getScoreOf(value);
