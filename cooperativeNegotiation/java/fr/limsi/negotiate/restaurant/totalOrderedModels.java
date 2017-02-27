@@ -15,7 +15,7 @@ public class totalOrderedModels {
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
 		d1_criteria.addPreference(Atmosphere.class, Cost.class);
 		d1_criteria.addPreference(Cost.class, Cuisine.class);
-		d1_criteria.addPreference(District.class, Atmosphere.class);
+		d1_criteria.addPreference(Location.class, Atmosphere.class);
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
@@ -41,13 +41,14 @@ public class totalOrderedModels {
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
-		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.TWELFTH, District.TENTH);
-		d1_location.addPreference(District.TWELFTH,District.FOURTH);
-		d1_location.addPreference(District.FOURTH, District.SECOND);
-		d1_location.addPreference(District.FOURTH, District.FIRST);
-		d1_location.addPreference(District.FIRST, District.SECOND);
-		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
+		Self_Ci<Location> d1_location =  new Self_Ci<>(Location.class);
+		d1_location.addPreference(Location.NORTH_SIDE, Location.DOWNTOWN);
+		d1_location.addPreference(Location.DOWNTOWN, Location.EAST_SIDE);
+		d1_location.addPreference(Location.EAST_SIDE, Location.WEST_SIDE);
+		d1_location.addPreference(Location.EAST_SIDE, Location.SOUTH_SIDE);
+		d1_location.addPreference(Location.WEST_SIDE, Location.SOUTH_SIDE);
+
+		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d1_location);
 		
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
 		d1_cost.addPreference(Cost.EXPENSIVE, Cost.AFFORDABLE);
@@ -68,7 +69,7 @@ public class totalOrderedModels {
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
 		d1_criteria.addPreference(Cuisine.class, Cost.class);
 		d1_criteria.addPreference(Cost.class, Atmosphere.class);
-		d1_criteria.addPreference(Atmosphere.class, District.class);
+		d1_criteria.addPreference(Atmosphere.class, Location.class);
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
@@ -95,13 +96,15 @@ public class totalOrderedModels {
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
-		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.SECOND, District.FIRST);
-		d1_location.addPreference(District.FIRST,District.FOURTH);
-		d1_location.addPreference(District.FOURTH, District.TENTH);
-		d1_location.addPreference(District.TENTH, District.TWELFTH);
-		d1_location.addPreference(District.FOURTH, District.TWELFTH);
-		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
+		Self_Ci<Location> d1_location =  new Self_Ci<>(Location.class);
+		d1_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
+		d1_location.addPreference(Location.SOUTH_SIDE,Location.EAST_SIDE);
+		d1_location.addPreference(Location.WEST_SIDE, Location.EAST_SIDE);
+		d1_location.addPreference(Location.EAST_SIDE, Location.NORTH_SIDE);
+		d1_location.addPreference(Location.EAST_SIDE, Location.DOWNTOWN);
+		d1_location.addPreference(Location.DOWNTOWN, Location.NORTH_SIDE);
+
+		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d1_location);
 		
 
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
@@ -121,7 +124,7 @@ public class totalOrderedModels {
 
 
 		Self_C<Restaurant>  d2_criteria = new Self_C<Restaurant> (Restaurant.class);
-		d2_criteria.addPreference(District.class, Atmosphere.class);
+		d2_criteria.addPreference(Location.class, Atmosphere.class);
 		d2_criteria.addPreference(Atmosphere.class, Cost.class);
 		d2_criteria.addPreference(Cost.class, Cuisine.class);
 
@@ -154,13 +157,13 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d2_atmosphere);
 
 		
-		Self_Ci<District> d2_location =  new Self_Ci<>(District.class);
-		d2_location.addPreference(District.TWELFTH, District.TENTH);
-		d2_location.addPreference(District.TENTH,District.FIRST);
-		d2_location.addPreference(District.SECOND, District.SECOND);
-		d2_location.addPreference(District.SECOND, District.FOURTH);
-		d2_location.addPreference(District.FIRST, District.FOURTH);
-		CriterionNegotiation<District> location = new CriterionNegotiation<>(d2_location);
+		Self_Ci<Location> d2_location =  new Self_Ci<>(Location.class);
+		d2_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
+		d2_location.addPreference(Location.WEST_SIDE,Location.DOWNTOWN);
+		d2_location.addPreference(Location.NORTH_SIDE, Location.DOWNTOWN);
+		d2_location.addPreference(Location.NORTH_SIDE, Location.EAST_SIDE);
+		d2_location.addPreference(Location.DOWNTOWN, Location.EAST_SIDE);
+		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d2_location);
 		
 
 		Self_Ci<Cost> d2_cost = new Self_Ci<Cost>(Cost.class);
@@ -182,7 +185,7 @@ public class totalOrderedModels {
 
 		Self_C<Restaurant>  d4_criteria = new Self_C<Restaurant> (Restaurant.class);
 		
-		d4_criteria.addPreference(District.class, Atmosphere.class);		
+		d4_criteria.addPreference(Location.class, Atmosphere.class);		
 		d4_criteria.addPreference(Atmosphere.class, Cost.class);
 		d4_criteria.addPreference(Cost.class, Cuisine.class);
 
@@ -208,13 +211,14 @@ public class totalOrderedModels {
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d4_atmosphere);
 
-		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.SECOND, District.FIRST);
-		d1_location.addPreference(District.FIRST,District.FOURTH);
-		d1_location.addPreference(District.FOURTH, District.TENTH);
-		d1_location.addPreference(District.TENTH, District.TWELFTH);
-		d1_location.addPreference(District.FOURTH, District.TWELFTH);
-		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
+		Self_Ci<Location> d4_location =  new Self_Ci<>(Location.class);
+		d4_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
+		d4_location.addPreference(Location.SOUTH_SIDE,Location.EAST_SIDE);
+		d4_location.addPreference(Location.WEST_SIDE, Location.EAST_SIDE);
+		d4_location.addPreference(Location.EAST_SIDE, Location.NORTH_SIDE);
+		d4_location.addPreference(Location.EAST_SIDE, Location.DOWNTOWN);
+		d4_location.addPreference(Location.DOWNTOWN, Location.NORTH_SIDE);
+		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d4_location);
 		
 
 		Self_Ci<Cost> d4_cost = new Self_Ci<Cost>(Cost.class);
@@ -233,9 +237,9 @@ public class totalOrderedModels {
 	public ArrayList<Negotiation<Restaurant>> getModels(){
 		ArrayList<Negotiation<Restaurant>> models = new ArrayList<Negotiation<Restaurant>>();
 		models.add(this.model1());
-	//	models.add(this.model2());
-		models.add(this.model3());
-	//	models.add(this.model4());
+		models.add(this.model2());
+//		models.add(this.model3());
+//		models.add(this.model4());
 	//	models.add(this.model5());
 		
 		return models;

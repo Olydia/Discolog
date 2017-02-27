@@ -2,12 +2,12 @@ package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.Criterion;
 
-public enum District implements Criterion {
-	FIRST, SECOND, FOURTH, EIGHTH, TENTH, TWELFTH ;
+public enum Location implements Criterion {
+	DOWNTOWN, NORTH_SIDE, EAST_SIDE, WEST_SIDE, SOUTH_SIDE;
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
-		return District.values();
+		return Location.values();
 	}
 
 	@Override
@@ -18,12 +18,15 @@ public enum District implements Criterion {
 	
 	@Override
 	public String toString(){
-		return this.name().toLowerCase();
+		String input = this.name();
+		input = input.replace("_", " ");
+		return input.toLowerCase();
 	}
 
 	@Override
 	public String print(String topic) {
-		return  topic  +" in the "+ this.toString() + " district";
+		String text = (this.equals(DOWNTOWN)? " " : " on the ");
+		return  topic  + text + this.toString();
 	}
 
 
