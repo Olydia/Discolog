@@ -3,8 +3,7 @@ package fr.limsi.negotiate.restaurant;
 import fr.limsi.negotiate.Criterion;
 
 public enum District implements Criterion {
-	I, II, IV, IIX, IX, XII ;
-
+	FIRST, SECOND, FOURTH, EIGHTH, TENTH, TWELFTH ;
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
@@ -19,7 +18,7 @@ public enum District implements Criterion {
 	
 	@Override
 	public String toString(){
-		return this.name();
+		return this.name().toLowerCase();
 	}
 
 	@Override

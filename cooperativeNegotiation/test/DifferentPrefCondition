@@ -6,23 +6,22 @@ Dialogues I like:
 
 Agent1 says "Let's go to a Chinese restaurant."
 Agent2 says "I don't like Chinese restaurants, let's choose something else."
-Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
+Agent1 says "Let's go to the Dragon dor. Its a quiet, cheap Chinese restaurant in the second district."
 Agent2 says "Do you like Italian restaurants?"
 Agent1 says "I don't like Italian restaurants."
-Agent2 says "Do you like Mexican restaurants?"
-Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
-Agent2 says "Do you like Mexican restaurants?"
-Agent1 says "I don't like Mexican restaurants."
 Agent2 says "Do you like French restaurants?"
+Agent1 says "Let's go to the Dragon dor. Its a quiet, cheap Chinese restaurant in the second district."
+Agent2 says "Do you like French restaurants?"
+Agent1 says "I don't like French restaurants."
+Agent2 says "Do you like Korean restaurants?"
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Okay, Let's go to a cheap restaurant."
-Agent1 says "Let's go to a restaurant in the II arrondissement."
-Agent2 says "Okay, Let's go to a restaurant in the II arrondissement."
-Agent1 says "Let's go to the Dragon dor . Its a quiet, cheap Chinese restaurant in the II arrondissement."
+Agent1 says "Let's go to a restaurant in the second district."
+Agent2 says "Okay, Let's go to a restaurant in the second district."
+Agent1 says "Let's go to the Dragon dor. Its a quiet, cheap Chinese restaurant in the second district."
 Agent2 says "Okay, Let's go to the Dragon dor restaurant."
 
-
-#I like the submissive agent strategy, chinese was refuse but still he proposed the "dragon dor" restaurant which is chinese ... Agent 2 ignores this proposal.
+#I like the dominant agent strategy, chinese was refuse but still he proposed the "dragon dor" restaurant which is chinese... Agent 2 ignores this proposal.
 #Thus, the dominant negotiate on each criterion of the restaurant "dragon dor" and made the agent 2 accepts it in the end. 
 #(We can clearly see that agent 2 made concessions while agent 1 no).
 
@@ -42,77 +41,21 @@ Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Do you like affordable restaurants?"
 Agent1 says "I don't like affordable restaurants."
-Agent2 says "What kind of arrondissement do you like?"
-Agent1 says "Let's go to a restaurant in the II arrondissement."
-Agent2 says "Okay, Let's go to a restaurant in the II arrondissement."
-Agent1 says "Let's go to the Okinawa . Its a quiet, cheap Japanese restaurant in the II arrondissement."
-Agent2 says "I prefer to go to a cheap restaurant but not to the Okinawa restaurant."
-Agent1 says "Let's go to the Okinawa . Its a quiet, cheap Japanese restaurant in the II arrondissement."
+Agent2 says "What kind of atmosphere do you like?"
+Agent1 says "Let's go to a cheap restaurant."
+Agent2 says "Okay, Let's go to a cheap restaurant."
+Agent1 says "Let's go to the Okinawa . Its a quiet, cheap Japanese restaurant in the second district."
 Agent2 says "Okay, Let's go to the Okinawa restaurant."
 
-
-# In this dialogue, the dominant agent is more cooperative than in the first dialogue.(the second  restaurant proposal is a japanese restaurant because the agent 2 doesn't like chinese food)
-#However, he refuses to make other concessions.
-
-
-----------------------------------------------------------------
-	Initpref(Agent1) = model 3 -Init pref(Agent2) = model 1 
-	
-	dom(Agent1)=0.9, dom(Agent2) = 0.5
-----------------------------------------------------------------
-
-
-Agent1 says "Let's go to an Italian restaurant."
-Agent2 says "I don't like Italian restaurants, let's choose something else."
-Agent1 says "Let's go to the Anteprima . Its a lively, expensive Italian restaurant in the IIX arrondissement."
-Agent2 says "Do you like Chinese restaurants?"
-Agent1 says "I don't like Chinese restaurants."
-Agent2 says "Do you like Japanese restaurants?"
-Agent1 says "Let's go to the Anteprima . Its a lively, expensive Italian restaurant in the IIX arrondissement."
-Agent2 says "Do you like Japanese restaurants?"
-Agent1 says "I don't like Japanese restaurants."
-Agent2 says "Do you like Turkish restaurants?"
-Agent1 says "Let's go to a restaurant in the IIX arrondissement."
-Agent2 says "Okay, Let's go to a restaurant in the IIX arrondissement."
-Agent1 says "Let's go to an expensive restaurant."
-Agent2 says "In the end, I prefer to go to the Anteprima restaurant."
-Agent1 says "Okay."
-
-
-# In this dialogue, concessions made by agent 2 are visibles with the italian and the expensive restaurant. 
-#
-
-----------------------------------------------------------------
-	Initpref(Agent1) = model 3 -Init pref(Agent2) = model 1 
-	dom(Agent1)=0.7, dom(Agent2) = 0.4
-----------------------------------------------------------------
-
-Agent1 says "Let's go to an Italian restaurant."
-Agent2 says "I don't like Italian restaurants, let's choose something else."
-Agent1 says "Let's go to an expensive restaurant."
-Agent2 says "Do you like cheap restaurants?"
-Agent1 says "I don't like cheap restaurants."
-Agent2 says "Do you like affordable restaurants?"
-Agent1 says "Let's go to an expensive restaurant."
-Agent2 says "Do you like affordable restaurants?"
-Agent1 says "I don't like affordable restaurants."
-Agent2 says "What kind of arrondissement do you like?"
-Agent1 says "Let's go to a restaurant in the IIX arrondissement."
-Agent2 says "Okay, Let's go to a restaurant in the IIX arrondissement."
-Agent1 says "Let's go to the Azteca . Its a lively, expensive Mexican restaurant in the IIX arrondissement."
-Agent2 says "I prefer to go to an expensive restaurant but not to the Azteca restaurant."
-Agent1 says "Let's go to the Azteca . Its a lively, expensive Mexican restaurant in the IIX arrondissement."
-Agent2 says "Okay, Let's go to the Azteca restaurant."
-
-# in this dialogue we can see the difference in both agents strategies: (i.e In one hand Agent 1 focuses on proposing restaurant to make the negotiation converge. 
-# On the other hand, Agent 2 keeps collecting informations about agent 1's preferences in order to make "fair" proposals. 
+# In this dialogue, the dominant agent is more cooperative than in the first dialogue.
+#(the second restaurant proposal is a Japanese restaurant because the agent 2 doesn't like Chinese food)
+#However, he refuses to make other concessions and leads the dialogue.
 
 
 ----------------------------------------------------------------
 	Initpref(Agent1) = model 1 -Init pref(Agent2) = model 3 
 	dom(Agent1)=0.7, dom(Agent2) = 0.25
 ----------------------------------------------------------------
-
 Agent1 says "Let's go to a Chinese restaurant."
 Agent2 says "I don't like Chinese restaurants, let's choose something else."
 Agent1 says "Let's go to a cheap restaurant."
@@ -121,9 +64,9 @@ Agent1 says "I don't like expensive restaurants."
 Agent2 says "Do you like affordable restaurants?"
 Agent1 says "Let's go to a cheap restaurant."
 Agent2 says "Okay, Let's go to a cheap restaurant."
-Agent1 says "Let's go to the Okinawa . Its a quiet, cheap Japanese restaurant in the II arrondissement."
-Agent2 says "Okay, Let's go to the Okinawa restaurant."
-Agent1 says "Okay."
+Agent1 says "Let's go to the Okinawa . Its a quiet, cheap Japanese restaurant in the second district."
+Agent2 says "Okay, Let's go to the Okinawa restaurant.""
 
-# The agent 2 is very submissive and after one reject, accept all the proposals of agent1. 
-#
+
+# The agent 2 is very submissive and after one reject, accept all the proposals of agent1 (concession behaviour). 
+#Agent 1 is the only one who make proposals(Lead the the negotiation)

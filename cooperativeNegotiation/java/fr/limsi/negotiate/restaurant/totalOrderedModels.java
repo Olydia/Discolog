@@ -42,11 +42,11 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
 		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.XII, District.IX);
-		d1_location.addPreference(District.XII,District.IV);
-		d1_location.addPreference(District.IV, District.II);
-		d1_location.addPreference(District.IV, District.I);
-		d1_location.addPreference(District.I, District.II);
+		d1_location.addPreference(District.TWELFTH, District.TENTH);
+		d1_location.addPreference(District.TWELFTH,District.FOURTH);
+		d1_location.addPreference(District.FOURTH, District.SECOND);
+		d1_location.addPreference(District.FOURTH, District.FIRST);
+		d1_location.addPreference(District.FIRST, District.SECOND);
 		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
 		
 		Self_Ci<Cost> d1_cost = new Self_Ci<Cost>(Cost.class);
@@ -72,16 +72,16 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.CHINESE);
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
-		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.KOREAN);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.ITALIAN);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.KOREAN);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
 
 
 
@@ -96,11 +96,11 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
 		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.II, District.I);
-		d1_location.addPreference(District.I,District.IV);
-		d1_location.addPreference(District.IV, District.IX);
-		d1_location.addPreference(District.IX, District.XII);
-		d1_location.addPreference(District.IV, District.XII);
+		d1_location.addPreference(District.SECOND, District.FIRST);
+		d1_location.addPreference(District.FIRST,District.FOURTH);
+		d1_location.addPreference(District.FOURTH, District.TENTH);
+		d1_location.addPreference(District.TENTH, District.TWELFTH);
+		d1_location.addPreference(District.FOURTH, District.TWELFTH);
 		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
 		
 
@@ -155,11 +155,11 @@ public class totalOrderedModels {
 
 		
 		Self_Ci<District> d2_location =  new Self_Ci<>(District.class);
-		d2_location.addPreference(District.XII, District.IX);
-		d2_location.addPreference(District.IX,District.I);
-		d2_location.addPreference(District.II, District.II);
-		d2_location.addPreference(District.II, District.IV);
-		d2_location.addPreference(District.I, District.IV);
+		d2_location.addPreference(District.TWELFTH, District.TENTH);
+		d2_location.addPreference(District.TENTH,District.FIRST);
+		d2_location.addPreference(District.SECOND, District.SECOND);
+		d2_location.addPreference(District.SECOND, District.FOURTH);
+		d2_location.addPreference(District.FIRST, District.FOURTH);
 		CriterionNegotiation<District> location = new CriterionNegotiation<>(d2_location);
 		
 
@@ -209,11 +209,11 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d4_atmosphere);
 
 		Self_Ci<District> d1_location =  new Self_Ci<>(District.class);
-		d1_location.addPreference(District.II, District.I);
-		d1_location.addPreference(District.I,District.IV);
-		d1_location.addPreference(District.IV, District.IX);
-		d1_location.addPreference(District.IX, District.XII);
-		d1_location.addPreference(District.IV, District.XII);
+		d1_location.addPreference(District.SECOND, District.FIRST);
+		d1_location.addPreference(District.FIRST,District.FOURTH);
+		d1_location.addPreference(District.FOURTH, District.TENTH);
+		d1_location.addPreference(District.TENTH, District.TWELFTH);
+		d1_location.addPreference(District.FOURTH, District.TWELFTH);
 		CriterionNegotiation<District> location = new CriterionNegotiation<>(d1_location);
 		
 
@@ -232,10 +232,10 @@ public class totalOrderedModels {
 	
 	public ArrayList<Negotiation<Restaurant>> getModels(){
 		ArrayList<Negotiation<Restaurant>> models = new ArrayList<Negotiation<Restaurant>>();
-		//models.add(this.model1());
-		models.add(this.model2());
-		//models.add(this.model3());
-		models.add(this.model4());
+		models.add(this.model1());
+	//	models.add(this.model2());
+		models.add(this.model3());
+	//	models.add(this.model4());
 	//	models.add(this.model5());
 		
 		return models;

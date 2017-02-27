@@ -27,7 +27,7 @@ public class TestDialogues {
 				double relationAgent2 ;
 
 				for(int i= 0; i<4; i++){
-					relationAgent2 = 0.3;
+					relationAgent2 = 0.2;
 					for(int j= 0; j<3; j++){
 
 						if(indexA != indexB){

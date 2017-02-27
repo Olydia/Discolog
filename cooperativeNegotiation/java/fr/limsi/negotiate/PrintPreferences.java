@@ -32,13 +32,13 @@ public class PrintPreferences<O extends Option> {
 		// TODO Auto-generated method stub
 		totalOrderedModels m = new totalOrderedModels();
 		//GenerateMovieModel m = new GenerateMovieModel();
-		PrintPreferences<Restaurant> p = new PrintPreferences<Restaurant>(m.model2());
+		PrintPreferences<Restaurant> p = new PrintPreferences<Restaurant>(m.model3());
 		PrintPreferences<Restaurant> p1 = new PrintPreferences<Restaurant>(m.model4());
 
 		p.printSatisfiability();
-		System.out.println("============================");
-		p1.printSatisfiability();
-		
+//		System.out.println("============================");
+//		p1.printSatisfiability();
+//		
 	}
 
 }

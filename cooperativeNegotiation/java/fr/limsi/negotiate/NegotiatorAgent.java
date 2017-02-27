@@ -27,7 +27,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.3;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.25;
 
 	private double relation = DOMINANT;
 
