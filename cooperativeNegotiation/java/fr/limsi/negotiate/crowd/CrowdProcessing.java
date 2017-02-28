@@ -9,7 +9,7 @@ public class CrowdProcessing {
 	public static void main(String args[]) {
 		String domModel = "model3";
 		String subModel = "model1";
-		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/dom09_sub04";
+		String path = "/people/ouldouali/git/Discolog/cooperativeNegotiation/test/Console";
 		String fileName = path+"/Dominant-"+domModel+"__Submissive-"+subModel;
 
 		//read file into stream, try-with-resources

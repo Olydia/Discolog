@@ -53,8 +53,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model3()), 
+				new NegotiatorAgent("Agent1", model.model3()), 
+				new NegotiatorAgent("Agent2", model.model4()), 
 				false);
 
 		// note not loading Negotiotion.xml!
