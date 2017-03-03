@@ -27,7 +27,7 @@ public class NegotiatorAgent extends Agent {
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.8;
 
 	private double relation = DOMINANT;
 
@@ -53,8 +53,8 @@ public class NegotiatorAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model3()), 
-				new NegotiatorAgent("Agent2", model.model4()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
