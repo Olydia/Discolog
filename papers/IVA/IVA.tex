@@ -295,65 +295,74 @@
 		
 		 We built a conversational agent able to deploy a strategy of negotiation based on its perception of interpersonal relationship of dominance. 
 		 
-		 
-		 In order to validate our model, we present in this section a perceptual experiment in which participants have to determine the behaviors of two agents generated using our model. 
+		 In order to validate our model, we conducted a perceptual study in which participants ha to determine the behaviors of two agents generated using our model. 
 		 
 			\subsection{Study design}
-		We developed an experimental scenario in which we generate dialogues of negotiation between two agents implemented with the proposed model. We used a simple topic of "negotiation about a restaurant where to have dinner".
+	%	We developed an experimental scenario in which we generated dialogues of negotiation between two agents implemented with the proposed model. We used a social topic of "negotiation about a restaurant where to have dinner".
+		We used our model to develop two conversational agents which have to negotiate about a social topic of "negotiation about a restaurant where to have dinner".
 		
-		We manipulated two parameters in the generation of dialogues. First, the initial value of dominance \textbf{dom} (see section \ref{decision}). The purpose was to define the behavior of agents in negotiation. 
-		We aimed to make the first agent adopt more a dominant behavior by initiating the value of its dominance \textbf{dom} in the higher range (dom  $>\sigma$). Complementarity, the second agent had to adopt a submissive behavior. Therefore we initiated its \textbf{dom} to be in the lower range. (dom  $ \leq \sigma$)
+		We generated a set of dialogues where we manipulated two main parameters. First, the initial value of the dominance \textbf{dom} (see section \ref{decision}). The purpose was to define the behavior of agents in negotiation.
+		We aimed to make the first agent \emph{(Agent 1)} adopt more a dominant behavior by initiating the value of its dominance \textbf{dom} in the higher range of the dominance spectrum ($dom>\sigma$). Complementarity, the second agent \emph{(Agent 2)} had to adopt a submissive behavior. Therefore we initiated its \textbf{dom} to be in the lower range. ($ dom\leq \sigma$).
 		
-		The second manipulation involved varying the initial preferences of both agents.  We manipulated the initial preferences to be either similar or different. We used the metric of Kendall distance \cite{bra2013Kendall} in order to compute the distance between two preferences sets (see section \ref{decision}).  
-	%	\begin{table} 
-	%		\centering
-	%		\begin{tabular}{|c|c|}
-	%			\hline
-	%			Models & Distance \\
-	%			\hline
-	%			(Model1, Model2) & 0.98\\
-	%			(Model2, Model3) & 0.90 \\
-	%			\hline
-	%		\end{tabular}
-	%		\caption{Kendall distance between the models of preferences}
-	%	\end{table}
+		We present the initial values of dominance defined for both agents:
+		
+	\begin{table}
+		\centering
+		\begin{tabular} {|c|c|c|}
+			\hline
+			\newline dom(Agent 1) & dom(Agent 2)\\
+			\hline
+			 \newline 0.9 & 0.4 \\
+			 \hline
+			 \newline 0.7 & 0.4 \\
+			 \hline
+			 \newline 0.7 & 0.2 \\
+			 \hline
+		\end{tabular}
+		\caption{Initial dominance setting for agents}
+	\end{table}
+		
+		The second manipulation involved varying the initial preferences of both agents. We manipulated the initial preferences to be either \textit{similar} or \textit{different}. We used the metric of Kendall distance \cite{bra2013Kendall} in order to compute the distance between two preferences sets (see section \ref{decision}).  
+		
+		
+		We figured out, that the dialogues generated with the \textit{similar} preferences condition are quite similar, because the negotiation converges quickly. Therefore, we presented only one dialogue in the \textit{similar preferences} condition for the experiment. 
+		
+	%	We present in table the initial setting for agents for the presented dialogues in the experiment.
+		
 				
 		\subsection{Hypotheses}
-		 We investigated three main hypotheses about the perception of agents behaviors of dominance during the negotiation. 
+		 We investigated four main hypotheses about the perception of agents behaviors of dominance during the negotiation. 
 		 \begin{itemize}
-		 	\item  \textbf{H1:} In the negotiation, the more dominant speaker will more strongly be perceived as self-centered.  
+		 	\item  \textbf{H1:} In the dialogue, the speaker with the higher dominance will more strongly be perceived as self-centered.  
 		 	
-		 	\item \textbf{H2:} Agents with lower dominance will make larger concessions.
+		 	\item \textbf{H2:} The speaker with the lower dominance is more strongly perceived as making concessions.
 		 	
-		 	\item \textbf{H3:} Agents with lower dominance are perceived as having a lower level of demand comparing to agents with higher dominance. 
+		 	\item \textbf{H3:} The speaker with the higher dominance is perceived as having a higher level of demand comparing to the speaker with a lower dominance.
 		 	
-		 	\item \textbf{H4:} Agents with higher dominance are more likely to take the lead of the negotiation. In addition they are perceived to adopt a goal-directed behavior. 
-		 	
-		 	\item \textbf{H5:} In the condition where initial preference sets of agents are similar, the behaviors of dominance will not be visible, because the negotiation converge quickly.
+		 	\item \textbf{H4:} The speaker with the higher dominance is more strongly perceived as taking the lead of the negotiation.
 		 	
 		 \end{itemize}
 				
 		\subsection{Experimental Procedure}
 		
 		We conducted a between-subject study using an online crowdsoursing website \emph{CrowdFlower} \footnote{https://www.crowdflower.com/}. 
-		Each generated dialogue had a questionnaire. There were 12 questions (including 2 test questions).
 		
-		Participants had to judge each agent behaviors in the proposed dialogues. Agents were described as two friends trying to find a restaurant where to have dinner. We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. Participants were invited to read the assigned dialogue and answer the corresponding questionnaire. 
+		%Each generated dialogue had a questionnaire. There were 12 questions (including 2 test questions).
+		
+		Each participant was shown only one dialogue, where the task was to judge each agent behaviors. Agents were described as two friends trying to find a restaurant where to have dinner. We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. Participants were invited to read the assigned dialogue and answer the corresponding questionnaire. 
 		
 		\subsection{Participants}
-		A total of 10 subjects participated to the experiment. They were recruited through the website \emph{Crowdflower.com}, for which each subject received \textit{20 cents} for the task. 
+		A total of 120 subjects participated to the experiment. They were recruited through the website \emph{Crowdflower.com}, for which each subject received \textit{25 cents}. 
 		
 		
-		We limited the participant pools to native English speakers. Test questions were included to check the sanity of the answers. We eliminated participants providing wrong answers to our sanity questions. The final number of participants were 10. 
+		We limited the participant pools to native English speakers. Two test questions were included to check the sanity of the answers. We excluded participants providing wrong answers to our sanity questions. The final number of accepted participants was 105. 
 		
 		\subsection{Results}
-		\hl{We should add in the begging a study about the relation between questions for the same principle $\alpha$ crombach}
+		For each hypothesis, we defined two questions. In order to analyze participant's responses, we computed the correlation between each pair of questions. The obtained results showed a high correlation between each pair of questions for all the hypotheses.
 		
+		The obtained data was analyzed using a non parametric test, and all pairwise analysis of agent 1 versus agent 2 were made using of Wilcoxon signed-rank test for paired data. 
 		
-		\par We used the T-Student analysis to analyze the obtained results for the different conditions. 
-		
-		
-		Our first hypothesis (H1) predicted that participants perceive agents with lower dominance  to care more for other preferences than agents with higher dominance would do. Our analysis confirmed our prediction; participants rated agents with lower dominance to consider the preferences of other (M=3.8, SD = 0.79), than they did with agents having higher dominance (M=2.2, SD=1.14), \emph{p =.011} (see Figure \ref{considerOther}).
+		\par Our first hypothesis (H1) predicted that participants perceive agents with lower dominance  to care more for other preferences than agents with higher dominance would do. Our analysis confirmed our prediction; participants rated agents with lower dominance to consider the preferences of other (M=3.8, SD = 0.79), than they did with agents having higher dominance (M=2.2, SD=1.14), \emph{p =.011} (see Figure \ref{considerOther}).
 					\begin{figure}[h]
 						\centering
 						\caption{\label{considerOther} The results for the  hypothesis H1}
