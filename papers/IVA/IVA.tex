@@ -35,32 +35,59 @@
 					In this paper, we are interested in modeling a dialogue system for social dialogue in which user and agent cooperate in order to achieve a common objective.  We believe that individuals that collaborate to fulfill an objective (for example: find a restaurant for dinner), have their own preferences in the way to do it, which lead them to conduct a \emph{cooperative negotiation} about their preferences in order to determine a trade-off that satisfy both interlocutors. Moreover, scholars in social psychology and communication investigated the impact interactive effects of relations and emotion in negotiation, and proved that  \emph{interpersonal dominance} affect the strategies of negotiators. Our objective is to build an agent that can perceive the established relation of dominance and adapt its strategy of negotiation to the relation. 
 					
 					In the next section, we review related works on designing social agents. Section 3 will relate our definition of dominance based on research on social psychology. In section 4, we present our model of dialogue. Section 5 will discuss our experiment and the analysis obtained results. 
-					
-					\section{Related works}
-					
+				
 					
 					\section{Dominance in dialogue}
-					\par Despite the various definitions of dominance available in the fields of interpersonal communication and psychology, scholars are converging to a general definition of dominance as the power to produce intended effects, and the ability to influence the behavior of other person in the conversation. (Bachrach \& Lawler, 1981; Berger, 1994; Burgoon et al.,
-					1998; Foa\& Foa, 1974; French \& Raven, 1959; Gray-Little \& Burks, 1983;
-					Henley, 1995; Olson \& Cromwell, 1975; Rollins \& Bahr, 1976). Dominance is generally viewed as a personality trait, or to describe the social role of an individual inside a group. However, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.(Rogers-Millar and Millar, 1979,Dunba and Burgoon, 2005). 
-					\par Dominant behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contribution may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified (K,Zablotskaya). Giving these contributions to the conversation, several researches get interested to detect  behaviors related to the dominance during the conversation. We focus essentially on the context of conversation of negotiation, where several researches already proved the impact of dominance on the negotiation(VAN KLEEF, 2005)
+					\par Despite the various definitions of dominance available in the fields of interpersonal communication and psychology, scholars are converging to a general definition of dominance as the power to produce intended effects, and the ability to influence the behavior of other person in the conversation. \cite{dunbar2005perceptions}. Dominance is generally viewed as a personality trait, or to describe the social role of an individual inside a group. However, in the context of communication, dominance is a dyadic variable where one individual's attempt of control is necessarily acquainted by the partner in the interaction.\cite{dunbar2005perceptions}. 
+					\par Dominant behaviors in a conversation can contribute either positively or negatively to the discussion. For example, positive contributions include actions such as keeping the conversation going, orient the task decision, by making quick decisions and conclusions etc. Negative contributions may include not considering the partner in the conversation, for example, not giving the occasion to express his opinion, not open to criticism. In addition, expressing verbally the dominance can be viewed as offensive and unjustified \cite{zablotskaya2012relating}. Giving these contributions to the conversation, several researches get interested to detect behaviors related to the dominance during the conversation. We focus essentially on the context of conversation of negotiation, where several researches already proved the impact of dominance on the negotiation\cite{van2006power}.
 					
 					\subsection{Behaviors of dominance in dialogue}
 					Several scholars studied behaviors related to the dominance in order to gain a better understanding to social relations. During a conversation, dominance can be perceived through verbal and nonverbal behaviors. We present in this section behaviors related to dominance that can be perceived in a conversation of cooperative negotiation.
 					\subsubsection{Non-verbal behaviors:}
-					At the non-verbal level, a wide range of behaviors have been associated with dominance. (Dunbar \& Burgoon) divide non-verbal behaviors into classes such (kinesics, vocalic, ). First, kinesics behaviors are considered as the richest of all the codes that includes facial expression, body movements, gestures. Indeed, dominant individuals are related with high visual ratio (high looking while speaking / listening)(burgoon).  Furthermore, (Dunbar, Burgoon 2005) found that the more body control an individual had the more observers perceived her as dominant. In addition, dominant individual are more susceptible to use gesture when they talk.  
-					\par  Second, voice cues of dominance manifest by speaking duration, speaking intensity, voice control and pitch. Dominant individuals speak loudly and more frequently and might cause interruption while other are talking (Dunbar, Burgoon 2005).
+					At the non-verbal level, a wide range of behaviors have been associated with dominance. \cite{burgoonnonverbal} divide non-verbal behaviors into classes such (kinesics, vocalic, ). First, kinesics behaviors are considered as the richest of all the codes that includes facial expression, body movements, gestures. Indeed, dominant individuals are related with high visual ratio (high looking while speaking / listening).  Furthermore, \cite{burgoonnonverbal} found that the more body control an individual had the more observers perceived her as dominant. In addition, dominant individuals are more susceptible to use gesture when they talk.  
+					\par  Second, voice cues of dominance manifest by speaking duration, speaking intensity, voice control and pitch. Dominant individuals speak loudly and more frequently and might cause interruption while other are talking \cite{dunbar2005perceptions}.
 					
 					\subsubsection{Verbal behaviors:}
-					verbal behavior of dominance in the dialogue is related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. Therefore, dominant negotiators tend to end up with the larger share of the pie (Giebels, De Dreu, \& Van de Vliert, 2000). 
-					\par A considerable body of research has documented the effects of dominance on negotiation behaviors and outcomes. First, dominant negotiator have higher aspirations, demands more and concede less(De Dreu, 1995). Second, dominant negotiator control the flow of the negotiation. Indeed, dominant behavior increase task orientation and goal-directed behaviour (Galinsky,Gruenfeld, \& Magee, 2003). Finally, dominant negotiator tend to not pay attention to less dominant negotiators Fiske (1993). The idea is that high-dominant individuals have many resources and can often act at will without serious consequences, while submissive individuals, have to be more careful because they are more dependent on other people. In addition, they are motivated to gain or regain control over their outcomes by paying close attention to the people on whom they depend.
+					verbal behaviors of dominance in the dialogue are related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. Therefore, dominant negotiators tend to end up with the larger share of the pie \cite{giebels2000interdependence}. 
+					\par A considerable body of research has documented the effects of dominance on negotiation behaviors and outcomes. First, in De Dreu researches about the impact of social value orientation, he demonstrated that \cite{de1995impact} dominant negotiators have higher aspirations, demands more and concede less. 
+					
+					 Moreover, Galinsky \cite{galinsky2003power} demonstrates that the dominance increases the action orientation. Dominant negotiators control the flow of the negotiation. Indeed, dominant behavior increase task orientation and goal-directed behavior. 
+					 
+					 Furthermore, dominant negotiators are self-centered tend to not pay attention to less dominant negotiators \cite{fiske1993controlling},\cite{de1995impact}.
+					 The idea is that high-dominant individuals have many resources and can often act at will without serious consequences, while submissive individuals, have to be more careful because they are more dependent on other people. In addition, they are motivated to gain or regain control over their outcomes by paying close attention to the people on whom they depend.
 					
 					\par We are interested in this paper to the verbal behaviors for two main reasons. First, verbal behaviors are directly related to \emph{the strategies} deployed during the negotiation. In addition our dialogue system is text oriented, which make the non-verbal behavior impossible to reflect during the dialogue. 
 					We present in the next section the decision model based on dominance behaviors. 
 					
 					\subsection{Principles of dominance in negotiation}
+					\subsubsection{Principle 1: Self Vs Other}
+						In DeDreu works \cite{de1995impact}, submissive negotiators consider the well-being of other in the negotiation, whereas dominant negotiators are only interested in their own well-being.
 					
-					\section{Model of negotiation based on dominance}
+					\subsubsection{Principle 2: Representation of demands}
+					
+					Dominant negotiators adopt different strategies comparing to less powerful negotiators. Several researches in social psychology defined a panel of different behaviors in a negotiation:
+					
+					\begin{itemize}
+						\item Dominant negotiators show a higher level of demand than the submissive ones.
+						\item  Submissive negotiator's demand decrease over time, and makes concessions.
+					
+					\end{itemize} 
+					
+					
+					
+					\subsubsection{Principle 3:Control the flow of the negotiation}
+					\begin{itemize}
+						\item Powerful negotiators tend to make the first move. \cite{magee2007power}
+						
+%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)
+						
+						\item Dominance affects the way that negotiators gather information about their partners. Negotiators with less power have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+						
+					\end{itemize} 
+					
+						
+
+	\section{Model of negotiation based on dominance}
 			%		
 			%			 \subsection{Model of preferences}
 			%			  \subsection{Model of communication}
@@ -79,17 +106,16 @@
 					\item $[Chinese, cheap, lively]$. 
 					\item $[Chinese, expensive, quit]$.   
 					\item $[Chinese, expensive, lively]$.
-					\item $[French, cheap, quit]$.  
-					\item $[French, expensive, quit]$.   
-					\item $[Chinese, expensive, lively]\ldots$ 
+%					\item $[French, cheap, quit]$.  
+%					\item $[French, expensive, quit]$.   
+%					\item $[Chinese, expensive, lively]\ldots$ 
 				\end{itemize}
 				
 				
 				\subsection{Self model} 
 				
 				\subsubsection{Preferences for self}
-				Preferences are partial orders (transitive, asymmetric binary relations) on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.
-				
+				Preferences are partial orders (transitive, asymmetric binary relations) on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.			
 				Let $\prec$ denotes the sequence of preferences $\{ \prec_i, \prec_2, ..., \prec_n\}$
 				
 				\subsubsection{Self satisfaction function} 
@@ -379,7 +405,7 @@
 				\par Our second hypothesis (H2) predicted that agents with the lower dominance will be perceived to make larger concessions. For all the proposed dialogues, participants responses supported our hypothesis. (See table ...)
 				For instance, in \textit{dialogue 1} participants reported that Agent2 made larger concessions (M=4.3, SD=0.8), than did the Agent 1(M=2.19, SD=1.1), (\textit{p$<$0.01}).  (see figure  \ref{concession})
 				
-				\par The third hypothesis was also supported in all the dialogues. H3 stated that agents with the higher dominance in dialogue are more strongly perceived as having higher level of demand. As can be seen in Table , in all the dialogues, Agent 1 was perceived as expressing a higher level of demand than Agent 2 does. For instance, in dialogue 1, the level of demand was rated for Agent 1(M=4.07, SD = 0.8) Versus Agent 2(M= 2.65, SD =1.1), with a \textit{p-value $<$ 0.01}.
+				\par The third hypothesis was also supported in all the dialogues. H3 stated that agents with the higher dominance in dialogue are more strongly perceived as having higher level of demand. As can be seen in Table , in all the dialogues, Agent 1 was perceived as expressing a higher level of demand than Agent 2 does. For instance, in dialogue 1, the level of demand was rated for Agent 1(M=4.07, SD = 0.8) versus Agent 2(M= 2.65, SD =1.1), with a \textit{p-value $<$ 0.01}.
 				
 				\par Finally, for the last hypothesis H4, the analysis revealed a significant main effect of the dominance in the lead of the dialogue, indicating that participants perceived agents with the higher dominance (Agent 1) as more leading the dialogue than agents with lower dominance (Agent2). In dialogue 1, participants indicated that Agent 1 is the one who leads the dialogue (M=4.2, SD=0.8) comparing to Agent 2 (M=2.3, SD= 1.1), \textit{p$<$ 0.01}. These results are depicted in the Table ... 
 				
@@ -485,11 +511,26 @@
 		%		\end{figure}
 						
 			 \subsection{Discussion}
-			 \par  The present research provides good support to the claim that the relation of dominance affect agent's behaviors in negotiation.
-			 We found that people perceive this difference in the agent's behaviors depending on the relation of dominance.  Indeed, three of our four hypotheses were confirmed. We predicted that dominant with higher dominance will be perceived as more individualist and self centred. Consistent with this prediction, agents with higher dominance lead the negotiation. However, our second hypothesis was not confirmed by our analysis. Behaviors related to the concessions were not perceived by our participants.  
+
+			 our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of dominance. Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of dominance affects agent's behaviors in negotiation.
 			 
-			 \textit{Limitations} The results presented have a number of limitations. Participants judged the dialogues from an external point which might influence the engagement in the the process of judging agent behavior. The next step, is to experiment our model with an interaction with humans.. 
+			 We found that participants perceived a significant difference in the agent's behaviors depending on their respective relation of dominance.  
+			 Indeed, all of our four hypotheses were confirmed. We predicted that agents with higher dominance will be perceived as more individualist and self-centred, whereas agents with lower dominance would care about other preferences. Furthermore, agents with lower dominance were perceived to make larger concessions than did agents with higher dominance. Consistent with this prediction, agents with higher dominance showed a greater level of demand in the negotiation. Finally, we obtain evidence that agents with higher dominance tends to lead the dialogue and take control of the negotiation's flow. 
 			 
+			 In addition to theses finding, we extended our analysis to understand the perception of dominance in dialogue.
+			 
+			 First, we studied the influence of the initial preferences in the generation and perception of behaviors of dominance.
+			 We supposed that when the initial preferences of agents are similar (\textit{similar preferences} condition), behaviors related dominance won't be perceived due to the high aspect of cooperation in the negotiation. However, as our results demonstrated for dialogues generated in the similar preferences condition, (see results of Dialogue 4), all the hypotheses were supported even when the preferences were quiet similar. Therefore, the behaviors of dominance implemented are not affected by the initial preferences of agents.
+			 
+			 Second, we get interested in analyzing the behaviors of dominance in the spectrum of dominance. We supposed that the highest the dominance gets in the spectrum, the better behaviors of dominance will be perceived. We did compare participant's judgments of Agent 1 in dialogues where Agent 1 had different setting of dominance whereas Agent 2 had the same setting. We specially compared Agent1 behaviors in Dialogue 1 and Dialogue 2. The results obtained are presented in the figure ... 
+			 
+			 Unfortunately, this hypothesis was not supported. We did not observe any significant difference in agents behaviors. This might be explained by the interpersonal nature of dominance, which means that participants rated the dominance of Agent 1 in opposition of Agent2, which makes the comparison in this case irrelevant. 
+			 
+			 \par  The results presented have a number of limitations. Participants judged the dialogues from an external point of view which might influence the engagement in the process of judging agent behavior. The next step, would be to experiment our model with an interaction with humans. Moreover, we aim to to extend our model with a module of theory of mind that would allow the agent to adapt its behavior to complement the user behavior perceived during the dialogue.
+			 
+			 
+			 \section{Related works}			
+			 	
 			 \section{Conclusion and future works}
 			% ================== BIBLIO ===============
 			\vskip 4pt
