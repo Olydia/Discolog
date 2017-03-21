@@ -34,15 +34,13 @@
 
 	\maketitle
 	\section{Introduction}
-	Dialogue systems are artificial systems capable to hold a conversation with a human user, usually to achieve certain objective or fulfill a task.
-	% Existing conversational agents provided with dialogue system play different roles like 
+	With the rise of artificial conversational agents capable to hold a conversation with a human user and potentially display a social behaviors. It become important to understand which social behaviors appear in human-human (H-H) dialogues and how they affect interlocutors behaviors. In particular the social relationship that interlocutors establish during the dialogue.
 	
-	During a human-human dialogue, interlocutors establish a social relationship that affect their behaviors. Previous researches have shown that people tend to respond to computers as social actor [bickmore], which lead the community to assess the psychosocial relationship between the user and the agent during their interaction. 
+	Previous researches have shown that people tend to respond to computers as social actor \cite{bickmore2005establishing}, which lead the community to assess the psychosocial relationship between the user and the agent during their interaction. 
 	A growing body of research is investigating the use of appropriate social behavior for virtual agents in different roles and types of user-computer relationship \cite{bickmore2005s,bickmore2005establishing,kidd2005sociable}.
-%	For example, Bickmore studied the impact of trust ...[To complete]
+
 	
-	
-	In this paper, we are interested in modeling a dialogue system for social dialogue in which user and agent cooperate in order to achieve a common objective.  We believe that individuals that collaborate to fulfill an objective (for example: find a restaurant for dinner), have their own preferences in the way to do it, which lead them to conduct a \emph{cooperative negotiation} about their preferences in order to determine a trade-off that satisfy both interlocutors. Moreover, scholars in social psychology and communication investigated \cite{dunbar2005perceptions,de1995impact} the impact interactive effects of relations and emotion in negotiation, and proved that  \emph{interpersonal dominance} affect the strategies of negotiators. Our objective is to build an agent that can perceive the established relation of dominance and adapt its strategy of negotiation to the relation. 
+	In this paper, we are interested in modeling a dialogue system for social dialogue in which user and agent cooperate in order to achieve a common objective.  We believe that individuals that collaborate to fulfill an objective (for example: find a restaurant for dinner), have their own preferences in the way to do it, which lead them to conduct a \emph{cooperative negotiation} about their preferences in order to determine a trade-off that satisfy both interlocutors. Moreover, scholars in social psychology and communication investigated \cite{dunbar2005perceptions,de1995impact} the impact interactive effects of relations and emotion in negotiation, and proved that  \emph{interpersonal dominance} directly affects the strategies of negotiators. Our objective is to build an agent that can perceive the established relation of dominance and adapt its strategy of negotiation to the perceived relation. 
 	
 	The next section will relate our definition of dominance based on research on social psychology. In section 3, we will review related works that studied the dimension of dominance in building conversation agents. Section 4, will present the different modules our model of dialogue. Section 5 will discuss our experiment and the analysis of the obtained results. 
 	
@@ -89,11 +87,14 @@
 	
 	\par \cite{strassmann2016effect} investigate the perception of nonverbal behaviors of virtual agents with a focus on dominance and cooperation. They found that crossed arms and the akimbo position were associated to a more dominant behavior. Whereas, self-touch with the hand in the neck and gaze downward evokes a more submissive behavior. On the same vain,  \cite{bee2010bossy} combines in their model the perception of nonverbal behaviors from the PAD model \cite{mehrabian1996analysis} with verbal behaviors related to personality traits from the big five model. They demonstrated that the linguistic personality traits influence the perception of dominance. In addition, gaze-based dominance influences the perception of personality traits.
 	
-	These researches differ from ours in two main points. First, they model the dominance as a personal trait, while in our current research, we consider the dominance as an interpersonal relation, which means that it take place between the agent and the user. Second, most of theses research focused on nonverbal behaviors of dominance, while we are interested in the verbal effect of dominance. Moreover, we aim to study the effect of dominance in a decisional level, where we investigate how the dominance affects the strategies of negotiation in dialogue.
+	These researches differ from ours in two main points. First, they model the dominance as a personal trait, while in our current research, we consider the dominance as an interpersonal relation, which means that it takes place between the agent and the user. 
+	
+	Second, most of theses research focused on nonverbal behaviors of dominance, while we are interested in the verbal behaviors of dominance. Moreover, we aim to study the effect of dominance in a decisional level, where we investigate how the dominance affects the strategies of negotiation in dialogue.
 	
 	
 	\section{Model of negotiation based on dominance}
-	In this section we will explain, the dialogue model built from the principles of dominance extracted for social psychology researches. Our focus was to reproduce automatically those behaviors.
+	In this section we will explain, the dialogue model built from the principles of dominance extracted for social psychology researches. Our focus was to build a model of negotiation of preferences capable to reproduce automatically those behaviors of dominance to defined strategies of negotiation.
+
 	\subsection{Domain model}
 	Consider a sequence of criterion sets $C_1, C_2, ..., C_n$ and an options set defined as the cross-product:
 	$O = C_1 \times C_2 \times \ldots C_n$.
@@ -477,7 +478,9 @@
 	\end{figure}%
 	\subsection{Discussion and conclusion}
 	
-	Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of dominance. Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of dominance affects agent's behaviors in negotiation.
+	Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of dominance. 
+	We proposed a model which allows a conversational agent to generate strategies of negotiation in function of its relation of dominance, inspired from researches in social psychology
+	Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of dominance affects agent's behaviors in negotiation.
 	
 	We found that participants perceived a significant difference in the agent's behaviors depending on their respective relation of dominance.  
 	Indeed, all of our four hypotheses were confirmed. We predicted that agents with higher dominance will be perceived as more individualist and self-centered, whereas agents with lower dominance would care about other preferences. Furthermore, agents with lower dominance were perceived to make larger concessions than did agents with higher dominance. Consistent with this prediction, agents with higher dominance showed a greater level of demand in the negotiation. Finally, we obtain evidence that agents with higher dominance tends to lead the dialogue and take control of the negotiation's flow. 
@@ -488,12 +491,12 @@
 	We supposed that when the initial preferences of agents are similar (\textit{similar preferences} condition), behaviors related dominance won't be perceived due to the high aspect of cooperation in the negotiation. However, as our results demonstrated for dialogues generated in the similar preferences condition, (see results of Dialogue 4), all the hypotheses were supported even when the preferences were quiet similar. Therefore, the behaviors of dominance implemented are not affected by the initial preferences of agents.
 	
 	Second, we get interested in analyzing the behaviors of dominance in the spectrum of dominance. We supposed that the highest the dominance gets in the spectrum, the better behaviors of dominance will be perceived. We did compare participant's judgments of Agent 1 in dialogues where Agent 1 had different setting of dominance whereas Agent 2 had the same setting. We specially compared Agent1 behaviors in Dialogue 1 and Dialogue 2. The results obtained are presented in \hl{the figure ... }.	
-	Unfortunately, this hypothesis was not supported. no significant difference in agents behaviors was observed. This might be explained by the interpersonal nature of dominance, which means that participants rated the dominance of Agent 1 in opposition of Agent2, which makes the comparison of agents behaviors from different dialogues irrelevant. 
+	The obtained results did not supported our hypothesis. no significant difference in agents behaviors was observed. This might be explained by the interpersonal nature of dominance, which means that participants rated the dominance of Agent 1 in opposition of Agent2, which makes the comparison of agents behaviors from different dialogues irrelevant. 
 	
 %	\par  The results presented have a number of limitations. Participants judged the dialogues from an external point of view which might influence the engagement in the process of judging agent behavior. 
 	Our findings validate our model of dialogue in general and specifically confirmed the coherence of the generated behaviors of dominance. 
 	The next step, would be to experiment our model in a realistic human-agent interaction.
-	Further on, the interaction with a user should take into consideration the suer's representation of its relation with the agent. Therefore, we aim to extend our model with a module of theory of mind that would allow the agent to have a mental representation of the user, and by consequence adapt its behavior to complement the user behavior perceived during the dialogue.
+	Further on, the interaction with a user should take into consideration the user's representation of its relation with the agent. Therefore, we aim to extend our model with a module of theory of mind that would allow the agent to have a mental representation of the user, and by consequence adapt its behavior to complement the user behavior perceived during the dialogue.
 	
 %	\section{Conclusion}
 	
