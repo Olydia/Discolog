@@ -15,7 +15,7 @@
 	\usepackage{xcolor, soul}
 	\sethlcolor{yellow}	
 	\usepackage{floatrow}
-	
+
 	\setlength\extrarowheight{3pt}
 	% Table float box with bottom caption, box width adjusted to content
 	\newfloatcommand{capbtabbox}{table}[][\FBwidth]
@@ -73,7 +73,7 @@
 	In order to implement those behaviors, we extracted three principle behaviors related to the relation of power that impact strategies of negotiation.
 
 	
-%	\subsection{Principles of dominance in negotiation}
+%	\subsection{Principles of power in negotiation}
 	Based on psychology research, we selected three main principles of behaviors in order to implement our conversational agent.
 	\begin{enumerate}
 	\item \textbf{Self Vs Other:} Submissive negotiators consider the preferences of other in the negotiation, whereas dominant negotiators  are self-centered and only interested by satisfying their own preferences.
@@ -88,13 +88,13 @@
 	%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)			
 	
 	\subsection{Power in affective computing}
-	Different models enabling conversational agents to exhibit social dominance behaviors through their verbal and nonverbal behavior have been proposed. 
+	Different models enabling conversational agents to exhibit social power behaviors through their verbal and nonverbal behavior have been proposed. 
 	
 	Most of the existing works investigate the nonverbal behavior of power. For instance, \cite{lance2008relation} proposed an animated virtual agent with a gaze model for emotional expression based on Mehrabians PAD model \cite{mehrabian1996analysis}. They demonstrated that power was associated to a raised head and fast movements. These results were also \cite{mignault2003many} works.
-	 Further on, \cite{gebhard2014exploring,callejas2014computational} demonstrated that head-tilt as well as the use of spacial movements is related to dominance and submissive perception. 
+	 Further on, \cite{gebhard2014exploring,callejas2014computational} demonstrated that head-tilt as well as the use of spacial movements is related to power and submissive perception. 
 	  
-	\par Other works investigated the perception of power combined to other social aspects. For instance,\cite{strassmann2016effect} investigate the perception of nonverbal behaviors of virtual agents with a focus on dominance and cooperation. On the same vain,  \cite{bee2010bossy} combines in their model the perception of nonverbal behaviors from the PAD model \cite{mehrabian1996analysis} with verbal behaviors related to personality traits from the big five model.
-	 They demonstrated that the linguistic personality traits influence the perception of dominance. Reciprocally, gaze-based dominance influences the perception of personality traits.
+	\par Other works investigated the perception of power combined to other social aspects. For instance,\cite{strassmann2016effect} investigate the perception of nonverbal behaviors of virtual agents with a focus on power and cooperation. On the same vain,  \cite{bee2010bossy} combines in their model the perception of nonverbal behaviors from the PAD model \cite{mehrabian1996analysis} with verbal behaviors related to personality traits from the big five model.
+	 They demonstrated that the linguistic personality traits influence the perception of power. Reciprocally, gaze-based power influences the perception of personality traits.
 	
 	 
 	These researches differ from ours in two main points. First, they model the power as an individual trait, while in our research, we consider the power as an interpersonal relation, which means that it takes place between the agent and the user(dyadic trait). 
@@ -145,21 +145,38 @@
 		Negotiators communicate during the negotiation via utterances. We generated nine types of utterance based on Sidner work. \cite{sidnerartificial}. 
 		
 		\begin{table}[h]
-			\begin{tabular} {|c|c|}
+			\begin{tabular} {|p{2.5cm}|p{3.5cm}|p{6cm}|}
 				\hline
-				\newline StatePreference(c) & I (don't) like c.\\
+				Utterance type & input & Format \\
 				\hline
-				\newline AskPreference(c) & do you like c ?\\
+				StatePreference & $c \in V_i$ & I (don't) like $c$.\\
 				\hline
-				
+				 \multirow{2}{*}{AskPreference} &$c \in V_i$ & do you like $c$ ?\\
+				 \cline{2-3}
+				 & $c \in C_i$ & What kind of $c$ do you like ? \\
+				 \hline
+				 Propose & $p / p\in V_i \vee p \in V$ & Let's go to $p$. \\
+				 \hline
+				 Reject & $p / p\in V_i \vee p \in V$ & I'd rather choose  something else \\
+				 \hline
+				 RejectPropose & $r, p / r,p\in Vi \vee r,p \in V $ & I don't want to go to $r$. Let's rather go to $p$ \\
+				 \hline 
+				 RejectState & $ p,c / p,c\in Vi \vee p \in V$ &  I don't like $c$, let's choose something else \\
+				 \hline
+				 Accept& $p / p\in V_i \vee p \in V$& Okay, let's go to $p$	 \\
+				 \hline
+				 AcceptPropose & $a,p / a,p\in Vi \vee a,p \in V $ & Okay. Let's go to $p$\\
+				 \hline
 			\end{tabular}
+			\caption{The list of possible utterances in the model of dialogue}
 		\end{table}
 	
-	\subsubsection{Model of other}
-					
-	Let the collection of $A_i \subseteq C_i$ be the criterion values that are acceptable to the other, and $U_i \subseteq C_i$ be the criteria values that are unacceptable.  We assume $A_i \cap U_i = \emptyset$.  Note	that some values are thus unknown.
+	In order to produce coherent dialogues, the agent keeps track of the different states of the dialogue updated after each move. 
+	The negotiation have to take into account each criterion of the discussed topic. For example, in a negotiation on restaurants, speakers might negotiate about the type of \textit{cuisine}, and the \textit{ambiance} to choose.  
 	
-	Then the acceptability of a criterion $c \in C_i$ is a function normalized to [0,1] and defined as follows.
+	First, the agent processes a model about the other interlocutor's preferences during the negotiation (\textit{i.e. model of other}). Let the collection of $A_i \subseteq C_i$ be the criterion values that are satisfiable to the other, and $U_i \subseteq C_i$ be the criteria values that are not.  We assume $A_i \cap U_i = \emptyset$.  Note that some values are thus unknown.
+	
+	Then the satisfiability of a criterion $c \in C_i$ is a function normalized to [0,1] and defined as follows.
 	\begin{equation}
 	other(c, A_i, U_i)= \left\{\begin{array}{ll}
 	1	 & \mathrm{if\ }  c \in A_i\\
@@ -168,66 +185,68 @@
 	\end{array}\right.
 	\end{equation}
 	
-	
 	This function is generalized to option $o \in O$ as a weighted sum.
 	
 	\begin{equation}
 	other(o, A, U) = \frac{ \sum_{i}^{n} other(o_i, A_i, U_i) } {n}
 	\end{equation}
 	
+	Second, information about the \textit{negotiation state} are processed. \\
+	We note  $s_i, p_i, t_i, r_i \subseteq C_i$, respectively, the criterion values stated by the agent in the dialogue, values which have been proposed, values which have been accepted and the values rejected in the negotiation. 
+		
+	Similarly, we define the same structure of proposals for the options called $P, R, T$
 	
-	\subsubsection{Negotiation state}
-
-	
-	
-	In order to produce coherent dialogues, the agent keeps track of the different states of the dialogue updated after each move. 
-	
-	The negotiation have to take into account each criterion of the discussed topic. For example, in a negotiation on restaurants, speakers might negotiate about the type of \textit{cuisine}, and the \textit{ambiance} to choose.  
-	For each discussed criterion, the agent register the following information:
-%	We note $D$ the set of criteria which have been discussed during the dialogue. When speakers agree on a value of a criterion to choose, the negotiation on this criterion is considered as \textit{closed}. We note $Cl$ the set of closed criteria.
-%For each discussed criterion $C_i \in D$, the agent register the following information:		
-	\begin{itemize} [noitemsep]
-	\item Let the collection of $S_i \subset C_i$ be the criterion values stated by the agent in the dialogue.
-	\item Proposals enunciated during the negotiation by both negotiators might have different status. They can either be accepted or rejected with respect of the decisional model (See section \ref{decision}).
-	\subitem  $P_i$ is the set of  values which have been proposed in the negotiation.
-	\subitem  $T_i$  is the set of values which have been accepted in the negotiation.
-	\subitem  $R_i$  is the set of values which have been rejected in the negotiation.
-	\end{itemize}
-	
-	Furthermore, interlocutors are allowed to make proposals of options. We thus define the same structure of proposals for the options; $P, R, T$
-	
-	\subsection{Decision based on dominance in negotiation}
+	\subsection{Decision based on power in negotiation}
 	\label{decision}
-	\subsubsection {Dominance and concession}
-	Let  $dom \in [0, 1] $ denotes the dominance of an agent (self) in the relationship.  It is a constant for a given agent in a given relationship.
-	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a time-varying function normalized to 	[0,1] of its dominance, defined as below.
+	We extracted from social psychology works three mains principles related to the relation of power which affects negotiators strategies and behaviors (see section \ref{domDialogue}). We present in this section, the formal theory built for each principle. 
+	
+	\subsubsection {Self vs other}
+		It was proved that dominant negotiators are self-centered, whereas submissive negotiators care about fairness and the well being of the other negotiator. Therefore, we can conclude, that when the power get higher,the higher a negotiator give weight to the satisfaction of its preferences 
+	
+		Let  $pow \in [0, 1] $ denotes the agent's perception of its relationship of power. It is a constant for a given agent in a given relationship.
+	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a function normalized to 	[0,1] of its power, defined as below.
+	%time-varying
 	\begin{equation}
-	self(dom, t) = \left\{\begin{array}{ll}
-	dom & \mathrm{if\ } (t \leq \tau)\\
-	max(0, dom - (\frac{\delta}{dom} . (t - \tau))) & \mathrm{otherwise}
-	\end{array}\right.
+		self(pow, t) = \left\{\begin{array}{ll}
+		pow & \mathrm{if\ } (t \leq \tau)\\
+		max(0, pow - (\frac{\delta}{pow} . (t - \tau))) & \mathrm{otherwise}
+		\end{array}\right.
 	\end{equation}
 	
-	
-	where is $t \geq 0$ is the number of open or rejected proposals.
-	
-	This is called the \emph{"concession curve"}, where $\tau > 0$ and $\delta > 0$
+	where is $t \geq 0$ is the number of open or rejected proposals and $\tau > 0$ and $\delta > 0$
 	are parameters of the theory in general and are initially assumed to
 	be 2 and 0.1, respectively.
 	
-	Therefore, the acceptability of a value $c \in C$  is relative to the weight an agent gives to its self satisfaction:
+	Let be	$\{V' \subset V$ / $\forall v \in V', acc(v,t) = true\}$ be the list of agent's acceptable values. 
 	
+		In the context of cooperative negotiation, the value of a proposal should be \textit{tolerable} for both interlocutors. Therefore, in addition to self preferences, the agent should considers other's preferences when proposing a value, with respect to the weight an agent gives to itself.
+	%	We define a tolerance function of a criterion $c \in C_i$ as a function normalized to [0,1]:
 	\begin{equation}
-	acc(c, t) = sat(c, \prec_i) \geq  \beta \times Self(t) ,  (\beta >0).
+	 tolerable(pow, t, c, \prec, A, U) = self(pow, t) . sat(c, \prec_i)  +  (1 - self(pow, t)) . other(c, A_i, U_i)
 	\end{equation}
 	
-	This function is generalized to options:
 	\begin{equation}
-	acc(o, t) = sat(o, \prec) \geq  \beta \times Self(t)
+	tolerable(pow, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} tolerable(pow, t, o_i, \prec_i, A_i, U_i) } {n}
 	\end{equation}
 	
+	\subsection{Level of demand and concessions}
 	
+	\hl{level of demand}
+				Therefore, the acceptability of a value $c \in V_i$  is relative to the weight an agent gives to its self satisfaction:
+				\begin{equation}
+				acc(c, t) = sat(c, \prec_i) \geq  \beta . Self(t).
+				\end{equation}
+				
+				This function is generalized to option $o \in O$:
+				\begin{equation}
+				acc(o, t) = sat(o, \prec) \geq  \beta . Self(t)
+				\end{equation}
 	
+		We represent the notion of concession, by making the agent decreases in the weight that its gives to self satisfaction during the negotiation. Indeed, we place our dialogue model in the context of \textit{cooperative negotiation}. Therefore, we aim to make the negotiation succeed which lead the negotiators  to make concessions if the negotiation is not converging. We define a \emph{"concession curve"}, where 
+		
+
+			
+
 	\subsection{Lead of the negotiation}
 	
 
@@ -242,7 +261,7 @@
 	\centering
 	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
 	\hline
-	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{dom  $>\sigma$}}}}&\textbf{Utterance type} & Condition \\
+	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\sigma$}}}}&\textbf{Utterance type} & Condition \\
 	\cline{2-3}
 	&Negotiation success & $\exists o \in T$   \textbf{ OR } $o \in P$ such that  $acc(o,t) = true$ \\
 	\cline{2-3}
@@ -263,7 +282,7 @@
 	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
 	\hline
 	\parbox[t]{2mm}{
-	\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{dom  $ \leq \sigma$}}}} & \textbf{Utterance type} & \textbf{Condition} \\
+	\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \sigma$}}}} & \textbf{Utterance type} & \textbf{Condition} \\
 	\cline{2-3}
 	& Negotiation success &  $\exists o \in T$ \\
 	\cline{2-3}
@@ -295,30 +314,7 @@
 	\caption{Conditions to choose an utterance type}
 	\label{utt}
 	\end{table}
-	
-	
-	\subsubsection{Choosing a value for an utterance} 
-	
-	Let be	$\{V' \subset V$ / $\forall v \in V', acc(v,t) = true\}$ be the list of agent's acceptable values. 
-	
-	In the context of cooperative negotiation, thee value of a proposal should be \textit{tolerable} for both interlocutors. Therefore, in addition to self preferences, the agent should considers other's preferences when proposing a value ((8) is computed for criteria, whereas (9) is computed for options). 	
-%	We define a tolerance function of a criterion $c \in C_i$ as a function normalized to [0,1]:
-	\begin{equation}
-	tolerable(dom, t, c, \prec, A, U) = self(dom, t) . sat(c, \prec_i)  +  (1 - self(dom, t)) . other(c, A_i, U_i)
-	\end{equation}
-	
-	\begin{equation}
-	tolerable(dom, t, o, \prec, A, U) = \frac{ \sum_{i}^{n} tolerable(dom, t, o_i, \prec_i, A_i, U_i) } {n}
-	\end{equation}
-	%					
-	%				The following function returns the most tolerable element of $V'$ to make a proposal.
-	%				\begin{equation}
-	%					chooseValue(dom, t, V, \prec, A, U) =	\operatorname*{arg\,max}_{name \in V} tolerable(dom, t, o, \prec, A, U)
-	%				\end{equation}
-	%				Note that argmax may not be unique.  The following function returns the most tolerable element of criterion $C_i$.
-	%				
-	%				$$chooseCriterion(dom, t, V, \prec, A, U, C_i) = option(chooseValue(dom, t, V, \prec, A, U, C_i))_i$$
-	
+
 	\subsection{Summary of general parameters }
 	\begin{itemize}[noitemsep]
 	
@@ -337,7 +333,7 @@
 	
 	\section{Evaluation}
 	
-	We built a conversational agent able to deploy a strategy of negotiation based on its perception of interpersonal relationship of dominance. 
+	We built a conversational agent able to deploy a strategy of negotiation based on its perception of interpersonal relationship of power. 
 	
 	In order to validate our model, we conducted a perceptual study in which participants have to determine the behaviors of two agents generated using our model. 
 	
@@ -345,8 +341,8 @@
 	%	We developed an experimental scenario in which we generated dialogues of negotiation between two agents implemented with the proposed model. We used a social topic of "negotiation about a restaurant where to have dinner".
 	We used our model to develop two conversational agents which have to negotiate about a social topic of "negotiation about a restaurant where to have dinner".
 	
-	We generated a set of dialogues where we manipulated two main conditions. First, the initial value of the dominance \textbf{dom} (see section \ref{decision}). The purpose was to define the behavior of agents in negotiation.
-	We aimed to make the first agent \emph{(Agent 1)} adopt more a dominant behavior by initiating the value of its dominance \textbf{dom} in the higher range of the dominance spectrum ($dom>\sigma$). Complementarity, the second agent \emph{(Agent 2)} had to adopt a submissive behavior. Therefore we initiated its \textbf{dom} to be in the lower range. ($ dom\leq \sigma$).
+	We generated a set of dialogues where we manipulated two main conditions. First, the initial value of the power \textbf{pow} (see section \ref{decision}). The purpose was to define the behavior of agents in negotiation.
+	We aimed to make the first agent \emph{(Agent 1)} adopt more a dominant behavior by initiating the value of its power \textbf{pow} in the higher range of the power spectrum ($pow>\sigma$). Complementarity, the second agent \emph{(Agent 2)} had to adopt a submissive behavior. Therefore we initiated its \textbf{pow} to be in the lower range. ($ pow\leq \sigma$).
 	
 	The second condition involved varying the initial preferences of both agents. We manipulated the initial preferences to be either \textit{similar} or \textit{different}. We used the metric of Kendall distance \cite{bra2013Kendall} in order to compute the distance between two preferences sets (see section \ref{decision}).  
 	We figured out, that the dialogues generated with the \textit{similar} preferences condition are quite similar, because the negotiation converges quickly. Therefore, we presented only one dialogue in the \textit{similar preferences} condition for the experiment. 
@@ -362,7 +358,7 @@
 	
 	\newline \multirow{2}{*} {\textbf{Initial preferences}}& \multicolumn{2}{ c| } {\textbf{Dominance}} & \\ \cline{2-3}
 	
-	\newline  & dom(Agent 1) & dom(Agent 2) &  \\ 
+	\newline  & pow(Agent 1) & pow(Agent 2) &  \\ 
 	\hline
 	\newline\multirow{3}{*} {Different preferences} & 0.9 & 0.4 & Dialogue 1 \\ \cline{2-4}
 	
@@ -383,15 +379,15 @@
 	
 	
 	\subsection{Hypotheses}
-	We investigated four main hypotheses about the perception of agents behaviors of dominance during the negotiation. 
+	We investigated four main hypotheses about the perception of agents behaviors of power during the negotiation. 
 	\begin{itemize}
-	\item  \textbf{H1:} In the dialogue, the speaker with the higher dominance will more strongly be perceived as self-centered.  
+	\item  \textbf{H1:} In the dialogue, the speaker with the higher power will more strongly be perceived as self-centered.  
 	
-	\item \textbf{H2:} The speaker with the lower dominance is more strongly perceived as making concessions.
+	\item \textbf{H2:} The speaker with the lower power is more strongly perceived as making concessions.
 	
-	\item \textbf{H3:} The speaker with the higher dominance is perceived as having a higher level of demand comparing to the speaker with a lower dominance.
+	\item \textbf{H3:} The speaker with the higher power is perceived as having a higher level of demand comparing to the speaker with a lower power.
 	
-	\item \textbf{H4:} The speaker with the higher dominance is more strongly perceived as taking the lead of the negotiation.
+	\item \textbf{H4:} The speaker with the higher power is more strongly perceived as taking the lead of the negotiation.
 	
 	\end{itemize}
 	
@@ -452,34 +448,34 @@
 	
 	The obtained data was analyzed using a non parametric test, and all pairwise comparison of of agent 1 and agent 2 behaviors were analyzed using Wilcoxon signed-rank test for paired data. All the results are resumed in the tables in the Appendix.
 	
-	\par Our first hypothesis (H1) stated that participants would perceive agents with the higher dominance to be self-centered and only care about their own preferences. Our analysis confirmed our prediction. For example, results obtained for \textit{dialogue2} showed that in average Agent1 was perceived as more self-centered (M=3.6, SD=0.9) than Agent 2 (M=2.2, SD=0.8) and (\textit{p$<$0.01}). The same results were observed for all the dialogues. 
-	Our second hypothesis (H2) predicted that agents with the lower dominance will be perceived to make larger concessions. For all the proposed dialogues, participants responses supported our hypothesis. 
+	\par Our first hypothesis (H1) stated that participants would perceive agents with the higher power to be self-centered and only care about their own preferences. Our analysis confirmed our prediction. For example, results obtained for \textit{dialogue2} showed that in average Agent1 was perceived as more self-centered (M=3.6, SD=0.9) than Agent 2 (M=2.2, SD=0.8) and (\textit{p$<$0.01}). The same results were observed for all the dialogues. 
+	Our second hypothesis (H2) predicted that agents with the lower power will be perceived to make larger concessions. For all the proposed dialogues, participants responses supported our hypothesis. 
 	%For instance, in \textit{dialogue 1} participants reported that Agent2 made larger concessions (M=4.3, SD=0.8), than did the Agent 1(M=2.19, SD=1.1), (\textit{p$<$0.01}).  (see figure  \ref{H2})
 
-	\par The third hypothesis was also supported in all different the dialogues. H3 stated that agents with the higher dominance in dialogue are more strongly perceived as having higher level of demand. In all the dialogues, Agent 1 was perceived as expressing a higher level of demand than Agent 2 does. 
+	\par The third hypothesis was also supported in all different the dialogues. H3 stated that agents with the higher power in dialogue are more strongly perceived as having higher level of demand. In all the dialogues, Agent 1 was perceived as expressing a higher level of demand than Agent 2 does. 
 	%For instance, in dialogue 1, the level of demand was rated for Agent 1(M=4.07, SD = 0.8) versus Agent 2(M= 2.65, SD =1.1), with a \textit{p-value $<$ 0.01}.
-	Finally, for the last hypothesis H4, the analysis revealed a significant main effect of the dominance in the lead of the dialogue, indicating that participants perceived agents with the higher dominance (Agent 1) as more leading the dialogue than agents with lower dominance (Agent2). 
+	Finally, for the last hypothesis H4, the analysis revealed a significant main effect of the power in the lead of the dialogue, indicating that participants perceived agents with the higher power (Agent 1) as more leading the dialogue than agents with lower power (Agent2). 
 	%In dialogue 1, participants indicated that Agent 1 is the one who leads the dialogue (M=4.2, SD=0.8) comparing to Agent 2 (M=2.3, SD= 1.1), \textit{p$<$ 0.01}. These results are depicted in the figure \ref{H4}.
 	
 	\subsection{Discussion and conclusion}
 	
-	Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of dominance. 
-	We proposed a model which allows a conversational agent to generate strategies of negotiation in function of its relation of dominance, inspired from researches in social psychology
-	Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of dominance affects agent's behaviors in negotiation.
+	Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of power. 
+	We proposed a model which allows a conversational agent to generate strategies of negotiation in function of its relation of power, inspired from researches in social psychology
+	Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of power affects agent's behaviors in negotiation.
 	
-	We found that participants perceived a significant difference in the agent's behaviors depending on their respective relation of dominance.  
-	Indeed, all of our four hypotheses were confirmed. We predicted that agents with higher dominance will be perceived as more individualist and self-centered, whereas agents with lower dominance would care about other preferences. Furthermore, agents with lower dominance were perceived to make larger concessions than did agents with higher dominance. Consistent with this prediction, agents with higher dominance showed a greater level of demand in the negotiation. Finally, we obtain evidence that agents with higher dominance tends to lead the dialogue and take control of the negotiation's flow. 
+	We found that participants perceived a significant difference in the agent's behaviors depending on their respective relation of power.  
+	Indeed, all of our four hypotheses were confirmed. We predicted that agents with higher power will be perceived as more individualist and self-centered, whereas agents with lower power would care about other preferences. Furthermore, agents with lower power were perceived to make larger concessions than did agents with higher power. Consistent with this prediction, agents with higher power showed a greater level of demand in the negotiation. Finally, we obtain evidence that agents with higher power tends to lead the dialogue and take control of the negotiation's flow. 
 	
-	In addition to these finding, we extended our analysis to understand the perception of dominance in dialogue.
+	In addition to these finding, we extended our analysis to understand the perception of power in dialogue.
 	
-	First, we studied the influence of the initial preferences in the generation and perception of behaviors of dominance.
-	We supposed that when the initial preferences of agents are similar (\textit{similar preferences} condition), behaviors related dominance won't be perceived due to the high aspect of cooperation in the negotiation. However, as our results demonstrated for dialogues generated in the similar preferences condition, (see results of Dialogue 4), all the hypotheses were supported even when the preferences were quiet similar. Therefore, the behaviors of dominance implemented are not affected by the initial preferences of agents.
+	First, we studied the influence of the initial preferences in the generation and perception of behaviors of power.
+	We supposed that when the initial preferences of agents are similar (\textit{similar preferences} condition), behaviors related power won't be perceived due to the high aspect of cooperation in the negotiation. However, as our results demonstrated for dialogues generated in the similar preferences condition, (see results of Dialogue 4), all the hypotheses were supported even when the preferences were quiet similar. Therefore, the behaviors of power implemented are not affected by the initial preferences of agents.
 	
-	Second, we get interested in analyzing the behaviors of dominance in the spectrum of dominance. We supposed that the highest the dominance gets in the spectrum, the better behaviors of dominance will be perceived. We did compare participant's judgments of Agent 1 in dialogues where Agent 1 had different setting of dominance whereas Agent 2 had the same setting. We specially compared Agent1 behaviors in Dialogue 1 and Dialogue 2. The results obtained are presented in \hl{the figure ... }.	
-	The obtained results did not supported our hypothesis. no significant difference in agents behaviors was observed. This might be explained by the interpersonal nature of dominance, which means that participants rated the dominance of Agent 1 in opposition of Agent2, which makes the comparison of agents behaviors from different dialogues irrelevant. 
+	Second, we get interested in analyzing the behaviors of power in the spectrum of power. We supposed that the highest the power gets in the spectrum, the better behaviors of power will be perceived. We did compare participant's judgments of Agent 1 in dialogues where Agent 1 had different setting of power whereas Agent 2 had the same setting. We specially compared Agent1 behaviors in Dialogue 1 and Dialogue 2. The results obtained are presented in \hl{the figure ... }.	
+	The obtained results did not supported our hypothesis. no significant difference in agents behaviors was observed. This might be explained by the interpersonal nature of power, which means that participants rated the power of Agent 1 in opposition of Agent2, which makes the comparison of agents behaviors from different dialogues irrelevant. 
 	
 %	\par  The results presented have a number of limitations. Participants judged the dialogues from an external point of view which might influence the engagement in the process of judging agent behavior. 
-	Our findings validate our model of dialogue in general and specifically confirmed the coherence of the generated behaviors of dominance. 
+	Our findings validate our model of dialogue in general and specifically confirmed the coherence of the generated behaviors of power. 
 	The next step, would be to experiment our model in a realistic human-agent interaction.
 	Further on, the interaction with a user should take into consideration the user's representation of its relation with the agent. Therefore, we aim to extend our model with a module of theory of mind that would allow the agent to have a mental representation of the user, and by consequence adapt its behavior to complement the user behavior perceived during the dialogue.
 	
