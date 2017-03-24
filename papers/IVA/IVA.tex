@@ -87,7 +87,7 @@
 		We will present in the next section the decision model based on the behaviors of power. 
 	%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)			
 	
-	\subsection{Power in affective computing }
+	\subsection{Power in affective computing}
 	Different models enabling conversational agents to exhibit social dominance behaviors through their verbal and nonverbal behavior have been proposed. 
 	
 	Most of the existing works investigate the nonverbal behavior of power. For instance, \cite{lance2008relation} proposed an animated virtual agent with a gaze model for emotional expression based on Mehrabians PAD model \cite{mehrabian1996analysis}. They demonstrated that power was associated to a raised head and fast movements. These results were also \cite{mignault2003many} works.
@@ -102,35 +102,36 @@
 	
 	
 	\section{Model of negotiation based on the relation of power}
-	In this section we will explain, the dialogue model built from the principles of dominance extracted for social psychology researches. Our focus was to build a model of negotiation of preferences capable to reproduce automatically those behaviors of dominance to defined strategies of negotiation.
+	In this section, we present our model of dialogue of negotiation of preferences.	
+	First, we present the domain of model that represent the agent's preferences and the representation of topics of negotiation. Second, we present the implementation of the principles of behaviors of power in negotiation (see section \ref{domDialogue}).
 
 	\subsection{Domain model}
-	Consider a sequence of criterion sets $C_1, C_2, ..., C_n$ and an options set defined as the cross-product:
+	The overall goal of a negotiation in our dialogue model is to choose an \textbf{option} in a set of possible options for a given topic. For instance, on the topic ``Restaurant'', we have a set of options: ``Chuck's cake'', ``Ginza''\ldots 
+	 Let $\mathcal{O}$ be the set of options, and $V$ be the set of available options, such that option :$ V\rightarrow O$. For example, V is the set of restaurants that are mutually known to the interlocutors. 
+		
+	\par To be able to compare these options, interlocutors base their evaluation of each option on a set of \textbf{criteria} that reflect options characteristics. We consider a sequence of criterion sets $C_1, C_2, ..., C_n$ such as options set are defined as the cross-product:
 	$O = C_1 \times C_2 \times \ldots C_n$.
-	For example, for restaurants, the criteria might be:
 	
-	Cuisine = \{Chinese, French, ...\} /Atmosphere = \{quiet, lively, ...\}. 
-	
-	and a restaurant options might be: 
-	
-	$[Chinese, cheap, lively]$. / $[Japanese, expensive, quit]$.   
-	%\item $[Chinese, expensive, lively]$.
-	%					\item $[French, cheap, quit]$.  
-	%					\item $[French, expensive, quit]$.   
-	%					\item $[Chinese, expensive, lively]\ldots$ 
+	Furthermore, each criterion has to be measurable, in the sense that it must be possible to rate an option. Therefore, $\forall$ \emph{c $\in C_i$},  we note \emph{$V_i$} its  domain of values mutually knowns by interlocutors. For example, the domain values of the criterion cuisine is noted $\emph{V}_{cuisine} = \{chineese, italian, \ldots\}$.
+%	For example, for restaurants, the criteria might be:
+%	
+%	Cuisine = \{Chinese, French, ...\} /Atmosphere = \{quiet, lively, ...\}. 
+%	
+%	and a restaurant options might be: 
+%	
+%	$[Chinese, cheap, lively]$. / $[Japanese, expensive, quit]$.   
+%	%\item $[Chinese, expensive, lively]$.
+%	%					\item $[French, cheap, quit]$.  
+%	%					\item $[French, expensive, quit]$.   
+%	%					\item $[Chinese, expensive, lively]\ldots$ 
 	\subsection{Self model} 
+		In order to allow the agent to negotiate about its preferences, we define a model about agent's preferences for each criterion of the topic. Preferences are represented as partial orders on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.			
+		Let $\prec$ denotes the sequence of preferences $\{ \prec_i, \prec_2, ..., \prec_n\}$.
 	
-	\subsubsection{Preferences for self}
-	Preferences are partial orders (transitive, asymmetric binary relations) on the criterion sets. The preference relation on the criterion set $C_i$ is denoted by $\prec_i$.			
-	Let $\prec$ denotes the sequence of preferences $\{ \prec_i, \prec_2, ..., \prec_n\}$
-	
-	\subsubsection{Self satisfaction function} 
-	
-	Satisfaction is a function normalized to [0,1] that evaluates an element of a criterion set relative to the corresponding preference relation, defined as follows.
-	
-	For $c \in C_i$ and $\prec_i$:
+		Using the set of binary preferences$\prec_i$, an agent is able to rate he likes a value $v \in V_i$ compared to other values in $V_i$. we denote a function \emph{Satisfaction} which is normalized to [0,1] that evaluates an element of a criterion set relative to the corresponding preference relation.
+
 	\begin{equation}
-	sat(c, \prec_i) =	1 - \left( \frac{|\{d : d \neq c \  \wedge \ (c \prec_i d)\}| }{( |C_i| - 1 )}\right)
+	sat(v, \prec_i) =	1 - \left( \frac{|\{d : d \neq c \  \wedge \ (v \prec_i d)\}| }{( |V_i| - 1 )}\right)
 	\end{equation}
 	
 	
@@ -140,13 +141,22 @@
 	sat(o, \prec) = \frac{\sum_{i}^{n} sat(o_i, \prec_i) }{n}
 	\end{equation}
 	
-	
-	
 	\subsection{Dialogue model}
-	During the dialogue, the agent gather knowledge about other preferences. We present the module responsible to store and process this knowledge. 
+		Negotiators communicate during the negotiation via utterances. We generated nine types of utterance based on Sidner work. \cite{sidnerartificial}. 
+		
+		\begin{table}[h]
+			\begin{tabular} {|c|c|}
+				\hline
+				\newline StatePreference(c) & I (don't) like c.\\
+				\hline
+				\newline AskPreference(c) & do you like c ?\\
+				\hline
+				
+			\end{tabular}
+		\end{table}
 	
-	\subsubsection{Other model}
-	We do not have detailed knowledge of the preferences of the other; the agent only knows which criteria values the other has said are acceptable or unacceptable.				
+	\subsubsection{Model of other}
+					
 	Let the collection of $A_i \subseteq C_i$ be the criterion values that are acceptable to the other, and $U_i \subseteq C_i$ be the criteria values that are unacceptable.  We assume $A_i \cap U_i = \emptyset$.  Note	that some values are thus unknown.
 	
 	Then the acceptability of a criterion $c \in C_i$ is a function normalized to [0,1] and defined as follows.
@@ -159,7 +169,7 @@
 	\end{equation}
 	
 	
-	This function is generalized to options as a weighted sum.
+	This function is generalized to option $o \in O$ as a weighted sum.
 	
 	\begin{equation}
 	other(o, A, U) = \frac{ \sum_{i}^{n} other(o_i, A_i, U_i) } {n}
@@ -167,12 +177,7 @@
 	
 	
 	\subsubsection{Negotiation state}
-	During a negotiation, negotiators express two types of utterances: %that we name \emph{statement moves} and \emph{negotiation moves}. 
-	
-	\begin{itemize} [noitemsep]
-	\item \emph{Statement move:} Speaker share information about its preferences (StatePreference) or ask other about his preferences (askPreferences).
-	\item \emph{Negotiation move:} Interlocutors negotiate about the different options of a topic (Propose, accept or reject proposals).
-	\end{itemize}
+
 	
 	
 	In order to produce coherent dialogues, the agent keeps track of the different states of the dialogue updated after each move. 
@@ -227,7 +232,7 @@
 	
 
 	\subsubsection{Choosing an utterance type}
-	Let $V$ be the set of available options (values), such that option :$ V\rightarrow O$. For example, V is the set of restaurants that are mutually known to the participants. 
+	
 	%This can be a many-to-one function, e.g., there could be two restaurants with same criteria.		
 	
 	We present in table \ref{utt} the possible utterance responses and their applicability conditions. Note that each line (utterance) assumes that the previous ones are already not applicable.% We name this function 	$ chooseUtterance(dom, t, V, \prec, A, U)$ 
