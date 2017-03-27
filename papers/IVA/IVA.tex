@@ -21,7 +21,7 @@
 	\newfloatcommand{capbtabbox}{table}[][\FBwidth]
 	
 	\begin{document}
-	\title{\vskip -10pt Dominance in dialogue of cooperative negotiation}
+	\title{\vskip -10pt Dominance in dialogue of collaborative negotiation}
 	
 	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
 		Nicolas Sabouret\inst{1} }
@@ -36,14 +36,14 @@
 
 	\maketitle
 	\section{Introduction}
-	\par With the rise of artificial conversational agents capable to hold a conversation with a human user and potentially display social behaviors. It become important to understand which social behaviors appear in human-human (H-H) dialogues and how they affect interlocutors behaviors. In particular the social relationship that interlocutors establish during the dialogue.
 	
-	Previous researches have shown that people tend to respond to computers as social actors \cite{bickmore2005establishing}, which lead the community to assess the psychosocial relationship between the user and the agent during their interaction. 
-	A growing body of research is investigating the use of appropriate social behavior for virtual agents in different roles and types of user-computer relationship \cite{bickmore2005s,bickmore2005establishing,kidd2005sociable}.
-
-	Moreover, many applications require the user and agent to cooperate in order to achieve a common objective. For example, an conversational agent playing a role of collaborator which have to cooperate with other employees to fulfill different tasks, or a companion agent for elderly that helps the elderly to respect a specific diet. However, in many cases, interlocutors have to negotiate in cooperative manner about the way to achieve the common task (\emph{i.e. Cooperative negotiation}). 	Indeed, we believe that individuals that collaborate to fulfill an objective, have their own preferences in the way to do it (based on their experiences), which lead them to conduct a \emph{cooperative negotiation} about their preferences in order to determine a trade-off that satisfy both interlocutors. Moreover, scholars in social psychology and communication investigated \cite{dunbar2005perceptions,de1995impact} the impact interactive effects of relations and emotion in negotiation, and proved that  \emph{interpersonal power} directly affects the strategies of negotiators. Our objective, in this paper, is to build a conversational agent that can deploys strategies of negotiation based its perceived relation of power with the user. 
-
-	The next section will relate on existing works around interpersonal power based on both researches on social psychology and affective computing. Section 3, will present the different modules our model of dialogue. Section 5 will discuss our experiment and the analysis of the obtained results. 
+	
+	\par As artificial conversational agents become more and more popular, they became capable to hold a conversation with a human user and potentially collaborate with the user in order to achieve a common objective. For example, artificial tutors collaborate with students [ref], or a companion agents can help elderly to follow a specific diet \cite{kidd2005sociable}. In this context, the user(s) and the agent have to negotiate in collaborative manner about the way to achieve the common task. This is called \emph{collaborative negotiation}. Unlike adversarial negotiation [ref], collaborative negotiation assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest [ref-Chu-Caroll & Carberry 1995, Sidner 94].
+	
+	Moreover, previous research has shown that people tend to respond to computers as social actors \cite{bickmore2005establishing}. This led the IVA community to study the psychosocial relationship between the user and the agent during their interaction: a growing body of research is investigating the use of appropriate social behavior for virtual agents in different roles and types of user-computer relationship \cite{bickmore2005s,bickmore2005establishing,kidd2005sociable}. In the context of human-human communication involving negotiation, social psychology and communication \cite{dunbar2005perceptions,de1995impact} investigated the impact of social relations and emotion on the negotiation. They proved that  \emph{interpersonal power} directly affects the strategies of negotiators. Therefore, in order to build intelligent conversational agents that conduct good collaborative negotiations, it is very important to allow them to adapt their negotiation strategies to different levels of interpersonal power.
+	
+	Our objective, in this paper, is to build a conversational agent that can deploys strategies of negotiation based its perceived relation of power with the user. In the next section, we discuss existing works on interpersonal power in the domain of social psychology and affective computing. Section 3 will present the different modules our model of dialogue. Section 4 will discuss our experiment and the analysis of the obtained results.
+	[REVOIR]
 	
 	
 	\section{Related works}
@@ -201,17 +201,23 @@
 	We extracted from social psychology works three mains principles related to the relation of power which affects negotiators strategies and behaviors (see section \ref{domDialogue}). We present in this section, the formal theory built for each principle. 
 	
 	\subsubsection {Self vs other}
-		It was proved that dominant negotiators are self-centered, whereas submissive negotiators care about fairness and the well being of the other negotiator. Therefore, we can conclude, that when the power get higher,the higher a negotiator give weight to the satisfaction of its preferences 
+		It was proved that dominant negotiators are self-centered, whereas submissive negotiators care about fairness and the well being of the other negotiator. Therefore, we can conclude, that the higher the power gets,the higher a negotiator give weight to the satisfaction of its preferences.
 	
 		Let  $pow \in [0, 1] $ denotes the agent's perception of its relationship of power. It is a constant for a given agent in a given relationship.
 	The weight that an agent gives to its self-satisfaction relative to	the satisfaction of the other is a function normalized to 	[0,1] of its power, defined as below.
 	%time-varying
-	\begin{equation}
+	\noindent
+	\begin{minipage}{0.5\textwidth}
+		\begin{equation}
 		self(pow, t) = \left\{\begin{array}{ll}
 		pow & \mathrm{if\ } (t \leq \tau)\\
 		max(0, pow - (\frac{\delta}{pow} . (t - \tau))) & \mathrm{otherwise}
 		\end{array}\right.
-	\end{equation}
+		\end{equation}
+	\end{minipage}
+	 \begin{minipage} {0.5\textwidth}
+		\includegraphics[width=\linewidth,keepaspectratio=true]{graphs/slope.jpg}
+	 \end{minipage}
 	
 	where is $t \geq 0$ is the number of open or rejected proposals and $\tau > 0$ and $\delta > 0$
 	are parameters of the theory in general and are initially assumed to
@@ -219,7 +225,7 @@
 	
 	Let be	$\{V' \subset V$ / $\forall v \in V', acc(v,t) = true\}$ be the list of agent's acceptable values. 
 	
-		In the context of cooperative negotiation, the value of a proposal should be \textit{tolerable} for both interlocutors. Therefore, in addition to self preferences, the agent should considers other's preferences when proposing a value, with respect to the weight an agent gives to itself.
+		In the context of collaborative negotiation, the value of a proposal should be \textit{tolerable} for both interlocutors. Therefore, in addition to self preferences, the agent should considers other's preferences when proposing a value, with respect to the weight it gives to its preferences.
 	%	We define a tolerance function of a criterion $c \in C_i$ as a function normalized to [0,1]:
 	\begin{equation}
 	 tolerable(pow, t, c, \prec, A, U) = self(pow, t) . sat(c, \prec_i)  +  (1 - self(pow, t)) . other(c, A_i, U_i)
@@ -230,9 +236,7 @@
 	\end{equation}
 	
 	\subsection{Level of demand and concessions}
-	
-	\hl{level of demand}
-				Therefore, the acceptability of a value $c \in V_i$  is relative to the weight an agent gives to its self satisfaction:
+		Based on the second principle, dominant negotiators are more demanding than the submissive ones. Therefore, the acceptability of a value $c \in V_i$  is relative to the weight an agent gives to its self satisfaction:
 				\begin{equation}
 				acc(c, t) = sat(c, \prec_i) \geq  \beta . Self(t).
 				\end{equation}
@@ -242,33 +246,32 @@
 				acc(o, t) = sat(o, \prec) \geq  \beta . Self(t)
 				\end{equation}
 	
-		We represent the notion of concession, by making the agent decreases in the weight that its gives to self satisfaction during the negotiation. Indeed, we place our dialogue model in the context of \textit{cooperative negotiation}. Therefore, we aim to make the negotiation succeed which lead the negotiators  to make concessions if the negotiation is not converging. We define a \emph{"concession curve"}, where 
+		
+		Furthermore, we represent the notion of concession, by making the agent decreases the weight that of its self satisfaction during the negotiation. Indeed, we place our dialogue model in the context of \textit{collaborative negotiation}. Therefore, we aim to make the negotiation succeed which lead the negotiators to make concessions if the negotiation is not converging. We, thus define a \emph{"concession curve"} see figure(), where Self(t) decreases when the number of open or rejected proposals during the negotiation increase (i.e the negotiation is not converging).
 		
 
 			
 
 	\subsection{Lead of the negotiation}
-	
-
-	\subsubsection{Choosing an utterance type}
-	
+		The third principle relates that the dominant negotiators initiate the negotiation. Therefore, we model the dominant agent to always start the negotiation. In addition, dominant negotiator tend to lead the negotiation. Therefore, we model the dominant agent to focus on keeping the negotiation going by choosing \emph{negotiation moves}.  \footnote{\emph{negotiation moves:} Propose, Reject, Accept, RejectPropose, AcceptPropose}.
+		In the opposite, a submissive negotiator aim to build an accurate model of other preferences in order to take the fairest decision in the end. Therefore, we made submissive negotiator to focus more on \emph{Statement moves}. \footnote{\emph{Statement moves}: StatePreference, AskPeference, RejectState}
+		We present in table \ref{utt} the possible utterance responses and their applicability conditions. Note that each line (utterance) assumes that the previous ones are already not applicable.
 	%This can be a many-to-one function, e.g., there could be two restaurants with same criteria.		
 	
-	We present in table \ref{utt} the possible utterance responses and their applicability conditions. Note that each line (utterance) assumes that the previous ones are already not applicable.% We name this function 	$ chooseUtterance(dom, t, V, \prec, A, U)$ 
+	% We name this function 	$ chooseUtterance(dom, t, V, \prec, A, U)$ 
 	
 	
-	\begin{table} [t]
+	\begin{table}[t]
 	\centering
 	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
 	\hline
-	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\sigma$}}}}&\textbf{Utterance type} & Condition \\
+	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\pi$}}}}&\textbf{Utterance type} & Condition \\
 	\cline{2-3}
-	&Negotiation success & $\exists o \in T$   \textbf{ OR } $o \in P$ such that  $acc(o,t) = true$ \\
+	&Negotiation success & $\exists o \in T   \lor o \in P$ /  $acc(o,t) = true$ \\
 	\cline{2-3}
-	& Negotiation failure & $ \forall o \in O$,  $o \in O$  \textbf{ OR } $acc(o,t) = false$\\
+	& Negotiation failure & $ \forall o \in O, acc(o,t) = false$\\
 	\cline{2-3}
-	& State & $type(u^{-1}) = AskPreference$  \textbf{ and }
-	$n < \alpha$ \newline(with $n$ the number of successive statement moves)\\
+	& State & $type(u^{-1}) = AskPreference \land n < \alpha$ \newline- $n$ the number of successive statement moves \newline -$u^{-1}$ is the previous utterance.\\
 	\cline{2-3}
 	& AcceptPropose & $\exists c \in P_i$ / $acc(c,t)= true$ \\
 	\cline{2-3}
@@ -282,30 +285,24 @@
 	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
 	\hline
 	\parbox[t]{2mm}{
-	\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \sigma$}}}} & \textbf{Utterance type} & \textbf{Condition} \\
+	\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \pi$}}}} & \textbf{Utterance type} & \textbf{Condition} \\
 	\cline{2-3}
 	& Negotiation success &  $\exists o \in T$ \\
 	\cline{2-3}
-	& Accept & $\exists c \in P_i$, $acc(c, t)=true $  \textbf{ OR } $ \exists o \in P$ ,  $acc(o, t) =true$ \\
+	& Accept & $\exists c \in P_i$, $acc(c, t)=true   \lor \exists o \in P$ ,  $acc(o, t) =true$ \\
 	\cline{2-3}
-	& RejectState & $ [\exists c \in P_i$, $acc(c, t)= false $ 
-	\newline \textbf{ OR }$ \exists o \in P$ ,  $acc(o, t)=false]$  \textbf{and} $t<\tau$.\\
+	& RejectState & $ (\exists c \in P_i, acc(c, t)= false  \lor \exists o \in P ,  acc(o, t)=false)  \land (t<\tau$).\\
 	\cline{2-3}
-	& Propose & $\exists c$ / $other(c, A_i, U_i)  = 1 $  \textbf{ and }$acc(c, t)=true$
-	\newline \textbf{ OR }  $\forall c \in C_i$,  $c \in T_i$\\
+	& Propose & $\exists c$/$(other(c, A_i, U_i)  = 1  \land acc(c, t)=true) \lor
+	\newline   (\forall c \in C_i$,  $c \in T_i$)\\
 	\cline{2-3}
-	& Ask &  \textbf{(}$t> \tau,$ \textbf{ and } 
-	$\exists c \in P_i /$
-	$ acc(c, t)=false$\textbf{) }
-	\newline \textbf{OR}  $ \forall c \in C_i,other(c, A_i, U_i)=0.5$ \\
+	& Ask &  $(t> \tau, \land \exists c \in P_i /$
+	$ acc(c, t)=false)\lor$ \newline $(\forall c \in C_i,other(c, A_i, U_i)=0.5)$\\
 	
 	\cline{2-3}
 	
-	& State & $type(u^{-1}) = AskPreference$
-	\newline \textbf{OR}
-	\newline $\exists x,other(x, A_i, U_i) \not = 0.5 $ 
-	\newline \textbf{OR}
-	\newline $ \exists C \in \mathcal{C}, A_i(C) = Unkown$
+	& State & $(type(u^{-1}) = AskPreference) \lor$
+	\newline $(\exists x,other(x, A_i, U_i) \not = 0.5) \lor$  $ (\exists C \in \mathcal{C}, A_i(C) = Unkown)$
 	\\
 	\cline{2-3}
 	& Propose & Otherwise \\
@@ -318,12 +315,11 @@
 	\subsection{Summary of general parameters }
 	\begin{itemize}[noitemsep]
 	
-	\item $\sigma \in $[0,1] : boundary between submissive and dominant used in
+	\item $\pi \in $[0,1] : boundary between submissive and dominant used in
 	choosing an utterance type
 	%		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
 	\item $\tau > 0$ : the minimum number of open or rejected proposals before concession begins
 	\item $\delta > 0$ : parameter in slope of concession curve.
-	\item $u^{-1}$ refers to the previous utterance.
 	\item $\alpha> 0$: the maximum number of successive statement moves.
 	
 	
@@ -342,7 +338,7 @@
 	We used our model to develop two conversational agents which have to negotiate about a social topic of "negotiation about a restaurant where to have dinner".
 	
 	We generated a set of dialogues where we manipulated two main conditions. First, the initial value of the power \textbf{pow} (see section \ref{decision}). The purpose was to define the behavior of agents in negotiation.
-	We aimed to make the first agent \emph{(Agent 1)} adopt more a dominant behavior by initiating the value of its power \textbf{pow} in the higher range of the power spectrum ($pow>\sigma$). Complementarity, the second agent \emph{(Agent 2)} had to adopt a submissive behavior. Therefore we initiated its \textbf{pow} to be in the lower range. ($ pow\leq \sigma$).
+	We aimed to make the first agent \emph{(Agent 1)} adopt more a dominant behavior by initiating the value of its power \textbf{pow} in the higher range of the power spectrum ($pow>\pi$). Complementarity, the second agent \emph{(Agent 2)} had to adopt a submissive behavior. Therefore we initiated its \textbf{pow} to be in the lower range. ($ pow\leq \pi$).
 	
 	The second condition involved varying the initial preferences of both agents. We manipulated the initial preferences to be either \textit{similar} or \textit{different}. We used the metric of Kendall distance \cite{bra2013Kendall} in order to compute the distance between two preferences sets (see section \ref{decision}).  
 	We figured out, that the dialogues generated with the \textit{similar} preferences condition are quite similar, because the negotiation converges quickly. Therefore, we presented only one dialogue in the \textit{similar preferences} condition for the experiment. 

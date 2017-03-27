@@ -113,6 +113,17 @@ public class Negotiation<O extends Option> {
 			return Math.max(0, s);
 		}
 	}
+	
+	public double selfTest(int t){
+		
+		double s=0;
+		if( t< NegotiationParameters.tau)
+			return this.relation;
+		else{
+			s= relation - ((NegotiationParameters.delta/relation) *(t-NegotiationParameters.tau));
+			return Math.max(0, s);
+		}
+	}
 
 	public int computeT() {
 		//		int t = 0;
