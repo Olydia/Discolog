@@ -96,14 +96,14 @@ public class NegotiatorAgent extends Agent {
 	public Utterance respond (Utterance utterance, Disco disco) {
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
-			 if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance))
+			 if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
 
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 			 else{
 			 
 			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
-			if(relation > NegotiationParameters.sigma){
+			if(relation > NegotiationParameters.pi){
 
 				return new Propose(disco, false, getNegotiation().chooseProposal());
 
@@ -120,7 +120,7 @@ public class NegotiatorAgent extends Agent {
 		}else if(endDialogue(utterance)) {
 			return new Say(disco, false, "Okay");
 
-		}else if (relation >  NegotiationParameters.sigma && negotiation.negotiationFailure(utterance)){
+		}else if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance)){
 
 
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
@@ -151,7 +151,7 @@ public class NegotiatorAgent extends Agent {
 
 
 			// DOMINANT case only propose !		
-		}else if (relation > NegotiationParameters.sigma && !getNegotiation().remainProposals().isEmpty()){
+		}else if (relation > NegotiationParameters.pi && !getNegotiation().remainProposals().isEmpty()){
 			//System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 			if(isProposition(utterance)){
 				
@@ -490,7 +490,7 @@ public class NegotiatorAgent extends Agent {
 	public boolean takeThelead(){
 		int nbPreferences =0;
 		
-		if(getNegotiation().getDominance()<= NegotiationParameters.sigma)
+		if(getNegotiation().getDominance()<= NegotiationParameters.pi)
 			return false;
 		
 		for(NegoUtterance utt : getNegotiation().getContext().getHistory()){

@@ -2,7 +2,7 @@ package fr.limsi.negotiate;
 
 public class NegotiationParameters {
 	// sigma : threshold of the relation of dominance
-	 public static final double sigma = 0.5;
+	 public static final double pi = 0.5;
 	 
 	 // minimum of non accepted proposals in the negotiation
 	 public static final int tau = 2;
