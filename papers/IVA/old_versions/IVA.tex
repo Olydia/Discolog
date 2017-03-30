@@ -41,7 +41,7 @@
 	\end{abstract}
 	
 	\section{Introduction}
-	As artificial conversational agents become more and more popular, they became capable to hold a conversation with a human user and potentially collaborate with the user in order to achieve a common objective. For example, artificial tutors collaborate with students [ref], or a companion agents can help elderly to follow a specific diet \cite{kidd2005sociable}. In this context, the user(s) and the agent have to negotiate in collaborative manner about the way to achieve the common task. This is called \emph{collaborative negotiation}. Unlike adversarial negotiation [ref-traum-marsella], collaborative negotiation assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest\cite{sidnerartificial,chu1995response}.
+	As artificial conversational agents become more and more popular, they became capable to hold a conversation with a human user and potentially collaborate with the user in order to achieve a common objective. For example, artificial tutors collaborate with students [ref], or a companion agents can help elderly to follow a specific diet \cite{kidd2005sociable}. In this context, the user(s) and the agent have to negotiate in collaborative manner about the way to achieve the common task. This is called \emph{collaborative negotiation}. Unlike adversarial negotiation \cite{traum2008multi}, collaborative negotiation assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest\cite{sidnerartificial,chu1995response}.
 	
 	Moreover, previous research has shown that people tend to respond to computers as social actors \cite{bickmore2005establishing}. This led the IVA community to study the psychosocial relationship between the user and the agent during their interaction: a growing body of research is investigating the use of appropriate social behavior for virtual agents in different roles and types of user-computer relationship \cite{bickmore2005s,bickmore2005establishing,kidd2005sociable}. In the context of human-human communication involving negotiation, social psychology and communication \cite{dunbar2005perceptions,de1995impact} investigated the impact of social relations and emotion on the negotiation. They proved that  \emph{interpersonal power} directly affects the strategies of negotiators. Therefore, in order to build intelligent conversational agents that conduct good collaborative negotiations, it is very important to allow them to adapt their negotiation strategies to different levels of interpersonal power. [Traum et al. studied this question in the context of adversarial multi-party negotiation. We consider the case of collaborative one-to-one dialogue.]
 	
@@ -73,7 +73,7 @@
 	\item \textbf{Representation of demands:} Dominant negotiators show a higher level of demand than the submissive ones. In addition,  Submissive negotiator's demand decrease over time, and tends to make larger concessions than dominant negotiators. \cite{de1995impact}
 	
 	\item \textbf{Control the flow of the negotiation:}
-	Dominant negotiators tend to make the first move \cite{magee2007power}. In addition, they take the lead of the negotiation. Otherwise, submissive negotiators aim to construct an accurate model of other preferences, which lead them to ask more questions about other preferences rather than keeping the negotiation going (makes proposals). \cite{de2004influence}
+	Dominant negotiators tend to make the first move \cite{magee2007power}. In addition, they take the lead of the negotiation. Otherwise, submissive negotiators aim to construct an accurate model of other preferences, which lead them to ask more questions about other preferences rather than keeping the negotiation going (makes proposals). \cite{gather-info}
 	
 	\end{enumerate}
 	%	We will present in the next section the decision model based on the behaviors of power. 
@@ -319,6 +319,8 @@
 	
 	
 	
+	
+	
 	\section{Evaluation}
 	
 	We built a conversational agent able to deploy strategies of negotiation based on its interpersonal relationship of power. In order to validate our model, we conducted a perceptual study in which participants had to determine the behaviors of two agents generated using our model. 
@@ -332,39 +334,39 @@
 	The second condition involved varying the initial preferences of both agents. We used the metric of Kendall distance \cite{bra2013Kendall} in order to compute the distance between two preferences sets. We manipulated the initial preferences to be either \textit{similar} or \textit{different}.
 	The conditions manipulated to generate the dialogues are depicted in table \ref{Conditions}
 	\begin{table}
-	\centering
-	\begin{tabular}{ |l|c|c|l| }
-	\hline
-	\multicolumn{3}{ |c| }{Conditions} & \multirow{2}{*}{Dialogue's label}  \\ \cline{1-3}
-	
-	\newline \multirow{2}{*} {\textbf{Initial preferences}}& \multicolumn{2}{ c| } {\textbf{Dominance}} & \\ \cline{2-3}
-	
-	\newline  & pow(\textit{speaker a}) & pow(\textit{speaker b}) &  \\ 
-	\hline
-	\newline\multirow{3}{*} {Different preferences} & 0.9 & 0.4 & Dialogue 1 \\ \cline{2-4}
-	
-	\newline  & 0.7 & 0.4 & Dialogue 2\\ \cline{2-4}
-	
-	\newline   &0.7 & 0.2 & Dialogue 3\\ 
-	\hline
-	\newline Similar preferences & 0.7 & 0.4 & Dialogue 4\\
-	\hline
-	\end{tabular}
-	\caption{Initial condition's setting for generating dialogues} 
-	\label{Conditions}
+		\centering
+		\begin{tabular}{ |l|c|c|l| }
+			\hline
+			\multicolumn{3}{ |c| }{Conditions} & \multirow{2}{*}{Dialogue's label}  \\ \cline{1-3}
+			
+			\newline \multirow{2}{*} {\textbf{Initial preferences}}& \multicolumn{2}{ c| } {\textbf{Dominance}} & \\ \cline{2-3}
+			
+			\newline  & pow(\textit{speaker a}) & pow(\textit{speaker b}) &  \\ 
+			\hline
+			\newline\multirow{3}{*} {Different preferences} & 0.9 & 0.4 & Dialogue 1 \\ \cline{2-4}
+			
+			\newline  & 0.7 & 0.4 & Dialogue 2\\ \cline{2-4}
+			
+			\newline   &0.7 & 0.2 & Dialogue 3\\ 
+			\hline
+			\newline Similar preferences & 0.7 & 0.4 & Dialogue 4\\
+			\hline
+		\end{tabular}
+		\caption{Initial condition's setting for generating dialogues} 
+		\label{Conditions}
 	\end{table}
-
+	
 	\subsection{Hypotheses}
 	We investigated four main hypotheses about the perception of agents behaviors of power during the negotiation. 
 	\begin{itemize}
-	\item  \textbf{H1:} The dominant speaker will more strongly be perceived as self-centered.  
-	
-	\item \textbf{H2:} The submissive speaker will be more strongly perceived as making larger concessions.
-	
-	\item \textbf{H3:}  The dominant speaker will more strongly be perceived as having a higher level of demand comparing to the submissive speaker.
-	
-	\item \textbf{H4:}  The dominant speaker will more strongly be perceived as taking the lead of the negotiation.
-	
+		\item  \textbf{H1:} The dominant speaker will more strongly be perceived as self-centered.  
+		
+		\item \textbf{H2:} The submissive speaker will be more strongly perceived as making larger concessions.
+		
+		\item \textbf{H3:}  The dominant speaker will more strongly be perceived as having a higher level of demand comparing to the submissive speaker.
+		
+		\item \textbf{H4:}  The dominant speaker will more strongly be perceived as taking the lead of the negotiation.
+		
 	\end{itemize}
 	
 	\subsection{Experimental Procedure}
@@ -378,18 +380,18 @@
 	
 	A total of 120 subjects participated to the experiment. Each subject received \textit{25 cents}. 
 	We limited the participant pools to native English speakers. We excluded participants providing wrong answers to our sanity questions. The final number of accepted participants was 105. 
-		%Each generated dialogue had a questionnaire. There were 12 questions (including 2 test questions).
+	%Each generated dialogue had a questionnaire. There were 12 questions (including 2 test questions).
 	\subsection{Results and discussion}
 	Table  \ref{res} summarize the results of our study, which strongly support all of our four hypotheses.  In order to analyze our data, we first computed the correlation for each pair of questions (see table ). The obtained results showed a high correlation between each pair of questions for all the hypotheses. This allow us to compute the comparison between speakers behaviors in the different dialogues. We used a non parametric test of Wilcoxon signed-rank test for paired data.  
-	 Hypothesis \textbf{H1} stated that participants would perceive dominant speaker to be self-centered and only care about its own preferences. Our analysis confirmed our prediction. In all the dialogues, participants perceived \textit{speaker a} to be self-centered, whereas \textit{speaker b} was perceived as taking into account the preferences of the other speaker.
-	 
+	Hypothesis \textbf{H1} stated that participants would perceive dominant speaker to be self-centered and only care about its own preferences. Our analysis confirmed our prediction. In all the dialogues, participants perceived \textit{speaker a} to be self-centered, whereas \textit{speaker b} was perceived as taking into account the preferences of the other speaker.
+	
 	Hypothesis \textbf{H2} predicted that the submissive speaker will be perceived to make larger concessions. For all the proposed dialogues, participants responses supported our hypothesis.
 	Participants rated the level of demand of the dominant speaker (\textit{\textit{speaker a}})  to be significantly higher than \textit{speaker b}. This difference supports the hypothesis \textbf{H3}. 
 	In addition, the analysis revealed a significant main effect of the power in the lead of the dialogue, indicating that participants perceived \textit{speaker a}  as more leading the dialogue \textit{speaker b} supporting highly hypothesis \textbf{H4}.  
 	
 	Finally, we made a post-study analysis to study the behaviors of power in the spectrum of power. We supposed that the highest the power gets in the spectrum, the better behaviors of power will be perceived. We did compare participant's judgments of \textit{speaker a} in dialogues where \textit{speaker a} had different setting of power whereas \textit{speaker b} had the same setting, which are \emph{Dialogue 1} and \emph{Dialogue 2}.
 	The obtained results did not supported our hypothesis. no significant difference in agents behaviors was observed. This might be explained by the interpersonal nature of power, which means that participants rated the power of \textit{speaker a} in opposition of  \textit{speaker b's} behavior, which makes the comparison of agents behaviors from different dialogues irrelevant. 
-
+	
 	\begin{table}[t]
 		
 		\begin{tabular}{|ll|c|c|c|c|c|c|c|c|} 
@@ -426,28 +428,23 @@
 			\hline	
 		\end{tabular}
 		\caption{Summary of the obtained results for each hypothesis}
-				\label{res}
+		\label{res}
 	\end{table}
-		
+	
 	\subsection{Conclusion}
-		Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of power. 
+	Our research aims to model a conversational agent which is able to deploy strategies of negotiation in function of its representation of power. 
 	We proposed a model which allows a conversational agent to generate strategies of negotiation in function of its interpersonal relation of power.
 	We extracted from research in social psychology three principles of negotiation behaviors related to power that we implemented.  
-		
+	
 	Our on-line study had the purpose to validate the implemented behaviors and did provide strong support to the claim that the relation of power affects agent's behaviors in negotiation.
 	
 	We found that participants perceived a significant difference in the agent's behaviors depending on their respective relation of power.  
 	Indeed, all of our four hypotheses were confirmed. 
 	%We predicted that agents with higher power will be perceived as more individualist and self-centered, whereas agents with lower power would care about other preferences. Furthermore, agents with lower power were perceived to make larger concessions than did agents with higher power. Consistent with this prediction, agents with higher power showed a greater level of demand in the negotiation. Finally, we obtain evidence that agents with higher power tends to lead the dialogue and take control of the negotiation's flow. 
- 
+	
 	Our findings validate our model of dialogue in general and specifically confirmed the coherence of the generated behaviors of power. 
 	The next step, would be to experiment our model in a realistic human-agent interaction.
 	Further on, the interaction with a user should take into consideration the user's representation of its relation with the agent. Therefore, we aim to extend our model with a module of theory of mind that would allow the agent to have a mental representation of the user, and by consequence adapt its behavior to complement the user behavior perceived during the dialogue.
-	
-%	\section{Conclusion}
-	
-		
-
 	
 	% ================== BIBLIO ===============
 	\vskip 4pt
