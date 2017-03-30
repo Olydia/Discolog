@@ -278,7 +278,7 @@
 	In order to validate our model, we conducted a perceptual study in which participants have to determine the behaviors of two agents generated using our model. We have implemented the model in Java with the DISCO platform \cite{rich09} and we generated synthetic dialogues between two artificial agents with different values of power and preferences.
 
 	\subsection{Study design}
-	We simulate a collaborative negotiation for choosing a restaurant. We built a set of 4 criteria (cuisine, ambiance, price and location) for a total of 420 options. The following parameter values were used in our simulation: $\tau=X$, $\pi=X$, $\alpha=X$, $\beta=X$ and $\delta=X$. We generated three preferences sets and we measured the difference between the preference sets using Kendall's distance \cite{bra2013Kendall}. We manipulated 2 simulation parameters: the power of both agents (named \emph{pow-a} and \emph{pow-b}) and the preference sets. Table \ref{table:conditions} summarizes the 4 experimental conditions that results from this combination. Note that we only consider one configuration of social power for the similar preference sets condition, because the resulting dialogues are very similar. An example dialogue is given on figure \ref{fig:ex-dialogue}. The first speaker (agent A) is always the dominant agent, as stated by our principle 3 on leading the dialogue.
+	We simulate a collaborative negotiation for choosing a restaurant. We built a set of 4 criteria (cuisine, ambiance, price and location) for a total of 420 options. The following parameter values were used in our simulation: $\tau=2$, $\pi=0.5$, $\alpha=2$, $\beta=1$ and $\delta=0.1$. We generated three preferences sets and we measured the difference between the preference sets using Kendall's distance \cite{bra2013Kendall}. We manipulated two simulation parameters: the power of both agents (named \emph{pow-a} and \emph{pow-b}) and the preference sets. Table \ref{table:conditions} summarizes the 4 experimental conditions that results from this combination. Note that we only consider one configuration of social power for the similar preference sets condition, because the resulting dialogues are very similar. An example dialogue is given on figure \ref{fig:ex-dialogue}. The first speaker (Speaker A) is always the dominant agent, as stated by our principle 3 on leading the dialogue.
 	
 	Our goal is to show these dialogues to human observers so as to evaluate how the relation pf power is perceived in the different dialogues.
 	\begin{table}
@@ -358,7 +358,7 @@
 	We defined  two questions for each hypothesis. Two sanity-check questions were added. Each one of these questions was to be answered on a 5 points Likert scale ranging from "I totally disagree" to "I totally agree".
 	
 	\begin{table}
-		\begin{tabular}{|p{1.5cm}|p{5cm}|p{7cm}|}
+		\begin{tabular}{|p{1.75cm}|p{5cm}|p{5.5cm}|}
 			\hline
 			Hypothesis &question 1& question 2 \\
 			\hline
@@ -379,9 +379,10 @@
 	\subsection{Results and discussion}
 	Table  \ref{res} summarizes the results of our study, which strongly support all of our four hypotheses: in each dialogue, the dominant agent and the submissive agent were clearly distinguished on all aspects. We first computed the correlation for each pair of questions (the average correlation is at .5 for all pairs of questions in all dialogues). This permits us to use the data to compare the speakers behavior on each dialogue. Since our data are not normally distributed, we used a non parametric Wilcoxon signed-rank test for paired data. The dominant speaker was correctly perceived as more self-centered (\textbf{H1}), making less concessions (\textbf{H2}), having a higher level of demand (\textbf{H3}) and leading the negotiation (\textbf{H4}).
 	
-	Finally, we made a post-study analysis by comparing the participant's judgments on the behaviors of Speaker A across different dialogues. Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. We computed the differences between the evaluations of Speakers A and B in Dialogue 1 and Dialogue 2 (pow-b remains unchanged at 0.4 whereas pow-a changes from 0.7 to 0.9). We did not obtain significant results, however, a tendency was observed ($p\simeq 0.1$) for self-centeredness and concessions and the lead of dialogue was clearly better perceived ($p=0.043$). This lack of result might be explained by the interpersonal nature of power, which means that participants rate the power of Speaker A as opposed to the behavior of Speaker B, which makes the comparison of agents behaviors from different dialogues partly irrelevant.
+	Finally, we made a post-study analysis by comparing the participant's judgments on the behaviors of Speaker A across different dialogues. Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. We computed the differences between the evaluations of Speakers A and B in Dialogue 1 and Dialogue 2 (pow-b remains unchanged at 0.4 whereas pow-a changes from 0.7 to 0.9). We did not obtain significant results, however, a tendency was observed ($p\simeq 0.1$) for 
+	self-centeredness, concessions and the lead of dialogue was clearly better perceived ($p=0.043$). This lack of result might be explained by the interpersonal nature of power, which means that participants rate the power of Speaker A as opposed to the behavior of Speaker B, which makes the comparison of agents behaviors from different dialogues partly irrelevant.
 	
-	[Limitation 3 blocs -> 4 H évalué seulement de manière globale (3 lignes max)]
+	The results presented here have a limitation. Indeed, we made a global study of the different principles. However, we did not study the perception of each principle independently from others. As the principles are interdependent, it would be impossible for us to investigate the perception of each principle separately. 
 	
 	\begin{table}[t]
 		
