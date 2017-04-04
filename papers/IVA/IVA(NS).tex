@@ -21,7 +21,7 @@
 	\newfloatcommand{capbtabbox}{table}[][\FBwidth]
 	
 	\begin{document}
-	\title{\vskip -10pt Dominance in dialogue of collaborative negotiation}
+	\title{\vskip -10pt A computational model of power in dialogues of collaborative negotiation}
 	
 	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
 		Nicolas Sabouret\inst{1} }
@@ -37,7 +37,7 @@
 	\maketitle
 	
 	\begin{abstract}
-		This paper presents a model of conversational agent that can deploys different strategies of negotiation based on the social power it wants to express for the user. This model is based on three principles of collaborative negotiation from the literature in social psychology. We show that this principles are correctly perceived by a human observer: the social behavior of the agent is made visible through its dialogue strategy.
+		This paper presents a conversational agent that can deploy different strategies of negotiation based on its social power. The underlying computational model is based on three principles of collaborative negotiation from the literature in social psychology. We evaluated our model by showing that these principles are correctly perceived by a human observer; the social behavior of the agent is made visible through its dialogue strategy.
 	\end{abstract}
 	
 	\section{Introduction}
@@ -87,18 +87,18 @@
 	First, we present the data structure for the agent's preferences and the topics of the negotiation. Second, we present the implementation of the principles of behaviors of power in negotiation (see section \ref{domDialogue}).
 
 	\subsection{Domain model}
-	The overall goal of a negotiation is to choose an \textbf{option} in a set of possible options $\mathcal{O}$. The evaluation of each option by participants is based on a set of \textbf{criteria} that reflect options characteristics. Let us consider a set $\mathcal{C}$ of $n$ criteria and let $C_1,\ldots,C_n$ be their respective domains of values. $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)\in\mathcal{O}$. For instance, in a dialogue about restaurants for which the criteria would be the type of cuisine and the price, we could have the option ``Chez Francis'' that is an expensive French restaurant: $francis=(French,expensive)$.
+	The overall goal of a negotiation is to choose an \textbf{option} in a set of possible options $\mathcal{O}$. The evaluation of each option by participants is based on a set of \textbf{criteria} that reflect the option's characteristics. Let us consider a set $\mathcal{C}$ of $n$ criteria and let $C_1,\ldots,C_n$ be their respective domains of values. $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)\in\mathcal{O}$. For instance, in a dialogue about restaurants for which the criteria would be the type of cuisine and the price, we could have the option ``Chez Francis'' that is an expensive French restaurant: $(French,expensive)$.
 	
 	\subsection{Preference model} 
-	Each agent is provided with a set of preferences, defined as a set $\prec$ of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers French food to Italian, $French\prec_{cuisine}Italian$.
+	The conversational agent is defined with a set of preferences, presented as a set $\prec$ of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers French food to Italian, $Italian\prec_{cuisine}French$.
 	
-	For a given value $v\in C_i$, the agent can compute the \emph{satisfaction} it has for this value as the number of ancestors in the preference order $\prec_i$, normalised in [0,1]:
+	For a given value $v\in C_i$, the agent computes the \emph{satisfaction} $sat_{self}$ it has for this value as the number of ancestors in the preference order $\prec_i$, normalized in [0,1]:
 	
 	\begin{equation}
 	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{d : d \neq c \  \wedge \ (v \prec_i d)\}| }{( |C_i| - 1 )}\right)
 	\end{equation}
 	
-	This notion of satisfaction is generalized to any option $o=(v_1,\ldots,v_n) \in \mathcal{O}$ as a simple weighted sum\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned by this question of criteria agregation in this paper.}:
+	This notion of satisfaction is generalized to any option $o\in \mathcal{O}$ as a simple weighted sum\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned by this question of criteria aggregation in this paper.}:
 	\begin{equation}
 	sat(o, \prec) = \frac{\sum_{i}^{n} sat(v_i, \prec_i) }{n}
 	\end{equation}
@@ -431,8 +431,8 @@
 
 	
 	% ================== BIBLIO ===============
-	\vskip 4pt
-\scriptsize{	\bibliographystyle{plain}
+
+		\scriptsize{	\bibliographystyle{plain}
 	\bibliography{Library}}
 
 
