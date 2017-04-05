@@ -21,7 +21,7 @@
 	\newfloatcommand{capbtabbox}{table}[][\FBwidth]
 	
 	\begin{document}
-	\title{\vskip -10pt A computational model of power in dialogues of collaborative negotiation}
+	\title{\vskip -10pt A computational model of power in collaborative negotiation dialogues}
 	
 	\author{Lydia Ould Ouali\inst{1}, Charles Rich\inst{2} \and
 		Nicolas Sabouret\inst{1} }
@@ -49,14 +49,13 @@
 	
 	\section{Related works}
 	The notion of social power has been widely studied in the fields of interpersonal communication and psychology \cite{kecskes2013research}. It can be defined as the capacity to produce intended effects and ability to influence the behavior of other person in the conversation \cite{dunbar2005perceptions}. In the context of communication, power is a dyadic variable that takes place during the dialogue, where the interlocutor who exerts power is viewed as \textit{dominant}, while the interlocutor with low power's behaviors is viewed as \textit{submissive}. 
-% where one individual's attempt of control is necessarily acquainted by the partner in the interaction.\cite{dunbar2005perceptions}
-
-	Behaviors related to power can contribute either positively or negatively to the dialogue. Positive contributions include keeping the conversation going, making quick decisions, etc. Negative contributions include not considering the partner (\emph{e.g.} not giving the occasion to express his opinion), appearing offensive, etc. \cite{zablotskaya2012relating}. In our work, we focus on negotiation dialogues, for which several researchers already proved the impact of power on the negotiation \cite{van2006power}.
-	
+% where one individual's attempt of control is necessarily acquainted by the partner in the interaction.\cite{dunbar2005perceptions
+	Behaviors related to power can contribute either positively or negatively to the dialogue. Positive contributions include keeping the conversation going, making quick decisions, etc. Negative contributions include not considering the partner (\emph{e.g.} not giving the occasion to express his opinion), appearing offensive, etc. \cite{zablotskaya2012relating}. In our work, we focus on negotiation dialogues, for which several researchers already proved the impact of power\cite{van2006power}.
+		\vspace{-1em} 
 	\subsection*{Behaviors of power in dialogue}
 	\label{domDialogue}
 	During a conversation, power can manifest through verbal and nonverbal behaviors.	
-	At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinestesic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several IVA have been developped with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring,callejas2014computational} in relation to power and submission perception. Similarly, \cite{strassmann2016effect} investigated the perception of nonverbal behaviors of virtual agents with a focus on power and cooperation.
+	At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinestesic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several IVA have been developed with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring,callejas2014computational} in relation to power and submission perception. Similarly, \cite{strassmann2016effect} investigated the perception of nonverbal behaviors of virtual agents with a focus on power and cooperation.
 	
 	Verbal behaviors of power in the dialogue are related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. A considerable body of research has documented the effects of power on negotiation behaviors and outcomes. De Dreu demonstrated that \cite{de1995impact} dominant negotiators have higher aspirations, demands more and concede less. Galinsky \cite{galinsky2003power} affirms that power increases the action orientation: dominant negotiators control the flow of the negotiation. In addition, high power increase task orientation and goal-directed behavior. \cite{giebels2000interdependence} shows that this leads dominant negotiators to end up with the larger share of the pie.
 	
@@ -68,9 +67,9 @@
 
 	In our work, we use a text-oriented dialogue system and we therefore focus on the verbal behaviors.  Our goal is to make visible \emph{the strategies} deployed during the negotiation depending on the power. In order to implement these different behaviors, we extracted three principle related to the relation of power that impact strategies of negotiation:
 	\begin{enumerate}
-	\item \textbf{Self Vs Other:} Submissive negotiators consider the preferences of other in the negotiation, whereas dominant negotiators  are self-centered and only interested by satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
+	\item \textbf{Representation of demands:} \hl{Dominant/high power} negotiators show a higher level of demand than the submissive ones. In addition,  Submissive negotiator's demand decrease over time, and tends to make larger concessions than dominant negotiators. \cite{de1995impact}
 	
-	\item \textbf{Representation of demands:} Dominant negotiators show a higher level of demand than the submissive ones. In addition,  Submissive negotiator's demand decrease over time, and tends to make larger concessions than dominant negotiators. \cite{de1995impact}
+	\item \textbf{Self Vs Other:} Submissive negotiators consider the preferences of other in the negotiation, whereas dominant negotiators  are self-centered and only interested by satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
 	
 	\item \textbf{Control the flow of the negotiation:}
 	Dominant negotiators tend to make the first move \cite{magee2007power}. In addition, they take the lead of the negotiation. Otherwise, submissive negotiators aim to construct an accurate model of other preferences, which lead them to ask more questions about other preferences rather than keeping the negotiation going (makes proposals). \cite{de2004influence}
@@ -85,7 +84,7 @@
 	\section{Model of negotiation based on the relation of power}
 	In this section, we present our model of dialogue of negotiation of preferences.	
 	First, we present the data structure for the agent's preferences and the topics of the negotiation. Second, we present the implementation of the principles of behaviors of power in negotiation (see section \ref{domDialogue}).
-
+	\vspace{-1em} 
 	\subsection{Domain model}
 	The overall goal of a negotiation is to choose an \textbf{option} in a set of possible options $\mathcal{O}$. The evaluation of each option by participants is based on a set of \textbf{criteria} that reflect the option's characteristics. Let us consider a set $\mathcal{C}$ of $n$ criteria and let $C_1,\ldots,C_n$ be their respective domains of values. $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)\in\mathcal{O}$. For instance, in a dialogue about restaurants for which the criteria would be the type of cuisine and the price, we could have the option ``Chez Francis'' that is an expensive French restaurant: $(French,expensive)$.
 	
@@ -93,52 +92,67 @@
 	The conversational agent is defined with a set of preferences, presented as a set $\prec$ of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers French food to Italian, $Italian\prec_{cuisine}French$.
 	
 	For a given value $v\in C_i$, the agent computes the \emph{satisfaction} $sat_{self}$ it has for this value as the number of ancestors in the preference order $\prec_i$, normalized in [0,1]:
-	
+		\vspace{-.5em} 
 	\begin{equation}
 	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{d : d \neq c \  \wedge \ (v \prec_i d)\}| }{( |C_i| - 1 )}\right)
 	\end{equation}
 	
-	This notion of satisfaction is generalized to any option $o\in \mathcal{O}$ as a simple weighted sum\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned by this question of criteria aggregation in this paper.}:
+	This notion of satisfaction is generalized to any option $o= (v_1, \ldots, v_n)\in \mathcal{O}$ as a simple weighted sum\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned by this question of criteria aggregation in this paper.}:
+		\vspace{-1em} 
 	\begin{equation}
-	sat(o, \prec) = \frac{\sum_{i}^{n} sat(v_i, \prec_i) }{n}
+	sat_{self}(o, \prec) = \frac{\sum_{i}^{n} sat_{self}(v_i, \prec_i) }{n}
+		\vspace{-1.5em} 
 	\end{equation}
-	
+
 	\subsection{Dialogue model}
-	Negotiators communicate during the negotiation via utterance types (or speech acts). Each utterance type has a specific set of arguments and is associated with a natural language generation. We defined five main types of utterance, based on the work by Sidner \cite{sidnerartificial}, and three derivate types that are combinations of the main ones.
-		
-		\begin{table}[h]
-			\begin{tabular} {|p{2.5cm}|p{3.5cm}|p{6cm}|}
+	Negotiators communicate during the negotiation via utterances. Each utterance type has a specific set of arguments and is associated with a specific format. We defined five utterance types, based on the work of Sidner \cite{sidnerartificial}, and three derivate types that are combinations of the main ones.
+	% changer le tableau, enlever parametre comme tab2 et ajouter les ensembles de valeurs a la fin	
+		\begin{table}[t]
+			{\scriptsize
+			\begin{tabular} {|p{2.75cm}|p{4cm}|p{3cm}|}
 				\hline
-				Utterance type & parameters & NL generation\\
+				Utterance type  & NL generation & Effects\\
 				\hline
-				StatePreference & $v \in C_i$, $b\in\{True,False\}$ & I (don't) like /$v$/.\\
+				StateValue(v) &  I (don't) like /$v$/. & \textit{Self} speaker : $v \in S_i$ \newline \textit{Other} speaker:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
 				\hline
-				 \multirow{2}{*}{AskPreference} &$v \in C_i$ & Do you like /$v$/ ?\\
-				 \cline{2-3} & $i\in\mathcal{C}$ & What kind of /$i$/ do you like ?\\
+				 AskValue(v)& Do you like /$v$/ ? & None \\
 				 \hline
-				 \multirow{2}{*}{Propose} & $o \in \mathcal{O}$ & Let's go to /$o$/.\\
-				 \cline{2-3} & $v \in C_i$ & Let's go to a /$v$/ restaurant.\\
+				 AskCriterion(i) &  What kind of /$i$/ do you like ? & None\\
 				 \hline
-				 Accept& $x \in \mathcal{O} \vee x\in C_i$ & Okay, let's go to /$x$/.\\
+				 ProposeOption(o)  & Let's go to /$o$/. & $o \in P$\\
 				 \hline
-				 Reject & $x \in \mathcal{O} \vee x\in C_i$ & I'd rather choose  something else. \\
+				 ProposeValue(v) & Let's go to a /$v$/. & $v \in P_i$\\
 				 \hline
+				 AcceptOption(o)& Okay, let's go to /$o$/.& $o \in T$ \\
 				 \hline
-				 RejectPropose & $(r,p)\in C_i^2 \vee (r,p) \in \mathcal{O}^2 $ & I don't want to go to $r$. Let's rather go to $p$ \\
-				 \hline 
-				 RejectState & $x \in \mathcal{O} \vee x\in C_i$ &  I don't like /$x$/, let's choose something else. \\
+				 AcceptValue(v) & Okay, let's go to a /$v$/.& $v \in T_i$ \\
+				\hline
+				 RejectOption(o) & I'd rather choose  something else. & $o \in R$\\
 				 \hline
-				 AcceptPropose & $o \in \mathcal{O}$ & Okay. Let's go to /$o$/.\\
+				 RejectValue(v) &  I'd rather choose  something else. & $v \in R_i$ \\
 				 \hline
+				 NegotiationSuccess &  We reached an agreement. & None\\
+				 \hline
+				 NegotiationFalure &  Sorry, but I no longer want to discuss this. & None\\
+				 \hline
+				% Counter Propose & $(r,p)\in C_i^2 \vee (r,p) \in \mathcal{O}^2 $ & I don't want to go to $r$. Let's rather go to $p$ \\
+				% \hline 
+				% RejectState & $x \in \mathcal{O} \vee x\in C_i$ &  I don't like /$x$/, let's choose something else. \\
+				% \hline
+				% AcceptPropose & $o \in \mathcal{O}$ & Okay. Let's go to /$o$/.\\
+				% \hline
 			\end{tabular}
-			\caption{The list of possible utterances in the model of dialogue}
+			}
+			\caption{The list of utterance types in the model of dialogue}
 		\end{table}
-	
-	The agent can ask information about the preferences of its interlocutor (Ask) or give information about its own preferences (State). It can propose, accept and reject both values of criteria (``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). The RejectPropose utterance type is used to clearly reject an option and make a counter-proposal in the same dialogue move. Similarly, the RejectState utterance type is used to make a reject with an explanation. The AcceptPropose is used to accept a criteria and propose a compatible option. Examples of dialogues are given in section \ref{sec:evaluation}.
+	$v \in C_i$,  $o \in \mathcal{O}$ and $i \in \mathcal{C}$.
+	The agent can ask information about the preferences of its interlocutor (Ask) or give information about its own preferences (State). It can propose, accept and reject both values of criteria (``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). The value /$v$/ refers to the NL format to express a value. For example, in dialogue about restaurants, /$Chinese$/ means \textit{Chinese restaurants}. 
+	%The RejectPropose utterance type is used to clearly reject an option and make a counter-proposal in the same dialogue move. Similarly, the RejectState utterance type is used to make a reject with an explanation. The AcceptPropose is used to accept a criteria and propose a compatible option. 
+	Examples of dialogues are given in section \ref{sec:evaluation}.
 	
 	\medskip
-	The rules of utterance selection are described in section \ref{sec:decision}. For the utterance selection, the agent keeps track of statements and proposals all along the dialogue. For each criteria $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criteria. This avoids re-statements of previous information. We also have the sets $A_i$ and $U_i$ of values which have been stated by the interlocutor as satisfiable or not (using a \emph{State} utterance type). We assume that $A_i\cap U_i=\emptyset$ and $A_i\cup U_i\subseteq C_i$ (some values can still be unknown). These sets serve as a model of the interlocutor's preferences that evolves during the negotiation. From these, we can compute the satisfiability of a value $v\in C_i$ for the other as:
-	
+	The rules of utterance selection are described in section \ref{sec:decision}. For the utterance selection, the agent keeps track of statements and proposals all along the dialogue. For each criteria $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criteria. This avoids re-statements of previous information. We also have the sets $A_i$ and $U_i$ of values which have been stated by the interlocutor as satisfiable or not (using a \emph{StateValue} utterance type). We assume that $A_i\cap U_i=\emptyset$ and $A_i\cup U_i\subseteq C_i$. Some values can still be unknown that we represent as being potentially satisfiable for other. These sets serve as a model of the interlocutor's preferences that evolves during the negotiation. From these, we can compute the satisfiability of a value $v\in C_i$ for the other as:
+		\vspace{-0.5em} 
 	\begin{equation}
 	sat_{other}(v, A_i, U_i)= \left\{\begin{array}{ll}
 	1	 & \mathrm{if\ }  c \in A_i\\
@@ -147,65 +161,73 @@
 	\end{array}\right.
 	\end{equation}
 	
-	This function is generalized to any option $o=(v_1,\ldots,v_n) \in O$ as a weighted sum:
+	%...
+	We choose .5 as an arbitrary value to defined the unknown values. This function is generalized to any option $o=(v_1,\ldots,v_n) \in O$ as an average:
 	
 	\begin{equation}
-	sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} other(v_i, A_i, U_i) } {n}
+	sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} sat_{other}(v_i, A_i, U_i) } {n}
 	\end{equation}
 	
-	We also maintain the sets $P_i \subseteq C_i$, $T_i\subseteq C_i$ and $R_i\subseteq C_i$ of all proposed, accepted and rejected values for each criteria. This will be used to make relevant proposals. Similarly, we consider $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ and $R\subseteq \mathcal{O}$ the sets of all proposed, accepted and rejected options in the dialogue.
+	We also maintain the sets $P_i \subseteq C_i$, $T_i\subseteq C_i$ and $R_i\subseteq C_i$ of all proposed, accepted and rejected values for each criteria. These will be used to make relevant proposals. Similarly, we consider $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ and $R\subseteq \mathcal{O}$ the sets of all proposed, accepted and rejected options in the dialogue.
 	
 
+	
 	\subsection{Decision based on power in negotiation}
 	\label{sec:decision}
-	Based from research from social psychology, we defined three mains principles related to the relation of power which affects negotiators strategies and behaviors (see section \ref{domDialogue}). We present in this section, the formal theory built for each principle. 
+	Based from research from social psychology, we defined three mains principles related to the relation of power which affects negotiators strategies and behaviors (see section \ref{domDialogue}). We present in this section, the computational theory implementing each principle. 
+	
+		We denote the agent's perception of its relationship of power $pow \in [0, 1] $. It is a constant for a given agent in a given relationship.
 	
 	\subsubsection{Level of demand and concessions}
 	In collaborative negotiation, both participants reduce their level of demand in time because they want to reach an agreement. According to our second principle, concessions should be higher for submissive agents. To implement this mechanism, we use a \emph{concession curve}, as illustrated on figure \ref{fig:concession}.
 	
-	 \begin{figure}[t]
-		\includegraphics[width=.4\linewidth,keepaspectratio=true]{graphs/slope.jpg}
-		\caption{\label{fig:concession}Concession curve for a dominant and a submissive agent}
-	 \end{figure}
+%	 \begin{figure}[t]
+%		\includegraphics[width=.4\linewidth,keepaspectratio=true]{graphs/slope.jpg}
+%		\caption{\label{fig:concession}Concession curve for a dominant and a submissive agent}
+%	 \end{figure}
 	 
-	 This mechanism is defined as follows. Let $pow \in [0, 1] $ be the agent's initial power. It is a constant for a given agent in a given relationship. Let $self(pow, t)$ be the instant value of power, following the concession curve:
+	 This mechanism is defined as follows. Let $self(pow, t)$ be a time varying value, following the concession curve:
 	 
 	 \begin{equation}
 	 self(pow, t) = \left\{\begin{array}{ll}
 	 pow & \mathrm{if\ } (t \leq \tau)\\
-	 max(0, pow - (\frac{\delta}{pow} . (t - \tau))) & \mathrm{otherwise}
+	 max(0, pow - (\frac{\delta}{pow} \cdot (t - \tau))) & \mathrm{otherwise}
 	 \end{array}\right.
 	 \end{equation}
 	 
-	 where is $t \geq 0$ is the number of open or rejected proposals and $\tau > 0$ and $\delta > 0$
-	 are parameters of the theory (in our experiments, we use $\tau=2$ and $\delta=0.1$). This value $self$ represents the weight an agent gives to its self satisfaction in time.
+	 where is $t \geq 0$ is the number of open or rejected proposals, $\tau > 0$ is the minimum number of proposals before concession begins and $\delta > 0$ is a computational parameter of the concession slope.
+	 are parameters of the theory. This value of $self$ represents the weight an agent gives to its self satisfaction relative to the other.
 	 
 	 The acceptability of a value $v \in C_i$ is defined as a boolean function:
+	 	 	\vspace{-.5em} 
 	 \begin{equation}
-	 acc(v, t) = sat_{self}(v, \prec_i) \geq  \beta . Self(t).
+	 \vspace{-.5em} 
+	 acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  \beta \cdot self(pow,t).
 	 \end{equation}
-	 
-	 with $\beta>0$ a parameter of the theory (we used $\beta=1$ in our implementation).
+	 with $\beta>0$ a parameter of the theory that defines the level of demand in function of the relation of power.
 	 
 	 This function is generalized to any option $o \in O$:
+	 	\vspace{-.5em} 
 	 \begin{equation}
-	 acc(o, t) = sat_{self}(o, \prec) \geq  \beta . Self(t)
+	 acc(pow,o, t) = sat_{self}(o, \prec) \geq  \beta \cdot self(t)
+	 	\vspace{-1.5em} 
 	 \end{equation}
-	
+
 	\subsubsection {Self vs other}
-	According to our first principle, dominant negotiators give more weight to the satisfaction of their own preferences. To implement this principle in the context of collaborative negotiation, we compute how much a given proposal is \emph{tolerable} considering the satisfiability for both the agent and its interlocutor.
+	According to our first principle, \hl{high power}dominant negotiators give more weight to the satisfaction of their own preferences. To implement this principle in the context of collaborative negotiation, we compute how much a given proposal is \emph{tolerable} considering the satisfiability for both the agent and its interlocutor.
 	
 	For a given criteria $i\in\mathcal{C}$, let $V_i\subseteq C_i$ be the subset of values that are acceptable for the agent:
-
+	\vspace{-1em} 
 	\begin{equation}
 	V_i(t) = \{ v\in C_i : acc(v,t) \}
+		\vspace{-0.5em} 
 	\end{equation}
 	
 	We compute the tolerability of a given value $v\in V_i$ at a time $t$ knowing the preference order $\prec_i$ and the preference of the interlocutor:
-	
+		\vspace{-1em} 
 	\begin{equation}
 	\begin{split}
-	tolerable(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t) . sat_{self}(v, \prec_i) \\
+	tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t) . sat_{self}(v, \prec_i) \\
 	& +  (1 - self(pow, t)) . sat_{other}(v, A_i, U_i)
 	\end{split} 
 	\end{equation}
@@ -213,61 +235,74 @@
 	And we generalize this function to any option $o=(v_1,\ldots,v_n) \in O$:
 	
 	\begin{equation}
-	tolerable(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tolerable(v_i, t, \prec_i, A_i, U_i, pow) } {n}
+	tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
 	\end{equation}
 	
 	
 	\subsubsection{Lead of the negotiation}
-	According to our third principle, dominant negotiators tend to lead the negotiation. We implemented this principle through the choice of utterance types described on table \ref{utt}. A dominant agent will focus on keeping the negotiation going by choosing \emph{negotiation moves} (Propose, Reject, Accept, RejectPropose or AcceptPropose). On the contrary, a submissive negotiator will focus on building an accurate model of other preferences in order to take the fairest decision. It will focus more on \emph{statement moves} (StatePreference, AskPeference or RejectState).
+	According to our third principle, dominant negotiators tend to lead the negotiation. We implemented this principle through the choice of utterance types described on table \ref{utt}. A dominant agent will focus on keeping the negotiation going by choosing \emph{negotiation moves} (ProposeValue /ProposeOption, RejectValue /RejectOption, AcceptValue/ AcceptOption. On the contrary, a submissive negotiator will focus on building an accurate model of other preferences in order to take the fairest decision. It will focus more on \emph{statement moves} StateValue or AskValue/ AskCriterion.
 	
-	We define a threshold $\pi$ to split the spectrum of power in two (dominant or submissive). We describe on table \ref{utt} the rules for utterance selection. Depending on the power, the previous utterance type (represented by $u^{-1}$) and the current dialogue state, the agent will select the first utterance type for which the condition is satisfied. For instance, a dominant agent will stop the negotiation as soon as all the remaining options are unacceptable (second line). A submissive agent will reject and state a preference, so as to explain why the proposal is not acceptable (third line of the submissive agent). If there is no open proposal, the submissive agent will propose any know acceptable criteria (4th line) or ask for new information (5th line).
+	We define a threshold $\pi$ to split the spectrum of power in two (\hl{dominant or submissive - NON}). We describe on table \ref{utt} the rules for utterance selection. Depending on the power, the previous utterance type and the current dialogue state, the agent will select the first utterance type for which the condition is satisfied. For instance, a dominant agent will stop the negotiation as soon as all the remaining options are unacceptable (line 2). A submissive agent will reject and state a preference, so as to explain why the proposal is not acceptable (line 14). If there is no open proposal, the submissive agent will will ask for new information (line 18 -19).
 	
-	\begin{table}[t]
-	\centering
-	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
-	\hline
-	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\pi$}}}}&\textbf{Utterance type} & \textbf{Condition} \\
-	\cline{2-3}
-	&Negotiation success & $\exists o \in T\cup P$, $acc(o,t) = true$ \\
-	\cline{2-3}
-	& Negotiation failure & $ \forall o \in \mathcal{O}, acc(o,t) = false$\\
-	\cline{2-3}
-	& State & $type(u^{-1}) = AskPreference \land n < \alpha$ \newline where $n$ is the number of successive statement moves and $\alpha$ a simulation parameter\\
-	\cline{2-3}
-	& AcceptPropose & $\exists i\in\mathcal{C}, \exists c \in P_i$, $acc(c,t)= true$ \\
-	\cline{2-3}
-	& RejectPropose & $\exists i\in\mathcal{C}, \exists c \in P_i$, $acc(c,t)= false$ \\
-	\cline{2-3}
-	& Propose & Otherwise  \\
-	
-	\hline
-	\end{tabular}
+	\hl{+ means that two utterance in one turn}
 
-	\begin{tabular}{|p{.45cm}|p{3cm}|p{8cm}|}
+	\begin{table}[!t]
+	{\scriptsize
+	\centering
+    \begin{tabular}{|p{.3cm}|p{.6cm}|p{3cm}|p{7.5cm}|}
 	\hline
+	\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\pi$}}}}&Line nb& \textbf{Utterance type} & \textbf{Condition} \\
+	\cline{2-4}
+	&1&NegotiationSuccess & $\exists o \in T\cup P$, $acc(pow,o,t)$ \\
+	\cline{2-4}
+	& 2& NegotiationFailure & $ \forall o \in \mathcal{O},  \neg acc(pow,o,t)$\\
+	\cline{2-4}
+	&3& StateValue(v) & $type(u^{-1}) = AskPreference \land n < \alpha$ \newline where $n$ is the number of successive statement moves\\
+	\cline{2-4}
+	&4& AcceptValue(v)+ \newline ProposeValue(c) & $ \exists v \in P_i$ / $acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+	\cline{2-4}
+	&5& AcceptValue(v)+\newline ProposeOption(o) &  $ \exists v \in P_i$ / $ acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $ v \in o \land acc(pow,o,t)$ \\
+	\cline{2-4}
+	&6& RejectValue(v)+\newline ProposeValue(c) & $ \exists v \in P_i$ / $ \neg acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+	\cline{2-4}
+	&7& RejectValue(v)+ \newline ProposeOption(o) &  $ \exists v \in P_i$ / $  \neg acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $acc(pow,o,t)$ \\
+	\cline{2-4}
+	& 8&RejectOption($o_1$)+ ProposeOption($o_2$) & $ \exists o_1 \in P$ / $ \neg acc(pow,o_1,t) \land \exists o_2\in\mathcal{O}, acc(pow,o_2,t)$ \\
+	\cline{2-4}
+	&9& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+	\cline{2-4}
+	&10& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
+	
+	\hline
+
 	\parbox[t]{2mm}{
-	\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \pi$}}}} & \textbf{Utterance type} & \textbf{Condition} \\
-	\cline{2-3}
-	& Negotiation success &  $\exists o \in T$ \\
-	\cline{2-3}
-	& Accept & $\exists i\in\mathcal{C}, \exists c \in P_i, acc(c, t)=true   \lor \exists o \in P, acc(o, t) = true$ \\
-	\cline{2-3}
-	& RejectState & $ t<\tau \land (\exists i\in\mathcal{C}, \exists c \in P_i, acc(c, t) = false  \lor \exists o \in P,  acc(o, t)=false) $.\\
-	\cline{2-3}
-	& Propose & \hspace{1mm} $\exists i\in\mathcal{C}, \exists c \in C_i, sat_{other}(c, A_i, U_i)  = 1  \land acc(c, t)=true $
-	\newline  $\lor \hspace{1.5mm}\forall i\in\mathcal{C},\exists c \in C_i, c \in T_i $\\
-	\cline{2-3}
-	& Ask & \hspace{3mm} $t > \tau \land \exists i\in\mathcal{C}, \exists c \in P_i, acc(c, t)=false$
-	\newline $\lor \hspace{1.5mm}\exists i\in\mathcal{C}, \forall c \in C_i, sat_{other}(c, A_i, U_i)=0.5$\\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \pi$}}}} & 11& Negotiation success &  $\exists o \in T$ \\
+	\cline{2-4}
+	&12& AcceptValue(v) & $\exists i\in\mathcal{C}, \exists v \in P_i, acc(pow, v, t)$ \\
+	\cline{2-4}
+	&13&AcceptOption(o) & $\exists o \in P, acc(pow, o, t)$ \\
+	\cline{2-4}
+	&14&RejectValue(v)+\newline StateValue(v) & $ t<\tau \land (\exists i\in\mathcal{C}, \exists v \in P_i, \neg acc(pow,v, t))$.\\
+	\cline{2-4}
+	&15&RejectOption(o)+ \newline StateValue(v) & $ t<\tau \land (\exists o \in P,  \neg acc(pow,o, t) \land \exists v \in o, \neg acc(pow,v, t))$.\\
+	\cline{2-4}
+	&16&ProposeValue(v) &  $\exists i\in\mathcal{C}, \exists v \in C_i, v \in A_i  \land acc(pow, v, t) $\\
+	\cline{2-4} 
+	&17&ProposeOption(o)  & $\forall i\in\mathcal{C},\exists v \in C_i, v \in T_i  \land v \in o$ \\
+	\cline{2-4} 
+	&18&AskValue(v) & $t > \tau \land \exists i\in\mathcal{C}, \exists c \in P_i, \neg acc(c, t)$ \\
+	\cline{2-4} 	
+	&19&AskCriterion(i) & $\exists i\in\mathcal{C}, A_i \cup U_i= \emptyset $\\
+	\cline{2-4}	
+	&20&StateValue(v) & $\exists i\in\mathcal{C}, C_i\cap S_i \neq \emptyset$	\\
+	\cline{2-4}
+	&21& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+	\cline{2-4}
+	&22& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
 	
-	\cline{2-3}
-	
-	& State & $\exists i\in\mathcal{C}, C_i\cap S_i \neq \emptyset$
-	\\
-	\cline{2-3}
-	& Propose & Otherwise \\
 	\hline
 	\end{tabular}
+	}
 	\caption{Selection of utterance types}
 	\label{utt}
 	\end{table}
@@ -302,7 +337,7 @@
 	
 	
 	\begin{figure}
-	\fbox{\begin{minipage}{0.9\textwidth}
+	\fbox{\begin{minipage}{.95\textwidth}
 			{\scriptsize\ttfamily
 			\begin{addmargin}[1em]{2em}% 1em left, 2em right
 				A: "Let's go to a Chinese restaurant."
@@ -311,44 +346,44 @@
 				
 				A: "Let's go to a cheap restaurant."
 				
-				B: "Do you like expensive restaurants?"
+				\hspace*{3mm}B: "Do you like expensive restaurants?"
 				
 				A: "I don't like expensive restaurants."
 				
-				[...]
+				($\ldots$)
 				
-				B: "What kind of atmosphere do you like?"
+				\hspace*{3mm}B: "What kind of atmosphere do you like?"
 				
 				A: "Let's go to a cheap restaurant."
 				
-				B: "Okay, let's go to a cheap restaurant."
+				\hspace*{3mm}B: "Okay, let's go to a cheap restaurant."
 				
 				A: "Let's go to Sap. It's a quiet, cheap Japanese restaurant on the south side."
 				
-				B: "Okay, let's go to Sap.
+				\hspace*{3mm}B: "Okay, let's go to Sap.
 			\end{addmargin}
 		}
 		\end{minipage}}
 		
-		\caption{\label{fig:ex-dialogue}Extract of Dialogue 2.}
+		\caption{\label{fig:ex-dialogue}Excerpt of Dialogue 2.}
 	\end{figure}
-		
+			\vspace{-1em} 
 	\subsection{Hypotheses}
+		\vspace{-.5em} 
 	Based on our three principles and the literature in on the perception of social power in negotiation, we investigated four hypotheses:
+	\vspace{-1.5em} 
 	\begin{itemize}
-		\item  \textbf{H1:} The dominant speaker will more strongly be perceived as self-centered.  
+		\item  \textbf{H1:} The dominant speaker will more strongly be perceived as self-centered than the submissive speaker.  
 		
-		\item \textbf{H2:} The submissive speaker will be more strongly perceived as making larger concessions.
+		\item \textbf{H2:} The submissive speaker will be more strongly perceived as making larger concessions than the dominant speaker.
 		
-		\item \textbf{H3:}  The dominant speaker will more strongly be perceived as having a higher level of demand comparing to the submissive speaker.
+		\item \textbf{H3:}  The dominant speaker will more strongly be perceived as having a higher level of demand than to the submissive speaker.
 		
-		\item \textbf{H4:}  The dominant speaker will more strongly be perceived as taking the lead of the negotiation.
+		\item \textbf{H4:}  The dominant speaker will more strongly be perceived as taking the lead in the negotiation than the submissive speaker.
 		
 	\end{itemize}
 	
-	
-	
-	
+		
 	\subsection{Experimental Procedure}
 	
 	We conducted a between-subject study using the online crowdsoursing website \emph{CrowdFlower}\footnote{https://www.crowdflower.com/}. 
@@ -358,6 +393,7 @@
 	We defined  two questions for each hypothesis. Two sanity-check questions were added. Each one of these questions was to be answered on a 5 points Likert scale ranging from "I totally disagree" to "I totally agree".
 	
 	\begin{table}
+		{\scriptsize
 		\begin{tabular}{|p{1.75cm}|p{5cm}|p{5.5cm}|}
 			\hline
 			Hypothesis &question 1& question 2 \\
@@ -371,12 +407,14 @@
 			\textbf{H4} &Speaker (A/B) takes the lead in the negotiation.&Speaker (A/B) takes the initiative in the negotiation \\
 			\hline
 		\end{tabular}
+		}
 		\caption{List of questions asked for the questionnaire}
 		\label{table:questionnaire}
 	\end{table}
 	A total of 120 native English subjects participated to the experiment. Each subject received \textit{25 cents} and we excluded 15 participants after sanity check.
 	
 	\subsection{Results and discussion}
+		\vspace{-.5em} 
 	Table  \ref{res} summarizes the results of our study, which strongly support all of our four hypotheses: in each dialogue, the dominant agent and the submissive agent were clearly distinguished on all aspects. We first computed the correlation for each pair of questions (the average correlation is at .5 for all pairs of questions in all dialogues). This permits us to use the data to compare the speakers behavior on each dialogue. Since our data are not normally distributed, we used a non parametric Wilcoxon signed-rank test for paired data. The dominant speaker was correctly perceived as more self-centered (\textbf{H1}), making less concessions (\textbf{H2}), having a higher level of demand (\textbf{H3}) and leading the negotiation (\textbf{H4}).
 	
 	Finally, we made a post-study analysis by comparing the participant's judgments on the behaviors of Speaker A across different dialogues. Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. We computed the differences between the evaluations of Speakers A and B in Dialogue 1 and Dialogue 2 (pow-b remains unchanged at 0.4 whereas pow-a changes from 0.7 to 0.9). We did not obtain significant results, however, a tendency was observed ($p\simeq 0.1$) for 
@@ -385,7 +423,7 @@
 	In this present experiment, we studied the perception of all the principles related to power simultaneously. One of the limits of this study concerns the fact that we did not investigate the perception of each principle individually. However, this is not the focus of our research, especially as the principles are interdependent.
 	
 	\begin{table}[t]
-		
+		{\scriptsize
 		\begin{tabular}{|ll|c|c|c|c|c|c|c|c|} 
 			\cline{3-10}
 			
@@ -393,7 +431,7 @@
 			\cline{3-10}
 			
 			
-			\multicolumn{1}{c} {} & & Agent1 & Agent2 & Agent1 & Agent2 & Agent1 & Agent2 & Agent1 & Agent2 \\
+			\multicolumn{1}{c} {} & & SpeakerA & SpeakerB & SpeakerA & SpeakerB & SpeakerA & SpeakerB & SpeakerA & SpeakerB \\
 			\hline 
 			%\multicolumn{9}{|c|}{ \textbf{Results for H1}} \\
 			%	\hline
@@ -419,6 +457,7 @@
 			\newline & \multicolumn{1}{|l|}{p-value} & \multicolumn{2}{c|}{ $<<0.01$} & \multicolumn{2}{c|}{ $<<0.01$} & \multicolumn{2}{c|}{ $<0.05$}& \multicolumn{2}{c|}{ $<<0.01$}\\
 			\hline	
 		\end{tabular}
+		}
 		\caption{Summary of the obtained results for each hypothesis}
 		\label{res}
 	\end{table}
@@ -432,7 +471,8 @@
 	
 	% ================== BIBLIO ===============
 
-		\scriptsize{	\bibliographystyle{plain}
+		\scriptsize{	
+	\bibliographystyle{ieeetr}
 	\bibliography{Library}}
 
 
