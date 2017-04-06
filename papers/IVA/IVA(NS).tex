@@ -48,37 +48,38 @@
 	In this paper, we present a model of conversational agent that can deploys different strategies of negotiation based on the social power it wants to express for the user. In the next section, we discuss existing works on interpersonal power in the domain of social psychology and affective computing. Section 3 presents the negotiation model, based on a set of utterance types and a model of preferences. It implements three principles of collaborative negotiation from the literature in social psychology. In section 4, we present an experiment conducted with two virtual agents and we show that these principles are correctly perceived by a human observer.	
 	
 	\section{Related works}
-	The notion of social power has been widely studied in the fields of interpersonal communication and psychology \cite{kecskes2013research}. It can be defined as the capacity to produce intended effects and ability to influence the behavior of other person in the conversation \cite{dunbar2005perceptions}. In the context of communication, power is a dyadic variable that takes place during the dialogue, where the interlocutor who exerts power is viewed as \textit{dominant}, while the interlocutor with low power's behaviors is viewed as \textit{submissive}. 
+	The notion of social power has been widely studied in the fields of interpersonal communication and psychology \cite{kecskes2013research}. It can be defined as the capacity to produce intended effects and ability to influence the behavior of other person in the conversation \cite{dunbar2005perceptions}. In the context of communication, power is a dyadic variable that takes place during the dialogue.
+	%, where the interlocutor who exerts power is viewed as \textit{dominant}, while the interlocutor with low power's behaviors is viewed as \textit{submissive}. 
 % where one individual's attempt of control is necessarily acquainted by the partner in the interaction.\cite{dunbar2005perceptions
 	Behaviors related to power can contribute either positively or negatively to the dialogue. Positive contributions include keeping the conversation going, making quick decisions, etc. Negative contributions include not considering the partner (\emph{e.g.} not giving the occasion to express his opinion), appearing offensive, etc. \cite{zablotskaya2012relating}. In our work, we focus on negotiation dialogues, for which several researchers already proved the impact of power\cite{van2006power}.
 		\vspace{-1em} 
-	\subsection*{Behaviors of power in dialogue}
+	\subsection{Behaviors of power in dialogue}
 	\label{domDialogue}
 	During a conversation, power can manifest through verbal and nonverbal behaviors.	
-	At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinestesic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several IVA have been developed with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring,callejas2014computational} in relation to power and submission perception. Similarly, \cite{strassmann2016effect} investigated the perception of nonverbal behaviors of virtual agents with a focus on power and cooperation.
+	At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinestesic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several IVA have been developed with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring,callejas2014computational} in relation to high-power and low-power perception. Similarly, \cite{strassmann2016effect} investigated the perception of nonverbal behaviors of virtual agents with a focus on power and cooperation.
 	
-	Verbal behaviors of power in the dialogue are related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. A considerable body of research has documented the effects of power on negotiation behaviors and outcomes. De Dreu demonstrated that \cite{de1995impact} dominant negotiators have higher aspirations, demands more and concede less. Galinsky \cite{galinsky2003power} affirms that power increases the action orientation: dominant negotiators control the flow of the negotiation. In addition, high power increase task orientation and goal-directed behavior. \cite{giebels2000interdependence} shows that this leads dominant negotiators to end up with the larger share of the pie.
+	Verbal behaviors of power in the dialogue are related to the type of \textit{strategies} that individuals choose in order to take control of the other especially during a negotiation. A considerable body of research has documented the effects of power on negotiation behaviors and outcomes. De Dreu demonstrated that \cite{de1995impact} high-power negotiators have higher aspirations, demands more and concede less. Galinsky \cite{galinsky2003power} affirms that power increases the action orientation: high-power negotiators control the flow of the negotiation. In addition, high power increase task orientation and goal-directed behavior. \cite{giebels2000interdependence} shows that this leads powerful negotiators to end up with the larger share of the pie.
 	
-	Furthermore, power affects the way that negotiators gather information about their partners \cite{de2004influence}. Submissive negotiators have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
+	Furthermore, power affects the way that negotiators gather information about their partners \cite{de2004influence}. Less-power negotiators have a stronger desire to develop an accurate understanding of their negotiation partner, which would lead them to ask more \emph{diagnostic} rather than \emph{leading} questions.
 	
-	It was also shown that dominant negotiators are self-centered and tend to not pay attention to the preferences of submissive negotiators \cite{fiske1993controlling,de1995impact}.
+	It was also shown that high-power negotiators are self-centered and tend to not pay attention to the preferences of the less powerful negotiators \cite{fiske1993controlling,de1995impact}.
 	%					 The idea is that high-dominant individuals have many resources and can often act at will without serious consequences, while submissive individuals, have to be more careful because they are more dependent on other people. In addition, they are motivated to gain or regain control over their outcomes by paying close attention to the people on whom they depend.
 	%					
 
-	In our work, we use a text-oriented dialogue system and we therefore focus on the verbal behaviors.  Our goal is to make visible \emph{the strategies} deployed during the negotiation depending on the power. In order to implement these different behaviors, we extracted three principle related to the relation of power that impact strategies of negotiation:
+	In our work, we use a text-oriented dialogue system and we therefore focus on the verbal behaviors. Our goal is to make visible \emph{the strategies} deployed during the negotiation depending on the power. In order to implement these different behaviors, we extracted three principle related to the relation of power that impact strategies of negotiation:
 	\begin{enumerate}
-	\item \textbf{Representation of demands:} \hl{Dominant/high power} negotiators show a higher level of demand than the submissive ones. In addition,  Submissive negotiator's demand decrease over time, and tends to make larger concessions than dominant negotiators. \cite{de1995impact}
+	\item \textbf{Representation of demands:} High power negotiators show a higher level of demand than the low-powerful ones. In addition,  low-power negotiator's demand decrease over time, and tends to make larger concessions than high-power negotiators. \cite{de1995impact}
 	
-	\item \textbf{Self Vs Other:} Submissive negotiators consider the preferences of other in the negotiation, whereas dominant negotiators  are self-centered and only interested by satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
+	\item \textbf{Self Vs Other:} Low-power negotiators consider the preferences of other in the negotiation, whereas high-power negotiators are self-centered and only interested by satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
 	
 	\item \textbf{Control the flow of the negotiation:}
-	Dominant negotiators tend to make the first move \cite{magee2007power}. In addition, they take the lead of the negotiation. Otherwise, submissive negotiators aim to construct an accurate model of other preferences, which lead them to ask more questions about other preferences rather than keeping the negotiation going (makes proposals). \cite{de2004influence}
+	High-power negotiators tend to make the first move \cite{magee2007power}. In addition, they take the lead of the negotiation. Otherwise, low-power negotiators aim to construct an accurate model of other preferences, which lead them to ask more questions about other preferences rather than keeping the negotiation going (makes proposals)\cite{de2004influence}. 
 	
 	\end{enumerate}
 	%	We will present in the next section the decision model based on the behaviors of power. 
 	%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)			
 	
-	Only few models consider the expression of power in the verbal behavior of an IVA. \cite{bee2010bossy} developped an agent that expresses social dominance through gaze and linguistic features. They demonstrated that the linguistic personality traits influence the perception of power. However, this work does not consider the how power affects the strategies of negotiation in dialogue. More recently, \cite{traum2008multi,de2011effect,de2015humans}consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agents. However, this research focus more on the negotiation aspect than on the expression of social power. Moreover, it considers only adversarial negotiation.
+	Only few models consider the expression of power in the verbal behavior of an IVA. \cite{bee2010bossy} developed an agent that expresses social power through gaze and linguistic features. They demonstrated that the linguistic personality traits influence the perception of power. However, this work does not consider the how power affects the strategies of negotiation in dialogue. More recently, \cite{traum2008multi,de2011effect,de2015humans}consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agents. However, this research focus more on the negotiation aspect than on the expression of social power. Moreover, it considers only adversarial negotiation.
 	
 	
 	\section{Model of negotiation based on the relation of power}
@@ -105,7 +106,8 @@
 	\end{equation}
 
 	\subsection{Dialogue model}
-	Negotiators communicate during the negotiation via utterances. Each utterance type has a specific set of arguments and is associated with a specific format. We defined five utterance types, based on the work of Sidner \cite{sidnerartificial}, and three derivate types that are combinations of the main ones.
+	Negotiators communicate during the negotiation via utterances. Each utterance type has a specific set of arguments and is associated with a specific format. We defined five utterance types, based on the work of Sidner \cite{sidnerartificial}.
+	%, and three derivate types that are combinations of the main ones.
 	% changer le tableau, enlever parametre comme tab2 et ajouter les ensembles de valeurs a la fin	
 		\begin{table}[t]
 			{\scriptsize
@@ -145,13 +147,12 @@
 			}
 			\caption{The list of utterance types in the model of dialogue}
 		\end{table}
-	$v \in C_i$,  $o \in \mathcal{O}$ and $i \in \mathcal{C}$.
-	The agent can ask information about the preferences of its interlocutor (Ask) or give information about its own preferences (State). It can propose, accept and reject both values of criteria (``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). The value /$v$/ refers to the NL format to express a value. For example, in dialogue about restaurants, /$Chinese$/ means \textit{Chinese restaurants}. 
+	The utterances take as parameter either a value of criterion$v \in C_i$,  an option $o \in \mathcal{O}$ or a criterion type $i \in \mathcal{C}$. These utterances allow the agent to ask information about the preferences of its interlocutor (AskValue/AskCriterion) or give information about its own preferences (StateValue). It can propose, accept and reject both values of criteria (``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). The value /$v$/ refers to the natural language format to express a value. For example, in dialogue about restaurants, /$Chinese$/ means \textit{Chinese restaurants}. 
 	%The RejectPropose utterance type is used to clearly reject an option and make a counter-proposal in the same dialogue move. Similarly, the RejectState utterance type is used to make a reject with an explanation. The AcceptPropose is used to accept a criteria and propose a compatible option. 
 	Examples of dialogues are given in section \ref{sec:evaluation}.
 	
 	\medskip
-	The rules of utterance selection are described in section \ref{sec:decision}. For the utterance selection, the agent keeps track of statements and proposals all along the dialogue. For each criteria $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criteria. This avoids re-statements of previous information. We also have the sets $A_i$ and $U_i$ of values which have been stated by the interlocutor as satisfiable or not (using a \emph{StateValue} utterance type). We assume that $A_i\cap U_i=\emptyset$ and $A_i\cup U_i\subseteq C_i$. Some values can still be unknown that we represent as being potentially satisfiable for other. These sets serve as a model of the interlocutor's preferences that evolves during the negotiation. From these, we can compute the satisfiability of a value $v\in C_i$ for the other as:
+	The rules of utterance selection are described in section \ref{sec:decision}. For the utterance selection, the agent keeps track of statements and proposals all along the dialogue. For each criterion $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criterion. This avoids re-statements of previous information. We also have the sets $A_i$ and $U_i$ of values which have been stated by the interlocutor as satisfiable or not (using a \emph{StateValue} utterance type). We assume that $A_i\cap U_i=\emptyset$ and $A_i\cup U_i\subseteq C_i$. Some values can still be unknown that we define as being potentially satisfiable for other. These sets serve as a model of the interlocutor's preferences that evolves during the negotiation. From these, we can compute the satisfiability of a value $v\in C_i$ for the other as:
 		\vspace{-0.5em} 
 	\begin{equation}
 	sat_{other}(v, A_i, U_i)= \left\{\begin{array}{ll}
@@ -162,7 +163,7 @@
 	\end{equation}
 	
 	%...
-	We choose .5 as an arbitrary value to defined the unknown values. This function is generalized to any option $o=(v_1,\ldots,v_n) \in O$ as an average:
+	We choose $0.5$ as an arbitrary value to define the unknown values. This function is generalized to any option $o=(v_1,\ldots,v_n) \in O$ as an average:
 	
 	\begin{equation}
 	sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} sat_{other}(v_i, A_i, U_i) } {n}
@@ -170,21 +171,29 @@
 	
 	We also maintain the sets $P_i \subseteq C_i$, $T_i\subseteq C_i$ and $R_i\subseteq C_i$ of all proposed, accepted and rejected values for each criteria. These will be used to make relevant proposals. Similarly, we consider $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ and $R\subseteq \mathcal{O}$ the sets of all proposed, accepted and rejected options in the dialogue.
 	
+	\begin{floatingfigure}[l]{2.5in}
+		\includegraphics[width=2.4in]{graphs/s3.png}
+	%	\caption{\label{fig:conc}Concession curve for self(t)}
+	\end{floatingfigure} 
 
 	
 	\subsection{Decision based on power in negotiation}
+
+		
 	\label{sec:decision}
 	Based from research from social psychology, we defined three mains principles related to the relation of power which affects negotiators strategies and behaviors (see section \ref{domDialogue}). We present in this section, the computational theory implementing each principle. 
 	
 		We denote the agent's perception of its relationship of power $pow \in [0, 1] $. It is a constant for a given agent in a given relationship.
+		
 	
 	\subsubsection{Level of demand and concessions}
-	In collaborative negotiation, both participants reduce their level of demand in time because they want to reach an agreement. According to our second principle, concessions should be higher for submissive agents. To implement this mechanism, we use a \emph{concession curve}, as illustrated on figure \ref{fig:concession}.
+	In collaborative negotiation, both participants reduce their level of demand in time because they want to reach an agreement. According to our first principle, concessions should be higher for submissive agents. To implement this mechanism, we use a \emph{concession curve}, as illustrated on figure \ref{fig:conc}.
 	
 %	 \begin{figure}[t]
 %		\includegraphics[width=.4\linewidth,keepaspectratio=true]{graphs/slope.jpg}
 %		\caption{\label{fig:concession}Concession curve for a dominant and a submissive agent}
 %	 \end{figure}
+
 	 
 	 This mechanism is defined as follows. Let $self(pow, t)$ be a time varying value, following the concession curve:
 	 
@@ -371,7 +380,7 @@
 	\subsection{Hypotheses}
 		\vspace{-.5em} 
 	Based on our three principles and the literature in on the perception of social power in negotiation, we investigated four hypotheses:
-	\vspace{-1.5em} 
+	\vspace{-.5em} 
 	\begin{itemize}
 		\item  \textbf{H1:} The dominant speaker will more strongly be perceived as self-centered than the submissive speaker.  
 		
@@ -411,6 +420,7 @@
 		\caption{List of questions asked for the questionnaire}
 		\label{table:questionnaire}
 	\end{table}
+		\vspace{-1em} 
 	A total of 120 native English subjects participated to the experiment. Each subject received \textit{25 cents} and we excluded 15 participants after sanity check.
 	
 	\subsection{Results and discussion}
