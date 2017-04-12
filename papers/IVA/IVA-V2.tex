@@ -222,7 +222,7 @@
 		\vspace{-.5em} 
 		\begin{equation}
 		\vspace{-.5em} 
-		acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t)).
+		acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
 		\end{equation}
 		where $\beta>0$ a parameter of the theory that defines the weight given to the level of demand.
 		
@@ -234,7 +234,7 @@
 		\end{equation}
 		
 		\subsubsection {Self vs other}
-		According to our second principle, high-power negotiators give more weight to their own satisfaction. To implement this principle in the context of collaborative negotiation, we compute how much a given proposal is \emph{tolerable} considering the satisfiability for both the agent and its partner. The value returned by $tol$ is used to build proposals during the negotiation.
+		According to our second principle, high-power negotiators give more weight to their own satisfaction. To implement this principle in the context of collaborative negotiation, we compute how much a given proposal is \emph{tolerable} considering the satisfiability for both the agent and its partner. The value returned by $tol$ is used to build proposals during the negotiation. 
 		
 		For a given criteria $i\in\mathcal{C}$, let $V_i\subseteq C_i$ be the subset of values that are acceptable for the agent:
 		\vspace{-1em} 
@@ -244,16 +244,16 @@
 		\end{equation}
 		
 		We compute the tolerability of a given value $v\in V_i$ at a time $t$ knowing the preference order $\prec_i$ and the preference of its partner:
-		\hl{Give a better explanation to the intuition here}
+		
 		\vspace{-1em} 
 		\begin{equation}
 		\begin{split}
-		tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t) . sat_{self}(v, \prec_i) \\
-		& +  (1 - self(pow, t)) . sat_{other}(v, A_i, U_i)
+		tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
+		& +  (1 - self(pow, t)) \cdot sat_{other}(v, A_i, U_i)
 		\end{split} 
 		\end{equation}
 		
-		And we generalize this function to any option $o=(v_1,\ldots,v_n) \in O$ as a single mean:
+		And we generalize this function to any option $o=(v_1,\ldots,v_n) \in O$ as a simple mean:
 		
 		\begin{equation}
 		tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
@@ -261,11 +261,15 @@
 		
 		
 		\subsubsection{Controlling the flow of the negotiation}
-		According to our third principle, high-power negotiators tend to lead the negotiation. We implemented this principle through the choice of utterance types.	
-		A high-power agent will focus on keeping the negotiation going by choosing \emph{negotiation moves} (ProposeValue /ProposeOption, RejectValue /RejectOption, AcceptValue/ AcceptOption). On the contrary, a lower power negotiator will focus on building an accurate model of other preferences in order to take the fairest decision. It will focus more on \emph{statement moves} (StateValue or AskValue/ AskCriterion).
-		An agent can express more than one utterance in a his speaking turn. This is modeled  with the sign "+" in Table \ref{utt}.
+		According to our third principle, high-power negotiators tend to lead the negotiation. We implemented this principle through the choice of utterance types presented in Table \ref{table:uttChoice}.	
 		
-		We defined a threshold $\pi$ to split the spectrum of power in two. We describe on table \ref{utt} the rules for utterance selection. Depending on the power, the previous utterance $u^{-1}$ type and the current dialogue state, the agent selects the first utterance type for which the condition is satisfied. For instance, a high-power agent will stop the negotiation as soon as all the remaining options are unacceptable (line 2). A low-power agent will reject and state a preference, so as to explain why the proposal is not acceptable (line 14). If there is no open proposal, the low-power agent will ask for new information (line 18 -19). 
+		We defined a threshold $\pi$ to split the spectrum of power in two. We describe the rules for utterance selection. Depending on the power, the previous utterance $u^{-1}$ type and the current dialogue state, the agent selects the first utterance type for which the condition is satisfied. For instance, a high-power agent will stop the negotiation as soon as all the remaining options are unacceptable (line 2). A low-power agent will reject and state a preference, so as to explain why the proposal is not acceptable (line 14). If there is no open proposal, the low-power agent will ask for new information (line 18 -19). In addition, an agent can express more than one utterance in a his speaking turn. This is modeled  with the sign "+" in Table \ref{table:uttChoice}.
+		
+		A high-power agent will focus on keeping the negotiation going by choosing \emph{negotiation moves} (ProposeValue /ProposeOption, RejectValue /RejectOption, AcceptValue/ AcceptOption) as presented in lines (4 to 10). The agent prioritizes the negotiations moves rather than exchanging information about the preferences. Indeed, as presented in line 3, after $\alpha$  speaking turns dedicated to sharing information, the agent will rather make proposals than stating his likes. An example is presented in the dialogue \ref{fig:ex-dialogue}. 
+		
+		On the contrary, a lower power negotiator will focus on building an accurate model its partner's likes in order to take the fairest decision. It will focus more on \emph{statement moves} (StateValue or AskValue/ AskCriterion) as seen in line(18-20). Whereas, the negotiation moves are restricted by conditions which ensure that the agent gathered enough information about its partner likes before to express a proposal (line 16-17).
+		
+
 		
 		\begin{table}[!t]
 			{\scriptsize
@@ -325,7 +329,7 @@
 				\end{tabular}
 			}
 			\caption{Selection of utterance types}
-			\label{utt}
+			\label{table:uttChoice}
 		\end{table}
 		
 		\section{Evaluation}
@@ -408,10 +412,10 @@
 			\subsection{Experimental Procedure}
 			
 			We conducted a between-subject study using the online crowdsoursing website \emph{CrowdFlower}\footnote{https://www.crowdflower.com/}. 
-			Each participant was shown only one dialogue. Agents were described as two friends trying to find a restaurant where to have dinner. %We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
-			Participants were invited to read the assigned dialogue and answer a questionnaire. 
+			Each participant was shown only one dialogue. Speaker A and B were described as two friends trying to negotiate a restaurant to have dinner. %We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
+			Participants were asked to read the assigned dialogue and answer a questionnaire. 
 			
-			We defined two questions for each hypothesis. Two sanity-check questions were added. Each one of these questions was to be answered on a 5 points Likert scale ranging from "I totally disagree" to "I totally agree".
+			We defined two questions for each hypothesis. Two test questions were included to check the	sanity of the answers. We eliminated participants providing wrong answers those questions. Each one of these questions was to be answered on a 5 points Likert scale ranging from "I totally disagree" to "I totally agree".
 			
 			\begin{table}
 				{\scriptsize
@@ -429,7 +433,7 @@
 						\hline
 					\end{tabular}
 				}
-				\caption{List of questions asked for the questionnaire}
+				\caption{Questions asked on the questionnaire}
 				\label{table:questionnaire}
 			\end{table}
 			\vspace{-1em} 
