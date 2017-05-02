@@ -9,7 +9,7 @@
 \usepackage{graphicx}
 \usepackage[rflt]{floatflt}
 \usepackage{mathrsfs}
-\usepackage[francais]{babel}
+
 
 
 	%	
@@ -31,20 +31,38 @@
 	
 	
 	
-	\par Aujourd’hui, les agents conversationnels animés (ACA) connaissent un essor important dans différent domaines d’applications, plaçant ces derniers dans des rôles de plus en plus variés tel que compagnon, tuteur  ou encore un recruteur virtuel. Dans ce genre de situation, l'ACA est amené à partager des buts et des tâches avec l'utilisateur et donc collaborent afin de les satisfaire.
+	\par Aujourd’hui, les agents conversationnels animés (ACA) connaissent un essor important dans différents domaines d’application. Ils adoptent des rôles de plus en plus variés tel que compagnon, tuteur  ou encore recruteur virtuel \cite{bickmore2005establishing,kerly2008calmsystem}. Dans ce genre de situations, l'ACA et l'utilisateur collaborent donc afin de satisfaire les buts et tâches qu'ils partagent.
 	
-	De plus, de nombreux travaux ont déjà démontré que les utilisateurs humains tendent à interagir naturellement et socialement avec ces ACA comme s’ils étaient humains. Ce rapprochement a mené la communauté à s'intéresser d'avantages aux comportements sociaux et leur impacts sur le comportement durant l'interaction. En effet, il a été démontré que la dimension sociale affecte nos comportements. Un nombre important de recherches visent actuellement à modéliser des ACA   capables d'exprimer des comportements socio-émotionnelles tant sur l'aspect verbal que non-verbal.
+	De plus, de nombreux travaux ont déjà démontré que les utilisateurs humains tendent à interagir naturellement et socialement avec ces ACA comme s’ils étaient humains. Ce rapprochement a mené la communauté à s'intéresser d'avantage aux comportements sociaux et à leur impact sur le comportement durant l'interaction.  Un nombre important de recherches visent actuellement à modéliser des ACAs capables d'exprimer des comportements socio-émotionnels tant sur l'aspect verbal que non-verbal \cite{callejas2014computational,de2011effect,kidd2005sociable}.
 	
-	Mon projet de thèse s'inscrit dans la continuité de ses travaux, où je m'intéresse à l'impact des relations sociales sur les stratégies de prise de décision durant une interaction, plus particulièrement dans le contexte d'une négociation collaborative avec l'utilisateur. 
+	Mon projet de thèse s'inscrit dans la continuité de ces travaux. Je m'intéresse à l'impact des relations sociales sur les stratégies de prise de décision durant une interaction, plus particulièrement dans le contexte d'une négociation collaborative avec l'utilisateur. Le premier objectif est de caractériser les comportements liés aux relations sociales qui affectent les stratégies dialogue. Le deuxième objectif de la thèse est de concevoir un modèle capable de reproduire fidèlement ces comportements afin de les intégrer dans un moteur de dialogue pour que l'agent s'adapte au niveau de relation sociale. Enfin, le troisième objectif est d'évaluer d'une part la pertinence du modèle proposé et d'autre part d'analyser l'impact de la dimension social dans l'amélioration de l'interaction homme-machine.  
 	
-	La première étape consistait à définir le contexte de la recherche et à faire une étude bibliographique du domaine. Ensuite, j'ai mené une étude afin de collecter des données sur le comportements des interlocuteurs dans un dialogue social. L'étude consistait à enregistrer deux personnes discutant pour choisir un restaurant où aller dîner. Cette étude nous a permis de détecter un nombre de comportements tels que l’aspect de la négociation collaborative dans le choix du restaurant ainsi l’apparition de certain comportements de dominance. De plus, elle nous a permis de définir les actes de dialogues pour le module de communication de l'ACA. Ensuite, une étude bibliographique en psychologie sociale a été effectué afin de déterminer les comportements de dominance qui apparaissent dans un dialogue de négociation et comment ces derniers affectent les stratégies des négociateurs dans le dialogue.
 	
-	En se basant sur l'état de l'art effectué et les données collectées, j'ai pu durant ma deuxième année de thèse proposer un modèle d'ACA capable de mener une négociation collaborative avec un utilisateur et d'adapter ses stratégies de négociation en fonction de sa dimension de dominance.  Ce modèle a été ensuite implémenté dans une plate-forme d'agent conversationnel. En début de troisième année, j'ai mi en place une expérimentation afin de validé le modèle proposé. Les résultats obtenues confirment la cohérence du modèle proposé ainsi que les comportements perçus.
+	La première étape consistait donc à définir les dimensions sociales qui influencent le dialogue. J'ai effectué une étude bibliographique sur les aspects sociaux dans le domaine de l'interaction. J'ai pu identifier quatre principales dimensions de la relation sociale \cite{de1995impact,de2004influence}. Les travaux de la littérature ont montré l'impact de la relation de dominance sur l'interaction. J'ai donc cherché à déterminer les comportements liés à la relation de dominance dans le contexte d'un dialogue social. J'ai pour cela mené une première étude afin de collecter des données sur le comportement d'interlocuteurs humain dans un dialogue social. L'étude consistait à enregistrer des personnes discutant pour choisir un restaurant. Cette étude  m'a permis de détecter l’aspect collaboratif dans la négociation ainsi que l’apparition de certain comportements de dominance. De plus, elle  m'a permis de définir les actes de dialogues pour le module de communication de l'ACA. 
 	
-	Actuellement, je travaille a étendre mon ACA avec un modèle de la théorie de l'esprit afin qu'il soit capable de percevoir sa relation de dominance avec son interlocuteur et pouvoir adapter son comportement à la relation perçue. La dernière étape consistera à valider ce modèle de dialogue.
-	 
+	Ensuite, j'ai effectué des recherches en psychologie sociale afin de déterminer les comportements de dominance qui apparaissent dans un dialogue de négociation et la manière  dont ces derniers affectent les stratégies des négociateurs dans le dialogue. La majorité des travaux existants s'intéressent aux dialogues de négociation compétitive, mais peu sur les dialogues de négociation collaborative. 
+	
+	En me basant sur les travaux en psychologie sociale de \emph{Dedreu et al} et les données collectées, j'ai pu proposer un premier modèle d'ACA capable de mener une négociation collaborative avec un utilisateur et d'adapter ses stratégies de négociation en fonction de sa dimension de dominance.  Ce modèle a été ensuite implémenté dans une plate-forme d'agent conversationnel. Une expérimentation a été mise en place avec des dialogues synthétiques pour valider la perception, par un humain, de l'impact des comportements de dominance sur la stratégie de négociation. Ainsi, j'ai montré que mon modèle permettait d'identifier si un agent était dominant ou soumis dans la négociation. Ces travaux ont fait l'objet d'un papier soumis à la conférence IVA (Intelligent Virtual Agents).
+	
+	Je suis actuellement en train d'intégrer ce modèle dans un ACA pour valider ces mêmes résultats, dès cet été, dans le contexte d'une interaction humain-agent.
+	
+	Le plan proposé pour le reste de la durée de thèse 	consiste à
+	
+	\begin{enumerate}
+		\item Concevoir un mécanisme d'adaptation de la stratégie de dialogue en fonction de la perception au cours de l'interaction, de la relation de dominance exprimé par l'utilisateur
+		\item Valider l'apport de ce mécanisme d'adaptation au dialogue grâce à une expérimentation interactive. Dans ce contexte, je propose de modéliser l'adaptation avec un modèle de théorie de l'esprit \cite{carlson2013theory} à partir du modèle dialogique existant. C'est une étape facile et rapide à mettre en œuvre. Une première version est donc prévue pour le mois de juillet.  
+		\item Mettre en place le protocole d'expérimentation et collecter les données, ce qui va m'occuper de juillet à octobre. Puis j'aimerai publier ces résultats et rédiger ma thèse pour l'envoyer en mars aux rapporteurs et soutenir au plus tard en mai 2018.
+	\end{enumerate}
+
+
+	
 	  
 	
-	
+		
+		% ================== BIBLIO ===============
+		
+		\scriptsize{	
+			\bibliographystyle{abbrv}
+			\bibliography{Library}}
 
 	\end{document}
