@@ -11,7 +11,6 @@ import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.movie.GenerateMovieModel;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 // TODO:  Further optimizations:
@@ -23,13 +22,21 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.2;
+
 	private Negotiation<? extends Option> negotiation;
+	private double relation = DOMINANT;
+
+
+	public NegotiatorAgent (String name, Negotiation<? extends Option> negotiation) { 
+		super(name); 
+		setNegotiation(negotiation);
+		// since agent has multiple choices, add DecompositionPlugin in order
+		// for agent to "look ahead" to utterance choices (as in user menus) 
+		new DecompositionPlugin(agenda, 25, true, true);
+	}
 
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
-
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.8;
-
-	private double relation = DOMINANT;
 
 	public double getRelation () { return relation; }
 
@@ -41,13 +48,6 @@ public class NegotiatorAgent extends Agent {
 
 	public void setRelation (double relation) { this.relation = relation; }
 
-	public NegotiatorAgent (String name, Negotiation<? extends Option> negotiation) { 
-		super(name); 
-		setNegotiation(negotiation);
-		// since agent has multiple choices, add DecompositionPlugin in order
-		// for agent to "look ahead" to utterance choices (as in user menus) 
-		new DecompositionPlugin(agenda, 25, true, true);
-	}
 
 	public static void main (String[] args) {
 		totalOrderedModels model = new totalOrderedModels();
@@ -74,7 +74,7 @@ public class NegotiatorAgent extends Agent {
 	public Plugin.Item respondIf (Interaction interaction, boolean guess) {
 		Disco disco = interaction.getDisco();
 		return Agenda.newItem(respond((Utterance) disco.getLastOccurrence(), disco), null);
-		
+
 	}
 
 	@Override
@@ -94,29 +94,34 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
+		return respondTo(utterance, disco);
+	}
+
+
+	public Utterance respondTo(Utterance utterance, Disco disco){
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
-			 if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
+			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
 
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
-			 else{
-			 
-			Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+			else{
 
-			if(relation > NegotiationParameters.pi){
+				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 
-				return new Propose(disco, false, getNegotiation().chooseProposal());
+				if(relation > NegotiationParameters.pi){
 
-			} else
-				return new AskPreference(disco, false, opent, null);	
-			 }
-			
+					return new Propose(disco, false, getNegotiation().chooseProposal());
+
+				} else
+					return new AskPreference(disco, false, opent, null);	
+			}
+
 		}else if(closeNegotiation(utterance)){
 			//System.exit(0);
 			disco.getInteraction().exit();
-		
+
 			return new Say(disco, false, "Okay");
-			
+
 		}else if(endDialogue(utterance)) {
 			return new Say(disco, false, "Okay");
 
@@ -125,11 +130,11 @@ public class NegotiatorAgent extends Agent {
 
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 
-//		} else if (negotiation.negotiationSuccess(relation, utterance)!= null){
-//			
-//
-//			//Option o = negotiation.negotiationSuccess(relation, utterance);
-//			//return new Say(disco, false, "Let's book a table at the " + o.toString() + " " + o.getClass().getSimpleName());
+			//				} else if (negotiation.negotiationSuccess(relation, utterance)!= null){
+			//					
+			//
+			//					//Option o = negotiation.negotiationSuccess(relation, utterance);
+			//					//return new Say(disco, false, "Let's book a table at the " + o.toString() + " " + o.getClass().getSimpleName());
 
 		} else if ( utterance instanceof AskPreference && !takeThelead()) {
 
@@ -154,7 +159,7 @@ public class NegotiatorAgent extends Agent {
 		}else if (relation > NegotiationParameters.pi && !getNegotiation().remainProposals().isEmpty()){
 			//System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 			if(isProposition(utterance)){
-				
+
 				// if the proposal is an optionProposal  and its acceptable accept
 				// Otherwise 
 				Proposal u = ((ProposalUtterance) utterance).getProposal();
@@ -164,13 +169,12 @@ public class NegotiatorAgent extends Agent {
 				if(getNegotiation().isAcceptable(u)){
 					if(u instanceof OptionProposal)
 						return new Accept(disco, false, u);
-					
+
 					Option bestOption = getNegotiation().chooseOption(getNegotiation().remainOptions());
 					return new AcceptPropose(disco, false, (CriterionProposal)u, createProposal(bestOption, false));
 
 				} else 
 					return new RejectPropose(disco, false,u, p);
-
 
 			}
 			else
@@ -180,17 +184,17 @@ public class NegotiatorAgent extends Agent {
 
 			//SUBMISSIVE cases
 		}else { 
-		//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
+			//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 
 			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
-			
+
 			// REJECT
 			if(canReject(utterance)) {
 				Proposal p = ((Propose) utterance).getProposal();
 				p.setStatus(Status.REJECTED);
-				
+
 				return new RejectState(disco, false, p, getNegotiation().justifyReject(p));
-				
+
 				//ACCEPT
 			}else if(getAcceptableProposal(c)!= null){
 
@@ -220,17 +224,16 @@ public class NegotiatorAgent extends Agent {
 					return new StatePreference(disco, false, value, status);
 				}
 
-					//return new Say(disco, false, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
+				//return new Say(disco, false, "I've told you all I like about "+ getNegotiation().getTopic().getSimpleName() + "s !");
 				else {
 					Proposal p = getNegotiation().chooseProposal();
 					return new Propose (disco, false, p);
-					
+
 				}
 			}
 
 		}
 	}
-
 	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
 	private boolean isProposition(Utterance utterance) {
@@ -263,7 +266,7 @@ public class NegotiatorAgent extends Agent {
 					return new CriterionProposal(first);
 
 			}
-			
+
 
 		} else {
 			List<Criterion> elem = new ArrayList<Criterion> ();
@@ -284,6 +287,7 @@ public class NegotiatorAgent extends Agent {
 		return null;
 	}
 
+	
 	private boolean canReject(Utterance utterance){
 		if(isProposition(utterance)){
 			Proposal p = (Proposal) utterance.getSlotValue("proposal");
@@ -295,6 +299,7 @@ public class NegotiatorAgent extends Agent {
 		return false; 
 	}
 
+	
 	private Proposal getAcceptableProposal(Class<? extends Criterion> c) {
 
 		//1. Check acceptable values in the current discussed criterion
@@ -461,7 +466,7 @@ public class NegotiatorAgent extends Agent {
 	}
 
 	public boolean endDialogue (Utterance utterance){
-	
+
 		if(utterance instanceof Say){
 
 			Say utt = (Say) utterance;
@@ -473,33 +478,33 @@ public class NegotiatorAgent extends Agent {
 		}
 		return false;
 	}
-	
+
 	public boolean closeNegotiation(Utterance utterance){
-		
+
 		if(utterance instanceof Say){
 
 			Say utt = (Say) utterance;
 
 			return (utt.getText().contains("Okay"));
+		}
 
-		}
-		
 		return (negotiation.negotiationSuccess());
-		}
+	}
+
 	
 	public boolean takeThelead(){
 		int nbPreferences =0;
-		
+
 		if(getNegotiation().getDominance()<= NegotiationParameters.pi)
 			return false;
-		
+
 		for(NegoUtterance utt : getNegotiation().getContext().getHistory()){
 			if ( utt instanceof PreferenceMove)
 				nbPreferences++;
 			else nbPreferences =0; 
-			
+
 		}
-		
+
 		return  (nbPreferences >= NegotiationParameters.alpha);
 	}
 }

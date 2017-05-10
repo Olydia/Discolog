@@ -2,7 +2,6 @@ package fr.limsi.negotiate;
 
 public class NegotiationMove extends NegoUtterance{
 	private	Proposal proposal;
-	private Statement<Criterion> justify;
 	
 	
 	public NegotiationMove(Proposal proposal, boolean external, UtType type) {
