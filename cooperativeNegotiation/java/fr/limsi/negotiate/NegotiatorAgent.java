@@ -46,7 +46,10 @@ public class NegotiatorAgent extends Agent {
 		this.negotiation = negotiation;
 	}
 
-	public void setRelation (double relation) { this.relation = relation; }
+	public void setRelation (double relation) { 
+		this.relation = relation; 
+		this.negotiation.setDominance(relation);
+	}
 
 
 	public static void main (String[] args) {
@@ -62,8 +65,6 @@ public class NegotiatorAgent extends Agent {
 		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
 		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
-		((NegotiatorAgent) dual.interaction1.getSystem()).getNegotiation().setDominance(DOMINANT);
-		((NegotiatorAgent) dual.interaction2.getSystem()).getNegotiation().setDominance(SUBMISSIVE);
 
 		dual.start();
 	}
