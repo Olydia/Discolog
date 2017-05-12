@@ -42,6 +42,10 @@ public class Guess {
 		
 	}
 	
+	
+	// mirror of the dialogue context
+	
+	
 	// for each criterionNegotiation update mirror
 	
 	// call respond to for each criterion model
