@@ -13,15 +13,6 @@ public abstract class Proposal {
 	// the flag is about who proposed the utterance 
 	public boolean isSelf;
 
-	public boolean isSelf() {
-		return isSelf;
-	}
-
-	public void setIsSelf(boolean value){
-		this.isSelf = value;
-
-	}
-
 	protected Proposal (boolean isSelf) {
 		this.isSelf = isSelf;
 	}
@@ -30,6 +21,15 @@ public abstract class Proposal {
 		this.isSelf = false;
 	}
 
+	public boolean isSelf() {
+		return isSelf;
+	}
+
+	public void setIsSelf(boolean value){
+		this.isSelf = value;
+
+	}
+	
 	public void setStatus (Status status) {
 		this.status = status;
 	}
