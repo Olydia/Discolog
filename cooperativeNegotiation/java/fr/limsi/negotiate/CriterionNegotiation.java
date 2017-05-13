@@ -13,6 +13,15 @@ public class CriterionNegotiation<C extends Criterion> {
 	private Other<C> other;
 	private Class<C> type; 
 	private List<Statement<C>> selfStatements;
+	
+	public void setOther(Other<C> other) {
+		this.other = other;
+	}
+
+	public void setProposals(ArrayList<CriterionProposal> proposals) {
+		this.proposals = proposals;
+	}
+
 	private ArrayList<CriterionProposal> proposals;
 
 	public CriterionNegotiation(Self_Ci<C> selfPreferences) {
