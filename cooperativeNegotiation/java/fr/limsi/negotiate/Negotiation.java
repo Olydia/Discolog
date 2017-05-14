@@ -28,12 +28,22 @@ public class Negotiation<O extends Option> {
 		this.context = new DialogueContext(criteria.sortValues());
 
 	}
-	//
-	//	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation, Class<O> topic) {
-	//		this.valueNegotiation = Arrays.asList(valueNegotiation);
-	//		this.proposals = new ArrayList<OptionProposal>();
-	//		this.topic=topic;
-	//	}
+	
+	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation, double relation,
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			ArrayList<OptionProposal> proposals) {
+
+		this.valueNegotiation = valueNegotiation;
+		this.relation = relation;
+		this.proposals = proposals;
+		this.topic=topic;
+		setCriteria(criteriaNegotiation);
+		this.context = c;
+	}
+	
+	public ArrayList<OptionProposal> getProposals() {
+		return proposals;
+	}
 
 	public Class<O> getTopic() {
 		return topic;
