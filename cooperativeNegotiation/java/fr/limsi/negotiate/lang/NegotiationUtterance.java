@@ -5,7 +5,7 @@ import edu.wpi.disco.Disco;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
 
-abstract class NegotiationUtterance extends Utterance {
+public abstract class NegotiationUtterance extends Utterance {
 
    // for extensions
    protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Decomposition decomp, 

@@ -41,6 +41,18 @@ public class Negotiation<O extends Option> {
 		this.context = c;
 	}
 	
+	// for Guess class
+	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			ArrayList<OptionProposal> proposals) {
+
+		this.valueNegotiation = valueNegotiation;
+		this.proposals = proposals;
+		this.topic=topic;
+		setCriteria(criteriaNegotiation);
+		this.context = c;
+	}
+	
 	public ArrayList<OptionProposal> getProposals() {
 		return proposals;
 	}

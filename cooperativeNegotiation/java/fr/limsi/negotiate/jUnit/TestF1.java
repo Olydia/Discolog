@@ -27,7 +27,7 @@ public class TestF1 {
 
 	public static void main (String[] args) {
 		totalOrderedModels model = new totalOrderedModels();
-		TestF1 test = new TestF1(model.model1(), 0.7);
+		TestF1 test = new TestF1(model.model1(), 0.8);
 		
 		 Interaction interaction = new Interaction(
 		            test.getAgent(), 

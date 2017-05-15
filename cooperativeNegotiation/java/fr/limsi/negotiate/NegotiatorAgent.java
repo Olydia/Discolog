@@ -27,10 +27,10 @@ public class NegotiatorAgent extends Agent {
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
 
-
 	public NegotiatorAgent (String name, Negotiation<? extends Option> negotiation) { 
 		super(name); 
 		setNegotiation(negotiation);
+		
 		// since agent has multiple choices, add DecompositionPlugin in order
 		// for agent to "look ahead" to utterance choices (as in user menus) 
 		new DecompositionPlugin(agenda, 25, true, true);
@@ -95,7 +95,9 @@ public class NegotiatorAgent extends Agent {
 	 * @param disco Needed for constructing new utterances
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
-		return respondTo(utterance, disco);
+		Utterance u = respondTo(utterance, disco);
+		System.out.println(u.format()+ " -> " + u.getType());
+		return u ;
 	}
 
 

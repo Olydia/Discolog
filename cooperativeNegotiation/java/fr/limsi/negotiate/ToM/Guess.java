@@ -1,23 +1,40 @@
-package fr.limsi.negotiate;
+package fr.limsi.negotiate.ToM;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import edu.wpi.disco.Disco;
+import edu.wpi.disco.lang.Utterance;
+import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.CriterionNegotiation;
+import fr.limsi.negotiate.CriterionProposal;
+import fr.limsi.negotiate.DialogueContext;
+import fr.limsi.negotiate.NegoUtterance;
+import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.NegotiatorAgent;
+import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.Other;
+import fr.limsi.negotiate.Proposal;
+import fr.limsi.negotiate.Self_C;
+import fr.limsi.negotiate.Self_Ci;
+import fr.limsi.negotiate.Statement;
+import fr.limsi.negotiate.lang.*;
 
 public class Guess {
 	// other possible models of preferences
 	// other possible power 
 	// mirror of self in order to create a negotiation
-	ArrayList<Self_Ci<? extends Criterion>> otherPref;
+	ArrayList<Self_Ci<Criterion>> otherPref;
 	Self_C<Option> otherC;
 	
 	Negotiation<? extends Option> other;
 	ArrayList<Double> hypo_pow;
 	
-	public Guess(Negotiation<? extends Option> other, ArrayList<Self_Ci<? extends Criterion>> otherPref,
+	
+	public Guess(Negotiation<? extends Option> self, ArrayList<Self_Ci<Criterion>> otherPref,
 			Self_C<Option> otherC) {
-		this.other = other;
+		this.other = mirrorNegotiation(otherPref, otherC, self);
+		//(ArrayList<Self_Ci<Criterion>> otherPref,	Self_C<Option> otherC, Negotiation<? extends Option> self
 		this.otherC = otherC;
 		this.otherPref = otherPref;
 		hypo_pow = new ArrayList<Double> ();
@@ -26,6 +43,19 @@ public class Guess {
 			elem=elem+0.1;
 			hypo_pow.add(elem);
 		}
+	}
+	
+	public ArrayList<Double> guess(Utterance selfUt, Utterance otherUt, Disco disco){
+		ArrayList<Double>  hypos = new ArrayList<Double> ();
+
+		for(double pow: hypo_pow){
+			NegotiatorAgent current = new NegotiatorAgent("otherTom", this.other);
+			current.setRelation(pow);
+			Utterance ut = current.respondTo(selfUt, disco);
+			if(identicalUtterances(ut, otherUt))
+				hypos.add(pow);
+		}
+		return hypos;
 	}
 
 	// method mirrors of proposals (self vs other proposals)
@@ -95,9 +125,8 @@ public class Guess {
 	// create the negotiation model
 	
 	Negotiation<? extends Option> mirrorNegotiation(ArrayList<Self_Ci<Criterion>> otherPref,
-	Self_C<Option> otherC,	double pow, Negotiation<? extends Option> self){
+	Self_C<Option> otherC, Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
-		ArrayList<OptionProposal> proposals =new ArrayList<OptionProposal>();
 		
 		for(Self_Ci<Criterion> pref: otherPref){
 			CriterionNegotiation<Criterion> cn  = self.getValueNegotiation(pref.getType());
@@ -106,19 +135,31 @@ public class Guess {
 				
 		DialogueContext context = mirrorContext(self.getContext());
 		
-		return new Negotiation (valueNegotiation, pow,
-			otherC, self.getTopic(), context, mirrorProposals(self.getProposals()));
+		return new Negotiation (valueNegotiation, otherC,
+				self.getTopic(), context, mirrorProposals(self.getProposals()));
 	}
 	
-	// method to select the preference model 
+	// Create the method that guesses the model (or the list of models)
 	
-	Self_Ci<? extends Criterion> getPrefModel(Class<? extends Criterion> type,ArrayList<Self_Ci<? extends Criterion>> otherPref){
-		for(Self_Ci<? extends Criterion> elem: otherPref){
-			if(elem.getType().equals(type))
-				return elem;
+	
+	boolean identicalUtterances(Utterance ut, Utterance otherUt){
+		if(ut.getType().equals(otherUt.getType())){
+			if (ut instanceof PreferenceUtterance){
+				Criterion c1 =  ((PreferenceUtterance) ut).getValue();
+				Criterion c2 =  ((PreferenceUtterance) otherUt).getValue();
+				return (c1.equals(c2));
+
+			}
+			else if (ut instanceof ProposalUtterance){
+				Proposal c1 =  ((ProposalUtterance) ut).getProposal();
+				Proposal c2 =  ((ProposalUtterance) otherUt).getProposal();
+				return (c1.equals(c2));
+			}
 		}
-		return null;
+		return false;
 	}
+	
+	
 	
 	// create a method to compare two utterances
 	public static void main (String[] args) {
