@@ -22,7 +22,6 @@ public class Accept extends ProposalUtterance {
 	@Override
 	protected void interpret () {
 		NegotiationMove acc = new NegotiationMove(getProposal(), getExternal(), NegoUtterance.UtType.ACCEPT);
-		getNegotiation().getContext().addUtt(acc);
 		// -----------------
 		getNegotiation().getContext_bis().addUtt(this);
 		// -----------------

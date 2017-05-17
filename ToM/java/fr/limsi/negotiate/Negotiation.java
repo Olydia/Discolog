@@ -15,7 +15,6 @@ public class Negotiation<O extends Option> {
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
 	private double relation=0; 
-	private DialogueContext context ;
 	private DC context_bis;
 
 
@@ -26,7 +25,6 @@ public class Negotiation<O extends Option> {
 		this.proposals = new ArrayList<OptionProposal>();
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
-		this.context = new DialogueContext(criteria.sortValues());
 		this.context_bis =  new DC(criteria.sortValues());
 
 	}
@@ -40,7 +38,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation, double relation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DC c, 
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
@@ -48,19 +46,19 @@ public class Negotiation<O extends Option> {
 		this.proposals = proposals;
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
-		this.context = c;
+		this.context_bis = c;
 	}
 	
 	// for Guess class
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DC c, 
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
 		this.proposals = proposals;
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
-		this.context = c;
+		this.context_bis = c;
 	}
 	
 	public ArrayList<OptionProposal> getProposals() {
@@ -197,17 +195,10 @@ public class Negotiation<O extends Option> {
 		}
 	}
 
-	public DialogueContext getContext() {
-		return context;
-	}
-
-	public void setContext(DialogueContext contex) {
-		this.context = contex;
-	}
 
 
 	public boolean negotiationFailure(Utterance utterance){
-		if (getContext().getHistory().size()>= 40 && 
+		if (getContext_bis().getHistory().size()>= 40 && 
 				!(utterance instanceof Propose || utterance instanceof Accept))
 			return true;
 
@@ -398,7 +389,7 @@ public class Negotiation<O extends Option> {
 		Criterion c = chooseCriterionProposal();
 		if(c!=null){
 		//Any value is accepted yet 
-			if(getContext().getClosedCriteria().isEmpty() && c != null){
+			if(getContext_bis().getClosedCriteria().isEmpty() && c != null){
 				return new CriterionProposal(true,c);
 			}
 			
@@ -470,7 +461,6 @@ public class Negotiation<O extends Option> {
 	
 	public void clearNegotiation(){
 		this.proposals.clear();
-		this.context.clearNegotiation();
 		this.context_bis.clearNegotiation();
 		for(CriterionNegotiation<Criterion> cn : getValuesNegotiation())
 			cn.clearNegotiation();

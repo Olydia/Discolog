@@ -49,7 +49,6 @@ public class AcceptPropose  extends ProposalUtterance {
 		ProposalMove prop = new ProposalMove(proposal, getAccepted(), getExternal(), NegoUtterance.UtType.ACCEPTPROPOSE);
 		// set the type of the utterance with the accepted one in order to close the negotiation about accepted
 		prop.setValueType(value.getClass());
-		getNegotiation().getContext().addUtt(prop);
 		
 		// -----------------
 		getNegotiation().getContext_bis().addUtt(this);

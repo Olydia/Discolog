@@ -8,8 +8,7 @@ import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.DialogueContext;
-import fr.limsi.negotiate.NegoUtterance;
+import fr.limsi.negotiate.DC;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.NegotiatorAgent;
 import fr.limsi.negotiate.Option;
@@ -87,14 +86,14 @@ public class Guess {
 	}
 	
 	// mirror of the dialogue context
-	public DialogueContext mirrorContext(DialogueContext dc){
-		DialogueContext mirror = new DialogueContext(dc.getTopicValues());
+	public DC mirrorContext(DC dc){
+		DC mirror = new DC(dc.getTopicValues());
 		mirror.setDiscussedCriteria(dc.getDiscussedCriteria());
 		mirror.setClosedCriteria(dc.getClosedCriteria());
 		
-		ArrayList<NegoUtterance> history =new ArrayList<NegoUtterance>(dc.getHistory());
-		for(NegoUtterance u : history)
-			u.setExtrenal(!u.isExtrenal());
+		ArrayList<NegotiationUtterance> history =new ArrayList<NegotiationUtterance>(dc.getHistory());
+		for(NegotiationUtterance u : history)
+			u.setExternal(!u.getExternal());
 		
 		mirror.setHistory(history);
 		return mirror;
@@ -133,7 +132,7 @@ public class Guess {
 			valueNegotiation.add(mirrorCriterionNego(cn, pref));
 		}
 				
-		DialogueContext context = mirrorContext(self.getContext());
+		DC context = mirrorContext(self.getContext_bis());
 		
 		return new Negotiation (valueNegotiation, otherC,
 				self.getTopic(), context, mirrorProposals(self.getProposals()));

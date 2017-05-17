@@ -32,8 +32,7 @@ public class AskPreference extends PreferenceUtterance {
             ask = new PreferenceMove(new Statement<Criterion>(getValue(), Satisfiable.UNKOWN),
             							getCriterion(), getExternal(),UtType.ASK);     
 	      
-	      getNegotiation().getContext().addUtt(ask);
-	      
+      
 	  	// -----------------
 			getNegotiation().getContext_bis().addUtt(this);
 			// -----------------

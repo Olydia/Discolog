@@ -24,7 +24,6 @@ public class Propose extends ProposalUtterance {
 		
 		
 		NegotiationMove prop = new NegotiationMove(p, getExternal(), NegoUtterance.UtType.PROPOSE);
-		getNegotiation().getContext().addUtt(prop);
 		
 		// -----------------
 		getNegotiation().getContext_bis().addUtt(this);
