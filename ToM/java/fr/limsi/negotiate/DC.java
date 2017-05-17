@@ -16,8 +16,8 @@ public class DC {
 
 		this.history =new ArrayList<NegotiationUtterance>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
-		//this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
-		//this.setTopicValues(topicValues);
+		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
+		this.setTopicValues(topicValues);
 	}
 
 	public List<Class<? extends Criterion>> getRemainDiscussedCrt() {

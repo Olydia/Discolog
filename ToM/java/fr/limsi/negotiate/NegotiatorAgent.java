@@ -143,7 +143,7 @@ public class NegotiatorAgent extends Agent {
 
 		} else if ( utterance instanceof AskPreference && !takeThelead()) {
 
-			PreferenceMove ask = (PreferenceMove)getNegotiation().getContext().getLastMove(true);
+			PreferenceUtterance ask = (PreferenceUtterance)getNegotiation().getContext_bis().getLastMove(true);
 			Statement<Criterion> state = respondToAsk(ask);
 			return new StatePreference(disco, false, state.getValue(), state.getStatus());
 
@@ -191,7 +191,7 @@ public class NegotiatorAgent extends Agent {
 		}else { 
 			//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 
-			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
+			Class<? extends Criterion> c=getNegotiation().getContext_bis().getCurrentDisucussedCriterion();
 
 			// REJECT
 			if(canReject(utterance)) {
@@ -321,7 +321,7 @@ public class NegotiatorAgent extends Agent {
 		List<Proposal> previousP = new ArrayList<Proposal>();
 
 		for( int i =0; i< getNegotiation().getContext_bis().getRemainDiscussedCrt().size()-1; i++ ){
-			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
+			Class<? extends Criterion> discussed = getNegotiation().getContext_bis().getRemainDiscussedCrt().get(i);
 			previousP.addAll(getNegotiation().getValueNegotiation(discussed).getProposalsWithStatus(Status.OPEN));
 		}
 
@@ -342,16 +342,12 @@ public class NegotiatorAgent extends Agent {
 	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
 
-	public Statement<Criterion> respondToAsk(PreferenceMove ask){
-		if(ask.getValue().getValue() == null){
-			Criterion value = getNegotiation().getValueNegotiation(ask.getValueType()).getSelf().sortValues().get(0);
-			return new Statement<Criterion>(value, Satisfiable.TRUE);
-		}
-		else{
-			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getValueType()).
-					getSelf().isSatisfiable(ask.getValue().getValue(), getNegotiation().self());
-			return new Statement<Criterion>(ask.getValue().getValue(), sat);
-		}
+	public Statement<Criterion> respondToAsk(PreferenceUtterance ask){
+
+			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getValue().getClass()).
+					getSelf().isSatisfiable(ask.getValue(), getNegotiation().self());
+			return new Statement<Criterion>(ask.getValue(), sat);
+		
 	}
 
 	public Proposal createProposal(Object o, boolean isSelf){
@@ -408,7 +404,7 @@ public class NegotiatorAgent extends Agent {
 	public List<Criterion> getOtherStatements(Satisfiable status){
 		List<Criterion> statements = new ArrayList<Criterion> ();
 		for( int i = getNegotiation().getContext_bis().getRemainDiscussedCrt().size()-1; i>=0 ; i--){
-			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
+			Class<? extends Criterion> discussed = getNegotiation().getContext_bis().getRemainDiscussedCrt().get(i);
 			CriterionNegotiation<Criterion> cn = getNegotiation().getValueNegotiation(discussed);
 			for(Criterion c: cn.getOther().getPreferences(status)){
 				if(!cn.isAccepted(c) && !cn.isRejected(c))
@@ -432,7 +428,7 @@ public class NegotiatorAgent extends Agent {
 
 		else {
 			List<Class<? extends Criterion>> discussions = getNegotiation().getCriteria().getElements();
-			for(Class<? extends Criterion> dis: getNegotiation().getContext().getPossibleDiscussions(discussions))
+			for(Class<? extends Criterion> dis: getNegotiation().getContext_bis().getPossibleDiscussions(discussions))
 				if(!getNegotiation().getValueNegotiation(dis).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 					return dis;
 
@@ -503,8 +499,8 @@ public class NegotiatorAgent extends Agent {
 		if(getNegotiation().getDominance()<= NegotiationParameters.pi)
 			return false;
 
-		for(NegoUtterance utt : getNegotiation().getContext().getHistory()){
-			if ( utt instanceof PreferenceMove)
+		for(NegotiationUtterance utt : getNegotiation().getContext_bis().getHistory()){
+			if ( utt instanceof PreferenceUtterance)
 				nbPreferences++;
 			else nbPreferences =0; 
 
