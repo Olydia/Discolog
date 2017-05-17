@@ -146,19 +146,6 @@ public class DialogueContext {
 
 	}
 
-	public Proposal getLastProposal(boolean isExternal, Status status){
-		Proposal p = null;
-		if(status.equals(Status.OPEN))
-			p= (Proposal) getLastUtterance(isExternal, UtType.PROPOSE).getValue();
-		else if(status.equals(Status.ACCEPTED))
-			p= (Proposal) getLastUtterance(isExternal, UtType.ACCEPT).getValue();
-		else if(status.equals(Status.REJECTED))
-			p= (Proposal) getLastUtterance(isExternal, UtType.REJECT).getValue();
-
-		return p;
-
-	}
-
 	public Proposal getLastProposal(){
 		for (int i = history.size()-1; i>= 0; i--){
 			NegoUtterance utt = history.get(i);

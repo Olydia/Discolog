@@ -12,7 +12,7 @@ import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
-public class StatePreference extends NegotiationUtterance {
+public class StatePreference extends PreferenceUtterance {
 
 	public static TaskClass CLASS;
 
@@ -22,19 +22,22 @@ public class StatePreference extends NegotiationUtterance {
 	}
 
 	public StatePreference (Disco disco, Boolean external, Criterion value, Satisfiable likable) { 
-		super(StatePreference.class, disco, external);
+		super(StatePreference.class, disco, external, value);
+		
 		if ( value != null ) setSlotValue("value", value);
 		setSlotValue("likable", likable);
 	}
 
 	public Criterion getValue () { return (Criterion) getSlotValue("value"); }
 	public Satisfiable getLikable () { return (Satisfiable) getSlotValue("likable"); }
+	public Class<? extends Criterion> getCriterion () { return getValue().getClass(); }
 	// count the number of statements ?
 	@Override
 	public void interpret () {
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),getLikable());
 		PreferenceMove st = new PreferenceMove(statement, getExternal(), UtType.STATE);
 		getNegotiation().getContext().addUtt(st);
+	
 		getNegotiation().addStatement(statement, getExternal());
 
 	}

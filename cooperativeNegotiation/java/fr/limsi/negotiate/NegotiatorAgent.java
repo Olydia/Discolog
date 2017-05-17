@@ -22,7 +22,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.2;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -96,6 +96,8 @@ public class NegotiatorAgent extends Agent {
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
+		System.out.println("dialogue context "+ getNegotiation().computeT());
+		System.out.println(" DC " +getNegotiation().getContext().getNonAcceptedProposals().size());
 		System.out.println(u.format()+ " -> " + u.getType());
 		return u ;
 	}

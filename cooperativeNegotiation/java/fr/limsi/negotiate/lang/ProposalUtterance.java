@@ -29,6 +29,8 @@ public abstract class ProposalUtterance extends NegotiationUtterance {
 
    public Proposal getProposal () { return (Proposal) getSlotValue("proposal"); }
    
+   public Proposal getValue ( ) { return (Proposal) getSlotValue("proposal"); }
+   
    
    //Propose postCondition
    protected Proposal proposeUpdate(Proposal input) {

@@ -19,9 +19,8 @@ public abstract class PreferenceUtterance extends NegotiationUtterance {
 
    // for extensions
    protected PreferenceUtterance (Class<? extends PreferenceUtterance> cls, Disco disco, Boolean external, 
-         Class<? extends Criterion> criterion, Criterion value) { 
+          Criterion value) { 
       super(cls, disco, external);
-      if ( criterion != null ) setSlotValue("criterion", criterion);
       if ( value != null ) setSlotValue("value", value);
    }
 

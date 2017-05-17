@@ -23,17 +23,19 @@ public class RejectState  extends ProposalUtterance {
 
 	}
 
-	public Criterion getValue () { return (Criterion) getSlotValue("value"); }
+	public Criterion getJustify() { return (Criterion) getSlotValue("value"); }
 	
 	@Override
 	public void interpret () {
 		super.rejectUpdate(getProposal());
 		
-		Statement<Criterion> statement = new Statement<Criterion>(getValue(),Satisfiable.FALSE);
+		Statement<Criterion> statement = new Statement<Criterion>(getJustify(),Satisfiable.FALSE);
 		ProposalMove st = new ProposalMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);
 		
 		getNegotiation().getContext().addUtt(st);
+		
 		getNegotiation().addStatement(statement, getExternal());
+		
 	}
 	
 

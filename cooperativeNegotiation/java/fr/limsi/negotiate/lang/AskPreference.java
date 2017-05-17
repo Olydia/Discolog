@@ -17,7 +17,9 @@ public class AskPreference extends PreferenceUtterance {
 	   
 	   public AskPreference (Disco disco, Boolean external, Class<? extends Criterion> criterion,
 	         Criterion value) { 
-	      super(AskPreference.class, disco, external, criterion, value);
+	      super(AskPreference.class, disco, external, value);
+	      if ( criterion != null ) setSlotValue("criterion", criterion);
+
 	   }
 	   
 	   @Override
@@ -31,5 +33,7 @@ public class AskPreference extends PreferenceUtterance {
             							getCriterion(), getExternal(),UtType.ASK);     
 	      
 	      getNegotiation().getContext().addUtt(ask);
+	      
+
 	   }
 }
