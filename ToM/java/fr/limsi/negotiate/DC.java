@@ -86,7 +86,7 @@ public class DC {
 	@SuppressWarnings("unchecked")
 	Class<? extends Criterion>  getValueType(NegotiationUtterance newUtt){
 		if(newUtt instanceof PreferenceUtterance)
-			return ((PreferenceUtterance) newUtt).getValue().getClass();
+			return ((PreferenceUtterance) newUtt).getCriterion();
 
 		return (Class<? extends Criterion>) ((ProposalUtterance) newUtt).getProposal().getValue().getClass();
 	}

@@ -7,7 +7,7 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.lang.*;
 
 
-public class Negotiation<O extends Option> {
+public class Negotiation<O extends Option> implements Cloneable {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
 
 
@@ -466,6 +466,10 @@ public class Negotiation<O extends Option> {
 			cn.clearNegotiation();
 	}
 
-
+	  @SuppressWarnings("unchecked")
+	@Override
+	public Negotiation<? extends Option> clone() throws CloneNotSupportedException {
+	        return (Negotiation<? extends Option>) super.clone();
+	    }
 
 }

@@ -24,8 +24,7 @@ public abstract class PreferenceUtterance extends NegotiationUtterance {
       if ( value != null ) setSlotValue("value", value);
    }
 
-   @SuppressWarnings("unchecked")
-   public Class<? extends Criterion> getCriterion () { return (Class<? extends Criterion>) getSlotValue("criterion"); }
    public Criterion getValue () { return (Criterion) getSlotValue("value"); }
+   public abstract Class<? extends Criterion> getCriterion ();
 
 }
