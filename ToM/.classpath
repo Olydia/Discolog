@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/disco/lib/disco.jar"/>
+	<classpathentry kind="lib" path="lib/disco/lib/disco.jar" sourcepath="lib/disco/lib/disco-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
