@@ -20,13 +20,9 @@ public class Propose extends ProposalUtterance {
 	@Override
 	protected void interpret () {
 		
-		Proposal p = proposeUpdate(getProposal());
-		
-		
-		NegotiationMove prop = new NegotiationMove(p, getExternal(), NegoUtterance.UtType.PROPOSE);
-		
+		proposeUpdate(getProposal());		
 		// -----------------
-		getNegotiation().getContext_bis().addUtt(this);
+		getNegotiation().getContext().addUtt(this);
 		// -----------------
 
 

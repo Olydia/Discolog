@@ -165,7 +165,7 @@ public class DC {
 					moves.add(((Propose) utt).getProposal());
 				}
 				else if (utt instanceof AcceptPropose || utt instanceof RejectPropose){
-					moves.add(((RejectPropose) utt).getProposal());
+					moves.add(((ProposalUtterance) utt).getProposal());
 				}
 				//Suppression des propositions acceptées durant la negociation
 				

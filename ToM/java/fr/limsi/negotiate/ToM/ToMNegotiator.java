@@ -10,12 +10,7 @@ import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.NegotiatorAgent;
 import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.Proposal;
-import fr.limsi.negotiate.lang.AcceptPropose;
-import fr.limsi.negotiate.lang.AskPreference;
-import fr.limsi.negotiate.lang.PreferenceUtterance;
-import fr.limsi.negotiate.lang.ProposalUtterance;
-import fr.limsi.negotiate.lang.RejectPropose;
-import fr.limsi.negotiate.lang.RejectState;
+import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
 	public ArrayList<Double> pow_hyp;
@@ -30,9 +25,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
 		System.out.println(u.format());
-		Negotiation<? extends Option> nego;
 		try {
-			nego = getNegotiation().clone();
+			Negotiation<? extends Option> nego = getNegotiation().clone();
 			System.out.println(this.getName() + " " + guess(nego, disco, utterance, u));
 
 		} catch (CloneNotSupportedException e) {
@@ -55,7 +49,9 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 		for (double pow: this.pow_hyp){
 			current.setDominance(pow);
-			if(identicalUtterances(guessUtt, guessUtt(current, pow, previousUtt, disco)))
+			Utterance guessed = guessUtt(current, pow, previousUtt, disco);
+			System.out.println(pow + " : " + guessed.toString());
+			if(identicalUtterances(guessUtt, guessed))
 				power.add(pow);
 		}
 		pow_hyp= power;

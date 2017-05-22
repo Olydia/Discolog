@@ -23,7 +23,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.3;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -145,7 +145,7 @@ public class NegotiatorAgent extends Agent {
 
 		} else if ( utterance instanceof AskPreference && !takeThelead()) {
 
-			PreferenceUtterance ask = (PreferenceUtterance)getNegotiation().getContext_bis().getLastMove(true);
+			PreferenceUtterance ask = (PreferenceUtterance)getNegotiation().getContext().getLastMove(true);
 			Statement<Criterion> state = respondToAsk(ask);
 			return new StatePreference(disco, false, state.getValue(), state.getStatus());
 
@@ -193,21 +193,18 @@ public class NegotiatorAgent extends Agent {
 		}else { 
 			//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 
-			Class<? extends Criterion> c=getNegotiation().getContext_bis().getCurrentDisucussedCriterion();
+			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 
 			// REJECT
 			if(canReject(utterance)) {
 				Proposal p = ((Propose) utterance).getProposal();
-				p.setStatus(Status.REJECTED);
 
 				return new RejectState(disco, false, p, getNegotiation().justifyReject(p));
 
 				//ACCEPT
 			}else if(getAcceptableProposal(c)!= null){
-
 				Proposal p = getAcceptableProposal(c);
-				p.setIsSelf(true);
-				p.setStatus(Status.ACCEPTED);
+				
 				return new Accept(disco, false, p);
 
 			}else if(canPropose(utterance) != null) {
@@ -322,8 +319,8 @@ public class NegotiatorAgent extends Agent {
 
 		List<Proposal> previousP = new ArrayList<Proposal>();
 
-		for( int i =0; i< getNegotiation().getContext_bis().getRemainDiscussedCrt().size()-1; i++ ){
-			Class<? extends Criterion> discussed = getNegotiation().getContext_bis().getRemainDiscussedCrt().get(i);
+		for( int i =0; i< getNegotiation().getContext().getRemainDiscussedCrt().size()-1; i++ ){
+			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
 			previousP.addAll(getNegotiation().getValueNegotiation(discussed).getProposalsWithStatus(Status.OPEN));
 		}
 
@@ -405,8 +402,8 @@ public class NegotiatorAgent extends Agent {
 	 */
 	public List<Criterion> getOtherStatements(Satisfiable status){
 		List<Criterion> statements = new ArrayList<Criterion> ();
-		for( int i = getNegotiation().getContext_bis().getRemainDiscussedCrt().size()-1; i>=0 ; i--){
-			Class<? extends Criterion> discussed = getNegotiation().getContext_bis().getRemainDiscussedCrt().get(i);
+		for( int i = getNegotiation().getContext().getRemainDiscussedCrt().size()-1; i>=0 ; i--){
+			Class<? extends Criterion> discussed = getNegotiation().getContext().getRemainDiscussedCrt().get(i);
 			CriterionNegotiation<Criterion> cn = getNegotiation().getValueNegotiation(discussed);
 			for(Criterion c: cn.getOther().getPreferences(status)){
 				if(!cn.isAccepted(c) && !cn.isRejected(c))
@@ -424,13 +421,13 @@ public class NegotiatorAgent extends Agent {
 
 
 	public Class <? extends Criterion> canAsk(){
-		Class<? extends Criterion> c = getNegotiation().getContext_bis().getCurrentDisucussedCriterion();
+		Class<? extends Criterion> c = getNegotiation().getContext().getCurrentDisucussedCriterion();
 		if(!getNegotiation().getValueNegotiation(c).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 			return c;
 
 		else {
 			List<Class<? extends Criterion>> discussions = getNegotiation().getCriteria().getElements();
-			for(Class<? extends Criterion> dis: getNegotiation().getContext_bis().getPossibleDiscussions(discussions))
+			for(Class<? extends Criterion> dis: getNegotiation().getContext().getPossibleDiscussions(discussions))
 				if(!getNegotiation().getValueNegotiation(dis).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 					return dis;
 
@@ -443,10 +440,10 @@ public class NegotiatorAgent extends Agent {
 	public List<Criterion> getPossibleStatements(){
 
 		List<Criterion> statements = new ArrayList<Criterion>();
-		Class<? extends Criterion> c=getNegotiation().getContext_bis().getCurrentDisucussedCriterion();
+		Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 		statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
 
-		c =  getNegotiation().getContext_bis().openNewDiscussion(getNegotiation().getCriteria().sortValues());
+		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().sortValues());
 
 		if(c != null)
 			statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
@@ -501,7 +498,7 @@ public class NegotiatorAgent extends Agent {
 		if(getNegotiation().getDominance()<= NegotiationParameters.pi)
 			return false;
 
-		for(NegotiationUtterance utt : getNegotiation().getContext_bis().getHistory()){
+		for(NegotiationUtterance utt : getNegotiation().getContext().getHistory()){
 			if ( utt instanceof PreferenceUtterance)
 				nbPreferences++;
 			else nbPreferences =0; 

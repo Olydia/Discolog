@@ -33,12 +33,14 @@ public class AcceptPropose  extends ProposalUtterance {
 	protected void interpret () {
 		
 		// add the proposal 
-		Proposal proposal = super.proposeUpdate(getProposal());
+		super.proposeUpdate(getProposal());
 		
 		// add the accepted proposal
 		Criterion value = (Criterion) getAccepted().getValue();
 		CriterionProposal acc = new CriterionProposal(!getExternal(), value);
 		acc.setStatus(Status.ACCEPTED);
+		this.setSlotValue("accepted", acc);
+
 		
 		CriterionNegotiation<Criterion>cn =getNegotiation().getValueNegotiation(value.getClass());
 		cn.updateProposal(acc);
@@ -46,12 +48,9 @@ public class AcceptPropose  extends ProposalUtterance {
 		
 		
 		// history update
-		ProposalMove prop = new ProposalMove(proposal, getAccepted(), getExternal(), NegoUtterance.UtType.ACCEPTPROPOSE);
-		// set the type of the utterance with the accepted one in order to close the negotiation about accepted
-		prop.setValueType(value.getClass());
-		
+
 		// -----------------
-		getNegotiation().getContext_bis().addUtt(this);
+		getNegotiation().getContext().addUtt(this);
 		// -----------------
 
 	}

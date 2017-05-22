@@ -34,7 +34,7 @@ public class AskPreference extends PreferenceUtterance {
 	   @Override
 	   protected void interpret () { 
 	  	// -----------------
-			getNegotiation().getContext_bis().addUtt(this);
+			getNegotiation().getContext().addUtt(this);
 			// -----------------
 	   }
 }

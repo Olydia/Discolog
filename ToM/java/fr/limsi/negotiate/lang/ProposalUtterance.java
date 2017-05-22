@@ -33,7 +33,8 @@ public abstract class ProposalUtterance extends NegotiationUtterance {
    
    
    //Propose postCondition
-   protected Proposal proposeUpdate(Proposal input) {
+   protected void proposeUpdate(Proposal input) {
+	   
 		Proposal p;
 		if(input instanceof CriterionProposal){
 			p = new CriterionProposal(!getExternal(), (Criterion)input.getValue());
@@ -44,24 +45,33 @@ public abstract class ProposalUtterance extends NegotiationUtterance {
 		
 		getNegotiation().addProposal(p);
 
-		return p;
+		//return p;
 	}
    
    //Reject postCondition
 
    protected void rejectUpdate(Proposal rejected) {
+	   
 		if(rejected instanceof CriterionProposal){
 			Criterion value = (Criterion) rejected.getValue();
+			
 			CriterionProposal p = new CriterionProposal(!getExternal(), value);
 			p.setStatus(Status.REJECTED);
+			
 			CriterionNegotiation<Criterion>cn =getNegotiation().getValueNegotiation(value.getClass());
-			cn.updateProposal((CriterionProposal)rejected);
+			cn.updateProposal((CriterionProposal)p);
+			
 			getNegotiation().addStatement(new Statement<Criterion>(value,Satisfiable.FALSE), getExternal());
+			this.setSlotValue("proposal", p);
+
 		}
-		if(rejected instanceof OptionProposal){
+		
+		else if(rejected instanceof OptionProposal){
 			OptionProposal p = new OptionProposal(!getExternal(), (Option)rejected.getValue());
 			p.setStatus(Status.REJECTED);
 			getNegotiation().updateProposal(p);
+			this.setSlotValue("proposal", p);
+
 		}
 	}
 

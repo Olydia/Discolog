@@ -29,7 +29,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 
 	}
 	
-	public DC getContext_bis() {
+	public DC getContext() {
 		return context_bis;
 	}
 
@@ -157,7 +157,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 
 	public int computeT() {
 
-		return getContext_bis().getNonAcceptedProposals().size();
+		return getContext().getNonAcceptedProposals().size();
 	}
 
 	public float tolerable(Option o){
@@ -198,7 +198,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 
 
 	public boolean negotiationFailure(Utterance utterance){
-		if (getContext_bis().getHistory().size()>= 40 && 
+		if (getContext().getHistory().size()>= 40 && 
 				!(utterance instanceof Propose || utterance instanceof Accept))
 			return true;
 
@@ -341,7 +341,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
 
-		List<Class<? extends Criterion>> discussions = getContext_bis().getPossibleDiscussions(getCriteria().sortValues());
+		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().sortValues());
 		discussions = getCriteria().sortValues(discussions);
 		double self = this.self();
 
@@ -383,13 +383,13 @@ public class Negotiation<O extends Option> implements Cloneable {
 		Option bestOption = chooseOption(acceptables);
 
 		// All the criteria have been discussed and closed (a value was accepted)
-		if(getContext_bis().getPossibleDiscussions(this.getCriteria().getElements()).isEmpty())
+		if(getContext().getPossibleDiscussions(this.getCriteria().getElements()).isEmpty())
 			return new OptionProposal(true, bestOption);
 
 		Criterion c = chooseCriterionProposal();
 		if(c!=null){
 		//Any value is accepted yet 
-			if(getContext_bis().getClosedCriteria().isEmpty() && c != null){
+			if(getContext().getClosedCriteria().isEmpty() && c != null){
 				return new CriterionProposal(true,c);
 			}
 			
@@ -448,11 +448,11 @@ public class Negotiation<O extends Option> implements Cloneable {
 	// used to compute the Accept utterance format
 
 	public boolean isLastProposal(Proposal accepted){
-		return getContext_bis().getLastProposal().equals(accepted);
+		return getContext().getLastProposal().equals(accepted);
 	}
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
-		NegotiationUtterance uttSelf =  getContext_bis().getHistory().get(getContext_bis().getHistory().size()-2);//getContext().getLastMove(!isSelf);
+		NegotiationUtterance uttSelf =  getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
 		
 				
 		return (uttSelf instanceof ProposalUtterance);

@@ -132,7 +132,7 @@ public class Guess {
 			valueNegotiation.add(mirrorCriterionNego(cn, pref));
 		}
 				
-		DC context = mirrorContext(self.getContext_bis());
+		DC context = mirrorContext(self.getContext());
 		
 		return new Negotiation (valueNegotiation, otherC,
 				self.getTopic(), context, mirrorProposals(self.getProposals()));
