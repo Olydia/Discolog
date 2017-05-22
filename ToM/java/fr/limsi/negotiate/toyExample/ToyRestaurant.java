@@ -5,7 +5,7 @@ import java.util.List;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Option;
 
-public enum Restaurant implements Option {
+public enum ToyRestaurant implements Option {
 
 
 	
@@ -34,7 +34,7 @@ public enum Restaurant implements Option {
 	@SuppressWarnings("serial")
 	private static final List<Class<? extends Criterion>> CRITERIA = new ArrayList<Class<? extends Criterion>> () {{ add(ToyCost.class); add(ToyCuisine.class); add(ToyAtmosphere.class); add(ToyLocation.class); }};
 	
-	Restaurant (ToyCuisine cuisine, ToyCost cost, ToyAtmosphere ambiance, ToyLocation district) {
+	ToyRestaurant (ToyCuisine cuisine, ToyCost cost, ToyAtmosphere ambiance, ToyLocation district) {
 		this.cuisine = cuisine;
 		this.cost = cost;
 		this.ambiance = ambiance;
