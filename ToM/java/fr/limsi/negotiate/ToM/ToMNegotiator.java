@@ -25,8 +25,16 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
 		try {
+			long startTime = System.currentTimeMillis();
 			Negotiation<? extends Option> nego = getNegotiation().clone();
-			System.out.println(this.getName() + "Hypotheses on pow: " + guess(nego, disco, utterance, u));
+			for(int i =0; i<10000000; i++)
+				guessTest(nego, disco, utterance, u, nego.getDominance());
+
+			long stopTime = System.currentTimeMillis();
+			long elapsedTime = stopTime - startTime;
+			System.out.println("ELEPSED TIME: " + elapsedTime);
+
+			System.out.println(this.getName() + " Hypotheses on pow: " + guess(nego, disco, utterance, u));
 
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
@@ -57,6 +65,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 		return power;
 	}
 
+	public boolean guessTest (Negotiation<? extends Option> current, Disco disco, 
+			Utterance previousUtt, Utterance guessUtt, double pow){
+		Utterance guessed = guessUtt(current, pow, previousUtt, disco);
+		//System.out.println(pow + " : " + guessed.toString());
+		return (identicalUtterances(guessUtt, guessed));
+	}
+
 	public void setPow_hyp(){
 
 		pow_hyp = 	new ArrayList<Double> ();
@@ -66,7 +81,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 	}
 
 	boolean identicalUtterances(Utterance ut, Utterance otherUt){
-		
+
 		if(ut.getType().equals(otherUt.getType())){
 			if (ut instanceof PreferenceUtterance){
 				Criterion c1 =  ((PreferenceUtterance) ut).getValue();
@@ -82,41 +97,41 @@ public class ToMNegotiator extends NegotiatorAgent{
 					return false;	
 
 				}
-			else 
+				else 
+					return (c1.equals(c2));
+
+
+			}
+			else if (ut instanceof ProposalUtterance){
+				Proposal c1 =  ((ProposalUtterance) ut).getProposal();
+				Proposal c2 =  ((ProposalUtterance) otherUt).getProposal();
+
+				if(ut instanceof AcceptPropose){
+					Proposal a1 = ((AcceptPropose) ut).getAccepted();
+					Proposal a2 = ((AcceptPropose) otherUt).getAccepted();
+					return (c1.equals(c2) && a1.equals(a2));
+
+				}
+				else if(ut instanceof RejectPropose){
+					Proposal r1 = ((RejectPropose) ut).getReject();
+					Proposal r2 = ((RejectPropose) otherUt).getReject();
+					return (c1.equals(c2) && r1.equals(r2));	
+				}
+				else if (ut instanceof RejectState){
+					Criterion cr1 = ((RejectState) ut).getJustify();
+					Criterion cr2 = ((RejectState) otherUt).getJustify();
+					return (c1.equals(c2) && cr1.equals(cr2));	
+
+				}
+
+
 				return (c1.equals(c2));
 
-
+			}
+			else if (ut instanceof Say)
+				return (((Say) ut).getText().equals(((Say) otherUt).getText()));
 		}
-		else if (ut instanceof ProposalUtterance){
-			Proposal c1 =  ((ProposalUtterance) ut).getProposal();
-			Proposal c2 =  ((ProposalUtterance) otherUt).getProposal();
-
-			if(ut instanceof AcceptPropose){
-				Proposal a1 = ((AcceptPropose) ut).getAccepted();
-				Proposal a2 = ((AcceptPropose) otherUt).getAccepted();
-				return (c1.equals(c2) && a1.equals(a2));
-
-			}
-			else if(ut instanceof RejectPropose){
-				Proposal r1 = ((RejectPropose) ut).getReject();
-				Proposal r2 = ((RejectPropose) otherUt).getReject();
-				return (c1.equals(c2) && r1.equals(r2));	
-			}
-			else if (ut instanceof RejectState){
-				Criterion cr1 = ((RejectState) ut).getJustify();
-				Criterion cr2 = ((RejectState) otherUt).getJustify();
-				return (c1.equals(c2) && cr1.equals(cr2));	
-
-			}
-
-
-			return (c1.equals(c2));
-
-		}
-		else if (ut instanceof Say)
-			return (((Say) ut).getText().equals(((Say) otherUt).getText()));
+		return false;
 	}
-	return false;
-}
 
 }
