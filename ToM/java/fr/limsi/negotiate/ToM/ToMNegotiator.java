@@ -24,10 +24,9 @@ public class ToMNegotiator extends NegotiatorAgent{
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
-		System.out.println(u.format());
 		try {
 			Negotiation<? extends Option> nego = getNegotiation().clone();
-			System.out.println(this.getName() + " " + guess(nego, disco, utterance, u));
+			System.out.println(this.getName() + "Hypotheses on pow: " + guess(nego, disco, utterance, u));
 
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
@@ -50,7 +49,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 		for (double pow: this.pow_hyp){
 			current.setDominance(pow);
 			Utterance guessed = guessUtt(current, pow, previousUtt, disco);
-			System.out.println(pow + " : " + guessed.toString());
+			//System.out.println(pow + " : " + guessed.toString());
 			if(identicalUtterances(guessUtt, guessed))
 				power.add(pow);
 		}
