@@ -55,7 +55,7 @@ public class Models< O extends Option> {
 			containers.add(m.createModelCriterion(elems));
 		}
 		List<List<Self_Ci<Criterion>>> results = m.getCombination(0, containers);
-		System.out.println(results);
+		System.out.println(results.size());
 
 	}
 }

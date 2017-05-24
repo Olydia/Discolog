@@ -25,14 +25,14 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
 		try {
-			long startTime = System.currentTimeMillis();
+//			long startTime = System.currentTimeMillis();
 			Negotiation<? extends Option> nego = getNegotiation().clone();
-			for(int i =0; i<10000000; i++)
-				guessTest(nego, disco, utterance, u, nego.getDominance());
-
-			long stopTime = System.currentTimeMillis();
-			long elapsedTime = stopTime - startTime;
-			System.out.println("ELEPSED TIME: " + elapsedTime);
+//			for(int i =0; i<10000000; i++)
+//				guessTest(nego, disco, utterance, u, nego.getDominance());
+//
+//			long stopTime = System.currentTimeMillis();
+//			long elapsedTime = stopTime - startTime;
+//			System.out.println("ELEPSED TIME: " + elapsedTime);
 
 			System.out.println(this.getName() + " Hypotheses on pow: " + guess(nego, disco, utterance, u));
 
