@@ -1,9 +1,8 @@
 package fr.limsi.negotiate.ToM;
 
 import java.util.*;
-
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.toyExample.ToyRestaurant;
+import fr.limsi.negotiate.toyExample.*;
 
 public class Models< O extends Option> {
 	List<Self_Ci<Criterion>> criteria_models;
@@ -47,15 +46,20 @@ public class Models< O extends Option> {
 	}
 	
 	public static void main (String[] args) {
-		Models<ToyRestaurant> m = new Models<>();
-		
-		List<List<Self_Ci<Criterion>>> containers = new ArrayList<List<Self_Ci<Criterion>>>();
-		for (Class<? extends Criterion> c: ToyRestaurant.ARRIBA_MEXICO.getCriteria()){
-			List<Criterion> elems = Arrays.asList(ToyRestaurant.ARRIBA_MEXICO.getValue(c).getValues());
-			containers.add(m.createModelCriterion(elems));
+		ToMNegotiator tom = new ToMNegotiator("TOM", new totalOrderedModels().model1());
+		for(Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry : tom.otherModel.entrySet()){
+			System.out.println(entry.getKey() + " : " + entry.getValue().size() );
 		}
-		List<List<Self_Ci<Criterion>>> results = m.getCombination(0, containers);
-		System.out.println(results.size());
+//		Models<ToyRestaurant> m = new Models<>();
+//		
+//		List<List<Self_Ci<Criterion>>> containers = new ArrayList<List<Self_Ci<Criterion>>>();
+//		
+//		for (Class<? extends Criterion> c: ToyRestaurant.ARRIBA_MEXICO.getCriteria()){
+//			List<Criterion> elems = Arrays.asList(ToyRestaurant.ARRIBA_MEXICO.getValue(c).getValues());
+//			containers.add(m.createModelCriterion(elems));
+//		}
+//		List<List<Self_Ci<Criterion>>> results = m.getCombination(0, containers);
+//		System.out.println(results.size());
 
 	}
 }

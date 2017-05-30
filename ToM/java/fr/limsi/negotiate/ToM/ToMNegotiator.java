@@ -2,23 +2,60 @@ package fr.limsi.negotiate.ToM;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.lang.Utterance;
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.NegotiatorAgent;
-import fr.limsi.negotiate.Option;
-import fr.limsi.negotiate.Proposal;
+import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
-	public ArrayList<Double> pow_hyp;
+	
+	public HashMap<Double, List<List<Self_Ci<Criterion>>>> otherModel;
 
+	
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
-		setPow_hyp();
+		this.otherModel = new HashMap<Double, List<List<Self_Ci<Criterion>>>> ();
+		
+		List<List<Self_Ci<Criterion>>>  prefs = setPreferences(negotiation.getCriteria().getElements());
+		for(double pow:setPow_hyp()){
+			ArrayList<List<Self_Ci<Criterion>>> copy = new ArrayList<List<Self_Ci<Criterion>>>();
+			copy.addAll(prefs);
+			otherModel.put(pow, copy);
+		}
+			
 
+	}
+	
+	//********** Initiate the model of toher
+	// Input : List of Criteria Class<? extends Criterion>
+	
+	
+	public List<List<Self_Ci<Criterion>>> setPreferences( List<Class<? extends Criterion>> elem){
+		Models<? extends Option> m = new Models<>();
+
+		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
+		for( Class<? extends Criterion> e: elem) {
+			
+			models.add(m.createModelCriterion(Arrays.asList(e.getEnumConstants())));
+		}
+ 
+		return m.getCombination(0, models);
+	}
+	
+	
+	public ArrayList<Double> setPow_hyp(){
+
+		ArrayList<Double> pow_hyp =	new ArrayList<Double> ();
+		for(int i=3; i<10; i++){
+			pow_hyp.add(i/10.0);
+		}
+		return pow_hyp;
 	}
 
 	@Override
@@ -44,17 +81,21 @@ public class ToMNegotiator extends NegotiatorAgent{
 	}
 
 	//----------------------------------------- for ToM ----------------------------------------
-	public Utterance guessUtt(Negotiation<? extends Option> nego, double pow, Utterance utt, Disco disco){
-		NegotiatorAgent agent = new NegotiatorAgent("current", nego);
-		agent.setRelation(pow);
-		return agent.respondTo(utt, disco);
-	}
+	public Negotiation<? extends Option> createModel()
+	
+	/**
+	 * 
+	 * @param disco
+	 * @param previousUtt
+	 * @param guessUtt
+	 * @return
+	 */
+	
 
-	public ArrayList<Double> guess (Negotiation<? extends Option> current, Disco disco, 
-			Utterance previousUtt, Utterance guessUtt ) {
+	public ArrayList<Double> guess (Disco disco, Utterance previousUtt, Utterance guessUtt ) {
 		ArrayList<Double> power = new ArrayList<Double>();
-
-		for (double pow: this.pow_hyp){
+		//for(Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry : otherModel.entrySet()){
+			for (double pow: this.pow_hyp){
 			current.setDominance(pow);
 			Utterance guessed = guessUtt(current, pow, previousUtt, disco);
 			//System.out.println(pow + " : " + guessed.toString());
@@ -64,6 +105,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 		pow_hyp= power;
 		return power;
 	}
+	
+	public Utterance guessUtt(Negotiation<? extends Option> nego, double pow, Utterance utt, Disco disco){
+		NegotiatorAgent agent = new NegotiatorAgent("current", nego);
+		agent.setRelation(pow);
+		return agent.respondTo(utt, disco);
+	}
+
 
 	public boolean guessTest (Negotiation<? extends Option> current, Disco disco, 
 			Utterance previousUtt, Utterance guessUtt, double pow){
@@ -72,13 +120,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 		return (identicalUtterances(guessUtt, guessed));
 	}
 
-	public void setPow_hyp(){
+	
 
-		pow_hyp = 	new ArrayList<Double> ();
-		for(int i=1; i<10; i++){
-			pow_hyp.add(i/10.0);
-		}
-	}
 
 	boolean identicalUtterances(Utterance ut, Utterance otherUt){
 

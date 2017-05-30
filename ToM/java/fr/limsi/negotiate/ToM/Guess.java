@@ -24,17 +24,13 @@ public class Guess {
 	// other possible power 
 	// mirror of self in order to create a negotiation
 	ArrayList<Self_Ci<Criterion>> otherPref;
-	Self_C<Option> otherC;
-	
 	Negotiation<? extends Option> other;
 	ArrayList<Double> hypo_pow;
 	
 	
-	public Guess(Negotiation<? extends Option> self, ArrayList<Self_Ci<Criterion>> otherPref,
-			Self_C<Option> otherC) {
-		this.other = mirrorNegotiation(otherPref, otherC, self);
+	public Guess(Negotiation<? extends Option> self, ArrayList<Self_Ci<Criterion>> otherPref) {
+		this.other = mirrorNegotiation(otherPref, self.get, self);
 		//(ArrayList<Self_Ci<Criterion>> otherPref,	Self_C<Option> otherC, Negotiation<? extends Option> self
-		this.otherC = otherC;
 		this.otherPref = otherPref;
 		hypo_pow = new ArrayList<Double> ();
 		double elem = 0;
@@ -44,18 +40,6 @@ public class Guess {
 		}
 	}
 	
-	public ArrayList<Double> guess(Utterance selfUt, Utterance otherUt, Disco disco){
-		ArrayList<Double>  hypos = new ArrayList<Double> ();
-
-		for(double pow: hypo_pow){
-			NegotiatorAgent current = new NegotiatorAgent("otherTom", this.other);
-			current.setRelation(pow);
-			Utterance ut = current.respondTo(selfUt, disco);
-			if(identicalUtterances(ut, otherUt))
-				hypos.add(pow);
-		}
-		return hypos;
-	}
 
 	// method mirrors of proposals (self vs other proposals)
 	public ArrayList <? extends Proposal>  mirrorProposals (ArrayList<? extends Proposal> proposals){
@@ -121,8 +105,8 @@ public class Guess {
 		return other;
 	}
 	
-	// create the negotiation model
 	
+	// create the negotiation model
 	Negotiation<? extends Option> mirrorNegotiation(ArrayList<Self_Ci<Criterion>> otherPref,
 	Self_C<Option> otherC, Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
