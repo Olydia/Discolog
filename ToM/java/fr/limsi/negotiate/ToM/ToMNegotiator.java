@@ -4,8 +4,11 @@ package fr.limsi.negotiate.ToM;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import com.sun.javafx.sg.prism.NGShape.Mode;
 
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.lang.Say;
@@ -70,8 +73,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 //			long stopTime = System.currentTimeMillis();
 //			long elapsedTime = stopTime - startTime;
 //			System.out.println("ELEPSED TIME: " + elapsedTime);
-
-			System.out.println(this.getName() + " Hypotheses on pow: " + guess(nego, disco, utterance, u));
+			Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+			guess(disco,selfPrevious, utterance, nego);
 
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
@@ -81,7 +84,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 	}
 
 	//----------------------------------------- for ToM ----------------------------------------
-	public Negotiation<? extends Option> createModel()
+	public Negotiation<? extends Option> createModel(double pow, List<Self_Ci<Criterion>> preferences,
+			Negotiation<? extends Option> selfNego){
+		ModelGenerator generator = new ModelGenerator();
+		Negotiation<? extends Option> nego = generator.mirrorNegotiation(preferences, selfNego);
+		nego.setDominance(pow);
+		return nego;
+	}
 	
 	/**
 	 * 
@@ -92,18 +101,26 @@ public class ToMNegotiator extends NegotiatorAgent{
 	 */
 	
 
-	public ArrayList<Double> guess (Disco disco, Utterance previousUtt, Utterance guessUtt ) {
-		ArrayList<Double> power = new ArrayList<Double>();
-		//for(Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry : otherModel.entrySet()){
-			for (double pow: this.pow_hyp){
-			current.setDominance(pow);
-			Utterance guessed = guessUtt(current, pow, previousUtt, disco);
-			//System.out.println(pow + " : " + guessed.toString());
-			if(identicalUtterances(guessUtt, guessed))
-				power.add(pow);
-		}
-		pow_hyp= power;
-		return power;
+	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
+			
+			ArrayList<List<Self_Ci<Criterion>> > deleteModel = new ArrayList<List<Self_Ci<Criterion>> >();
+			
+			for(Iterator<Map.Entry<Double, List<List<Self_Ci<Criterion>>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
+				Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry = it.next();
+				for(List<Self_Ci<Criterion>> pref: entry.getValue()){
+					Utterance guessed = guessUtt(createModel(entry.getKey(), pref, selfNego), entry.getKey(), previousUtt, disco);
+					if(!identicalUtterances(guessUtt, guessed))
+						deleteModel.add(pref);	
+				}
+				entry.getValue().removeAll(deleteModel);
+				System.out.println( entry.getKey() +" " +entry.getValue().size());  
+				
+				if(entry.getValue().isEmpty()) {
+			        it.remove();
+			      }
+			    }
+			// ---------------------------------
+
 	}
 	
 	public Utterance guessUtt(Negotiation<? extends Option> nego, double pow, Utterance utt, Disco disco){

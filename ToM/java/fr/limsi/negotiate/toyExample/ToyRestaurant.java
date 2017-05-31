@@ -72,7 +72,7 @@ public enum ToyRestaurant implements Option {
 
 	@Override
 	public String toString(){
-		return this.capitalize(this.name());
+		return "Restaurant";
 	}
 
 }

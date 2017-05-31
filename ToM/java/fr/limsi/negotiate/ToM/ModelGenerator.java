@@ -3,43 +3,34 @@ package fr.limsi.negotiate.ToM;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.disco.Disco;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.DC;
 import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.NegotiatorAgent;
 import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.Other;
 import fr.limsi.negotiate.Proposal;
-import fr.limsi.negotiate.Self_C;
 import fr.limsi.negotiate.Self_Ci;
 import fr.limsi.negotiate.Statement;
 import fr.limsi.negotiate.lang.*;
+import fr.limsi.negotiate.toyExample.*;
 
-public class Guess {
+public class ModelGenerator {
 	// other possible models of preferences
 	// other possible power 
 	// mirror of self in order to create a negotiation
-	ArrayList<Self_Ci<Criterion>> otherPref;
-	Negotiation<? extends Option> other;
-	ArrayList<Double> hypo_pow;
-	
-	
-	public Guess(Negotiation<? extends Option> self, ArrayList<Self_Ci<Criterion>> otherPref) {
-		this.other = mirrorNegotiation(otherPref, self.get, self);
-		//(ArrayList<Self_Ci<Criterion>> otherPref,	Self_C<Option> otherC, Negotiation<? extends Option> self
-		this.otherPref = otherPref;
-		hypo_pow = new ArrayList<Double> ();
-		double elem = 0;
-		for(int i=0; i<10; i++){
-			elem=elem+0.1;
-			hypo_pow.add(elem);
-		}
-	}
-	
+//	List<Self_Ci<Criterion>> otherPref;
+//	Negotiation<? extends Option> other;
+//	
+//	
+//	public Guess(Negotiation<? extends Option> self, List<Self_Ci<Criterion>> otherPref) {
+//		//instance of negotiation
+//		this.other = mirrorNegotiation(otherPref, self);
+//		this.otherPref = otherPref;
+//	}
+
 
 	// method mirrors of proposals (self vs other proposals)
 	public ArrayList <? extends Proposal>  mirrorProposals (ArrayList<? extends Proposal> proposals){
@@ -107,8 +98,9 @@ public class Guess {
 	
 	
 	// create the negotiation model
-	Negotiation<? extends Option> mirrorNegotiation(ArrayList<Self_Ci<Criterion>> otherPref,
-	Self_C<Option> otherC, Negotiation<? extends Option> self){
+	@SuppressWarnings("unchecked")
+	Negotiation<? extends Option> mirrorNegotiation(List<Self_Ci<Criterion>> otherPref,
+	 Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
 		
 		for(Self_Ci<Criterion> pref: otherPref){
@@ -118,7 +110,7 @@ public class Guess {
 				
 		DC context = mirrorContext(self.getContext());
 		
-		return new Negotiation (valueNegotiation, otherC,
+		return new Negotiation (valueNegotiation, self.getCriteria(),
 				self.getTopic(), context, mirrorProposals(self.getProposals()));
 	}
 	
@@ -144,11 +136,18 @@ public class Guess {
 	
 	
 	
-	// create a method to compare two utterances
-	public static void main (String[] args) {
-		//Guess m = new Guess(new totalOrderedModels().model1());
-		//System.out.println(m.hypo_pow);
-	}
+//	// create a method to compare two utterances
+//	public static void main (String[] args) {
+//		Negotiation<ToyRestaurant> model = new totalOrderedModels().model1();
+//		model.addProposal(new CriterionProposal(true,ToyCuisine.FRENCH));
+//		model.addProposal(new CriterionProposal(false, ToyAtmosphere.QUIET));
+//		model.addStatement(new Statement<Criterion>(ToyCuisine.FRENCH, true), false);
+//		model.addStatement(new Statement<Criterion>(ToyAtmosphere.QUIET, true), true);
+//
+//		ToMNegotiator tom = new ToMNegotiator("TOM", new totalOrderedModels().model1());
+//		List<Self_Ci<Criterion>> other = tom.otherModel.get(0.9).get(0);
+//
+//	}
 
 		
 

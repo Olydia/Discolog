@@ -203,8 +203,9 @@ public class Negotiation<O extends Option> implements Cloneable {
 			return true;
 
 		//if(getDominance()>=0){
-		List<Option> remainOptions= nonRejectedOptions();//getAcceptableOptions(nonRejectedOptions());
-		return (remainOptions.isEmpty());
+		List<Option> remainOptions= nonRejectedOptions();
+		 return getAcceptableOptions(remainOptions).isEmpty();
+		//return (remainOptions.isEmpty());
 		//|| 
 		//	getAcceptableOptions().isEmpty());
 		//}
@@ -329,6 +330,8 @@ public class Negotiation<O extends Option> implements Cloneable {
 
 
 	public Option chooseOption(List<Option> V){
+		if (V.isEmpty())
+			return null;
 		V.sort(new Comparator<Option>() {
 			@Override
 			public int compare(Option o1, Option o2){

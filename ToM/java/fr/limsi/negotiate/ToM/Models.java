@@ -46,7 +46,7 @@ public class Models< O extends Option> {
 	}
 	
 	public static void main (String[] args) {
-		ToMNegotiator tom = new ToMNegotiator("TOM", new totalOrderedModels().model1());
+		ToMNegotiator tom = new ToMNegotiator("TOM", new ToyModel().model1());
 		for(Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry : tom.otherModel.entrySet()){
 			System.out.println(entry.getKey() + " : " + entry.getValue().size() );
 		}

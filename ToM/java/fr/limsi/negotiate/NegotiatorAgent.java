@@ -13,6 +13,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
 //
@@ -23,7 +24,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.5;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -56,8 +57,9 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
+		//totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
+		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
 				new ToMNegotiator("Agent2", model.model2()), 
@@ -100,7 +102,7 @@ public class NegotiatorAgent extends Agent {
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
 
-		//System.out.println(u.format()+ " -> " + u.getType());
+		System.out.println(u.format()+ " -> " + u.getType());
 		return u ;
 	}
 
@@ -342,11 +344,20 @@ public class NegotiatorAgent extends Agent {
 
 
 	public Statement<Criterion> respondToAsk(PreferenceUtterance ask){
-
-			Satisfiable sat = getNegotiation().getValueNegotiation(ask.getValue().getClass()).
-					getSelf().isSatisfiable(ask.getValue(), getNegotiation().self());
+		CriterionNegotiation<Criterion> cr = getNegotiation().getValueNegotiation(ask.getCriterion());
+		if(ask.getValue() != null){
+			Criterion asked = ask.getValue();
+			Satisfiable sat = cr.getSelf().isSatisfiable(asked, getNegotiation().self());
 			return new Statement<Criterion>(ask.getValue(), sat);
-		
+			
+		}
+		else{
+			Criterion respond = cr.acceptableValues(getNegotiation().self()).get(0);
+			return new Statement<Criterion>(respond, fr.limsi.negotiate.Statement.Satisfiable.TRUE);
+
+		}
+
+
 	}
 
 	public Proposal createProposal(Object o, boolean isSelf){
