@@ -99,15 +99,15 @@
 	</task>
 
 	<script init="true">
+		var State = Packages.fr.limsi.negotiate.lang.StatePreference;
 
 		var STATE_PREFERENCE_TEST = null;
+		
 		$negotiation =
 		$disco.getInteraction().getSystem().getNegotiation();
 
-		function
-		isProposed (proposal, status) {
-		return
-		$negotiation.isProposed(proposal, status);
+		function isProposed (proposal, status) {
+			return 	$negotiation.isProposed(proposal, status);
 		}
 
 		function getStatus
@@ -115,18 +115,11 @@
 		return $negotiation.checkProposalStatus(proposal);
 		}
 
-		function mostPreferredValue(criterion) {
-		return
-		$negotiation.mostPreferredCriterion(criterion);
+		function createProposal(criterion) {
+		
+			return $negotiation.createProposal(criterion);
 		}
-
-		function printMS() {
-		return $negotiation.printAllMentalState();
-		}
-
-		function getDiscussedCriterion(){
-		return $negotiation.context.getDiscussedCriterion();
-		}
+		
 
 	</script>
 

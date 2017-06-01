@@ -1,0 +1,24 @@
+    # Writing log to /tmp/Console.test...
+    # Jun 1, 2017 3:20:22 PM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  > next
+    Agent says "Let's go to a restaurant on the south side."
+  > execute fr.limsi.negotiate.lang.RejectState/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE)/Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE
+    User says "I don't like restaurants on the south side, let's choose something else."
+    Agent says "Let's go to the Shanghai . It's a quiet, cheap Chinese restaurant on the south side."
+  > execute fr.limsi.negotiate.lang.AskPreference/null/Packages.fr.limsi.negotiate.restaurant.Location.EAST_SIDE
+    User says "Do you like restaurants on the east side?"
+    Agent says "I don't like restaurants on the east side."
+  > execute fr.limsi.negotiate.lang.AskPreference/null/Packages.fr.limsi.negotiate.restaurant.Location.DOWNTOWN
+    User says "Do you like restaurants downtown?"
+    Agent says "Let's go to the Shanghai . It's a quiet, cheap Chinese restaurant on the south side."
+  > execute fr.limsi.negotiate.lang.AskPreference/null/Packages.fr.limsi.negotiate.restaurant.Location.DOWNTOWN
+    User says "Do you like restaurants downtown?"
+    Agent says "I don't like restaurants downtown."
+  > execute fr.limsi.negotiate.lang.AskPreference/null/Packages.fr.limsi.negotiate.restaurant.Location.NORTH_SIDE
+    User says "Do you like restaurants on the north side?"
+    Agent says "Let's go to the Shanghai . It's a quiet, cheap Chinese restaurant on the south side." 
+  > execute fr.limsi.negotiate.lang.Accept/createProposal(Packages.fr.limsi.negotiate.restaurant.Restaurant.SHANGHAI)
+    User says "Okay, let's go to the Shanghai restaurant."
+    Agent says "Okay."
+

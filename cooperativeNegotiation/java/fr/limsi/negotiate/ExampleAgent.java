@@ -1,33 +1,63 @@
 package fr.limsi.negotiate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
+//import java.util.Random;
 import edu.wpi.disco.*;
 import edu.wpi.disco.Agenda.Plugin;
-import edu.wpi.disco.lang.Utterance;
 import edu.wpi.disco.lang.Say;
-import edu.wpi.disco.plugin.DecompositionPlugin;
+import edu.wpi.disco.lang.Utterance;
+import edu.wpi.disco.plugin.*;
+import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import fr.limsi.negotiate.lang.Accept;
+import fr.limsi.negotiate.lang.AcceptPropose;
+import fr.limsi.negotiate.lang.AskPreference;
+import fr.limsi.negotiate.lang.NegotiationUtterance;
+import fr.limsi.negotiate.lang.PreferenceUtterance;
+import fr.limsi.negotiate.lang.ProposalUtterance;
+import fr.limsi.negotiate.lang.Propose;
+import fr.limsi.negotiate.lang.RejectPropose;
+import fr.limsi.negotiate.lang.RejectState;
+import fr.limsi.negotiate.lang.StatePreference;
+import fr.limsi.negotiate.restaurant.*;
 
-// TODO:  Further optimizations:
-//
-// * use same Disco instance for all ToM's and for base agent, so
-//   avoid translation!  (Provide alternate constructor for Tom)
-//
-// * for ToM's don't add occurrences to segment (allows more GC?)
+//TODO: Make small movie dialogue example to verify modularity
+//import fr.limsi.negotiate.movie.*;
 
-public class NegotiatorAgent extends Agent {
+public class ExampleAgent extends Agent {
+
+	// use this instead of Disco.main().  See negotiate/bin/negotiate
+	public static void main (String[] args) {
+		totalOrderedModels model = new totalOrderedModels();
+
+		Interaction interaction = new Interaction(
+				new ExampleAgent("agent", model.model1()), 
+				new User("user"),
+				args.length > 0 && args[0].length() > 0 ? args[0] : null);
+		interaction.load("models/Negotiate.xml");
+		((ExampleAgent) interaction.getSystem()).setRelation(DOMINANT);
+
+		// do not guess recipes, since using DecompositionPlugin below
+		interaction.setGuess(false); 
+		// TODO: enable random choice among applicable utterances (disabled
+		//       for now to make debugging easier
+		// Agent.RANDOM = new Random(12345);
+		interaction.start(true); // give user first turn
+	}
+
 
 	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
 
-	public NegotiatorAgent (String name, Negotiation<? extends Option> negotiation) { 
+	public ExampleAgent (String name, Negotiation<? extends Option> negotiation) { 
 		
 		super(name); 
 		setNegotiation(negotiation);
@@ -53,24 +83,7 @@ public class NegotiatorAgent extends Agent {
 		this.negotiation.setDominance(relation);
 	}
 
-
-	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
-		//GenerateMovieModel model = new GenerateMovieModel();
-		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
-				false);
-
-		// note not loading Negotiotion.xml!
-		dual.interaction1.load("models/Negotiate.xml");
-		dual.interaction2.load("models/Negotiate.xml");
-		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
-
-		dual.start();
-	}
-
+	// *************************** methods to generate an utterance
 	@Override
 	// for consistency, overriding this to used compiled version of dialogue tree
 	// for normal agent operation 

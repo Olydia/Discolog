@@ -4,8 +4,7 @@ import edu.wpi.cetask.*;
 
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.Proposal.Status;
-import fr.limsi.negotiate.Statement.Satisfiable;
+
 
 public class Reject extends ProposalUtterance {
 
@@ -23,10 +22,11 @@ public class Reject extends ProposalUtterance {
 	
 	@Override
 	protected void interpret () {
-//		NegotiationMove rej = new NegotiationMove(getProposal(), getExternal(), NegoUtterance.UtType.REJECT);
-//		getNegotiation().getContext().addUtt(rej);
-//
-//		mentalStateUpdate();
+		
+		super.rejectUpdate(getProposal());
+		// -----------------
+		getNegotiation().getContext().addUtt(this);
+		// -----------------
 	}
 
 	

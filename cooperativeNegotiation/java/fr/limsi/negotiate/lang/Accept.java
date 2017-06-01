@@ -21,24 +21,31 @@ public class Accept extends ProposalUtterance {
 
 	@Override
 	protected void interpret () {
-		NegotiationMove acc = new NegotiationMove(getProposal(), getExternal(), NegoUtterance.UtType.ACCEPT);
-		getNegotiation().getContext().addUtt(acc);
-	
+
 
 		if(getProposal() instanceof CriterionProposal){
 			Criterion value = (Criterion) getProposal().getValue();
 			CriterionProposal p = new CriterionProposal(!getExternal(), value);
 			p.setStatus(Status.ACCEPTED);
 			
+			this.setSlotValue("proposal", p);
+			
 			CriterionNegotiation<Criterion>cn =getNegotiation().getValueNegotiation(value.getClass());
 			cn.updateProposal((CriterionProposal)getProposal());
 			getNegotiation().addStatement(new Statement<Criterion>(value,Satisfiable.TRUE), getExternal());
 		}
 
-		if(getProposal() instanceof OptionProposal){
+		else if(getProposal() instanceof OptionProposal){
 			OptionProposal p = new OptionProposal(!getExternal(), (Option)getProposal().getValue());
 			p.setStatus(Status.ACCEPTED);
 			getNegotiation().updateProposal(p);
+			
+			this.setSlotValue("proposal", p);
+
 		}
+		
+		// -----------------
+		getNegotiation().getContext().addUtt(this);
+		// -----------------
 	}
 }

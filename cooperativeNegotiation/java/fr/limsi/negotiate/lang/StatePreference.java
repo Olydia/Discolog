@@ -36,8 +36,9 @@ public class StatePreference extends PreferenceUtterance {
 	public void interpret () {
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),getLikable());
 		PreferenceMove st = new PreferenceMove(statement, getExternal(), UtType.STATE);
-		getNegotiation().getContext().addUtt(st);
-	
+		// -----------------
+		getNegotiation().getContext().addUtt(this);
+		// -----------------
 		getNegotiation().addStatement(statement, getExternal());
 
 	}

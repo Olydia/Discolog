@@ -1,20 +1,20 @@
 package fr.limsi.negotiate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import fr.limsi.negotiate.lang.*;
 
-import fr.limsi.negotiate.NegoUtterance.UtType;
-import fr.limsi.negotiate.Proposal.Status;
 
 public class DialogueContext {
 
-	private List<NegoUtterance> history;
+	private List<NegotiationUtterance> history;
 	private List<Class<? extends Criterion>> discussedCriteria; 
 	private List<Class<? extends Criterion>> closedCriteria; 
 	private List<Class<? extends Criterion>> topicValues;
 
 	public DialogueContext(List<Class<? extends Criterion>> topicValues) {
 
-		this.history =new ArrayList<NegoUtterance>();
+		this.history =new ArrayList<NegotiationUtterance>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
 		this.setTopicValues(topicValues);
@@ -44,33 +44,33 @@ public class DialogueContext {
 		this.discussedCriteria = discussedCriteria;
 	}
 
-	public void setHistory(List<NegoUtterance> history) {
+	public void setHistory(List<NegotiationUtterance> history) {
 
 		this.history = history;
 	}
 
 
-	public List<NegoUtterance> getHistory() {
+	public List<NegotiationUtterance> getHistory() {
 
 		return history;
 	}
 
-	public void addUtt (NegoUtterance ut){
-		if  (!(ut.getValue() instanceof OptionProposal && !ut.getType().equals(UtType.ACCEPTPROPOSE)))
+	public void addUtt (NegotiationUtterance ut){
+		if  (!(ut.getValue() instanceof OptionProposal && !ut.getType().equals(ut instanceof AcceptPropose)))
 			updateDiscussion(ut);
 
 		this.history.add(ut);
 	}
 
-	public NegoUtterance getLastMove(){
+	public NegotiationUtterance getLastMove(){
 
 		return history.get(history.size()-1);
 	}
 
-	public NegoUtterance getLastMove(boolean external){
+	public NegotiationUtterance getLastMove(boolean external){
 
 		for(int i=history.size()-1; i>=0; i--){
-			if(history.get(i).isExtrenal()== external)
+			if(history.get(i).getExternal()== external)
 				return history.get(i);
 		}
 		return null;
@@ -83,12 +83,21 @@ public class DialogueContext {
 		return this.discussedCriteria.get(discussedCriteria.size() -1);
 	}
 
-	public void updateDiscussion(NegoUtterance newUtt){
-		Class<? extends Criterion> newDi = newUtt.getValueType();
+	@SuppressWarnings("unchecked")
+	Class<? extends Criterion>  getValueType(NegotiationUtterance newUtt){
+		if(newUtt instanceof PreferenceUtterance)
+			return ((PreferenceUtterance) newUtt).getCriterion();
+
+		return (Class<? extends Criterion>) ((ProposalUtterance) newUtt).getProposal().getValue().getClass();
+	}
+
+
+	public void updateDiscussion(NegotiationUtterance newUtt){
+		Class<? extends Criterion> newDi = getValueType(newUtt);
 		if(discussedCriteria.isEmpty())
 			this.discussedCriteria.add(newDi);
 
-		else if(newUtt.getType().equals(UtType.ACCEPT) || newUtt.getType().equals(UtType.ACCEPTPROPOSE))
+		else if(newUtt instanceof Accept || newUtt instanceof AcceptPropose)
 			this.closeDiscussion(newDi);
 
 
@@ -136,68 +145,47 @@ public class DialogueContext {
 			openNewDiscussion(this.topicValues);
 	}
 
-	public NegoUtterance getLastUtterance(boolean isExternal, UtType type){
-		for (int i = history.size()-1; i>= 0; i--){
-			NegoUtterance utt = history.get(i);
-			if(utt.isExtrenal() == isExternal && utt.getType().equals(type))
-				return utt;
-		}
-		return null;
-
-	}
-
 	public Proposal getLastProposal(){
 		for (int i = history.size()-1; i>= 0; i--){
-			NegoUtterance utt = history.get(i);
-			if(isProposal(utt))
+			NegotiationUtterance utt = history.get(i);
+			if(utt instanceof ProposalUtterance)
 				return  (Proposal) utt.getValue();
 		}
 		return null;
 
 	}
 
-	public boolean isProposal(NegoUtterance utterance){
-		UtType last = utterance.getType();
-		return (last.equals(UtType.PROPOSE) ||last.equals(UtType.REJECTPROPOSE) || last.equals(UtType.ACCEPTPROPOSE));
-	}
-
-	public List<Proposal> getNegotiationMoves(){
-		List<Proposal> moves = new ArrayList<Proposal>();
-		for (NegoUtterance utt : history){
-			if(utt instanceof NegotiationMove)
-				moves.add((Proposal)utt.getValue());
-		}
-		return moves;	
-	}
-
 	public List<Proposal> getNonAcceptedProposals(){
 		List<Proposal> moves = new ArrayList<Proposal>();
 
-		for (NegoUtterance utt : history){
-			if(utt instanceof NegotiationMove && !(utt.getType().equals(UtType.REJECT) || utt.getType().equals(UtType.REJECTSTATE))){
-				Proposal p = null;
-
-				if(utt.getType().equals(UtType.ACCEPT))
-
-					p = ((NegotiationMove) utt).getProposal();
-
-				else if(utt.getType().equals(UtType.ACCEPTPROPOSE)){
-
-					p = (Proposal) ((ProposalMove) utt).getOther();
-					moves.add(((ProposalMove) utt).getProposal());
+		for (NegotiationUtterance utt : history){
+			if(utt instanceof ProposalUtterance) {
+				
+				if(utt instanceof Propose){
+					moves.add(((Propose) utt).getProposal());
 				}
-				// not an Accept nor AcceptPropose
-				if(p == null)
-					moves.add(((NegotiationMove) utt).getProposal());
-
-				else{
-					int index = moves.lastIndexOf(p);
+				else if (utt instanceof AcceptPropose || utt instanceof RejectPropose){
+					moves.add(((ProposalUtterance) utt).getProposal());
+				}
+				//Suppression des propositions acceptées durant la negociation
+				
+				else if(utt instanceof Accept){
+					int index = moves.lastIndexOf(((Accept) utt).getProposal());
 					moves.remove(index);
 				}
+				else if(utt instanceof AcceptPropose){
+					int index = moves.lastIndexOf(((AcceptPropose) utt).getAccepted());
+					moves.remove(index);
+				}
+				
+
 			}
+			
+			
 		}
 		return moves;
 	}
+	
 
 	public void clearNegotiation(){
 		this.history.clear();
@@ -227,6 +215,5 @@ public class DialogueContext {
 	public void setTopicValues(List<Class<? extends Criterion>> topicValues) {
 		this.topicValues = topicValues;
 	}
-
 
 }

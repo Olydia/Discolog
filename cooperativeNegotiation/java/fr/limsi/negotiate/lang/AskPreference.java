@@ -22,18 +22,19 @@ public class AskPreference extends PreferenceUtterance {
 
 	   }
 	   
+	   @SuppressWarnings("unchecked")
+	public Class<? extends Criterion> getCriterion () { 
+		   Class<? extends Criterion> type = (Class<? extends Criterion>) getSlotValue("criterion");
+		   if(type == null)
+			   return ((Criterion) getSlotValue("value")).getClass();
+		   return type;
+		   }
+
+	   
 	   @Override
 	   protected void interpret () { 
-		   PreferenceMove ask;
-		   if (getCriterion() == null) 
-			   ask = new PreferenceMove(getValue(), Satisfiable.UNKOWN , getExternal(),UtType.ASK);
-
-		  else 
-            ask = new PreferenceMove(new Statement<Criterion>(getValue(), Satisfiable.UNKOWN),
-            							getCriterion(), getExternal(),UtType.ASK);     
-	      
-	      getNegotiation().getContext().addUtt(ask);
-	      
-
+	  	// -----------------
+			getNegotiation().getContext().addUtt(this);
+			// -----------------
 	   }
 }

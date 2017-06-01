@@ -4,7 +4,6 @@ import edu.wpi.cetask.Decomposition;
 import edu.wpi.cetask.TaskClass;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
 
@@ -27,15 +26,16 @@ public class RejectState  extends ProposalUtterance {
 	
 	@Override
 	public void interpret () {
+		
 		super.rejectUpdate(getProposal());
 		
 		Statement<Criterion> statement = new Statement<Criterion>(getJustify(),Satisfiable.FALSE);
-		ProposalMove st = new ProposalMove(super.getProposal(), statement, getExternal(), UtType.REJECTSTATE);
-		
-		getNegotiation().getContext().addUtt(st);
 		
 		getNegotiation().addStatement(statement, getExternal());
 		
+		// -----------------
+		getNegotiation().getContext().addUtt(this);
+		// -----------------
 	}
 	
 
