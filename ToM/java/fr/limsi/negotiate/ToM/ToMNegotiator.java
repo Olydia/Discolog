@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import com.sun.javafx.sg.prism.NGShape.Mode;
-
 import edu.wpi.disco.Disco;
+import edu.wpi.disco.Interaction;
+import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
@@ -19,11 +18,14 @@ import fr.limsi.negotiate.lang.*;
 public class ToMNegotiator extends NegotiatorAgent{
 	
 	public HashMap<Double, List<List<Self_Ci<Criterion>>>> otherModel;
+	public Negotiation<? extends Option> previousState;
 
 	
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
 		this.otherModel = new HashMap<Double, List<List<Self_Ci<Criterion>>>> ();
+		this.previousState = negotiation;
+		
 		
 		List<List<Self_Ci<Criterion>>>  prefs = setPreferences(negotiation.getCriteria().getElements());
 		for(double pow:setPow_hyp()){
@@ -63,25 +65,43 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
-		Utterance u = respondTo(utterance, disco);
-		try {
+	//	try {
 //			long startTime = System.currentTimeMillis();
-			Negotiation<? extends Option> nego = getNegotiation().clone();
+	//Negotiation<? extends Option> nego = getNegotiation().clone();
 //			for(int i =0; i<10000000; i++)
 //				guessTest(nego, disco, utterance, u, nego.getDominance());
 //
 //			long stopTime = System.currentTimeMillis();
 //			long elapsedTime = stopTime - startTime;
 //			System.out.println("ELEPSED TIME: " + elapsedTime);
-			Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-			guess(disco,selfPrevious, utterance, nego);
+//			Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+//			guess(disco,selfPrevious, utterance, nego);
 
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		//} catch (CloneNotSupportedException e) {
+		//	e.printStackTrace();
+		//}
+		Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+		guess(disco,selfPrevious, utterance, previousState);
+		Utterance u = respondTo(utterance, disco);
+
 
 		return u ;
 	}
+
+	
+	@Override
+	public Plugin.Item respondIf (Interaction interaction, boolean guess) {
+		try {
+			previousState = getNegotiation().clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return super.respondIf(interaction, guess);
+	}
+
 
 	//----------------------------------------- for ToM ----------------------------------------
 	public Negotiation<? extends Option> createModel(double pow, List<Self_Ci<Criterion>> preferences,
