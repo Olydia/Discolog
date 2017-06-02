@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.Agenda.Plugin;
@@ -20,19 +22,19 @@ import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
 	
-	public HashMap<Double, List<PrefNegotiation<? extends Option>>> otherModel;
+	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
 
 	
-	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
+	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation, Class<Option> type) {
 		super(name, negotiation);
-		this.otherModel = new HashMap<Double, List<PrefNegotiation<? extends Option>>> ();
+		this.otherModel = new HashMap<Double, List<PrefNegotiation<Option>>> ();
 		this.previousState = negotiation;
 		
 		
-		List<List<Self_Ci<Criterion>>>  prefs = setPreferences(negotiation.getCriteria().getElements());
+		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), type);
 		for(double pow:setPow_hyp()){
-			ArrayList<List<Self_Ci<Criterion>>> copy = new ArrayList<List<Self_Ci<Criterion>>>();
+			List<PrefNegotiation<Option>> copy = new ArrayList<PrefNegotiation<Option>>();
 			copy.addAll(prefs);
 			otherModel.put(pow, copy);
 		}
@@ -44,16 +46,12 @@ public class ToMNegotiator extends NegotiatorAgent{
 	// Input : List of Criteria Class<? extends Criterion>
 	
 	
-	public List<List<Self_Ci<Criterion>>> setPreferences( List<Class<? extends Criterion>> elem){
-		Models<? extends Option> m = new Models();
+	public List<PrefNegotiation<Option>> setPreferences( List<Class<? extends Criterion>> elem, 
+			Class<Option> class1){
+		Models<Option> m = new Models<Option>();
+		return m.computeModels(elem, class1);
 
-		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
-		for( Class<? extends Criterion> e: elem) {
-			
-			models.add(m.createValuesModel(Arrays.asList(e.getEnumConstants())));
-		}
- 
-		return m.getCombination(0, models);
+		
 	}
 	
 	
@@ -128,8 +126,12 @@ public class ToMNegotiator extends NegotiatorAgent{
 			
 			ArrayList<List<Self_Ci<Criterion>> > deleteModel = new ArrayList<List<Self_Ci<Criterion>> >();
 			
-			for(Iterator<Map.Entry<Double, List<List<Self_Ci<Criterion>>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
-				Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry = it.next();
+			for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
+				Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
+				/*
+				 * il faut gerer la mise a jouer des elements
+				 */
+				
 				for(List<Self_Ci<Criterion>> pref: entry.getValue()){
 					Utterance guessed = guessUtt(createModel(entry.getKey(), pref, selfNego), entry.getKey(), previousUtt, disco);
 					if(!identicalUtterances(guessUtt, guessed))
