@@ -50,7 +50,12 @@ public class Self_Ci <C> extends Self<C> {
 	public List<C> getElements (){
 		return Arrays.asList(this.type.getEnumConstants());
 	}
-
-
+	@Override
+	public String toString(){
+		String s = "";
+		for(Preference<C> p : selfPreferences)
+			s = p + "\t";
+		return s;
+	}
 
 }

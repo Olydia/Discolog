@@ -36,9 +36,11 @@ public class ToyModel {
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d1_ToyLocation);
 		
 		Self_Ci<ToyCost> d1_ToyCost = new Self_Ci<ToyCost>(ToyCost.class);
-		d1_ToyCost.addPreference(ToyCost.EXPENSIVE, ToyCost.AFFORDABLE);
-		d1_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.CHEAP);
-		
+//		d1_ToyCost.addPreference(ToyCost.EXPENSIVE, ToyCost.AFFORDABLE);
+//		d1_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.CHEAP);
+//		
+		d1_ToyCost.addPreference(ToyCost.EXPENSIVE, ToyCost.CHEAP);
+
 		CriterionNegotiation<ToyCost> ToyCost = new CriterionNegotiation<>(d1_ToyCost);
 
 		@SuppressWarnings("unchecked")
@@ -76,9 +78,9 @@ public class ToyModel {
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d2_ToyLocation);
 		
 		Self_Ci<ToyCost> d2_ToyCost = new Self_Ci<ToyCost>(ToyCost.class);
-		d2_ToyCost.addPreference(ToyCost.CHEAP, ToyCost.AFFORDABLE);
-		d2_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.EXPENSIVE);
-		
+//		d2_ToyCost.addPreference(ToyCost.CHEAP, ToyCost.AFFORDABLE);
+//		d2_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.EXPENSIVE);
+//		
 		CriterionNegotiation<ToyCost> ToyCost = new CriterionNegotiation<>(d2_ToyCost);
 
 		@SuppressWarnings("unchecked")

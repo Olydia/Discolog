@@ -1,5 +1,6 @@
 package fr.limsi.negotiate;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -49,5 +50,8 @@ public abstract class Self<C> {
 	
 	public abstract List<C> getElements ();
 	public abstract void addPreference (C less, C more);
+
+
+
 
 }

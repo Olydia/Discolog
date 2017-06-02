@@ -1,4 +1,4 @@
-package fr.limsi.negotiate.ToM;
+package fr.limsi.negotiate.ToM.preferencesGeneration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +99,7 @@ public class ModelGenerator {
 	
 	// create the negotiation model
 	@SuppressWarnings("unchecked")
-	Negotiation<? extends Option> mirrorNegotiation(List<Self_Ci<Criterion>> otherPref,
+	public	Negotiation<? extends Option> mirrorNegotiation(List<Self_Ci<Criterion>> otherPref,
 	 Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
 		

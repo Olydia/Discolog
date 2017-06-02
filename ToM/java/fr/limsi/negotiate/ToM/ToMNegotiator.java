@@ -13,17 +13,20 @@ import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.ToM.preferencesGeneration.ModelGenerator;
+import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
+import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
 import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
 	
-	public HashMap<Double, List<List<Self_Ci<Criterion>>>> otherModel;
+	public HashMap<Double, List<PrefNegotiation<? extends Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
 
 	
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
-		this.otherModel = new HashMap<Double, List<List<Self_Ci<Criterion>>>> ();
+		this.otherModel = new HashMap<Double, List<PrefNegotiation<? extends Option>>> ();
 		this.previousState = negotiation;
 		
 		
@@ -42,12 +45,12 @@ public class ToMNegotiator extends NegotiatorAgent{
 	
 	
 	public List<List<Self_Ci<Criterion>>> setPreferences( List<Class<? extends Criterion>> elem){
-		Models<? extends Option> m = new Models<>();
+		Models<? extends Option> m = new Models();
 
 		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
 		for( Class<? extends Criterion> e: elem) {
 			
-			models.add(m.createModelCriterion(Arrays.asList(e.getEnumConstants())));
+			models.add(m.createValuesModel(Arrays.asList(e.getEnumConstants())));
 		}
  
 		return m.getCombination(0, models);
