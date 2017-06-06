@@ -12,9 +12,9 @@ public class ToyModel {
 
 
 		Self_C<ToyRestaurant>  d1_criteria = new Self_C<ToyRestaurant> (ToyRestaurant.class);
-		d1_criteria.addPreference(ToyAtmosphere.class, ToyCost.class);
-		d1_criteria.addPreference(ToyCost.class, ToyCuisine.class);
 		d1_criteria.addPreference(ToyLocation.class, ToyAtmosphere.class);
+		d1_criteria.addPreference(ToyCost.class, ToyAtmosphere.class);
+		d1_criteria.addPreference(ToyAtmosphere.class, ToyCuisine.class);
 
 
 		Self_Ci<ToyCuisine> d1_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
@@ -56,7 +56,7 @@ public class ToyModel {
 		Self_C<ToyRestaurant>  d2_criteria = new Self_C<ToyRestaurant> (ToyRestaurant.class);
 		d2_criteria.addPreference(ToyAtmosphere.class, ToyCost.class);
 		d2_criteria.addPreference(ToyCost.class, ToyCuisine.class);
-		d2_criteria.addPreference(ToyLocation.class, ToyAtmosphere.class);
+		d2_criteria.addPreference(ToyCuisine.class, ToyLocation.class);
 
 
 		Self_Ci<ToyCuisine> d2_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
@@ -67,7 +67,7 @@ public class ToyModel {
 		CriterionNegotiation<ToyCuisine> cuisine = new CriterionNegotiation<>(d2_cuisine);
 
 		Self_Ci<ToyAtmosphere> d2_ToyAtmosphere = new Self_Ci<ToyAtmosphere>(ToyAtmosphere.class);
-		d2_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.QUIET);
+		d2_ToyAtmosphere.addPreference(ToyAtmosphere.QUIET, ToyAtmosphere.LIVELY);
 
 
 		CriterionNegotiation<ToyAtmosphere> atmospher = new CriterionNegotiation<>(d2_ToyAtmosphere);
@@ -78,6 +78,8 @@ public class ToyModel {
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d2_ToyLocation);
 		
 		Self_Ci<ToyCost> d2_ToyCost = new Self_Ci<ToyCost>(ToyCost.class);
+		d2_ToyCost.addPreference(ToyCost.CHEAP, ToyCost.EXPENSIVE);
+
 //		d2_ToyCost.addPreference(ToyCost.CHEAP, ToyCost.AFFORDABLE);
 //		d2_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.EXPENSIVE);
 //		

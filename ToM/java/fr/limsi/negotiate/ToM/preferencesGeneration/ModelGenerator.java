@@ -37,7 +37,7 @@ public class ModelGenerator {
 		ArrayList<? extends Proposal> p = new ArrayList<Proposal>(proposals);
 		for(Proposal prop : p){
 			boolean self = prop.isSelf();
-			prop.setIsSelf(self);
+			prop.setIsSelf(!self);
 		}
 		
 		return p;
@@ -99,18 +99,18 @@ public class ModelGenerator {
 	
 	// create the negotiation model
 	@SuppressWarnings("unchecked")
-	public	Negotiation<? extends Option> mirrorNegotiation(List<Self_Ci<Criterion>> otherPref,
+	public	Negotiation<? extends Option> mirrorNegotiation(PrefNegotiation<Option> otherPref,
 	 Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
 		
-		for(Self_Ci<Criterion> pref: otherPref){
+		for(Self_Ci<Criterion> pref: otherPref.getValues_prefs()){
 			CriterionNegotiation<Criterion> cn  = self.getValueNegotiation(pref.getType());
 			valueNegotiation.add(mirrorCriterionNego(cn, pref));
 		}
 				
 		DC context = mirrorContext(self.getContext());
 		
-		return new Negotiation (valueNegotiation, self.getCriteria(),
+		return new Negotiation (valueNegotiation, otherPref.getCriteria_prefs(),
 				self.getTopic(), context, mirrorProposals(self.getProposals()));
 	}
 	

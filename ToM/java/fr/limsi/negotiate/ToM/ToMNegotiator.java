@@ -2,7 +2,6 @@ package fr.limsi.negotiate.ToM;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,13 +25,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public Negotiation<? extends Option> previousState;
 
 	
-	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation, Class<Option> type) {
+	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
 		this.otherModel = new HashMap<Double, List<PrefNegotiation<Option>>> ();
 		this.previousState = negotiation;
 		
 		
-		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), type);
+		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), (Class<Option>) negotiation.getTopic());
 		for(double pow:setPow_hyp()){
 			List<PrefNegotiation<Option>> copy = new ArrayList<PrefNegotiation<Option>>();
 			copy.addAll(prefs);
@@ -82,16 +81,19 @@ public class ToMNegotiator extends NegotiatorAgent{
 		//	e.printStackTrace();
 		//}
 		Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-		guess(disco,selfPrevious, utterance, previousState);
+		if (utterance != null)
+			guess(disco,selfPrevious, utterance, previousState);
+		
 		Utterance u = respondTo(utterance, disco);
-
+		System.out.println(u.format()+ " -> " + u.getType());
 
 		return u ;
 	}
 
-	
+
 	@Override
-	public Plugin.Item respondIf (Interaction interaction, boolean guess) {
+	// overriding this for ToM.predict()
+	public final Plugin.Item predict (Interaction interaction) {
 		try {
 			previousState = getNegotiation().clone();
 		} catch (CloneNotSupportedException e) {
@@ -99,13 +101,11 @@ public class ToMNegotiator extends NegotiatorAgent{
 			e.printStackTrace();
 		}
 		
-		
-		return super.respondIf(interaction, guess);
+		return respondIf(interaction, false);
 	}
 
-
 	//----------------------------------------- for ToM ----------------------------------------
-	public Negotiation<? extends Option> createModel(double pow, List<Self_Ci<Criterion>> preferences,
+	public Negotiation<? extends Option> createModel(double pow, PrefNegotiation<Option> preferences,
 			Negotiation<? extends Option> selfNego){
 		ModelGenerator generator = new ModelGenerator();
 		Negotiation<? extends Option> nego = generator.mirrorNegotiation(preferences, selfNego);
@@ -121,10 +121,10 @@ public class ToMNegotiator extends NegotiatorAgent{
 	 * @return
 	 */
 	
-
+	
 	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
 			
-			ArrayList<List<Self_Ci<Criterion>> > deleteModel = new ArrayList<List<Self_Ci<Criterion>> >();
+			ArrayList<PrefNegotiation<Option> > deleteModel = new ArrayList<PrefNegotiation<Option>>();
 			
 			for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
 				Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
@@ -132,10 +132,10 @@ public class ToMNegotiator extends NegotiatorAgent{
 				 * il faut gerer la mise a jouer des elements
 				 */
 				
-				for(List<Self_Ci<Criterion>> pref: entry.getValue()){
-					Utterance guessed = guessUtt(createModel(entry.getKey(), pref, selfNego), entry.getKey(), previousUtt, disco);
+				for(PrefNegotiation<Option> element: entry.getValue()){
+					Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
 					if(!identicalUtterances(guessUtt, guessed))
-						deleteModel.add(pref);	
+						deleteModel.add(element);	
 				}
 				entry.getValue().removeAll(deleteModel);
 				System.out.println( entry.getKey() +" " +entry.getValue().size());  
@@ -158,7 +158,6 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public boolean guessTest (Negotiation<? extends Option> current, Disco disco, 
 			Utterance previousUtt, Utterance guessUtt, double pow){
 		Utterance guessed = guessUtt(current, pow, previousUtt, disco);
-		//System.out.println(pow + " : " + guessed.toString());
 		return (identicalUtterances(guessUtt, guessed));
 	}
 
