@@ -187,7 +187,7 @@
 		Using the sets $A_i$ and $U_i$ that represent the interlocutor's likings, the agent can compute the satisfiability of a value $v\in C_i$ for the other (partner) as:
 		\vspace{-0.5em} 
 		\begin{equation}
-		sat_{other}(v, A_i, U_i)= \left\{\begin{array}{ll}
+		sat_{other}(v)= \left\{\begin{array}{ll}
 		1	 & \mathrm{if\ }  c \in A_i\\
 		0    & \mathrm{if\ }c \in U_i\\
 		0.5	 & \mathrm{otherwise}
@@ -276,7 +276,7 @@
 		\noindent
 		The agent will always propose the most tolerable element in $V_i$:
 		\begin{equation}
-			propose(V_i, \prec_i, A_i, U_i, pow) =  \operatorname*{arg\,max}_{v \in V_i} ( tol(v, t, \prec_i, A_i, U_i, pow))
+			propose(V_i, \prec_i,pow) =  \operatorname*{arg\,max}_{v \in V_i} ( tol(v))
 		\end{equation}
 
 		\subsubsection{Controlling the flow of the negotiation}

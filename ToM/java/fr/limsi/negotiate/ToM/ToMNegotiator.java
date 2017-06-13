@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import edu.wpi.cetask.Plan;
+import edu.wpi.cetask.Task;
 import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
-import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
@@ -18,6 +19,7 @@ import fr.limsi.negotiate.ToM.preferencesGeneration.ModelGenerator;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
 import fr.limsi.negotiate.lang.*;
+import fr.limsi.negotiate.toyExample.ToyRestaurant;
 
 public class ToMNegotiator extends NegotiatorAgent{
 	
@@ -25,6 +27,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public Negotiation<? extends Option> previousState;
 
 	
+
+
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
 		this.otherModel = new HashMap<Double, List<PrefNegotiation<Option>>> ();
@@ -41,6 +45,14 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 	}
 	
+	public Negotiation<? extends Option> getPreviousState() {
+		return previousState;
+	}
+
+	public void setPreviousState(Negotiation<? extends Option> previousState) {
+		this.previousState = previousState;
+		//this.previousState.propose(new OptionProposal(ToyRestaurant.ARRIBA_MEXICO));
+	}
 	//********** Initiate the model of toher
 	// Input : List of Criteria Class<? extends Criterion>
 	
@@ -62,6 +74,22 @@ public class ToMNegotiator extends NegotiatorAgent{
 		}
 		return pow_hyp;
 	}
+	@Override
+	public void execute (Task occurrence, Interaction interaction, Plan contributes) {
+		// clone the current state of the negotiation 
+		cloneNegotiation();
+		super.execute(occurrence, interaction, contributes);
+	}
+
+	public void cloneNegotiation() {
+		try {
+			setPreviousState(getNegotiation().clone());
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
@@ -81,28 +109,16 @@ public class ToMNegotiator extends NegotiatorAgent{
 		//	e.printStackTrace();
 		//}
 		Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+
+
 		if (utterance != null)
 			guess(disco,selfPrevious, utterance, previousState);
 		
 		Utterance u = respondTo(utterance, disco);
 		System.out.println(u.format()+ " -> " + u.getType());
-
 		return u ;
 	}
 
-
-	@Override
-	// overriding this for ToM.predict()
-	public final Plugin.Item predict (Interaction interaction) {
-		try {
-			previousState = getNegotiation().clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return respondIf(interaction, false);
-	}
 
 	//----------------------------------------- for ToM ----------------------------------------
 	public Negotiation<? extends Option> createModel(double pow, PrefNegotiation<Option> preferences,
