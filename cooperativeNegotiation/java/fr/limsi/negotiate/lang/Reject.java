@@ -21,7 +21,7 @@ public class Reject extends ProposalUtterance {
 	}
 	
 	@Override
-	protected void interpret () {
+	public void interpret () {
 		
 		super.rejectUpdate(getProposal());
 		// -----------------

@@ -68,6 +68,7 @@ public class Models<O extends Option> {
 	    return combinations;
 	}
 	
+	
 	public List<PrefNegotiation<O>> computeModels(List<Class<? extends Criterion>> criteria, Class<O> class1){
 		 List<PrefNegotiation<O>> finalModel = new ArrayList<PrefNegotiation<O>>();
 		 List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();

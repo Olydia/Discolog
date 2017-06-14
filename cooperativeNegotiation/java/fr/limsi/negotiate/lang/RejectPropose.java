@@ -22,7 +22,7 @@ public class RejectPropose  extends ProposalUtterance {
 	public Proposal getReject () { return (Proposal) getSlotValue("rejected"); }
 
 	@Override
-	protected void interpret () {
+	public void interpret () {
 		
 		// add the rejected proposal
 		super.rejectUpdate(getReject());

@@ -61,6 +61,14 @@ public class Negotiation<O extends Option> implements Cloneable {
 		this.context_bis = c;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Negotiation(Negotiation<? extends Option> negotiation) {
+		this.valueNegotiation = negotiation.getValuesNegotiation();
+		this.proposals = negotiation.getProposals();
+		this.topic= (Class<O>) negotiation.getTopic();
+		setCriteria((Self_C<O>) negotiation.getCriteria());
+		this.context_bis = negotiation.getContext();	}
+
 	public ArrayList<OptionProposal> getProposals() {
 		return proposals;
 	}

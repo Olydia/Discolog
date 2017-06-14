@@ -19,14 +19,21 @@ import fr.limsi.negotiate.ToM.preferencesGeneration.ModelGenerator;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.toyExample.ToyRestaurant;
 
 public class ToMNegotiator extends NegotiatorAgent{
 	
 	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
+	public Negotiation<? extends Option> other;
 
 	
+	/**
+	 * 
+	 * @param Ajout modif
+	 * @param 
+	 */
+	
+	public Negotiation<? extends Option> otherMental;
 
 
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
@@ -35,15 +42,16 @@ public class ToMNegotiator extends NegotiatorAgent{
 		this.previousState = negotiation;
 		
 		
+		@SuppressWarnings("unchecked")
 		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), (Class<Option>) negotiation.getTopic());
 		for(double pow:setPow_hyp()){
 			List<PrefNegotiation<Option>> copy = new ArrayList<PrefNegotiation<Option>>();
 			copy.addAll(prefs);
 			otherModel.put(pow, copy);
-		}
-			
+		}	
 
 	}
+	
 	
 	public Negotiation<? extends Option> getPreviousState() {
 		return previousState;
@@ -82,12 +90,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 	}
 
 	public void cloneNegotiation() {
-		try {
-			setPreviousState(getNegotiation().clone());
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			setPreviousState(getNegotiation().clone());
+//		} catch (CloneNotSupportedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		setPreviousState(new Negotiation(getNegotiation()));
 	}
 
 
@@ -109,7 +118,6 @@ public class ToMNegotiator extends NegotiatorAgent{
 		//	e.printStackTrace();
 		//}
 		Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-
 
 		if (utterance != null)
 			guess(disco,selfPrevious, utterance, previousState);
@@ -149,6 +157,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 				 */
 				
 				for(PrefNegotiation<Option> element: entry.getValue()){
+					
 					Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
 					if(!identicalUtterances(guessUtt, guessed))
 						deleteModel.add(element);	
@@ -162,6 +171,12 @@ public class ToMNegotiator extends NegotiatorAgent{
 			    }
 			// ---------------------------------
 
+	}
+	
+	public void updateOther(Utterance next){
+		// Ajouter interpretation
+		
+		// 
 	}
 	
 	public Utterance guessUtt(Negotiation<? extends Option> nego, double pow, Utterance utt, Disco disco){

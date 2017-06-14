@@ -20,7 +20,7 @@ public class Accept extends ProposalUtterance {
 	}
 
 	@Override
-	protected void interpret () {
+	public void interpret () {
 
 
 		if(getProposal() instanceof CriterionProposal){

@@ -18,7 +18,7 @@ public class Propose extends ProposalUtterance {
 	}
 
 	@Override
-	protected void interpret () {
+	public void interpret () {
 		
 		proposeUpdate(getProposal());		
 		// -----------------

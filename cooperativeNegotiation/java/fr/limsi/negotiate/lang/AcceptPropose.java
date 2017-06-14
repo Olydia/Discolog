@@ -30,7 +30,7 @@ public class AcceptPropose  extends ProposalUtterance {
 	public CriterionProposal getAccepted () { return (CriterionProposal) getSlotValue("accepted"); }
 
 	@Override
-	protected void interpret () {
+	public void interpret () {
 		
 		// add the proposal 
 		super.proposeUpdate(getProposal());

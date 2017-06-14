@@ -100,14 +100,18 @@ public class ModelGenerator {
 	// create the negotiation model
 	@SuppressWarnings("unchecked")
 	public	Negotiation<? extends Option> mirrorNegotiation(PrefNegotiation<Option> otherPref,
-	 Negotiation<? extends Option> self){
+	
+		// Create the preferences of the model	
+		Negotiation<? extends Option> self){
 		List<CriterionNegotiation<Criterion>> valueNegotiation = new ArrayList<CriterionNegotiation<Criterion>> ();
+		
 		
 		for(Self_Ci<Criterion> pref: otherPref.getValues_prefs()){
 			CriterionNegotiation<Criterion> cn  = self.getValueNegotiation(pref.getType());
 			valueNegotiation.add(mirrorCriterionNego(cn, pref));
 		}
 				
+	// -----
 		DC context = mirrorContext(self.getContext());
 		
 		return new Negotiation (valueNegotiation, otherPref.getCriteria_prefs(),

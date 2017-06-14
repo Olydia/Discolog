@@ -32,10 +32,11 @@ public class StatePreference extends PreferenceUtterance {
 	public Satisfiable getLikable () { return (Satisfiable) getSlotValue("likable"); }
 	public Class<? extends Criterion> getCriterion () { return getValue().getClass(); }
 	// count the number of statements ?
+	
 	@Override
 	public void interpret () {
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),getLikable());
-		PreferenceMove st = new PreferenceMove(statement, getExternal(), UtType.STATE);
+
 		// -----------------
 		getNegotiation().getContext().addUtt(this);
 		// -----------------
