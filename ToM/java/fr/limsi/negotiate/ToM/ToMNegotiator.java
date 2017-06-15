@@ -49,7 +49,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 			copy.addAll(prefs);
 			otherModel.put(pow, copy);
 		}	
-
+		System.out.println(prefs.size());
 	}
 	
 	

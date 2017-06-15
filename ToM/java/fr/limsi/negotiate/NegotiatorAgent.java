@@ -12,7 +12,6 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
@@ -112,6 +111,7 @@ public class NegotiatorAgent extends Agent {
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
 
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
+			
 			else{
 
 				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
