@@ -493,5 +493,23 @@ public class Negotiation<O extends Option> {
 		
 		return null;
 	}
+	/**
+	 * 
+	 * @param values : list des criteres choisis par l'utilisateur
+	 * a noter que chaque critere a un type différent 
+	 * @return
+	 */
+	public List<Option> getOptionWithValues(List<Criterion> values) {
+		ArrayList<Option> options = new ArrayList<>(Arrays.asList(getOptions()));
+		for(Criterion c: values) {
+			for (Iterator<Option> iterator = options.iterator(); iterator.hasNext(); ) {
+					Option o = iterator.next();
+					if(!o.getValue(c.getClass()).equals(c))
+						iterator.remove();
+			}
+		}
+		return options;
+		
+	}
 
 }
