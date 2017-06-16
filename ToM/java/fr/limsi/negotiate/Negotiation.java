@@ -7,7 +7,7 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.lang.*;
 
 
-public class Negotiation<O extends Option> implements Cloneable {
+public class Negotiation<O extends Option> {
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
 
 
@@ -15,7 +15,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
 	private double relation=0; 
-	private DC context_bis;
+	private DialogueContext context_bis;
 
 
 	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation,
@@ -25,20 +25,20 @@ public class Negotiation<O extends Option> implements Cloneable {
 		this.proposals = new ArrayList<OptionProposal>();
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
-		this.context_bis =  new DC(criteria.sortValues());
+		this.context_bis =  new DialogueContext(criteria.sortValues());
 
 	}
 	
-	public DC getContext() {
+	public DialogueContext getContext() {
 		return context_bis;
 	}
 
-	public void setContext_bis(DC context_bis) {
+	public void setContext_bis(DialogueContext context_bis) {
 		this.context_bis = context_bis;
 	}
 
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation, double relation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DC c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
@@ -51,7 +51,7 @@ public class Negotiation<O extends Option> implements Cloneable {
 	
 	// for Guess class
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DC c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
@@ -477,10 +477,14 @@ public class Negotiation<O extends Option> implements Cloneable {
 			cn.clearNegotiation();
 	}
 
-	  @SuppressWarnings("unchecked")
-	@Override
-	public Negotiation<? extends Option> clone() throws CloneNotSupportedException {
-	        return (Negotiation<? extends Option>) super.clone();
-	    }
+	public Negotiation<? extends Option> cloneNegotiation() {
+	   ArrayList<OptionProposal> optionP = new ArrayList<OptionProposal>(this.getProposals());
+	   List<CriterionNegotiation<Criterion>> criteria = new ArrayList<CriterionNegotiation<Criterion>>();
+	   DialogueContext c = getContext().clone();
+	   for(CriterionNegotiation<Criterion> cr : this.getValuesNegotiation())
+		   criteria.add(cr.clone());
+	   
+	   return new Negotiation<O> (criteria, relation, this.getCriteria(), this.getTopic(), c, optionP);
+	}
 
 }

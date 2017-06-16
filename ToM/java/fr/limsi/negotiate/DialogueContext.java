@@ -5,18 +5,27 @@ import java.util.List;
 import fr.limsi.negotiate.lang.*;
 
 
-public class DC {
+public class DialogueContext {
 
 	private List<NegotiationUtterance> history;
 	private List<Class<? extends Criterion>> discussedCriteria; 
 	private List<Class<? extends Criterion>> closedCriteria; 
 	private List<Class<? extends Criterion>> topicValues;
 
-	public DC(List<Class<? extends Criterion>> topicValues) {
+	public DialogueContext(List<Class<? extends Criterion>> topicValues) {
 
 		this.history =new ArrayList<NegotiationUtterance>();
 		this.discussedCriteria = new ArrayList<Class<? extends Criterion>>();
 		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
+		this.setTopicValues(topicValues);
+	}
+	
+	public DialogueContext(List<Class<? extends Criterion>> topicValues, List<NegotiationUtterance> history,
+			List<Class<? extends Criterion>> discussedCriteria, List<Class<? extends Criterion>> closedCriteria) {
+
+		this.history =history;
+		this.discussedCriteria = discussedCriteria;
+		this.setClosedCriteria(closedCriteria);
 		this.setTopicValues(topicValues);
 	}
 
@@ -216,4 +225,11 @@ public class DC {
 		this.topicValues = topicValues;
 	}
 
+	
+	public DialogueContext clone(){
+		 List<NegotiationUtterance> history = new ArrayList<NegotiationUtterance>(this.getHistory());
+		 List<Class<? extends Criterion>> discussedCriteria = new ArrayList<Class<? extends Criterion>>(this.discussedCriteria); 
+		 List<Class<? extends Criterion>> closedCriteria = new ArrayList<Class<? extends Criterion>>(this.closedCriteria);
+		 return new DialogueContext(this.topicValues, history, discussedCriteria, closedCriteria);
+	}
 }

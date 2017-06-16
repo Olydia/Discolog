@@ -33,7 +33,7 @@ import fr.limsi.negotiate.restaurant.*;
 public class ExampleAgent extends Agent {
 
 	// use this instead of Disco.main().  See negotiate/bin/negotiate
-	public static void main (String[] args) {
+	public static void main (String[] args) throws Throwable {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Interaction interaction = new Interaction(
@@ -41,8 +41,7 @@ public class ExampleAgent extends Agent {
 				new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.load("models/Negotiate.xml");
-		((ExampleAgent) interaction.getSystem()).setRelation(DOMINANT);
-
+		((ExampleAgent) interaction.getSystem()).setRelation(SUBMISSIVE);
 		// do not guess recipes, since using DecompositionPlugin below
 		interaction.setGuess(false); 
 		// TODO: enable random choice among applicable utterances (disabled
@@ -114,7 +113,6 @@ public class ExampleAgent extends Agent {
 		return u ;
 	}
 
-	
 	public Utterance respondTo(Utterance utterance, Disco disco){
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {

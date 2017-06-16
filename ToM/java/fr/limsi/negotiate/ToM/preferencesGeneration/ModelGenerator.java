@@ -7,7 +7,7 @@ import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.DC;
+import fr.limsi.negotiate.DialogueContext;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.Other;
@@ -61,8 +61,8 @@ public class ModelGenerator {
 	}
 	
 	// mirror of the dialogue context
-	public DC mirrorContext(DC dc){
-		DC mirror = new DC(dc.getTopicValues());
+	public DialogueContext mirrorContext(DialogueContext dc){
+		DialogueContext mirror = new DialogueContext(dc.getTopicValues());
 		mirror.setDiscussedCriteria(dc.getDiscussedCriteria());
 		mirror.setClosedCriteria(dc.getClosedCriteria());
 		
@@ -112,7 +112,7 @@ public class ModelGenerator {
 		}
 				
 	// -----
-		DC context = mirrorContext(self.getContext());
+		DialogueContext context = mirrorContext(self.getContext());
 		
 		return new Negotiation (valueNegotiation, otherPref.getCriteria_prefs(),
 				self.getTopic(), context, mirrorProposals(self.getProposals()));

@@ -13,6 +13,8 @@ public class CriterionNegotiation<C extends Criterion> {
 	private Other<C> other;
 	private Class<C> type; 
 	private List<Statement<C>> selfStatements;
+	private ArrayList<CriterionProposal> proposals;
+
 	
 	public void setOther(Other<C> other) {
 		this.other = other;
@@ -22,7 +24,6 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.proposals = proposals;
 	}
 
-	private ArrayList<CriterionProposal> proposals;
 
 	public CriterionNegotiation(Self_Ci<C> selfPreferences) {
 		this.type = selfPreferences.getType();
@@ -30,6 +31,16 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.other = new Other<C>(type);
 		this.proposals = new ArrayList<CriterionProposal>();
 		this.selfStatements = new ArrayList<Statement<C>>();
+		// test
+	}
+	
+	public CriterionNegotiation(Self_Ci<C> selfPreferences, Other<C> other, Class<C> type, 
+			ArrayList<CriterionProposal> proposals, List<Statement<C>> selfStatements) {
+		this.type = type;
+		this.self = selfPreferences;
+		this.other = other;
+		this.proposals = proposals;
+		this.selfStatements = selfStatements;
 		// test
 	}
 
@@ -244,6 +255,17 @@ public class CriterionNegotiation<C extends Criterion> {
 		this.proposals.clear();
 		this.selfStatements.clear();
 		this.getOther().clearNegotiation();
+	}
+	
+	
+	public CriterionNegotiation<C> clone(){
+		 Other<C> other = new Other<>(getType());
+		 other.setPreferences(this.other.getPreferences());
+		 List<Statement<C>> selfStatements = new ArrayList<Statement<C>>(this.getSelfStatements());
+		 ArrayList<CriterionProposal> proposals = new ArrayList<CriterionProposal>(this.getProposals());
+		 
+		 return new CriterionNegotiation<C>(null, other, type, proposals, selfStatements);
+		
 	}
 }	
 

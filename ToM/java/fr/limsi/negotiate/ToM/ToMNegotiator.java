@@ -1,6 +1,5 @@
 package fr.limsi.negotiate.ToM;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,7 +23,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 	
 	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
-	public Negotiation<? extends Option> other;
+	//public Negotiation<? extends Option> other;
 
 	
 	/**
@@ -49,7 +48,6 @@ public class ToMNegotiator extends NegotiatorAgent{
 			copy.addAll(prefs);
 			otherModel.put(pow, copy);
 		}	
-		System.out.println(prefs.size());
 	}
 	
 	
@@ -82,21 +80,31 @@ public class ToMNegotiator extends NegotiatorAgent{
 		}
 		return pow_hyp;
 	}
-	@Override
-	public void execute (Task occurrence, Interaction interaction, Plan contributes) {
-		// clone the current state of the negotiation 
-		cloneNegotiation();
-		super.execute(occurrence, interaction, contributes);
-	}
 
+	   @Override
+	   public void execute (Task occurrence, Interaction interaction, Plan contributes) {	  
+	      super.execute(occurrence, interaction, contributes);
+     	 cloneNegotiation();
+
+
+	   }
+	   
+	   
 	public void cloneNegotiation() {
+	
+		setPreviousState(getNegotiation().cloneNegotiation());
 //		try {
 //			setPreviousState(getNegotiation().clone());
 //		} catch (CloneNotSupportedException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		setPreviousState(new Negotiation(getNegotiation()));
+//		setPreviousState(new Negotiation(getNegotiation().getValuesNegotiation(),
+//															getNegotiation().getCriteria(),
+//															getNegotiation().getTopic(),
+//															getNegotiation().getContext(),
+//															getNegotiation().getProposals()
+//														  ));
 	}
 
 
