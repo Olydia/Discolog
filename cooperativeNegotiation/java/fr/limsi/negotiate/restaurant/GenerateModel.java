@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
@@ -188,8 +189,9 @@ public class GenerateModel {
 		ArrayList<Criterion> values = new ArrayList<Criterion>();
 		values.add(Cuisine.CHINESE); values.add(Atmosphere.FAMILY);
 		values.add(Cost.CHEAP);
-		values.add(Location.DOWNTOWN);
-		System.out.println(m3.getOptionWithValues(values));
+		List<Option> p= m3.getOptionWithValues(values);
+		for(Option o : p)
+		System.out.println(o.print());
 //		m1.setDominance(0.7);
 //		m3.setDominance(0.4);
 //		for(int t =0; t<8; t++){

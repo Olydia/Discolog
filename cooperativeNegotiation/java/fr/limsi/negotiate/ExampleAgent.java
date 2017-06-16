@@ -41,7 +41,7 @@ public class ExampleAgent extends Agent {
 				new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.load("models/Negotiate.xml");
-		((ExampleAgent) interaction.getSystem()).setRelation(SUBMISSIVE);
+		((ExampleAgent) interaction.getSystem()).setRelation(DOMINANT);
 		// do not guess recipes, since using DecompositionPlugin below
 		interaction.setGuess(false); 
 		// TODO: enable random choice among applicable utterances (disabled
