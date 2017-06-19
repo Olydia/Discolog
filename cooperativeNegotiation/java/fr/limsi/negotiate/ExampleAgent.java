@@ -15,16 +15,7 @@ import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.lang.Accept;
-import fr.limsi.negotiate.lang.AcceptPropose;
-import fr.limsi.negotiate.lang.AskPreference;
-import fr.limsi.negotiate.lang.NegotiationUtterance;
-import fr.limsi.negotiate.lang.PreferenceUtterance;
-import fr.limsi.negotiate.lang.ProposalUtterance;
-import fr.limsi.negotiate.lang.Propose;
-import fr.limsi.negotiate.lang.RejectPropose;
-import fr.limsi.negotiate.lang.RejectState;
-import fr.limsi.negotiate.lang.StatePreference;
+import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.*;
 
 //TODO: Make small movie dialogue example to verify modularity
