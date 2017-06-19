@@ -97,9 +97,11 @@ public class Models<O extends Option> {
 		Models<ToyRestaurant> m = new Models<ToyRestaurant>();
 		List<PrefNegotiation<ToyRestaurant>> val = m.computeModels(ToyRestaurant.ARRIBA_MEXICO.getCriteria(), ToyRestaurant.class);
 		for(PrefNegotiation<ToyRestaurant> v : val){
-			System.out.println(v.getValues_prefs() + " "+ v.getCriteria_prefs());
+			System.out.println(v.getValues_prefs() + " "+ v.getCriteria_prefs().getPreferences());
 		}
 		System.out.println(val.size());
+		
+		
 //		ToMNegotiator tom = new ToMNegotiator("TOM", new ToyModel().model1());
 //		for(Map.Entry<Double, List<List<Self_Ci<Criterion>>>> entry : tom.otherModel.entrySet()){
 //			System.out.println(entry.getKey() + " : " + entry.getValue().size());

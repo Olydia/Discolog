@@ -1,7 +1,6 @@
 package fr.limsi.negotiate.ToM.preferencesGeneration;
 
 import java.util.*;
-import fr.limsi.negotiate.*;
 
 
 public abstract class Preferences<E> {
