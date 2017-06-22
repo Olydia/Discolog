@@ -3,8 +3,7 @@ package fr.limsi.negotiate.lang;
 import edu.wpi.cetask.*;
 import edu.wpi.disco.Disco;
 import fr.limsi.negotiate.*;
-import fr.limsi.negotiate.NegoUtterance.UtType;
-import fr.limsi.negotiate.Statement.Satisfiable;
+
 
 public class AskPreference extends PreferenceUtterance {
 
@@ -37,4 +36,10 @@ public class AskPreference extends PreferenceUtterance {
 			getNegotiation().getContext().addUtt(this);
 			// -----------------
 	   }
+
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new AskPreference(getDisco(), !getExternal(), getCriterion(), getValue());
+	}
 }

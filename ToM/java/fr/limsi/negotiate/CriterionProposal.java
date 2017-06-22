@@ -72,5 +72,11 @@ public class CriterionProposal extends Proposal {
 		return "a " + value;
 	}
 
+	@Override
+	public CriterionProposal mirrorProposal() {
+		CriterionProposal p =  new CriterionProposal(!this.isSelf, this.getValue());
+		p.setStatus(this.getStatus());
+		return p;
+	}
 
 }

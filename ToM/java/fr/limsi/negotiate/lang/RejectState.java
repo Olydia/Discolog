@@ -37,6 +37,12 @@ public class RejectState  extends ProposalUtterance {
 		getNegotiation().getContext().addUtt(this);
 		// -----------------
 	}
+
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new RejectState(getDisco(), !getExternal(), getProposal(), getJustify());
+	}
 	
 
 	

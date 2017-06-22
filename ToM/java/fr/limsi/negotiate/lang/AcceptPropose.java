@@ -54,4 +54,10 @@ public class AcceptPropose  extends ProposalUtterance {
 		// -----------------
 
 	}
+
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new AcceptPropose(getDisco(), !getExternal(), getAccepted(), getProposal());
+	}
 }

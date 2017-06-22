@@ -20,6 +20,7 @@ public class OptionProposal extends Proposal {
 		this.option = option;
 	}
 	
+	
 	public OptionProposal( Option option) {
 		super();
 		this.option = option;
@@ -66,6 +67,13 @@ public class OptionProposal extends Proposal {
 	public String printProposal(String topic) {
 		// TODO Auto-generated method stub
 		return "the " + getValue() + " "+ topic;
+	}
+
+	@Override
+	public OptionProposal mirrorProposal() {
+		OptionProposal p =  new OptionProposal(!this.isSelf, this.getValue());
+		p.setStatus(this.getStatus());
+		return p;
 	}
 
 }

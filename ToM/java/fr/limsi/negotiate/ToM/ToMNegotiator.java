@@ -75,7 +75,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public ArrayList<Double> setPow_hyp(){
 
 		ArrayList<Double> pow_hyp =	new ArrayList<Double> ();
-		for(int i=3; i<10; i++){
+		for(int i=3; i<4; i++){
 			pow_hyp.add(i/10.0);
 		}
 		return pow_hyp;
@@ -131,7 +131,6 @@ public class ToMNegotiator extends NegotiatorAgent{
 			guess(disco,selfPrevious, utterance, previousState);
 		
 		Utterance u = respondTo(utterance, disco);
-		System.out.println(u.format()+ " -> " + u.getType());
 		return u ;
 	}
 
@@ -167,6 +166,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 				for(PrefNegotiation<Option> element: entry.getValue()){
 					
 					Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
+					System.out.println(guessed.format()+ " -> " + guessed.getType());
+
 					if(!identicalUtterances(guessUtt, guessed))
 						deleteModel.add(element);	
 				}

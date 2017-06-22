@@ -4,16 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.disco.lang.Utterance;
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.CriterionNegotiation;
-import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.DialogueContext;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.Option;
-import fr.limsi.negotiate.Other;
-import fr.limsi.negotiate.Proposal;
-import fr.limsi.negotiate.Self_Ci;
-import fr.limsi.negotiate.Statement;
+import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.toyExample.*;
 
@@ -33,16 +24,26 @@ public class ModelGenerator {
 
 
 	// method mirrors of proposals (self vs other proposals)
-	public ArrayList <? extends Proposal>  mirrorProposals (ArrayList<? extends Proposal> proposals){
-		ArrayList<? extends Proposal> p = new ArrayList<Proposal>(proposals);
-		for(Proposal prop : p){
-			boolean self = prop.isSelf();
-			prop.setIsSelf(!self);
+	public ArrayList <CriterionProposal>  mirrorCriterionProposals (ArrayList<CriterionProposal> proposals){
+		ArrayList<CriterionProposal> p = new ArrayList<CriterionProposal>();
+		for(CriterionProposal prop : proposals){
+			p.add(prop.mirrorProposal());
 		}
 		
 		return p;
 			
 	}
+	
+	public ArrayList <OptionProposal>  mirrorOptionProposals (ArrayList<OptionProposal> proposals){
+		ArrayList<OptionProposal> p = new ArrayList<OptionProposal>();
+		for(OptionProposal prop : proposals){
+			p.add( prop.mirrorProposal());
+		}
+		
+		return p;
+			
+	}
+	
 	// method change self statements to Other
 	public Other <Criterion> selfToOther( ArrayList<Statement<Criterion>> selfStatements, Class<Criterion> type ){
 		
@@ -66,8 +67,8 @@ public class ModelGenerator {
 		mirror.setDiscussedCriteria(dc.getDiscussedCriteria());
 		mirror.setClosedCriteria(dc.getClosedCriteria());
 		
-		ArrayList<NegotiationUtterance> history =new ArrayList<NegotiationUtterance>(dc.getHistory());
-		for(NegotiationUtterance u : history)
+		ArrayList<NegotiationUtterance> history =new ArrayList<NegotiationUtterance>();
+		for(NegotiationUtterance u : dc.getHistory())
 			u.setExternal(!u.getExternal());
 		
 		mirror.setHistory(history);
@@ -79,7 +80,6 @@ public class ModelGenerator {
 	
 	
 	// call respond to for each criterion model
-	@SuppressWarnings("unchecked")
 	public CriterionNegotiation<Criterion> mirrorCriterionNego (CriterionNegotiation<Criterion> selfCn, Self_Ci<Criterion> otherPref){
 //		private Self_Ci<C> self; 	private Class<C> type; 
 		CriterionNegotiation<Criterion> other = new CriterionNegotiation<Criterion>(otherPref);
@@ -91,7 +91,7 @@ public class ModelGenerator {
 		other.setSelfStatements(otherToSelf(selfCn.getOther()));
 		
 //		private ArrayList<CriterionProposal> proposals;
-		other.setProposals((ArrayList<CriterionProposal>) mirrorProposals(selfCn.getProposals()));
+		other.setProposals(mirrorCriterionProposals(selfCn.getProposals()));
 		
 		return other;
 	}
@@ -115,7 +115,7 @@ public class ModelGenerator {
 		DialogueContext context = mirrorContext(self.getContext());
 		
 		return new Negotiation (valueNegotiation, otherPref.getCriteria_prefs(),
-				self.getTopic(), context, mirrorProposals(self.getProposals()));
+				self.getTopic(), context, mirrorOptionProposals(self.getProposals()));
 	}
 	
 	// Create the method that guesses the model (or the list of models)

@@ -35,12 +35,17 @@ public class StatePreference extends PreferenceUtterance {
 	@Override
 	public void interpret () {
 		Statement<Criterion> statement = new Statement<Criterion>(getValue(),getLikable());
-		PreferenceMove st = new PreferenceMove(statement, getExternal(), UtType.STATE);
 		// -----------------
 		getNegotiation().getContext().addUtt(this);
 		// -----------------
 		getNegotiation().addStatement(statement, getExternal());
 
+	}
+
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new StatePreference(getDisco(), !getExternal(), getValue(), getLikable());
 	}
 
 }

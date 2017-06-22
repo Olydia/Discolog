@@ -26,5 +26,6 @@ public abstract class NegotiationUtterance extends Utterance {
    
 	public abstract Object getValue();
 
+	public abstract NegotiationUtterance mirrorCopy();
 
 }

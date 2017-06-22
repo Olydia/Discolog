@@ -35,6 +35,10 @@ public abstract class Proposal {
 	}
 
 	public Status getStatus () { return status; }
+	
+	// Needed in the model of ToM to generate the inverse of proposals
+	public abstract Proposal mirrorProposal();
+
 		
 	public abstract Object getValue();
 	

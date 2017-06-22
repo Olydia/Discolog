@@ -48,4 +48,9 @@ public class Accept extends ProposalUtterance {
 		getNegotiation().getContext().addUtt(this);
 		// -----------------
 	}
+
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		return new Accept(getDisco(), !getExternal(), getProposal());
+	}
 }

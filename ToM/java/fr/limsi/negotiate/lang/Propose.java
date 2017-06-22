@@ -28,5 +28,11 @@ public class Propose extends ProposalUtterance {
 
 	}
 
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new Propose(getDisco(), !getExternal(), getProposal());
+	}
+
 
 }

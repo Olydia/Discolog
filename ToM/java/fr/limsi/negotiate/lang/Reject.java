@@ -29,5 +29,11 @@ public class Reject extends ProposalUtterance {
 		// -----------------
 	}
 
+	@Override
+	public NegotiationUtterance mirrorCopy() {
+		// TODO Auto-generated method stub
+		return new Reject(getDisco(), !getExternal(), getProposal());
+	}
+
 	
 }
