@@ -12,6 +12,7 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
@@ -23,7 +24,7 @@ import fr.limsi.negotiate.toyExample.ToyModel;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.3;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.2;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -56,19 +57,19 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		//totalOrderedModels model = new totalOrderedModels();
+		totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		ToyModel model = new ToyModel();
+		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new ToMNegotiator("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new ToMNegotiator("Agent2", model.model2()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((ToMNegotiator) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
+		((ToMNegotiator) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}

@@ -75,7 +75,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public ArrayList<Double> setPow_hyp(){
 
 		ArrayList<Double> pow_hyp =	new ArrayList<Double> ();
-		for(int i=3; i<4; i++){
+		for(int i=3; i<10; i++){
 			pow_hyp.add(i/10.0);
 		}
 		return pow_hyp;
@@ -154,24 +154,21 @@ public class ToMNegotiator extends NegotiatorAgent{
 	
 	
 	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
-			
-			ArrayList<PrefNegotiation<Option> > deleteModel = new ArrayList<PrefNegotiation<Option>>();
-			
+						
 			for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
 				Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
 				/*
 				 * il faut gerer la mise a jouer des elements
 				 */
-				
-				for(PrefNegotiation<Option> element: entry.getValue()){
+				for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
+					PrefNegotiation<Option> element = iterator.next();
 					
 					Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
-					System.out.println(guessed.format()+ " -> " + guessed.getType());
+					//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
 
 					if(!identicalUtterances(guessUtt, guessed))
-						deleteModel.add(element);	
+						iterator.remove();
 				}
-				entry.getValue().removeAll(deleteModel);
 				System.out.println( entry.getKey() +" " +entry.getValue().size());  
 				
 				if(entry.getValue().isEmpty()) {

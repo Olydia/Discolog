@@ -69,7 +69,7 @@ public class ModelGenerator {
 		
 		ArrayList<NegotiationUtterance> history =new ArrayList<NegotiationUtterance>();
 		for(NegotiationUtterance u : dc.getHistory())
-			u.setExternal(!u.getExternal());
+			history.add(u.mirrorCopy());
 		
 		mirror.setHistory(history);
 		return mirror;

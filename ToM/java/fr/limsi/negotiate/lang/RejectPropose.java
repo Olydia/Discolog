@@ -40,6 +40,6 @@ public class RejectPropose  extends ProposalUtterance {
 	public NegotiationUtterance mirrorCopy() {
 		// TODO Auto-generated method stub
 		return  new RejectPropose(getDisco(), !getExternal(), getReject(),getProposal());
-;
+
 	}
 }
