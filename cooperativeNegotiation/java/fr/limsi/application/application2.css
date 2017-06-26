@@ -1,0 +1,109 @@
+.root {
+     -fx-background-image: url("a.jpg");
+}
+
+/* .pane {
+-fx-background-color: linear-gradient( #f0f8ff, #b0c4de);
+-fx-background-color: linear-gradient( cornsilk, tan);
+-fx-background-radius: 5,4,3,5;
+-fx-background-insets: 4,4,4,4;
+
+}*/
+
+
+.split-pane:horizontal > * > .split-pane-divider {
+  -fx-border-color: transparent;
+   -fx-box-border: transparent #BBBBBB;
+/*   -fx-background-color: transparent, -fx-inner-border-horizontal;
+   -fx-background-color: grey;*/
+-fx-border-width: 0.1;
+/*   -fx-background-insets: 0, 0 1 0 1;*/
+}
+
+.chatBox {
+     -fx-background-image: url("white.jpg");
+}
+.label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+ /* #welcome-text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}*/
+#actiontarget {
+  -fx-fill: BLACK;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+#errorMessage {
+  -fx-fill: FIREBRICK;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.button:hover {
+       -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+.button .text {
+-fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.8), 0, 0.0 , 0 , -1 );
+}
+
+.button:pressed {
+ 
+}
+
+.check-box  {
+	/*-fx-border-color: lightblue;*/
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial Narrow";
+    /*-fx-font-weight: bold;*/
+    /*-fx-border-insets: -5;
+    -fx-border-radius: 5;
+    -fx-border-style: dotted;*/
+   /*  -fx-border-width: 2;*/
+}
+
+.radio-button {
+-fx-font-family: "Arial";
+-fx-font-size: 16px;
+/*    -fx-text-fill: rgb(255, 255, 255, 0.4);*/
+   /*  -fx-font-weight: bold;*/
+    -fx-border-insets: -5;
+    -fx-border-radius: 5;
+    -fx-border-style: dotted;
+    -fx-border-width: 2;
+-fx-border-width: 0px;
+}
+.choice-box{
+	 -fx-pref-width: 170;
+      /*-fx-background-color:
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);*/
+    -fx-padding: 3 10 4 20;
+    /*-fx-text-fill: white;*/
+   /* -fx-font-size: 12px;*/
+}
+
+.text-field {
+	-fx-pref-width: 170;
+    -fx-background-color: #a9a9a9 , white , white;
+
+
+}
+
+
