@@ -12,7 +12,6 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
@@ -24,7 +23,7 @@ import fr.limsi.negotiate.toyExample.ToyModel;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.2;
+	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -57,9 +56,9 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
+		//totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		//ToyModel model = new ToyModel();
+		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
 				new ToMNegotiator("Agent2", model.model2()), 

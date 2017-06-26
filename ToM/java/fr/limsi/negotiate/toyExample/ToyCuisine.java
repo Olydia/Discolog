@@ -3,7 +3,7 @@ import fr.limsi.negotiate.Criterion;
 
 public enum ToyCuisine implements Criterion {
 
-   FRENCH, MEXICAN;
+   FRENCH, MEXICAN, ITALIAN;
 
    
 	@Override
