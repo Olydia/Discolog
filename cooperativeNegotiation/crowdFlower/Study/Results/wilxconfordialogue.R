@@ -1,3 +1,4 @@
+#file path + name
 pValue <- function(csvfile){
   
   my_array <- read.table(csvfile, header = T, sep = ";")
