@@ -3,7 +3,7 @@ package fr.limsi.negotiate.toyExample;
 import fr.limsi.negotiate.Criterion;
 
 public enum ToyLocation implements Criterion {
-	DOWNTOWN, EAST_SIDE/*, WEST_SIDE*/;
+	DOWNTOWN, EAST_SIDE, WEST_SIDE;
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
