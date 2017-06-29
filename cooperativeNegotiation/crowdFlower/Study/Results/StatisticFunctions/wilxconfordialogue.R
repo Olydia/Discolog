@@ -3,7 +3,7 @@ pValue <- function(csvfile){
   
   my_array <- read.table(csvfile, header = T, sep = ";")
   attach(my_array)
-  p1<- wilcox.test(H1_A, H1_B, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.8, exact=F, correct = F)
+  p1<- wilcox.test(H1_A, H1_B, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.9, exact=F, correct = F)
   print(p1)
   
   p2<-  wilcox.test(H2_A, H2_B, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.8, exact=F, correct = F)
@@ -18,7 +18,8 @@ pValue <- function(csvfile){
 
 
 
-    # print(p)
+    
+# print(p)
 
   
   

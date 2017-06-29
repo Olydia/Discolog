@@ -98,8 +98,8 @@
 		%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)
 		\subsection{Similar work in the literature}
 		Only few researchers have considered the expression of power in the verbal behavior of a conversational agent. \cite{bee2010bossy} developed an agent that expresses social power through gaze and linguistic features. They demonstrated that linguistic personality traits influence the perception of power. However, this work does not consider how power affects the strategies of negotiation in dialogue. More recently, \cite{broekens2010affective,de2015humans} consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agents. However, this research focuses more on the negotiation aspect than on the expression of social power. In our work, we want to investigate the expression of power through the dialogue strategy, which has not been considered by previous work.
-		
-		\hl{In the approach we propose hereafter, we chose to consider only situations in which participants can share their preferences freely. Previous work by Nazari et al. }\cite{nazari2015} \hl{considers a different situation in which the (human) participant can hide his intentions.}
+		\hl{ modif }
+		Furthermore, \textit{Nazari et al}\cite{nazari2015opponent} showed  that communicating preferences in a negotiation with a human improve the negotiation's outcomes. We consider, in our paper, a negotiation of preferences where negotiators can share their preferences freely. Whereas, \cite{nazari2015opponent} considered situations where negotiators used deception to gain unfair advantage and might hide their intentions.
 		
 		\section{Model of negotiation based on the relation of power}
 		In this section, we present our model of dialogue for a Virtual Agent  in the context of collaborative negotiation based on power.	
@@ -280,9 +280,16 @@
 			propose(V_i, \prec_i,pow) =  \operatorname*{arg\,max}_{v \in V_i} ( tol(v))
 		\end{equation}
 
-		\subsubsection*{List of parameters}
-
-		\hl{remettre la table avec les params}
+		\subsubsection*{Summary of general parameters }
+	\begin{itemize}[noitemsep]
+		
+		\item $\pi \in $[0,1] : boundary between submissive and dominant used in
+		choosing an utterance type
+		%		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
+		\item $\tau > 0$ : the minimum number of open or rejected proposals before concession begins
+		\item $\delta > 0$ : parameter in slope of concession curve.
+		\item $\alpha> 0$: the maximum number of successive statement moves.
+	\end{itemize}
 
 		\subsubsection{Controlling the flow of the negotiation}
 		According to our third principle, high-power negotiators tend to lead the negotiation. We implemented this principle through the choice of utterance types presented in Table \ref{table:uttChoice}.		
