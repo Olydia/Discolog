@@ -47,27 +47,27 @@
 		
 		\section{Introduction}
 		
-		As they rise in popularity, artificial conversational agents become more present in daily applications in which they plays different roles such as pedagogical robots, companion robots for children or for the elderly, etc. In these situations, agent and user have to collaborate through their interaction in order to achieve shared goals. Such example of collaboration can be found in intelligent tutoring agents \cite{kerly2008calmsystem}, where agent and learner collaborate to achieve exercises. They compare their respective knowledge on the problem to be solved and discuss possible solutions. Such confrontation offers a personalized teaching to the learner.
+		As they rise in popularity, artificial conversational agents become more present in daily applications in which they play different roles such as pedagogical robots, companion robots for children or for the elderly, etc. In these situations, agent and user have to collaborate through their interaction in order to achieve shared goals. Such example of collaboration can be found in intelligent tutoring agents \cite{kerly2008calmsystem}, where agent and learner collaborate to achieve exercises. They compare their respective knowledge on the problem to be solved and discuss possible solutions. Such confrontation offers a personalized teaching to the learner.
 		
-		As illustrated on the above example, user  and agent typically negotiate in a collaborative manner about the way to achieve the shared goal, depending on individual expertise and preferences. This specific type of discussion is called \emph{collaborative negotiation}. Unlike adversarial negotiation \cite{broekens2010affective}, collaborative negotiation assumes that each participant is motivated by the goal of finding a trade-off that best satisfies the interests of both participants, instead of one that maximizes his own interest \cite{sidner1994artificial,chu1995response}.
+		As illustrated in the above example, user and the agent typically negotiate in a collaborative manner about the way to achieve the shared goal, depending on individual expertise and preferences. This specific type of discussion is called \emph{collaborative negotiation}. Unlike adversarial negotiation \cite{broekens2010affective}, collaborative negotiation assumes that each participant is motivated by the goal of finding a trade-off that best satisfies the interests of both participants, instead of one that maximizes his own interest \cite{sidner1994artificial,chu1995response}.
 		%For instance,  CALMsystem \cite{kerly2008calmsystem} turoring agent presents the learner with their learner model, offering them the opportunity to compare their own beliefs regarding their capabilities with those inferred by the system, and allow the learner to negotiate over the proposed representations.
 		
-		Our goal is to build conversational agents capable of credible collaborative negotiation with a human user. To this end, we need to understand how human beings behave in such situation. Indeed, as stated by \cite{broekens2010affective}, negotiation is a multifaceted process which involves social interaction and affects as well as personal preferences and opinions. Therefore, it is crucial to understand the impact of social aspects on the negotiation process. Researchers in social psychology and communication \cite{dunbar2005perceptions,de1995impact} showed that  \emph{social power} directly affects the strategies of negotiators. Therefore, we claim that conversational agent which are able to negotiate with a user must be able to adapt their negotiation strategies to different levels of power.
+		Our goal is to build conversational agents capable of credible collaborative negotiation with a human user. To this end, we need to understand how human beings behave in such situation. Indeed, as stated by \cite{broekens2010affective}, negotiation is a multifaceted process which involves social interaction and affects as well as personal preferences and opinions. Therefore, it is crucial to understand the impact of social aspects of the negotiation process. Researchers in social psychology and communication \cite{dunbar2005perceptions,de1995impact} showed that \emph{social power} directly  affects the strategies of negotiators. Therefore, we claim that conversational agent which is able to negotiate with a user must be able to adapt their negotiation strategies to different levels of power.
 		
-		In this paper, we present a conversational agent that aims to contribute to essentials aspects of conversation agents in terms of negotiation and social behaviors.
-		We propose an agent capable to negotiate with the user. In addition, it can deploy different strategies of negotiation based on the social power it wants to express.
-		 In the next section, we discuss existing works on interpersonal power in the domain of social psychology and affective computing. Section 3 presents the computational model of negotiation, based on a set of utterance types and a model of preferences. It implements general model of negotiation based on three principles of collaborative negotiation from the literature in social psychology. In section 4, we present an experiment conducted with two virtual agents on a negotiation about restaurants showing that the principles are correctly perceived by human observers.	
+		In this paper, we present a conversational agent that aims to contribute to essentials aspects of conversation agents in terms of negotiation and social behaviors. We propose an agent capable of negotiating with the user. In addition, it can deploy different strategies of negotiation based on the social power it wants to express.
+		
+		 In the next section, we discuss existing works on interpersonal power in the domain of social psychology and affective computing. Section 3 presents the computational model of negotiation, based on a set of utterance types and a model of preferences. It implements a general model of negotiation based on three principles of collaborative negotiation from the literature in social psychology. In section 4, we present an experiment conducted with two virtual agents on a negotiation about restaurants showing that the principles are correctly perceived by human observers.	
 		
 		\section{Related work}
 		The notion of social power has been widely studied in the fields of interpersonal communication and psychology \cite{kecskes2013research}. It can be defined as the capacity to produce intended effects and to influence the behavior of the other person in the conversation \cite{dunbar2005perceptions}. In the context of communication and negotiation, power is a dyadic variable that takes place during the dialogue.
 		%, where the interlocutor who exerts power is viewed as \textit{dominant}, while the interlocutor with low power's behaviors is viewed as \textit{submissive}. 
 		% where one individual's attempt of control is necessarily acquainted by the partner in the interaction.\cite{dunbar2005perceptions
-		Behaviors related to power can contribute either positively or negatively to the dialogue. Positive contributions include keeping the conversation going and making quick decisions. Negative contributions include not considering the partner (\emph{e.g.} not giving the occasion to express his opinion) and appearing offensive. In our work, we focus on negotiation dialogues, in which several researchers already shown the impact of social power\cite{de2004influence,burgoonnonverbal}.
+		Behaviors related to power can contribute either positively or negatively to the dialogue. Positive contributions include keeping the conversation going and making quick decisions. Negative contributions include not considering the partner (\emph{e.g.} not giving the occasion to express his opinion) and appearing offensive. In our work, we focus on negotiation dialogues, in which several researchers have already shown the impact of social power\cite{de2004influence,burgoonnonverbal}.
 
 		\subsection{Behaviors of power in dialogue}
 		\label{sec:domDialogue}
 		During a dialogue, power can manifest through verbal and nonverbal behaviors.	
-		At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinestesic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several conversational agents have been developed with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring}
+		At the nonverbal level, a wide range of behaviors have been associated with the relation of power in kinesthetic behaviors (facial expression, body movements and gestures) and voice (speaking duration, speaking intensity, voice control and pitch) \cite{burgoonnonverbal}. Based on this work, several conversational agents have been developed with the ability to exhibit social power through nonverbal behavior, such as gaze \cite{lance2008relation}, body movements \cite{mignault2003many} or head tilt \cite{gebhard2014exploring}
 		%,callejas2014computational}
 		in relation to high-power and low-power perception.
 		
@@ -80,11 +80,11 @@
 		%					
 		
 		%In our work, we use a text-oriented dialogue system and we therefore focus on the verbal behaviors. 
-		Our goal is develop a model of dialogue for Virtual Agents which considers these properties related to social power. We want to make visible \emph{the strategies} deployed during the negotiation depending on the power. In order to implement these different behaviors, we identified three principle related to the relation of power and their impact on the strategy of negotiation:
+		Our goal is to develop a model of dialogue for Virtual Agents which considers these properties related to social power. We want to make visible \emph{the strategies} deployed during the negotiation depending on the power. In order to implement these different behaviors, we identified three principles related to the relation of power and their impact on the strategy of negotiation
 		\begin{enumerate}
-			\item \textbf{Level of demand and concession:} High-power negotiators show a higher level of demand than the low-power ones. In addition, low-power negotiator's demand decrease over time and the negotiatior tends to make larger concessions than high-power negotiators. \cite{de1995impact}
+			\item \textbf{Level of demand and concession:} High-power negotiators show a higher level of demand than the low-power ones. In addition, low-power negotiator's demand decrease over time and the negotiator tends to make larger concessions than high-power negotiators. \cite{de1995impact}
 			
-			\item \textbf{Self vs other:} Low-power negotiators consider the preferences of other in the negotiation, whereas high-power negotiators are self-centered and only interested by satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
+			\item \textbf{Self vs other:} Low-power negotiators consider the preferences of the other in the negotiation, whereas high-power negotiators are self-centered and only interested in satisfying their own preferences. \cite{fiske1993controlling,de1995impact}
 			
 			\item \textbf{Controlling the flow of the negotiation:}
 			High-power negotiators tend to make the first move \cite{magee2007power} and take the lead in the negotiation. Low-power negotiators aim to construct an accurate model of other preferences, which leads them to ask more questions about other preferences rather than keeping the negotiation going (\emph{e.g} by making proposals)\cite{de2004influence}. 
@@ -97,19 +97,19 @@
 		%	We will present in the next section the decision model based on the behaviors of power. 
 		%						\item Based on Carsten, De Dreu and Van Kleef demonstrate that high power negotiators are high in their propensity to negotiate relative to participants with low power. (leading individuals to focus on the rewards available to them in situations and to bargain forgreater rewards than were initially offered to them.)
 		\subsection{Similar work in the literature}
-		Only few researchers have considered the expression of power in the verbal behavior of a conversational agent. \cite{bee2010bossy} developed an agent that expresses social power through gaze and linguistic features. They demonstrated that linguistic personality traits influence the perception of power. However, this work does not consider how power affects the strategies of negotiation in dialogue. More recently, \cite{broekens2010affective,de2015humans} consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agents. However, this research focuses more on the negotiation aspect than on the expression of social power. In our work, we want to investigate the expression of power through the dialogue strategy, which has not been considered by previous work.
-		\hl{ modif }
-		Furthermore, \textit{Nazari et al}\cite{nazari2015opponent} showed  that communicating preferences in a negotiation with a human improve the negotiation's outcomes. We consider, in our paper, a negotiation of preferences where negotiators can share their preferences freely. Whereas, \cite{nazari2015opponent} considered situations where negotiators used deception to gain unfair advantage and might hide their intentions.
+		Only a few researchers have considered the expression of power in the verbal behavior of a conversational agent. \cite{bee2010bossy} developed an agent that expresses social power through gaze and linguistic features. They demonstrated that linguistic personality traits influence the perception of power. However, this work does not consider how power affects the strategies of negotiation in dialogue. More recently, \cite{broekens2010affective,de2015humans} consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agent. However, this research focuses more on the negotiation aspect than on the expression of social power. In our work, we want to investigate the expression of power through the dialogue strategy, which has not been considered by previous work.
+		
+		\hl{ Furthermore}, \textit{Nazari et al}\cite{nazari2015opponent} \hl{showed that communicating preferences in a negotiation with a human improve the negotiation outcomes. We consider, in our paper, a negotiation of preferences where negotiators can share their preferences freely. Whereas,} \cite{nazari2015opponent} \hl{considered situations where negotiators used deception to gain an unfair advantage and might hide their intentions.}
 		
 		\section{Model of negotiation based on the relation of power}
 		In this section, we present our model of dialogue for a Virtual Agent  in the context of collaborative negotiation based on power.	
-		First, we present the data structure for the agent's preferences and the topics of the negotiation. Second, we present the implementation of the principles of behaviors of power in negotiation discussed in section \ref{sec:domDialogue}.
+		First, we present the data structure for the agent's preferences and the topics of the negotiation. Second, we present the implementation of the principles of behaviors of power in negotiation discussed in this section \ref{sec:domDialogue}.
 		\vspace{-1em} 
 		\subsection{Domain model}
 		The overall goal of a negotiation is to choose an \textbf{option} in a set of possible options $\mathcal{O}$. The evaluation of each option by participants is based on a set of \textbf{criteria} that reflect the option's characteristics. Let us consider a set $\mathcal{C}$ of $n$ criteria and let $C_1,\ldots,C_n$ be their respective domains of values. $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)$, making the simplifying assumption that all options are available. For instance, in a dialogue about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,expensive)$.
 		
 		\subsection{Preference model} 
-		The conversational agent is defined with a set of preferences, formalized as a set $\prec$ of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers French food to Italian, $Italian\prec_{cuisine}French$.
+		The conversational agent is defined with a set of preferences, formalized as a set of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers French food to Italian, $Italian\prec_{cuisine}French$.
 		
 		For a given criterion $i\in \mathcal{C}$, for a given value $v\in C_i$, the agent computes its \emph{satisfaction} $sat_{self}(v \prec_i)$ for this value as the number of values it prefers less in the partial order $\prec_i$, normalized in [0,1]:
 		\vspace{-.5em} 
@@ -117,7 +117,7 @@
 		sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
 		\end{equation}
 		
-		This notion of satisfaction is generalized to any option $o= (v_1, \ldots, v_n)\in \mathcal{O}$ as a simple average\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned by this question of criteria aggregation in this paper.}:
+		This notion of satisfaction is generalized to any option $o= (v_1, \ldots, v_n)\in \mathcal{O}$ as a simple average\footnote{There exists a great amount of literature in theoretic decision making on how to combine multiple criteria using Order Weight Averages or Choquet's integrals, for instance. We are not concerned with this question of criteria aggregation in this paper.}:
 		\vspace{-1em} 
 		\begin{equation}
 		sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
@@ -128,11 +128,11 @@
 		The satisfaction represents the tendency for an agent to accept or to propose a possible value or option in the negotiation dialogue: the closer to 1, the more it will be selected early in the negotiation.
 		
 		\subsection{Dialogue model}
-		Negotiators communicate during the negotiation via \emph{utterances}. Each utterance type has a specific set of arguments and is associated with a specific expression in natural language (NL). We use five utterance types, based on the work of Sidner \cite{sidner1994artificial} and two additional utterances to close the negotiation. Table \ref{table:utt} summarizes these generic utterances types. Only the NL generation of these utterances has to be specialized to the application domain. In this paper, we will illustrate this model on a collaborative negotiation about restaurants. The value /$v$/ in Table \ref{table:utt} refers to this NL format to express a value.
+		Negotiators communicate during the negotiation via \emph{utterances}. Each utterance type has a specific set of arguments and is associated with a specific expression in natural language (NL). We use five utterance types, based on the work of Sidner \cite{sidner1994artificial} and two additional utterances to close the negotiation. Table \ref{table:utt} summarizes these generic utterance types. Only the NL generation of these utterances has to be specialized in the application domain. In this paper, we will illustrate this model on a collaborative negotiation about restaurants. The value /$v$/ in Table \ref{table:utt} refers to this NL format to express a value.
  		%, and three derivate types that are combinations of the main ones.
 		% changer le tableau, enlever parametre comme tab2 et ajouter les ensembles de valeurs a la fin	
 
-		Each utterance type takes as parameter either a criterion value $v \in C_i$, an option $o \in \mathcal{O}$ or a criterion type $i \in \mathcal{C}$. They can be separated in three groups. Information moves (\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to exchange information about the participant's likings. In human-human negotiation dialogue, we observed that partners tend to express what they like or does'nt like (\emph{e.g} \textit{I (don't)like Chinese restaurants})  rather than binary comparison (\emph{e.g} \textit{I like Chinese more than French}). This is the reason why, we use unary operators for the information utterances.
+		Each utterance type takes as parameter either a criterion value $v \in C_i$, an option $o \in \mathcal{O}$ or a criterion type $i \in \mathcal{C}$. They can be separated into three groups. Information moves (\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to exchange information about the participant's likings. In human-human negotiation dialogue, we observed that partners tend to express what they like or do not like (\emph{e.g} \textit{I (don't)like Chinese restaurants})  rather than binary comparison (\emph{e.g} \textit{I like Chinese more than French}). This is the reason we use unary operators for the information utterances.
 		
 		Negotiation moves (\textit{Propose}, \textit{Accept} and \textit{Reject}) allow the agent to make or to answer to proposals. The agent can propose, accept and reject both values (``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}'').
 		
@@ -141,7 +141,7 @@
 		Examples of dialogues for restaurants are given in section \ref{sec:evaluation}.
 		
 		\medskip
-		The decision process for utterance selection is based on our three principles and is described in section \ref{sec:decision}. To perform this utterance selection, the agent keeps track of all statements and proposals during the dialogue. For each criterion $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criterion. This avoids re-statements of previous information. We also build the sets $A_i\subseteq C_i$ and $U_i\subseteq C_i$ of values which have been stated by the interlocutor as liked or disliked through \emph{StateValue} utterances. We assume that $A_i\cap U_i=\emptyset$.
+		The decision process for utterance selection is based on our three principles and is described in section \ref{sec:decision}. To perform this utterance selection, the agent keeps track of all statements and proposals during the dialogue. For each criterion $i\in\mathcal{C}$, we build the set $S_i \subseteq C_i$ of statements that the agent has made about this criterion. This avoids restatements of previous information. We also build the sets $A_i\subseteq C_i$ and $U_i\subseteq C_i$ of values which have been stated by the interlocutor as liked or disliked through \emph{StateValue} utterances. We assume that $A_i\cap U_i=\emptyset$.
 		
 		We also maintain the sets $P_i \subseteq C_i$, $T_i\subseteq C_i$ and $R_i\subseteq C_i$ of all proposed, accepted and rejected values for each criteria. These will be used to make relevant proposals. Similarly, we consider $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ and $R\subseteq \mathcal{O}$ the sets of all proposed, accepted and rejected options in the dialogue.
 		 
@@ -196,7 +196,7 @@
 		\end{equation}
 		
 		%...
-		Note that some values might remain unknown: in a collaborative negotiation, they can be considered as being potentially satisfiable. Therefore we give them an arbitrary value fixed to $0.5$.
+		Note that some values might remain unknown: in a collaborative negotiation, they can be considered as being potentially satisfiable. Therefore, we give them an arbitrary value fixed to $0.5$.
 		
 		This function is generalized to any option $o=(v_1,\ldots,v_n) \in O$:
 		
@@ -204,19 +204,19 @@
 		sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} sat_{other}(v_i, A_i, U_i) } {n}
 		\end{equation}
 		
-		The satisfiability represents the expectation an agent has about the other accepting or rejecting a proposal. It will be used to select the most tolerable offer to make to its interlocutor in the next section.
+		The satisfiability represents the expectation an agent has about the other accepting or rejecting a proposal. It will be used to select the most tolerable offer to make in the negotiation. The concept of tolerable is presented in the next section.
 		
 		\subsection{Decision based on power in negotiation}
 		\label{sec:decision}
 		
-		In section \ref{sec:domDialogue}, we identified three main principles related to the relation of power which affects negotiators strategies and behaviors. In this section, we present the computational theory implementing each principle. 
+		In section \ref{sec:domDialogue}, we identified three principles related to the relation of power which affects negotiators strategies and behaviors. In this section, we present the computational theory implementing each principle. 
 		
-		We denote the agent's belief of its  power $pow \in [0, 1]$. It is a constant for a given agent in a given relationship.
+		We denote the agent's belief of its  power $pow \in [0, 1]$. It is a constant for a given agent in a given interaction.
 		
 		
 		\subsubsection{Level of demand and concession}
 	
-		In collaborative negotiation, both participants reduce their level of demand in time because they want to reach an agreement. However, according to our first principle, the level of demand should be higher for high-power agent and concessions should be greater for low-power ones. To model this behavior, we use a \emph{concession curve} illustrated on Figure \ref{fig:conc}.
+		In collaborative negotiation, both participants reduce their level of demand over time because they want to reach an agreement. However, according to our first principle, the level of demand should be higher for high-power agent and concessions should be greater for low-power ones. To model this behavior, we use a \emph{concession curve} illustrated in Figure \ref{fig:conc}.
 		
 		Let $self(pow, t)$ be a time varying value, following the concession curve:
 		\begin{equation}
@@ -229,11 +229,11 @@
 				\includegraphics[width=1.8in]{graphs/sv3.png}
 				\caption{\label{fig:conc}Concession curve}
 			\end{floatingfigure} 
-		where is $t \geq 0$ is the number of open or rejected proposals, $\tau > 0$ is the minimum number of proposals before concession begins and $\delta > 0$ is a computational parameter of the concession slope.
+		where is $t \geq 0$ is the number of open or rejected proposals, $\tau > 0$ is the minimum number of proposals before the concession begins and $\delta > 0$ is a computational parameter of the concession slope.
 		
-		The value $self(pow,t)$ represents the weight an agent gives to its self satisfaction relative to the satisfaction of its partner. The higher the agent's power gets, the higher its demands get. In addition, the slope decreases faster for low values of power.
+		The value $self(pow,t)$ represents the weight an agent gives to its self-satisfaction relative to the satisfaction of its partner. The higher the agent's power gets, the higher its demands get. In addition, the slope decreases faster for low values of power.
 		 
-		These behaviors of demand and concession are implemented in the computation of an \textit{acceptability} value. Based on the value of satisfiability, the agent is able to say if it likes a value or not.
+		These behaviors of demand and concession are implemented in the computation of an \textit{acceptability} value. Based on the value of satisfiability, the agent is able to tell if it likes a value or not.
 		
 		The acceptability of a value $v \in C_i$ is defined as a boolean function:
 		\begin{equation}
@@ -242,7 +242,7 @@
 		\end{equation}
 		
 		\medskip
-		where $\beta>0$ a parameter of the theory that defines the weight given to the level of demand.
+		where $\beta>0$ is a parameter of the theory that defines the weight given to the level of demand.
 		
 		This boolean function is generalized to any option $o \in O$: $acc(pow,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(pow,t))$. This acceptability is used by the agent to decide whether he accepts a proposal or not.
 		
@@ -259,7 +259,8 @@
 		\end{equation}
 		This set corresponds to all the proposals an agent could make at a time of the negotiation.
 		
-		We compute the tolerability of a given value $v\in V_i(pow,t)$ by balancing between the agent's preferences and the likings of its partner. We assume that the agent gives a weight to its partner satisfaction which is complementary to its self satisfaction:
+		We compute the tolerability of a given value $v\in V_i(pow,t)$ by balancing between the agent's preferences and the likings of its partner. We assume that the agent gives a weight to its partner satisfaction which is complementary to its self-satisfaction:
+		
 		\begin{equation}
 		\begin{split}
 		tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
@@ -285,7 +286,7 @@
 		
 		\item $\pi \in $[0,1] : boundary between submissive and dominant used in
 		choosing an utterance type
-		%		\item $\beta$:  a value that represent the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
+		\item $\beta$:  a value that represents the minimum score that a value has to get to be positively satisfiable to the agent preferences in the negotiation. Note that $\beta = const \times self(dom,t)$.
 		\item $\tau > 0$ : the minimum number of open or rejected proposals before concession begins
 		\item $\delta > 0$ : parameter in slope of concession curve.
 		\item $\alpha> 0$: the maximum number of successive statement moves.
@@ -371,9 +372,10 @@
 		In order to evaluate our model, we conducted a controlled study in which participants judge the behaviors of two agents implemented using our model. Our system is written in Java using the DISCO platform \cite{rich09}. This allowed us to produce synthetic dialogues between two artificial agents with different values of power and varying preferences.
 		
 		\subsection{Study design}
-		We simulate a collaborative negotiation for choosing a restaurant using four criteria (cuisine, ambiance, price and location) for a total of 420 options. An example of dialogue is given in figure \ref{fig:ex-dialogue}. The following parameter values were used in our simulation: $\tau=2$, $\pi=0.5$, $\alpha=2$, $\beta=1$ and $\delta=0.1$. We generated three preferences sets and we measured the difference between the preference sets using Kendall's distance \cite{bra2013Kendall}. We manipulated two simulation parameters: the power of both agents (named \emph{pow-a} and \emph{pow-b}) and the preference sets. This later affects the generation of dialogues in term of values and length.  Table \ref{table:conditions} summarizes the 4 experimental conditions that results from this combination. Note that we only consider one configuration of social power for the similar preference sets condition, because the the produced dialogues with other values of power are all very similar in this case. The first speaker (Speaker A) is always the high-power agent, as stated by our  third principle on leading the dialogue.
+		We simulate a collaborative negotiation for choosing a restaurant using four criteria (cuisine, ambiance, price and location) for a total of 420 options. An example of dialogue is given in the figure \ref{fig:ex-dialogue}. The following parameter values were used in our simulation: $\tau=2$, $\pi=0.5$, $\alpha=2$, $\beta=1$ and $\delta=0.1$. We generated three preferences sets and we measured the difference between the preference sets using Kendall's distance \cite{bra2013Kendall}. We manipulated two simulation parameters: the power of both agents (named \emph{pow-a} and \emph{pow-b}) and the preference sets. This later affects the generation of dialogues in term of values and length.  Table \ref{table:conditions} summarizes the 4 experimental conditions that results from this combination. Note that we only consider one configuration of social power for the similar preference sets condition, because the produced dialogues with other values of power are all very similar in this case. The first speaker (Speaker A) is always the high-power agent, as stated by our third principle of leading the dialogue.
 		
-		Our goal is to show these dialogues to human observers so as to evaluate how the relation pf power is perceived in the different dialogues.
+		
+		Our goal is to show these dialogues to human observers so as to evaluate how the relation of power is perceived in the different dialogues.
 		\begin{table}[t]
 			\centering
 			\begin{tabular}{ |l|c|c|l| }
@@ -446,7 +448,7 @@
 			Each participant was shown only one dialogue. Speaker A and B were described as two friends trying to negotiate a restaurant to have dinner. %We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
 			Participants were asked to read the assigned dialogue and answer a questionnaire. 
 			
-			We defined two questions for each hypothesis. Two test questions were included to check the	sanity of the answers. We eliminated participants providing wrong answers those questions. Each one of these questions was to be answered on a 5 points Likert scale ranging from ``I totally disagree" to ``I totally agree".
+			We defined two questions for each hypothesis. Two test questions were included to check the	sanity of the answers. We eliminated participants providing wrong answers to those questions. Each one of these questions was to be answered on a 5 points Likert scale ranging from ``I totally disagree" to ``I totally agree".
 			
 			\begin{table}[t]
 				{\scriptsize
@@ -468,16 +470,16 @@
 				\label{table:questionnaire}
 			\end{table}
 
-			A total of 120 native English subjects participated to the experiment (30 for each condition). Each subject received \textit{25 cents} and we excluded 15 participants because they failed the sanity check.
+			A total of 120 native English subjects participated in the experiment (30 for each condition). Each subject received \textit{25 cents} and we excluded 15 participants because they failed the sanity check.
 			
 			\subsection{Results and discussion}
 			\vspace{-.5em} 
 			Table  \ref{res} summarizes the results of our study, which strongly support all of our four hypotheses. We first computed the correlation for each pair of questions for a given hypothesis (the average correlation is at .5 for all pairs of questions in all dialogues). This permits us to use the data to compare the speakers behavior on each dialogue. Since our data are not normally distributed, we used a non-parametric Wilcoxon signed-rank test for paired data. The higher-power speaker was correctly perceived as more self-centered (\textbf{H1}), making less concessions (\textbf{H2}), more demanding (\textbf{H3}) and leading the negotiation (\textbf{H4}) as depicted in Table \ref{res}.
 			
 			Finally, we made a post-study analysis by comparing the participant's judgments on the behaviors of Speaker A across different dialogues. We computed the differences between the evaluations of Speakers A and B in Dialogue 1 and Dialogue 2 (power of Speaker B remains unchanged at 0.4 whereas power of Speaker A changes from 0.7 to 0.9). 
-			Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. However, power in dialogue is interpersonal by nature, which means that participants rate the power of Speaker A as opposed to the behavior of Speaker B. For this reason, agregating the evaluations from different dialogues does not make sense. This explains why we obtained mixed results on this aspect. Indeed, a tendency was observed ($p\simeq 0.1$) for self-centeredness, concessions and the level of demand. Only the lead of dialogue was clearly better perceived ($p=0.043$) when the dominance increases.
+			Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. However, power in dialogue is interpersonal by nature, which means that participants rate the power of Speaker A as opposed to the behavior of Speaker B. For this reason, aggregating the evaluations from different dialogues does not make sense. This explains why we obtained mixed results on this aspect. Indeed, a tendency was observed ($p\simeq 0.1$) for self-centeredness, concessions and the level of demand. Only the lead of dialogue was clearly better perceived ($p=0.043$) when the dominance increases.
 			
-			Note that in this experiment, we studied the perception of all the principles related to power simultaneously. This could be seen as a limit of this study: we did not investigate the perception of each principle individually. However, during previous experiments, we detected that the principles are interdependent, which make a separate evaluation of each of them in a dialogue difficult to perform.
+			Note that in this experiment, we studied the perception of all the principles related to power simultaneously. This could be seen as a limit of this study: we did not investigate the perception of each principle individually. However, during previous experiments, we detected that the principles are interdependent, which makes a separate evaluation of each of them in a dialogue difficult to perform.
 			
 			\hl{A further point of criticism is the statistics, which is not up to standards. Table 5 of the paper simply reports p-values without providing the test statistics, effects sizes, etc. It is now also common to report exact p-values and not just the fact that p < alpha. The reported p-values seem to be sufficiently small, but test may still be not significant if corrected for errors from multiple testing. I would appreciate if this would be corrected in a final version of the paper.}
 			
@@ -527,7 +529,7 @@
 			
 			Our research aims to model a conversational agent which is able to deploy different strategies of negotiation depending on its representation of social power. Based on research in social psychology, we defined three behavioral principles related to power in collaborative negotiation. We proposed a model of utterance selection based on modeling of preferences and the implementation of these principles. We showed that the behaviors related to social power are correctly perceived in the resulting dialogues. Our findings validate our model of dialogue in general and specifically confirmed the coherence of the generated behaviors of power.
 			
-			Future works will focus on using this model in a human-agent interaction. It was showed by \cite{klatt2011negotiations} that having a model of the other impacts the negotiation strategy and improves the outcomes. Therefore, we aim to use our dialogue model to build a representation of the interlocutor's social power, following a theory of mind approach. We hope to show that an agent that adapts its own strategy to the perceived power of its interlocutor will be a better collaborative negotiator.		
+			Future works will focus on using this model in a human-agent interaction. It was shown by \cite{klatt2011negotiations} that having a model of the other impacts the negotiation strategy and improves the outcomes. Therefore, we aim to use our dialogue model to build a representation of the interlocutor's social power, following a theory of mind approach. We hope to show that an agent that adapts its own strategy to the perceived power of its interlocutor will be a better collaborative negotiator.		
 			
 			
 			% ================== BIBLIO ===============
