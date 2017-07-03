@@ -4,5 +4,5 @@ Test Statistics is called "V"
 see http://cerim.univ-lille2.fr/fileadmin/user_upload/statistiques/michael_genin/Cours/Tests_statistiques/Tests_non-parametriques_printable.pdf (diapo 38)
 2. Calculate Z in order to be able to compute the effect side (see diapo 42-43)
 3. 
-the effect size = z/ square(N)
+the effect size (r) = z/ square(N)
 N is the the size of the number of observations.
