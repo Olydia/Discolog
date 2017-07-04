@@ -38,10 +38,10 @@ effectSize <- function(a, b){
   cat ("Z", Z,"\n")
   
  # r = Z /sqrt(Na, Nb)
-  N = length(a) * length(b)
-  cat ("a", length(a), "b" , length(b), "\n")
-  cat("N", N, "n ", n, "\n")
+  N = length(a) + length(b)
   r = Z /sqrt(N)
+  cat ("R", r,"\n")
+  
   return (r)
 }
   
