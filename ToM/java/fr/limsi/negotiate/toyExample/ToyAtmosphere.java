@@ -4,7 +4,7 @@ import fr.limsi.negotiate.Criterion;
 
 public enum ToyAtmosphere implements Criterion{
 
-	LIVELY, QUIET, FAMILY;
+	LIVELY, QUIET,/* FAMILY*/;
 
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub

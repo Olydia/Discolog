@@ -19,7 +19,7 @@ public class ToyModel {
 
 		Self_Ci<ToyCuisine> d1_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
 		
-		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.MEXICAN);
+		//d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.MEXICAN);
 		d1_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.FRENCH);
 
 		
@@ -27,14 +27,14 @@ public class ToyModel {
 
 		Self_Ci<ToyAtmosphere> d1_ToyAtmosphere = new Self_Ci<ToyAtmosphere>(ToyAtmosphere.class);
 		d1_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.QUIET);
-		d1_ToyAtmosphere.addPreference(ToyAtmosphere.QUIET, ToyAtmosphere.FAMILY);
+		//d1_ToyAtmosphere.addPreference(ToyAtmosphere.QUIET, ToyAtmosphere.FAMILY);
 
 
 		CriterionNegotiation<ToyAtmosphere> atmospher = new CriterionNegotiation<>(d1_ToyAtmosphere);
 
 		Self_Ci<ToyLocation> d1_ToyLocation =  new Self_Ci<>(ToyLocation.class);
 		d1_ToyLocation.addPreference(ToyLocation.DOWNTOWN, ToyLocation.EAST_SIDE);
-		d1_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.WEST_SIDE);
+		//d1_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.WEST_SIDE);
 
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d1_ToyLocation);
 		
@@ -65,21 +65,21 @@ public class ToyModel {
 		Self_Ci<ToyCuisine> d2_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
 	
 		d2_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.MEXICAN);
-		d2_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.ITALIAN);
+	//	d2_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.ITALIAN);
 
 		
 		CriterionNegotiation<ToyCuisine> cuisine = new CriterionNegotiation<>(d2_cuisine);
 
 		Self_Ci<ToyAtmosphere> d2_ToyAtmosphere = new Self_Ci<ToyAtmosphere>(ToyAtmosphere.class);
 		d2_ToyAtmosphere.addPreference(ToyAtmosphere.QUIET, ToyAtmosphere.LIVELY);
-		d2_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.FAMILY);
+	//	d2_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.FAMILY);
 
 
 		CriterionNegotiation<ToyAtmosphere> atmospher = new CriterionNegotiation<>(d2_ToyAtmosphere);
 
 		Self_Ci<ToyLocation> d2_ToyLocation =  new Self_Ci<>(ToyLocation.class);
 		d2_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.DOWNTOWN);
-		d2_ToyLocation.addPreference(ToyLocation.DOWNTOWN, ToyLocation.WEST_SIDE);
+	//	d2_ToyLocation.addPreference(ToyLocation.DOWNTOWN, ToyLocation.WEST_SIDE);
 
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d2_ToyLocation);
 		

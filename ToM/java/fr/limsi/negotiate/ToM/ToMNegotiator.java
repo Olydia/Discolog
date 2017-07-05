@@ -128,7 +128,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 		Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
 
 		if (utterance != null)
-			guess(disco,selfPrevious, utterance, previousState);
+			guessProba(disco,selfPrevious, utterance, previousState);
 		
 		Utterance u = respondTo(utterance, disco);
 		return u ;
@@ -179,6 +179,36 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 	}
 	
+	
+	public void guessProba (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
+		 HashMap<Double, Float> proba = new HashMap<Double, Float>();
+		 
+		for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
+			Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
+			
+			int total = entry.getValue().size();
+			int correct = 0;
+			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
+				PrefNegotiation<Option> element = iterator.next();
+				
+				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
+				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
+
+				if(identicalUtterances(guessUtt, guessed))
+					correct ++;
+			}
+			float p = correct/total;
+			proba.put(entry.getKey(), p);
+			System.out.println( entry.getKey() +" " + correct + " " + total);
+			System.out.printf("%.4f",  p);  
+			System.out.println();
+//			if(entry.getValue().isEmpty()) {
+//		        it.remove();
+//		      }
+		    }
+		// ---------------------------------
+
+}
 	public void updateOther(Utterance next){
 		// Ajouter interpretation
 		

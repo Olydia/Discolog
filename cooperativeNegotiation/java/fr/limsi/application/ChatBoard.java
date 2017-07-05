@@ -2095,7 +2095,7 @@ public class ChatBoard extends AnchorPane{
 	        		}
 	        		command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
 	        		if (command2!="") command=command+"/"+command2;
-	        		//Reste à vérifier le cas de DOMINANT
+	        		//Reste ï¿½ vï¿½rifier le cas de DOMINANT
 	        		//String cmd="fr.limsi.negotiate.lang.Propose/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.NORTH_SIDE)";
 	        		//System.out.println(command);
 	        		interaction.getConsole().execute(command);
