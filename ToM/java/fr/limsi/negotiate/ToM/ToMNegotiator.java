@@ -1,11 +1,15 @@
 package fr.limsi.negotiate.ToM;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.Task;
@@ -20,18 +24,18 @@ import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
 import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
-	
+
 	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
 	//public Negotiation<? extends Option> other;
 
-	
+
 	/**
 	 * 
 	 * @param Ajout modif
 	 * @param 
 	 */
-	
+
 	public Negotiation<? extends Option> otherMental;
 
 
@@ -39,8 +43,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 		super(name, negotiation);
 		this.otherModel = new HashMap<Double, List<PrefNegotiation<Option>>> ();
 		this.previousState = negotiation;
-		
-		
+
+
 		@SuppressWarnings("unchecked")
 		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), (Class<Option>) negotiation.getTopic());
 		for(double pow:setPow_hyp()){
@@ -49,8 +53,8 @@ public class ToMNegotiator extends NegotiatorAgent{
 			otherModel.put(pow, copy);
 		}	
 	}
-	
-	
+
+
 	public Negotiation<? extends Option> getPreviousState() {
 		return previousState;
 	}
@@ -61,17 +65,17 @@ public class ToMNegotiator extends NegotiatorAgent{
 	}
 	//********** Initiate the model of toher
 	// Input : List of Criteria Class<? extends Criterion>
-	
-	
+
+
 	public List<PrefNegotiation<Option>> setPreferences( List<Class<? extends Criterion>> elem, 
 			Class<Option> class1){
 		Models<Option> m = new Models<Option>();
 		return m.computeModels(elem, class1);
 
-		
+
 	}
-	
-	
+
+
 	public ArrayList<Double> setPow_hyp(){
 
 		ArrayList<Double> pow_hyp =	new ArrayList<Double> ();
@@ -81,46 +85,46 @@ public class ToMNegotiator extends NegotiatorAgent{
 		return pow_hyp;
 	}
 
-	   @Override
-	   public void execute (Task occurrence, Interaction interaction, Plan contributes) {	  
-	      super.execute(occurrence, interaction, contributes);
-     	 cloneNegotiation();
+	@Override
+	public void execute (Task occurrence, Interaction interaction, Plan contributes) {	  
+		super.execute(occurrence, interaction, contributes);
+		cloneNegotiation();
 
 
-	   }
-	   
-	   
+	}
+
+
 	public void cloneNegotiation() {
-	
+
 		setPreviousState(getNegotiation().cloneNegotiation());
-//		try {
-//			setPreviousState(getNegotiation().clone());
-//		} catch (CloneNotSupportedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		setPreviousState(new Negotiation(getNegotiation().getValuesNegotiation(),
-//															getNegotiation().getCriteria(),
-//															getNegotiation().getTopic(),
-//															getNegotiation().getContext(),
-//															getNegotiation().getProposals()
-//														  ));
+		//		try {
+		//			setPreviousState(getNegotiation().clone());
+		//		} catch (CloneNotSupportedException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+		//		setPreviousState(new Negotiation(getNegotiation().getValuesNegotiation(),
+		//															getNegotiation().getCriteria(),
+		//															getNegotiation().getTopic(),
+		//															getNegotiation().getContext(),
+		//															getNegotiation().getProposals()
+		//														  ));
 	}
 
 
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
-	//	try {
-//			long startTime = System.currentTimeMillis();
-	//Negotiation<? extends Option> nego = getNegotiation().clone();
-//			for(int i =0; i<10000000; i++)
-//				guessTest(nego, disco, utterance, u, nego.getDominance());
-//
-//			long stopTime = System.currentTimeMillis();
-//			long elapsedTime = stopTime - startTime;
-//			System.out.println("ELEPSED TIME: " + elapsedTime);
-//			Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-//			guess(disco,selfPrevious, utterance, nego);
+		//	try {
+		//			long startTime = System.currentTimeMillis();
+		//Negotiation<? extends Option> nego = getNegotiation().clone();
+		//			for(int i =0; i<10000000; i++)
+		//				guessTest(nego, disco, utterance, u, nego.getDominance());
+		//
+		//			long stopTime = System.currentTimeMillis();
+		//			long elapsedTime = stopTime - startTime;
+		//			System.out.println("ELEPSED TIME: " + elapsedTime);
+		//			Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+		//			guess(disco,selfPrevious, utterance, nego);
 
 		//} catch (CloneNotSupportedException e) {
 		//	e.printStackTrace();
@@ -129,7 +133,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 		if (utterance != null)
 			guessProba(disco,selfPrevious, utterance, previousState);
-		
+
 		Utterance u = respondTo(utterance, disco);
 		return u ;
 	}
@@ -143,7 +147,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 		nego.setDominance(pow);
 		return nego;
 	}
-	
+
 	/**
 	 * 
 	 * @param disco
@@ -151,70 +155,75 @@ public class ToMNegotiator extends NegotiatorAgent{
 	 * @param guessUtt
 	 * @return
 	 */
-	
-	
+
+
 	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
-						
-			for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
-				Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
-				/*
-				 * il faut gerer la mise a jouer des elements
-				 */
-				for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
-					PrefNegotiation<Option> element = iterator.next();
-					
-					Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
-					//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
 
-					if(!identicalUtterances(guessUtt, guessed))
-						iterator.remove();
-				}
-				System.out.println( entry.getKey() +" " +entry.getValue().size());  
-				
-				if(entry.getValue().isEmpty()) {
-			        it.remove();
-			      }
-			    }
-			// ---------------------------------
-
-	}
-	
-	
-	public void guessProba (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
-		 HashMap<Double, Float> proba = new HashMap<Double, Float>();
-		 
 		for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
-			
-			int total = entry.getValue().size();
-			int correct = 0;
+			/*
+			 * il faut gerer la mise a jouer des elements
+			 */
 			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
 				PrefNegotiation<Option> element = iterator.next();
-				
+
+				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
+				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
+
+				if(!identicalUtterances(guessUtt, guessed))
+					iterator.remove();
+			}
+			System.out.println( entry.getKey() +" " +entry.getValue().size());  
+
+			if(entry.getValue().isEmpty()) {
+				it.remove();
+			}
+		}
+		// ---------------------------------
+
+	}
+
+
+	public void guessProba (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
+		HashMap<Double, Double> proba = new HashMap<Double, Double>();
+		System.out.println(" ------------------------------------------------------------ ");
+
+		for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
+
+			Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
+
+			double total = entry.getValue().size();
+			double correct = 0;
+			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
+				PrefNegotiation<Option> element = iterator.next();
+
 				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
 				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
 
 				if(identicalUtterances(guessUtt, guessed))
 					correct ++;
 			}
-			float p = correct/total;
+			double p = correct/total;
 			proba.put(entry.getKey(), p);
-			System.out.println( entry.getKey() +" " + correct + " " + total);
-			System.out.printf("%.4f",  p);  
-			System.out.println();
-//			if(entry.getValue().isEmpty()) {
-//		        it.remove();
-//		      }
-		    }
-		// ---------------------------------
 
-}
+			System.out.println( entry.getKey() + " p =" + p);
+			//			if(entry.getValue().isEmpty()) {
+			//		        it.remove();
+			//		      }
+
+		}
+		// ---------------------------------
+		System.out.println("Guess the other pow :" +getOtherPow(proba));
+		System.out.println(" ------------------------------------------------------------ ");
+
+
+	}
 	public void updateOther(Utterance next){
 		// Ajouter interpretation
-		
+
 		// 
 	}
-	
+
 	public Utterance guessUtt(Negotiation<? extends Option> nego, double pow, Utterance utt, Disco disco){
 		NegotiatorAgent agent = new NegotiatorAgent("current", nego);
 		agent.setRelation(pow);
@@ -228,7 +237,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 		return (identicalUtterances(guessUtt, guessed));
 	}
 
-	
+
 
 
 	boolean identicalUtterances(Utterance ut, Utterance otherUt){
@@ -284,5 +293,33 @@ public class ToMNegotiator extends NegotiatorAgent{
 		}
 		return false;
 	}
+
+	public  Map<Double, Double> sortPower(Map<Double, Double> unsortMap){
+		Map<Double, Double> result = unsortMap.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+
+
+		return (result);
+	}
+
+	public double getOtherPow(Map<Double, Double> values){
+		Map<Double, Double> result = sortPower(values); 
+		double max = java.util.Collections.max(result.values());
+		List<Double> keys = new ArrayList<Double>();
+		for(Iterator<Entry<Double, Double>> it = result.entrySet().iterator(); it.hasNext();){
+			Entry<Double, Double> entry = it.next();
+			if(entry.getValue().equals(max))
+				keys.add(entry.getKey());
+		}
+
+		OptionalDouble average = keys.stream()
+				.mapToDouble(a -> a).average();
+
+		return average.isPresent() ? average.getAsDouble() : 0; 
+	}
+
 
 }

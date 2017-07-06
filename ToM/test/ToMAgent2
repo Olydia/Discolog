@@ -1,0 +1,88 @@
+***************************************************************************************
+pow(Agent 1) = 0.7, pow(Agent 2) = 0.4 
+Agent with ToM: Agent 2 
+Agent 2 tries to guess pow(Agent 1)
+***************************************************************************************
+
+Agent1 says "Let's go to a quiet toyrestaurant."
+Agent2 says "I don't like quiet toyrestaurants, let's choose something else."
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "Do you like lively toyrestaurants?"
+Agent1 says "I don't like lively toyrestaurants."
+Agent2 says "What kind of toycost do you like?"
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "What kind of toycost do you like?"
+Agent1 says "I like cheap toyrestaurants."
+Agent2 says "Do you like expensive toyrestaurants?"
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "Okay, let's go to the Pavillon limere toyrestaurant."
+Agent1 says "Okay."
+
+************************************ Pow guessed at each turn ***************************************************
+
+I don't like quiet toyrestaurants, let's choose something else -> RejectState
+ ------------------------------------------------------------ 
+0.3 p =0.5
+0.5 p =0.5
+0.6 p =0.0
+0.7 p =0.0
+0.9 p =0.0
+0.4 p =0.5
+0.8 p =0.0
+Guess the other pow :0.4000000000000001
+ ------------------------------------------------------------ 
+Do you like lively toyrestaurants? -> AskPreference
+ ------------------------------------------------------------ 
+0.3 p =0.3125
+0.5 p =0.3125
+0.6 p =0.0
+0.7 p =0.0
+0.9 p =0.0
+0.4 p =0.3125
+0.8 p =0.0
+Guess the other pow :0.4000000000000001
+ ------------------------------------------------------------ 
+What kind of toycost do you like? -> AskPreference
+ ------------------------------------------------------------ 
+0.3 p =0.3125
+0.5 p =0.3125
+0.6 p =0.0
+0.7 p =0.0
+0.9 p =0.0
+0.4 p =0.3125
+0.8 p =0.0
+Guess the other pow :0.4000000000000001
+ ------------------------------------------------------------ 
+What kind of toycost do you like? -> AskPreference
+ ------------------------------------------------------------ 
+0.3 p =0.0
+0.5 p =0.3125
+0.6 p =0.0
+0.7 p =0.0
+0.9 p =0.0
+0.4 p =0.0625
+0.8 p =0.0
+Guess the other pow :0.5
+ ------------------------------------------------------------ 
+Do you like expensive toyrestaurants? -> AskPreference
+ ------------------------------------------------------------ 
+0.3 p =0.0
+0.5 p =0.25
+0.6 p =0.0
+0.7 p =0.0
+0.9 p =0.0
+0.4 p =0.0625
+0.8 p =0.0
+Guess the other pow :0.5
+ ------------------------------------------------------------ 
+You proposed the Pavillon limere toyrestaurant earlier. In the end that's suits me fine -> Accept
+ ------------------------------------------------------------ 
+0.3 p =1.0
+0.5 p =0.9375
+0.6 p =0.6875
+0.7 p =0.6875
+0.9 p =0.3125
+0.4 p =1.0
+0.8 p =0.3125
+Guess the other pow :0.35
+ ------------------------------------------------------------ 

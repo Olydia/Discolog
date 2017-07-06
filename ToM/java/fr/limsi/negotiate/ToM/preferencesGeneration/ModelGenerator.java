@@ -6,7 +6,6 @@ import java.util.List;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.toyExample.*;
 
 public class ModelGenerator {
 	// other possible models of preferences
