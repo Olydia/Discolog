@@ -99,7 +99,7 @@
 		\subsection{Similar work in the literature}
 		Only a few researchers have considered the expression of power in the verbal behavior of a conversational agent. \cite{bee2010bossy} developed an agent that expresses social power through gaze and linguistic features. They demonstrated that linguistic personality traits influence the perception of power. However, this work does not consider how power affects the strategies of negotiation in dialogue. More recently, \cite{broekens2010affective,de2015humans} consider trust, expression of emotions as anger and happiness as dimensions of the negotiation strategy of a virtual agent. However, this research focuses more on the negotiation aspect than on the expression of social power. In our work, we want to investigate the expression of power through the dialogue strategy, which has not been considered by previous work.
 		
-		\hl{ Furthermore}, \textit{Nazari et al}\cite{nazari2015opponent} \hl{showed that communicating preferences in a negotiation with a human improve the negotiation outcomes. We consider, in our paper, a negotiation of preferences where negotiators can share their preferences freely. Whereas,} \cite{nazari2015opponent} \hl{considered situations where negotiators used deception to gain an unfair advantage and might hide their intentions.}
+		In a different context, \cite{nazari2015opponent} studied how the communication of preferences in a negotiation with a human can impact the negotiation outcomes. They consider situations in which negotiators can use deception to gain an unfair advantage and can hide their intentions. We do not consider this case in our work. Our agents are not only collaborative, but they also give correct information about their preferences and they do not try to hide any information. Previous work such as \cite{swartout2006toward} showed that, even in collaborative negotiation, it is not always possible or advisable to give information about all preferences.
 		
 		\section{Model of negotiation based on the relation of power}
 		In this section, we present our model of dialogue for a Virtual Agent  in the context of collaborative negotiation based on power.	
@@ -185,7 +185,7 @@
 		\end{table}
 		
 		\subsubsection*{Satisfiability}
-		Using the sets $A_i$ and $U_i$ that represent the interlocutor's likings, the agent can compute the satisfiability of a value $v\in C_i$ for the other (partner) as:
+		Using the sets $A_i$ and $U_i$ that represent the interlocutor's likings, the agent can compute the satisfiability of a value $v\in C_i$ for the interlocutor (\emph{i.e.} the \emph{other} person) using the following formula:
 		\vspace{-0.5em} 
 		\begin{equation}
 		sat_{other}(v)= \left\{\begin{array}{ll}
@@ -472,28 +472,30 @@
 
 			A total of 120 native English subjects participated in the experiment (30 for each condition). Each subject received \textit{25 cents} and we excluded 15 participants because they failed the sanity check.
 			
-		\hl{   Modif	}
 		\subsection{Results and discussion}
 			\vspace{-.5em} 
-			Table  \ref{res} summarizes the results of our study, which strongly support all of our four hypotheses. \hl{ Cette phrase est tres mal tourne mais je nai pas su reformuler.  We first computed the correlation for each pair of questions for a given hypothesis (the average correlation is at .5 for all pairs of questions in all dialogues)}. This allow us to use the data to compare the speaker's behaviors on each dialogue.
-			 Since our data are not normally distributed, we used a non-parametric \emph{Wilcoxon signed-rank test} for paired data. 
-			 
-			 
-			 The higher-power speaker was highly perceived as more self-centered (\textbf{H1}), with a large effect size. For dialogue1, the statistical test indicates that the higher-power agent was significantly perceived as more individualist \emph{Z=-5.28, p$<$0.001}. 
-			In addition, a significant difference in the level of concessions expressed in all the dialogues was revealed (\textbf{H2}). Indeed, the high-power agent was perceived as making less concessions. The effect size showed a medium effect for the following dialogues: (Dialogue2, Dialogue3, and Dialogue4), and a large effect for Dialogue1 with \emph{Z=-5.34, p$<$0.001}.
-			 
-			 Hypothesis \textbf{H3} was also confirmed by the \emph{Wilcoxon signed-rank test}, where the higher-power agent was defined as the most demanding negotiator, with a large effect size observed for all the dialogues. 
-			 
-			The (\textbf{H4}) hypothesis was confirmed. the Wilcoxon ranked test revealed that the high-power agent was perceived as significantly more leading the dialogue than the low-power agent, with a large effect size for the dialogues (Dialogue1, Dialogue2 and Dialogue 4) and a medium effect size for Dialogue3 as depicted in Table \ref{res}.
+			Table~\ref{res} summarizes the results of our study, which strongly support all of our four hypotheses.  The higher-power speaker was correctly perceived as more self-centered (\textbf{H1}), making less concessions (\textbf{H2}), more demanding (\textbf{H3}) and leading the negotiation (\textbf{H4}).
 			
+			We first computed the correlation for each pair of questions corresponding to a given hypothesis (the average correlation is .5). Since there is a strong correlation, we can use the data to compare the speakers' behaviors on each dialogue. Note that our data are not normally distributed. This is the reason why we used a non-parametric Wilcoxon signed-rank test to verify that our paired sets of data significantly different from each other.
+			 
+			The higher-power speaker was largely perceived as more self-centered, as assumed by hypothesis \textbf{H1}, with a large effect size. For instance, if you consider dialogue 1 on Table~\ref{res}, the statistical test indicates that the higher-power agent was significantly perceived as more self-centered with \emph{Z=-5.28} and \emph{p$<$0.001}.
+			
+			In addition, a significant difference in the level of concessions expressed in all the dialogues was revealed (\textbf{H2}). Indeed, the high-power agent was perceived as making less concessions. The effect size showed a medium effect for dialogues 2 to 4, and a large effect for Dialogue 1 (with \emph{Z=-5.34} and \emph{p$<$0.001}).
+			 
+			Hypothesis \textbf{H3} was also confirmed by the \emph{Wilcoxon signed-rank test}, where the higher-power agent was defined as the most demanding negotiator, with a large effect size observed for all the dialogues. 
+			 
+			The (\textbf{H4}) hypothesis was confirmed. The Wilcoxon ranked test revealed that the high-power agent was perceived as significantly more leading the dialogue than the low-power agent, with a large effect size for the dialogues 1, 2 and 4, and a medium effect size for Dialogue3 as depicted in Table~\ref{res}.
+			
+			\medskip
 			Finally, we made a post-study analysis by comparing the participants' judgments on the behaviors of Speaker A across different dialogues. We computed the differences between the evaluations of Speakers A and B in Dialogue 1 and Dialogue 2 (power of Speaker B remains unchanged at 0.4 whereas the power of Speaker A changes from 0.7 to 0.9).
 			
 			Our hypothesis was that a greater difference in power would lead to a better perception of behaviors related to power. However, power in the dialogue is interpersonal by nature, which means that participants rate the power of Speaker A as opposed to the behavior of Speaker B. For this reason, aggregating the evaluations from different dialogues does not make sense. This explains why we obtained mixed results on this aspect. Indeed, a tendency was observed ($p\simeq 0.1$) for self-centeredness, concessions and the level of demand. Only the lead of dialogue was clearly better perceived ($p=0. 043$) when the power increases.
 			
-			Note that in this experiment, we studied the perception of all the principles related to power simultaneously. This could be seen as a limit of this study: we did not investigate the perception of each principle individually. However, during previous experiments, we detected that the principles are interdependent, which makes a separate evaluation of each of them in a dialogue difficult to perform.
+			\medskip
+			Also note that in this experiment, we studied the perception of all the principles related to power simultaneously. This could be seen as a limit of this study: we did not investigate the perception of each principle individually. However, during previous experiments, we detected that the principles are interdependent, which makes a separate evaluation of each of them in a dialogue difficult to perform.
 			
-			We focus in this study on situations where agents have a complementary relation of power (A high-power side and low-power side). We did not
-			 study situations in which both agents are high-powered or low-powerful. The reason is that we want to assess whether the social power is perceived by human observers. This supposes that we aim to analyze the relation of dominance, as defined by \cite{burgoonnonverbal} in the context of collaborative negotiation. Indeed, \cite{burgoonnonverbal} defines the relation of dominance as the ability to exert behaviors of power. It refers to context and relationship-dependent interactional  patterns in which one actor’s assertion of control is met by acquiescence from another. Therefore, in the relation of dominance, one actor plays the dominant role and expresses high-powered's behaviors. Whereas, the other actor plays the submissive role and exerts behaviors of low-power individual.
+			\medskip
+			We focus in this study on situations where agents have a complementary relation of power (A high-power side and low-power side). We did not study situations in which both agents are high-powered or low-powerful. The reason is that we want to assess whether the social power is perceived by human observers. This supposes that we aim to analyze the relation of dominance, as defined by \cite{burgoonnonverbal} in the context of collaborative negotiation. Indeed, \cite{burgoonnonverbal} defines the relation of dominance as the ability to exert behaviors of power. It refers to context and relationship-dependent interactional  patterns in which one actor’s assertion of control is met by acquiescence from another. Therefore, in the relation of dominance, one actor plays the dominant role and expresses high-powered's behaviors whereas, the other actor plays the submissive role and exerts behaviors of low-power individual.
 			\hl{fin modification}
 			\begin{table}[t]
 				{\scriptsize
