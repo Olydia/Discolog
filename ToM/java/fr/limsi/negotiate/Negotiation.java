@@ -245,8 +245,10 @@ public class Negotiation<O extends Option> {
 
 	@SuppressWarnings("unchecked")
 	boolean isAcceptable(Option option){
+		double self = NegotiationParameters.beta * self();
 		double satisfiability= satisfiability((O)option);
-		return satisfiability >= NegotiationParameters.beta * self();
+		System.out.println(option + " Sat (option) = " + satisfiability + " Self : "+ self);
+		return satisfiability >= self;
 	}
 	// test of acceptability
 

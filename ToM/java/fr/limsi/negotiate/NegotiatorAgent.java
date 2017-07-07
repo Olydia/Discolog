@@ -61,14 +61,14 @@ public class NegotiatorAgent extends Agent {
 		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
-				new ToMNegotiator("Agent2", model.model2()), 
+				new NegotiatorAgent("Agent2", model.model2()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((ToMNegotiator) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}
@@ -100,7 +100,7 @@ public class NegotiatorAgent extends Agent {
 	 */
 	public Utterance respond (Utterance utterance, Disco disco) {
 		Utterance u = respondTo(utterance, disco);
-		System.out.println(u.format()+ " -> " + u.getType());
+		//System.out.println(u.format()+ " -> " + u.getType());
 		return u ;
 	}
 

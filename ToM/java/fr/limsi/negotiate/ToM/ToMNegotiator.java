@@ -205,7 +205,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 			}
 			double p = correct/total;
 			proba.put(entry.getKey(), p);
-
+			System.out.println(total);
 			System.out.println( entry.getKey() + " p =" + p);
 			//			if(entry.getValue().isEmpty()) {
 			//		        it.remove();
