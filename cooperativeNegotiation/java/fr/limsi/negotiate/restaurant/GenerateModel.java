@@ -153,10 +153,10 @@ public class GenerateModel {
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
 			System.out.println("\t *********** " + v.getType().getSimpleName()+ " *********** ");
 			for(Criterion value: v.getElements())	
-				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+ " | is Satifiable: "+ v.getSelf().isSatisfiable(value, m.self()));
+				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+ " | is Satifiable: "+ v.getSelf().isSatisfiable(value, m.getDominance()));
 		}
 	}
-	
+
 	public static void finalCalcul(Negotiation<Restaurant> m){
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
 			for(Criterion value: v.getElements())

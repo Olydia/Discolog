@@ -25,10 +25,10 @@ public class Negotiation<O extends Option> {
 		this.proposals = new ArrayList<OptionProposal>();
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
-		this.context_bis =  new DialogueContext(criteria.sortValues());
+		this.context_bis =  new DialogueContext(criteria.getElements());
 
 	}
-	
+
 	public DialogueContext getContext() {
 		return context_bis;
 	}
@@ -48,7 +48,7 @@ public class Negotiation<O extends Option> {
 		setCriteria(criteriaNegotiation);
 		this.context_bis = c;
 	}
-	
+
 	// for Guess class
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
 			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
@@ -60,7 +60,7 @@ public class Negotiation<O extends Option> {
 		setCriteria(criteriaNegotiation);
 		this.context_bis = c;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Negotiation(Negotiation<? extends Option> negotiation) {
 		this.valueNegotiation = negotiation.getValuesNegotiation();
@@ -151,9 +151,9 @@ public class Negotiation<O extends Option> {
 			return Math.max(0, s);
 		}
 	}
-	
+
 	public double selfTest(int t){
-		
+
 		double s=0;
 		if( t< NegotiationParameters.tau)
 			return this.relation;
@@ -212,7 +212,7 @@ public class Negotiation<O extends Option> {
 
 		//if(getDominance()>=0){
 		List<Option> remainOptions= nonRejectedOptions();
-		 return getAcceptableOptions(remainOptions).isEmpty();
+		return getAcceptableOptions(remainOptions).isEmpty();
 		//return (remainOptions.isEmpty());
 		//|| 
 		//	getAcceptableOptions().isEmpty());
@@ -247,7 +247,7 @@ public class Negotiation<O extends Option> {
 	boolean isAcceptable(Option option){
 		double self = NegotiationParameters.beta * self();
 		double satisfiability= satisfiability((O)option);
-		System.out.println(option + " Sat (option) = " + satisfiability + " Self : "+ self);
+		//System.out.println(option + " Sat (option) = " + satisfiability + " Self : "+ self);
 		return satisfiability >= self;
 	}
 	// test of acceptability
@@ -401,11 +401,11 @@ public class Negotiation<O extends Option> {
 
 		Criterion c = chooseCriterionProposal();
 		if(c!=null){
-		//Any value is accepted yet 
+			//Any value is accepted yet 
 			if(getContext().getClosedCriteria().isEmpty() && c != null){
 				return new CriterionProposal(true,c);
 			}
-			
+
 			// Otherwise
 			return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
@@ -466,12 +466,12 @@ public class Negotiation<O extends Option> {
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
 		NegotiationUtterance uttSelf =  getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
-		
-				
+
+
 		return (uttSelf instanceof ProposalUtterance);
 
 	}
-	
+
 	public void clearNegotiation(){
 		this.proposals.clear();
 		this.context_bis.clearNegotiation();
@@ -480,13 +480,36 @@ public class Negotiation<O extends Option> {
 	}
 
 	public Negotiation<? extends Option> cloneNegotiation() {
-	   ArrayList<OptionProposal> optionP = new ArrayList<OptionProposal>(this.getProposals());
-	   List<CriterionNegotiation<Criterion>> criteria = new ArrayList<CriterionNegotiation<Criterion>>();
-	   DialogueContext c = getContext().clone();
-	   for(CriterionNegotiation<Criterion> cr : this.getValuesNegotiation())
-		   criteria.add(cr.clone());
-	   
-	   return new Negotiation<O> (criteria, relation, this.getCriteria(), this.getTopic(), c, optionP);
+		ArrayList<OptionProposal> optionP = new ArrayList<OptionProposal>(this.getProposals());
+		List<CriterionNegotiation<Criterion>> criteria = new ArrayList<CriterionNegotiation<Criterion>>();
+		DialogueContext c = getContext().clone();
+		for(CriterionNegotiation<Criterion> cr : this.getValuesNegotiation())
+			criteria.add(cr.clone());
+
+		return new Negotiation<O> (criteria, relation, this.getCriteria(), this.getTopic(), c, optionP);
+	}
+	/**
+	 * User to compute the format (Check models/Negotiate.properties) of the rejectPropose utterance. 
+	 * @param p1 Rejected proposal
+	 * @param p2 Counter propose
+	 * @return 
+	 */
+	public boolean match(Proposal p1, Proposal p2){
+		if(p1.getClass().equals(p2.getClass()))
+			return p1.equals(p2);
+		if(p1 instanceof OptionProposal){
+			Option p = (Option) p1.getValue();
+			@SuppressWarnings("unchecked")
+			Criterion c = p.getValue((Class<? extends Criterion>) p2.getValue().getClass());
+			return(c.equals(p2.getValue()));
+		}
+		if(p1 instanceof CriterionProposal){
+			Option op = (Option) p2.getValue();
+			@SuppressWarnings("unchecked")
+			Criterion c = op.getValue((Class<? extends Criterion>) p1.getValue().getClass());
+			return(c.equals(p1.getValue()));
+		}
+		return false;
 	}
 
 }

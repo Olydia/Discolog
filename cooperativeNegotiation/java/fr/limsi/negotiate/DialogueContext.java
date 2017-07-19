@@ -19,6 +19,15 @@ public class DialogueContext {
 		this.setClosedCriteria(new ArrayList<Class<? extends Criterion>>());
 		this.setTopicValues(topicValues);
 	}
+	
+	public DialogueContext(List<Class<? extends Criterion>> topicValues, List<NegotiationUtterance> history,
+			List<Class<? extends Criterion>> discussedCriteria, List<Class<? extends Criterion>> closedCriteria) {
+
+		this.history =history;
+		this.discussedCriteria = discussedCriteria;
+		this.setClosedCriteria(closedCriteria);
+		this.setTopicValues(topicValues);
+	}
 
 	public List<Class<? extends Criterion>> getRemainDiscussedCrt() {
 
@@ -79,8 +88,9 @@ public class DialogueContext {
 
 
 	public Class<? extends Criterion> getCurrentDisucussedCriterion(){
-
-		return this.discussedCriteria.get(discussedCriteria.size() -1);
+		if(discussedCriteria.isEmpty())
+			return openNewDiscussion(topicValues);
+		return this.discussedCriteria.get(discussedCriteria.size()-1);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -216,4 +226,11 @@ public class DialogueContext {
 		this.topicValues = topicValues;
 	}
 
+	
+	public DialogueContext clone(){
+		 List<NegotiationUtterance> history = new ArrayList<NegotiationUtterance>(this.getHistory());
+		 List<Class<? extends Criterion>> discussedCriteria = new ArrayList<Class<? extends Criterion>>(this.discussedCriteria); 
+		 List<Class<? extends Criterion>> closedCriteria = new ArrayList<Class<? extends Criterion>>(this.closedCriteria);
+		 return new DialogueContext(this.topicValues, history, discussedCriteria, closedCriteria);
+	}
 }

@@ -221,7 +221,7 @@ public class NegotiatorAgent extends Agent {
 					// do a statement from the remain values !
 
 					Criterion  value = sts.get(0);
-					Satisfiable status = getNegotiation().getValueNegotiation(value.getClass()).getSelf().isSatisfiable(value, getNegotiation().self());
+					Satisfiable status =getSatisfiable(value);
 					return new StatePreference(disco, false, value, status);
 				}
 
@@ -342,7 +342,7 @@ public class NegotiatorAgent extends Agent {
 		CriterionNegotiation<Criterion> cr = getNegotiation().getValueNegotiation(ask.getCriterion());
 		if(ask.getValue() != null){
 			Criterion asked = ask.getValue();
-			Satisfiable sat = cr.getSelf().isSatisfiable(asked, getNegotiation().self());
+			Satisfiable sat = getSatisfiable(asked);
 			return new Statement<Criterion>(ask.getValue(), sat);
 			
 		}
@@ -351,8 +351,6 @@ public class NegotiatorAgent extends Agent {
 			return new Statement<Criterion>(respond, fr.limsi.negotiate.Statement.Satisfiable.TRUE);
 
 		}
-
-
 	}
 
 	public Proposal createProposal(Object o, boolean isSelf){
@@ -366,9 +364,12 @@ public class NegotiatorAgent extends Agent {
 		return null;
 
 	}
-	public fr.limsi.negotiate.Statement.Satisfiable Satisfiable (Criterion c){
-		return getNegotiation().getValueNegotiation(c.getClass()).getSelf().isSatisfiable(c, getNegotiation().self());
+	
+	public Satisfiable getSatisfiable (Criterion c){
+		return getNegotiation().getValueNegotiation(c.getClass()).getSelf().isSatisfiable(c, getNegotiation().getDominance());
 	}
+	
+	
 	public Proposal createProposal(Object o, boolean isSelf, Status status){
 		if(o == null)
 			return null;

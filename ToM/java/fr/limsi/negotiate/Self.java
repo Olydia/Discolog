@@ -26,7 +26,6 @@ public abstract class Self<C> {
 	}
 
 
-
 	public List<C> sortValues(){
 		List<C> elems = getElements();
 		return (sortValues(elems));

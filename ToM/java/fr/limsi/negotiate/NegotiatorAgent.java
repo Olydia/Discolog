@@ -10,9 +10,8 @@ import edu.wpi.disco.plugin.DecompositionPlugin;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.toyExample.ToyModel;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 // TODO:  Further optimizations:
 //
@@ -23,7 +22,7 @@ import fr.limsi.negotiate.toyExample.ToyModel;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.2;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -56,12 +55,12 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		//totalOrderedModels model = new totalOrderedModels();
+		totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		ToyModel model = new ToyModel();
+		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
+				new NegotiatorAgent("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -114,7 +113,9 @@ public class NegotiatorAgent extends Agent {
 			
 			else{
 
-				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				Class<? extends Criterion> opent = getNegotiation().getCriteria().getElements().get(0);
+
 
 				if(relation > NegotiationParameters.pi){
 
@@ -225,7 +226,7 @@ public class NegotiatorAgent extends Agent {
 					// do a statement from the remain values !
 
 					Criterion  value = sts.get(0);
-					Satisfiable status = getNegotiation().getValueNegotiation(value.getClass()).getSelf().isSatisfiable(value, getNegotiation().self());
+					Satisfiable status = getSatisfiable(value);
 					return new StatePreference(disco, false, value, status);
 				}
 
@@ -346,7 +347,7 @@ public class NegotiatorAgent extends Agent {
 		CriterionNegotiation<Criterion> cr = getNegotiation().getValueNegotiation(ask.getCriterion());
 		if(ask.getValue() != null){
 			Criterion asked = ask.getValue();
-			Satisfiable sat = cr.getSelf().isSatisfiable(asked, getNegotiation().self());
+			Satisfiable sat = getSatisfiable(asked);
 			return new Statement<Criterion>(ask.getValue(), sat);
 			
 		}
@@ -370,8 +371,8 @@ public class NegotiatorAgent extends Agent {
 		return null;
 
 	}
-	public fr.limsi.negotiate.Statement.Satisfiable Satisfiable (Criterion c){
-		return getNegotiation().getValueNegotiation(c.getClass()).getSelf().isSatisfiable(c, getNegotiation().self());
+	public Satisfiable getSatisfiable (Criterion c){
+		return getNegotiation().getValueNegotiation(c.getClass()).getSelf().isSatisfiable(c, getNegotiation().getDominance());
 	}
 	public Proposal createProposal(Object o, boolean isSelf, Status status){
 		if(o == null)

@@ -511,5 +511,29 @@ public class Negotiation<O extends Option> {
 		return options;
 		
 	}
+	
+	/**
+	 * User to compute the format (Check models/Negotiate.properties) of the rejectPropose utterance. 
+	 * @param p1 Rejected proposal
+	 * @param p2 Counter propose
+	 * @return 
+	 */
+	public boolean match(Proposal p1, Proposal p2){
+		if(p1.getClass().equals(p2.getClass()))
+			return p1.equals(p2);
+		if(p1 instanceof OptionProposal){
+			Option p = (Option) p1.getValue();
+			@SuppressWarnings("unchecked")
+			Criterion c = p.getValue((Class<? extends Criterion>) p2.getValue().getClass());
+			return(c.equals(p2.getValue()));
+		}
+		if(p1 instanceof CriterionProposal){
+			Option op = (Option) p2.getValue();
+			@SuppressWarnings("unchecked")
+			Criterion c = op.getValue((Class<? extends Criterion>) p1.getValue().getClass());
+			return(c.equals(p1.getValue()));
+		}
+		return false;
+	}
 
 }
