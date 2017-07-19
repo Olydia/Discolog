@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 
 public class ChatBoard extends AnchorPane{
 
-	static double relation=0.9;
+	static double relation=0.4;
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
 
@@ -142,10 +142,10 @@ public class ChatBoard extends AnchorPane{
 
 	}
 
-	public Interaction interact(String username){
+	/*public Interaction interact(String username){
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
-			 ExampleAgent agent1= new ExampleAgent("agent", model.model1());
+			 ExampleAgent agent1= new ExampleAgent("Alfred", model.model1());
 			 agent=agent1;
 			 Interaction interaction = new Interaction(
 						agent1,
@@ -159,7 +159,7 @@ public class ChatBoard extends AnchorPane{
 				//negotiation=agent.getNegotiation();
 
 				return interaction;
-	}
+	}*/
 
 	public void colorButtons(ArrayList<Button> cButtons){
 		for (int i=0;i<cButtons.size();i++){
@@ -267,13 +267,13 @@ public class ChatBoard extends AnchorPane{
 
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
-			 ExampleAgent agent= new ExampleAgent("agent", model.model1());
+			 ExampleAgent agent= new ExampleAgent("Alfred", model.model1());
 			 User user= new User(username);
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,
 						/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
 				interaction.load("models/Negotiate.xml");
-				((ExampleAgent) interaction.getSystem()).setRelation(0.9);
+				((ExampleAgent) interaction.getSystem()).setRelation(relation);
 
 
 				interaction.setGuess(false);
@@ -2260,7 +2260,10 @@ public class ChatBoard extends AnchorPane{
 			        		if (command2!="") command=command+"/"+command2;
 			        		//Reste à vérifier le cas de DOMINANT
 			        		//String cmd="fr.limsi.negotiate.lang.Propose/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.NORTH_SIDE)";
-			        		//System.out.println(command);
+			        		System.out.println(command);
+			        		/*if (relation==0.9){
+			        			interaction.getConsole().next("true");
+			        		}*/
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
