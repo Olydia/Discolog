@@ -15,5 +15,7 @@ public class chatConsole extends OutputStream{
 	    {
 	        output.appendText(String.valueOf((char) i));
 	        output.setStyle("-fx-font-size: 16px;");
+
+
 	    }
 }

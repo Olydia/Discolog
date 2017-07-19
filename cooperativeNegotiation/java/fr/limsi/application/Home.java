@@ -185,75 +185,7 @@ public class Home extends Application {
 
  public static void main(String[] args) {
 	 launch(args);
-	/* totalOrderedModels model = new totalOrderedModels();
 
-		Interaction interaction = new Interaction(
-				new ExampleAgent("agent", model.model1()),
-				new User("user"),
-				args.length > 0 && args[0].length() > 0 ? args[0] : null);
-		interaction.load("models/Negotiate.xml");
-		((ExampleAgent) interaction.getSystem()).setRelation(0.9);
-
-		// do not guess recipes, since using DecompositionPlugin below
-		interaction.setGuess(false);
-		// TODO: enable random choice among applicable utterances (disabled
-		//       for now to make debugging easier
-		// Agent.RANDOM = new Random(12345);
-		interaction.start(true); // give user first turn
-			String lien="C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test";
-			Console cnsl=new Console(lien,interaction);
-		    String cmd="fr.limsi.negotiate.lang.RejectState/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE)/Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE";
-
-		    cnsl.execute(cmd);
-		    String FILENAME = "C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test";
-		    BufferedReader br = null;
-			FileReader fr = null;
-
-			try {
-
-				fr = new FileReader(FILENAME);
-				br = new BufferedReader(fr);
-
-				String sCurrentLine;
-
-				br = new BufferedReader(new FileReader(FILENAME));
-
-				while ((sCurrentLine = br.readLine()) != null) {
-					try{
-						File ff=new File("C:\\Users\\dhouib\\Desktop\\test.txt");
-						ff.createNewFile();
-						FileWriter ffw=new FileWriter(ff);
-						ffw.write(sCurrentLine);  // écrire une ligne dans le fichier resultat.txt
-						ffw.write("\n"); // forcer le passage à la ligne
-						ffw.close(); // fermer le fichier à la fin des traitements
-						} catch (Exception e) {}
-					System.out.println("1");
-					}
-
-
-
-
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
-			} finally {
-
-				try {
-
-					if (br != null)
-						br.close();
-
-					if (fr != null)
-						fr.close();
-
-				} catch (IOException ex) {
-
-					ex.printStackTrace();
-
-				}
-
-			}*/
 
 
     }

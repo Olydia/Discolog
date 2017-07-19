@@ -2,14 +2,6 @@
      -fx-background-image: url("a.jpg");
 }
 
-/* .pane {
--fx-background-color: linear-gradient( #f0f8ff, #b0c4de);
--fx-background-color: linear-gradient( cornsilk, tan);
--fx-background-radius: 5,4,3,5;
--fx-background-insets: 4,4,4,4;
-
-}*/
-
 
 .split-pane:horizontal > * > .split-pane-divider {
   -fx-border-color: transparent;
@@ -30,12 +22,6 @@
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
- /* #welcome-text {
-   -fx-font-size: 32px;
-   -fx-font-family: "Arial Black";
-   -fx-fill: #818181;
-   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
-}*/
 #actiontarget {
   -fx-fill: BLACK;
   -fx-font-weight: bold;
@@ -55,14 +41,15 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 .button:hover {
-       -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+
 }
 .button .text {
 -fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.8), 0, 0.0 , 0 , -1 );
 }
 
 .button:pressed {
- 
+ -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+
 }
 
 .check-box  {

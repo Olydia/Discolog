@@ -8,22 +8,22 @@ import fr.limsi.negotiate.*;
 public abstract class NegotiationUtterance extends Utterance {
 
    // for extensions
-   protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Decomposition decomp, 
-         String step, boolean repeat) { 
+   protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Decomposition decomp,
+         String step, boolean repeat) {
       super(cls, disco, decomp, step, repeat);
    }
 
    // for extensions
-   protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Boolean external) { 
+   protected NegotiationUtterance (Class<? extends NegotiationUtterance> cls, Disco disco, Boolean external) {
       super(cls, disco, external);
 
    }
 
    public Negotiation<?> getNegotiation () {
-      return ( (NegotiatorAgent) getDisco().getInteraction().getSystem()).getNegotiation();
-      
+      return ( (ExampleAgent) getDisco().getInteraction().getSystem()).getNegotiation();
+
    }
-   
+
 	public abstract Object getValue();
 
 
