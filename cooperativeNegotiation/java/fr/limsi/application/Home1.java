@@ -45,9 +45,9 @@ import edu.wpi.disco.User;
 import fr.limsi.negotiate.ExampleAgent;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
-public class Home extends Application {
+public class Home1 extends Application {
 	String username;
-	public Home(){
+	public Home1(){
 
 	}
 
@@ -74,9 +74,9 @@ public class Home extends Application {
        // Scene scene = new Scene(pane, 400, 300);
         homeStage.setScene(scene);
         scene.getStylesheets().add
-        (Home.class.getResource("application2.css").toExternalForm());
+        (Home1.class.getResource("application2.css").toExternalForm());
         homeStage.show();
-        Chat chat=new Chat();
+        Chat1 chat=new Chat1();
     	Stage chatStage=new Stage();
 
         /*The name label*/

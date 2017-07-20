@@ -27,7 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class ChatBoard extends AnchorPane{
+public class ChatBoard1 extends AnchorPane{
 
 	static double relation=0.4;
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
@@ -39,7 +39,7 @@ public class ChatBoard extends AnchorPane{
 
 	public String[] details = new String[8];
 
-	public ChatBoard(){
+	public ChatBoard1(){
 
 	}
 	public ObservableList<String> getOpenOptionsList(){
@@ -267,7 +267,7 @@ public class ChatBoard extends AnchorPane{
 
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
-			 ExampleAgent agent= new ExampleAgent("Alfred", model.model1());
+			 ExampleAgent agent= new ExampleAgent("Arthur", model.model1());
 			 User user= new User(username);
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,
@@ -279,9 +279,6 @@ public class ChatBoard extends AnchorPane{
 				interaction.setGuess(false);
 
 				interaction.start(true); // give user first turn
-
-
-
 		/*Connecting with Disco*/
 
 		//String lien="C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test";
@@ -311,7 +308,7 @@ public class ChatBoard extends AnchorPane{
         	       // Scene scene = new Scene(pane, 400, 300);
         	     optionStage.setScene(scene);
         	     scene.getStylesheets().add
-        	        (Home.class.getResource("application2.css").toExternalForm());
+        	        (Home1.class.getResource("application2.css").toExternalForm());
 
 	    for (int i=0;i<8;i++){
 	    	details[i]="";
@@ -639,12 +636,6 @@ public class ChatBoard extends AnchorPane{
 
 		   setTopAnchor(sendHBox,400.0);
 		   setLeftAnchor(sendHBox,600.0);
-
-		   /*setTopAnchor(sendHBox,10.0);
-		   setLeftAnchor(sendHBox,1100.0);*/
-
-		  // setTopAnchor(exitHBox,450.0);
-		   //setLeftAnchor(exitHBox,1110.0);
 
 		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
 
@@ -1001,10 +992,6 @@ public class ChatBoard extends AnchorPane{
 		     		setTopAnchor(proposeCriterionLabel,150.0);
 		     		setLeftAnchor(proposeCriterionLabel,100.0);
 		     		setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
-
-
-
-
 	            }
 	        });
 
@@ -1039,7 +1026,7 @@ public class ChatBoard extends AnchorPane{
 	        	       // Scene scene = new Scene(pane, 400, 300);
 	        	     optionStage.setScene(scene);
 	        	     scene.getStylesheets().add
-	        	        (Home.class.getResource("application2.css").toExternalForm());
+	        	        (Home1.class.getResource("application2.css").toExternalForm());
 	            	optionChoice.start(optionStage);
 	            //	setTopAnchor(list.get(list.size()-1),300.0);
 	            	//setLeftAnchor(list.get(list.size()-1),400.0);
@@ -1108,8 +1095,6 @@ public class ChatBoard extends AnchorPane{
 
 
 	            //	list.addAll(proposeCriterionLabel);
-
-
 	            }
 	        });
 
@@ -1135,9 +1120,7 @@ public class ChatBoard extends AnchorPane{
 		     		setTopAnchor(sendHBox,350.0);
 	            	setLeftAnchor(sendHBox,600.0);
 
-
 	            	list.add(acceptLabel);
-
 	            }
 	        });
 
@@ -1419,13 +1402,14 @@ public class ChatBoard extends AnchorPane{
 
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
-	            	noButton.setStyle(on);
-	            	yesButton.setStyle(off);
-	            	list.clear();
-	            	list.addAll(acceptButton,rejectButton,proposeButton,stateButton,stopButton,actionLabel);
-	            	//list.removeAll(stateButton,askGeneralButton,askSpecificButton,proposeValueButton,proposeOptionButton,rejectOnlyHBox,rejectStateHBox,rejectProposeHBox ,stopLabel,noHBox,yesHBox,c1HBox,c2HBox,c3HBox,c4HBox);
 
-	            	//list.removeAll(co1Button, co2Button, co3Button,co4Button,c1Button,c2Button,c3Button,c4Button,acceptCriterionLabel,acceptOptionLabel,proposeCriterionLabel,proposeOptionLabel,rejectOptionLabel,rejectCriterionLabel);
+	            	list.clear();
+		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+	            	proposeButton.setStyle(off);
+	            	acceptButton.setStyle(off);
+	            	rejectButton.setStyle(off);
+	            	stateAskButton.setStyle(off);
+	            	stopButton.setStyle(off);
 
 	            }
 	        });
@@ -2258,12 +2242,9 @@ public class ChatBoard extends AnchorPane{
 			        		}
 			        		command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
 			        		if (command2!="") command=command+"/"+command2;
-			        		//Reste à vérifier le cas de DOMINANT
-			        		//String cmd="fr.limsi.negotiate.lang.Propose/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.NORTH_SIDE)";
-			        		System.out.println(command);
-			        		/*if (relation==0.9){
-			        			interaction.getConsole().next("true");
-			        		}*/
+
+			        		//System.out.println(command);
+
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
