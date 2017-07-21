@@ -270,7 +270,7 @@ public class ChatBoard2 extends AnchorPane{
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
 			 ExampleAgent agent= new ExampleAgent("Bob", model.model1());
-			 User user= new User(username);
+			 User user= new User("User");
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,
 						/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
@@ -328,7 +328,7 @@ public class ChatBoard2 extends AnchorPane{
       	ArrayList<String> openList =new ArrayList<String>();
 
 		/*Labels*/
-		Label actionLabel = new Label("What do you want to say "+username+"?");
+		Label actionLabel = new Label("What do you want to say?");
 		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
 		Label acceptLabel = new Label("What do you want to accept?");
 		//Label proposeOptionLabel = new Label("What "+situation+" do you want to propose?  (Select the criteria to find the option you chose)");
@@ -1450,8 +1450,8 @@ public class ChatBoard2 extends AnchorPane{
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
 
-	            	File fichier1 = new File("C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test");
-	            	File fichier2 = new File("C:\\Users\\dhouib\\Desktop\\test2.txt");
+	            	File fichier1 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"AppData"+File.separator+"Local"+File.separator+"Temp"+File.separator+"Console.test");
+	            	File fichier2 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"Desktop"+File.separator+"test2"+username+".txt");
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);

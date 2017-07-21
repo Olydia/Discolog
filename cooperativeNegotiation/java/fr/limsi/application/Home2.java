@@ -80,7 +80,7 @@ public class Home2 extends Application {
     	Stage chatStage=new Stage();
 
         /*The name label*/
-        Label userName = new Label("User Name:");
+        Label userName = new Label("The experience number");
         //grid.add(userName, 0, 1);
         userName.setId("label");
 
@@ -138,7 +138,7 @@ public class Home2 extends Application {
 
         AnchorPane.setTopAnchor(userTextField,400.0);
         AnchorPane.setBottomAnchor(userTextField,585.0);
-        AnchorPane.setLeftAnchor(userTextField,600.0);
+        AnchorPane.setLeftAnchor(userTextField,650.0);
 
         AnchorPane.setTopAnchor(cb,450.0);
         //setBottomAnchor(cb,200.0);
@@ -158,7 +158,7 @@ public class Home2 extends Application {
 
         ObservableList list = pane.getChildren();
 
-        list.addAll(sceneTitle,pw,userName,userTextField,cb,hbBtn);
+        list.addAll(sceneTitle/*,pw*/,userName,userTextField/*,cb*/,hbBtn);
 
 
 
@@ -166,18 +166,18 @@ public class Home2 extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-                if (cb.getValue()==null){
+               /* if (cb.getValue()==null){
                 	//grid.getChildren().remove(errorMessage);
                 	//grid.add(errorMessage, 1, 7);
                 	errorMessage.setText("You must choose a situation");
                 	list.add(errorMessage);
                 }
-                else{
+                else{*/
             	chat.username=userTextField.getText();
-            	chat.situation=(String) cb.getValue();
+            	chat.situation=/*(String) cb.getValue()*/"restaurant";
             	chat.start(chatStage);
             	homeStage.hide();
-                }
+               // }
             }
         });
 
