@@ -2,6 +2,7 @@ package fr.limsi.application;
 
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
 import java.util.ArrayList;
 import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;
@@ -1424,6 +1425,11 @@ public class ChatBoard1 extends AnchorPane{
 
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
+	            	File fichier1 = new File("C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test");
+	            	File fichier2 = new File("C:\\Users\\dhouib\\Desktop\\test1.txt");
+
+	            	writeHistory history=new writeHistory();
+	            	history.copyFile(fichier1,fichier2);
 
 	            }
 	        });

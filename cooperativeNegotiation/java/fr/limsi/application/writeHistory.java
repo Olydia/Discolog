@@ -1,9 +1,12 @@
 package fr.limsi.application;
 import java.io.FileOutputStream;
+
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +18,7 @@ public class writeHistory {
 	public void write(String txt){
 		try{
 			File ff=new File("C:\\Users\\dhouib\\Desktop\\test.txt");
-			ff.createNewFile();
+			//ff.createNewFile();
 			FileWriter ffw=new FileWriter(ff);
 			ffw.write(txt);  // écrire une ligne dans le fichier resultat.txt
 			ffw.write("\n"); // forcer le passage à la ligne
@@ -43,21 +46,23 @@ public class writeHistory {
 			catch (Exception e){
 				System.out.println(e.toString());
 			}
-	/*
-			//création ou ajout dans le fichier texte
-			try {
-				FileWriter fw = new FileWriter (fichier);
-				BufferedWriter bw = new BufferedWriter (fw);
-				PrintWriter fichierSortie = new PrintWriter (bw);
-					fichierSortie.println (chaine+"\n test de lecture et écriture !!");
-				fichierSortie.close();
-				System.out.println("Le fichier " + fichier + " a été créé!");
-				return chaine;
-			}
-			catch (Exception e){
-				System.out.println(e.toString());
-			}*/
+
 			return chaine;
+		}
+		public boolean copyFile(File source, File dest) {
+		    try (InputStream sourceFile = new java.io.FileInputStream(source);
+		            OutputStream destinationFile = new FileOutputStream(dest)) {
+		        // Lecture par segment de 0.5Mo
+		        byte buffer[] = new byte[512 * 1024];
+		        int nbLecture;
+		        while ((nbLecture = sourceFile.read(buffer)) != -1){
+		            destinationFile.write(buffer, 0, nbLecture);
+		        }
+		    } catch (IOException e){
+		        e.printStackTrace();
+		        return false; // Erreur
+		    }
+		    return true; // Résultat OK
 		}
 
 

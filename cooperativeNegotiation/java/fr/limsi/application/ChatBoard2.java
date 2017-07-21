@@ -2,6 +2,7 @@ package fr.limsi.application;
 
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import edu.wpi.disco.*;
@@ -1445,16 +1446,15 @@ public class ChatBoard2 extends AnchorPane{
 
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
-	            	//list.removeAll(stateButton,askGeneralButton,askSpecificButton,proposeValueButton,proposeOptionButton,rejectOnlyHBox,rejectStateHBox,rejectProposeHBox ,stopLabel,noHBox,yesHBox,c1HBox,c2HBox,c3HBox,c4HBox);
-
-	            	//list.removeAll(co1Button, co2Button, co3Button,co4Button,c1Button,c2Button,c3Button,c4Button,acceptCriterionLabel,acceptOptionLabel,proposeCriterionLabel,proposeOptionLabel,rejectOptionLabel,rejectCriterionLabel);
 
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
-	            //	interaction.
-	            	//interaction.getConsole().history("");
+
+	            	File fichier1 = new File("C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test");
+	            	File fichier2 = new File("C:\\Users\\dhouib\\Desktop\\test2.txt");
+
 	            	writeHistory history=new writeHistory();
-	            	history.read();
+	            	history.copyFile(fichier1,fichier2);
 	            }
 	        });
 
