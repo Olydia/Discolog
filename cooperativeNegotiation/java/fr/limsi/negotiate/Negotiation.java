@@ -14,7 +14,7 @@ public class Negotiation<O extends Option> {
 	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
-	private double relation=0; 
+	private double relation=0;
 	private DialogueContext context ;
 
 
@@ -28,9 +28,9 @@ public class Negotiation<O extends Option> {
 		this.context = new DialogueContext(criteria.sortValues());
 
 	}
-	
+
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation, double relation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c,
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
@@ -40,10 +40,10 @@ public class Negotiation<O extends Option> {
 		setCriteria(criteriaNegotiation);
 		this.context = c;
 	}
-	
+
 	// for Guess class
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
-			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
+			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c,
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
@@ -52,7 +52,7 @@ public class Negotiation<O extends Option> {
 		setCriteria(criteriaNegotiation);
 		this.context = c;
 	}
-	
+
 	public ArrayList<OptionProposal> getProposals() {
 		return proposals;
 	}
@@ -73,7 +73,7 @@ public class Negotiation<O extends Option> {
 	}
 
 	public O[] getOptions(){
-		return (topic.getEnumConstants()); 
+		return (topic.getEnumConstants());
 	}
 	public void propose(OptionProposal p){
 		this.proposals.add(p);
@@ -135,9 +135,9 @@ public class Negotiation<O extends Option> {
 			return Math.max(0, s);
 		}
 	}
-	
+
 	public double selfTest(int t){
-		
+
 		double s=0;
 		if( t< NegotiationParameters.tau)
 			return this.relation;
@@ -157,14 +157,14 @@ public class Negotiation<O extends Option> {
 		//			 proposal.removeAll(rejected);
 		//			 t += rejected.size();
 		//
-		//			 
+		//
 		//		}
 		//		 proposal.removeAll(getOptionsProposals(Status.ACCEPTED));
 		//		 List<OptionProposal> optionRejected = getOptionsProposals(Status.REJECTED);
 		//		 proposal.removeAll(optionRejected);
-		//		 
+		//
 		//		 t+= optionRejected.size();
-		//		 
+		//
 		//		 t+= proposal.size();
 		//		return t;
 		return getContext().getNonAcceptedProposals().size();
@@ -186,14 +186,32 @@ public class Negotiation<O extends Option> {
 
 
 	public void addProposal(Proposal proposal) {
+
 		if (proposal instanceof CriterionProposal) {
 			Criterion value = (Criterion) proposal.getValue();
-			getValueNegotiation(value.getClass()).propose((CriterionProposal) proposal);
+			CriterionNegotiation<Criterion> model = getValueNegotiation(value.getClass());
+
+			if(!existProposal(model.getProposals(), proposal))
+				model.propose((CriterionProposal) proposal);
 
 		}
 
 		if(proposal instanceof OptionProposal)
-			this.propose((OptionProposal) proposal);
+			if(!existProposal(getProposals(), proposal))
+				this.propose((OptionProposal) proposal);
+	}
+	/**
+	 *
+	 * @param proposal List of proposal
+	 * @param p propsal which we are looking for
+	 * @return
+	 */
+	public boolean existProposal(ArrayList<? extends Proposal> proposals, Proposal p){
+		for( Proposal pp : proposals){
+			if(pp.isSameProopsal(p))
+				return true;
+		}
+		return false;
 	}
 
 	public void updateProposal(OptionProposal proposal){
@@ -215,14 +233,14 @@ public class Negotiation<O extends Option> {
 
 
 	public boolean negotiationFailure(Utterance utterance){
-		if (getContext().getHistory().size()>= 40 && 
+		if (getContext().getHistory().size()>= 40 &&
 				!(utterance instanceof Propose || utterance instanceof Accept))
 			return true;
 
 		//if(getDominance()>=0){
 		List<Option> remainOptions= nonRejectedOptions();//getAcceptableOptions(nonRejectedOptions());
 		return (remainOptions.isEmpty());
-		//|| 
+		//||
 		//	getAcceptableOptions().isEmpty());
 		//}
 		//		else
@@ -311,7 +329,7 @@ public class Negotiation<O extends Option> {
 			//					}
 			//				}
 			//
-			//				
+			//
 			//			}
 		}
 		return options;
@@ -365,7 +383,7 @@ public class Negotiation<O extends Option> {
 		for(int i = discussions.size()-1; i>=0; i--){
 			CriterionNegotiation<Criterion> elm = getValueNegotiation(discussions.get(i));
 			List<Criterion> acc = elm.getAcceptableValues(elm.remainProposals(), self);
-			if(acc.isEmpty())	
+			if(acc.isEmpty())
 				return null;
 
 			Criterion value = elm.chooseValue(acc,self);
@@ -405,11 +423,11 @@ public class Negotiation<O extends Option> {
 
 		Criterion c = chooseCriterionProposal();
 		if(c!=null){
-		//Any value is accepted yet 
+		//Any value is accepted yet
 			if(getContext().getClosedCriteria().isEmpty() && c != null){
 				return new CriterionProposal(true,c);
 			}
-			
+
 			// Otherwise
 			return(tolerable(bestOption) > getValueNegotiation(c.getClass()).tolerable(c, self())?
 					new OptionProposal(true, bestOption): new CriterionProposal(true, c));
@@ -470,12 +488,12 @@ public class Negotiation<O extends Option> {
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
 		NegotiationUtterance uttSelf =  getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
-		
-				
+
+
 		return (uttSelf instanceof ProposalUtterance);
 
 	}
-	
+
 	public void clearNegotiation(){
 		this.proposals.clear();
 		this.context.clearNegotiation();
@@ -487,16 +505,16 @@ public class Negotiation<O extends Option> {
 	public Proposal createProposal(Object e){
 		if (e instanceof Criterion)
 			return new CriterionProposal((Criterion)e);
-		
+
 		else if (e instanceof Option)
 			return new OptionProposal((Option)e);
-		
+
 		return null;
 	}
 	/**
-	 * 
+	 *
 	 * @param values : list des criteres choisis par l'utilisateur
-	 * a noter que chaque critere a un type différent 
+	 * a noter que chaque critere a un type différent
 	 * @return
 	 */
 	public List<Option> getOptionWithValues(List<Criterion> values) {
@@ -509,14 +527,14 @@ public class Negotiation<O extends Option> {
 			}
 		}
 		return options;
-		
+
 	}
-	
+
 	/**
-	 * User to compute the format (Check models/Negotiate.properties) of the rejectPropose utterance. 
+	 * User to compute the format (Check models/Negotiate.properties) of the rejectPropose utterance.
 	 * @param p1 Rejected proposal
 	 * @param p2 Counter propose
-	 * @return 
+	 * @return
 	 */
 	public boolean match(Proposal p1, Proposal p2){
 		if(p1.getClass().equals(p2.getClass()))

@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.ExampleAgent;
 import fr.limsi.negotiate.OptionProposal;
@@ -53,17 +54,17 @@ public class ChatBoard1 extends AnchorPane{
 		    return observableOpenList;
 	}
 
-	public ObservableList<String> getOpenCriteriaList(){
-		ArrayList<String> openList =new ArrayList<String>();
-
-		  	//System.out.println(agent.getNegotiation().getOptionsProposals(Status.OPEN).size());
-		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
-		   		openList.add(co.toString());
-		   		}
-		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
-		    openList.clear();
-		    return observableOpenList;
-	}
+//	public ObservableList<String> getOpenCriteriaList(){
+//		ArrayList<String> openList =new ArrayList<String>();
+//
+//		  	//System.out.println(agent.getNegotiation().getOptionsProposals(Status.OPEN).size());
+//		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
+//		   		openList.add(co.toString());
+//		   		}
+//		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
+//		    openList.clear();
+//		    return observableOpenList;
+//	}
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
 		for (int i=0;i<c.length;i++){
@@ -328,7 +329,7 @@ public class ChatBoard1 extends AnchorPane{
 		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
 		Label acceptLabel = new Label("What do you want to accept?");
 		//Label proposeOptionLabel = new Label("What "+situation+" do you want to propose?  (Select the criteria to find the option you chose)");
-		Label proposeCriterionLabel = new Label("What criterion do you want to propose?  (Select the criteria to find the option you chose)");
+		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
 		//Label stateLabel = new Label("What do you want to state?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
@@ -704,59 +705,45 @@ public class ChatBoard1 extends AnchorPane{
 	            	stateAskButton.setStyle(off);
 	            	stopButton.setStyle(off);
 
-	            	/*answer1.setText("Okay, let's go to ");
-	            	answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");*/
-
-	            	/*setTopAnchor(acceptOptionHBox,100.0);
-	            	setLeftAnchor(acceptOptionHBox,400.0);
-
-
-	     		  	setTopAnchor(acceptProposeHBox ,100.0);
-	     		   	setLeftAnchor(acceptProposeHBox ,750.0);*/
-
-
-	     		 //  for (CriterionNegotiation<Criterion>cr: agent.getNegotiation().getValuesNegotiation()){
-	     		  /* for (CriterionProposal p: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
-	     		   		openList.add(p.toString());
-	     		   		}*/
-	     		//   }
-
-
 	     		   	openList.clear();
-	     		   	if (situation=="restaurant"){
-		     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
+//	     		   	if (situation=="restaurant"){
+	     		   		for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+	     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+			    				openList.add(co.toString());
 
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
+	     		   		}
 
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   	}
-	     		   	else{
-	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   	}
+//		     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+	//     		   	}
+//	     		   	else{
+//	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
+//
+//		    				openList.add(co.toString());
+//		    		   		}
+//	     		   	}
 
 
 	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){

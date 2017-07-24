@@ -332,7 +332,7 @@ public class ChatBoard2 extends AnchorPane{
 		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
 		Label acceptLabel = new Label("What do you want to accept?");
 		//Label proposeOptionLabel = new Label("What "+situation+" do you want to propose?  (Select the criteria to find the option you chose)");
-		Label proposeCriterionLabel = new Label("What criterion do you want to propose?  (Select the criteria to find the option you chose)");
+		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
 		//Label stateLabel = new Label("What do you want to state?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");

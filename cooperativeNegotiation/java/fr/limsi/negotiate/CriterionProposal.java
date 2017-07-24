@@ -1,10 +1,10 @@
 package fr.limsi.negotiate;
 
 /**
- * 
+ *
  * @author Charles rich
  * 	Criterion proposal
- */ 
+ */
 public class CriterionProposal extends Proposal {
 
 	@Override
@@ -19,7 +19,7 @@ public class CriterionProposal extends Proposal {
 		super(isSelf);
 		this.criterion = criterion;
 	}
-	
+
 	public CriterionProposal (Criterion criterion) {
 		super();
 		this.criterion = criterion;
@@ -30,7 +30,7 @@ public class CriterionProposal extends Proposal {
 	Criterion getValue() {
 		return criterion;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj){
 		if ( this == obj )
@@ -48,7 +48,7 @@ public class CriterionProposal extends Proposal {
 
 		return true;
 	}
-	
+
 	@Override
 	public int hashCode () {
 		final int prime = 31;
@@ -68,9 +68,11 @@ public class CriterionProposal extends Proposal {
 		String value = getValue().print(topic);
 		if("AEIOUaeiou".indexOf(value.charAt(0)) != -1)
 			return "an " + value;
-		
+
 		return "a " + value;
 	}
+
+
 
 
 }
