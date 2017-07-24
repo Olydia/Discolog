@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.ExampleAgent;
 import fr.limsi.negotiate.OptionProposal;
@@ -738,38 +739,11 @@ public class ChatBoard2 extends AnchorPane{
 
 
 	     		   	openList.clear();
-	     		   	if (situation=="restaurant"){
-		     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
-
+	     		   for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+    		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
 		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
 
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   	}
-	     		   	else{
-	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
-
-		    				openList.add(co.toString());
-		    		   		}
-	     		   	}
+    		   		}
 
 
 	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
@@ -822,41 +796,16 @@ public class ChatBoard2 extends AnchorPane{
 	     		   	setLeftAnchor(rejectProposeHBox ,850.0);
 
 	     		   openList.clear();
-	     		   	if (situation=="restaurant"){
-	     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
+	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+		    				openList.add(co.toString());
 
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
+     		   		}
 
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	     		   	}
-	     		   	else{
-	     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	     		   	}
 	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
 	    		   		openList.add(op.toString());
 	    		   		}
+
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
 
 	            	open.setItems(observableOpenList);
@@ -865,8 +814,8 @@ public class ChatBoard2 extends AnchorPane{
 	            	rejectStateButton.setStyle(off);
 	            	rejectProposeButton.setStyle(off);
 	     		   	list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox );
-
 	            }
+
 	        });
 
 

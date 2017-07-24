@@ -706,45 +706,12 @@ public class ChatBoard1 extends AnchorPane{
 	            	stopButton.setStyle(off);
 
 	     		   	openList.clear();
-//	     		   	if (situation=="restaurant"){
+
 	     		   		for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
 	     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
 			    				openList.add(co.toString());
 
 	     		   		}
-
-//		     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-	//     		   	}
-//	     		   	else{
-//	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//	     		   		for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//		    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
-//
-//		    				openList.add(co.toString());
-//		    		   		}
-//	     		   	}
-
 
 	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
 	    		   		openList.add(op.toString());
@@ -796,38 +763,12 @@ public class ChatBoard1 extends AnchorPane{
 	     		   	setLeftAnchor(rejectProposeHBox ,850.0);
 
 	     		   openList.clear();
-	     		   	if (situation=="restaurant"){
-	     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Atmosphere.class).getProposalsWithStatus(Status.OPEN)){
+	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+		    				openList.add(co.toString());
 
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
+     		   		}
 
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cuisine.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Location.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	     		   	}
-	     		   	else{
-	     		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Category.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Country.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	    			for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Year.class).getProposalsWithStatus(Status.OPEN)){
-
-	    				openList.add(co.toString());
-	    		   		}
-	     		   	}
 	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
 	    		   		openList.add(op.toString());
 	    		   		}
