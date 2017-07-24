@@ -3,7 +3,9 @@ import fr.limsi.negotiate.Criterion;
 
 public enum ToyCost implements Criterion {
    
-   EXPENSIVE, CHEAP, AFFORDABLE;
+   EXPENSIVE, CHEAP
+   //, AFFORDABLE
+   ;
 
    public Criterion[] getValues() {
 	// TODO Auto-generated method stub

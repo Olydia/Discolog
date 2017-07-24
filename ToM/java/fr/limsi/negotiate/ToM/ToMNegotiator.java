@@ -197,11 +197,16 @@ public class ToMNegotiator extends NegotiatorAgent{
 			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
 				PrefNegotiation<Option> element = iterator.next();
 
-				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
+				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), 
+						entry.getKey(), previousUtt, disco);
 				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
 
 				if(identicalUtterances(guessUtt, guessed))
 					correct ++;
+				else{
+					if(guessUtt instanceof StatePreference)
+						iterator.remove();
+				}
 			}
 			double p = correct/total;
 			proba.put(entry.getKey(), p);
