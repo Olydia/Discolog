@@ -44,27 +44,7 @@ public class ChatBoard1 extends AnchorPane{
 	public ChatBoard1(){
 
 	}
-	public ObservableList<String> getOpenOptionsList(){
-			ArrayList<String> openList =new ArrayList<String>();
-		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
-		   		openList.add(op.toString());
-		   		}
-		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
-		    openList.clear();
-		    return observableOpenList;
-	}
 
-//	public ObservableList<String> getOpenCriteriaList(){
-//		ArrayList<String> openList =new ArrayList<String>();
-//
-//		  	//System.out.println(agent.getNegotiation().getOptionsProposals(Status.OPEN).size());
-//		   	for (CriterionProposal co: agent.getNegotiation().getValueNegotiation(Cost.class).getProposalsWithStatus(Status.OPEN)){
-//		   		openList.add(co.toString());
-//		   		}
-//		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
-//		    openList.clear();
-//		    return observableOpenList;
-//	}
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
 		for (int i=0;i<c.length;i++){
@@ -73,7 +53,11 @@ public class ChatBoard1 extends AnchorPane{
 
 		}
 	}
-
+	/**
+	 * @param ch: a string in a viewlist
+	 * @param situation: restaurant or movie
+	 * @return boolean: true if ch is a criterion
+	 */
 	public boolean isCriterion(String ch,String situation){
 
 		ArrayList<String> criteria =new ArrayList<String>();
@@ -99,7 +83,12 @@ public class ChatBoard1 extends AnchorPane{
 	   	return false;
 
 	}
-
+	/**
+	 * finds the criterion based on its value (in the form a string)
+	 * @param ch: a string in a list
+	 * @param situation: restaurant or movie
+	 * @return a string representing the criterion
+	 */
 	public String getCriterion(String ch,String situation){
 
 		ArrayList<String> tmp =new ArrayList<String>();
@@ -143,32 +132,25 @@ public class ChatBoard1 extends AnchorPane{
 		return criterion;
 
 	}
-
-	/*public Interaction interact(String username){
-		 totalOrderedModels model = new totalOrderedModels();
-		 //String[] args=null;
-			 ExampleAgent agent1= new ExampleAgent("Alfred", model.model1());
-			 agent=agent1;
-			 Interaction interaction = new Interaction(
-						agent1,
-						new User(username),null);
-				interaction.load("models/Negotiate.xml");
-				((ExampleAgent) interaction.getSystem()).setRelation(relation);
-
-				interaction.setGuess(false);
-
-				interaction.start(true); // give user first turn
-				//negotiation=agent.getNegotiation();
-
-				return interaction;
-	}*/
+	/**
+	 * colors the buttons as if they are released
+	 * @param cButtons
+	 */
 
 	public void colorButtons(ArrayList<Button> cButtons){
 		for (int i=0;i<cButtons.size();i++){
 			cButtons.get(i).setStyle(off);
 		}
 	}
-
+	/**
+	 * removes the buttons from the screen
+	 * @param c1HBoxs
+	 * @param c2HBoxs
+	 * @param c3HBoxs
+	 * @param c4HBoxs
+	 * @param list: the list of visible elements
+	 * @param situation: restaurant or movie
+	 */
 	public void clearLastButtons(ArrayList<HBox> c1HBoxs,ArrayList<HBox> c2HBoxs,ArrayList<HBox> c3HBoxs,ArrayList<HBox> c4HBoxs,ObservableList list,String situation){
 
 		if (situation=="restaurant")
@@ -355,8 +337,6 @@ public class ChatBoard1 extends AnchorPane{
 		Button counterproposeOptionButton = new Button("Option");
 		Button counterproposeValueButton = new Button("Criterion");
 
-		Button acceptOptionButton = new Button("Just accept");
-		Button acceptValueButton = new Button("I want to propose");
 		Button acceptProposeButton = new Button("Counterpropose");
 
 		Button rejectOnlyButton = new Button("Just Reject");
@@ -493,8 +473,7 @@ public class ChatBoard1 extends AnchorPane{
 		HBox counterproposeOptionHBox = new HBox(15);
 		HBox counterproposeValueHBox = new HBox(15);
 
-		HBox acceptOptionHBox = new HBox(15);
-		HBox acceptValueHBox = new HBox(15);
+
 		HBox acceptProposeHBox = new HBox(15);
 
 		HBox rejectOnlyHBox = new HBox(15);
@@ -558,8 +537,7 @@ public class ChatBoard1 extends AnchorPane{
 		counterproposeOptionHBox.getChildren().addAll(counterproposeOptionButton);
 		counterproposeValueHBox.getChildren().addAll(counterproposeValueButton);
 
-		acceptOptionHBox.getChildren().addAll(acceptOptionButton);
-		acceptValueHBox.getChildren().addAll(acceptValueButton);
+
 		acceptProposeHBox.getChildren().addAll(acceptProposeButton);
 
 		rejectOnlyHBox.getChildren().addAll(rejectOnlyButton);
@@ -719,10 +697,6 @@ public class ChatBoard1 extends AnchorPane{
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
 
 	            	open.setItems(observableOpenList);
-
-	            	acceptOptionButton.setStyle(off);
-	            	acceptProposeButton.setStyle(off);
-	     		   //	list.addAll(acceptOptionHBox,acceptProposeHBox );
 
 		     		list.addAll(open,sendHBox);
 		     		setTopAnchor(open,150.0);
@@ -1027,31 +1001,7 @@ public class ChatBoard1 extends AnchorPane{
 	            }
 	        });
 
-		   acceptOptionButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="Accept";
-	            	//acceptValueButton.setStyle(off);
-	            	acceptOptionButton.setStyle(on);
-	            	acceptProposeButton.setStyle(off);
-
-		     		answer1.setText(answer1.getText()+"Okay, let's go to  the ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
-
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(acceptOptionHBox,acceptProposeHBox,open,sendHBox);
-		     		setTopAnchor(open,200.0);
-		     		setLeftAnchor(open,400.0);
-		     		setTopAnchor(sendHBox,350.0);
-	            	setLeftAnchor(sendHBox,600.0);
-
-	            	list.add(acceptLabel);
-	            }
-	        });
 
 		   acceptProposeButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1147,18 +1097,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	rejectOnlyButton.setStyle(off);
 	            	rejectStateButton.setStyle(on);
 	            	rejectProposeButton.setStyle(off);
-
-	            	/*setTopAnchor(criterionHBox ,150.0);
-	     		   	setLeftAnchor(criterionHBox ,530.0);
-
-	     		  	setTopAnchor(optionHBox ,150.0);
-	     		   	setLeftAnchor(optionHBox ,730.0);*/
-
-	            	/*setTopAnchor(criterion2HBox ,300.0);
-	     		   	setLeftAnchor(criterion2HBox ,530.0);
-
-	     		  	setTopAnchor(option2HBox ,300.0);
-	     		   	setLeftAnchor(option2HBox ,730.0);*/
 
 	     		   setTopAnchor(open,150.0);
 		     		setLeftAnchor(open,400.0);
