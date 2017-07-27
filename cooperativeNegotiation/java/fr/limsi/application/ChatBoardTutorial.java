@@ -316,11 +316,11 @@ public class ChatBoardTutorial extends AnchorPane{
 		Button stateAskButton = new Button("State/Ask");
 		Button stopButton = new Button("Stop");
 
-		Button proposeOptionButton = new Button("Option");
-		Button proposeValueButton = new Button("Criterion");
+		Button proposeOptionButton = new Button(situation);
+		Button proposeValueButton = new Button("criterion");
 
-		Button counterproposeOptionButton = new Button("Option");
-		Button counterproposeValueButton = new Button("Criterion");
+		Button counterproposeOptionButton = new Button(situation);
+		Button counterproposeValueButton = new Button("criterion");
 
 //		Button acceptOptionButton = new Button("Just accept");
 //		Button acceptValueButton = new Button("I want to propose");
@@ -340,8 +340,8 @@ public class ChatBoardTutorial extends AnchorPane{
 		Button likeButton = new Button("I like ...");
 		Button dontLikeButton = new Button("I don't like ...");
 
-		Button optionButton = new Button("Option");
-		Button criterionButton = new Button("Criterion");
+		Button optionButton = new Button(situation);
+		Button criterionButton = new Button("criterion");
 
 		Button cG1Button = new Button();
 		Button cG2Button = new Button();

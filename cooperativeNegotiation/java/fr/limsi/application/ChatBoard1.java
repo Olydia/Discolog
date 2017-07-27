@@ -333,11 +333,11 @@ public class ChatBoard1 extends AnchorPane{
 		Button stateAskButton = new Button("State/Ask");
 		Button stopButton = new Button("Stop");
 
-		Button proposeOptionButton = new Button("Option");
-		Button proposeValueButton = new Button("Criterion");
+		Button proposeOptionButton = new Button(situation);
+		Button proposeValueButton = new Button("criterion");
 
-		Button counterproposeOptionButton = new Button("Option");
-		Button counterproposeValueButton = new Button("Criterion");
+		Button counterproposeOptionButton = new Button(situation);
+		Button counterproposeValueButton = new Button("criterion");
 
 		Button acceptProposeButton = new Button("Counterpropose");
 
@@ -355,8 +355,8 @@ public class ChatBoard1 extends AnchorPane{
 		Button likeButton = new Button("I like ...");
 		Button dontLikeButton = new Button("I don't like ...");
 
-		Button optionButton = new Button("Option");
-		Button criterionButton = new Button("Criterion");
+		Button optionButton = new Button(situation);
+		Button criterionButton = new Button("criterion");
 
 		//Button option2Button = new Button("Option");
 	//	Button criterion2Button = new Button("Criterion");
@@ -1295,7 +1295,7 @@ public class ChatBoard1 extends AnchorPane{
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
 	            	File fichier1 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"AppData"+File.separator+"Local"+File.separator+"Temp"+File.separator+"Console.test");
-	            	File fichier2 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"Desktop"+File.separator+"test1"+username+".txt");
+	            	File fichier2 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"Desktop"+File.separator+"T1-Arthur-dom"+relation+"-exp"+username+".txt");
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
