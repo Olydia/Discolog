@@ -10,8 +10,10 @@ import edu.wpi.disco.plugin.DecompositionPlugin;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
+import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
 //
@@ -22,7 +24,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.2;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -55,18 +57,18 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
+		//totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		//ToyModel model = new ToyModel();
+		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model3()), 
+				new ToMNegotiator("Agent1", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model2()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
+		((ToMNegotiator) dual.interaction1.getSystem()).setRelation(DOMINANT);
 		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();

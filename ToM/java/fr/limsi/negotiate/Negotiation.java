@@ -184,14 +184,32 @@ public class Negotiation<O extends Option> {
 
 
 	public void addProposal(Proposal proposal) {
+
 		if (proposal instanceof CriterionProposal) {
 			Criterion value = (Criterion) proposal.getValue();
-			getValueNegotiation(value.getClass()).propose((CriterionProposal) proposal);
+			CriterionNegotiation<Criterion> model = getValueNegotiation(value.getClass());
+
+			if(!existProposal(model.getProposals(), proposal))
+				model.propose((CriterionProposal) proposal);
 
 		}
 
 		if(proposal instanceof OptionProposal)
-			this.propose((OptionProposal) proposal);
+			if(!existProposal(getProposals(), proposal))
+				this.propose((OptionProposal) proposal);
+	}
+	/**
+	 *
+	 * @param proposal List of proposal
+	 * @param p propsal which we are looking for
+	 * @return
+	 */
+	public boolean existProposal(ArrayList<? extends Proposal> proposals, Proposal p){
+		for( Proposal pp : proposals){
+			if(pp.isSameProopsal(p))
+				return true;
+		}
+		return false;
 	}
 
 	public void updateProposal(OptionProposal proposal){
@@ -366,9 +384,8 @@ public class Negotiation<O extends Option> {
 
 			Criterion value = elm.chooseValue(acc,self);
 			argmax.add(value);
-
-
 		}
+		
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
 			public int compare(Criterion c1, Criterion c2){

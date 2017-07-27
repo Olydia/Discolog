@@ -36,9 +36,15 @@ public abstract class Proposal {
 
 	public Status getStatus () { return status; }
 	
+	public boolean isSameProopsal(Proposal p) {
+		return (this.getValue().equals(p.getValue()) &&
+				this.getStatus().equals(p.getStatus()) &&
+				this.isSelf == p.isSelf
+				);
+	}
+	
 	// Needed in the model of ToM to generate the inverse of proposals
 	public abstract Proposal mirrorProposal();
-
 		
 	public abstract Object getValue();
 	
