@@ -299,7 +299,7 @@ public class ChatBoard2 extends AnchorPane{
 		//Label stateLabel = new Label("What do you want to state?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
-		Label whyLabel = new Label("Explain why you want to reject:");
+		Label whyLabel = new Label("What is it that you don't like?");
 		Label errorLabel = new Label("You must precise if you like or don't like");
 		errorLabel.setId("errorMessage");
 
@@ -1102,7 +1102,7 @@ public class ChatBoard2 extends AnchorPane{
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
 	            	details[0]="RejectState";
-
+	            	details[6]="FALSE";
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
@@ -1133,18 +1133,18 @@ public class ChatBoard2 extends AnchorPane{
 
 		     		setTopAnchor(whyLabel,250.0);
 	            	setLeftAnchor(whyLabel,100.0);
-		     		setTopAnchor(likeHBox,300.0);
-	            	setTopAnchor(dontLikeHBox,300.0);
-	            	setLeftAnchor(likeHBox,500.0);
-	            	setLeftAnchor(dontLikeHBox,700.0);
+		     		//setTopAnchor(likeHBox,300.0);
+	            	//setTopAnchor(dontLikeHBox,300.0);
+	            	//setLeftAnchor(likeHBox,500.0);
+	            	//setLeftAnchor(dontLikeHBox,700.0);
 	            	likeButton.setStyle(off);
 	            	dontLikeButton.setStyle(off);
-	            	list.addAll(likeHBox,dontLikeHBox);
+	            	//list.addAll(likeHBox,dontLikeHBox);
 
-	            	setTopAnchor(sendHBox,450.0);
+	            	setTopAnchor(sendHBox,400.0);
 	            	setLeftAnchor(sendHBox,600.0);
 
-	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,350.0,situation,list);
+	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,300.0,situation,list);
 
 	     		//   list.addAll(optionHBox,criterionHBox,option2HBox,criterion2HBox);
 	     		  list.addAll(rejectLabel,open,whyLabel);
