@@ -316,6 +316,8 @@ public class ChatBoard1 extends AnchorPane{
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
 		Label whyLabel = new Label("Explain why you want to reject:");
+		Label errorLabel = new Label("You must precise if you like or don't like");
+		errorLabel.setId("errorMessage");
 
 		Label answer1=new Label("");
 		Label answer2=new Label("");
@@ -769,6 +771,7 @@ public class ChatBoard1 extends AnchorPane{
 	            	stateAskButton.setStyle(on);
 	            	stopButton.setStyle(off);
 	            	details[0]="statepreference";
+	            	details[6]="";
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
@@ -1995,10 +1998,16 @@ public class ChatBoard1 extends AnchorPane{
 			        		if (command2!="") command=command+"/"+command2;
 
 			        		//System.out.println(command);
-
+			        		if ((details[0]=="StatePreference") && (details[6]=="")){
+				        		setTopAnchor(errorLabel,500.0);
+				        		setLeftAnchor(errorLabel,800.0);
+				        		list.add(errorLabel);
+				        		}
+				        		else{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
+				        		}
 			        		list.clear();
 				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 				     		  proposeButton.setStyle(off);

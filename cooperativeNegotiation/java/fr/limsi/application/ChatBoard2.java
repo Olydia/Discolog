@@ -300,6 +300,8 @@ public class ChatBoard2 extends AnchorPane{
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
 		Label whyLabel = new Label("Explain why you want to reject:");
+		Label errorLabel = new Label("You must precise if you like or don't like");
+		errorLabel.setId("errorMessage");
 
 		Label answer1=new Label("");
 		Label answer2=new Label("");
@@ -782,6 +784,7 @@ public class ChatBoard2 extends AnchorPane{
 	            	stateAskButton.setStyle(on);
 	            	stopButton.setStyle(off);
 	            	details[0]="statepreference";
+	            	details[6]="";
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
@@ -2031,12 +2034,17 @@ public class ChatBoard2 extends AnchorPane{
 
 			        		//String cmd="fr.limsi.negotiate.lang.Propose/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.NORTH_SIDE)";
 			        		//System.out.println(command);
-
+			        		if ((details[0]=="StatePreference") && (details[6]=="")){
+				        		setTopAnchor(errorLabel,500.0);
+				        		setLeftAnchor(errorLabel,800.0);
+				        		list.add(errorLabel);
+				        		}
+				        		else{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
 			        		//interaction.getConsole().clear("");
-
+				        		}
 			        		list.clear();
 				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 				     		  proposeButton.setStyle(off);
