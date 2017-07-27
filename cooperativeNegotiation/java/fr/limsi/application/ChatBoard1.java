@@ -1964,6 +1964,7 @@ public class ChatBoard1 extends AnchorPane{
 			        			else{
 			        				details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
 				        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+				        			details[3]=details[3].replace(" ","_");
 			        			}
 			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
 			        		}
@@ -1977,6 +1978,7 @@ public class ChatBoard1 extends AnchorPane{
 			        			else{
 			        			details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
 			        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+			        			details[3]=details[3].replace(" ","_");
 			        			}
 			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
 			        			command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5];
@@ -1990,6 +1992,7 @@ public class ChatBoard1 extends AnchorPane{
 			        			else{
 			        			details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
 			        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+			        			details[3]=details[3].replace(" ","_");
 			        			}
 			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
 			        			command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5]+")";
