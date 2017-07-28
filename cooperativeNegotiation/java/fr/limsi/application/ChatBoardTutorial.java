@@ -1329,11 +1329,6 @@ public class ChatBoardTutorial extends AnchorPane{
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
 
-	            	File fichier1 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"AppData"+File.separator+"Local"+File.separator+"Temp"+File.separator+"Console.test");
-	            	File fichier2 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"Desktop"+File.separator+"test2"+username+".txt");
-
-	            	writeHistory history=new writeHistory();
-	            	history.copyFile(fichier1,fichier2);
 	            }
 	        });
 

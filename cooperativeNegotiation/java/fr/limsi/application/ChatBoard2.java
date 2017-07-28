@@ -796,7 +796,7 @@ public class ChatBoard2 extends AnchorPane{
 	            	answer4.setText("");
 
 	            	optionChoice.start(optionStage);
-	       
+
 	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
 	            	chatStage.hide();
 
@@ -853,10 +853,10 @@ public class ChatBoard2 extends AnchorPane{
 	        	     scene.getStylesheets().add
 	        	        (Home1.class.getResource("application2.css").toExternalForm());
 	            	optionChoice.start(optionStage);
-	      
+
 	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
 	            	chatStage.hide();
- 
+
 	            }
 	        });
 
@@ -975,7 +975,7 @@ public class ChatBoard2 extends AnchorPane{
 
 		     		setTopAnchor(whyLabel,250.0);
 	            	setLeftAnchor(whyLabel,100.0);
-		     
+
 	            	likeButton.setStyle(off);
 	            	dontLikeButton.setStyle(off);
 
@@ -1147,8 +1147,8 @@ public class ChatBoard2 extends AnchorPane{
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
 
-	            	File fichier1 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"AppData"+File.separator+"Local"+File.separator+"Temp"+File.separator+"Console.test");
-	            	File fichier2 = new File("C:"+File.separator+"Users"+File.separator+"dhouib"+File.separator+"Desktop"+File.separator+"T2-Bob-dom"+relation+"-exp"+username+".txt");
+	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+"Console.test");
+	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Arthur-dom"+relation+"-exp"+username+".txt");
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
@@ -1752,7 +1752,7 @@ public class ChatBoard2 extends AnchorPane{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
-			        	
+
 				        		}
 			        		list.clear();
 				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
