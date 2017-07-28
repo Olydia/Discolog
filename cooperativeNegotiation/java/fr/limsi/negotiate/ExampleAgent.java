@@ -28,7 +28,7 @@ public class ExampleAgent extends Agent {
 		totalOrderedModels model = new totalOrderedModels();
 
 		Interaction interaction = new Interaction(
-				new ExampleAgent("agent", model.model1()), 
+				new ExampleAgent("agent", model.model4()), 
 				new User("user"),
 				args.length > 0 && args[0].length() > 0 ? args[0] : null);
 		interaction.load("models/Negotiate.xml");
@@ -42,7 +42,7 @@ public class ExampleAgent extends Agent {
 	}
 
 
-	public static double  DOMINANT = 0.1, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;

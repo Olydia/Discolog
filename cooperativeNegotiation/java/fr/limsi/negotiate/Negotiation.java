@@ -404,12 +404,35 @@ public class Negotiation<O extends Option> {
 
 	}
 	public List<Option> getAcceptableOptions(List<Option> options){
+		List<Criterion> criteria = new ArrayList<Criterion>();
+
+		for(CriterionProposal p : getAcceptedProposals())
+			criteria.add(p.getValue());
+
 		List<Option> acceptables = new ArrayList<Option>();
-		for(Option o: options){
-			if(isAcceptable(o))
-				acceptables.add(o);
-		}
+		List<Option> possibleOptions = getOptionWithValues(criteria, nonRejectedOptions());
+
+		if(!possibleOptions.isEmpty())
+			options = possibleOptions;
+		
+			for(Option o: options){
+				if(isAcceptable(o)){
+					acceptables.add(o);
+
+				}
+			}	
 		return acceptables;
+	}
+
+
+	public List<CriterionProposal> getAcceptedProposals(){
+
+		List<CriterionProposal>  accepted = new ArrayList<CriterionProposal>();
+		for(CriterionNegotiation<Criterion> cr : getValuesNegotiation()){
+			accepted.addAll(cr.getProposalsWithStatus(Status.ACCEPTED));
+		}
+
+		return accepted;
 	}
 
 	public Proposal chooseProposal() {
@@ -423,7 +446,7 @@ public class Negotiation<O extends Option> {
 
 		Criterion c = chooseCriterionProposal();
 		if(c!=null){
-		//Any value is accepted yet
+			//Any value is accepted yet
 			if(getContext().getClosedCriteria().isEmpty() && c != null){
 				return new CriterionProposal(true,c);
 			}
@@ -521,9 +544,22 @@ public class Negotiation<O extends Option> {
 		ArrayList<Option> options = new ArrayList<>(Arrays.asList(getOptions()));
 		for(Criterion c: values) {
 			for (Iterator<Option> iterator = options.iterator(); iterator.hasNext(); ) {
-					Option o = iterator.next();
-					if(!o.getValue(c.getClass()).equals(c))
-						iterator.remove();
+				Option o = iterator.next();
+				if(!o.getValue(c.getClass()).equals(c))
+					iterator.remove();
+			}
+		}
+		return options;
+
+	}
+	
+	public List<Option> getOptionWithValues(List<Criterion> values,List<Option> options) {
+		
+		for(Criterion c: values) {
+			for (Iterator<Option> iterator = options.iterator(); iterator.hasNext(); ) {
+				Option o = iterator.next();
+				if(!o.getValue(c.getClass()).equals(c))
+					iterator.remove();
 			}
 		}
 		return options;
