@@ -38,13 +38,22 @@ public class ChatBoard1 extends AnchorPane{
 	public ExampleAgent agent;
 
 	public String action;
-
+/**
+ * details allows to create the instructions used for execute:
+ * details[0]: The action. Ex: Propose.
+ * details[1]: The situation of the negotiation
+ * details[2]: criterion or situation(when an option is chosen)
+ * details[3]: value of the criterion or option
+ * details[4]: criterion or situation(when an option is chosen) for the second part
+ * details[5]: value of the criterion or option for the second part
+ * details[6]: To specify if the user likes or not the preference he is expressing
+ * details[7]: contains General or Specific to differentiate between the 2 forms of AskPreference
+ */
 	public String[] details = new String[8];
 
 	public ChatBoard1(){
 
 	}
-
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
 		for (int i=0;i<c.length;i++){
@@ -77,11 +86,9 @@ public class ChatBoard1 extends AnchorPane{
 		}
 
 	   	for (int i=0; i<criteria.size();i++){
-	   		//System.out.println(ch.toUpperCase()+"-*****-"+criteria.get(i));
 	   		if (ch.toUpperCase().equals(criteria.get(i))) return true;
 	   	}
 	   	return false;
-
 	}
 	/**
 	 * finds the criterion based on its value (in the form a string)
@@ -250,7 +257,6 @@ public class ChatBoard1 extends AnchorPane{
 	public void addElements(String username, String situation,Stage chatStage/*,Interaction interaction*/){
 
 		 totalOrderedModels model = new totalOrderedModels();
-		 //String[] args=null;
 			 ExampleAgent agent= new ExampleAgent("Arthur", model.model1());
 			 User user= new User("User");
 			 Interaction interaction = new Interaction(
@@ -261,27 +267,7 @@ public class ChatBoard1 extends AnchorPane{
 
 
 				interaction.setGuess(false);
-
 				interaction.start(true); // give user first turn
-		/*Connecting with Disco*/
-
-		//String lien="C:\\Users\\dhouib\\AppData\\Local\\Temp\\Console.test";
-		//Console cnsl=new Console(lien,interaction);
-	  //  String cmd="fr.limsi.negotiate.lang.RejectState/createProposal(Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE)/Packages.fr.limsi.negotiate.restaurant.Location.SOUTH_SIDE";
-	    //cnsl.next(null);
-	    //cnsl.execute("next");
-	    //PrintStream discussion=new PrintStream();
-
-	   // cnsl.execute(cmd);
-
-	   //System.out.println(agent.getLastUtterance().format());
-	 //   interaction.format(utterance)
-
-	   // if ( !cnsl.getEngine().getStack().get(0).getChildren().isEmpty()) System.out.println();
-	   //   if ( cnsl.getEngine().history(System.out) ) System.out.println();
-	   //  if ( cnsl.getEngine().history(System.out) ) discussion=System.out;
-	    // discussion.println();
-
 				OptionChoice optionChoice=new OptionChoice();
         		Stage optionStage=new Stage();
             	Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
@@ -289,7 +275,6 @@ public class ChatBoard1 extends AnchorPane{
         	     Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
         	     optionStage.setScene(scene);
         	     optionStage.setFullScreen(true);
-        	       // Scene scene = new Scene(pane, 400, 300);
         	     optionStage.setScene(scene);
         	     scene.getStylesheets().add
         	        (Home1.class.getResource("application2.css").toExternalForm());
@@ -310,19 +295,12 @@ public class ChatBoard1 extends AnchorPane{
 		Label actionLabel = new Label("What do you want to say?");
 		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
 		Label acceptLabel = new Label("What do you want to accept?");
-		//Label proposeOptionLabel = new Label("What "+situation+" do you want to propose?  (Select the criteria to find the option you chose)");
 		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
-		//Label stateLabel = new Label("What do you want to state?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
 		Label whyLabel = new Label("What is it that you don't like?");
 		Label errorLabel = new Label("You must precise if you like or don't like");
 		errorLabel.setId("errorMessage");
-
-		Label answer1=new Label("");
-		Label answer2=new Label("");
-		Label answer3=new Label("");
-		Label answer4=new Label("");
 
 		ObservableList<Node> list = getChildren();
 
@@ -358,9 +336,6 @@ public class ChatBoard1 extends AnchorPane{
 		Button optionButton = new Button(situation);
 		Button criterionButton = new Button("criterion");
 
-		//Button option2Button = new Button("Option");
-	//	Button criterion2Button = new Button("Criterion");
-
 		Button cG1Button = new Button();
 		Button cG2Button = new Button();
 		Button cG3Button = new Button();
@@ -393,8 +368,6 @@ public class ChatBoard1 extends AnchorPane{
 			setCriterionButtonsTexts(co12Button,co22Button,co32Button,co42Button,situation);
 
 			Button sendButton = new Button("Send");
-
-		//Button exitButton = new Button("Exit");
 
 		/*All criteria buttons*/
 
@@ -496,9 +469,6 @@ public class ChatBoard1 extends AnchorPane{
 		HBox optionHBox= new HBox(15);
 		HBox criterionHBox= new HBox(15);
 
-		//HBox option2HBox= new HBox(15);
-		/*HBox criterion2HBox= new HBox(15);*/
-
 		HBox cG1HBox = new HBox(15);
 		HBox cG2HBox = new HBox(15);
 		HBox cG3HBox = new HBox(15);
@@ -525,7 +495,7 @@ public class ChatBoard1 extends AnchorPane{
 		HBox co42HBox = new HBox(15);
 
 		HBox sendHBox = new HBox(15);
-		//HBox exitHBox = new HBox(15);
+
 
 		proposeHBox.getChildren().addAll(proposeButton);
 		acceptHBox.getChildren().addAll(acceptButton);
@@ -559,9 +529,6 @@ public class ChatBoard1 extends AnchorPane{
 		optionHBox.getChildren().addAll(optionButton);
 		criterionHBox.getChildren().addAll(criterionButton);
 
-	//	option2HBox.getChildren().addAll(option2Button);
-		//criterion2HBox.getChildren().addAll(criterion2Button);
-
 		cG1HBox.getChildren().addAll(cG1Button);
 		cG2HBox.getChildren().addAll(cG2Button);
 		cG3HBox.getChildren().addAll(cG3Button);
@@ -588,7 +555,6 @@ public class ChatBoard1 extends AnchorPane{
 		co42HBox.getChildren().addAll(co42Button);
 
 		sendHBox.getChildren().addAll(sendButton);
-	//	exitHBox.getChildren().addAll(exitButton);
 
 		/*The positions*/
 		   setTopAnchor(actionLabel,10.0);
@@ -634,7 +600,7 @@ public class ChatBoard1 extends AnchorPane{
 			        	list.add(acceptProposeHBox);
 			        }
 				   }
-			        //System.out.println("Selected item: " + newValue);
+
 			    }
 		   });
 
@@ -650,11 +616,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	rejectButton.setStyle(off);
 	            	stateAskButton.setStyle(off);
 	            	stopButton.setStyle(off);
-
-	            	answer1.setText("Let's go to ");
-	            	answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
 
 	            	setTopAnchor(sendHBox,350.0);
 	            	setLeftAnchor(sendHBox,600.0);
@@ -751,7 +712,6 @@ public class ChatBoard1 extends AnchorPane{
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
 
 	            	open.setItems(observableOpenList);
-	            	//observableOpenList.clear();
 	            	rejectOnlyButton.setStyle(off);
 	            	rejectStateButton.setStyle(off);
 	            	rejectProposeButton.setStyle(off);
@@ -839,14 +799,7 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(proposeOptionHBox,proposeValueHBox);
 
-		     		answer1.setText("Let's go to the ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
-
 	            	optionChoice.start(optionStage);
-	            	//setTopAnchor(list.get(list.size()-1),300.0);
-	            	//setLeftAnchor(list.get(list.size()-1),400.0);
 	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
 	            	chatStage.hide();
 
@@ -857,23 +810,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	setTopAnchor(co4HBox,200.0);
 
 	            	list.add(sendHBox);
-
-	          /*  	if (situation=="restaurant")
-		    	        {
-		            	setLeftAnchor(co1HBox,300.0);
-		            	setLeftAnchor(co2HBox,500.0);
-		            	setLeftAnchor(co3HBox,700.0);
-		            	setLeftAnchor(co4HBox,900.0);
-		            	list.addAll(co1HBox,co2HBox,co3HBox,co4HBox);
-		    	        }
-	            	else{
-	            		setLeftAnchor(co1HBox,350.0);
-	            		setLeftAnchor(co2HBox,600.0);
-	            		setLeftAnchor(co3HBox,850.0);
-	            		list.addAll(co1HBox,co2HBox,co3HBox);
-	            		}*/
-
-	            	//list.addAll(proposeOptionLabel);
 	            }
 	        });
 
@@ -891,10 +827,7 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(proposeOptionHBox,proposeValueHBox);
 		     		list.addAll(proposeCriterionLabel);
-		     		answer1.setText("Let's go to a ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
+
 		     		setTopAnchor(proposeCriterionLabel,150.0);
 		     		setLeftAnchor(proposeCriterionLabel,100.0);
 		     		setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
@@ -908,19 +841,8 @@ public class ChatBoard1 extends AnchorPane{
 	            	counterproposeOptionButton.setStyle(on);
 	            	counterproposeValueButton.setStyle(off);
 
-	            	//details[0]="Propose";
 
-
-
-	            	/*list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);*/
 	            	list.add(sendHBox);
-
-		     		/*answer1.setText("Let's go to the ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");*/
 
 	            	OptionChoice optionChoice=new OptionChoice();
 	            	Stage optionStage=new Stage();
@@ -929,13 +851,12 @@ public class ChatBoard1 extends AnchorPane{
 	        	     Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
 	        	     optionStage.setScene(scene);
 	        	     optionStage.setFullScreen(true);
-	        	       // Scene scene = new Scene(pane, 400, 300);
+
 	        	     optionStage.setScene(scene);
 	        	     scene.getStylesheets().add
 	        	        (Home1.class.getResource("application2.css").toExternalForm());
 	            	optionChoice.start(optionStage);
-	            //	setTopAnchor(list.get(list.size()-1),300.0);
-	            	//setLeftAnchor(list.get(list.size()-1),400.0);
+
 	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
 	            	chatStage.hide();
 
@@ -945,22 +866,7 @@ public class ChatBoard1 extends AnchorPane{
 	            	setTopAnchor(co3HBox,200.0);
 	            	setTopAnchor(co4HBox,200.0);
 
-	          /*  	if (situation=="restaurant")
-		    	        {
-		            	setLeftAnchor(co1HBox,300.0);
-		            	setLeftAnchor(co2HBox,500.0);
-		            	setLeftAnchor(co3HBox,700.0);
-		            	setLeftAnchor(co4HBox,900.0);
-		            	list.addAll(co1HBox,co2HBox,co3HBox,co4HBox);
-		    	        }
-	            	else{
-	            		setLeftAnchor(co1HBox,350.0);
-	            		setLeftAnchor(co2HBox,600.0);
-	            		setLeftAnchor(co3HBox,850.0);
-	            		list.addAll(co1HBox,co2HBox,co3HBox);
-	            		}*/
 
-	            	//list.addAll(proposeOptionLabel);
 	            }
 	        });
 
@@ -972,16 +878,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	counterproposeOptionButton.setStyle(off);
 	            	counterproposeValueButton.setStyle(on);
 
-	            	//details[0]="Propose";
-
-	            /*	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);*/
-
-		     		/*answer1.setText("Let's go to a ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");*/
 		     		setTopAnchor(proposeCriterionLabel,150.0);
 		     		setLeftAnchor(proposeCriterionLabel,100.0);
 		     		list.clear();
@@ -999,8 +895,6 @@ public class ChatBoard1 extends AnchorPane{
 		            	}
 	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,350.0,situation,list);
 
-
-	            //	list.addAll(proposeCriterionLabel);
 	            }
 	        });
 
@@ -1011,15 +905,6 @@ public class ChatBoard1 extends AnchorPane{
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
 	            	details[0]="AcceptPropose";
-
-	            	//acceptValueButton.setStyle(off);
-	            	//acceptOptionButton.setStyle(off);
-	            	//acceptProposeButton.setStyle(on);
-
-		     		answer1.setText("Okay, let's go to  the ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
 
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
@@ -1037,7 +922,6 @@ public class ChatBoard1 extends AnchorPane{
 
 	     		   list.addAll(counterproposeOptionHBox,counterproposeValueHBox,open);
 
-	     			//list.addAll(acceptOptionHBox,acceptProposeHBox);
 	            	list.addAll(acceptLabel,proposeLabel);
 	            }
 	        });
@@ -1052,22 +936,9 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
-		     		answer1.setText("I'd rather choose something else");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");
-
 	            	rejectOnlyButton.setStyle(on);
 	            	rejectStateButton.setStyle(off);
 	            	rejectProposeButton.setStyle(off);
-
-
-
-	     		  /* 	setTopAnchor(criterionHBox ,150.0);
-	     		   	setLeftAnchor(criterionHBox ,530.0);
-
-	     		  	setTopAnchor(optionHBox ,150.0);
-	     		   	setLeftAnchor(optionHBox ,730.0);*/
 
 	     		   setTopAnchor(open,200.0);
 		     		setLeftAnchor(open,400.0);
@@ -1075,12 +946,10 @@ public class ChatBoard1 extends AnchorPane{
 		     		setTopAnchor(sendHBox,350.0);
 	            	setLeftAnchor(sendHBox,600.0);
 
-	     		 //  list.addAll(optionHBox,criterionHBox);
 	     		  list.addAll(rejectLabel,open,sendHBox);
 
 	            }
 	        });
-
 
 		   rejectStateButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1092,10 +961,6 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
-		     		answer1.setText("I don't like ");
-		     		answer3.setText("let's choose something else");
-		     		answer2.setText("");
-	            	answer4.setText("");
 
 	            	rejectOnlyButton.setStyle(off);
 	            	rejectStateButton.setStyle(on);
@@ -1106,20 +971,16 @@ public class ChatBoard1 extends AnchorPane{
 
 		     		setTopAnchor(whyLabel,250.0);
 	            	setLeftAnchor(whyLabel,100.0);
-		     		//setTopAnchor(likeHBox,300.0);
-	            	//setTopAnchor(dontLikeHBox,300.0);
-	            	//setLeftAnchor(likeHBox,500.0);
-	            	//setLeftAnchor(dontLikeHBox,700.0);
+
 	            	likeButton.setStyle(off);
 	            	dontLikeButton.setStyle(off);
-	            	//list.addAll(likeHBox,dontLikeHBox);
+
 	            	details[6]="FALSE";
 	            	setTopAnchor(sendHBox,400.0);
 	            	setLeftAnchor(sendHBox,600.0);
 
 	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,300.0,situation,list);
 
-	     		//   list.addAll(optionHBox,criterionHBox,option2HBox,criterion2HBox);
 	     		  list.addAll(rejectLabel,open,whyLabel);
 	            }
 	        });
@@ -1134,20 +995,12 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
-		     		answer1.setText("I don't want to go to ");
-		     		answer3.setText(". Let's rather go to ");
-		     		answer2.setText("");
-	            	answer4.setText("");
+
 
 	            	rejectOnlyButton.setStyle(off);
 	            	rejectStateButton.setStyle(off);
 	            	rejectProposeButton.setStyle(on);
 
-	            	/*setTopAnchor(criterionHBox ,150.0);
-	     		   	setLeftAnchor(criterionHBox ,530.0);
-
-	     		  	setTopAnchor(optionHBox ,150.0);
-	     		   	setLeftAnchor(optionHBox ,730.0);*/
 
 		     		   setTopAnchor(open,150.0);
 			     		setLeftAnchor(open,400.0);
@@ -1166,15 +1019,6 @@ public class ChatBoard1 extends AnchorPane{
 
 	     		   	setTopAnchor(sendHBox,450.0);
 	            	setLeftAnchor(sendHBox,600.0);
-
-
-	            /*	setTopAnchor(criterion2HBox ,300.0);
-	     		   	setLeftAnchor(criterion2HBox ,530.0);
-
-	     		  	setTopAnchor(option2HBox ,300.0);
-	     		   	setLeftAnchor(option2HBox ,730.0);*/
-
-	     		  // list.addAll(optionHBox,criterionHBox,option2HBox,criterion2HBox);
 
 	     		  list.addAll(rejectLabel,proposeLabel,open,counterproposeOptionHBox,counterproposeValueHBox);
 	            }
@@ -1195,11 +1039,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
-
-		     		answer1.setText("I (don't) like");
-		     		answer2.setText("");
-	            	answer4.setText("");
-	            	answer3.setText("");
 
 	            	setTopAnchor(likeHBox,150.0);
 	            	setTopAnchor(dontLikeHBox,150.0);
@@ -1227,11 +1066,6 @@ public class ChatBoard1 extends AnchorPane{
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 		     		list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
 
-		     		answer1.setText("What kind of "+situation+"s do you like?");
-		     		answer2.setText("");
-	            	answer4.setText("");
-	            	answer3.setText("");
-
 	            	setSecondaryButtonsPositions(cG1HBox,cG2HBox,cG3HBox,cG4HBox,cG1Button,cG2Button,cG3Button,cG4Button,170.0,situation,list);
 
 	            	  setTopAnchor(sendHBox,250.0);
@@ -1253,11 +1087,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	stateButton.setStyle(off);
 	            	askGeneralButton.setStyle(off);
 	            	askSpecificButton.setStyle(on);
-
-	            	answer1.setText("Do you like ");
-	            	answer2.setText("");
-	            	answer4.setText("");
-	            	answer3.setText("");
 
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
@@ -1288,9 +1117,6 @@ public class ChatBoard1 extends AnchorPane{
 
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
-	            	//list.removeAll(stateButton,askGeneralButton,askSpecificButton,proposeValueButton,proposeOptionButton,rejectOnlyHBox,rejectStateHBox,rejectProposeHBox ,stopLabel,noHBox,yesHBox,c1HBox,c2HBox,c3HBox,c4HBox);
-
-	            	//list.removeAll(co1Button, co2Button, co3Button,co4Button,c1Button,c2Button,c3Button,c4Button,acceptCriterionLabel,acceptOptionLabel,proposeCriterionLabel,proposeOptionLabel,rejectOptionLabel,rejectCriterionLabel);
 
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
@@ -1308,10 +1134,6 @@ public class ChatBoard1 extends AnchorPane{
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
 	            	details[6]="TRUE";
-	            	answer1.setText("I like ");
-	            	answer2.setText("");
-	            	answer4.setText("");
-	            	answer3.setText("");
 
 	            	likeButton.setStyle(on);
 	            	dontLikeButton.setStyle(off);
@@ -1324,10 +1146,6 @@ public class ChatBoard1 extends AnchorPane{
 	            @Override
 	            public void handle(ActionEvent prosposeEvent) {
 	            	details[6]="FALSE";
-	            	answer1.setText("I don't like ");
-	            	answer2.setText("");
-	            	answer4.setText("");
-	            	answer3.setText("");
 
 	            	dontLikeButton.setStyle(on);
 	            	likeButton.setStyle(off);
@@ -1556,120 +1374,6 @@ public class ChatBoard1 extends AnchorPane{
 
 	        });
 
-
-
-
-
-
-
-		  /*co1Button.setOnAction(new EventHandler<ActionEvent>() {
-
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
-	            	if (co1Button.getStyle()==on){ co1Button.setStyle(off);}
-	            	else { co1Button.setStyle(on);}
-
-	            	 if (situation=="restaurant")
-	     	        {
-
-	     				 for (int i=0;i<4;i++){
-	     					setTopAnchor(co1HBoxs.get(i),getTopAnchor(co1HBox)+50.0);
-	     					setLeftAnchor(co1HBoxs.get(i),300.0+200.0*i);
-	     					list.add(co1HBoxs.get(i));
-	     				 }
-
-	     	        }
-	            	 else{
-	            		 for (int i=0;i<6;i++){
-		     					setTopAnchor(co1HBoxs.get(i),getTopAnchor(co1HBox)+50.0);
-		     					setLeftAnchor(co1HBoxs.get(i),200.0+150.0*i);
-		     					list.add(co1HBoxs.get(i));
-	            		 }
-	            	 }
-	            }
-	        });*/
-
-		/*  co2Button.setOnAction(new EventHandler<ActionEvent>() {
-
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
-
-	            	if (co2Button.getStyle()==on){ co2Button.setStyle(off);}
-	            	else { co2Button.setStyle(on);}
-
-	            	 if (situation=="restaurant")
-		     	        {
-
-		     				 for (int i=0;i<3;i++){
-		     					setTopAnchor(co2HBoxs.get(i),getTopAnchor(co2HBox)+50.0);
-		     					setLeftAnchor(co2HBoxs.get(i),300.0+250.0*i);
-		     					list.add(co2HBoxs.get(i));
-		     				 }
-
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
-			     					setTopAnchor(co2HBoxs.get(i),getTopAnchor(co2HBox)+50.0);
-			     					setLeftAnchor(co2HBoxs.get(i),200.0+150.0*i);
-			     					list.add(co2HBoxs.get(i));
-		            		 }
-		            	 }
-
-	            }
-	        });*/
-
-		/*  co3Button.setOnAction(new EventHandler<ActionEvent>() {
-
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
-
-	            	if (co3Button.getStyle()==on){ co3Button.setStyle(off);}
-	            	else { co3Button.setStyle(on);}
-
-	            	 if (situation=="restaurant")
-		     	        {
-
-		     				 for (int i=0;i<7;i++){
-		     					setTopAnchor(co3HBoxs.get(i),getTopAnchor(co3HBox)+50.0);
-		     					setLeftAnchor(co3HBoxs.get(i),150.0+150.0*i);
-		     					list.add(co3HBoxs.get(i));
-		     				 }
-
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
-			     					setTopAnchor(co3HBoxs.get(i),getTopAnchor(co3HBox)+50.0);
-			     					setLeftAnchor(co3HBoxs.get(i),200.0+150.0*i);
-			     					list.add(co3HBoxs.get(i));
-		            		 }
-		            	 }
-
-	            }
-	        });*/
-
-		 /* co4Button.setOnAction(new EventHandler<ActionEvent>() {
-
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
-
-	            	if (co4Button.getStyle()==on){ co4Button.setStyle(off);}
-	            	else { co4Button.setStyle(on);}
-
-
-		     				 for (int i=0;i<5;i++){
-		     					setTopAnchor(co4HBoxs.get(i),getTopAnchor(co4HBox)+50.0);
-		     					setLeftAnchor(co4HBoxs.get(i),200.0+200.0*i);
-		     					list.add(co4HBoxs.get(i));
-		     				 }
-		            	 }
-
-	        });*/
-
-
 		  c12Button.setOnAction(new EventHandler<ActionEvent>() {
 
 	            @Override
@@ -1855,26 +1559,25 @@ public class ChatBoard1 extends AnchorPane{
 
 								 	});
 
-				 }
+					 }
 
+					 for (int i=0;i<c3Buttons.size();i++){
+						 String cr3=c3Buttons.get(i).getText();
+						 String cr32=c32Buttons.get(i).getText();
+						 final Button myButton=c3Buttons.get(i);
+						 final Button myButton2=c32Buttons.get(i);
+						 myButton.setOnAction(new EventHandler<ActionEvent>() {
 
-				 for (int i=0;i<c3Buttons.size();i++){
-					 String cr3=c3Buttons.get(i).getText();
-					 String cr32=c32Buttons.get(i).getText();
-					 final Button myButton=c3Buttons.get(i);
-					 final Button myButton2=c32Buttons.get(i);
-					 myButton.setOnAction(new EventHandler<ActionEvent>() {
+				            @Override
+				            public void handle(ActionEvent exitEvent) {
+				            			colorButtons(c3Buttons);
+				            			myButton.setStyle(on);
+				        				list.remove(sendHBox);
+				            			list.add(sendHBox);
+					     				 details[3]=cr3;
+					            	 	}
 
-			            @Override
-			            public void handle(ActionEvent exitEvent) {
-			            			colorButtons(c3Buttons);
-			            			myButton.setStyle(on);
-			        				list.remove(sendHBox);
-			            			list.add(sendHBox);
-				     				 details[3]=cr3;
-				            	 	}
-
-							 	});
+								 	});
 
 					 myButton2.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1921,8 +1624,6 @@ public class ChatBoard1 extends AnchorPane{
 					            	 	}
 
 								 	});
-
-
 				 }
 
 				  sendButton.setOnAction(new EventHandler<ActionEvent>() {

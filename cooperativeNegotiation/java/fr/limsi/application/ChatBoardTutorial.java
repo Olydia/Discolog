@@ -39,7 +39,17 @@ public class ChatBoardTutorial extends AnchorPane{
 	public ExampleAgent agent;
 
 	public String action;
-
+	/**
+	 * details allows to create the instructions used for execute:
+	 * details[0]: The action. Ex: Propose.
+	 * details[1]: The situation of the negotiation
+	 * details[2]: criterion or situation(when an option is chosen)
+	 * details[3]: value of the criterion or option
+	 * details[4]: criterion or situation(when an option is chosen) for the second part
+	 * details[5]: value of the criterion or option for the second part
+	 * details[6]: To specify if the user likes or not the preference he is expressing
+	 * details[7]: contains General or Specific to differentiate between the 2 forms of AskPreference
+	 */
 	public String[] details = new String[8];
 
 	public ChatBoardTutorial(){
@@ -294,9 +304,7 @@ public class ChatBoardTutorial extends AnchorPane{
 		Label actionLabel = new Label("What do you want to say?");
 		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
 		Label acceptLabel = new Label("What do you want to accept?");
-		//Label proposeOptionLabel = new Label("What "+situation+" do you want to propose?  (Select the criteria to find the option you chose)");
 		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
-		//Label stateLabel = new Label("What do you want to state?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
 		Label whyLabel = new Label("What is it that you don't like?");

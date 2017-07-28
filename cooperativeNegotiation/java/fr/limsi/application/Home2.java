@@ -55,13 +55,7 @@ public class Home2 extends Application {
     public void start(Stage homeStage) {
         homeStage.setTitle("Negotiation Agent");
         AnchorPane pane = new AnchorPane();
-       // pane.setAlignment(Pos.CENTER);
-        //The alignment property changes the default position of the grid from
-        //the top left of the scene to the center.
-        /*grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-*/
+
         /*The welcome text*/
         Text sceneTitle = new Text("Welcome");
         sceneTitle.setId("welcome-text");
