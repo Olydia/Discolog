@@ -111,6 +111,7 @@ public class NegotiatorAgent extends Agent {
 			else{
 
 				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				System.out.println(opent);
 
 				if(relation > NegotiationParameters.pi){
 

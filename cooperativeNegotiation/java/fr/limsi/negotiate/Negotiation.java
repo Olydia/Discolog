@@ -388,9 +388,8 @@ public class Negotiation<O extends Option> {
 
 			Criterion value = elm.chooseValue(acc,self);
 			argmax.add(value);
-
-
 		}
+		
 		argmax.sort(new Comparator<Criterion>() {
 			@Override
 			public int compare(Criterion c1, Criterion c2){
