@@ -1147,11 +1147,12 @@ public class ChatBoard2 extends AnchorPane{
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
 
-	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+"Console.test");
+	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Arthur-dom"+relation+"-exp"+username+".txt");
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
+	            	chatStage.hide();
 	            }
 	        });
 
@@ -1752,7 +1753,7 @@ public class ChatBoard2 extends AnchorPane{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
-
+			        		if (agent.getNegotiation().negotiationSuccess()){System.out.println("You hauksghdkaglhd");}
 				        		}
 			        		list.clear();
 				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);

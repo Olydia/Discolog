@@ -1328,7 +1328,7 @@ public class ChatBoardTutorial extends AnchorPane{
 
 	            	yesButton.setStyle(on);
 	            	noButton.setStyle(off);
-
+	            	chatStage.hide();
 	            }
 	        });
 
