@@ -1152,6 +1152,8 @@ public class ChatBoard2 extends AnchorPane{
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
+	            	chatStage.hide();
+
 	            }
 	        });
 
@@ -1752,7 +1754,7 @@ public class ChatBoard2 extends AnchorPane{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
-
+			        		if (agent.getNegotiation().negotiationSuccess()){System.out.println("You hauksghdkaglhd");}
 				        		}
 			        		list.clear();
 				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
