@@ -1125,7 +1125,6 @@ public class ChatBoard1 extends AnchorPane{
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
 	            	chatStage.hide();
-
 	            }
 	        });
 
