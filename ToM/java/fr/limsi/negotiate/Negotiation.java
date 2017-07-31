@@ -400,7 +400,9 @@ public class Negotiation<O extends Option> {
 	}
 	public List<Option> getAcceptableOptions(List<Option> options){
 		List<Option> acceptables = new ArrayList<Option>();
+		System.out.println(options.size());
 		for(Option o: options){
+			System.out.println("Option " + o.toString() + " : "+ satisfiability((O) o));
 			if(isAcceptable(o))
 				acceptables.add(o);
 		}
