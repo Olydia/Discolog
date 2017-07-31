@@ -1,0 +1,22 @@
+    # 31 juil. 2017 17:01:40 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Let's go to a restaurant on the north side."
+    User says "Let's go to a restaurant on the south side."
+    Bob says "I don't want to go to a restaurant on the south side. Let's rather go to a restaurant on the north side."
+    User says "Let's go to a restaurant on the south side."
+    Bob says "I don't want to go to a restaurant on the south side. Let's rather go to a restaurant on the north side."
+    User says "Let's go to a restaurant on the west side."
+    Bob says "I don't want to go to a restaurant on the west side. Let's rather go to a restaurant on the north side."
+    User says "Let's go to a restaurant on the north side."
+    Bob says "Okay. Let's go to the Paris bistro . It's a romantic, cheap French restaurant on the north side."
+    User says "I don't like French restaurants."
+    Bob says "Let's go to a restaurant on the north side."
+    User says "Okay, let's go to a restaurant on the north side."
+    Bob says "Let's go to the Andiamo pizzeria restaurant. It's a lively, expensive Italian restaurant on the north side."
+    User says "I don't like Italian restaurants."
+    Bob says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+    User says "I don't like Japanese restaurants."
+    Bob says "Let's go to the Aba turkish restaurant. It's a lively, expensive Turkish restaurant on the north side."
+    User says "Let's go to the Asia place restaurant. It's a lively, expensive Chinese restaurant on the east side."
+    Bob says "Okay, let's go to the Asia place restaurant."
+We reached an agreement, the negotiation is over!

@@ -1,0 +1,15 @@
+    # 31 juil. 2017 17:18:19 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "What kind of cuisine do you like?"
+    Arthur says "I like Chinese restaurants."
+    User says "I like Chinese restaurants."
+    Arthur says "Let's go to a Chinese restaurant."
+    User says "Okay. Let's go to a lively . lively."
+    Arthur says "Do you like Japanese restaurants?"
+    User says "I don't like Japanese restaurants."
+    Arthur says "Do you like Turkish restaurants?"
+    User says "I like Turkish restaurants."
+    Arthur says "Let's go to a Turkish restaurant."
+    User says "Let's go to the Aba turkish restaurant. It's a lively, expensive Turkish restaurant on the north side."
+    Arthur says "Okay, let's go to the Aba turkish restaurant."
+We reached an agreement, the negotiation is over!
