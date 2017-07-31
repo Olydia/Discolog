@@ -566,9 +566,9 @@ public class ChatBoard2 extends AnchorPane{
 		   setLeftAnchor(sendHBox,600.0);
 
 		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
-
+		   if (relation>0.5){
 		   boolean guess1 = interaction.getProperty("interaction@guess", interaction.isGuess());
-		   interaction.getSystem().respond(interaction, false, guess1);
+		   interaction.getSystem().respond(interaction, false, guess1);}
 
 		   /*The actions*/
 

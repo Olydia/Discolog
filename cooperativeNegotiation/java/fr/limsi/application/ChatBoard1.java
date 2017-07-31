@@ -587,6 +587,10 @@ public class ChatBoard1 extends AnchorPane{
 
 		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
 
+		   if (relation>0.5){
+			   boolean guess1 = interaction.getProperty("interaction@guess", interaction.isGuess());
+			   interaction.getSystem().respond(interaction, false, guess1);}
+
 		   /*The actions*/
 
 		   open.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
