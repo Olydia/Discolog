@@ -1061,7 +1061,8 @@ public class ChatBoard2 extends AnchorPane{
 	            	setLeftAnchor(dontLikeHBox,700.0);
 	            	likeButton.setStyle(off);
 	            	dontLikeButton.setStyle(off);
-
+	            	setTopAnchor(sendHBox,300.0);
+	            	setLeftAnchor(sendHBox,600.0);
 	            	list.addAll(likeHBox,dontLikeHBox);
 
 	            	setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
@@ -1152,7 +1153,7 @@ public class ChatBoard2 extends AnchorPane{
 	            	noButton.setStyle(off);
 
 	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
-	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Arthur-dom"+relation+"-exp"+username+".txt");
+	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Bob-dom"+relation+"-exp"+username+".txt");
 
 	            	writeHistory history=new writeHistory();
 	            	history.copyFile(fichier1,fichier2);
