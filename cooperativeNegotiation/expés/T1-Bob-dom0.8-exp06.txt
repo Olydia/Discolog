@@ -1,0 +1,20 @@
+    # 31 juil. 2017 15:15:24 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Let's go to a restaurant on the north side."
+    User says "What kind of cuisine do you like?"
+    Bob says "I like French restaurants."
+    User says "Let's go to a Japanese restaurant."
+    Bob says "Okay. Let's go to the Paris bistro . It's a romantic, cheap French restaurant on the north side."
+    User says "I like Japanese restaurants."
+    Bob says "Let's go to a Japanese restaurant."
+    User says "Let's go to an affordable restaurant."
+    Bob says "Okay. Let's go to the Tsukizi . It's a romantic, affordable Japanese restaurant on the north side."
+    User says "I don't like romantic restaurants."
+    Bob says "Let's go to a Japanese restaurant."
+    User says "What kind of atmosphere do you like?"
+    Bob says "I like romantic restaurants."
+    User says "Do you like quiet restaurants?"
+    Bob says "Let's go to a Japanese restaurant."
+    User says "Let's go to the Japotori restaurant. It's a quiet, affordable Japanese restaurant on the downtown."
+    Bob says "Okay, let's go to the Japotori restaurant."
+We reached an agreement, the negotiation is over!
