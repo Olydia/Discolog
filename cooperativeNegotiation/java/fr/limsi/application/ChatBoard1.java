@@ -298,7 +298,7 @@ public class ChatBoard1 extends AnchorPane{
 		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
-		Label whyLabel = new Label("What is it that you don't like?");
+		Label whyLabel = new Label("What did you dislike about this proposal?");
 		Label errorLabel = new Label("You must precise if you like or don't like");
 		errorLabel.setId("errorMessage");
 
@@ -587,6 +587,10 @@ public class ChatBoard1 extends AnchorPane{
 
 		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
 
+		   if (relation>0.5){
+			   boolean guess1 = interaction.getProperty("interaction@guess", interaction.isGuess());
+			   interaction.getSystem().respond(interaction, false, guess1);}
+
 		   /*The actions*/
 
 		   open.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
@@ -684,7 +688,11 @@ public class ChatBoard1 extends AnchorPane{
 	            	rejectButton.setStyle(on);
 	            	stateAskButton.setStyle(off);
 	            	stopButton.setStyle(off);
-	            	details[0]="Reject";
+
+	            	counterproposeOptionButton.setStyle(off);
+		     		counterproposeValueButton.setStyle(off);
+
+		     		details[0]="Reject";
 
 	            	list.clear();
 		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
@@ -1710,7 +1718,7 @@ public class ChatBoard1 extends AnchorPane{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
-			        		if (agent.getNegotiation().negotiationSuccess()){System.out.println("You hauksghdkaglhd");}
+			        		if (agent.getNegotiation().negotiationSuccess()){System.out.println("We reached an agreement, the negotiation is over!");}
 
 				        		}
 			        		list.clear();
