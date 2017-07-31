@@ -310,6 +310,16 @@ public class Negotiation<O extends Option> {
 		return prop;
 	}
 
+	public List<OptionProposal>  getOptionsProposals(Status status, boolean isSelf){
+		List<OptionProposal> prop =new ArrayList<OptionProposal>();
+
+		for (OptionProposal p: proposals){
+			if (p.getStatus().equals(status) && p.isSelf == isSelf)
+				prop.add(p);
+		}
+		return prop;
+	}
+
 
 	public List<Option> remainOptions(){
 		List<Option> options = nonRejectedOptions();
@@ -587,6 +597,21 @@ public class Negotiation<O extends Option> {
 			return(c.equals(p1.getValue()));
 		}
 		return false;
+	}
+	/**
+	 * 
+	 * @param status: the status of the proposal {OPEN, ACCEPTED, REJECTED}
+	 * @param isSelf: TRUE when the proposal is made by the agent. False when made by the user or the interlocutor agent.
+	 * @return
+	 */
+	
+	public List<Proposal> getProposalsWithStatus(Status status, boolean isSelf){
+		List<Proposal> proposals = new ArrayList<Proposal>();
+		for(CriterionNegotiation<Criterion> cr : getValuesNegotiation()){
+			proposals.addAll(cr.getProposalsWithStatus(status, isSelf));
+		}
+		proposals.addAll(getOptionsProposals(status, isSelf));
+		return proposals;
 	}
 
 }
