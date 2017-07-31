@@ -71,6 +71,11 @@ public class CriterionProposal extends Proposal {
 		
 		return "a " + value;
 	}
+	
+	@Override
+	public String printDetailedProposal(String topic) {
+		return printProposal(topic);
+	}
 
 	@Override
 	public CriterionProposal mirrorProposal() {

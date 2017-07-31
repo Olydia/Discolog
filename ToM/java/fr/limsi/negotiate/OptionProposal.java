@@ -68,6 +68,12 @@ public class OptionProposal extends Proposal {
 		// TODO Auto-generated method stub
 		return "the " + getValue() + " "+ topic;
 	}
+	
+	@Override
+	public String printDetailedProposal(String topic) {
+		// TODO Auto-generated method stub
+		return printProposal(topic) + ". "+ printValue();
+	}
 
 	@Override
 	public OptionProposal mirrorProposal() {

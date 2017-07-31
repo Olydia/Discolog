@@ -50,6 +50,8 @@ public abstract class Proposal {
 	
 	public abstract String printValue();
 	public abstract String printProposal(String topic) ;
+	public abstract String printDetailedProposal(String topic) ;
+
 	
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
 

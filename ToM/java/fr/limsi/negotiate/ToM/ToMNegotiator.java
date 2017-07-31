@@ -24,7 +24,7 @@ import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
 import fr.limsi.negotiate.lang.*;
 
 public class ToMNegotiator extends NegotiatorAgent{
-
+ 
 	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
 	//public Negotiation<? extends Option> other;
@@ -135,6 +135,7 @@ public class ToMNegotiator extends NegotiatorAgent{
 			guessProba(disco,selfPrevious, utterance, previousState);
 
 		Utterance u = respondTo(utterance, disco);
+		System.out.println(u.format());
 		return u ;
 	}
 

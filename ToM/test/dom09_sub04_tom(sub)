@@ -1,0 +1,149 @@
+***************************************************************************************
+pow(Agent 1) = 0.9, pow(Agent 2) = 0.4 
+Agent with ToM: Agent 1
+Agent  tries to guess pow(Agent 2)
+***************************************************************************************
+
+Agent1 says "Let's go to a family toyrestaurant."
+Agent2 says "Okay, let's go to a family toyrestaurant."
+Agent1 says "Let's go to a toyrestaurant on the east side."
+Agent2 says "I don't like toyrestaurants on the east side, let's choose something else."
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "Do you like toyrestaurants downtown?"
+Agent1 says "I don't like toyrestaurants downtown."
+Agent2 says "What kind of toycuisine do you like?"
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "What kind of toycuisine do you like?"
+Agent1 says "I like Japanese toyrestaurants."
+Agent2 says "Do you like Italian toyrestaurants?"
+Agent1 says "Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side."
+Agent2 says "Okay, let's go to the Pavillon limere toyrestaurant."
+
+************************************ Pow guessed at each turn ***************************************************
+
+Let's go to a family toyrestaurant -> Propose
+ ------------------------------------------------------------ 
+
+0.3 p =0.0
+
+0.5 p =0.0
+
+0.6 p =0.10001929012345678
+
+0.7 p =0.08950617283950617
+
+0.9 p =0.0
+
+0.4 p =0.0
+
+0.8 p =0.033950617283950615
+Guess the other pow :0.6
+ ------------------------------------------------------------ 
+Let's go to a toyrestaurant on the east side -> Propose
+ ------------------------------------------------------------ 
+
+0.3 p =0.0
+
+0.5 p =0.0
+
+0.6 p =0.10054976851851852
+
+0.7 p =0.10001929012345678
+
+0.9 p =0.041811342592592594
+
+0.4 p =0.0
+
+0.8 p =0.06944444444444445
+Guess the other pow :0.6
+ ------------------------------------------------------------ 
+Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side -> Propose
+ ------------------------------------------------------------ 
+
+0.3 p =0.0
+
+0.5 p =0.0
+
+0.6 p =0.061342592592592594
+
+0.7 p =0.059027777777777776
+
+0.9 p =0.023148148148148147
+
+0.4 p =0.0
+
+0.8 p =0.041666666666666664
+Guess the other pow :0.6
+ ------------------------------------------------------------ 
+I don't like toyrestaurants downtown -> StatePreference
+ ------------------------------------------------------------ 
+
+0.3 p =1.0
+
+0.5 p =1.0
+
+0.6 p =0.9814814814814815
+
+0.7 p =0.9444444444444444
+
+0.9 p =0.37037037037037035
+
+0.4 p =1.0
+
+0.8 p =0.6666666666666666
+Guess the other pow :0.4000000000000001
+ ------------------------------------------------------------ 
+Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side -> Propose
+ ------------------------------------------------------------ 
+
+0.3 p =0.0
+
+0.5 p =0.0
+
+0.6 p =0.061342592592592594
+
+0.7 p =0.059027777777777776
+
+0.9 p =0.023148148148148147
+
+0.4 p =0.0
+
+0.8 p =0.041666666666666664
+Guess the other pow :0.6
+ ------------------------------------------------------------ 
+I like Japanese toyrestaurants -> StatePreference
+ ------------------------------------------------------------ 
+
+0.3 p =0.25
+
+0.5 p =0.25
+
+0.6 p =0.25
+
+0.7 p =0.25
+
+0.9 p =0.18518518518518517
+
+0.4 p =0.25
+
+0.8 p =0.2222222222222222
+Guess the other pow :0.5
+ ------------------------------------------------------------ 
+Let's go to the Pavillon limere . It's a quiet, cheap French restaurant on the east side -> Propose
+ ------------------------------------------------------------ 
+
+0.3 p =0.0
+
+0.5 p =0.0
+
+0.6 p =0.0625
+
+0.7 p =0.0625
+
+0.9 p =0.05092592592592592
+
+0.4 p =0.0
+
+0.8 p =0.059027777777777776
+Guess the other pow :0.6499999999999999
+ 
