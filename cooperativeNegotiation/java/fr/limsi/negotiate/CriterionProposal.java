@@ -2,7 +2,7 @@ package fr.limsi.negotiate;
 
 /**
  *
- * @author Charles rich
+ * @author Charles rich lydia ouldouali
  * 	Criterion proposal
  */
 public class CriterionProposal extends Proposal {
@@ -57,12 +57,13 @@ public class CriterionProposal extends Proposal {
 		return result;
 	}
 
+	// Used to print an accepted or rejected proposal
 	@Override
 	public String printValue() {
 		// TODO Auto-generated method stub
 		return this.toString();
 	}
-
+	// Print detailed proposal
 	@Override
 	public String printProposal(String topic) {
 		String value = getValue().print(topic);
@@ -70,6 +71,11 @@ public class CriterionProposal extends Proposal {
 			return "an " + value;
 
 		return "a " + value;
+	}
+
+	@Override
+	public String printDetailedProposal(String topic) {
+		return printProposal(topic);
 	}
 
 
