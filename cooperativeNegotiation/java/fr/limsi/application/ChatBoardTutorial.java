@@ -307,7 +307,7 @@ public class ChatBoardTutorial extends AnchorPane{
 		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
 		Label rejectLabel = new Label("What do you want to reject?");
 		Label proposeLabel = new Label("What do you want to propose?");
-		Label whyLabel = new Label("What is it that you don't like?");
+		Label whyLabel = new Label("What did you dislike about this proposal?");
 		Label errorLabel = new Label("You must precise if you like or don't like");
 		errorLabel.setId("errorMessage");
 		Label answer1=new Label("");
@@ -710,6 +710,10 @@ public class ChatBoardTutorial extends AnchorPane{
 	            	rejectButton.setStyle(on);
 	            	stateAskButton.setStyle(off);
 	            	stopButton.setStyle(off);
+
+	            	counterproposeOptionButton.setStyle(off);
+		     		counterproposeValueButton.setStyle(off);
+
 	            	details[0]="Reject";
 
 	            	list.clear();
