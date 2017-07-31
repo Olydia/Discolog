@@ -1,0 +1,12 @@
+    # 31 juil. 2017 14:47:24 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Let's go to a restaurant on the north side."
+    User says "What kind of cuisine do you like?"
+    Bob says "I like French restaurants."
+    User says "I like quiet restaurants."
+    Bob says "Let's go to a restaurant on the north side."
+    User says "Let's go to the Couronne restaurant. It's a quiet, expensive French restaurant on the north side."
+    Bob says "I don't want to go to the Couronne restaurant. Let's go to another a restaurant on the north side."
+    User says "Let's go to the Arpege restaurant. It's a lively, cheap French restaurant on the north side."
+    Bob says "Okay, let's go to the Arpege restaurant."
+We reached an agreement, the negotiation is over!

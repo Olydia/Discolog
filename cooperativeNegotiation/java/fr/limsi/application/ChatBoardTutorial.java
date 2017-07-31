@@ -1243,7 +1243,8 @@ public class ChatBoardTutorial extends AnchorPane{
 	            	setLeftAnchor(dontLikeHBox,700.0);
 	            	likeButton.setStyle(off);
 	            	dontLikeButton.setStyle(off);
-
+	            	setTopAnchor(sendHBox,300.0);
+	            	setLeftAnchor(sendHBox,600.0);
 	            	list.addAll(likeHBox,dontLikeHBox);
 
 	            	setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);

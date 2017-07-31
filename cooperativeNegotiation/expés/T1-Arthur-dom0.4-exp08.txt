@@ -1,0 +1,11 @@
+    # 31 juil. 2017 15:59:47 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Do you like Chinese restaurants?"
+    Arthur says "I like Chinese restaurants."
+    User says "Let's go to an affordable restaurant."
+    Arthur says "Okay, let's go to an affordable restaurant."
+    User says "Let's go to a restaurant on the east side."
+    Arthur says "Okay, let's go to a restaurant on the east side."
+    User says "Let's go to the Shan gout restaurant. It's a romantic, affordable Chinese restaurant on the north side."
+    Arthur says "Okay, let's go to the Shan gout restaurant."
+We reached an agreement, the negotiation is over!
