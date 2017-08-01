@@ -1,0 +1,5 @@
+    # 1 août 2017 15:48:20 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Tilleuls restaurant. It's a lively, affordable French restaurant on the downtown."
+    Bob says "Okay, let's go to the Tilleuls restaurant."
+We reached an agreement, the negotiation is over!

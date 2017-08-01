@@ -1,0 +1,21 @@
+    # 1 août 2017 14:43:54 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to a Mexican restaurant."
+    Bob says "Okay, let's go to a Mexican restaurant."
+    User says "Let's go to a cheap restaurant."
+    Bob says "Okay, let's go to a cheap restaurant."
+    User says "What kind of atmosphere do you like?"
+    Bob says "I like romantic restaurants."
+    User says "I don't like romantic restaurants."
+    Bob says "Do you like family restaurants?"
+    User says "I don't like family restaurants."
+    Bob says "Do you like lively restaurants?"
+    User says "I don't like lively restaurants."
+    Bob says "Do you like quiet restaurants?"
+    User says "I like quiet restaurants."
+    Bob says "What kind of location do you like?"
+    User says "I like restaurants on the south side."
+    Bob says "Do you like restaurants on the north side?"
+    User says "Let's go to the Parrilla restaurant. It's a quiet, cheap Mexican restaurant on the south side."
+    Bob says "Okay, let's go to the Parrilla restaurant."
+We reached an agreement, the negotiation is over!

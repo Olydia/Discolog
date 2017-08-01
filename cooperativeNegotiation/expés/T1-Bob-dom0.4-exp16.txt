@@ -1,0 +1,5 @@
+    # 1 août 2017 13:44:08 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Chateau de bagnols restaurant. It's a romantic, affordable French restaurant on the west side."
+    Bob says "Okay, let's go to the Chateau de bagnols restaurant."
+We reached an agreement, the negotiation is over!

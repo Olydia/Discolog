@@ -1,0 +1,5 @@
+    # 1 août 2017 12:59:32 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Platanes restaurant. It's a romantic, expensive French restaurant on the south side."
+    Bob says "Okay, let's go to the Platanes restaurant."
+We reached an agreement, the negotiation is over!
