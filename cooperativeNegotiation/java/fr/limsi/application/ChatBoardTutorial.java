@@ -675,12 +675,12 @@ public class ChatBoardTutorial extends AnchorPane{
 
 	     		   	openList.clear();
 	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
 		    				openList.add(co.toString());
 
      		   		}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
+	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
 	    		   		openList.add(op.toString());
 	    		   		}
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
@@ -731,12 +731,12 @@ public class ChatBoardTutorial extends AnchorPane{
 
 	     		   openList.clear();
 	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
 		    				openList.add(co.toString());
 
      		   		}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
+	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
 	    		   		openList.add(op.toString());
 	    		   		}
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);

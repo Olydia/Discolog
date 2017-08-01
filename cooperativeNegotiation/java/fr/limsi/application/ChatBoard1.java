@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 public class ChatBoard1 extends AnchorPane{
 
-	static double relation=0.4;
+	static double relation=0.8;
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
 
@@ -653,12 +653,12 @@ public class ChatBoard1 extends AnchorPane{
 	     		   	openList.clear();
 
 	     		   		for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-	     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+	     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
 			    				openList.add(co.toString());
 
 	     		   		}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
+	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
 	    		   		openList.add(op.toString());
 	    		   		}
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
@@ -709,12 +709,12 @@ public class ChatBoard1 extends AnchorPane{
 
 	     		   openList.clear();
 	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN))
+     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
 		    				openList.add(co.toString());
 
      		   		}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN)){
+	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
 	    		   		openList.add(op.toString());
 	    		   		}
 	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
