@@ -1,0 +1,5 @@
+    # 1 août 2017 10:19:49 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Restaurant restaurant. It's a quiet, cheap French restaurant on the west side."
+    Bob says "Okay, let's go to the Restaurant restaurant."
+We reached an agreement, the negotiation is over!
