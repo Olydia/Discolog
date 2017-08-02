@@ -78,16 +78,19 @@ public class Models<O extends Option> {
 			}
 			
 			List<List<Self_Ci<Criterion>>> valuesModel = getCombination(0, models);
-			List<Self_C<O>> criterionModel = createCriterionModel(criteria, class1);
+			// Ignore the criteria in the preference model
+			//List<Self_C<O>> criterionModel = createCriterionModel(criteria, class1);
 			
 			// loop the criteria 
 
-			for(Self_C<O> self: criterionModel){
+			// <-- Ignore the crireria in the preference model --> for(Self_C<O> self: criterionModel){
 				// loop values
 				for(List<Self_Ci<Criterion>> value: valuesModel){
+					// <-- Ignore the crireria in the preference model -->	finalModel.add(new PrefNegotiation<O>(value, self));
+					Self_C<O> self = new Self_C<O> (class1);
 					finalModel.add(new PrefNegotiation<O>(value, self));
 				}
-			}
+				// <-- Ignore the crireria in the preference model --> }
 		return finalModel;
 			
 			

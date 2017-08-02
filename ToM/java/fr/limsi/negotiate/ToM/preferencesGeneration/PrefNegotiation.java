@@ -28,11 +28,16 @@ public class PrefNegotiation <A extends Option>{
 			this.criteria_prefs = criteria_prefs;
 		}
 
-		 
+		public PrefNegotiation(List<Self_Ci<Criterion>> values_prefs) {
+			this.values_prefs = values_prefs;
+			//this.criteria_prefs = criteria_prefs;
+		}
+		
 		public PrefNegotiation(List<Self_Ci<Criterion>> values_prefs, Self_C<A> criteria_prefs) {
 			this.values_prefs = values_prefs;
 			this.criteria_prefs = criteria_prefs;
 		}
+		
 		
 
 	}

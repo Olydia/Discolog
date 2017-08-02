@@ -12,9 +12,10 @@ public class ToyModel {
 
 
 		Self_C<ToyRestaurant>  d1_criteria = new Self_C<ToyRestaurant> (ToyRestaurant.class);
-		d1_criteria.addPreference(ToyLocation.class, ToyAtmosphere.class);
-		d1_criteria.addPreference(ToyCost.class, ToyAtmosphere.class);
-		d1_criteria.addPreference(ToyAtmosphere.class, ToyCuisine.class);
+		
+//		d1_criteria.addPreference(ToyLocation.class, ToyAtmosphere.class);
+//		d1_criteria.addPreference(ToyCost.class, ToyAtmosphere.class);
+//		d1_criteria.addPreference(ToyAtmosphere.class, ToyCuisine.class);
 
 
 		Self_Ci<ToyCuisine> d1_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
@@ -59,9 +60,9 @@ public class ToyModel {
 
 
 		Self_C<ToyRestaurant>  d2_criteria = new Self_C<ToyRestaurant> (ToyRestaurant.class);
-		d2_criteria.addPreference(ToyAtmosphere.class, ToyCost.class);
-		d2_criteria.addPreference(ToyCost.class, ToyCuisine.class);
-		d2_criteria.addPreference(ToyCuisine.class, ToyLocation.class);
+//		d2_criteria.addPreference(ToyAtmosphere.class, ToyCost.class);
+//		d2_criteria.addPreference(ToyCost.class, ToyCuisine.class);
+//		d2_criteria.addPreference(ToyCuisine.class, ToyLocation.class);
 
 
 		Self_Ci<ToyCuisine> d2_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);

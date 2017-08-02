@@ -12,7 +12,6 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ToMNegotiator;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
@@ -24,7 +23,7 @@ import fr.limsi.negotiate.toyExample.ToyModel;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -61,15 +60,15 @@ public class NegotiatorAgent extends Agent {
 		//GenerateMovieModel model = new GenerateMovieModel();
 		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new ToMNegotiator("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
+				new NegotiatorAgent("Agent1", model.model2()), 
+				new ToMNegotiator("Agent2", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((ToMNegotiator) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
+		((ToMNegotiator) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}
@@ -455,8 +454,8 @@ public class NegotiatorAgent extends Agent {
 		List<Criterion> statements = new ArrayList<Criterion>();
 		Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
 		statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());
-
-		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().sortValues());
+		// <-- Ignore the crireria in the preference model --> 
+		c =  getNegotiation().getContext().openNewDiscussion(getNegotiation().getCriteria().getElements());
 
 		if(c != null)
 			statements.addAll(getNegotiation().getValueNegotiation(c).remainValues());

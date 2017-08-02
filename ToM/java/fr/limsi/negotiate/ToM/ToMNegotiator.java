@@ -18,6 +18,7 @@ import edu.wpi.disco.Interaction;
 import edu.wpi.disco.lang.Say;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.preferencesGeneration.ModelGenerator;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.ToM.preferencesGeneration.PrefNegotiation;
@@ -28,6 +29,17 @@ public class ToMNegotiator extends NegotiatorAgent{
 	public HashMap<Double, List<PrefNegotiation<Option>>> otherModel;
 	public Negotiation<? extends Option> previousState;
 	//public Negotiation<? extends Option> other;
+	public double other;
+
+
+	public double getOther() {
+		return other;
+	}
+
+
+	public void setOther(double other) {
+		this.other = other;
+	}
 
 
 	/**
@@ -36,15 +48,13 @@ public class ToMNegotiator extends NegotiatorAgent{
 	 * @param 
 	 */
 
-	public Negotiation<? extends Option> otherMental;
-
-
 	public ToMNegotiator(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
 		this.otherModel = new HashMap<Double, List<PrefNegotiation<Option>>> ();
 		this.previousState = negotiation;
 
-
+		this.other = 1 - getNegotiation().getDominance();
+		
 		@SuppressWarnings("unchecked")
 		List<PrefNegotiation<Option>>  prefs = setPreferences(negotiation.getCriteria().getElements(), (Class<Option>) negotiation.getTopic());
 		for(double pow:setPow_hyp()){
@@ -158,31 +168,31 @@ public class ToMNegotiator extends NegotiatorAgent{
 	 */
 
 
-	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
-
-		for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
-			Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
-			/*
-			 * il faut gerer la mise a jouer des elements
-			 */
-			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
-				PrefNegotiation<Option> element = iterator.next();
-
-				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
-				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
-
-				if(!identicalUtterances(guessUtt, guessed))
-					iterator.remove();
-			}
-			System.out.println( entry.getKey() +" " +entry.getValue().size());  
-
-			if(entry.getValue().isEmpty()) {
-				it.remove();
-			}
-		}
-		// ---------------------------------
-
-	}
+//	public void guess (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
+//
+//		for(Iterator<Entry<Double, List<PrefNegotiation<Option>>>> it = otherModel.entrySet().iterator(); it.hasNext(); ) {
+//			Map.Entry<Double, List<PrefNegotiation<Option>>> entry = it.next();
+//			/*
+//			 * il faut gerer la mise a jouer des elements
+//			 */
+//			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
+//				PrefNegotiation<Option> element = iterator.next();
+//
+//				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), entry.getKey(), previousUtt, disco);
+//				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
+//
+//				if(!identicalUtterances(guessUtt, guessed))
+//					iterator.remove();
+//			}
+//			System.out.println( entry.getKey() +" " +entry.getValue().size());  
+//
+//			if(entry.getValue().isEmpty()) {
+//				it.remove();
+//			}
+//		}
+//		// ---------------------------------
+//
+//	}
 
 
 	public void guessProba (Disco disco, Utterance previousUtt, Utterance guessUtt, Negotiation<? extends Option> selfNego) {
@@ -197,17 +207,21 @@ public class ToMNegotiator extends NegotiatorAgent{
 			double correct = 0;
 			for (Iterator<PrefNegotiation<Option>> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
 				PrefNegotiation<Option> element = iterator.next();
-
-				Utterance guessed = guessUtt(createModel(entry.getKey(), element, selfNego), 
+				Negotiation<? extends Option> currentModel = createModel(entry.getKey(), element, selfNego);
+				Utterance guessed = guessUtt(currentModel, 
 						entry.getKey(), previousUtt, disco);
 				//System.out.println(" guessed "+ entry.getKey() + "utt " + guessed.format()+ " -> " + guessed.getType());
 
-				if(identicalUtterances(guessUtt, guessed))
-					correct ++;
+				if(guessUtt instanceof StatePreference && !isSatisfiable((StatePreference)guessUtt, currentModel))
+					iterator.remove();
+				
 				else{
-					if(guessUtt instanceof StatePreference)
-						iterator.remove();
+					if(identicalUtterances(guessUtt, guessed))
+						correct ++;
 				}
+				
+				
+				
 			}
 			double p = correct/total;
 			proba.put(entry.getKey(), p);
@@ -219,11 +233,20 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 		}
 		// ---------------------------------
-		System.out.println("Guess the other pow :" +getOtherPow(proba));
+		setOther(getOtherPow(proba));
+		System.out.println("Guess the other pow :" + getOther());
 		System.out.println(" ------------------------------------------------------------ ");
 
 
 	}
+	private boolean isSatisfiable(StatePreference guessUtt, Negotiation<? extends Option> model) {
+		Criterion e = guessUtt.getValue();
+		Satisfiable s = guessUtt.getLikable();
+		Satisfiable s2 =model.getValueNegotiation(e.getClass()).getSelf().isSatisfiable(e, model.getDominance());
+		return(s.equals(s2));
+	}
+
+
 	public void updateOther(Utterance next){
 		// Ajouter interpretation
 
@@ -263,8 +286,19 @@ public class ToMNegotiator extends NegotiatorAgent{
 					return false;	
 
 				}
-				else 
+				else{
+					
+					if(ut instanceof StatePreference){
+						Satisfiable s1 = ((StatePreference)ut).getLikable();
+						Satisfiable s2 = ((StatePreference)otherUt).getLikable();
+						return (c1.equals(c2) && s1.equals(s2));
+
+					}
 					return (c1.equals(c2));
+
+				}
+					
+
 
 
 			}
@@ -313,14 +347,21 @@ public class ToMNegotiator extends NegotiatorAgent{
 
 	public double getOtherPow(Map<Double, Double> values){
 		Map<Double, Double> result = sortPower(values); 
+		
 		double max = java.util.Collections.max(result.values());
+		
 		List<Double> keys = new ArrayList<Double>();
+		
 		for(Iterator<Entry<Double, Double>> it = result.entrySet().iterator(); it.hasNext();){
 			Entry<Double, Double> entry = it.next();
+			
 			if(entry.getValue().equals(max))
 				keys.add(entry.getKey());
 		}
-
+		int sizeResult = result.values().size();
+//		if(sizeResult == keys.size())
+//			return other;
+		
 		OptionalDouble average = keys.stream()
 				.mapToDouble(a -> a).average();
 

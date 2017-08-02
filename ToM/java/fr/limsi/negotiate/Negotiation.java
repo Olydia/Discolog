@@ -371,9 +371,9 @@ public class Negotiation<O extends Option> {
 
 	public Criterion chooseCriterionProposal(){
 		ArrayList<Criterion> argmax = new ArrayList<Criterion>();
-
-		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().sortValues());
-		discussions = getCriteria().sortValues(discussions);
+		// <-- Ignore the crireria in the preference model -->  .getPossibleDiscussions(getCriteria().sortValues()
+		List<Class<? extends Criterion>> discussions = getContext().getPossibleDiscussions(getCriteria().getElements());
+		//discussions = getCriteria().sortValues(discussions);
 		double self = this.self();
 
 		for(int i = discussions.size()-1; i>=0; i--){
@@ -400,9 +400,9 @@ public class Negotiation<O extends Option> {
 	}
 	public List<Option> getAcceptableOptions(List<Option> options){
 		List<Option> acceptables = new ArrayList<Option>();
-		System.out.println(options.size());
+		//System.out.println(options.size());
 		for(Option o: options){
-			System.out.println("Option " + o.toString() + " : "+ satisfiability((O) o));
+			//System.out.println("Option " + o.toString() + " : "+ satisfiability((O) o));
 			if(isAcceptable(o))
 				acceptables.add(o);
 		}
