@@ -1,0 +1,19 @@
+    # 2 août 2017 11:44:14 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "What kind of atmosphere do you like?"
+    Bob says "I like romantic restaurants."
+    User says "What kind of cuisine do you like?"
+    Bob says "I like French restaurants."
+    User says "Do you like Italian restaurants?"
+    Bob says "I don't like Italian restaurants."
+    User says "What kind of cost do you like?"
+    Bob says "I like cheap restaurants."
+    User says "Let's go to a quiet restaurant."
+    Bob says "I don't like quiet restaurants, let's choose something else."
+    User says "Let's go to a French restaurant."
+    Bob says "Okay, let's go to a French restaurant."
+    User says "Let's go to a restaurant on the north side."
+    Bob says "Okay, let's go to a restaurant on the north side."
+    User says "Let's go to the Cocagnou restaurant. It's a family, cheap French restaurant on the north side."
+    Bob says "Okay, let's go to the Cocagnou restaurant."
+We reached an agreement, the negotiation is over!

@@ -1,0 +1,7 @@
+    # 1 août 2017 20:01:23 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Casa da vinci restaurant. It's a romantic, expensive Italian restaurant on the south side."
+    Arthur says "I don't like expensive restaurants, let's choose something else."
+    User says "Let's go to the Del arte restaurant. It's a quiet, cheap Italian restaurant on the downtown."
+    Arthur says "Okay, let's go to the Del arte restaurant."
+We reached an agreement, the negotiation is over!

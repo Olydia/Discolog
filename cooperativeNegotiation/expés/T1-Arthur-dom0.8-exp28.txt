@@ -1,0 +1,12 @@
+    # 2 août 2017 14:43:00 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Arthur says "Let's go to a restaurant on the south side."
+    User says "Okay, let's go to a restaurant on the south side."
+    Arthur says "Let's go to the Shanghai restaurant. It's a quiet, cheap Chinese restaurant on the south side."
+    User says "I don't like Chinese restaurants, let's choose something else."
+    Arthur says "Let's go to a quiet restaurant."
+    User says "Okay, let's go to a quiet restaurant."
+    Arthur says "Let's go to the Sap restaurant. It's a quiet, cheap Japanese restaurant on the south side."
+    User says "Okay, let's go to the Sap restaurant."
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
