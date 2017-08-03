@@ -1,0 +1,16 @@
+    # 3 août 2017 10:45:37 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Let's go to a restaurant on the north side."
+    User says "Let's go to a restaurant on the north side."
+    Bob says "Okay. Let's go to the Paris bistro restaurant. It's a romantic, cheap French restaurant on the north side."
+    User says "I'd rather choose something else."
+    Bob says "Let's go to a restaurant on the north side."
+    User says "Okay for the a restaurant on the north side."
+    Bob says "Let's go to the Takeo restaurant. It's a romantic, cheap Japanese restaurant on the north side."
+    User says "I don't like romantic restaurants, let's choose something else."
+    Bob says "Let's go to the Cocagnou restaurant. It's a family, cheap French restaurant on the north side."
+    User says "I don't want to go to the Cocagnou restaurant. Let's rather go to a quiet restaurant."
+    Bob says "I don't want to go to a quiet restaurant. Let's go to another the Grande tour restaurant. It's a quiet, cheap French restaurant on the north side."
+    User says "Okay for the the Grande tour restaurant."
+    Bob says "Okay."
+We reached an agreement, the negotiation is over!

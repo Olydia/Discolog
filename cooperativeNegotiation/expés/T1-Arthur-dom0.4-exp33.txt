@@ -1,0 +1,13 @@
+    # 3 août 2017 11:38:42 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "What kind of cuisine do you like?"
+    Arthur says "I like Chinese restaurants."
+    User says "I like Chinese restaurants."
+    Arthur says "Let's go to a Chinese restaurant."
+    User says "Okay for the a Chinese restaurant."
+    Arthur says "What kind of cost do you like?"
+    User says "Do you like affordable restaurants?"
+    Arthur says "I like affordable restaurants."
+    User says "Let's go to the Royal orchid restaurant. It's a quiet, affordable Chinese restaurant on the south side."
+    Arthur says "Okay for the the Royal orchid restaurant."
+We reached an agreement, the negotiation is over!

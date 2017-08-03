@@ -1,0 +1,8 @@
+    # 3 août 2017 11:49:26 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Let's go to a restaurant on the north side."
+    User says "I don't want to go to a restaurant on the north side. Let's rather go to a restaurant downtown."
+    Bob says "I don't want to go to a restaurant downtown. Let's go to another the Lion dor restaurant. It's a romantic, cheap French restaurant on the downtown."
+    User says "Okay for the the Lion dor restaurant."
+    Bob says "Okay."
+We reached an agreement, the negotiation is over!

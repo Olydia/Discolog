@@ -1,0 +1,20 @@
+    # 3 août 2017 13:29:13 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     User says "Let's go to the Petit bonneval restaurant. It's a family, affordable French restaurant on the downtown."
+    Arthur says "Okay for the the Petit bonneval restaurant."
+We reached an agreement, the negotiation is over!
+    User says "What kind of atmosphere do you like?"
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
+    User says "What kind of cost do you like?"
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
+    User says "Let's go to an affordable restaurant."
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
+    User says "Do you like expensive restaurants?"
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
+    User says "Let's go to the Dino ristorante restaurant. It's a romantic, cheap Italian restaurant on the downtown."
+    Arthur says "Okay."
+We reached an agreement, the negotiation is over!
