@@ -1,0 +1,27 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Article{de2004influence,
+  Title                    = {The influence of power on the information search, impression formation, and demands in negotiation},
+  Author                   = {De Dreu, Carsten KW and Van Kleef, Gerben A},
+  Journal                  = {Journal of Experimental Social Psychology},
+  Year                     = {2004},
+  Number                   = {3},
+  Pages                    = {303--319},
+  Volume                   = {40},
+
+  Publisher                = {Elsevier}
+}
+
+@Article{magee2007power,
+  Title                    = {Power, propensity to negotiate, and moving first in competitive interactions},
+  Author                   = {Magee, Joe C and Galinsky, Adam D and Gruenfeld, Deborah H},
+  Journal                  = {Personality and Social Psychology Bulletin},
+  Year                     = {2007},
+  Number                   = {2},
+  Pages                    = {200--212},
+  Volume                   = {33},
+
+}
+

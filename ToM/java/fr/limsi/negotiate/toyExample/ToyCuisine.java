@@ -5,7 +5,8 @@ public enum ToyCuisine implements Criterion {
 
    FRENCH, MEXICAN
    , ITALIAN
-  // ,JAPANESE
+  ,JAPANESE
+  //, CHINESE
    ;
 
    
