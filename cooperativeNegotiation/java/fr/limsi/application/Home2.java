@@ -70,7 +70,7 @@ public class Home2 extends Application {
         scene.getStylesheets().add
         (Home2.class.getResource("application2.css").toExternalForm());
         homeStage.show();
-        Chat2 chat=new Chat2();
+        UpPrincipalScreen2 chat=new UpPrincipalScreen2();
     	Stage chatStage=new Stage();
 
         /*The name label*/

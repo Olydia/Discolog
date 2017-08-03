@@ -29,7 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class ChatBoard1 extends AnchorPane{
+public class DownPrincipalScreen1 extends AnchorPane{
 
 	static double relation=0.8;
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
@@ -51,7 +51,7 @@ public class ChatBoard1 extends AnchorPane{
  */
 	public String[] details = new String[8];
 
-	public ChatBoard1(){
+	public DownPrincipalScreen1(){
 
 	}
 

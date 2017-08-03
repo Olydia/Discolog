@@ -76,7 +76,7 @@ public class HomeTutorial extends Application {
         scene.getStylesheets().add
         (HomeTutorial.class.getResource("application2.css").toExternalForm());
         homeStage.show();
-        ChatTutorial chat=new ChatTutorial();
+        UpPrincipalScreenTutorial chat=new UpPrincipalScreenTutorial();
     	Stage chatStage=new Stage();
 
         /*The name label*/

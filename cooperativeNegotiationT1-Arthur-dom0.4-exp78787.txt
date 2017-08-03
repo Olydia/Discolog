@@ -1,3 +1,0 @@
-    # 28 juil. 2017 12:44:03 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  > C:\Users\dhouib\Documents\GitHub\Discolog\cooperativeNegotiation\T1-Arthur-dom0.4-exp78787.txt

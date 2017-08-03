@@ -14,7 +14,7 @@ import javafx.scene.layout.FlowPane;
 
 
 
-public class ChatTutorial extends Application {
+public class UpPrincipalScreenTutorial extends Application {
 	String situation;
 	String username;
 	@Override
@@ -26,13 +26,13 @@ public class ChatTutorial extends Application {
 		   TextArea ta = new TextArea();
 	        //VBox vbox = new VBox(ta);
 		FlowPane flow = new FlowPane(Orientation.VERTICAL);
-		ChatBoardTutorial chatBoard= new ChatBoardTutorial();
+		DownPrincipalScreenTutorial chatBoard= new DownPrincipalScreenTutorial();
 		//Chat chat=new Chat();
 		//Choice choice=new Choice();
 		sp.getItems().addAll(flow,chatBoard);
         sp.setDividerPositions(0.3f);
 
-		String image = ChatTutorial.class.getResource("white.jpg").toExternalForm();
+		String image = UpPrincipalScreenTutorial.class.getResource("white.jpg").toExternalForm();
 
         flow.setStyle("-fx-background-image: url('" + image + "'); "
         		 +
@@ -50,7 +50,7 @@ public class ChatTutorial extends Application {
         chatStage.setFullScreen(true);
 
         scene.getStylesheets().add
-        (ChatTutorial.class.getResource("application2.css").toExternalForm());
+        (UpPrincipalScreenTutorial.class.getResource("application2.css").toExternalForm());
         chatStage.show();
         chatBoard.addElements(username,situation,chatStage/*,chatBoard.interact(username)*/);
 
