@@ -12,3 +12,4 @@ soit just un bouton qui fait passer à la fenêtre principale du tutoriel.
 -writeHistory: définit la méthode copyFile qui permet de copier le fichier temporaire de l'historique de la discussion généré par Disco dans un autre chemin
 -Le fichier application2.css contient des détails sur la forme de l'interface.
 
+Pour enregistrer les discussions il faut faire stop->yes
