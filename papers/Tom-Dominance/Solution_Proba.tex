@@ -1,0 +1,121 @@
+\documentclass{llncs}
+\usepackage{subcaption}
+\usepackage{subfig} 
+\usepackage{usual}
+\usepackage{graphicx}
+\usepackage[rflt]{floatflt}
+\usepackage[francais]{babel}
+%\pagestyle{plain}
+%
+\begin{document}
+	
+	\section{Introduction}
+	Nous avons propos\'e un mod\`ele de dialogue de n\'egociation coop\'erative  o\`u un agent peut adapter sa strat\'egie de n\'egociation en fonction de la relation de pouvoir qu'il cherche \`a exprimer. 
+	Le but final de ce mod\`ele est  de mod\`eliser la relation de dominance que deux n\'egociateurs \'etablissent lors de leur interaction. 
+	\par La relation de dominance est d\'efini par \emph{Dunbar et \textit{al}} comme la capacit\'e  \`a manifester des comportements de pouvoirs o\`u l'assertion de pouvoir d'un parti est forc\'ement accept\'e par l'autre parti. Par d\'efinition la relation de dominance est compl\'ementaire. 
+	Par cons\'equent, si on veut impl\'ementer la relation de dominance lors de la n\'egiciation, l'agent doit "deviner" la relation de pouvoir exprim\'ee par son interlocuteur afin de s'y adapter. 
+	
+	Nous avons propos\'e d'utiliser la th\`eorie de l'esprit afin de reconna\^itre la relation de pouvoir exprim\'ee par l'autre. 
+	
+	La premi\`ere solution visait \`a r\'eutiliser le mod\`ele d\'ecisionnel de l'agent pour raisonner sur l'autre. Le mod\`ele existant de n\'egociation coop\'erative sur des pr\'eferences, repose sur trois \'elements (Le contexte de la n\'egociation, la relation de pouvoir \textbf{pow} et les pr\'eferences).
+	
+	Il fallait donc formuler des hypoth\`eses sur chaque \'element du mod\`ele d\'ecisionel pour pouvoir deviner le \textbf{pow} de l'autre. La limite de cette proposition r\'esidait dans le fait de devoir mod\`eliser tous les mo\`eles de pr\'eferences pour un sujet donn\'e, d'autant plus qu'on ne cherche pas \`a apprendre les pr\'eferences de l'autre.
+	
+	Pour cette raison, je propose une solution probabiliste où une repr\'esentation partielle des pr\'eferences de l'autre est faite. 
+	
+	\section{Adaptation de l'algorithme de d\'ecision}
+	
+	\subsection{Rappel de l'algorithme}
+	L'algorithme de d\'ecision est bas\'e sur trois fonctions:
+	\subsubsection{Satisfiabilit\'e:}
+	
+	Cette fonction est utilis\'e pour exprimer les valeurs aim\'es par l'agent (dans le cadre de StatePreference)
+	\begin{equation}
+	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+	\end{equation}
+	
+	Une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$.
+	
+	\subsubsection{Acceptabilit\'e:}
+	La notion d'acceptabilit\'e est utilis\'ee pour soit accepter ou rejeter des propositions. Une proposition est dite acceptable: 
+	\begin{equation}
+	\vspace{-.5em} 
+	acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
+	\end{equation}
+	et Self repr\'esente le poid donn\'e \`a la satisfaction de ses pr\'ef\'erences \`a un moment \textbf{t} de la n\'egociation. 
+	
+	\begin{equation}
+	self(pow, t) = \left\{\begin{array}{ll}
+	pow & \mathrm{if\ } (t \leq \tau)\\
+	max(0, pow - (\frac{\delta}{pow} \cdot (t - \tau))) & \mathrm{otherwise}
+	\end{array}\right.
+	\end{equation}
+	
+	\subsubsection{Tol\'erabilit\'e}
+	Cette notion est utilis\'ee pour calculer la valeur de proposition que l'agent va \'enoncer. L'agent prend en compte ses pr\'eferences ainsi que celle de l'autre. A partir de la liste des valeurs acceptables, l'agent calcule la proposition la plus tol\'erable. 
+	
+	\begin{equation}
+	tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
+	\end{equation}
+	
+	
+	\subsection{Adaptation du syst\`eme}
+	Le but de cette solution est de pr\'esenter un mod\`ele d\'ecisionnel qui calcule la probabilt\'e d'obtenir l'utterance ennonc\'e pour chaque hypoth\`ese de pouvoir \textbf{pow}. 
+	
+	J'ai formul\'e une premi\`ere hypoth\`ese  qui sugg\`ere qu'au lieu de mod\`eliser toutes les relations de pr\'eferences, on mod\`elisait l'ensemble de valeurs satisfiables.
+	
+	Par exemple, supposons qu'on ait un mod\`ele compos\'e de l'ensemble des valeurs \{A, B, C, D\}, l'ensemble des relations des pr\'eferences qu'on peut g\'en\'erer de ce mod\`ele est de l'ordre de 4! = 24. 
+	
+	Au lieu de g\'enerer l'ensemble des relations de pr\'eferences, je propose de g\'enerer l'ensemble des valeurs satisfiables possibles. 
+	Rappelons qu'une valeur $v$ est satisfiable si $ sat_{self}(v, \prec_i) > pow$. En supposons qu'on ait un ordre total sur les pr\'ef\'erences, on peut conna\^itre le pourcentage des valeurs satisfiables d'un ensemble donn\'e. 
+	
+	Par exemple, pour l'ensemble ordonn\'e\{A, B, C, D\} et pow =0.4, a partir des valeurs de satisfiabilit\'e present\'e dans la table \ref{table:conditions}, on peut conclure que les valeurs satisfiables sont \{C,D\}. 
+	Les valeurs de satisfiabilit\'e sont normalis\'e entre [0,1] on peut dire que pour un que pow =0.4, 60\% des valeurs  sont satisfiables.
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ |l|c|c|c|c| }
+			\hline
+			\textbf{Values}& \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\ 
+			\hline
+			\newline  \textbf{Sat }& 0 & 0.3 & 0.6 & 1\\ 
+			\hline
+			
+		\end{tabular}
+		\caption{Valeurs de sat}
+		\label{table:conditions}
+	\end{table}
+	On peut g\'en\'eraliser comme suit:
+	
+	Pour une valeur de $pow$ donn\'ee, le domaine de valeurs $D$. Le nombre de valeurs satisfiable est:
+	\begin{equation}
+	Satisfiable(pow, D)= card(D) * (1-pow)
+	\end{equation}
+	
+	Avec cette proposition, nous avons une mod\'elisation partielle des pr\'ef\'erences mais qui r\'eduit consid\'erablement la taille des mod\`eles à $C_{card(D)}^{1-pow} $  
+	
+	\subsection{Adaptation d'Acceptabilit\'e}
+	Etant donn\'ee qu'on a maintenant une repr\'esentation approximative des valeurs de satisfiabilit\'e. Il faut aussi adapter le calcul de l'acceptabilit\'e.
+	Cette notion qui prend en compte le principe de concession mod\`elis\'e avec la fonction $Self$. Si la valeur de $Self$ d\'ecroit lors de la n\'egociation, des valeurs non satisfiables deviennent acceptables.
+	Reprenons l'exemple pr\'ec\'edent, supposons qu'au court de la n\'egociation $Self = 0.3$, donc, \textbf{B} est maintenant acceptable. 
+	Dans le cas o\`u on ne conna\^it pas l'ordre de pr\'ef\'erences, on peut dire qu'une des deux valeurs \textbf{A ou B} est maintenant acceptable.
+	
+	\begin{equation}
+	Acceptability(V) =  \left\{\begin{array}{ll}
+	1 & \mathrm{if\ } (sat(V) = true)\\
+	m/n & \mathrm{otherwise}
+	\end{array}\right.
+	\end{equation}
+	\begin{itemize}
+		\item m: le nombre de valeurs devenus acceptables (dans l'exemple 1 (\textbf{B})
+		\item n: le nombre de valeurs non satisfiables (dans l'exemple 2 (\textbf{A, B}))
+	\end{itemize}
+	
+	\subsection{Tol\'erabilit\'e}
+	Pour l'instant, je bloque un peu sur le mod\`ele, car les valeurs de satisfiabilit\'e sont soit vrais(1) ou fausse (0). 
+	On pourrait essayer de calculer quand même.
+	
+	\subsection{D\'ecision}
+	Pour le choix de l'utterance, au lieu de calculer l'utterance, je propose de calculer la probabilit\'e d'obtenir l'utterance \'ennonc\'e par l'autre. 
+	On combine les probabilit\'es obtenues pour chaque mod\`ele pour chaque valeur de pow. 
+	
+\end{document}
