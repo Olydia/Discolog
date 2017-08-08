@@ -22,7 +22,7 @@ public class ToyModel {
 		
 		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.MEXICAN);
 		d1_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.FRENCH);
-	//	d1_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.JAPANESE);
+		d1_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.JAPANESE);
 
 
 		
@@ -100,6 +100,14 @@ public class ToyModel {
 		(new CriterionNegotiation[] {ToyCost, cuisine, atmospher, ToyLocation}, d2_criteria, ToyRestaurant.class);
 		return model2;
 
+	}	public static void main (String[] args) {
+		//totalOrderedModels model = new totalOrderedModels();
+		//GenerateMovieModel model = new GenerateMovieModel();
+		ToyModel model = new ToyModel();
+		Negotiation a = model.model1();
+		for(ToyCuisine c: ToyCuisine.values()){
+			System.out.println(c + " "+a.getValueNegotiation(ToyCuisine.class).getSelf().satisfaction(c));
+		}
 	}
 	
 	
