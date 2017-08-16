@@ -1,9 +1,0 @@
-    # 1 août 2017 10:48:13 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     User says "Let's go to a Mexican restaurant."
-    Bob says "Okay, let's go to a Mexican restaurant."
-    User says "What kind of location do you like?"
-    Bob says "I like restaurants on the north side."
-    User says "Let's go to the Mexico lindo restaurant. It's a lively, affordable Mexican restaurant on the north side."
-    Bob says "Okay, let's go to the Mexico lindo restaurant."
-We reached an agreement, the negotiation is over!

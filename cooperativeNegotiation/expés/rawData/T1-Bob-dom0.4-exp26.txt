@@ -1,7 +1,0 @@
-    # 2 août 2017 13:42:45 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     User says "Let's go to an expensive restaurant."
-    Bob says "I don't like expensive restaurants, let's choose something else."
-    User says "Let's go to the Letape restaurant. It's a quiet, expensive French restaurant on the downtown."
-    Bob says "Okay, let's go to the Letape restaurant."
-We reached an agreement, the negotiation is over!

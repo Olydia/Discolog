@@ -1,9 +1,0 @@
-    # 31 juil. 2017 14:45:17 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     User says "What kind of atmosphere do you like?"
-    Arthur says "I like quiet restaurants."
-    User says "Do you like Korean restaurants?"
-    Arthur says "I like Korean restaurants."
-    User says "Let's go to the Bossam restaurant. It's a quiet, expensive Korean restaurant on the west side."
-    Arthur says "Okay, let's go to the Bossam restaurant."
-We reached an agreement, the negotiation is over!

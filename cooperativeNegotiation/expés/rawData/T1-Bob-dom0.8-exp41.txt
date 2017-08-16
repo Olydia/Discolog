@@ -1,8 +1,0 @@
-    # 1 août 2017 23:21:18 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     Bob says "Let's go to a restaurant on the north side."
-    User says "Let's go to the Pescatore restaurant. It's a lively, affordable Turkish restaurant on the west side."
-    Bob says "I don't want to go to the Pescatore restaurant. Let's rather go to a restaurant on the north side."
-    User says "I don't want to go to a restaurant on the north side. Let's rather go to the Suchiku restaurant. It's a family, affordable Japanese restaurant on the east side."
-    Bob says "Okay, let's go to the Suchiku restaurant."
-We reached an agreement, the negotiation is over!

@@ -1,7 +1,0 @@
-    # 2 août 2017 16:07:58 - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     User says "Let's go to an Italian restaurant."
-    Bob says "I don't like Italian restaurants, let's choose something else."
-    User says "Let's go to the Chateau bellevue restaurant. It's a lively, cheap French restaurant on the west side."
-    Bob says "Okay, let's go to the Chateau bellevue restaurant."
-We reached an agreement, the negotiation is over!
