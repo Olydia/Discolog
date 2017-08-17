@@ -119,12 +119,12 @@ public class Negotiation<O extends Option> {
 		this.relation = dominance;
 	}
 
-	public float satisfiability(O option) {
+	public float satisfiability(Option object) {
 		float satisfaction = 0;
 		int n=0;
-		for(Class<? extends Criterion> criterion : option.getCriteria()){
+		for(Class<? extends Criterion> criterion : object.getCriteria()){
 			CriterionNegotiation<Criterion> value = this.getValueNegotiation(criterion);
-			satisfaction += value.getSelf().satisfaction(option.getValue(criterion));
+			satisfaction += value.getSelf().satisfaction(object.getValue(criterion));
 			n++;
 		}
 		return satisfaction/n;

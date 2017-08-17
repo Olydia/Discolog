@@ -18,8 +18,8 @@ public abstract class Self<C> {
 
 
 
-	public Satisfiable isSatisfiable(C value, double self){
-		if (this.satisfaction(value) >= self)
+	public Satisfiable isSatisfiable(C value, double pow){
+		if (this.satisfaction(value) >= pow)
 			return Satisfiable.TRUE;
 		else 
 			return Satisfiable.FALSE;
@@ -45,6 +45,16 @@ public abstract class Self<C> {
 	public float satisfaction(C value){
 		float score = matrix.getScoreOf(value);
 		return (1-score);
+	}
+	
+	public List<C> getSatisfiableValues(double pow){
+		List<C> val = sortValues();
+		List<C> sat = new ArrayList<C>();
+		for(C elem : val) {
+			if(isSatisfiable(elem, pow).equals(Satisfiable.TRUE))
+				sat.add(elem);
+		}
+		return sat;
 	}
 	
 	public abstract List<C> getElements ();

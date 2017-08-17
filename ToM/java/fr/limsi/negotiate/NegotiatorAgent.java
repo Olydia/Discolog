@@ -311,14 +311,15 @@ public class NegotiatorAgent extends Agent {
 
 		//1. Check acceptable values in the current discussed criterion
 		List<Proposal> proposals = new ArrayList<Proposal>();
+		
 		proposals.addAll(getNegotiation().getValueNegotiation(c).getProposalsWithStatus(Status.OPEN, false));
-
-		for(Proposal p: sortProposals(proposals)){
+		// sort the acceptable proposals 
+		for(Proposal p: sortPropSat(proposals)){
 			if(getNegotiation().isAcceptable(p))
 				return p;
 
 		}
-		//2. if 1 is not valid, check acceptable proposals in the previous discussed criteria
+		//2. if 1 is not valid, check acceptable proposals in the previous discussed criteria or options
 
 		List<Proposal> previousP = new ArrayList<Proposal>();
 
@@ -332,7 +333,7 @@ public class NegotiatorAgent extends Agent {
 
 		if(!previousP.isEmpty()){
 
-			Proposal p = sortProposals(previousP).get(0);
+			Proposal p = sortPropSat(previousP).get(0);
 			if(getNegotiation().isAcceptable(p))
 				return p;
 		}
@@ -353,7 +354,7 @@ public class NegotiatorAgent extends Agent {
 			
 		}
 		else{
-			Criterion respond = cr.acceptableValues(getNegotiation().self()).get(0);
+			Criterion respond = cr.getSelf().getSatisfiableValues(getNegotiation().getDominance()).get(0);
 			return new Statement<Criterion>(respond, fr.limsi.negotiate.Statement.Satisfiable.TRUE);
 
 		}
@@ -385,7 +386,7 @@ public class NegotiatorAgent extends Agent {
 		}
 
 	}
-	public float acceptablity(Proposal p){
+	public float tolerability(Proposal p){
 		if(p instanceof CriterionProposal){
 			@SuppressWarnings("unchecked")
 			CriterionNegotiation<Criterion> model = this.getNegotiation().getValueNegotiation(
@@ -397,17 +398,37 @@ public class NegotiatorAgent extends Agent {
 			return getNegotiation().tolerable((Option)p.getValue());
 	}
 
+	public float satisfactionProposal(Proposal p){
+		
+		if(p instanceof CriterionProposal){
+			@SuppressWarnings("unchecked")
+			CriterionNegotiation<Criterion> model = this.getNegotiation().getValueNegotiation(
+					(Class<? extends Criterion>) p.getValue().getClass());
 
+			return model.getSelf().satisfaction((Criterion)p.getValue());
+		}
+		else 
+			return getNegotiation().satisfiability((Option)p.getValue());
+	}
 
+	//  Sort proposal tolerabilty to make proposals
 	public List<Proposal> sortProposals(List<Proposal> props){
 		props.sort(new Comparator<Proposal>(){
 			public int compare(Proposal p1, Proposal p2){
-				return Float.compare(acceptablity(p2), acceptablity(p1));
+				return Float.compare(tolerability(p2), tolerability(p1));
 			}
 		});
 		return props;
 	}
-	/**
+	// sort proposals to be accepted
+	public List<Proposal> sortPropSat(List<Proposal> props){
+		props.sort(new Comparator<Proposal>(){
+			public int compare(Proposal p1, Proposal p2){
+				return Float.compare(satisfactionProposal(p2), satisfactionProposal(p1));
+			}
+		});
+		return props;
+	}	/**
 	 * Returns the list of other statements which has not been Rejected or Accepted
 	 * @param status
 	 * @return 

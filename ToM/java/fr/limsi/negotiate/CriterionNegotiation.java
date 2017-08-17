@@ -71,18 +71,6 @@ public class CriterionNegotiation<C extends Criterion> {
 		return acc;
 	}
 	
-	public List<C> acceptableValues(double self){
-		List<C> values = getAcceptableValues(this.getElements(), self);
-		
-		values.sort(new Comparator<C> (){
-			public int compare (C c1, C c2){
-				return Float.compare(getSelf().satisfaction(c2), getSelf().satisfaction(c1));
-			}
-		});
-		return values;
-	}
-
-	
 	public void propose(CriterionProposal p){
 		this.proposals.add(p);
 	}
