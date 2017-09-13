@@ -19,7 +19,23 @@
 \documentclass[runningheads,a4paper]{llncs}
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
+\usepackage[noend]{algpseudocode}
+\usepackage{subfig} 
 \usepackage{graphicx}
+\usepackage{frame, caption}
+\usepackage{amsmath}
+\usepackage{eulervm}
+\usepackage{fontenc}
+\usepackage{mathrsfs}
+\usepackage{multirow, enumitem, longtable, rotating,lipsum, scrextend}
+\usepackage{array}
+\usepackage{floatflt}
+\usepackage{makecell}
+\usepackage{xcolor, soul}
+\sethlcolor{yellow}	
+\usepackage{floatrow}
+\usepackage{setspace}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
 
 \usepackage{url}
 \urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
@@ -33,12 +49,10 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{Lecture Notes in Computer Science:\\Authors' Instructions
-for the Preparation\\of Camera-Ready
-Contributions\\to LNCS/LNAI/LNBI Proceedings}
+\title{}
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{Lecture Notes in Computer Science: Authors' Instructions}
+
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -47,14 +61,12 @@ Contributions\\to LNCS/LNAI/LNBI Proceedings}
 % the running heads and the author index.
 %
 \author{Alfred Hofmann%
-\thanks{Please note that the LNCS Editorial assumes that all authors have used
-the western naming convention, with given names preceding surnames. This determines
-the structure of the names in the running heads and the author index.}%
+%
 \and Ursula Barth\and Ingrid Haas\and Frank Holzwarth\and\\
 Anna Kramer\and Leonie Kunz\and Christine Rei\ss\and\\
 Nicole Sator\and Erika Siebert-Cole\and Peter Stra\ss er}
 %
-\authorrunning{Lecture Notes in Computer Science: Authors' Instructions}
+
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
@@ -86,4 +98,102 @@ Tiergartenstr. 17, 69121 Heidelberg, Germany\\
 \section{Introduction}
 
 
+\section{Model of negotiation based on the relation of power}
+	We present a model of \textit{collaborative} negotiation in which an agent and a human user negotiate to reach an agreement, based on each one's \textit{preferences}. In addition, the strategy of negotiation deployed by the agent is based or impacted by the interpersonal relation of power established.
+We present in this section the different elements of the collaborative negotiation model based on the relation of power.
+\subsection{The negotiation domain}
+
+	The overall goal of the negotiator agent is to reach an agreement about an \textbf{option} in a set of possible options $\mathcal{O}$. 
+	Each option is characterized by a set of \textbf{criteria} denoted $\mathcal{C}$. We define for each criterion its domain value $C_i$.
+	The set of options $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)$, making the simplifying assumption that all options are available. For instance, in a dialogue about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,expensive)$.
+	
+	\subsubsection{Preference model} 
+		We enable the agent to have preferences on each criterion of $\mathcal{C}$, formalized as a set of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers affordable restaurants to expenssive, $Expenssive\prec_{Price}Affordable$.
+		
+		Based on the relation of preferences, we define a function of \emph{satisfaction} that allows the agent to compute whether its like a value or not. Therefore, for a given value $v\in C_i$, the agent computes its \emph{satisfaction} $sat_{self}(v \prec_i)$ for this value as the number of values it prefers less in the partial order $\prec_i$, normalized in [0,1]:
+		\vspace{-.5em} 
+		\begin{equation}
+		sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+		\end{equation}
+		
+	This notion of satisfaction is generalized to any option $o= (v_1, \ldots, v_n)\in \mathcal{O}$ as a simple average
+	\vspace{-1em} 
+	\begin{equation}
+	sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
+	\vspace{-1.5em} 
+	\end{equation}
+	
+
+	\subsubsection{Communication model}
+	Agent and user communicate through \emph{utterances}. Each utterance type has a specific set of arguments and is associated with a specific expression in natural language (NL). We use five utterance types, based on the work of Sidner \cite{sidner1994artificial} and two additional utterances to close the negotiation (see Table \ref{table:utt}). The NL generation adapts to the discussed topic. The value /$v$/ in Table \ref{table:utt} refers to this NL format to express a value.
+	
+	
+	Each utterance type takes as parameter either a criterion value $v \in C_i$, an option $o \in \mathcal{O}$ or a criterion type $i \in \mathcal{C}$. They can be separated into three groups. 
+	
+	\begin{itemize}
+	\item Information moves (\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to share knowledge about the participant's likings.
+	\item Negotiation moves (\textit{Propose}, \textit{Accept} and \textit{Reject}). Throughout the course of the negotiation process, the agent makes offers for both values. Criterion(``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). It has also to respond to offers, by accepting or rejecting them.
+
+	\item Closure moves (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) are used to end the negotiation.
+	\end{itemize}
+	
+	
+	%The RejectPropose utterance type is used to clearly reject an option and make a counter-proposal in the same dialogue move. Similarly, the RejectState utterance type is used to make a reject with an explanation. The AcceptPropose is used to accept a criteria and propose a compatible option. 
+
+
+	\begin{table}[t]
+		{\scriptsize
+			\begin{tabular} {|p{2.75cm}|p{4cm}|p{3cm}|}
+				\hline
+				\textbf{Utterance type}  &\textbf{ NL generation} & \textbf{Postcondition}\\
+				\hline
+				StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
+				\hline
+				AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
+				
+				AskCriterion(i) &  What kind of /$i$/ do you like ? & \\
+				\hline
+				ProposeOption(o)  & Let's go to /$o$/. & $o \in P$\\
+				
+				ProposeValue(v) & Let's go to a /$v$/. & $v \in P_i$\\
+				\hline
+				AcceptOption(o)& Okay, let's go to /$o$/.& $o \in T$ \\
+				
+				AcceptValue(v) & Okay, let's go to a /$v$/.& $v \in T_i$ \\
+				\hline
+				RejectOption(o) & I'd rather choose  something else. & $o \in R$\\
+				
+				RejectValue(v) &  I'd rather choose  something else. & $v \in R_i$ \\
+				\hline
+				NegotiationSuccess &  We reached an agreement. & \multirow{2}{*}{}\\
+				\cline{1-2}
+				NegotiationFailure &  Sorry, but I no longer want to discuss this. & \\
+				\hline
+				% Counter Propose & $(r,p)\in C_i^2 \vee (r,p) \in \mathcal{O}^2 $ & I don't want to go to $r$. Let's rather go to $p$ \\
+				% \hline 
+				% RejectState & $x \in \mathcal{O} \vee x\in C_i$ &  I don't like /$x$/, let's choose something else. \\
+				% \hline
+				% AcceptPropose & $o \in \mathcal{O}$ & Okay. Let's go to /$o$/.\\
+				% \hline
+			\end{tabular}
+		}
+		\caption{\label{table:utt}List of utterance types in the model of dialogue.}
+	\end{table}
+	\subsection{Dialogue context}
+In order to make cohrent decisions during the negotiation, the agent keeps track of the information shared. 
+\begin{itemize}
+	\item \emph{Other statements}: We build the sets $A_i\subseteq C_i$ and $U_i\subseteq C_i$ of values which have been stated by the other as liked or disliked through \emph{StateValue} utterances.
+	
+	\item \emph{Self statements:} We build the set $S_i \subseteq C_i$ of statements that the agent has made about this criterion which avoids repition.
+	
+	\item \emph{Shared proposals:} We define the sets $P_i \subseteq C_i$, $T_i\subseteq C_i$ and $R_i\subseteq C_i$ of all proposed, accepted and rejected values for each criteria. Similarly, we consider $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ and $R\subseteq \mathcal{O}$ the sets of all proposed, accepted and rejected options in the dialogue.
+	
+\end{itemize}
+
+
+
+\subsection{the decisional model based on power}
+\scriptsize{	
+	\bibliographystyle{splncs}
+	\bibliography{Library}}
 \end{document}
