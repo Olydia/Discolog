@@ -259,12 +259,16 @@
 	
 	\begin{equation}
 	\begin{split}
-	tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
-	& +  (1 - self(pow, t)) \cdot sat_{other}(v, A_i, U_i)
+	tol(v) & = self(t)  \cdot sat_{self}(v) \\
+	& +  (1 - self(t)) \cdot sat_{other}(v)
 	\end{split} 
 	\end{equation}
 	
 	\noindent
+	
+		\begin{equation}
+		tol(v) = self(t)  \cdot sat_{self}(v) +  (1 - self(t)) \cdot sat_{other}(v)
+		\end{equation}
 	And we generalize this function to any option $o=(v_1,\ldots,v_n) \in O$:
 	
 	\begin{equation}
