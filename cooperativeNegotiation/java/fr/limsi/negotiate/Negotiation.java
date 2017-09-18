@@ -380,7 +380,7 @@ public class Negotiation<O extends Option> {
 				return Float.compare(tolerable(o2), tolerable(o1));
 			}
 		});
-		System.out.println(V);
+		//System.out.println(V);
 		return V.get(0);
 	}
 

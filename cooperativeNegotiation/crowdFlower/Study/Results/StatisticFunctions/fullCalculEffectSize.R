@@ -18,3 +18,4 @@ fullCalcul <- function(csvfile){
  value4 <- effectSize(H4_A, H4_B)
  cat("H4", value4,"\n")
 }
+
