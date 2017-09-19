@@ -281,13 +281,13 @@
 			The hypotheses closely follows those studied in a previous work. We aim to validate theses hypotheses in the context of a human machine interaction
 			
 			\begin{itemize}
-					\item  \textbf{H1:} The higher-power speaker will more strongly be perceived as self-centered than the lower-power speaker.  
+					\item  \textbf{H1:} The higher-power agent will more strongly be perceived as self-centered than the lower-power agent.  
 					
-					\item \textbf{H2:} The lower-power speaker will be more strongly perceived as making larger concessions than the higher-power speaker.
+					\item \textbf{H2:}  The higher-power agent will more strongly be perceived as demanding than the lower-power agent.
+										
+					\item \textbf{H3:} The lower-power agent will be more strongly perceived as making larger concessions than the higher-power agent.
 					
-					\item \textbf{H3:}  The higher-power speaker will more strongly be perceived as demanding than the lower-power speaker.
-					
-					\item \textbf{H4:}  The higher-power speaker will more strongly be perceived as taking the lead in the negotiation than the lower-power speaker.
+					\item \textbf{H4:}  The higher-power agent will more strongly be perceived as taking the lead in the negotiation than the lower-power agent.
 					
 				\end{itemize}
 				
@@ -296,11 +296,41 @@
 		
 		
 		Upon arrival, participants were asked to sign an informed consent form and the negotiation task was explained. Following this, training session begins, participants were given instruction on the use of the HMI to interact with the agent, the experimenter started the training session and left the room until training was complete and participants were familiar with the interface. Following training, the experiment begins and participants negotiate with the agents. Upon completion of the negotiation, participants were asked to fill out a questionnaire about their experience. They were asked to report their perception of the agents behaviors during the negotiation. 
+	
+	
+		A total of 40 participants participated in the experiment. They were randomly assigned to the experimental conditions.% We balanced the population for each condition. 
 		
 		\subsection{Results}
 		
 		
-	%  within-subject
+		Our analysis first checked the perception of the agent behaviors during the interaction. The results are summarized in figure 
+		Participants have perceived that agent bob leads the negotiation (\emph{M= 4.40, SD= 0.9}). They also rated bob to be demanding (\emph{M= 3.59, SD= 1.3}) and not self-centered (\emph{M =2.92, SD =1.3}). In addition, to the questions about concessions made during the negotiation, participants perceived that bob make few concessions (\emph{M=3.29, SD =1.24}).
+		
+		In the contrary, participants perceived the behavior of Arthur as follows: In average, Arthur doesn't lead the dialogue (\emph{M= 1.76, SD= 1.09}). It has a low level of demand (\emph{M= 2.32, SD= 1.3}) and makes few concessions (\emph{M= 3.39, SD= 1.16}). Furthermore, Arthur was perceived as taking into account the participant preferences and is not selfish (\emph{M=2.7, SD =1.13}).
+		
+		The second step of our analysis concerns the evaluation of both agents behaviors. We compared the behavior of Bob and Arthur using a \textit{non parametric Wilcoxon signed-rank test}. Our first hypothesis predicted that the high power agent Bob would be perceived as more self-centered than low power agent Arthur. Our analysis confirmed our prediction; participants perceived Bob to be more self-centered than Arthur (\emph{Z=-3.2, p = 0.001, d= -0.3}). In addition, our second hypothesis was also confirmed. Bob was perceived as being more demanding than Arthur with a small effect size(\emph{Z=-3.6, p < 0.001, d=-0.3}). 
+		
+		The third hypothesis predicted that Arthur would make larger concessions than bob. However, the analysis of our data did not confirmed the hypothesis. There was no significant difference perceived in concessions made by agents during the negotiation (\emph{Z=-3.2, p = 0.001, d=-0.05}).
+		
+		The last hypothesis was confirmed. The Wilcoxon ranked test revealed that Bob agent was perceived as significantly more leading the dialogue than Arthur, with a medium effect size (\emph{Z=-3.2, p = 0.001, d= -0.6}).
+			\vspace{-.9em}  
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=4in]{graphs/res.pdf}
+				\caption{The results from our analysis}
+				\label{res}
+			\end{figure}
+			\vspace{-.5em} 
+		\subsection{Discussion}
+		The results from our experiment provided strong support for three of four of our hypotheses. Participants perceived Bob the high power agent to lead the negotiation, to be self-centered and more demanding comparing to Arthur, the low power agent. These results are in line with the Dedreu and colleagues on the impact of power in the expression of negotiation strategy.  
+		
+		However, our third hypothesis was not confirmed as participants did not perceived a significant difference in the level of concessions made during the negotiation. This result can be explained by the impact of preferences in the outcome of negotiation. As explained in a previous work [ref], the preferences affect the strategy of the agent. In the case where agent and user share common preferences, the negotiation will converge quickly and no confrontation of preferences will be experienced during the negotiation. This is the limitation of our experiment. We did not collect prior knowledge about the preferences of participants. Therefore, we were not able to measure the distance between the preferences of the agent and the user and to analyze the impact of preferences on the perception of concessions.
+		
+		The results have important implications for the design of artificial agents that can negotiate with people. Artificial
+		intelligence research in automated negotiation have focused on different aspects of the task of negotiation such as the number of issues discussed, the parties implied in the negotiation, and so on. However, fewer research investigate the impact of the social context \cite{de2011effect,nazari2015opponent}. This This work is a continuation of this field, where we aim to demonstrate the importance of social behaviors when implementing agents that interacts with human. 
+		
+		The next step (and we have begun) of our research is to study the construction of the relation of dominance during the negotiation and its impact on both the strategies displayed by the negotiators as well as the outcomes of the negotiation.
+		
 \scriptsize{	
 	\bibliographystyle{splncs}
 	\bibliography{Library}}
