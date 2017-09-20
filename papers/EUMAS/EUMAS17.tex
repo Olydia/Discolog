@@ -91,25 +91,26 @@
 	
 	\begin{abstract}
 		
-		% Negotiation has drawn considerable attention in the IA and human-computer interaction fields where several researches proposed efficient decision making models which improves the outcomes of the negotiation. However,negotiation with a human is a process that involves social interaction as well as personal preferences. Indeed, social psychology have provided evidence that social aspects such as interpersonal relation or emotions play an important role in negotiation. For instance, the interpersonal relation of dominance affects the way the negotiators build their strategy of negotiation in term of demand and concessions. This paper present a model of negotiation where the agent is able to express different strategies of negotiation based on its relation of power with the user. The underlying strategies of negotiation are defined from the literature in social psychology. An experiment that studies the effect of the power in the strategy displayed by the agent during its interaction with human participants showed that participants perceived the different strategies of the agent in respect with the power it intended to express. 
-		
-		This paper presents a model of negotiation in which the agent is capable of expressing different negotiation strategies depending on its relation of power with the user. The underlying strategies of negotiation are defined from the literature in social psychology. We present an experiment that studies the effect of power in the strategies displayed by the agent during a human-agent collaborative negotiation. Our results show that participants correctly perceive the differences in the agent strategies depending on the relation of power it intendended to express.
+		This paper presents a model of collaborative negotiation in which the agent is capable of expressing different negotiation strategies depending on its relation of power with the user. The underlying strategies of negotiation are defined from the literature in social psychology. We present an experiment that studies the effect of power in the strategies displayed by the agent during a human-agent collaborative negotiation. Our results show that participants correctly perceive the differences in the agent strategies depending on the relation of power it intended to express.
 		
 		
 	\end{abstract}
 	
 	
 	\section{Introduction}
-	Negotiation as a daily activity in life
-	interest of building agents that negotiate when defining agents or help to learn negotiation
-	Social behaviors in negotiation in psychology
-	proposed implementation 
-	One important dimension is dominance that we propose to stdy
+	Negotiation has drawn considerable attention in the IA and human-computer interaction fields where several researches proposed efficient decision making models which improves the outcomes of the negotiation. These works focus essentially on the structural aspects of negotiation \cite{sycara2010agent,lai2009generic}. 
+	However, negotiation with a human  is not limited to the process of rational decision making about options and
+	issues, it also involves social interaction as well as personal preferences. Indeed, a by now considerable body of research in social psychology has shown that social aspects such as interpersonal relation, affect or emotions play an important role in negotiation. It affects how negotiators define their behaviors, how they are perceived by the opponent and direclty the outcomes of the negotiation.
+	For instance, De dreu\cite{de1995impact} provided evidence that interpersonal relation of dominance influences the way that negotiators approach and build their negotiation strategy. Dominant negotiators show a high level of demands, whereas submissive negotiators exhibit lower levels of demand and greater level of concessions. Moreover, Van kleef \cite{van2006power}	shows that people make larger concessions to an opponent who expresses anger, and they make fewer concessions to an opponent who 	expresses happiness.
+
+	This paper present a model of collaborative negotiation of preferences where the agent negotiate with a human user. The negotiation strategy expressed by the agent is based on its relation of power with the user. We defined three principles inspired from the literature in social psychology to define the agent behavior and its negotiation strategy. An experiment that studies the effect of the power in the strategy displayed by the agent during its interaction with human participants showed that participants perceived the different strategies of the agent in respect with the power it intended to express. 
+	
+
 	
 	
 	\section{Model of negotiation based on the relation of power}
 	We present a model of \textit{collaborative} negotiation in which an agent and a human user negotiate to reach an agreement, based on each one's \textit{preferences}. In addition, the strategy of negotiation deployed by the agent is based or impacted by the interpersonal relation of power established.
-	We present in this section the different elements of the collaborative negotiation model based on the relation of power.
+	We present in this section the different elements of the collaborative negotiation model based on the relation of power. 
 	\subsection{The negotiation domain}
 	
 	The overall goal of the negotiator agent is to reach an agreement about an \textbf{option} in a set of possible options $\mathcal{O}$. 
@@ -142,10 +143,10 @@
 	Each utterance type takes as parameter either a criterion value $v \in C_i$, an option $o \in \mathcal{O}$ or a criterion type $i \in \mathcal{C}$. They can be separated into three groups. 
 	
 	\begin{itemize}
-		\item Information moves (\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to share knowledge about the participant's likings.
-		\item Negotiation moves (\textit{Propose}, \textit{Accept} and \textit{Reject}). Throughout the course of the negotiation process, the agent makes offers for both values. Criterion(``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). It has also to respond to offers, by accepting or rejecting them.
+		\item \textbf{Information moves }(\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to share knowledge about the participant's likings.
+		\item \textbf{Negotiation moves} (\textit{Propose}, \textit{Accept} and \textit{Reject}). Throughout the course of the negotiation process, the agent makes offers for both values. Criterion(``Let's go to a Chinese restaurant'') or options (``Let's go to \emph{Chez Francis}''). It has also to respond to offers, by accepting or rejecting them.
 		
-		\item Closure moves (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) are used to end the negotiation.
+		\item \textbf{Closure moves} (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) are used to end the negotiation.
 	\end{itemize}
 	
 	
@@ -193,7 +194,7 @@
 	
 	
 	\subsection{Dialogue context}
-	In order to make cohrent decisions during the negotiation, the agent keeps track of the information shared. 
+	In order to make coherent decisions during the negotiation, the agent keeps track of the information shared. 
 	\begin{itemize}
 		\item \emph{Other statements}: We build the sets $A_i\subseteq C_i$ and $U_i\subseteq C_i$ of values which have been stated by the other as liked or disliked through \emph{StateValue} utterances. The agent can thus computes the satisfaction for each value.
 		\vspace{-0.5em} 
@@ -213,11 +214,11 @@
 	
 	\subsection{the decisional model based on power}
 	
-	The agent builds its strategy of negotiation with respect to the relation of power its has with the user. Therefore, we initiate the agent with it's belief of power $pow \in [0,1]$. Furthermore, its strategy of negotiation is driven by three main behaviors identified from researches in social psychology. 
+	The agent builds its strategy of negotiation with respect to the relation of power its has with the user. Therefore, we initiate the agent with it's belief of power $pow \in [0,1]$. Furthermore, its strategy of negotiation is driven by three main behaviors identified from researches in social psychology \cite{de1995impact,fiske1993controlling,magee2007power,de2004influence}. 
 	\vspace{-0.5em} 
 	\subsubsection{Level of demand and concessions}
 	Dedreu proved in his work \cite{de1995impact} that high-power negotiators show a higher level of demand than the low-power ones. In addition, low-power negotiator's demand decrease over time and the negotiator tends to make larger concessions than high-power negotiators. 
-	The notion of concession is implemented by a \emph{concession curve} denoted  $self(pow, t)$ which decreases over time ($t$). \footnote{For detailed explanation, please refer to the article []}
+	The notion of concession is implemented by a \emph{concession curve} denoted  $self(pow, t)$ which decreases over time ($t$). \footnote{For detailed explanation, please refer to the article \cite{ouali2017computational}}
 	%illustrated in \ref{fig:conc}
 	
 	\begin{equation}
@@ -261,7 +262,7 @@
 	High-power negotiators tend to make the first move \cite{magee2007power} and take the lead in the negotiation. Low-power negotiators aim to construct an accurate model of other preferences, which leads them to ask more questions about other preferences rather than keeping the negotiation going (\emph{e.g} by making proposals)\cite{de2004influence}.
 	The lead of the negotiation is reflected throughout the utterances expressed during the negotiation. Therefore, we defined rules that control the choice of the utterance and reflects the cited behaviors. A high-powerful agent will try to keep the negotiation going by priorizing \emph{Negotiation moves} (see section \ref{Comm}). In addition, we designed additional utterances (\textit{i.e} \emph{RejectPropose, AcceptPropose}) allowing the agent to express the control of the negotiation.
 	In the contrary, low power agent will at first, focus on \emph{information moves} in order to learn more about the preferences of its interlocutor then make proposals that suits the knowledge gathered. 
-	The details of the algorithm are discussed in a previous work []
+	The details of the algorithm are discussed in a previous work\cite {ouali2017computational}
 	
 \section{Experiment}
 	We conducted a study to evaluate the negotiation model during interactions with human users. We aim to analyze the user's perception of the agent behavior during the negotiation.
@@ -270,10 +271,17 @@
 		
 		Participants negotiate with the agent on the social topic of \emph{"restaurants"}. Our aim was to define a social topic which does not require specific expertise and participants have personal preferences.
 		
-		The criteria defined to choose a restaurant(see section ) were \{ \textit{cuisine, price, ambiance, location}\}. Each criterion was defined with a domain of values, and a total of 420 of restaurants was generated from the values of each criterion. (figure)
+		The criteria defined to choose a restaurant were \{ \textit{cuisine, price, ambiance, location}\}. Each criterion was defined with a domain of values, and a total of 420 of restaurants was generated from the values of each criterion. (figure ?)
 		
 		We defined two agents Bob and Arthur which play different behaviors. We designed Bob to follow a high power behavior (\textit{i.e} pow(Bob) = 0.8) and Arthur to play the low power negotiator (\textit{i.e} pow(Arthur) = 0.4).
-		Participants interacted with agents thought a HMI that we designed for the experiment. They communicated using the utterances that we defined see( section .. ). Firgure 2 shows the HMI with the possible utterances to enunciate.
+		Participants interacted with agents thought a HMI that we designed for the experiment. They communicated using the utterances that we defined see (section \ref{Comm}). Figure \ref{ihm} shows the HMI with the possible utterances to enunciate.
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width=3.5in]{graphs/ihm.png}
+			\caption{Graphical user interface for participant}
+			\label{ihm}
+		\end{figure}
 		
 		Two conditions were considered in order to not bias the perception of participants. In the first condition, participants interacted first with Bob, the hight power agent, following by the interaction with the low power agent Arthur. In the contrary, the second condition, participants interacted first with Arther then with Bob. 
 		 
