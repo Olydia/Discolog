@@ -105,11 +105,11 @@ public class ExampleAgent extends Agent {
 	}
 
 	public Utterance respondTo(Utterance utterance, Disco disco){
-		System.out.println("North" + getNegotiation().getValueNegotiation(Location.class).
-				tolerable(Location.NORTH_SIDE, getNegotiation().self()));
-		
-		System.out.println("Down" + getNegotiation().getValueNegotiation(Location.class).
-				tolerable(Location.DOWNTOWN, getNegotiation().self()));
+//		System.out.println("North" + getNegotiation().getValueNegotiation(Location.class).
+//				tolerable(Location.NORTH_SIDE, getNegotiation().self()));
+//		
+//		System.out.println("Down" + getNegotiation().getValueNegotiation(Location.class).
+//				tolerable(Location.DOWNTOWN, getNegotiation().self()));
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))

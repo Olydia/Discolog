@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 public class ChatBoard2 extends AnchorPane{
 
-	static double relation=0.8;
+	static double relation=0.4;
 	//The next two strings contain the form of the button: on when pressed and off when released
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
