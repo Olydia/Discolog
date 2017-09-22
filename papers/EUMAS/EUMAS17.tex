@@ -100,7 +100,7 @@
 	
 	
 	\section{Introduction}
-	An emerging concept in recent years has focused on building a social agent that interacts with a human user capable of understanding and displaying social behaviors. In addition, during their interaction, agent and user can share common goals or tasks to achieve which lead them to collaborate in order to find a way to achieve their common goals in a way that both satisfies them (in term of preferences and opinions). This process is called \emph{collaborative negotiation}.
+	An emerging concept in recent years has focused on building a social agent that interacts with a human user capable of understanding and displaying social behaviors. In addition, during their interaction, agent and user can share common goals or tasks to achieve which lead them to collaborate in order to find a way to achieve them in a way that both satisfies them in term of their respective preferences and opinions. This process is called \emph{collaborative negotiation}.
 	
 	Negotiation has already drawn considerable attention in the IA and human-computer interaction fields. Several researches proposed efficient decision making models which improves the outcomes of the negotiation. This work focus mainly on the structural aspects of negotiation \cite{sycara2010agent,lai2009generic}. 
 	However, negotiation with a human  is not limited to the process of rational decision making about options and
@@ -111,6 +111,31 @@
 	
 
 	\section{Related works}	
+		Negotiation is a social activity that includes process of decision making as well as social interaction. \textbf{Present negotiation}
+		
+		\subsection{Social behaviors in negotiation}
+			
+			Social psychologists have drawn early interest in studying the impact of social behaviors, at an \emph{interpersonal} level, on the negotiation. One of the most studied dimension is the interpersonal relation of \emph{dominance}. Dominance is expressive, relationally based communicative acts by which power is exerted %and influence achieved
+			 \cite{burgoonnonverbal}. Similarly,  
+			%In addition, control attempts by one individual are accepted by the partner
+			power can broadly defined as the ability to exercise influence on other people \cite{van2006power}.
+			
+			In most of cases, negotiators differ in power \cite{van2006power} which create a relation of dominance. A considerable body of research has documented the effects of power on negotiation behaviors and outcomes. For instance, dominant or high power negotiators have higher aspirations, express a high level of demand and makes fewer concessions compared to submissive or low power negotiators \cite{de1995impact}. Moreover, high power negotiators tend to take the lead of the negotiation and adopt a goal-directed behavior which increases action orientation \cite{galinsky2003power}.
+			
+			In addition to these behavioral consequences of power in negotiation, De dreu \cite{de2004influence,fiske1993controlling} that power influence the way that we consider the preferences of the negotiation's partner. High power negotiator are less likely to consider the preferences of the partner in its decision making, whereas, low power negotiators ascribe greater levels of fairness and adopt a strategy to collect additional information about the partner's preferences \cite{de2004influence}.
+			
+			Social behaviors don't influence only  negotiators strategy, they also affect how negotiators perceive their negotiation partner. Indeed, expressing emotion affects the perception of the negotiators partner which lead him to adapt his negotiation strategy. It is argued that emotions convey useful information about people’s feelings, intentions and orientation towards others. For instance, negative emotions serve as a call for
+			mental or behavioral adjustment, whereas positive emotions serve as a cue to stay the course \cite{cacioppo1999emotion}. Following these works, Van Kleef \textit{et al} investigated the impact of expressing emotion of anger and happiness on the perception of the negotiation by its partner\cite{van2006power}. They revealed that negotiators concede more to angry opponents compared to happy opponent. Indeed, negotiators use emotions to infer the limit of their partners. Negotiators who faced angry opponent judged the limits of their partner to be hight. Conversely, negotiators with a happy opponent judged the opponent’s limit to be low, which led them to make fewer concessions.
+			
+			\subsection{Conversational agents which negotiate with human}
+			
+			
+%			 Emotion 
+%			 showed that negotiators used their opponent’s emotions to
+%			 infer the other’s limits, and subsequently used this information to make an offer. Negotiators who were
+%			 confronted with an angry opponent judged the other’s limit to be high and, to avoid impasse, they
+%			 made relatively large concessions. , and accordingly made smaller
+%			 concessions. Furthermore, Van Kleef et al. showed that negotiators only modified their demands in
 	
 	\section{Model of negotiation based on the relation of power}
 	We present a model of \textit{collaborative} negotiation in which an agent and a human user negotiate to reach an agreement, based on each one's \textit{preferences}. In addition, the strategy of negotiation deployed by the agent is based or impacted by the interpersonal relation of power established.
@@ -122,19 +147,18 @@
 	The set of options $\mathcal{O}$ can be simply defined as the cross-product $C_1\times\ldots\times C_n$ and each option $o\in\mathcal{O}$ is a tuple $(v_1,\ldots,v_n)$, making the simplifying assumption that all options are available. For instance, in a dialogue about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,expensive)$.
 	
 	\subsubsection{Preference model} 
-	We enable the agent to have preferences on each criterion of $\mathcal{C}$, formalized as a set of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers affordable restaurants to expenssive, $Expenssive\prec_{Price}Affordable$.
+	We enable the agent to have preferences on each criterion of $\mathcal{C}$, formalized as a set of partial orders $\prec_i$ on each $C_i$. For instance, if the agent prefers affordable restaurants to expensive, $Expensive\prec_{Price}Affordable$.
 	
 	Based on the relation of preferences, we define a function of \emph{satisfaction} that allows the agent to compute whether its like a value or not. Therefore, for a given value $v\in C_i$, the agent computes its \emph{satisfaction} $sat_{self}(v \prec_i)$ for this value as the number of values it prefers less in the partial order $\prec_i$, normalized in [0,1]:
-	\vspace{-.5em} 
+
 	\begin{equation}
 	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
 	\end{equation}
 	
 	This notion of satisfaction is generalized to any option $o= (v_1, \ldots, v_n)\in \mathcal{O}$ as a simple average
-	\vspace{-1em} 
+
 	\begin{equation}
 	sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
-	\vspace{-1.5em} 
 	\end{equation}
 	
 	%In addition to its preferences, we allow the agent to construct a model of its interlocutor preferences
@@ -158,8 +182,8 @@
 	
 	
 	\begin{table}[t]
-		{\scriptsize
-			\begin{tabular} {|p{2.75cm}|p{4cm}|}
+		
+			\begin{tabular} {|p{4.5cm}|p{6cm}|}
 				\hline
 				\textbf{Utterance type}  &\textbf{ NL generation} \\
 				\hline
@@ -192,14 +216,14 @@
 				% AcceptPropose & $o \in \mathcal{O}$ & Okay. Let's go to /$o$/.\\
 				% \hline
 			\end{tabular}
-		}
+		
 		\caption{\label{table:utt}List of utterance types in the model of dialogue.}
 	\end{table}
 	
 	
 	\subsection{Dialogue context}
 	In order to make coherent decisions during the negotiation, the agent keeps track of the information shared by its interlocutor:
-		\vspace{-0.5em} 
+
 		\begin{equation}
 		sat_{other}(v)= \left\{\begin{array}{ll}
 		1	 & \mathrm{if\ }  c \in A_i\\
@@ -211,14 +235,15 @@
 	\subsection{the decisional model based on power}
 	
 	The agent builds its strategy of negotiation with respect to the relation of power its has with the user. Therefore, we initiate the agent with it's belief of power $pow \in [0,1]$. Furthermore, its strategy of negotiation is driven by three main behaviors identified from researches in social psychology \cite{de1995impact,fiske1993controlling,magee2007power,de2004influence}. 
-	\vspace{-0.5em} 
+
 	\subsubsection{Level of demand and concessions}
+		\begin{floatingfigure}[r]{2.75in}
+			\includegraphics[width=2.75 in, height = 1.75in]{graphs/sv3.png}
+			\caption{\label{fig:conc}Concession curve}
+		\end{floatingfigure}  
 	Dedreu proved in his work \cite{de1995impact} that high-power negotiators show a higher level of demand than the low-power ones. In addition, low-power negotiator's demand decrease over time and the negotiator tends to make larger concessions than high-power negotiators. 
 	The notion of concession is implemented by a \emph{concession curve} denoted  $self(pow, t)$ which decreases over time ($t$)(see figure \ref{fig:conc}). 
-	\begin{floatingfigure}[r]{2in}
-		\includegraphics[width=2 in]{graphs/sv3.png}
-		\caption{\label{fig:conc}Concession curve}
-	\end{floatingfigure}  
+
 	%\footnote{For detailed explanation, please refer to the article \cite{ouali2017computational}}
 	%illustrated in \ref{fig:conc}
 	
@@ -232,9 +257,8 @@
 			
 	The level of demand shows up in negotiation when the agent has to decide wheather a proposal is acceptable.
 	Therefore, we implemented a function that computes the acceptability of proposals. Let be $v$ a proposal, thus its acceptability is computed:
-	\vspace{-0.5em} 
+
 	\begin{equation}
-	\vspace{-.5em} 
 	acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
 	\end{equation}
 	
@@ -242,10 +266,10 @@
 	\subsubsection{Self vs other:} Low-power negotiators consider the preferences when making decisions, whereas high-power negotiators are self-centered and only interested in satisfying their own preferences. \cite{fiske1993controlling,de1995impact}.
 	Therefore, when the agent makes proposals, it has to take into account its preferences and its interlocutor's preferences with respect of the weight it gives to the satisfaction of its preferences and the other preferences.	
 	Let us consider the subset $V_i\subseteq C_i$ of values that are acceptable for the agent:
-	\vspace{-0.5em} 
+	%\vspace{-0.5em} 
 	\begin{equation}
 	V_i(pow,t) = \{ v\in C_i : acc(pow,v,t) \}
-	\vspace{-0.5em}
+%	\vspace{-0.5em}
 	\end{equation}
 	
 	We propose a function for a proposal selection as follows:
@@ -274,10 +298,11 @@
 		We defined two agents Bob and Arthur which play different behaviors. We designed Bob to follow a high power behavior (\textit{i.e} pow(Bob) = 0.8) and Arthur to play the low power negotiator (\textit{i.e} pow(Arthur) = 0.4).
 		Participants interacted with agents thought a HMI that we designed for the experiment. They communicated using the utterances that we defined see (section \ref{Comm}). Figure \ref{ihm} shows the HMI with the possible utterances to enunciate.
 		
-		\begin{figure}
+		\begin{figure}[t]
 			\centering
-			\includegraphics[width=4in]{graphs/ihm.png}
-			\caption{Graphical user interface for participant}
+			\fbox{\includegraphics [width=\textwidth, height = 0.45\textheight]{graphs/ihm1.png}}
+			\caption{Graphical user interface for participant
+				\\ User selects Propose(Italian).}
 			\label{ihm}
 		\end{figure}
 		
@@ -301,9 +326,8 @@
 		We conducted a within-subject where each participant interacted with both  agents Bob and Arthur.
 		
 		Upon arrival, the participant is asked to sign an informed consent form and the negotiation task was explained. Following this, training session begins, the participant is given instruction on the use of the HMI to interact with the agent, the experimenter starts the training session and leave the room until training is complete and participant is familiar with the interface. Following training, the experiment begins and the participant negotiates with the agents. Upon completion of the negotiation, the participant is asked to fill out a questionnaire about his experience.
-		
-		We 
-		 Each participant is asked to report his perception of the agents behaviors during the negotiation. 
+		We designed a questionnaire allowing the participants to report his perception of the agents behaviors during the negotiation. For each hypothesis, we defined two questions with different formulations in order to not bias the answers of participants. In addition, we defined test questions to check the sanity of the the participant's answers. The responses are given on Likert scale.
+
 	
 		A total of 40 participants participated in the experiment. They were randomly assigned to the experimental conditions.% We balanced the population for each condition. 
 		
@@ -320,25 +344,31 @@
 		The third hypothesis predicted that Arthur would make larger concessions than bob. However, the analysis of our data did not confirmed the hypothesis. There was no significant difference perceived in concessions made by agents during the negotiation (\emph{Z=-3.2, p = 0.001, d=-0.05}).
 		
 		The last hypothesis was confirmed. The Wilcoxon ranked test revealed that Bob agent was perceived as significantly more leading the dialogue than Arthur, with a medium effect size (\emph{Z=-3.2, p = 0.001, d= -0.6}).
-			\vspace{-.9em}  
+		%	\vspace{-.9em}  
 			\begin{figure}[h]
 				\centering
-				\includegraphics[width=4in]{graphs/res.pdf}
+				\includegraphics[width=\textwidth,height=0.42\textheight]{graphs/res.pdf}
 				\caption{The results from our analysis}
 				\label{res}
 			\end{figure}
-			\vspace{-.5em} 
+		%	\vspace{-.5em} 
 		\subsection{Discussion}
-		The results from our experiment provided strong support for three of four of our hypotheses. Participants perceived Bob the high power agent to lead the negotiation, to be self-centered and more demanding comparing to Arthur, the low power agent. These results are in line with the Dedreu and colleagues on the impact of power in the expression of negotiation strategy.  
 		
-		However, our third hypothesis was not confirmed as participants did not perceived a significant difference in the level of concessions made during the negotiation. This result can be explained by the impact of preferences in the outcome of negotiation. As explained in a previous work [ref], the preferences affect the strategy of the agent. In the case where agent and user share common preferences, the negotiation will converge quickly and no confrontation of preferences will be experienced during the negotiation. This is the limitation of our experiment. We did not collect prior knowledge about the preferences of participants. Therefore, we were not able to measure the distance between the preferences of the agent and the user and to analyze the impact of preferences on the perception of concessions.
+		The results from our experiment provide strong support for three out of four hypotheses. Participants perceived Bob the high power agent to lead the negotiation, to be self-centered and more demanding comparing to Arthur, the low power agent. These results are in line with the Dedreu and colleagues on the impact of power in the expression of negotiation strategy.  
 		
-		The results have important implications for the design of artificial agents that can negotiate with people. Artificial
-		intelligence research in automated negotiation have focused on different aspects of the task of negotiation such as the number of issues discussed, the parties implied in the negotiation, and so on. However, fewer research investigate the impact of the social context \cite{de2011effect,nazari2015opponent}. This This work is a continuation of this field, where we aim to demonstrate the importance of social behaviors when implementing agents that interacts with human. 
+		However, our third hypothesis was not confirmed as participants did not perceived a significant difference in the level of concessions expressed by Bob and Arthur. This result can be explained by the impact of preferences in the outcome of negotiation. Preferences affect the strategy displayed by the agent. In the case where agent and user share common preferences, the negotiation will converge quickly and no confrontation of preferences will be experienced during the negotiation. This is a limitation of our experiment. We did not collect prior knowledge about the preferences of participants. Therefore, we were not able to measure the distance between the preferences of the agent and the user and to analyze the impact of preferences on the on the level of concessions. Therefore, we were not able to analyze the responses for hypothesis 3 to report whether concessions were only influenced by preferences or the relation of power.
 		
-		The next step (and we have begun) of our research is to study the construction of the relation of dominance during the negotiation and its impact on both the strategies displayed by the negotiators as well as the outcomes of the negotiation.
+		\section{Conclusion}
 		
-\scriptsize{	
-	\bibliographystyle{splncs}
-	\bibliography{Library}}
+		We have presented in this paper a conversational agent able to hold a collaborative negotiation with a human user and deploy different strategies influenced by its relation of power. Agent behavior was inspired from works in social psychology that investigated how power influenced the negotiator's behaviors.
+		
+		 The system has been tested with an interactive experiment. Participants interacted with two agents displaying different behaviors (\textit{i.e.} high power behavior and low power behavior).
+		 
+		 The results have important implications for the design of artificial agents that can negotiate with people. Artificial intelligence research in automated negotiation have focused on different aspects of the task of negotiation such as the number of issues discussed, the parties implied in the negotiation, and so on. However, fewer research investigate the impact of the social context \cite{de2011effect,nazari2015opponent}. This This work is a continuation of this field, where we aim to demonstrate the importance of social behaviors when implementing agents that interacts with human. %We focus on the impact of interpersonal relation of dominance in the agent negotiation strategy.
+		
+		The next step of our research is to study the construction of the relation of dominance during the negotiation and its impact on both the strategies displayed by the negotiators as well as the outcomes of the negotiation.
+		
+
+		\bibliographystyle{alpha}
+		\bibliography{Library}
 \end{document}
