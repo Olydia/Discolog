@@ -10,22 +10,21 @@
 \begin{document}
 	
 	\section{Introduction}
-	Nous avons propos\'e un mod\`ele de dialogue de n\'egociation coop\'erative  o\`u un agent peut adapter sa strat\'egie de n\'egociation en fonction de la relation de pouvoir qu'il cherche \`a exprimer. 
+	Nous avons propos\'e un mod\`ele de dialogue de n\'egociation coop\'erative  qui permet a un agent peut adapter sa strat\'egie de n\'egociation en fonction de la relation de pouvoir qu'il cherche \`a exprimer. 
 	Le but final de ce mod\`ele est  de mod\`eliser la relation de dominance que deux n\'egociateurs \'etablissent lors de leur interaction. 
 	\par La relation de dominance est d\'efini par \emph{Dunbar et \textit{al}} comme la capacit\'e  \`a manifester des comportements de pouvoirs o\`u l'assertion de pouvoir d'un parti est forc\'ement accept\'e par l'autre parti. Par d\'efinition la relation de dominance est compl\'ementaire. 
-	Par cons\'equent, si on veut impl\'ementer la relation de dominance lors de la n\'egiciation, l'agent doit "deviner" la relation de pouvoir exprim\'ee par son interlocuteur afin de s'y adapter. 
+	Afin de mod\`eliser la relation de dominance lors de la n\'egiciation, l'agent doit "deviner" le comportement de pouvoir exprim\'e par son interlocuteur afin d'adopter un comportement compl\'ementaire. 
+	Nous proposons d'utiliser la th\`eorie de l'esprit afin de reconna\^itre les comportements de pouvoir exprim\'es par l'utilisateur. 
 	
-	Nous avons propos\'e d'utiliser la th\`eorie de l'esprit afin de reconna\^itre la relation de pouvoir exprim\'ee par l'autre. 
+	La premi\`ere solution visait \`a r\'eutiliser le mod\`ele d\'ecisionnel de l'agent pour raisonner sur le comportement de l'autre. Le mod\`ele existant de n\'egociation coop\'erative sur des pr\'eferences, est composé sur trois \'elements (Le contexte de la n\'egociation, la relation de pouvoir \textbf{pow} et les pr\'eferences).
 	
-	La premi\`ere solution visait \`a r\'eutiliser le mod\`ele d\'ecisionnel de l'agent pour raisonner sur l'autre. Le mod\`ele existant de n\'egociation coop\'erative sur des pr\'eferences, repose sur trois \'elements (Le contexte de la n\'egociation, la relation de pouvoir \textbf{pow} et les pr\'eferences).
-	
-	Il fallait donc formuler des hypoth\`eses sur chaque \'element du mod\`ele d\'ecisionel pour pouvoir deviner le \textbf{pow} de l'autre. La limite de cette proposition r\'esidait dans le fait de devoir mod\`eliser tous les mo\`eles de pr\'eferences pour un sujet donn\'e, d'autant plus qu'on ne cherche pas \`a apprendre les pr\'eferences de l'autre.
+	formuler des hypoth\`eses sur chaque \'element du mod\`ele d\'ecisionel pour pouvoir deviner le \textbf{pow} de l'autre. La limite de cette proposition r\'esidait dans le fait de devoir mod\`eliser tous les mo\`eles de pr\'eferences pour un sujet donn\'e, d'autant plus qu'on ne cherche pas \`a apprendre les pr\'eferences de l'autre.
 	
 	Pour cette raison, je propose une solution probabiliste où une repr\'esentation partielle des pr\'eferences de l'autre est faite. 
 	
 	\section{Adaptation de l'algorithme de d\'ecision}
 	
-	\subsection{Rappel de l'algorithme}
+	\subsection{Rappel du mod\`ele d\'ecisionnel}
 	L'algorithme de d\'ecision est bas\'e sur trois fonctions:
 	\subsubsection{Satisfiabilit\'e:}
 	
@@ -37,7 +36,7 @@
 	Une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$.
 	
 	\subsubsection{Acceptabilit\'e:}
-	La notion d'acceptabilit\'e est utilis\'ee pour soit accepter ou rejeter des propositions. Une proposition est dite acceptable: 
+	La notion d'acceptabilit\'e est utilis\'ee pour d\'ecider d'accepter ou rejeter des propositions. Une proposition est dite acceptable: 
 	\begin{equation}
 	\vspace{-.5em} 
 	acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
@@ -60,7 +59,8 @@
 	
 	
 	\subsection{Adaptation du syst\`eme}
-	Le but de cette solution est de pr\'esenter un mod\`ele d\'ecisionnel qui calcule la probabilt\'e d'obtenir l'utterance ennonc\'e pour chaque hypoth\`ese de pouvoir \textbf{pow}. 
+	Pour calculer la valeur de pouvoir exprim\'e par l'autre, nous proposons un mod\`ele qui formule des hypoth\`eses sur l'\'etat mental de l'autre. Ces hypoth\`eses concernent le valeur de pouvoir \textbf{pow} qu'il exprimer ainsi que ses pr\'eferences. 
+	Le but de cette solution est de pr\'esenter un mod\`ele d\'ecisionnel qui calcule la probabilt\'e d'obtenir l'utterance ennonc\'e pour chaque hypoth\`ese donnée. 
 	
 	J'ai formul\'e une premi\`ere hypoth\`ese  qui sugg\`ere qu'au lieu de mod\`eliser toutes les relations de pr\'eferences, on mod\`elisait l'ensemble de valeurs satisfiables.
 	
