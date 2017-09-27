@@ -2,46 +2,65 @@
 \usepackage{subcaption}
 \usepackage{subfig} 
 \usepackage{usual}
+\usepackage[utf8]{inputenc}
+
 \usepackage{graphicx}
 \usepackage[rflt]{floatflt}
 \usepackage[francais]{babel}
+\usepackage[noend]{algpseudocode}
+\usepackage{subfig} 
+\usepackage{frame, caption}
+\usepackage{amsmath}
+\usepackage{eulervm}
+\usepackage{fontenc}
+\usepackage{mathrsfs}
+\usepackage{multirow, enumitem, longtable, rotating,lipsum, scrextend}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{xcolor, soul}
+\sethlcolor{yellow}	
+\usepackage{floatrow}
 %\pagestyle{plain}
 %
 \begin{document}
 	
 	\section{Introduction}
-	Nous avons propos\'e un mod\`ele de dialogue de n\'egociation coop\'erative  qui permet a un agent peut adapter sa strat\'egie de n\'egociation en fonction de la relation de pouvoir qu'il cherche \`a exprimer. 
-	Le but final de ce mod\`ele est  de mod\`eliser la relation de dominance que deux n\'egociateurs \'etablissent lors de leur interaction. 
-	\par La relation de dominance est d\'efini par \emph{Dunbar et \textit{al}} comme la capacit\'e  \`a manifester des comportements de pouvoirs o\`u l'assertion de pouvoir d'un parti est forc\'ement accept\'e par l'autre parti. Par d\'efinition la relation de dominance est compl\'ementaire. 
-	Afin de mod\`eliser la relation de dominance lors de la n\'egiciation, l'agent doit "deviner" le comportement de pouvoir exprim\'e par son interlocuteur afin d'adopter un comportement compl\'ementaire. 
-	Nous proposons d'utiliser la th\`eorie de l'esprit afin de reconna\^itre les comportements de pouvoir exprim\'es par l'utilisateur. 
+	Nous avons proposé un modèle de dialogue de négociation coopérative  qui permet a un agent d'adapter sa stratégie de négociation en fonction de la relation de pouvoir qu'il cherche à exprimer. 
+	Le but final de ce modèle est  de modéliser la relation de dominance que deux négociateurs établissent lors de leur interaction. 
+	\par La relation de dominance est défini par \emph{Dunbar et \textit{al}} comme la capacité  à manifester des comportements de pouvoirs o\`u l'assertion de pouvoir d'un parti est forcément accepté par l'autre parti. Par définition la relation de dominance est complémentaire. 
+	Afin de modéliser la relation de dominance lors de la négociation, l'agent doit "deviner" le comportement de pouvoir exprimé par son interlocuteur afin d'adopter un comportement complémentaire. 
+	Nous proposons d'utiliser la théorie de l'esprit afin de simuler le raisonnement de 'Other' et donc d'être en mesure de le comprendre et reconnaître les comportements de pouvoir exprimés. la Tom assume que 'Other'  utilise les même principes raisonnement que 'Self'. 
 	
-	La premi\`ere solution visait \`a r\'eutiliser le mod\`ele d\'ecisionnel de l'agent pour raisonner sur le comportement de l'autre. Le mod\`ele existant de n\'egociation coop\'erative sur des pr\'eferences, est composé sur trois \'elements (Le contexte de la n\'egociation, la relation de pouvoir \textbf{pow} et les pr\'eferences).
+	Dans la prochaine section, nous présentons un rappel du modèle décisionnel de l'agent. 
 	
-	formuler des hypoth\`eses sur chaque \'element du mod\`ele d\'ecisionel pour pouvoir deviner le \textbf{pow} de l'autre. La limite de cette proposition r\'esidait dans le fait de devoir mod\`eliser tous les mo\`eles de pr\'eferences pour un sujet donn\'e, d'autant plus qu'on ne cherche pas \`a apprendre les pr\'eferences de l'autre.
+	%	La première solution visait à réutiliser le modèle décisionnel de l'agent pour raisonner sur le comportement de l'autre (prédir le comportement de pouvoir éxprimé). Le modèle existant de négociation coopérative sur des préférences, est composé sur trois élements (Le contexte de la négociation, la relation de pouvoir \textbf{pow} et les préférences).
+	%	
+	%	Nous visons donc à formuler des hypothèses sur chaque élement du modèle décisionel pour pouvoir deviner le \textbf{pow} de l'autre. La limite de cette proposition résidait dans le fait de devoir modéliser des hypothèses tous les moèles de préférences pour un sujet de négociation donné, d'autant plus qu'on ne cherche pas à apprendre les préférences de l'autre.
+	%	
+	%	Pour cette raison, nous propose une solution probabiliste où une représentation partielle des préférences de l'autre est faite. 
+	%	
+	%	\section{Adaptation de l'algorithme de décision}
 	
-	Pour cette raison, je propose une solution probabiliste où une repr\'esentation partielle des pr\'eferences de l'autre est faite. 
+	\section{Rappel du modèle décisionnel}
+	Pour prendre une décision, l'agent prend en compte ses préférences ainsi que la valeur de pouvoir qu'il cherche à éxprimer. Nous avons donc modéliser un agent qui a un ensemble de préférences (binaire, transitive) sur chaque critère de la négociation. De plus, l'agent est initié avec une valeur de pouvoir $pow \in [0, 1]$. L'algorithme de décision est basé sur trois principales fonctions:
 	
-	\section{Adaptation de l'algorithme de d\'ecision}
+	\subsection{Satisfiabilité:}
 	
-	\subsection{Rappel du mod\`ele d\'ecisionnel}
-	L'algorithme de d\'ecision est bas\'e sur trois fonctions:
-	\subsubsection{Satisfiabilit\'e:}
+	Cette fonction est utilisé pour exprimer les valeurs aimés par l'agent. Par exemple, dans le cas o\`u l'agent énonce ses préférences (\textit{i.e StatePreference}).
 	
-	Cette fonction est utilis\'e pour exprimer les valeurs aim\'es par l'agent (dans le cadre de StatePreference)
 	\begin{equation}
 	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
 	\end{equation}
 	
 	Une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$.
 	
-	\subsubsection{Acceptabilit\'e:}
-	La notion d'acceptabilit\'e est utilis\'ee pour d\'ecider d'accepter ou rejeter des propositions. Une proposition est dite acceptable: 
+	\subsection{Acceptabilité:}
+	La notion d'acceptabilité est utilisée pour décider d'accepter ou rejeter des propositions. Une proposition est dite acceptable: 
 	\begin{equation}
 	\vspace{-.5em} 
 	acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
 	\end{equation}
-	et Self repr\'esente le poid donn\'e \`a la satisfaction de ses pr\'ef\'erences \`a un moment \textbf{t} de la n\'egociation. 
+	et Self est une fonction qui modélise la variation de \textit{pow} dans le temps. Elle représente le poid donné à la satisfaction de ses préférences à un moment \textbf{t} de la négociation. 
 	
 	\begin{equation}
 	self(pow, t) = \left\{\begin{array}{ll}
@@ -50,54 +69,107 @@
 	\end{array}\right.
 	\end{equation}
 	
-	\subsubsection{Tol\'erabilit\'e}
-	Cette notion est utilis\'ee pour calculer la valeur de proposition que l'agent va \'enoncer. L'agent prend en compte ses pr\'eferences ainsi que celle de l'autre. A partir de la liste des valeurs acceptables, l'agent calcule la proposition la plus tol\'erable. 
+	\subsubsection{Tolérabilité}
+	Cette notion est utilisée pour calculer la valeur de proposition que l'agent va énoncer. L'agent prend en compte ses préférences ainsi que celle de l'autre. A partir de la liste des valeurs acceptables, l'agent calcule la meilleure proposition à énoncer. 
 	
 	\begin{equation}
-	tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
+	\begin{split}
+	tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
+	& +  (1 - self(pow, t)) \cdot sat_{other}(v, A_i, U_i)
+	\end{split} 
 	\end{equation}
 	
 	
-	\subsection{Adaptation du syst\`eme}
-	Pour calculer la valeur de pouvoir exprim\'e par l'autre, nous proposons un mod\`ele qui formule des hypoth\`eses sur l'\'etat mental de l'autre. Ces hypoth\`eses concernent le valeur de pouvoir \textbf{pow} qu'il exprimer ainsi que ses pr\'eferences. 
-	Le but de cette solution est de pr\'esenter un mod\`ele d\'ecisionnel qui calcule la probabilt\'e d'obtenir l'utterance ennonc\'e pour chaque hypoth\`ese donnée. 
+	\subsection{ToM: Raisonnement sur l'autre}
 	
-	J'ai formul\'e une premi\`ere hypoth\`ese  qui sugg\`ere qu'au lieu de mod\`eliser toutes les relations de pr\'eferences, on mod\`elisait l'ensemble de valeurs satisfiables.
 	
-	Par exemple, supposons qu'on ait un mod\`ele compos\'e de l'ensemble des valeurs \{A, B, C, D\}, l'ensemble des relations des pr\'eferences qu'on peut g\'en\'erer de ce mod\`ele est de l'ordre de 4! = 24. 
+	Pour calculer la valeur de pouvoir exprimé par l'autre, nous proposons de reproduire son raisonnement à partir de l'utterance qu'il énoncée.
 	
-	Au lieu de g\'enerer l'ensemble des relations de pr\'eferences, je propose de g\'enerer l'ensemble des valeurs satisfiables possibles. 
-	Rappelons qu'une valeur $v$ est satisfiable si $ sat_{self}(v, \prec_i) > pow$. En supposons qu'on ait un ordre total sur les pr\'ef\'erences, on peut conna\^itre le pourcentage des valeurs satisfiables d'un ensemble donn\'e. 
+	Le raisonnement lors de la négociation étant basé  sur l'état mental de l'agent (\textit{pow} et le modèle de préférences), nous proposons de formuler des hypothèses sur les possibles états mentaux de l'agent et d'élager les fausses hypothèses au fur et mesure des informations collectées lors de la negociation (Utterances communiquées).
 	
-	Par exemple, pour l'ensemble ordonn\'e\{A, B, C, D\} et pow =0.4, a partir des valeurs de satisfiabilit\'e present\'e dans la table \ref{table:conditions}, on peut conclure que les valeurs satisfiables sont \{C,D\}. 
-	Les valeurs de satisfiabilit\'e sont normalis\'e entre [0,1] on peut dire que pour un que pow =0.4, 60\% des valeurs  sont satisfiables.
-	\begin{table}[h]
-		\centering
-		\begin{tabular}{ |l|c|c|c|c| }
-			\hline
-			\textbf{Values}& \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\ 
-			\hline
-			\newline  \textbf{Sat }& 0 & 0.3 & 0.6 & 1\\ 
-			\hline
-			
-		\end{tabular}
-		\caption{Valeurs de sat}
-		\label{table:conditions}
-	\end{table}
-	On peut g\'en\'eraliser comme suit:
+	Un inconvénient important se pose qui est le nombre d'hypothèses formulées pour une négociation donnée. En effet, pour chaque critère $C$, le nombre de modèles de préférences possibles est de l'ordre de $card(C) !$. 
 	
-	Pour une valeur de $pow$ donn\'ee, le domaine de valeurs $D$. Le nombre de valeurs satisfiable est:
-	\begin{equation}
-	Satisfiable(pow, D)= card(D) * (1-pow)
-	\end{equation}
+	La taille importante du possible représente une limite computationnelle du modèle de la ToM, d'autant qu'on ne cherche pas à connaître les préférences de l'autre. Pour cette raison, nous proposons une adaptation probabiliste de notre modèle de décision avec connaissance partielle des préférences de l'autre. 
 	
-	Avec cette proposition, nous avons une mod\'elisation partielle des pr\'ef\'erences mais qui r\'eduit consid\'erablement la taille des mod\`eles à $C_{card(D)}^{1-pow} $  
+	Le but de cette solution est de présenter un modèle décisionnel qui calcule la probabilité d'obtenir l'utterance énoncé pour chaque hypothèse de l’état mental donnée. 
 	
-	\subsection{Adaptation d'Acceptabilit\'e}
-	Etant donn\'ee qu'on a maintenant une repr\'esentation approximative des valeurs de satisfiabilit\'e. Il faut aussi adapter le calcul de l'acceptabilit\'e.
-	Cette notion qui prend en compte le principe de concession mod\`elis\'e avec la fonction $Self$. Si la valeur de $Self$ d\'ecroit lors de la n\'egociation, des valeurs non satisfiables deviennent acceptables.
-	Reprenons l'exemple pr\'ec\'edent, supposons qu'au court de la n\'egociation $Self = 0.3$, donc, \textbf{B} est maintenant acceptable. 
-	Dans le cas o\`u on ne conna\^it pas l'ordre de pr\'ef\'erences, on peut dire qu'une des deux valeurs \textbf{A ou B} est maintenant acceptable.
+	
+	\subsection{Satisfiabilité ou modèle partiel des préférences}
+	La première étape est d'adapter la modélisation des préférences et le calcul de satisfiabilité des valeurs à partir des préférences.
+	
+	La première hypothèse forte suggère que l'autre a un ordre \emph{total} sur ses préférences. Par conséquent, pour un modèle $M$ de préférences, la formule $sat$ peut trier par ordre croissant de préférences les valeurs.  
+	
+	
+	%	J'ai formulé une première hypothèse  qui suggère qu'au lieu de modéliser toutes les relations de préférences, on modèlisait 'uniquement' l'ensemble de valeurs dite satisfiables.
+	%	
+	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{ |c|c|c|c|c| }
+				\hline
+				\textbf{Value}& \textbf{A} & \textbf{B} & \textbf{C}& \textbf{D} \\ 
+				\hline
+				\newline  \textbf{Sat(Value) }& 0 & 0.3 & 0.6 & 1\\ 
+				\hline
+				\newline  \textbf{IsSatisfiable(pow =0.4) }& false & false & true & true\\ 
+				\hline
+			\end{tabular}
+			\caption{Valeurs de sat}
+			\label{table:conditions}
+		\end{table}
+	
+	Rappelons qu'une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$. Reprenons le modèle $M$, pour un $pow =0.4$, nous pouvons calculer les valeurs satisfiables pour cet état mental comme présenté dans le tableau \ref{table:conditions}. On peut donc savoir que pour cet état mental l'agent aime la valeur D mais n'aime pas la valeur A.
+	
+	En conclusion, pour un état mental donné (modèle de préférences d'ordre total $M$  et une relation de pouvoir $pow$), on peut calculer la proportions de valeurs \emph{satisfiables} . Par exemple, pour un $pow =0.4$ seules les valeurs dont la satisfaction est supérieure à 0.4 sont considérées comme satisfiables. 
+	Les valeurs de satisfiabilité sont normalisées entre [0,1] on peut dire que pour un que $pow =0.4$, 60\% (1 - 0.4) des valeurs sont satisfiables. En conclusion le nombre de valeurs satisfiables pour un état mental: 
+			\begin{equation}
+			nbSat(pow, D)= (1-pow) \times card(D)
+			\end{equation}
+	
+	Notre adaptation propose qu'au lieu de modéliser tous les modèles de préférences possibles, on modéliserait 'uniquement' l'ensemble de valeurs dite satisfiables. Par exemple, pour le domaine $D$ présenté plus haut et pour un $pow =0.4$, $nbSat =2$, l'ensemble des modèles de préférences possible est 
+	
+	$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$.
+	
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{ |c|c|c| }
+					\hline
+					 & \multicolumn{2}{c|}{État mental}  \\
+					\hline
+					Hypothèse & Pow & Modèles possibles \\
+					\hline
+					H1&0.3&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
+					\hline
+					H2&0.4&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
+					\hline
+					H3&0.5&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$\\
+					\hline
+					H4&0.6&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
+					\hline
+					H5&0.7&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$\\
+				\hline
+					H6&0.9&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
+					\hline
+				\end{tabular}
+				\caption{Hypothèses de l'état mental de l'autre pour le domaine $D=\{A, B, C, D\}$}
+				\label{table:poss}
+			\end{table}
+	
+	
+	La modélisation partielle des préférences réduit considérablement la taille des modèles possible  à $C_{D}^{card(D) \times (1-pow)}$. Par exemple, pour un domaine $D$ les hypothèses sur l'état mental de l'autre sont représentées dans la table \ref{table:poss}.
+	
+	\subsubsection{Mise à jour des hypothèses:}
+		Le but de la ToM est de deviner l'état mental de l'autre par le biais des utterances communiquées par ce dernier. Quand l'autre énonce un statePreference, il communique des informations sur ces préférences (ce qu'il aime ou n'aime pas). Cette information permet à  l'agent peut supprimer les hypothèses qui sont en contradictions avec le state énoncé ce qui nous permettrait de réduire le nombre des hypothèses rapidement.  
+	
+	
+	\subsection{Acceptabilité}
+	Étant donnée qu'on a maintenant une représentation partielle des valeurs de satisfiabilité. Il faut aussi adapter le calcul de l'acceptabilité.
+	
+	Cette notion qui prend en compte le principe de concession modélisé avec la fonction $Self$. En effet, une valeur $v$ est dite acceptable si $sat(v) >Self$. Une première conclusion peut être faite " une valeur satisfiable est forcément acceptable". Cependant, avec les concessions exprimées, la valeur de $Self$ est amenée à décroître durant de la négociation, si $self<pow$, des valeurs non satisfiables deviennent acceptables. 
+
+	Dans le cas où on ne connaît pas l'ordre de préférences, nous ne pouvons connaître les valeurs non satisfiables sont maintenant acceptables. Nous proposons donc de calculer la probabilité qu'une valeur non satisfiable devienne acceptable en utilisant la valeur de $Self$. La probabilité est calculé comme suit:
+	
+	% Reprenons l'exemple précédent, pour une hypothèse où $pow =0.4$ et $M= \{A,B\}$. Supposons que $Self = 0.3$ au termes de concessions, donc, des valeurs dont la satisfiabilité est inférieure à $pow$ deviennent acceptables.  
 	
 	\begin{equation}
 	Acceptability(V) =  \left\{\begin{array}{ll}
@@ -106,16 +178,27 @@
 	\end{array}\right.
 	\end{equation}
 	\begin{itemize}
-		\item m: le nombre de valeurs devenus acceptables (dans l'exemple 1 (\textbf{B})
-		\item n: le nombre de valeurs non satisfiables (dans l'exemple 2 (\textbf{A, B}))
+		\item $m= nbSat(pow,D) - (card(D) \times (1-Self)) $: le nombre de valeurs devenus acceptables
+		\item $n= card(D) \times pow $ le nombre de valeurs non satisfiables
 	\end{itemize}
 	
-	\subsection{Tol\'erabilit\'e}
-	Pour l'instant, je bloque un peu sur le mod\`ele, car les valeurs de satisfiabilit\'e sont soit vrais(1) ou fausse (0). 
+	Par conséquent, pour chaque hypothèse d'état mental, l'agent peut calculer la probabilité qu'une valeur soit acceptable durant la négociation.
+	
+	\subsubsection{Mise à jour des hypothèses:}
+		La fonction d'acceptabilité est utilisé dans le cas où l'autre énonce un Accept ou un Reject. En fonction de l'utterance énoncé, l'agent met à jour ses hypothèses. 
+		
+		\textbf{Reject:} Dans le cas où une valeur est rejetée, on peut déduire que cette valeur n'est forcément pas satisfiable. Cette information permet à l'agent de réviser cette hypothèse en suppriment tous les modèles où cette valeur est satisfiable.
+		
+		\textbf{Accept: } Problème agrégation des probabilité pour chaque modèle.
+%		\hl{ Pour pow fixé, pour chaque model possible de pow M$\in$ Poss(pow), j'ai la proba d'avoir un accept(v) si c'était ce pow et ce modèle qui était le bon
+%			Pour pow fixé, je fais la moyenne des probas des M (* problème pour la moyenne il faudrait que tous les M aient le poids... or quand j'en retire est-ce ça reste vrai ? peut-être ?)	Je considère que cette moyenne est la probabilité qu'il ait eu un accept avec cette valeur de pow.}
+%	
+	\subsection{Tolérabilité}
+	Pour l'instant, je bloque un peu sur le modèle, car les valeurs de satisfiabilité sont soit vrais(1) ou fausse (0). 
 	On pourrait essayer de calculer quand même.
 	
-	\subsection{D\'ecision}
-	Pour le choix de l'utterance, au lieu de calculer l'utterance, je propose de calculer la probabilit\'e d'obtenir l'utterance \'ennonc\'e par l'autre. 
-	On combine les probabilit\'es obtenues pour chaque mod\`ele pour chaque valeur de pow. 
+%	\subsection{Décision}
+%	Pour le choix de l'utterance, au lieu de calculer l'utterance, je propose de calculer la probabilité d'obtenir l'utterance énoncé par l'autre. 
+%	On combine les probabilités obtenues pour chaque modèle pour chaque valeur de pow. 
 	
 \end{document}
