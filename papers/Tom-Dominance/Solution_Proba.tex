@@ -45,8 +45,8 @@
 	Pour prendre une décision, l'agent prend en compte ses préférences ainsi que la valeur de pouvoir qu'il cherche à éxprimer. Nous avons donc modéliser un agent qui a un ensemble de préférences (binaire, transitive) sur chaque critère de la négociation. De plus, l'agent est initié avec une valeur de pouvoir $pow \in [0, 1]$. L'algorithme de décision est basé sur trois principales fonctions:
 	
 	\subsection{Satisfiabilité:}
+	Cette fonction est utilisé pour exprimer les valeurs aimés par l'agent. Par exemple, dans le cas o\`u l'agent énonce ses préférences (\textit{i.e StatePreference}). La satisfiabilité d'une valeur $v \in C_i$ est calculée à partir des nombre de prédécesseurs de $v$ dans la relations de préférences sur la totalité $|C_i| - 1$ valeurs à comparer avec $v$. 
 	
-	Cette fonction est utilisé pour exprimer les valeurs aimés par l'agent. Par exemple, dans le cas o\`u l'agent énonce ses préférences (\textit{i.e StatePreference}).
 	
 	\begin{equation}
 	sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
@@ -85,24 +85,31 @@
 	
 	Pour calculer la valeur de pouvoir exprimé par l'autre, nous proposons de reproduire son raisonnement à partir de l'utterance qu'il énoncée.
 	
-	Le raisonnement lors de la négociation étant basé  sur l'état mental de l'agent (\textit{pow} et le modèle de préférences), nous proposons de formuler des hypothèses sur les possibles états mentaux de l'agent et d'élager les fausses hypothèses au fur et mesure des informations collectées lors de la negociation (Utterances communiquées).
+	Le raisonnement lors de la négociation étant basé  sur l'état mental de l'agent (\textit{pow} et le modèle de préférences), nous proposons de formuler des hypothèses sur les possibles états mentaux de l'agent et d'élaguer les fausses hypothèses au fur et mesure des informations collectées lors de la negociation (Utterances communiquées).
 	
-	Un inconvénient important se pose qui est le nombre d'hypothèses formulées pour une négociation donnée. En effet, pour chaque critère $C$, le nombre de modèles de préférences possibles est de l'ordre de $card(C) !$. 
+	Un inconvénient important se pose, le nombre d'hypothèses formulées pour une négociation donnée. En effet, pour chaque critère $C$, le nombre de modèles de préférences possibles est de l'ordre de $|C| !$. Donc pour un nombre de $n$ critères le nombre de modèles de préférences qu'on poeut générer est de l'ordre de $ M = \prod_{k=1}^n C_k!$
 	
 	La taille importante du possible représente une limite computationnelle du modèle de la ToM, d'autant qu'on ne cherche pas à connaître les préférences de l'autre. Pour cette raison, nous proposons une adaptation probabiliste de notre modèle de décision avec connaissance partielle des préférences de l'autre. 
 	
-	Le but de cette solution est de présenter un modèle décisionnel qui calcule la probabilité d'obtenir l'utterance énoncé pour chaque hypothèse de l’état mental donnée. 
+	Le but de cette solution est de présenter un modèle décisionnel qui calcule la probabilité d'obtenir l'utterance énoncé pour chaque hypothèse de l’état mental donnée. De plus, l'agent révise ses hypothèses en fonction des informations collectées durant la négociation.
 	
 	
 	\subsection{Satisfiabilité ou modèle partiel des préférences}
 	La première étape est d'adapter la modélisation des préférences et le calcul de satisfiabilité des valeurs à partir des préférences.
 	
-	La première hypothèse forte suggère que l'autre a un ordre \emph{total} sur ses préférences. Par conséquent, pour un modèle $M$ de préférences, la formule $sat$ peut trier par ordre croissant de préférences les valeurs.  
+	La première hypothèse forte suggère que 'l'autre' a un ordre \emph{total} sur ses préférences. Par conséquent, pour un domaine de valeurs $D$, on génère un modèle $M$ de préférences composé de $|D| -1$ relations de préférences binaires. Cette dernière permet de trier les valeurs par ordre croissants, et en fonction de la taille du domaine $|D|$, nous pouvons anticiper le calcul les valeurs de satisfiabilité pour le modèle d'ordre total $M$ sans pour autant connaître les relations de préférences entre les différentes valeurs.
 	
+	Rappelons que $sat$ d'une valeur $v$ est calculée à partir du nombre de prédécesseurs de cette dernières. Comme les valeurs sont triés par ordre croissants.Nous pouvons généraliser le calcul de satisfiabilité comme suit. Supposons, que les valeurs sont définis avec un rang $i$ dans l'ordre des valeurs, la satisfiabilité d'une valeur $v$ avec un rang $i$ :
+	
+	\begin{equation}
+		sat(v) = \frac{i-1}{|D|-1}
+	\end{equation} 
+	
+	Par exemple, pour une domaine $D =\{A, B, C, D\}$ où $|D| = 4$, les valeurs de sat sont présentés dans la table suivant: 
 	
 	%	J'ai formulé une première hypothèse  qui suggère qu'au lieu de modéliser toutes les relations de préférences, on modèlisait 'uniquement' l'ensemble de valeurs dite satisfiables.
 	%	
-	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
+%	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
 		\begin{table}[h]
 			\centering
 			\begin{tabular}{ |c|c|c|c|c| }
@@ -123,7 +130,7 @@
 	En conclusion, pour un état mental donné (modèle de préférences d'ordre total $M$  et une relation de pouvoir $pow$), on peut calculer la proportions de valeurs \emph{satisfiables} . Par exemple, pour un $pow =0.4$ seules les valeurs dont la satisfaction est supérieure à 0.4 sont considérées comme satisfiables. 
 	Les valeurs de satisfiabilité sont normalisées entre [0,1] on peut dire que pour un que $pow =0.4$, 60\% (1 - 0.4) des valeurs sont satisfiables. En conclusion le nombre de valeurs satisfiables pour un état mental: 
 			\begin{equation}
-			nbSat(pow, D)= (1-pow) \times card(D)
+			nbSat(pow, D)= (1-pow) \times |D|
 			\end{equation}
 	
 	Notre adaptation propose qu'au lieu de modéliser tous les modèles de préférences possibles, on modéliserait 'uniquement' l'ensemble de valeurs dite satisfiables. Par exemple, pour le domaine $D$ présenté plus haut et pour un $pow =0.4$, $nbSat =2$, l'ensemble des modèles de préférences possible est 
@@ -156,7 +163,7 @@
 			\end{table}
 	
 	
-	La modélisation partielle des préférences réduit considérablement la taille des modèles possible  à $C_{D}^{card(D) \times (1-pow)}$. Par exemple, pour un domaine $D$ les hypothèses sur l'état mental de l'autre sont représentées dans la table \ref{table:poss}.
+	La modélisation partielle des préférences réduit considérablement la taille des modèles possible  à $C_{D}^{|D| \times (1-pow)}$. Par exemple, pour un domaine $D$ les hypothèses sur l'état mental de l'autre sont représentées dans la table \ref{table:poss}.
 	
 	\subsubsection{Mise à jour des hypothèses:}
 		Le but de la ToM est de deviner l'état mental de l'autre par le biais des utterances communiquées par ce dernier. Quand l'autre énonce un statePreference, il communique des informations sur ces préférences (ce qu'il aime ou n'aime pas). Cette information permet à  l'agent peut supprimer les hypothèses qui sont en contradictions avec le state énoncé ce qui nous permettrait de réduire le nombre des hypothèses rapidement.  
@@ -178,8 +185,8 @@
 	\end{array}\right.
 	\end{equation}
 	\begin{itemize}
-		\item $m= nbSat(pow,D) - (card(D) \times (1-Self)) $: le nombre de valeurs devenus acceptables
-		\item $n= card(D) \times pow $ le nombre de valeurs non satisfiables
+		\item $m= nbSat(pow,D) - (|D| \times (1-Self)) $: le nombre de valeurs devenus acceptables
+		\item $n= |D| \times pow $ le nombre de valeurs non satisfiables
 	\end{itemize}
 	
 	Par conséquent, pour chaque hypothèse d'état mental, l'agent peut calculer la probabilité qu'une valeur soit acceptable durant la négociation.
