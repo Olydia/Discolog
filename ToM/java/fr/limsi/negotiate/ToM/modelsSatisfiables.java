@@ -9,9 +9,9 @@ import java.util.Set;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.toyExample.ToyCuisine;
 
-public class PreferencesGeneration {
+public class modelsSatisfiables {
 
-	public PreferencesGeneration() {
+	public modelsSatisfiables() {
 		
 	}
 	
