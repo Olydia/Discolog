@@ -95,45 +95,60 @@
 	
 	
 	\subsection{Satisfiabilité ou modèle partiel des préférences}
-	La première étape est d'adapter la modélisation des préférences et le calcul de satisfiabilité des valeurs à partir des préférences.
+	La première étape est d'adapter la modélisation des préférences et le calcul de satisfiabilité des valeurs à partir des préférences. Le but de notre modélisation est d'être em mesure de raisonner (e reproduire le calcul des fonctions de raisonnement) avec une connaissance partielle sur les préférences. 
 	
-	La première hypothèse forte suggère que 'l'autre' a un ordre \emph{total} sur ses préférences. Par conséquent, pour un domaine de valeurs $D$, on génère un modèle $M$ de préférences composé de $|D| -1$ relations de préférences binaires. Cette dernière permet de trier les valeurs par ordre croissants, et en fonction de la taille du domaine $|D|$, nous pouvons anticiper le calcul les valeurs de satisfiabilité pour le modèle d'ordre total $M$ sans pour autant connaître les relations de préférences entre les différentes valeurs.
+	La première hypothèse forte suggère que \emph{'l'autre'} a un ordre \emph{total} sur ses préférences. Par conséquent, pour un domaine de valeurs $D$, on génère un modèle $M$ de préférences composé de $|D| -1$ relations de préférences binaires. Par conséquent, toutes les valeurs sont comparables
+	 permet de trier les valeurs par ordre croissants.
+	 Pour rappel la fonction $Sat$ se calcule à partir du nombre de prédécesseurs dans l'ordre de préférences. Comme les valeurs de $D$ peuvent être triées par ordre croissants due à l'ordre total, on peut anticiper les valeurs de satisfiabilité obtenues pour un domaine donné $D$ à partir de sa taille $|D|$.
+	 Par exemple un domaine composé de quatre valeurs $ |D|=4$, dont le modèle de préférences $M$ contient un ordre total de préférences. On peur prédir les valeurs de satisfiabilité comme présenté dans la table \ref{poss}.
+	 
+	 \begin{table}
+	 	\centering
+	 	\begin{tabular}{ |c|c|c|c|c| }
+		 	\hline				
+		 	rang(Valeur) & 1 & 2 & 3 & 4 \\
+		 	\hline
+		 	Nombre prédécesseurs & 3 & 2 & 1& 0 \\
+		 	\hline
+		 	Sat(Valeur) & 0 & 0.33 & 0.66 &1 \\
+		 	\hline
+		 	
+	 \end{tabular}
+	 \caption{Valeurs de satisfiabilité pour un domaine d}
+	 \label{poss}
+	 \end{table}
 	
-	Rappelons que $sat$ d'une valeur $v$ est calculée à partir du nombre de prédécesseurs de cette dernières. Comme les valeurs sont triés par ordre croissants.Nous pouvons généraliser le calcul de satisfiabilité comme suit. Supposons, que les valeurs sont définis avec un rang $i$ dans l'ordre des valeurs, la satisfiabilité d'une valeur $v$ avec un rang $i$ :
+	Nous pouvons généraliser le calcul de satisfiabilité pour une domaine $D$ comme suit. Les valeurs peuvent être triés, donc chaque valeur $v \in D$ est définie avec un rang $i$ dans l'ordre des préférences, la satisfiabilité d'une valeur $v$ avec un rang $i$ :
 	
 	\begin{equation}
 		sat(v) = \frac{i-1}{|D|-1}
 	\end{equation} 
 	
-	Par exemple, pour une domaine $D =\{A, B, C, D\}$ où $|D| = 4$, les valeurs de sat sont présentés dans la table suivant: 
+	Maintenant, qu'on peut peut calculer les valeurs de satisfiables qu'un domaine peut avoir, on peut calculer la proportion de valeurs satisfiable pour n'importe quel état mental. 
+%	Par exemple, pour une domaine $D =\{A, B, C, D\}$ où $|D| = 4$, les valeurs de sat sont présentés dans la table suivant: 
 	
 	%	J'ai formulé une première hypothèse  qui suggère qu'au lieu de modéliser toutes les relations de préférences, on modèlisait 'uniquement' l'ensemble de valeurs dite satisfiables.
 	%	
-%	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
-		\begin{table}[h]
-			\centering
-			\begin{tabular}{ |c|c|c|c|c| }
-				\hline
-				\textbf{Value}& \textbf{A} & \textbf{B} & \textbf{C}& \textbf{D} \\ 
-				\hline
-				\newline  \textbf{Sat(Value) }& 0 & 0.3 & 0.6 & 1\\ 
-				\hline
-				\newline  \textbf{IsSatisfiable(pow =0.4) }& false & false & true & true\\ 
-				\hline
-			\end{tabular}
-			\caption{Valeurs de sat}
-			\label{table:conditions}
-		\end{table}
+%%	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
+%		\begin{table}[h]
+%			\centering
+%			\begin{tabular}{ |c|c|c|c|c| }
+%				\hline
+%				\textbf{Value}& \textbf{A} & \textbf{B} & \textbf{C}& \textbf{D} \\ 
+%				\hline
+%				\newline  \textbf{Sat(Value) }& 0 & 0.3 & 0.6 & 1\\ 
+%				\hline
+%				\newline  \textbf{IsSatisfiable(pow =0.4) }& false & false & true & true\\ 
+%				\hline
+%			\end{tabular}
+%			\caption{Valeurs de sat}
+%			\label{table:conditions}
+%		\end{table}
 	
-	Rappelons qu'une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$. Reprenons le modèle $M$, pour un $pow =0.4$, nous pouvons calculer les valeurs satisfiables pour cet état mental comme présenté dans le tableau \ref{table:conditions}. On peut donc savoir que pour cet état mental l'agent aime la valeur D mais n'aime pas la valeur A.
-	
-	En conclusion, pour un état mental donné (modèle de préférences d'ordre total $M$  et une relation de pouvoir $pow$), on peut calculer la proportions de valeurs \emph{satisfiables} . Par exemple, pour un $pow =0.4$ seules les valeurs dont la satisfaction est supérieure à 0.4 sont considérées comme satisfiables. 
-	Les valeurs de satisfiabilité sont normalisées entre [0,1] on peut dire que pour un que $pow =0.4$, 60\% (1 - 0.4) des valeurs sont satisfiables. En conclusion le nombre de valeurs satisfiables pour un état mental: 
-			\begin{equation}
-			nbSat(pow, D)= (1-pow) \times |D|
-			\end{equation}
-	
-	Notre adaptation propose qu'au lieu de modéliser tous les modèles de préférences possibles, on modéliserait 'uniquement' l'ensemble de valeurs dite satisfiables. Par exemple, pour le domaine $D$ présenté plus haut et pour un $pow =0.4$, $nbSat =2$, l'ensemble des modèles de préférences possible est 
+%	Rappelons qu'une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$. Reprenons le modèle $M$, pour un $pow =0.4$, nous pouvons calculer les valeurs satisfiables pour cet état mental comme présenté dans le tableau \ref{table:conditions}. On peut donc savoir que pour cet état mental l'agent aime la valeur D mais n'aime pas la valeur A.
+%	
+
+
 	
 	$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$.
 	
