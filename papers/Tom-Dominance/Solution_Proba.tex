@@ -55,6 +55,7 @@
 	Une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$.
 	
 	\subsection{Acceptabilité:}
+	\label{sec:acc}
 	La notion d'acceptabilité est utilisée pour décider d'accepter ou rejeter des propositions. Une proposition est dite acceptable: 
 	\begin{equation}
 	\vspace{-.5em} 
@@ -95,12 +96,12 @@
 	
 	
 	\subsection{Satisfiabilité ou modèle partiel des préférences}
+	\label{sec:sat}
 	La première étape est d'adapter la modélisation des préférences et le calcul de satisfiabilité des valeurs à partir des préférences. Le but de notre modélisation est d'être em mesure de raisonner (e reproduire le calcul des fonctions de raisonnement) avec une connaissance partielle sur les préférences. 
 	
-	La première hypothèse forte suggère que \emph{'l'autre'} a un ordre \emph{total} sur ses préférences. Par conséquent, pour un domaine de valeurs $D$, on génère un modèle $M$ de préférences composé de $|D| -1$ relations de préférences binaires. Par conséquent, toutes les valeurs sont comparables
-	 permet de trier les valeurs par ordre croissants.
+	La première hypothèse forte suggère que \emph{'l'autre'} possède un ordre \emph{total} sur ses préférences. Par conséquent, pour un domaine de valeurs $D$, on génère un modèle $M$ de préférences composé de $(|D| -1)$ relations de préférences binaires. Par conséquent, toutes les valeurs sont comparables entre elles, ce qui permet de les trier par ordre croissants.
 	 Pour rappel la fonction $Sat$ se calcule à partir du nombre de prédécesseurs dans l'ordre de préférences. Comme les valeurs de $D$ peuvent être triées par ordre croissants due à l'ordre total, on peut anticiper les valeurs de satisfiabilité obtenues pour un domaine donné $D$ à partir de sa taille $|D|$.
-	 Par exemple un domaine composé de quatre valeurs $ |D|=4$, dont le modèle de préférences $M$ contient un ordre total de préférences. On peur prédir les valeurs de satisfiabilité comme présenté dans la table \ref{poss}.
+	 Par exemple, pour un domaine composé de quatre valeurs $ |D|=4$, dont le modèle de préférences $M$ contient un ordre total de préférences. On peur prédir les valeurs de satisfiabilité comme présenté dans la table \ref{poss}.
 	 
 	 \begin{table}
 	 	\centering
@@ -114,94 +115,96 @@
 		 	\hline
 		 	
 	 \end{tabular}
-	 \caption{Valeurs de satisfiabilité pour un domaine d}
+	 \caption{Valeurs de satisfiabilité pour un domaine $D$.}
 	 \label{poss}
 	 \end{table}
 	
-	Nous pouvons généraliser le calcul de satisfiabilité pour une domaine $D$ comme suit. Les valeurs peuvent être triés, donc chaque valeur $v \in D$ est définie avec un rang $i$ dans l'ordre des préférences, la satisfiabilité d'une valeur $v$ avec un rang $i$ :
+	Nous pouvons généraliser le calcul de satisfiabilité pour une domaine $D$ possédant un modèle $M$ de préférences d'ordre total. Les valeurs pouvant être triés, chaque valeur $v \in D$ est possède donc un rang $i(v)$ dans l'ordre des préférences. La satisfiabilité d'une valeur $v$ avec un rang $i(v)$ :
 	
 	\begin{equation}
-		sat(v) = \frac{i-1}{|D|-1}
+		sat(v) = \frac{i(v)-1}{|D|-1}
 	\end{equation} 
 	
-	Maintenant, qu'on peut peut calculer les valeurs de satisfiables qu'un domaine peut avoir, on peut calculer la proportion de valeurs satisfiable pour n'importe quel état mental. 
-%	Par exemple, pour une domaine $D =\{A, B, C, D\}$ où $|D| = 4$, les valeurs de sat sont présentés dans la table suivant: 
+	Maintenant, qu'on peut peut calculer les valeurs de satisfiabilité d'un domaine, nous pouvons donc, pour un état mental donné \emph{(M, pow)} calculer la proportion de valeurs satisfiables. 
+	Par exemple, pour un état mental défini sur $|D|$ avec un modèle de préférences d'ordre total $M$ et un $pow =0.3$ $M_1 = \{M, 0.3\}$, en visualisant les valeurs de satisfiabilité de $|D|$ (voir table \ref{poss}), on peut conclure que pour un état mental où $pow =0.3$, $3/4$ des valeurs dans $D$ sont satisfiables. 
 	
-	%	J'ai formulé une première hypothèse  qui suggère qu'au lieu de modéliser toutes les relations de préférences, on modèlisait 'uniquement' l'ensemble de valeurs dite satisfiables.
-	%	
-%%	Par exemple, supposons qu'on ait un domaine composé de l'ensemble des valeurs $D =\{A, B, C, D\}$, l'ensemble des relations des préférences d'ordre total qu'on peut générer à partir ce modèle est de l'ordre de 4! = 24. Supposons que le modèle de préférences $M= \{A \rightarrow B, B \rightarrow C, C \rightarrow D \}$. La valeur de satisfiabilité de chaque valeur est présenté dans le table \ref{table:conditions}.
-%		\begin{table}[h]
-%			\centering
-%			\begin{tabular}{ |c|c|c|c|c| }
-%				\hline
-%				\textbf{Value}& \textbf{A} & \textbf{B} & \textbf{C}& \textbf{D} \\ 
-%				\hline
-%				\newline  \textbf{Sat(Value) }& 0 & 0.3 & 0.6 & 1\\ 
-%				\hline
-%				\newline  \textbf{IsSatisfiable(pow =0.4) }& false & false & true & true\\ 
-%				\hline
-%			\end{tabular}
-%			\caption{Valeurs de sat}
-%			\label{table:conditions}
-%		\end{table}
+	Cette information nous permet, donc, de générer des hypothèses sur les états mentaux sur un domaine donnée sans pour autant connaître l'ordre de préférences.
+	Par exemple, pour l'état mental $M_1$,  supposons que les valeurs de $D$ sont $D =\{A, B, C, D\}$.
 	
-%	Rappelons qu'une valeur $v$ est dite satisfiable si $ sat_{self}(v, \prec_i) > pow$. Reprenons le modèle $M$, pour un $pow =0.4$, nous pouvons calculer les valeurs satisfiables pour cet état mental comme présenté dans le tableau \ref{table:conditions}. On peut donc savoir que pour cet état mental l'agent aime la valeur D mais n'aime pas la valeur A.
-%	
+	Pour un $pow$ donné, nous pouvons générer les hypothèses suivantes sur les valeurs satisfiables: 
+	$Hyp(pow) = \{(A,B,C) , (A,B,D), (A,C,D), (B,C,D) \}$
+	
+	Ce processus est généralisable à toute valeur de $pow$ donné. Nous proposons donc une première adaptation qui consiste à générer des hypothèses sur l'ensemble des valeurs satisfiables pour un $pow$ fixé, au lieu de générer des hypothèses sur l'ensemble des préférences pour le domaine. Cette proposition réduit considérablement l'ensemble du possible.
+	
+	Soit $\mathcal{M}_H$ une hypothèse sur un état mental, c'est-à-dire un ensemble des valeurs satisfiable pour un $pow$ fixé (par exemple, $\{B,C\}$). Le calcul de satisfiabilité pour une valeur $v\in D$ dans l'hypothèse $\mathcal{M}_H$ est alors le suivant: 
+	
+		\begin{equation}
+		sat_{\mathcal{M}_H}(v)= \left\{\begin{array}{ll}
+		True	 & \mathrm{if\ }  v \in \mathcal{M}_H\\
+		False & \mathrm{otherwise}
+		\end{array}\right.
+		\end{equation}
+		
+	Les hypothèses sur les états mentaux possibles du domaine $D =\{A, B, C, D\}$ sont présenté dans la table \ref{table:poss} 
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ |c|c|c| }
+			\hline
+			& \multicolumn{2}{c|}{État mental}  \\
+			\hline
+			Hypothèse & Pow & Modèles possibles Hyp(pow) \\
+			\hline
+			H1&0.3&$\{ (A,B,C) , (A,B,D), (A,C,D), (B,C,D) \}$ \\
+			\hline
+			H2&0.4&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$ \\
+			\hline
+			H3&0.5&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$\\
+			\hline
+			H4&0.6&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$ \\
+			\hline
+			H5&0.7&$\{ (A), (B), (C), (D) \}$\\
+			\hline
+			H6&0.8&$\{ (A), (B), (C), (D) \}$ \\
+			\hline
+			H7&0.9&$\{ (A), (B), (C), (D) \}$ \\
+			\hline
+		\end{tabular}
+		\caption{Hypothèses de l'état mental de l'autre pour le domaine $D=\{A, B, C, D\}$}
+		\label{table:poss}
+	\end{table}
 
-
-	
-	$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$.
-	
-			\begin{table}[h]
-				\centering
-				\begin{tabular}{ |c|c|c| }
-					\hline
-					 & \multicolumn{2}{c|}{État mental}  \\
-					\hline
-					Hypothèse & Pow & Modèles possibles \\
-					\hline
-					H1&0.3&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
-					\hline
-					H2&0.4&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
-					\hline
-					H3&0.5&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$\\
-					\hline
-					H4&0.6&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
-					\hline
-					H5&0.7&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$\\
-				\hline
-					H6&0.9&$\{ \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\} \}$ \\
-					\hline
-				\end{tabular}
-				\caption{Hypothèses de l'état mental de l'autre pour le domaine $D=\{A, B, C, D\}$}
-				\label{table:poss}
-			\end{table}
-	
-	
-	La modélisation partielle des préférences réduit considérablement la taille des modèles possible  à $C_{D}^{|D| \times (1-pow)}$. Par exemple, pour un domaine $D$ les hypothèses sur l'état mental de l'autre sont représentées dans la table \ref{table:poss}.
-	
 	\subsubsection{Mise à jour des hypothèses:}
-		Le but de la ToM est de deviner l'état mental de l'autre par le biais des utterances communiquées par ce dernier. Quand l'autre énonce un statePreference, il communique des informations sur ces préférences (ce qu'il aime ou n'aime pas). Cette information permet à  l'agent peut supprimer les hypothèses qui sont en contradictions avec le state énoncé ce qui nous permettrait de réduire le nombre des hypothèses rapidement.  
+		Le but de la ToM est de deviner l'état mental de l'autre par le biais des utterances communiquées par ce dernier. Quand l'autre énonce un statePreference, il communique des informations sur ces préférences (ce qu'il aime ou n'aime pas). Cette information permet à  l'agent peut supprimer les hypothèses qui sont en contradictions avec le state énoncé ce qui nous permettrait de réduire le nombre des hypothèses rapidement.  Par exemple,  quand \emph{'l'autre'} énonce $StatePreference(v)$, l'agent met à jour ses hypothèses en supprimant les $\{\mathcal{M}_H/ v \notin \mathcal{M}_H\}$.  
 	
+	\subsubsection{Proposition pour la ToM}
+	Notre objectif est de calculer, à chaque tour de parole, une probabilité de la valeur de pouvoir de l'interlocuteur en partant de ses réponses précédentes et des hypothèses sur les modèles possibles. (rappel)
+	En l'état actuel, une première proposition pourrait être de dire que la probabilité que l'interlocuteur ait effectivement le pouvoir $pow$ dépend du nombre d'hypothèses restantes comparées au nombre d'hypothèses initiales: plus nous avons supprimé d'hypothèse (suite à des State), plus il est probablement que $pow$ ne soit pas le bon.
+	
+	La proposition numéro 1 est la suivante:
+	$$proba(pow)(t) = \frac{|Hyp(pow)(t)|}{|Hyp(pow)(init)|}$$
 	
 	\subsection{Acceptabilité}
-	Étant donnée qu'on a maintenant une représentation partielle des valeurs de satisfiabilité. Il faut aussi adapter le calcul de l'acceptabilité.
 	
-	Cette notion qui prend en compte le principe de concession modélisé avec la fonction $Self$. En effet, une valeur $v$ est dite acceptable si $sat(v) >Self$. Une première conclusion peut être faite " une valeur satisfiable est forcément acceptable". Cependant, avec les concessions exprimées, la valeur de $Self$ est amenée à décroître durant de la négociation, si $self<pow$, des valeurs non satisfiables deviennent acceptables. 
+	Une valeur $v$ est dite acceptable si $sat(v) > Self(t, pow)$. Nous reprenons le même principe utilisé dans la section \ref{sec:sat} qui nous permet de connaître les valeurs de satisfiabilité d'un domaine. Nous pouvons donc formuler des hypothèses sur la proportion de valeurs acceptables à un moment donné dans la négociation.
+	
+	 Une première conclusion peut être faite \emph{une valeur \textit{satisfiable} est forcément \textit{acceptable}} car $(Self(t,pow) <= pow)$ (see section \ref{sec:acc}). Cependant, avec les concessions exprimées, la valeur de $Self$ est amenée à décroître durant de la négociation, si $Self<pow$, des valeurs non satisfiables deviennent acceptables. 
 
-	Dans le cas où on ne connaît pas l'ordre de préférences, nous ne pouvons connaître les valeurs non satisfiables sont maintenant acceptables. Nous proposons donc de calculer la probabilité qu'une valeur non satisfiable devienne acceptable en utilisant la valeur de $Self$. La probabilité est calculé comme suit:
+	Dans le cas où on ne connaît pas l'ordre de préférences, nous ne pouvons connaître les valeurs non satisfiables sont maintenant acceptables. Nous proposons donc de calculer la probabilité qu'une valeur non satisfiable devienne acceptable en utilisant la valeur de $Self$. En effet, dans le cas où $Self$ décroît, de nouvelles valeurs sont acceptables. Pour un $pow$ donné, c'est-à-dire pour un ensemble $Hyp(pow)$ de modèles possible à un moment donné de la négociation, et pour chaque modèle $\mathcal{M}_H\in Hyp(pow)$, notons $ac(pow)$ le nombre de valeurs acceptables (c'est-à-dire qui vérifient $sat(v)\geq self$, qui est le même pour tous les $\mathcal{M}_H$) et $sa(pow)$ le nombre de valeurs de valeurs satisfiable ($sat(v)\geq pow$, qui est aussi le même pour tous les $\mathcal{M}_H$). La probabilité qu'une valeur $v$ soit acceptable pour chacun des modèles $\mathcal{M}_H\in Hyp(pow)$ possibles se calcule alors par:
+	
+	
 	
 	% Reprenons l'exemple précédent, pour une hypothèse où $pow =0.4$ et $M= \{A,B\}$. Supposons que $Self = 0.3$ au termes de concessions, donc, des valeurs dont la satisfiabilité est inférieure à $pow$ deviennent acceptables.  
 	
 	\begin{equation}
-	Acceptability(V) =  \left\{\begin{array}{ll}
-	1 & \mathrm{if\ } (sat(V) = true)\\
-	m/n & \mathrm{otherwise}
+	Acceptability_{\mathcal{M}_H}(v) =  \left\{\begin{array}{ll}
+	1 & \mathrm{if\ } (sat_{\mathcal{M}_H}(v) = true)\\
+	\frac{m}{n} & \mathrm{otherwise}
 	\end{array}\right.
 	\end{equation}
 	\begin{itemize}
-		\item $m= nbSat(pow,D) - (|D| \times (1-Self)) $: le nombre de valeurs devenus acceptables
-		\item $n= |D| \times pow $ le nombre de valeurs non satisfiables
+		\item $m= (ac(pow) - sa(pow)) $: le nombre de valeurs devenus acceptables
+		\item $n= (|D| - sa(pow)) $ le nombre de valeurs non satisfiables
 	\end{itemize}
 	
 	Par conséquent, pour chaque hypothèse d'état mental, l'agent peut calculer la probabilité qu'une valeur soit acceptable durant la négociation.
@@ -209,15 +212,24 @@
 	\subsubsection{Mise à jour des hypothèses:}
 		La fonction d'acceptabilité est utilisé dans le cas où l'autre énonce un Accept ou un Reject. En fonction de l'utterance énoncé, l'agent met à jour ses hypothèses. 
 		
-		\textbf{Reject:} Dans le cas où une valeur est rejetée, on peut déduire que cette valeur n'est forcément pas satisfiable. Cette information permet à l'agent de réviser cette hypothèse en suppriment tous les modèles où cette valeur est satisfiable.
+		\textbf{Reject:} Dans le cas où une valeur est rejetée, la valeur n'est pas acceptable. On peut déduire que cette valeur n'est forcément pas satisfiable (puisque, par définition de $self$, toute valeur acceptable est forcément satisfiable). Cette information permet à l'agent de réviser cette hypothèse en suppriment tous les modèles où cette valeur est satisfiable, comme elle le fait avec des $State$.
 		
-		\textbf{Accept: } Problème agrégation des probabilité pour chaque modèle.
+		\emph{Proposition reste la même}
+		
+		\textbf{Accept:} TODO
 %		\hl{ Pour pow fixé, pour chaque model possible de pow M$\in$ Poss(pow), j'ai la proba d'avoir un accept(v) si c'était ce pow et ce modèle qui était le bon
 %			Pour pow fixé, je fais la moyenne des probas des M (* problème pour la moyenne il faudrait que tous les M aient le poids... or quand j'en retire est-ce ça reste vrai ? peut-être ?)	Je considère que cette moyenne est la probabilité qu'il ait eu un accept avec cette valeur de pow.}
 %	
+
+	\subsubsection{Proposition pour la ToM}
+	Une deuxième proposition, ne tenant compte que tu accept, est de faire la moyenne des $acc_{M}(v)$ pour tous les $M$ d'un $pow$ donnné et de dire que c'est la proba de $pow$. Et pour tenir compte de la proposition numéro 1, on fait cette moyenne en comptant aussi ce qui a été supprimé (valeur O).
+	
+	La proposition numéro 2 est la suivante:
+	$$proba(pow)(t) = \frac{\sum_{M\in Hyp(pow)(t)} acc_M(v)}{|Hyp(pow)(init)|}$$
+
+
 	\subsection{Tolérabilité}
-	Pour l'instant, je bloque un peu sur le modèle, car les valeurs de satisfiabilité sont soit vrais(1) ou fausse (0). 
-	On pourrait essayer de calculer quand même.
+	
 	
 %	\subsection{Décision}
 %	Pour le choix de l'utterance, au lieu de calculer l'utterance, je propose de calculer la probabilité d'obtenir l'utterance énoncé par l'autre. 
