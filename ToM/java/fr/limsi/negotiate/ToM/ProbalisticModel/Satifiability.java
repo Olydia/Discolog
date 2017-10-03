@@ -94,7 +94,7 @@ public class Satifiability {
 		Satifiability c = new Satifiability(Atmosphere.FAMILY);
 		System.out.println(c.getSat());
 		System.out.println(c.nbSat(0.6));
-		System.out.println(c.generateHypModels(0.6));
+		System.out.println(c.generateHypModels(0.3));
 	}
 
 	
