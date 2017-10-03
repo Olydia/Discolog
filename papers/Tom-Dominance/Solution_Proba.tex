@@ -90,9 +90,12 @@
 	
 	Un inconvénient important se pose, le nombre d'hypothèses formulées pour une négociation donnée. En effet, pour chaque critère $C$, le nombre de modèles de préférences possibles est de l'ordre de $|C| !$. Donc pour un nombre de $n$ critères le nombre de modèles de préférences qu'on poeut générer est de l'ordre de $ M = \prod_{k=1}^n C_k!$
 	
-	La taille importante du possible représente une limite computationnelle du modèle de la ToM, d'autant qu'on ne cherche pas à connaître les préférences de l'autre. Pour cette raison, nous proposons une adaptation probabiliste de notre modèle de décision avec connaissance partielle des préférences de l'autre. 
+	La taille importante du possible représente une limite computationnelle du modèle de la ToM, d'autant qu'on ne cherche pas à connaître les préférences de l'autre. Pour rappel, notre objectif était de donner un \emph{score} à chaque valeur possiblde $pow_{other}$ et la méthode brute consiste à compter combien des $M$ modèles possibles il reste pour chaque valeur de $pow$.
 	
-	Le but de cette solution est de présenter un modèle décisionnel qui calcule la probabilité d'obtenir l'utterance énoncé pour chaque hypothèse de l’état mental donnée. De plus, l'agent révise ses hypothèses en fonction des informations collectées durant la négociation.
+	Pour contourner la limite computationnelle, nous proposons une adaptation de notre modèle de décision avec connaissance \emph{partielle} des préférences de l'autre. 
+	
+	Le but de cette solution est de présenter un modèle décisionnel qui calcule un score pour chaque valeur de $pow$ en travaillant sur des hypothèses d'état mental qui ne sont définies qu'en terme de valeur satisfiabilité pour les éléments, au lieu de représenter les ordres totaux. Cela réduit la taille des possibles puisque, si on a $sa$ éléments satisfiables dans un ensemble à $d$ éléments, il y a seulement $C_d^{sa}$ combinaisons.
+	Comme dans la version avec les ordres totaux, l'agent révise ses hypothèses en fonction des informations collectées durant la négociation.
 	
 	
 	\subsection{Satisfiabilité ou modèle partiel des préférences}
@@ -178,11 +181,11 @@
 		Le but de la ToM est de deviner l'état mental de l'autre par le biais des utterances communiquées par ce dernier. Quand l'autre énonce un statePreference, il communique des informations sur ces préférences (ce qu'il aime ou n'aime pas). Cette information permet à  l'agent peut supprimer les hypothèses qui sont en contradictions avec le state énoncé ce qui nous permettrait de réduire le nombre des hypothèses rapidement.  Par exemple,  quand \emph{'l'autre'} énonce $StatePreference(v)$, l'agent met à jour ses hypothèses en supprimant les $\{\mathcal{M}_H/ v \notin \mathcal{M}_H\}$.  
 	
 	\subsubsection{Proposition pour la ToM}
-	Notre objectif est de calculer, à chaque tour de parole, une probabilité de la valeur de pouvoir de l'interlocuteur en partant de ses réponses précédentes et des hypothèses sur les modèles possibles. (rappel)
-	En l'état actuel, une première proposition pourrait être de dire que la probabilité que l'interlocuteur ait effectivement le pouvoir $pow$ dépend du nombre d'hypothèses restantes comparées au nombre d'hypothèses initiales: plus nous avons supprimé d'hypothèse (suite à des State), plus il est probablement que $pow$ ne soit pas le bon.
+	Notre objectif est de calculer, à chaque tour de parole, un score sur chaque valeur de pouvoir de l'interlocuteur en partant de ses réponses précédentes et des hypothèses sur les modèles possibles. (rappel)
+	En l'état actuel, une première proposition pourrait être de dire que le score pour la valeur $pow$ dépend du nombre d'hypothèses restantes comparées au nombre d'hypothèses initiales: plus nous avons supprimé d'hypothèse (suite à des State), plus le score doit être faible.
 	
 	La proposition numéro 1 est la suivante:
-	$$proba(pow)(t) = \frac{|Hyp(pow)(t)|}{|Hyp(pow)(init)|}$$
+	$$score(pow)(t) = \frac{|Hyp(pow)(t)|}{|Hyp(pow)(init)|}$$
 	
 	\subsection{Acceptabilité}
 	
@@ -222,10 +225,10 @@
 %	
 
 	\subsubsection{Proposition pour la ToM}
-	Une deuxième proposition, ne tenant compte que tu accept, est de faire la moyenne des $acc_{M}(v)$ pour tous les $M$ d'un $pow$ donnné et de dire que c'est la proba de $pow$. Et pour tenir compte de la proposition numéro 1, on fait cette moyenne en comptant aussi ce qui a été supprimé (valeur O).
+	Une deuxième proposition, ne tenant compte que du accept, est de faire la moyenne des $acc_{M}(v)$ pour tous les $M$ d'un $pow$ donnné et de dire que c'est le score de $pow$. Et pour tenir compte de la proposition numéro 1, on fait cette moyenne en comptant aussi ce qui a été supprimé (valeur O).
 	
 	La proposition numéro 2 est la suivante:
-	$$proba(pow)(t) = \frac{\sum_{M\in Hyp(pow)(t)} acc_M(v)}{|Hyp(pow)(init)|}$$
+	$$score(pow)(t) = \frac{\sum_{M\in Hyp(pow)(t)} acc_M(v)}{|Hyp(pow)(init)|}$$
 
 
 	\subsection{Tolérabilité}
