@@ -463,7 +463,6 @@ public class NegotiatorAgent extends Agent {
 			for(Class<? extends Criterion> dis: getNegotiation().getContext().getPossibleDiscussions(discussions))
 				if(!getNegotiation().getValueNegotiation(dis).getOther().getPreferences(Satisfiable.UNKOWN).isEmpty())
 					return dis;
-
 		}
 
 		return null;

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.restaurant.Atmosphere;
-import fr.limsi.negotiate.restaurant.Cuisine;
+import fr.limsi.negotiate.restaurant.*;
 /**
  * 
  * @author ouldouali
@@ -29,6 +28,12 @@ public class Satifiability {
 	
 	}
 	
+	/**
+	 * 
+	 * @return computes the values of satifiability for the domain, 
+	 * with the assumption of total order preferences on the values of the domain.
+	 */
+	
 	public List<Float> getSat(){
 		List<Float> as = new ArrayList<Float>();
 		float sat = (float) 0.0;
@@ -40,7 +45,11 @@ public class Satifiability {
 		
 		return as;
 	}
-	
+	/**
+	 * 
+	 * @param pow
+	 * @return nbSat:  Computes the number of satisfiable values for a given pow
+	 */
 	public int nbSat (double pow){
 		List<Float> sats = getSat();
 		int D = domain.getValues().length;
@@ -51,11 +60,25 @@ public class Satifiability {
 		return 0;
 	}
 	
-	public  List<Set<Criterion>> generateHypModels(double pow) {
+	
+	/**
+	 * 
+	 * @param pow
+	 * @return Computes the different models of satisfiable for the domain given a value pow
+	 */
+	public  List<SatCriterion> generateHypModels(double pow) {
+		List<SatCriterion> pref = new ArrayList<SatCriterion>();
 		int k = nbSat(pow);
 		List<Criterion> elements = Arrays.asList(domain.getValues());
-	    return getSubsets(elements, k);
+		List<Set<Criterion>>  subsets =  getSubsets(elements, k);
+		for (Set<Criterion> m : subsets){
+			List<Criterion> set = new ArrayList<Criterion> (m);
+			pref.add(new SatCriterion(domain.getClass(), set));
+		}
+		return pref;
 	}
+	
+	
 	
 	/**
 	 * 
@@ -63,15 +86,18 @@ public class Satifiability {
 	 * @param k= the number of satisfiable values
 	 * @return
 	 */
-	public static List<Set<Criterion>> getSubsets(List<Criterion> superSet, int k) {
+	public  List<Set<Criterion>> getSubsets(List<Criterion> superSet, int k) {
 	    List<Set<Criterion>> res = new ArrayList<>();
 	    getSubsets(superSet, k, 0, new HashSet<Criterion>(), res);
 	    return res;
 	}
 	
-	
+	/**
+	 * 
+	 * @return the subsets of size k 
+	 */
 
-	private static void getSubsets(List<Criterion> superSet, int k, int idx, Set<Criterion> current,List<Set<Criterion>> solution) {
+	private void getSubsets(List<Criterion> superSet, int k, int idx, Set<Criterion> current,List<Set<Criterion>> solution) {
 	    //successful stop clause
 	    if (current.size() == k) {
 	        solution.add(new HashSet<>(current));
@@ -92,9 +118,15 @@ public class Satifiability {
 	
 	public static void main(String[] args) {
 		Satifiability c = new Satifiability(Atmosphere.FAMILY);
-		System.out.println(c.getSat());
-		System.out.println(c.nbSat(0.6));
-		System.out.println(c.generateHypModels(0.3));
+		Satifiability c1 = new Satifiability(Cost.AFFORDABLE);
+		List<List<SatCriterion>> models = new ArrayList<List<SatCriterion>>();
+//		System.out.println(c.getSat());
+//		System.out.println(c.nbSat(0.6));
+		models.add(c.generateHypModels(0.4));
+		models.add(c1.generateHypModels(0.4));
+		MHypothesis m = new MHypothesis();
+		for (List<SatCriterion> v : m.getCombination(0, models))
+		System.out.println(v);
 	}
 
 	
