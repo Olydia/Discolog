@@ -8,6 +8,7 @@ import java.util.Set;
 
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.restaurant.*;
+import fr.limsi.negotiate.toyExample.ToyRestaurant;
 /**
  * 
  * @author ouldouali
@@ -20,9 +21,9 @@ import fr.limsi.negotiate.restaurant.*;
 
 public class Satifiability {
 	
-	Criterion domain;
+	 private Class<? extends Criterion> domain;
 
-	public Satifiability(Criterion domain) {
+	public Satifiability(Class<? extends Criterion> domain) {
 		
 		this.domain = domain;
 	
@@ -37,8 +38,8 @@ public class Satifiability {
 	public List<Float> getSat(){
 		List<Float> as = new ArrayList<Float>();
 		float sat = (float) 0.0;
-		int length = domain.getValues().length -1 ;		
-		for( int i = 0; i< domain.getValues().length; i++){
+		int length = domain.getEnumConstants().length -1 ;		
+		for( int i = 0; i< domain.getEnumConstants().length; i++){
 			sat =  (float) i/length;
 			as.add(sat);
 		}
@@ -52,7 +53,7 @@ public class Satifiability {
 	 */
 	public int nbSat (double pow){
 		List<Float> sats = getSat();
-		int D = domain.getValues().length;
+		int D = domain.getEnumConstants().length;
 		for(float s : sats){
 			if(s>= pow)
 				return D - sats.indexOf(s);
@@ -69,11 +70,11 @@ public class Satifiability {
 	public  List<SatCriterion> generateHypModels(double pow) {
 		List<SatCriterion> pref = new ArrayList<SatCriterion>();
 		int k = nbSat(pow);
-		List<Criterion> elements = Arrays.asList(domain.getValues());
+		List<Criterion> elements = Arrays.asList(domain.getEnumConstants());
 		List<Set<Criterion>>  subsets =  getSubsets(elements, k);
 		for (Set<Criterion> m : subsets){
 			List<Criterion> set = new ArrayList<Criterion> (m);
-			pref.add(new SatCriterion(domain.getClass(), set));
+			pref.add(new SatCriterion(domain, set));
 		}
 		return pref;
 	}
@@ -117,16 +118,14 @@ public class Satifiability {
 
 	
 	public static void main(String[] args) {
-		Satifiability c = new Satifiability(Atmosphere.FAMILY);
-		Satifiability c1 = new Satifiability(Cost.AFFORDABLE);
+		Satifiability c = new Satifiability(Atmosphere.class);
+		Satifiability c1 = new Satifiability(Cost.class);
 		List<List<SatCriterion>> models = new ArrayList<List<SatCriterion>>();
-//		System.out.println(c.getSat());
-//		System.out.println(c.nbSat(0.6));
-		models.add(c.generateHypModels(0.4));
-		models.add(c1.generateHypModels(0.4));
-		MHypothesis m = new MHypothesis();
-		for (List<SatCriterion> v : m.getCombination(0, models))
-		System.out.println(v);
+
+		
+		MHypothesis m = new MHypothesis(0.3, ToyRestaurant.ANTEPRIMA.getCriteria());
+		for (List<SatCriterion> v : m.getHypothesis())
+			System.out.println(v);
 	}
 
 	

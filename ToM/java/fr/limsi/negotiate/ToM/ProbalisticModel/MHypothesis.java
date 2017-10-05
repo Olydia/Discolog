@@ -3,12 +3,47 @@ package fr.limsi.negotiate.ToM.ProbalisticModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.*;
 
 public class MHypothesis {
+	
+	private double pow;
+	private List<Class<? extends Criterion>> criteria; 
+	 private List<List<SatCriterion>> hypothesis;
+	
+	public double getPow() {
+		return pow;
+	}
 
-	public MHypothesis() {
-		// TODO Auto-generated constructor stub
+
+	public List<Class<? extends Criterion>> getCriteria() {
+		return criteria;
+	}
+
+
+	public List<List<SatCriterion>> getHypothesis() {
+		return hypothesis;
+	}
+
+
+	public MHypothesis (double pow, List<Class<? extends Criterion>> criteria) {
+		this.pow= pow;
+		this.criteria = criteria;
+		this.hypothesis = computeHypothesis();
+	}
+	
+	
+	public List<List<SatCriterion>> computeHypothesis(){
+		
+		List<List<SatCriterion>> sat = new ArrayList<List<SatCriterion>> ();
+		// for each criterion, compute the set of possible hypotheses 
+		for(Class<? extends Criterion> c : criteria){
+			Satifiability e = new Satifiability(c);
+			sat.add(e.generateHypModels(this.pow));
+		}
+		
+		// combine the different models obtained for each criterion
+		return getCombination(0, sat);
 	}
 	
 	/**

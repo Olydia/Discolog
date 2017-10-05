@@ -98,7 +98,7 @@ public class Models<O extends Option> {
 	
 	public static void main (String[] args) {
 		Models<ToyRestaurant> m = new Models<ToyRestaurant>();
-		List<PrefNegotiation<ToyRestaurant>> val = m.computeModels(ToyRestaurant.ARRIBA_MEXICO.getCriteria(), ToyRestaurant.class);
+		List<PrefNegotiation<ToyRestaurant>> val = m.computeModels(ToyRestaurant.A_CITADELLA.getCriteria(), ToyRestaurant.class);
 		for(PrefNegotiation<ToyRestaurant> v : val){
 			System.out.println(v.getValues_prefs() + " "+ v.getCriteria_prefs().getPreferences());
 		}

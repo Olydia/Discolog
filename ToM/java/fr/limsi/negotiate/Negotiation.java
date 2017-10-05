@@ -8,9 +8,8 @@ import fr.limsi.negotiate.lang.*;
 
 
 public class Negotiation<O extends Option> {
+	
 	private List<CriterionNegotiation<Criterion>> valueNegotiation;
-
-
 	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;

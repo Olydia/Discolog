@@ -3,10 +3,10 @@ import fr.limsi.negotiate.Criterion;
 
 public enum ToyCuisine implements Criterion {
 
-   FRENCH, MEXICAN
-   , ITALIAN
+ //  FRENCH, MEXICAN
+   ITALIAN
   ,JAPANESE
-  //, CHINESE
+  , CHINESE
    ;
 
    
@@ -33,19 +33,19 @@ public enum ToyCuisine implements Criterion {
 	
 	public String getFrVersion(){
 		String fr = "";
-		switch(this) {
-        case MEXICAN:
-        	fr = "MEXICAIN";
-        break;
-        case FRENCH:
-        	fr = "FRANÇAIS";
-        break;
+//		switch(this) {
+//        case MEXICAN:
+//        	fr = "MEXICAIN";
+//        break;
+//        case FRENCH:
+//        	fr = "FRANÇAIS";
+//        break;
         
         
-        default:
+ //       default:
 	        System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
-        break;
-     }
+ //       break;
+ //    }
 		return fr;
   }
 }
