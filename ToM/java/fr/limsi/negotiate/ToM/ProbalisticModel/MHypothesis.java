@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.ToM.ProbalisticModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.limsi.negotiate.*;
@@ -9,7 +10,7 @@ public class MHypothesis {
 	
 	private double pow;
 	private List<Class<? extends Criterion>> criteria; 
-	 private List<List<SatCriterion>> hypothesis;
+	 private List<Hypothesis> hypothesis;
 	
 	public double getPow() {
 		return pow;
@@ -21,7 +22,7 @@ public class MHypothesis {
 	}
 
 
-	public List<List<SatCriterion>> getHypothesis() {
+	public List<Hypothesis> getHypothesis() {
 		return hypothesis;
 	}
 
@@ -33,7 +34,7 @@ public class MHypothesis {
 	}
 	
 	
-	public List<List<SatCriterion>> computeHypothesis(){
+	public List<Hypothesis> computeHypothesis(){
 		
 		List<List<SatCriterion>> sat = new ArrayList<List<SatCriterion>> ();
 		// for each criterion, compute the set of possible hypotheses 
@@ -43,7 +44,12 @@ public class MHypothesis {
 		}
 		
 		// combine the different models obtained for each criterion
-		return getCombination(0, sat);
+		List<List<SatCriterion>> models = getCombination(0, sat);
+		List<Hypothesis> hypo = new ArrayList<Hypothesis>();
+		
+		models.forEach(model -> hypo.add(new Hypothesis(model)));
+		
+		return hypo;
 	}
 	
 	/**
@@ -85,6 +91,16 @@ public class MHypothesis {
 			}
 		}
 		return combinations;
+	}
+
+	public void revise(Statement<Criterion> s){
+		
+		for (Iterator<Hypothesis> it = hypothesis.iterator(); it.hasNext();) {	
+			Hypothesis elem = it.next();
+			if(!elem.getSat(s.getValue()).equals(s.getStatus()))
+					it.remove();
+		}
+				
 	}
 
 }

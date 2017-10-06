@@ -10,7 +10,7 @@ import edu.wpi.disco.plugin.DecompositionPlugin;
 import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.ToM.ToMNegotiator;
+import fr.limsi.negotiate.ToM.*;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
@@ -61,14 +61,14 @@ public class NegotiatorAgent extends Agent {
 		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model2()), 
-				new ToMNegotiator("Agent2", model.model1()), 
+				new NegotiatorAgent("Agent2", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((ToMNegotiator) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}

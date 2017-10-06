@@ -20,9 +20,11 @@ public class ToyModel {
 
 		Self_Ci<ToyCuisine> d1_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
 		
-		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.MEXICAN);
-		d1_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.FRENCH);
-		d1_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.JAPANESE);
+//		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.MEXICAN);
+//		d1_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.FRENCH);
+//		d1_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.JAPANESE);
+		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.JAPANESE);
+		d1_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.CHINESE);
 
 
 		
@@ -68,8 +70,11 @@ public class ToyModel {
 		Self_Ci<ToyCuisine> d2_cuisine = new Self_Ci <ToyCuisine>(ToyCuisine.class);
 		
 		//d2_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.FRENCH);
-		d2_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.MEXICAN);
-		d2_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.ITALIAN);
+//		d2_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.MEXICAN);
+//		d2_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.ITALIAN);
+		d2_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.ITALIAN);
+		d2_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.CHINESE);
+
 
 		
 		CriterionNegotiation<ToyCuisine> cuisine = new CriterionNegotiation<>(d2_cuisine);

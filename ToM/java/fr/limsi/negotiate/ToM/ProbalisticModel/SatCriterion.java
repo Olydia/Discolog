@@ -9,6 +9,7 @@ import fr.limsi.negotiate.Criterion;
  * Type: the Criterion
  * satValue: the satisfiable values for the criterion
  */
+import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class SatCriterion {
 	
@@ -45,5 +46,10 @@ public class SatCriterion {
 	public boolean isSatifiable(Criterion c){
 		
 		return satValues.contains(c);
+	}
+	
+	public Satisfiable getSatisfaction(Criterion c){
+		
+		return(isSatifiable(c)? Satisfiable.TRUE : Satisfiable.FALSE);
 	}
 }

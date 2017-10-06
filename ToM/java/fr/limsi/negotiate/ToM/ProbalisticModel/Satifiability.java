@@ -118,14 +118,9 @@ public class Satifiability {
 
 	
 	public static void main(String[] args) {
-		Satifiability c = new Satifiability(Atmosphere.class);
-		Satifiability c1 = new Satifiability(Cost.class);
-		List<List<SatCriterion>> models = new ArrayList<List<SatCriterion>>();
-
 		
-		MHypothesis m = new MHypothesis(0.3, ToyRestaurant.ANTEPRIMA.getCriteria());
-		for (List<SatCriterion> v : m.getHypothesis())
-			System.out.println(v);
+
+
 	}
 
 	

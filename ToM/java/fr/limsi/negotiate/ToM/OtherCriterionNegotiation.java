@@ -6,8 +6,14 @@ import java.util.List;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.NegotiationParameters;
+import fr.limsi.negotiate.Self_Ci;
 
 public class OtherCriterionNegotiation<C extends Criterion> extends CriterionNegotiation<C> {
+	public OtherCriterionNegotiation(Self_Ci<C> selfPreferences) {
+		super(selfPreferences);
+		// TODO Auto-generated constructor stub
+	}
+
 	private OtherSelf<C> self;
 	
 //	public OtherCriterionNegotiation() {
