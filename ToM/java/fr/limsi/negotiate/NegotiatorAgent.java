@@ -11,6 +11,7 @@ import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.*;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
@@ -61,14 +62,14 @@ public class NegotiatorAgent extends Agent {
 		ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model2()), 
-				new NegotiatorAgent("Agent2", model.model1()), 
+				new ToMNegotiatorProba("Agent2", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}

@@ -7,6 +7,16 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class Hypothesis {
 	
+	public List<SatCriterion> getModel() {
+		return model;
+	}
+
+
+	public void setModel(List<SatCriterion> model) {
+		this.model = model;
+	}
+
+
 	List<SatCriterion> model;
 	
 	public Hypothesis(List<SatCriterion> model) {

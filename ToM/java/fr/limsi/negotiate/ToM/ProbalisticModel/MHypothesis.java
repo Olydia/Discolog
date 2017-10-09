@@ -1,17 +1,23 @@
 package fr.limsi.negotiate.ToM.ProbalisticModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.OptionalDouble;
+import java.util.Map.Entry;
 
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Statement.Satisfiable;
+import fr.limsi.negotiate.toyExample.*;
 
 public class MHypothesis {
-	
+
 	private double pow;
 	private List<Class<? extends Criterion>> criteria; 
-	 private List<Hypothesis> hypothesis;
-	
+	private List<Hypothesis> hypothesis;
+
 	public double getPow() {
 		return pow;
 	}
@@ -32,34 +38,34 @@ public class MHypothesis {
 		this.criteria = criteria;
 		this.hypothesis = computeHypothesis();
 	}
-	
-	
+
+
 	public List<Hypothesis> computeHypothesis(){
-		
+
 		List<List<SatCriterion>> sat = new ArrayList<List<SatCriterion>> ();
 		// for each criterion, compute the set of possible hypotheses 
 		for(Class<? extends Criterion> c : criteria){
 			Satifiability e = new Satifiability(c);
 			sat.add(e.generateHypModels(this.pow));
 		}
-		
+
 		// combine the different models obtained for each criterion
 		List<List<SatCriterion>> models = getCombination(0, sat);
 		List<Hypothesis> hypo = new ArrayList<Hypothesis>();
-		
+
 		models.forEach(model -> hypo.add(new Hypothesis(model)));
-		
+
 		return hypo;
 	}
-	
+
 	/**
 	 * 
 	 * @param currentIndex: index for the recursive call
 	 * @param preferences : for all Criteria the list of the different preferences
 	 * @return the combination of all the possible set of preferences for a given topic
 	 */
-	
-	
+
+
 	public List<List<SatCriterion>> getCombination(int currentIndex,  List<List<SatCriterion>> preferences) {
 
 		if (currentIndex == preferences.size()) {
@@ -93,14 +99,28 @@ public class MHypothesis {
 		return combinations;
 	}
 
-	public void revise(Statement<Criterion> s){
-		
+	public void revise(Statement<? extends Criterion> s){
 		for (Iterator<Hypothesis> it = hypothesis.iterator(); it.hasNext();) {	
 			Hypothesis elem = it.next();
 			if(!elem.getSat(s.getValue()).equals(s.getStatus()))
-					it.remove();
+				it.remove();
 		}
-				
-	}
 
+
+	}
+	
+
+
+
+	public static void main(String[] args) {
+
+		HModels model = new HModels(ToyRestaurant.A_CITADELLA.getCriteria());
+		for(MHypothesis elem : model.getHypotheses()){
+			elem.revise(new Statement<ToyCuisine>(ToyCuisine.CHINESE, Satisfiable.FALSE));
+
+//			for(Hypothesis e : elem.getHypothesis())
+//				System.out.println(e.getModel());
+
+		}
+	}
 }

@@ -39,7 +39,7 @@ public class SatCriterion {
 	
 	public String toString() {
 		String s = ("{ Type : " + this.type.getSimpleName());
-		s += (" , values : " +  this.satValues +"}  | ");
+		s += (" , values : " +  this.satValues.toString() +"}  | ");
 		return s;
 	} 
 	

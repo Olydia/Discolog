@@ -39,15 +39,13 @@ public class ToyModel {
 
 		Self_Ci<ToyLocation> d1_ToyLocation =  new Self_Ci<>(ToyLocation.class);
 		d1_ToyLocation.addPreference(ToyLocation.DOWNTOWN, ToyLocation.EAST_SIDE);
-		//d1_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.WEST_SIDE);
+		d1_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.WEST_SIDE);
 
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d1_ToyLocation);
 		
 		Self_Ci<ToyCost> d1_ToyCost = new Self_Ci<ToyCost>(ToyCost.class);
 		d1_ToyCost.addPreference(ToyCost.EXPENSIVE, ToyCost.AFFORDABLE);
 		d1_ToyCost.addPreference(ToyCost.AFFORDABLE, ToyCost.CHEAP);
-//		
-	//	d1_ToyCost.addPreference(ToyCost.EXPENSIVE, ToyCost.CHEAP);
 
 		CriterionNegotiation<ToyCost> ToyCost = new CriterionNegotiation<>(d1_ToyCost);
 
@@ -72,23 +70,23 @@ public class ToyModel {
 		//d2_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.FRENCH);
 //		d2_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.MEXICAN);
 //		d2_cuisine.addPreference(ToyCuisine.MEXICAN, ToyCuisine.ITALIAN);
-		d2_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.ITALIAN);
-		d2_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.CHINESE);
+		d2_cuisine.addPreference(ToyCuisine.CHINESE, ToyCuisine.ITALIAN);
+		d2_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.JAPANESE);
 
 
 		
 		CriterionNegotiation<ToyCuisine> cuisine = new CriterionNegotiation<>(d2_cuisine);
 
 		Self_Ci<ToyAtmosphere> d2_ToyAtmosphere = new Self_Ci<ToyAtmosphere>(ToyAtmosphere.class);
-		d2_ToyAtmosphere.addPreference(ToyAtmosphere.QUIET, ToyAtmosphere.LIVELY);
-		d2_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.FAMILY);
+		d2_ToyAtmosphere.addPreference(ToyAtmosphere.FAMILY, ToyAtmosphere.LIVELY);
+		d2_ToyAtmosphere.addPreference(ToyAtmosphere.LIVELY, ToyAtmosphere.QUIET);
 
 
 		CriterionNegotiation<ToyAtmosphere> atmospher = new CriterionNegotiation<>(d2_ToyAtmosphere);
 
 		Self_Ci<ToyLocation> d2_ToyLocation =  new Self_Ci<>(ToyLocation.class);
+		d2_ToyLocation.addPreference(ToyLocation.WEST_SIDE, ToyLocation.EAST_SIDE);
 		d2_ToyLocation.addPreference(ToyLocation.EAST_SIDE, ToyLocation.DOWNTOWN);
-	//	d2_ToyLocation.addPreference(ToyLocation.DOWNTOWN, ToyLocation.WEST_SIDE);
 
 		CriterionNegotiation<ToyLocation> ToyLocation = new CriterionNegotiation<>(d2_ToyLocation);
 		

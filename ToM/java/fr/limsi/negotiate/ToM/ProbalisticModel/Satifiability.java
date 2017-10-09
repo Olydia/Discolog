@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.restaurant.*;
-import fr.limsi.negotiate.toyExample.ToyRestaurant;
 /**
  * 
  * @author ouldouali
@@ -22,6 +20,10 @@ import fr.limsi.negotiate.toyExample.ToyRestaurant;
 public class Satifiability {
 	
 	 private Class<? extends Criterion> domain;
+
+	public Class<? extends Criterion> getDomain() {
+		return domain;
+	}
 
 	public Satifiability(Class<? extends Criterion> domain) {
 		
@@ -72,6 +74,7 @@ public class Satifiability {
 		int k = nbSat(pow);
 		List<Criterion> elements = Arrays.asList(domain.getEnumConstants());
 		List<Set<Criterion>>  subsets =  getSubsets(elements, k);
+		
 		for (Set<Criterion> m : subsets){
 			List<Criterion> set = new ArrayList<Criterion> (m);
 			pref.add(new SatCriterion(domain, set));
@@ -115,15 +118,5 @@ public class Satifiability {
 	    getSubsets(superSet, k, idx+1, current, solution);
 	}
 
-
-	
-	public static void main(String[] args) {
-		
-
-
-	}
-
-	
-	
 
 }

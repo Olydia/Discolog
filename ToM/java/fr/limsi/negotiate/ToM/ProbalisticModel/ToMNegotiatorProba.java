@@ -35,8 +35,11 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	public ToMNegotiatorProba(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
+		
 		List<Class<? extends Criterion>> criteria  = negotiation.getCriteria().getElements();
+		
 		this.otherModel =  new HModels(criteria);
+		
 		this.previousState = negotiation;
 
 		this.other = 1 - getNegotiation().getDominance();
@@ -73,14 +76,11 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-		double pow1 = 0;
 		if (utterance != null)
 			//guessProba(disco,selfPrevious, utterance, previousState);
-			 pow1 = otherModel.guess(utterance);
-
-		System.out.println(pow1);
+		this.setOther(otherModel.guess(utterance, getOther()));
+		System.out.println(getOther());
 		Utterance u = respondTo(utterance, disco);
-		System.out.println(u.format());
 		return u ;
 	}
 
