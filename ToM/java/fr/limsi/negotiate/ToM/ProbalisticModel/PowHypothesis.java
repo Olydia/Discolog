@@ -146,6 +146,7 @@ public class PowHypothesis{
 		return this.satisfiability.get(c);
 		
 	}
+	// Call from ToMnegotiatorProba
 	
 	public float scoreAcc(Class<? extends Criterion> type, List<CriterionProposal> accepted, double self){
 		int acc = getAcceptable(type, self);
