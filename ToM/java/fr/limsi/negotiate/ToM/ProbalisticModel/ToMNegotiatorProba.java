@@ -85,5 +85,5 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	}
 
 
-
+	
 }

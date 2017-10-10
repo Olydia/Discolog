@@ -140,17 +140,26 @@ public class Negotiation<O extends Option> {
 		return satisfaction/n;
 	}
 	// t is the number of non accepted proposals
+	
 	public double self(){
-		int t = computeT();
-		double s=0;
-		if( t< NegotiationParameters.tau)
-			return this.relation;
-		else{
-			s= relation - ((NegotiationParameters.delta/relation) *(t-NegotiationParameters.tau));
-			return Math.max(0, s);
-		}
+		return computeSelf(this.relation);
 	}
 
+	public double computeSelf(double pow){
+		
+		int t = computeT();
+		double s=0;
+		
+		if( t< NegotiationParameters.tau)
+			return pow;
+		
+		else{
+			s= pow - ((NegotiationParameters.delta/pow) *(t-NegotiationParameters.tau));
+			return Math.max(0, s);
+		}
+		
+	}
+	
 	public double selfTest(int t){
 
 		double s=0;

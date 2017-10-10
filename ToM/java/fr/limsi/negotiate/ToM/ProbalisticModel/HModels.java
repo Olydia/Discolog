@@ -11,21 +11,21 @@ import fr.limsi.negotiate.lang.*;
 
 public class HModels {
 	
-	private List<MHypothesis> hypotheses ;
+	private List<PowHypothesis> hypotheses ;
 	private List<Class<? extends Criterion>> criteria; 
 
 	
 	public HModels(List<Class<? extends Criterion>> criteria) {
-		hypotheses = new ArrayList<MHypothesis>();
+		hypotheses = new ArrayList<PowHypothesis>();
 		this.criteria = criteria;
 		for(int i=3; i<10; i++){
 			double pow =i/10.0;
-			hypotheses.add(new MHypothesis(pow, criteria));
+			hypotheses.add(new PowHypothesis(pow, criteria));
 		}
 	}
 
 
-	public List<MHypothesis> getHypotheses() {
+	public List<PowHypothesis> getHypotheses() {
 		return hypotheses;
 	}
 
@@ -73,8 +73,8 @@ public class HModels {
 
 		Map <Double,Integer> maxPow = new HashMap<Double,Integer>();
 		
-		for (Iterator<MHypothesis> it = hypotheses.iterator(); it.hasNext();) {	
-			MHypothesis current = it.next();
+		for (Iterator<PowHypothesis> it = hypotheses.iterator(); it.hasNext();) {	
+			PowHypothesis current = it.next();
 			current.revise(critrion);
 			maxPow.put(current.getPow(), current.getHypothesis().size());
 //			if(current.getHypothesis().size()>= max){

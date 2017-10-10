@@ -1,12 +1,10 @@
 package fr.limsi.negotiate.ToM.ProbalisticModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 
 import fr.limsi.negotiate.Criterion;
+
 /**
  * 
  * @author ouldouali
@@ -69,15 +67,19 @@ public class Satifiability {
 	 * @param pow
 	 * @return Computes the different models of satisfiable for the domain given a value pow
 	 */
-	public  List<SatCriterion> generateHypModels(double pow) {
-		List<SatCriterion> pref = new ArrayList<SatCriterion>();
+	public  List<CriterionHypothesis> generateHypModels(double pow) {
+		
+		List<CriterionHypothesis> pref = new ArrayList<CriterionHypothesis>();
+		
 		int k = nbSat(pow);
+		
 		List<Criterion> elements = Arrays.asList(domain.getEnumConstants());
+		
 		List<Set<Criterion>>  subsets =  getSubsets(elements, k);
 		
 		for (Set<Criterion> m : subsets){
 			List<Criterion> set = new ArrayList<Criterion> (m);
-			pref.add(new SatCriterion(domain, set));
+			pref.add(new CriterionHypothesis(domain, set));
 		}
 		return pref;
 	}
