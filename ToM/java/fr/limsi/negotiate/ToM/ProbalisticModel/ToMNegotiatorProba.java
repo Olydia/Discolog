@@ -8,6 +8,17 @@ import edu.wpi.disco.Disco;
 import edu.wpi.disco.Interaction;
 import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.Statement.Satisfiable;
+import fr.limsi.negotiate.ToM.preferencesGeneration.CriterionPreferences;
+import fr.limsi.negotiate.lang.*;
+import fr.limsi.negotiate.restaurant.*;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import fr.limsi.negotiate.toyExample.ToyCost;
+import fr.limsi.negotiate.toyExample.ToyCuisine;
+import fr.limsi.negotiate.toyExample.ToyModel;
+import fr.limsi.negotiate.toyExample.ToyRestaurant;
+
 
 public class ToMNegotiatorProba extends NegotiatorAgent{
 
@@ -78,12 +89,105 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
 		if (utterance != null)
 			//guessProba(disco,selfPrevious, utterance, previousState);
-		this.setOther(otherModel.guess(utterance, getOther()));
+		this.setOther(guess(utterance, getOther()));
 		System.out.println(getOther());
 		Utterance u = respondTo(utterance, disco);
 		return u ;
 	}
 
 
+	// ***** TOM computing
 	
+	public double guess(Utterance u, double previousPow){
+		
+		System.out.println(u.format());
+		
+		if(u instanceof StatePreference){
+			
+			Statement<Criterion> c  = new Statement<Criterion>(((StatePreference) u).getValue(), 
+															((StatePreference) u).getLikable());
+			return this.otherModel.reviseHypothese(c, previousPow);
+
+		}else if(u instanceof Reject){
+			return this.otherModel.updateReject(((Reject) u).getProposal(), previousPow);
+		
+		
+		
+		}else if (u instanceof Accept){
+			return updateAccept(((Accept) u).getProposal(), previousPow);
+			
+			
+		}else if (u instanceof AcceptPropose){
+			// Il manque le cas du propose 
+			return updateAccept(((AcceptPropose) u).getAccepted(), previousPow);
+			
+			
+		}else if(u instanceof RejectState){
+			
+			Proposal reject = ((RejectState) u).getProposal();
+			Criterion justify = ((RejectState) u).getJustify();
+			if(reject.getValue().equals(justify))
+				return this.otherModel.updateReject(reject, previousPow);
+			
+			else{
+				this.otherModel.updateReject(reject, previousPow);
+				return this.otherModel.reviseHypothese(new Statement<Criterion>
+										(justify, Satisfiable.FALSE), previousPow);
+			}
+		}
+		return previousPow;
+	}
+	
+	// Accept Update
+	
+	public Map <Double,Float> getAcceptability(CriterionProposal c){
+		
+		Map <Double,Float> acc = new HashMap<Double,Float>();
+		Class<? extends Criterion> cType =c.getValue().getClass();
+		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
+											getProposalsWithStatus(Status.ACCEPTED);
+		
+		for(PowHypothesis model: otherModel.getHypotheses()){
+			
+			double self = this.getNegotiation().computeSelf(model.getPow());
+			acc.put(model.getPow(), model.scoreAcc(cType,accepted, self));
+		}
+		
+		return acc;
+	}
+	
+	
+	public double updateAccept(Proposal accepted, double previousPow){
+		if(accepted instanceof CriterionProposal){
+			Map <Double,Float> acc = getAcceptability((CriterionProposal) accepted);
+			return this.otherModel.reviseOtherPow(acc, previousPow);
+		}
+		return previousPow;
+	}
+	
+	
+	
+	public static void main (String[] args) {
+		totalOrderedModels model = new totalOrderedModels();
+
+		Negotiation<Restaurant> a = model.model1();
+		a.addProposal(new CriterionProposal(true, Cuisine.CHINESE));
+		
+		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
+		ac.setStatus(Status.ACCEPTED);
+		
+		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
+		ac1.setStatus(Status.ACCEPTED);
+		// add the accept
+//		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
+//		cn.updateProposal(ac);
+//		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.TRUE), false);
+		
+		ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
+		
+		System.out.println(tom.updateAccept(ac1, 0.6));
+		
+	}
+
+		
 }

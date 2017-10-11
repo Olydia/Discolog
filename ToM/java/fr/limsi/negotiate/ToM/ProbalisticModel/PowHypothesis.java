@@ -156,7 +156,7 @@ public class PowHypothesis{
 			totalScore += current.scoreAcc(acc - current.getSatValues().size(), accepted);
 		}
 		// il ne manque que diviser sur la taille init de toutes les valeurs
-		return (totalScore/initModels);
+		return (totalScore);
 	}
 
 

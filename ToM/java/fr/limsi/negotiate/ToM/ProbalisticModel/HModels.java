@@ -4,10 +4,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.lang.*;
 
 public class HModels {
 	
@@ -34,31 +32,7 @@ public class HModels {
 		return criteria;
 	}
 
-	
-	public double guess(Utterance u, double previousPow){
-		System.out.println(u.format());
-		if(u instanceof StatePreference){
-			Statement<Criterion> c  = new Statement<Criterion>(((StatePreference) u).getValue(), 
-															((StatePreference) u).getLikable());
-			return reviseHypothese(c, previousPow);
 
-		}
-		else if(u instanceof Reject){
-			return updateReject(((Reject) u).getProposal(), previousPow);
-		}
-		
-		else if(u instanceof RejectState){
-			Proposal reject = ((RejectState) u).getProposal();
-			Criterion justify = ((RejectState) u).getJustify();
-			if(reject.getValue().equals(justify))
-				return updateReject(reject, previousPow);
-			else{
-				updateReject(reject, previousPow);
-				return reviseHypothese(new Statement<Criterion>(justify, Satisfiable.FALSE), previousPow);
-			}
-		}
-		return previousPow;
-	}
 	
 	public double updateReject(Proposal rejected, double previousPow){
 		if(rejected instanceof CriterionProposal){
@@ -66,29 +40,26 @@ public class HModels {
 			return reviseHypothese(new Statement<Criterion>(elem, Satisfiable.FALSE), previousPow);
 		}
 		 // Creer une fonction 
-		return 0.3; 
+		return previousPow; 
 	}
 	
 	public double reviseHypothese(Statement<Criterion> critrion, double previousPow){
 
-		Map <Double,Integer> maxPow = new HashMap<Double,Integer>();
+		Map <Double,Float> maxPow = new HashMap<Double,Float>();
 		
 		for (Iterator<PowHypothesis> it = hypotheses.iterator(); it.hasNext();) {	
 			PowHypothesis current = it.next();
 			current.revise(critrion);
-			maxPow.put(current.getPow(), current.getHypothesis().size());
-//			if(current.getHypothesis().size()>= max){
-//				max = current.getHypothesis().size();
-//				maxP = current.getPow();
-//			}
+			maxPow.put(current.getPow(), (float) current.getHypothesis().size());
+
 		}
 		
 		return reviseOtherPow(maxPow, previousPow);
 	}
 	
 
-	public  Map<Double, Integer> sortPower(Map<Double, Integer> unsortMap){
-		Map<Double, Integer> result = unsortMap.entrySet().stream()
+	public  Map<Double, Float> sortPower(Map<Double, Float> unsortMap){
+		Map<Double, Float> result = unsortMap.entrySet().stream()
 				.sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
 						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
@@ -99,15 +70,18 @@ public class HModels {
 		
 	}
 	
-	public double reviseOtherPow(Map<Double, Integer> values, double previousPow){
-		Map<Double, Integer> result = sortPower(values); 
+	public double reviseOtherPow(Map<Double, Float> values, double previousPow){
+		
+		Map<Double, Float> result = sortPower(values); 
+		System.out.println(result);
 
-		int max = java.util.Collections.max(result.values());
+		float max = java.util.Collections.max(result.values());
 
 		List<Double> keys = new ArrayList<Double>();
 
-		for(Iterator<Entry<Double, Integer>> it = result.entrySet().iterator(); it.hasNext();){
-			Entry<Double, Integer> entry = it.next();
+		for(Iterator<Entry<Double, Float>> it = result.entrySet().iterator(); it.hasNext();){
+		
+			Entry<Double, Float> entry = it.next();
 
 			if(entry.getValue().equals(max))
 				keys.add(entry.getKey());

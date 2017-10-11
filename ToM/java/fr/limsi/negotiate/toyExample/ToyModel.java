@@ -103,7 +103,9 @@ public class ToyModel {
 		(new CriterionNegotiation[] {ToyCost, cuisine, atmospher, ToyLocation}, d2_criteria, ToyRestaurant.class);
 		return model2;
 
-	}	public static void main (String[] args) {
+	}	
+	
+	public static void main (String[] args) {
 		//totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
 		ToyModel model = new ToyModel();

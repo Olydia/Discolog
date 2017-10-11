@@ -70,6 +70,7 @@ public class CriterionHypothesis{
 	
 	public double scoreAcc(int m, List<CriterionProposal> accepted){
 		int subset = m - getT(accepted);
+		//System.out.println("domain size  " +getDomainSize() +" |sat values "+ satValues.size() + " |acc and not sat " + getT(accepted));
 		int total = getDomainSize() - (satValues.size() + getT(accepted));
 		return combination(subset, total);
 	}
@@ -91,18 +92,6 @@ public class CriterionHypothesis{
 
 		return t;
 	}
-	
-	/**
-	 * 
-	 * @return the number of values acceptables which are not sat
-	 */
-////	public int getM(){
-////		
-////	}
-//	
-////	public int getAcc(double self){
-////	
-////}
 //
 //	//  Method to compute combination of k in the set of size n
 //
@@ -110,16 +99,18 @@ public class CriterionHypothesis{
 
 	
 	
-	public int fact(int i){
-		if(i == 0)
-			return 1;
-		else
-			return i * fact(i-1);
+	public int fact(int n) {
+	      if (n <= 1)
+	            return 1;
+	      else
+	            return n * fact(n - 1);
 	}
 
 	public double combination(int k, int n){
-
-		return fact(n) / (fact(k) * fact(n-k)) ;
+		int total = fact(n);
+		int sub = fact(k) * fact(n-k);
+		return (total/sub);
 	}
+	
 
 }

@@ -13,6 +13,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.*;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.lang.*;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.toyExample.ToyModel;
 
 // TODO:  Further optimizations:
@@ -57,19 +58,19 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		//totalOrderedModels model = new totalOrderedModels();
+		totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		ToyModel model = new ToyModel();
+		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model2()), 
-				new ToMNegotiatorProba("Agent2", model.model1()), 
+				new ToMNegotiatorProba("Agent1", model.model3()), 
+				new NegotiatorAgent("Agent2", model.model1()), 
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(DOMINANT);
+		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 
 		dual.start();
 	}
@@ -107,6 +108,7 @@ public class NegotiatorAgent extends Agent {
 
 	
 	public Utterance respondTo(Utterance utterance, Disco disco){
+		
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
