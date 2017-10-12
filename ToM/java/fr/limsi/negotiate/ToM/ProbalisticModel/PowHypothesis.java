@@ -152,7 +152,7 @@ public class PowHypothesis{
 	public float scoreAcc(Class<? extends Criterion> type, List<CriterionProposal> accepted, double self){
 		int acc = getAcceptable(type, self);
 		int totalScore = 0;
-		System.out.println("Value of power :" + this.pow);
+		System.out.println("Value of power :" + this.pow + "Value of Self "+ self);
 		
 		for(Hypothesis h : this.hypothesis){
 			

@@ -188,6 +188,13 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
 		ac1.setStatus(Status.ACCEPTED);
 		
+		OptionProposal p = new OptionProposal(true, Restaurant.A_LA_TURKA);
+		p.setStatus(Status.REJECTED);
+		a.updateProposal(p);
+		
+		OptionProposal p2 = new OptionProposal(true, Restaurant.ABA_TURKISH);
+		p2.setStatus(Status.REJECTED);
+		a.updateProposal(p2);
 		// add the accept
 		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
 		cn.updateProposal(ac);

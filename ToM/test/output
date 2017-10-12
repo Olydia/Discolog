@@ -1,4 +1,4 @@
-Value of power :0.3
+Value of power :0.3Value of Self 0.3
 [French, Turkish, Chinese, Italian, Japanese]
 domain size  7 |sat values 5 |acc and not sat 0| m : 0
 Score = 1.0
@@ -7559,7 +7559,7 @@ Score = 0.0
 [Mexican, Turkish, Italian, Japanese, Korean]
 domain size  7 |sat values 5 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.4
+Value of power :0.4Value of Self 0.4
 [French, Turkish, Chinese, Italian]
 domain size  7 |sat values 4 |acc and not sat 0| m : 0
 Score = 1.0
@@ -26460,7 +26460,7 @@ Score = 0.0
 [Mexican, Turkish, Japanese, Korean]
 domain size  7 |sat values 4 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.5
+Value of power :0.5Value of Self 0.5
 [French, Turkish, Chinese, Italian]
 domain size  7 |sat values 4 |acc and not sat 0| m : 0
 Score = 1.0
@@ -45361,7 +45361,7 @@ Score = 0.0
 [Mexican, Turkish, Japanese, Korean]
 domain size  7 |sat values 4 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.6
+Value of power :0.6Value of Self 0.6
 [French, Chinese, Italian]
 domain size  7 |sat values 3 |acc and not sat 0| m : 0
 Score = 1.0
@@ -64262,7 +64262,7 @@ Score = 0.0
 [Mexican, Japanese, Korean]
 domain size  7 |sat values 3 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.7
+Value of power :0.7Value of Self 0.7
 [French, Chinese]
 domain size  7 |sat values 2 |acc and not sat 0| m : 0
 Score = 1.0
@@ -71823,7 +71823,7 @@ Score = 0.0
 [Mexican, Korean]
 domain size  7 |sat values 2 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.8
+Value of power :0.8Value of Self 0.8
 [French, Chinese]
 domain size  7 |sat values 2 |acc and not sat 0| m : 0
 Score = 1.0
@@ -75604,7 +75604,7 @@ Score = 0.0
 [Mexican, Korean]
 domain size  7 |sat values 2 |acc and not sat 1| m : 0
 Score = 0.0
-Value of power :0.9
+Value of power :0.9Value of Self 0.9
 [French]
 domain size  7 |sat values 1 |acc and not sat 1| m : 0
 Score = 0.0
