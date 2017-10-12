@@ -69,10 +69,14 @@ public class CriterionHypothesis{
 	 */
 	
 	public double scoreAcc(int m, List<CriterionProposal> accepted){
+		System.out.println(satValues);
 		int subset = m - getT(accepted);
-		//System.out.println("domain size  " +getDomainSize() +" |sat values "+ satValues.size() + " |acc and not sat " + getT(accepted));
 		int total = getDomainSize() - (satValues.size() + getT(accepted));
-		return combination(subset, total);
+		System.out.println("domain size  " +getDomainSize() +" |sat values "+ satValues.size() +
+				" |acc and not sat " + getT(accepted)+ "| m : " + m);
+		double combi = combination(subset, total);
+		System.out.println("Score = "+ combi );
+		return combi;
 	}
 
 	
@@ -86,7 +90,7 @@ public class CriterionHypothesis{
 		int t = 0;
 
 		for(CriterionProposal a : accepted){
-			if(! isSatifiable(a.getValue()))
+			if(!isSatifiable(a.getValue()))
 				t++;
 		}
 

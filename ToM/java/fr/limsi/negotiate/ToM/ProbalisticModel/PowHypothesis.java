@@ -129,6 +129,7 @@ public class PowHypothesis{
 	 * @return the number of acceptable values 
 	 */
 	public int getAcceptable(Class<? extends Criterion> criterion, double self){
+		
 		List<Float> sats = getSatValues(criterion);
 		int D = criterion.getEnumConstants().length;
 		
@@ -151,9 +152,14 @@ public class PowHypothesis{
 	public float scoreAcc(Class<? extends Criterion> type, List<CriterionProposal> accepted, double self){
 		int acc = getAcceptable(type, self);
 		int totalScore = 0;
+		System.out.println("Value of power :" + this.pow);
+		
 		for(Hypothesis h : this.hypothesis){
+			
 			CriterionHypothesis current = h.getCriterionSat(type);
-			totalScore += current.scoreAcc(acc - current.getSatValues().size(), accepted);
+			int m = acc - current.getSatValues().size();
+			totalScore += current.scoreAcc(m, accepted);
+			
 		}
 		// il ne manque que diviser sur la taille init de toutes les valeurs
 		return (totalScore);

@@ -134,7 +134,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 				return this.otherModel.reviseHypothese(new Statement<Criterion>
 										(justify, Satisfiable.FALSE), previousPow);
 			}
-		}
+		}else if(u instanceof AskPreference)
+			return 0.4;
+		
 		return previousPow;
 	}
 	
@@ -158,10 +160,13 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	
 	
 	public double updateAccept(Proposal accepted, double previousPow){
+		
 		if(accepted instanceof CriterionProposal){
+			
 			Map <Double,Float> acc = getAcceptability((CriterionProposal) accepted);
 			return this.otherModel.reviseOtherPow(acc, previousPow);
 		}
+		
 		return previousPow;
 	}
 	
@@ -172,17 +177,25 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 		Negotiation<Restaurant> a = model.model1();
 		a.addProposal(new CriterionProposal(true, Cuisine.CHINESE));
-		
+		a.addProposal(new CriterionProposal(true, Cuisine.JAPANESE));
+		a.addProposal(new CriterionProposal(true, Cuisine.ITALIAN));
 		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
+		ac.setStatus(Status.REJECTED);
+		
+		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);
 		ac.setStatus(Status.ACCEPTED);
 		
 		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
 		ac1.setStatus(Status.ACCEPTED);
-		// add the accept
-//		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
-//		cn.updateProposal(ac);
-//		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.TRUE), false);
 		
+		// add the accept
+		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
+		cn.updateProposal(ac);
+		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
+		
+		cn.updateProposal(ac2);
+		a.addStatement(new Statement<Criterion>(ac2.getValue(),Satisfiable.TRUE), false);
+
 		ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
 		
 		System.out.println(tom.updateAccept(ac1, 0.6));
