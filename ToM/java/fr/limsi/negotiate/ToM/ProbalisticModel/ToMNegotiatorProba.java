@@ -10,14 +10,9 @@ import edu.wpi.disco.lang.Utterance;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.ToM.preferencesGeneration.CriterionPreferences;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.*;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
-import fr.limsi.negotiate.toyExample.ToyCost;
-import fr.limsi.negotiate.toyExample.ToyCuisine;
-import fr.limsi.negotiate.toyExample.ToyModel;
-import fr.limsi.negotiate.toyExample.ToyRestaurant;
 
 
 public class ToMNegotiatorProba extends NegotiatorAgent{
@@ -82,8 +77,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	}
 
 
-	
-
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
@@ -113,8 +106,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		
 		
 		
-		}else if (u instanceof Accept){
-			return updateAccept(((Accept) u).getProposal(), previousPow);
+		}else if (u instanceof Accept || u instanceof Propose){
+			return updateAccept(((ProposalUtterance) u).getProposal(), previousPow);
 			
 			
 		}else if (u instanceof AcceptPropose){
@@ -134,8 +127,16 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 				return this.otherModel.reviseHypothese(new Statement<Criterion>
 										(justify, Satisfiable.FALSE), previousPow);
 			}
-		}else if(u instanceof AskPreference)
-			return 0.4;
+			
+		}else if(u instanceof RejectPropose){
+			this.otherModel.updateReject(((RejectPropose) u).getReject(), previousPow);
+			return this.updateAccept(((RejectPropose) u).getProposal(), previousPow);
+		}
+	
+//		else if(u instanceof AskPreference)
+//			return 0.4;
+//		
+		
 		
 		return previousPow;
 	}
@@ -145,16 +146,22 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public Map <Double,Float> getAcceptability(CriterionProposal c){
 		
 		Map <Double,Float> acc = new HashMap<Double,Float>();
+		
 		Class<? extends Criterion> cType =c.getValue().getClass();
+		
 		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
 											getProposalsWithStatus(Status.ACCEPTED);
+		
+		if(accepted.contains(c))
+			accepted.remove(c);
 		
 		for(PowHypothesis model: otherModel.getHypotheses()){
 			
 			double self = this.getNegotiation().computeSelf(model.getPow());
-			acc.put(model.getPow(), model.scoreAcc(cType,accepted, self));
+			
+			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self));
 		}
-		
+		System.out.println(acc);
 		return acc;
 	}
 	
@@ -173,35 +180,39 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	
 	
 	public static void main (String[] args) {
+		
 		totalOrderedModels model = new totalOrderedModels();
 
 		Negotiation<Restaurant> a = model.model1();
+		a.setDominance(0.7);
 		a.addProposal(new CriterionProposal(true, Cuisine.CHINESE));
 		a.addProposal(new CriterionProposal(true, Cuisine.JAPANESE));
 		a.addProposal(new CriterionProposal(true, Cuisine.ITALIAN));
-		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
-		ac.setStatus(Status.REJECTED);
 		
-		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);
-		ac.setStatus(Status.ACCEPTED);
+//		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
+//		ac.setStatus(Status.REJECTED);
 		
+//		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
+//		cn.updateProposal(ac);
+//		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
+//		
+//		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);
+//		ac.setStatus(Status.ACCEPTED);
+//		cn.updateProposal(ac2);
+//		a.addStatement(new Statement<Criterion>(ac2.getValue(),Satisfiable.TRUE), false);
+//		
+//		
+//		
+//		OptionProposal p = new OptionProposal(true, Restaurant.A_LA_TURKA);
+//		p.setStatus(Status.REJECTED);
+//		a.updateProposal(p);
+//		
+//		OptionProposal p2 = new OptionProposal(true, Restaurant.ABA_TURKISH);
+//		p2.setStatus(Status.REJECTED);
+//		a.updateProposal(p2);
+		// add the accept
 		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
 		ac1.setStatus(Status.ACCEPTED);
-		
-		OptionProposal p = new OptionProposal(true, Restaurant.A_LA_TURKA);
-		p.setStatus(Status.REJECTED);
-		a.updateProposal(p);
-		
-		OptionProposal p2 = new OptionProposal(true, Restaurant.ABA_TURKISH);
-		p2.setStatus(Status.REJECTED);
-		a.updateProposal(p2);
-		// add the accept
-		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
-		cn.updateProposal(ac);
-		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
-		
-		cn.updateProposal(ac2);
-		a.addStatement(new Statement<Criterion>(ac2.getValue(),Satisfiable.TRUE), false);
 
 		ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
 		

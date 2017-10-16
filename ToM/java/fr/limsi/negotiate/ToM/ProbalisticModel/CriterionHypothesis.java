@@ -58,6 +58,10 @@ public class CriterionHypothesis{
 
 		return this.type.getEnumConstants().length;
 	}
+	
+	public int sat(Criterion c){
+		return (isSatifiable(c) ? 1 : 0);
+	}
 
 	/**
 	 *  
@@ -68,7 +72,14 @@ public class CriterionHypothesis{
 	 * @return the score to accept a proposal in the current state of the negotiation
 	 */
 	
-	public double scoreAcc(int m, List<CriterionProposal> accepted){
+	public double scoreAcc(Criterion criterion, int m, List<CriterionProposal> accepted){
+
+		// Case criterion is sat
+		
+		if(this.getSatisfaction(criterion).equals(Satisfiable.TRUE))
+			return 1;
+		
+		// Otherwise computes the score of acceptability
 		System.out.println(satValues);
 		int subset = m - getT(accepted);
 		int total = getDomainSize() - (satValues.size() + getT(accepted));
@@ -103,7 +114,7 @@ public class CriterionHypothesis{
 
 	
 	
-	public int fact(int n) {
+	public static int fact(int n) {
 	      if (n <= 1)
 	            return 1;
 	      else

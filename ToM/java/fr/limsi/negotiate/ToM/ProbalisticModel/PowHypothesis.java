@@ -14,7 +14,7 @@ import fr.limsi.negotiate.toyExample.*;
  */
 
 public class PowHypothesis{
-	
+
 
 	private double pow;
 	private List<Class<? extends Criterion>> criteria; 
@@ -22,7 +22,7 @@ public class PowHypothesis{
 	private final int initModels;
 	private Map<Class<? extends Criterion>, List<Float>> satisfiability;
 
-	
+
 
 
 	public PowHypothesis (double pow, List<Class<? extends Criterion>> criteria) {
@@ -46,18 +46,18 @@ public class PowHypothesis{
 		return hypothesis;
 	}
 
-	
+
 	public List<Hypothesis > computeHypothesis(){
 		this.satisfiability = new HashMap<Class<? extends Criterion>, List<Float>>();
-		
+
 		List<List<CriterionHypothesis>> sat = new ArrayList<List<CriterionHypothesis>> ();
-		
+
 		// for each criterion, compute the set of possible hypotheses 
 		for(Class<? extends Criterion> c : criteria){
 			Satifiability e = new Satifiability(c);
-			
+
 			satisfiability.put(c, e.getSat());
-			
+
 			sat.add(e.generateHypModels(this.pow));
 		}
 
@@ -89,7 +89,7 @@ public class PowHypothesis{
 		}
 
 		List<List<CriterionHypothesis>> combinations = new ArrayList<
-																List<CriterionHypothesis>>();
+				List<CriterionHypothesis>>();
 		List<CriterionHypothesis> container = preferences.get(currentIndex);
 		List<CriterionHypothesis> containerItemList = container;
 
@@ -104,7 +104,7 @@ public class PowHypothesis{
 
 				for (List<CriterionHypothesis> suffix : suffixList) {
 					List<CriterionHypothesis> nextCombination = 
-												new ArrayList<CriterionHypothesis>();
+							new ArrayList<CriterionHypothesis>();
 					nextCombination.add(containerItem);
 					nextCombination.addAll(suffix);
 					combinations.add(nextCombination);
@@ -114,8 +114,14 @@ public class PowHypothesis{
 		return combinations;
 	}
 
+	/**
+	 * 
+	 * @param s statement to use in order to revise the knwoledge about other
+	 */
+
 	public void revise(Statement<? extends Criterion> s){
 		for (Iterator<Hypothesis> it = hypothesis.iterator(); it.hasNext();) {	
+
 			Hypothesis elem = it.next();
 			if(!elem.getSat(s.getValue()).equals(s.getStatus()))
 				it.remove();
@@ -123,46 +129,69 @@ public class PowHypothesis{
 
 
 	}
-	
+
 	/**
 	 * 
 	 * @return the number of acceptable values 
 	 */
 	public int getAcceptable(Class<? extends Criterion> criterion, double self){
-		
+
 		List<Float> sats = getSatValues(criterion);
 		int D = criterion.getEnumConstants().length;
-		
+
 		for(float s : sats){
-			
+
 			if(s>= pow)
 				return D - sats.indexOf(s);
 		}
 		return 0;
 	}
-	
-	
+
+
 	public List<Float> getSatValues(Class<? extends Criterion> c){
-		
+
 		return this.satisfiability.get(c);
-		
+
 	}
 	// Call from ToMnegotiatorProba
-	
-	public float scoreAcc(Class<? extends Criterion> type, List<CriterionProposal> accepted, double self){
+
+	public float scoreAcc(Criterion criterion, List<CriterionProposal> accepted, double self){
+
+		Class<? extends Criterion> type = criterion.getClass();
+		// get the number of acceptable values in the model
 		int acc = getAcceptable(type, self);
-		int totalScore = 0;
-		System.out.println("Value of power :" + this.pow + "Value of Self "+ self);
+		int sat = getAcceptable(type, pow);
+
+		int m = acc - sat;
 		
-		for(Hypothesis h : this.hypothesis){
+		// m = 0 means that Sat = Acc no concessions only sat values are acceptables
+		// update models as state
+		//System.out.println("Value of power :" + this.pow + "Value of Self "+ self + "value of m " + m);
+
+		if(m ==0){
 			
-			CriterionHypothesis current = h.getCriterionSat(type);
-			int m = acc - current.getSatValues().size();
-			totalScore += current.scoreAcc(m, accepted);
-			
+			revise(new Statement<Criterion>(criterion, Satisfiable.TRUE));
+			float result =  ( (float) hypothesis.size()/ initModels);
+			//System.out.println( result + " il reste " + hypothesis.size() + " sur un total de " + initModels) ;
+			return result;
 		}
+
+		int totalScore = 0;
+
+
+		for(Hypothesis h : this.hypothesis){
+
+			CriterionHypothesis current = h.getCriterionSat(type);
+
+
+			totalScore += current.scoreAcc(criterion, m, accepted);
+
+		}
+		CriterionHypothesis example = this.hypothesis.get(0).getModel().get(0);
+		int n = example.getDomainSize() - example.getSatValues().size();
+		double perfectScore =  example.combination(m, n);
 		// il ne manque que diviser sur la taille init de toutes les valeurs
-		return (totalScore);
+		return  (float) ( (float) totalScore/perfectScore);
 	}
 
 
@@ -172,8 +201,8 @@ public class PowHypothesis{
 		for(PowHypothesis elem : model.getHypotheses()){
 			elem.revise(new Statement<ToyCuisine>(ToyCuisine.CHINESE, Satisfiable.FALSE));
 
-//			for(Hypothesis e : elem.getHypothesis())
-//				System.out.println(e.getModel());
+			//			for(Hypothesis e : elem.getHypothesis())
+			//				System.out.println(e.getModel());
 
 		}
 	}

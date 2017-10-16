@@ -14,7 +14,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 public class Hypothesis {
 
 	
-	List<CriterionHypothesis> model;
+	private List<CriterionHypothesis> model;
 
 	
 	public List<CriterionHypothesis> getModel() {
@@ -48,5 +48,8 @@ public class Hypothesis {
 		return getCriterionSat(c.getClass()).
 				getSatisfaction(c);
 	}
+	
+	
+	
 
 }
