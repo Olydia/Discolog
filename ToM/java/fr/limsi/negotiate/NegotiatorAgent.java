@@ -23,7 +23,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.8, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;

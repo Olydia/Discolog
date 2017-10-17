@@ -141,7 +141,7 @@ public class PowHypothesis{
 
 		for(float s : sats){
 
-			if(s>= pow)
+			if(s >= self)
 				return D - sats.indexOf(s);
 		}
 		return 0;
@@ -166,9 +166,10 @@ public class PowHypothesis{
 		
 		// m = 0 means that Sat = Acc no concessions only sat values are acceptables
 		// update models as state
-		//System.out.println("Value of power :" + this.pow + "Value of Self "+ self + "value of m " + m);
+		//System.out.println("Value of power :" + this.pow + "Value of Self "+ self + " m " + m);
+		//System.out.println("acceptable values " + acc + "sat values " + sat);
 
-		if(m ==0){
+		if(m == 0){
 			
 			revise(new Statement<Criterion>(criterion, Satisfiable.TRUE));
 			float result =  ( (float) hypothesis.size()/ initModels);
@@ -182,16 +183,15 @@ public class PowHypothesis{
 		for(Hypothesis h : this.hypothesis){
 
 			CriterionHypothesis current = h.getCriterionSat(type);
-
-
 			totalScore += current.scoreAcc(criterion, m, accepted);
 
 		}
-		CriterionHypothesis example = this.hypothesis.get(0).getModel().get(0);
-		int n = example.getDomainSize() - example.getSatValues().size();
-		double perfectScore =  example.combination(m, n);
+		
+		int n = type.getEnumConstants().length - sat;
+
+		double perfectScore =  Combination.combination(m, n);
 		// il ne manque que diviser sur la taille init de toutes les valeurs
-		return  (float) ( (float) totalScore/perfectScore);
+		return  (float) ((float) totalScore/perfectScore);
 	}
 
 

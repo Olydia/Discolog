@@ -152,8 +152,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
 											getProposalsWithStatus(Status.ACCEPTED);
 		
-		if(accepted.contains(c))
-			accepted.remove(c);
+//		if(accepted.contains(c))
+//			accepted.remove(c);
 		
 		for(PowHypothesis model: otherModel.getHypotheses()){
 			
@@ -161,7 +161,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			
 			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self));
 		}
-		System.out.println(acc);
+		
+		System.out.println("Values of acceptability " + acc);
 		return acc;
 	}
 	
@@ -193,7 +194,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 //		ac.setStatus(Status.REJECTED);
 		
 //		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
-//		cn.updateProposal(ac);
 //		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
 //		
 //		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);

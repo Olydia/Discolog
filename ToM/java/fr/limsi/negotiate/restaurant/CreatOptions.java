@@ -2,7 +2,6 @@ package fr.limsi.negotiate.restaurant;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import fr.limsi.negotiate.toyExample.*;
 

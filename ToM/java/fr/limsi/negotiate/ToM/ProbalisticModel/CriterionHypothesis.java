@@ -76,17 +76,13 @@ public class CriterionHypothesis{
 
 		// Case criterion is sat
 		
-		if(this.getSatisfaction(criterion).equals(Satisfiable.TRUE))
-			return 1;
+//		if(this.getSatisfaction(criterion).equals(Satisfiable.TRUE))
+//			return 1;
 		
 		// Otherwise computes the score of acceptability
-		System.out.println(satValues);
 		int subset = m - getT(accepted);
 		int total = getDomainSize() - (satValues.size() + getT(accepted));
-		System.out.println("domain size  " +getDomainSize() +" |sat values "+ satValues.size() +
-				" |acc and not sat " + getT(accepted)+ "| m : " + m);
-		double combi = combination(subset, total);
-		System.out.println("Score = "+ combi );
+		double combi = Combination.combination(subset, total);
 		return combi;
 	}
 
@@ -108,24 +104,7 @@ public class CriterionHypothesis{
 		return t;
 	}
 //
-//	//  Method to compute combination of k in the set of size n
-//
-//	
 
-	
-	
-	public static int fact(int n) {
-	      if (n <= 1)
-	            return 1;
-	      else
-	            return n * fact(n - 1);
-	}
-
-	public double combination(int k, int n){
-		int total = fact(n);
-		int sub = fact(k) * fact(n-k);
-		return (total/sub);
-	}
 	
 
 }
