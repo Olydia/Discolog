@@ -138,10 +138,10 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			return this.updateAccept(models,((RejectPropose) u).getProposal(), previousPow);
 		
 		}else if(u instanceof AskPreference){
-			Map<Double, Float> values ; // get the number of elements divided by total
-			this.otherModel.reviseOtherPow(values, previousPow);
+			Map<Double, Float> values =this.otherModel.getHypothesesSize(); // get the number of elements divided by total
+			 return this.otherModel.reviseOtherPow(values, previousPow);
+			
 		}
-					return 0.4;
 				
 
 

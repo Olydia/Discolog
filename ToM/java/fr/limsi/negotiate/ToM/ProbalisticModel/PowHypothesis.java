@@ -47,6 +47,14 @@ public class PowHypothesis{
 	}
 
 
+	public int getInitModels() {
+		return initModels;
+	}
+
+	public void setHypothesis(List<Hypothesis> hypothesis) {
+		this.hypothesis = hypothesis;
+	}
+
 	public List<Hypothesis > computeHypothesis(){
 		this.satisfiability = new HashMap<Class<? extends Criterion>, List<Float>>();
 

@@ -135,4 +135,13 @@ public class HModels {
 		}
 		return p;
 	}
+	
+	public Map<Double, Float> getHypothesesSize(){
+		Map<Double, Float> sizes = new HashMap<Double, Float>();
+		for(PowHypothesis h: this.hypotheses){
+			float mean =((float)  h.getHypothesis().size()) / h.getInitModels();
+			sizes.put(h.getPow(), mean);
+		}
+		return sizes;
+	}
 }
