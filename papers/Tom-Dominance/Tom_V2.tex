@@ -258,10 +258,29 @@ En conlusion, pour un $pow$ donné, le score d'acceptabilité d'une valeur est l
 
 \subsection{Tolérabilité}
 
-La fonction de tolérabilité est calculé pour définir la valeur à proposer. La valeur choisis est initialement définis dans l'ensemble des valeurs acceptables. Par concéquent, une première hypothèse est qu'une valeur proposée est forcément acceptable. Nous pouvons réutiliser la mise à jour calculé pour le cas d'accept.
-%	\subsection{Décision}
+La fonction de tolérabilité est calculée pour définir la valeur à proposer. La valeur choisie à partir de l'ensemble des valeurs acceptables. Par concéquent, une première hypothèse est qu'une valeur proposée est forcément acceptable. Nous pouvons réutiliser la mise à jour calculé pour le cas d'accept.
+
+\subsection{Le choix de l'utterance}: 
+Le dernier principe de raisonnement se base sur le choix de l'utterance qui détermine la volonté de prendre le contrôle de la négociation. Nous avions défini deux stratégies. Le première strategie refletait le comportement dominant qui vise à controler la négociation, en se focalisant sur les actes de \emph{propositions}. A l'opposé, le comportement soumis cherche à collecter des informations sur les préférences de l'autre afin de prendre des décisions 'équitables' dans la negociation.
+
+Nous pouvons formuler des hypothèses sur le $pow$ de l'autre à partir de la proportions d'actes de dialogues de propose vs de ask formulées.
+
+Notons, $U_{other}$ l'ensemble des actes de dialogues énnoncés par l'autre, $Prop_{Other}$, $Ask_{Other}$ respectivement les utterances de propositions et les actes de dialogues d'asks énnoncés. 
+\begin{equation}
+\left\{\begin{array}{ll}
+pow > 0.5 & \mathrm{if\ } (|Ask_{Other}| \leq |Prop_{Other}|)\\
+pow\leq 0.5 & \mathrm{otherwise}
+\end{array}\right.
+\end{equation}
+
+\subsubsection{Mise à jour des hypothèses}
+A partir du choix de l'acte de dialogue, nous pouvons collecter des informations sur lintervale des valeurs de $pow$ à considérer pour calculer les hypothèse. Cela reduirait l'ensemble du possible, en ne prenant en comptes que les $Hyp_{pow}$ qui sont inclues dans l'intervale.
 %	Pour le choix de l'utterance, au lieu de calculer l'utterance, je propose de calculer la probabilité d'obtenir l'utterance énoncé par l'autre. 
 %	On combine les probabilités obtenues pour chaque modèle pour chaque valeur de pow. 
 
-	
+\section{Limitations}
+
+Le modèle conçu donne plus de poids aux hypothèses avec un $pow$ bas, car les hypothèses sont plus nombreuses.
+Une des problématiques concerne la valeur du Propose. On doit etre en mesure de faire varier la valeurs du score en fonction si la valeur est sat chez l'agent, si la valeurs de self est basse alors le poids donné aux preferences de l'autre est élévé.
+Je propose donc 	
 \end{document}
