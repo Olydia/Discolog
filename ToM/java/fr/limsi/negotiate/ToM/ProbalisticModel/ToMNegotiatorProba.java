@@ -42,6 +42,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public ToMNegotiatorProba(String name, Negotiation<? extends Option> negotiation) {
 		super(name, negotiation);
 
+		
 		List<Class<? extends Criterion>> criteria  = negotiation.getCriteria().getElements();
 
 		this.otherModel =  new HModels(criteria);
@@ -83,7 +84,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		if (utterance != null)
 			//guessProba(disco,selfPrevious, utterance, previousState);
 			this.setOther(guess(utterance, getOther()));
-		System.out.println(getOther());
+		System.out.println("Predicted pow : " + getOther());
 		Utterance u = respondTo(utterance, disco);
 		return u ;
 	}
@@ -138,7 +139,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			return this.updateAccept(models,((RejectPropose) u).getProposal(), previousPow);
 		
 		}else if(u instanceof AskPreference){
-			Map<Double, Float> values =this.otherModel.getHypothesesSize(); // get the number of elements divided by total
+			Map<Double, Float> values =this.otherModel.getHypothesesSize(models); 
+			//System.out.println(values);// get the number of elements divided by total
 			 return this.otherModel.reviseOtherPow(values, previousPow);
 			
 		}
@@ -176,7 +178,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self));
 		}
 
-		System.out.println("Values of acceptability " + acc);
+		//System.out.println("Values of acceptability " + acc);
 		return acc;
 	}
 	

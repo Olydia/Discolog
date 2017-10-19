@@ -48,7 +48,7 @@ public class HModels {
 	public double reviseHypothese(List<PowHypothesis> models, Statement<Criterion> critrion, double previousPow){
 
 		Map <Double,Float> maxPow = new HashMap<Double,Float>();
-
+		//System.out.println(maxPow);
 		for (Iterator<PowHypothesis> it = models.iterator(); it.hasNext();) {	
 			PowHypothesis current = it.next();
 			current.revise(critrion);
@@ -85,7 +85,7 @@ public class HModels {
 	public double reviseOtherPow(Map<Double, Float> values, double previousPow){
 
 		Map<Double, Float> result = sortPower(values); 
-		//System.out.println(result);
+		System.out.println(result);
 
 		float max = java.util.Collections.max(result.values());
 		
@@ -137,8 +137,13 @@ public class HModels {
 	}
 	
 	public Map<Double, Float> getHypothesesSize(){
+		return getHypothesesSize(this.hypotheses);
+	}
+
+
+	public Map<Double, Float> getHypothesesSize(List<PowHypothesis> models) {
 		Map<Double, Float> sizes = new HashMap<Double, Float>();
-		for(PowHypothesis h: this.hypotheses){
+		for(PowHypothesis h: models){
 			float mean =((float)  h.getHypothesis().size()) / h.getInitModels();
 			sizes.put(h.getPow(), mean);
 		}
