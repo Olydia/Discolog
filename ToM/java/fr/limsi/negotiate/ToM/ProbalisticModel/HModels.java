@@ -34,20 +34,22 @@ public class HModels {
 
 
 
-	public double updateReject(Proposal rejected, double previousPow){
+	public double updateReject(List<PowHypothesis> models, 
+			Proposal rejected, double previousPow){
 		if(rejected instanceof CriterionProposal){
 			Criterion elem = (Criterion) rejected.getValue();
-			return reviseHypothese(new Statement<Criterion>(elem, Satisfiable.FALSE), previousPow);
+			return reviseHypothese(models, new Statement<Criterion>
+			(elem, Satisfiable.FALSE), previousPow);
 		}
 		// Creer une fonction 
 		return previousPow; 
 	}
-
-	public double reviseHypothese(Statement<Criterion> critrion, double previousPow){
+	
+	public double reviseHypothese(List<PowHypothesis> models, Statement<Criterion> critrion, double previousPow){
 
 		Map <Double,Float> maxPow = new HashMap<Double,Float>();
 
-		for (Iterator<PowHypothesis> it = hypotheses.iterator(); it.hasNext();) {	
+		for (Iterator<PowHypothesis> it = models.iterator(); it.hasNext();) {	
 			PowHypothesis current = it.next();
 			current.revise(critrion);
 			
@@ -62,6 +64,11 @@ public class HModels {
 		return reviseOtherPow(maxPow, previousPow);
 	}
 
+	public double reviseHypothese(Statement<Criterion> critrion, double previousPow){
+		return reviseHypothese(hypotheses, critrion, previousPow);
+	}
+
+	
 
 	public  Map<Double, Float> sortPower(Map<Double, Float> unsortMap){
 		Map<Double, Float> result = unsortMap.entrySet().stream()
@@ -81,7 +88,7 @@ public class HModels {
 		//System.out.println(result);
 
 		float max = java.util.Collections.max(result.values());
-
+		
 		List<Double> keys = new ArrayList<Double>();
 
 		for(Iterator<Entry<Double, Float>> it = result.entrySet().iterator(); it.hasNext();){
@@ -92,8 +99,8 @@ public class HModels {
 				keys.add(entry.getKey());
 		}
 
-		if(result.values().size() == keys.size())
-			return previousPow;
+//		if(result.values().size() == keys.size())
+//			return previousPow;
 
 		OptionalDouble average = keys.stream()
 				.mapToDouble(a -> a).average();
@@ -111,6 +118,21 @@ public class HModels {
 	//		return null;
 	//	}
 
+	public List<PowHypothesis> getDom(){
+		List<PowHypothesis> p = new ArrayList<PowHypothesis>();
+		for(PowHypothesis h: this.hypotheses){
+			if(h.getPow()> 0.5)
+				p.add(h);
+		}
+		return p;
+	}
 
-
+	public List<PowHypothesis> getSub(){
+		List<PowHypothesis> p = new ArrayList<PowHypothesis>();
+		for(PowHypothesis h: this.hypotheses){
+			if(h.getPow()<= 0.5)
+				p.add(h);
+		}
+		return p;
+	}
 }
