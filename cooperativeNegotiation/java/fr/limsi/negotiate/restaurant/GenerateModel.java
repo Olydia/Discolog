@@ -131,8 +131,8 @@ public class GenerateModel {
 
 		Self_Ci<Atmosphere> d2_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
 		d2_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.LIVELY);
-		d2_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.LIVELY);
-		d2_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.ROMANTIC);
+		d2_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.FAMILY);
+		d2_atmosphere.addPreference(Atmosphere.LIVELY, Atmosphere.FAMILY);
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d2_atmosphere);
 
 
@@ -183,26 +183,12 @@ public class GenerateModel {
 	
 	public static void main (String[] args)  {
 		
-		totalOrderedModels m = new totalOrderedModels();
-		Negotiation<Restaurant> m1 = m.model1();
-		Negotiation<Restaurant> m3 = m.model3();
-		ArrayList<Criterion> values = new ArrayList<Criterion>();
-		values.add(Cuisine.CHINESE); values.add(Atmosphere.FAMILY);
-		values.add(Cost.CHEAP);
-		List<Option> p= m3.getOptionWithValues(values);
-		for(Option o : p)
-		System.out.println(o.print());
-//		m1.setDominance(0.7);
-//		m3.setDominance(0.4);
-//		for(int t =0; t<8; t++){
-//			System.out.println(m1.selfTest(t));
-	//	}
-//		m1.addStatement(new Statement<Criterion>(Atmosphere.QUIET, Satisfiable.TRUE), true);
-//		m1.addStatement(new Statement<Criterion>(Cuisine.CHINESE, Satisfiable.TRUE), true);
-//		System.out.println(m1.getValueNegotiation(Cuisine.class).ask());
-
-
-		//test Ask 
+		GenerateModel m = new GenerateModel();
+		Negotiation<Restaurant> m1 = m.model2();
+		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
+		for(Atmosphere e: Atmosphere.values()){
+			System.out.println( e + " " +m1.getValueNegotiation(Atmosphere.class).getSelf().satisfaction(e));
+		}
 		
 	}
 

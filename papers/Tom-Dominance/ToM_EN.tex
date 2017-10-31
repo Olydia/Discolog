@@ -1,0 +1,76 @@
+\documentclass{llncs}
+\usepackage{subcaption}
+\usepackage{subfig} 
+\usepackage{usual}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\usepackage[rflt]{floatflt}
+\usepackage[noend]{algpseudocode}
+\usepackage{subfig} 
+\usepackage{frame, caption}
+\usepackage{amsmath}
+\usepackage{eulervm}
+\usepackage{fontenc}
+\usepackage{mathrsfs}
+\usepackage{multirow, enumitem, longtable, rotating,lipsum, scrextend}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{xcolor, soul}
+\sethlcolor{yellow}	
+\usepackage{floatrow}
+%\pagestyle{plain}
+%
+\begin{document}
+	plan of the paper
+	1. We defined a model of dialogue make a schema that explains 
+	The model produces an utterance based on the agent mental state
+	the agent mental state includes : its preferences, its representation of power noted\emph{pow}, and the context of the dialogue(history of the dialogue)
+	
+	Previous studies validated our hypotheses that the choice of the utterance as built reflect the right behaviors of power.
+	Our goal is to produce plausible social behaviors when building a relation of dominance with a human interlocutor. 
+	(Reprendre la definition de dom comme ecrite) 
+	
+	We make the assumption that our model faithfully reproduce behaviors of power when selecting utterances to enunciate. On that assumption, we aim to build a model of ToM based on simulation, able to compute the current value of power \emph{pow} expressed by the interlocutor based on the utterance expressed. 
+	
+	\section{Old model + biblio}
+	
+	What do we consider in our model to generate an utterance: 
+	The choice of the utterance and the value expressed are influenced by four main factors:
+	\begin{enumerate}
+		\item \emph{pow}: the agent has a personal representation of the power that it wants to express. The value of power influence all the decisional process and the negotiation strategy from the choice of the utterance to the values associated to the utterances.
+		
+		\item \emph{Preferences:} for a fixed value of pow, a mental state is also defined with a set of the agent's preferences. 
+		Preferences are essential when choosing an utterance, in terms of the values that the agent like or dislike. The preferences are either partial or total ordered. 
+		It allows the agent to compute the values which it likes, that we note \textit{satisfiable}.
+		
+		The satisfiability of a value $v$ defined in the domain of the criterion $C_i$ is computed as follow: 
+		
+			\begin{equation}
+			sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+			\end{equation}
+		A value $v$ is said satisfiable if:
+		 	$sat(v, \prec_i) \geq pow$.
+		
+		
+		\par For example, for  a mental state where $pow =0.6$, the criterion which domain is  $D =\{A, B, C, D\}$ is defined with the set of preferences $\{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values is composed by the value $\{B, C, D\}$ 
+			 \begin{table}
+			 	\centering
+			 	\begin{tabular}{ |c|c|c|c|c| }
+			 		\hline				
+			 		value & A & B & C & D \\
+			 		\hline
+
+			 		\hline
+			 		Sat(value) & 0.3 & 0.6 & 0.6 & 1 \\
+			 		\hline
+			 		
+			 	\end{tabular}
+			 	\caption{Value of satisfiability for the model $D$.}
+			 	\label{sat}
+			 \end{table}
+		
+		\par During the negotiation, the agent has to make concessions when the negotiation is not converging, which means that the agent might accept proposals with values which are not satisfiables.
+	\end{enumerate}
+	
+\end{document}
