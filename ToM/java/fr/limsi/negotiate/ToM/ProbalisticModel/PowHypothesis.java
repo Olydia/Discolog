@@ -47,6 +47,14 @@ public class PowHypothesis{
 	}
 
 
+	public int getInitModels() {
+		return initModels;
+	}
+
+	public void setHypothesis(List<Hypothesis> hypothesis) {
+		this.hypothesis = hypothesis;
+	}
+
 	public List<Hypothesis > computeHypothesis(){
 		this.satisfiability = new HashMap<Class<? extends Criterion>, List<Float>>();
 
@@ -178,18 +186,18 @@ public class PowHypothesis{
 		}
 
 		int totalScore = 0;
+		int n = type.getEnumConstants().length - sat;
 
+		double perfectScore =  Combination.combination(m, n);
 
 		for(Hypothesis h : this.hypothesis){
 
 			CriterionHypothesis current = h.getCriterionSat(type);
-			totalScore += current.scoreAcc(criterion, m, accepted);
+			totalScore += ((float)current.scoreAcc(criterion, m, accepted)) / perfectScore;
 
 		}
 		
-		int n = type.getEnumConstants().length - sat;
-
-		double perfectScore =  Combination.combination(m, n);
+		
 		// il ne manque que diviser sur la taille init de toutes les valeurs
 		return  (float) ((float) totalScore/perfectScore);
 	}
