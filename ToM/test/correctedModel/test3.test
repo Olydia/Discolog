@@ -1,0 +1,61 @@
+pow(Agent1) = 0.9 / Pref(Agent1) = model3
+pow(Agent2) = 0.5 / Pref(Agent2) = model1
+
+
+*** Agent 2 is the agent with the TOM ***
+-----------------------------------------------------------------------------------------------
+
+Agent1 says "Let's go to a restaurant on the north side."
+{0.9=0.2, 0.8=0.2, 0.6=0.4, 0.7=0.4}
+Predicted pow : 0.6499999999999999
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Predicted pow : 0.6499999999999999
+Agent1 says "I don't like restaurants on the south side."
+{0.9=0.2, 0.8=0.2, 0.6=0.3, 0.7=0.3}
+Predicted pow : 0.6499999999999999
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Predicted pow : 0.6499999999999999
+Agent1 says "I don't like restaurants on the west side."
+{0.6=0.2, 0.7=0.2, 0.9=0.2, 0.8=0.2}
+Predicted pow : 0.75
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Predicted pow : 0.75
+Agent1 says "I don't like restaurants on the east side."
+{0.6=0.1, 0.7=0.1, 0.9=0.2, 0.8=0.2}
+Predicted pow : 0.8500000000000001
+Agent1 says "Let's go to a lively restaurant."
+{0.6=0.1, 0.7=0.1, 0.9=0.2, 0.8=0.2}
+Predicted pow : 0.8500000000000001
+Agent1 says "Let's go to an expensive restaurant."
+{0.9=0.06666667, 0.6=0.1, 0.7=0.1, 0.8=0.2}
+Predicted pow : 0.8
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Predicted pow : 0.8
+Agent1 says "Okay."
+Predicted pow : 0.8
+
+Agent2 Interaction
+
+Agent1 says "Let's go to a restaurant on the north side."
+Agent2 says "I don't like restaurants on the north side, let's choose something else."
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Agent2 says "Do you like restaurants on the south side?"
+Agent1 says "I don't like restaurants on the south side."
+Agent2 says "Do you like restaurants on the west side?"
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Agent2 says "Do you like restaurants on the west side?"
+Agent1 says "I don't like restaurants on the west side."
+Agent2 says "Do you like restaurants on the east side?"
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Agent2 says "Do you like restaurants on the east side?"
+Agent1 says "I don't like restaurants on the east side."
+Agent2 says "Do you like restaurants downtown?"
+Agent1 says "Let's go to a lively restaurant."
+Agent2 says "Okay, let's go to a lively restaurant."
+Agent1 says "Let's go to an expensive restaurant."
+Agent2 says "Okay, let's go to an expensive restaurant."
+Agent1 says "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the north side."
+Agent2 says "Okay, let's go to the Ebis restaurant."
+Agent1 says "Okay."
+Agent2 says "Okay."
+

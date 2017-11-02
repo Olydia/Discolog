@@ -2,6 +2,7 @@ package fr.limsi.negotiate;
 
 import java.util.*;
 
+
 import edu.wpi.disco.*;
 import edu.wpi.disco.Agenda.Plugin;
 import edu.wpi.disco.lang.Utterance;
@@ -23,7 +24,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.75, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -38,7 +39,6 @@ public class NegotiatorAgent extends Agent {
 		new DecompositionPlugin(agenda, 25, true, true);
 	}
 	
-
 	public Negotiation<? extends Option> getNegotiation () { return negotiation; }
 
 	public double getRelation () { return relation; }
@@ -60,8 +60,8 @@ public class NegotiatorAgent extends Agent {
 		//GenerateMovieModel model = new GenerateMovieModel();
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model2()), 
-				new ToMNegotiatorProba("Agent2", model.model1()), 
+				new NegotiatorAgent("Agent1", model.model1()), 
+				new ToMNegotiatorProba("Agent2", model.model3()), 
 				false);
 
 		// note not loading Negotiotion.xml!
@@ -106,9 +106,11 @@ public class NegotiatorAgent extends Agent {
 
 	
 	public Utterance respondTo(Utterance utterance, Disco disco){
-		
+//		System.out.println(" ***** Pow " + getNegotiation().getDominance()+ 
+//				" Self " + getNegotiation().computeSelf(getNegotiation().getDominance()) + "*****");
 		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
+			
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
 
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");

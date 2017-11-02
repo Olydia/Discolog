@@ -274,7 +274,7 @@ public enum Restaurant implements Option {
 	ELDORADO(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.DOWNTOWN),
 	GRANDE_TOUR(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.NORTH_SIDE),
 	PAVILLON_LIMERE(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.EAST_SIDE),
-	RESTAURANT(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.WEST_SIDE),
+	RESTAURANT_LOUI(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.WEST_SIDE),
 	EN_BONNE_COMPAGNIE(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.QUIET, Location.SOUTH_SIDE),
 	LION_DOR(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.ROMANTIC, Location.DOWNTOWN),
 	PARIS_BISTRO(Cuisine.FRENCH, Cost.CHEAP, Atmosphere.ROMANTIC, Location.NORTH_SIDE),

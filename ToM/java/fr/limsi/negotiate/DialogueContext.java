@@ -60,7 +60,6 @@ public class DialogueContext {
 
 
 	public List<NegotiationUtterance> getHistory() {
-
 		return history;
 	}
 
@@ -231,5 +230,14 @@ public class DialogueContext {
 		 List<Class<? extends Criterion>> discussedCriteria = new ArrayList<Class<? extends Criterion>>(this.discussedCriteria); 
 		 List<Class<? extends Criterion>> closedCriteria = new ArrayList<Class<? extends Criterion>>(this.closedCriteria);
 		 return new DialogueContext(this.topicValues, history, discussedCriteria, closedCriteria);
+	}
+
+	public List<NegotiationUtterance> getHistory(boolean isExternal) {
+		List<NegotiationUtterance> utt = new ArrayList<NegotiationUtterance>();
+		for(NegotiationUtterance u : this.getHistory()){
+			if(u.getExternal().equals(isExternal))
+				utt.add(u);
+		}
+		return utt;
 	}
 }

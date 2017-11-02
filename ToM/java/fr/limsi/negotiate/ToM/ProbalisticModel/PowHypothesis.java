@@ -193,13 +193,15 @@ public class PowHypothesis{
 		for(Hypothesis h : this.hypothesis){
 
 			CriterionHypothesis current = h.getCriterionSat(type);
-			totalScore += ((float)current.scoreAcc(criterion, m, accepted)) / perfectScore;
+			totalScore += ((float)current.scoreAcc(criterion, m, accepted));
 
 		}
 		
 		
 		// il ne manque que diviser sur la taille init de toutes les valeurs
-		return  (float) ((float) totalScore/perfectScore);
+		float ratioAcc = (float) ((float) totalScore/perfectScore);
+	//	System.out.println("-------------------  score "+ totalScore + " perfect "+ perfectScore + " init " + initModels + " ");
+		return  (float) (ratioAcc/initModels);
 	}
 
 

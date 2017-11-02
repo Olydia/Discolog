@@ -98,7 +98,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		float prop = getProposePropotion();
 		float ask = getAskPropotion();
 		List<PowHypothesis> models = (prop>=ask? otherModel.getDom(): otherModel.getSub());
-		// si c'est superieurs récuperer uniquement les pow> 0.5 et les donner en entrée
+		// si c'est superieurs rï¿½cuperer uniquement les pow> 0.5 et les donner en entrï¿½e
 		
 
 		if(u instanceof StatePreference){
@@ -174,7 +174,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		for(PowHypothesis model: models){
 
 			double self = this.getNegotiation().computeSelf(model.getPow());
-
+			//System.out.println(model.getPow() + " self "+ self);
 			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self));
 		}
 

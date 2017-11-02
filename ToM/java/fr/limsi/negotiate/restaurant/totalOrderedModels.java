@@ -9,7 +9,7 @@ import fr.limsi.negotiate.Self_Ci;
 
 public class totalOrderedModels {
 
-	public   Negotiation<Restaurant>  model1(){
+	public  Negotiation<Restaurant>  model1(){
 
 
 		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
@@ -19,16 +19,12 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.CHINESE);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.CHINESE);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.KOREAN);
-		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
-		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.MEXICAN);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
 		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.JAPANESE);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.MEXICAN);
+		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
+		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.ITALIAN);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
 
 		
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
@@ -73,16 +69,13 @@ public class totalOrderedModels {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.CHINESE);
-		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
-		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.TURKISH);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.KOREAN);
-		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MEXICAN);
-		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.FRENCH);
-		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.ITALIAN);
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.MEXICAN);
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.ITALIAN);
-		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
+		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.CHINESE);
+		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.KOREAN);
+		d1_cuisine.addPreference(Cuisine.KOREAN, Cuisine.JAPANESE);
+
 
 
 
@@ -131,6 +124,7 @@ public class totalOrderedModels {
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
 		d1_cuisine.setType(Cuisine.class);
+		
 		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.KOREAN);
 		d1_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.KOREAN);
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.JAPANESE);
@@ -141,6 +135,7 @@ public class totalOrderedModels {
 		d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.FRENCH);
 		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.JAPANESE);
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.KOREAN);
+
 
 
 
@@ -245,6 +240,16 @@ public class totalOrderedModels {
 		return models;
 	}
 	
+	public static void main (String[] args)  {
+		
+		totalOrderedModels m = new totalOrderedModels();
+		Negotiation<Restaurant> m1 = m.model3();
+		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
+		for(Cuisine e: Cuisine.values()){
+			System.out.println( e + " " +m1.getValueNegotiation(e.getClass()).getSelf().satisfaction(e));
+		}
+		
+	}
 	
 		
 

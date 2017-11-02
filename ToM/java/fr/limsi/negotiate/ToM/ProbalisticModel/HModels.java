@@ -56,8 +56,12 @@ public class HModels {
 			int currentSize = current.getHypothesis().size();
 			if(currentSize == 0)
 				it.remove();
-			else 
-				maxPow.put(current.getPow(), ((float)currentSize));
+			else {
+				//System.out.println(current.getPow() + " restant "+ currentSize + "total "+ current.getInitModels() );
+				float rationSat = (float) ((float) currentSize / current.getInitModels()); 
+				maxPow.put(current.getPow(), ((float)rationSat));
+
+			}
 
 		}
 
@@ -99,8 +103,6 @@ public class HModels {
 				keys.add(entry.getKey());
 		}
 
-//		if(result.values().size() == keys.size())
-//			return previousPow;
 
 		OptionalDouble average = keys.stream()
 				.mapToDouble(a -> a).average();

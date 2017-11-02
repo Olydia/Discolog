@@ -183,11 +183,11 @@ public class GenerateModel {
 	
 	public static void main (String[] args)  {
 		
-		GenerateModel m = new GenerateModel();
-		Negotiation<Restaurant> m1 = m.model2();
+		totalOrderedModels m = new totalOrderedModels();
+		Negotiation<Restaurant> m1 = m.model1();
 		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
-		for(Atmosphere e: Atmosphere.values()){
-			System.out.println( e + " " +m1.getValueNegotiation(Atmosphere.class).getSelf().satisfaction(e));
+		for(Cost e: Cost.values()){
+			System.out.println( e + " " +m1.getValueNegotiation(e.getClass()).getSelf().satisfaction(e));
 		}
 		
 	}
