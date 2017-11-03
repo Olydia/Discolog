@@ -34,29 +34,30 @@
 	We make the assumption that our model faithfully reproduce behaviors of power when selecting utterances to enunciate. On that assumption, we aim to build a model of ToM based on simulation, able to compute the current value of power \emph{pow} expressed by the interlocutor based on the utterance expressed. 
 	
 	\section{Model of dialogue}
+		
+		We defined a dialogue system of cooperative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. The goal of a negotiation is to choose an option from the discussed topic. Theses options are defined as a set of criteria  $\{C_1, ..., C_n\}$ that reflect the option's characteristics. In order to be able to negotiate about which option to choose, an agent is initiated with a set of partial or total ordered set preferences $\prec_i$ on each criterion $C_i$. Using theses preferences, an agent can compute a score of satisfaction for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the set of preferences $\prec_i$, then, the score is normalized in $[0, 1]$: 
+		
+				\begin{equation}
+				sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+				\end{equation}
+				
+		The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$. 
+		
+		 \subsection{Model of decision based on power}
+		The decisional process during the negotiation is built to take into account the power of the agent. Therefore, agent is initiated with a value of power $pow \in [0,1]$. In addition, the decisional process to produce an utterance considers respectively, the agent's power, its preferences and the context of the negotiation.  
+		
+		A detailed explanation of the decisional model is presented in \cite{} . We present in the following the most important factors that defines the agent strategy.
+		
+		\subsubsection{Satisfiability }
+		The agent is allowed to share its preferences. %(\emph{StatePreference(v)}). 
+		To this end, the agent considers its perception of power $pow$, such that a value $v$ is satisfiable (likable), if:  
+		\begin{equation}
+		 	sat(v, \prec_i) \geq pow
+		\end{equation}
 	
-		We defined a model of cooperative negotiation enabling a conversational agent to adapt its negotiation strategy to the power it intends to express.  Therefore, a conversational agent is initiated with a value of power $pow \in [0,1]$. In addition, the decisional process to produce an utterance is influenced by four main factors:
-	\begin{enumerate}
-%		\item \emph{pow}: the agent has a personal representation of the power that it wants to express. The value of power influence all the decisional process and the negotiation strategy from the choice of the utterance to the values associated to the utterances.
+		We note $S$ the set of satisfiable values given a fixed value of $pow$.
 		
-		\item \emph{Preferences:} For each topic of negotiation, decision is based on a set of criteria $\{C_1, ..., C_n\}$. Thus, the agent is defined with a set of preferences  called $\prec_i$ on each criterion $C_i$. The preference relation is binary and transitive. it's either partial or total ordered. 
-		
-		% for a fixed value of $pow$,and a topic of negotiation.  a mental state is also defined with a set of agent's preferences. 
-		
-		Preferences are essential in the decisional process because it allows the agent to compute the values which it likes, that we note \textit{satisfiable}.
-		
-		The satisfiability of a value $v \in C_i$ defined in the domain of the criterion is computed as follow: 
-		
-			\begin{equation}
-			sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
-			\end{equation}
-	
-	
-		A value $v$ is called satisfiable if:
-		 	$sat(v, \prec_i) \geq pow$.
-		
-		
-		\par For example, for  a mental state where $pow =0.6$, the criterion which domain is  $D =\{A, B, C, D\}$ is defined with the set of preferences $\{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values is composed by the value $sat = \{B, C, D\}$ 
+		\par For example, for  a mental state where $pow =0.6$, the criterion which domain is  $D =\{A, B, C, D\}$ is defined with the set of preferences $\{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values is composed by the value $ S = \{B, C, D\}$ 
 			 \begin{table}
 			 	\centering
 			 	\begin{tabular}{ |c|c|c|c|c| }
@@ -73,9 +74,36 @@
 			 	\label{sat}
 			 \end{table}
 		
-		\item \textit{Decision based on power: } During the negotiation, the agent makes decisions about the proposals it receives. However, when the negotiation is not converging, the agent  has to make concessions, which means that the agent might accept proposals which are not satisfiables. We compute the notion of concession with a function called $self$, which is a time varying function of $pow$ that decreases over time. In the beginning, $self = pow$, with the negotiation is evolving $self < pow$. 
 		
-		We call the set $Acc$, the set of acceptable values such that $ v \in Acc$ if $sat(v) > pow$ 
-	\end{enumerate}
+	\subsubsection{Acceptability}
+	 
+	 During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, when the negotiation is not converging, the agent has to make concessions which means that the agent has to lower his level of demand. 
+	 We compute the notion of concession with $self(t)$, which is a time varying value of $pow$ that decreases over time $t$. In the beginning, $self(0) = pow$, when the negotiation evolves without converging self decreases $self(t) < pow$ as presented in the figure ... 
+	 
+	Thus, a proposal with a value $v \in C_i$ is \emph{acceptable} ($v \in Ac$) is computed with a boolean function:
+			\begin{equation}
+				acc(pow, v) = sat(v, \prec_i) \geq self(t)
+			\end{equation}	
+	and we note $Ac$ the set of acceptable values.
+
+	At a moment $t \not = 0$, where $self(t) < pow$,  an agent might accept proposals which are not satisfiables.  We note $M$ the set of acceptable values which are not satisfiables.
+	$\{v \in M / v \in Ac, v \notin S\}$.
+	
+%	Therefore, in order to accept \emph{Accept} or propose \emph{Propose} a value $v$, this value has to be acceptable $v \in Acc$. In the contrary, a value $v$ can be rejected (\emph{Reject}) if $v \not \in Acc$ and by consequences $v\not \in S$
+%	
+\subsubsection{Choice of an utterance}
+	The agent uses a strategy to choose the utterance type that reflects behaviors of power. Indeed, high-power agents focus on utterances of \emph{propose} in order to make the negotiation go on. On the contrary, a low-power agent uses in average more \emph{ask} utterances in order to have an accurate knowledge about the other to take the fairest decision.
+	
+	\subsection{Beliefs about other}
+	
+	In order to build a complementary relation of dominance with the user, the agent has to construct beliefs about the behaviors of power expressed by the user and adapt to complement his behavior. 
+	For this purpose, we propose to enable the agent with a model of theory of mind  based on simulation \cite{bibid}. The agent uses its model of decision in order to guess the behavior of the user from its enunciated utterance.   
+	
+	Decision in the negotiation is based on $pow$, preferences, and the current context of the negotiation, we propose to infer hypotheses about the decisional model of the user. 
+	
+	Expliquer qu'on commence a formuler des hypotheses sur le pouvoir de l'autre, pour chaque hypothese, on formule des hypotheses sur les preferences de l'autre 
+	
+	pour chaque critere, recreer les relations de preferences, qui donne une taille
+	
 	
 \end{document}
