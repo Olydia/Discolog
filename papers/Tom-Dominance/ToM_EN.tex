@@ -19,6 +19,7 @@
 \usepackage{xcolor, soul}
 \sethlcolor{yellow}	
 \usepackage{floatrow}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
 %\pagestyle{plain}
 %
 \begin{document}
@@ -97,13 +98,38 @@
 	\subsection{Beliefs about other}
 	
 	In order to build a complementary relation of dominance with the user, the agent has to construct beliefs about the behaviors of power expressed by the user and adapt to complement his behavior. 
-	For this purpose, we propose to enable the agent with a model of theory of mind  based on simulation \cite{bibid}. The agent uses its model of decision in order to guess the behavior of the user from its enunciated utterance.   
 	
-	Decision in the negotiation is based on $pow$, preferences, and the current context of the negotiation, we propose to infer hypotheses about the decisional model of the user. 
+	We make the assumption that our model of dialogue effectively presents the process of utterance's selection using power. 
 	
-	Expliquer qu'on commence a formuler des hypotheses sur le pouvoir de l'autre, pour chaque hypothese, on formule des hypotheses sur les preferences de l'autre 
+	Based on this assumption, we propose to enable the agent with a model of theory of mind based on simulation \cite{bibid}. The agent uses its model of decision in order to guess the behavior of the user from its enunciated utterance.   
 	
-	pour chaque critere, recreer les relations de preferences, qui donne une taille
+	The agent needs to infer hypotheses about the user's mental state (\emph{i.e} Pow, Preferences) in order to reason about its behaviors. With knowledge raised during the negotiation, the agent will remove inconsistent hypotheses.
+	
+	First, we define hypotheses about the possible values of $pow$ that the agents aims to predict. Let $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$ be the hypotheses on $pow$.
+	
+	Second, for each fixed hypothesis $ h_i \in H_{pow}$, we define hypotheses on the different set of preferences  noted $M_H $. Thus, for each $C_i$, we compute all the possible combination of preference's relations. When relations of preferences are total ordered, the total number of preference's relations is in the order of $|H{C_i}| = |C_i|!$. In the case of partial ordered relations of preferences, the total number of possible relations is  $ |H{C_i}| = (|C_i| + 1)!$. Hence, for a topic of negotiation with $n$ criteria, the number of possible set of preferences is $ |M_H| = \prod_{i=1}^n (|H{C_i}|)$. 
+	
+	For each hypothesis $ h_i \in H_{pow}$, we associate the set of possible preferences $M_H(h_i)$ identical for all the hypotheses in the beginning. After each user's turn, the agent updates its hypotheses and remove the ones that did not produced the same utterance than enunciated by the user. The value of power selected is computed as follow:
+	
+	\begin{equation}
+		pow_{Other} = \operatorname*{arg\,max}_{h_i \in H_{pow}} ( M_H(h_i))
+	\end{equation} 
+	
+	This solution presents a computational limitation concerning the number of hypotheses formulated to generate the preferences. As presented, the size of hypotheses $M_H$ is considerable which can slow down the dialogue generation. However, we don't aim to know the "correct" preferences of the user but only the expressed power $pow$. 
+	
+	To deal with this limitation, we propose to infer hypotheses with partial knowledge about preferences. We only need to represent information about the user's preferences to be able reproduce its decisional model. 
+	
+	
+	\subsubsection{Partial model of preferences}
+	
+	
+	
+	
+	
+	
+
+	
+	
 	
 	
 \end{document}
