@@ -34,6 +34,10 @@ public class totalOrderedModels {
 		d1_atmosphere.addPreference(Atmosphere.LIVELY, Atmosphere.ROMANTIC);
 		d1_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.FAMILY);
 		d1_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.QUIET);
+		d1_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.COZY);
+		d1_atmosphere.addPreference(Atmosphere.COZY, Atmosphere.MODERN);
+
+
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
@@ -86,6 +90,10 @@ public class totalOrderedModels {
 		d1_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.LIVELY);
 		d1_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.LIVELY);
 		d1_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.FAMILY);
+		d1_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.MODERN);
+		d1_atmosphere.addPreference(Atmosphere.MODERN, Atmosphere.COZY);
+
+
 
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
@@ -145,7 +153,7 @@ public class totalOrderedModels {
 		d2_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.LIVELY);
 		d2_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.LIVELY);
 		d2_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.ROMANTIC);
-		d2_atmosphere.addPreference(Atmosphere.QUIET, Atmosphere.ROMANTIC);
+		d2_atmosphere.addPreference(Atmosphere.ROMANTIC, Atmosphere.QUIET);
 		d2_atmosphere.addPreference(Atmosphere.FAMILY, Atmosphere.QUIET);
 
 
