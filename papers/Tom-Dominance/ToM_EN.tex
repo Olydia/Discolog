@@ -24,7 +24,7 @@
 %
 \begin{document}
 	\begin{abstract}
-		content...
+		
 	\end{abstract}
 %	plan of the paper
 %	1. We defined a model of dialogue make a schema that explains 
@@ -39,7 +39,7 @@
 	
 	\section{Model of dialogue}
 		
-		We defined a dialogue system of cooperative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. The goal of a negotiation is to choose an option from the discussed topic. Theses options are defined as a set of criteria  $\{C_1, ..., C_n\}$ that reflect the option's characteristics. In order to be able to negotiate about which option to choose, an agent is initiated with a set of partial or total ordered set preferences $\prec_i$ on each criterion $C_i$. Using theses preferences, an agent can compute a score of satisfaction for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the set of preferences $\prec_i$, then, the score is normalized in $[0, 1]$: 
+		We defined a dialogue system of cooperative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. The goal of a negotiation is to choose an option from the discussed topic. Theses options are defined as a set of criteria  $\{C_1, ..., C_n\}$ that reflect the option's characteristics. In order to be able to negotiate about which option to choose, an agent is initiated with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, an agent can compute a score of satisfaction for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$, then, the score is normalized in $[0, 1]$: 
 		
 				\begin{equation}
 				sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
@@ -55,14 +55,14 @@
 		\subsubsection{Satisfiability }
 		\label{sec:sat}
 		The agent is allowed to share its preferences. %(\emph{StatePreference(v)}). 
-		To this end, the agent considers its perception of power $pow$ to compute the satisfiability, such that a value $v$ is said satisfiable (likable), if:  
+		To this end, the agent considers its perception of power $pow$ to compute the satisfiability, such that a value $v$ is satisfiable (likable), if:  
 		\begin{equation}
 		 	sat(v, \prec_i) \geq pow
 		\end{equation}
 	
-		Therefore, given a value of $pow$, and a model of preferences $\prec$, the agent has a set set of satisfiable values noted $S$. 
+		Therefore, given a value of $pow$, and a model of preferences $\prec$, the agent has a set of satisfiable values noted $S$. 
 		
-		\par For example, for  a mental state where $pow =0.6$, the criterion which domain is  $D =\{A, B, C, D\}$ is defined with the set of preferences $ \prec_D = \{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values $ S = \{B, C, D\}$ 
+		\par For example, consider a mental state where $pow =0.6$, a criterion with a domain $D =\{A, B, C, D\}$ is defined with the set of preferences $ \prec_D = \{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values is $ S = \{B, C, D\}$ 
 			 \begin{table}
 			 	\centering
 			 	\begin{tabular}{ |c|c|c|c|c| }
@@ -83,7 +83,7 @@
 	\subsubsection{Acceptability}
 	 
 	 During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, when the negotiation is not converging, the agent has to make concessions which means that the agent has to lower his level of demand. 
-	 We compute the notion of concession with $self(t)$, which is a time varying value of $pow$ that decreases over time $t$. In the beginning, $self(0) = pow$, when the negotiation evolves without converging self decreases $self(t) < pow$ as presented in the figure 
+	 We compute the notion of concession with $self(t)$, which is a time varying value of $pow$ that decreases over time $t$. In the beginning, $self(0) = pow$, when the negotiation evolves without converging self decreases $self(t) < pow$ as presented in the figure \ref{fig:conc}.
 	 	\begin{floatingfigure}[r]{1.8in}
 	 		\includegraphics[width=1.8in]{figs/sv3.png}
 	 		\caption{\label{fig:conc}Concession curve}
@@ -95,7 +95,8 @@
 			\end{equation}	
 	and we note $Ac$ the set of acceptable values.
 
-	When negotiation progress in time without converging to a trade-off, the agent has to make concessions which means $self(t) < pow$. As a consequence, the agent might accept proposals which are not satisfiables. We note $M$ the set of acceptable values which are not satisfiables.
+	%When negotiation progress in time without converging to a trade-off,
+	In addition, When concessions occurs during the negotiation $self(t) < pow$. As a consequence, the agent might accept proposals which are not satisfiables. We note $M$ the set of acceptable values which are not satisfiables.
 	$\{v \in M / v \in Ac, v \notin S\}$.
 	
 %	Therefore, in order to accept \emph{Accept} or propose \emph{Propose} a value $v$, this value has to be acceptable $v \in Acc$. In the contrary, a value $v$ can be rejected (\emph{Reject}) if $v \not \in Acc$ and by consequences $v\not \in S$
@@ -111,11 +112,11 @@
 	
 	Based on this assumption, we propose to enable the agent with a model of theory of mind based on simulation \cite{bibid}. The agent uses its model of decision in order to guess the behavior of the user from its enunciated utterance.   
 	
-	The agent needs to infer hypotheses about the user's mental state (\emph{i.e} Pow, Preferences) in order to reason about its behaviors. With knowledge raised during the negotiation, the agent will remove inconsistent hypotheses.
+	The agent needs to infer hypotheses about the user's mental state (\emph{i.e} Pow, Preferences) in order to reason about his behaviors. With knowledge gathered during the negotiation, the agent will remove inconsistent hypotheses.
 	
 	First, we define hypotheses about the possible values of $pow$ that the agents aims to predict. Let $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$ be the hypotheses on $pow$.
 	
-	Second, for each fixed hypothesis $ h_i \in H_{pow}$, we define hypotheses on the different set of preferences  noted $M_H $. Thus, for each $C_i$, we compute all the possible combination of preference's relations. When relations of preferences are total ordered, the total number of preference's relations is in the order of $|H{C_i}| = |C_i|!$. In the case of partial ordered relations of preferences, the total number of possible relations is  $ |H{C_i}| = (|C_i| + 1)!$. Hence, for a topic of negotiation with $n$ criteria, the number of possible set of preferences is $ |M_H| = \prod_{i=1}^n (|H{C_i}|)$. 
+	Second, for each fixed hypothesis $ h_i \in H_{pow}$, we define hypotheses on the different set of preferences  noted $M_H $. Thus, for each criterion $C_i$ of the a topic , we compute all the possible combination of preference's relations. When relations of preferences are total ordered, the total number of preference's relations is in the order of $|H{C_i}| = |C_i|!$. In the case of partial ordered relations of preferences, the total number of possible relations is  $ |H{C_i}| = (|C_i| + 1)!$. Hence, for a topic of negotiation with $n$ criteria, the number of possible set of preferences is $$ |M_H| = \prod_{i=1}^n (|H{C_i}|)$$. 
 	
 	For each hypothesis $ h_i \in H_{pow}$, we associate the set of possible preferences $M_H(h_i)$ identical for all the hypotheses in the beginning. After each user's turn, the agent updates its hypotheses and remove the ones that did not produced the same utterance than enunciated by the user. The value of power selected is computed as follow:
 	
