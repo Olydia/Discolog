@@ -52,9 +52,10 @@ public class Self_Ci <C> extends Self<C> {
 	}
 	@Override
 	public String toString(){
-		String s = "";
+		String s = "[";
 		for(Preference<C> p : selfPreferences)
-			s = p + "\t";
+			s += p + " , ";
+		s+= "]";
 		return s;
 	}
 

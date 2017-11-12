@@ -27,14 +27,18 @@ public class Negotiation<O extends Option> {
 		this.context_bis =  new DialogueContext(criteria.getElements());
 
 	}
+	
+	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation,
+			Self_C<O>  criteriaNegotiation, Class<O> topic) {
 
-	public DialogueContext getContext() {
-		return context_bis;
+		this.valueNegotiation = valueNegotiation;
+		this.proposals = new ArrayList<OptionProposal>();
+		this.topic=topic;
+		setCriteria(criteriaNegotiation);
+		this.context_bis =  new DialogueContext(criteria.getElements());
+
 	}
 
-	public void setContext_bis(DialogueContext context_bis) {
-		this.context_bis = context_bis;
-	}
 
 	public Negotiation(List<CriterionNegotiation<Criterion>>valueNegotiation, double relation,
 			Self_C<O>  criteriaNegotiation, Class<O> topic, DialogueContext c, 
@@ -68,6 +72,14 @@ public class Negotiation<O extends Option> {
 		setCriteria((Self_C<O>) negotiation.getCriteria());
 		this.context_bis = negotiation.getContext();	}
 
+	
+	public DialogueContext getContext() {
+		return context_bis;
+	}
+
+	public void setContext_bis(DialogueContext context_bis) {
+		this.context_bis = context_bis;
+	} 
 	public ArrayList<OptionProposal> getProposals() {
 		return proposals;
 	}

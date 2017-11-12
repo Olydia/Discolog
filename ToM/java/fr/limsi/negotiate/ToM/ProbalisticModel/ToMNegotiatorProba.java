@@ -19,8 +19,18 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	private HModels otherModel;
 	public Negotiation<? extends Option> previousState;
-	//public Negotiation<? extends Option> other;
 	public double other;
+	private List<Double> guessed;
+
+
+	public List<Double> getGuessed() {
+		return guessed;
+	}
+
+
+	public void setGuessed(List<Double> guessed) {
+		this.guessed = guessed;
+	}
 
 
 	public double getOther() {
@@ -50,6 +60,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		this.previousState = negotiation;
 
 		this.other = 1 - getNegotiation().getDominance();
+		
+		this.guessed = new ArrayList<Double>();
+
 
 
 	}
@@ -82,9 +95,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
 		if (utterance != null)
-			//guessProba(disco,selfPrevious, utterance, previousState);
 			this.setOther(guess(utterance, getOther()));
-		System.out.println("Predicted pow : " + getOther());
+		guessed.add(getOther());
+		System.out.println("Predicted pow : " + guessed);
 		Utterance u = respondTo(utterance, disco);
 		return u ;
 	}
@@ -94,7 +107,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	public double guess(Utterance u, double previousPow){
 
-		System.out.println(u.format());
+		//System.out.println(u.format());
 		float prop = getProposePropotion();
 		float ask = getAskPropotion();
 		List<PowHypothesis> models = (prop>=ask? otherModel.getDom(): otherModel.getSub());
@@ -251,7 +264,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
 		ac1.setStatus(Status.ACCEPTED);
 
-		ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
+		//ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
 
 		//System.out.println(tom.updateAccept(ac1, 0.6));
 
