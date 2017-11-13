@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import com.sun.org.apache.xpath.internal.operations.Neg;
 import edu.wpi.disco.Dual;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.expirement.FileAppend;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.toyExample.*;
 
 public class TestDialogues {
 	// creer les models de pref
@@ -33,23 +35,22 @@ public class TestDialogues {
 				//					System.out.println("-------------------------------------Dominant-model" + (indexA+1)+ 
 				//							"___Submissive-model"+  (indexB+1)+ "   " +relationAgent1 + "__" + relationAgent2 +" ------------------------------------");
 				ID ++;
-				String fileName = path+"ID "+ID+"_Nego_" + relationAgent2 +"_"+ "ToM-"+ relationAgent1;
-
-				//String fileName = "Nego_" + relationAgent1 +"_"+ "ToM-"+ relationAgent2;
+			//	String fileName = path+"ID "+ID+"_Nego_" + relationAgent2 +"_"+ "ToM-"+ relationAgent1;
+				String fileName = path+"ID "+ID+"_Nego_" + relationAgent1 +"_"+ "ToM-"+ relationAgent2;
 				FileAppend file = new FileAppend(fileName);
 
 				Dual dual = new Dual(
-						new ToMNegotiatorProba("Agent1", negotiation), 
-						new NegotiatorAgent("Agent2", negotiation2), 
+						new ToMNegotiatorProba("Agent1", negotiation),
+						new NegotiatorAgent("Agent2", negotiation2),
 						false);
 
 				// note not loading Negotiotion.xml!
 				dual.interaction1.load("models/Negotiate.xml");
 				dual.interaction2.load("models/Negotiate.xml");
-				((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(relationAgent1);
-				((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(relationAgent2);
-				((ToMNegotiatorProba) dual.interaction1.getSystem()).getNegotiation().setDominance(relationAgent1);
-				((NegotiatorAgent) dual.interaction2.getSystem()).getNegotiation().setDominance(relationAgent2);
+				((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(relationAgent1);
+				((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(relationAgent2);
+				((NegotiatorAgent) dual.interaction2.getSystem()).getNegotiation().setDominance(relationAgent1);
+				((ToMNegotiatorProba) dual.interaction1.getSystem()).getNegotiation().setDominance(relationAgent2);
 				long startTime = System.currentTimeMillis();
 				dual.start();
 				try {
@@ -88,12 +89,12 @@ public class TestDialogues {
 
 	public static void main(String[] args) {
 
-		Models<Restaurant> m = new Models<Restaurant>();
-		m.generateSelfs(Restaurant.A_CITADELLA.getCriteria(), Restaurant.class);
-		for (Models<Restaurant>.Tuple<List<Self_Ci<Criterion>>,
+		Models<ToyRestaurant> m = new Models<ToyRestaurant>();
+		m.generateSelfs(ToyRestaurant.A_CITADELLA.getCriteria(), ToyRestaurant.class);
+		for (Models<ToyRestaurant>.Tuple<List<Self_Ci<Criterion>>,
 				List<Self_Ci<Criterion>> > e:m.getFinalList()){
-			excuteTests(m.createNegotiation(e.a, Restaurant.class), 
-					m.createNegotiation(e.b, Restaurant.class));
+			excuteTests(m.createNegotiation(e.a, ToyRestaurant.class),
+					m.createNegotiation(e.b, ToyRestaurant.class));
 		}
 
 		//		

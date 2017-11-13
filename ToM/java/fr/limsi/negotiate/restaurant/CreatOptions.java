@@ -1,5 +1,8 @@
 package fr.limsi.negotiate.restaurant;
 
+import fr.limsi.negotiate.toyExample.ToyAtmosphere;
+import fr.limsi.negotiate.toyExample.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,11 +79,11 @@ public class CreatOptions {
 	public static void main(String[] args) {
 		Map<String, String[]> restau = new HashMap<String, String[]>();
 		restau.put("ITALIAN", italian);
-		restau.put("TURKISH", turkish);
+		//restau.put("TURKISH", turkish);
 		restau.put("MEXICAN", mexican);
 		restau.put("FRENCH", french );
 		restau.put("CHINESE", chinese);
-		restau.put("KOREAN", korean);
+	//	restau.put("KOREAN", korean);
 		restau.put("JAPANESE", japanese);
 
 
@@ -88,11 +91,11 @@ public class CreatOptions {
 		int i =0;
 		for(String cuisine: restau.keySet()){
 
-			for(Cost cost: Cost.values()){
-				for (Atmosphere ambiance: Atmosphere.values()){
-					for (Location arr : Location.values()){
-							System.out.println(restau.get(cuisine)[i].toUpperCase()+"(Cuisine."+cuisine+ ", Cost." + cost.name()+ ", Atmosphere." +
-									ambiance.name() + ", Location." + arr.name()+"),");
+			for(ToyCost cost: ToyCost.values()){
+				for (ToyAtmosphere ambiance: ToyAtmosphere.values()){
+					for (ToyLocation arr : ToyLocation.values()){
+							System.out.println(restau.get(cuisine)[i].toUpperCase()+"(ToyCuisine."+cuisine+ ", ToyCost." + cost.name()+ ", ToyAtmosphere." +
+									ambiance.name() + ", ToyLocation." + arr.name()+"),");
 							i++;
 						}
 
