@@ -139,7 +139,7 @@
 	
 	\begin{abstract}  % put your abstract here!
 		
-		Interpersonal dominance relation has a major effect on the outcome of a negotiation. It has been shown that when participants adopt complementary dominance behaviors (one being dominant and the other being submissive), they reach mutually beneficial outcomes and this increases their reciprocal likings. In this paper, we investigate the simulation of this interpersonal relationship in the context of collaborative negotiation between an artificial agents.
+		Interpersonal dominance relation has a major effect on the outcome of a negotiation. It has been shown that when participants adopt complementary dominance behaviors (one being dominant and the other being submissive), they reach mutually beneficial outcomes and this increases their reciprocal likings. In this paper, we investigate about the simulation of this interpersonal relationship in the context of collaborative negotiation between artificial agents.
 		
 		Our simulation is based on a previously published model. We present a Theory of Mind model that allows an agent to evaluate its interlocutor's level of dominance. The agent establishes the relation of dominance by adapting its behavior of power to complement the power of its interlocutor. We show on agent-agent simulation that the system correctly predicts the interlocutor's power. 
 		
@@ -195,7 +195,7 @@
 	\section{Introduction}
 	Negotiation is a common task in daily life. People negotiate about simple situations as choosing a restaurant as well as complex situations such as salary negotiation or a promotion. Thus, we observe a variety of conversational agents which have been created to negotiate with people [refs]. Theses systems are designed with a large panel of abilities such as, the number of parties, the number of issues negotiated \emph{etc $\ldots$}.
 	
-	Negotiation is often complex to model. It is a multifaceted process which involves social interaction and affects as well as personal preferences and opinions  \cite{bro2010affective}. Indeed, researches in social psychology demonstrated that the relation of dominance affected the way that the negotiation precess is lived and perceived.
+	Negotiation is often complex to model and implement. It is a multifaceted process which involves social interaction and affects as well as personal preferences and opinions  \cite{bro2010affective}. Indeed, researches in social psychology demonstrated that the relation of dominance affected the way that the negotiation precess is lived and perceived.
 	Negotiating parties often differ in terms of power, and power differences exert an important influence on the way negotiator build their negotiation strategies, the behaviors displayed and by consequences the outcomes of the negotiation \cite{van2006power}. More precisely, dominance complementarity in which one negotiator exhibits high-power behaviors (dominant behavior) and other one responds with submissive behavior and vice versa \cite{tiedens2003power}. The complementarity leads the negotiator to reach mutually beneficial outcomes and increases their reciprocal likings \cite{wiltermuth2015benefits,tiedens2003power}.
 	
 	
@@ -203,7 +203,7 @@
 	
 	To construct a complementary relation of dominance, the agent has to interpret the user behaviors to understand the power he intends to express.  In a previous work \cite{ouali2017computational}, we designed a negotiation system capable of expressing negotiation's strategies that reflect the power of the agent. We propose to extend this model, with theory of mind abilities based on simulation, that allow the agent to reason about the behaviors. 
 	
-	Since the behaviors of power implemented reflects human behaviors, we assume that the user uses the same decision model. Therefore, the agent will define beliefs about the user' reasoning based on his  utterances. 
+	Since the implemented behaviors of power reflect human behaviors, we assume that the user uses the same decision model. Therefore, the agent will define beliefs about the user's reasoning based on his  utterances. 
 	
 	
 	In this paper specifically, we present our model of theory of mind that construct a mental model of the user and processes the value of power he exhibits in the negotiation. 
@@ -216,15 +216,15 @@
 	
 	In social interactions and negotiation in particular, reasoning about the beliefs, goals, and intentions of others is crucial. People use this so-called theory of mind \cite{premack1978does} or mentalizing to understand why others behave the way they do, as well as to predict the future behavior of others. Therefore, various negotiation models use Theory of Mind approaches to create models of negotiation which are more realistic. 
 	
-	For instance, Pynadath \textit{et al}\cite{pynadath2013you} showed the advantages of the theory of mind on negotiation even with an overly simplified model. They observed significant similarities between	the partner behavior and the agent's idealized expectations. Moreover, deviations in expectations about the other did not affect the agent performances and played in some cases in the advantage of the agent.
+	For instance, Pynadath \textit{et al}\cite{pynadath2013you} showed the advantages of the theory of mind on negotiation even with an overly simplified model. They observed significant similarities between	the partner behaviors and the agent's idealized expectations. Moreover, deviations in expectations about the other did not affect the agent performances and played in some cases in the advantage of the agent.
 	
-	de Weerd \textit{et al} \cite{de2013higher} investigated the use of high-order theory of mind in mixed-motive situations where cooperative and competitive behaviors play an important role. They found that the use of first-order and second-order theory of mind allow agents to balance competitive and cooperative	aspects of the game. This prevents the agents from breaking down compared to  agents without theory of mind.
+	de Weerd \textit{et al} \cite{de2013higher} investigated the use of high-order theory of mind in mixed-motive situations where cooperative and competitive behaviors play an important role. They found that the use of first-order and second-order theory of mind allow agents to balance competitive and cooperative	aspects of the game. This prevents agents from breaking down compared to  agents without theory of mind.
 	
 	
 	Theses presented works use dynamics which only focus on rational behaviors and exclude social aspects. However, The impact of social behaviors has been extensively debated in social psychology. Among such works, varios researches have been investigating emotion recognition in negotiation; the effects of one individual's	emotions on the other's social decisions and behavior during the negotiation. Moreover, they investigate how theses resource of information are integrated.
 	For example, Elfenbein\textit{ et al} \cite{elfenbein2007reading} proved that  emotion recognition accuracy is positively correlated to  better performances in negotiation
 	
-	In the same vein, several researches suggested the effect of anger expression in the negotiation \cite{sinaceur2006get,van2010interpersonal,ferguson2004social}. For example, VanKleef \cite{van2004interpersonal} demonstrated that negotiators monitor their opponent's emotions and use them to estimate the opponent's limits, and modify their demands according to the presumed location of those limits. As a result, negotiators concede more to an angry opponent than to a happy one. 
+	In the same vein, several researches suggested that anger expression has effects on the negotiation \cite{sinaceur2006get,van2010interpersonal,ferguson2004social}. For example, VanKleef \cite{van2004interpersonal} demonstrated that negotiators monitor their opponent's emotions and use them to estimate the opponent's limits, and modify their demands according to the presumed location of those limits. As a result, negotiators concede more to an angry opponent than to a happy one. 
 	
 	
 	For theses reasons, reasoning about the social behaviors is important for the percpective of construnging negotiators agents. \cite{alfonso2015emotional} proposed a model that can observe and predict other's agents emotional behaviors. The three step method proposes to revise the agent's  beliefs by integrating a bayesian model which infers probabilities about the emotional behaviors of other's agents and compute probabilitistic prediction about their appraisals.
@@ -234,7 +234,7 @@
 	In the context our work, we focus on the impact of dominance in the negotiation. Dominance as an interpersonal relation is defined by burgoon \cite{burgoon1998nature} as expressive, relationally based communicative acts by which power is exerted and influence achieved. Futrthermore, its is a dyadic variable in which control attempts by one individual are accepted by the
 	interactional partner \cite{dunbar2005perceptions}. For this reason, we focus on dominance complementarity between a negotiator agent and a human user in the context of collaborative negotiation. 
 	
-	Dominance complementarity is characterized by one person in adyadic interaction behaving dominantly and his counterpart behaving submissively \cite{tiedens2003power} have been investigated in the context of negotation. \cite{tiedens2003power} showed that when complementarity occurs in an interaction, people feel more comfortable and helps to create interpersonal liking relation.
+	Dominance complementarity is characterized by one person in adyadic interaction behaving dominantly and his counterpart behaving submissively \cite{tiedens2003power} and those behaviors have been investigated in the context of negotation. \cite{tiedens2003power} showed that when complementarity occurs in an interaction, people feel more comfortable and helps to create interpersonal liking relation.
 	Moreover, \cite{wiltermuth2015benefits} showed that dominance complementarity can positively improve coordination and by consequences improve objective benefits.
 	
 	Our goal is to create a model of negotiation in which the agent adapts its negotiation strategies to the relation of dominance established with the user. Therefore, the agent has to reason about user's behaviors of power  to understand the level of dominance or submissiveness expressed. The agent then adopt a complementary starategy in order to complement the user behaviors and establish the relation of dominance.
@@ -242,28 +242,54 @@
 	We present in this paper a model of theory of mind that build beliefs about the user behaviors of power in order to predict his behavior of dominance. We propose to use our model of negotiation based on power in order to reason about the user behaviors. 
 	\section{Model of dialogue}
 	
-	We defined a dialogue system of cooperative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. The goal of a negotiation is to choose an option from the discussed topic. Theses options are defined as a set of criteria  $\{C_1, ..., C_n\}$ that reflect the option's characteristics. In order to be able to negotiate about which option to choose, an agent is initiated with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, an agent can compute a score of satisfaction for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$, then, the score is normalized in $[0, 1]$: 
+	Our simulation of interpersonal relation of dominance is based on a previously proposed model of collaborative negotiation \cite{x}. In this model, the artificial agent selects an utterance based on the previously exchanged information and on its personal level of social power. We showed that the utterances produced by this model allow human user to correctly perceive the different dimensions of social power expressed by the agent. 
+	It is not necessary to know this dialogue model to understand the simulation presented here. However, some elements are required to explain our approach. This section briefly presents the main principles of the collaborative negotiation dialogue model.
 	
-	\begin{equation}
-	sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
-	\end{equation}
+
 	
+%	We defined a dialogue system of collaborative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. 
+	The goal of a negotiation is to choose an option from the discussed topic. Theses options are defined as a set of criteria  $\{C_1, ..., C_n\}$ that reflect the option's characteristics. In order to be able to negotiate about which option to choose, an agent is initiated with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, an agent can compute a score of satisfaction for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$
+	%, then, the score is normalized in $[0, 1]$: 
+	
+%	\begin{equation}
+%	sat(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+%	\end{equation}
+%	
 	The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$. 
 	
 	\subsection{Model of decision based on power}
-	The decisional process during the negotiation is built to take into account the power of the agent. Therefore, agent is initiated with a value of power $pow \in [0,1]$. In addition, the decisional process to produce an utterance considers respectively, the agent's power, its preferences and the context of the negotiation.  
+	The decisional process during the negotiation is built to take into account the power of the agent. Therefore, agent is initiated with a value of power $pow \in [0,1]$. The decisional process to produce an utterance considers respectively, the agent's power, its preferences and the context of the negotiation.  We present in table \ref{tab:utt} the applicability condition for each utterance.
 	
-	A detailed explanation of the decisional model is presented in \cite{} . We present in the following the most important factors that defines the agent strategy.
+	\begin{table}
+		\centering
+		\begin{tabular}  {|l|l|}
+			\hline
+			Utterance & Applicability condition \\
+			\hline
+			StatePreference(v) & $sat(v, \prec_i) \geq pow$ \\
+			\hline 
+			Propose(v) & $acc(pow, v) = true$ \\
+			\hline
+			Accept(v)  & $acc(pow, v) = true$ \\
+			\hline
+			Reject(v) & $acc(pow, v) = false$ \\
+			\hline
+		\end{tabular}
+		\caption{Value of satisfiability for the model $D$.}
+		\label{tab:utt}
+	\end{table}
 	
-	\subsubsection{Satisfiability }
+	A detailed explanation of the decisional model is presented in \cite{}. We present in the following the most important factors that defines the agent strategy. 
+	
+	\subsubsection{Satisfiability: }
 	\label{sec:sat}
-	The agent is allowed to share its preferences. %(\emph{StatePreference(v)}). 
+	The agent is allowed to share its preferences using the utterance \emph{StatePreference(v)}. 
 	To this end, the agent considers its perception of power $pow$ to compute the satisfiability, such that a value $v$ is satisfiable (likable), if:  
 	\begin{equation}
 	sat(v, \prec_i) \geq pow
 	\end{equation}
 	
-	Therefore, given a value of $pow$, and a model of preferences $\prec$, the agent has a set of satisfiable values noted $S$. 
+	Given a value of $pow$, and a model of preferences $\prec$, the agent has a set of satisfiable values noted $S$. 
 	
 	\par For example, consider a mental state where $pow =0.6$, a criterion with a domain $D =\{A, B, C, D\}$ is defined with the set of preferences $ \prec_D = \{A \rightarrow  B, C \rightarrow  D , B \rightarrow D \}$. The values of satisfiability are depicted in the table \ref{sat}. We can compute that the set of satisfiable values is $ S = \{B, C, D\}$ 
 	\begin{table}
@@ -285,12 +311,15 @@
 	
 	\subsubsection{Acceptability}
 	
-	\begin{floatingfigure}[r]{1.5in}
-		\includegraphics[width=1.5in]{figs/sv3.png}
-		\caption{\label{fig:conc}Concession curve}
-	\end{floatingfigure} 
-	
+
 	During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, when the negotiation is not converging, the agent has to make concessions which means that the agent has to lower his level of demand. 
+	
+		\begin{floatingfigure}[r]{1.5in}
+			\includegraphics[width=1.5in]{figs/sv3.png}
+			\caption{\label{fig:conc}Concession curve}
+		\end{floatingfigure} 
+		
+		
 	We compute the notion of concession with $self(t)$, which is a time varying value of $pow$ that decreases over time $t$. In the beginning, $self(0) = pow$, when the negotiation evolves without converging self decreases $self(t) < pow$ as presented in the figure \ref{fig:conc}.
 	
 	
@@ -311,7 +340,13 @@
 	
 	\subsection{Beliefs about other}
 	
-	In order to build a complementary relation of dominance with the user, the agent has to construct beliefs about the behaviors of power expressed by the user and adapt to complement his behavior. 
+	In order to build a complementary relation of dominance with the user, the agent has to construct beliefs about the behaviors of power expressed by the user and adapt to complement his behavior as presented in figure \ref{fig:model}.
+	
+	\begin{figure*}
+			\fbox{\includegraphics[width=\linewidth, height= 0.4\textheight]{figs/model_tom.pdf}}
+			\caption{Model of collaborative negotiation with a model of other} 
+			\label{fig:model}
+	\end{figure*} 
 	
 	We make the assumption that our model of dialogue effectively presents the process of utterance's selection using power. 
 	
@@ -472,8 +507,8 @@
 	
 	We imeplemented two agents with thoery of mind abilities.
 	The first agent ($agent_A$) plays a role of a dominant agent( $pow > 0.5$), whereas, the second agent ($agent_B$) plays the role of a submissive agent ($pow \leq 0.5$). 
-	We manipulated two simulation parameters for the initialisation of our agents. First, the power of both agents (named \emph{pow-a} and \emph{pow-b}). We variate the values of power in order to study the accuracy in different settings as presented in table \ref{tab:powsettings}.
-	Second, we variate the preference sets and more specificly the size of the discussed topic in order to study the timeliness of the algorithme from simple to richer topics. We generate $150$ different models of preferences.
+	We manipulated two simulation parameters for the initialisation of our agents. First, the power of both agents (named \emph{pow-a} and \emph{pow-b}). We variate the values of power in order to study the accuracy of predictions in different settings as presented in table \ref{tab:powsettings}.
+	Second, we variate the preference sets and more specificly the size of the discussed topic in order to study the timeliness of the algorithme from simple to richer topics. We generate in total $150$ different models of preferences.
 	
 	In total we generate $1451$ combinations for the initial states of both agents. For each combination, we generate a dialogue in which the agent with theory of mind estimates the other's value of power.
 	
@@ -493,12 +528,15 @@
 	\end{table}
 	
 	\subsection{Results and discussion}
-	We present in this section the results obtained for both the accuracy of model and the timeliness of the execution.
+	We present in this section the results obtained for both the accuracy of predictions made by our model and the timeliness of the execution.
 	
-	\subsubsection{Accuracy of predictions:} For each dialogue, we obtain the prediction of power of one agent, and the results are depicted in table \ref{tab:res1}. 
-	First, we computed the standard deviation between the actual value of powe $pow$ and the guessed value of power $Other_{pow}$. In average, for the total $1451$ dialogues, a small deviation of was observed. Moreover, in order to analyse the results in a more general way, we calculated the \emph{risidual deviation } in order to compute the deviation of the observed value of power $Other_{pow}$ from the
-	real value of power $pow$. 
-	We observe small deviations which means that our model makes close predictions of behaviors  related to power of the other agent.
+	\subsubsection{Accuracy of predictions:} For each dialogue, we obtain the predictions made by the agent with ToM abilities about the behaviors of power of the other agent. Results are summerized in table \ref{tab:res1}. 
+	
+	
+	First, we computed the \emph{standard deviation} between the actual value of powe $pow$ and the guessed value of power $Other_{pow}$. In average, for the total $1451$ dialogues, a small deviation of was observed. Moreover, in order to analyse the results in a more general way, we calculated the \emph{risidual deviation } in order to compute the deviation of prediction between the preditcted value  $Other_{pow}$ from the real value of power $pow$. 
+	We observe small deviations which means that our model makes close predictions of other's power.
+	
+	
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{|l|c|}
@@ -512,9 +550,10 @@
 		\label{tab:res1}
 	\end{table}
 	
-	Second, we analyzed the frequency of false predictions. For example, $agent_A$ predicts that $agent_B$ is dominant whereas $agent_B$ is submissive. Therefore, we computed percentage of false prediction which at the order of $ 2.6 \% $. Indeed, only $30$ predictions were incorrect. This result enhance the reliability of our algorithm. 
+	Second, we analyzed the frequency of false predictions. For example, $agent_A$ predicts that $agent_B$ is dominant whereas $agent_B$ is submissive. Therefore, we computed the percentage of false prediction. For all the dialogues, only $30$ predictions were incorrect which means that $ 2.6 \% $ of predictions were incorrect. This result enhance the reliability of our algorithm. 
 	
-	Finally, we studied the stability of our algorithm. For each dialogue, we computed the number of iterations necessary to find the best $Other_{pow}$. The results depicted in graphs show the residual variation at each iteration for the different topics. We observe that in average, after $7$th itertation, the algorithm converges to a final value of $other_{pow}$.
+	Finally, we studied the stability of our algorithm. For each dialogue, we computed the number of iterations necessary to find the best prediction of $Other_{pow}$. The results depicted in table \ref{tab:conv} shows the residual variation at each iteration for the different topics. We observe that in average, after $7$th itertation, the algorithm converges to a final value of $other_{pow}$.
+	
 		\begin{table*}[t]
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
@@ -532,11 +571,11 @@
 		\label{tab:conv}
 	\end{table*}
 	
-	Moreover, we studied the impact of the number of hypotheses on the stability. We wanted to study wether a large number of hypotheses will need extra iterations to converge. Therefore we compared results obtained for small topic, medium, and large topics of conversation. The graph presented in figure \ref{converge} shows that our algorithm converges in average quickly independtly from the size of topic. The data presented in table \ref{tab:conv}, we observe that the algorthim took two additional iterations to converge in the large topic. The difference is not significant.
+	Moreover, we studied the impact of the number of hypotheses on the stability. We wanted to study wether a large number of hypotheses will need extra iterations to converge. Therefore, we compared results obtained for small topic, medium, and large topics of conversation. The graph presented in figure \ref{converge} shows that our algorithm converges in average quickly independtly from the size of topic. The data presented in table \ref{tab:conv} shows that the algorthim took two additional iterations to converge in the large topic. The difference is not significant to affect the general behavior of our model.
 	
 	
 		\begin{figure}[]
-			\fbox{\includegraphics[width=\linewidth]{figs/total.PNG}}
+			\fbox{\includegraphics[width=\linewidth]{figs/total}}
 			\caption{Algorithm convergence for all topics} 
 			\label{converge}
 		\end{figure}
@@ -564,6 +603,8 @@
 %	\end{figure*}
 %	
 	\section{Discussion}
+		The results show that agents with theory of mind abilities were able to correctly predict the other agent's behaviors of power
+		
 	\section{Conclusion}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% bibliography: see CFP for number of permitted pages
