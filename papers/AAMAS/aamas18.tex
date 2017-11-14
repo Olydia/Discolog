@@ -278,7 +278,7 @@
 %	
 	The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
 	
-	\par For example, let us consider a domain $D =\{A, B, C, D\}$ with the set of preferences $\{A \prec B, C \prec D , B \prec D \}$. The values of satisfiability are depicted in the table \ref{tab:sat}.
+	\par For example, let us consider a domain $M =\{A, B, C, D\}$ with the set of preferences $\{A \prec B, C \prec D , B \prec D \}$. The values of satisfiability are depicted in the table \ref{tab:sat}.
 		\begin{table}
 			\centering
 			\begin{tabular}{ |c|c|c|c|c| }
@@ -291,7 +291,7 @@
 				\hline
 				
 			\end{tabular}
-			\caption{Value of satisfiability for the model $D$.}
+			\caption{Value of satisfiability for the model $M$.}
 			\label{tab:sat}
 		\end{table}
 	
@@ -429,7 +429,7 @@
 	\par In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered.} In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
 	
 
-	Based on the values of satisfiability, and given a fixed value of $h_i \in H_{pow}$, we can compute the size of $S$ in order to generate hypotheses on the different combination of satisfiable values  noted $M_h(h_i)$. For example, considering a value of $pow =0.6$, and the same criterion $D$, the number of satisfiable values $|S| = 2$. Therefore, $M_h(pow) = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D)\}$. This process is generalized to all the hypotheses of $H_{pow}$. An example is presented in the table \ref{tab:sat}
+	Based on the values of satisfiability, and given a fixed value of $h_i \in H_{pow}$, we can compute the size of $S$ in order to generate hypotheses on the different combination of satisfiable values  noted $M_h(h_i)$. For example, considering a value of $pow =0.6$, and the same criterion $M$, the number of satisfiable values $|S| = 2$. Therefore, $M_h(pow) = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D)\}$. This process is generalized to all the hypotheses of $H_{pow}$. An example is presented in the table \ref{tab:sat}
 	
 	
 	
@@ -457,7 +457,7 @@
 			H7&0.9&$\{ (A), (B), (C), (D) \}$ \\
 			\hline
 		\end{tabular}
-		\caption{Hypotheses on mental states for the criterion $D=\{A, B, C, D\}$}
+		\caption{Hypotheses on mental states for the criterion $M=\{A, B, C, D\}$}
 		\label{table:poss}
 	\end{table}
 	
@@ -578,7 +578,7 @@
 			\label{tab:initP}
 		\end{table}
 		
-	\subsection{Results and discussion}
+	\subsection{Results}
 	We present in this section the results obtained for both the accuracy of predictions made by our model and the timeliness of the execution.
 	
 	\subsubsection{Accuracy of predictions:} For each dialogue, we obtain the predictions made by the agent with ToM abilities about the behaviors of power of the other agent. Results are summarized in table \ref{tab:res1}. 
@@ -664,7 +664,7 @@
 	
 	
 	\subsection{Timeliness}
-	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves.For each dialogue, we computed the time excution of the negotiation. Results are presented in table \ref{tab:time}, where wee see the evolution of the time execution. Unfortunatly, the evolution of the algorithm is exponential.
+	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves.For each dialogue, we computed the time execution of the negotiation. Results are presented in table \ref{tab:time}, where wee see the evolution ofthe time execution. Unfortunately, we can observe that the evolution of our algorithm is exponential. However, it managed to give accurate predictions in realistic time
 
 %	\begin{figure*}[t]
 %		\minipage{0.3\textwidth}
@@ -682,9 +682,18 @@
 %	\end{figure*}
 %	
 	\section{Discussion}
-		The results show that agents with theory of mind abilities were able to correctly predict the other agent's behaviors of power
+		We presented model of theory of mind that aims to predict the value of power expressed by the agent's partner.
+		
 		
 	\section{Conclusion}
+	
+		Rappeler la contribution
+		collaboratif negotiation
+		model de la theorie de l'esprit
+		evaluation avec bon resultats
+		meme avec des conaissances partielles on pouvait 
+		limites evaluer dans le context d'interaction avec homme machine
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% bibliography: see CFP for number of permitted pages
 	
