@@ -202,6 +202,12 @@
 	For this reason, it is important to develop negotiator agents that can adapt their social behavior to the dominance of their interlocutor. Our work aims at developing such a system that is capable of evaluating and adapting to this degree of dominance.
 	
 	We focus on a specific kind of interaction called \emph{collaborative negotiation}. Unlike adversarial negotiation, collaborative negotiation assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest\cite{sidnerartificial,chu1995response}. In order to develop our adaptative negotiator agent, we first designed a model of collaborative negotiation that allows an agent to express its social dominance through negotiation strategies \cite{ouali2017computational}. We showed that human observers correctly perceive the dominance expressed by the agent. The next steps are to evaluate the level of dominance of the interlocutor and to adapt the agent's level of dominance. In this paper, we present a theory of mind approach to evaluate the level of dominance of the interlocutor (step 2 on Figure~\ref{fig:schema-general}).
+
+	\begin{figure*}
+			\fbox{\includegraphics[width=\linewidth, height= 0.4\textheight]{figs/model_tom.pdf}}
+			\caption{Model of collaborative negotiation with a model of other} 
+			\label{fig:schema-general}
+	\end{figure*} 
 	
 %	
 %	
@@ -258,6 +264,7 @@
 	It is not necessary to have a complete knowledge of this dialogue model to understand the simulation presented here. However, some elements are required to explain our approach. This section briefly presents the main principles of the collaborative negotiation dialogue model.
 	
 	\subsection{Dialogue model}
+	\label{sec:dialogue-model}
 	
 %	We defined a dialogue system of collaborative negotiation which enable  a conversational agent to create and adapt its negotiation strategy to the power it intends to express. 
 	The goal of a negotiation is to choose an option in a set of possible values $\mathcal{O}$. Each option $o\in\mathcal{O}$ is defined as a set of values $\{v_1, ..., v_n\}$ associated to criteria $\{C_1, ..., C_n\}$ that reflect the options characteristics.  For instance, in a negotiation about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,expensive)$.
@@ -298,7 +305,7 @@
 	The selection of the utterance relies on three elements.
 	
 	\subsubsection{Lead of the dialogue}
-	\cite{magee2007power,de2004influence} showed that the participant with higher power tends to lead the dialogue and to focuses on the negotiation convergence. In our model, this means that agents with high values of power ($pow>0.5$) will selected negotiation moves preferably. On the contrary, submissive negotiators focus on having accurate knowledge about the other to take the fairest decision. In our model, agents with low power will select StatePreference and AskPreference utterances more often.
+	De Dreu showed that the participant with higher power tends to lead the dialogue and to focuses on the negotiation convergence \cite{magee2007power,de2004influence}. In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. On the contrary, submissive negotiators focus on having accurate knowledge about the other to take the fairest decision. In our model, agents with low power will select \emph{AskPreferences} utterances more often to collect information.
 		
 	\subsubsection{Satisfiability: StatePreferences}
 	\label{sec:sat}
@@ -307,89 +314,113 @@
 	\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
 	\end{equation}
 	
-	For example, if we consider the preference set given on table~\ref{tab:sat} and the power $pow=0.6$, we can compute the set of satisfiable values $S = \{B, C, D\}$. This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.	
+	For example, if we consider the preference set given on table~\ref{tab:sat} and the power $pow=0.6$, we can compute the set of satisfiable values $S = \{B, C, D\}$. This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
 	
 	\subsubsection{Acceptability: negotiation moves}
-	During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, when the negotiation is not converging, the agent has to make concessions which means that the agent has to lower his level of demand.
+	During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, in the context of collaborative negotiation, participants make concessions when the discussion is not converging. In our dialogue model, this means that the agent has to lower his level of demand.
 	
 		\begin{floatingfigure}[r]{1.5in}
 			\includegraphics[width=1.5in]{figs/sv3.png}
 			\caption{\label{fig:conc}Concession curve}
 		\end{floatingfigure} 
 		
-	We compute the notion of concession with $self(t)$, which is a time varying value of $pow$ that decreases over time $t$. In the beginning, $self(0) = pow$, when the negotiation evolves without converging self decreases $self(t) < pow$ as presented in the figure \ref{fig:conc}.
+	For this reason, we define the variable $self(t)$ which is a time varying function of $pow$, decreasing over time $t$. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, self decreases as presented in the figure \ref{fig:conc}. The concession slope is stronger for low-power agents.
 	
-	Thus, a proposal with a value $v \in C_i$ is \emph{acceptable} ($v \in Ac$) is computed with a boolean function:
+	This value of $self$ is used directly to answer a \emph{Propose(v)} utterance. We say that the value $v$ is \emph{acceptable} at time $t$, and we note $v \in Ac$, when:
 	\begin{equation}
-	acc(pow, v) = sat(v, \prec_i) \geq self(t)
-	\end{equation}	
-	and we note $Ac$ the set of acceptable values.
+	v\in Ac\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq self(t)
+	\end{equation}
 	
-	%When negotiation progress in time without converging to a trade-off,
-	As the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. We note $M$ the set of not-satisfiable values that can be accepted in the current dialogue move.
+	The agent will answer with an \emph{Accept} to a proposal only if the value is acceptable, and will answer with a \emph{Reject} otherwise. Also note that, when building proposals (i.e. \emph{Propose} utterances) the agent can only propose a value that is acceptable.
 	
-	$\{v \in M / v \in Ac, v \notin S\}$.
+	Finally, it is important to note that the set $Ac$ grows over time: as the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. We denote $M\varsubsetneq Ac$ the set of not-satisfiable values that can be accepted in the current dialogue move: $M = Ac\setminus S$.
 	
-	%	Therefore, in order to accept \emph{Accept} or propose \emph{Propose} a value $v$, this value has to be acceptable $v \in Acc$. In the contrary, a value $v$ can be rejected (\emph{Reject}) if $v \not \in Acc$ and by consequences $v\not \in S$
-	%	
-	
-	
-	
-	XXX
-	
-	Table~\ref{tab:utt} presents the applicability condition for each utterance.
+	\subsubsection{Summary}	
+	Table~\ref{tab:utt} presents the applicability condition for the five utterance types, based on the values of $pow$ and the derived sets $S$ and $Ac$. The utterance \emph{AskPreference} only depends on the lead of dialogue rules, related to the value of $pow$.
 		
 		\begin{table}
 			\centering
+				\caption{Applicability conditions for the five utterance types.}
+				\label{tab:utt}
 			\begin{tabular}  {|l|l|}
 				\hline
 				Utterance & Applicability condition \\
 				\hline
-				StatePreference(v) & $sat(v, \prec_i) \geq pow$ \\
+				AskPreference(v) & None \\
 				\hline 
-				Propose(v) & $acc(pow, v) = true$ \\
+				StatePreference(v) & $v\in S$ \\
+				\hline 
+				Propose(v) & $v\in Ac$ \\
 				\hline
-				Accept(v)  & $acc(pow, v) = true$ \\
+				Accept(v)  & $v\in Ac$ \\
 				\hline
-				Reject(v) & $acc(pow, v) = false$ \\
+				Reject(v) & $v\notin Ac$ \\
 				\hline
 			\end{tabular}
-			\caption{Value of satisfiability for the model $D$.}
-			\label{tab:utt}
 		\end{table}
 	
-	\subsection{Beliefs about other}
+	\subsection{Beliefs about other: general algorithm}
 	
-	In order to build a complementary relation of dominance with the user, the agent has to construct beliefs about the behaviors of power expressed by the user and adapt to complement his behavior as presented in figure \ref{fig:model}.
-	
+	In order to build a complementary relation of dominance with the user, the agent has to evaluate the power of the user, as presented in figure \ref{fig:schema-general}. To this goal, we propose to use a Theory of Mind (ToM) approach \cite{premack1978does}. The idea is to consider different hypotheses about the user's mental state, including his/her value of power. Using the decision model, we simulate the possible proposals, questions or answers that can be produced. We then compare the result of this simulation with the actual utterance expressed by the user. This gives information about the possible values of power. This idea is illustrated on Figure~\ref{fig:tom}.
+		
 	\begin{figure*}
 			\fbox{\includegraphics[width=\linewidth, height= 0.4\textheight]{figs/model_tom.pdf}}
-			\caption{Model of collaborative negotiation with a model of other} 
-			\label{fig:model}
+			\caption{A theory of mind approach to evaluate the user's level of dominance} 
+			\label{fig:tom}
 	\end{figure*} 
+
+	This approach however relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the dialogues produced by this model are correctly perceived by human users in terms of dominance. This is no proof that the model is similar to a human decision process, but the behaviors that it produces are at least coherent with the notion of dominance as human people understand it.
 	
-	We make the assumption that our model of dialogue effectively presents the process of utterance's selection using power. 
-	
-	Based on this assumption, we propose to enable the agent with a model of theory of mind based on simulation \cite{bibid}. The agent uses its model of decision in order to guess the behavior of the user from its enunciated utterance.   
-	
-	The agent needs to infer hypotheses about the user's mental state (\emph{i.e} Pow, Preferences) in order to reason about his behaviors. With knowledge gathered during the negotiation, the agent will remove inconsistent hypotheses.
-	
-	First, we define hypotheses about the possible values of $pow$ that the agents aims to predict. Let $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$ be the hypotheses on $pow$.
-	
-	Second, for each fixed hypothesis $ h_i \in H_{pow}$, we define hypotheses on the different set of preferences  noted $M_H $. Thus, for each criterion $C_i$ of the a topic , we compute all the possible combination of preference's relations. When relations of preferences are total ordered, the total number of preference's relations is in the order of $|H{C_i}| = |C_i|!$. In the case of partial ordered relations of preferences, the total number of possible relations is  $ |H{C_i}| = (|C_i| + 1)!$. Hence, for a topic of negotiation with $n$ criteria, the number of possible set of preferences is 
-	$$ |M_H| = \prod_{i=1}^n (|H{C_i}|)$$ 
-	
-	For each hypothesis $ h_i \in H_{pow}$, we associate the set of possible preferences $M_H(h_i)$ identical for all the hypotheses in the beginning. After each user's turn, the agent updates its hypotheses and remove the ones that did not produced the same utterance than enunciated by the user. The value of power selected is computed as follow:
-	
+	The second assumption is that the system can build a model of the possible mental states of the interlocutor. Concretely, this means a value of $pow$ and a set of preferences $\prec_i$ for all criteria. The general algorithm for a ToM is as follows:
+	\begin{enumerate}
+	\item Build a set $H_{pow}$ of hypothesis about power: $h\in H_{pow}$ represents the hypothesis $pow=h$;
+	\item For each hypothesis $h$, build the set of all possible preferences $Prec_h$: the elements $p\in Prec_h$ are partial orders on the criteria.
+	\item After each user utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
+	\item For each $h$, compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$
+	\end{enumerate}
+	The idea is that the hypothesis with the highest score is the most probable value for the user's power value.
+
 	\begin{equation}
-	pow_{Other} = \operatorname*{arg\,max}_{h_i \in H_{pow}} (M_H(h_i))
-	\end{equation} 
+	pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
+	\end{equation}
+
+	There is, of course, an infinite set of possible values for $pow$. In our work, we consider only 9 values: $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$.
+
+	\subsection{Complete model of preferences}
 	
-	This solution presents a computational limitation concerning the number of hypotheses formulated to generate the preferences. As presented, the size of hypotheses $M_H$ is considerable which can slow down the dialogue generation. However, we don't aim to know the "correct" preferences of the user but only the expressed power $pow$. 
+	To build the set of possible preferences for each hypothesis, we need to consider all possible partial orders $\prec_i$ for each criterion $C_i$. However, there are $(|C_i| + 1)!$ possible partial orders for each criteria. As a consequence:
 	
-	To deal with this limitation, we propose to infer hypotheses with partial knowledge about preferences. We only need to represent information about the user's preferences to be able reproduce its decisional model. 
+	$$ |M_H| = \prod_{i=1}^n (|C_i|+1)!$$
 	
+	In the negotiation dialogue we consider for our work, there are approximately 5 criteria with 4 to 10 possible values each. This means that there are between $24.10^9$ and $100.10^{36}$ possible preference sets. It is not reasonable to consider them all, one by one, at each step of the dialogue.
 	
+	Even if we consider only total order sets of preferences, we still have  $\prod_{i=1}^n |C_i|!$ possible sets. It remains impossible to consider in the context of a dialogue.
+	
+	Moreover, our goal is not to model the exact mental state of the interlocutor. We only want to evaluate his/her behavior of power. In the proposed ToM approach, we need to make hypothesis on the preferences to compute the applicability conditions of the utterances. The system uses the preferences to evaluate which values are satisfiable ($S$) or acceptable ($Ac$), depending on the value of $pow$ and the current progress of the negotiation. But the preference set $Pref_h$ contains too much information! What is really required to simulate the decision process are only the sets $S$ and $Ac$, as shown on table~\ref{tab:utt}.
+	
+	Thus, we want to build hypotheses on $S$ and $Ac$, not on $Pref$. This does not reduce the complexity since we have as many possible $S$ and $Ac$ as preference sets, at a given time of the negotiation.
+	
+	Our proposal to reduce this complexity is to consider only $S$ in the hypothesis of preferences, and to assume that we have a total order on the preferences.
+	
+	Indeed, when all values all the values are comparable, it is possible to sort them by order of preferences. In this case, the value of satisfiability only depend on the rank in this order of preferences, not on the order of the other elements in the set. For example, consider a criterion with 4 values and a total order of preferences on the values. The score of satisfiability for each rank is presented on Table~\ref{tab:poss}: it does not depend on the values themselves. The third value of the preference set will have $sat(v)=.66$, as defined in section~\ref{sec:dialogue-model}.
+		\begin{table}[h]
+			\caption{Satisfiability depending on the rank for a 4-values criterion.}
+			\label{tab:poss}
+			\centering
+			\begin{tabular}{ |c|c|c|c|c| }
+				\hline				
+				rank(value) & 1 & 2 & 3 & 4 \\
+				\hline
+				Nb predecessors & 3 & 2 & 1& 0 \\
+				\hline
+				Sat(value) & 0 & 0.33 & 0.66 &1 \\
+				\hline
+			\end{tabular}
+		\end{table}
+	
+	As a consequence, for a given value of power $pow$, the size of $S$ is fixed, independently of the possible relation of preferences $\prec$.
+	
+	XXX il reste une phrase pour dire qu'on a moins d'hypothèse mais qu'on le paye en ayant un modèle de décision qui doit être modifié pour la ToM XXX
 	
 	\subsection{Partial model of preferences}
 	
@@ -397,23 +428,7 @@
 	
 	\par In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered.} In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
 	
-	For example, the criterion $D$, of the size  $|D| = 4$ with total ordered preferences, get the values of satisfiability as presented in table \ref{tab:poss}.
-	\begin{table}[h]
-		\centering
-		\begin{tabular}{ |c|c|c|c|c| }
-			\hline				
-			rank(value) & 1 & 2 & 3 & 4 \\
-			\hline
-			Nb predecessors & 3 & 2 & 1& 0 \\
-			\hline
-			Sat(value) & 0 & 0.33 & 0.66 &1 \\
-			\hline
-			
-		\end{tabular}
-		\caption{Values of satisfiability for the criterion $D$.}
-		\label{tab:poss}
-	\end{table}
-	
+
 	Based on the values of satisfiability, and given a fixed value of $h_i \in H_{pow}$, we can compute the size of $S$ in order to generate hypotheses on the different combination of satisfiable values  noted $M_h(h_i)$. For example, considering a value of $pow =0.6$, and the same criterion $D$, the number of satisfiable values $|S| = 2$. Therefore, $M_h(pow) = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D)\}$. This process is generalized to all the hypotheses of $H_{pow}$. An example is presented in the table \ref{tab:sat}
 	
 	
