@@ -402,7 +402,7 @@
 	
 	Our proposal to reduce this complexity is to consider only $S$ in the hypothesis of preferences, and to assume that we have a total order on the preferences.
 	
-	Indeed, when all values all the values are comparable, it is possible to sort them by order of preferences. In this case, the value of satisfiability only depend on the rank in this order of preferences, not on the order of the other elements in the set. For example, consider a criterion with 4 values and a total order of preferences on the values. The score of satisfiability for each rank is presented on Table~\ref{tab:poss}: it does not depend on the values themselves. The third value of the preference set will have $sat(v)=.66$, as defined in section~\ref{sec:dialogue-model}.
+	Indeed, when all values are comparable, it is possible to sort them by order of preferences. In this case, the value of satisfiability only depends on the rank in this order of preferences, not on the order of the other elements in the set. For example, consider a criterion with 4 values and a total order of preferences on thees values. The value of can be sorted by order of preferences. The score of satisfiability for each rank is presented on Table~\ref{tab:poss}: it does not depend on the values themselves. For instance, the third value of the preference set will have $sat(v)=.66$, as defined in section~\ref{sec:dialogue-model}.
 		\begin{table}[h]
 			\caption{Satisfiability depending on the rank for a 4-values criterion.}
 			\label{tab:poss}
@@ -419,7 +419,7 @@
 		\end{table}
 	
 	As a consequence, for a given value of power $pow$, the size of $S$ is fixed, independently of the possible relation of preferences $\prec$.
-	
+	This modeling will allows the agent will compute a smaller set oh hypotheses. However, simulating the behavior of other with incomplete knowledge will affect the precision of the prediction.  
 %	XXX il reste une phrase pour dire qu'on a moins d'hypothèse mais qu'on le paye en ayant un modèle de décision qui doit être modifié pour la ToM XXX
 	
 	\subsection{Partial model of preferences}
@@ -665,7 +665,7 @@
 	
 	
 	\subsection{Timeliness}
-	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves.For each dialogue, we computed the the average time execution at each negotiation turn. We aim to study the effect of hypotheses's size on the rapidity of prediction at eahc turn. Results are presented in figure \ref{fig:time}. When comparing the time execution between the medium and large models, we observe that the algorithm took in average $12$ millisonds at each turn. However, this difference is not significant since the total execution remains very quick.
+	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves.For each dialogue, we computed the the average time execution at each negotiation turn. We aim to study the effect of hypotheses's size on the rapidity of prediction at eahc turn. Results are presented in figure \ref{fig:time}. When comparing the time execution between the medium and large models, we observe that the algorithm took in average $12$ milliseconds at each turn. However, this difference is not significant since the total execution remains very quick.
 	
 	\begin{figure}[]
 		\fbox{\includegraphics[width=\linewidth]{figs/time_exec.png}}
@@ -673,19 +673,19 @@
 		\label{fig:time}
 	\end{figure}
 
-	We analyzed the behaviors of our model of ToM in different aspects and the obtained results provide a strong support to its accuracy. Indeed, for most of the generated dialogues, the agent with ToM abilies was able to evaluate a very close approximation of its partner's level of power. Moreover, the agent was able to find the righ dominance range only after two dialogue turns and the best evalutation after five turns. Theses behaviors were generated in a reasonable amount of time allowing the agent to produce real time dialogues.
+	We analyzed the behaviors of our model of ToM in different aspects and the obtained results provide a strong support to its accuracy. Indeed, for most of the generated dialogues, the agent with ToM abilities was able to evaluate a very close approximation of its partner's level of power. Moreover, the agent was able to find the right dominance range only after two dialogue turns and the best evaluation after five turns. Theses behaviors were generated in a reasonable amount of time allowing the agent to produce real time dialogues.
 	
-	 These findings strengthen the accuracy of our model and give good perspectives to implement this model in the context of human/ agent collaborative negotiation. However, the presented validation in the context of agent/agent negotiation is a controlled evaluation since both agents use the same decisional model. This situation increases the chance of good predictions of the partner's behaviors of power. 	Thus, a validation of our collaborative model of negotiation must be validated in the contex of human/agent negotiation.
+	 These findings strengthen the accuracy of our model and give good perspectives to implement this model in the context of human/ agent collaborative negotiation. However, the presented validation in the context of agent/agent negotiation is a controlled evaluation since both agents use the same decisional model. This situation increases the chance of good predictions of the partner's behaviors of power. 	Thus, a validation of our collaborative model of negotiation must be validated in the context of human/agent negotiation.
 	\section{Conclusion}
-		We presented in this paper, a model of collaborative negotiation with theorie of mind (ToM) abilies. Our model of ToM focuses essentially to predict the agent's partner value of power in the perspective of defining a complementary relation of dominance.
+		We presented in this paper, a model of collaborative negotiation with theory of mind (ToM) abilities. Our model of ToM focuses essentially to predict the agent's partner value of power in the perspective of defining a complementary relation of dominance.
 
-		The agent buils partial representation of the mental state of its partner, allowing the agent to have sufficiant knowledge to compute the value of the partner's power. In addition, the limited knowledge ensure the agent to reason in a reasonable time to produce real time dialogues.
+		The agent builds partial representation of the mental state of its partner, allowing the agent to have sufficient knowledge to compute the value of the partner's power. In addition, the limited knowledge ensure the agent to reason in a reasonable time to produce real time dialogues.
 		
-		Our model was evaluated and validated in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate close and quick predictions of it's parentner behaviors in several conditions.
+		Our model was evaluated and validated in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate close and quick predictions of it's partner behaviors in several conditions.
 		
-		The presented evalution relies on the fact that both agents use the same decision to build their strategy in  the negotiation. However, in the context oh human/agent negotiation, the agent doesn't know the decisional model of the user. We only make the assumption that the user uses the same reasoning as the agent.
+		The presented evaluation relies on the fact that both agents use the same decision to build their strategy in  the negotiation. However, in the context oh human/agent negotiation, the agent doesn't know the decisional model of the user. We only make the assumption that the user uses the same reasoning as the agent.
 		%Rappeler l'importance de la complementarite
-		 Therefore as perspective, we aim to evalute the accuracy of our model in the human/user negotiations. Moreover, the agent will also adapt its behaviors of power to complement the predicted user's behaviors in order to simulate the dominance complementarity. In such situation, the agent will have to consider the effect of wrong predictions on the negotiation outcomes. We believe that modeling a complementary relation of dominance will improve the negotiation outcomes and increase mutual liking between the agent and the user.
+		 Therefore as perspective, we aim to evaluate the accuracy of our model in the human/user negotiations. Moreover, the agent will also adapt its behaviors of power to complement the predicted user's behaviors in order to simulate the dominance complementarity. In such situation, the agent will have to consider the effect of wrong predictions on the negotiation outcomes. We believe that modeling a complementary relation of dominance will improve the negotiation outcomes and increase mutual liking between the agent and the user.
 		
 		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
