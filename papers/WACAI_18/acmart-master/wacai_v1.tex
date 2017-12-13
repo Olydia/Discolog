@@ -1,15 +1,290 @@
-% !TeX spellcheck = <none>
+% !TeX spellcheck = fr
 \section{Introduction}
-Les agents conversationnels connaissent un essort important  dans plusieurs domaines d'applications. Ces agents jouent différents rôles allant du rôle de tuteur pour enfant au compagnon pour les personnes agées isolées.
-Dans le contexte de ces d'interactions,  l'agent et l'utilisateur humain  sont amenés à collaborer afin de satisfaire des tâches ou buts communs. Par exemple, un agent tuteur qui collabore avec un eleve pour résoudre des exercices. Ils comparent leur connaissances respectives sur l'exercice à résoudre et discutent des solutions possibles. Une telle confrontation  permet d'offrir un enseignement personnalisé à l'éleve. 
+Les agents conversationnels connaissent un essor important  dans plusieurs domaines d'applications. Ces agents jouent différents rôles allant du rôle de tuteur pour enfant au compagnon pour les personnes âgées isolées.
+Dans le contexte de ces d'interactions,  l'agent et l'utilisateur humain  sont amenés à collaborer afin de satisfaire des tâches ou buts communs. Par exemple, un agent tuteur qui collabore avec un élève pour résoudre des exercices. Ils comparent leur connaissances respectives sur l'exercice à résoudre et discutent des solutions possibles. Une telle confrontation  permet d'offrir un enseignement personnalisé à l'élève. 
 
-En effet, la collaboration entre interlocuteurs pour la satisfaction de buts implique la confrentation des préférences et expertises de chacun des partis ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} A la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les interêts des deux participants au lieu de maximiser ses propres gains.
+En effet, la collaboration entre interlocuteurs pour la satisfaction de buts implique la confrontation des préférences et expertises de chacun des partis ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} A la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les intérêts des deux participants au lieu de maximiser ses propres gains.
 
 Notre but est de modéliser un agent conversationnel capable d'avoir des négociations collaboratives crédibles avec un utilisateur humain.
-Pour ce faire, nous avons besoin de comprendre les comportements adoptés durant les négociations humains/humain. En effet, ... présente la négociation comme un procéssus multidimensionnel qui implique  une interaction sociale, des affects ainsi que des préférences et des opinions. par conséquent, la compréhension des comportements sociaux est cruciale dans l'étude du procéssus de négociation. De plus, la litterature en psychologie sociale  a déjà démontré que la \emph{relation de pouvoir} a un effet direct sur les stratégies des négociateurs. 
+Pour ce faire, il est nécessaire de comprendre les comportements adoptés durant les négociations humains/humain. En effet,  Broekens \cite{broekens2010affective} présente la négociation comme un processus multidimensionnel qui implique une interaction sociale, des affects ainsi que des préférences et des opinions. La compréhension de l'aspect social est donc crucial pour l'étude du processus de négociation.
+De plus, la littérature en psychologie sociale a déjà démontré que la \emph{relation de pouvoir} a un effet direct sur les stratégies qu'utilisent les négociateurs.
+Il est par conséquent important pour un agent conversationnel qui négocie avec un utilisateur humain, de prendre en compte sa perception de la relation de pouvoir pour construire sa stratégie de négociation.
 
+Dans cette optique nous proposons dans ce papier, un agent conversationnel capable de mener une négociation collaborative avec un utilisateur humain. De plus, il est capable de déployer différentes stratégies de négociation en se basant sur la relation de pouvoir qu'il cherche à exprimer. Le plan de l'article se présente comme suit. La section 2 présente un état de l'art concis sur l'impact de la relation de pouvoir sur la négociation aussi bien en psychologie sociale qu'en informatique affective.  La section 3 présente les éléments de notre modèle de négociation collaborative. A partir d'un ensemble d'actes de dialogues et de préférences, nous proposons un modèle général de décision basé sur trois principes de négociation tirés de la psychologie sociale. Nous présentons en section 4 l'évaluation de notre modèle de négociation dans des interactions avec des utilisateurs humains qui montrent la pertinence des comportements implémentés. 
 
-Nous proposons dans ce papier, un modèle de négociation collaborative 
+\section{État de l'art}
+	La notion de pouvoir social a été largement étudiée dans les domaines de la communication interpersonnelle et de la psychologie \cite{kecskes2013research}. Le pouvoir peut être défini comme la capacité à produire les effets voulus et à influencer le comportement de l'autre personne dans la conversation \cite {dunbar2005perceptions}. Dans le contexte de la communication et de la négociation, le pouvoir est une variable dyadique qui intervient au cours du dialogue.
+	Les comportements liés au pouvoir peuvent contribuer positivement ou négativement au dialogue. Les contributions positives comprennent le maintien de la conversation et la prise de décisions rapides. Les contributions négatives incluent des comportements qui sont tournés vers soi et de ne pas considérer le partenaire (\emph {e.g.} Ne donnant pas l'occasion d'exprimer son opinion) et semblant offensant. Dans notre travail, nous nous concentrons sur des dialogues de négociation, dans lesquels plusieurs chercheurs ont déjà montré l'impact du pouvoir social \cite {de2004influence, burgoonnonverbal}.
 
+\section{Modèle de négociation basé sur la relation de pouvoir}
+	
+	Nous présentons dans cette section notre modèle de dialogue pour un agent virtuel dans le contexte de négociation collaborative. 
+	Premièrement, nous présenterons le domaine de négociation à savoir la définition du sujet de conversation ainsi que les préférences sur ses valeurs. 
+	Deuxièmement, nous présenterons notre algorithme de décision qui prend en compte les principes de comportements de pouvoirs (voir section 2.1) .
+	
+	\subsection{le domaine de la négociation}
+		Le but de chaque processus de négociation est de trouver une \textbf{option} parmi un ensemble d'option $\mathcal{O}$. Le choix d'une option repose sur les critères qui caractérisent l'option.  Nous considérons l'ensemble $\mathcal{C}$ composé de $n$ critères, chacune disposant respectivement d'un domaine de valeurs  $C_1 \ldots C_n$. Nous pouvons donc représenté $\mathcal{O}$ comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $o \in \mathcal{O}$ comme un tuple $(v_1,\ldots,v_n)$ en faisant l'hypothèse que toutes les options d'un sujet donné sont toutes connues.
 
+	
+	Par exemple, pour un dialogue a propos des restaurants, les critères peuvent être le type de cuisine et le prix. Une option peut donc être représenté comme suit : $(Française, abordable)$
+	
+	\subsection{Le modèle des préférences}
+		L'agent dispose d'un ensemble de préférences défini pour chaque critère $C_i$, formalisé comme un ordre partiel $ \prec_i$ sur les valeurs de ce critère. 
+		Par exemple, si l'agent préfère la cuisine japonaise à la cuisine turque, on notera la relation de préférence $japonaise \prec_{cuisine} turque$. 
+		
+		A partir des relations de préférences, pour chaque critère $i\in \mathcal{C}$, pour chaque valeur $v\in C_i$, l'agent calcule la valeur de  \emph{satisfaction} $sat_{self}(v \prec_i)$ pour cette valeur comme le nombre de valeurs qu'il préfère moins dans l'ordre partiel des préférences $\prec_i$ normalisé entre $[0,1]$:
+		
+				\begin{equation}
+				sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+				\end{equation}
+				
+		La notion de satisfaction est généralisée aux options $o= (v_1, \ldots, v_n)\in \mathcal{O}$ comme une moyenne: 
+			\begin{equation}
+			sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
+			%\vspace{-1.5em} 
+			\end{equation}
+			
+		La notion de satisfaction est utilisée tout au long du processus décisionnel de la négociation. Elle représente la tendance d'accepter ou rejeter une proposition, aussi bien que la valeur à proposer. Plus la valeur de satisfaction approxime 1, plus tôt elle sera sélectionnée au cours de la négociation.
+		 
+		 
+	\subsection{Le modèle de dialogue}
+	Les négociateurs communiquent pendant la négociation en utilisant des \emph {actes de dialogue}. Chaque acte de dialogue possède un ensemble spécifique d'arguments et est associé à une expression en langage naturel (NL). Nous utilisons cinq types d'actes de dialogues, basés sur le travail de Sidner \cite {sidner1994artificial} et deux actes supplémentaires pour conclure la négociation. la table \ref {table:utt} résume les différents actes de dialogues  génériques. 
+	
+	Comme les expressions dépendent du domaine d'application, seule la génération NL de ces énoncés doit être spécialisée. Dans cet article, nous illustrerons ce modèle par une négociation collaborative sur les restaurants. La valeur / $ v $ / dans la table \ref {table:utt} fait référence à ce format  en NL pour exprimer une valeur.
+	
+	Chaque type d'acte prend comme paramètre soit une valeur de critère $v \in C_i$, une option $o \in \mathcal{O}$, ou un critère $i \in \mathcal{C}$. 
+	Nous distinguons trois groupes d'actes. Premièrement, les actes informatifs (\textit{AskValue/AskCriterion} et \textit{StateValue}) qui sont utilisés pour échanger des informations sur les préférences des interlocuteurs.  Nous avons remarqué que dans les interactions humain-humain, les interlocuteurs expriment implicitement leur préférences en spécifiant ce qu'ils aiment ou pas ( \emph{e.x.}\textit{I like Chinese more than French}) au lieu de faire une comparaison binaire
+	
+	Deuxièmement, les actes de négociation (\textit{Propose}, \textit{Accept} and \textit{Reject}) permettent à l'agent de mener la négociation soit en ouvrant des propositions ou en accepter/ rejeter une. Une proposition peut concerner soit une valeur de critère (``Let's go to a Chinese restaurant'') ou bien une option (``Let's go to \emph{Chez Francis} restaurant'').
+	
+	Troisièmement, les actes de fermeture de négociation (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) sont utilisés pour clore un dialogue. 
+	Des exemples de dialogues utilisant ces actes sont présentés dans la section \ref{sec:eval}.
+	
+	Le processus de décision pour la sélection du prochain acte de dialogue est basé sur nos trois principes qui sont décrits dans la section \ref{sec:decision}. Pour effectuer cette sélection, l'agent garde une trace de toutes les déclarations et propositions faites au cours du dialogue. Pour chaque critère $ i \in \mathcal{C} $, nous construisons l'ensemble $ S_i \subseteq C_i $  les valeurs préférences que l'agent a communiqué pour ce critère. Cela évite les reformulations d'informations précédentes. Nous construisons aussi les ensembles $ A_i \subseteq C_i $ et $ U_i \subseteq C_i $ des valeurs qui ont été déclarées comme aimées ou détestées par les expressions \emph {StateValue} de l'interlocuteur. Nous supposons que $ A_i \cap U_i = \emptyset $.
+	
+	Nous maintenons aussi les ensembles $ P_i \subseteq C_i $, $ T_i \subseteq C_i $ et $ R_i \subseteq C_i $ de toutes les valeurs proposées, acceptées et rejetées pour chaque critère. Ceux-ci seront utilisés pour faire des propositions pertinentes. De même, nous considérons $ P \subseteq \mathcal {O} $, $ T \subseteq \mathcal {O} $ et $ R \subseteq \mathcal {O} $ les ensembles de toutes les options proposées, acceptées et rejetées durant le dialogue.
+		\begin{table}[t]
+			{%\scriptsize
+				\begin{tabular} {|p{2cm}|p{3.5cm}|p{2.5cm}|}
+					\hline
+					\textbf{Utterance type}  &\textbf{ NL generation} & \textbf{Postcondition}\\
+					\hline
+					StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
+					\hline
+					AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
+					
+					AskCriterion(i) &  What kind of /$i$/ do you like ? & \\
+					\hline
+					ProposeOption(o)  & Let's go to /$o$/. & $o \in P$\\
+					
+					ProposeValue(v) & Let's go to a /$v$/. & $v \in P_i$\\
+					\hline
+					AcceptOption(o)& Okay, let's go to /$o$/.& $o \in T$ \\
+					
+					AcceptValue(v) & Okay, let's go to a /$v$/.& $v \in T_i$ \\
+					\hline
+					RejectOption(o) & I'd rather choose  something else. & $o \in R$\\
+					
+					RejectValue(v) &  I'd rather choose  something else. & $v \in R_i$ \\
+					\hline
+					Negotiation Success &  We reached an agreement. & \multirow{2}{*}{}\\
+					\cline{1-2}
+					Negotiation Failure &  Sorry, but I no longer want to discuss this. & \\
+					\hline
+					% Counter Propose & $(r,p)\in C_i^2 \vee (r,p) \in \mathcal{O}^2 $ & I don't want to go to $r$. Let's rather go to $p$ \\
+					% \hline 
+					% RejectState & $x \in \mathcal{O} \vee x\in C_i$ &  I don't like /$x$/, let's choose something else. \\
+					% \hline
+					% AcceptPropose & $o \in \mathcal{O}$ & Okay. Let's go to /$o$/.\\
+					% \hline
+				\end{tabular}
+			}
+			\caption{\label{table:utt}Liste des actes de dialogue.}
+		\end{table}
+		
+		
+		\subsection{Satisfaction de l'autre}
+			En utilisant les ensemble $A_i$ et $U_i$ qui représentent les goûts de l'interlocuteur, l'agent peut calculer la satisfaction d'une valeur $v\in C_i$ pour l'interlocuteur en utilisant la formule suivante: 
+			
+			Notez que certaines valeurs peuvent rester inconnues: dans une négociation collaborative, ces valeurs peuvent être considérées comme potentiellement satisfaisantes. Par conséquent, nous leur donnons une valeur arbitraire fixée à 0.5.
+				\begin{equation}
+				sat_{other}(v)= \left\{\begin{array}{ll}
+				1	 & \mathrm{if\ }  c \in A_i\\
+				0    & \mathrm{if\ }c \in U_i\\
+				0.5	 & \mathrm{otherwise}
+				\end{array}\right.
+				\end{equation}
+			Cette formule est généralisable aux options $o=(v_1,\ldots,v_n) \in O$:
+			
+			\begin{equation}
+			sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} sat_{other}(v_i, A_i, U_i) } {n}
+			\end{equation}
+		
+		La satisfaction représente l'attente qu'a un agent a propos du comportement de son interlocuteur pour soit accepter ou rejeter une proposition. Il sera utilisé pour sélectionner la proposition la plus tolérable à faire dans la négociation. Le concept de tolérable est présenté dans le section suivante.	
+		
+		
+		\subsection{Processus de décision basé sur le pouvoir dans la négociation}
+		\label{sec:decision}
+		Dans la section \ref{sec:domDialogue}, nous avons identifié trois principes liés à la relation de pouvoir qui affecte les stratégies et comportements des négociateurs. Dans cette section, nous présentons la théorie computationnelle implémentant chaque principe.
+		
+		Nous désignons la croyance de l'agent de sa puissance $ pow \in [0, 1] $. C'est une constante pour un agent donné dans une interaction donnée.
+		
+		\subsubsection {Niveau d'exigences et de concession}
+		
+		En négociation collaborative, les deux participants réduisent leur niveau d'exigences au fil du temps dans le but de parvenir à un accord. Cependant, selon notre premier principe, le niveau d'exigence devrait être plus haut pour les agents avec un pouvoir élevé et les concessions devraient être plus importantes pour les agents avec un pouvoir faible. Pour modéliser ce comportement, nous utilisons une \emph {courbe de concession} illustrée dans la figure \ref {fig:conc}.
+		
+		Soit $ self (pow, t) $ une valeur variant dans le temps, suivant la courbe de concession:
+			\begin{equation}
+			self(pow, t) = \left\{\begin{array}{ll}
+			pow & \mathrm{if\ } (t \leq \tau)\\
+			max(0, pow - (\frac{\delta}{pow} \cdot (t - \tau))) & \mathrm{otherwise}
+			\end{array}\right.
+			\end{equation}
 
+%			\begin{floatingfigure}[r]{1.8in}
+%				\includegraphics[width=1.8in]{graphs/sv3.png}
+%				\caption{\label{fig:conc}Courbe de concession}
+%			\end{floatingfigure} 
+			
+		Où est $ t \geq 0 $ est le nombre de propositions ouvertes ou rejetées, $ \tau> 0 $ est le nombre minimum de propositions avant le début de la concession et $ \delta> 0 $ est un paramètre de calcul pour la courbe de concession.
+	
+	La valeur $ self (pow, t) $ représente le poids qu'un agent donne à son autosatisfaction par rapport à la satisfaction de son partenaire. Plus le pouvoir de l'agent est élevé, plus ses exigences sont élevées. De plus, la courbe diminue plus vite pour les agents avec un pouvoir faible.
+	
+	Ces comportements d'exigence et de concession sont implémentés pour calculer \textit{l'acceptabilité} d'une valeur. Basé sur la valeur de satisfaction, l'agent peut décider de soit accepter ou rejeter une valeur.
+	
+	L'acceptabilité d'une valeur $ v \in C_i $ est définie comme une fonction booléenne:	
+	
+	\begin{equation}
+%	\vspace{-.5em} 
+	acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
+	\end{equation}	
+	où $ \beta> 0 $ est un paramètre de la théorie qui définit le poids donné au niveau d'exigence.
+	
+	Cette fonction est généralisable à toutes les options,  $o \in O$: $acc(pow,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(pow,t))$.
+	
+	\subsection{Soi Vs autrui}
+
+	Selon notre second principe, les négociateurs avec un pouvoir élevé donnent plus de poids à leur propre satisfaction. Pour implémenter ce principe dans le contexte d'une négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \textit{tolérable} en considérant la satisfaction de l'agent et de son partenaire.
+	
+	Pour un critère $i \in \mathcal{C}$, nous considérons le sous ensemble $V_i\subseteq C_i$ des valeurs acceptables pour l'agent: 
+		\begin{equation}
+		V_i(pow,t) = \{ v\in C_i : acc(pow,v,t) \}
+	%	\vspace{-0.5em}
+		\end{equation}
+	
+	
+	Nous calculons la tolérabilité d'une valeur donnée $ v \in V_i (pow, t) $ en équilibrant entre les préférences de l'agent et les goûts de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
+		\begin{equation}
+		\begin{split}
+		tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
+		& +  (1 - self(pow, t)) \cdot sat_{other}(v, A_i, U_i)
+		\end{split} 
+		\end{equation}
+	
+	
+	Nous généralisons cette fonction aux options $o=(v_1,\ldots,v_n) \in O$:
+	
+	\begin{equation}
+	tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
+	\end{equation}
+	
+	\noindent
+	L'agent propose toujours la valeur la plus tolérable dans le sous ensemble $V_i$:
+	\begin{equation}
+	propose(V_i, \prec_i,pow) =  \operatorname*{arg\,max}_{v \in V_i} ( tol(v))
+	\end{equation}
+	
+	
+		\subsubsection*{Résumé des paramètres d'implémentation }
+		\begin{itemize}[noitemsep]
+			
+			\item $\pi \in $[0,1] : La limite entre le comportement dominant et soumis. Elle est utilisée dans le processus de choix d'acte de dialogue
+			\item $\beta$:  une valeur qui représente le score minimum qu'une valeur doit obtenir pour être positivement satisfiable aux préférences de l'agent dans la négociation. Notons que $\beta = const \times self(dom,t)$.
+			\item $\tau > 0$ : le nombre minimal de propositions ouvertes ou rejetées avant le début des concessions
+			\item $\delta > 0$ : paramètre de la courbe de concession.
+			\item $\alpha> 0$: Le nombre maximum d'actes informatifs successifs.
+		\end{itemize}
+	
+	\subsubsection {Contrôle de la négociation}
+	Le troisième principe relate que les négociateurs avec un pouvoir élevé ont tendance à mener la négociation. Nous avons implémenté ce principe à travers le choix des actes de dialogue présentés dans table \ref {table:uttChoice}.
+	
+	Nous avons défini un seuil $ \pi $ pour diviser le spectre de pouvoir en deux.
+	
+	En fonction du pouvoir, de l'acte de dialogue précédent $ u ^ {- 1} $ et de l'état du dialogue actuel, l'agent sélectionne le premier acte dans la table \ref {table:uttChoice} pour lequel la condition est satisfaite. 
+	Par exemple, un agent avec un pouvoir élevé arrêtera la négociation dès que toutes les options restantes seront inacceptables (ligne 2). Un agent avec un pouvoir faible rejettera et indiquera une préférence, afin d'expliquer pourquoi la proposition n'est pas acceptable (ligne 14). S'il n'y a pas de proposition ouverte, l'agent avec un pouvoir faible demandera de nouvelles informations (ligne 18 -19).
+	
+	Dans notre modèle, un agent peut exprimer plus d'un acte de dialogue durant son tour de parole qui est représenté avec le signe "+" dans la table \ref {table:uttChoice}.
+	
+	Notez qu'un agent avec un pouvoir élevé se concentrera sur le maintien de la négociation en choisissant  des \emph{actes de négociation} (ProposeValue / ProposeOption, RejectValue / RejectOption, AcceptValue / AcceptOption) comme présenté dans les lignes (4 à 10). L'agent priorise un processus de négociation plutôt que d'échanger des informations sur les préférences. En effet, comme présenté à la ligne 3, après les tours $ \alpha $ consacrés au partage d'informations, l'agent fera plutôt des propositions que d'exprimer ses préférences. Un exemple est présenté dans le dialogue \ref {fig:ex-dialogue}.
+	
+	En opposition, un négociateur avec un pouvoir faible se concentrera sur la construction d'un modèle précis des préférences de son partenaire afin de prendre la décision la plus équitable. Il se concentrera plus sur \emph {les actes informatifs} (StateValue ou AskValue / AskCriterion) comme le montre la ligne (18-20). De plus, les actes de négociation sont limités par des conditions qui garantissent que l'agent a rassemblé suffisamment d'informations sur ses préférences de partenaires avant d'exprimer une proposition (ligne 16-17).
+		\begin{table*}[!t]
+			{%\scriptsize
+				\centering
+				\begin{tabular}{|p{.3cm}|p{.6cm}|p{3cm}|p{7.5cm}|}
+					\hline
+					\parbox[t]{2mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\textbf{pow  $>\pi$}}}}&Line nb& \textbf{Utterance type} & \textbf{Condition} \\
+					\cline{2-4}
+					&1&NegotiationSuccess & $\exists o \in T\cup P$, $acc(pow,o,t)$ \\
+					\cline{2-4}
+					& 2& NegotiationFailure & $ \forall o \in \mathcal{O},  \neg acc(pow,o,t)$\\
+					\cline{2-4}
+					&3& StateValue(v) & $type(u^{-1}) = AskPreference \land n < \alpha$ \newline where $n$ is the number of successive statement moves\\
+					\cline{2-4}
+					&4& AcceptValue(v)+ \newline ProposeValue(c) & $ \exists v \in P_i$ / $acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+					\cline{2-4}
+					&5& AcceptValue(v)+\newline ProposeOption(o) &  $ \exists v \in P_i$ / $ acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $ v \in o \land acc(pow,o,t)$ \\
+					\cline{2-4}
+					&6& RejectValue(v)+\newline ProposeValue(c) & $ \exists v \in P_i$ / $ \neg acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+					\cline{2-4}
+					&7& RejectValue(v)+ \newline ProposeOption(o) &  $ \exists v \in P_i$ / $  \neg acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $acc(pow,o,t)$ \\
+					\cline{2-4}
+					& 8&RejectOption($o_1$)+ ProposeOption($o_2$) & $ \exists o_1 \in P$ / $ \neg acc(pow,o_1,t) \land \exists o_2\in\mathcal{O}, acc(pow,o_2,t)$ \\
+					\cline{2-4}
+					&9& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+					\cline{2-4}
+					&10& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
+					
+					\hline
+					
+					\parbox[t]{2mm}{
+						\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \pi$}}}} & 11& Negotiation success &  $\exists o \in T$ \\
+					\cline{2-4}
+					&12& AcceptValue(v) & $\exists i\in\mathcal{C}, \exists v \in P_i, acc(pow, v, t)$ \\
+					\cline{2-4}
+					&13&AcceptOption(o) & $\exists o \in P, acc(pow, o, t)$ \\
+					\cline{2-4}
+					&14&RejectValue(v)+\newline StateValue(v) & $ t<\tau \land (\exists i\in\mathcal{C}, \exists v \in P_i, \neg acc(pow,v, t))$.\\
+					\cline{2-4}
+					&15&RejectOption(o)+ \newline StateValue(v) & $ t<\tau \land (\exists o \in P,  \neg acc(pow,o, t) \land \exists v \in o, \neg acc(pow,v, t))$.\\
+					\cline{2-4}
+					&16&ProposeValue(v) &  $\exists i\in\mathcal{C}, \exists v \in C_i, v \in A_i  \land acc(pow, v, t) $\\
+					\cline{2-4} 
+					&17&ProposeOption(o)  & $\forall i\in\mathcal{C},\exists v \in C_i, v \in T_i  \land v \in o$ \\
+					\cline{2-4} 
+					&18&AskValue(v) & $t > \tau \land \exists i\in\mathcal{C}, \exists c \in P_i, \neg acc(c, t)$ \\
+					\cline{2-4} 	
+					&19&AskCriterion(i) & $\exists i\in\mathcal{C}, A_i \cup U_i= \emptyset $\\
+					\cline{2-4}	
+					&20&StateValue(v) & $\exists i\in\mathcal{C}, C_i\cap S_i \neq \emptyset$	\\
+					\cline{2-4}
+					&21& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+					\cline{2-4}
+					&22& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
+					
+					\hline
+				\end{tabular}
+			}
+			\caption{Sélection d'un acte de dialogue}
+			\label{table:uttChoice}
+		\end{table*}
+	
+	
+	
+	
+	
+	
+	
+	
+		\section{Évaluation}
+		\label{sec:eval}
