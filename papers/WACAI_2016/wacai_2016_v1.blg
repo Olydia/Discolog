@@ -1,4 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: wacai_2016_v1.aux
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: wacai_2016_v1.aux
 The style file: abbrv.bst
 Database file #1: Library.bib
 Warning--can't use both author and editor fields in Amgoud2002
@@ -7,4 +9,45 @@ Warning--empty year in annesysteme
 Warning--empty journal in daskalopulu1998handling
 Warning--there's a number but no volume in rich2009building
 Warning--empty journal in zablotskaya2012relating
+You've used 29 entries,
+            2118 wiz_defined-function locations,
+            676 strings with 9018 characters,
+and the built_in function-call counts, 10024 in all, are:
+= -- 997
+> -- 441
+< -- 11
++ -- 178
+- -- 144
+* -- 669
+:= -- 1625
+add.period$ -- 91
+call.type$ -- 29
+change.case$ -- 154
+chr.to.int$ -- 0
+cite$ -- 35
+duplicate$ -- 409
+empty$ -- 804
+format.name$ -- 144
+if$ -- 2128
+int.to.chr$ -- 0
+int.to.str$ -- 29
+missing$ -- 34
+newline$ -- 147
+num.names$ -- 58
+pop$ -- 184
+preamble$ -- 1
+purify$ -- 130
+quote$ -- 0
+skip$ -- 291
+stack$ -- 0
+substring$ -- 618
+swap$ -- 102
+text.length$ -- 11
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 106
+warning$ -- 6
+while$ -- 101
+width$ -- 31
+write$ -- 316
 (There were 6 warnings)
