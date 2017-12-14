@@ -82,6 +82,7 @@
 			 
 			 
 		\subsection{Le modèle de dialogue}
+		\label {sec:com}
 		Les négociateurs communiquent pendant la négociation en utilisant des \emph {actes de dialogue}. Chaque acte de dialogue possède un ensemble spécifique d'arguments et est associé à une expression en langage naturel (NL). Nous utilisons cinq types d'actes de dialogues, basés sur le travail de Sidner \cite {sidner1994artificial} et deux actes supplémentaires pour conclure la négociation. la table \ref {table:utt} résume les différents actes de dialogues  génériques. 
 		
 		Comme les expressions dépendent du domaine d'application, seule la génération NL de ces énoncés doit être spécialisée. Dans cet article, nous illustrerons ce modèle par une négociation collaborative sur les restaurants. La valeur / $ v $ / dans la table \ref {table:utt} fait référence à ce format  en NL pour exprimer une valeur.
@@ -325,5 +326,36 @@
 			Les critères sélectionnés pour choisir un restaurant étaient \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
 				
 			Nous avons défini deux agents Bob et Arthur qui jouent des comportements différents. Nous avons conçu Bob pour suivre un comportement dominant (un pouvoir élevé) (\textit {i.e} pow (Bob) = 0.8) et Arthur pour jouer au négociateur avec un pouvoir faible (\textit {i.e} pow (Arthur) = 0.4).
-			Les participants ont interagi avec les agents via une interface graphique (GUI) que nous avons conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons définis voir (section \ref {Comm}).
-			% La figure \ ref {ihm} montre l'interface graphique avec les énoncés possibles à énoncer.
+			Les participants ont interagi avec les agents via une interface graphique (GUI) que nous avons conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons définis voir (section \ref {sec:com}).
+						% La figure \ ref {ihm} montre l'interface graphique avec les énoncés possibles à énoncer.
+						
+			Nous avons défini deux modèles expérimentaux dans le but d'éviter de biaiser la perception des participants. Dans le premier modèle, les participants ont d'abord interagi avec Bob, l'agent dont le pouvoir est élevé. Ensuite, une interaction avec l'agent de pouvoir faible Arthur.
+			A l'opposé, la deuxième condition, les participants ont interagi d'abord avec Arthur puis avec Bob.
+			
+			\subsection {Hypothèses}
+			Nous avons défini quatre hypothèses qui reflètent les différents comportements et stratégies affichés par les agents lors de la négociation.
+			
+			\begin{itemize}
+				\item \textbf {H1:} L'agent avec un pouvoir élevé sera plus fortement perçu comme étant égocentrique que l'agent dont le pouvoir est faible.
+				
+				\item \textbf {H2:} L'agent avec un pouvoir élevé sera plus fortement perçu comme exigeant que l'agent dont le pouvoir est faible.
+				
+				\item \textbf {H3:} L'agent de plus faible puissance sera plus fortement perçu comme faisant des concessions plus importantes que l'agent  avec un pouvoir élevé.
+				
+				\item \textbf {H4:} L'agent  avec un pouvoir élevé sera plus fortement perçu comme prenant le contrôle de la négociation que l'agent avec un pouvoir plus faible.
+			
+			\end{itemize}
+
+			\subsection{Procédure}
+			
+			Nous avons étude inter-sujets où chaque participant a interagi avec les deux agents, Bob et Arthur.
+			
+			À l'arrivée, le participant est invité à signer un formulaire de consentement éclairé, ensuite la tâche de négociation lui est expliquée. 
+			Suite à cela, la  session d'entraînement commence, le participant reçoit des instructions sur l'utilisation de l'interface graphique pour interagir avec l'agent, l'expérimentateur lance la séance et quitte la salle jusqu'à ce que l'entraînement soit complet et que le participant se soit familiarisé avec l'interface.
+			 Après la formation, l'expérience commence et le participant négocie avec les deux agents. À la fin de la négociation, le participant est invité à remplir un questionnaire sur son expérience.
+			
+			Nous avons conçu un questionnaire permettant aux participants de rapporter leurs perception des comportements de l'agent lors des processus de négociation. Pour chaque hypothèse, nous avons défini deux questions avec des formulations différentes afin de ne pas biaiser les réponses des participants. En outre, nous avons défini des questions de test pour vérifier la validité des réponses des participants. Les réponses sont données sur l'échelle de Likert.
+			
+			Au total, 40 participants ont participé à l'expérience. Ils ont été assignés au hasard aux conditions expérimentales.
+			
+			\subsection{Résultats}
