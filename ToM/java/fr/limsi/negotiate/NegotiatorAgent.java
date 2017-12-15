@@ -24,7 +24,7 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class NegotiatorAgent extends Agent {
 
-	public static double  DOMINANT = 0.9, SUBMISSIVE = 0.4;
+	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
 	private double relation = DOMINANT;
@@ -61,15 +61,17 @@ public class NegotiatorAgent extends Agent {
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
-				new ToMNegotiatorProba("Agent2", model.model3()), 
+				new NegotiatorAgent("Agent2", model.model2()), 
+				//new ToMNegotiatorProba("Agent2", model.model3()), 
+
 				false);
 
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(DOMINANT);
-		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
-
+		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
+		//((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		dual.start();
 	}
 

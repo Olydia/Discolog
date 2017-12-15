@@ -1,0 +1,14 @@
+#Dom Sub (sans adaptation)
+#M3-M1
+
+Agent1 says "Let's go to a restaurant on the north side."
+Agent2 says "I don't like restaurants on the north side, let's choose something else."
+Agent1 says "Let's go to a lively restaurant."
+Agent2 says "Do you like modern restaurants?"
+Agent1 says "I like modern restaurants."
+Agent2 says "Let's go to a modern restaurant."
+Agent1 says "Okay. Let's go to the Ai . It's a modern, expensive Japanese restaurant on the downtown."
+Agent2 says "Okay, let's go to a lively restaurant."
+Agent1 says "Let's go to the Aki restaurant. It's a lively, expensive Japanese restaurant on the downtown."
+Agent2 says "Okay, let's go to the Ai restaurant."
+

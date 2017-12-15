@@ -47,14 +47,14 @@ public class NegotiationDistance {
 
 		NegotiationDistance distance34 = new NegotiationDistance(tm.model3(), tm.model4());
 
-//		System.out.println( "1, 2: " + distance12.distance());
-//		System.out.println( "1, 3: " + distance13.distance());
-//		System.out.println("1, 4: " + distance14.distance());
-//		
-//		System.out.println( "2, 3: " +distance23.distance());
-//		System.out.println("2, 4: " +distance24.distance());
-//		
-//		System.out.println("3, 4: " +distance34.distance());
+		System.out.println( "1, 2: " + distance12.distance());
+		System.out.println( "1, 3: " + distance13.distance());
+		System.out.println("1, 4: " + distance14.distance());
+		
+		System.out.println( "2, 3: " +distance23.distance());
+		System.out.println("2, 4: " +distance24.distance());
+		
+		System.out.println("3, 4: " +distance34.distance());
 
 
 	}
