@@ -45,18 +45,18 @@
 	
 	\maketitle
 	\begin{abstract}
-		Cet article présente un agent conversationnel capable de déployer différentes stratégies de négociation en fonction de son pouvoir social. Le modèle computationnel sous-jacent est basé sur trois principes négociation extrait de la littérature en psychologie sociale. Le comportement social de l'agent est rendu visible à travers sa stratégie de dialogue. Nous présentons une expérience qui étudie l'effet du pouvoir sur ns les stratégies éxprimées par l'agent au cours d'une négociation collaborative humain-agent. Nos résultats montrent que les participants perçoivent correctement les différences dans les stratégies d'agent en fonction de la relation de pouvoir qu'il cherche à d'exprimer.
+		Cet article se situe dans le contexte de la conception d'agents conversationnels capables d'exprimer des comportements sociaux. Il présente un modèle informatique de sélection d'énoncés qui permet d'exprimer différents niveaux de pouvoir (au sens de la relation sociale de dominance) dans un dialogue de négociation collaborative avec un interlocuteur humain. Nous avons extraits de la littérature en psychologie sociale trois principes de négociation en rapport avec la notion de pouvoir social. Nous présentons le modèle informatique qui permet de rendre visible ces principes à travers la stratégie de dialogue de l'agent. Nous présentons ensuite évaluation de ce modèle dans le contexte d'une interaction humain-agent. Nos résultats montrent que les participants perçoivent correctement les différences dans les stratégies de l'agent en fonction de la relation de pouvoir qu'il cherche à d'exprimer.
 	\end{abstract}
 
-\keywords{Négociation collaborative, Relation de pouvoir, Stratégie de négociation}
+	\keywords{Dialogue de négociation collaborative, relation de pouvoir, stratégie de négociation}
 
 
 
 	\section{Introduction}
-	Les agents conversationnels connaissent un essor important  dans plusieurs domaines d'applications. Ces agents jouent différents rôles allant du rôle de tuteur pour enfant au compagnon pour les personnes âgées isolées.
-	Dans le contexte de ces d'interactions,  l'agent et l'utilisateur humain  sont amenés à collaborer afin de satisfaire des tâches ou buts communs. Par exemple, un agent tuteur qui collabore avec un élève pour résoudre des exercices. Ils comparent leur connaissances respectives sur l'exercice à résoudre et discutent des solutions possibles. Une telle confrontation  permet d'offrir un enseignement personnalisé à l'élève. 
+	Les agents conversationnels connaissent un essor important  dans plusieurs domaines d'applications: systèmes de tuteur intelligents \cite{graesser2001intelligent} pour enfant, compagnon pour personnes âgées isolées \cite{bickmore2005s}, etc.
+	Dans le contexte de ces interactions, l'agent et l'utilisateur humain  sont amenés à collaborer afin de satisfaire des tâches ou buts communs. Par exemple, un agent tuteur qui collabore avec un élève pour résoudre des exercices. Ils comparent leur connaissances respectives sur l'exercice à résoudre et discutent des solutions possibles. Une telle confrontation  permet d'offrir un enseignement personnalisé à l'élève. 
 	
-	En effet, la collaboration entre interlocuteurs pour la satisfaction de buts implique la confrontation des préférences et expertises de chacun des partis ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} A la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les intérêts des deux participants au lieu de maximiser ses propres gains.
+	La collaboration entre interlocuteurs pour la satisfaction de buts implique donc la confrontation des préférences et expertises de chacun des partis, ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} À la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les intérêts des deux participants au lieu de maximiser ses propres gains.
 	
 	Notre but est de modéliser un agent conversationnel capable d'avoir des négociations collaboratives crédibles avec un utilisateur humain.
 	Pour ce faire, il est nécessaire de comprendre les comportements adoptés durant les négociations humains/humain. En effet,  Broekens \cite{broekens2010affective} présente la négociation comme un processus multidimensionnel qui implique une interaction sociale, des affects ainsi que des préférences et des opinions. La compréhension de l'aspect social est donc crucial pour l'étude du processus de négociation.
@@ -87,10 +87,10 @@
 			\begin{enumerate}
 				\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs avec un pouvoir élevé affichent un niveau d'exigence plus important que les négociateurs avec un pouvoir plus faible. De plus, les exigences des négociateurs de faible pouvoir diminuent avec le temps il a tendance à faire des concessions plus importantes comparés a des négociateurs avec un pouvoir plus grand. \cite{de1995impact}
 				
-				\item \textbf{Soi Vs autrui:} Les négociateurs de faible pouvoir prennent en compte les préférences de l'autre dans la négociation, alors que les négociateurs avec un pouvoir plus grand sont égocentriques et ne s'intéressent qu'à satisfaire leurs propres préférences. \cite{fiske1993controlling,de1995impact}
+				\item \textbf{Soi \emph{vs} autrui:} Les négociateurs de faible pouvoir prennent en compte les préférences de l'autre dans la négociation, alors que les négociateurs avec un pouvoir plus grand sont égocentriques et ne s'intéressent qu'à satisfaire leurs propres préférences. \cite{fiske1993controlling,de1995impact}
 				
 				\item \textbf{Contrôle du flux de la négociation:}
-				Les négociateurs avec un pouvoir élevé ont tendance à faire le premier pas \cite {magee2007power} et à prendre les devants dans la négociation. Les négociateurs de faible pouvoir visent à construire un modèle précis des préférences du partenaire de négociation, ce qui les amène à poser plus de questions afin de collecter des informations sur les préférences du partenaire au lieu de faire avancer la négociation (\emph{e.g}  faire des propositions)\cite{de2004influence}. 
+				Les négociateurs avec un pouvoir élevé ont tendance à faire le premier pas \cite {magee2007power} et à prendre les devants dans la négociation. Les négociateurs de faible pouvoir visent à construire un modèle précis des préférences du partenaire de négociation, ce qui les amène à poser plus de questions afin de collecter des informations sur les préférences du partenaire au lieu de faire avancer la négociation (\emph{e.g}  faire des propositions)~\cite{de2004influence}. 
 				
 			\end{enumerate}
 	
@@ -113,7 +113,7 @@
 			Le but de chaque processus de négociation est de trouver une \textbf{option} parmi un ensemble d'option $\mathcal{O}$. Le choix d'une option repose sur les critères qui caractérisent l'option.  Nous considérons l'ensemble $\mathcal{C}$ composé de $n$ critères, chacune disposant respectivement d'un domaine de valeurs  $C_1 \ldots C_n$. Nous pouvons donc représenté $\mathcal{O}$ comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $o \in \mathcal{O}$ comme un tuple $(v_1,\ldots,v_n)$ en faisant l'hypothèse que toutes les options d'un sujet donné sont toutes connues.
 	
 		
-		Par exemple, pour un dialogue a propos des restaurants, les critères peuvent être le type de cuisine et le prix. Une option peut donc être représenté comme suit : $(Française, abordable)$
+		Par exemple, pour un dialogue a propos des restaurants, les critères peuvent être le type de cuisine et le prix. Une option pourrait donc être représenté par le couple suivant: $(Française, abordable)$
 		
 		\subsection{Le modèle des préférences}
 			L'agent dispose d'un ensemble de préférences défini pour chaque critère $C_i$, formalisé comme un ordre partiel $ \prec_i$ sur les valeurs de ce critère. 
@@ -250,7 +250,7 @@
 		
 		Cette fonction est généralisable à toutes les options,  $o \in O$: $acc(pow,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(pow,t))$.
 		
-		\subsection{Soi Vs autrui}
+		\subsection{Soi \emph{vs} autrui}
 	
 		Selon notre second principe, les négociateurs avec un pouvoir élevé donnent plus de poids à leur propre satisfaction. Pour implémenter ce principe dans le contexte d'une négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \textit{tolérable} en considérant la satisfaction de l'agent et de son partenaire.
 		
