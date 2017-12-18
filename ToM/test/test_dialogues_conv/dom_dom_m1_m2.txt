@@ -1,0 +1,9 @@
+#Dom Dom (sans adaptation)
+#M1-M2
+
+
+Agent1 says "Let's go to a restaurant on the south side."
+Agent2 says "I don't want to go to a restaurant on the south side. Let's go to another a restaurant on the south side."
+Agent1 says "Okay. Let's go to the Moulin2 . It's a modern, cheap French restaurant on the west side."
+Agent2 says "I don't want to go to the Moulin2 restaurant. Let's go to another the Moulin2 restaurant. It's a modern, cheap French restaurant on the west side."
+Agent1 says "Okay, let's go to the Moulin2 restaurant."

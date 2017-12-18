@@ -1,0 +1,17 @@
+#Dom Sub (sans adaptation)
+#M1-M2
+
+Agent1 says "Let's go to a restaurant on the south side."
+Agent2 says "I don't like restaurants on the south side, let's choose something else."
+Agent1 says "Let's go to a modern restaurant."
+Agent2 says "Okay, let's go to a modern restaurant."
+Agent1 says "Let's go to a cheap restaurant."
+Agent2 says "Do you like expensive restaurants?"
+Agent1 says "I don't like expensive restaurants."
+Agent2 says "Do you like affordable restaurants?"
+Agent1 says "Let's go to a cheap restaurant."
+Agent2 says "Do you like affordable restaurants?"
+Agent1 says "I don't like affordable restaurants."
+Agent2 says "What kind of cuisine do you like?"
+Agent1 says "Let's go to the Moulin2 restaurant. It's a modern, cheap French restaurant on the west side."
+Agent2 says "Okay, let's go to the Moulin2 restaurant."
