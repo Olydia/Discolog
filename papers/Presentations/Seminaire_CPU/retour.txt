@@ -1,0 +1,19 @@
+Contextualiser l'exp pour un meilleur renseignement des prefs (par exemple: ce soir)
+
+Calculer le temps
+
+Agent negociateur dans le souk (justine cassel)
+
+Intrasujet:
+Calculer les prefs a partir 
+
+Analyser le comportement de l'utilisateur dans la negociation
+
+agreabilite: Godspeen
+Presence sociale
+
+Ajouter un temps reponse pour l'agent pour la reflexion
+
+Reprendre les questions des precedentes a la premiere personne
+
+evaluer l'estimation faite au cours de la négociation (est que l'agent a fait une evaluation aleatoire ou pas)
