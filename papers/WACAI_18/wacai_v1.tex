@@ -418,6 +418,7 @@
 			A l'opposé, la deuxième condition, les participants ont d'abord interagi  avec Arthur puis avec Bob.
 			
 			\subsection {Hypothèses}
+			\label{sec:hyp}
 			Nous avons défini quatre hypothèses qui reflètent les différents comportements et stratégies affichés par les agents lors de la négociation.
 			
 			\begin{itemize}
@@ -433,7 +434,32 @@
 
 
 			\subsection{Évaluation Agent/Agent}
+				Dans le but de valider la perception des comportements de pouvoir généré par notre modèle de négociation, nous avons effectué une première évaluation agent/agent où les participants avaient le rôle de juge externe pour évaluer le comportement des agents lors de leur négociation.
 				
+				Nous avons manipulé deux paramètres de simulations à savoir les valeurs de pouvoir des deux agents ainsi sur l'ensemble de leurs préférences. Ces derniers ont un effet direct sur le rendu des négociations. Au final, nous avons obtenus quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues), un exemple de dialogue est présenté dans la figure \ref{fig:ex-dialogue}. De plus, les hypothèses formulées sont identiques a celles présentées dans la section précédente. 
+						\begin{table}[h]
+							\centering
+							\begin{tabular}{ |l|c|c|l| }
+								\hline
+								\textbf{Préférences}& \textbf{Pow(A)} & \textbf{Pow(B)} & \textbf{Label} \\ 
+								\hline
+								\newline\multirow{3}{*} { Préférences différentes} & 0.9 & 0.4 & Dialogue 1 \\ \cline{2-4}
+								
+								\newline  & 0.7 & 0.4 & Dialogue 2\\ \cline{2-4}
+								
+								\newline   &0.7 & 0.2 & Dialogue 3\\ 
+								\hline
+								\newline Préférences similaires& 0.7 & 0.4 & Dialogue 4\\
+								\hline
+							\end{tabular}
+							\caption{Conditions expérimentales pour la génération des dialogues.} 
+							\label{table:conditions}
+						\end{table}
+				Nous avons conduit une étude inter-sujet dans la quelle chaque participant avait évalué uniquement un dialogue. Les résultats obtenus  suite au test de Wilcoxon confirment fortement nos hypothèses. En effet, les participants ont observé une différence significative entre le comportement ente l'agent avec un pouvoir élevé et l'agent dont le pouvoir est faible. L'agent avec un pouvoir élevé a été perçu comme égocentrique, ayant un haut niveau d'exigences et faisant moins de concessions que l'agent avec un pouvoir faible. Par opposition, l'agent avec un pouvoir faible a été perçu comme tenant compte des préférences de son interlocuteur dans sa prise de décision et manquait de prise d'initiative. Par conséquente, les comportements de pouvoir ont été correctement perçu dans la totalité des dialogues.
+				
+				Dans la suite de cet article , nous chercherons à valider la perception de ces comportements dans le contexte d'une interaction humain agent. 
+				
+			
 			
 			\subsection{Procédure}
 			
