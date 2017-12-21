@@ -14,6 +14,7 @@ public class HModels {
 
 
 	public HModels(List<Class<? extends Criterion>> criteria) {
+		
 		hypotheses = new ArrayList<PowHypothesis>();
 		this.criteria = criteria;
 		for(int i=3; i<10; i++){

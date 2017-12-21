@@ -23,12 +23,14 @@ public class RejectPropose  extends ProposalUtterance {
 
 	@Override
 	protected void interpret () {
-		
+		Proposal r = getReject();
+		Proposal p = getProposal();
+		boolean i = getExternal();
 		// add the rejected proposal
-		super.rejectUpdate(getReject());
+		super.rejectUpdate(r);
 		
 		// add the counter proposal
-		super.proposeUpdate(getProposal());
+		super.proposeUpdate(p);
 		
 		// history update
 		// -----------------
@@ -39,7 +41,8 @@ public class RejectPropose  extends ProposalUtterance {
 	@Override
 	public NegotiationUtterance mirrorCopy() {
 		// TODO Auto-generated method stub
-		return  new RejectPropose(getDisco(), !getExternal(), getReject(),getProposal());
+		
+		return  new RejectPropose(getDisco(), !getExternal(), getReject(), super.getProposal());
 
 	}
 }

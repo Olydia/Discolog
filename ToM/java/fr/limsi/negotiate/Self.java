@@ -10,7 +10,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 public abstract class Self<C> {
 
 	protected MatrixOfPref<C> matrix;
-
+	
 	
 	public MatrixOfPref<C> getMatrix() {
 		return matrix;

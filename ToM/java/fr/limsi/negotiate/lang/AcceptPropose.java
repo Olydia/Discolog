@@ -31,7 +31,7 @@ public class AcceptPropose  extends ProposalUtterance {
 	protected void interpret () {
 		
 		// add the proposal 
-		super.proposeUpdate(getProposal());
+		super.proposeUpdate(super.getProposal());
 		
 		// add the accepted proposal
 		Criterion value = (Criterion) getAccepted().getValue();
@@ -56,6 +56,6 @@ public class AcceptPropose  extends ProposalUtterance {
 	@Override
 	public NegotiationUtterance mirrorCopy() {
 		// TODO Auto-generated method stub
-		return new AcceptPropose(getDisco(), !getExternal(), getAccepted(), getProposal());
+		return new AcceptPropose(getDisco(), !getExternal(), getAccepted(), super.getProposal());
 	}
 }

@@ -27,7 +27,7 @@ public class RejectState  extends ProposalUtterance {
 	@Override
 	public void interpret () {
 		
-		super.rejectUpdate(getProposal());
+		super.rejectUpdate(super.getProposal());
 		
 		Statement<Criterion> statement = new Statement<Criterion>(getJustify(),Satisfiable.FALSE);
 		
@@ -41,7 +41,7 @@ public class RejectState  extends ProposalUtterance {
 	@Override
 	public NegotiationUtterance mirrorCopy() {
 		// TODO Auto-generated method stub
-		return new RejectState(getDisco(), !getExternal(), getProposal(), getJustify());
+		return new RejectState(getDisco(), !getExternal(), super.getProposal(), getJustify());
 	}
 	
 

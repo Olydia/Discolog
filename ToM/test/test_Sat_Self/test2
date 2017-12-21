@@ -1,0 +1,21 @@
+# Sub - Sub M1-M3
+# Agent 2 Adaptatif
+# Sat changes
+Agent1 says "What kind of cuisine do you like?"
+Agent2 says "I like Japanese restaurants."
+Agent1 says "Do you like French restaurants?"
+Agent2 says "Let's go to a Japanese restaurant."
+Agent1 says "I don't like Japanese restaurants, let's choose something else."
+Agent2 says "Let's go to a restaurant on the north side."
+Agent1 says "Do you like restaurants on the south side?"
+Agent2 says "I don't like restaurants on the south side."
+Agent1 says "Do you like restaurants on the west side?"
+Agent2 says "Let's go to a restaurant on the north side."
+Agent1 says "Do you like restaurants on the west side?"
+Agent2 says "I don't like restaurants on the west side."
+Agent1 says "Do you like restaurants on the east side?"
+Agent2 says "Let's go to a restaurant on the north side."
+Agent1 says "Okay, let's go to a restaurant on the north side."
+Agent2 says "Let's go to the Ahsi restaurant. It's a lively, expensive Korean restaurant on the north side."
+Agent1 says "Okay, let's go to the Ahsi restaurant."
+Agent2 says "Okay."

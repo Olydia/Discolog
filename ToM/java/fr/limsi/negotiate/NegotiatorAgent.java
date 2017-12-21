@@ -61,8 +61,10 @@ public class NegotiatorAgent extends Agent {
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				new NegotiatorAgent("Agent1", model.model1()), 
-				new NegotiatorAgent("Agent2", model.model2()), 
-				//new ToMNegotiatorProba("Agent2", model.model3()), 
+				//new ToMNegotiatorProba("Agent1", model.model1()), 
+
+				//new NegotiatorAgent("Agent2", model.model3()), 
+				new ToMNegotiatorProba("Agent2", model.model3()), 
 
 				false);
 
@@ -70,8 +72,13 @@ public class NegotiatorAgent extends Agent {
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
 		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
-		//((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
-		((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		//((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
+
+		//((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		
+		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		
+
 		dual.start();
 	}
 
@@ -119,8 +126,9 @@ public class NegotiatorAgent extends Agent {
 			
 			else{
 
-				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
-				Class<? extends Criterion> opent = getNegotiation().getCriteria().getElements().get(0);
+				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				
+				//Class<? extends Criterion> opent = getNegotiation().getCriteria().getElements().get(0);
 
 
 				if(relation > NegotiationParameters.pi){

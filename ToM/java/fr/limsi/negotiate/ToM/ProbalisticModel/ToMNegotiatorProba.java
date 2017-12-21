@@ -94,23 +94,54 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
-		if (utterance != null)
-			this.setOther(guess(utterance, getOther()));
-		guessed.add(getOther());
-		System.out.println("Predicted pow : " + guessed);
+		if (utterance != null){
+			double other = guess(utterance, getOther());
+			this.setOther(other);
+			guessed.add(other);
+			complement(other);
+			System.out.println("Predicted pow : " + other);
+
+		}
+			
+		
 		Utterance u = respondTo(utterance, disco);
 		return u ;
+	}
+	
+	public void complement (double guess){
+		this.setRelation(1 - guess);
+	}
+	
+	public void mimic(double guess){
+		this.setRelation(guess);
+
 	}
 
 
 	// ***** TOM computing
-
-	public double guess(Utterance u, double previousPow){
-
-		//System.out.println(u.format());
+	/**
+	 * Compute hypotheses about the other's lead of dialogue
+	 * Large propose: Dominant
+	 * Large ask: submissive
+	 * @return 
+	 */
+	public  List<PowHypothesis> leadDialogue(){
 		float prop = getProposePropotion();
 		float ask = getAskPropotion();
-		List<PowHypothesis> models = (prop>=ask? otherModel.getDom(): otherModel.getSub());
+		if(prop>=0.5)
+				return otherModel.getDom();
+			
+		else if(ask>=0.5)
+				return otherModel.getSub();
+		else
+			return otherModel.getHypotheses();
+	}
+	
+	public double guess(Utterance u, double previousPow){
+
+		System.out.println(u.format());
+		
+		List<PowHypothesis> models = leadDialogue();
 		// si c'est superieurs r�cuperer uniquement les pow> 0.5 et les donner en entr�e
 		
 

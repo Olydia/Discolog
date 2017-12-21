@@ -62,7 +62,7 @@ public abstract class ProposalUtterance extends NegotiationUtterance {
 			cn.updateProposal((CriterionProposal)p);
 			
 			getNegotiation().addStatement(new Statement<Criterion>(value,Satisfiable.FALSE), getExternal());
-			this.setSlotValue("proposal", p);
+			//this.setSlotValue("proposal", p);
 
 		}
 		
@@ -70,7 +70,7 @@ public abstract class ProposalUtterance extends NegotiationUtterance {
 			OptionProposal p = new OptionProposal(!getExternal(), (Option)rejected.getValue());
 			p.setStatus(Status.REJECTED);
 			getNegotiation().updateProposal(p);
-			this.setSlotValue("proposal", p);
+			//this.setSlotValue("proposal", p);
 
 		}
 	}

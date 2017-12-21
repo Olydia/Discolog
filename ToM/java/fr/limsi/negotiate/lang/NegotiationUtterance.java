@@ -23,7 +23,8 @@ public abstract class NegotiationUtterance extends Utterance {
       return ( (NegotiatorAgent) getDisco().getInteraction().getSystem()).getNegotiation();
       
    }
-   
+   	
+   // used in the dilogueContext Class
 	public abstract Object getValue();
 
 	public abstract NegotiationUtterance mirrorCopy();
