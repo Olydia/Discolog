@@ -21,12 +21,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -260,6 +263,15 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 	}
 	public void addElements(String username, String situation,Stage chatStage/*,Interaction interaction*/){
 
+		ScrollBar sc = new ScrollBar();
+		sc.setMin(0);
+		sc.setMax(1000);
+		sc.setValue(50);
+		final VBox vb = new VBox();
+		Group root = new Group();
+		root.getChildren().addAll(vb, sc);
+		
+		
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
 			 ExampleAgent agent= new ExampleAgent("Bob", model.model1());
@@ -1150,8 +1162,8 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 	            	dontLikeButton.setStyle(off);
 	            	//list.addAll(likeHBox,dontLikeHBox);
 
-	            	setTopAnchor(sendHBox,450.0);
-	            	setLeftAnchor(sendHBox,600.0);
+	            	setTopAnchor(sendHBox,getHeight() * 0.2);
+	            	setLeftAnchor(sendHBox,getWidth()* 0.5);
 
 	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,300.0,situation,list);
 

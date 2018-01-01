@@ -1,0 +1,126 @@
+% !TeX spellcheck = <none>
+
+	
+
+	\subsection{Modèle de négociation collaborative}
+	
+
+	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
+	% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
+	%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
+	
+	De plus, nous avons mené une première expérience où nous avons enregistré deux dialogues de négociations entre deux humains qui avaient pour but de trouver un restaurant où diner.
+	
+	Nous avons analyser le dialogue en utilisant la décomposition en DSP (Candece). Un des premier résultat observé que les négociateurs s'intéréssaient à plusieurs critères pour le choix d'un restaurants, par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères été soit abordé simultanément dans la négociation, ou bien un par un. C'est a dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'a aboutir à un compromis.
+		inspiration des travaux en négociation qui se basent sur la représentation multi-critères ( ou multi-attribute) du domaine.
+		
+\subsubsection{Domaine de négociation }
+Critère , Option, Préférences, Satisfiabilité
+Contexte de négociation: préférences de l'autre, historique de la négociation (proposition, préférences exprimés)
+\textcolor{blue}{explication des préférences}
+%https://pdfs.semanticscholar.org/f4ea/f27ea6f3f94b8e8d4d8d103eb7a1ebaf2324.pdf
+%Strict preference is asymmetric: There is no pair of x and x’ in Ω such that x≺i
+%x’ and
+%x’≺i
+%x;
+%• Transitivity: For all x, x’ and x’’ in Ω , if xÉi
+%x’ and x’Éi
+%x’’, then xÉi
+%x’’;
+%• Completeness: For all x and x’ in Ω , either xÉi
+%x’ or x’Éi
+%x;
+%• Strict convexity: For any solution x, the set of solutions that an agent prefers to x is
+%strictly convex;
+%where xÉi
+%x’ (or x≺i
+%x’) indicates that the offer x’ is at least as good as (or better than) x
+%for agent i.
+%The first two conditions ensure that the agents’ preferences are consistent in the
+%negotiation domain; the third condition ensures that any pair of points in the negotiation 
+%13
+%domain can be compared; the last condition ensures that agents’ preferences on each
+%issue are monotone if the values of the other issues are fixed, i.e., if the value of an issue
+%increases, when the values of the other issues are fixed, the utility of an agent is
+%monotonically increasing or decreasing. This last condition implies that each Pareto
+%optimal solution of a multi-attribute negotiation is on a joint tangent hyperplane of a pair
+%of indifference curves (or surfaces) 2
+%of the two agents and the Pareto frontier is a
+%continuous curve
+\subsubsection{Communication}
+Présentation des actes de dialogues avec leurs catégories et conditions d'applicabilité. 
+\textcolor{red}{Expliquer que note choix d'utterances se basent sur les travaux de Candece Sidner. De plus, l'analyse en DSP nous a révélé que les participants utiliser des doubles utterances dans leur négociation, et ceci de manière réccurente. Ceci traduisait de plus leur stratégies de négociation influncé par des comportements de pouvoir}
+
+\subsection{Décision basée sur le pouvoir}
+\subsubsection{Principes de pouvoirs }principes}
+
+\subsubsection{Algos de décision pour les 3 
+
+\subsection{Évaluation des comportements de pouvoir}
+Dans cette section, nous présentons une évaluation qui vise a valider les comportements de pouvoirs implémentés. Nous avons effectué deux types d'évaluation. Nous avons d'abord chercher à faire une évaluation externe des comportements dans le cadre d'une interaction agent-agent.  Ensuite, nous nous sommes intéressés à évaluer la perception des comportements dans le cadre d'une interaction agent-humain. 
+
+\subsubsection{Dialogue Agent-Agent}
+\begin{enumerate}
+	\item Conditions
+	\item Hypothèses
+	\item Protocole expérimental
+	\item Résultat et discussion 
+\end{enumerate}
+\subsubsection{Dialogue Humain- Agent}
+\begin{enumerate}
+	\item Conditions
+	\item Hypothèses
+	\item Protocole expérimental (Interface, participant, et pool de participants)
+	\item Résultat et discussion 
+\end{enumerate}
+
+\subsubsection{Discussion générale}
+Discuter la perception des comportements de pouvoir de manière générale, et introduire la partie implémentation de la relation de dominance complémentaire.
+\subsection{Modèle de la relation interpersonnelle de dominance}
+\textbf{But}: simuler une relation interpersonnelle de dominance entre l'utilisateur et l'agent en se basant sur leur comportements de pouvoir. 
+
+\textbf{Intérêt}: complémentarité de dominance améliore les résultats de la négociation. Par ailleurs, elle permet de renforcer la relation d'appréciation (\emph{liking}) entre les partenaires.  
+
+\textbf{Résumé objectifs}: dans le but de modéliser la relation de dominance, il faut, en premier temps, que l'agent puisse reconnaître les comportements de pouvoir exprimé par l'utilisateur en utilisant un modèle de la théorie de l'esprit. En second temps, l'agent adapter sa stratégie de négociation afin d'adopter un comportement de pouvoir complémentaire a celui exprimé par l'utilisateur. Cela permettra de créer une relation complémentaire de dominance 
+
+\subsubsection{Modèle de l'interlocuteur}
+\begin{itemize}
+	\item Utilisation de la théorie de l'esprit basée simulation. 
+	\item Méthode: Formuler des hypothèses sur l'état mental de l'interlocuteur.
+	\item Problème: Taille importante des hypothèses sur les préférences pour un sujet donné. 
+	\item Solution: Adaptation de la solution vers un modèle de raisonnement avec connaissances partielle sur les préférences. 
+\end{itemize}
+
+\textbf{Adaptation de l'algorithme de décision}
+
+\par Expliquer la démarche comme dans le papier AAMAS. Pour chaque module, expliquer l'adaptation utilisée.
+
+\textbf{Évaluation du modèle}
+
+Le but est de valider la pertinence du modèle de l'interlocuteur dans le cadre d'une interaction agent-agent. 
+\par Présenter l'évaluation purement informatique des performances de l'algorithme.
+\begin{enumerate}
+	\item \textbf{Conditions:} Présenter les paramètres évalués à savoir : l'efficacité de prédiction, le temps de convergence et d'exécution.
+	\item \textbf{Protocole:} nombre de dialogues, conditions d'initialisations (pow, pref).
+	\item \textbf{Résultats et discussion}
+\end{enumerate}
+
+\subsubsection{Adaptation du comportement de l'agent : Simulation de la relation de dominance}		
+Expliquer rapidement qu'a chaque tour l'agent calcule le $other_{pow}$ pour s'adapter $ self_{pow}= 1 - other_{pow}$
+
+Présenter l'expérimentation:
+
+\begin{enumerate}
+	\item Conditions étudiée: Interaction (avec/sans) adaptation.
+	\item Hypothèses
+	\item Protocole expérimental
+	\item Résultats
+	\item Discussion
+\end{enumerate}
+
+\subsubsection{Conclusion}
+Parler de notre démarche à chaque étape.
+
+Les études menées
+
+Discuter globalement des résultats

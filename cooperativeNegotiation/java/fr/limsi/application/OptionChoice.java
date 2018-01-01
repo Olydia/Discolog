@@ -152,8 +152,8 @@ public class OptionChoice extends AnchorPane{
           	cb4.getSelectionModel().selectLast();
 
           	ListView<String> options = new ListView<>();
-          	options.setPrefWidth(450.0);
-          	options.setPrefHeight(500.0);
+          	options.setPrefWidth(getWidth()/3);
+          	options.setPrefHeight(getHeight()/3);
         	ArrayList<String> optionsList =new ArrayList<String>();
 
 
@@ -205,14 +205,15 @@ public class OptionChoice extends AnchorPane{
 		HBox okHBox = new HBox(15);
 		HBox retourHBox = new HBox(15);
 		filterHBox.getChildren().addAll(filterButton);
-		setTopAnchor(filterHBox,300.0);
-     	setLeftAnchor(filterHBox,600.0);
+		//setTopAnchor(filterHBox,300.0);
+		setTopAnchor(filterHBox,getHeight()* 0.4);
+     	setLeftAnchor(filterHBox,getWidth() * 0.5);
 		okHBox.getChildren().addAll(okButton);
-		setTopAnchor(okHBox,900.0);
-     	setLeftAnchor(okHBox,600.0);
+		setTopAnchor(okHBox,getHeight() -100);
+     	setLeftAnchor(okHBox,getWidth() * 0.4);
      	retourHBox.getChildren().addAll(retourButton);
-     	setTopAnchor(retourHBox,900.0);
-     	setLeftAnchor(retourHBox,1100.0);
+     	setTopAnchor(retourHBox,getHeight() - 100);
+     	setLeftAnchor(retourHBox,getWidth() * 0.5);
 		list.addAll(retourHBox,filterHBox);
 		/* The options list */
 
