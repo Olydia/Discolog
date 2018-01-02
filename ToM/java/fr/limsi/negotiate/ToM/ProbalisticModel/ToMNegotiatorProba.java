@@ -22,7 +22,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public double other;
 	private List<Double> guessed;
 
+	
 
+	
 	public List<Double> getGuessed() {
 		return guessed;
 	}
@@ -98,7 +100,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			double other = guess(utterance, getOther());
 			this.setOther(other);
 			guessed.add(other);
-			complement(other);
+			mimic(other);
 			System.out.println("Predicted pow : " + other);
 
 		}
@@ -108,12 +110,17 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		return u ;
 	}
 	
+	public void adapt(double value){
+		super.relation = value;
+		getNegotiation().setAdaptativePow(value);
+	}
+	
 	public void complement (double guess){
-		this.setRelation(1 - guess);
+		this.adapt(1 - guess);
 	}
 	
 	public void mimic(double guess){
-		this.setRelation(guess);
+		this.adapt(guess);
 
 	}
 

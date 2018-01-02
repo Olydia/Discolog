@@ -170,7 +170,8 @@ public class GenerateModel {
 			m1.setDominance(d);
 			for(Satisfiable o: other){
 				c.getOther().addPreference(value,o);
-				System.out.println(value+","+d +"," +c.getSelf().satisfaction(value)+","+ c.getOther().other(value) +","+ c.tolerable(value, m1.self()));
+				System.out.println(value+","+d +"," +c.getSelf().satisfaction(value)+","+ 
+				c.getOther().other(value) +","+ c.tolerable(value, m1.self()));
 				c.getOther().getPreferences().clear();
 
 			}

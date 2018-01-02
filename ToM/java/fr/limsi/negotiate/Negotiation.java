@@ -13,8 +13,11 @@ public class Negotiation<O extends Option> {
 	private Self_C<O> criteria;
 	private ArrayList<OptionProposal> proposals;
 	private Class<O> topic;
-	private double relation=0; 
+	private double pow=0; 
 	private DialogueContext context_bis;
+	//adapt Application case: TomAgent used in order to adapt the agent behavior
+	private double adaptativePow = 0;
+	
 
 
 	public Negotiation(CriterionNegotiation<Criterion>[] valueNegotiation,
@@ -45,11 +48,20 @@ public class Negotiation<O extends Option> {
 			ArrayList<OptionProposal> proposals) {
 
 		this.valueNegotiation = valueNegotiation;
-		this.relation = relation;
+		this.pow = relation;
+		this.adaptativePow = relation;
 		this.proposals = proposals;
 		this.topic=topic;
 		setCriteria(criteriaNegotiation);
 		this.context_bis = c;
+	}
+	
+	public double getAdaptativePow() {
+		return adaptativePow;
+	}
+
+	public void setAdaptativePow(double adaptativefPow) {
+		this.adaptativePow = adaptativefPow;
 	}
 
 	// for Guess class
@@ -123,11 +135,15 @@ public class Negotiation<O extends Option> {
 	}
 
 	public double getDominance() {
-		return relation;
+		return pow;
 	}
-
+	
+	/*
+	 * 
+	 * initiate the value of pow and 
+	 */
 	public void setDominance(double dominance) {
-		this.relation = dominance;
+		this.pow = dominance;
 	}
 
 	public float satisfiability(Option object) {
@@ -154,7 +170,7 @@ public class Negotiation<O extends Option> {
 	// t is the number of non accepted proposals
 	
 	public double self(){
-		return computeSelf(this.relation);
+		return computeSelf(this.getAdaptativePow());
 	}
 
 	public double computeSelf(double pow){
@@ -171,18 +187,18 @@ public class Negotiation<O extends Option> {
 		}
 		
 	}
-	
-	public double selfTest(int t){
-
-		double s=0;
-		if( t< NegotiationParameters.tau)
-			return this.relation;
-		else{
-			s= relation - ((NegotiationParameters.delta/relation) *(t-NegotiationParameters.tau));
-			return Math.max(0, s);
-		}
-	}
-
+//	
+//	public double selfTest(int t){
+//
+//		double s=0;
+//		if( t< NegotiationParameters.tau)
+//			return this.relation;
+//		else{
+//			s= relation - ((NegotiationParameters.delta/relation) *(t-NegotiationParameters.tau));
+//			return Math.max(0, s);
+//		}
+//	}
+//
 	public int computeT() {
 
 		return getContext().getNonAcceptedProposals().size();
@@ -525,7 +541,7 @@ public class Negotiation<O extends Option> {
 		for(CriterionNegotiation<Criterion> cr : this.getValuesNegotiation())
 			criteria.add(cr.clone());
 
-		return new Negotiation<O> (criteria, relation, this.getCriteria(), this.getTopic(), c, optionP);
+		return new Negotiation<O> (criteria, pow, this.getCriteria(), this.getTopic(), c, optionP);
 	}
 	/**
 	 * User to compute the format (Check models/Negotiate.properties) of the rejectPropose utterance. 

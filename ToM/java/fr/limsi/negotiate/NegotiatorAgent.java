@@ -27,7 +27,7 @@ public class NegotiatorAgent extends Agent {
 	public static double  DOMINANT = 0.7, SUBMISSIVE = 0.4;
 
 	private Negotiation<? extends Option> negotiation;
-	private double relation = DOMINANT;
+	protected double relation = DOMINANT;
 
 	public NegotiatorAgent (String name, Negotiation<? extends Option> negotiation) { 
 		
@@ -52,6 +52,7 @@ public class NegotiatorAgent extends Agent {
 	public void setRelation (double relation) { 
 		this.relation = relation; 
 		this.negotiation.setDominance(relation);
+		this.negotiation.setAdaptativePow(relation);
 	}
 
 
@@ -540,7 +541,10 @@ public class NegotiatorAgent extends Agent {
 	public boolean takeThelead(){
 		int nbPreferences =0;
 
-		if(getNegotiation().getDominance()<= NegotiationParameters.pi)
+		//adaptative agent case: on 
+		if(getNegotiation().getAdaptativePow()<= NegotiationParameters.pi)
+
+		//if(getNegotiation().getDominance()<= NegotiationParameters.pi)
 			return false;
 
 		for(NegotiationUtterance utt : getNegotiation().getContext().getHistory()){
