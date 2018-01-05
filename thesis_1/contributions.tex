@@ -1,17 +1,28 @@
-% !TeX spellcheck = <none>
+% !TeX spellcheck = fr_FR
 
 Comme mentionné dans l'introduction, la principale contribution de cette thèse est d'étudier l'impact de la relation de dominance sur les stratégies de négociation dans le cadre de négociation collaborative entre un agent conversationnel et un utilisateur humain. 
 Pour ce faire, nous devons construire un modèle de négociation qui permettent aux négociateurs de présenter leurs stratégies de négociation. 
 
 Dans ce chapitre, nous présentons notre modèle de négociation collaborative sur lequel sera construit notre modèle de décision basé sur la dominance. 
-Dans la section 
- dans le chapitre 2
+
+Afin de définir un système de dialogue dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord enregistré des dialogues de négociation entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social de type "négociation collaborative". Nous avons annotés et analysé les dialogues. Cette étude nous a livré un ensemble de comportements  que nous présenterons dans la première section de ce chapitre. 
+
+Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle de négociation.
+
+
+
+Dans la seconde section, nous présenterons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisé dans la mise en œuvre de systèmes de négociations automatiques. 
+
+La troisième section présentera notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réapproprié les actes de dialogue de \cite{sidner} pour la négociation collaborative.
+
+\section{Domaine de négociation}
+
 	La représentation du domaine de négociation en  informatique, présenter les différents papiers
 	interet du win win
 	Présenter notre expé
 	
 	
-	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la representation du domaine: negociation sur un critère et la négociation multi-critères. La recherche multi-critères reste un champs moins étudié que la négociation uni critère. Cependant, dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est crucial. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultannément. Un exemple présenté dans [] où des négociateurs
+	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la representation du domaine: negociation sur un critère et la négociation multi-critères. La recherche multi-critères reste un champs moins étudié que la négociation uni critère. Cependant, dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est crucial. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément. Un exemple présenté dans [] où des négociateurs
 	
 
 	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
@@ -23,7 +34,7 @@ Dans la section
 	Nous avons analyser le dialogue en utilisant la décomposition en DSP (Candece). Un des premier résultat observé que les négociateurs s'intéréssaient à plusieurs critères pour le choix d'un restaurants, par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères été soit abordé simultanément dans la négociation, ou bien un par un. C'est a dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'a aboutir à un compromis.
 		inspiration des travaux en négociation qui se basent sur la représentation multi-critères ( ou multi-attribute) du domaine.
 		
-\subsubsection{Domaine de négociation }
+
 Critère , Option, Préférences, Satisfiabilité
 Contexte de négociation: préférences de l'autre, historique de la négociation (proposition, préférences exprimés)
 \textcolor{blue}{explication des préférences}
