@@ -15,14 +15,61 @@ Dans la seconde section, nous présenterons le domaine de négociation utilisé.
 
 La troisième section présentera notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réapproprié les actes de dialogue de \cite{sidner} pour la négociation collaborative.
 
+
+ \section{Collecte de données}
+	 Afin de définir un système de dialogue social dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord effectuer une étude dans laquelle nous avons analyser les comportements de deux interlocuteurs dans un cadre de dialogue social de type "négociation collaborative". 
+	Le but du dialogue est de trouver un restaurant où dîner avec son interlocuteur. De plus, les interlocuteurs n'avaient pas de connaissances prérequis sur les préférences de leur interlocuteur.
+	
+	Une fois le dialogue enregistré, nous les avons annoté et analyser la structure du dialogue en suivant la théorie de \emph{Grosz et Sidner} \cite{sidner} qui stipule que la structure du dialogue est composée de trois éléments à savoir la structure linguistique, la structure intentionnelle et enfin l'état attentionnel.	
+	Nous présenterons dans ce qui suit la procédure de l'analyse ainsi que les résultats obtenus. 
+	
+	\subsection{Analyse de la structure de dialogue}  
+		La théorie présenté par \emph{Grosz et Sidner} propose que la structure d'un dialogue orienté tâche est constituée par trois éléments chacun agissant sur un aspect du dialogue. 
+		
+		D'abord, \emph{la structure linguistique} a pour but décomposé le dialogue en une séquence de segments de dialogue appelé (\textit{DS: discourse segment }) de tel sorte que chaque segment est composé d'un ensemble de sous-segments et d'une séquence d'énoncés appartenant uniquement au segment(n'appartient pas a un sous segment). De plus, les énoncés au sein d'un même segment contribuent à un même but. Cette décomposition proposée est non strict du fait qu'il est difficile de trouver des indices de segmentation. Des exemples d'indices proposés sont l'intention communicative commune à chaque DS, des expressions  linguistiques comme l'utilisation de termes "d'abord, finalement, $\ldots$". Des indices plus subtiles tels que le changement d'intonation, le temps de pause peuvent aussi être utilisés.
+		
+	\subsection{Structure intentionnelle}
+		Un interlocuteur s'engage dans un dialogue poussé par une ou plusieurs intentions internes qu'on nomme \emph{DP: discourse purpose}. De plus, pour chaque DS, nous pouvons isolé un but spécifique noté \emph{DSP: Discourse segment purpose}. Le but est d'analyser comment les DSPs participent à la satisfaction du DS initial. En outre, cette structure comprend l'analyse des relations entre les différents DSPs. Deux relations ont été identifiées, \emph{dominance} et \emph{satisfaction-precedence}. Si la satisfaction de l'intention d'un DSP1 participe a la satisfaction de celle d'un DSP2, alors le DSP1 \textbf{contribue} au DSP2. Par opposition le DSP2 \textbf{domine} le DSP 1.
+
+
+	\subsubsection{Structure attentionnelle}
+	
+		Cette structure représente “l'abstraction de l'attention des participants au fur et à mesure que leur dialogue avance”.
+		% Dynamic stack that records salient objects, properties and relations Focusing – process of manipulating focus spaces on attentional (focus) stack
+	 
+	 \subsubsection{Exemple de l'analyse}
+		 Nous présentons dans cette section un exemple de l'analyse dite en DSP que nous avons effectué sur les dialogues que nous avons enregistré.
+		%	ajouter un exemple avec chaque dsp: l'intention trouver et l'indentation.
+	
+	
+	
+	\subsubsection{Résultats de l'analyse}
+		L'analyse en DSPs nous a révélé un nombre de comportements intéressants tant sur l'aspect structurelle de la négociation que sur les stratégies de négociations déployés par les interlocuteurs. 	
+		
+		En effet, la décomposition du dialogue en \emph{DS} nous a confirmé que les négociateurs s'intéressaient a différents critères pour le choix d'une option (restaurant dans notre exemple). Ces critères sont négocié simultanément durant la négociation jusqu'a trouver un compromis qui satisfasse les négociateurs sur les critères qu'il jugent importants. 
+		Par exemple, dans le premier dialogue, les interlocuteurs se sont plus intéressés a l'ambiance du restaurant et son emplacement pour le choix finale. Au contraire dans le second dialogue, les interlocuteurs se sont principalement intéressés aux type de la cuisine et la qualité.
+		    
+		 De plus, Les critères les plus importants sont les premiers à être abordés, et en cas de conflit d'autre critères sont abordés. 
+		 Ceci est confirmé par des travaux en négociations automatiques qui mettent en avant l'intérêt de la modalisation multicritères dans les systèmes de négociation. Ce point sera abordé plus en détails en section ... 
+		 
+		 Sur l'aspect communicatif, notre modèle se basant sur des actes de dialogue, nous nous sommes intéressés au style d'informations échangés lors de la négociation. Nous avons récoltés des informations sur le style linguistique à affecter a nos actes de dialogues qui seront présentés en détails dans la section ... 
+		 
+		 Finalement, le dernier point et le plus important à être discuté est les stratégies que les négociateurs utilisent. En effet, l'analyse en DSP nous a permis d'analyser la corrélation entre différents comportements reliés à la dimension de la dominance. En effet, nous avons pu observé la relation entre la dominance et la fréquence de prise de parole. Le style linguistique est aussi influencé, l'argumentation, l'expression des préférences etc. 
+		 (ajouter exemple)
+		 
+		  
+	%	Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle dialogique qui comprend un modèle mental de l'environnement de l'agent et un modèle lui permettant de mener une négociation coopérative. 
+		
+	
+
 \section{Domaine de négociation}
 
 	La représentation du domaine de négociation en  informatique, présenter les différents papiers
-	interet du win win
-	Présenter notre expé
+
+
 	
 	
-	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la representation du domaine: negociation sur un critère et la négociation multi-critères. La recherche multi-critères reste un champs moins étudié que la négociation uni critère. Cependant, dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est crucial. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément. Un exemple présenté dans [] où des négociateurs
+	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères. La recherche multi-critères reste un champs moins étudié que la négociation uni critère. Cependant, dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est crucial. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément. Un exemple présenté dans [] où des négociateurs
 	
 
 	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
