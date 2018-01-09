@@ -13,7 +13,7 @@ Les informations collectées grâce l'observation des comportements humains nous
 
 Dans la seconde section, nous présenterons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisé dans la mise en œuvre de systèmes de négociations automatiques. 
 
-La troisième section présentera notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réapproprié les actes de dialogue de \cite{sidner} pour la négociation collaborative.
+La troisième section présentera notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réapproprié les actes de dialogue de \cite{grosz1986attention} pour la négociation collaborative.
 
 
  \section{Collecte de données}
@@ -64,25 +64,36 @@ La troisième section présentera notre modèle de communication basé sur des a
 
 \section{Domaine de négociation}
 
-	La représentation du domaine de négociation en  informatique, présenter les différents papiers
 
+%	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
+% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
+%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
 
+	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères. Cependant, La littérature existante se concentre plus sur la négociation uni critère \cite{lai2008decentralized,lai2004literature}. 
 	
+	Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, ce fait est confirmé par l'analyse que nous avions effectué dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurants. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères ont soit été abordé simultanément dans la négociation, ou bien un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'a aboutir à un compromis.
 	
-	La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères. La recherche multi-critères reste un champs moins étudié que la négociation uni critère. Cependant, dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est crucial. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément. Un exemple présenté dans [] où des négociateurs
-	
+	De plus, plusieurs travaux en négociation automatique ont mis en exergue que la négociation multi-critères augmente la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature} . 
 
-	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
-	% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
-	%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
+	% 	Pour toutes ces raisons, notre choix s'est porter sur la négociation multi-critère
+
+	Les résultats des précédents travaux nous ont motivé à utiliser une représentation multi-critère pour modéliser notre domaine de négociation collaborative. 
 	
-	De plus, nous avons mené une première expérience où nous avons enregistré deux dialogues de négociations entre deux humains qui avaient pour but de trouver un restaurant où diner.
+	\subsection{Représentation formelle des éléments de la négociation }	
+	Le but de la négociation est de choisir une \textit{option} $O$ dans l'ensemble des options $\mathcal{O}$ comprenant toutes les options alternatives envisagé pour un sujet de négociation donnée. 
 	
-	Nous avons analyser le dialogue en utilisant la décomposition en DSP (Candece). Un des premier résultat observé que les négociateurs s'intéréssaient à plusieurs critères pour le choix d'un restaurants, par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères été soit abordé simultanément dans la négociation, ou bien un par un. C'est a dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'a aboutir à un compromis.
-		inspiration des travaux en négociation qui se basent sur la représentation multi-critères ( ou multi-attribute) du domaine.
+	L'évaluation de chaque option repose sur un ensemble de critères $\mathcal{C}$ reflétant les caractéristiques de l'option. Nous définissons l'ensemble $\mathcal{C}$ de $n$ critères, et $C_1,\ldots,C_n$ le domaine de valeurs de chaque critère de l'ensemble. 
+	Par conséquent, $\mathcal{O}$ peut être défini comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $O \in \mathcal{O}$ est un tuple $(v_1,\ldots,v_n)$. 
+	
+		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant où dîner à pour but de choisir un restaurant parmi
 		
+		Continuer l'exemple complet du restaurant. 
+	
+	
 
-Critère , Option, Préférences, Satisfiabilité
+les préférences sont censées régir le processus
+décisionnel
+, Satisfiabilité
 Contexte de négociation: préférences de l'autre, historique de la négociation (proposition, préférences exprimés)
 \textcolor{blue}{explication des préférences}
 %https://pdfs.semanticscholar.org/f4ea/f27ea6f3f94b8e8d4d8d103eb7a1ebaf2324.pdf
