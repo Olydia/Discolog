@@ -27,7 +27,8 @@ public class CriteriaSaisie extends JPanel {
 		//GridLayout g = new GridLayout(4, 1);
 		BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(boxlayout);
-		
+		add(Box.createVerticalGlue());
+
 		p = new PCuisine();
 		this.add(p);
 		add(Box.createVerticalGlue());
