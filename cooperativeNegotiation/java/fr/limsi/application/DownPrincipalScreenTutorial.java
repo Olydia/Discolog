@@ -271,14 +271,14 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 		Group root = new Group();
 		root.getChildren().addAll(vb, sc);
 		
-		
-		this.model = null;
-		new InterfaceSaisieModel(this);
-		while (model=null) {
-			Thread.sleep(1000);
-		}
-		
-		ExampleAgent = ...(model);
+//		
+//		this.model = null;
+//		new InterfaceSaisieModel(this);
+//		while (model=null) {
+//			Thread.sleep(1000);
+//		}
+//		
+//		ExampleAgent = ...(model);
 		
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;
