@@ -1,9 +1,7 @@
 package fr.limsi.application.SaisiePref;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -31,4 +29,6 @@ public class PSaisie extends JPanel {
 		add(buttons, BorderLayout.SOUTH);
 	}
 
+	
+		//public Map
 }

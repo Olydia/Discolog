@@ -3,9 +3,13 @@ package fr.limsi.application.SaisiePref;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class PCuisine extends JPanel {
 //	JLabel lChinese;
@@ -59,7 +63,14 @@ public class PCuisine extends JPanel {
 //		tMexican = new JTextField();
 //		tTurkish = new JTextField();
 
-		//FlowLayout flow = new FlowLayout();
+		//FlowLayout flow = new FlowLayout();$
+		
+		TitledBorder border = new TitledBorder(new LineBorder(Color.black),"Cuisine");
+		border.setTitleJustification(TitledBorder.LEFT);
+		border.setTitlePosition(TitledBorder.TOP);
+		border.setTitleFont(new Font("Ariel", Font.BOLD, 20));
+		this.setBorder(border);
+		
 		BoxLayout boxlayout = new BoxLayout(this, BoxLayout.LINE_AXIS);
 		this.setLayout(boxlayout);
 
@@ -90,13 +101,10 @@ public class PCuisine extends JPanel {
 		this.add(lTurkish);
 		
 		add(Box.createHorizontalGlue());
-
-
-
-
-
-
 		
-	}
+	}	
+//		public HashMap<String, Integer> getRanks(){
+//			
+//		}
 
 }

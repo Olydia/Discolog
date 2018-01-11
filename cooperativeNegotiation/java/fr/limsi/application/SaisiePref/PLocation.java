@@ -1,10 +1,13 @@
 package fr.limsi.application.SaisiePref;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
-
+import java.awt.Font;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class PLocation extends JPanel {
 	
@@ -19,6 +22,12 @@ public class PLocation extends JPanel {
 	 * Create the panel.
 	 */
 	public PLocation() {
+		TitledBorder border = new TitledBorder(new LineBorder(Color.black),"Location");
+		border.setTitleJustification(TitledBorder.LEFT);
+		border.setTitlePosition(TitledBorder.TOP);
+		border.setTitleFont(new Font("Ariel", Font.BOLD, 20));
+		this.setBorder(border);
+
 		
 		lDowntown = new Element("Downtown");
 		lSouth = new Element("South");

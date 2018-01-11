@@ -1,15 +1,9 @@
 package fr.limsi.application.SaisiePref;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-
-	
 
 
 @SuppressWarnings("serial")
@@ -18,7 +12,7 @@ public class CriteriaSaisie extends JPanel {
 	private PCuisine p;
 	private PCost cost;
 	private PLocation location;
-	PAthmosphere athm;
+	private PAthmosphere athm;
 	
 	public CriteriaSaisie() {
 		//this.setBackground(Color.black);

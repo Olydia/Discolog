@@ -1,10 +1,14 @@
 package fr.limsi.application.SaisiePref;
 
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class PAthmosphere extends JPanel {
 
@@ -19,6 +23,10 @@ public class PAthmosphere extends JPanel {
 	 * Create the panel.
 	 */
 	public PAthmosphere() {
+		
+	
+
+		
 		lCozy = new Element("Cozy");
 		lFamily = new Element("Family");
 		lLively = new Element("Lively");
@@ -51,8 +59,14 @@ public class PAthmosphere extends JPanel {
 
 		this.add(lQuiet);
 		add(Box.createHorizontalGlue());
+		
+		add(Box.createVerticalGlue());
 
-
+		TitledBorder border = new TitledBorder(new LineBorder(Color.black),"Athmosphere");
+		border.setTitleJustification(TitledBorder.LEFT);
+		border.setTitlePosition(TitledBorder.TOP);
+		border.setTitleFont(new Font("Ariel", Font.BOLD, 20));
+		this.setBorder(border);
 
 
 
