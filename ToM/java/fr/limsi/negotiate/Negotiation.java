@@ -567,6 +567,20 @@ public class Negotiation<O extends Option> {
 		return false;
 	}
 	
+	// Methods for the GUI 
+	
+	
+	public List<OptionProposal>  getOptionsProposals(Status status, boolean isSelf){
+		List<OptionProposal> prop =new ArrayList<OptionProposal>();
+
+		for (OptionProposal p: proposals){
+			if (p.getStatus().equals(status) && p.isSelf == isSelf)
+				prop.add(p);
+		}
+		return prop;
+	}
+
+	
 	public List<Self_Ci<Criterion>> getSelfs(){
 		List<Self_Ci<Criterion>> self = new ArrayList<Self_Ci<Criterion>>();
 		
