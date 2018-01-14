@@ -1,6 +1,7 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -82,13 +83,15 @@ public class CriteriaSelect extends JFrame {
 
 		sourceList.setTransferHandler(new ListTransferHandler());
 		destList.setTransferHandler(new ListTransferHandler());
+        this.setMinimumSize(new Dimension(200, 200));
+
 		this.pack();
 
 	}
 	
 	public ListModel<String> getValues(){
 		if(this.getSourceList().getModel().getSize()!=0)
-			System.out.println("Remplir tout les critères");
+			System.out.println("Remplir tout les criteres");
 		else{
 			System.out.println(this.getDestList().getModel());
 			return this.getDestList().getModel();

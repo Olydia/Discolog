@@ -1,6 +1,7 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -121,7 +122,10 @@ public class Acceuil extends JFrame{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			Acceuil frame = new Acceuil();
+	        frame.setMinimumSize(new Dimension(200, 200));
+
 			frame.pack();
+			
 			frame.setVisible(true);
 		});
 	}
