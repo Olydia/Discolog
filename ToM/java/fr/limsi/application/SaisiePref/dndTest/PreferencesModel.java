@@ -1,4 +1,4 @@
-package fr.limsi.SaisiePref.dndTest;
+package fr.limsi.application.SaisiePref.dndTest;
 
 import java.util.ArrayList;
 import java.util.List;
