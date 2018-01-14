@@ -37,7 +37,7 @@ public class DownPrincipalScreen2 extends AnchorPane{
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
 
-	public ExampleAgent agent;
+	//public ExampleAgent agent;
 
 	public String action;
 	/**
