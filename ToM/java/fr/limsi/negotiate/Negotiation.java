@@ -566,5 +566,16 @@ public class Negotiation<O extends Option> {
 		}
 		return false;
 	}
+	
+	public List<Self_Ci<Criterion>> getSelfs(){
+		List<Self_Ci<Criterion>> self = new ArrayList<Self_Ci<Criterion>>();
+		
+		for (CriterionNegotiation<Criterion> elem : this.getValuesNegotiation()){
+			self.add(elem.getSelf());
+		}
+		return self;
+		
+		
+	}
 
 }
