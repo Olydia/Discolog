@@ -1,4 +1,4 @@
-package fr.limsi.application.SaisiePref.dndTest;
+package fr.limsi.SaisiePref.dndTest;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
