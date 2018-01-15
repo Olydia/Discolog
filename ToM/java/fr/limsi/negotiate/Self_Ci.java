@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.ListModel;
+
 public class Self_Ci <C> extends Self<C> {
 
 	private ArrayList<Preference<C>> selfPreferences; 
@@ -59,4 +61,27 @@ public class Self_Ci <C> extends Self<C> {
 		return s;
 	}
 
+	//----- Additional funtions for the GUI (get user preferences)
+	
+		public C getName(String name){
+			
+			//return type.getField(name.toUpperCase());
+			for (C elem: type.getEnumConstants()){
+				if(elem.toString().toLowerCase().equals(name.toLowerCase()))
+						return elem;
+			}
+			return null;
+		}
+		
+
+		public void createPreferences(ListModel<String> classement){
+			
+			for(int i = 0; i< classement.getSize()-1; i++){
+				C less = getName(classement.getElementAt(i));
+				C more = getName(classement.getElementAt(i+1));
+				
+				this.addPreference(less, more);
+			}
+		}
+	
 }

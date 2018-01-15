@@ -107,6 +107,25 @@ public class Models<O extends Option> {
 			}
 		}
 	}
+	
+	public List<Self_Ci<Criterion>> getOtherModel(List<List<Self_Ci<Criterion>>> preferences, List<Self_Ci<Criterion>> userPref) {
+
+		List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
+		List<Self_Ci<Criterion>> foundModel = null;
+		while (foundModel == null) {
+			List<Self_Ci<Criterion>> current = new ArrayList<>();
+			for (List<Self_Ci<Criterion>> preference : preferences) {
+				int random = new Random().nextInt(preference.size() - 1);
+				current.add(preference.get(random));
+			}
+			if (!containsCurrent(visitedCombination, current)){
+			visitedCombination.add(current);
+			if (new PreferenceDistance(userPref, current).distance() >= DISTANCE)
+				foundModel = current;
+			}
+		}
+		return foundModel;
+	}
 
 	public boolean containsCurrent(List<List<Self_Ci<Criterion>>> visitedCombination, List<Self_Ci<Criterion>> current){
 		boolean ok = false;
@@ -160,13 +179,34 @@ public class Models<O extends Option> {
 		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
 		for( Class<? extends Criterion> e: criteria) {
 			List<Self_Ci<Criterion>> crt = createValuesModel(Arrays.asList(e.getEnumConstants()));
-			String kaka = crt.toString();
+			//String kaka = crt.toString();
 			models.add(crt);
 		}
 
 		getCombinationAmine(models);
 
 		System.out.println("zzz");
+
+	}
+	
+	public Negotiation<O> createOther (List<Class<? extends Criterion>> criteria,
+			Class<O> class1, List<Self_Ci<Criterion>> userPref){
+		
+		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
+		for( Class<? extends Criterion> e: criteria) {
+			List<Self_Ci<Criterion>> crt = createValuesModel(Arrays.asList(e.getEnumConstants()));
+			//String kaka = crt.toString();
+			models.add(crt);
+		}
+		
+		
+		@SuppressWarnings("unchecked")
+		Negotiation<O> nego = (Negotiation<O>) 
+							createNegotiation(getOtherModel(models, userPref), class1);
+		// Ajouter le create negotiation a partir de self
+		return nego;
+		
+
 
 	}
 	
