@@ -4,9 +4,10 @@
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 %\usepackage[francais]{babel}
+\usepackage[french]{minitoc}
 \usepackage{color}
 \usepackage[noend]{algpseudocode}
-\usepackage{subfig} 
+\usepackage{subfig,amsbsy,booktabs,adjustbox} 
 \usepackage{frame, caption}
 \usepackage{amsmath}
 \usepackage{eulervm}
@@ -28,9 +29,16 @@
 
 
 \begin{document}
+	
+%	\tableofcontents
+
 	\chapter{Modèle de négociation collaborative}
+		\minitoc
+		
 	\input{contributions}
 	
+	%\chapter{Processus de décision basé sur le pouvoir}
+	\label{chap:dec}
 	\bibliographystyle{abbrv}
 	\bibliography{Library}
 \end{document}
