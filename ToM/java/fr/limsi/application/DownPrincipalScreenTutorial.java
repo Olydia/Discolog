@@ -9,7 +9,6 @@ import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.ExampleAgent;
 import fr.limsi.negotiate.OptionProposal;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.movie.*;
@@ -270,15 +269,7 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 		final VBox vb = new VBox();
 		Group root = new Group();
 		root.getChildren().addAll(vb, sc);
-		
-//		
-//		this.model = null;
-//		new InterfaceSaisieModel(this);
-//		while (model=null) {
-//			Thread.sleep(1000);
-//		}
-//		
-//		ExampleAgent = ...(model);
+
 		
 		 totalOrderedModels model = new totalOrderedModels();
 		 //String[] args=null;

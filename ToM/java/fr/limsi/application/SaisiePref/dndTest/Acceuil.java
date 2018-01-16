@@ -1,24 +1,34 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.*;
 
-// il faut envoyer les prefs de l'agent � l'agent
+// il faut envoyer les prefs de l'agent � l'agent
 // 
 
 public class Acceuil extends JFrame{
-	JLabel welcom  = new JLabel("text d'acceuil");
+	
+	JLabel textAcceuil = new JLabel("Bienvenu");
+	String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
+			+ "en les classant par ordre croissant \n"
+			+ " de la valeur que vous appréciez le moins \n"
+			+ "a la valeur que vous appréciez le plus";
+			
+	JTextArea welcom  = new JTextArea(text);
 	JButton commencer = new JButton("Commencer");
 	
 	CriteriaSelect cuisine;
@@ -29,9 +39,14 @@ public class Acceuil extends JFrame{
 	
 	
 	public Acceuil(){
+		Font font = new Font("Arial", Font.BOLD, 20);
+		welcom.setFont(font);
+		welcom.setEditable(false);
 		
-		this.getContentPane().add(welcom, BorderLayout.NORTH);
-		this.getContentPane().add(commencer, BorderLayout.CENTER);
+		this.getContentPane().add(textAcceuil, BorderLayout.NORTH);
+		this.getContentPane().add(welcom, BorderLayout.CENTER);
+		this.getContentPane().add(commencer, BorderLayout.SOUTH);
+		this.getContentPane().setBackground(Color.white);
 		
 		cost = new CriteriaSelect(Cost.class);
 		cuisine = new CriteriaSelect(Cuisine.class);

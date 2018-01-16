@@ -193,17 +193,24 @@ public class totalOrderedModels {
 		d4_criteria.addPreference(Cost.class, Cuisine.class);
 
 		Self_Ci<Cuisine> d4_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d4_cuisine.addPreference(Cuisine.KOREAN, Cuisine.CHINESE);
-		d4_cuisine.addPreference(Cuisine.CHINESE, Cuisine.ITALIAN);
-		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.TURKISH);
-		d4_cuisine.addPreference(Cuisine.CHINESE, Cuisine.MEXICAN);
-		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.MEXICAN);
-		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
-		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.JAPANESE);
-		d4_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
-		d4_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH);
-
+//		d4_cuisine.addPreference(Cuisine.KOREAN, Cuisine.CHINESE);
+//		d4_cuisine.addPreference(Cuisine.CHINESE, Cuisine.ITALIAN);
+//		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.TURKISH);
+//		d4_cuisine.addPreference(Cuisine.CHINESE, Cuisine.MEXICAN);
+//		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.MEXICAN);
+//		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.FRENCH);
+//		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.JAPANESE);
+//		d4_cuisine.addPreference(Cuisine.TURKISH, Cuisine.JAPANESE);
+//		d4_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH);
 		
+		d4_cuisine.addPreference(Cuisine.CHINESE, Cuisine.MEXICAN);
+		d4_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.KOREAN);
+		d4_cuisine.addPreference(Cuisine.KOREAN, Cuisine.MEXICAN);
+		d4_cuisine.addPreference(Cuisine.KOREAN, Cuisine.TURKISH);
+		d4_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.ITALIAN);
+		d4_cuisine.addPreference(Cuisine.TURKISH, Cuisine.ITALIAN);
+		d4_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
+
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d4_cuisine);
 
 		Self_Ci<Atmosphere> d4_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
@@ -251,8 +258,8 @@ public class totalOrderedModels {
 	public static void main (String[] args)  {
 		
 		totalOrderedModels m = new totalOrderedModels();
-		Negotiation<Restaurant> m1 = m.model3();
-		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
+		Negotiation<Restaurant> m1 = m.model4();
+		System.out.println(m1.getValueNegotiation(Cuisine.class).getSelf().getSelfPreferences());
 		for(Cuisine e: Cuisine.values()){
 			System.out.println( e + " " +m1.getValueNegotiation(e.getClass()).getSelf().satisfaction(e));
 		}
