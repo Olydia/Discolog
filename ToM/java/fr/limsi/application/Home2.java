@@ -1,5 +1,6 @@
 package fr.limsi.application;
 
+import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,18 +139,13 @@ public class Home2 extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-               /* if (cb.getValue()==null){
-                	//grid.getChildren().remove(errorMessage);
-                	//grid.add(errorMessage, 1, 7);
-                	errorMessage.setText("You must choose a situation");
-                	list.add(errorMessage);
-                }
-                else{*/
+            	Acceuil pref = new Acceuil();
+            	pref.setVisible(true);
+            	
             	chat.username=userTextField.getText();
-            	chat.situation=/*(String) cb.getValue()*/"restaurant";
+            	chat.situation="restaurant";
             	chat.start(chatStage);
             	homeStage.hide();
-               // }
             }
         });
 

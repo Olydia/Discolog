@@ -2,9 +2,6 @@ package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
@@ -16,10 +13,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 
 import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.restaurant.Cuisine;
 
 public class CriteriaSelect extends JFrame {
 
