@@ -10,6 +10,7 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.OptionProposal;
 import fr.limsi.negotiate.Proposal.Status;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 import javafx.beans.value.ChangeListener;
@@ -255,13 +256,13 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public void addElements(String username, String situation,Stage chatStage/*,Interaction interaction*/){
 
 		 totalOrderedModels model = new totalOrderedModels();
-			 ExampleAgent agent= new ExampleAgent("Arthur", model.model1());
+			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Arthur", model.model1());
 			 User user= new User("User");
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,
 						/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
 				interaction.load("models/Negotiate.xml");
-				((ExampleAgent) interaction.getSystem()).setRelation(relation);
+				((ToMNegotiatorProba) interaction.getSystem()).setRelation(relation);
 
 
 				interaction.setGuess(false);

@@ -24,17 +24,17 @@ import fr.limsi.negotiate.restaurant.Cuisine;
 public class CriteriaSelect extends JFrame {
 
 	private JLabel newTextField = new JLabel("Entrez vos préférences");
-	private JList<String> sourceList = new JList<>(new DefaultListModel<>());
-	private JList<String> destList = new JList<>(new DefaultListModel<>());
+	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());
+	private JList<String> ranked = new JList<>(new DefaultListModel<>());
 	protected JButton confim;
 	private Class<? extends Criterion> type;
 
 	public JList<String> getSourceList() {
-		return sourceList;
+		return toBeRanked;
 	}
 
 	public JList<String> getDestList() {
-		return destList;
+		return ranked;
 	}
 
 	public CriteriaSelect(Class<? extends Criterion> type) {
@@ -43,7 +43,7 @@ public class CriteriaSelect extends JFrame {
 		Criterion[] elements = type.getEnumConstants();
 		// Remplir la liste des valeurs
 		for (int i = 0; i < elements.length; i++) {
-			((DefaultListModel<String>) sourceList.getModel()).add(i, elements[i].toString());
+			((DefaultListModel<String>) toBeRanked.getModel()).add(i, elements[i].toString());
 			// ((DefaultListModel<String>) destList.getModel()).add(i, "B " + i);
 		}
 
@@ -54,12 +54,12 @@ public class CriteriaSelect extends JFrame {
 		nameBox.add(newTextField);
 
 		Box sourceBox = Box.createVerticalBox();
-		sourceBox.add(new JLabel("Source"));
-		sourceBox.add(new JScrollPane(sourceList));
+		sourceBox.add(new JLabel("Critères restant à classer"));
+		sourceBox.add(new JScrollPane(toBeRanked));
 
 		Box destBox = Box.createVerticalBox();
-		destBox.add(new JLabel("Destination"));
-		destBox.add(new JScrollPane(destList));
+		destBox.add(new JLabel("Votre classement"));
+		destBox.add(new JScrollPane(ranked));
 
 		Box listBox = Box.createHorizontalBox();
 		listBox.add(sourceBox);
@@ -72,18 +72,19 @@ public class CriteriaSelect extends JFrame {
 		this.getContentPane().add(allBox, BorderLayout.CENTER);
 		this.getContentPane().add(confim, BorderLayout.SOUTH);
 
-		sourceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		destList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		toBeRanked.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		ranked.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		sourceList.setDragEnabled(true);
-		destList.setDragEnabled(true);
+		toBeRanked.setDragEnabled(true);
+		ranked.setDragEnabled(true);
 
-		sourceList.setDropMode(DropMode.INSERT);
-		destList.setDropMode(DropMode.INSERT);
+		toBeRanked.setDropMode(DropMode.INSERT);
+		ranked.setDropMode(DropMode.INSERT);
 
-		sourceList.setTransferHandler(new ListTransferHandler());
-		destList.setTransferHandler(new ListTransferHandler());
-        this.setMinimumSize(new Dimension(200, 200));
+		ListTransferHandler h = new ListTransferHandler(toBeRanked);
+		toBeRanked.setTransferHandler(h);
+		ranked.setTransferHandler(h);
+        this.setMinimumSize(new Dimension(300, 350));
 
 		this.pack();
 
