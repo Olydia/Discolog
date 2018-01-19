@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -86,8 +87,12 @@ public class CriteriaSelect extends JFrame {
 	}
 	
 	public ListModel<String> getValues(){
-		if(this.getSourceList().getModel().getSize()!=0)
-			System.out.println("Remplir tout les criteres");
+		if(this.getSourceList().getModel().getSize()!=0){
+			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs", "Message",
+			        JOptionPane.WARNING_MESSAGE);
+		}
+
+			
 		else{
 			System.out.println(this.getDestList().getModel());
 			return this.getDestList().getModel();
