@@ -238,7 +238,7 @@
 	
 		\begin{figure*}
 			\centering
-			\includegraphics[width=0.75\linewidth, height= 0.35\textheight]{figs/model_tom.pdf}
+			\includegraphics[width=0.75\linewidth, height= 0.3\textheight]{figs/model_tom.pdf}
 			\caption{Model of collaborative negotiation with a model of other} 
 			\label{fig:schema-general}
 		\end{figure*} 
@@ -311,7 +311,7 @@
 		\hline
 		value & chinese & japanese & italian & french \\	
 		\hline
-		sat(value) & 0.3 & 0.6 & 0.6 & 1 \\
+		sat(value) & 0 & 0.3 & 0.6 & 1 \\
 		\hline
 	\end{tabular}
 		\caption{Value of satisfiability for the set of preferences $\prec_{cuisine}$.}
@@ -353,40 +353,52 @@
 	
 	\subsection{Decision based on power}
 	
-	The decisional process is built to take into account the power of the agent, its preferences and the context of the negotiation. Therefore, the agent is initiated with a value of power $pow \in [0,1]$. 
+	We designed the decisional process of the agent to takes into account the power. Therefore, the agent is initiated with a value of power $pow \in [0,1]$. Moreover, as the negotiation is about preferences, the decision making process has also to consider the agent's preferences. The result of this process is an utterance that the agent communicates to its partner as presented in figure ....
 	
+	We present in this section, the decision making algorithm, which relies on three elements. Moreover, we will explain how the principles of power extracted from social psychology research influence this decisional process.
+
 	The selection of the utterance relies on three elements.
 	
 	\subsubsection{Lead of the dialogue}
-	De Dreu showed that the participant with higher power tends to lead the dialogue and to focuses on the negotiation convergence \cite{magee2007power,de2004influence}. In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. On the contrary, submissive negotiators focus on having accurate knowledge about the other to take the fairest decision. In our model, agents with low power will select \emph{AskPreferences} utterances more often to collect information.
+	De Dreu \textit{et al} showed that the participant with higher power tends to lead the dialogue and to focuses on the negotiation convergence \cite{magee2007power,de2004influence}. Whereas, low power negotiators focus on building an accurate model of their partner's preferences in order to make the fairest decision \cite{de1995impact}.
+	 
+	 In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. Indeed, to make the negotiation converge, the agent has to keep making proposals until a compromise that satisfies the agent and its partner is found.
+	 On the contrary, agents with low power will select \emph{AskPreferences} utterances more often to collect information. A detailed presentation of the utterance selection is presented in \cite{ouali2017computational}.
 	
-	\subsubsection{Satisfiability: StatePreferences}
+	\subsubsection{Satisfiability}
 	\label{sec:sat}
-	When using a \emph{StatePreference(v)} utterance, the agent expresses its liking for a value. As showed by \cite{de1995impact}, high-power negotiators are more demanding than low-power ones. For this reason, in our model, the set of values that the agent likes, named $S$, depends on the level of power $pow$. It is computed as follows:
+	When using a \emph{StatePreference(v)} utterance, the agent expresses its liking for a value. As showed by \cite{de1995impact}, high-power negotiators are more demanding than low-power ones. In our model, the set of values that the agent likes, named $S$, depends on the level of power $pow$. It is computed as follows:
 	\begin{equation}
 	\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
 	\end{equation}
 	
-	For example, if we consider the preference set given on table~\ref{tab:sat} and the power $pow=0.6$, we can compute the set of satisfiable values for this criteria: $S = \{B, C, D\}$. This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
+	For example, if we consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Let's now consider a first agent Bob with a value of power $pow = 0.7$. We can compute using the above function that bob likes only $french$ cuisine. Whereas, let's consider another agent Arthuer with a smaller value of power $pow=0.4$, the set of satisfiable values for Arthur $S= \{french, italian\}$. 
 	
-	\subsubsection{Acceptability: negotiation moves}
-	During the negotiation, the agent makes decisions about the proposals it receives. It might express an \emph{Accept} or \emph{Reject}. However, in the context of collaborative negotiation, participants make concessions when the discussion is not converging. In our dialogue model, this means that the agent has to lower his level of demand.
+    This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
+	
+	\subsubsection{Acceptability}
+	
+	In collaborative negotiation, both negotiators might have to reduce their level of demand over time because they want to reach an agreement. The level of concessions expressed in a negotiation is affected by power. It was demonstrated that low-power negotiator's demand decrease over time and tends to make larger concessions than high-power negotiator. \cite{de1995impact}
+	
+	We designed a function that decreases the agent level's of demand during the negotiation, more precisly, when the negotiation is not converging.  To model this behavior, we use a \emph{concession curve} illustrated in Figure \ref{fig:conc}.
+	We define $self(t)$ to be a time varying function of $pow$ which decreases over time $t$ and follows the concession curve. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, the function decreases as presented in the figure \ref{fig:conc}.
+	
+	This function is designed to evaluate the acceptability of a proposal. Indeed, during the process of negotiation, the agent makes decisions about the proposals it receives by its partner. It might express an \emph{Accept} or \emph{Reject}. In the case where the negotiation is not converging, the agent has to lower his level of demand and makes concessions. Thererfore, 
 	
 	\begin{figure}[t]
 		\includegraphics[width=2.5in]{figs/sv3.png}
 		\caption{\label{fig:conc}Concession curve}
 	\end{figure} 
 	
-	For this reason, we define the variable $self(t)$ which is a time varying function of $pow$, decreasing over time $t$. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, self decreases as presented in the figure \ref{fig:conc}. The concession slope is stronger for low-power agents.
-	
-	This value of $self$ is used directly to answer a \emph{Propose(v)} utterance. We say that the value $v$ is \emph{acceptable} at time $t$, and we note $v \in Ac$, when:
+	the agent uses the value of $self$ to directly answer a \emph{Propose(v)} utterance. We say that the value $v$ is \emph{acceptable} at time $t$, and we note $v \in Ac$, when:
 	\begin{equation}
 	v\in Ac\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq self(t)
 	\end{equation}
 	
 	The agent will answer with an \emph{Accept} to a proposal only if the value is acceptable, and will answer with a \emph{Reject} otherwise. Also note that, when building proposals (i.e. \emph{Propose} utterances) the agent can only propose a value that is acceptable.
 	
-	Finally, it is important to note that the set $Ac$ grows over time: as the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. We denote %$M\varsubsetneq Ac$ the set of not-satisfiable values that can be accepted in the current dialogue move: $M = Ac\setminus S$.
+	Finally, it is important to note that the set $Ac$ grows over time: as the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. %We denote $M\subsetneq Ac$ the set of not-satisfiable values that can be accepted in the current dialogue move: $M = Ac\setminus S$.
+	Example ?
 	
 	\subsubsection{Summary}	
 	Table~\ref{tab:utt} presents the applicability condition for the five utterance types, based on the values of $pow$ and the derived sets $S$ and $Ac$. The utterance \emph{AskPreference} only depends on the lead of dialogue rules, related to the value of $pow$.
@@ -412,16 +424,13 @@
 		\end{tabular}
 	\end{table}
 	
-	\subsection{Beliefs about other: general algorithm}
-		\colorbox{red}{In order to simulate another’s mental processes,
-			it is not necessary to categorize all the beliefs and
-			desires attributed to that person as such. In other words, it
-			is not necessary to be capable of complete introspection %http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf
-		}
+	\section{Beliefs about other: general algorithm}
+
 	In order to build a complementary relation of dominance with the user, the agent has to evaluate the power of the user, as presented in figure \ref{fig:schema-general}. To this goal, we propose to use a Theory of Mind (ToM) approach \cite{premack1978does}. The idea is to consider different hypotheses about the user's mental state, including his/her value of power. Using the decision model, we simulate the possible proposals, questions or answers that can be produced. We then compare the result of this simulation with the actual utterance expressed by the user. This gives information about the possible values of power. This idea is illustrated on Figure~\ref{fig:tom}.
 	
 	\begin{figure*}
-		\fbox{\includegraphics[width=\linewidth, height= 0.4\textheight]{figs/model_tom.pdf}}
+		\centering
+		\includegraphics[width=0.8\linewidth, height= 0.3\textheight]{figs/tom.png}
 		\caption{A theory of mind approach to evaluate the user's level of dominance} 
 		\label{fig:tom}
 	\end{figure*} 
@@ -476,7 +485,11 @@
 	This representation allows our Theory of Mind model to work with a smaller set of hypotheses. However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model to deal with the non-ordered sets of satisfiable and acceptable values. Second, it will affect the precision of the prediction. In this section we present the partial model of preferences and the new ToM algorithm. In the next section, we will evaluate the quality of the model in an agent-agent simulation.
 	
 	\subsection{Partial model of preferences}
-	
+			\colorbox{red}{In order to simulate another’s mental processes,
+		it is not necessary to categorize all the beliefs and
+		desires attributed to that person as such. In other words, it
+		is not necessary to be capable of complete introspection %http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf
+	}
 	The model of preferences is used to compute the satisfiability of values (see section \ref{sec:sat}). Knowing the set of satisfiable values is crucial for the decisional process. Instead of computing hypotheses on the set of preferences, we propose to \emph{make hypotheses about $S$ only}, the set of satisfiable values for a giving value of power $pow$.  
 	
 	In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered} In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
