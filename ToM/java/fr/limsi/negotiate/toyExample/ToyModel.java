@@ -25,6 +25,8 @@ public class ToyModel {
 //		d1_cuisine.addPreference(ToyCuisine.FRENCH, ToyCuisine.JAPANESE);
 		d1_cuisine.addPreference(ToyCuisine.ITALIAN, ToyCuisine.JAPANESE);
 		d1_cuisine.addPreference(ToyCuisine.JAPANESE, ToyCuisine.CHINESE);
+		d1_cuisine.addPreference(ToyCuisine.CHINESE, ToyCuisine.FRENCH);
+
 
 
 		
