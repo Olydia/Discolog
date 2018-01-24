@@ -69,7 +69,7 @@
 	\usepackage{frame, caption}
 	\usepackage{mathrsfs}
 	\usepackage{array}
-	\usepackage[cmex10]{amsmath}
+	\usepackage{amsmath,amssymb}
 	\usepackage{color}
 	%
 	\usepackage{fancyhdr}
@@ -238,7 +238,7 @@
 	
 		\begin{figure*}
 			\centering
-			\includegraphics[width=0.75\linewidth, height= 0.3\textheight]{figs/model_tom.pdf}
+			\includegraphics[width=0.75\linewidth, height= 0.2\textheight]{figs/model.png}
 			\caption{Model of collaborative negotiation with a model of other} 
 			\label{fig:schema-general}
 		\end{figure*} 
@@ -297,15 +297,15 @@
 	
 	\label{sec:dialogue-model}
 	
-	The goal of a negotiation is to choose an option in a set of possible options $\mathcal{O}$. Each option $o\in\mathcal{O}$ is defined as a set of values $\{v_1, ..., v_n\}$ associated to criteria $\{C_1, ..., C_n\}$ that reflect the options characteristics.  
+	The goal of a negotiation is to choose an option in a set of possible options $\mathcal{O}$. Each option $o\in\mathcal{O}$ is defined as a set of values $\{v_1, ..., v_n\}$ associated to criteria $\{C_1, ..., C_n\}$ that reflect the option's characteristics.  
 	For instance, in a negotiation about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,Expensive)$.
 	
-	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. For example, the agent prefers Chinese food to Turkish one. Using theses preferences, it can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
+	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, the agent can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
 	 
 	 
-	For example, let's consider the criteria of $cuisine$ defined with the following values: $french, italian, japanese, chinese$. In addition, the agent has a total order of preferences on these values $ \prec_{cuisine}= \{chinese \prec japanese, japanese \prec italian, italian \prec french\}$. From this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}
+	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french, italian, japanese, chinese}$\}$. In addition, the agent has a total order of preferences on these values $ \prec_{cuisine}= \{chinese \prec japanese, japanese \prec italian, italian \prec french\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
 	
-	\begin{table}
+	\begin{table} [h]
 		\centering
 		\begin{tabular}{ |c|c|c|c|c| }
 		\hline
@@ -314,9 +314,11 @@
 		sat(value) & 0 & 0.3 & 0.6 & 1 \\
 		\hline
 	\end{tabular}
-		\caption{Value of satisfiability for the set of preferences $\prec_{cuisine}$.}
+		\caption{$Sat$ computed on the set of preferences $\prec_{cuisine}$.}
 		\label{tab:sat}
+		\vspace{-0.5em} 
 	\end{table}
+
 	
 	%, then, the score is normalized in $[0, 1]$: 
 	
@@ -343,7 +345,7 @@
 %		\label{tab:sat}
 %	\end{table}
 	
-	The domain of negotiation includes a \emph{communication model}. This model enables the agent to communicate with its partner throughout \textit{utterances}. 
+	The domain of negotiation includes a \emph{communication model}. This model enables the agent to communicate with its partner throughout text based \textit{utterances}. 
 	Each one is associated with a natural language formulation. The details are presented in \cite{ouali2017computational}.
 	
 	To keep the model as generic as possible, we defined five utterances types grouped in three different categories. \textbf{Information moves} (\textit{AskValue/AskCriterion} and \textit{StateValue}) are used to exchange information about the participant's likings. They are used to express what the agent likes or do not like (\emph{e.g} \textit{I (don't)like Chinese restaurants}).
@@ -352,85 +354,87 @@
 
 	
 	\subsection{Decision based on power}
+	The decision making process is designed to consider, in addition to preferences, the power of the agent. 
+	Therefore, the agent is initiated with a value of power $pow \in [0,1]$. 
 	
-	We designed the decisional process of the agent to takes into account the power. Therefore, the agent is initiated with a value of power $pow \in [0,1]$. Moreover, as the negotiation is about preferences, the decision making process has also to consider the agent's preferences. The result of this process is an utterance that the agent communicates to its partner as presented in figure ....
-	
-	We present in this section, the decision making algorithm, which relies on three elements. Moreover, we will explain how the principles of power extracted from social psychology research influence this decisional process.
+	We present in this section, the decision making algorithm, which relies on three elements. We will explain how the principles of power inspired from social psychology literature influence this decisional process.
 
-	The selection of the utterance relies on three elements.
-	
-	\subsubsection{Lead of the dialogue}
-	De Dreu \textit{et al} showed that the participant with higher power tends to lead the dialogue and to focuses on the negotiation convergence \cite{magee2007power,de2004influence}. Whereas, low power negotiators focus on building an accurate model of their partner's preferences in order to make the fairest decision \cite{de1995impact}.
-	 
-	 In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. Indeed, to make the negotiation converge, the agent has to keep making proposals until a compromise that satisfies the agent and its partner is found.
-	 On the contrary, agents with low power will select \emph{AskPreferences} utterances more often to collect information. A detailed presentation of the utterance selection is presented in \cite{ouali2017computational}.
 	
 	\subsubsection{Satisfiability}
 	\label{sec:sat}
-	When using a \emph{StatePreference(v)} utterance, the agent expresses its liking for a value. As showed by \cite{de1995impact}, high-power negotiators are more demanding than low-power ones. In our model, the set of values that the agent likes, named $S$, depends on the level of power $pow$. It is computed as follows:
+	The value of satisfiability is associated to the \emph{StatePreference(v)} utterance that allows the agent to express his likings. As showed by \cite{de1995impact}, high-power negotiators are more demanding than low-power ones.
+	We capture this principle by implementing a set of the agent's satisfiable values, named $S$, that varies depending on the level of power $pow$. It is computed as follows:
+
 	\begin{equation}
-	\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
+		\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
 	\end{equation}
 	
-	For example, if we consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Let's now consider a first agent Bob with a value of power $pow = 0.7$. We can compute using the above function that bob likes only $french$ cuisine. Whereas, let's consider another agent Arthuer with a smaller value of power $pow=0.4$, the set of satisfiable values for Arthur $S= \{french, italian\}$. 
+	For example, if we consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Let's now consider a first agent Bob with a value of power $pow = 0.7$. We can compute, using the above function, that bob likes only $french$ cuisine. Whereas, the second agent Arthur with a smaller value of power $pow=0.4$ will have its set of satisfiable values initiated to $S= \{french, italian\}$. 
 	
     This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
 	
 	\subsubsection{Acceptability}
 	
-	In collaborative negotiation, both negotiators might have to reduce their level of demand over time because they want to reach an agreement. The level of concessions expressed in a negotiation is affected by power. It was demonstrated that low-power negotiator's demand decrease over time and tends to make larger concessions than high-power negotiator. \cite{de1995impact}
+	In collaborative negotiation, both negotiators might have to reduce their level of demand over time because they want to reach an agreement. The level of concessions expressed in a negotiation is affected by power. It was demonstrated that low-power negotiator's demand decrease over time and tends to make larger concessions than high-power negotiator \cite{de1995impact}.
 	
-	We designed a function that decreases the agent level's of demand during the negotiation, more precisly, when the negotiation is not converging.  To model this behavior, we use a \emph{concession curve} illustrated in Figure \ref{fig:conc}.
-	We define $self(t)$ to be a time varying function of $pow$ which decreases over time $t$ and follows the concession curve. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, the function decreases as presented in the figure \ref{fig:conc}.
+	We designed a function that decreases the agent level's of demand during the negotiation, specifically, when the negotiation is not converging.  To model this behavior, we use a \emph{concession curve}, named $self(t)$ . %and illustrated in Figure \ref{fig:conc}.
+	We define this function to be a time varying function of $pow$ which decreases over time $t$ and follows the concession curve. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, the function decreases as illustrated in the figure \ref{fig:conc}.
 	
-	This function is designed to evaluate the acceptability of a proposal. Indeed, during the process of negotiation, the agent makes decisions about the proposals it receives by its partner. It might express an \emph{Accept} or \emph{Reject}. In the case where the negotiation is not converging, the agent has to lower his level of demand and makes concessions. Thererfore, 
 	
-	\begin{figure}[t]
-		\includegraphics[width=2.5in]{figs/sv3.png}
+	\begin{floatingfigure}[l]{1.3in}
+		\includegraphics[width=1.2in]{figs/sv3.png}
 		\caption{\label{fig:conc}Concession curve}
-	\end{figure} 
+	\end{floatingfigure} 
 	
-	the agent uses the value of $self$ to directly answer a \emph{Propose(v)} utterance. We say that the value $v$ is \emph{acceptable} at time $t$, and we note $v \in Ac$, when:
+	
+	This function is designed to evaluate the acceptability of a proposal. Indeed, during the process of negotiation, the agent makes decisions about the proposals it receives by its partner. It might express an \emph{Accept} or \emph{Reject}. In the case where the negotiation is not converging, the agent has to lower his level of demand and makes concessions. Therefore, the agent uses the value of $self$ to directly answer a \emph{Propose(v)} utterance. We say that the value $v$ is \emph{acceptable} at time $t$, and we note $v \in Ac$, when:
 	\begin{equation}
 	v\in Ac\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq self(t)
 	\end{equation}
 	
 	The agent will answer with an \emph{Accept} to a proposal only if the value is acceptable, and will answer with a \emph{Reject} otherwise. Also note that, when building proposals (i.e. \emph{Propose} utterances) the agent can only propose a value that is acceptable.
 	
-	Finally, it is important to note that the set $Ac$ grows over time: as the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. %We denote $M\subsetneq Ac$ the set of not-satisfiable values that can be accepted in the current dialogue move: $M = Ac\setminus S$.
-	Example ?
+	Finally, it is important to note that the set $Ac$ grows over time: as the negotiation evolves, the agent might accept proposals which are not satisfiable, as a consequence of making concessions. We denote $M\subsetneq Ac$ the set of not-satisfiable values that can became acceptable due to concessions: $M = Ac\setminus S$.
+
+	
+	
+	\subsubsection{Lead of the dialogue}
+	De Dreu \textit{et al} showed that the participant with higher power tends to lead the dialogue and to focus on the negotiation convergence \cite{magee2007power,de2004influence}. On the opposite, low power negotiators focus on building an accurate model of their partner's preferences in order to make the fairest decision \cite{de1995impact}. This leads them to ask more questions about other preferences
+	
+	In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. Indeed, to make the negotiation converge, the agent has to keep making proposals until a compromise that satisfies the agent and its partner is found.
+	On the contrary, agents with low power will select \emph{AskPreferences} utterances more often to collect information. A detailed presentation of the utterance selection is presented in \cite{ouali2017computational}.
 	
 	\subsubsection{Summary}	
 	Table~\ref{tab:utt} presents the applicability condition for the five utterance types, based on the values of $pow$ and the derived sets $S$ and $Ac$. The utterance \emph{AskPreference} only depends on the lead of dialogue rules, related to the value of $pow$.
-	
-	\begin{table}
-		\centering
-		\caption{Applicability conditions for the five utterance types.}
-		\label{tab:utt}
-		\begin{tabular}  {|l|l|}
-			\hline
-			Utterance & Applicability condition \\
-			\hline
-			AskPreference(v) & None \\
-			\hline 
-			StatePreference(v) & $v\in S$ \\
-			\hline 
-			Propose(v) & $v\in Ac$ \\
-			\hline
-			Accept(v)  & $v\in Ac$ \\
-			\hline
-			Reject(v) & $v\notin Ac$ \\
-			\hline
-		\end{tabular}
-	\end{table}
-	
+		\begin{table}[b]
+			\centering
+			\caption{Applicability conditions for the five utterance types.}
+			\label{tab:utt}
+			\begin{tabular}  {|l|l|}
+				\hline
+				Utterance & Applicability condition \\
+				\hline
+				AskPreference(v) & None \\
+				\hline 
+				StatePreference(v) & $v\in S$ \\
+				\hline 
+				Propose(v) & $v\in Ac$ \\
+				\hline
+				Accept(v)  & $v\in Ac$ \\
+				\hline
+				Reject(v) & $v\notin Ac$ \\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+
 	\section{Beliefs about other: general algorithm}
 
 	In order to build a complementary relation of dominance with the user, the agent has to evaluate the power of the user, as presented in figure \ref{fig:schema-general}. To this goal, we propose to use a Theory of Mind (ToM) approach \cite{premack1978does}. The idea is to consider different hypotheses about the user's mental state, including his/her value of power. Using the decision model, we simulate the possible proposals, questions or answers that can be produced. We then compare the result of this simulation with the actual utterance expressed by the user. This gives information about the possible values of power. This idea is illustrated on Figure~\ref{fig:tom}.
 	
 	\begin{figure*}
 		\centering
-		\includegraphics[width=0.8\linewidth, height= 0.3\textheight]{figs/tom.png}
+		\includegraphics[width=0.8\linewidth]{figs/tom.png}
 		\caption{A theory of mind approach to evaluate the user's level of dominance} 
 		\label{fig:tom}
 	\end{figure*} 
@@ -445,11 +449,12 @@
 		\item For each $h$, compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$
 	\end{enumerate}
 	The idea is that the hypothesis with the highest score is the most probable value for the user's power value.
-	
+	\vspace{-0.1 cm}
 	\begin{equation}
 	pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
+			\vspace{-0.15 cm}
 	\end{equation}
-	
+
 	There is, of course, an infinite set of possible values for $pow$. In our work, we consider only 9 values: $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$.
 	
 	\subsection{Complete model of preferences}
