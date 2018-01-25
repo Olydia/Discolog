@@ -229,6 +229,13 @@
 		To express those behaviors of power, we designed a model of collaborative negotiation that allows an agent to express its power through negotiation strategies \cite{ouali2017computational}. We showed that human observers correctly perceived the power expressed by the agent.
 		The next step is to extend this model in order to simulate an interpersonal relation of dominance between the agent and the user. This means that if one negotiator exerts behaviors of high power, its partner has to adapt in order to exert complementary behaviors of low power, and vice versa.
 		
+		\begin{figure*}[h]
+			\centering
+			\includegraphics[width=0.8\linewidth, height= 0.2\textheight]{figs/model/general.png}
+			\caption{Model of collaborative negotiation with a model of other} 
+			\label{fig:schema-general}
+		\end{figure*} 
+	
 		 For this aim, the agent has adapt its social behavior to the power expressed by his interlocutor. Our work aims at developing such a system that is capable of evaluating and adapting to this degree of power expressed by the interactional partner. We propose a model of theory of mind based on \emph{simulation-theory (ST)} \cite{gordon1986folk} to evaluate the behaviors of the partner. \emph{ST} suggests that, we humans, have the ability to project oneself in the other person’s shoes \cite{shanton2010simulation}. Therefore, we can simulate his or her mental activity with our own capacities for practical reasoning. It allows us to mimic the mental state of our interactional partner \cite{harbers2009modeling}.%\cite{http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf}
 		  
 		 This paper describes our model of \emph{ST} that allows the agent to simulate the behaviors of its partner and reason about it to predict its intentional power as presented in the figure~\ref{fig:schema-general}. The agent assumes that its partner has a similar decision's model based on power. Therefore, for each enunciated utterance by the user, the agent tries to guess the behavior of power that its partner intends to express. In addition, we present the first step of our validation process, that aims to validate the accuracy of prediction made on the partner's behaviors. We study in the context of agent/agent interaction, in which one agent is implemented with our model of \emph{ST}, the degree of exactitude the agent guessed its interlocutor's behaviors of power. 
@@ -236,12 +243,7 @@
 		 % We present an experiment in which we aim to study the accuracy ot the agent's guessing of it interlocutor behaviors of power.
 	
 	
-		\begin{figure*}
-			\centering
-			\includegraphics[width=0.75\linewidth, height= 0.2\textheight]{figs/model.png}
-			\caption{Model of collaborative negotiation with a model of other} 
-			\label{fig:schema-general}
-		\end{figure*} 
+
 	
 
 		The paper is organized as follows. Section II gives an overview of previous automated negotiation agents with theory of mind and other related work on social behavior recognition. In section III, we briefly present our model of dialogue for collaborative negotiation. We show that extending this model with a theory of mind raises computational issues. We propose a new model to evaluate the dominance of the interlocutor. This model is based on reasoning with uncertainty. Section IV presents an evaluation of this new model in the context of agent-agent negotiation. We show that the system correctly predicts the interlocutor's power in spite of the restrictions on the model. In section V, we discuss the future use of this new model for building an adaptive negotiator agent.
@@ -356,7 +358,8 @@
 	
 	\subsection{Decision based on power}
 	\label{sec:dec}
-	The decision making process is designed to consider, in addition to preferences, the power of the agent as presented in the \textit{step 1} of the figure \ref{fig:schema-general}. 
+	The decision making process is designed to consider, in addition to preferences, the power of the agent as presented in the \textit{step 1} of the figure \ref{
+		l}. 
 	Therefore, the agent is initiated with a value of power $pow \in [0,1]$. 
 	
 	We present in this section, the decisional model, which relies on three elements. We will explain how the principles of power inspired from social psychology literature influence this decisional process.
@@ -440,12 +443,12 @@
 	The mental state requires to model the inputs necessary to reason during the negotiation. The idea is to consider different hypotheses about the user's mental state, including his/her value of power and its preferences. Using the agent's decision model, we simulate the possible utterances produced by each hypothesis. 
 	We then compare the results of this simulation with the actual utterance expressed by the user ($Utterance_{other}$) in \textit{step 3}. This gives information about the possible values of power. The principle is illustrated on Figure~\ref{fig:tom}.
 	
-%	\begin{figure*}
-%		\centering
-%		\includegraphics[width=0.8\linewidth]{figs/tom.png}
-%		\caption{A theory of mind approach to evaluate the user's level of dominance} 
-%		\label{fig:tom}
-%	\end{figure*} 
+	\begin{figure*}
+		\centering
+		\includegraphics[width=0.8\linewidth]{figs/model/tom_select.png}
+		\caption{A theory of mind approach to evaluate the user's level of power} 
+		\label{fig:tom}
+	\end{figure*} 
 	
 	This approach however relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the behaviors of power expressed by agents are correctly perceived by human users. 
 	%This is no proof that the model is similar to a human decision process, but the behaviors that it produces are at least coherent with the notion of dominance as human people understand it.
