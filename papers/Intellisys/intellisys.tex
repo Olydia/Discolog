@@ -249,6 +249,7 @@
 	
 	\section{Related works}
 	
+	%https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3737477/ pour plus d'exemple de tom 
 	In social interactions and negotiation in particular, reasoning about the beliefs, goals, and intentions of others is crucial. People use this so-called theory of mind \cite{premack1978does} or mentalizing to understand why others behave the way they do, as well as to predict the future behavior of others. Therefore, various negotiation models use theory of mind approaches to create  more realistic models of negotiation. 
 	
 	For instance, Pynadath \textit{et al}\cite{pynadath2013you} showed the advantages of theory of mind on negotiation even with an overly simplified model. They observed significant similarities between	the partner behaviors and the agent's idealized expectations. Moreover, deviations in expectations about the other did not affect the agent performances and played in some cases in the advantage of the agent.
@@ -354,10 +355,11 @@
 
 	
 	\subsection{Decision based on power}
-	The decision making process is designed to consider, in addition to preferences, the power of the agent. 
+	\label{sec:dec}
+	The decision making process is designed to consider, in addition to preferences, the power of the agent as presented in the \textit{step 1} of the figure \ref{fig:schema-general}. 
 	Therefore, the agent is initiated with a value of power $pow \in [0,1]$. 
 	
-	We present in this section, the decision making algorithm, which relies on three elements. We will explain how the principles of power inspired from social psychology literature influence this decisional process.
+	We present in this section, the decisional model, which relies on three elements. We will explain how the principles of power inspired from social psychology literature influence this decisional process.
 
 	
 	\subsubsection{Satisfiability}
@@ -382,6 +384,7 @@
 	
 	
 	\begin{floatingfigure}[l]{1.3in}
+		\captionsetup{justification=centering}
 		\includegraphics[width=1.2in]{figs/sv3.png}
 		\caption{\label{fig:conc}Concession curve}
 	\end{floatingfigure} 
@@ -404,9 +407,7 @@
 	In our model, this means that agents with high values of power ($pow>0.5$) will select \emph{Propose} moves more often. Indeed, to make the negotiation converge, the agent has to keep making proposals until a compromise that satisfies the agent and its partner is found.
 	On the contrary, agents with low power will select \emph{AskPreferences} utterances more often to collect information. A detailed presentation of the utterance selection is presented in \cite{ouali2017computational}.
 	
-	\subsubsection{Summary}	
-	Table~\ref{tab:utt} presents the applicability condition for the five utterance types, based on the values of $pow$ and the derived sets $S$ and $Ac$. The utterance \emph{AskPreference} only depends on the lead of dialogue rules, related to the value of $pow$.
-		\begin{table}[b]
+		\begin{table}[ht]
 			\centering
 			\caption{Applicability conditions for the five utterance types.}
 			\label{tab:utt}
@@ -427,49 +428,68 @@
 			\end{tabular}
 		\end{table}
 		
+	
+	\subsubsection{Summary}	
+	The result of the decision process is the utterance that the agent communicates to the user (see \textit{step 2} of the figure \ref{fig:schema-general}). Thus, table~\ref{tab:utt} presents the applicability condition for the five utterance types, based on the values of $pow$ and the derived sets $S$ and $Ac$. The utterance \emph{AskPreference} only depends on the lead of dialogue rules, related to the value of $pow$.
 
 	\section{Beliefs about other: general algorithm}
 
-	In order to build a complementary relation of dominance with the user, the agent has to evaluate the power of the user, as presented in figure \ref{fig:schema-general}. To this goal, we propose to use a Theory of Mind (ToM) approach \cite{premack1978does}. The idea is to consider different hypotheses about the user's mental state, including his/her value of power. Using the decision model, we simulate the possible proposals, questions or answers that can be produced. We then compare the result of this simulation with the actual utterance expressed by the user. This gives information about the possible values of power. This idea is illustrated on Figure~\ref{fig:tom}.
+	In order to build a complementary relation of dominance with the user, the agent must adapt its behavior to complement the behaviors of the user. To this due, the agent has to evaluate the power of the user, as presented in figure \ref{fig:schema-general}.
 	
-	\begin{figure*}
-		\centering
-		\includegraphics[width=0.8\linewidth]{figs/tom.png}
-		\caption{A theory of mind approach to evaluate the user's level of dominance} 
-		\label{fig:tom}
-	\end{figure*} 
+	In order to figure out the value of power expressed by the user, the agent has to understand the decisional model of the user. To this goal, we propose to use a Theory of Mind (ToM) approach \cite{premack1978does} based on simulation (\emph{ST}) to establish and maintain representations of the mental states of its human counterpart. 
+	The mental state requires to model the inputs necessary to reason during the negotiation. The idea is to consider different hypotheses about the user's mental state, including his/her value of power and its preferences. Using the agent's decision model, we simulate the possible utterances produced by each hypothesis. 
+	We then compare the results of this simulation with the actual utterance expressed by the user ($Utterance_{other}$) in \textit{step 3}. This gives information about the possible values of power. The principle is illustrated on Figure~\ref{fig:tom}.
 	
-	This approach however relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the dialogues produced by this model are correctly perceived by human users in terms of dominance. This is no proof that the model is similar to a human decision process, but the behaviors that it produces are at least coherent with the notion of dominance as human people understand it.
+%	\begin{figure*}
+%		\centering
+%		\includegraphics[width=0.8\linewidth]{figs/tom.png}
+%		\caption{A theory of mind approach to evaluate the user's level of dominance} 
+%		\label{fig:tom}
+%	\end{figure*} 
 	
-	The second assumption is that the system can build a model of the possible mental states of the interlocutor. Concretely, this means a value of $pow$ and a set of preferences $\prec_i$ for all criteria. The general algorithm for a ToM is as follows:
+	This approach however relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the behaviors of power expressed by agents are correctly perceived by human users. 
+	%This is no proof that the model is similar to a human decision process, but the behaviors that it produces are at least coherent with the notion of dominance as human people understand it.
+	
+	The second assumption is that the system can build a model of the possible mental states of the interlocutor. Concretely, this means a value of $pow$ and a set of preferences $\prec_i$ for all criteria. 
+	
+	Based on these assumptions, we present the general algorithm of the user's model of mental state as follows:
 	\begin{enumerate}
-		\item Build a set $H_{pow}$ of hypothesis about power: $h\in H_{pow}$ represents the hypothesis $pow=h$;
+		\item Build a set $H_{pow}$ of hypothesis about power: $h\in H_{pow}$ represents the hypothesis $pow=h$. In our work, we consider only 9 values: 
+		
+		$H_{pow}=\{0.1, 0.2, \ldots, 0.9\}$.
 		\item For each hypothesis $h$, build the set of all possible preferences $Prec_h$: the elements $p\in Prec_h$ are partial orders on the criteria.
 		\item After each user utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
-		\item For each $h$, compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$
+		\item For each $h$, generate the corresponding utterance using $h$ as input for the decisional model.
+		\item compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated bu the user. 
+		\item 	The idea is that the hypothesis with the highest score is the most probable value for the user's power value.
+		\vspace{-0.1 cm}
+		\begin{equation}
+		pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
+		\vspace{-0.15 cm}
+		\end{equation}
+		
 	\end{enumerate}
-	The idea is that the hypothesis with the highest score is the most probable value for the user's power value.
-	\vspace{-0.1 cm}
-	\begin{equation}
-	pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
-			\vspace{-0.15 cm}
-	\end{equation}
+	
 
-	There is, of course, an infinite set of possible values for $pow$. In our work, we consider only 9 values: $H_{pow} = \{0.1, 0.2, \ldots, 0.9\}$.
+
 	
-	\subsection{Complete model of preferences}
+	\subsection{Simulation of the other's preferences}
 	
-	To build the set of possible preferences for each hypothesis, we need to consider all possible partial orders $\prec_i$ for each criterion $C_i$. However, there are $(|C_i| + 1)!$ possible partial orders for each criteria. As a consequence there are $\prod_{i=1}^n (|C_i|+1)!$ different possible preference sets.
+		The representation of the user's preferences is a crucial input for the decisional model. In order to generate the set of possible preferences for each hypothesis, we need to consider all possible partial orders $\prec_i$ for each criterion $C_i$. 
+		We can compute the size of the set of binary preferences based on the number of values, which is $(|C_i| + 1)!$ possible partial orders for each criteria. As a consequence, for a topic with $n$ criteria, there are $\prod_{i=1}^n (|C_i|+1)!$ different possible preference sets.
 	
-	In the negotiation dialogue we consider for our work, there are approximately 5 criteria with 4 to 10 possible values each. This means that there are between $24.10^9$ and $100.10^{36}$ possible preference sets. It is not reasonable to consider them all, one by one, at each step of the dialogue.
+		If we consider a reasonable example, with 5 criteria. For each criteria, we consider approximatively 4 to 10 possible values each. The set of possible preferences that the agent has represent for the user's model, are between $24.10^9$ and $100.10^{36}$ possible preference sets. 
+		We can easily conclude that it is not reasonable to consider all theses hypotheses, one by one, at each step of the dialogue.
 	
-	Even if we consider only total order sets of preferences, we still have  $\prod_{i=1}^n |C_i|!$ possible sets. It remains impossible to consider in the context of a dialogue.
+%		Even if we consider only total order sets of preferences, we still have  $\prod_{i=1}^n |C_i|!$ possible sets. It remains impossible to consider in the context of a dialogue.
 	
-	Moreover, our goal is not to model the exact mental state of the interlocutor. We only want to evaluate his/her behavior of power. In the proposed ToM approach, we need to make hypothesis on the preferences to compute the applicability conditions of the utterances. The system uses the preferences to evaluate which values are satisfiable ($S$) or acceptable ($Ac$), depending on the value of $pow$ and the current progress of the negotiation. But the preference set $Pref_h$ contains too much information! What is really required to simulate the decision process are only the sets $S$ and $Ac$, as shown on table~\ref{tab:utt}.
+	%	Moreover, our goal is not to model the exact mental state of the interlocutor. We only want to evaluate his/her behavior of power. In the proposed ToM approach, we need to make hypothesis on the preferences to compute the applicability conditions of the utterances. The system uses the preferences to evaluate which values are satisfiable ($S$) or acceptable ($Ac$), depending on the value of $pow$ and the current progress of the negotiation. But the preference set $Pref_h$ contains too much information! What is really required to simulate the decision process are only the sets $S$ and $Ac$, as shown on table~\ref{tab:utt}.
 	
-	This said, it becomes visible that, when simulating the other's decision, what really matters is whether the discussed value is satisfiable or acceptable (depending on the utterance), not its exact position in the preference set. As a consequence, our proposal to reduce this complexity is to consider unordered sets for $S$ and $Ac$ in our hypothesis, and to assume we have total order sets. This drastically reduces the size of the hypotheses.
+	%	This said, it becomes visible that, when simulating the other's decision, what really matters is whether the discussed value is satisfiable or acceptable (depending on the utterance), not its exact position in the preference set. As a consequence, our proposal to reduce this complexity is to consider unordered sets for $S$ and $Ac$ in our hypothesis, and to assume we have total order sets. This drastically reduces the size of the hypotheses.
+		We conducted an analysis of our decisional model to define the need of preferences. As presented in section \ref{sec:dec}, the preferences are used to compute the \emph{satisfiability} of each value. %The value of \emph{satisfiability}
+		 This value is necessary during the decisional process because it is required to build the set of satisfiable values $S$, and the set of acceptable values $Ac$.   
 	
-	Indeed, if we have a total order, the value of satisfiability only depends on the rank in this order of preferences, not on the order of the other elements in the set. For example, consider a criterion with 4 values and a total order of preferences on thees values. The value of can be sorted by order of preferences. The score of satisfiability for each rank is presented on Table~\ref{tab:poss}: it does not depend on the values themselves. For instance, the third value of the preference set will have $sat(v)=.66$, as defined in section~\ref{sec:dialogue-model}.
+		However, in the case of total ordered preferences, all the values are comparable, which means that they can be sorted by order of preferences, by calculating the number of predecessors, as in the example \ref{tab:sat}. Independently from the values themselves, by knowing the number of values, we can compute the value of \emph{satisfiability} of each value only from its rank of this in the order of preferences. For example, if we define a different set of preferences  on the criterion $cuisine$ $\prec'_{cuisine} = \{italian \prec japanese, japanese \prec french, french \prec chinese\}$. We will, still obtain similar values of satisfiability. The score of satisfiability for each value is directly computed from the number of predecessor in the ranking as presented on Table~\ref{tab:poss}. Therefore, in a total ordered preferences, we will always obtain the same values of satisfiability as presented in the table \ref{tab:poss}. 
 	\begin{table}[h]
 		\caption{Satisfiability depending on the rank for a 4-values criterion.}
 		\label{tab:poss}
@@ -485,19 +505,34 @@
 		\end{tabular}
 	\end{table}
 	
-	As a consequence, for a given value of power $pow$, the size of $S$ is fixed, independently of the possible relation of preferences $\prec$. Concretely, if $n$ is the number of elements in the criteria and $s$ is the size of $S$ as defined by the value of $pow$, we have only $\binom{n}{s}$ possibilities for $S$ to consider.
+	As a consequence, for a given value of power $pow$, we can compute the number of satisfiable values $S$ without knowing the relation of preferences. For example, for the criterion $cuisine$ which have 4 values, for any given total ordered preference, and a value of $pow = 0.4$, we can deduct that the number of satisfiable values is always $|S| = 2$
 	
-	This representation allows our Theory of Mind model to work with a smaller set of hypotheses. However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model to deal with the non-ordered sets of satisfiable and acceptable values. Second, it will affect the precision of the prediction. In this section we present the partial model of preferences and the new ToM algorithm. In the next section, we will evaluate the quality of the model in an agent-agent simulation.
+	Instead of calculating all the possible relation of preferences $\prec$. We can reduce the calculation to the set of possible satisfiable values.  Concretely, consider a criterion with $n$ number of values and total ordered preferences. For a given value of power $pow$, we obtain, $s$  the size of $S$. We have to generate only $\binom{n}{s}$ possibilities for the values of $S$ to consider. For example, for the criterion $cuisine$ and $pow =0.4$, we can generate all the possible satisfiable values as illustrated in table \ref{tab:sat_poss}.
+		\begin{table*}[h]
+			\centering
+			\caption{The possible $S$ for $cuisine$, with $pow=0.4$}
+			\label{tab:sat_poss}
+
+			\begin{tabular}{|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
+				\hline				
+				 $S_1$ & $S_2$ & $S_3$ & $S_4$ & $S_5$ & $S_6$ \\
+				\hline$(italian,french)$& $(italian,japanese)$ & $(italian,chinese)$ & $(french,japanese)$ & $(french,chinese)$ & $(japanese,chinese)$ \\
+				\hline
+			\end{tabular}
+		\end{table*}
 	
-	\subsection{Partial model of preferences}
+	This representation allows our model of the other to work with a reasonable set of hypotheses.  
+	However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model of the decision making to deal with the non-ordered sets of satisfiable and acceptable values. Second, it might affect the precision of the prediction of the interlocutor's power.
+	We present in the next section the partial model of preferences and the adaptation of the decisional model.
+	
+	\section{Partial model of preferences}
 			\colorbox{red}{In order to simulate another’s mental processes,
 		it is not necessary to categorize all the beliefs and
 		desires attributed to that person as such. In other words, it
 		is not necessary to be capable of complete introspection %http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf
 	}
-	The model of preferences is used to compute the satisfiability of values (see section \ref{sec:sat}). Knowing the set of satisfiable values is crucial for the decisional process. Instead of computing hypotheses on the set of preferences, we propose to \emph{make hypotheses about $S$ only}, the set of satisfiable values for a giving value of power $pow$.  
 	
-	In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered} In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
+	In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered}. In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
 	
 	Based on the values of satisfiability, and given a fixed value of $h \in H_{pow}$, we compute the value $s$ which is the size of all our hypotheses $S$ for this value of power. We then built all possible combinations of satisfiable values  noted $M_h$. For example, considering a value of $pow =0.6$, and the preference model given on Table~\ref{tab:sat} for our 4-values criterion. The number of satisfiable values $s=2$. We can build $M_{0.6} = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D)\}$. This process is generalized to all the hypotheses of $H_{pow}$, as presented on Table~\ref{tab:sat}
 	
@@ -602,6 +637,7 @@
 	\end{equation}
 	
 	
+	% -----------
 	\section{Evaluation}
 	In order to assess the validity of our partial model of preferences for the prediction of the interlocutor's power, we propose to simulate dialogues with two artificial agents. We can then compare the result of the prediction with the actual mental model of the interlocutor. We do not only evaluate the accuracy of our model of theory of mind, but also how fast it can predict the power of the interlocutor as well as the timeliness of the algorithm.
 	

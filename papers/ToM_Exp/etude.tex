@@ -5,6 +5,21 @@
 	\usepackage{color}
 	
 	\begin{document}
+		
+		Nous rappelons que le but de cet étude est de vérifier l'impact positif de la complémentarité sur la négociation collaborative entre un agent et un utilisateur humain. 
+		
+		\section{Conditions}
+		
+			Nous avons formulé trois conditions pour l'évaluation de notre modèle de négociation basé sur la relation de dominance: 
+			\begin{itemize}
+				\item Comportement complémentaire: L'agent va adapter son comportement pour complémenter le comportement de dominance de l'utilisateur
+				
+				\item Comportement similaire: L'agent va adopter un comportement similaire à celui de l'utilisateur. D'une manière il va imiter la stratégie de dominance exprimé par l'utilisateur
+				
+				\item Condition de contrôle : Agent qui ne s'adapte pas dont le pouvoir sera initié à $pow =0.5$. Un comportement neutre. 
+			\end{itemize}
+			
+			
 		\section{Explication de l'étude}
 			\textbf{ Version FR}
 
@@ -13,7 +28,7 @@
 		
 		Imaginez que vous allez dîner avec un ami ce soir. Vous allez discuter avec lui afin de choisir un restaurant qui vous convienne à tous les deux.
 	
-		Le choix d'un restaurant est basé sur vos préférences personnelles. Nous allons prendre en compte 4 critères préalablement défini. En effet, vous prendrez en compte le type de \textbf{cuisine}, \textbf{le prix} , \textbf{l'ambiance} et \textbf{la localisation} pour le choix du restaurant. Par exemple le restaurant Barocco est défini avec les critères présenté dans la table \ref{teb:ex}.
+		Le choix d'un restaurant est basé sur vos préférences personnelles. Nous allons prendre en compte 4 critères: le type de \textbf{cuisine}, \textbf{le prix} , \textbf{l'ambiance} et \textbf{la localisation} pour le choix du restaurant. Par exemple le restaurant Barocco est défini avec les critères présenté dans la table \ref{teb:ex}.
 			\begin{table}[h]
 			\begin{tabular} {|c|c|c|c|c|}
 				\hline
@@ -28,9 +43,9 @@
 		
 		L'étude se déroulera en trois étapes:
 		
-		Premièrement, vous allez effectué une session d'entraînement afin de vous familiariser avec l'interface d'interaction.
+		Premièrement, vous allez effectuer une session d'entraînement afin de vous familiariser avec l'interface d'interaction.
 		
-		Ensuite, pour les besoins de l'étude, nous vous demanderons de renseigner vos préférences par critères. Les agents avec qui vous allez dialoguer ne connaissent pas vos préférences. Ils seront utilisés pour analyser les dialogues. Merci de bien vouloir respecter les préférences renseigné dans vos interactions.
+		Ensuite, pour les besoins de l'étude, nous vous demanderons de renseigner vos préférences par critères. Les agents avec qui vous allez dialoguer ne connaissent pas vos préférences. Les informations sur vos préférences seront utilisées pour analyser les dialogues. Merci de bien vouloir respecter les préférences renseigné dans vos interactions.
 		
 		Finalement, vous allez discuter avec trois personnes différentes représentées par des agents conversationnels.  Comportez vous \textbf{naturellement} avec chacun des trois agents, comme vous l'auriez fait avec une de vos connaissance pour choisir un restaurant.  
 		
@@ -38,7 +53,12 @@
 		 Si vous avez des questions, c'est le moment de les poser à l'expérimentateur. Sinon, nous allons commencer la phase d'entraînement 
 		\textcolor{blue}{Ici se termine le texte de présentation et nous pouvons lancer la partie tutoriel avec la présence de l'expérimentateur pour toute explication}.
 		
-		Dans ce qui suit je vais présenter la page d'accueil pour la seconde partie.
+			\subsection{Phase tutoriel}
+			Dans le cadre de cette étude, vous allez interagir avec l'agent via une interface qui vous permettra de sélectionner des actes dialogiques pour négocier. 
+			Chaque acte de dialogue permet de générer automatiquement une phrase correspondant a ce que vous voulez exprimer.
+			Montrer un exemple de sélection. Expliquer les notions de critères et options. Ensuite laisser la main à l'utilisateur pour choisir des actes.  
+			
+
 		
 		\textcolor{red}{Remarque générale : tu ne dis pas trop à quoi va ressembler l'interaction. Je pense qu'il faudrait expliquer (choisir des types de phrase, on voit la phrase, etc). Comme tu tu rédigeais un "tuto" sur l'utilisation de l'interface d'Hatem. }
 		
