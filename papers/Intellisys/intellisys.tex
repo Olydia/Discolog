@@ -306,13 +306,13 @@
 	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, the agent can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
 	 
 	 
-	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french, italian, japanese, chinese}$\}$. In addition, the agent has a total order of preferences on these values $ \prec_{cuisine}= \{chinese \prec japanese, japanese \prec italian, italian \prec french\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
+	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french$(fr)$, italian$(it)$, japanese$(jap)$, chinese$(ch)$}$\}$. In addition, the agent has a total order of preferences on these values $ \prec_{cuisine}= \{ch\prec jap, jap \prec it, it \prec fr\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
 	
 	\begin{table} [h]
 		\centering
 		\begin{tabular}{ |c|c|c|c|c| }
 		\hline
-		value & chinese & japanese & italian & french \\	
+		value & $ch$ & $jap$ & $it$ & $fr$ \\	
 		\hline
 		sat(value) & 0 & 0.3 & 0.6 & 1 \\
 		\hline
@@ -358,8 +358,7 @@
 	
 	\subsection{Decision based on power}
 	\label{sec:dec}
-	The decision making process is designed to consider, in addition to preferences, the power of the agent as presented in the \textit{step 1} of the figure \ref{
-		l}. 
+	The decision making process is designed to consider, in addition to preferences, the power of the agent as presented in the \textit{step 1} of the figure \ref{fig:schema-general}. 
 	Therefore, the agent is initiated with a value of power $pow \in [0,1]$. 
 	
 	We present in this section, the decisional model, which relies on three elements. We will explain how the principles of power inspired from social psychology literature influence this decisional process.
@@ -374,7 +373,7 @@
 		\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
 	\end{equation}
 	
-	For example, if we consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Let's now consider a first agent Bob with a value of power $pow = 0.7$. We can compute, using the above function, that bob likes only $french$ cuisine. Whereas, the second agent Arthur with a smaller value of power $pow=0.4$ will have its set of satisfiable values initiated to $S= \{french, italian\}$. 
+	For example, if we consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Let's now consider a first agent Bob with a value of power $pow = 0.7$. We can compute, using the above function, that bob likes only $french$ cuisine $S= \{fr\}$. Whereas, the second agent Arthur with a smaller value of power $pow=0.4$ will have its set of satisfiable values initiated to $S= \{fr, it\}$. 
 	
     This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
 	
@@ -492,7 +491,7 @@
 		We conducted an analysis of our decisional model to define the need of preferences. As presented in section \ref{sec:dec}, the preferences are used to compute the \emph{satisfiability} of each value. %The value of \emph{satisfiability}
 		 This value is necessary during the decisional process because it is required to build the set of satisfiable values $S$, and the set of acceptable values $Ac$.   
 	
-		However, in the case of total ordered preferences, all the values are comparable, which means that they can be sorted by order of preferences, by calculating the number of predecessors, as in the example \ref{tab:sat}. Independently from the values themselves, by knowing the number of values, we can compute the value of \emph{satisfiability} of each value only from its rank of this in the order of preferences. For example, if we define a different set of preferences  on the criterion $cuisine$ $\prec'_{cuisine} = \{italian \prec japanese, japanese \prec french, french \prec chinese\}$. We will, still obtain similar values of satisfiability. The score of satisfiability for each value is directly computed from the number of predecessor in the ranking as presented on Table~\ref{tab:poss}. Therefore, in a total ordered preferences, we will always obtain the same values of satisfiability as presented in the table \ref{tab:poss}. 
+		However, in the case of total ordered preferences, all the values are comparable, which means that they can be sorted by order of preferences, by calculating the number of predecessors, as in the example \ref{tab:sat}. Independently from the values themselves, by knowing the number of values, we can compute the value of \emph{satisfiability} of each value only from its rank of this in the order of preferences. For example, if we define a different set of preferences  on the criterion $cuisine$ $\prec'_{cuisine} = \{it \prec jap, ja \prec fr, fr\prec ch\}$. We will, still obtain similar values of satisfiability. The score of satisfiability for each value is directly computed from the number of predecessor in the ranking as presented on Table~\ref{tab:poss}. Therefore, in a total ordered preferences, we will always obtain the same values of satisfiability as presented in the table \ref{tab:poss}. 
 	\begin{table}[h]
 		\caption{Satisfiability depending on the rank for a 4-values criterion.}
 		\label{tab:poss}
@@ -508,71 +507,74 @@
 		\end{tabular}
 	\end{table}
 	
-	As a consequence, for a given value of power $pow$, we can compute the number of satisfiable values $S$ without knowing the relation of preferences. For example, for the criterion $cuisine$ which have 4 values, for any given total ordered preference, and a value of $pow = 0.4$, we can deduct that the number of satisfiable values is always $|S| = 2$
+	As a consequence, for a given value of power $pow$, we can compute the number of satisfiable values $S$ without knowing the binary relations of preferences. For example, for the criterion $cuisine$ which have 4 values, for any given total ordered preference, and a value of $pow = 0.6$, we can deduct that the number of satisfiable values is always $|S| = 2$
 	
-	Instead of calculating all the possible relation of preferences $\prec$. We can reduce the calculation to the set of possible satisfiable values.  Concretely, consider a criterion with $n$ number of values and total ordered preferences. For a given value of power $pow$, we obtain, $s$  the size of $S$. We have to generate only $\binom{n}{s}$ possibilities for the values of $S$ to consider. For example, for the criterion $cuisine$ and $pow =0.4$, we can generate all the possible satisfiable values as illustrated in table \ref{tab:sat_poss}.
-		\begin{table*}[h]
+	Instead of calculating all the possible relations of preferences $\prec$. We can reduce the calculation to the set of possible satisfiable values.  Concretely, consider a criterion with $n$ number of values and total ordered preferences. For a given value of power $pow$, we obtain, $s$  the size of $S$. We have to generate only $\binom{n}{s}$ possibilities for the values of $S$ to consider. For example, for the criterion $cuisine$ and $pow =0.6$, we can generate all the possible satisfiable values as illustrated in table \ref{tab:sat_poss}.
+		\begin{table}[h]
 			\centering
-			\caption{The possible $S$ for $cuisine$, with $pow=0.4$}
+			\caption{The possible sets $S$ for $cuisine$, with $pow=0.6$}
 			\label{tab:sat_poss}
 
-			\begin{tabular}{|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
+			\begin{tabular}{|c|c|c|c|c|c|}%|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
 				\hline				
 				 $S_1$ & $S_2$ & $S_3$ & $S_4$ & $S_5$ & $S_6$ \\
-				\hline$(italian,french)$& $(italian,japanese)$ & $(italian,chinese)$ & $(french,japanese)$ & $(french,chinese)$ & $(japanese,chinese)$ \\
+				\hline$(it,fr)$& $(it,jap)$ & $(it,ch)$ & $(fr,jap)$ & $(fr,ch)$ & $(jap,ch)$ \\
 				\hline
 			\end{tabular}
-		\end{table*}
+		\end{table}
 	
 	This representation allows our model of the other to work with a reasonable set of hypotheses.  
 	However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model of the decision making to deal with the non-ordered sets of satisfiable and acceptable values. Second, it might affect the precision of the prediction of the interlocutor's power.
 	We present in the next section the partial model of preferences and the adaptation of the decisional model.
 	
 	\section{Partial model of preferences}
-			\colorbox{red}{In order to simulate another’s mental processes,
-		it is not necessary to categorize all the beliefs and
-		desires attributed to that person as such. In other words, it
-		is not necessary to be capable of complete introspection %http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf
-	}
-	
-	In order to generate theses hypotheses for any criterion, we make the strong assumption that preferences are \emph{total ordered}. In this case, all the values are comparable and could be ranked by order of preferences. Knowing the rank of preferences allows the agent to compute in advance the possible values of satisfiability.
-	
-	Based on the values of satisfiability, and given a fixed value of $h \in H_{pow}$, we compute the value $s$ which is the size of all our hypotheses $S$ for this value of power. We then built all possible combinations of satisfiable values  noted $M_h$. For example, considering a value of $pow =0.6$, and the preference model given on Table~\ref{tab:sat} for our 4-values criterion. The number of satisfiable values $s=2$. We can build $M_{0.6} = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D)\}$. This process is generalized to all the hypotheses of $H_{pow}$, as presented on Table~\ref{tab:sat}
-	
-	\begin{table}[h]
+%			\colorbox{red}{In order to simulate another’s mental processes,
+%		it is not necessary to categorize all the beliefs and
+%		desires attributed to that person as such. In other words, it
+%		is not necessary to be capable of complete introspection %http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf
+%	}
+%	
+	\begin{table}[b]
 		\centering
-		\caption{Hypotheses on mental states for a 4-value criterion $C_i=\{A, B, C, D\}$}
-		\begin{tabular}{ |c|c|c| }
+		\caption{Hypotheses on preferences for a 4-value criterion $C_i=\{A, B, C, D\}$}
+		\begin{tabular}{ |p{1cm}|p{0.5cm}|p{5.2cm}| }
 			\hline
 			& \multicolumn{2}{c|}{Hypotheses}  \\
 			\hline
 			Hypothesis & $pow$ & $M_{pow}$ \\
 			\hline
-			H1&0.3&$\{ (A,B,C) , (A,B,D), (A,C,D), (B,C,D) \}$ \\
+			H1&0.3&$\{(A,B,C)\} , \{(A,B,D)\}, \{(A,C,D)\}$, $\{(B,C,D)\}$ \\
 			\hline
-			H2&0.4&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$ \\
+			H2&0.4&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\},$ $\{(B,D)\}$ , $\{(C,D)\}$ \\
 			\hline
-			H3&0.5&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$\\
+			H3&0.5&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\}$, $\{(B,D)\}$, $\{(C,D)\}$\\
 			\hline
-			H4&0.6&$\{ (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) \}$ \\
+			H4&0.6&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\}$, $\{(B,D)\}$, $\{(C,D)\}$ \\
 			\hline
-			H5&0.7&$\{ (A), (B), (C), (D) \}$\\
+			H5&0.7&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$\\
 			\hline
-			H6&0.8&$\{ (A), (B), (C), (D) \}$ \\
+			H6&0.8&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$ \\
 			\hline
-			H7&0.9&$\{ (A), (B), (C), (D) \}$ \\
+			H7&0.9&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$ \\
 			\hline
 		\end{tabular}
 		
 		\label{table:poss}
 	\end{table}
+
+	In order to generate hypotheses about satisfiable values, given any criterion, we make the strong assumption that the interlocutor's preferences are \emph{total ordered}. As presented above, for a given criterion, and a total ordered preferences, we can know the values of satisfiability possibles without knowing the relation of preferences. 
 	
+	Based on the values of satisfiability, and given a fixed value of $h \in H_{pow}$, we compute the value $s$ which is the size of all our hypotheses $S$ for this value of power. 
+	We then built all possible combinations of satisfiable values noted $M_h$ (see Table ~ \ref{tab:sat_poss}). This process is generalized to all the hypotheses of $H_{pow}$. We present in Table~\ref{tab:sat} an example of the generation of hypotheses for a criterion $C_i=\{A, B, C, D\}$.
+	
+
 	\subsection{Decision in negotiation with partial representation of preferences}
+	
 	The adaptation of the mental state to partial representation implies to modify the reasoning process. In the following, we present the adaptation of the decisional model to take into account partial and incomplete mental state. The goal is to reproduce the reasoning model in order to compute at each turn, the power $other_{pow}$ of the interlocutor. 
 	
 	First, we present the adaptation of the functionalities. Second, we present, the computation of the other's \emph{pow} from functions of decision.   
 	
-	\subsubsection{Satisfiability:}
+	\subsubsection{Satisfiability}
 	To compute whether a value $v \in C_i$ is satisfiable, we check for each hypothesis of power $h_i$, the set satisfiable values $S_i \in M_h(pow)$.
 	Thus: 
 	\begin{equation}
@@ -582,7 +584,7 @@
 	\end{array}\right.
 	\end{equation}
 	
-	\subsubsection{Acceptability:}
+	\subsubsection{Acceptability}
 	Computing the acceptability of a value $v$ depends on the current of value of $self(t)$. For each hypothesis on power $h_i$, we associate a value $self_i(t)$ that represents the level of concessions at the current time. 
 	
 	With partial knowledge of preferences and for a fixed value of power $h_i$, the agent is not able to compute all the acceptable values $Ac_i$. Especially,   values of the set $M_i$ (\emph{i.e} acceptable values which are not satisfiable). 
@@ -631,7 +633,7 @@
 	\end{array}\right) \frac{1}{| M_h(h_i)|}
 	\end{equation}
 	
-	\subsection{ToM algorithme with partial preferences}
+	\subsection{ToM algorithm with partial preferences}
 	At each turn of the dialogue, the agent uses its model of the theory of mind in order to compute other's behaviors of power $pow_{other}$. We present, the process of updating $other_{pow}$ depending on the received utterance. 
 	
 	The value of power selected:
