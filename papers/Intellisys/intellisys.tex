@@ -125,28 +125,25 @@
 	%
 	% paper title
 	% can use linebreaks \\ within to get better formatting as desired
-	\title{I've got the power's value! A computational model to evaluate the interlocutor's behaviors in collaborative negotiation}
+	\title{Guess my power: A computational model to simulate the behavior of a partner in the context of collaborative negotiation}
 	
 	
 	% author names and affiliations
 	% use a multiple column layout for up to three different
 	% affiliations
-%	\author{\IEEEauthorblockN{Michael Shell}
-%	\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-%	Georgia Institute of Technology\\
-%	Atlanta, Georgia 30332--0250\\
-%	Email: http://www.michaelshell.org/contact.html}
-%	\and
-%	\IEEEauthorblockN{Homer Simpson}
-%	\IEEEauthorblockA{Twentieth Century Fox\\
-%	Springfield, USA\\
-%	Email: homer@thesimpsons.com}
-%	\and
-%	\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-%	\IEEEauthorblockA{Starfleet Academy\\
-%	San Francisco, California 96678-2391\\
-%	Telephone: (800) 555--1212\\
-%	Fax: (888) 555--1212}}
+	\author{\IEEEauthorblockN{Lydia OULDOUALI}
+	\IEEEauthorblockA{LIMSI-CNRS, UPR 3251, Orsay, France\\
+	Universit\'e Paris-Sud, Orsay, France \\
+	Email: ouldouali@limsi.fr}
+	\and
+	\IEEEauthorblockN{Nicolas Sabouret}
+	\IEEEauthorblockA{LIMSI-CNRS, UPR 3251, Orsay, France\\
+	Universit\'e Paris-Sud, Orsay, France \\
+	Email: nicolas.sabouret@limsi.fr}
+	\and
+	\IEEEauthorblockN{Charles Rich}
+	\IEEEauthorblockA{	Worcester Polytechnic Institute\\ Worcester, Massachusetts, USA\\
+	Email:rich@wpi.edu}}
 	
 	% conference papers do not typically use \thanks and this command
 	% is locked out in conference mode. If really needed, such as for
@@ -231,7 +228,7 @@
 		
 		\begin{figure*}[h]
 			\centering
-			\includegraphics[width=0.8\linewidth, height= 0.2\textheight]{figs/model/general.png}
+			\includegraphics[width=0.8\linewidth]{figs/model/general.png}
 			\caption{Model of collaborative negotiation with a model of other} 
 			\label{fig:schema-general}
 		\end{figure*} 
@@ -306,20 +303,21 @@
 	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, the agent can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
 	 
 	 
-	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french$(fr)$, italian$(it)$, japanese$(jap)$, chinese$(ch)$}$\}$. In addition, the agent has a total order of preferences on these values $ \prec_{cuisine}= \{ch\prec jap, jap \prec it, it \prec fr\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
+	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french$(fr)$, italian$(it)$, japanese$(jap)$, chinese$(ch)$}$\}$. In addition, the agent has a total order of preferences on these values $\prec_{cuisine}$$=\{ch$$\prec$$jap, jap$$\prec$$it, it$$\prec$ $fr\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
 	
 	\begin{table} [h]
 		\centering
+				\large
 		\begin{tabular}{ |c|c|c|c|c| }
 		\hline
 		value & $ch$ & $jap$ & $it$ & $fr$ \\	
 		\hline
-		sat(value) & 0 & 0.3 & 0.6 & 1 \\
+		sat(value) & 0 & 0.33 & 0.6 & 1 \\
 		\hline
 	\end{tabular}
 		\caption{$Sat$ computed on the set of preferences $\prec_{cuisine}$.}
 		\label{tab:sat}
-		\vspace{-0.5em} 
+
 	\end{table}
 
 	
@@ -387,7 +385,7 @@
 	
 	\begin{floatingfigure}[l]{1.3in}
 		\captionsetup{justification=centering}
-		\includegraphics[width=1.2in]{figs/sv3.png}
+		\includegraphics[width=1.3in]{figs/sv3.png}
 		\caption{\label{fig:conc}Concession curve}
 	\end{floatingfigure} 
 	
@@ -449,7 +447,7 @@
 		\label{fig:tom}
 	\end{figure*} 
 	
-	This approach however relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the behaviors of power expressed by agents are correctly perceived by human users. 
+	This approach, however, relies on a couple of strong assumptions. First, it assumes that the decision model is an accurate representation of the decisional process of the user. There is no way to guarantee this assumption. However, in our previous research \cite{ouali2017computational}, we showed that the behaviors of power expressed by agents are correctly perceived by human users. 
 	%This is no proof that the model is similar to a human decision process, but the behaviors that it produces are at least coherent with the notion of dominance as human people understand it.
 	
 	The second assumption is that the system can build a model of the possible mental states of the interlocutor. Concretely, this means a value of $pow$ and a set of preferences $\prec_i$ for all criteria. 
@@ -464,10 +462,9 @@
 		\item For each $h$, generate the corresponding utterance using $h$ as input for the decisional model.
 		\item compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated bu the user. 
 		\item 	The idea is that the hypothesis with the highest score is the most probable value for the user's power value.
-		\vspace{-0.1 cm}
+
 		\begin{equation}
 		pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
-		\vspace{-0.15 cm}
 		\end{equation}
 		
 	\end{enumerate}
@@ -491,11 +488,12 @@
 		We conducted an analysis of our decisional model to define the need of preferences. As presented in section \ref{sec:dec}, the preferences are used to compute the \emph{satisfiability} of each value. %The value of \emph{satisfiability}
 		 This value is necessary during the decisional process because it is required to build the set of satisfiable values $S$, and the set of acceptable values $Ac$.   
 	
-		However, in the case of total ordered preferences, all the values are comparable, which means that they can be sorted by order of preferences, by calculating the number of predecessors, as in the example \ref{tab:sat}. Independently from the values themselves, by knowing the number of values, we can compute the value of \emph{satisfiability} of each value only from its rank of this in the order of preferences. For example, if we define a different set of preferences  on the criterion $cuisine$ $\prec'_{cuisine} = \{it \prec jap, ja \prec fr, fr\prec ch\}$. We will, still obtain similar values of satisfiability. The score of satisfiability for each value is directly computed from the number of predecessor in the ranking as presented on Table~\ref{tab:poss}. Therefore, in a total ordered preferences, we will always obtain the same values of satisfiability as presented in the table \ref{tab:poss}. 
+		However, in the case of total ordered preferences, all the values are comparable, which means that they can be sorted by order of preferences, by calculating the number of predecessors, as in the example \ref{tab:sat}. Independently from the values themselves, by knowing the number of values, we can compute the value of \emph{satisfiability} of each value only from its rank of this in the order of preferences. For example, if we define a different set of preferences  on the criterion $cuisine$ $\prec'_{cuisine} = \{it$$\prec$ $jap, jap$$\prec$$ fr, fr$$\prec$$ch\}$. We will, still obtain similar values of satisfiability. The score of satisfiability for each value is directly computed from the number of predecessor in the ranking as presented on Table~\ref{tab:poss}. Therefore, in a total ordered preferences, we will always obtain the same values of satisfiability as presented in the table \ref{tab:poss}. 
 	\begin{table}[h]
 		\caption{Satisfiability depending on the rank for a 4-values criterion.}
 		\label{tab:poss}
 		\centering
+		\large
 		\begin{tabular}{ |c|c|c|c|c| }
 			\hline				
 			rank(value) & 1 & 2 & 3 & 4 \\
@@ -507,7 +505,7 @@
 		\end{tabular}
 	\end{table}
 	
-	As a consequence, for a given value of power $pow$, we can compute the number of satisfiable values $S$ without knowing the binary relations of preferences. For example, for the criterion $cuisine$ which have 4 values, for any given total ordered preference, and a value of $pow = 0.6$, we can deduct that the number of satisfiable values is always $|S| = 2$
+	As a consequence, for a given value of power $pow$, we can compute the number of satisfiable values $S$ without knowing the binary relations of preferences. For example, for the criterion $cuisine$ which have 4 values, for any given total ordered preference, and a value of $pow = 0.6$, we can deduct that the number of satisfiable values is always $|S| = 2$.
 	
 	Instead of calculating all the possible relations of preferences $\prec$. We can reduce the calculation to the set of possible satisfiable values.  Concretely, consider a criterion with $n$ number of values and total ordered preferences. For a given value of power $pow$, we obtain, $s$  the size of $S$. We have to generate only $\binom{n}{s}$ possibilities for the values of $S$ to consider. For example, for the criterion $cuisine$ and $pow =0.6$, we can generate all the possible satisfiable values as illustrated in table \ref{tab:sat_poss}.
 		\begin{table}[h]
@@ -527,7 +525,7 @@
 	However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model of the decision making to deal with the non-ordered sets of satisfiable and acceptable values. Second, it might affect the precision of the prediction of the interlocutor's power.
 	We present in the next section the partial model of preferences and the adaptation of the decisional model.
 	
-	\section{Partial model of preferences}
+	\subsection{Partial model of preferences}
 %			\colorbox{red}{In order to simulate another’s mental processes,
 %		it is not necessary to categorize all the beliefs and
 %		desires attributed to that person as such. In other words, it
@@ -536,45 +534,45 @@
 %	
 	\begin{table}[b]
 		\centering
-		\caption{Hypotheses on preferences for a 4-value criterion $C_i=\{A, B, C, D\}$}
-		\begin{tabular}{ |p{1cm}|p{0.5cm}|p{5.2cm}| }
+		\caption{Hypotheses on preferences for a 4-value criterion $cuisine$}
+		\begin{tabular}{ |p{1cm}|p{0.82cm}|p{5.3cm}| }
 			\hline
 			& \multicolumn{2}{c|}{Hypotheses}  \\
 			\hline
-			Hypothesis & $pow$ & $M_{pow}$ \\
+			Hypothesis & $h_i(pow)$ & Hypotheses on satisfiable values $ M_h(h_i)$\\
 			\hline
-			H1&0.3&$\{(A,B,C)\} , \{(A,B,D)\}, \{(A,C,D)\}$, $\{(B,C,D)\}$ \\
+			H1&0.3&$\{(fr,it,jap)\} , \{(fr,it,ch)\}, \{(fr,jap,ch)\}$, $\{(it,jap,ch)\}$ \\
 			\hline
-			H2&0.4&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\},$ $\{(B,D)\}$ , $\{(C,D)\}$ \\
+			H2&0.4&$\{(fr,it)\}, \{(fr,jap)\}, \{(fr,ch)\}, \{(it,jap)\},$ $\{(it,ch)\}$ , $\{(jap,ch)\}$ \\
 			\hline
-			H3&0.5&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\}$, $\{(B,D)\}$, $\{(C,D)\}$\\
+			H3&0.5&$\{(fr,it)\}, \{(fr,jap)\}, \{(fr,ch)\}, \{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$\\
 			\hline
-			H4&0.6&$\{(A,B)\}, \{(A,C)\}, \{(A,D)\}, \{(B,C)\}$, $\{(B,D)\}$, $\{(C,D)\}$ \\
+			H4&0.6&$\{(fr,it)\}, \{(fr,jap)\}, \{(fr,ch)\}, \{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$ \\
 			\hline
-			H5&0.7&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$\\
+			H5&0.7&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$\\
 			\hline
-			H6&0.8&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$ \\
+			H6&0.8&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$ \\
 			\hline
-			H7&0.9&$\{(A)\}, \{(B)\}, \{(C)\}, \{(D)\}$ \\
+			H7&0.9&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$ \\
 			\hline
-		\end{tabular}
-		
-		\label{table:poss}
+		\end{tabular}		
+		\label{tab:hypo}
 	\end{table}
 
-	In order to generate hypotheses about satisfiable values, given any criterion, we make the strong assumption that the interlocutor's preferences are \emph{total ordered}. As presented above, for a given criterion, and a total ordered preferences, we can know the values of satisfiability possibles without knowing the relation of preferences. 
+	In order to generate hypotheses about satisfiable values, given any criterion, we make the strong assumption that the interlocutor's preferences are \emph{total ordered}. As presented above, for a given criterion, and a total ordered preferences, we can predict the values of satisfiability possibles without knowing the relation of preferences. 
 	
-	Based on the values of satisfiability, and given a fixed value of $h \in H_{pow}$, we compute the value $s$ which is the size of all our hypotheses $S$ for this value of power. 
-	We then built all possible combinations of satisfiable values noted $M_h$ (see Table ~ \ref{tab:sat_poss}). This process is generalized to all the hypotheses of $H_{pow}$. We present in Table~\ref{tab:sat} an example of the generation of hypotheses for a criterion $C_i=\{A, B, C, D\}$.
+	Based on the values of satisfiability, and given a fixed value of $h \in H_{pow}$, we compute the number of satisfiable values named $s$ which is the size of all our hypotheses $S$ for this value of power. 
+	We then built all possible combinations of satisfiable values noted $M_h$ (see Table~\ref{tab:hypo}). This process is generalized to all the hypotheses of $H_{pow}$. We present in Table~\ref{tab:sat} an example of the generation of all the hypotheses possible for a criterion $cuisine$.
 	
 
-	\subsection{Decision in negotiation with partial representation of preferences}
+	\section{Decision in negotiation with partial representation of preferences}
 	
 	The adaptation of the mental state to partial representation implies to modify the reasoning process. In the following, we present the adaptation of the decisional model to take into account partial and incomplete mental state. The goal is to reproduce the reasoning model in order to compute at each turn, the power $other_{pow}$ of the interlocutor. 
 	
-	First, we present the adaptation of the functionalities. Second, we present, the computation of the other's \emph{pow} from functions of decision.   
+	First, we present the adaptation of the decisional process to handle partial knowledge.
+	Second, we present, how the agent update its belief about the other's \emph{pow} based on the simulation of its behavior.   
 	
-	\subsubsection{Satisfiability}
+	\subsection{Satisfiability}
 	To compute whether a value $v \in C_i$ is satisfiable, we check for each hypothesis of power $h_i$, the set satisfiable values $S_i \in M_h(pow)$.
 	Thus: 
 	\begin{equation}
@@ -584,21 +582,33 @@
 	\end{array}\right.
 	\end{equation}
 	
-	\subsubsection{Acceptability}
-	Computing the acceptability of a value $v$ depends on the current of value of $self(t)$. For each hypothesis on power $h_i$, we associate a value $self_i(t)$ that represents the level of concessions at the current time. 
+	\subsection{Acceptability}
+	The set of acceptable values $Ac$ depends on the value of $self(t)$, knowing that $self(t)$ decreases over time when the negotiation is not converging. The purpose behind this proposal, is to capture the behaviors of concessions over time. concretely, this means that the set of acceptable values $Ac$ grows during the negotiation, and new values become acceptable noted $M$. 
 	
-	With partial knowledge of preferences and for a fixed value of power $h_i$, the agent is not able to compute all the acceptable values $Ac_i$. Especially,   values of the set $M_i$ (\emph{i.e} acceptable values which are not satisfiable). 
+	For example, in the context of negotiation with a set of preferences $\prec_{cuisine}$ and $pow= 0.6$, as illustrated in Table~\ref{tab:sat}. The set of satisfiable and acceptable values are intiated to $S =Ac=\{it,fr\}$ and $M= \emptyset$. 
+	However, due to concessions, the value of self, initially to $self(0)=0.6$, reduces to $self(t) = 0.3$. Thus, values which are not satisfiable are now acceptable. Therefore, the set $Ac$  is updated  $Ac=\{it,fr,jap\}$ and by consequences $M=\{jap\}$. 
+	% case of partial knowledge
+	Now, consider the situation where the agent has a partial representation of preferences, aka, the agent only knows hypotheses about the sets $S$. For each hypothesis on power $h_i$, we associate a value $self_i(t)$ that represents the level of concessions at the current time. 
+	In the case where there are no concessions ($self_i(t)=h_i$), the agent can compute the set of acceptable values because $|Ac_i| = s$.
+	However, in the context of concessions, where $self_i(t)$ decreases, the set of acceptable values grows, the agent can compute the number of acceptable values at the current state of the negotiation. For example, consider the hypothesis $h4$, and $self_i(t)$ that decreases to $self_i(t)=0.3$, with the information about the possible values of satisafiability presented in Table~\ref{tab:poss}, the agent can compute the number of acceptable values $|Ac_4| = 3$. By consequence, the agent knows that a new value is acceptable which is also not satisfiable $|M_4|=1$. 
+	However, the agent is not able to compute which value is now acceptable. For example, consider the first hypothesis on satisfiable values related to $h_4$; $S_i = \{fr, it\}$, the agent cannot compute which of the values $jap$ or $ch$ is now acceptable. 
 	
-	Nevertheless, the agent can have certain information about acceptable values such as $ S_i \subset Ac_i$. Moreover, using the initial values of satisfiability for a given criterion (see table \ref{sat}), agent can compute the number of acceptable values at the current state of the negotiation $|Acc_i|$ and by consequences $|M| = |Acc_i| - |S_i|$. 
-	
-	We propose to calculate the score of acceptability of a value $v$ taking into account the available information. Therefore, for a hypothesis of power $h_i$, hypotheses on preferences $S_i \in M_h(h_i)$,  and the list of accepted values during the negotiation $A$, the score that $v \in D$ is acceptable is computed as follow: 
+	Therefore, we propose to adapt the calculation of $acceptabilty$ only with partial knowledge available. For a hypothesis of power $h_i$, for each hypothesis on preferences $S_i \in M_h(h_i)$, and the list of accepted values during the negotiation $A$, the score that a value $v \in D$ is acceptable is computed as follows:
+	 
 	\begin{equation}
 	Acc(v, pow) = C_{|D|-(|S_i| + k)}^{|M| - k}
 	\end{equation}
-	$k = |K| $ is the number of elements in the set $K = A \cap \overline S_i$
+	$k = |K| $ is the number of elements in the set $K=A \cap \overline S_i$, the set of accepted values which are not satisfiable.
+	Using this function, the agent can compute the $acceptability$ of each value of $cuisine$ for the the set $S_i$ relied to $h_4$. 
+	
+% 
+%	%====== old version ==========
+%	Nevertheless, the agent can have certain information about acceptable values such as $ S_i \subset Ac_i$. Moreover, using the initial values of satisfiability for a given criterion (see table \ref{sat}), agent can compute the number of acceptable values at the current state of the negotiation $|Acc_i|$ and by consequences $|M| = |Acc_i| - |S_i|$. 
+%	
+%	
 	
 	
-	\subsubsection{Lead of the dialogue}		
+	\subsection{Lead of the dialogue}		
 	As presented before, the choice of a specific utterance's type translates behaviors of power. Indeed, a high frequency of choosing \emph{proposal utterance} shows a behaviors of high-power. Whereas, a high frequency of \emph{share preferences utterances} reflects behaviors of low-power.
 	We note $history$ the list of utterances enunciated by the user. the value of power is computed from the ratio of propose enunciated versus asks.
 	\begin{equation}
@@ -609,42 +619,55 @@
 	\end{equation}
 	
 	Once, the list of possible is restricted, we update the hypotheses by taking into account the value associated to the expressed utterance.
+	For example, suppose that the agent assumes that $\frac{history(Propose)}{hisotry} > 0.5$. Therefore, the agent will only considers the hypotheses $\{h_4 - h_9\}$ to compute the power of its interlocutor.
+	
+	
+	\subsection{Belief update about interlocutor's power}
+	We present how the agent updates its belief about the powe of its interlocutor, based on the utterance that the interlocutor communicates.
+	
 	
 	\subsubsection{Share a preference}
-	When the user expresses a \emph{StatePreference(v, s)}, he shares his preferences in the way where $v \in S$ if $s =true$, otherwise $v \notin S$. 
-	In addition, when the user rejects a proposal \emph{Reject(p)}, he also shares his preferences . As $S \subset Acc$ means if a value is not acceptable, it is automatically not satisfiable $p \notin S$. 
+		We consider that the interlocutor shares a preferences in two cases.
+		
+		First, when the interlocutor expresses a \emph{StatePreference(v,s)}, he shares a preference in a way where $v \in S$ (I like $v$) otherwise $v \notin S$ (I don't like $v$). 
 	
-	Therefore, for each  $h_i \in H_{pow}$, we propose to update the agent's hypotheses $M_h(h_i)$ by removing all the hypotheses on preferences that are no longer consistent with the information learned. 
+		Second, based on our design, we consider that the interlocutor shares a preference when he/her rejects a proposal \emph{Reject(p)}. If a value is not acceptable, it is necessarily not satisfiable because $S \subset Ac$. Thus, if $p\not\in Ac$, then $p\not\in S$. 
+	
+	Therefore, when the agent learn a new preference about its interlocutor, he updates his hypotheses as follows: for each  $h_i \in H_{pow}$, we propose to update the agent's hypotheses $M_h(h_i)$ by removing all the hypotheses on preferences that are no longer consistent with the information learned. 
 	Then, we compute the score of each $h_i$ at the moment $t$ :
 	
 	$$score(h_i,t) = \frac{|M_h(h_i, t)|}{|M_h(h_i, init)|}$$
 	
+	For example, suppose that the interlocutor expresses \emph{StatePreference(fr, true)}, this means that the agent has to remove all the hypotheses where $fr \not\in S_i$. For example, for $h_4$, out of the six hypotheses, the agent removes three: $\{\{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$. In the end, $score(h_4) = 0.5$. 
+	
 	
 	\subsubsection{Accept a proposal}
-	When the user accept (\emph{Accept(p)}) or propose a proposal (\emph{Propose(p)}), means that $p \in Acc$. 
-	The agent has to calculate for each $h_i \in H_{pow}$ the score of acceptability. In addition, the values of acceptability have to be normalized to allow a coherent comparison. Thus, given a hypothesis on power $h_i$, he score of acceptability is normalized by taking into account the ideal score of acceptability.
+	When the interlocutor accepts (\emph{Accept(p)}) or proposes a proposal (\emph{Propose(p)}), means that $p \in Ac$. 
+	The agent has to calculate for each $h_i \in H_{pow}$ the score of acceptability. 
+	In addition, we aim to normalize the values of acceptability in order to have a coherent comparison between the different hypotheses. Thus, given a hypothesis on power $h_i$, he score of acceptability is normalized by taking into account the ideal score of acceptability. We define the "best" score of acceptability : 
 	
-	$$I_{pow} =  C_{|D|-|S_i|}^{|M|}$$
+	$$I_{pow} = C_{|D|-|S_i|}^{|M|}$$
 	
 	
-	The final value of acceptability is then:
+	The final value of acceptability normilized is then:
 	\begin{equation}
 	score(h_i, t)= \left( \begin{array}{c}  \frac{1}{I_{pow}} \cdot \sum_{S_i \in M_h(h_i) } acc(p, h_i) 
 	\end{array}\right) \frac{1}{| M_h(h_i)|}
 	\end{equation}
 	
-	\subsection{ToM algorithm with partial preferences}
-	At each turn of the dialogue, the agent uses its model of the theory of mind in order to compute other's behaviors of power $pow_{other}$. We present, the process of updating $other_{pow}$ depending on the received utterance. 
+	For example, tha agent recieves an \emph{Accept(it)}. We take as example, $h_5$ to compute the values of acceptability. Suppose, that $self_5(t)=0.6$, the value of acceptabiliy of $it$ for this hypothesis: $acc(it,h_5)=$$C_3^1$$=3$ and $I_{0.7}=3$. Thus $score(h_5, t)= 1/6$
 	
-	The value of power selected:
-	\begin{equation}
-	pow_{other} = \operatorname*{arg\,max}_{h_i \in H_{pow}} ( score(h_i,t))
-	\end{equation}
+	\subsubsection{Belief's update}
+	At each turn of the dialogue, the agent uses its model of the theory of mind in order to compute other's behaviors of power $pow_{other}$. We present, the process of updating $other_{pow}$ depending on the received utterance. As presented, at each turn, the agent computes a score for each hypothesis. Then, the agent associates the value of power to the hypothesis that gets the best score at this turn.
 	
+		\begin{equation}
+			pow_{other} = \operatorname*{arg\,max}_{h_i \in H_{pow}} (score(h_i,t))
+		\end{equation}
+		
 	
 	% -----------
 	\section{Evaluation}
-	In order to assess the validity of our partial model of preferences for the prediction of the interlocutor's power, we propose to simulate dialogues with two artificial agents. We can then compare the result of the prediction with the actual mental model of the interlocutor. We do not only evaluate the accuracy of our model of theory of mind, but also how fast it can predict the power of the interlocutor as well as the timeliness of the algorithm.
+	We present in the paper a model based on \emph{ST} that aims to guess the behaviors of power expressed by an interlocutor. In order to assess the validity of our model with partial representation of preferences, we propose to simulate dialogues with two artificial agents. We can then compare the result of the prediction with the actual mental model of the interlocutor. We do not only evaluate the accuracy of our model of theory of mind, but also how fast it can predict the power of the interlocutor as well as the timeliness of the algorithm.
 	
 	\subsection{Method}
 	We implemented two agents with theory of mind abilities.
@@ -666,7 +689,7 @@
 		\label{tab:powsettings}
 	\end{table}
 	
-	Second, we variate the size of preference sets and more specifically the size of the discussed topic in order to study the timeliness of the algorithm from simple to richer topics. We generate three types of topics as presented in table \ref{tab:initP} and for each topic we generated $50$ different models of preferences. In total, negotiators was initiated with $150$ different models of preferences, added to the values of power,  $1451$ combinations were created for the initial states of both agents. For each combination, we generate a dialogue in which the agent with theory of mind estimates the other's value of power.
+	Second, we variate the size of preference sets and more specifically the size of the discussed topic in order to study the timeliness of our model from simple to richer topics. Indeed, as discussed in section \ref{sec:dialogue-model}, interlocutors negotiate over multiple criteria, each one defined with a set of values. Our aim is to analyse whether our model handle rich topics with multiple criteria and several values per criterion which would require an important number of hypotheses. Therefore, we generateed three types of topics as presented in table \ref{tab:initP} and for each topic we generated $50$ different models of preferences. In total, negotiators was initiated with $150$ different models of preferences, added to the values of power,  $1451$ combinations were created for the initial states of both agents. For each combination, we generate a dialogue in which the agent with theory of mind estimates the other's value of power.
 	
 	
 	\begin{table}[]
@@ -687,22 +710,22 @@
 		\label{tab:initP}
 	\end{table}
 	
-	\subsection{Results and discussion}
-	We present in this section the results obtained for both the accuracy of predictions made by our model and the timeliness of the execution.
+	\subsection{Analyses of the dialogues}
+	We present in this section the statistical studies done, as well as the results obtained for both the accuracy of predictions made by our model and the timeliness of the execution.
 	
-	\subsubsection{Accuracy of predictions:} For each dialogue, we obtain the predictions made by the agent with ToM abilities about the behaviors of power of the other agent. Results are summarized in table \ref{tab:res1}. 
+	\subsubsection{Accuracy of predictions:} For each dialogue, we obtain the predictions made by the agent with ToM abilities about the behaviors of the power of the other agent. Results are summarized in the table \ref{tab:res1}. 
 	
-	
-	First, we computed the \emph{standard deviation} between the guessed value of power $Other_{pow}$ and the actual value of power $pow$. In average, for the total of $1451$ dialogues, a small deviation of $0.075$ was observed. Moreover, in order to analyze the results in a more general way, we calculated the \emph{residual deviation }  that computes the accuracy of the dependent variable being measured. We have computed the deviation of prediction between the predicted value  $Other_{pow}$ from the real value of power $pow$. 
-	We observe deviations of the range $rv = 0.015$ which means that our model makes accurate and close predictions of other's power.
+	First, we computed the \emph{root mean square error} that indicates the standard deviation of the differences between the guessed  values of power and the actual power of the partner. For the total of $1451$ dialogues, a small deviation of $rmse= 0.12$ was observed. Moreover, in order to analyze the results in a more general way, we calculated the \emph{residual deviation}  that computes the accuracy of the dependent variable being measured. We have computed the deviation of prediction between the predicted value  $Other_{pow}$ from the real value of power $pow$. 
+	We observe deviations of the range $rv = 0.015$ which means that based on the two statistical analysis, our model makes accurate and close predictions of other's power.
 	
 	
 	\begin{table}[h]
 		\centering
+		\large
 		\caption{Results of margin errors for prediction} 
 		\begin{tabular}{|l|c|}
 			\hline
-			Average of the standard deviation & 0,075 \\
+			Root mean square error & 0,12 \\
 			\hline
 			Residual variation (rv) & 0,015 \\
 			\hline
@@ -711,8 +734,8 @@
 		\label{tab:res1}
 	\end{table}
 	
-	Second, we analyzed the frequency of false predictions. For example, $agent_A$ predicts that $agent_B$ is dominant whereas $agent_B$ is submissive. To this end, we computed the percentage of false predictions. For all the dialogues, only $30$ predictions were incorrect which means that $ 2.6 \% $ of predictions were false. This result confirm the reliability of our algorithm. 
-	\begin{table*}[t]
+	Second, we analyzed the frequency of false predictions. For example, $agent_A$ predicts that $agent_B$ is dominant, whereas $agent_B$ is submissive. To this end, we computed the percentage of false predictions. For all the dialogues, only $30$ predictions were incorrect which means that $ 2.6 \% $ of predictions were false. This result confirms the reliability of our algorithm. 
+	\begin{table*}[h]
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{Number of etiration to make predictions} \\
@@ -725,14 +748,12 @@
 		\caption{Average number of iterations to compute a prediction} 
 		\label{tab:conv}
 	\end{table*}
-	Finally, for all the dialogues in which the agent was able to find a good prediction (in total $1421$), we analyzed the rapidity of convergence of our algorithm. The results are presented in table \ref{tab:conv}
+	Finally, for all the dialogues in which the agent was able to find a good prediction (in total $1421$), we analyzed the rapidity of convergence of our algorithm. The results are presented in table \ref{tab:conv}. Indeed, for each dialogue, we computed the number of iterations necessary to find a good prediction and maintain it. On average, the algorithm needed $3$ iterations in order to predict the right range of the power of the other (whether the agent has a dominant or a submissive behavior). 
+	
+	Moreover, we calculated the average number of iterations needed to find a prediction such that $rv \leq 0.02$. In average the agent needed $3$ iterations in order to evaluate a value close to the other's power. The evolution of convergence for all the dialogues is presented in the figure \ref{fig:converge}
 	
 	
-	For each dialogue, we computed the number of iteration necessary to find a good prediction. In average, the algorithm needed $3$ iterations in order to predict the right range of dominance of the other (weather the agent has dominant or a submissive behavior). 
-	
-	Moreover, we calculated the average number of iterations needed to find a prediction such that $rv \leq 0.02$. In average the agent needed $3$ iterations in order to evaluate a close value to the other's power. The evolution of convergence for all the dialogues are presented in figure  \ref{fig:converge}
-	
-	We  also computed the average number of iterations in order to find the best prediction of $Other_{pow}$. The results depicted in table \ref{tab:conv} show that the agent makes in average $4$ iterations to converge towards the best value.  
+	We also computed the average number of iterations in order to find the best prediction of $Other_{pow}$. The results showed that the agent makes in average $4$ iterations to converge towards the best value.  
 	
 	%		\begin{table*}[t]
 	%		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
@@ -751,7 +772,7 @@
 	%		\label{tab:conv}
 	%	\end{table*}
 	
-	We studied the impact of the initial number of hypotheses about the other model on the convergence of the algorithm. We wanted to study weather a large number of hypotheses will need extra iterations to converge. Therefore, we compared results obtained for small topic, medium, and large topics of negotiation. The graph presented in figure \ref{fig:converge} shows that our algorithm converges in average quickly independently from the size of topic. We can observe that the algorithm took two additional iterations to converge in the large topic. The difference is not significant to affect the general behavior of our model.
+	We studied the impact of the initial number of hypotheses $M_h$ on the convergence of the prediction. We wanted to study whether a large number of hypotheses will need extra iterations to converge. Therefore, we compared results obtained for small topic, medium, and large topics on the convergence of the negotiation. The graph presented in figure \ref{fig:converge} shows that our algorithm converges in average quickly, independently from the size of the topic. We can observe that the algorithm took two additional iterations to converge on the larger topic compared to medium and small topics. The difference is not significant to affect the general behavior of our model.
 	%	\begin{table}
 	%		\
 	%		\begin{tabular}{|p{3 cm}|c|c|c|}
@@ -771,7 +792,7 @@
 	
 	
 	\subsection{Timeliness}
-	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves.For each dialogue, we computed the the average time execution at each negotiation turn. We aim to study the effect of hypotheses's size on the rapidity of prediction at eahc turn. Results are presented in figure \ref{fig:time}. When comparing the time execution between the medium and large models, we observe that the algorithm took in average $12$ milliseconds at each turn. However, this difference is not significant since the total execution remains very quick.
+	We evaluate the time execution of the algorithm in order to study how the model of theory of mind evolves. For each dialogue, we computed the average time execution at each negotiation turn. We aim to study the effect of hypotheses's size on the rapidity of prediction at each turn. Results are presented in figure \ref{fig:time}. When comparing the time execution between the medium and large models, we observe that the algorithm took in average $12$ milliseconds at each turn. However, this difference is not significant since the total execution remains very quick.
 	
 	\begin{figure}[]
 		\fbox{\includegraphics[width=\linewidth]{figs/time_exec.png}}
@@ -779,19 +800,23 @@
 		\label{fig:time}
 	\end{figure}
 	
-	We analyzed the behaviors of our model of ToM in different aspects and the obtained results provide a strong support to its accuracy. Indeed, for most of the generated dialogues, the agent with ToM abilities was able to evaluate a very close approximation of its partner's level of power. Moreover, the agent was able to find the right dominance range only after two dialogue turns and the best evaluation after five turns. Theses behaviors were generated in a reasonable amount of time allowing the agent to produce real time dialogues.
+	We analyzed the behaviors of our model of ToM in different aspects and the obtained results provide a strong support to its accuracy. Indeed, for most of the generated dialogue, the agent with ToM abilities was able to predict a very close approximation of its partner's level of power. Moreover, the agent was able to find the right dominance range only after two speaking turns and the best evaluation after five turns. These behaviors were generated in a reasonable amount of time, allowing the agent to produce real time dialogues.
 	
-	These findings strengthen the accuracy of our model and give good perspectives to implement this model in the context of human/ agent collaborative negotiation. However, the presented validation in the context of agent/agent negotiation is a controlled evaluation since both agents use the same decisional model. This situation increases the chance of good predictions of the partner's behaviors of power. 	Thus, a validation of our collaborative model of negotiation must be validated in the context of human/agent negotiation.
+	These findings strengthen the accuracy of our model and give good perspectives to implement this model in the context of human/ agent collaborative negotiation. However, the presented validation in the context of agent/agent negotiation is a controlled evaluation since both agents use the same decisional model. This situation increases the chance of good predictions of the partner's behaviors of power. 	
+	Thus, a validation of our collaborative model of negotiation must be validated in the context of human/agent negotiation.
+
 	\section{Conclusion}
-	We presented in this paper, a model of collaborative negotiation with theory of mind (ToM) abilities. Our model of ToM focuses essentially to predict the agent's partner value of power in the perspective of defining a complementary relation of dominance.
+	We presented in this paper, a model of collaborative negotiation enabled with a simulation model in order to predict the behavior of the interlocutor. Our aim, is to enable a conversational agent to guess the behavior of its interlocutor in order to adopt a complementary behavior.
 	
-	The agent builds partial representation of the mental state of its partner, allowing the agent to have sufficient knowledge to compute the value of the partner's power. In addition, the limited knowledge ensure the agent to reason in a reasonable time to produce real time dialogues.
+	 Our model of ToM focuses essentially to predict the agent's partner value of power. For this purpose, we used mechanism for ToM research based on simulation. This theory assumes that the agent is capable to reason from its interlocutor perspective using his own mechanims of  reasoning and decision.
+	  
+	Therefore, we present a solution in which the agent builds a partial representation of the mental state of its interlocutor, allowing him to have sufficient knowledge to compute the value of the interlocutor's power. In addition, the limited knowledge ensures the agent to reason in a reasonable time to produce real time dialogues.
 	
-	Our model was evaluated and validated in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate close and quick predictions of it's partner behaviors in several conditions.
+	We adapted the decision process of the agent to handle partial knowledge and we presented an evaluation to validate the accuracy of the agent's prediction in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate close and quick predictions of it's partner behaviors in several conditions.
 	
-	The presented evaluation relies on the fact that both agents use the same decision to build their strategy in  the negotiation. However, in the context oh human/agent negotiation, the agent doesn't know the decisional model of the user. We only make the assumption that the user uses the same reasoning as the agent.
+	The presented evaluation relies on the fact that both agents use the same decision to build their strategy in the negotiation. However, in the context oh human/agent negotiation, the agent doesn't know the decisional model of the user. We only make the assumption that the user uses the same reasoning as the agent.
 	%Rappeler l'importance de la complementarite
-	Therefore as perspective, we aim to evaluate the accuracy of our model in the human/user negotiations. Moreover, the agent will also adapt its behaviors of power to complement the predicted user's behaviors in order to simulate the dominance complementarity. In such situation, the agent will have to consider the effect of wrong predictions on the negotiation outcomes. We believe that modeling a complementary relation of dominance will improve the negotiation outcomes and increase mutual liking between the agent and the user.
+	Therefore, as perspective, we aim to evaluate the accuracy of our model in the human/user negotiations. Moreover, the agent will also adapt its behaviors of power to complement the predicted user's behaviors in order to simulate the dominance complementarity. In such situation, the agent will have to consider the effect of wrong predictions on the negotiation outcomes. We believe that modeling a complementary relation of dominance will improve the negotiation outcomes and increase mutual liking between the agent and the user.
 	
 	\bibliographystyle{IEEEtran}
 	% argument is your BibTeX string definitions and bibliography database(s)
