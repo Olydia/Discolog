@@ -205,15 +205,5 @@ public class PowHypothesis{
 	}
 
 
-	public static void main(String[] args) {
 
-		HModels model = new HModels(ToyRestaurant.A_CITADELLA.getCriteria());
-		for(PowHypothesis elem : model.getHypotheses()){
-			elem.revise(new Statement<ToyCuisine>(ToyCuisine.CHINESE, Satisfiable.FALSE));
-
-			//			for(Hypothesis e : elem.getHypothesis())
-			//				System.out.println(e.getModel());
-
-		}
-	}
 }
