@@ -6,75 +6,42 @@
 	
 	\begin{document}
 		
-		Nous rappelons que le but de cet étude est de vérifier l'impact positif de la complémentarité sur la négociation collaborative entre un agent et un utilisateur humain. 
+		We recall that the purpose of this study is to verify the positive impact of complementarity on collaborative negotiation between an agent and a human user.
+	
 		
+		\section{Hypothèses}
+		\begin{itemize}
+			\item Dyads of complementary dominance achieve high joint gain  compared to the other dyads.
+			\item Participants feel more comfortable with an agent displaying a complementary behavior
+			\item Complementarity increases the liking between the negotiators.
+		\end{itemize}
+
+			
 		\section{Conditions}
-		
-			Nous avons formulé trois conditions pour l'évaluation de notre modèle de négociation basé sur la relation de dominance: 
+			We have formulated three conditions to evaluate our model of negotiation based on the relation of dominance:
+
 			\begin{itemize}
-				\item Comportement complémentaire: L'agent va adapter son comportement pour complémenter le comportement de dominance de l'utilisateur
+				\item Complementary Behavior: The agent will adapt its behavior to complement the user's dominance behavior
 				
-				\item Comportement similaire: L'agent va adopter un comportement similaire à celui de l'utilisateur. D'une manière il va imiter la stratégie de dominance exprimé par l'utilisateur
+				\item Similar behavior: The agent will behave similarly to the user. In a way it will mimic the dominance strategy expressed by the user
 				
-				\item Condition de contrôle : Agent qui ne s'adapte pas dont le pouvoir sera initié à $pow =0.5$. Un comportement neutre. 
+				\item Condition of control: Agent who does not adapt its behavior. Its power will be initiated at $ pow = 0.5 $ to express a neutral behavior.
 			\end{itemize}
 			
 			
-		\section{Explication de l'étude}
-			\textbf{ Version FR}
-
-		Bonjour, l’expérimentation à laquelle vous allez participer à pour objectif d'analyser les comportements d’un agent conversationnel dans le cadre d’un dialogue de négociation avec un humain.
-		Dans le cadre de cette étude, vous allez dialoguer avec un ou plusieurs agents conversationnels.
-		
-		Imaginez que vous allez dîner avec un ami ce soir. Vous allez discuter avec lui afin de choisir un restaurant qui vous convienne à tous les deux.
-	
-		Le choix d'un restaurant est basé sur vos préférences personnelles. Nous allons prendre en compte 4 critères: le type de \textbf{cuisine}, \textbf{le prix} , \textbf{l'ambiance} et \textbf{la localisation} pour le choix du restaurant. Par exemple le restaurant Barocco est défini avec les critères présenté dans la table \ref{teb:ex}.
-			\begin{table}[h]
-			\begin{tabular} {|c|c|c|c|c|}
-				\hline
-				Nom du restaurant & cuisine & prix & ambiance& localisation \\
-				\hline
-				Borocco & Italien & Grande table & Calme & à coté de la rivière \\
-				\hline 
-			\end{tabular}
-			\label{teb:ex}
-			\caption{Présentation du restaurant Borocco}
-		\end{table}
-		
-		L'étude se déroulera en trois étapes:
-		
-		Premièrement, vous allez effectuer une session d'entraînement afin de vous familiariser avec l'interface d'interaction.
-		
-		Ensuite, pour les besoins de l'étude, nous vous demanderons de renseigner vos préférences par critères. Les agents avec qui vous allez dialoguer ne connaissent pas vos préférences. Les informations sur vos préférences seront utilisées pour analyser les dialogues. Merci de bien vouloir respecter les préférences renseigné dans vos interactions.
-		
-		Finalement, vous allez discuter avec trois personnes différentes représentées par des agents conversationnels.  Comportez vous \textbf{naturellement} avec chacun des trois agents, comme vous l'auriez fait avec une de vos connaissance pour choisir un restaurant.  
-		
-		
-		 Si vous avez des questions, c'est le moment de les poser à l'expérimentateur. Sinon, nous allons commencer la phase d'entraînement 
-		\textcolor{blue}{Ici se termine le texte de présentation et nous pouvons lancer la partie tutoriel avec la présence de l'expérimentateur pour toute explication}.
-		
-			\subsection{Phase tutoriel}
-			Dans le cadre de cette étude, vous allez interagir avec l'agent via une interface qui vous permettra de sélectionner des actes dialogiques pour négocier. 
-			Chaque acte de dialogue permet de générer automatiquement une phrase correspondant a ce que vous voulez exprimer.
-			Montrer un exemple de sélection. Expliquer les notions de critères et options. Ensuite laisser la main à l'utilisateur pour choisir des actes.  
-			
-
-		
-		\textcolor{red}{Remarque générale : tu ne dis pas trop à quoi va ressembler l'interaction. Je pense qu'il faudrait expliquer (choisir des types de phrase, on voit la phrase, etc). Comme tu tu rédigeais un "tuto" sur l'utilisation de l'interface d'Hatem. }
-		
-		\textbf{EN version}
+		\section{Method}
 			Hello, the experiment in which you will participate aims to analyze the behavior of conversational agents in the context of negotiation dialogues with  humans.
 			
 			As part of this study, you will interact with one or several conversational agents.
 			
 			Imagine that you are having dinner with a friend tonight. For this reason, you will discuss with him in order to choose a restaurant that suits you both.
 			
-			The choice of a restaurant is based on your personal preferences. We will take into account 4 criteria. You'll take into account the type of \textbf {cuisine}, \textbf {the price}, \textbf {the athmosphere} and \textbf {the location} to choose a restaurant. For example the restaurant Barocco is defined with the criteria presented in the table \ref{teb:exEn}
+			The choice of a restaurant is based on your personal preferences. We will take into account 4 criteria. You'll take into account the type of \textbf {cuisine}, \textbf {the price}, \textbf {the atmosphere} and \textbf {the location} to choose a restaurant. For example the restaurant Barocco is defined with the criteria presented in the table \ref{teb:exEn}
 			
 				\begin{table}[h]
 			\begin{tabular} {|c|c|c|c|c|}
 				\hline
-				Restaurant name & cuisine & Price & Athmosphere & location \\
+				Restaurant name & cuisine & Price & Atmosphere & location \\
 				\hline
 				Borocco & Italian & Expensive & Calm & River side \\
 				\hline 
@@ -94,38 +61,131 @@
 	
 		If you have any question, its time to ask the experimenter. Otherwise, we can start the first stage of the study.
 	
-		\section{Reseignement des préférences}
-			\subsection{Ecran d'acceuil}
-			
-				\textbf{Version FR}
-				
-				
-				Pour les besoin de l'étude, nous vous demandons de bien vouloir renseigner vos préférences pour chaque critère sur lesquels portera la négociation.
-				
-				Les critères étant indépendants, chaque critère sera présenté indépendamment des autres. Vous devez donc spécifiez vos préférences en vous focalisant sur le critère présenté et en ignorant les autres critère.
-				
-				Nous vous invitons à classer les valeurs \textbf{par ordre décroissant}de vos préférences, en commençant par la valeur qui vous aimez le plus en allant vers la valeur que vous aimez le moins.
-				
-			 Si vous avez des questions, c'est le moment de les poser à l'expérimentateur. Sinon, nous allons commencer l'étude.
-				
-				$<<Commencer>>$
-				
-	
-		\subsection{Pour chaque critère}
-			Toutes choses égales par ailleurs, classez par ordre croissant de vos préférences les valeurs suivantes: 
+		\section{Informations about the preferences}
+			\subsection{Welcome screen}
 		
-
-			
-			\textbf{En version}
 			For the purposes of this study, we ask you to enter your preferences for each criterion that will be discussed during the negotiation.
 			
 			Since the criteria are independent, each criterion will be presented independently of the others. You have to focus your rank only on the criterion presented and ignore the other criteria.
 			
 			We invite you to rank your preferences in an \textbf {descending} order, starting with the value you like the most,  to the value you like the least.
 			
-			If you have any question, you can call the experimenter. Otherwise, we can strat the study.
+			If you have any question, you can call the experimenter. Otherwise, we can start the study.
 		
+				 
+				\textbf{Message to print for each criterion:}  All things being equal,sort the following values in ascending order of your preferences.
+		
+		
+		\section{Questionnaire}
+			For each agent, ask the following questions. The word "agent" will be replaced with the name that we will attribute to the agent.
+			\begin{enumerate}
+				% We need to evaluate the value creation 
+				\item I'm satisfied with the final choice
+				\item The final choice is fair.
+				
+				% Evaluate behaviors of dominance during the negotiation
+				\item The agent took into account your preferences.
+				\item The agent presses its position during the negotiation.
+				\item The agent gives up his position during the negotiation
+				\item The agent made concessions during the negotiation.
+				\item the agent take the lead the negotiation.
+				\item The agent is self-centered.
+				
+				\item I took into account the preferences of the agent.
+				\item I made concessions during the negotiation.
+				\item I have the tendency to take the lead the negotiation.
+				\item I give up my position during the negotiation
+				\item I press my position during the negotiation.
+				\item I'm self-centered.
+				
+				\item I appreciate the negotiation with the agent.
+				\item I liked the agent.
+				\item I enjoyed discussing with the agent.
+				\item The agent was aggressive
+				\item I would like to negotiate again with the agent.
+				
+				% manipulation check question
+				\item Cuisine was the first criterion you agreed on 
+				
+			\end{enumerate}
 			
-				\textbf{For each criterion:}  All things being equal,sort the following values in ascending order of your preferences.
+	
+	% ------------------------ Version FR ----------------------
+	\section{Version FR}
+		Nous rappelons que le but de cet étude est de vérifier l'impact positif de la complémentarité sur la négociation collaborative entre un agent et un utilisateur humain. 
 		
+		\subsection{conditions}
+		
+		Nous avons formulé trois conditions pour l'évaluation de notre modèle de négociation basé sur la relation de dominance: 
+		\begin{itemize}
+			\item Comportement complémentaire: L'agent va adapter son comportement pour complémenter le comportement de dominance de l'utilisateur
+			
+			\item Comportement similaire: L'agent va adopter un comportement similaire à celui de l'utilisateur. D'une manière il va imiter la stratégie de dominance exprimé par l'utilisateur
+			
+			\item Condition de contrôle : Agent qui ne s'adapte pas dont le pouvoir sera initié à $pow =0.5$. Un comportement neutre. 
+			\end{itemize}
+			
+			
+				\subsection{Explication de l'étude}
+				\textbf{ Version FR}
+				
+				Bonjour, l’expérimentation à laquelle vous allez participer à pour objectif d'analyser les comportements d’un agent conversationnel dans le cadre d’un dialogue de négociation avec un humain.
+				Dans le cadre de cette étude, vous allez dialoguer avec un ou plusieurs agents conversationnels.
+				
+				Imaginez que vous allez dîner avec un ami ce soir. Vous allez discuter avec lui afin de choisir un restaurant qui vous convienne à tous les deux.
+				
+				Le choix d'un restaurant est basé sur vos préférences personnelles. Nous allons prendre en compte 4 critères: le type de \textbf{cuisine}, \textbf{le prix} , \textbf{l'ambiance} et \textbf{la localisation} pour le choix du restaurant. Par exemple le restaurant Barocco est défini avec les critères présenté dans la table \ref{teb:exfr}.
+				\begin{table}[h]
+					\begin{tabular} {|c|c|c|c|c|}
+						\hline
+						Nom du restaurant & cuisine & prix & ambiance& localisation \\
+						\hline
+						Borocco & Italien & Grande table & Calme & à coté de la rivière \\
+						\hline 
+					\end{tabular}
+					\label{teb:exfr}
+					\caption{Présentation du restaurant Borocco}
+				\end{table}
+				
+				L'étude se déroulera en trois étapes:
+				
+				Premièrement, vous allez effectuer une session d'entraînement afin de vous familiariser avec l'interface d'interaction.
+				
+				Ensuite, pour les besoins de l'étude, nous vous demanderons de renseigner vos préférences par critères. Les agents avec qui vous allez dialoguer ne connaissent pas vos préférences. Les informations sur vos préférences seront utilisées pour analyser les dialogues. Merci de bien vouloir respecter les préférences renseigné dans vos interactions.
+				
+				Finalement, vous allez discuter avec trois personnes différentes représentées par des agents conversationnels.  Comportez vous \textbf{naturellement} avec chacun des trois agents, comme vous l'auriez fait avec une de vos connaissance pour choisir un restaurant.  
+				
+				
+				Si vous avez des questions, c'est le moment de les poser à l'expérimentateur. Sinon, nous allons commencer la phase d'entraînement 
+				\textcolor{blue}{Ici se termine le texte de présentation et nous pouvons lancer la partie tutoriel avec la présence de l'expérimentateur pour toute explication}.
+				
+				\subsubsection{Phase tutoriel}
+				Dans le cadre de cette étude, vous allez interagir avec l'agent via une interface qui vous permettra de sélectionner des actes dialogiques pour négocier. 
+				Chaque acte de dialogue permet de générer automatiquement une phrase correspondant a ce que vous voulez exprimer.
+				Montrer un exemple de sélection. Expliquer les notions de critères et options. Ensuite laisser la main à l'utilisateur pour choisir des actes.  
+				
+				
+				
+				\textcolor{red}{Remarque générale : tu ne dis pas trop à quoi va ressembler l'interaction. Je pense qu'il faudrait expliquer (choisir des types de phrase, on voit la phrase, etc). Comme tu tu rédigeais un "tuto" sur l'utilisation de l'interface d'Hatem. }
+				
+					\subsection{Reseignement des préférences}
+					\subsubsection{Ecran d'acceuil}
+					
+					\textbf{Version FR}
+					
+					
+					Pour les besoin de l'étude, nous vous demandons de bien vouloir renseigner vos préférences pour chaque critère sur lesquels portera la négociation.
+					
+					Les critères étant indépendants, chaque critère sera présenté indépendamment des autres. Vous devez donc spécifiez vos préférences en vous focalisant sur le critère présenté et en ignorant les autres critère.
+					
+					Nous vous invitons à classer les valeurs \textbf{par ordre décroissant}de vos préférences, en commençant par la valeur qui vous aimez le plus en allant vers la valeur que vous aimez le moins.
+					
+					Si vous avez des questions, c'est le moment de les poser à l'expérimentateur. Sinon, nous allons commencer l'étude.
+					
+					$<<Commencer>>$
+					
+					
+					\subsubsection{Pour chaque critère}
+					Toutes choses égales par ailleurs, classez par ordre croissant de vos préférences les valeurs suivantes: 
+					
 	\end{document}
