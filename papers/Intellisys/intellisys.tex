@@ -66,14 +66,14 @@
 	\documentclass[conference, letterpaper]{IEEEtran}
 	\usepackage{booktabs}
 	\usepackage[rflt]{floatflt}
-	\usepackage{frame, caption}
+	\usepackage{frame,caption,subcaption,calc}
 	\usepackage{mathrsfs}
 	\usepackage{array}
 	\usepackage{amsmath,amssymb}
 	\usepackage{color}
 	%
 	\usepackage{fancyhdr}
-	\usepackage[caption=false,font=footnotesize]{subfig}
+%	\usepackage[caption=false,font=footnotesize]{subfig}
 	\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
 	% correct bad hyphenation here
 	\hyphenation{op-tical net-works semi-conduc-tor}
@@ -351,9 +351,9 @@
 	We define this function to be a time varying function of $pow$ which decreases over time $t$ and follows the concession curve. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, the function decreases as illustrated in the figure \ref{fig:conc}.
 	
 	
-	\begin{floatingfigure}[l]{1.15in}
+	\begin{floatingfigure}[l]{1.2in}
 		\captionsetup{justification=centering}
-		\includegraphics[width=1.15in]{figs/sv3.png}
+		\includegraphics[width=1.2in]{figs/s3.png}
 		\caption{\label{fig:conc}Concession curve}
 	\end{floatingfigure} 
 	
@@ -381,37 +381,41 @@
 	\subsubsection{Example of dialogue}	
 		We present an example of a dialogue generated with two agents implement with our model of dialogue. Agent$A$ adopts a dominant behavior $pow_A =0.7$ and the agent$B$ follows a submissive behavior $pow_B =0.4$. The dialogue is illustrated in figure ... 
 		
-			\begin{figure}[h]
-				\fbox{\begin{minipage}{.95\textwidth}
-						{\scriptsize\ttfamily
-							\begin{addmargin}[1em]{2em}% 1em left, 2em right
-								A: "Let's go to a restaurant on the south side."
+		\begin{figure}
+		\fbox{ \begin{minipage}{.48\textwidth}
+				\ttfamily
+							%\begin{addmargin}[1em]{2em}% 1em left, 2em right
+								\textbf{A:} "Let's go to a restaurant on the south side."
 								
-								\hspace*{3mm}B: "I don't like restaurants on the south side, let's choose something else."
 								
-								A: "Let's go to a modern restaurant."
+								\hspace*{3mm}\textbf{B:} "I don't like restaurants on the south side, let's choose something else."
+							
 								
-								\hspace*{3mm}B: "Okay, let's go to a modern restaurant."
+								\textbf{A:} "Let's go to a modern restaurant."
 								
-								A: "Let's go to a French restaurant."
+								
+								\hspace*{3mm}\textbf{B:} "Okay, let's go to a modern restaurant."
+								
+								\textbf{A: }"Let's go to a French restaurant."
 								
 								$\ldots$
 								
-								\hspace*{3mm}B: "What kind of cost do you like?"
+								\hspace*{3mm}\textbf{B:} "What kind of cost do you like?"
 								
-								A: "I like cheap restaurants."
+								\textbf{A:} "I like cheap restaurants."
 								
-								\hspace*{3mm}B: "Do you like expensive restaurants?"
+								\hspace*{3mm}\textbf{B:} "Do you like expensive restaurants?"
 								
-								A: "Let's go to the Maison blanche restaurant. It's a modern, cheap French restaurant on the south side."
+							\textbf{A:} "Let's go to the Maison blanche restaurant. It's a modern, cheap French restaurant on the south side."
 								
-								\hspace*{3mm}B: "Okay, let's go to the Maison blanche restaurant."
-							\end{addmargin}
-						}
-					\end{minipage}}
-					
-					\caption{\label{fig:ex-dialogue}Excerpt of Dialogue 2.}
-				\end{figure}
+								\hspace*{3mm}\textbf{B:} "Okay, let's go to the Maison blanche restaurant."
+						%	\end{addmargin}
+					\end{minipage}
+				}
+			
+		\caption{\label{fig:ex-dialogue}Exemple of dialogue.}
+	\end{figure}
+
 
 	\section{Beliefs about other: general algorithm}
 
@@ -487,11 +491,12 @@
 			\centering
 			\caption{The possible sets $S$ for $cuisine$, with $pow=0.6$}
 			\label{tab:sat_poss}
-
-			\begin{tabular}{|c|c|c|c|c|c|}%|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
-				\hline				
-				 $S_1$ & $S_2$ & $S_3$ & $S_4$ & $S_5$ & $S_6$ \\
-				\hline$(it,fr)$& $(it,jap)$ & $(it,ch)$ & $(fr,jap)$ & $(fr,ch)$ & $(jap,ch)$ \\
+			\large
+			\begin{tabular}{|c|c|c|}%|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
+				\hline
+				$S_1=(it,fr)$& $S_2=(it,jap)$ & $S_3=(it,ch)$\\
+				\hline
+				$S_4=(fr,jap)$ & $S_5=(fr,ch)$ & $S_6=(jap,ch)$ \\
 				\hline
 			\end{tabular}
 		\end{table}
@@ -701,7 +706,9 @@
 	\end{table}
 	
 	Second, we analyzed the frequency of false predictions. For example, $agent_A$ predicts that $agent_B$ is dominant, whereas $agent_B$ is submissive. To this end, we computed the percentage of false predictions. For all the dialogues, only $30$ predictions were incorrect which means that $ 2.6 \% $ of predictions were false. This result confirms the reliability of our algorithm. 
-	\begin{table*}[h]
+	\begin{table}[h]
+		\centering
+		\large
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{Number of iteration to make predictions} \\
@@ -713,7 +720,7 @@
 		\end{tabular}
 		\caption{Average number of iterations to compute a prediction} 
 		\label{tab:conv}
-	\end{table*}
+	\end{table}
 	Finally, for all the dialogues in which the agent was able to find a good prediction (in total $1421$), we analyzed the rapidity of convergence of our algorithm. The results are presented in table \ref{tab:conv}. Indeed, for each dialogue, we computed the number of iterations necessary to find a good prediction and maintain it. On average, the algorithm needed $3$ iterations in order to predict the right range of the power of the other (whether the agent has a dominant or a submissive behavior). 
 	
 	Moreover, we calculated the average number of iterations needed to find a prediction such that $rv \leq 0.02$. In average the agent needed $3$ iterations in order to evaluate a value close to the other's power. The evolution of convergence for all the dialogues is presented in the figure \ref{fig:converge}
