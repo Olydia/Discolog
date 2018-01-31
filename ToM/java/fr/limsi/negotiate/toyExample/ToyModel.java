@@ -5,6 +5,9 @@ import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Self_C;
 import fr.limsi.negotiate.Self_Ci;
+import fr.limsi.negotiate.restaurant.Cuisine;
+import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 public class ToyModel {
 
@@ -110,11 +113,12 @@ public class ToyModel {
 	public static void main (String[] args) {
 		//totalOrderedModels model = new totalOrderedModels();
 		//GenerateMovieModel model = new GenerateMovieModel();
-		ToyModel model = new ToyModel();
-		Negotiation a = model.model1();
-		for(ToyCuisine c: ToyCuisine.values()){
-			System.out.println(c + " "+a.getValueNegotiation(ToyCuisine.class).getSelf().satisfaction(c));
-		}
+		totalOrderedModels model = new totalOrderedModels();
+		Negotiation<Restaurant> a = model.model1();
+		System.out.println(a.getValueNegotiation(Cuisine.class).getSelf().getSatisfiableValues(0.6));
+//		for(Cuisine c: Cuisine.values()){
+//			System.out.println(c + " "+);
+//		}
 	}
 	
 	
