@@ -380,7 +380,7 @@
 		
 	
 	\subsubsection{Example of dialogue}	
-		We present an example of dialogue generated with two agents implement with our model of dialogue. Agent$A$ adopts a dominant behavior $pow_A =0.7$ and the agent$B$ follows a submissive behavior $pow_B =0.4$. The dialogue is illustrated in figure \ref{fig:ex-dia}.
+		We present an example of dialogue generated with two agents implement with our model of dialogue. Agent$A$ adopts a dominant behavior $pow_A =0.7$ and the agent$B$ follows a submissive behavior $pow_B =0.4$. The dialogue is illustrated on Figure \ref{fig:ex-dia}.
 		
 		\begin{figure}
 		\fbox{ \begin{minipage}{.48\textwidth}
@@ -521,7 +521,7 @@
 			\end{tabular}
 		\end{table}
 	
-	This representation allows our model of the other to work with a reasonable set of hypotheses. If we consider the same reasonable example, with 5 criteria. For each criteria, we consider approximatively 4 to 10 possible values each. The set of possible hypotheses of satisfiable values that the agent has represent for the user's model, are between $30$ and $1050$ possible hypotheses.
+	This partial representation of preferences allows our model of the other to work with a reduced set of hypotheses, compared to the initial model with a complete representation of the preferences. If we consider the same example, with 5 criteria and 10 values per criterion, the maximum number of hypotheses to consider for a given value of power is $\binom{10}{5}=252$ (this value is maximum for $pow=0.5$).
  	However, simulating the behavior of the interlocutor with incomplete knowledge has two consequences. First, it requires to adapt the simulation model of the decision making to deal with the non-ordered sets of satisfiable and acceptable values. Second, it might affect the precision of the prediction of the interlocutor's power.
 
 	In order to generate hypotheses about satisfiable values, given any criterion, we make the strong assumption that the interlocutor's preferences are \emph{total ordered}. Therefore, given a fixed value of $h \in H_{pow}$, we compute the number of satisfiable values named $s$ which is the size of all our hypotheses $S$ for this value of power. 
@@ -603,7 +603,7 @@
 		
 		$$score(h_i,t) = \frac{|M_h(h_i, t)|}{|M_h(h_i, init)|}$$
 		
-		\textit{- Example:}
+		\subsubsection*{\bf Example}
 		
 		Suppose that the interlocutor expresses $\emph{StatePreference(fr, true)}$, this means that the agent has to remove all the hypotheses where $fr \not\in S_i$. The update of each hypothesis and their respective scores are presented in Table~\ref{tab:update_hyp}. 
 		
@@ -641,22 +641,20 @@
 		When the interlocutor accepts (\emph{Accept(p)}) or proposes a proposal (\emph{Propose(p)}), means that the value is acceptable $p \in Ac(t)$. 
 		The agent has to calculate for each $h_i \in H_{pow}$ the score of acceptability attributed to this value. 
 		
-		The set of acceptable values $Ac(t)$ depends on the value of $self(t)$, knowing that $self(t)$ decreases over time when the negotiation is not converging. The purpose behind this proposal, is to capture the behaviors of concessions over time. Concretely, this means that the set of acceptable values $Ac(t)$ grows during the negotiation, and new values become acceptable noted $M(t)$. 
+		The set of acceptable values $Ac(t)$ depends on the value of $self(t)$, knowing that $self(t)$ decreases over time when the negotiation is not converging. Our goal is to capture the behaviors of concessions over time. Concretely, this means that the set of acceptable values $Ac(t)$ grows during the negotiation, and new values become acceptable noted $M(t)$. 
 		
 		Thus, for each hypothesis on power $h_i$, we associate a value $self_i(t)$ that represents the level of concessions at the current time. Using this value, and the set of satisfiable values (see Table~\ref{tab:poss}), the agent can compute the number of acceptable values $|Ac(t)_i|$, as presented in \ref{sec:acc}, and the number of the values which became acceptable due to concessions $|M(t)_i|$.
 		
-		Therefore, we propose to adapt the calculation of $acceptabilty$ only with partial knowledge available. For a hypothesis of power $h_i$, for each hypothesis on preferences $S_i \in M_h(h_i)$, and the list of accepted values during the negotiation $A$, the score that a value $v \in C_i$ is acceptable, is computed as follows:
+		Therefore, we propose to adapt the calculation of $acceptabilty$ only with partial knowledge available. For a hypothesis of power $h_i$, for each hypothesis on preferences $S_i \in M_h(h_i)$, and the list of accepted values during the negotiation $A$, the score that a value $p \in C_i$ is acceptable, is computed as follows:
 		
 		\begin{equation}
-		Acc(v, h_i) = C_{|C_i|-(|S_i| + k)}^{|M_i(t)| - k}
+		Acc(p, h_i) = C_{|C_i|-(|S_i| + k)}^{|M_i(t)| - k}
 		\end{equation}
-		$k = |K| $ is the number of elements in the set $K=A \cap \overline S_i$, the set of accepted values which are not satisfiable.
+		$k = |K| $ is the number of elements in the set $K=A \cap \overline S_i$, the set of accepted values which are not satisfiable. The score of acceptability is the number of possible sets $M_i(t)$ that are compatible with the value $p\in C_i$ (i.e. the value that was proposed or accepted by the interlocutor) and the hypothesis $S_i$.
 		%Using this function, the agent can compute the $acceptability$ of each value of $cuisine$ for the the set $S_i$ relied to $h_4$. 
 		
-		
 
-		
-		In addition, we aim to normalize the values of acceptability in order to have a coherent comparison between the different hypotheses. Thus, given a hypothesis on power $h_i$, he score of acceptability is normalized by taking into account the ideal score of acceptability. We define the "best" score of acceptability : 
+		In addition, we normalize this score of acceptability in order to have a coherent comparison between the different hypotheses (the number of hypotheses for each value of $pow$ can differ). Thus, given a hypothesis on power $h_i$, he score of acceptability is normalized by taking into account the ideal score of acceptability. We can compute the "best" score of acceptability a priori:
 		
 		$$I_{pow} = C_{|C_i|-|S_i|}^{|M_i(t)|}$$
 		
@@ -668,7 +666,8 @@
 		\end{equation}
 		
 			%	------------------------------------------------------------------------------------------------------------------------------
-		\textit{- Example:}
+		
+		\subsubsection*{\bf Example}
 		
 		The agent receives an \emph{Accept(jap)}. We take as example, $h_4$ to compute the values of acceptability of the value $jap$.
 
@@ -809,20 +808,17 @@
 	We analyzed the behaviors of our model of ToM in different aspects and the obtained results provide a strong support to its accuracy. Indeed, for most of the generated dialogue, the agent with ToM abilities was able to predict a very close approximation of its partner's level of power. Moreover, the agent was able to find the right dominance range only after two speaking turns and the best evaluation after five turns. These behaviors were generated in a reasonable amount of time, allowing the agent to produce real time dialogues.
 	
 	These findings strengthen the accuracy of our model and give good perspectives to implement this model in the context of human/ agent collaborative negotiation. However, the presented validation in the context of agent/agent negotiation is a controlled evaluation since both agents use the same decisional model. This situation increases the chance of good predictions of the partner's behaviors of power. 	
-	Thus, a validation of our collaborative model of negotiation must be validated in the context of human/agent negotiation. We believe that theses behaviors of power can be used to simulate a human user behaviors. Indeed, the implemented behaviors relies on studies from social psychology. Moreover, we validated the consistency of theses behaviors in the context of perceptive study, where human participants were able to perceive and recognize behaviors of power expressed by agents.
+	Thus, our collaborative model of negotiation must be validated in the context of human/agent negotiation. Our initial model of power \cite{ouali2017computational} relies on studies from social psychology. It has been validated with a perceptive study where human participants were able to perceive and recognize behaviors of power expressed by agents. For these reasons, we believe that it is a good approximation of human behaviors of power and we expect good predictions from our ToM model in the context of human-agent interaction.
 
 	\section{Conclusion}
 			
 	We presented in this paper, a model of collaborative negotiation enabled with a simulation model in order to predict the behavior of the interlocutor. Our aim, is to enable a conversational agent to guess the behavior of its interlocutor in order to adopt a complementary behavior.
 	
-	 Our model of ToM focuses essentially to predict the behavior of power expressed by the agent's interlocutor. For this purpose, we used mechanism for ToM research based on simulation. This theory assumes that the agent is capable to reason from the perspective of its interlocutor using his own mechanism of reasoning and decision.
+	 Our model of ToM focuses essentially on predicting the behavior of power expressed by the agent's interlocutor. To this purpose, we used simulation theory (\emph{ST}). It assumes that the agent is capable to reason from the perspective of its interlocutor using his own mechanism of reasoning and decision.
 	  
-	Therefore, we present a solution in which the agent builds a partial representation of the mental state of its interlocutor, allowing him to have sufficient knowledge to compute the value of the interlocutor's power. In addition, the limited knowledge ensures the agent to reason in a reasonable time to produce real time dialogues.
+	We presented a solution in which the agent builds a partial representation of the mental state of its interlocutor. This allows the agent to have sufficient knowledge to compute the value of the interlocutor's power. Our results are compatible with the research in cognitive psychology: \cite{harbers2009modeling} suggests that, in order to simulate another's mental processes, it is not necessary to categorize all the beliefs and desires attributed to that person as such. In other words, it is not necessary to have a complete model of the interlocutor.
 	
-	This partial representation of the interlocutor's mental state is supported by research in simulation theory.  Indeed, \cite{harbers2009modeling} suggests that in order to simulate another’s mental processes, it is not necessary to categorize all the beliefs and desires attributed to that person as such. In other words, it	is not necessary to be capable of complete introspection.
-	
-	Therefore, we adapted the decision process of the agent to handle partial knowledge and we presented an evaluation to validate the accuracy of the agent's prediction in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate close and quick predictions of it's partner behaviors in several conditions.
-	
+	We adapted the decision process of the agent to handle partial knowledge and we presented an evaluation to validate the accuracy of the agent's prediction in the context of agent/agent negotiation. The results confirmed the accuracy of the ToM models. Indeed, the agent was able to generate, in a limited number of dialogue turns, an accurate prediction of it's partner behaviors.
 	
 	%Rappeler l'importance de la complementarite
 	As perspective, we aim to simulate a complementary relation of dominance between an agent and human user during a process of collaborative negotiation. In such case, the agent will have to adapt its behaviors of power to complement the predicted user's behaviors in order to simulate the dominance complementarity. Thus, the agent will have to consider the effect of wrong predictions on the negotiation outcomes. We believe that modeling a complementary relation of dominance will improve the negotiation outcomes and increase mutual liking between the agent and the user similarly to human/human negotiations \cite{wiltermuth2015benefits,tiedens2003power}.
