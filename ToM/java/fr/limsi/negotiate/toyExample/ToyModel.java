@@ -115,10 +115,10 @@ public class ToyModel {
 		//GenerateMovieModel model = new GenerateMovieModel();
 		totalOrderedModels model = new totalOrderedModels();
 		Negotiation<Restaurant> a = model.model1();
-		System.out.println(a.getValueNegotiation(Cuisine.class).getSelf().getSatisfiableValues(0.6));
-//		for(Cuisine c: Cuisine.values()){
-//			System.out.println(c + " "+);
-//		}
+		System.out.println(a.getValueNegotiation(Cuisine.class).getSelf().getSatisfiableValues(0.5));
+		for(Cuisine c: Cuisine.values()){
+			System.out.println(c + " "+a.getValueNegotiation(Cuisine.class).getSelf().satisfaction(c));
+		}
 	}
 	
 	

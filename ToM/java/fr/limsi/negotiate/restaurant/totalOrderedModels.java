@@ -25,6 +25,12 @@ public class totalOrderedModels {
 		d1_cuisine.addPreference(Cuisine.MEXICAN, Cuisine.TURKISH);
 		d1_cuisine.addPreference(Cuisine.TURKISH, Cuisine.ITALIAN);
 		d1_cuisine.addPreference(Cuisine.ITALIAN, Cuisine.FRENCH);
+//		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.C);
+//		d1_cuisine.addPreference(Cuisine.C, Cuisine.K);
+//		d1_cuisine.addPreference(Cuisine.K, Cuisine.M);
+
+
+
 
 		
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
