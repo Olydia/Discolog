@@ -152,7 +152,8 @@ public class Home2 extends Application {
     }
 
  public static void main(String[] args) {
-	 launch(args);
+	Home2 home = new Home2();
+	home.launch(args);
 
 
 
