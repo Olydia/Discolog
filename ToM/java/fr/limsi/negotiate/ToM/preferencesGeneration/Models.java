@@ -108,6 +108,12 @@ public class Models<O extends Option> {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param preferences the list of all possible values given a specific topic
+	 * @param userPref model of prefs to consider in order to generate different preferences 
+	 * @return a list of preferences which is distant from user pref
+	 */
 	public List<Self_Ci<Criterion>> getOtherModel(List<List<Self_Ci<Criterion>>> preferences, List<Self_Ci<Criterion>> userPref) {
 
 		List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
@@ -125,6 +131,37 @@ public class Models<O extends Option> {
 			}
 		}
 		return foundModel;
+	}
+	
+	/**
+	 * 
+	 * @param preferences
+	 * @param userPref
+	 * @return Define the agents model of preferences for the Application package
+	 */
+	public List<List<Self_Ci<Criterion>>> agentModels(List<List<Self_Ci<Criterion>>> preferences, List<Self_Ci<Criterion>> userPref) {
+
+		List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
+		List<List<Self_Ci<Criterion>>> agentModels= new ArrayList<>();
+
+		for(int i=0; i<3; i++){
+		List<Self_Ci<Criterion>> foundModel = null;
+		while (foundModel == null) {
+			List<Self_Ci<Criterion>> current = new ArrayList<>();
+			for (List<Self_Ci<Criterion>> preference : preferences) {
+				int random = new Random().nextInt(preference.size() - 1);
+				current.add(preference.get(random));
+			}
+			if (!containsCurrent(visitedCombination, current)){
+			visitedCombination.add(current);
+			if (new PreferenceDistance(userPref, current).distance() >= DISTANCE)
+				foundModel = current;
+			}
+		}
+		 agentModels.add(foundModel);
+		 foundModel = null;
+		}
+		return agentModels;
 	}
 
 	public boolean containsCurrent(List<List<Self_Ci<Criterion>>> visitedCombination, List<Self_Ci<Criterion>> current){
@@ -189,15 +226,26 @@ public class Models<O extends Option> {
 
 	}
 	
-	public Negotiation<O> createOther (List<Class<? extends Criterion>> criteria,
-			Class<O> class1, List<Self_Ci<Criterion>> userPref){
-		
+	/**
+	 * 
+	 * @param criteria: list of criteria
+	 * @param class1: type of the topic
+	 * @return list of the possible binary preferences for each criterion in criteria
+	 */
+	public List<List<Self_Ci<Criterion>>> preferencesCreation (List<Class<? extends Criterion>> criteria,Class<O> class1){
 		List<List<Self_Ci<Criterion>>> models = new ArrayList<List<Self_Ci<Criterion>>>();
 		for( Class<? extends Criterion> e: criteria) {
 			List<Self_Ci<Criterion>> crt = createValuesModel(Arrays.asList(e.getEnumConstants()));
 			//String kaka = crt.toString();
 			models.add(crt);
 		}
+		
+		return models;
+	}
+	public Negotiation<O> createOther (List<Class<? extends Criterion>> criteria,
+			Class<O> class1, List<Self_Ci<Criterion>> userPref){
+		
+		List<List<Self_Ci<Criterion>>> models = preferencesCreation(criteria, class1);
 		
 		
 		@SuppressWarnings("unchecked")

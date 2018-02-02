@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,19 +24,21 @@ import fr.limsi.negotiate.restaurant.*;
 
 public class Acceuil extends JFrame{
 	
-	JLabel textAcceuil = new JLabel("Bienvenu");
-	String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
+	private List<Negotiation<? extends Option>>  negotiators = new ArrayList<Negotiation<? extends Option>> ();
+
+	private JLabel textAcceuil = new JLabel("Bienvenu");
+	private String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
 			+ "en les classant par ordre croissant \n"
 			+ " de la valeur que vous appréciez le moins \n"
 			+ "a la valeur que vous appréciez le plus";
 			
-	JTextArea welcom  = new JTextArea(text);
-	JButton commencer = new JButton("Commencer");
+	private JTextArea welcom  = new JTextArea(text);
+	private JButton commencer = new JButton("Commencer");
 	
-	CriteriaSelect cuisine;
-	CriteriaSelect cost;
-	CriteriaSelect athmos;
-	CriteriaSelect location;
+	private CriteriaSelect cuisine;
+	private CriteriaSelect cost;
+	private CriteriaSelect athmos;
+	private CriteriaSelect location;
 
 	
 	
@@ -131,11 +135,17 @@ public class Acceuil extends JFrame{
 							// Creer le modele de prefs
 							Negotiation<Restaurant> nego = model.createModel();
 							Models<Restaurant> other = new Models<Restaurant>();
-							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
-									Restaurant.class, nego.getSelfs());
+//							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
+//									Restaurant.class, nego.getSelfs());
+							List<List<Self_Ci<Criterion>>> agents = other.agentModels(other.preferencesCreation(Restaurant.A_CITADELLA.getCriteria(),
+									Restaurant.class), nego.getSelfs());
 							
-							for(Self_Ci<Criterion> c : agent.getSelfs())
-								System.out.println(c.getSelfPreferences());
+							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
+							for (List<Self_Ci<Criterion>> pref: agents){
+								for(Self_Ci<Criterion> c : pref)
+									System.out.println(c.getSelfPreferences());
+							}
+							
 						}
 							
 					}
@@ -143,6 +153,22 @@ public class Acceuil extends JFrame{
 	        );
 	}
 	
+	
+	/**
+	 * 
+	 * @param prefs
+	 * @param model
+	 * @param type
+	 * @return Initates the negotiation models from the preferences sets
+	 */
+	List<Negotiation<? extends Option>> negotiatorAgents (List<List<Self_Ci<Criterion>>> prefs, Models<? extends Option> model,
+													Class<? extends Option> type){
+		List<Negotiation<? extends Option>>  negotiators = new ArrayList<Negotiation<? extends Option>> ();
+		for(List<Self_Ci<Criterion>> pref : prefs){
+			negotiators.add(model.createNegotiation(pref,type));
+		}
+		return negotiators;
+	}
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			Acceuil frame = new Acceuil();
@@ -152,6 +178,16 @@ public class Acceuil extends JFrame{
 			
 			frame.setVisible(true);
 		});
+	}
+
+
+	public List<Negotiation<? extends Option>> getNegotiators() {
+		return negotiators;
+	}
+
+
+	public void setNegotiators(List<Negotiation<? extends Option>> negotiators) {
+		this.negotiators = negotiators;
 	}
 
 }

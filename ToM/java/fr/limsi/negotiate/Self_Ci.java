@@ -77,8 +77,8 @@ public class Self_Ci <C> extends Self<C> {
 		public void createPreferences(ListModel<String> classement){
 			
 			for(int i = 0; i< classement.getSize()-1; i++){
-				C less = getName(classement.getElementAt(i));
-				C more = getName(classement.getElementAt(i+1));
+				C more = getName(classement.getElementAt(i));
+				C less = getName(classement.getElementAt(i+1));
 				
 				this.addPreference(less, more);
 			}
