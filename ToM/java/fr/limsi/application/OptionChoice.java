@@ -34,7 +34,7 @@ public class OptionChoice extends AnchorPane{
 
 	}
 	/**
-	 * Le but de cette methode est de générer la liste
+	 * Le but de cette methode est de gï¿½nï¿½rer la liste
 	 *  des chaines de caracteres a partir des criteres
 	 * @param c
 	 * @return
@@ -206,8 +206,8 @@ public class OptionChoice extends AnchorPane{
 		HBox retourHBox = new HBox(15);
 		filterHBox.getChildren().addAll(filterButton);
 		//setTopAnchor(filterHBox,300.0);
-		setTopAnchor(filterHBox,getHeight()* 0.4);
-     	setLeftAnchor(filterHBox,getWidth() * 0.5);
+		setTopAnchor(filterHBox,getHeight()* 0.275);
+     	setLeftAnchor(filterHBox,getWidth() * 0.4);
 		okHBox.getChildren().addAll(okButton);
 		setTopAnchor(okHBox,getHeight() -100);
      	setLeftAnchor(okHBox,getWidth() * 0.4);
@@ -351,7 +351,7 @@ public class OptionChoice extends AnchorPane{
 	/**
  	 *
  	 * @param values : list des criteres choisis par l'utilisateur
- 	 * a noter que chaque critere a un type différent
+ 	 * a noter que chaque critere a un type diffï¿½rent
  	 * @return
  	 */
  	public List<Option> getOptionWithValues(List<Criterion> values,  Option[] optionsValues) {
