@@ -2,6 +2,7 @@ package fr.limsi.application;
 
 import java.io.PrintStream;
 
+import fr.limsi.negotiate.*;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
@@ -17,6 +18,10 @@ import javafx.scene.layout.FlowPane;
 public class UpPrincipalScreen1 extends Application {
 	String situation;
 	String username;
+	Negotiation<? extends Option> prefModel;
+	public void setPrefModel(Negotiation<? extends Option> prefModel) {
+		this.prefModel = prefModel;
+	}
 	@Override
 	public void start(Stage chatStage) {
 
@@ -26,6 +31,7 @@ public class UpPrincipalScreen1 extends Application {
 		   TextArea ta = new TextArea();
 	        //VBox vbox = new VBox(ta);
 		FlowPane flow = new FlowPane(Orientation.VERTICAL);
+		
 		DownPrincipalScreen1 chatBoard= new DownPrincipalScreen1();
 		//Chat chat=new Chat();
 		//Choice choice=new Choice();
@@ -52,12 +58,8 @@ public class UpPrincipalScreen1 extends Application {
         scene.getStylesheets().add
         (UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
         chatStage.show();
-        chatBoard.addElements(username,situation,chatStage/*,chatBoard.interact(username)*/);
+        chatBoard.addElements(username,situation,chatStage, prefModel);
 
 	}
 
-/*
-	public static void main(String[] args) {
-		launch(args);
-	}*/
 }

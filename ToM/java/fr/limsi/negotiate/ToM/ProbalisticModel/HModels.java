@@ -90,7 +90,7 @@ public class HModels {
 	public double reviseOtherPow(Map<Double, Float> values, double previousPow){
 
 		Map<Double, Float> result = sortPower(values); 
-		System.out.println(result);
+		//System.out.println(result);
 
 		float max = java.util.Collections.max(result.values());
 		

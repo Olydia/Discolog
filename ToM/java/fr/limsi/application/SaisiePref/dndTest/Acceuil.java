@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -22,9 +23,9 @@ import fr.limsi.negotiate.restaurant.*;
 // il faut envoyer les prefs de l'agent � l'agent
 // 
 
-public class Acceuil extends JFrame{
+public class Acceuil extends JDialog{
 	
-	private List<Negotiation<? extends Option>>  negotiators = new ArrayList<Negotiation<? extends Option>> ();
+	private List<Negotiation<? extends Option>> negotiators;
 
 	private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
@@ -40,9 +41,10 @@ public class Acceuil extends JFrame{
 	private CriteriaSelect athmos;
 	private CriteriaSelect location;
 
-	
+  
 	
 	public Acceuil(){
+		negotiators = new ArrayList<Negotiation<? extends Option>> ();
 		Font font = new Font("Arial", Font.BOLD, 20);
 		welcom.setFont(font);
 		welcom.setEditable(false);
@@ -141,10 +143,13 @@ public class Acceuil extends JFrame{
 									Restaurant.class), nego.getSelfs());
 							
 							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
+							
+							
 							for (List<Self_Ci<Criterion>> pref: agents){
 								for(Self_Ci<Criterion> c : pref)
 									System.out.println(c.getSelfPreferences());
 							}
+							setVisible(false);
 							
 						}
 							

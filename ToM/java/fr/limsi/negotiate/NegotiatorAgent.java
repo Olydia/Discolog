@@ -516,7 +516,7 @@ public class NegotiatorAgent extends Agent {
 		if(utterance instanceof Say){
 
 			Say utt = (Say) utterance;
-			System.out.println(utt.getText());
+			//System.out.println(utt.getText());
 
 			if(utt.getText().contains("Sorry, but I no longer want to do for dinner"))
 

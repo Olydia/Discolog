@@ -2,8 +2,7 @@ package fr.limsi.application;
 
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;

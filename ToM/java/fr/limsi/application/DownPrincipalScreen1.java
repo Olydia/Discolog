@@ -5,10 +5,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.File;
 import java.util.ArrayList;
 import edu.wpi.disco.*;
-import fr.limsi.negotiate.Criterion;
-import fr.limsi.negotiate.CriterionNegotiation;
-import fr.limsi.negotiate.CriterionProposal;
-import fr.limsi.negotiate.OptionProposal;
+import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.movie.*;
@@ -253,10 +250,10 @@ public class DownPrincipalScreen1 extends AnchorPane{
 			b3.setText("Year");
 		}
 	}
-	public void addElements(String username, String situation,Stage chatStage/*,Interaction interaction*/){
+	public void addElements(String username, String situation,Stage chatStage ,Negotiation<? extends Option> model/*,Interaction interaction*/){
 
-		 totalOrderedModels model = new totalOrderedModels();
-			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Arthur", model.model1());
+		//	totalOrderedModels model = new totalOrderedModels();
+			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Arthur", model);
 			 User user= new User("User");
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,

@@ -7,6 +7,7 @@ import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,7 +18,7 @@ import javax.swing.ListSelectionModel;
 
 import fr.limsi.negotiate.Criterion;
 
-public class CriteriaSelect extends JFrame {
+public class CriteriaSelect extends JDialog {
 
 	private JLabel newTextField = new JLabel("Entrez vos préférences");
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());

@@ -101,7 +101,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			this.setOther(other);
 			guessed.add(other);
 			mimic(other);
-			System.out.println("Predicted pow : " + other);
+			//System.out.println("Predicted pow : " + other);
 
 		}
 			
@@ -146,7 +146,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	
 	public double guess(Utterance u, double previousPow){
 
-		System.out.println(u.format());
+		//System.out.println(u.format());
 		
 		List<PowHypothesis> models = leadDialogue();
 		// si c'est superieurs r�cuperer uniquement les pow> 0.5 et les donner en entr�e
