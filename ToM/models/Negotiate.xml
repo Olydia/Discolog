@@ -128,6 +128,10 @@
 		return $negotiation.context.getDiscussedCriterion();
 		}
 
+		function createProposal(criterion) {
+		
+			return $negotiation.createProposal(criterion);
+		}
 	</script>
 
 </taskModel>
