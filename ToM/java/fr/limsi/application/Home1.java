@@ -2,6 +2,8 @@ package fr.limsi.application;
 
 import java.awt.Dimension;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.SwingUtilities;
 
@@ -37,9 +39,9 @@ import javafx.stage.Stage;
 
 public class Home1 extends Application {
 	String username;
-	Acceuil frame; 
-	public Home1(Acceuil frame){
-		this.frame = frame;
+	//Acceuil frame; 
+	public Home1(/*Acceuil frame*/){
+		//this.frame = frame;
 	}
 
 	@Override
@@ -144,8 +146,22 @@ public class Home1 extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				
+				Acceuil frame = new Acceuil();
 				frame.setVisible(true);
             	homeStage.hide();
+        		while (!Acceuil.isDone()){
+        			try {
+        				System.out.println("****"+Acceuil.isDone());
+        				Thread.sleep(500);
+        			} catch (InterruptedException e1) {
+        				// TODO Auto-generated catch block
+        				e1.printStackTrace();
+        			}
+        		}
+        		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
+        		System.out.println(neg.toString());
+        		
+        		startAgent();
             	
             		
 //				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
@@ -158,14 +174,32 @@ public class Home1 extends Application {
 
 			}
 		});
-
+		
 	}
 
+	public void startAgent(/*Negotiation<? extends Option> nego*/){
+		UpPrincipalScreen1 chat = new UpPrincipalScreen1();
+		chat.situation="restaurant";
+    	Stage chatStage=new Stage();
+    	chat.setPrefModel(Acceuil.getNegotiators().get(0));
+    	chat.start(chatStage);
+    	
+		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1();
+		chat2.situation="restaurant";
+    	Stage chatStage2=new Stage();
+    	chat2.setPrefModel(Acceuil.getNegotiators().get(1));
+    	chat2.start(chatStage2);
+    	
+	}
+	
 	public static void main(String[] args) {
-		Acceuil frame = new Acceuil();
-		Home1 fxFrame = new Home1(frame);
-		Application.launch(fxFrame.getClass(),args);
+		Home1 home = new Home1();
+		home.launch(args);
 
+		
 
+		
 	}
+	
+	
 }

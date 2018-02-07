@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,7 +27,7 @@ import fr.limsi.negotiate.restaurant.*;
 
 public class Acceuil extends JDialog{
 	
-	private List<Negotiation<? extends Option>> negotiators;
+	public static List<Negotiation<? extends Option>> negotiators;
 
 	private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
@@ -41,10 +43,13 @@ public class Acceuil extends JDialog{
 	private CriteriaSelect athmos;
 	private CriteriaSelect location;
 
-	private boolean isDone = false;
+	private static boolean isDone = false;
 	
 	public Acceuil(){
+		Lock l = new ReentrantLock();
+		l.lock();
 		negotiators = new ArrayList<Negotiation<? extends Option>> ();
+		l.unlock();
 		Font font = new Font("Arial", Font.BOLD, 20);
 		welcom.setFont(font);
 		welcom.setEditable(false);
@@ -134,7 +139,6 @@ public class Acceuil extends JDialog{
 							//Get the selected rank of preferences
 							model.d1_location.createPreferences(location.getValues());
 							//next frame
-							location.setVisible(false);
 							
 							// Creer le modele de prefs
 							Negotiation<Restaurant> nego = model.createModel();
@@ -152,6 +156,7 @@ public class Acceuil extends JDialog{
 									System.out.println(c.getSelfPreferences());
 							}
 							isDone = true;
+							location.setVisible(false);
 							setVisible(false);
 							
 						}
@@ -177,35 +182,50 @@ public class Acceuil extends JDialog{
 		}
 		return negotiators;
 	}
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			Acceuil frame = new Acceuil();
-	        frame.setMinimumSize(new Dimension(200, 200));
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(() -> {
+//			Acceuil frame = new Acceuil();
+//	        frame.setMinimumSize(new Dimension(200, 200));
+//
+//			frame.pack();
+//			
+//			frame.setVisible(true);
+//		});
+//	}
 
-			frame.pack();
-			
-			frame.setVisible(true);
-		});
+
+	public static List<Negotiation<? extends Option>> getNegotiators() {
+		Lock l = new ReentrantLock();
+		l.lock();
+		List<Negotiation<? extends Option>> neg = Acceuil.negotiators;
+		l.unlock();
+		return neg;
 	}
 
 
-	public List<Negotiation<? extends Option>> getNegotiators() {
-		return negotiators;
+	public static void  setNegotiators(List<Negotiation<? extends Option>> negotiators) {
+		Lock l = new ReentrantLock();
+		l.lock();
+		Acceuil.negotiators = negotiators;
+		l.unlock();
 	}
 
 
-	public void setNegotiators(List<Negotiation<? extends Option>> negotiators) {
-		this.negotiators = negotiators;
+	public static boolean isDone() {
+		Lock l = new ReentrantLock();
+		boolean state;
+		l.lock();
+		state= isDone;
+		l.unlock();
+		return state;
 	}
 
 
-	public boolean isDone() {
-		return isDone;
-	}
-
-
-	public void setDone(boolean isDone) {
-		this.isDone = isDone;
+	public static void setDone(boolean isDone) {
+		Lock l = new ReentrantLock();
+		l.lock();
+		Acceuil.isDone = isDone;
+		l.unlock();
 	}
 
 }

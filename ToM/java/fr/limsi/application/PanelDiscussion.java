@@ -15,7 +15,7 @@ import javafx.scene.layout.FlowPane;
 
 
 
-public class UpPrincipalScreen1 extends Application {
+public class PanelDiscussion extends Application {
 	String situation;
 	String username;
 	Negotiation<? extends Option> prefModel;
@@ -38,7 +38,7 @@ public class UpPrincipalScreen1 extends Application {
 		sp.getItems().addAll(flow,chatBoard);
         sp.setDividerPositions(0.3f);
 
-		String image = UpPrincipalScreen1.class.getResource("white.jpg").toExternalForm();
+		String image = PanelDiscussion.class.getResource("white.jpg").toExternalForm();
 
         flow.setStyle("-fx-background-image: url('" + image + "'); "
         		 +
@@ -52,14 +52,13 @@ public class UpPrincipalScreen1 extends Application {
         System.setErr(ps);
         flow.getChildren().add(ta);
         Scene scene = new Scene(sp, visualBounds.getWidth(), visualBounds.getHeight());
-       chatStage.setScene(scene);
+        chatStage.setScene(scene);
         chatStage.setFullScreen(true);
 
         scene.getStylesheets().add
-        (UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
+        (PanelDiscussion.class.getResource("application2.css").toExternalForm());
+        chatStage.show();
         chatBoard.addElements(username,situation,chatStage, prefModel);
-
-        chatStage.showAndWait();
 
 	}
 

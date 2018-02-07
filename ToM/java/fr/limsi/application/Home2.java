@@ -50,7 +50,6 @@ public class Home2 extends Application {
         (Home2.class.getResource("application2.css").toExternalForm());
         homeStage.show();
         UpPrincipalScreen2 chat=new UpPrincipalScreen2();
-    	Stage chatStage=new Stage();
 
         /*The name label*/
         Label userName = new Label("The experience number");
@@ -139,11 +138,10 @@ public class Home2 extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-            	Acceuil pref = new Acceuil();
-            	pref.setVisible(true);
             	
             	chat.username=userTextField.getText();
             	chat.situation="restaurant";
+            	Stage chatStage=new Stage();
             	chat.start(chatStage);
             	homeStage.hide();
             }
