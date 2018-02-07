@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import com.sun.msv.datatype.xsd.FractionDigitsFacet;
+
 import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
@@ -35,11 +37,15 @@ import javafx.stage.Stage;
 
 public class Home1 extends Application {
 	String username;
-
-	public Home1(){
-
+	Acceuil frame; 
+	public Home1(Acceuil frame){
+		this.frame = frame;
 	}
 
+	@Override
+	public void init(){
+		
+	}
 	@Override
 	public void start(Stage homeStage) {
 		homeStage.setTitle("Negotiation Agent");
@@ -137,19 +143,18 @@ public class Home1 extends Application {
 
 			@Override
 			public void handle(ActionEvent e) {
-				Acceuil frame = new Acceuil();
-				frame.setMinimumSize(new Dimension(200, 200));
-				frame.pack();
+				
 				frame.setVisible(true);
-
-
-				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
-				UpPrincipalScreen1 chat=new UpPrincipalScreen1();
-				chat.setPrefModel(negotiators.get(0));
-				Stage chatStage=new Stage();
-				chat.username=userTextField.getText();
-				chat.situation=/*(String) cb.getValue()*/"restaurant";
-				chat.start(chatStage);
+            	homeStage.hide();
+            	
+            		
+//				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
+//				UpPrincipalScreen1 chat=new UpPrincipalScreen1();
+//				chat.setPrefModel(negotiators.get(0));
+//				Stage chatStage=new Stage();
+//				chat.username=userTextField.getText();
+//				chat.situation=/*(String) cb.getValue()*/"restaurant";
+//				chat.start(chatStage);
 
 			}
 		});
@@ -157,10 +162,9 @@ public class Home1 extends Application {
 	}
 
 	public static void main(String[] args) {
-
-
-		launch(args);
-
+		Acceuil frame = new Acceuil();
+		Home1 fxFrame = new Home1(frame);
+		Application.launch(fxFrame.getClass(),args);
 
 
 	}

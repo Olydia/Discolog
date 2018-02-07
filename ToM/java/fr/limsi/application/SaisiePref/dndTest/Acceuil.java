@@ -41,7 +41,7 @@ public class Acceuil extends JDialog{
 	private CriteriaSelect athmos;
 	private CriteriaSelect location;
 
-  
+	private boolean isDone = false;
 	
 	public Acceuil(){
 		negotiators = new ArrayList<Negotiation<? extends Option>> ();
@@ -53,6 +53,8 @@ public class Acceuil extends JDialog{
 		this.getContentPane().add(welcom, BorderLayout.CENTER);
 		this.getContentPane().add(commencer, BorderLayout.SOUTH);
 		this.getContentPane().setBackground(Color.white);
+		setMinimumSize(new Dimension(400, 500));
+		pack();
 		
 		cost = new CriteriaSelect(Cost.class);
 		cuisine = new CriteriaSelect(Cuisine.class);
@@ -149,6 +151,7 @@ public class Acceuil extends JDialog{
 								for(Self_Ci<Criterion> c : pref)
 									System.out.println(c.getSelfPreferences());
 							}
+							isDone = true;
 							setVisible(false);
 							
 						}
@@ -193,6 +196,16 @@ public class Acceuil extends JDialog{
 
 	public void setNegotiators(List<Negotiation<? extends Option>> negotiators) {
 		this.negotiators = negotiators;
+	}
+
+
+	public boolean isDone() {
+		return isDone;
+	}
+
+
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
 	}
 
 }
