@@ -41,14 +41,14 @@ public class UpPrincipalScreen1 extends Application {
 	@Override
 	public void start(Stage chatStage) {
 
-		chatStage.setTitle("Negotiator Agent");
+		chatStage.setTitle(agentName);
 		SplitPane sp = new SplitPane();
 		sp.setOrientation(Orientation.VERTICAL);
 		TextArea ta = new TextArea();
 		//VBox vbox = new VBox(ta);
 		FlowPane flow = new FlowPane(Orientation.VERTICAL);
 
-		chatBoard= new DownPrincipalScreen1();
+		chatBoard= new DownPrincipalScreen1(agentName);
 		//Chat chat=new Chat();
 		//Choice choice=new Choice();
 		sp.getItems().addAll(flow,chatBoard);
