@@ -34,6 +34,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 
 	public String action;
+	private ToMNegotiatorProba agent;
 /**
  * details allows to create the instructions used for execute:
  * details[0]: The action. Ex: Propose.
@@ -253,7 +254,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public void addElements(String username, String situation,Stage chatStage ,Negotiation<? extends Option> model/*,Interaction interaction*/){
 
 		//	totalOrderedModels model = new totalOrderedModels();
-			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Arthur", model);
+			 agent= new ToMNegotiatorProba("Arthur", model);
 			 User user= new User("User");
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,
@@ -1715,7 +1716,8 @@ public class DownPrincipalScreen1 extends AnchorPane{
 			        		interaction.getConsole().execute(command);
 			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 			        		interaction.getSystem().respond(interaction, false, guess);
-			        		if (agent.getNegotiation().negotiationSuccess()){System.out.println("We reached an agreement, the negotiation is over!");}
+			        		if (negotiationSuccess()){
+			        			System.out.println("We reached an agreement, the negotiation is over!");}
 
 				        		}
 			        		list.clear();
@@ -1728,5 +1730,9 @@ public class DownPrincipalScreen1 extends AnchorPane{
 			            }
 			        });
 
+	}
+	
+	public boolean negotiationSuccess(){
+		return agent.getNegotiation().negotiationSuccess();
 	}
 }

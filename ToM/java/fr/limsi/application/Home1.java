@@ -149,19 +149,14 @@ public class Home1 extends Application {
 				Acceuil frame = new Acceuil();
 				frame.setVisible(true);
             	homeStage.hide();
+            	
         		while (!Acceuil.isDone()){
-        			try {
-        				System.out.println("****"+Acceuil.isDone());
-        				Thread.sleep(500);
-        			} catch (InterruptedException e1) {
-        				// TODO Auto-generated catch block
-        				e1.printStackTrace();
-        			}
+        			pause();
         		}
         		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
         		System.out.println(neg.toString());
         		
-        		startAgent();
+        		startAgents();
             	
             		
 //				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
@@ -176,19 +171,34 @@ public class Home1 extends Application {
 		});
 		
 	}
-
-	public void startAgent(/*Negotiation<? extends Option> nego*/){
-		UpPrincipalScreen1 chat = new UpPrincipalScreen1();
+	
+	public void pause(){
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	public void startAgents(/*Negotiation<? extends Option> nego*/){
+		
+		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob");
 		chat.situation="restaurant";
     	Stage chatStage=new Stage();
     	chat.setPrefModel(Acceuil.getNegotiators().get(0));
     	chat.start(chatStage);
     	
-		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1();
+//    	while(!chat.successNegotiation())
+//    		pause();
+    
+//    	
+		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur");
 		chat2.situation="restaurant";
     	Stage chatStage2=new Stage();
     	chat2.setPrefModel(Acceuil.getNegotiators().get(1));
     	chat2.start(chatStage2);
+    	
     	
 	}
 	

@@ -18,49 +18,68 @@ import javafx.scene.layout.FlowPane;
 public class UpPrincipalScreen1 extends Application {
 	String situation;
 	String username;
-	Negotiation<? extends Option> prefModel;
+	String agentName;
+	private Negotiation<? extends Option> prefModel;
+	 private DownPrincipalScreen1 chatBoard;
+	 
+	 
+	public UpPrincipalScreen1(String agentName){
+		this.agentName = agentName;
+	}
+	public DownPrincipalScreen1 getChatBoard() {
+		return chatBoard;
+	}
+	public void setChatBoard(DownPrincipalScreen1 chatBoard) {
+		this.chatBoard = chatBoard;
+	}
+	public Negotiation<? extends Option> getPrefModel() {
+		return prefModel;
+	}
 	public void setPrefModel(Negotiation<? extends Option> prefModel) {
 		this.prefModel = prefModel;
 	}
 	@Override
 	public void start(Stage chatStage) {
 
-	    chatStage.setTitle("Negotiator Agent");
-	    SplitPane sp = new SplitPane();
+		chatStage.setTitle("Negotiator Agent");
+		SplitPane sp = new SplitPane();
 		sp.setOrientation(Orientation.VERTICAL);
-		   TextArea ta = new TextArea();
-	        //VBox vbox = new VBox(ta);
+		TextArea ta = new TextArea();
+		//VBox vbox = new VBox(ta);
 		FlowPane flow = new FlowPane(Orientation.VERTICAL);
-		
-		DownPrincipalScreen1 chatBoard= new DownPrincipalScreen1();
+
+		chatBoard= new DownPrincipalScreen1();
 		//Chat chat=new Chat();
 		//Choice choice=new Choice();
 		sp.getItems().addAll(flow,chatBoard);
-        sp.setDividerPositions(0.3f);
+		sp.setDividerPositions(0.3f);
 
 		String image = UpPrincipalScreen1.class.getResource("white.jpg").toExternalForm();
 
-        flow.setStyle("-fx-background-image: url('" + image + "'); "
-        		 +
-        		 "-fx-background-position: center center; " +
-                 "-fx-background-repeat: stretch;");
-        Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
-        ta.setPrefSize(visualBounds.getWidth(), (visualBounds.getHeight()-5.0)/2);
-        chatConsole console = new chatConsole(ta);
-        PrintStream ps = new PrintStream(console, true);
-        System.setOut(ps);
-        System.setErr(ps);
-        flow.getChildren().add(ta);
-        Scene scene = new Scene(sp, visualBounds.getWidth(), visualBounds.getHeight());
-       chatStage.setScene(scene);
-        chatStage.setFullScreen(true);
+		flow.setStyle("-fx-background-image: url('" + image + "'); "
+				+
+				"-fx-background-position: center center; " +
+				"-fx-background-repeat: stretch;");
+		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+		ta.setPrefSize(visualBounds.getWidth(), (visualBounds.getHeight()-5.0)/2);
+		chatConsole console = new chatConsole(ta);
+		PrintStream ps = new PrintStream(console, true);
+		System.setOut(ps);
+		System.setErr(ps);
+		flow.getChildren().add(ta);
+		Scene scene = new Scene(sp, visualBounds.getWidth(), visualBounds.getHeight());
+		chatStage.setScene(scene);
+		chatStage.setFullScreen(true);
 
-        scene.getStylesheets().add
-        (UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
-        chatBoard.addElements(username,situation,chatStage, prefModel);
+		scene.getStylesheets().add
+		(UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
+		chatBoard.addElements(username,situation,chatStage, prefModel);
+		chatStage.show();
 
-        chatStage.showAndWait();
-
+	}
+	
+	public boolean successNegotiation(){
+		return chatBoard.negotiationSuccess();
 	}
 
 }
