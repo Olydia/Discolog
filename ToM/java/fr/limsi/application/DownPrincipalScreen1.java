@@ -1768,7 +1768,8 @@ public class DownPrincipalScreen1 extends AnchorPane{
 						UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username);
 						chat2.situation="restaurant";
 
-						String arthur = "Preferences of agent Bob \n \n" +
+						String arthur = "--------------------------------------------- \n \n"+
+						"Preferences of agent Arthur \n \n" +
 								Acceuil.negotiators.get(1).printPreferences();
 
 						writer.write(arthur, fichier2);
@@ -1783,7 +1784,8 @@ public class DownPrincipalScreen1 extends AnchorPane{
 						chat3.situation="restaurant";
 						Stage chatStage3=new Stage();
 						
-						String kevin = "Preferences of agent Bob \n \n" +
+						String kevin = "--------------------------------------------- \n \n"+
+										"Preferences of agent Kevin \n \n" +
 								Acceuil.negotiators.get(2).printPreferences();
 
 						writer.write(kevin, fichier2);
