@@ -4,7 +4,10 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import edu.wpi.disco.*;
+import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
@@ -19,7 +22,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
@@ -36,17 +43,17 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public String action;
 	private ToMNegotiatorProba agent;
 	private String agentName;
-/**
- * details allows to create the instructions used for execute:
- * details[0]: The action. Ex: Propose.
- * details[1]: The situation of the negotiation
- * details[2]: criterion or situation(when an option is chosen)
- * details[3]: value of the criterion or option
- * details[4]: criterion or situation(when an option is chosen) for the second part
- * details[5]: value of the criterion or option for the second part
- * details[6]: To specify if the user likes or not the preference he is expressing
- * details[7]: contains General or Specific to differentiate between the 2 forms of AskPreference
- */
+	/**
+	 * details allows to create the instructions used for execute:
+	 * details[0]: The action. Ex: Propose.
+	 * details[1]: The situation of the negotiation
+	 * details[2]: criterion or situation(when an option is chosen)
+	 * details[3]: value of the criterion or option
+	 * details[4]: criterion or situation(when an option is chosen) for the second part
+	 * details[5]: value of the criterion or option for the second part
+	 * details[6]: To specify if the user likes or not the preference he is expressing
+	 * details[7]: contains General or Specific to differentiate between the 2 forms of AskPreference
+	 */
 	public String[] details = new String[8];
 
 	public DownPrincipalScreen1(String agentName){
@@ -56,7 +63,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
 		for (int i=0;i<c.length;i++){
 
-    		criteria.add(c[i].toString().toUpperCase());
+			criteria.add(c[i].toString().toUpperCase());
 
 		}
 	}
@@ -83,10 +90,10 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 		}
 
-	   	for (int i=0; i<criteria.size();i++){
-	   		if (ch.toUpperCase().equals(criteria.get(i))) return true;
-	   	}
-	   	return false;
+		for (int i=0; i<criteria.size();i++){
+			if (ch.toUpperCase().equals(criteria.get(i))) return true;
+		}
+		return false;
 	}
 	/**
 	 * finds the criterion based on its value (in the form a string)
@@ -159,135 +166,136 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public void clearLastButtons(ArrayList<HBox> c1HBoxs,ArrayList<HBox> c2HBoxs,ArrayList<HBox> c3HBoxs,ArrayList<HBox> c4HBoxs,ObservableList list,String situation){
 
 		if (situation=="restaurant")
-        {
+		{
 
-			 for (int i=0;i<Atmosphere.values().length;i++){
-				 list.remove(c1HBoxs.get(i));
+			for (int i=0;i<Atmosphere.values().length;i++){
+				list.remove(c1HBoxs.get(i));
 
 
-			 }
+			}
 
-			 for (int i=0;i<Cost.values().length;i++){
-				 list.remove(c2HBoxs.get(i));
-			 }
+			for (int i=0;i<Cost.values().length;i++){
+				list.remove(c2HBoxs.get(i));
+			}
 
-			 for (int i=0;i<Cuisine.values().length;i++){
-				 list.remove(c3HBoxs.get(i));
-			 }
+			for (int i=0;i<Cuisine.values().length;i++){
+				list.remove(c3HBoxs.get(i));
+			}
 
-			 for (int i=0;i<Location.values().length;i++){
-				 list.remove(c4HBoxs.get(i));
-			 }
-        }
-     else
-     	{
-	    	 for (int i=0;i<Category.values().length;i++){
-	    		 list.remove(c1HBoxs.get(i));
-	    	 }
-	    	 for (int i=0;i<Country.values().length;i++){
-	    		 list.remove(c2HBoxs.get(i));
-			 }
+			for (int i=0;i<Location.values().length;i++){
+				list.remove(c4HBoxs.get(i));
+			}
+		}
+		else
+		{
+			for (int i=0;i<Category.values().length;i++){
+				list.remove(c1HBoxs.get(i));
+			}
+			for (int i=0;i<Country.values().length;i++){
+				list.remove(c2HBoxs.get(i));
+			}
 
-			 for (int i=0;i<Location.values().length;i++){
-				 list.remove(c3HBoxs.get(i));
+			for (int i=0;i<Location.values().length;i++){
+				list.remove(c3HBoxs.get(i));
 
-			 }
-        }
+			}
+		}
 
 	}
 
 	public void setSecondaryButtonsTexts(Criterion[] c, ArrayList<Button>c1Buttons, ArrayList<Button> c12Buttons,ArrayList<HBox> c1HBoxs, ArrayList<HBox> c12HBoxs){
-		 for (int i=0;i<c.length;i++){
-			 Button iButton = new Button( c[i].toString());
-			 Button i2Button = new Button( c[i].toString());
-			 c1Buttons.add(iButton);
-			 c12Buttons.add(i2Button);
-			 HBox iHBox = new HBox(15);
-			 HBox i2HBox = new HBox(15);
-			 iHBox.getChildren().addAll(iButton);
-			 i2HBox.getChildren().addAll(i2Button);
-			 c1HBoxs.add(iHBox);
-			 c12HBoxs.add(i2HBox);
-		 }
+		for (int i=0;i<c.length;i++){
+			Button iButton = new Button( c[i].toString());
+			Button i2Button = new Button( c[i].toString());
+			c1Buttons.add(iButton);
+			c12Buttons.add(i2Button);
+			HBox iHBox = new HBox(15);
+			HBox i2HBox = new HBox(15);
+			iHBox.getChildren().addAll(iButton);
+			i2HBox.getChildren().addAll(i2Button);
+			c1HBoxs.add(iHBox);
+			c12HBoxs.add(i2HBox);
+		}
 	}
 
 	public void setSecondaryButtonsPositions(HBox c1HBox, HBox c2HBox, HBox c3HBox, HBox c4HBox, Button c1, Button c2, Button c3, Button c4, double pos, String situation, ObservableList<Node> list){
 		setTopAnchor(c1HBox,pos);
-    	setTopAnchor(c2HBox,pos);
-    	setTopAnchor(c3HBox,pos);
-    	setTopAnchor(c4HBox,pos);
+		setTopAnchor(c2HBox,pos);
+		setTopAnchor(c3HBox,pos);
+		setTopAnchor(c4HBox,pos);
 
-    	c1.setStyle(off);
-    	c2.setStyle(off);
-    	c3.setStyle(off);
-    	c4.setStyle(off);
+		c1.setStyle(off);
+		c2.setStyle(off);
+		c3.setStyle(off);
+		c4.setStyle(off);
 
-    	if (situation=="restaurant")
-	        {
-        	setLeftAnchor(c1HBox,300.0);
-        	setLeftAnchor(c2HBox,500.0);
-        	setLeftAnchor(c3HBox,700.0);
-        	setLeftAnchor(c4HBox,900.0);
-        	list.addAll(c1HBox,c2HBox,c3HBox,c4HBox);
-	        }
-    	else{
-    		setLeftAnchor(c1HBox,350.0);
-    		setLeftAnchor(c2HBox,600.0);
-    		setLeftAnchor(c3HBox,850.0);
-    		list.addAll(c1HBox,c2HBox,c3HBox);
-    		}
+		if (situation=="restaurant")
+		{
+			setLeftAnchor(c1HBox,300.0);
+			setLeftAnchor(c2HBox,500.0);
+			setLeftAnchor(c3HBox,700.0);
+			setLeftAnchor(c4HBox,900.0);
+			list.addAll(c1HBox,c2HBox,c3HBox,c4HBox);
+		}
+		else{
+			setLeftAnchor(c1HBox,350.0);
+			setLeftAnchor(c2HBox,600.0);
+			setLeftAnchor(c3HBox,850.0);
+			list.addAll(c1HBox,c2HBox,c3HBox);
+		}
 	}
 
 	public void setCriterionButtonsTexts(Button b1,Button b2, Button b3, Button b4, String situation){
 		if (situation=="restaurant")
-        {
-		b1.setText("Atmosphere");
-		b2.setText("Cost");
-		b3.setText("Cuisine");
-		b4.setText("Location");
-        }
+		{
+			b1.setText("Atmosphere");
+			b2.setText("Cost");
+			b3.setText("Cuisine");
+			b4.setText("Location");
+		}
 		else{
 			b1.setText("Category");
 			b2.setText("Country");
 			b3.setText("Year");
 		}
 	}
-	public void addElements(String username, String situation,Stage chatStage ,Negotiation<? extends Option> model/*,Interaction interaction*/){
+	public void addElements(String username, String situation,Stage chatStage ,
+			Negotiation<? extends Option> model, int nbAgents/*,Interaction interaction*/){
 
 		//	totalOrderedModels model = new totalOrderedModels();
-			 agent= new ToMNegotiatorProba(agentName, model);
-			 User user= new User("User");
-			 Interaction interaction = new Interaction(
-						/*new ExampleAgent("agent", model.model1())*/agent,
-						/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
-				interaction.load("models/Negotiate.xml");
-				((ToMNegotiatorProba) interaction.getSystem()).setRelation(relation);
+		agent= new ToMNegotiatorProba(agentName, model);
+		User user= new User("User");
+		Interaction interaction = new Interaction(
+				/*new ExampleAgent("agent", model.model1())*/agent,
+				/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
+		interaction.load("models/Negotiate.xml");
+		((ToMNegotiatorProba) interaction.getSystem()).setRelation(relation);
 
 
-				interaction.setGuess(false);
-				interaction.start(true); // give user first turn
-				OptionChoice optionChoice=new OptionChoice();
-        		Stage optionStage=new Stage();
-            	Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
-            	int ButtonId;
-        	     Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
-        	     optionStage.setScene(scene);
-        	     optionStage.setFullScreen(true);
-        	     optionStage.setScene(scene);
-        	     scene.getStylesheets().add
-        	        (Home1.class.getResource("application2.css").toExternalForm());
+		interaction.setGuess(false);
+		interaction.start(true); // give user first turn
+		OptionChoice optionChoice=new OptionChoice();
+		Stage optionStage=new Stage();
+		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+		int ButtonId;
+		Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
+		optionStage.setScene(scene);
+		optionStage.setFullScreen(true);
+		optionStage.setScene(scene);
+		scene.getStylesheets().add
+		(Home1.class.getResource("application2.css").toExternalForm());
 
-	    for (int i=0;i<8;i++){
-	    	details[i]="";
-	    }
+		for (int i=0;i<8;i++){
+			details[i]="";
+		}
 		details[1]=situation;
 
 		/*The lists*/
 
 		ListView<String> open = new ListView<>();
-      	open.setPrefWidth(450.0);
-      	open.setPrefHeight(100.0);
-      	ArrayList<String> openList =new ArrayList<String>();
+		open.setPrefWidth(450.0);
+		open.setPrefHeight(100.0);
+		ArrayList<String> openList =new ArrayList<String>();
 
 		/*Labels*/
 		Label actionLabel = new Label("What do you want to say?");
@@ -353,19 +361,19 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		setCriterionButtonsTexts(c12Button,c22Button,c32Button,c42Button,situation);
 		setCriterionButtonsTexts(cG1Button,cG2Button,cG3Button,cG4Button,situation);
 
-		 	Button co1Button = new Button();
-			Button co2Button = new Button();
-			Button co3Button = new Button();
-			Button co4Button = new Button();
-			Button co12Button = new Button();
-			Button co22Button = new Button();
-			Button co32Button = new Button();
-			Button co42Button = new Button();
+		Button co1Button = new Button();
+		Button co2Button = new Button();
+		Button co3Button = new Button();
+		Button co4Button = new Button();
+		Button co12Button = new Button();
+		Button co22Button = new Button();
+		Button co32Button = new Button();
+		Button co42Button = new Button();
 
-			setCriterionButtonsTexts(co1Button,co2Button,co3Button,co4Button,situation);
-			setCriterionButtonsTexts(co12Button,co22Button,co32Button,co42Button,situation);
+		setCriterionButtonsTexts(co1Button,co2Button,co3Button,co4Button,situation);
+		setCriterionButtonsTexts(co12Button,co22Button,co32Button,co42Button,situation);
 
-			Button sendButton = new Button("Send");
+		Button sendButton = new Button("Send");
 
 		/*All criteria buttons*/
 
@@ -555,1186 +563,1259 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		sendHBox.getChildren().addAll(sendButton);
 
 		/*The positions*/
-		   setTopAnchor(actionLabel,10.0);
-		   setLeftAnchor(actionLabel,100.0);
+		setTopAnchor(actionLabel,10.0);
+		setLeftAnchor(actionLabel,100.0);
 
 
-		   setTopAnchor(acceptLabel,150.0);
-		   setLeftAnchor(acceptLabel,100.0);
+		setTopAnchor(acceptLabel,150.0);
+		setLeftAnchor(acceptLabel,100.0);
 
-		   setTopAnchor(rejectLabel,150.0);
-		   setLeftAnchor(rejectLabel,100.0);
+		setTopAnchor(rejectLabel,150.0);
+		setLeftAnchor(rejectLabel,100.0);
 
-		   setTopAnchor(proposeHBox,50.0);
-		   setLeftAnchor(proposeHBox,350.0);
+		setTopAnchor(proposeHBox,50.0);
+		setLeftAnchor(proposeHBox,350.0);
 
-		   setTopAnchor(acceptHBox ,50.0);
-		   setLeftAnchor(acceptHBox ,500.0);
+		setTopAnchor(acceptHBox ,50.0);
+		setLeftAnchor(acceptHBox ,500.0);
 
-		   setTopAnchor(rejectHBox,50.0);
-		   setLeftAnchor(rejectHBox,650.0);
+		setTopAnchor(rejectHBox,50.0);
+		setLeftAnchor(rejectHBox,650.0);
 
-		   setTopAnchor(stateAskHBox,50.0);
-		   setLeftAnchor(stateAskHBox,800.0);
+		setTopAnchor(stateAskHBox,50.0);
+		setLeftAnchor(stateAskHBox,800.0);
 
-		   setTopAnchor(stopHBox,50.0);
-		   setLeftAnchor(stopHBox,950.0);
+		setTopAnchor(stopHBox,50.0);
+		setLeftAnchor(stopHBox,950.0);
 
-		   setTopAnchor(sendHBox,400.0);
-		   setLeftAnchor(sendHBox,600.0);
+		setTopAnchor(sendHBox,400.0);
+		setLeftAnchor(sendHBox,600.0);
 
-		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
+		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox/*,sendHBox*/);
 
-		   if (relation>0.5){
-			   boolean guess1 = interaction.getProperty("interaction@guess", interaction.isGuess());
-			   interaction.getSystem().respond(interaction, false, guess1);}
+		if (relation>0.5){
+			boolean guess1 = interaction.getProperty("interaction@guess", interaction.isGuess());
+			interaction.getSystem().respond(interaction, false, guess1);}
 
-		   /*The actions*/
+		/*The actions*/
 
-		   open.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
-			   @Override
-			    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				   if ((open.getSelectionModel().getSelectedItem()!=null)&&(details[0].equals("Accept"))){
-					   list.remove(acceptProposeHBox);
-				   if (isCriterion(newValue, situation)){
-					   setTopAnchor(acceptProposeHBox,260.0);
-					   setLeftAnchor(acceptProposeHBox,650.0);
-			        	list.add(acceptProposeHBox);
-			        }
-				   }
+		open.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if ((open.getSelectionModel().getSelectedItem()!=null)&&(details[0].equals("Accept"))){
+					list.remove(acceptProposeHBox);
+					if (isCriterion(newValue, situation)){
+						setTopAnchor(acceptProposeHBox,260.0);
+						setLeftAnchor(acceptProposeHBox,650.0);
+						list.add(acceptProposeHBox);
+					}
+				}
 
-			    }
-		   });
+			}
+		});
 
-		   proposeButton.setOnAction(new EventHandler<ActionEvent>() {
+		proposeButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.clear();
-	     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-	     			details[0]="propose";
-	            	proposeButton.setStyle(on);
-	            	acceptButton.setStyle(off);
-	            	rejectButton.setStyle(off);
-	            	stateAskButton.setStyle(off);
-	            	stopButton.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				details[0]="propose";
+				proposeButton.setStyle(on);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(off);
 
-	            	setTopAnchor(sendHBox,350.0);
-	            	setLeftAnchor(sendHBox,600.0);
+				setTopAnchor(sendHBox,350.0);
+				setLeftAnchor(sendHBox,600.0);
 
-	            	setTopAnchor(proposeOptionHBox,100.0);
-	            	setLeftAnchor(proposeOptionHBox,450.0);
+				setTopAnchor(proposeOptionHBox,100.0);
+				setLeftAnchor(proposeOptionHBox,450.0);
 
-	     		   	setTopAnchor(proposeValueHBox ,100.0);
-	     		   	setLeftAnchor(proposeValueHBox ,750.0);
+				setTopAnchor(proposeValueHBox ,100.0);
+				setLeftAnchor(proposeValueHBox ,750.0);
 
-	     		   proposeOptionButton.setStyle(off);
-	     		   proposeValueButton.setStyle(off);
-	     		   list.addAll(proposeOptionHBox,proposeValueHBox);
-	            }
-	        });
+				proposeOptionButton.setStyle(off);
+				proposeValueButton.setStyle(off);
+				list.addAll(proposeOptionHBox,proposeValueHBox);
+			}
+		});
 
 
-		   acceptButton.setOnAction(new EventHandler<ActionEvent>() {
+		acceptButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.clear();
-		     		list.addAll(actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		details[0]="Accept";
-	            	proposeButton.setStyle(off);
-	            	acceptButton.setStyle(on);
-	            	rejectButton.setStyle(off);
-	            	stateAskButton.setStyle(off);
-	            	stopButton.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.clear();
+				list.addAll(actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				details[0]="Accept";
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(on);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(off);
 
-	     		   	openList.clear();
+				openList.clear();
 
-	     		   		for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-	     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
-			    				openList.add(co.toString());
+				for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+					for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
+						openList.add(co.toString());
 
-	     		   		}
+				}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
-	    		   		openList.add(op.toString());
-	    		   		}
-	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
+				for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
+					openList.add(op.toString());
+				}
+				ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
 
-	            	open.setItems(observableOpenList);
+				open.setItems(observableOpenList);
 
-		     		list.addAll(open,sendHBox);
-		     		setTopAnchor(open,150.0);
-		     		setLeftAnchor(open,400.0);
+				list.addAll(open,sendHBox);
+				setTopAnchor(open,150.0);
+				setLeftAnchor(open,400.0);
 
-		     		setTopAnchor(sendHBox,260.0);
-	            	setLeftAnchor(sendHBox,550.0);
+				setTopAnchor(sendHBox,260.0);
+				setLeftAnchor(sendHBox,550.0);
 
-	            	setTopAnchor(acceptLabel,100.0);
-	            	setLeftAnchor(acceptLabel,100.0);
-	            	list.add(acceptLabel);
-	            }
-	        });
+				setTopAnchor(acceptLabel,100.0);
+				setLeftAnchor(acceptLabel,100.0);
+				list.add(acceptLabel);
+			}
+		});
 
 
-		   rejectButton.setOnAction(new EventHandler<ActionEvent>() {
+		rejectButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	proposeButton.setStyle(off);
-	            	acceptButton.setStyle(off);
-	            	rejectButton.setStyle(on);
-	            	stateAskButton.setStyle(off);
-	            	stopButton.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(on);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(off);
 
-	            	counterproposeOptionButton.setStyle(off);
-		     		counterproposeValueButton.setStyle(off);
+				counterproposeOptionButton.setStyle(off);
+				counterproposeValueButton.setStyle(off);
 
-		     		details[0]="Reject";
+				details[0]="Reject";
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
 
-	            	setTopAnchor(rejectOnlyHBox,100.0);
-	            	setLeftAnchor(rejectOnlyHBox,250.0);
+				setTopAnchor(rejectOnlyHBox,100.0);
+				setLeftAnchor(rejectOnlyHBox,250.0);
 
-	     		   	setTopAnchor(rejectStateHBox ,100.0);
-	     		   	setLeftAnchor(rejectStateHBox ,550.0);
+				setTopAnchor(rejectStateHBox ,100.0);
+				setLeftAnchor(rejectStateHBox ,550.0);
 
-	     		  	setTopAnchor(rejectProposeHBox ,100.0);
-	     		   	setLeftAnchor(rejectProposeHBox ,850.0);
+				setTopAnchor(rejectProposeHBox ,100.0);
+				setLeftAnchor(rejectProposeHBox ,850.0);
 
-	     		   openList.clear();
-	     			for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
-     		   			for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
-		    				openList.add(co.toString());
+				openList.clear();
+				for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
+					for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
+						openList.add(co.toString());
 
-     		   		}
+				}
 
-	    		   	for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
-	    		   		openList.add(op.toString());
-	    		   		}
-	    		    ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
+				for (OptionProposal op: agent.getNegotiation().getOptionsProposals(Status.OPEN,true)){
+					openList.add(op.toString());
+				}
+				ObservableList<String> observableOpenList = FXCollections.observableArrayList(openList);
 
-	            	open.setItems(observableOpenList);
-	            	rejectOnlyButton.setStyle(off);
-	            	rejectStateButton.setStyle(off);
-	            	rejectProposeButton.setStyle(off);
-	     		   	list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox );
+				open.setItems(observableOpenList);
+				rejectOnlyButton.setStyle(off);
+				rejectStateButton.setStyle(off);
+				rejectProposeButton.setStyle(off);
+				list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox );
 
-	            }
-	        });
+			}
+		});
 
 
-		   stateAskButton.setOnAction(new EventHandler<ActionEvent>() {
+		stateAskButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	proposeButton.setStyle(off);
-	            	acceptButton.setStyle(off);
-	            	rejectButton.setStyle(off);
-	            	stateAskButton.setStyle(on);
-	            	stopButton.setStyle(off);
-	            	details[0]="statepreference";
-	            	details[6]="";
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(on);
+				stopButton.setStyle(off);
+				details[0]="statepreference";
+				details[6]="";
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
-	            	setTopAnchor(stateHBox,100.0);
-	            	setLeftAnchor(stateHBox,250.0);
+				setTopAnchor(stateHBox,100.0);
+				setLeftAnchor(stateHBox,250.0);
 
-	     		   	setTopAnchor(askGeneralHBox ,100.0);
-	     		   	setLeftAnchor(askGeneralHBox ,500.0);
+				setTopAnchor(askGeneralHBox ,100.0);
+				setLeftAnchor(askGeneralHBox ,500.0);
 
-	     		  	setTopAnchor(askSpecificHBox ,100.0);
-	     		   	setLeftAnchor(askSpecificHBox ,850.0);
+				setTopAnchor(askSpecificHBox ,100.0);
+				setLeftAnchor(askSpecificHBox ,850.0);
 
-	     		   setTopAnchor(sendHBox,300.0);
-	            	setLeftAnchor(sendHBox,600.0);
-	            	stateButton.setStyle(off);
-	            	askGeneralButton.setStyle(off);
-	            	askSpecificButton.setStyle(off);
-	     		   	list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
-	            }
-	        });
+				setTopAnchor(sendHBox,300.0);
+				setLeftAnchor(sendHBox,600.0);
+				stateButton.setStyle(off);
+				askGeneralButton.setStyle(off);
+				askSpecificButton.setStyle(off);
+				list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
+			}
+		});
 
 
-		   stopButton.setOnAction(new EventHandler<ActionEvent>() {
+		stopButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	proposeButton.setStyle(off);
-	            	acceptButton.setStyle(off);
-	            	rejectButton.setStyle(off);
-	            	stateAskButton.setStyle(off);
-	            	stopButton.setStyle(on);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(on);
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
 
-	            	setTopAnchor(stopLabel,100.0);
-	            	setLeftAnchor(stopLabel,450.0);
+				setTopAnchor(stopLabel,100.0);
+				setLeftAnchor(stopLabel,450.0);
 
-	     		   	setTopAnchor(noHBox ,150.0);
-	     		   	setLeftAnchor(noHBox ,530.0);
+				setTopAnchor(noHBox ,150.0);
+				setLeftAnchor(noHBox ,530.0);
 
-	     		  	setTopAnchor(yesHBox ,150.0);
-	     		   	setLeftAnchor(yesHBox ,730.0);
+				setTopAnchor(yesHBox ,150.0);
+				setLeftAnchor(yesHBox ,730.0);
 
 
-	     		   	list.addAll(stopLabel,noHBox,yesHBox);
-	            }
-	        });
+				list.addAll(stopLabel,noHBox,yesHBox);
+			}
+		});
 
 
-		   proposeOptionButton.setOnAction(new EventHandler<ActionEvent>() {
+		proposeOptionButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	proposeOptionButton.setStyle(on);
-	            	proposeValueButton.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				proposeOptionButton.setStyle(on);
+				proposeValueButton.setStyle(off);
 
-	            	details[0]="Propose";
-	            	details[2]=situation;
-	            	details[2]=details[2].substring(0, 1).toUpperCase() + details[2].substring(1).toLowerCase();
+				details[0]="Propose";
+				details[2]=situation;
+				details[2]=details[2].substring(0, 1).toUpperCase() + details[2].substring(1).toLowerCase();
 
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(proposeOptionHBox,proposeValueHBox);
 
-	            	optionChoice.start(optionStage);
-	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
-	            	chatStage.hide();
+				optionChoice.start(optionStage);
+				optionChoice.addElements(situation,optionStage,chatStage,details,list);
+				chatStage.hide();
 
 
-	            	setTopAnchor(co1HBox,200.0);
-	            	setTopAnchor(co2HBox,200.0);
-	            	setTopAnchor(co3HBox,200.0);
-	            	setTopAnchor(co4HBox,200.0);
+				setTopAnchor(co1HBox,200.0);
+				setTopAnchor(co2HBox,200.0);
+				setTopAnchor(co3HBox,200.0);
+				setTopAnchor(co4HBox,200.0);
 
-	            	list.add(sendHBox);
-	            }
-	        });
+				list.add(sendHBox);
+			}
+		});
 
 
-		   proposeValueButton.setOnAction(new EventHandler<ActionEvent>() {
+		proposeValueButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	proposeOptionButton.setStyle(off);
-	            	proposeValueButton.setStyle(on);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				proposeOptionButton.setStyle(off);
+				proposeValueButton.setStyle(on);
 
-	            	details[0]="Propose";
+				details[0]="Propose";
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);
-		     		list.addAll(proposeCriterionLabel);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(proposeOptionHBox,proposeValueHBox);
+				list.addAll(proposeCriterionLabel);
 
-		     		setTopAnchor(proposeCriterionLabel,150.0);
-		     		setLeftAnchor(proposeCriterionLabel,100.0);
-		     		setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
-	            }
-	        });
+				setTopAnchor(proposeCriterionLabel,150.0);
+				setLeftAnchor(proposeCriterionLabel,100.0);
+				setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
+			}
+		});
 
-		   counterproposeOptionButton.setOnAction(new EventHandler<ActionEvent>() {
+		counterproposeOptionButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	counterproposeOptionButton.setStyle(on);
-	            	counterproposeValueButton.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				counterproposeOptionButton.setStyle(on);
+				counterproposeValueButton.setStyle(off);
 
 
-	            	list.add(sendHBox);
+				list.add(sendHBox);
 
-	            	OptionChoice optionChoice=new OptionChoice();
-	            	Stage optionStage=new Stage();
-	            	Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+				OptionChoice optionChoice=new OptionChoice();
+				Stage optionStage=new Stage();
+				Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 
-	        	     Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
-	        	     optionStage.setScene(scene);
-	        	     optionStage.setFullScreen(true);
+				Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
+				optionStage.setScene(scene);
+				optionStage.setFullScreen(true);
 
-	        	     optionStage.setScene(scene);
-	        	     scene.getStylesheets().add
-	        	        (Home1.class.getResource("application2.css").toExternalForm());
-	            	optionChoice.start(optionStage);
+				optionStage.setScene(scene);
+				scene.getStylesheets().add
+				(Home1.class.getResource("application2.css").toExternalForm());
+				optionChoice.start(optionStage);
 
-	            	optionChoice.addElements(situation,optionStage,chatStage,details,list);
-	            	chatStage.hide();
+				optionChoice.addElements(situation,optionStage,chatStage,details,list);
+				chatStage.hide();
 
 
-	            	setTopAnchor(co1HBox,200.0);
-	            	setTopAnchor(co2HBox,200.0);
-	            	setTopAnchor(co3HBox,200.0);
-	            	setTopAnchor(co4HBox,200.0);
+				setTopAnchor(co1HBox,200.0);
+				setTopAnchor(co2HBox,200.0);
+				setTopAnchor(co3HBox,200.0);
+				setTopAnchor(co4HBox,200.0);
 
 
-	            }
-	        });
+			}
+		});
 
 
-		   counterproposeValueButton.setOnAction(new EventHandler<ActionEvent>() {
+		counterproposeValueButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	counterproposeOptionButton.setStyle(off);
-	            	counterproposeValueButton.setStyle(on);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				counterproposeOptionButton.setStyle(off);
+				counterproposeValueButton.setStyle(on);
 
-		     		setTopAnchor(proposeCriterionLabel,150.0);
-		     		setLeftAnchor(proposeCriterionLabel,100.0);
-		     		list.clear();
-		     		list.addAll(actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				setTopAnchor(proposeCriterionLabel,150.0);
+				setLeftAnchor(proposeCriterionLabel,100.0);
+				list.clear();
+				list.addAll(actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
-		     		   list.addAll(counterproposeOptionHBox,counterproposeValueHBox,open);
+				list.addAll(counterproposeOptionHBox,counterproposeValueHBox,open);
 
 
-		            	list.addAll(proposeLabel);
-		            	if (details[0]=="AcceptPropose"){
-		            		list.addAll(acceptLabel);
-		            		}
-		            	if (details[0]=="RejectPropose"){
-		            		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox,rejectLabel);
-		            	}
-	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,350.0,situation,list);
+				list.addAll(proposeLabel);
+				if (details[0]=="AcceptPropose"){
+					list.addAll(acceptLabel);
+				}
+				if (details[0]=="RejectPropose"){
+					list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox,rejectLabel);
+				}
+				setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,350.0,situation,list);
 
-	            }
-	        });
+			}
+		});
 
 
 
-		   acceptProposeButton.setOnAction(new EventHandler<ActionEvent>() {
+		acceptProposeButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="AcceptPropose";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="AcceptPropose";
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 
 
-		     		setTopAnchor(counterproposeOptionHBox,300.0);
-	            	setLeftAnchor(counterproposeOptionHBox,450.0);
+				setTopAnchor(counterproposeOptionHBox,300.0);
+				setLeftAnchor(counterproposeOptionHBox,450.0);
 
-	     		   	setTopAnchor(counterproposeValueHBox ,300.0);
-	     		   	setLeftAnchor(counterproposeValueHBox ,750.0);
+				setTopAnchor(counterproposeValueHBox ,300.0);
+				setLeftAnchor(counterproposeValueHBox ,750.0);
 
-	     		   setTopAnchor(proposeLabel,250.0);
-	     		   setLeftAnchor(proposeLabel,100.0);
-	     		   setTopAnchor(sendHBox,450.0);
+				setTopAnchor(proposeLabel,250.0);
+				setLeftAnchor(proposeLabel,100.0);
+				setTopAnchor(sendHBox,450.0);
 
-	     		   list.addAll(counterproposeOptionHBox,counterproposeValueHBox,open);
+				list.addAll(counterproposeOptionHBox,counterproposeValueHBox,open);
 
-	            	list.addAll(acceptLabel,proposeLabel);
-	            }
-	        });
+				list.addAll(acceptLabel,proposeLabel);
+			}
+		});
 
 
-		  rejectOnlyButton.setOnAction(new EventHandler<ActionEvent>() {
+		rejectOnlyButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="Reject";
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="Reject";
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
-	            	rejectOnlyButton.setStyle(on);
-	            	rejectStateButton.setStyle(off);
-	            	rejectProposeButton.setStyle(off);
+				rejectOnlyButton.setStyle(on);
+				rejectStateButton.setStyle(off);
+				rejectProposeButton.setStyle(off);
 
-	     		   setTopAnchor(open,200.0);
-		     		setLeftAnchor(open,400.0);
+				setTopAnchor(open,200.0);
+				setLeftAnchor(open,400.0);
 
-		     		setTopAnchor(sendHBox,350.0);
-	            	setLeftAnchor(sendHBox,600.0);
+				setTopAnchor(sendHBox,350.0);
+				setLeftAnchor(sendHBox,600.0);
 
-	     		  list.addAll(rejectLabel,open,sendHBox);
+				list.addAll(rejectLabel,open,sendHBox);
 
-	            }
-	        });
+			}
+		});
 
-		   rejectStateButton.setOnAction(new EventHandler<ActionEvent>() {
+		rejectStateButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="RejectState";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="RejectState";
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
 
-	            	rejectOnlyButton.setStyle(off);
-	            	rejectStateButton.setStyle(on);
-	            	rejectProposeButton.setStyle(off);
+				rejectOnlyButton.setStyle(off);
+				rejectStateButton.setStyle(on);
+				rejectProposeButton.setStyle(off);
 
-	     		   setTopAnchor(open,150.0);
-		     		setLeftAnchor(open,400.0);
+				setTopAnchor(open,150.0);
+				setLeftAnchor(open,400.0);
 
-		     		setTopAnchor(whyLabel,250.0);
-	            	setLeftAnchor(whyLabel,100.0);
+				setTopAnchor(whyLabel,250.0);
+				setLeftAnchor(whyLabel,100.0);
 
-	            	likeButton.setStyle(off);
-	            	dontLikeButton.setStyle(off);
+				likeButton.setStyle(off);
+				dontLikeButton.setStyle(off);
 
-	            	details[6]="FALSE";
-	            	setTopAnchor(sendHBox,400.0);
-	            	setLeftAnchor(sendHBox,600.0);
+				details[6]="FALSE";
+				setTopAnchor(sendHBox,400.0);
+				setLeftAnchor(sendHBox,600.0);
 
-	            	setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,300.0,situation,list);
+				setSecondaryButtonsPositions(c12HBox,c22HBox,c32HBox,c42HBox,c12Button,c22Button,c32Button,c42Button,300.0,situation,list);
 
-	     		  list.addAll(rejectLabel,open,whyLabel);
-	            }
-	        });
+				list.addAll(rejectLabel,open,whyLabel);
+			}
+		});
 
-		   rejectProposeButton.setOnAction(new EventHandler<ActionEvent>() {
+		rejectProposeButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="RejectPropose";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="RejectPropose";
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
 
 
-	            	rejectOnlyButton.setStyle(off);
-	            	rejectStateButton.setStyle(off);
-	            	rejectProposeButton.setStyle(on);
+				rejectOnlyButton.setStyle(off);
+				rejectStateButton.setStyle(off);
+				rejectProposeButton.setStyle(on);
 
 
-		     		   setTopAnchor(open,150.0);
-			     		setLeftAnchor(open,400.0);
+				setTopAnchor(open,150.0);
+				setLeftAnchor(open,400.0);
 
-	            	setTopAnchor(proposeCriterionLabel,250.0);
-		     		setLeftAnchor(proposeCriterionLabel,100.0);
+				setTopAnchor(proposeCriterionLabel,250.0);
+				setLeftAnchor(proposeCriterionLabel,100.0);
 
-	              	setTopAnchor(proposeLabel,250.0);
-	            	setLeftAnchor(proposeLabel,100.0);
+				setTopAnchor(proposeLabel,250.0);
+				setLeftAnchor(proposeLabel,100.0);
 
-	            	setTopAnchor(counterproposeOptionHBox,300.0);
-	            	setLeftAnchor(counterproposeOptionHBox,450.0);
+				setTopAnchor(counterproposeOptionHBox,300.0);
+				setLeftAnchor(counterproposeOptionHBox,450.0);
 
-	     		   	setTopAnchor(counterproposeValueHBox ,300.0);
-	     		   	setLeftAnchor(counterproposeValueHBox ,750.0);
+				setTopAnchor(counterproposeValueHBox ,300.0);
+				setLeftAnchor(counterproposeValueHBox ,750.0);
 
-	     		   	setTopAnchor(sendHBox,450.0);
-	            	setLeftAnchor(sendHBox,600.0);
+				setTopAnchor(sendHBox,450.0);
+				setLeftAnchor(sendHBox,600.0);
 
-	     		  list.addAll(rejectLabel,proposeLabel,open,counterproposeOptionHBox,counterproposeValueHBox);
-	            }
-	        });
+				list.addAll(rejectLabel,proposeLabel,open,counterproposeOptionHBox,counterproposeValueHBox);
+			}
+		});
 
 
-		   stateButton.setOnAction(new EventHandler<ActionEvent>() {
+		stateButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="StatePreference";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="StatePreference";
 
-	            	stateButton.setStyle(on);
-	            	askGeneralButton.setStyle(off);
-	            	askSpecificButton.setStyle(off);
+				stateButton.setStyle(on);
+				askGeneralButton.setStyle(off);
+				askSpecificButton.setStyle(off);
 
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
 
-	            	setTopAnchor(likeHBox,150.0);
-	            	setTopAnchor(dontLikeHBox,150.0);
-	            	setLeftAnchor(likeHBox,500.0);
-	            	setLeftAnchor(dontLikeHBox,700.0);
-	            	likeButton.setStyle(off);
-	            	dontLikeButton.setStyle(off);
-	            	setTopAnchor(sendHBox,300.0);
-	            	setLeftAnchor(sendHBox,600.0);
-	            	list.addAll(likeHBox,dontLikeHBox);
+				setTopAnchor(likeHBox,150.0);
+				setTopAnchor(dontLikeHBox,150.0);
+				setLeftAnchor(likeHBox,500.0);
+				setLeftAnchor(dontLikeHBox,700.0);
+				likeButton.setStyle(off);
+				dontLikeButton.setStyle(off);
+				setTopAnchor(sendHBox,300.0);
+				setLeftAnchor(sendHBox,600.0);
+				list.addAll(likeHBox,dontLikeHBox);
 
-	            	setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
+				setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
 
-	            }
-	        });
+			}
+		});
 
 
-		   askGeneralButton.setOnAction(new EventHandler<ActionEvent>() {
+		askGeneralButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
 
-	            	details[0]="AskPreference";
-	            	details[7]="General";
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
+				details[0]="AskPreference";
+				details[7]="General";
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
 
-	            	setSecondaryButtonsPositions(cG1HBox,cG2HBox,cG3HBox,cG4HBox,cG1Button,cG2Button,cG3Button,cG4Button,170.0,situation,list);
+				setSecondaryButtonsPositions(cG1HBox,cG2HBox,cG3HBox,cG4HBox,cG1Button,cG2Button,cG3Button,cG4Button,170.0,situation,list);
 
-	            	  setTopAnchor(sendHBox,250.0);
-		            	setLeftAnchor(sendHBox,600.0);
-	            	stateButton.setStyle(off);
-	            	askGeneralButton.setStyle(on);
-	            	askSpecificButton.setStyle(off);
+				setTopAnchor(sendHBox,250.0);
+				setLeftAnchor(sendHBox,600.0);
+				stateButton.setStyle(off);
+				askGeneralButton.setStyle(on);
+				askSpecificButton.setStyle(off);
 
 
-	            }
-	        });
+			}
+		});
 
-		   askSpecificButton.setOnAction(new EventHandler<ActionEvent>() {
+		askSpecificButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[0]="AskPreference";
-	            	details[7]="Specefic";
-	            	stateButton.setStyle(off);
-	            	askGeneralButton.setStyle(off);
-	            	askSpecificButton.setStyle(on);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[0]="AskPreference";
+				details[7]="Specefic";
+				stateButton.setStyle(off);
+				askGeneralButton.setStyle(off);
+				askSpecificButton.setStyle(on);
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				list.addAll(stateHBox,askGeneralHBox,askSpecificHBox);
 
-	            	setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,170.0,situation,list);
+				setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,170.0,situation,list);
 
-	            }
-	        });
+			}
+		});
 
-		  noButton.setOnAction(new EventHandler<ActionEvent>() {
+		noButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
 
-	            	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-	            	proposeButton.setStyle(off);
-	            	acceptButton.setStyle(off);
-	            	rejectButton.setStyle(off);
-	            	stateAskButton.setStyle(off);
-	            	stopButton.setStyle(off);
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(off);
 
-	            }
-	        });
+			}
+		});
 
-		  yesButton.setOnAction(new EventHandler<ActionEvent>() {
+		yesButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
 
-	            	yesButton.setStyle(on);
-	            	noButton.setStyle(off);
-	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
-	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Arthur-dom"+relation+"-exp"+username+".txt");
-	            	writeHistory history=new writeHistory();
-	            	history.copyFile(fichier1,fichier2);
-	            	chatStage.hide();
-	            }
-	        });
+				yesButton.setStyle(on);
+				noButton.setStyle(off);
+				File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
+				File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
+						username+".txt");
+				//sauvegarde(fichier1, fichier2);
+				chatStage.hide();
+			}
+		});
 
-		  likeButton.setOnAction(new EventHandler<ActionEvent>() {
+		likeButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[6]="TRUE";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[6]="TRUE";
 
-	            	likeButton.setStyle(on);
-	            	dontLikeButton.setStyle(off);
+				likeButton.setStyle(on);
+				dontLikeButton.setStyle(off);
 
-	            }
-	        });
+			}
+		});
 
-		  dontLikeButton.setOnAction(new EventHandler<ActionEvent>() {
+		dontLikeButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	details[6]="FALSE";
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				details[6]="FALSE";
 
-	            	dontLikeButton.setStyle(on);
-	            	likeButton.setStyle(off);
+				dontLikeButton.setStyle(on);
+				likeButton.setStyle(off);
 
-	            }
-	        });
+			}
+		});
 
-		  optionButton.setOnAction(new EventHandler<ActionEvent>() {
+		optionButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
 
-	            	optionButton.setStyle(on);
-	            	criterionButton.setStyle(off);
+				optionButton.setStyle(on);
+				criterionButton.setStyle(off);
 
-	            	list.removeAll(c1HBox,c2HBox,c3HBox,c4HBox,co1HBox,co2HBox,co3HBox,co4HBox);
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
+				list.removeAll(c1HBox,c2HBox,c3HBox,c4HBox,co1HBox,co2HBox,co3HBox,co4HBox);
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
 
-	            	setSecondaryButtonsPositions(co1HBox,co2HBox,co3HBox,co4HBox,co1Button,co2Button,co3Button,co4Button,200.0,situation,list);
+				setSecondaryButtonsPositions(co1HBox,co2HBox,co3HBox,co4HBox,co1Button,co2Button,co3Button,co4Button,200.0,situation,list);
 
-	            }
-	        });
+			}
+		});
 
-		  criterionButton.setOnAction(new EventHandler<ActionEvent>() {
+		criterionButton.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
 
-	            	criterionButton.setStyle(on);
-	            	optionButton.setStyle(off);
+				criterionButton.setStyle(on);
+				optionButton.setStyle(off);
 
-	            	list.removeAll(c1HBox,c2HBox,c3HBox,c4HBox,co1HBox,co2HBox,co3HBox,co4HBox);
-	            	clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				list.removeAll(c1HBox,c2HBox,c3HBox,c4HBox,co1HBox,co2HBox,co3HBox,co4HBox);
+				clearLastButtons(co1HBoxs,co2HBoxs,co3HBoxs,co4HBoxs,list,situation);
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
 
-	            	setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
+				setSecondaryButtonsPositions(c1HBox,c2HBox,c3HBox,c4HBox,c1Button,c2Button,c3Button,c4Button,200.0,situation,list);
 
-	            }
-	        });
+			}
+		});
 
 
 
-		  c1Button.setOnAction(new EventHandler<ActionEvent>() {
+		c1Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
-	            	details[2]=c1Button.getText();
-	            	 c3Button.setStyle(off);
-	            	 c1Button.setStyle(on);
-	            	 c2Button.setStyle(off);
-	            	 c4Button.setStyle(off);
-	            	 colorButtons(c1Buttons);
-	            	 if (situation=="restaurant")
-	     	        {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				details[2]=c1Button.getText();
+				c3Button.setStyle(off);
+				c1Button.setStyle(on);
+				c2Button.setStyle(off);
+				c4Button.setStyle(off);
+				colorButtons(c1Buttons);
+				if (situation=="restaurant")
+				{
 
-	     				 for (int i=0;i<Atmosphere.values().length;i++){
+					for (int i=0;i<Atmosphere.values().length;i++){
 
-	     					setTopAnchor(c1HBoxs.get(i),getTopAnchor(c1HBox)+50.0);
-	     					setLeftAnchor(c1HBoxs.get(i),300.0+200.0*i);
-	     					list.add(c1HBoxs.get(i));
-	     				 }
+						setTopAnchor(c1HBoxs.get(i),getTopAnchor(c1HBox)+50.0);
+						setLeftAnchor(c1HBoxs.get(i),300.0+200.0*i);
+						list.add(c1HBoxs.get(i));
+					}
 
-	     	        }
-	            	 else{
-	            		 for (int i=0;i<6;i++){
+				}
+				else{
+					for (int i=0;i<6;i++){
 
-		     					setTopAnchor(c1HBoxs.get(i),getTopAnchor(c1HBox)+50.0);
-		     					setLeftAnchor(c1HBoxs.get(i),200.0+150.0*i);
-		     					list.add(c1HBoxs.get(i));
-	            		 }
-	            	 }
-	            }
-	        });
+						setTopAnchor(c1HBoxs.get(i),getTopAnchor(c1HBox)+50.0);
+						setLeftAnchor(c1HBoxs.get(i),200.0+150.0*i);
+						list.add(c1HBoxs.get(i));
+					}
+				}
+			}
+		});
 
-		  c2Button.setOnAction(new EventHandler<ActionEvent>() {
+		c2Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
-	              	details[2]=c2Button.getText();
-	            	c3Button.setStyle(off);
-	            	 c1Button.setStyle(off);
-	            	 c2Button.setStyle(on);
-	            	 c4Button.setStyle(off);
-	            	 colorButtons(c2Buttons);
-	            	 if (situation=="restaurant")
-		     	        {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				details[2]=c2Button.getText();
+				c3Button.setStyle(off);
+				c1Button.setStyle(off);
+				c2Button.setStyle(on);
+				c4Button.setStyle(off);
+				colorButtons(c2Buttons);
+				if (situation=="restaurant")
+				{
 
-		     				 for (int i=0;i<3;i++){
+					for (int i=0;i<3;i++){
 
-		     					setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
-		     					setLeftAnchor(c2HBoxs.get(i),300.0+250.0*i);
-		     					list.add(c2HBoxs.get(i));
-		     				 }
+						setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
+						setLeftAnchor(c2HBoxs.get(i),300.0+250.0*i);
+						list.add(c2HBoxs.get(i));
+					}
 
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
+				}
+				else{
+					for (int i=0;i<5;i++){
 
-			     					setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
-			     					setLeftAnchor(c2HBoxs.get(i),200.0+150.0*i);
-			     					list.add(c2HBoxs.get(i));
-		            		 }
-		            	 }
+						setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
+						setLeftAnchor(c2HBoxs.get(i),200.0+150.0*i);
+						list.add(c2HBoxs.get(i));
+					}
+				}
 
-	            }
-	        });
+			}
+		});
 
-		  c3Button.setOnAction(new EventHandler<ActionEvent>() {
+		c3Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
-	              	details[2]=c3Button.getText();
-	            	c3Button.setStyle(on);
-		           	 c1Button.setStyle(off);
-		           	 c2Button.setStyle(off);
-		           	 c4Button.setStyle(off);
-		           	colorButtons(c3Buttons);
-	            	 if (situation=="restaurant")
-		     	        {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				details[2]=c3Button.getText();
+				c3Button.setStyle(on);
+				c1Button.setStyle(off);
+				c2Button.setStyle(off);
+				c4Button.setStyle(off);
+				colorButtons(c3Buttons);
+				if (situation=="restaurant")
+				{
 
-		     				 for (int i=0;i<7;i++){
-		     					setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
-		     					setLeftAnchor(c3HBoxs.get(i),150.0+150.0*i);
-		     					list.add(c3HBoxs.get(i));
-		     				 }
+					for (int i=0;i<7;i++){
+						setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
+						setLeftAnchor(c3HBoxs.get(i),150.0+150.0*i);
+						list.add(c3HBoxs.get(i));
+					}
 
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
-			     					setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
-			     					setLeftAnchor(c3HBoxs.get(i),200.0+150.0*i);
-			     					list.add(c3HBoxs.get(i));
-		            		 }
-		            	 }
+				}
+				else{
+					for (int i=0;i<5;i++){
+						setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
+						setLeftAnchor(c3HBoxs.get(i),200.0+150.0*i);
+						list.add(c3HBoxs.get(i));
+					}
+				}
 
-	            }
-	        });
+			}
+		});
 
-		  c4Button.setOnAction(new EventHandler<ActionEvent>() {
+		c4Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
-	              	details[2]=c4Button.getText();
-	            	 c3Button.setStyle(off);
-	            	 c1Button.setStyle(off);
-	            	 c2Button.setStyle(off);
-	            	 c4Button.setStyle(on);
-	            	 colorButtons(c4Buttons);
-		     				 for (int i=0;i<5;i++){
-		     					setTopAnchor(c4HBoxs.get(i),getTopAnchor(c4HBox)+50.0);
-		     					setLeftAnchor(c4HBoxs.get(i),200.0+200.0*i);
-		     					list.add(c4HBoxs.get(i));
-		     				 }
-		            	 }
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c1HBoxs,c2HBoxs,c3HBoxs,c4HBoxs,list,situation);
+				details[2]=c4Button.getText();
+				c3Button.setStyle(off);
+				c1Button.setStyle(off);
+				c2Button.setStyle(off);
+				c4Button.setStyle(on);
+				colorButtons(c4Buttons);
+				for (int i=0;i<5;i++){
+					setTopAnchor(c4HBoxs.get(i),getTopAnchor(c4HBox)+50.0);
+					setLeftAnchor(c4HBoxs.get(i),200.0+200.0*i);
+					list.add(c4HBoxs.get(i));
+				}
+			}
 
-	        });
+		});
 
 
-		  cG1Button.setOnAction(new EventHandler<ActionEvent>() {
+		cG1Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.remove(sendHBox);
-	            	list.add(sendHBox);
-	            	details[2]=cG1Button.getText();
-	            	 cG3Button.setStyle(off);
-	            	 cG1Button.setStyle(on);
-	            	 cG2Button.setStyle(off);
-	            	 cG4Button.setStyle(off);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.remove(sendHBox);
+				list.add(sendHBox);
+				details[2]=cG1Button.getText();
+				cG3Button.setStyle(off);
+				cG1Button.setStyle(on);
+				cG2Button.setStyle(off);
+				cG4Button.setStyle(off);
 
-	            }
-	        });
+			}
+		});
 
-		  cG2Button.setOnAction(new EventHandler<ActionEvent>() {
+		cG2Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.remove(sendHBox);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.remove(sendHBox);
 
-	            	list.add(sendHBox);
-	              	details[2]=cG2Button.getText();
-	            	cG3Button.setStyle(off);
-	            	 cG1Button.setStyle(off);
-	            	 cG2Button.setStyle(on);
-	            	 cG4Button.setStyle(off);
+				list.add(sendHBox);
+				details[2]=cG2Button.getText();
+				cG3Button.setStyle(off);
+				cG1Button.setStyle(off);
+				cG2Button.setStyle(on);
+				cG4Button.setStyle(off);
 
 
-	            }
-	        });
+			}
+		});
 
-		  cG3Button.setOnAction(new EventHandler<ActionEvent>() {
+		cG3Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.remove(sendHBox);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.remove(sendHBox);
 
-	            	list.add(sendHBox);
-	              	details[2]=cG3Button.getText();
-	            	cG3Button.setStyle(on);
-		           	 cG1Button.setStyle(off);
-		           	 cG2Button.setStyle(off);
-		           	 cG4Button.setStyle(off);
+				list.add(sendHBox);
+				details[2]=cG3Button.getText();
+				cG3Button.setStyle(on);
+				cG1Button.setStyle(off);
+				cG2Button.setStyle(off);
+				cG4Button.setStyle(off);
 
 
-	            }
-	        });
+			}
+		});
 
-		  cG4Button.setOnAction(new EventHandler<ActionEvent>() {
+		cG4Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	list.remove(sendHBox);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				list.remove(sendHBox);
 
-	            	list.add(sendHBox);
-	              	details[2]=cG4Button.getText();
-	            	 cG3Button.setStyle(off);
-	            	 cG1Button.setStyle(off);
-	            	 cG2Button.setStyle(off);
-	            	 cG4Button.setStyle(on);
-	            }
+				list.add(sendHBox);
+				details[2]=cG4Button.getText();
+				cG3Button.setStyle(off);
+				cG1Button.setStyle(off);
+				cG2Button.setStyle(off);
+				cG4Button.setStyle(on);
+			}
 
-	        });
+		});
 
-		  c12Button.setOnAction(new EventHandler<ActionEvent>() {
+		c12Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
-	              	details[4]=c12Button.getText();
-	            	 c32Button.setStyle(off);
-	            	 c12Button.setStyle(on);
-	            	 c22Button.setStyle(off);
-	            	 c42Button.setStyle(off);
-			         colorButtons(c12Buttons);
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
+				details[4]=c12Button.getText();
+				c32Button.setStyle(off);
+				c12Button.setStyle(on);
+				c22Button.setStyle(off);
+				c42Button.setStyle(off);
+				colorButtons(c12Buttons);
 
-	            	 if (situation=="restaurant")
-	     	        {
+				if (situation=="restaurant")
+				{
 
-	     				 for (int i=0;i<4;i++){
-	     					setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
-	     					setLeftAnchor(c12HBoxs.get(i),300.0+200.0*i);
-	     					list.add(c12HBoxs.get(i));
-	     				 }
+					for (int i=0;i<4;i++){
+						setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
+						setLeftAnchor(c12HBoxs.get(i),300.0+200.0*i);
+						list.add(c12HBoxs.get(i));
+					}
 
-	     	        }
-	            	 else{
-	            		 for (int i=0;i<6;i++){
-		     					setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
-		     					setLeftAnchor(c12HBoxs.get(i),200.0+150.0*i);
-		     					list.add(c12HBoxs.get(i));
-	            		 }
-	            	 }
-	            }
-	        });
+				}
+				else{
+					for (int i=0;i<6;i++){
+						setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
+						setLeftAnchor(c12HBoxs.get(i),200.0+150.0*i);
+						list.add(c12HBoxs.get(i));
+					}
+				}
+			}
+		});
 
-		  c22Button.setOnAction(new EventHandler<ActionEvent>() {
+		c22Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
-	            	details[4]=c22Button.getText();
-	            	c32Button.setStyle(off);
-	            	 c12Button.setStyle(off);
-	            	 c22Button.setStyle(on);
-	            	 c42Button.setStyle(off);
-	            	  colorButtons(c22Buttons);
-	            	 if (situation=="restaurant")
-		     	        {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
+				details[4]=c22Button.getText();
+				c32Button.setStyle(off);
+				c12Button.setStyle(off);
+				c22Button.setStyle(on);
+				c42Button.setStyle(off);
+				colorButtons(c22Buttons);
+				if (situation=="restaurant")
+				{
 
-		     				 for (int i=0;i<3;i++){
-		     					setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
-		     					setLeftAnchor(c22HBoxs.get(i),300.0+250.0*i);
-		     					list.add(c22HBoxs.get(i));
-		     				 }
+					for (int i=0;i<3;i++){
+						setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
+						setLeftAnchor(c22HBoxs.get(i),300.0+250.0*i);
+						list.add(c22HBoxs.get(i));
+					}
 
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
-			     					setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
-			     					setLeftAnchor(c22HBoxs.get(i),200.0+150.0*i);
-			     					list.add(c22HBoxs.get(i));
-		            		 }
-		            	 }
+				}
+				else{
+					for (int i=0;i<5;i++){
+						setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
+						setLeftAnchor(c22HBoxs.get(i),200.0+150.0*i);
+						list.add(c22HBoxs.get(i));
+					}
+				}
 
-	            }
-	        });
+			}
+		});
 
-		  c32Button.setOnAction(new EventHandler<ActionEvent>() {
+		c32Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
-	            	details[4]=c32Button.getText();
-	            	c32Button.setStyle(on);
-		           	 c12Button.setStyle(off);
-		           	 c22Button.setStyle(off);
-		           	 c42Button.setStyle(off);
-		             colorButtons(c32Buttons);
-	            	 if (situation=="restaurant")
-		     	        {
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
+				details[4]=c32Button.getText();
+				c32Button.setStyle(on);
+				c12Button.setStyle(off);
+				c22Button.setStyle(off);
+				c42Button.setStyle(off);
+				colorButtons(c32Buttons);
+				if (situation=="restaurant")
+				{
 
-		     				 for (int i=0;i<7;i++){
-		     					setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
-		     					setLeftAnchor(c32HBoxs.get(i),150.0+150.0*i);
-		     					list.add(c32HBoxs.get(i));
-		     				 }
+					for (int i=0;i<7;i++){
+						setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
+						setLeftAnchor(c32HBoxs.get(i),150.0+150.0*i);
+						list.add(c32HBoxs.get(i));
+					}
 
-		     	        }
-		            	 else{
-		            		 for (int i=0;i<5;i++){
-			     					setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
-			     					setLeftAnchor(c32HBoxs.get(i),200.0+150.0*i);
-			     					list.add(c32HBoxs.get(i));
-		            		 }
-		            	 }
+				}
+				else{
+					for (int i=0;i<5;i++){
+						setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
+						setLeftAnchor(c32HBoxs.get(i),200.0+150.0*i);
+						list.add(c32HBoxs.get(i));
+					}
+				}
 
-	            }
-	        });
+			}
+		});
 
-		  c42Button.setOnAction(new EventHandler<ActionEvent>() {
+		c42Button.setOnAction(new EventHandler<ActionEvent>() {
 
-	            @Override
-	            public void handle(ActionEvent prosposeEvent) {
-	            	clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
-	            	details[4]=c42Button.getText();
-	            	 c32Button.setStyle(off);
-	            	 c12Button.setStyle(off);
-	            	 c22Button.setStyle(off);
-	            	 c42Button.setStyle(on);
-	            	 colorButtons(c42Buttons);
-		     				 for (int i=0;i<5;i++){
-		     					setTopAnchor(c42HBoxs.get(i),getTopAnchor(c42HBox)+50.0);
-		     					setLeftAnchor(c42HBoxs.get(i),200.0+200.0*i);
-		     					list.add(c42HBoxs.get(i));
-		     				 }
-		            	 }
+			@Override
+			public void handle(ActionEvent prosposeEvent) {
+				clearLastButtons(c12HBoxs,c22HBoxs,c32HBoxs,c42HBoxs,list,situation);
+				details[4]=c42Button.getText();
+				c32Button.setStyle(off);
+				c12Button.setStyle(off);
+				c22Button.setStyle(off);
+				c42Button.setStyle(on);
+				colorButtons(c42Buttons);
+				for (int i=0;i<5;i++){
+					setTopAnchor(c42HBoxs.get(i),getTopAnchor(c42HBox)+50.0);
+					setLeftAnchor(c42HBoxs.get(i),200.0+200.0*i);
+					list.add(c42HBoxs.get(i));
+				}
+			}
 
-	        });
+		});
 
-		  /*Defining the actions of the button arrays*/
+		/*Defining the actions of the button arrays*/
 
 
-				 for (ButtonId=0;ButtonId<c1Buttons.size();ButtonId++){
-					 String cr1=c1Buttons.get(ButtonId).getText();
-					 String cr12=c12Buttons.get(ButtonId).getText();
-					 final Button myButton=c1Buttons.get(ButtonId);
-					 final Button myButton2=c12Buttons.get(ButtonId);
-					 myButton.setOnAction(new EventHandler<ActionEvent>() {
+		for (ButtonId=0;ButtonId<c1Buttons.size();ButtonId++){
+			String cr1=c1Buttons.get(ButtonId).getText();
+			String cr12=c12Buttons.get(ButtonId).getText();
+			final Button myButton=c1Buttons.get(ButtonId);
+			final Button myButton2=c12Buttons.get(ButtonId);
+			myButton.setOnAction(new EventHandler<ActionEvent>() {
 
-			            @Override
-			            public void handle(ActionEvent exitEvent) {
-			            		colorButtons(c1Buttons);
-			            		myButton.setStyle(on);
-			            		list.remove(sendHBox);
-			            		list.add(sendHBox);
-			     				 details[3]= cr1;
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c1Buttons);
+					myButton.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[3]= cr1;
 
-				            	 	}
+				}
 
-							 	});
+			});
 
-					 myButton2.setOnAction(new EventHandler<ActionEvent>() {
+			myButton2.setOnAction(new EventHandler<ActionEvent>() {
 
-				            @Override
-				            public void handle(ActionEvent exitEvent) {
-				            			colorButtons(c12Buttons);
-				            			myButton2.setStyle(on);
-				        				list.remove(sendHBox);
-				            			list.add(sendHBox);
-					     				details[5]=cr12;
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c12Buttons);
+					myButton2.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[5]=cr12;
 
-					            	 	}
+				}
 
-								 	});
+			});
 
-				 }
+		}
 
-				 for (int i=0;i<c2Buttons.size();i++){
-					 String cr2=c2Buttons.get(i).getText();
-					 String cr22=c22Buttons.get(i).getText();
-					 final Button myButton=c2Buttons.get(i);
-					 final Button myButton2=c22Buttons.get(i);
-					 myButton.setOnAction(new EventHandler<ActionEvent>() {
+		for (int i=0;i<c2Buttons.size();i++){
+			String cr2=c2Buttons.get(i).getText();
+			String cr22=c22Buttons.get(i).getText();
+			final Button myButton=c2Buttons.get(i);
+			final Button myButton2=c22Buttons.get(i);
+			myButton.setOnAction(new EventHandler<ActionEvent>() {
 
-			            @Override
-			            public void handle(ActionEvent exitEvent) {
-			            	colorButtons(c2Buttons);
-			            		myButton.setStyle(on);
-			        			list.remove(sendHBox);
-			            		list.add(sendHBox);
-				     				 details[3]=cr2;
-				            	 	}
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c2Buttons);
+					myButton.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[3]=cr2;
+				}
 
-							 	});
+			});
 
-					 myButton2.setOnAction(new EventHandler<ActionEvent>() {
+			myButton2.setOnAction(new EventHandler<ActionEvent>() {
 
-				            @Override
-				            public void handle(ActionEvent exitEvent) {
-				            	colorButtons(c22Buttons);
-				            	myButton2.setStyle(on);
-				        			list.remove(sendHBox);
-				            		list.add(sendHBox);
-					     				 details[5]=cr22;
-					            	 	}
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c22Buttons);
+					myButton2.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[5]=cr22;
+				}
 
-								 	});
+			});
 
-					 }
+		}
 
-					 for (int i=0;i<c3Buttons.size();i++){
-						 String cr3=c3Buttons.get(i).getText();
-						 String cr32=c32Buttons.get(i).getText();
-						 final Button myButton=c3Buttons.get(i);
-						 final Button myButton2=c32Buttons.get(i);
-						 myButton.setOnAction(new EventHandler<ActionEvent>() {
+		for (int i=0;i<c3Buttons.size();i++){
+			String cr3=c3Buttons.get(i).getText();
+			String cr32=c32Buttons.get(i).getText();
+			final Button myButton=c3Buttons.get(i);
+			final Button myButton2=c32Buttons.get(i);
+			myButton.setOnAction(new EventHandler<ActionEvent>() {
 
-				            @Override
-				            public void handle(ActionEvent exitEvent) {
-				            			colorButtons(c3Buttons);
-				            			myButton.setStyle(on);
-				        				list.remove(sendHBox);
-				            			list.add(sendHBox);
-					     				 details[3]=cr3;
-					            	 	}
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c3Buttons);
+					myButton.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[3]=cr3;
+				}
 
-								 	});
+			});
 
-					 myButton2.setOnAction(new EventHandler<ActionEvent>() {
+			myButton2.setOnAction(new EventHandler<ActionEvent>() {
 
-				            @Override
-				            public void handle(ActionEvent exitEvent) {
-				            	colorButtons(c32Buttons);
-				            	myButton2.setStyle(on);
-				            			list.remove(sendHBox);
-				            			list.add(sendHBox);
-					     				 details[5]=cr32;
-					            	 	}
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c32Buttons);
+					myButton2.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[5]=cr32;
+				}
 
-								 	});
+			});
 
-				 }
+		}
 
-				 for (int i=0;i<c4Buttons.size();i++){
-					 String cr4=c4Buttons.get(i).getText();
-					 String cr42=c42Buttons.get(i).getText();
-					 final Button myButton=c4Buttons.get(i);
-					 final Button myButton2=c42Buttons.get(i);
-					 myButton.setOnAction(new EventHandler<ActionEvent>() {
-
-			            @Override
-			            public void handle(ActionEvent exitEvent) {
-			            			colorButtons(c4Buttons);
-			            			myButton.setStyle(on);
-			            			list.remove(sendHBox);
-			            			list.add(sendHBox);
-				     				details[3]=cr4;
-				            	 	}
-
-							 	});
-
-					 myButton2.setOnAction(new EventHandler<ActionEvent>() {
-
-				            @Override
-				            public void handle(ActionEvent exitEvent) {
-				            			colorButtons(c42Buttons);
-				            			myButton.setStyle(on);
-				            			list.remove(sendHBox);
-				            			list.add(sendHBox);
-					     				details[5]=cr42;
-					            	 	}
-
-								 	});
-				 }
-
-				  sendButton.setOnAction(new EventHandler<ActionEvent>() {
-
-			            @Override
-			            public void handle(ActionEvent exitEvent) {
-
-			            	String command;
-			        		String command1="null";
-			        		String command2="";
-			        		details[3]=details[3].replace(" ","_");
-			        		details[3]=details[3].toUpperCase();
-			        		details[5]=details[5].replace(" ","_");
-			        		details[5]=details[5].toUpperCase();
-			        		if (details[0]=="AskPreference"){
-			        			if (details[7]=="General"){
-			        				command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
-				        			command2="null";
-
-			        			}
-			        			else{
-			        				command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
-			        				command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
-			        			}
-			        		}
-			        		else if (details[0]=="StatePreference"){
-			        			command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
-			        			command2="Packages.fr.limsi.negotiate.Statement.Satisfiable."+details[6];
-			        		}
-			        		else if (details[0]=="Propose"){
-			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-			        		}
-			        		else if ((details[0]=="Accept")||(details[0]=="Reject")){
-			        			if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
-				        			details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
-				        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-				        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			else{
-			        				details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
-				        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-				        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-			        		}
-
-			        		else if (details[0]=="RejectState"){
-			        			if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
-				        			details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
-				        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-				        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			else{
-			        			details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
-			        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-			        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-			        			command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5];
-			        		}
-			        		else {
-			        			if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
-				        			details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
-				        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-				        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			else{
-			        			details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
-			        			details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
-			        			details[3]=details[3].replace(" ","_");
-			        			}
-			        			command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-			        			command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5]+")";
-			        		}
-			        		command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
-			        		if (command2!="") command=command+"/"+command2;
-
-			        		//System.out.println(command);
-			        		if ((details[0]=="StatePreference") && (details[6]=="")){
-				        		setTopAnchor(errorLabel,500.0);
-				        		setLeftAnchor(errorLabel,800.0);
-				        		list.add(errorLabel);
-				        		}
-				        		else{
-			        		interaction.getConsole().execute(command);
-			        		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
-			        		interaction.getSystem().respond(interaction, false, guess);
-			        		if (negotiationSuccess()){
-			        			//sauvegarde
-			        			
-			        			System.out.println("We reached an agreement, the negotiation is over!");}
-
-				        		}
-			        		list.clear();
-				     		   list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-				     		  proposeButton.setStyle(off);
-				            	acceptButton.setStyle(off);
-				            	rejectButton.setStyle(off);
-				            	stateAskButton.setStyle(off);
-				            	stopButton.setStyle(off);
-			            }
-			        });
+		for (int i=0;i<c4Buttons.size();i++){
+			String cr4=c4Buttons.get(i).getText();
+			String cr42=c42Buttons.get(i).getText();
+			final Button myButton=c4Buttons.get(i);
+			final Button myButton2=c42Buttons.get(i);
+			myButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c4Buttons);
+					myButton.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[3]=cr4;
+				}
+
+			});
+
+			myButton2.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent exitEvent) {
+					colorButtons(c42Buttons);
+					myButton.setStyle(on);
+					list.remove(sendHBox);
+					list.add(sendHBox);
+					details[5]=cr42;
+				}
+
+			});
+		}
+
+		sendButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent exitEvent) {
+
+				String command;
+				String command1="null";
+				String command2="";
+				details[3]=details[3].replace(" ","_");
+				details[3]=details[3].toUpperCase();
+				details[5]=details[5].replace(" ","_");
+				details[5]=details[5].toUpperCase();
+				if (details[0]=="AskPreference"){
+					if (details[7]=="General"){
+						command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
+						command2="null";
+
+					}
+					else{
+						command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
+						command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
+					}
+				}
+				else if (details[0]=="StatePreference"){
+					command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
+					command2="Packages.fr.limsi.negotiate.Statement.Satisfiable."+details[6];
+				}
+				else if (details[0]=="Propose"){
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+				}
+				else if ((details[0]=="Accept")||(details[0]=="Reject")){
+					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
+						details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					else{
+						details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+				}
+
+				else if (details[0]=="RejectState"){
+					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
+						details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					else{
+						details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+					command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5];
+				}
+				else {
+					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
+						details[2]=getCriterion(open.getSelectionModel().getSelectedItem(),situation);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					else{
+						details[2]=situation.substring(0, 1).toUpperCase()+situation.substring(1);
+						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
+						details[3]=details[3].replace(" ","_");
+					}
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5]+")";
+				}
+				command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
+				if (command2!="") command=command+"/"+command2;
+
+				//System.out.println(command);
+				if ((details[0]=="StatePreference") && (details[6]=="")){
+					setTopAnchor(errorLabel,500.0);
+					setLeftAnchor(errorLabel,800.0);
+					list.add(errorLabel);
+				}
+				else{
+					interaction.getConsole().execute(command);
+					boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
+					interaction.getSystem().respond(interaction, false, guess);
+					if (negotiationSuccess()){
+
+						System.out.println("We reached an agreement, the negotiation is over!");
+						File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
+						File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
+								username+".txt");
+						sauvegarde(fichier1, fichier2);
+						nextStep(nbAgents);
+					}
+				}
+				list.clear();
+				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+				proposeButton.setStyle(off);
+				acceptButton.setStyle(off);
+				rejectButton.setStyle(off);
+				stateAskButton.setStyle(off);
+				stopButton.setStyle(off);
+			}
+
+			private void nextStep(int nbAgents) {
+
+				File fichier2 = new File(System.getProperty("user.dir")+
+						File.separator+agentName+"_"+relation+"-exp"+username+".txt");
+
+				WriteHistory writer = new WriteHistory();
+
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("End of negotiation");
+				//alert.setHeaderText("Look, a Confirmation Dialog");
+				alert.setContentText("The negotiation is over. "
+						+ "	Please call the experimentator");
+				ButtonType nextStep = new ButtonType("Next Step");
+				alert.getButtonTypes().setAll(nextStep);
+
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == nextStep){
+					Stage chatStage2=new Stage();
+
+					switch(nbAgents){
+					case(0):{
+						UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username);
+						chat2.situation="restaurant";
+
+						String arthur = "Preferences of agent Bob \n \n" +
+								Acceuil.negotiators.get(1).printPreferences();
+
+						writer.write(arthur, fichier2);
+						chatStage.hide();
+
+						chat2.setPrefModel(Acceuil.getNegotiators().get(1));
+						chat2.start(chatStage2);
+						break;
+					}	
+					case(1):{
+						UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username);
+						chat3.situation="restaurant";
+						Stage chatStage3=new Stage();
+						
+						String kevin = "Preferences of agent Bob \n \n" +
+								Acceuil.negotiators.get(2).printPreferences();
+
+						writer.write(kevin, fichier2);
+						chatStage2.hide();
+						chat3.setPrefModel(Acceuil.getNegotiators().get(2));
+						chat3.start(chatStage3);
+						
+						break;
+					}
+					default: 
+						break;
+
+					}
+				} else {
+
+				}
+
+			}
+		});
 
 	}
-	
+
+	protected void sauvegarde(File fichier1, File fichier2) {
+
+		WriteHistory history=new WriteHistory();
+		WriteHistory.copyLock.lock();
+		history.copyFile(fichier1,fichier2);
+		WriteHistory.copyLock.unlock();
+
+	}
+
+
 	public boolean negotiationSuccess(){
 		return agent.getNegotiation().negotiationSuccess();
 	}

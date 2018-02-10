@@ -1,13 +1,7 @@
 package fr.limsi.application;
 
-import java.awt.Dimension;
+import java.io.File;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import javax.swing.SwingUtilities;
-
-import com.sun.msv.datatype.xsd.FractionDigitsFacet;
 
 import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import fr.limsi.negotiate.Negotiation;
@@ -38,10 +32,13 @@ import javafx.stage.Stage;
 
 
 public class Home1 extends Application {
-	String username;
-	//Acceuil frame; 
+	String username = "1";
+	WriteHistory writer;
+	File history ;
 	public Home1(/*Acceuil frame*/){
 		//this.frame = frame;
+		 writer = new WriteHistory();
+
 	}
 
 	@Override
@@ -109,27 +106,21 @@ public class Home1 extends Application {
 
 		/*Positions*/
 
-		pane.setTopAnchor(sceneTitle,300.0);
+		pane.setTopAnchor(sceneTitle,200.0);
 
 		pane.setLeftAnchor(sceneTitle,600.0);
 
-		AnchorPane.setTopAnchor(userName,400.0);
+		AnchorPane.setTopAnchor(userName,350.0);
 
-		AnchorPane.setLeftAnchor(userName,400.0);
-
-		AnchorPane.setTopAnchor(pw,450.0);
-
-		AnchorPane.setLeftAnchor(pw,400.0);
+		AnchorPane.setLeftAnchor(userName,300.0);
 
 		AnchorPane.setTopAnchor(userTextField,400.0);
 		AnchorPane.setBottomAnchor(userTextField,585.0);
-		AnchorPane.setLeftAnchor(userTextField,650.0);
+		AnchorPane.setLeftAnchor(userTextField,280 + userName.getWidth());
 
-		AnchorPane.setTopAnchor(cb,450.0);
 
-		AnchorPane.setLeftAnchor(cb,600.0);
 
-		AnchorPane.setTopAnchor(hbBtn,500.0);
+		AnchorPane.setTopAnchor(hbBtn,550.0);
 
 		AnchorPane.setLeftAnchor(hbBtn,800.0);
 
@@ -139,12 +130,15 @@ public class Home1 extends Application {
 
 		ObservableList list = pane.getChildren();
 
-		list.addAll(sceneTitle/*,pw*/,userName,userTextField/*,cb*/,hbBtn);
+		list.addAll(sceneTitle,userName,userTextField,hbBtn);
 
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent e) {
+				username=userTextField.getText();
+				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
+				username+".txt");
 				
 				Acceuil frame = new Acceuil();
 				frame.setVisible(true);
@@ -153,6 +147,12 @@ public class Home1 extends Application {
         		while (!Acceuil.isDone()){
         			pause();
         		}
+        		
+    			String userPref = "User Preferences : \n \n" 
+    								+ frame.getUserPref().printPreferences();
+        		
+    			writer.write(userPref, history);
+        		
         		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
         		System.out.println(neg.toString());
         		
@@ -163,7 +163,6 @@ public class Home1 extends Application {
 //				UpPrincipalScreen1 chat=new UpPrincipalScreen1();
 //				chat.setPrefModel(negotiators.get(0));
 //				Stage chatStage=new Stage();
-//				chat.username=userTextField.getText();
 //				chat.situation=/*(String) cb.getValue()*/"restaurant";
 //				chat.start(chatStage);
 
@@ -182,22 +181,29 @@ public class Home1 extends Application {
 	}
 	
 	public void startAgents(/*Negotiation<? extends Option> nego*/){
-		
-		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob");
+		List<Negotiation<? extends Option>> negotiations = Acceuil.getNegotiators();
+		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username);
 		chat.situation="restaurant";
     	Stage chatStage=new Stage();
-    	chat.setPrefModel(Acceuil.getNegotiators().get(0));
+    	chat.setPrefModel(negotiations.get(0));
+    	String bob = "Preferences of agent Bob \n \n" + negotiations.get(0).printPreferences();
+    	writer.write(bob, history);
+    	
     	chat.start(chatStage);
     	
 //    	while(!chat.successNegotiation())
 //    		pause();
     
 //    	
-		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur");
-		chat2.situation="restaurant";
-    	Stage chatStage2=new Stage();
-    	chat2.setPrefModel(Acceuil.getNegotiators().get(1));
-    	chat2.start(chatStage2);
+//		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username);
+//		chat2.situation="restaurant";
+//    	Stage chatStage2=new Stage();
+//    	
+//    	String arthur = "Preferences of agent Bob \n \n" + negotiations.get(0).printPreferences();
+//    	writer.write(arthur, history);
+//    	
+//    	chat2.setPrefModel(Acceuil.getNegotiators().get(1));
+//    	chat2.start(chatStage2);
     	
     	
 	}

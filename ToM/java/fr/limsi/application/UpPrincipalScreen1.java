@@ -16,15 +16,25 @@ import javafx.scene.layout.FlowPane;
 
 
 public class UpPrincipalScreen1 extends Application {
+	public static int nbAgents = -1;
 	String situation;
-	String username;
-	String agentName;
+	private String username;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	private String agentName;
 	private Negotiation<? extends Option> prefModel;
 	 private DownPrincipalScreen1 chatBoard;
 	 
 	 
-	public UpPrincipalScreen1(String agentName){
+	public UpPrincipalScreen1(String agentName, String userName){
 		this.agentName = agentName;
+		this.username = userName;
+		nbAgents ++;
 	}
 	public DownPrincipalScreen1 getChatBoard() {
 		return chatBoard;
@@ -73,7 +83,7 @@ public class UpPrincipalScreen1 extends Application {
 
 		scene.getStylesheets().add
 		(UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
-		chatBoard.addElements(username,situation,chatStage, prefModel);
+		chatBoard.addElements(username,situation,chatStage, prefModel, nbAgents);
 		chatStage.show();
 
 	}

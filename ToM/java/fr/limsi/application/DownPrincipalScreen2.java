@@ -1155,7 +1155,7 @@ public class DownPrincipalScreen2 extends AnchorPane{
 	            	File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 	            	File fichier2 = new File(System.getProperty("user.dir")+File.separator+"T1-Bob-dom"+relation+"-exp"+username+".txt");
 
-	            	writeHistory history=new writeHistory();
+	            	WriteHistory history=new WriteHistory();
 	            	history.copyFile(fichier1,fichier2);
 	            	chatStage.hide();
 	            }

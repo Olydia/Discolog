@@ -632,6 +632,14 @@ public class Negotiation<O extends Option> {
 
 	}
 	
-	
+	public String printPreferences(){
+		String pref = "";
+		for (CriterionNegotiation<Criterion> cr : this.valueNegotiation){
+			pref += "\n"+cr.getType().toString() + "\n";
+			pref += cr.getSelf().getSelfPreferences()+ "\n"+ "\n" ;
+		}
+		
+		return pref;
+	}
 
 }

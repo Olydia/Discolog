@@ -28,6 +28,7 @@ import fr.limsi.negotiate.restaurant.*;
 public class Acceuil extends JDialog{
 	
 	public static List<Negotiation<? extends Option>> negotiators;
+	private Negotiation<? extends Option> userPref;
 
 	private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
@@ -140,13 +141,14 @@ public class Acceuil extends JDialog{
 							model.d1_location.createPreferences(location.getValues());
 							//next frame
 							
-							// Creer le modele de prefs
+							// Creer le modele de prefs de l'utilisateur
 							Negotiation<Restaurant> nego = model.createModel();
+							setUserPref(nego);
 							Models<Restaurant> other = new Models<Restaurant>();
 //							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
 //									Restaurant.class, nego.getSelfs());
 							List<List<Self_Ci<Criterion>>> agents = other.agentModels(other.preferencesCreation(Restaurant.A_CITADELLA.getCriteria(),
-									Restaurant.class), nego.getSelfs());
+									Restaurant.class), userPref.getSelfs());
 							
 							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
 							
@@ -226,6 +228,16 @@ public class Acceuil extends JDialog{
 		l.lock();
 		Acceuil.isDone = isDone;
 		l.unlock();
+	}
+
+
+	public Negotiation<? extends Option> getUserPref() {
+		return userPref;
+	}
+
+
+	public void setUserPref(Negotiation<? extends Option> userPref) {
+		this.userPref = userPref;
 	}
 
 }
