@@ -57,6 +57,9 @@ public abstract class Self<C> {
 		return sat;
 	}
 	
+	public C mostPreffered(){
+		return sortValues().get(0);
+	}
 	public abstract List<C> getElements ();
 	public abstract void addPreference (C less, C more);
 

@@ -132,34 +132,82 @@ public class Models<O extends Option> {
 		}
 		return foundModel;
 	}
+	/**
+	 * 
+	 * @param existantModels
+	 * @param current
+	 * @param distance
+	 * @return if the current model is different from the models in the list, using a kendall distance
+	 */
+	public boolean isDifferent(List<List<Self_Ci<Criterion>>> existantModels, List<Self_Ci<Criterion>> current
+			,double distance){
+		
+		for(List<Self_Ci<Criterion>> elem: existantModels){
+			
+			//if (new PreferenceDistance(elem, current).distance() < distance)
+				if (!new PreferenceDistance(elem, current).diffMostPrf())
+				return false;
+		}
+			
+		
+		return true;
+		
+	}
 	
 	/**
 	 * 
 	 * @param preferences
 	 * @param userPref
 	 * @return Define the agents model of preferences for the Application package
+	 * Computes models of negotiations such that theses models are different (kendall tau = DISTANCE) from 
+	 * userPref
+	 * In addition each produced model is different from the others
 	 */
-	public List<List<Self_Ci<Criterion>>> agentModels(List<List<Self_Ci<Criterion>>> preferences, List<Self_Ci<Criterion>> userPref) {
-
+	public List<List<Self_Ci<Criterion>>> agentModels(List<List<Self_Ci<Criterion>>> preferences,
+			List<Self_Ci<Criterion>> userPref) {
+		
+		int nbModels = 3;
+		double MODELDISTANCE = 0.5;
 		List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
 		List<List<Self_Ci<Criterion>>> agentModels= new ArrayList<>();
-
-		for(int i=0; i<3; i++){
+		for(int i=0; i<nbModels; i++){
 		List<Self_Ci<Criterion>> foundModel = null;
 		while (foundModel == null) {
+			
 			List<Self_Ci<Criterion>> current = new ArrayList<>();
+			List<Integer> currentIndex = new ArrayList<Integer>();
+
 			for (List<Self_Ci<Criterion>> preference : preferences) {
 				int random = new Random().nextInt(preference.size() - 1);
 				current.add(preference.get(random));
+				currentIndex.add(random);
 			}
 			if (!containsCurrent(visitedCombination, current)){
 			visitedCombination.add(current);
-			if (new PreferenceDistance(userPref, current).distance() >= DISTANCE)
-				foundModel = current;
+			if (new PreferenceDistance(userPref, current).distance() >= DISTANCE 
+					&& 	isDifferent(agentModels, current, MODELDISTANCE)){
+					foundModel = current;
+					for (int i1=0; i1<preferences.size() ; i1++) {
+						List<Self_Ci<Criterion>> preference = preferences.get(i1);
+						preference.remove(currentIndex.get(i1));
+					}
+
+			}
+			else {
+				for (int i1=0; i1<preferences.size() ; i1++) {
+					List<Self_Ci<Criterion>> preference = preferences.get(i1);
+					preference.remove(currentIndex.get(i1));
+				}
+
+				
+			}
 			}
 		}
 		 agentModels.add(foundModel);
-		 foundModel = null;
+		 for(Self_Ci<Criterion> c : foundModel)
+				System.out.println(c.getSelfPreferences());
+		 foundModel.clear();
+		 
 		}
 		return agentModels;
 	}

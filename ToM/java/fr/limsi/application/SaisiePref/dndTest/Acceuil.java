@@ -150,13 +150,15 @@ public class Acceuil extends JDialog{
 							List<List<Self_Ci<Criterion>>> agents = other.agentModels(other.preferencesCreation(Restaurant.A_CITADELLA.getCriteria(),
 									Restaurant.class), userPref.getSelfs());
 							
-							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
-							
-							
+							System.out.println("totototototo");
 							for (List<Self_Ci<Criterion>> pref: agents){
 								for(Self_Ci<Criterion> c : pref)
 									System.out.println(c.getSelfPreferences());
+								
+							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
+							
 							}
+							
 							isDone = true;
 							location.setVisible(false);
 							setVisible(false);
@@ -184,16 +186,16 @@ public class Acceuil extends JDialog{
 		}
 		return negotiators;
 	}
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(() -> {
-//			Acceuil frame = new Acceuil();
-//	        frame.setMinimumSize(new Dimension(200, 200));
-//
-//			frame.pack();
-//			
-//			frame.setVisible(true);
-//		});
-//	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			Acceuil frame = new Acceuil();
+	        frame.setMinimumSize(new Dimension(200, 200));
+
+			frame.pack();
+			
+			frame.setVisible(true);
+		});
+	}
 
 
 	public static List<Negotiation<? extends Option>> getNegotiators() {
