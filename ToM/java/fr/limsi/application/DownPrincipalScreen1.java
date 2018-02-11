@@ -11,6 +11,7 @@ import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 import javafx.beans.value.ChangeListener;
@@ -35,13 +36,13 @@ import javafx.stage.Stage;
 
 public class DownPrincipalScreen1 extends AnchorPane{
 
-	static double relation=0.7;
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
 
 
 	public String action;
 	private ToMNegotiatorProba agent;
+	static double relation=0.5;
 	private String agentName;
 	/**
 	 * details allows to create the instructions used for execute:
@@ -260,10 +261,10 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		}
 	}
 	public void addElements(String username, String situation,Stage chatStage ,
-			Negotiation<? extends Option> model, int nbAgents/*,Interaction interaction*/){
+			Negotiation<? extends Option> model, int nbAgents, ADAPT state/*,Interaction interaction*/){
 
 		//	totalOrderedModels model = new totalOrderedModels();
-		agent= new ToMNegotiatorProba(agentName, model);
+		agent= new ToMNegotiatorProba(agentName, model, state);
 		User user= new User("User");
 		Interaction interaction = new Interaction(
 				/*new ExampleAgent("agent", model.model1())*/agent,
@@ -1765,7 +1766,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 					switch(nbAgents){
 					case(0):{
-						UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username);
+						UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
 						chat2.situation="restaurant";
 
 						String arthur = "--------------------------------------------- \n \n"+
@@ -1780,7 +1781,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 						break;
 					}	
 					case(1):{
-						UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username);
+						UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
 						chat3.situation="restaurant";
 						Stage chatStage3=new Stage();
 						

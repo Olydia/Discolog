@@ -11,6 +11,7 @@ import fr.limsi.negotiate.CriterionProposal;
 import fr.limsi.negotiate.OptionProposal;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 import javafx.beans.value.ChangeListener;
@@ -270,7 +271,7 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 
 		
 		 totalOrderedModels model = new totalOrderedModels();
-			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Bob", model.model1());
+			 ToMNegotiatorProba agent= new ToMNegotiatorProba("Amine", model.model1(), ADAPT.NONADAPT);
 			 User user= new User("User");
 			 Interaction interaction = new Interaction(
 						/*new ExampleAgent("agent", model.model1())*/agent,

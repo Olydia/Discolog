@@ -3,6 +3,7 @@ package fr.limsi.application;
 import java.io.PrintStream;
 
 import fr.limsi.negotiate.*;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
@@ -19,6 +20,7 @@ public class UpPrincipalScreen1 extends Application {
 	public static int nbAgents = -1;
 	String situation;
 	private String username;
+	ADAPT state;
 	public String getUsername() {
 		return username;
 	}
@@ -31,9 +33,10 @@ public class UpPrincipalScreen1 extends Application {
 	 private DownPrincipalScreen1 chatBoard;
 	 
 	 
-	public UpPrincipalScreen1(String agentName, String userName){
+	public UpPrincipalScreen1(String agentName, String userName, ADAPT state){
 		this.agentName = agentName;
 		this.username = userName;
+		this.state = state;
 		nbAgents ++;
 	}
 	public DownPrincipalScreen1 getChatBoard() {
@@ -83,7 +86,7 @@ public class UpPrincipalScreen1 extends Application {
 
 		scene.getStylesheets().add
 		(UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
-		chatBoard.addElements(username,situation,chatStage, prefModel, nbAgents);
+		chatBoard.addElements(username,situation,chatStage, prefModel, nbAgents, state);
 		chatStage.show();
 
 	}

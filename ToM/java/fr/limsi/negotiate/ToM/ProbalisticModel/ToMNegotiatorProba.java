@@ -16,12 +16,11 @@ import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 
 public class ToMNegotiatorProba extends NegotiatorAgent{
-
 	private HModels otherModel;
 	public Negotiation<? extends Option> previousState;
 	public double other;
 	private List<Double> guessed;
-
+	private ADAPT state;
 	
 
 	
@@ -51,10 +50,10 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	 * @param 
 	 */
 
-	public ToMNegotiatorProba(String name, Negotiation<? extends Option> negotiation) {
+	public ToMNegotiatorProba(String name, Negotiation<? extends Option> negotiation, ADAPT state) {
 		super(name, negotiation);
 
-		
+		this.state = state;
 		List<Class<? extends Criterion>> criteria  = negotiation.getCriteria().getElements();
 
 		this.otherModel =  new HModels(criteria);
@@ -100,7 +99,20 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			double other = guess(utterance, getOther());
 			this.setOther(other);
 			guessed.add(other);
-			mimic(other);
+			
+			switch(this.state){
+				case MIMIC:
+					mimic(other);
+					break;
+				case COMPLEMENT:
+					complement(other);
+					break;
+				case NONADAPT:
+					break;
+				default:
+					break;
+
+			}
 			//System.out.println("Predicted pow : " + other);
 
 		}
@@ -308,5 +320,10 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	}
 
+	public enum ADAPT {
+			 COMPLEMENT,
+			MIMIC,
+			NONADAPT;
+		}
 
 }

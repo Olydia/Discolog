@@ -6,6 +6,7 @@ import java.util.List;
 import fr.limsi.application.SaisiePref.dndTest.Acceuil;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -182,7 +183,7 @@ public class Home1 extends Application {
 	
 	public void startAgents(/*Negotiation<? extends Option> nego*/){
 		List<Negotiation<? extends Option>> negotiations = Acceuil.getNegotiators();
-		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username);
+		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username, ADAPT.COMPLEMENT);
 		chat.situation="restaurant";
     	Stage chatStage=new Stage();
     	chat.setPrefModel(negotiations.get(0));

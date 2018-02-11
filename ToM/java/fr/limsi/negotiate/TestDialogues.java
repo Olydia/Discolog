@@ -8,6 +8,7 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 import com.sun.org.apache.xpath.internal.operations.Neg;
 import edu.wpi.disco.Dual;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.ToM.expirement.FileAppend;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.Restaurant;
@@ -40,7 +41,7 @@ public class TestDialogues {
 				FileAppend file = new FileAppend(fileName);
 
 				Dual dual = new Dual(
-						new ToMNegotiatorProba("Agent1", negotiation),
+						new ToMNegotiatorProba("Agent1", negotiation, ADAPT.COMPLEMENT),
 						new NegotiatorAgent("Agent2", negotiation2),
 						false);
 

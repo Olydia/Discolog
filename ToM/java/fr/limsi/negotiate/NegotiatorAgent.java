@@ -12,6 +12,7 @@ import fr.limsi.negotiate.NegoUtterance.UtType;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.lang.*;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
@@ -65,7 +66,7 @@ public class NegotiatorAgent extends Agent {
 				//new ToMNegotiatorProba("Agent1", model.model1()), 
 
 				//new NegotiatorAgent("Agent2", model.model3()), 
-				new ToMNegotiatorProba("Agent2", model.model3()), 
+				new ToMNegotiatorProba("Agent2", model.model3(), ADAPT.COMPLEMENT), 
 
 				false);
 
