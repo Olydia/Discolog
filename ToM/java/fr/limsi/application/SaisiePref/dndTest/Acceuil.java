@@ -144,20 +144,19 @@ public class Acceuil extends JDialog{
 							// Creer le modele de prefs de l'utilisateur
 							Negotiation<Restaurant> nego = model.createModel();
 							setUserPref(nego);
+							System.out.println(nego.printPreferences());
 							Models<Restaurant> other = new Models<Restaurant>();
 //							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
 //									Restaurant.class, nego.getSelfs());
 							List<List<Self_Ci<Criterion>>> agents = other.agentModels(other.preferencesCreation(Restaurant.A_CITADELLA.getCriteria(),
 									Restaurant.class), userPref.getSelfs());
 							
-							System.out.println("totototototo");
-							for (List<Self_Ci<Criterion>> pref: agents){
-								for(Self_Ci<Criterion> c : pref)
-									System.out.println(c.getSelfPreferences());
-								
-							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
-							
+						
+							for(List<Self_Ci<Criterion>> elem:other.getMax(agents)){
+								System.out.println(elem);
 							}
+							
+							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
 							
 							isDone = true;
 							location.setVisible(false);

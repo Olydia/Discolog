@@ -14,20 +14,20 @@ public class PreferenceDistance {
 		this.model2=model2;
 	}
 
-	public boolean diffMostPrf (){
-		
+	public int diffMostPrf (){
+		int nb = 0;
 		for(Self_Ci<Criterion> cr1: model1){
 
 			Self_Ci<Criterion> cr2 = this.getCriterionModel(cr1.getType(), model2);
 			
-			if(cr1.mostPreffered().equals(cr2.mostPreffered()))
-				return false;
+			if(!cr1.mostPreffered().equals(cr2.mostPreffered()))
+				nb ++;
 			
 		}
 		//Distance criteria = new Distance(model1.getCriteria().getPreferences(),model2.getCriteria().getPreferences(),model1.getCriteria().getElements());
 
 
-		return true;
+		return nb;
 
 	}
 

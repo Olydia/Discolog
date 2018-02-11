@@ -1746,8 +1746,8 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 			private void nextStep(int nbAgents) {
 
-				File fichier2 = new File(System.getProperty("user.dir")+
-						File.separator+agentName+"_"+relation+"-exp"+username+".txt");
+				File fichier2 = new File(System.getProperty("user.dir")+File.separator+"Participant"+
+						username+".txt");
 
 				WriteHistory writer = new WriteHistory();
 

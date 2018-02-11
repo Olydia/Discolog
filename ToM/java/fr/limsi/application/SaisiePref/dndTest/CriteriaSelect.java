@@ -95,7 +95,7 @@ public class CriteriaSelect extends JDialog {
 
 			
 		else{
-			System.out.println(this.getDestList().getModel());
+			//System.out.println(this.getDestList().getModel());
 			return this.getDestList().getModel();
 			// Ecrire les criteres dans l'ensemble static
 		}
