@@ -2,6 +2,7 @@ package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -43,10 +44,14 @@ public class CriteriaSelect extends JDialog {
 	public CriteriaSelect(Class<? extends Criterion> type) {
 	    EmptyBorder border = new EmptyBorder(10, 20, 10, 20);
 	    
+	    toBeRanked.setFont(new Font("Arial", Font.PLAIN, 16));
+	    ranked.setFont(new Font("Arial", Font.PLAIN, 16));
 
+	    
 		Font font = new Font("Arial",Font.BOLD,14);
 		welcomText.setFont(font);
 		welcomText.setBorder(border);
+		welcomText.setAlignmentX(Component.CENTER_ALIGNMENT);
 		//welcomText.setBorder(new LineBorder(Color.BLACK));
 		this.confim = new JButton("Confirm");
 		this.type = type;  
@@ -65,6 +70,7 @@ public class CriteriaSelect extends JDialog {
 
 		Box sourceBox = Box.createVerticalBox();
 		JLabel toRank = new JLabel("Criteria still to be classified");
+		toRank.setAlignmentX(Component.CENTER_ALIGNMENT);
 		toRank.setBorder(border);
 		sourceBox.add(toRank);
 		
@@ -73,6 +79,7 @@ public class CriteriaSelect extends JDialog {
 		Box destBox = Box.createVerticalBox();
 		JLabel rankedLabel = new JLabel("Your ranking");
 		rankedLabel.setBorder(border);
+		rankedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		destBox.add(rankedLabel);
 		destBox.add(new JScrollPane(ranked));
 

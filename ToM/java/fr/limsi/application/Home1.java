@@ -143,8 +143,7 @@ public class Home1 extends Application {
 				
 				Acceuil frame = new Acceuil();
 				frame.setVisible(true);
-            	homeStage.hide();
-            	
+            	homeStage.hide();            	
         		while (!Acceuil.isDone()){
         			pause();
         		}
