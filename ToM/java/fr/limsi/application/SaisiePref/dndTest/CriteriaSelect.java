@@ -1,26 +1,32 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import fr.limsi.negotiate.Criterion;
 
 public class CriteriaSelect extends JDialog {
 
-	private JLabel newTextField = new JLabel("Entrez vos préférences");
+	private JLabel welcomText = new JLabel("All other things being equal,"
+											+ "sort the following values in ascending "
+											+ "order of your preferences");
+	
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());
 	private JList<String> ranked = new JList<>(new DefaultListModel<>());
 	protected JButton confim;
@@ -35,6 +41,13 @@ public class CriteriaSelect extends JDialog {
 	}
 
 	public CriteriaSelect(Class<? extends Criterion> type) {
+	    EmptyBorder border = new EmptyBorder(10, 20, 10, 20);
+	    
+
+		Font font = new Font("Arial",Font.BOLD,14);
+		welcomText.setFont(font);
+		welcomText.setBorder(border);
+		//welcomText.setBorder(new LineBorder(Color.BLACK));
 		this.confim = new JButton("Confirm");
 		this.type = type;  
 		Criterion[] elements = type.getEnumConstants();
@@ -48,14 +61,19 @@ public class CriteriaSelect extends JDialog {
 	
 		
 		Box nameBox = Box.createHorizontalBox();
-		nameBox.add(newTextField);
+		nameBox.add(welcomText);
 
 		Box sourceBox = Box.createVerticalBox();
-		sourceBox.add(new JLabel("Critères restant à classer"));
+		JLabel toRank = new JLabel("Criteria still to be classified");
+		toRank.setBorder(border);
+		sourceBox.add(toRank);
+		
 		sourceBox.add(new JScrollPane(toBeRanked));
 
 		Box destBox = Box.createVerticalBox();
-		destBox.add(new JLabel("Votre classement"));
+		JLabel rankedLabel = new JLabel("Your ranking");
+		rankedLabel.setBorder(border);
+		destBox.add(rankedLabel);
 		destBox.add(new JScrollPane(ranked));
 
 		Box listBox = Box.createHorizontalBox();
@@ -89,7 +107,7 @@ public class CriteriaSelect extends JDialog {
 	
 	public ListModel<String> getValues(){
 		if(this.getSourceList().getModel().getSize()!=0){
-			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs", "Message",
+			JOptionPane.showMessageDialog(this, "Please, rank all the values before confirm", "Message",
 			        JOptionPane.WARNING_MESSAGE);
 		}
 
