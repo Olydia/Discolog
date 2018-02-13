@@ -277,6 +277,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		interaction.start(true); // give user first turn
 		OptionChoice optionChoice=new OptionChoice();
 		Stage optionStage=new Stage();
+		
 		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 		int ButtonId;
 		Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());

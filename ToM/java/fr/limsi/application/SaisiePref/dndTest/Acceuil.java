@@ -4,8 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -20,6 +24,7 @@ import javax.swing.SwingUtilities;
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.*;
+import javafx.stage.Screen;
 
 // il faut envoyer les prefs de l'agent � l'agent
 // 
@@ -66,9 +71,15 @@ public class Acceuil extends JDialog{
 		this.getContentPane().add(welcom, BorderLayout.CENTER);
 		this.getContentPane().add(commencer, BorderLayout.SOUTH);
 		this.getContentPane().setBackground(Color.white);
-		setMinimumSize(new Dimension(400, 500));
-		pack();
 		
+    	
+
+       // this.setLocation((int) Screen.getPrimary().getBounds().getMinX(), this.getY());
+
+		setMinimumSize(new Dimension(400, 300));
+		pack();
+		showOnScreen(2, this);
+		center(this);
 		cost = new CriteriaSelect(Cost.class);
 		cuisine = new CriteriaSelect(Cuisine.class);
 		athmos = new CriteriaSelect(Atmosphere.class);
@@ -97,6 +108,7 @@ public class Acceuil extends JDialog{
 							model.d1_cuisine.createPreferences(cuisine.getValues());
 							//next frame
 							cuisine.setVisible(false);
+							showOnScreen(1, cuisine);
 							cost.setVisible(true);
 						}
 							
@@ -175,7 +187,29 @@ public class Acceuil extends JDialog{
 	            }
 	        );
 	}
-	
+    public void center(JDialog frame) {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = frame.getSize().width;
+        int h = frame.getSize().height;
+        int x = (dim.width - w) / 3;
+        int y = (dim.height - h) / 3;
+        frame.setLocation(x, y);
+        
+    }
+    
+    public static void showOnScreen( int screen, JDialog frame ) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] gd = ge.getScreenDevices();
+       // gd[0].
+        System.out.println(gd.length);
+        if( screen > -1 && screen < gd.length ) {
+            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
+        } else if( gd.length > 0 ) {
+            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
+        } else {
+            throw new RuntimeException( "No Screens Found" );
+        }
+    }
 	
 	/**
 	 * 

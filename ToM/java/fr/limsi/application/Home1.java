@@ -48,6 +48,7 @@ public class Home1 extends Application {
 	}
 	@Override
 	public void start(Stage homeStage) {
+		
 		homeStage.setTitle("Negotiation Agent");
 		AnchorPane pane = new AnchorPane();
 
@@ -142,8 +143,10 @@ public class Home1 extends Application {
 				username+".txt");
 				
 				Acceuil frame = new Acceuil();
+            	homeStage.hide(); 
 				frame.setVisible(true);
-            	homeStage.hide();            	
+				
+            
         		while (!Acceuil.isDone()){
         			pause();
         		}
