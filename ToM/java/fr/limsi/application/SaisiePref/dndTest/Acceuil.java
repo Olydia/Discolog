@@ -29,11 +29,18 @@ public class Acceuil extends JDialog{
 	public static List<Negotiation<? extends Option>> negotiators;
 	private Negotiation<? extends Option> userPref;
 
-	private JLabel textAcceuil = new JLabel("Bienvenu");
-	private String text = "Nous vous invitons à saisir vos préférences sur chaque critère \n"
-			+ "en les classant par ordre croissant \n"
-			+ " de la valeur que vous appréciez le moins \n"
-			+ "a la valeur que vous appréciez le plus";
+	//private JLabel textAcceuil = new JLabel("Bienvenu");
+	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
+			+ "\n that will be discussed during the negotiation. \n\n"+
+			
+			"Since the criteria are independent, each criterion will be presented independently of the others."
+			+ "\n You have to focus your rank only on the criterion presented and ignore the other criteria. \n\n \n"
+			
+			+"We invite you to rank your preferences in an descending order, "
+			+ "\n starting with the value you like the most,  to the value you like the least. \n\n"+
+			
+			"If you have any question, you can call the experimenter."
+			+ "\n Otherwise, we can start the study.";
 			
 	private JTextArea welcom  = new JTextArea(text);
 	private JButton commencer = new JButton("Commencer");
@@ -46,6 +53,7 @@ public class Acceuil extends JDialog{
 	private static boolean isDone = false;
 	
 	public Acceuil(){
+		
 		Lock l = new ReentrantLock();
 		l.lock();
 		negotiators = new ArrayList<Negotiation<? extends Option>> ();
@@ -54,7 +62,7 @@ public class Acceuil extends JDialog{
 		welcom.setFont(font);
 		welcom.setEditable(false);
 		
-		this.getContentPane().add(textAcceuil, BorderLayout.NORTH);
+		//this.getContentPane().add(textAcceuil, BorderLayout.NORTH);
 		this.getContentPane().add(welcom, BorderLayout.CENTER);
 		this.getContentPane().add(commencer, BorderLayout.SOUTH);
 		this.getContentPane().setBackground(Color.white);
