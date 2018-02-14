@@ -9,7 +9,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -17,14 +16,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.*;
-import javafx.stage.Screen;
 
 // il faut envoyer les prefs de l'agent � l'agent
 // 
