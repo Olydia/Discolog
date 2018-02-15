@@ -10,6 +10,7 @@ import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -62,7 +63,6 @@ public class Home1 extends Application {
 		homeStage.setScene(scene);
 		homeStage.setFullScreen(true);
 
-		homeStage.setScene(scene);
 		scene.getStylesheets().add
 		(Home1.class.getResource("application2.css").toExternalForm());
 		homeStage.show();
@@ -134,32 +134,57 @@ public class Home1 extends Application {
 
 		list.addAll(sceneTitle,userName,userTextField,hbBtn);
 
-		btn.setOnAction(new EventHandler<ActionEvent>() {
+		btn.setOnAction( event -> {
+			username=userTextField.getText();
+			history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
+					username+".txt");
+	
+					homeStage.hide();
+		        	Acceuil frame = new Acceuil();
+		        	Stage acceuil = new Stage();
 
-			@Override
-			public void handle(ActionEvent e) {
-				username=userTextField.getText();
-				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
-				username+".txt");
+		    Task<List<Negotiation<? extends Option>>> task = new Task<List<Negotiation<? extends Option>>>() {
+		        @Override
+		        public List<Negotiation<? extends Option>>   call() {
+		            // process long-running computation, data retrieval, etc...
+			    	List<Negotiation<? extends Option>>  result = Acceuil.getNegotiators();
+
+		            return result;
+		        }
+		    };
+		    task.setOnRunning((e) -> frame.start(acceuil));
+		    task.setOnSucceeded(e -> {
+		        // update UI with result
+		    });
+		    new Thread(task).start();
+		});
+//				username=userTextField.getText();
+//				
+//				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
+//				username+".txt");
+//
+//				homeStage.hide(); 
+//				
+//
+//				Acceuil frame = new Acceuil();
+//				frame.start(new Stage());
+//            	
 				
-				Acceuil frame = new Acceuil();
-            	homeStage.hide(); 
-				frame.setVisible(true);
 				
-            
-        		while (!Acceuil.isDone()){
-        			pause();
-        		}
-        		
-    			String userPref = "User Preferences : \n \n" 
-    								+ frame.getUserPref().printPreferences();
-        		
-    			writer.write(userPref, history);
-        		
-        		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
-        		System.out.println(neg.toString());
-        		
-        		startAgents();
+//            
+//        		while (!Acceuil.isDone()){
+//        			pause();
+//        		}
+//        		
+//    			String userPref = "User Preferences : \n \n" 
+//    								+ frame.getUserPref().printPreferences();
+//        		
+//    			writer.write(userPref, history);
+//        		
+//        		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
+//        		System.out.println(neg.toString());
+//        		
+//        		startAgents();
             	
             		
 //				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
@@ -169,8 +194,7 @@ public class Home1 extends Application {
 //				chat.situation=/*(String) cb.getValue()*/"restaurant";
 //				chat.start(chatStage);
 
-			}
-		});
+
 		
 	}
 	

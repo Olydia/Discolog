@@ -119,7 +119,7 @@ public class NegotiatorAgent extends Agent {
 	public Utterance respondTo(Utterance utterance, Disco disco){
 //		System.out.println(" ***** Pow " + getNegotiation().getDominance()+ 
 //				" Self " + getNegotiation().computeSelf(getNegotiation().getDominance()) + "*****");
-		//if ( utterance != null )System.out.println(utterance.format() + "\n");
+		if ( utterance != null )System.out.println(utterance.format() + "\n");
 		if ( utterance == null ) {
 			
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))

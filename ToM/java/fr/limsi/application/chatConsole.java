@@ -7,13 +7,16 @@ public class chatConsole extends OutputStream{
 
 	    public chatConsole(TextArea ta)
 	    {
-	        this.output = ta;
+	        this.output = ta ;
+	        output.setEditable(false);
+	        //this.output.setDisable(true);
+	       
 	    }
 
 	    @Override
 	    public void write(int i) throws IOException
 	    {
-	        output.appendText(String.valueOf((char) i));
+	        output.appendText(String.valueOf((char) i) );
 	        output.setStyle("-fx-font-size: 16px;");
 
 

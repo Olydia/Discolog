@@ -1,7 +1,11 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +14,11 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Negotiation;
@@ -22,20 +30,8 @@ import fr.limsi.negotiate.restaurant.Cost;
 import fr.limsi.negotiate.restaurant.Cuisine;
 import fr.limsi.negotiate.restaurant.Location;
 import fr.limsi.negotiate.restaurant.Restaurant;
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-// il faut envoyer les prefs de l'agent � l'agent
-// 
-
-public class Acceuil extends Application{
+public class Selection extends JPanel {
 
 	public static List<Negotiation<? extends Option>> negotiators;
 	private Negotiation<? extends Option> userPref;
@@ -43,84 +39,67 @@ public class Acceuil extends Application{
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
 			+ "\n that will be discussed during the negotiation. \n\n"+
-
+			
 			"Since the criteria are independent, each criterion will be presented independently of the others."
 			+ "\n You have to focus your rank only on the criterion presented and ignore the other criteria. \n\n \n"
-
+			
 			+"We invite you to rank your preferences in an descending order, "
 			+ "\n starting with the value you like the most,  to the value you like the least. \n\n"+
-
+			
 			"If you have any question, you can call the experimenter."
 			+ "\n Otherwise, we can start the study.";
-
-
-
+			
+	private JTextArea welcom  = new JTextArea(text);
+	private JButton commencer = new JButton("Commencer");
+	
 	private CriteriaSelect cuisine;
 	private CriteriaSelect cost;
 	private CriteriaSelect athmos;
 	private CriteriaSelect location;
 
 	private static boolean isDone = false;
-
-	@Override
-	public void start(Stage stage){
-		TextArea welcom  = new TextArea(text);
-		Button commencer = new Button("Commencer");
-		// TODO Auto-generated method stub
-		stage.setTitle("Preferences selection");
+	
+	public Selection(){
+		
 		Lock l = new ReentrantLock();
 		l.lock();
 		negotiators = new ArrayList<Negotiation<? extends Option>> ();
 		l.unlock();
-		//welcom.setFont(font);
+		Font font = new Font("Arial", Font.BOLD, 20);
+		welcom.setFont(font);
 		welcom.setEditable(false);
-
-
+		
 		//this.getContentPane().add(textAcceuil, BorderLayout.NORTH);
-		BorderPane border = new BorderPane();
-		HBox hbox = new HBox();
+		this.add(welcom, BorderLayout.CENTER);
+		this.add(commencer, BorderLayout.SOUTH);
+		this.setBackground(Color.white);
+		
+    	
 
-		border.setCenter(hbox);
-		hbox.getChildren().add(welcom);
-
-		HBox textA = new HBox();
-		textA.setAlignment(Pos.CENTER);
-		border.setBottom(textA);
-		textA.getChildren().add(commencer);
-		border.setPrefSize(600, 400);
-
-		Scene scene = new Scene(border, 600, 400);
-		stage.setScene(scene);
-		stage.show();
-
-		//this.getContentPane().setBackground(Color.white);
+       // this.setLocation((int) Screen.getPrimary().getBounds().getMinX(), this.getY());
 
 
-
-		// this.setLocation((int) Screen.getPrimary().getBounds().getMinX(), this.getY());
-		//	setMinimumSize(new Dimension(400, 300));
-		//showOnScreen(2, this);
-		//center(this);
 		cost = new CriteriaSelect(Cost.class);
 		cuisine = new CriteriaSelect(Cuisine.class);
 		athmos = new CriteriaSelect(Atmosphere.class);
 		location = new CriteriaSelect(Location.class);
-
+		
 		// Init the model of preferences
 		PreferencesModel model = new PreferencesModel();
-
-		commencer.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+		
+		
+		// Affichage des fenetres
+		commencer.addActionListener(new ActionListener() {
 			@Override
-			public void handle(javafx.event.ActionEvent event) {
-				stage.hide();
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				cuisine.setVisible(true);
-				
 			}
-		});
-
-
+				
+			});
+		
 		cuisine.confim.addActionListener(
-				new ActionListener() {
+	            new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(cuisine.getValues()!= null){
@@ -128,17 +107,17 @@ public class Acceuil extends Application{
 							model.d1_cuisine.createPreferences(cuisine.getValues());
 							//next frame
 							cuisine.setVisible(false);
-							//	showOnScreen(1, cuisine);
+							showOnScreen(1, cuisine);
 							cost.setVisible(true);
 						}
-
+							
 					}
-				}
-				);
-
+	            }
+	        );
+		
 		cost.confim.addActionListener(
-				new ActionListener() {
-
+	            new ActionListener() {
+	         
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(cost.getValues()!= null){
@@ -148,14 +127,14 @@ public class Acceuil extends Application{
 							cost.setVisible(false);
 							athmos.setVisible(true);
 						}
-
+							
 					}
-				}
-				);
-
+	            }
+	        );
+		
 		athmos.confim.addActionListener(
-				new ActionListener() {
-
+	            new ActionListener() {
+	         
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(athmos.getValues()!= null){
@@ -165,72 +144,72 @@ public class Acceuil extends Application{
 							athmos.setVisible(false);
 							location.setVisible(true);
 						}
-
+							
 					}
-				}
-				);
-
+	            }
+	        );
+		
 		location.confim.addActionListener(
-				new ActionListener() {
-
+	            new ActionListener() {
+	         
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(location.getValues()!= null){
 							//Get the selected rank of preferences
 							model.d1_location.createPreferences(location.getValues());
 							//next frame
-
+							
 							// Creer le modele de prefs de l'utilisateur
 							Negotiation<Restaurant> nego = model.createModel();
 							setUserPref(nego);
 							System.out.println(nego.printPreferences());
 							Models<Restaurant> other = new Models<Restaurant>();
-							//							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
-							//									Restaurant.class, nego.getSelfs());
+//							Negotiation<Restaurant> agent = other.createOther(Restaurant.A_CITADELLA.getCriteria(),
+//									Restaurant.class, nego.getSelfs());
 							List<List<Self_Ci<Criterion>>> agents = other.agentModels(other.preferencesCreation(Restaurant.A_CITADELLA.getCriteria(),
 									Restaurant.class), userPref.getSelfs());
-
-
+							
+						
 							for(List<Self_Ci<Criterion>> elem:other.getMax(agents)){
 								System.out.println(elem);
 							}
-
+							
 							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
-
+							
 							isDone = true;
 							location.setVisible(false);
-							stage.hide();
-
+							setVisible(false);
+							
 						}
-
+							
 					}
-				}
-				);
+	            }
+	        );
 	}
-	public void center(JDialog frame) {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		int w = frame.getSize().width;
-		int h = frame.getSize().height;
-		int x = (dim.width - w) / 3;
-		int y = (dim.height - h) / 3;
-		frame.setLocation(x, y);
-
-	}
-
-	//    public static void showOnScreen( int screen, Application frame ) {
-	//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	//        GraphicsDevice[] gd = ge.getScreenDevices();
-	//       // gd[0].
-	//        System.out.println(gd.length);
-	//        if( screen > -1 && screen < gd.length ) {
-	//            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.);
-	//        } else if( gd.length > 0 ) {
-	//            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
-	//        } else {
-	//            throw new RuntimeException( "No Screens Found" );
-	//        }
-	//    }
-	//	
+    public void center(JDialog frame) {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = frame.getSize().width;
+        int h = frame.getSize().height;
+        int x = (dim.width - w) / 3;
+        int y = (dim.height - h) / 3;
+        frame.setLocation(x, y);
+        
+    }
+    
+    public static void showOnScreen( int screen, JDialog frame ) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] gd = ge.getScreenDevices();
+       // gd[0].
+        System.out.println(gd.length);
+        if( screen > -1 && screen < gd.length ) {
+            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
+        } else if( gd.length > 0 ) {
+            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
+        } else {
+            throw new RuntimeException( "No Screens Found" );
+        }
+    }
+	
 	/**
 	 * 
 	 * @param prefs
@@ -239,22 +218,19 @@ public class Acceuil extends Application{
 	 * @return Initates the negotiation models from the preferences sets
 	 */
 	List<Negotiation<? extends Option>> negotiatorAgents (List<List<Self_Ci<Criterion>>> prefs, Models<? extends Option> model,
-			Class<? extends Option> type){
+													Class<? extends Option> type){
 		List<Negotiation<? extends Option>>  negotiators = new ArrayList<Negotiation<? extends Option>> ();
 		for(List<Self_Ci<Criterion>> pref : prefs){
 			negotiators.add(model.createNegotiation(pref,type));
 		}
 		return negotiators;
 	}
-	public static void main(String[] args) {
-		Acceuil.launch(args);
-	}
 
 
 	public static List<Negotiation<? extends Option>> getNegotiators() {
 		Lock l = new ReentrantLock();
 		l.lock();
-		List<Negotiation<? extends Option>> neg = Acceuil.negotiators;
+		List<Negotiation<? extends Option>> neg = Selection.negotiators;
 		l.unlock();
 		return neg;
 	}
@@ -263,7 +239,7 @@ public class Acceuil extends Application{
 	public static void  setNegotiators(List<Negotiation<? extends Option>> negotiators) {
 		Lock l = new ReentrantLock();
 		l.lock();
-		Acceuil.negotiators = negotiators;
+		Selection.negotiators = negotiators;
 		l.unlock();
 	}
 
@@ -281,7 +257,7 @@ public class Acceuil extends Application{
 	public static void setDone(boolean isDone) {
 		Lock l = new ReentrantLock();
 		l.lock();
-		Acceuil.isDone = isDone;
+		Selection.isDone = isDone;
 		l.unlock();
 	}
 
