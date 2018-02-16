@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -12,10 +13,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JDialog;
 
+import fr.limsi.application.UpPrincipalScreen1;
+import fr.limsi.application.WriteHistory;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.Self_Ci;
+import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.Atmosphere;
 import fr.limsi.negotiate.restaurant.Cost;
@@ -23,6 +27,7 @@ import fr.limsi.negotiate.restaurant.Cuisine;
 import fr.limsi.negotiate.restaurant.Location;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,6 +44,8 @@ public class Acceuil extends Application{
 
 	public static List<Negotiation<? extends Option>> negotiators;
 	private Negotiation<? extends Option> userPref;
+	WriteHistory writer;
+
 
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
@@ -59,9 +66,15 @@ public class Acceuil extends Application{
 	private CriteriaSelect cost;
 	private CriteriaSelect athmos;
 	private CriteriaSelect location;
-
+	private String username;
+	private File history;
 	private static boolean isDone = false;
 
+	public Acceuil(String username, File history) {
+		this.username =username;
+		this.history = history;
+		writer = new WriteHistory();
+	}
 	@Override
 	public void start(Stage stage){
 		TextArea welcom  = new TextArea(text);
@@ -114,7 +127,7 @@ public class Acceuil extends Application{
 			public void handle(javafx.event.ActionEvent event) {
 				stage.hide();
 				cuisine.setVisible(true);
-				
+
 			}
 		});
 
@@ -197,15 +210,51 @@ public class Acceuil extends Application{
 
 							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
 
-							isDone = true;
 							location.setVisible(false);
-							stage.hide();
+							//*************** Mise a jour des informations et ecriture dans le fichier text
+							String userPref = "User Preferences : \n \n" 
+									+ getUserPref().printPreferences();
+							WriteHistory writer = new WriteHistory();
+							writer.write(userPref, history);
+
+							List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
+							System.out.println(neg.toString());
+
+							isDone = true;
+							//hide current
+							
+							// lanch agents
+//							Platform.runLater(new Runnable() {
+//							      @Override public void run() {
+//							    	  
+//							        //Update UI here     
+//							    	  stage.hide();
+//
+//							      }
+//							    });
 
 						}
 
 					}
 				}
 				);
+	}
+
+
+	public void startAgents(){
+		System.out.println("je lance les agents");
+		List<Negotiation<? extends Option>> negotiations = getNegotiators();
+		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username, ADAPT.COMPLEMENT);
+		chat.situation="restaurant";
+		Stage chatStage=new Stage();
+		chat.setPrefModel(negotiations.get(0));
+		String bob = "Preferences of agent Bob \n \n" + negotiations.get(0).printPreferences();
+		writer.write(bob, history);
+
+		chat.start(chatStage);
+
+
+
 	}
 	public void center(JDialog frame) {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

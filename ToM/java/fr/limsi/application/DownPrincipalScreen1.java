@@ -30,6 +30,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -44,6 +45,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	private ToMNegotiatorProba agent;
 	static double relation=0.5;
 	private String agentName;
+	private String passWord = "next12";
 	/**
 	 * details allows to create the instructions used for execute:
 	 * details[0]: The action. Ex: Propose.
@@ -277,7 +279,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		interaction.start(true); // give user first turn
 		OptionChoice optionChoice=new OptionChoice();
 		Stage optionStage=new Stage();
-		
+
 		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 		int ButtonId;
 		Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
@@ -1752,59 +1754,71 @@ public class DownPrincipalScreen1 extends AnchorPane{
 						username+".txt");
 
 				WriteHistory writer = new WriteHistory();
+				// Create alert
+				//				Alert alert = new Alert(AlertType.CONFIRMATION);
+				//				alert.setTitle("End of negotiation");
+				//				//alert.setHeaderText("Look, a Confirmation Dialog");
+				//				alert.setContentText("The negotiation is over. "
+				//						+ "	Please call the experimentator");
+				//				ButtonType nextStep = new ButtonType("Next Step");
+				//				alert.getButtonTypes().setAll(nextStep);
+				//
+				//				Optional<ButtonType> result = alert.showAndWait();
 
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("End of negotiation");
-				//alert.setHeaderText("Look, a Confirmation Dialog");
-				alert.setContentText("The negotiation is over. "
+				TextInputDialog dialog = new TextInputDialog("password");
+				dialog.setTitle("Next Dialog");
+				dialog.setHeaderText("The negotiation is over. "
 						+ "	Please call the experimentator");
-				ButtonType nextStep = new ButtonType("Next Step");
-				alert.getButtonTypes().setAll(nextStep);
+				dialog.setContentText("Password:");
 
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == nextStep){
+				// Traditional way to get the response value.
+				Optional<String> result = dialog.showAndWait();
+				// 
+				if (result.isPresent()){
+					if(result.get()== passWord){
 					Stage chatStage2=new Stage();
 
-					switch(nbAgents){
-					case(0):{
-						UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
-						chat2.situation="restaurant";
+			switch(nbAgents){
+			case(0):{
+				UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
+				chat2.situation="restaurant";
 
-						String arthur = "--------------------------------------------- \n \n"+
+				String arthur = "--------------------------------------------- \n \n"+
 						"Preferences of agent Arthur \n \n" +
-								Acceuil.negotiators.get(1).printPreferences();
+						Acceuil.negotiators.get(1).printPreferences();
 
-						writer.write(arthur, fichier2);
-						chatStage.hide();
+				writer.write(arthur, fichier2);
+				chatStage.hide();
 
-						chat2.setPrefModel(Acceuil.getNegotiators().get(1));
-						chat2.start(chatStage2);
-						break;
-					}	
-					case(1):{
-						UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
-						chat3.situation="restaurant";
-						Stage chatStage3=new Stage();
-						
-						String kevin = "--------------------------------------------- \n \n"+
-										"Preferences of agent Kevin \n \n" +
-								Acceuil.negotiators.get(2).printPreferences();
+				chat2.setPrefModel(Acceuil.getNegotiators().get(1));
+				chat2.start(chatStage2);
+				break;
+			}	
+			case(1):{
+				UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
+				chat3.situation="restaurant";
+				Stage chatStage3=new Stage();
 
-						writer.write(kevin, fichier2);
-						chatStage2.hide();
-						chat3.setPrefModel(Acceuil.getNegotiators().get(2));
-						chat3.start(chatStage3);
-						
-						break;
+				String kevin = "--------------------------------------------- \n \n"+
+						"Preferences of agent Kevin \n \n" +
+						Acceuil.negotiators.get(2).printPreferences();
+
+				writer.write(kevin, fichier2);
+				chatStage2.hide();
+				chat3.setPrefModel(Acceuil.getNegotiators().get(2));
+				chat3.start(chatStage3);
+
+				break;
+			}
+			default: 
+				break;
+
+			}
+		} 
+					else{
+						//rester dans l'état courant
 					}
-					default: 
-						break;
-
-					}
-				} else {
-
 				}
-
 			}
 		});
 

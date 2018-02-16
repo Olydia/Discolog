@@ -18,7 +18,7 @@ import javafx.scene.layout.FlowPane;
 
 public class UpPrincipalScreen1 extends Application {
 	public static int nbAgents = -1;
-	String situation;
+	public String situation;
 	private String username;
 	ADAPT state;
 	public String getUsername() {

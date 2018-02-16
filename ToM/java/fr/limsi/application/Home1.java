@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -35,11 +36,11 @@ import javafx.stage.Stage;
 
 public class Home1 extends Application {
 	String username = "1";
-	WriteHistory writer;
+	//WriteHistory writer;
 	File history ;
 	public Home1(/*Acceuil frame*/){
 		//this.frame = frame;
-		 writer = new WriteHistory();
+		// writer = new WriteHistory();
 
 	}
 
@@ -130,111 +131,73 @@ public class Home1 extends Application {
 
 		AnchorPane.setLeftAnchor(errorMessage,700.0);
 
-		ObservableList list = pane.getChildren();
+		ObservableList<Node> list = pane.getChildren();
 
 		list.addAll(sceneTitle,userName,userTextField,hbBtn);
 
-		btn.setOnAction( event -> {
-			username=userTextField.getText();
-			history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
-					username+".txt");
-	
-					homeStage.hide();
-		        	Acceuil frame = new Acceuil();
-		        	Stage acceuil = new Stage();
+		btn.setOnAction(new EventHandler<ActionEvent>() {
 
-		    Task<List<Negotiation<? extends Option>>> task = new Task<List<Negotiation<? extends Option>>>() {
-		        @Override
-		        public List<Negotiation<? extends Option>>   call() {
-		            // process long-running computation, data retrieval, etc...
-			    	List<Negotiation<? extends Option>>  result = Acceuil.getNegotiators();
-
-		            return result;
-		        }
-		    };
-		    task.setOnRunning((e) -> frame.start(acceuil));
-		    task.setOnSucceeded(e -> {
-		        // update UI with result
-		    });
-		    new Thread(task).start();
-		});
-//				username=userTextField.getText();
-//				
-//				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
-//				username+".txt");
-//
-//				homeStage.hide(); 
-//				
-//
-//				Acceuil frame = new Acceuil();
-//				frame.start(new Stage());
-//            	
+			@Override
+			public void handle(ActionEvent e) {
+				username=userTextField.getText();
+				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
+				username+".txt");
 				
-				
-//            
-//        		while (!Acceuil.isDone()){
-//        			pause();
-//        		}
-//        		
-//    			String userPref = "User Preferences : \n \n" 
-//    								+ frame.getUserPref().printPreferences();
-//        		
-//    			writer.write(userPref, history);
-//        		
-//        		List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
-//        		System.out.println(neg.toString());
-//        		
-//        		startAgents();
+				Acceuil frame = new Acceuil(username, history);
+				Stage acceuil = new Stage();
+				frame.start(acceuil);
+            	homeStage.hide();     
             	
-            		
-//				List<Negotiation<? extends Option>> negotiators = frame.getNegotiators();
-//				UpPrincipalScreen1 chat=new UpPrincipalScreen1();
-//				chat.setPrefModel(negotiators.get(0));
-//				Stage chatStage=new Stage();
-//				chat.situation=/*(String) cb.getValue()*/"restaurant";
-//				chat.start(chatStage);
-
-
+            	Task<Void> task = new Task<Void>() {
+            	    @Override public Void call() {
+            	    	while (!Acceuil.isDone()){
+            	    		try {
+            	    			Thread.sleep(200);
+            	    		} catch (InterruptedException e1) {
+            	    			// TODO Auto-generated catch block
+            	    			e1.printStackTrace();
+            	    		}
+            	    	}
+            	        return null;
+            	    }
+            	};
+            	
+            	 task.setOnSucceeded(elem -> {
+     		        // update UI with result
+            		 acceuil.hide();
+            		 frame.startAgents();
+     		    });
+            	Thread aa = new Thread(task);
+            	aa.start();
+            	try {
+					aa.join();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
+        		
+    
+        		
+        		
+//        		
+			}
+		
+		});
 		
 	}
+
 	
 	public void pause(){
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 	
-	public void startAgents(/*Negotiation<? extends Option> nego*/){
-		List<Negotiation<? extends Option>> negotiations = Acceuil.getNegotiators();
-		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username, ADAPT.COMPLEMENT);
-		chat.situation="restaurant";
-    	Stage chatStage=new Stage();
-    	chat.setPrefModel(negotiations.get(0));
-    	String bob = "Preferences of agent Bob \n \n" + negotiations.get(0).printPreferences();
-    	writer.write(bob, history);
-    	
-    	chat.start(chatStage);
-    	
-//    	while(!chat.successNegotiation())
-//    		pause();
-    
-//    	
-//		UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username);
-//		chat2.situation="restaurant";
-//    	Stage chatStage2=new Stage();
-//    	
-//    	String arthur = "Preferences of agent Bob \n \n" + negotiations.get(0).printPreferences();
-//    	writer.write(arthur, history);
-//    	
-//    	chat2.setPrefModel(Acceuil.getNegotiators().get(1));
-//    	chat2.start(chatStage2);
-    	
-    	
-	}
-	
+
 	public static void main(String[] args) {
 		Home1 home = new Home1();
 		home.launch(args);

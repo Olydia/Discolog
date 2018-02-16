@@ -10,7 +10,7 @@
 	import sun.management.resources.agent;
 	
 	public class Models<O extends Option> {
-		final double DISTANCE = 0.8;
+		final double DISTANCE = 0.7;
 		final int MAX_MODELS = 15;
 	
 		private List<Tuple<List<Self_Ci<Criterion>>, List<Self_Ci<Criterion>>>> finalList;
