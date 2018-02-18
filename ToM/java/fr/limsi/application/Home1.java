@@ -147,40 +147,6 @@ public class Home1 extends Application {
 				Stage acceuil = new Stage();
 				frame.start(acceuil);
             	homeStage.hide();     
-            	
-            	Task<Void> task = new Task<Void>() {
-            	    @Override public Void call() {
-            	    	while (!Acceuil.isDone()){
-            	    		try {
-            	    			Thread.sleep(200);
-            	    		} catch (InterruptedException e1) {
-            	    			// TODO Auto-generated catch block
-            	    			e1.printStackTrace();
-            	    		}
-            	    	}
-            	        return null;
-            	    }
-            	};
-            	
-            	 task.setOnSucceeded(elem -> {
-     		        // update UI with result
-            		 acceuil.hide();
-            		 frame.startAgents();
-     		    });
-            	Thread aa = new Thread(task);
-            	aa.start();
-            	try {
-					aa.join();
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            	
-        		
-    
-        		
-        		
-//        		
 			}
 		
 		});
@@ -188,14 +154,14 @@ public class Home1 extends Application {
 	}
 
 	
-	public void pause(){
-		try {
-			Thread.sleep(200);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
+//	public void pause(){
+//		try {
+//			Thread.sleep(200);
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
 	
 
 	public static void main(String[] args) {

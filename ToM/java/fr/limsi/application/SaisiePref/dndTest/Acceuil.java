@@ -28,6 +28,7 @@ import fr.limsi.negotiate.restaurant.Location;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -102,6 +103,9 @@ public class Acceuil extends Application{
 		textA.getChildren().add(commencer);
 		border.setPrefSize(600, 400);
 
+		Platform.setImplicitExit(false);
+
+		
 		Scene scene = new Scene(border, 600, 400);
 		stage.setScene(scene);
 		stage.show();
@@ -223,21 +227,26 @@ public class Acceuil extends Application{
 							isDone = true;
 							//hide current
 							
-							// lanch agents
-//							Platform.runLater(new Runnable() {
-//							      @Override public void run() {
-//							    	  
-//							        //Update UI here     
-//							    	  stage.hide();
-//
-//							      }
-//							    });
+						// lanch agents
+							
+							Platform.runLater(new Runnable() {
+						        @Override
+						        public void run() {
+						        	System.out.println("Running");
+									startAgents();
+
+						          //javaFX operations should go here
+						        }
+						   });
 
 						}
 
 					}
 				}
 				);
+		
+		
+		
 	}
 
 
@@ -295,9 +304,7 @@ public class Acceuil extends Application{
 		}
 		return negotiators;
 	}
-	public static void main(String[] args) {
-		Acceuil.launch(args);
-	}
+
 
 
 	public static List<Negotiation<? extends Option>> getNegotiators() {
