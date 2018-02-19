@@ -205,9 +205,15 @@
 	In addition, dominance is represented as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior \cite{burgoon1998nature}. 
 	
 	
-	In order to build an agent which considers its relation of dominance with a human interlocutor, the agent has to be able to express and understand behaviors related to power. Therefore, we presented in \cite{ouali2017computational} a computational model of negotiation in which an agent is allowed to express its behavior 
+	In order to build an agent which considers its relation of dominance with a human interlocutor, the agent has to be able to express and understand behaviors related to power. Therefore, we presented in \cite{ouali2017computational} a computational model of negotiation in which an agent is allowed to express its behavior of power through its strategy of negotiation. Moreover, we presented an experimental study showing that external judges were able to perceive those behaviors of power expressed by an artificial agent.
 	
-	We focus on a specific kind of interaction called \emph{collaborative negotiation}. Unlike adversarial negotiation, collaborative negotiation assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest\cite{sidner1994artificial,chu1995response}. In order to develop our adaptive negotiator agent, we first designed a model of collaborative negotiation that allows an agent to express its social dominance through negotiation strategies \cite{ouali2017computational}. We showed that human observers correctly perceive the dominance expressed by the agent. The next steps are to evaluate the level of dominance of the interlocutor and to adapt the agent's level of dominance. In this paper, we present a theory of mind approach to evaluate the level of dominance of the interlocutor (step 2 on Figure~\ref{fig:schema-general}).
+	In this paper, we propose to extend this model in order to allow the agent to simulate a complementary interpersonal relation of dominance with its partner. To this aim, the agent has to understand the behaviors of power expressed by the interlocutor so as to adapt a complementary behavior.
+
+	We propose to tackle this issue using mechanisms inspired from theory of mind. More specifically, we use mechanisms of \emph{simulation theory} \emph{ST} which suggests that humans, have the ability to project oneself in the other person’s shoes \cite{shanton2010simulation}. Therefore, we can simulate his or her mental activity with our own capacities for practical reasoning. 
+	Thus, we can mimic the mental state of our interactional partner \cite{harbers2009modeling}.
+	
+	We present in this paper a model of ToM with a \emph{ST} approach, in which the agent uses its model of decision based on power to reason about its partner behaviors. 
+	
 	
 	\begin{figure*}
 		\fbox{\includegraphics[width=\linewidth, height= 0.4\textheight]{figs/model_tom.pdf}}
