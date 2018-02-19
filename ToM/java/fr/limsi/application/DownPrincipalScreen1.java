@@ -1765,57 +1765,59 @@ public class DownPrincipalScreen1 extends AnchorPane{
 				//
 				//				Optional<ButtonType> result = alert.showAndWait();
 
-//				TextInputDialog dialog = new TextInputDialog("password");
-//				dialog.setTitle("Next Dialog");
-//				dialog.setHeaderText("The negotiation is over. "
-//						+ "	Please call the experimentator");
-//				dialog.setContentText("Password:");
-//				Optional<String> result = dialog.showAndWait();
+				//				TextInputDialog dialog = new TextInputDialog("password");
+				//				dialog.setTitle("Next Dialog");
+				//				dialog.setHeaderText("The negotiation is over. "
+				//						+ "	Please call the experimentator");
+				//				dialog.setContentText("Password:");
+				//				Optional<String> result = dialog.showAndWait();
 
-				 PasswordDialog pd = new PasswordDialog();
-				    Optional<String> result = pd.showAndWait();
-				  
-				    if (result.isPresent()){
-				    	if(result.get()== passWord){
-					Stage chatStage2=new Stage();
+				PasswordDialog pd = new PasswordDialog();
+				Optional<String> result = pd.showAndWait();
 
-			switch(nbAgents){
-			case(0):{
-				UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
-				chat2.situation="restaurant";
+				if (result.isPresent()){
+					System.out.println(result.orElse("vide"));
+					if(result.get().equals(passWord)){
+						System.out.println(result.orElse("vide"));
+						Stage chatStage2=new Stage();
 
-				String arthur = "--------------------------------------------- \n \n"+
-						"Preferences of agent Arthur \n \n" +
-						Acceuil.negotiators.get(1).printPreferences();
+						switch(nbAgents){
+						case(0):{
+							UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
+							chat2.situation="restaurant";
 
-				writer.write(arthur, fichier2);
-				chatStage.hide();
+							String arthur = "--------------------------------------------- \n \n"+
+									"Preferences of agent Arthur \n \n" +
+									Acceuil.negotiators.get(1).printPreferences();
 
-				chat2.setPrefModel(Acceuil.getNegotiators().get(1));
-				chat2.start(chatStage2);
-				break;
-			}	
-			case(1):{
-				UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
-				chat3.situation="restaurant";
-				Stage chatStage3=new Stage();
+							writer.write(arthur, fichier2);
+							chatStage.hide();
 
-				String kevin = "--------------------------------------------- \n \n"+
-						"Preferences of agent Kevin \n \n" +
-						Acceuil.negotiators.get(2).printPreferences();
+							chat2.setPrefModel(Acceuil.getNegotiators().get(1));
+							chat2.start(chatStage2);
+							break;
+						}	
+						case(1):{
+							UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
+							chat3.situation="restaurant";
+							Stage chatStage3=new Stage();
 
-				writer.write(kevin, fichier2);
-				chatStage2.hide();
-				chat3.setPrefModel(Acceuil.getNegotiators().get(2));
-				chat3.start(chatStage3);
+							String kevin = "--------------------------------------------- \n \n"+
+									"Preferences of agent Kevin \n \n" +
+									Acceuil.negotiators.get(2).printPreferences();
 
-				break;
-			}
-			default: 
-				break;
+							writer.write(kevin, fichier2);
+							chatStage2.hide();
+							chat3.setPrefModel(Acceuil.getNegotiators().get(2));
+							chat3.start(chatStage3);
 
-			}
-		} 
+							break;
+						}
+						default: 
+							break;
+
+						}
+					} 
 					else{
 						//rester dans l'état courant
 					}
