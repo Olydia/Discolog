@@ -119,7 +119,8 @@ public class NegotiatorAgent extends Agent {
 	public Utterance respondTo(Utterance utterance, Disco disco){
 //		System.out.println(" ***** Pow " + getNegotiation().getDominance()+ 
 //				" Self " + getNegotiation().computeSelf(getNegotiation().getDominance()) + "*****");
-		if ( utterance != null )System.out.println(utterance.format() + "\n");
+	//	if ( utterance != null )System.out.println(utterance.format() + "\n");
+		List<Class<? extends Criterion>> criteria = getNegotiation().getCriteria().getElements();
 		if ( utterance == null ) {
 			
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
@@ -127,10 +128,10 @@ public class NegotiatorAgent extends Agent {
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 			
 			else{
-
-				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				int random = new Random().nextInt(criteria.size());
+				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 				
-				//Class<? extends Criterion> opent = getNegotiation().getCriteria().getElements().get(0);
+				Class<? extends Criterion> opent = criteria.get(random);
 
 
 				if(relation > NegotiationParameters.pi){
@@ -209,9 +210,11 @@ public class NegotiatorAgent extends Agent {
 
 			//SUBMISSIVE cases
 		}else { 
-			//	System.out.println(getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
+			// if there is no discussed criterion open one
+			int random = new Random().nextInt(criteria.size());
 
-			Class<? extends Criterion> c=getNegotiation().getContext().getCurrentDisucussedCriterion();
+			Class<? extends Criterion> c= (getNegotiation().getContext().getDiscussedCriteria().isEmpty() ?
+					criteria.get(random): getNegotiation().getContext().getCurrentDisucussedCriterion());
 
 			// REJECT
 			if(canReject(utterance)) {

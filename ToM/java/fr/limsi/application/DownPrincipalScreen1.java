@@ -1765,17 +1765,18 @@ public class DownPrincipalScreen1 extends AnchorPane{
 				//
 				//				Optional<ButtonType> result = alert.showAndWait();
 
-				TextInputDialog dialog = new TextInputDialog("password");
-				dialog.setTitle("Next Dialog");
-				dialog.setHeaderText("The negotiation is over. "
-						+ "	Please call the experimentator");
-				dialog.setContentText("Password:");
+//				TextInputDialog dialog = new TextInputDialog("password");
+//				dialog.setTitle("Next Dialog");
+//				dialog.setHeaderText("The negotiation is over. "
+//						+ "	Please call the experimentator");
+//				dialog.setContentText("Password:");
+//				Optional<String> result = dialog.showAndWait();
 
-				// Traditional way to get the response value.
-				Optional<String> result = dialog.showAndWait();
-				// 
-				if (result.isPresent()){
-					if(result.get()== passWord){
+				 PasswordDialog pd = new PasswordDialog();
+				    Optional<String> result = pd.showAndWait();
+				  
+				    if (result.isPresent()){
+				    	if(result.get()== passWord){
 					Stage chatStage2=new Stage();
 
 			switch(nbAgents){

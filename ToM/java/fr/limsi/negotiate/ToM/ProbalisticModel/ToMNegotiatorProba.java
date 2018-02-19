@@ -94,8 +94,14 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
-		int time = new Random().nextInt(300) + 450;
-		pause(time);
+		int time = new Random().nextInt(500) + 550;
+		//pause(time);
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
 		if (utterance != null){

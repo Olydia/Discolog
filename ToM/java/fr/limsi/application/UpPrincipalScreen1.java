@@ -74,11 +74,15 @@ public class UpPrincipalScreen1 extends Application {
 				"-fx-background-position: center center; " +
 				"-fx-background-repeat: stretch;");
 		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+		
 		ta.setPrefSize(visualBounds.getWidth(), (visualBounds.getHeight()-5.0)/2);
+		
 		chatConsole console = new chatConsole(ta);
+		
 		PrintStream ps = new PrintStream(console, true);
 		System.setOut(ps);
 		System.setErr(ps);
+		
 		flow.getChildren().add(ta);
 		Scene scene = new Scene(sp, visualBounds.getWidth(), visualBounds.getHeight());
 		chatStage.setScene(scene);
