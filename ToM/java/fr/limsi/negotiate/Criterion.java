@@ -10,3 +10,4 @@ public interface Criterion {
 	String getFrVersion();
 	String print(String topic);
 }
+

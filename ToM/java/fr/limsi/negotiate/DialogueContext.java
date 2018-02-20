@@ -162,6 +162,21 @@ public class DialogueContext {
 		return null;
 
 	}
+	
+	/**
+	 * 
+	 * @return The last propose made by an interlocutor
+	 */
+	
+	public Proposal getLastProposal(boolean isSelf){
+		for (int i = history.size()-1; i>= 0; i--){
+			NegotiationUtterance utt = history.get(i);
+			if(utt instanceof Propose && utt.getExternal().equals(!isSelf))
+				return  (Proposal) utt.getValue();
+		}
+		return null;
+
+	}
 
 	public List<Proposal> getNonAcceptedProposals(){
 		List<Proposal> moves = new ArrayList<Proposal>();
@@ -240,4 +255,6 @@ public class DialogueContext {
 		}
 		return utt;
 	}
+	
+
 }

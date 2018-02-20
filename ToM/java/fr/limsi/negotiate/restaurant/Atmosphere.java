@@ -4,7 +4,7 @@ import fr.limsi.negotiate.Criterion;
 
 public enum Atmosphere implements Criterion{
 
-	LIVELY, QUIET, ROMANTIC, FAMILY, COZY, MODERN ;
+	COZY,FAMILY,LIVELY, MODERN, ROMANTIC, QUIET ;
 
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub

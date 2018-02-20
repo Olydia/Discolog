@@ -13,9 +13,10 @@ import javafx.scene.layout.Priority;
 public class PasswordDialog extends Dialog<String> {
   private PasswordField passwordField;
 
-  public PasswordDialog() {
-    setTitle("Password");
-    setHeaderText("Please enter your password.");
+  public PasswordDialog(String agent) {
+    setTitle("End of negotiation");
+    setHeaderText("The negotiation with " + agent +" is over. "
+					+ "	Please call the experimentator");
 
     ButtonType passwordButtonType = new ButtonType("Decrypt", ButtonData.OK_DONE);
     getDialogPane().getButtonTypes().addAll(passwordButtonType, ButtonType.CANCEL);

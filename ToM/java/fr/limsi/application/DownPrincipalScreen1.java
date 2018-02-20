@@ -4,6 +4,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import edu.wpi.disco.*;
@@ -64,11 +65,12 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	}
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
+		
 		for (int i=0;i<c.length;i++){
-
 			criteria.add(c[i].toString().toUpperCase());
 
 		}
+		Collections.sort(criteria);
 	}
 	/**
 	 * @param ch: a string in a viewlist
@@ -207,6 +209,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	}
 
 	public void setSecondaryButtonsTexts(Criterion[] c, ArrayList<Button>c1Buttons, ArrayList<Button> c12Buttons,ArrayList<HBox> c1HBoxs, ArrayList<HBox> c12HBoxs){
+		
 		for (int i=0;i<c.length;i++){
 			Button iButton = new Button( c[i].toString());
 			Button i2Button = new Button( c[i].toString());
@@ -327,7 +330,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		Button counterproposeOptionButton = new Button(situation);
 		Button counterproposeValueButton = new Button("criterion");
 
-		Button acceptProposeButton = new Button("Counterpropose");
+		Button acceptProposeButton = new Button("Accept and Propose");
 
 		Button rejectOnlyButton = new Button("Just Reject");
 		Button rejectStateButton = new Button("Reject and explain why");
@@ -1754,31 +1757,12 @@ public class DownPrincipalScreen1 extends AnchorPane{
 						username+".txt");
 
 				WriteHistory writer = new WriteHistory();
-				// Create alert
-				//				Alert alert = new Alert(AlertType.CONFIRMATION);
-				//				alert.setTitle("End of negotiation");
-				//				//alert.setHeaderText("Look, a Confirmation Dialog");
-				//				alert.setContentText("The negotiation is over. "
-				//						+ "	Please call the experimentator");
-				//				ButtonType nextStep = new ButtonType("Next Step");
-				//				alert.getButtonTypes().setAll(nextStep);
-				//
-				//				Optional<ButtonType> result = alert.showAndWait();
 
-				//				TextInputDialog dialog = new TextInputDialog("password");
-				//				dialog.setTitle("Next Dialog");
-				//				dialog.setHeaderText("The negotiation is over. "
-				//						+ "	Please call the experimentator");
-				//				dialog.setContentText("Password:");
-				//				Optional<String> result = dialog.showAndWait();
-
-				PasswordDialog pd = new PasswordDialog();
+				PasswordDialog pd = new PasswordDialog(agentName);
 				Optional<String> result = pd.showAndWait();
 
 				if (result.isPresent()){
-					System.out.println(result.orElse("vide"));
 					if(result.get().equals(passWord)){
-						System.out.println(result.orElse("vide"));
 						Stage chatStage2=new Stage();
 
 						switch(nbAgents){

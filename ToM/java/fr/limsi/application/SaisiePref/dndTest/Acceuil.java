@@ -1,7 +1,6 @@
 package fr.limsi.application.SaisiePref.dndTest;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,6 @@ import fr.limsi.negotiate.restaurant.Location;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -51,15 +49,15 @@ public class Acceuil extends Application{
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
 			+ "\n that will be discussed during the negotiation. \n\n"+
+			
+			"Note that the agents do not know your preferences \n \n"+
 
-			"Since the criteria are independent, each criterion will be presented independently of the others."
-			+ "\n You have to focus your rank only on the criterion presented and ignore the other criteria. \n\n \n"
+			"We will present you each criterion (Athmosphere, Cost, Cuisine, Location) one after the other. \n \n"
 
-			+"We invite you to rank your preferences in an descending order, "
-			+ "\n starting with the value you like the most,  to the value you like the least. \n\n"+
+			+"For each criterion, you will have to rank your preferences in a descending order: "
+			+ "\n put on the top of the list the value you like the most for this criterion. \n\n"+
 
-			"If you have any question, you can call the experimenter."
-			+ "\n Otherwise, we can start the study.";
+			"If you have any question, at any time during the process, feel free to call the experimenter.";
 
 
 
@@ -78,35 +76,32 @@ public class Acceuil extends Application{
 	}
 	@Override
 	public void start(Stage stage){
-		TextArea welcom  = new TextArea(text);
-		Button commencer = new Button("Commencer");
+		TextArea textWelcom  = new TextArea(text);
+		Button btncommencer = new Button("Ok, I understand");
 		// TODO Auto-generated method stub
 		stage.setTitle("Preferences selection");
 		Lock l = new ReentrantLock();
 		l.lock();
 		negotiators = new ArrayList<Negotiation<? extends Option>> ();
 		l.unlock();
-		//welcom.setFont(font);
-		welcom.setEditable(false);
+	    btncommencer.setStyle("-fx-font-weight: bold;");
+		textWelcom.setEditable(false);
 
 
-		//this.getContentPane().add(textAcceuil, BorderLayout.NORTH);
 		BorderPane border = new BorderPane();
-		HBox hbox = new HBox();
+		border.setCenter(textWelcom);
 
-		border.setCenter(hbox);
-		hbox.getChildren().add(welcom);
-
-		HBox textA = new HBox();
-		textA.setAlignment(Pos.CENTER);
-		border.setBottom(textA);
-		textA.getChildren().add(commencer);
-		border.setPrefSize(600, 400);
+		HBox btn = new HBox();
+		btn.setAlignment(Pos.CENTER);
+		btn.getChildren().add(btncommencer);
+		border.setBottom(btn);
+//		textA.
+		//border.setPrefSize(700, 500);
 
 		Platform.setImplicitExit(false);
 
 		
-		Scene scene = new Scene(border, 600, 400);
+		Scene scene = new Scene(border, 700, 500);
 		stage.setScene(scene);
 		stage.show();
 
@@ -126,7 +121,7 @@ public class Acceuil extends Application{
 		// Init the model of preferences
 		PreferencesModel model = new PreferencesModel();
 
-		commencer.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+		btncommencer.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
 			@Override
 			public void handle(javafx.event.ActionEvent event) {
 				stage.hide();
@@ -251,7 +246,7 @@ public class Acceuil extends Application{
 
 
 	public void startAgents(){
-		System.out.println("je lance les agents");
+		//System.out.println("je lance les agents");
 		List<Negotiation<? extends Option>> negotiations = getNegotiators();
 		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username, ADAPT.COMPLEMENT);
 		chat.situation="restaurant";

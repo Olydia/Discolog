@@ -48,11 +48,11 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
 		Self_Ci<Location> d1_location =  new Self_Ci<>(Location.class);
-		d1_location.addPreference(Location.NORTH_SIDE, Location.DOWNTOWN);
-		d1_location.addPreference(Location.DOWNTOWN, Location.EAST_SIDE);
-		d1_location.addPreference(Location.EAST_SIDE, Location.WEST_SIDE);
-		d1_location.addPreference(Location.EAST_SIDE, Location.SOUTH_SIDE);
-		d1_location.addPreference(Location.WEST_SIDE, Location.SOUTH_SIDE);
+		d1_location.addPreference(Location.NEAR_EIFFEL_TOWER, Location.CENTER_OF_PARIS);
+		d1_location.addPreference(Location.CENTER_OF_PARIS, Location.PERE_LACHAISE);
+		d1_location.addPreference(Location.PERE_LACHAISE, Location.GARE_DU_NORD);
+		d1_location.addPreference(Location.PERE_LACHAISE, Location.MONTPARNASSE);
+		d1_location.addPreference(Location.GARE_DU_NORD, Location.MONTPARNASSE);
 
 		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d1_location);
 		
@@ -104,12 +104,12 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
 		Self_Ci<Location> d1_location =  new Self_Ci<>(Location.class);
-		d1_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
-		d1_location.addPreference(Location.SOUTH_SIDE,Location.EAST_SIDE);
-		d1_location.addPreference(Location.WEST_SIDE, Location.EAST_SIDE);
-		d1_location.addPreference(Location.EAST_SIDE, Location.NORTH_SIDE);
-		d1_location.addPreference(Location.EAST_SIDE, Location.DOWNTOWN);
-		d1_location.addPreference(Location.DOWNTOWN, Location.NORTH_SIDE);
+		d1_location.addPreference(Location.MONTPARNASSE, Location.GARE_DU_NORD);
+		d1_location.addPreference(Location.MONTPARNASSE,Location.PERE_LACHAISE);
+		d1_location.addPreference(Location.GARE_DU_NORD, Location.PERE_LACHAISE);
+		d1_location.addPreference(Location.PERE_LACHAISE, Location.NEAR_EIFFEL_TOWER);
+		d1_location.addPreference(Location.PERE_LACHAISE, Location.CENTER_OF_PARIS);
+		d1_location.addPreference(Location.CENTER_OF_PARIS, Location.NEAR_EIFFEL_TOWER);
 
 		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d1_location);
 		
@@ -167,11 +167,11 @@ public class totalOrderedModels {
 
 		
 		Self_Ci<Location> d2_location =  new Self_Ci<>(Location.class);
-		d2_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
-		d2_location.addPreference(Location.WEST_SIDE,Location.DOWNTOWN);
-		d2_location.addPreference(Location.NORTH_SIDE, Location.DOWNTOWN);
-		d2_location.addPreference(Location.NORTH_SIDE, Location.EAST_SIDE);
-		d2_location.addPreference(Location.DOWNTOWN, Location.EAST_SIDE);
+		d2_location.addPreference(Location.MONTPARNASSE, Location.GARE_DU_NORD);
+		d2_location.addPreference(Location.GARE_DU_NORD,Location.CENTER_OF_PARIS);
+		d2_location.addPreference(Location.NEAR_EIFFEL_TOWER, Location.CENTER_OF_PARIS);
+		d2_location.addPreference(Location.NEAR_EIFFEL_TOWER, Location.PERE_LACHAISE);
+		d2_location.addPreference(Location.CENTER_OF_PARIS, Location.PERE_LACHAISE);
 		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d2_location);
 		
 
@@ -228,12 +228,12 @@ public class totalOrderedModels {
 		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d4_atmosphere);
 
 		Self_Ci<Location> d4_location =  new Self_Ci<>(Location.class);
-		d4_location.addPreference(Location.SOUTH_SIDE, Location.WEST_SIDE);
-		d4_location.addPreference(Location.SOUTH_SIDE,Location.EAST_SIDE);
-		d4_location.addPreference(Location.WEST_SIDE, Location.EAST_SIDE);
-		d4_location.addPreference(Location.EAST_SIDE, Location.NORTH_SIDE);
-		d4_location.addPreference(Location.EAST_SIDE, Location.DOWNTOWN);
-		d4_location.addPreference(Location.DOWNTOWN, Location.NORTH_SIDE);
+		d4_location.addPreference(Location.MONTPARNASSE, Location.GARE_DU_NORD);
+		d4_location.addPreference(Location.MONTPARNASSE,Location.PERE_LACHAISE);
+		d4_location.addPreference(Location.GARE_DU_NORD, Location.PERE_LACHAISE);
+		d4_location.addPreference(Location.PERE_LACHAISE, Location.NEAR_EIFFEL_TOWER);
+		d4_location.addPreference(Location.PERE_LACHAISE, Location.CENTER_OF_PARIS);
+		d4_location.addPreference(Location.CENTER_OF_PARIS, Location.NEAR_EIFFEL_TOWER);
 		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d4_location);
 		
 

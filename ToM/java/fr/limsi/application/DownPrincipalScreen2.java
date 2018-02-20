@@ -5,6 +5,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 import edu.wpi.disco.*;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
@@ -60,6 +63,9 @@ public class DownPrincipalScreen2 extends AnchorPane{
 
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
+		
+		Arrays.sort(c);
+
 		for (int i=0;i<c.length;i++){
 
     		criteria.add(c[i].toString().toUpperCase());
@@ -205,7 +211,9 @@ public class DownPrincipalScreen2 extends AnchorPane{
 	}
 
 	public void setSecondaryButtonsTexts(Criterion[] c, ArrayList<Button>c1Buttons, ArrayList<Button> c12Buttons,ArrayList<HBox> c1HBoxs, ArrayList<HBox> c12HBoxs){
-		 for (int i=0;i<c.length;i++){
+		Arrays.sort(c); 
+		
+		for (int i=0;i<c.length;i++){
 			 Button iButton = new Button( c[i].toString());
 			 Button i2Button = new Button( c[i].toString());
 			 c1Buttons.add(iButton);
@@ -330,7 +338,7 @@ public class DownPrincipalScreen2 extends AnchorPane{
 		Button counterproposeOptionButton = new Button(situation);
 		Button counterproposeValueButton = new Button("criterion");
 
-		Button acceptProposeButton = new Button("Counterpropose");
+		Button acceptProposeButton = new Button("Accept and Propose");
 
 		Button rejectOnlyButton = new Button("Just Reject");
 		Button rejectStateButton = new Button("Reject and explain why");

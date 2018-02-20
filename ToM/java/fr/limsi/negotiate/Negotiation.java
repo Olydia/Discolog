@@ -516,11 +516,11 @@ public class Negotiation<O extends Option> {
 	// used to compute the Accept utterance format
 
 	public boolean isLastProposal(Proposal accepted){
-		return getContext().getLastProposal().equals(accepted);
+		return getContext().getLastProposal(!accepted.isSelf).equals(accepted);
 	}
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
-		NegotiationUtterance uttSelf =  getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
+		NegotiationUtterance uttSelf = getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
 
 
 		return (uttSelf instanceof ProposalUtterance);
@@ -641,5 +641,24 @@ public class Negotiation<O extends Option> {
 		
 		return pref;
 	}
-
+	
+	public String constructAccept(Proposal currentProposal){
+		if(isPropose(currentProposal.isSelf)){
+			if(isLastProposal(currentProposal)){
+				return "Okay, let's go to " + currentProposal.printProposal(getTopic().getSimpleName().toLowerCase());
+			}
+			else if(getContext().otherProposal(currentProposal)!= null){
+				return "I prefer to go to " + 
+						currentProposal.printProposal(getTopic().getSimpleName().toLowerCase())
+					+ " but not to "+ getContext().otherProposal(currentProposal).printProposal(getTopic().getSimpleName().toLowerCase());
+			}
+			else {
+				return "In the end, I prefer to go to "
+						+ currentProposal.printProposal(getTopic().getSimpleName().toLowerCase());
+			}
+		}
+		else
+			return "You proposed " + currentProposal.printProposal(getTopic().getSimpleName().toLowerCase())
+			+ " earlier. In the end that's suits me fine";
+	}
 }

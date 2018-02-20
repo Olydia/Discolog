@@ -1,10 +1,14 @@
 package fr.limsi.negotiate.restaurant;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.TreeSet;
+
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
 
 public class GenerateModel {
-	
+
 	public   Negotiation<Restaurant>  emptyModel(){
 
 
@@ -32,7 +36,7 @@ public class GenerateModel {
 
 	}
 
-	
+
 	public   Negotiation<Restaurant>  model1(){
 
 
@@ -104,8 +108,8 @@ public class GenerateModel {
 		return model1;
 
 	}
-	
-	
+
+
 	public   Negotiation<Restaurant>  model2(){
 
 
@@ -144,24 +148,24 @@ public class GenerateModel {
 		return model2;
 
 	}
-	
-	
+
+
 	public static void printPreferences(Negotiation<Restaurant> m){
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
 			System.out.println("\t *********** " + v.getType().getSimpleName()+ " *********** ");
 			for(Criterion value: v.getElements())	
 				System.out.println(value.toString() + "  "+v.getSelf().satisfaction(value)+
-								" | is Satifiable: "+ v.getSelf().isSatisfiable(value, m.getDominance()));
+						" | is Satifiable: "+ v.getSelf().isSatisfiable(value, m.getDominance()));
 		}
 	}
-	
+
 	public static void finalCalcul(Negotiation<Restaurant> m){
 		for(CriterionNegotiation<Criterion> v: m.getValuesNegotiation()){
 			for(Criterion value: v.getElements())
 				calculateElem(value, m);
 		}
 	}
-	
+
 	public static void calculateElem(Criterion value, Negotiation<Restaurant> m1){
 		Satisfiable[]other ={Satisfiable.FALSE, Satisfiable.UNKOWN, Satisfiable.TRUE}; 
 		double[]dt ={0.8, 0.5, 0.4, 0.2}; 
@@ -171,25 +175,28 @@ public class GenerateModel {
 			for(Satisfiable o: other){
 				c.getOther().addPreference(value,o);
 				System.out.println(value+","+d +"," +c.getSelf().satisfaction(value)+","+ 
-				c.getOther().other(value) +","+ c.tolerable(value, m1.self()));
+						c.getOther().other(value) +","+ c.tolerable(value, m1.self()));
 				c.getOther().getPreferences().clear();
 
 			}
 		}
-		
+
 
 	}
-	
+
 	public static void main (String[] args)  {
+		Cuisine[] c = Cuisine.values();
 		
-		
-		totalOrderedModels m = new totalOrderedModels();
-		Negotiation<Restaurant> m1 = m.model1();
-		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
-		for(Cuisine e: Cuisine.values()){
-			System.out.println( e + " " +m1.getValueNegotiation(e.getClass()).getSelf().satisfaction(e));
-		}
-		
+		System.out.println("");		
+		for(Cuisine elem : c)
+			System.out.print(elem + ", ");
+		//		totalOrderedModels m = new totalOrderedModels();
+		//		Negotiation<Restaurant> m1 = m.model1();
+		//		System.out.println(m1.getValueNegotiation(Atmosphere.class).getSelf().getSelfPreferences());
+		//		for(Cuisine e: Cuisine.values()){
+		//			System.out.println( e + " " +m1.getValueNegotiation(e.getClass()).getSelf().satisfaction(e));
+		//		}
+		//		
 	}
 
 }
