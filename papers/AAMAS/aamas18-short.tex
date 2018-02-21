@@ -157,12 +157,15 @@
 
 
 	\section{Negotiator agent with ToM}
-		Present mental state of the agent (domain, communication) 
+		We developed a negotiator agent that can handle negotiation over several topics. Each topic considers different criteria or issues to make the final decision. For example, negotiate to choose a restaurant includes the criteria \textit{Cuisine, atmosphere, price and location}. 
+		 Thus, the agent is defined with a set of \textit{preferences} on each criterion. 
 		
-		Decision during the negotiation is built to take into account the preferences of the agent as well as his power. 
-		Conclusion 1: in order to guess the user power, based on its behaviors (produced utterances) the agent has to make hypotheses about its mental state (preferences, power). Since, our aim is to guess the power, we propose a model in which the agent has a partial representation of preferences. 
+		Moreover, the agent communicates with the user via \emph{utterances}. Theses utterances allows him to either share its preferences or make negotiations moves. An example of a dialogue is presented in Figure 2. 
 		
-		We propose an adaptation of the agent decision model to handle partial knowledge of preferences. 
+		
+		As presented in \textit{step 1} of the Figure \ref{fig:schema-general}, the decisional model of the agent takes into account, the agent's preferences in addition to a value of power $pow \in  [0,1]$. The result of the decisional process is an \emph{utterance} communicated to the user. 
+		
+		We aim to use this model of decision to reason about the user's behaviors during the negotiation. Indeed, based
 		
 	\section{Conclusion}
 
