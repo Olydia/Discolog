@@ -141,34 +141,13 @@
 	
 	\section{Introduction}
 	
-	Negotiation is a common task in daily life. People negotiate not only in professional situations (\emph{e.g.} for a salary increase or a promotion) but also in more simple situations such as choosing the holiday's destination. In the last decade, a variety of conversational agents which negotiate with people  have been created \cite{pynadath2013you,gratch2016misrepresentation,klatt2011negotiations}. Theses agents are designed with a growing number of decisional abilities, including multi-party and multi-issues negotiation capabilities.
+	Negotiation is a common task in daily life. People negotiate not only in professional situations (\emph{e.g.} for a salary increase or a promotion) but also in more simple situations such as choosing the holiday's destination. In the last decade, a variety of conversational agents which negotiate with people  have been created \cite{pynadath2013you,gratch2016misrepresentation,klatt2011negotiations}.
 	
-	However, negotiation is a multifaceted process which also involves social interaction, affects as well as personal preferences and opinions  \cite{bro2010affective}. Several research considered the role social behavior in the negotiation process. For instance, \cite{traum2008multi} defined a negotiator agent capable of deploying several strategies, constructed based on multiple social factors such as trust and commitment. 
-	\cite{de2011effect} studied how the expression of emotions such as anger and happiness affects the strategies of negotiators, and by consequences the outcomes of the negotiation. 
-	%In the same vein, \cite{kraus1995designing} developed an agent that behaves according to different personalities and has a learning mechanism to learn the personality of its opponents.
+	However, negotiation is a multifaceted process which also involves social interaction, affects as well as personal preferences and opinions  \cite{bro2010affective}. Several research considered the of role social behavior in the negotiation process, such as emotions and trust	\cite{de2011effect}. Research in social psychology demonstrated that the relation of dominance affects the way that the negotiation process is perceived \cite{van2006power}. Negotiators build different negotiation strategies depending on their relative dominance which directly influences the outcomes of the negotiation. More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings.
 	
-	One key element in the social aspect is the \emph{interpersonal relation} between the agent and a human user. 
-	%We focus in the following paper on the relation of dominance. 
-	Indeed, researches in social psychology demonstrated that the relation of dominance affects the way that the negotiation process is perceived \cite{van2006power}. Negotiating parties often differ in terms of dominance and this difference exerts an important influence on the behavior of participants. Negotiators build different negotiation strategies depending on their relative dominance which directly influences the outcomes of the negotiation. 
-	More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings. \cite{wiltermuth2015benefits,tiedens2003power}.
+	Dominance, as an interpersonal relation, is a dyadic variable in which control attempts by one individual are accepted by the partner. This means that one individual expresses behaviors of high power while the interactional partner adopts a low power behavior \cite{burgoon1998nature}. 
 	
-	In addition, dominance is represented as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior \cite{burgoon1998nature}. 
-	
-	
-	In order to build an agent which considers its relation of dominance with a human interlocutor, the agent has to be able to express and understand behaviors related to power. To this aim, we presented in a previous work \cite{ouali2017computational} a computational model of negotiation in which an agent is allowed to express its behavior of power through its strategy of negotiation. First, we defined principles of negotiation based on power inspired from social psychology \cite{de1995impact,van2004interpersonal,van2006power,magee2007power}. Second, we presented a computational model of collaborative negotiation, in which the decisional model takes into account those principles of power to build the agent's negotiation strategy. 
-	Finally, we presented an experimental study showing that external judges were able to perceive behaviors of power expressed by an artificial agent in the context of agent/agent negotiation.
-	
-	
-	Taking this computational model as a point of departure, we propose, to create a negotiator agent able to simulate a \emph{complementary relation of dominance} with its interlocutor. To this aim, the agent has to understand the behaviors of power expressed by the interlocutor so as to adapt a complementary behavior.
-
-	We propose to implement this complementarity using mechanisms inspired from theory of mind. More specifically, we use mechanisms of \emph{simulation theory} \emph{ST} which suggests that humans, have the ability to project oneself in the other person's shoes \cite{shanton2010simulation}. Therefore, we can simulate his or her mental activity with our own capacities for practical reasoning. 
-	Thus, we can mimic the mental state of our interactional partner \cite{harbers2009modeling}.
-	
-	We present in this paper a model of ToM with a \emph{ST} approach, in which the agent uses its model of decision based on power in order to reason about its interlocutor's behavior and guess his/her behaviors of power. By consequence, the agent can adapt its behaviors to the behavior guessed in order to create a complementary relation of dominance as illustrated in figure \ref{fig:schema-general}.
-	
-	
-	 
-	
+	In this poster, we present an agent that simulates such a relation of dominance when negotiating with a human interlocutor. The agent is able to express and understand behaviors related to power. This work is based on the computational model proposed by \cite{ouali2017computational} in which an agent expresses its behavior of power through its strategy of negotiation. It is based on three principles of negotiation based on power inspired from social psychology \cite{de1995impact,van2006power,magee2007power}. We show how this model can be adapted to reason about the user's power, following a Theory of Mind approach. We simulate the mental activity of the interlocutor, we show that the agent can make good predictions in the context of agent-agent interaction. We propose to use this model in the context of human-agent negotiation.
 	
 	\begin{figure*}
 		\includegraphics[width=0.65\linewidth, height= 0.25\textheight]{figs/model_tom.pdf}
