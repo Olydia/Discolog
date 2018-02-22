@@ -47,89 +47,40 @@
 
 	
 	% AAMAS: submissions are anonymous for most tracks
-	\author{Paper \#32}  % put your paper number here!
+%	\author{Paper \#32}  % put your paper number here!
 	
 
 	%
-	%\author{Ben Trovato}
-	%\authornote{Dr.~Trovato insisted his name be first.}
-	%\orcid{1234-5678-9012}
-	%\affiliation{%
-	%  \institution{Institute for Clarity in Documentation}
-	%  \streetaddress{P.O. Box 1212}
-	%  \city{Dublin} 
-	%  \state{Ohio} 
-	%  \postcode{43017-6221}
-	%}
-	%\email{trovato@corporation.com}
-	%
-	%\author{G.K.M. Tobin}
-	%\authornote{The secretary disavows any knowledge of this author's actions.}
-	%\affiliation{%
-	%  \institution{Institute for Clarity in Documentation}
-	%  \streetaddress{P.O. Box 1212}
-	%  \city{Dublin} 
-	%  \state{Ohio} 
-	%  \postcode{43017-6221}
-	%}
-	%\email{webmaster@marysville-ohio.com}
-	%
-	%\author{Lars Th{\o}rv{\"a}ld}
-	%\authornote{This author is the
-	%  one who did all the really hard work.}
-	%\affiliation{%
-	%  \institution{The Th{\o}rv{\"a}ld Group}
-	%  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-	%  \city{Hekla} 
-	%  \country{Iceland}}
-	%\email{larst@affiliation.org}
-	%
-	%\author{Valerie B\'eranger}
-	%\affiliation{%
-	%  \institution{Inria Paris-Rocquencourt}
-	%  \city{Rocquencourt}
-	%  \country{France}
-	%}
-	%\author{Aparna Patel} 
-	%\affiliation{%
-	% \institution{Rajiv Gandhi University}
-	% \streetaddress{Rono-Hills}
-	% \city{Doimukh} 
-	% \state{Arunachal Pradesh}
-	% \country{India}}
-	%\author{Huifen Chan}
-	%\affiliation{%
-	%  \institution{Tsinghua University}
-	%  \streetaddress{30 Shuangqing Rd}
-	%  \city{Haidian Qu} 
-	%  \state{Beijing Shi}
-	%  \country{China}
-	%}
-	%
-	%\author{Charles Palmer}
-	%\affiliation{%
-	%  \institution{Palmer Research Laboratories}
-	%  \streetaddress{8600 Datapoint Drive}
-	%  \city{San Antonio}
-	%  \state{Texas} 
-	%  \postcode{78229}}
-	%\email{cpalmer@prl.com}
-	%
-	%\author{John Smith}
-	%\affiliation{\institution{The Th{\o}rv{\"a}ld Group}}
-	%\email{jsmith@affiliation.org}
-	%
-	%\author{Julius P.~Kumquat}
-	%\affiliation{\institution{The Kumquat Consortium}}
-	%\email{jpkumquat@consortium.net}
-	%
-	%% The example's default list of authors is too long for headers
-	%\renewcommand{\shortauthors}{B. Trovato et al.}
+	\author{Lydia OuldOuali}
+	\affiliation{%
+	  \institution{LIMSI-CNRS}
+	  \streetaddress{Universit\'e Paris-Sud}
+	  \city{Orsay, France } 
+	}
+	\email{ouldouali@limsi.fr}
 	
+	\author{Nicolas Sabouret}
+	\affiliation{%
+		\institution{LIMSI-CNRS}
+		\streetaddress{Universit\'e Paris-Sud}
+		\city{Orsay, France } 
+	}
+	\email{nicolas.sabouret@limsi.fr}
+	
+	
+	\author{Charles Rich}
+	\affiliation{%
+		\institution{Worcester Polytechnic Institute}
+		\streetaddress{}
+		\city{Worcester, Massachusetts, USA} 
+	}
+	\email{rich@wpi.edu}
+	
+
 	
 	\begin{abstract}  % put your abstract here!
-		
-	
+		We present in this article a model of theory of mind based on simulation allowing an artificial agent to reason about its interlocutor behaviors of power during a collaborative negotiation. This model is an extension of a previous work in which we presented a model of negotiation that allow an agent to express behaviors of power through its strategy of negotiation. Based on the \emph{simulation theory}, we adapt the decision model of the agent in order to reason about the user's behavior. We show on agent-agent	simulation that the system correctly predicts the interlocutor’s
+		power.
 		
 	\end{abstract}
 	
@@ -157,17 +108,90 @@
 
 
 	\section{Negotiator agent with ToM}
-		We developed a negotiator agent that can handle negotiation over several topics. Each topic considers different criteria or issues to make the final decision. For example, negotiate to choose a restaurant includes the criteria \textit{Cuisine, atmosphere, price and location}. 
-		 Thus, the agent is defined with a set of \textit{preferences} on each criterion. 
+	
+		We developed a negotiator agent that can handle a negotiation with the goal to choose an option over several options. 
+		Each option considers different criteria or issues. 
+		For example, negotiate to choose a restaurant includes negotiating over the criteria \textit{Cuisine, atmosphere, price and location}.  Thus, the agent is defined with a set of \textit{ binary preferences} $\prec_i$ on each criterion $i$. 
+		%For example, $\prec_{cuisine}$$=\{ch$$\prec$$jap, jap$$\prec$$it, it$$\prec$$fr\}$
 		
-		Moreover, the agent communicates with the user via \emph{utterances}. Theses utterances allows him to either share its preferences or make negotiations moves. An example of a dialogue is presented in Figure 2. 
+		Moreover, the agent communicates with the user via \emph{utterances}. Theses utterances allows him to either share its preferences or make negotiations moves. An example of a dialogue is presented in Figure \ref{fig:ex-dia}. 
+				
+					\begin{figure}[b]
+						 \begin{minipage}{.48\textwidth}
+								\slshape
+								%\begin{addmargin}[1em]{2em}% 1em left, 2em right
+								\textbf{A:} "Let's go to a restaurant at Montparnasse."
+								
+								\hspace*{3mm}\textbf{B:} "Okay, let's go to a restaurant at Montparnasse."
+								
+								$\ldots$
+								
+								\textbf{A:} "Do you like expensive restaurants?"
+								
+								
+								\hspace*{3mm}\textbf{B:} "I don't like expensive restaurants."
+								
+								\textbf{A: }"Do you like affordable restaurants?"
+								
+								\hspace*{3mm}\textbf{B:} "Let's go to the Maison blanche restaurant. 
+								$\\$It's a modern, cheap French restaurant on the Montparnasse"
+								
+								\hspace*{3mm}\textbf{A:} "Okay, let's go to the Maison blanche restaurant."
+								%	\end{addmargin}
+							\end{minipage}
+							
+						
+						\caption{\label{fig:ex-dia}Example of dialogue.}
+					\end{figure}
+		
+		As presented in \textit{step 1} of the Figure \ref{fig:schema-general}, the decisional model of the agent takes into account, the agent's preferences in addition to a value of power $pow \in  [0,1]$. It builds the agent's negotiation strategy and the result of the decisional process is an \emph{utterance} that the agent communicates to the user. 
+		
+	
+		Based on the \emph{simulation theory}, we use the agent's decisional model to reason about the user behaviors during the negotiation.
+		Therefore, the agent needs to make assumptions about the user's preferences and its power, necessary to make decisions during the negotiation process.
+		We note $H_{pow}$ the hypotheses of power expressed by the user and $Prec_h$ all the possible hypotheses concerning the preferences of the user for a specific topic. 
+		
+		The second step consists on reasoning on the user's behaviors in order to predict its power. After each dialogue turn expressed by the user, the agent use a general algorithm able to compute, for each hypothesis a corresponding utterance using the agent's decisional model. 
+		We present the general algorithm of the user's model of mental state as follows:
+	
+		\begin{enumerate}
+			\item Build a set $H_{pow}$ of hypothesis about power: $h\in H_{pow}$ represents the hypothesis $pow=h$. In our work, we consider only 9 values: 
+			
+			$H_{pow}=\{0.1, 0.2, \ldots, 0.9\}$.
+			\item For each hypothesis $h$, build the set of all possible preferences $Prec_h$: the elements $p\in Prec_h$ are partial orders on the criteria.
+			\item After each user utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
+			\item For each $h$, generate the corresponding utterance using $h$ as input for the decisional model.
+			\item Compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated bu the user. 
+			\item 	The hypothesis with the highest score is the most probable value for the user's power value.
+			
+			\begin{equation}
+			pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
+			\end{equation}
+			
+		\end{enumerate}
+		
+		However, this model has a limitation concerning the important number of hypotheses that the agent had to consider at each turn. Indeed, given a topic with $n$ criteria, and each criterion has $k$ values. The number of hypotheses on the preference set that the agent has to compute is in the order of  $\prod_{i=1}^n (k+1)!$. 
+		Thus, for a simple topic defined with 5 criteria, each one has 4 values. The number of hypotheses to consider is estimated to $24.10^9$. 
+		
+		This leads us to conduct an analysis of our decisional model to define the need of preferences in the negotiation process. One solution was to consider a \textit{partial representation} of the user preferences. This solution is supported  by research in cognitive psychology: Harbers \cite{harbers2009modeling} suggests that, in order to simulate another's mental processes, it is not necessary to categorize all the beliefs and desires attributed to that person as such. In other words, it is not necessary to have a complete model of the interlocutor.
+		
+		We propose a model in which the hypotheses on preferences are incomplete. Instead of computing all the possible relation of preferences $\prec_i$, we only compute the set of satisfiable values (\emph{i.e. the values that the agent likes}). This partial representation allows the agent to reason about the user's behavior with a reduced set of hypotheses.
+		As a consequence, we adapted the agent's decision model in order to handle uncertainty of preferences in the reasoning process. 
+		
+		Finally, we conducted an experimental study that aims to assess the validity of the decisional model with partial preferences. 
+		We implemented two agents with the presented model. At each dialogue turn, each agent will try to predict the behavior of power expressed by its interlocutor.  For each agent, we compared the agent's prediction with the effective value of power assigned to other agent. 
+		We further analyzed the speed of the prediction and the timeliness of the algorithm. 
+		
+		The results obtained confirmed the accuracy of our model to predict the behavior of power expressed by an interlocutor during a collaborative negotiation.  As a perspective, we intend to evaluate our model of decision to be able to \emph{simulate a complementary relation of dominance} between an artificial agent and a human user. The goal is to study the impact of a complementary relation on the outcome of the negotiation as well as the experience of the negotiation. 
 		
 		
-		As presented in \textit{step 1} of the Figure \ref{fig:schema-general}, the decisional model of the agent takes into account, the agent's preferences in addition to a value of power $pow \in  [0,1]$. The result of the decisional process is an \emph{utterance} communicated to the user. 
+		 
 		
-		We aim to use this model of decision to reason about the user's behaviors during the negotiation. Indeed, based
 		
-	\section{Conclusion}
+		
+		
+		
+
 
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
