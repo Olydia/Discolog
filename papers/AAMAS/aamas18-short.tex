@@ -79,9 +79,7 @@
 
 	
 	\begin{abstract}  % put your abstract here!
-		We present in this article a model of theory of mind based on simulation allowing an artificial agent to reason about its interlocutor behaviors of power during a collaborative negotiation. This model is an extension of a previous work in which we presented a model of negotiation that allow an agent to express behaviors of power through its strategy of negotiation. Based on the \emph{simulation theory}, we adapt the decision model of the agent in order to reason about the user's behavior. We show on agent-agent	simulation that the system correctly predicts the interlocutor’s
-		power.
-		
+		We present in this paper a simulation-oriented theory of mind model for interpreting behaviors of power during a collaborative negotiation. This model relies on a model of negotiation that allows an agent to express behaviors of power through its strategy of negotiation. Based on the \emph{simulation theory}, we adapted the decision model of the agent to reason about its interlocutor's behavior. A preliminary evaluation in the context of agent-agent interaction shows that the system correctly predicts the interlocutor's power.
 	\end{abstract}
 	
 
@@ -92,29 +90,21 @@
 	
 	\section{Introduction}
 	
-	Negotiation is a common task in daily life. People negotiate not only in professional situations (\emph{e.g.} for a salary increase or a promotion) but also in more simple situations such as choosing the holiday's destination. In the last decade, a variety of conversational agents which negotiate with people  have been created \cite{pynadath2013you,gratch2016misrepresentation,klatt2011negotiations}.
+	Negotiation is a common task in daily life. People negotiate not only in professional situations (\emph{e.g.} for a salary increase or a promotion) but also in more simple situations such as choosing the holiday's destination. In the last decade, a variety of conversational agents have been created that can negotiate with people \cite{pynadath2013you,gratch2016misrepresentation,klatt2011negotiations}.
 	
-	However, negotiation is a multifaceted process which also involves social interaction, affects as well as personal preferences and opinions  \cite{bro2010affective}. Several research considered the of role social behavior in the negotiation process, such as emotions and trust	\cite{de2011effect}. Research in social psychology demonstrated that the relation of dominance affects the way that the negotiation process is perceived \cite{van2006power}. Negotiators build different negotiation strategies depending on their relative dominance which directly influences the outcomes of the negotiation. More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings.
+	Research in social psychology demonstrated that the relation of dominance affects the way that the negotiation process is perceived \cite{van2006power}. Negotiators build different negotiation strategies depending on their relative dominance which directly influences the outcomes of the negotiation. More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings.
 	
-	Dominance, as an interpersonal relation, is a dyadic variable in which control attempts by one individual are accepted by the partner. This means that one individual expresses behaviors of high power while the interactional partner adopts a low power behavior \cite{burgoon1998nature}. 
-	
-	In this poster, we present an agent that simulates such a relation of dominance when negotiating with a human interlocutor. The agent is able to express and understand behaviors related to power. This work is based on the computational model proposed by \cite{ouali2017computational} in which an agent expresses its behavior of power through its strategy of negotiation. It is based on three principles of negotiation based on power inspired from social psychology \cite{de1995impact,van2006power,magee2007power}. We show how this model can be adapted to reason about the user's power, following a Theory of Mind approach. We simulate the mental activity of the interlocutor, we show that the agent can make good predictions in the context of agent-agent interaction. We propose to use this model in the context of human-agent negotiation.
+	In this poster, we present an agent that simulates such a relation of dominance in collaborative negotiation, based on the computational model proposed by \cite{ouali2017computational}. We show how this model can be adapted to reason about the interlocutor's power, following a Theory of Mind approach to simulate the mental activity of the interlocutor. We show that the agent can make good predictions in the context of agent-agent interaction.
 	
 	\begin{figure*}
-		\includegraphics[width=0.65\linewidth, height= 0.25\textheight]{figs/model_tom.pdf}
+		\includegraphics[width=0.7\linewidth]{figs/model_tom.pdf}
 		\caption{Model of collaborative negotiation with a model of other} 
 		\label{fig:schema-general}
 	\end{figure*} 
 
 
 	\section{Negotiator agent with ToM}
-	
-		We developed a negotiator agent that can handle a negotiation with the goal to choose an option over several options. 
-		Each option considers different criteria or issues. 
-		For example, negotiate to choose a restaurant includes negotiating over the criteria \textit{Cuisine, atmosphere, price and location}.  Thus, the agent is defined with a set of \textit{ binary preferences} $\prec_i$ on each criterion $i$. 
-		%For example, $\prec_{cuisine}$$=\{ch$$\prec$$jap, jap$$\prec$$it, it$$\prec$$fr\}$
-		
-		Moreover, the agent communicates with the user via \emph{utterances}. Theses utterances allows him to either share its preferences or make negotiations moves. An example of a dialogue is presented in Figure \ref{fig:ex-dia}. 
+	Our negotiator agent can handle a negotiation to choose one option over several ones, characterized different criteria values. For example, the negotiation for a restaurant considers the criteria \textit{Cuisine, atmosphere, price and location}. The agent has a set of \textit{binary preferences} $\prec_i$ on each criterion $i$. It communicates with its interlocutor via abstract \emph{utterances} (\emph{i.e.} formal speech acts) to either share its preferences or make negotiations moves. An example of a dialogue is presented in Figure \ref{fig:ex-dia}. 
 				
 					\begin{figure}[b]
 						 \begin{minipage}{.48\textwidth}
@@ -144,25 +134,19 @@
 						\caption{\label{fig:ex-dia}Example of dialogue.}
 					\end{figure}
 		
-		As presented in \textit{step 1} of the Figure \ref{fig:schema-general}, the decisional model of the agent takes into account, the agent's preferences in addition to a value of power $pow \in  [0,1]$. It builds the agent's negotiation strategy and the result of the decisional process is an \emph{utterance} that the agent communicates to the user. 
-		
+		As presented on Figure \ref{fig:schema-general}, the decision model takes into account the agent's preferences in addition to a value of power $pow \in  [0,1]$. The negotiation strategy selects an \emph{utterance} that the agent communicates to its interlocutor. 
 	
-		Based on the \emph{simulation theory}, we use the agent's decisional model to reason about the user behaviors during the negotiation.
-		Therefore, the agent needs to make assumptions about the user's preferences and its power, necessary to make decisions during the negotiation process.
-		We note $H_{pow}$ the hypotheses of power expressed by the user and $Prec_h$ all the possible hypotheses concerning the preferences of the user for a specific topic. 
-		
-		The second step consists on reasoning on the user's behaviors in order to predict its power. After each dialogue turn expressed by the user, the agent use a general algorithm able to compute, for each hypothesis a corresponding utterance using the agent's decisional model. 
-		We present the general algorithm of the user's model of mental state as follows:
+		Based on the \emph{simulation theory}, we use the agent's decisional model to reason about the interlocutor's behaviors during the negotiation: the agent infers its interlocutor's value of power based on the utterances it received during the negotiation. To this purpose, the agent makes assumptions about the interlocutor's preferences and power. The algorithm is as follows:
 	
 		\begin{enumerate}
 			\item Build a set $H_{pow}$ of hypothesis about power: $h\in H_{pow}$ represents the hypothesis $pow=h$. In our work, we consider only 9 values: 
 			
 			$H_{pow}=\{0.1, 0.2, \ldots, 0.9\}$.
 			\item For each hypothesis $h$, build the set of all possible preferences $Prec_h$: the elements $p\in Prec_h$ are partial orders on the criteria.
-			\item After each user utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
+			\item After each utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
 			\item For each $h$, generate the corresponding utterance using $h$ as input for the decisional model.
-			\item Compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated bu the user. 
-			\item 	The hypothesis with the highest score is the most probable value for the user's power value.
+			\item Compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$ stated by the interlocutor. 
+			\item 	The hypothesis with the highest score is the most probable value for the interlocutor's power value.
 			
 			\begin{equation}
 			pow_{other} = \operatorname*{arg\,max}_{h} (score(h))
@@ -170,28 +154,15 @@
 			
 		\end{enumerate}
 		
-		However, this model has a limitation concerning the important number of hypotheses that the agent had to consider at each turn. Indeed, given a topic with $n$ criteria, and each criterion has $k$ values. The number of hypotheses on the preference set that the agent has to compute is in the order of  $\prod_{i=1}^n (k+1)!$. 
-		Thus, for a simple topic defined with 5 criteria, each one has 4 values. The number of hypotheses to consider is estimated to $24.10^9$. 
+		This model however requires to build an important number of hypotheses for the agent to consider at each turn. Indeed, given a topic with $n$ criteria, assuming that each criterion has $k$ values, the number of hypotheses on the preference set that the agent has to compute is in the order of  $\prod_{i=1}^n (k+1)!$. For a topic with 5 criteria, 4 values each, the number of hypotheses to consider is $24.10^9$!
 		
-		This leads us to conduct an analysis of our decisional model to define the need of preferences in the negotiation process. One solution was to consider a \textit{partial representation} of the user preferences. This solution is supported  by research in cognitive psychology: Harbers \cite{harbers2009modeling} suggests that, in order to simulate another's mental processes, it is not necessary to categorize all the beliefs and desires attributed to that person as such. In other words, it is not necessary to have a complete model of the interlocutor.
+		To overcome this limitation, we consider only a \textit{partial representation} of the interlocutor's preferences. This solution is supported  by research in cognitive psychology: Harbers \cite{harbers2009modeling} suggests that, in order to simulate another's mental processes, it is not necessary to categorize all the beliefs and desires attributed to that person as such. In other words, it is not necessary to have a complete model of the interlocutor.
 		
-		We propose a model in which the hypotheses on preferences are incomplete. Instead of computing all the possible relation of preferences $\prec_i$, we only compute the set of satisfiable values (\emph{i.e. the values that the agent likes}). This partial representation allows the agent to reason about the user's behavior with a reduced set of hypotheses.
-		As a consequence, we adapted the agent's decision model in order to handle uncertainty of preferences in the reasoning process. 
+		Instead of computing all the possible relation of preferences $\prec_i$, we only compute the set of satisfiable values (\emph{i.e.} the values that the interlocutor likes). The set of hypotheses to consider is drastically reduced but 1) we had to adapt the agent's decision model in the simulation Theory of Mind in order to handle uncertainty of preferences in the reasoning process and 2) the inferred power value might not be correct since it relies on a different model (with uncertainties). 
 		
-		Finally, we conducted an experimental study that aims to assess the validity of the decisional model with partial preferences. 
-		We implemented two agents with the presented model. At each dialogue turn, each agent will try to predict the behavior of power expressed by its interlocutor.  For each agent, we compared the agent's prediction with the effective value of power assigned to other agent. 
-		We further analyzed the speed of the prediction and the timeliness of the algorithm. 
+		We conducted an experimental study to assess the validity of the decisional model with partial preferences. We implemented two agents with this model. At each dialogue turn, each agent will try to predict the behavior of power expressed by its interlocutor. For each agent, we compared the agent's prediction with the effective value of power assigned to other agent. We further analyzed the speed of the prediction and the timeliness of the algorithm. 
 		
-		The results obtained confirmed the accuracy of our model to predict the behavior of power expressed by an interlocutor during a collaborative negotiation.  As a perspective, we intend to evaluate our model of decision to be able to \emph{simulate a complementary relation of dominance} between an artificial agent and a human user. The goal is to study the impact of a complementary relation on the outcome of the negotiation as well as the experience of the negotiation. 
-		
-		
-		 
-		
-		
-		
-		
-		
-
+		The results obtained confirmed the accuracy of our model to predict the behavior of power expressed by an interlocutor during a collaborative negotiation.  As a perspective, we intend to evaluate our model of decision to be able to \emph{simulate a complementary relation of dominance} between an artificial agent and a human user. The goal is to study the impact of a complementary relation on the outcome of the negotiation as well as the experience of the negotiation.
 
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
