@@ -322,7 +322,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		Button acceptButton = new Button("Accept");
 		Button rejectButton = new Button("Reject");
 		Button stateAskButton = new Button("State/Ask");
-		Button stopButton = new Button("Stop");
+		Button stopButton = new Button("My preferences");
 
 		Button proposeOptionButton = new Button(situation);
 		Button proposeValueButton = new Button("criterion");
@@ -779,27 +779,13 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 			@Override
 			public void handle(ActionEvent prosposeEvent) {
-				proposeButton.setStyle(off);
-				acceptButton.setStyle(off);
-				rejectButton.setStyle(off);
-				stateAskButton.setStyle(off);
+				
 				stopButton.setStyle(on);
 
-				list.clear();
-				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
+            	ShowPreferencesDialog userPref = new ShowPreferencesDialog(Acceuil.preferencesUser);
+            	Optional<String> result = userPref.showAndWait();
+				stopButton.setStyle(off);
 
-
-				setTopAnchor(stopLabel,100.0);
-				setLeftAnchor(stopLabel,450.0);
-
-				setTopAnchor(noHBox ,150.0);
-				setLeftAnchor(noHBox ,530.0);
-
-				setTopAnchor(yesHBox ,150.0);
-				setLeftAnchor(yesHBox ,730.0);
-
-
-				list.addAll(stopLabel,noHBox,yesHBox);
 			}
 		});
 

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.AbstractList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
@@ -127,7 +129,20 @@ public class CriteriaSelect extends JDialog {
 		return null;
 	}
 
-	
+	public  List<String> asList() {
+		final ListModel<String> model = this.getValues();
+	     return new AbstractList<String>() {
+	          @Override public String get(int index) {
+	              return        model.getElementAt(index);
+	          }
+
+			@Override
+			public int size() {
+				// TODO Auto-generated method stub
+				return model.getSize();
+			}
+	     };
+	 }
 
 }
 

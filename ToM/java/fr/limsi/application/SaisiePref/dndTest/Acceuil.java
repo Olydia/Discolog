@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -44,7 +45,9 @@ public class Acceuil extends Application{
 	public static List<Negotiation<? extends Option>> negotiators;
 	private Negotiation<? extends Option> userPref;
 	WriteHistory writer;
-
+	
+	public static HashMap<String, List<String>> preferencesUser= 
+				new HashMap<String, List<String>>();
 
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
 	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
@@ -209,6 +212,19 @@ public class Acceuil extends Application{
 
 							setNegotiators(negotiatorAgents(agents, other, Restaurant.class));
 
+							// save the preferences
+							preferencesUser.put(Cuisine.class.getSimpleName(),
+									cuisine.asList());
+							
+							preferencesUser.put(Location.class.getSimpleName(),
+											location.asList());
+							
+							preferencesUser.put(Cost.class.getSimpleName(),
+									cost.asList());
+							
+							preferencesUser.put(Atmosphere.class.getSimpleName(),
+									athmos.asList());
+							
 							location.setVisible(false);
 							//*************** Mise a jour des informations et ecriture dans le fichier text
 							String userPref = "User Preferences : \n \n" 
@@ -221,6 +237,7 @@ public class Acceuil extends Application{
 
 							isDone = true;
 							//hide current
+							
 							
 						// lanch agents
 							
