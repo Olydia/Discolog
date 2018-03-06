@@ -174,8 +174,6 @@ public class PowHypothesis{
 		
 		// m = 0 means that Sat = Acc no concessions only sat values are acceptables
 		// update models as state
-		//System.out.println("Value of power :" + this.pow + "Value of Self "+ self + " m " + m);
-		//System.out.println("acceptable values " + acc + "sat values " + sat);
 
 		if(m == 0){
 			
