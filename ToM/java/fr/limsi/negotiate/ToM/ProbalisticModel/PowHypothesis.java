@@ -204,6 +204,11 @@ public class PowHypothesis{
 		return  (float) (ratioAcc/initModels);
 	}
 
+	
+	@Override
+	public String toString(){
+		return  this.pow + ":: " + this.hypothesis.size();
+	}
 
 
 }

@@ -62,8 +62,8 @@ public class NegotiatorAgent extends Agent {
 		//GenerateMovieModel model = new GenerateMovieModel();
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
-				new NegotiatorAgent("Agent1", model.model1()), 
-				//new ToMNegotiatorProba("Agent1", model.model1()), 
+				//new NegotiatorAgent("Agent1", model.model1()), 
+				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.COMPLEMENT), 
 
 				//new NegotiatorAgent("Agent2", model.model3()), 
 				new ToMNegotiatorProba("Agent2", model.model3(), ADAPT.COMPLEMENT), 
@@ -73,8 +73,8 @@ public class NegotiatorAgent extends Agent {
 		// note not loading Negotiotion.xml!
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
-		((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
-		//((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
+		//((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
 
 		//((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		
@@ -119,7 +119,7 @@ public class NegotiatorAgent extends Agent {
 	public Utterance respondTo(Utterance utterance, Disco disco){
 //		System.out.println(" ***** Pow " + getNegotiation().getDominance()+ 
 //				" Self " + getNegotiation().computeSelf(getNegotiation().getDominance()) + "*****");
-	//	if ( utterance != null )System.out.println(utterance.format() + "\n");
+		//if ( utterance != null )System.out.println(utterance.format() + "\n");
 		List<Class<? extends Criterion>> criteria = getNegotiation().getCriteria().getElements();
 		if ( utterance == null ) {
 			

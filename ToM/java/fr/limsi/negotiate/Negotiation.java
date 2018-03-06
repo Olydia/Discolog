@@ -15,6 +15,7 @@ public class Negotiation<O extends Option> {
 	private Class<O> topic;
 	private double pow=0; 
 	private DialogueContext context_bis;
+	
 	//adapt Application case: TomAgent used in order to adapt the agent behavior
 	private double adaptativePow = 0;
 	

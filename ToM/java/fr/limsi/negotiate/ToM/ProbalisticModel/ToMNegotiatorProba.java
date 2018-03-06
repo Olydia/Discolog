@@ -86,7 +86,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	@Override
 	public void execute (Task occurrence, Interaction interaction, Plan contributes) {	  
 		super.execute(occurrence, interaction, contributes);
-		//cloneNegotiation();
 
 
 	}
@@ -94,6 +93,18 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
+		
+		System.out.println("-------------------------------------------------------------------------------------");
+		if ( utterance != null )  System.out.println(utterance.format() + "\n");
+		System.out.println(otherModel.getHypotheses());
+
+
+//		try {
+//			Thread.currentThread().sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		int time = new Random().nextInt(500) + 550;
 //		//pause(time);
 //		try {
@@ -102,8 +113,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-
-		//Utterance selfPrevious = getNegotiation().getContext().getLastMove(false);
+        
 		if (utterance != null){
 			double other = guess(utterance, getOther());
 			this.setOther(other);
@@ -122,7 +132,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 					break;
 
 			}
-			//System.out.println("Predicted pow : " + other);
+
+			System.out.println( this.getName() +" predicted the pow of the other to : " + other);
 
 		}
 			
@@ -156,10 +167,10 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public  List<PowHypothesis> leadDialogue(){
 		float prop = getProposePropotion();
 		float ask = getAskPropotion();
-		if(prop>=0.5)
+		if(prop>0.5)
 				return otherModel.getDom();
 			
-		else if(ask>=0.5)
+		else if(ask>0.5)
 				return otherModel.getSub();
 		else
 			return otherModel.getHypotheses();
@@ -289,45 +300,45 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		}
 		return ((float)ask/otherUtt.size());
 	}
-	public static void main (String[] args) {
-
-		totalOrderedModels model = new totalOrderedModels();
-
-		Negotiation<Restaurant> a = model.model1();
-		a.setDominance(0.7);
-		a.addProposal(new CriterionProposal(true, Cuisine.CHINESE));
-		a.addProposal(new CriterionProposal(true, Cuisine.JAPANESE));
-		a.addProposal(new CriterionProposal(true, Cuisine.ITALIAN));
-
-		//		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
-		//		ac.setStatus(Status.REJECTED);
-
-		//		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
-		//		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
-		//		
-		//		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);
-		//		ac.setStatus(Status.ACCEPTED);
-		//		cn.updateProposal(ac2);
-		//		a.addStatement(new Statement<Criterion>(ac2.getValue(),Satisfiable.TRUE), false);
-		//		
-		//		
-		//		
-		//		OptionProposal p = new OptionProposal(true, Restaurant.A_LA_TURKA);
-		//		p.setStatus(Status.REJECTED);
-		//		a.updateProposal(p);
-		//		
-		//		OptionProposal p2 = new OptionProposal(true, Restaurant.ABA_TURKISH);
-		//		p2.setStatus(Status.REJECTED);
-		//		a.updateProposal(p2);
-		// add the accept
-		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
-		ac1.setStatus(Status.ACCEPTED);
-
-		//ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
-
-		//System.out.println(tom.updateAccept(ac1, 0.6));
-
-	}
+//	public static void main (String[] args) {
+//
+//		totalOrderedModels model = new totalOrderedModels();
+//
+//		Negotiation<Restaurant> a = model.model1();
+//		a.setDominance(0.7);
+//		a.addProposal(new CriterionProposal(true, Cuisine.CHINESE));
+//		a.addProposal(new CriterionProposal(true, Cuisine.JAPANESE));
+//		a.addProposal(new CriterionProposal(true, Cuisine.ITALIAN));
+//
+//		//		CriterionProposal ac = new CriterionProposal(false, Cuisine.CHINESE);
+//		//		ac.setStatus(Status.REJECTED);
+//
+//		//		CriterionNegotiation<Criterion>cn =a.getValueNegotiation(ac.getValue().getClass());
+//		//		a.addStatement(new Statement<Criterion>(ac.getValue(),Satisfiable.FALSE), false);
+//		//		
+//		//		CriterionProposal ac2 = new CriterionProposal(false, Cuisine.JAPANESE);
+//		//		ac.setStatus(Status.ACCEPTED);
+//		//		cn.updateProposal(ac2);
+//		//		a.addStatement(new Statement<Criterion>(ac2.getValue(),Satisfiable.TRUE), false);
+//		//		
+//		//		
+//		//		
+//		//		OptionProposal p = new OptionProposal(true, Restaurant.A_LA_TURKA);
+//		//		p.setStatus(Status.REJECTED);
+//		//		a.updateProposal(p);
+//		//		
+//		//		OptionProposal p2 = new OptionProposal(true, Restaurant.ABA_TURKISH);
+//		//		p2.setStatus(Status.REJECTED);
+//		//		a.updateProposal(p2);
+//		// add the accept
+//		CriterionProposal ac1 = new CriterionProposal(false, Cuisine.ITALIAN);
+//		ac1.setStatus(Status.ACCEPTED);
+//
+//		//ToMNegotiatorProba tom = new ToMNegotiatorProba("test", a);
+//
+//		//System.out.println(tom.updateAccept(ac1, 0.6));
+//
+//	}
 
 	public enum ADAPT {
 			 COMPLEMENT,
