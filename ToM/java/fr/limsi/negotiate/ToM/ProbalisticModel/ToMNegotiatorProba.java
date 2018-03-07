@@ -258,7 +258,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 			double self = this.getNegotiation().computeSelf(model.getPow());
 			//System.out.println(model.getPow() + " self "+ self);
-			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self));
+			acc.put(model.getPow(), model.scoreAcc(c.getValue(),accepted, self, 
+					getNegotiation().getContext().isFirstMove(true)));
 		}
 
 		//System.out.println("Values of acceptability " + acc);

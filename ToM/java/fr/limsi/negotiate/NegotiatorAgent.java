@@ -63,10 +63,10 @@ public class NegotiatorAgent extends Agent {
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				//new NegotiatorAgent("Agent1", model.model1()), 
-				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.COMPLEMENT), 
+				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.MIMIC), 
 
 				//new NegotiatorAgent("Agent2", model.model3()), 
-				new ToMNegotiatorProba("Agent2", model.model3(), ADAPT.COMPLEMENT), 
+				new ToMNegotiatorProba("Agent2", model.model3(), ADAPT.MIMIC), 
 
 				false);
 
@@ -74,11 +74,11 @@ public class NegotiatorAgent extends Agent {
 		dual.interaction1.load("models/Negotiate.xml");
 		dual.interaction2.load("models/Negotiate.xml");
 		//((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
-		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(DOMINANT);
 
 		//((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		
-		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(DOMINANT);
 		
 
 		dual.start();
@@ -128,10 +128,11 @@ public class NegotiatorAgent extends Agent {
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 			
 			else{
-				int random = new Random().nextInt(criteria.size());
-				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				//int random = new Random().nextInt(criteria.size());
+				//Class<? extends Criterion> opent = criteria.get(random);
+
+				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 				
-				Class<? extends Criterion> opent = criteria.get(random);
 
 
 				if(relation > NegotiationParameters.pi){

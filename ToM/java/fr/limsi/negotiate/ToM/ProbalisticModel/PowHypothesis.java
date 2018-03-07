@@ -4,7 +4,6 @@ import java.util.*;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Statement.Satisfiable;
-import fr.limsi.negotiate.toyExample.*;
 
 /**
  * 
@@ -163,7 +162,8 @@ public class PowHypothesis{
 	}
 	// Call from ToMnegotiatorProba
 
-	public float scoreAcc(Criterion criterion, List<CriterionProposal> accepted, double self){
+	public float scoreAcc(Criterion criterion, List<CriterionProposal> accepted, 
+			double self, boolean isFirstMove){
 
 		Class<? extends Criterion> type = criterion.getClass();
 		// get the number of acceptable values in the model
@@ -175,9 +175,10 @@ public class PowHypothesis{
 		// m = 0 means that Sat = Acc no concessions only sat values are acceptables
 		// update models as state
 
-		if(m == 0){
-			
+		if(m == 0 && isFirstMove){
+			// check if its the first utterance
 			revise(new Statement<Criterion>(criterion, Satisfiable.TRUE));
+			
 			float result =  ( (float) hypothesis.size()/ initModels);
 			//System.out.println( result + " il reste " + hypothesis.size() + " sur un total de " + initModels) ;
 			return result;

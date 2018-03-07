@@ -64,7 +64,8 @@ public class DialogueContext {
 	}
 
 	public void addUtt (NegotiationUtterance ut){
-		if  (!(ut.getValue() instanceof OptionProposal && !ut.getType().equals(ut instanceof AcceptPropose)))
+		
+		if  (ut instanceof AcceptPropose||!(ut.getValue() instanceof OptionProposal))
 			updateDiscussion(ut);
 
 		this.history.add(ut);
@@ -84,7 +85,9 @@ public class DialogueContext {
 		return null;
 	}
 
-
+	public boolean isFirstMove(boolean external){
+		return (getHistory(external).size() == 1);
+	}
 
 	public Class<? extends Criterion> getCurrentDisucussedCriterion(){
 
@@ -104,8 +107,13 @@ public class DialogueContext {
 		Class<? extends Criterion> newDi = getValueType(newUtt);
 		if(discussedCriteria.isEmpty())
 			this.discussedCriteria.add(newDi);
+		
+		else if( newUtt instanceof AcceptPropose){
+			Class<? extends Criterion> type = ((AcceptPropose) newUtt).getAccepted().getValue().getClass();
+			this.closeDiscussion(type);
 
-		else if(newUtt instanceof Accept || newUtt instanceof AcceptPropose)
+		}
+		else if(newUtt instanceof Accept)
 			this.closeDiscussion(newDi);
 
 
@@ -175,6 +183,19 @@ public class DialogueContext {
 				return  (Proposal) utt.getValue();
 		}
 		return null;
+
+	}
+	
+	public boolean isFirstProposal(boolean external){
+		for (NegotiationUtterance utt : history){
+			
+			if(utt instanceof Propose && utt.getExternal().equals(external)){
+				Proposal propsal =  (Proposal) utt.getValue();
+				return propsal.equals(getLastProposal(!external));
+
+			}
+		}
+		return false;
 
 	}
 
