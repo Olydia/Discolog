@@ -63,10 +63,10 @@ public class NegotiatorAgent extends Agent {
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				//new NegotiatorAgent("Agent1", model.model1()), 
-				new ToMNegotiatorProba("Agent1", model.model3(), ADAPT.MIMIC), 
+				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.COMPLEMENT), 
 
 				//new NegotiatorAgent("Agent2", model.model3()), 
-				new ToMNegotiatorProba("Agent2", model.model2(), ADAPT.COMPLEMENT), 
+				new ToMNegotiatorProba("Agent2", model.model3(), ADAPT.MIMIC), 
 
 				false);
 
