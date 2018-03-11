@@ -66,7 +66,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
 
 		for (int i=0;i<c.length;i++){
-			criteria.add(c[i].toString().toUpperCase());
+			criteria.add(c[i].afficher().toUpperCase());
 
 		}
 		Collections.sort(criteria);
@@ -102,24 +102,24 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		ArrayList<String> tmp =new ArrayList<String>();
 		String criterion="";
 
-			addCriteria(Atmosphere.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Atmosphere";}
-			}
-			addCriteria(Cost.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Cost";}
-			}
-			addCriteria(Cuisine.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Cuisine";}
-			}
-			addCriteria(Location.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Location";}
-			}
-		
-	
+		addCriteria(Atmosphere.values(),tmp);
+		for (int i=0;i<tmp.size();i++){
+			if (ch.toUpperCase().equals(tmp.get(i))){return "Atmosphere";}
+		}
+		addCriteria(Cost.values(),tmp);
+		for (int i=0;i<tmp.size();i++){
+			if (ch.toUpperCase().equals(tmp.get(i))){return "Cost";}
+		}
+		addCriteria(Cuisine.values(),tmp);
+		for (int i=0;i<tmp.size();i++){
+			if (ch.toUpperCase().equals(tmp.get(i))){return "Cuisine";}
+		}
+		addCriteria(Location.values(),tmp);
+		for (int i=0;i<tmp.size();i++){
+			if (ch.toUpperCase().equals(tmp.get(i))){return "Location";}
+		}
+
+
 
 		return criterion;
 
@@ -145,34 +145,34 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	 */
 	public void clearLastButtons(ArrayList<HBox> c1HBoxs,ArrayList<HBox> c2HBoxs,ArrayList<HBox> c3HBoxs,ArrayList<HBox> c4HBoxs,ObservableList list,String situation){
 
-		
-
-			for (int i=0;i<Atmosphere.values().length;i++){
-				list.remove(c1HBoxs.get(i));
 
 
-			}
+		for (int i=0;i<Atmosphere.values().length;i++){
+			list.remove(c1HBoxs.get(i));
 
-			for (int i=0;i<Cost.values().length;i++){
-				list.remove(c2HBoxs.get(i));
-			}
 
-			for (int i=0;i<Cuisine.values().length;i++){
-				list.remove(c3HBoxs.get(i));
-			}
+		}
 
-			for (int i=0;i<Location.values().length;i++){
-				list.remove(c4HBoxs.get(i));
-			}
-		
+		for (int i=0;i<Cost.values().length;i++){
+			list.remove(c2HBoxs.get(i));
+		}
+
+		for (int i=0;i<Cuisine.values().length;i++){
+			list.remove(c3HBoxs.get(i));
+		}
+
+		for (int i=0;i<Location.values().length;i++){
+			list.remove(c4HBoxs.get(i));
+		}
+
 
 	}
 
 	public void setSecondaryButtonsTexts(Criterion[] c, ArrayList<Button>c1Buttons, ArrayList<Button> c12Buttons,ArrayList<HBox> c1HBoxs, ArrayList<HBox> c12HBoxs){
 
 		for (int i=0;i<c.length;i++){
-			Button iButton = new Button( c[i].toString());
-			Button i2Button = new Button( c[i].toString());
+			Button iButton = new Button( c[i].afficher());
+			Button i2Button = new Button( c[i].afficher());
 			c1Buttons.add(iButton);
 			c12Buttons.add(i2Button);
 			HBox iHBox = new HBox(15);
@@ -195,35 +195,22 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		c3.setStyle(off);
 		c4.setStyle(off);
 
-		if (situation=="restaurant")
-		{
-			setLeftAnchor(c1HBox,300.0);
-			setLeftAnchor(c2HBox,500.0);
-			setLeftAnchor(c3HBox,700.0);
-			setLeftAnchor(c4HBox,900.0);
-			list.addAll(c1HBox,c2HBox,c3HBox,c4HBox);
-		}
-		else{
-			setLeftAnchor(c1HBox,350.0);
-			setLeftAnchor(c2HBox,600.0);
-			setLeftAnchor(c3HBox,850.0);
-			list.addAll(c1HBox,c2HBox,c3HBox);
-		}
+
+		setLeftAnchor(c1HBox,300.0);
+		setLeftAnchor(c2HBox,500.0);
+		setLeftAnchor(c3HBox,700.0);
+		setLeftAnchor(c4HBox,900.0);
+		list.addAll(c1HBox,c2HBox,c3HBox,c4HBox);
+
 	}
 
 	public void setCriterionButtonsTexts(Button b1,Button b2, Button b3, Button b4, String situation){
-		if (situation=="restaurant")
-		{
-			b1.setText("Atmosphere");
-			b2.setText("Cost");
-			b3.setText("Cuisine");
-			b4.setText("Location");
-		}
-		else{
-			b1.setText("Category");
-			b2.setText("Country");
-			b3.setText("Year");
-		}
+
+		b1.setText("Ambiance");
+		b2.setText("Prix");
+		b3.setText("Cuisine");
+		b4.setText("Localisation");
+
 	}
 	public void addElements(String username, String situation,Stage chatStage ,
 			Negotiation<? extends Option> model, int nbAgents, ADAPT state/*,Interaction interaction*/){
@@ -265,14 +252,13 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		ArrayList<String> openList =new ArrayList<String>();
 
 		/*Labels*/
-		Label actionLabel = new Label("What do you want to say?");
-		Label stopLabel = new Label("Are you sure that you want to stop the discussion?");
-		Label acceptLabel = new Label("What do you want to accept?");
-		Label proposeCriterionLabel = new Label("What criterion do you want to propose?");
-		Label rejectLabel = new Label("What do you want to reject?");
-		Label proposeLabel = new Label("What do you want to propose?");
-		Label whyLabel = new Label("What did you dislike about this proposal?");
-		Label errorLabel = new Label("You must precise if you like or don't like");
+		Label actionLabel = new Label("Que voulez vous dire?");
+		Label acceptLabel = new Label("Que voulez vous accepter?");
+		Label proposeCriterionLabel = new Label("Quel critère voulez vous proposer?");
+		Label rejectLabel = new Label("Que voulez vous rejeter?");
+		Label proposeLabel = new Label("Que voulez vous proposer?");
+		Label whyLabel = new Label("Qu'est-ce que vous n'aimez pas dans cette proposition?");
+		Label errorLabel = new Label("Vous devez préciser si vous aimez ou n'aimez pas");
 		errorLabel.setId("errorMessage");
 
 		ObservableList<Node> list = getChildren();
@@ -282,32 +268,32 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		Button acceptButton = new Button("Accept");
 		Button rejectButton = new Button("Reject");
 		Button stateAskButton = new Button("State/Ask");
-		Button stopButton = new Button("My preferences");
+		Button stopButton = new Button("Mes preferences");
 
 		Button proposeOptionButton = new Button(situation);
-		Button proposeValueButton = new Button("criterion");
+		Button proposeValueButton = new Button("critere");
 
 		Button counterproposeOptionButton = new Button(situation);
-		Button counterproposeValueButton = new Button("criterion");
+		Button counterproposeValueButton = new Button("critere");
 
-		Button acceptProposeButton = new Button("Accept and Propose");
+		Button acceptProposeButton = new Button("Accept et Propose");
 
-		Button rejectOnlyButton = new Button("Just Reject");
-		Button rejectStateButton = new Button("Reject and explain why");
-		Button rejectProposeButton = new Button("Reject and counterpropose");
+		Button rejectOnlyButton = new Button("Juste Reject");
+		Button rejectStateButton = new Button("Reject et expliquer");
+		Button rejectProposeButton = new Button("Reject et countre propose");
 
-		Button stateButton = new Button("I (don't) like ...");
-		Button askGeneralButton = new Button("what kind of ... do you like?");
-		Button askSpecificButton = new Button("Do you like ... "+situation+"s?");
+		Button stateButton = new Button("J'aime/ je n'aime pas ...");
+		Button askGeneralButton = new Button("Quel type de ... aimes tu?");
+		Button askSpecificButton = new Button("est que tu aimes ... "+situation+"s?");
 
-		Button yesButton = new Button("Yes");
-		Button noButton = new Button("No");
+		Button yesButton = new Button("Oui");
+		Button noButton = new Button("Non");
 
-		Button likeButton = new Button("I like ...");
-		Button dontLikeButton = new Button("I don't like ...");
+		Button likeButton = new Button("J'aime ...");
+		Button dontLikeButton = new Button("Je n'aime pas ...");
 
 		Button optionButton = new Button(situation);
-		Button criterionButton = new Button("criterion");
+		Button criterionButton = new Button("critere");
 
 		Button cG1Button = new Button();
 		Button cG2Button = new Button();
@@ -340,7 +326,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		setCriterionButtonsTexts(co1Button,co2Button,co3Button,co4Button,situation);
 		setCriterionButtonsTexts(co12Button,co22Button,co32Button,co42Button,situation);
 
-		Button sendButton = new Button("Send");
+		Button sendButton = new Button("Envoyer");
 
 		/*All criteria buttons*/
 
@@ -616,7 +602,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 				for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
 					for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
-						openList.add(co.toString());
+						openList.add(co.getValue().afficher());
 
 				}
 
@@ -672,7 +658,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 				openList.clear();
 				for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
 					for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
-						openList.add(co.toString());
+						openList.add(co.getValue().afficher());
 
 				}
 

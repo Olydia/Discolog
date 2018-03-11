@@ -23,7 +23,8 @@ public class chatConsole extends OutputStream{
 	    	
 	    	
 	        output.appendText(StringToUTF8.convertToUTF8(value)) ;
-	        output.setStyle("-fx-font-family: 'Helvetica'");
+	        output.setStyle("-fx-font-size: 16px;");
+
 
 	    }
 }
