@@ -1,0 +1,138 @@
+<taskModel about="urn:negotiate.limsi.fr:Negotiate"
+	xmlns="http://www.cs.wpi.edu/~rich/cetask/cea-2018-ext">
+
+
+	<!-- This file contains the definitions for the utterance types used in 
+		the negotiation model. See Negotiate.properties for glossing. -->
+
+	<!-- see semantics in interpret() method in Java class definition for StatePreference, 
+		etc. -->
+
+	<task id="fr.limsi.negotiate.lang.StatePreference">
+		<!-- NOTE: * null value for either input means the other input is preferred 
+			to _all_ other possible criteria in that category * at most one input may 
+			have null value * null value for slot is _not_ the same as being undefined, 
+			see Task.isDefinedSlot(String) -->
+		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
+		<input name="likable" type="Packages.fr.limsi.negotiate.Statement.Satisfiable" />
+
+	</task>
+
+
+	<task id="fr.limsi.negotiate.lang.AskPreference">
+
+		<!-- Note: The 'criterion' input below is to support asking about a criterion 
+			in general, i.e., with both the 'less' and 'more' inputs null. The value 
+			provided should be Java class object that is a subtype of fr.limsi.negotiate.Criterion 
+			and the values provided for 'less' and 'more', if non-null, should be instances 
+			of this class. The criterion input itself is not optional. -->
+
+		<input name="criterion" type="object" />
+		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
+
+		<precondition>
+			if($this.value!= null){
+			!($negotiation.getCriterionNegotiation($this.value.getClass()).isInOther($this.value))
+			}
+		</precondition>
+
+	</task>
+
+
+	<task id="fr.limsi.negotiate.lang.Propose">
+
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+
+		<precondition>
+			! isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN)
+		</precondition>
+
+	</task>
+
+
+	<task id="fr.limsi.negotiate.lang.Accept">
+
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+
+		<precondition>
+			isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
+		</precondition>
+
+	</task>
+
+	<task id="fr.limsi.negotiate.lang.Reject">
+
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+
+		<precondition>
+			isProposed ($this.proposal,
+			Packages.fr.limsi.negotiate.Proposal.Status.OPEN);
+		</precondition>
+
+	</task>
+
+
+
+	<task id="fr.limsi.negotiate.lang.RejectState">
+
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+		<input name="value" type="Packages.fr.limsi.negotiate.Criterion" />
+
+	</task>
+
+
+
+	<task id="fr.limsi.negotiate.lang.RejectPropose">
+	
+		<input name="rejected" type="Packages.fr.limsi.negotiate.Proposal" />
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+
+	</task>
+	
+		<task id="fr.limsi.negotiate.lang.AcceptPropose">
+		
+		<input name="accepted" type="Packages.fr.limsi.negotiate.CriterionProposal" />
+		<input name="proposal" type="Packages.fr.limsi.negotiate.Proposal" />
+
+	</task>
+
+	<script init="true">
+
+		var STATE_PREFERENCE_TEST = null;
+		$negotiation =
+		$disco.getInteraction().getSystem().getNegotiation();
+
+		function
+		isProposed (proposal, status) {
+		return
+		$negotiation.isProposed(proposal, status);
+		}
+
+		function getStatus
+		(proposal) {
+		return $negotiation.checkProposalStatus(proposal);
+		}
+
+		function mostPreferredValue(criterion) {
+		return
+		$negotiation.mostPreferredCriterion(criterion);
+		}
+
+		function printMS() {
+		return $negotiation.printAllMentalState();
+		}
+
+		function getDiscussedCriterion(){
+		return $negotiation.context.getDiscussedCriterion();
+		}
+
+		function createProposal(criterion) {
+		
+			return $negotiation.createProposal(criterion);
+		}
+	</script>
+
+</taskModel>
+ 
