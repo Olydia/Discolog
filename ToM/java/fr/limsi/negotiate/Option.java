@@ -9,5 +9,5 @@ public interface Option {
     List<Class<? extends Criterion>> getCriteria();
     String getFrVersion();
     String print();
-
+    public String afficher();
 }

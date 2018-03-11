@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.StringToUTF8;
 
 public enum Restaurant implements Option {
 	A_CITADELLA(Cuisine.ITALIAN, Cost.EXPENSIVE, Atmosphere.LIVELY, Location.CENTER_OF_PARIS),
@@ -674,6 +675,14 @@ public enum Restaurant implements Option {
 		  return "It's a "+ this.ambiance+", " +this.cost+" "+ this.cuisine+ " restaurant on the " + this.district;
 	}
 
+	public String afficher(){
+		  String value = "c'est un restaurant "+ this.cuisine.afficher()+", "
+				  +this.cost.afficher()+" avec une ambiance "+ this.ambiance.afficher()
+				  + " situé " + this.district.afficher();
+		  
+		  return StringToUTF8.convertToUTF8(value);
+	}
+	
 	@Override
 	public String getFrVersion() {
 		// TODO Auto-generated method stub

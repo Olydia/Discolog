@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.StringToUTF8;
 
 public enum Location implements Criterion {
 	//DOWNTOWN, NORTH_SIDE, EAST_SIDE, WEST_SIDE, SOUTH_SIDE;
@@ -14,9 +15,40 @@ public enum Location implements Criterion {
 	}
 
 	@Override
-	public String getFrVersion() {
-		// TODO Auto-generated method stub
-		return null;
+	public String afficher() {
+
+		String fr = "";
+		switch(this) {
+        case CENTER_OF_PARIS:
+        	fr += "près du centre de paris";
+        break;
+        case MONTPARNASSE:
+        	fr += "à Montparnasse";
+        break;
+        case GARE_DU_NORD:
+        	fr += "à gare du Nord";
+        break;
+        case NEAR_EIFFEL_TOWER:
+        	fr += "près de la tour Eiffel";
+        break;
+        case PERE_LACHAISE:
+        	fr += "à Père lachaise";
+        break;
+        default:
+	        System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
+        break;
+     }
+		return StringToUTF8.convertToUTF8(fr);
+  
+	}
+	
+	@Override
+	public String afficherLikes() {
+	
+			String fr = "les restaurants " +afficher() + "s";
+			return StringToUTF8.convertToUTF8(fr);
+
+
 	}
 	
 	@Override

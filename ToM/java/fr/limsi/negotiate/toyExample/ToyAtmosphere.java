@@ -22,7 +22,7 @@ public enum ToyAtmosphere implements Criterion{
 		return this.toString() +" "+ topic;
 	}
 
-	public String getFrVersion(){
+	public String afficher(){
 		String fr = "";
 		switch(this) {
 		case LIVELY:
@@ -36,6 +36,12 @@ public enum ToyAtmosphere implements Criterion{
 			break;
 		}
 		return fr;
+	}
+
+	@Override
+	public String afficherLikes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

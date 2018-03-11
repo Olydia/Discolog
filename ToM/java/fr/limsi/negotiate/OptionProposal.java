@@ -76,6 +76,23 @@ public class OptionProposal extends Proposal {
 	}
 
 	@Override
+	public String afficherProp() {
+		// TODO Auto-generated method stub
+		String fr =  "au restaurant " + getValue();
+		return StringToUTF8.convertToUTF8(fr);
+
+	}
+
+
+	@Override
+	public String afficherPropDetail() {
+		// TODO Auto-generated method stub
+		String fr = afficherProp() + ". "+  this.getValue().afficher();
+		return StringToUTF8.convertToUTF8(fr);
+
+	}
+	
+	@Override
 	public OptionProposal mirrorProposal() {
 		OptionProposal p =  new OptionProposal(!this.isSelf, this.getValue());
 		p.setStatus(this.getStatus());

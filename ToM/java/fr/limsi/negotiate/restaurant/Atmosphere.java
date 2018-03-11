@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.restaurant;
 
 import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.StringToUTF8;
 
 public enum Atmosphere implements Criterion{
 
@@ -15,27 +16,60 @@ public enum Atmosphere implements Criterion{
 	public String toString(){
 		return this.name().toLowerCase();
 	}
-	
+
 	@Override
 	public String print(String topic) {
 		// TODO Auto-generated method stub
 		return this.toString() +" "+ topic;
 	}
 
-	public String getFrVersion(){
+	public String afficher(){
 		String fr = "";
 		switch(this) {
 		case LIVELY:
-			fr = "ANIME";
+			fr = "animé";
 			break;
 		case QUIET:
-			fr = "CALME";
+			fr = "calme";
+			break;
+		case COZY:
+			fr = "cosy";
+			break;
+		case FAMILY:
+			fr = "familial";
+			break;
+		case MODERN:
+			fr = "moderne";
+			break;
+		case ROMANTIC:
+			fr = "romantique";
 			break;
 		default:
 			System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
 			break;
 		}
-		return fr;
+		return StringToUTF8.convertToUTF8(fr);
 	}
 
+	@Override
+	public String afficherLikes() {
+		String fr = "les restaurants ";
+		switch(this) {
+		case COZY:
+			fr += "cosy";
+			break;
+		case FAMILY:
+			fr += "familiaux";
+			break;
+		default:
+			fr += afficher() + "s";
+			break;
+		}
+		return StringToUTF8.convertToUTF8(fr);
+	}
+
+
+
 }
+
+

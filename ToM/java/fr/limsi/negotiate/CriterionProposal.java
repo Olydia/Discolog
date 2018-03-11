@@ -77,6 +77,24 @@ public class CriterionProposal extends Proposal {
 		return printProposal(topic);
 	}
 
+	
+
+	@Override
+	public String afficherProp() {
+		// TODO Auto-generated method stub
+		String fr = "à un restaurant " + this.getValue().afficher();
+		return StringToUTF8.convertToUTF8(fr);
+
+	}
+
+	@Override
+	public String afficherPropDetail() {
+		// TODO Auto-generated method stub
+		String fr = afficherProp();
+		return StringToUTF8.convertToUTF8(fr);
+
+	}
+	
 	@Override
 	public CriterionProposal mirrorProposal() {
 		CriterionProposal p =  new CriterionProposal(!this.isSelf, this.getValue());

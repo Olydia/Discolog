@@ -13,7 +13,6 @@ import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
-import fr.limsi.negotiate.movie.*;
 import fr.limsi.negotiate.restaurant.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -65,7 +64,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	}
 
 	public void addCriteria(Criterion[] c,ArrayList<String> criteria){
-		
+
 		for (int i=0;i<c.length;i++){
 			criteria.add(c[i].toString().toUpperCase());
 
@@ -80,20 +79,12 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	public boolean isCriterion(String ch,String situation){
 
 		ArrayList<String> criteria =new ArrayList<String>();
-		if (situation=="restaurant"){
 
-			addCriteria(Atmosphere.values(),criteria);
-			addCriteria(Cost.values(),criteria);
-			addCriteria(Cuisine.values(),criteria);
-			addCriteria(Location.values(),criteria);
-		}
-		else{
+		addCriteria(Atmosphere.values(),criteria);
+		addCriteria(Cost.values(),criteria);
+		addCriteria(Cuisine.values(),criteria);
+		addCriteria(Location.values(),criteria);
 
-			addCriteria(Category.values(),criteria);
-			addCriteria(Country.values(),criteria);
-			addCriteria(Year.values(),criteria);
-
-		}
 
 		for (int i=0; i<criteria.size();i++){
 			if (ch.toUpperCase().equals(criteria.get(i))) return true;
@@ -110,7 +101,6 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 		ArrayList<String> tmp =new ArrayList<String>();
 		String criterion="";
-		if (situation=="restaurant"){
 
 			addCriteria(Atmosphere.values(),tmp);
 			for (int i=0;i<tmp.size();i++){
@@ -128,23 +118,8 @@ public class DownPrincipalScreen1 extends AnchorPane{
 			for (int i=0;i<tmp.size();i++){
 				if (ch.toUpperCase().equals(tmp.get(i))){return "Location";}
 			}
-		}
-		else{
-
-			addCriteria(Category.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Category";}
-			}
-			addCriteria(Country.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Country";}
-			}
-			addCriteria(Year.values(),tmp);
-			for (int i=0;i<tmp.size();i++){
-				if (ch.toUpperCase().equals(tmp.get(i))){return "Year";}
-			}
-
-		}
+		
+	
 
 		return criterion;
 
@@ -170,8 +145,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	 */
 	public void clearLastButtons(ArrayList<HBox> c1HBoxs,ArrayList<HBox> c2HBoxs,ArrayList<HBox> c3HBoxs,ArrayList<HBox> c4HBoxs,ObservableList list,String situation){
 
-		if (situation=="restaurant")
-		{
+		
 
 			for (int i=0;i<Atmosphere.values().length;i++){
 				list.remove(c1HBoxs.get(i));
@@ -190,26 +164,12 @@ public class DownPrincipalScreen1 extends AnchorPane{
 			for (int i=0;i<Location.values().length;i++){
 				list.remove(c4HBoxs.get(i));
 			}
-		}
-		else
-		{
-			for (int i=0;i<Category.values().length;i++){
-				list.remove(c1HBoxs.get(i));
-			}
-			for (int i=0;i<Country.values().length;i++){
-				list.remove(c2HBoxs.get(i));
-			}
-
-			for (int i=0;i<Location.values().length;i++){
-				list.remove(c3HBoxs.get(i));
-
-			}
-		}
+		
 
 	}
 
 	public void setSecondaryButtonsTexts(Criterion[] c, ArrayList<Button>c1Buttons, ArrayList<Button> c12Buttons,ArrayList<HBox> c1HBoxs, ArrayList<HBox> c12HBoxs){
-		
+
 		for (int i=0;i<c.length;i++){
 			Button iButton = new Button( c[i].toString());
 			Button i2Button = new Button( c[i].toString());
@@ -274,7 +234,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		Interaction interaction = new Interaction(
 				/*new ExampleAgent("agent", model.model1())*/agent,
 				/*new User(username)*/user,/*args.length > 0 && args[0].length() > 0 ? args[0] : */null);
-		interaction.load("models/Negotiate.xml");
+		interaction.load("models/NegotiateFR.xml");
 		((ToMNegotiatorProba) interaction.getSystem()).setRelation(relation);
 
 
@@ -404,17 +364,11 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		ArrayList<HBox> c32HBoxs=new ArrayList<>();
 		ArrayList<HBox> c42HBoxs=new ArrayList<>();
 
-		if (situation=="restaurant"){
-			setSecondaryButtonsTexts(Atmosphere.values(),c1Buttons,c12Buttons,c1HBoxs,c12HBoxs);
-			setSecondaryButtonsTexts(Cost.values(),c2Buttons,c22Buttons,c2HBoxs,c22HBoxs);
-			setSecondaryButtonsTexts(Cuisine.values(),c3Buttons,c32Buttons,c3HBoxs,c32HBoxs);
-			setSecondaryButtonsTexts(Location.values(),c4Buttons,c42Buttons,c4HBoxs,c42HBoxs);
-		}
-		else{
-			setSecondaryButtonsTexts(Category.values(),c1Buttons,c12Buttons,c1HBoxs,c12HBoxs);
-			setSecondaryButtonsTexts(Country.values(),c2Buttons,c22Buttons,c2HBoxs,c22HBoxs);
-			setSecondaryButtonsTexts(Year.values(),c3Buttons,c32Buttons,c3HBoxs,c32HBoxs);
-		}
+		setSecondaryButtonsTexts(Atmosphere.values(),c1Buttons,c12Buttons,c1HBoxs,c12HBoxs);
+		setSecondaryButtonsTexts(Cost.values(),c2Buttons,c22Buttons,c2HBoxs,c22HBoxs);
+		setSecondaryButtonsTexts(Cuisine.values(),c3Buttons,c32Buttons,c3HBoxs,c32HBoxs);
+		setSecondaryButtonsTexts(Location.values(),c4Buttons,c42Buttons,c4HBoxs,c42HBoxs);
+
 
 		ArrayList<Button> co1Buttons=new ArrayList<>();
 		ArrayList<Button> co2Buttons=new ArrayList<>();
@@ -437,17 +391,12 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		ArrayList<HBox> co32HBoxs=new ArrayList<>();
 		ArrayList<HBox> co42HBoxs=new ArrayList<>();
 
-		if (situation=="restaurant"){
-			setSecondaryButtonsTexts(Atmosphere.values(),co1Buttons,co12Buttons,co1HBoxs,co12HBoxs);
-			setSecondaryButtonsTexts(Cost.values(),co2Buttons,co22Buttons,co2HBoxs,co22HBoxs);
-			setSecondaryButtonsTexts(Cuisine.values(),co3Buttons,co32Buttons,co3HBoxs,co32HBoxs);
-			setSecondaryButtonsTexts(Location.values(),co4Buttons,co42Buttons,co4HBoxs,co42HBoxs);
-		}
-		else{
-			setSecondaryButtonsTexts(Category.values(),co1Buttons,co12Buttons,co1HBoxs,co12HBoxs);
-			setSecondaryButtonsTexts(Country.values(),co2Buttons,co22Buttons,co2HBoxs,co22HBoxs);
-			setSecondaryButtonsTexts(Year.values(),co3Buttons,co32Buttons,co3HBoxs,co32HBoxs);
-		}
+		setSecondaryButtonsTexts(Atmosphere.values(),co1Buttons,co12Buttons,co1HBoxs,co12HBoxs);
+		setSecondaryButtonsTexts(Cost.values(),co2Buttons,co22Buttons,co2HBoxs,co22HBoxs);
+		setSecondaryButtonsTexts(Cuisine.values(),co3Buttons,co32Buttons,co3HBoxs,co32HBoxs);
+		setSecondaryButtonsTexts(Location.values(),co4Buttons,co42Buttons,co4HBoxs,co42HBoxs);
+
+
 
 		HBox proposeHBox = new HBox(15);
 		HBox acceptHBox = new HBox(15);
@@ -779,11 +728,11 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 			@Override
 			public void handle(ActionEvent prosposeEvent) {
-				
+
 				stopButton.setStyle(on);
 
-            	ShowPreferencesDialog userPref = new ShowPreferencesDialog(Acceuil.preferencesUser);
-            	Optional<String> result = userPref.showAndWait();
+				ShowPreferencesDialog userPref = new ShowPreferencesDialog(Acceuil.preferencesUser);
+				Optional<String> result = userPref.showAndWait();
 				stopButton.setStyle(off);
 
 			}

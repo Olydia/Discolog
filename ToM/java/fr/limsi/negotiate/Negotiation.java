@@ -632,7 +632,7 @@ public class Negotiation<O extends Option> {
 		return options;
 
 	}
-	
+	// ----- Modalité d'affichages 
 	public String printPreferences(){
 		String pref = "";
 		for (CriterionNegotiation<Criterion> cr : this.valueNegotiation){
@@ -662,4 +662,66 @@ public class Negotiation<O extends Option> {
 			return "You proposed " + currentProposal.printProposal(getTopic().getSimpleName().toLowerCase())
 			+ " earlier. In the end that's suits me fine";
 	}
+	
+	
+	public String construireAccept(Proposal currentProposal){
+		if(isPropose(currentProposal.isSelf)){
+			if(isLastProposal(currentProposal)){
+				return StringToUTF8.convertToUTF8("D'accord, allons " + currentProposal.afficherProp());
+			}
+			else if(getContext().otherProposal(currentProposal)!= null){
+				return StringToUTF8.convertToUTF8("Je préfère aller " + 
+						currentProposal.afficherProp()
+					+ " mais pas "+ getContext().otherProposal(currentProposal).afficherProp());
+			}
+			else {
+				return StringToUTF8.convertToUTF8("Au final, je préfère aller "
+						+ currentProposal.afficherProp());
+			}
+		}
+		else
+			return StringToUTF8.convertToUTF8("Tu avais proposé d'aller " + currentProposal.afficherProp()
+			+ " précédemment. En fin de compte, ça me va bien");
+	}
+	
+	public String afficherCriterion(String criterionName) {
+		String fr = "";
+		switch(criterionName) {
+		case "cuisine":
+			fr= criterionName;
+			break;
+		case "cost":
+			fr = "prix";
+			break;
+		case "athmosphere":
+			fr += "ambiance";
+			break;
+		case "location":
+			fr += "localisation";
+			break;
+			
+		default:
+			fr = criterionName;
+			break;
+		}
+		return StringToUTF8.convertToUTF8(fr);
+//		if("AEIOUaeiou".indexOf(value.charAt(0)) != -1)
+//			return "an " + value;
+//		
+//		return "a " + value;
+	}
+	
+	public String afficherAsk(String criterionName){
+		String value = afficherCriterion(criterionName);
+		if("AEIOUaeiou".indexOf(value.charAt(0)) != -1)
+			return  StringToUTF8.convertToUTF8("d'" + value);
+		
+		return StringToUTF8.convertToUTF8("de " + value);
+	}
+	
+	public String getFR(String fr){
+		return StringToUTF8.convertToUTF8(fr);
+
+	}
+	
 }

@@ -71,14 +71,14 @@ public class NegotiatorAgent extends Agent {
 				false);
 
 		// note not loading Negotiotion.xml!
-		dual.interaction1.load("models/Negotiate.xml");
-		dual.interaction2.load("models/Negotiate.xml");
+		dual.interaction1.load("models/NegotiateFR.xml");
+		dual.interaction2.load("models/NegotiateFR.xml");
 		//((NegotiatorAgent) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
-		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(DOMINANT);
+		((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(SUBMISSIVE);
 
 		//((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		
-		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(DOMINANT);
+		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		
 
 		dual.start();

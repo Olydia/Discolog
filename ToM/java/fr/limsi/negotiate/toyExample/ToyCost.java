@@ -23,7 +23,7 @@ public enum ToyCost implements Criterion {
 		return this.toString() +" "+ topic;
 	}
 
-	public String getFrVersion(){
+	public String afficher(){
 		String fr = "";
 		switch(this) {
         case EXPENSIVE:
@@ -38,5 +38,10 @@ public enum ToyCost implements Criterion {
      }
 		return fr;
   }
+	@Override
+	public String afficherLikes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

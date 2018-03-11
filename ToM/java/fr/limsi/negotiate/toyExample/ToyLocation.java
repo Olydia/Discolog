@@ -13,7 +13,7 @@ public enum ToyLocation implements Criterion {
 	}
 
 	@Override
-	public String getFrVersion() {
+	public String afficher() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,6 +31,10 @@ public enum ToyLocation implements Criterion {
 		return  topic  + text + this.toString();
 	}
 
-
+	@Override
+	public String afficherLikes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

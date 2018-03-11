@@ -144,4 +144,10 @@ public enum ToyRestaurant implements Option {
 		return this.capitalize(this.name());
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
