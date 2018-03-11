@@ -35,7 +35,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class DownPrincipalScreen1 extends AnchorPane{
+public class SceneBas1 extends AnchorPane{
 
 	static  String on=" -fx-background-color: linear-gradient(#2A5058, #61a2b1);"+"-fx-font-size: 16px;"+ "-fx-text-fill: yellow;";
 	static  String off=" -fx-background-color: linear-gradient(#61a2b1, #2A5058)";
@@ -59,7 +59,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 	 */
 	public String[] details = new String[8];
 
-	public DownPrincipalScreen1(String agentName){
+	public SceneBas1(String agentName){
 		this.agentName = agentName;
 	}
 
@@ -237,7 +237,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 		optionStage.setFullScreen(true);
 		optionStage.setScene(scene);
 		scene.getStylesheets().add
-		(Home1.class.getResource("application2.css").toExternalForm());
+		(Acceuil1.class.getResource("application2.css").toExternalForm());
 
 		for (int i=0;i<8;i++){
 			details[i]="";
@@ -796,7 +796,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 				optionStage.setScene(scene);
 				scene.getStylesheets().add
-				(Home1.class.getResource("application2.css").toExternalForm());
+				(Acceuil1.class.getResource("application2.css").toExternalForm());
 				optionChoice.start(optionStage);
 
 				optionChoice.addElements(situation,optionStage,chatStage,details,list);
@@ -1688,7 +1688,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 
 						switch(nbAgents){
 						case(0):{
-							UpPrincipalScreen1 chat2 = new UpPrincipalScreen1("Arthur",username, ADAPT.MIMIC);
+							SceneHaut1 chat2 = new SceneHaut1("Arthur",username, ADAPT.MIMIC);
 							chat2.situation="restaurant";
 
 							String arthur = "--------------------------------------------- \n \n"+
@@ -1703,7 +1703,7 @@ public class DownPrincipalScreen1 extends AnchorPane{
 							break;
 						}	
 						case(1):{
-							UpPrincipalScreen1 chat3 = new UpPrincipalScreen1("Kevin",username, ADAPT.NONADAPT);
+							SceneHaut1 chat3 = new SceneHaut1("Kevin",username, ADAPT.NONADAPT);
 							chat3.situation="restaurant";
 							Stage chatStage3=new Stage();
 

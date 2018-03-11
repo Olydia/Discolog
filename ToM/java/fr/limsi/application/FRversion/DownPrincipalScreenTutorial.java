@@ -254,7 +254,7 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 		// Scene scene = new Scene(pane, 400, 300);
 		optionStage.setScene(scene);
 		scene.getStylesheets().add
-		(Home1.class.getResource("application2.css").toExternalForm());
+		(Acceuil1.class.getResource("application2.css").toExternalForm());
 
 		for (int i=0;i<8;i++){
 			details[i]="";
@@ -883,7 +883,7 @@ public class DownPrincipalScreenTutorial extends AnchorPane{
 				// Scene scene = new Scene(pane, 400, 300);
 				optionStage.setScene(scene);
 				scene.getStylesheets().add
-				(Home1.class.getResource("application2.css").toExternalForm());
+				(Acceuil1.class.getResource("application2.css").toExternalForm());
 				optionChoice.start(optionStage);
 				//	setTopAnchor(list.get(list.size()-1),300.0);
 				//setLeftAnchor(list.get(list.size()-1),400.0);

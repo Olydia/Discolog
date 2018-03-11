@@ -16,7 +16,7 @@ import javafx.scene.layout.FlowPane;
 
 
 
-public class UpPrincipalScreen1 extends Application {
+public class SceneHaut1 extends Application {
 	public static int nbAgents = -1;
 	public String situation;
 	private String username;
@@ -30,19 +30,19 @@ public class UpPrincipalScreen1 extends Application {
 
 	private String agentName;
 	private Negotiation<? extends Option> prefModel;
-	 private DownPrincipalScreen1 chatBoard;
+	 private SceneBas1 chatBoard;
 	 
 	 
-	public UpPrincipalScreen1(String agentName, String userName, ADAPT state){
+	public SceneHaut1(String agentName, String userName, ADAPT state){
 		this.agentName = agentName;
 		this.username = userName;
 		this.state = state;
 		nbAgents ++;
 	}
-	public DownPrincipalScreen1 getChatBoard() {
+	public SceneBas1 getChatBoard() {
 		return chatBoard;
 	}
-	public void setChatBoard(DownPrincipalScreen1 chatBoard) {
+	public void setChatBoard(SceneBas1 chatBoard) {
 		this.chatBoard = chatBoard;
 	}
 	public Negotiation<? extends Option> getPrefModel() {
@@ -61,13 +61,13 @@ public class UpPrincipalScreen1 extends Application {
 		//VBox vbox = new VBox(ta);
 		FlowPane flow = new FlowPane(Orientation.VERTICAL);
 
-		chatBoard= new DownPrincipalScreen1(agentName);
+		chatBoard= new SceneBas1(agentName);
 		//Chat chat=new Chat();
 		//Choice choice=new Choice();
 		sp.getItems().addAll(flow,chatBoard);
 		sp.setDividerPositions(0.3f);
 
-		String image = UpPrincipalScreen1.class.getResource("white.jpg").toExternalForm();
+		String image = SceneHaut1.class.getResource("white.jpg").toExternalForm();
 
 		flow.setStyle("-fx-background-image: url('" + image + "'); "
 				+
@@ -89,7 +89,7 @@ public class UpPrincipalScreen1 extends Application {
 		chatStage.setFullScreen(true);
 
 		scene.getStylesheets().add
-		(UpPrincipalScreen1.class.getResource("application2.css").toExternalForm());
+		(SceneHaut1.class.getResource("application2.css").toExternalForm());
 		chatBoard.addElements(username,situation,chatStage, prefModel, nbAgents, state);
 		chatStage.show();
 

@@ -34,11 +34,11 @@ import javafx.stage.Stage;
 
 
 
-public class Home1 extends Application {
+public class Acceuil1 extends Application {
 	String username = "1";
 	//WriteHistory writer;
 	File history ;
-	public Home1(/*Acceuil frame*/){
+	public Acceuil1(/*Acceuil frame*/){
 		//this.frame = frame;
 		// writer = new WriteHistory();
 
@@ -65,7 +65,7 @@ public class Home1 extends Application {
 		homeStage.setFullScreen(true);
 
 		scene.getStylesheets().add
-		(Home1.class.getResource("application2.css").toExternalForm());
+		(Acceuil1.class.getResource("application2.css").toExternalForm());
 		homeStage.show();
 
 
@@ -165,7 +165,7 @@ public class Home1 extends Application {
 	
 
 	public static void main(String[] args) {
-		Home1 home = new Home1();
+		Acceuil1 home = new Acceuil1();
 		home.launch(args);
 
 		
