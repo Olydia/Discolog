@@ -19,11 +19,11 @@ public class chatConsole extends OutputStream{
 	    @Override
 	    public void write(int i) throws IOException
 	    {
-	    	//String value =StringToUTF8.convertToUTF8();
+	    	String value = String.valueOf((char) i);
 	    	
-	        output.appendText(String.valueOf((char) i)) ;
-	        output.setStyle("-fx-font-size: 16px;");
-
+	    	
+	        output.appendText(StringToUTF8.convertToUTF8(value)) ;
+	        output.setStyle("-fx-font-family: 'Helvetica'");
 
 	    }
 }
