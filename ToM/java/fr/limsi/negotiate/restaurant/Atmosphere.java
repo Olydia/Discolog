@@ -27,7 +27,7 @@ public enum Atmosphere implements Criterion{
 		String fr = "";
 		switch(this) {
 		case LIVELY:
-			fr = "animé";
+			fr = "anim\u00e9";
 			break;
 		case QUIET:
 			fr = "calme";

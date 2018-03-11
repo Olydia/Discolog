@@ -678,7 +678,7 @@ public enum Restaurant implements Option {
 	public String afficher(){
 		  String value = "c'est un restaurant "+ this.cuisine.afficher()+", "
 				  +this.cost.afficher()+" avec une ambiance "+ this.ambiance.afficher()
-				  + " situé " + this.district.afficher();
+				  + " situ\u00e9 " + this.district.afficher();
 		  
 		  return StringToUTF8.convertToUTF8(value);
 	}

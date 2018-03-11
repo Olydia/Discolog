@@ -20,25 +20,25 @@ public enum Location implements Criterion {
 		String fr = "";
 		switch(this) {
         case CENTER_OF_PARIS:
-        	fr += "près du centre de paris";
+        	fr += "pr\u00e9s du centre de paris";
         break;
         case MONTPARNASSE:
-        	fr += "à Montparnasse";
+        	fr += "\u00e0 Montparnasse";
         break;
         case GARE_DU_NORD:
-        	fr += "à gare du Nord";
+        	fr += "\u00e0 gare du Nord";
         break;
         case NEAR_EIFFEL_TOWER:
-        	fr += "près de la tour Eiffel";
+        	fr += "pr\u00e9s de la tour Eiffel";
         break;
         case PERE_LACHAISE:
-        	fr += "à Père lachaise";
+        	fr += "\u00e0 P\u00e8re lachaise";
         break;
         default:
 	        System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
         break;
      }
-		return StringToUTF8.convertToUTF8(fr);
+		return fr;// StringToUTF8.convertToUTF8(fr);
   
 	}
 	
@@ -46,7 +46,7 @@ public enum Location implements Criterion {
 	public String afficherLikes() {
 	
 			String fr = "les restaurants " +afficher() + "s";
-			return StringToUTF8.convertToUTF8(fr);
+			return fr;//StringToUTF8.convertToUTF8(fr);
 
 
 	}

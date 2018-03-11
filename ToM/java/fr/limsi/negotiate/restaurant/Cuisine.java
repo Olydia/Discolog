@@ -35,7 +35,7 @@ public enum Cuisine implements Criterion {
 			fr += "chinois";
 			break;
 		case FRENCH:
-			fr += "français";
+			fr += "fran\u00e7ais";
 			break;
 		case ITALIAN:
 			fr += "italien";
@@ -50,7 +50,7 @@ public enum Cuisine implements Criterion {
 			fr += "mexicain";
 			break;
 		case KOREAN:
-			fr += "coréen";
+			fr += "cor\u00e9en";
 			break;
 		default:
 			System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
@@ -73,14 +73,15 @@ public enum Cuisine implements Criterion {
 			fr += "mexicains";
 			break;
 		case KOREAN:
-			fr += "coréens";
+			fr += "cor\u00e9ens";	
+			
 			break;
 			
 		default:
 			fr += afficher();
 			break;
 		}
-		return StringToUTF8.convertToUTF8(fr);
+		return fr;//StringToUTF8.convertToUTF8(fr);
 	}
 	
 	
