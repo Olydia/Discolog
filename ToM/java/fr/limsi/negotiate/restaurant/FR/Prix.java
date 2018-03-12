@@ -46,7 +46,7 @@ public enum Prix implements Criterion {
 	public String afficherLikes() {
 		String fr= "les restaurants " +afficher();
 			if (this.equals(BAS_PRIX))
-				return  StringToUTF8.convertToUTF8(fr);
+				return  StringToUTF8.convertToUTF8("les restaurants à " +afficher());
 			return StringToUTF8.convertToUTF8(fr + "s");
 
 	}

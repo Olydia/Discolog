@@ -82,7 +82,7 @@ public class CriterionProposal extends Proposal {
 	@Override
 	public String afficherProp() {
 		// TODO Auto-generated method stub
-		String fr = '\u00e0'+" un restaurant " + this.getValue().afficher();
+		String fr ="dans un restaurant " + this.getValue().afficher();
 		return StringToUTF8.convertToUTF8(fr);
 
 	}

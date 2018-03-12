@@ -28,7 +28,7 @@ public enum Localisation implements Criterion {
         	fr += "\u00e0 gare du Nord";
         break;
         case PRES_DE_LA_TOUR_EIFFEL:
-        	fr += "pr\u00e9s de la tour Eiffel";
+        	fr += "pr\u00e8s de la tour Eiffel";
         break;
         case PERE_LACHAISE:
         	fr += "\u00e0 P\u00e8re lachaise";
@@ -43,10 +43,7 @@ public enum Localisation implements Criterion {
 	
 	@Override
 	public String afficherLikes() {
-			if(this.equals(CENTRE_DE_PARIS))
 				return "les restaurants " +afficher() ;
-			String fr = "les restaurants " +afficher() + "s";
-			return fr;//StringToUTF8.convertToUTF8(fr);
 
 
 	}
