@@ -680,7 +680,7 @@ public class Negotiation<O extends Option> {
 			}
 		}
 		else
-			return StringToUTF8.convertToUTF8("Tu avais propos\u00e9 avant, " + currentProposal.afficherProp()
+			return StringToUTF8.convertToUTF8("Tu avais propos\u00e9 d'aller " + currentProposal.afficherProp()
 			+ " pr\u00e9c\u00e9demment. Finalement, j’aimerai bien y aller");
 	}
 	
