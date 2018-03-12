@@ -67,7 +67,7 @@ public class Self_Ci <C> extends Self<C> {
 			
 			//return type.getField(name.toUpperCase());
 			for (C elem: type.getEnumConstants()){
-				if(elem.toString().toLowerCase().equals(name.toLowerCase()))
+				if(((Criterion) elem).afficher().toLowerCase().equals(name.toLowerCase()))
 						return elem;
 			}
 			return null;

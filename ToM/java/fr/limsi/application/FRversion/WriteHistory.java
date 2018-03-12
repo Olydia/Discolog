@@ -33,7 +33,7 @@ public class WriteHistory {
 		        e.printStackTrace();
 		        return false; // Erreur
 		    }
-		    return true; // Résultat OK
+		    return true; // Rï¿½sultat OK
 		}
 
 

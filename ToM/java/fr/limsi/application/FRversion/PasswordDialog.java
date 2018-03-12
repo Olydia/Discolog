@@ -14,9 +14,9 @@ public class PasswordDialog extends Dialog<String> {
   private PasswordField passwordField;
 
   public PasswordDialog(String agent) {
-    setTitle("End of negotiation");
-    setHeaderText("The negotiation with " + agent +" is over. "
-					+ "	Please call the experimentator");
+    setTitle("Fin de la negociation");
+    setHeaderText("La negociation avec " + agent +" st'est terminé avec succes. "
+					+ "	Merci d'appeler l'experimentateur");
 
     ButtonType passwordButtonType = new ButtonType("Decrypt", ButtonData.OK_DONE);
     getDialogPane().getButtonTypes().addAll(passwordButtonType, ButtonType.CANCEL);

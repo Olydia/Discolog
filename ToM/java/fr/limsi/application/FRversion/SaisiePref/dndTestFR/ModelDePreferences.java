@@ -5,29 +5,23 @@ import java.util.List;
 
 import javax.swing.ListModel;
 
-import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.CriterionNegotiation;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Self_C;
 import fr.limsi.negotiate.Self_Ci;
-import fr.limsi.negotiate.restaurant.Atmosphere;
-import fr.limsi.negotiate.restaurant.Cost;
-import fr.limsi.negotiate.restaurant.Cuisine;
-import fr.limsi.negotiate.restaurant.Location;
-import fr.limsi.negotiate.restaurant.Restaurant;
-
-public class PreferencesModel {
+import fr.limsi.negotiate.restaurant.FR.*;
+public class ModelDePreferences {
 
 	public Self_Ci<Cuisine> d1_cuisine;
-	public Self_Ci<Atmosphere> d1_atmosphere;
-	public Self_Ci<Cost> d1_cost;
-	public Self_Ci<Location> d1_location;
+	public Self_Ci<Ambiance> d1_atmosphere;
+	public Self_Ci<Prix> d1_cost;
+	public Self_Ci<Localisation> d1_location;
 	
-	public PreferencesModel() {
+	public ModelDePreferences() {
 		d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_atmosphere = new Self_Ci<Atmosphere>(Atmosphere.class);
-		d1_cost = new Self_Ci<Cost>(Cost.class);
-		d1_location =  new Self_Ci<>(Location.class);
+		d1_atmosphere = new Self_Ci<Ambiance>(Ambiance.class);
+		d1_cost = new Self_Ci<Prix>(Prix.class);
+		d1_location =  new Self_Ci<Localisation>(Localisation.class);
 
 	}
 	
@@ -37,13 +31,13 @@ public class PreferencesModel {
 		
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
-		CriterionNegotiation<Atmosphere> atmospher = new CriterionNegotiation<>(d1_atmosphere);
+		CriterionNegotiation<Ambiance> atmospher = new CriterionNegotiation<>(d1_atmosphere);
 
-		CriterionNegotiation<Cost> cost = new CriterionNegotiation<>(d1_cost);
+		CriterionNegotiation<Prix> cost = new CriterionNegotiation<>(d1_cost);
 		
 //		d1_location.addPreference(Location.NORTH_SIDE, Location.DOWNTOWN);
 
-		CriterionNegotiation<Location> location = new CriterionNegotiation<>(d1_location);
+		CriterionNegotiation<Localisation> location = new CriterionNegotiation<>(d1_location);
 
 		@SuppressWarnings("unchecked")
 		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 

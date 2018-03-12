@@ -13,19 +13,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JDialog;
 
-import fr.limsi.application.UpPrincipalScreen1;
-import fr.limsi.application.WriteHistory;
+import fr.limsi.application.FRversion.FenetreHaut;
+import fr.limsi.application.FRversion.WriteHistory;
 import fr.limsi.negotiate.Criterion;
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
 import fr.limsi.negotiate.Self_Ci;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
-import fr.limsi.negotiate.restaurant.Atmosphere;
-import fr.limsi.negotiate.restaurant.Cost;
-import fr.limsi.negotiate.restaurant.Cuisine;
-import fr.limsi.negotiate.restaurant.Location;
-import fr.limsi.negotiate.restaurant.Restaurant;
+import fr.limsi.negotiate.restaurant.FR.Ambiance;
+import fr.limsi.negotiate.restaurant.FR.Cuisine;
+import fr.limsi.negotiate.restaurant.FR.Localisation;
+import fr.limsi.negotiate.restaurant.FR.Prix;
+import fr.limsi.negotiate.restaurant.FR.Restaurant;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -40,7 +40,7 @@ import javafx.stage.Stage;
 // il faut envoyer les prefs de l'agent � l'agent
 // 
 
-public class Acceuil extends Application{
+public class PrefAcceuil extends Application{
 
 	public static List<Negotiation<? extends Option>> negotiators;
 	private Negotiation<? extends Option> userPref;
@@ -50,17 +50,17 @@ public class Acceuil extends Application{
 				new HashMap<String, List<String>>();
 
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
-	private String text = "For the purposes of this study, we ask you to enter your preferences for each criterion"
-			+ "\n that will be discussed during the negotiation. \n\n"+
+	private String text = "Pour les besoins de l'etude, nous vous demandons de bien vouloir "
+			+ "\n pour chaque critere sur lesquels portera la negociation. \n\n"+
 			
-			"Note that the agents do not know your preferences \n \n"+
+			" Notez que les agents ne connaissent pas vos preferences.\n \n"+
 
-			"We will present you each criterion (Athmosphere, Cost, Cuisine, Location) one after the other. \n \n"
+			"Nous vous presenterons chaque critere (Atmosphere, Prix, Cuisine, Localisation) l'un apres l'autre. \n \n"
 
-			+"For each criterion, you will have to rank your preferences in a descending order: "
-			+ "\n put on the top of the list the value you like the most for this criterion. \n\n"+
+			+"Pour chaque critere, vous devrez classer vos preferences par ordre decroissant: "
+			+ "\n mettez en haut de la liste la valeur que vous aimez le plus pour ce critere. \n\n"+
 
-			"If you have any question, at any time during the process, feel free to call the experimenter.";
+			"Si vous avez des questions, à tout moment pendant le processus, n'hesitez pas à appeler l'experimentateur.";
 
 
 
@@ -72,7 +72,7 @@ public class Acceuil extends Application{
 	private File history;
 	private static boolean isDone = false;
 
-	public Acceuil(String username, File history) {
+	public PrefAcceuil(String username, File history) {
 		this.username =username;
 		this.history = history;
 		writer = new WriteHistory();
@@ -80,7 +80,7 @@ public class Acceuil extends Application{
 	@Override
 	public void start(Stage stage){
 		TextArea textWelcom  = new TextArea(text);
-		Button btncommencer = new Button("Ok, I understand");
+		Button btncommencer = new Button("Ok, J'ai compris");
 		// TODO Auto-generated method stub
 		stage.setTitle("Preferences selection");
 		Lock l = new ReentrantLock();
@@ -116,13 +116,13 @@ public class Acceuil extends Application{
 		//	setMinimumSize(new Dimension(400, 300));
 		//showOnScreen(2, this);
 		//center(this);
-		cost = new CriteriaSelect(Cost.class);
+		cost = new CriteriaSelect(Prix.class);
 		cuisine = new CriteriaSelect(Cuisine.class);
-		athmos = new CriteriaSelect(Atmosphere.class);
-		location = new CriteriaSelect(Location.class);
+		athmos = new CriteriaSelect(Ambiance.class);
+		location = new CriteriaSelect(Localisation.class);
 
 		// Init the model of preferences
-		PreferencesModel model = new PreferencesModel();
+		ModelDePreferences model = new ModelDePreferences();
 
 		btncommencer.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
 			@Override
@@ -216,13 +216,13 @@ public class Acceuil extends Application{
 							preferencesUser.put(Cuisine.class.getSimpleName(),
 									cuisine.asList());
 							
-							preferencesUser.put(Location.class.getSimpleName(),
+							preferencesUser.put(Localisation.class.getSimpleName(),
 											location.asList());
 							
-							preferencesUser.put(Cost.class.getSimpleName(),
+							preferencesUser.put(Prix.class.getSimpleName(),
 									cost.asList());
 							
-							preferencesUser.put(Atmosphere.class.getSimpleName(),
+							preferencesUser.put(Ambiance.class.getSimpleName(),
 									athmos.asList());
 							
 							location.setVisible(false);
@@ -232,7 +232,7 @@ public class Acceuil extends Application{
 							WriteHistory writer = new WriteHistory();
 							writer.write(userPref, history);
 
-							List<Negotiation<? extends Option>> neg = Acceuil.getNegotiators();
+							List<Negotiation<? extends Option>> neg = PrefAcceuil.getNegotiators();
 							System.out.println(neg.toString());
 
 							isDone = true;
@@ -265,7 +265,7 @@ public class Acceuil extends Application{
 	public void startAgents(){
 		//System.out.println("je lance les agents");
 		List<Negotiation<? extends Option>> negotiations = getNegotiators();
-		UpPrincipalScreen1 chat = new UpPrincipalScreen1("Bob", username, ADAPT.COMPLEMENT);
+		FenetreHaut chat = new FenetreHaut("Bob", username, ADAPT.COMPLEMENT);
 		chat.situation="restaurant";
 		Stage chatStage=new Stage();
 		chat.setPrefModel(negotiations.get(0));
@@ -322,7 +322,7 @@ public class Acceuil extends Application{
 	public static List<Negotiation<? extends Option>> getNegotiators() {
 		Lock l = new ReentrantLock();
 		l.lock();
-		List<Negotiation<? extends Option>> neg = Acceuil.negotiators;
+		List<Negotiation<? extends Option>> neg = PrefAcceuil.negotiators;
 		l.unlock();
 		return neg;
 	}
@@ -331,7 +331,7 @@ public class Acceuil extends Application{
 	public static void  setNegotiators(List<Negotiation<? extends Option>> negotiators) {
 		Lock l = new ReentrantLock();
 		l.lock();
-		Acceuil.negotiators = negotiators;
+		PrefAcceuil.negotiators = negotiators;
 		l.unlock();
 	}
 
@@ -349,7 +349,7 @@ public class Acceuil extends Application{
 	public static void setDone(boolean isDone) {
 		Lock l = new ReentrantLock();
 		l.lock();
-		Acceuil.isDone = isDone;
+		PrefAcceuil.isDone = isDone;
 		l.unlock();
 	}
 

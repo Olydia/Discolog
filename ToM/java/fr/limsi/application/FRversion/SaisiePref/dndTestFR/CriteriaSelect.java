@@ -26,9 +26,9 @@ import fr.limsi.negotiate.Criterion;
 
 public class CriteriaSelect extends JDialog {
 
-	private JLabel welcomText = new JLabel("All other things being equal,"
-											+ "sort the following values in ascending "
-											+ "order of your preferences");
+	private JLabel welcomText = new JLabel("Toutes choses egales par ailleurs,"
+											+ "classez par ordre croissant de vos preferences "
+											+ "les valeurs suivantes");
 	
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());
 	private JList<String> ranked = new JList<>(new DefaultListModel<>());
@@ -55,12 +55,12 @@ public class CriteriaSelect extends JDialog {
 		welcomText.setBorder(border);
 		welcomText.setAlignmentX(Component.CENTER_ALIGNMENT);
 		//welcomText.setBorder(new LineBorder(Color.BLACK));
-		this.confim = new JButton("Confirm");
+		this.confim = new JButton("Confirmer");
 		this.type = type;  
 		Criterion[] elements = type.getEnumConstants();
 		// Remplir la liste des valeurs
 		for (int i = 0; i < elements.length; i++) {
-			((DefaultListModel<String>) toBeRanked.getModel()).add(i, elements[i].toString());
+			((DefaultListModel<String>) toBeRanked.getModel()).add(i, elements[i].afficher());
 			// ((DefaultListModel<String>) destList.getModel()).add(i, "B " + i);
 		}
 
@@ -71,7 +71,7 @@ public class CriteriaSelect extends JDialog {
 		nameBox.add(welcomText);
 
 		Box sourceBox = Box.createVerticalBox();
-		JLabel toRank = new JLabel("Criteria still to be classified");
+		JLabel toRank = new JLabel("Les criteres a classer");
 		toRank.setAlignmentX(Component.CENTER_ALIGNMENT);
 		toRank.setBorder(border);
 		sourceBox.add(toRank);
@@ -79,7 +79,7 @@ public class CriteriaSelect extends JDialog {
 		sourceBox.add(new JScrollPane(toBeRanked));
 
 		Box destBox = Box.createVerticalBox();
-		JLabel rankedLabel = new JLabel("Your ranking");
+		JLabel rankedLabel = new JLabel("Votre classement");
 		rankedLabel.setBorder(border);
 		rankedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		destBox.add(rankedLabel);
@@ -116,7 +116,7 @@ public class CriteriaSelect extends JDialog {
 	
 	public ListModel<String> getValues(){
 		if(this.getSourceList().getModel().getSize()!=0){
-			JOptionPane.showMessageDialog(this, "Please, rank all the values before confirm", "Message",
+			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs avant de confirmer", "Message",
 			        JOptionPane.WARNING_MESSAGE);
 		}
 

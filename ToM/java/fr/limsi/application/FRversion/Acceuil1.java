@@ -1,12 +1,13 @@
 package fr.limsi.application.FRversion;
 
+
 import java.io.File;
 import java.util.List;
 
-import fr.limsi.application.SaisiePref.dndTest.Acceuil;
-import fr.limsi.negotiate.Negotiation;
-import fr.limsi.negotiate.Option;
-import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
+import javax.print.DocFlavor.URL;
+
+import fr.limsi.application.FRversion.SaisiePref.dndTestFR.PrefAcceuil;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,7 +64,7 @@ public class Acceuil1 extends Application {
 		Scene scene = new Scene(pane, visualBounds.getWidth(), visualBounds.getHeight());
 		homeStage.setScene(scene);
 		homeStage.setFullScreen(true);
-
+		
 		scene.getStylesheets().add
 		(Acceuil1.class.getResource("application2.css").toExternalForm());
 		homeStage.show();
@@ -143,7 +144,7 @@ public class Acceuil1 extends Application {
 				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
 				username+".txt");
 				
-				Acceuil frame = new Acceuil(username, history);
+				PrefAcceuil frame = new PrefAcceuil(username, history);
 				Stage acceuil = new Stage();
 				frame.start(acceuil);
             	homeStage.hide();     

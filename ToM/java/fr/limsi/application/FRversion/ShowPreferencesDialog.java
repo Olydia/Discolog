@@ -3,7 +3,7 @@ package fr.limsi.application.FRversion;
 import java.util.HashMap;
 import java.util.List;
 
-import fr.limsi.negotiate.restaurant.Atmosphere;
+import fr.limsi.negotiate.restaurant.FR.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
@@ -20,10 +20,10 @@ public class ShowPreferencesDialog extends Dialog<String> {
 	public ShowPreferencesDialog(HashMap<String, List<String>> preferencesUser){
 
 		VBox cuisine =createList("Cuisine", preferencesUser.get("Cuisine"));
-		VBox location =createList("Location", preferencesUser.get("Location"));
-		VBox cost =createList("Cost", preferencesUser.get("Cost"));
-		String a = Atmosphere.class.getSimpleName();
-		VBox athm =createList(a, preferencesUser.get(a));
+		VBox location =createList("Localisation", preferencesUser.get("Localisation"));
+		VBox cost =createList("Prix", preferencesUser.get("Prix"));
+		String a = Ambiance.class.getSimpleName();
+		VBox athm =createList("Ambiance", preferencesUser.get(a));
 
 
 		// Create the GridPane
