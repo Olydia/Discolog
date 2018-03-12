@@ -1592,21 +1592,21 @@ public class FenetreBas extends AnchorPane{
 				}
 				if (details[0]=="AskPreference"){
 					if (details[7]=="General"){
-						command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
+						command1="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+".class";
 						command2="null";
 
 					}
 					else{
-						command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+".class";
-						command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
+						command1="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+".class";
+						command2="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3];
 					}
 				}
 				else if (details[0]=="StatePreference"){
-					command1="Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3];
+					command1="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3];
 					command2="Packages.fr.limsi.negotiate.Statement.Satisfiable."+details[6];
 				}
 				else if (details[0]=="Propose"){
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
 				}
 				else if ((details[0]=="Accept")||(details[0]=="Reject")){
 					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
@@ -1619,7 +1619,7 @@ public class FenetreBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
 				}
 
 				else if (details[0]=="RejectState"){
@@ -1633,8 +1633,8 @@ public class FenetreBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-					command2="Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5];
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
+					command2="Packages.fr.limsi.negotiate."+details[1]+"FR"+details[4]+"."+details[5];
 				}
 				else {
 					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
@@ -1647,8 +1647,8 @@ public class FenetreBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[2]+"."+details[3]+")";
-					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+"."+details[4]+"."+details[5]+")";
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
+					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[4]+"."+details[5]+")";
 				}
 				command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
 				if (command2!="") command=command+"/"+command2;

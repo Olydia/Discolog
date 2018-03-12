@@ -670,18 +670,18 @@ public class Negotiation<O extends Option> {
 				return StringToUTF8.convertToUTF8("D'accord, allons " + currentProposal.afficherProp());
 			}
 			else if(getContext().otherProposal(currentProposal)!= null){
-				return StringToUTF8.convertToUTF8("Je pr\u00e9f\u00e8re aller " + 
+				return StringToUTF8.convertToUTF8("Je veux bien aller " + 
 						currentProposal.afficherProp()
 					+ " mais pas "+ getContext().otherProposal(currentProposal).afficherProp());
 			}
 			else {
-				return StringToUTF8.convertToUTF8("Au final, je pr\u00e9f\u00e8re aller "
+				return StringToUTF8.convertToUTF8("Finalement, je pr\u00e9f\u00e8re aller "
 						+ currentProposal.afficherProp());
 			}
 		}
 		else
-			return StringToUTF8.convertToUTF8("Tu avais propos\u00e9 d'aller " + currentProposal.afficherProp()
-			+ " pr\u00e9c\u00e9demment. En fin de compte, \u00e7a me va bien");
+			return StringToUTF8.convertToUTF8("Tu avais propos\u00e9 avant, " + currentProposal.afficherProp()
+			+ " pr\u00e9c\u00e9demment. Finalement, j’aimerai bien y aller");
 	}
 	
 	public String afficherCriterion(String criterionName) {

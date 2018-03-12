@@ -14,7 +14,7 @@ import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
+import fr.limsi.negotiate.restaurant.FR.ModelDePreferencesTotal;;
 
 // TODO:  Further optimizations:
 //
@@ -58,7 +58,7 @@ public class NegotiatorAgent extends Agent {
 
 
 	public static void main (String[] args) {
-		totalOrderedModels model = new totalOrderedModels();
+		ModelDePreferencesTotal model = new ModelDePreferencesTotal();
 		//GenerateMovieModel model = new GenerateMovieModel();
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(

@@ -43,7 +43,8 @@ public enum Localisation implements Criterion {
 	
 	@Override
 	public String afficherLikes() {
-	
+			if(this.equals(CENTRE_DE_PARIS))
+				return "les restaurants " +afficher() ;
 			String fr = "les restaurants " +afficher() + "s";
 			return fr;//StringToUTF8.convertToUTF8(fr);
 
