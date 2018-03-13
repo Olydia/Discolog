@@ -4,7 +4,7 @@ import fr.limsi.negotiate.StringToUTF8;
 
 public enum Prix implements Criterion {
    
-    ABORDABLE, BAS_PRIX, GASTRONOMIQUE;
+    ABORDABLE, BAS_PRIX, CHIC;
 
    public Criterion[] getValues() {
 	// TODO Auto-generated method stub
@@ -25,8 +25,8 @@ public enum Prix implements Criterion {
 	public String afficher(){
 		String fr = "";
 		switch(this) {
-        case GASTRONOMIQUE:
-        	fr = "gastronomique";
+        case CHIC:
+        	fr = "chic";
         break;
         case BAS_PRIX:
         	fr = "bas prix";

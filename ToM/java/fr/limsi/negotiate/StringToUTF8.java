@@ -15,6 +15,10 @@ public class StringToUTF8 {
 	   
 	   public static final String convertToUTF8(String s )
 	   {
+		 
+		   // remplacer "ￃﾩ" par "é"
+
+		   
 		    byte bytes[] = null;
 			try {
 				bytes = s.getBytes("UTF8");

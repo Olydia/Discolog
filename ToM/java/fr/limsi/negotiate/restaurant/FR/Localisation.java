@@ -3,10 +3,8 @@ package fr.limsi.negotiate.restaurant.FR;
 import fr.limsi.negotiate.Criterion;
 
 public enum Localisation implements Criterion {
-	//DOWNTOWN, NORTH_SIDE, EAST_SIDE, WEST_SIDE, SOUTH_SIDE;
 
 	CENTRE_DE_PARIS,GARE_DU_NORD, MONTPARNASSE,  PRES_DE_LA_TOUR_EIFFEL, PERE_LACHAISE ;
-	//CENTER_OF_PARIS,NEAR_EIFFEL_TOWER, PERE_LACHAISE, GARE_DU_NORD , MONTPARNASSE;
 	@Override
 	public Criterion[] getValues() {
 		// TODO Auto-generated method stub
@@ -19,19 +17,19 @@ public enum Localisation implements Criterion {
 		String fr = "";
 		switch(this) {
         case CENTRE_DE_PARIS:
-        	fr += "pr\u00e9s du centre de paris";
+        	fr += "Dans le centre de Paris";
         break;
         case MONTPARNASSE:
-        	fr += "\u00e0 Montparnasse";
+        	fr += "pr\u00e8s de Montparnasse";
         break;
         case GARE_DU_NORD:
-        	fr += "\u00e0 gare du Nord";
+        	fr += "pr\u00e8s de Gare du Nord";
         break;
         case PRES_DE_LA_TOUR_EIFFEL:
         	fr += "pr\u00e8s de la tour Eiffel";
         break;
         case PERE_LACHAISE:
-        	fr += "\u00e0 P\u00e8re lachaise";
+        	fr += "pr\u00e8s du P\u00e8re lachaise";
         break;
         default:
 	        System.out.println("THE VALUE" + this.toString()+ " DOESN'T EXIST");
@@ -53,6 +51,7 @@ public enum Localisation implements Criterion {
 		String input = this.name();
 		input = input.replace("_", " ");
 		return input.toLowerCase();
+		//return this.afficher();
 	}
 
 	@Override

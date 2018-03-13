@@ -36,6 +36,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 // il faut envoyer les prefs de l'agent � l'agent
 // 
@@ -50,17 +52,18 @@ public class PrefAcceuil extends Application{
 				new HashMap<String, List<String>>();
 
 	//private JLabel textAcceuil = new JLabel("Bienvenu");
-	private String text = "Pour les besoins de l'etude, nous vous demandons de bien vouloir "
-			+ "\n pour chaque critere sur lesquels portera la negociation. \n\n"+
+	private String text = "Pour les besoins de l'\u00e9tude, nous vous demandons de bien vouloir renseigner vos pr\u00e9f\u00e9rences"
+			+ "\n pour chaque crit\u00e8re sur lesquels portera la n\u00e9gociation.\n\n"+
 			
-			" Notez que les agents ne connaissent pas vos preferences.\n \n"+
+			"Notez que les agents ne connaissent pas vos pr\u00e9f\u00e9rences.\n \n"+
 
-			"Nous vous presenterons chaque critere (Atmosphere, Prix, Cuisine, Localisation) l'un apres l'autre. \n \n"
+			"Nous vous pr\u00e9senterons chaque crit\u00e8re (Type de cuisine, Prix, Ambiance, Localisation) l'un apr\u00e8s l'autre. \n \n"
 
-			+"Pour chaque critere, vous devrez classer vos preferences par ordre decroissant: "
-			+ "\n mettez en haut de la liste la valeur que vous aimez le plus pour ce critere. \n\n"+
+			+"Pour chaque crit\u00e8re, vous devrez classer vos pr\u00e9f\u00e9rences par ordre d\u00e9croissant:\n"
+			+ " placez en haut de la liste la valeur que vous aimez le plus pour ce crit\u00e8re.\n\n"+
 
-			"Si vous avez des questions, à tout moment pendant le processus, n'hesitez pas à appeler l'experimentateur.";
+			"Si vous avez des questions, \u00e0 tout moment pendant l'exp\u00e9rience, \n" +
+			" n'h\u00e9sitez pas \u00e0 appeler l'exp\u00e9rimentateur.";
 
 
 
@@ -102,20 +105,22 @@ public class PrefAcceuil extends Application{
 		//border.setPrefSize(700, 500);
 
 		Platform.setImplicitExit(false);
-
+		stage.initStyle(StageStyle.UTILITY);
 		
 		Scene scene = new Scene(border, 700, 500);
 		stage.setScene(scene);
 		stage.show();
+		
+		Platform.setImplicitExit(false);
 
-		//this.getContentPane().setBackground(Color.white);
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		        event.consume();
+		    }
+		});
 
 
-
-		// this.setLocation((int) Screen.getPrimary().getBounds().getMinX(), this.getY());
-		//	setMinimumSize(new Dimension(400, 300));
-		//showOnScreen(2, this);
-		//center(this);
 		cost = new CriteriaSelect(Prix.class);
 		cuisine = new CriteriaSelect(Cuisine.class);
 		athmos = new CriteriaSelect(Ambiance.class);

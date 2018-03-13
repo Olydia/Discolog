@@ -1,6 +1,7 @@
 package fr.limsi.application.FRversion;
 
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
@@ -79,9 +80,17 @@ public class FenetreHaut extends Application {
 		
 		chatConsole console = new chatConsole(ta);
 		
-		PrintStream ps = new PrintStream(console, true);
-		System.setOut(ps);
-		System.setErr(ps);
+		PrintStream ps;
+		try {
+			ps = new PrintStream(console, true, "UTF-8");
+			
+			System.setOut(ps);
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//System.setErr(ps);
 		
 		flow.getChildren().add(ta);
 		Scene scene = new Scene(sp, visualBounds.getWidth(), visualBounds.getHeight());

@@ -11,8 +11,7 @@ import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
+
 
 
 public class ToMNegotiatorProba extends NegotiatorAgent{
@@ -95,7 +94,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 		
 	//	System.out.println("-------------------------------------------------------------------------------------");
-		if ( utterance != null )  System.out.println(utterance.format() + "\n");
+		//if ( utterance != null )  System.out.println(utterance.format() + "\n");
 		//System.out.println(otherModel.getHypotheses());
 
 

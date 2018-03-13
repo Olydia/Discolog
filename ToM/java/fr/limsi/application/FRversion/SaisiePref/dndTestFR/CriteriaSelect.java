@@ -26,8 +26,8 @@ import fr.limsi.negotiate.Criterion;
 
 public class CriteriaSelect extends JDialog {
 
-	private JLabel welcomText = new JLabel("Toutes choses egales par ailleurs,"
-											+ "classez par ordre croissant de vos preferences "
+	private JLabel welcomText = new JLabel("Toutes choses \u00e9gales par ailleurs,"
+											+ "classez par ordre croissant de vos pr\u00e9ferences "
 											+ "les valeurs suivantes");
 	
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());
@@ -71,7 +71,7 @@ public class CriteriaSelect extends JDialog {
 		nameBox.add(welcomText);
 
 		Box sourceBox = Box.createVerticalBox();
-		JLabel toRank = new JLabel("Les criteres a classer");
+		JLabel toRank = new JLabel("Les crit\u00e8res \u00e0 classer");
 		toRank.setAlignmentX(Component.CENTER_ALIGNMENT);
 		toRank.setBorder(border);
 		sourceBox.add(toRank);
@@ -108,7 +108,10 @@ public class CriteriaSelect extends JDialog {
 		ListTransferHandler h = new ListTransferHandler(toBeRanked);
 		toBeRanked.setTransferHandler(h);
 		ranked.setTransferHandler(h);
-        this.setMinimumSize(new Dimension(300, 350));
+        
+		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		
+		this.setMinimumSize(new Dimension(300, 350));
 
 		this.pack();
 
@@ -116,7 +119,7 @@ public class CriteriaSelect extends JDialog {
 	
 	public ListModel<String> getValues(){
 		if(this.getSourceList().getModel().getSize()!=0){
-			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs avant de confirmer", "Message",
+			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs avant de confirmer", "Warning",
 			        JOptionPane.WARNING_MESSAGE);
 		}
 

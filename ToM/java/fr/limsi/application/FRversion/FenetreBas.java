@@ -275,10 +275,10 @@ public class FenetreBas extends AnchorPane{
 		Button stopButton = new Button("Mes preferences");
 
 		Button proposeOptionButton = new Button(situation);
-		Button proposeValueButton = new Button("critere");
+		Button proposeValueButton = new Button("crit\u00e8re");
 
 		Button counterproposeOptionButton = new Button(situation);
-		Button counterproposeValueButton = new Button("critere");
+		Button counterproposeValueButton = new Button("crit\u00e8re");
 
 		Button acceptProposeButton = new Button("Accept et Propose");
 
@@ -297,7 +297,7 @@ public class FenetreBas extends AnchorPane{
 		Button dontLikeButton = new Button("Je n'aime pas ...");
 
 		Button optionButton = new Button(situation);
-		Button criterionButton = new Button("critere");
+		Button criterionButton = new Button("crit\u00e8re");
 
 		Button cG1Button = new Button();
 		Button cG2Button = new Button();
@@ -1586,10 +1586,6 @@ public class FenetreBas extends AnchorPane{
 				details[3]=details[3].toUpperCase();
 				details[5]=details[5].replace(" ","_");
 				details[5]=details[5].toUpperCase();
-				for(String elem : details){
-					System.out.println(elem);
-
-				}
 				if (details[0]=="AskPreference"){
 					if (details[7]=="General"){
 						command1="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+".class";

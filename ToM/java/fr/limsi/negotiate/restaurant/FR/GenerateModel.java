@@ -62,7 +62,7 @@ public class GenerateModel {
 
 
 		Self_Ci<Prix> d1_cost = new Self_Ci<Prix>(Prix.class);
-		d1_cost.addPreference(Prix.GASTRONOMIQUE, Prix.ABORDABLE);
+		d1_cost.addPreference(Prix.CHIC, Prix.ABORDABLE);
 		d1_cost.addPreference(Prix.ABORDABLE, Prix.BAS_PRIX);
 		CriterionNegotiation<Prix> cost = new CriterionNegotiation<>(d1_cost);
 
@@ -99,7 +99,7 @@ public class GenerateModel {
 
 		Self_Ci<Prix> d1_cost = new Self_Ci<Prix>(Prix.class);
 		d1_cost.addPreference(Prix.BAS_PRIX, Prix.ABORDABLE);
-		d1_cost.addPreference(Prix.ABORDABLE, Prix.GASTRONOMIQUE);
+		d1_cost.addPreference(Prix.ABORDABLE, Prix.CHIC);
 		CriterionNegotiation<Prix> cost = new CriterionNegotiation<>(d1_cost);
 
 		@SuppressWarnings("unchecked")
@@ -139,7 +139,7 @@ public class GenerateModel {
 
 		Self_Ci<Prix> d2_cost = new Self_Ci<Prix>(Prix.class);
 		d2_cost.addPreference(Prix.BAS_PRIX, Prix.ABORDABLE);
-		d2_cost.addPreference(Prix.ABORDABLE, Prix.GASTRONOMIQUE);
+		d2_cost.addPreference(Prix.ABORDABLE, Prix.CHIC);
 		CriterionNegotiation<Prix> cost = new CriterionNegotiation<>(d2_cost);
 
 		@SuppressWarnings("unchecked")
