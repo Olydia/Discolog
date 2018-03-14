@@ -160,6 +160,52 @@ public class PowHypothesis{
 		return this.satisfiability.get(c);
 
 	}
+	
+	public float scoreReject(Criterion criterion, List<CriterionProposal> rejected, 
+			double self, boolean isFirstMove){
+
+
+		Class<? extends Criterion> type = criterion.getClass();
+		// get the number of acceptable values in the model
+		int acc = getAcceptable(type, self);
+		int sat = getAcceptable(type, pow);
+
+		int m = acc - sat;
+		
+		// m = 0 means that Sat = Acc no concessions only sat values are acceptables
+		// update models as state
+
+		if(m == 0 && isFirstMove){
+			// check if its the first utterance
+			revise(new Statement<Criterion>(criterion, Satisfiable.TRUE));
+			
+			float result =  ( (float) hypothesis.size()/ initModels);
+			//System.out.println( result + " il reste " + hypothesis.size() + " sur un total de " + initModels) ;
+			return result;
+		}
+
+		int totalScore = 0;
+		int n = type.getEnumConstants().length - sat;
+		
+		// ensemble de valeurs non acceptable a ce moment de la négociation
+		int rejet = type.getEnumConstants().length - (acc+ rejected.size());
+		//perfectScore dans le cas ou il n'ya pas de valeur deja acceptée
+		double perfectScore =  Combination.combination(m, n);
+
+		for(Hypothesis h : this.hypothesis){
+
+			CriterionHypothesis current = h.getCriterionSat(type);
+			totalScore += ((float)current.scoreAcc(criterion, m, rejected));
+
+		}
+		
+		
+		// il ne manque que diviser sur la taille init de toutes les valeurs
+		float ratioAcc = (float) ((float) totalScore/perfectScore);
+	//	System.out.println("-------------------  score "+ totalScore + " perfect "+ perfectScore + " init " + initModels + " ");
+		return  (float) (ratioAcc/initModels);
+	
+	}
 	// Call from ToMnegotiatorProba
 
 	public float scoreAcc(Criterion criterion, List<CriterionProposal> accepted, 

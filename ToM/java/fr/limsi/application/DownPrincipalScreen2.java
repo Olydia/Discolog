@@ -235,7 +235,6 @@ public class DownPrincipalScreen2 extends AnchorPane{
 				interaction.load("models/NegotiateFR.xml");
 				((ToMNegotiatorProba) interaction.getSystem()).setRelation(relation);
 
-
 				interaction.setGuess(false);
 
 				interaction.start(true); // give user first turn

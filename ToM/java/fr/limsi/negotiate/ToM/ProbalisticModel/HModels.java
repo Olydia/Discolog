@@ -38,9 +38,9 @@ public class HModels {
 	public double updateReject(List<PowHypothesis> models, 
 			Proposal rejected, double previousPow){
 		if(rejected instanceof CriterionProposal){
-			Criterion elem = (Criterion) rejected.getValue();
-			return reviseHypothese(models, new Statement<Criterion>
-			(elem, Satisfiable.FALSE), previousPow);
+//			Criterion elem = (Criterion) rejected.getValue();
+//			return reviseHypothese(models, new Statement<Criterion>
+//			(elem, Satisfiable.FALSE), previousPow);
 		}
 		// Creer une fonction 
 		return previousPow; 
