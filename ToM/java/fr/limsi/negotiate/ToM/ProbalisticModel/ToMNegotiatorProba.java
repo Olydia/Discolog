@@ -132,7 +132,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 			}
 
-		//	System.out.println( this.getName() +" predicted the pow of the other to : " + other);
+			System.out.println( this.getName() +" predicted the pow of the other to : " + other);
 
 		}
 			

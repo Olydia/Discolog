@@ -177,8 +177,8 @@ public class PowHypothesis{
 
 		if(m == 0 && isFirstMove){
 			// check if its the first utterance
-			revise(new Statement<Criterion>(criterion, Satisfiable.TRUE));
 			
+			revise(new Statement<Criterion>(criterion, Satisfiable.FALSE));
 			float result =  ( (float) hypothesis.size()/ initModels);
 			//System.out.println( result + " il reste " + hypothesis.size() + " sur un total de " + initModels) ;
 			return result;
@@ -190,12 +190,12 @@ public class PowHypothesis{
 		// ensemble de valeurs non acceptable a ce moment de la négociation
 		int rejet = type.getEnumConstants().length - (acc+ rejected.size());
 		//perfectScore dans le cas ou il n'ya pas de valeur deja acceptée
-		double perfectScore =  Combination.combination(m, n);
+		double perfectScore =  Combination.combination(rejet, n);
 
 		for(Hypothesis h : this.hypothesis){
 
 			CriterionHypothesis current = h.getCriterionSat(type);
-			totalScore += ((float)current.scoreAcc(criterion, m, rejected));
+			totalScore += ((float)current.scoreRject(criterion, m, rejected));
 
 		}
 		
@@ -206,6 +206,7 @@ public class PowHypothesis{
 		return  (float) (ratioAcc/initModels);
 	
 	}
+	
 	// Call from ToMnegotiatorProba
 
 	public float scoreAcc(Criterion criterion, List<CriterionProposal> accepted, 
@@ -231,6 +232,7 @@ public class PowHypothesis{
 		}
 
 		int totalScore = 0;
+		// n = Ci - S 
 		int n = type.getEnumConstants().length - sat;
 
 		double perfectScore =  Combination.combination(m, n);
