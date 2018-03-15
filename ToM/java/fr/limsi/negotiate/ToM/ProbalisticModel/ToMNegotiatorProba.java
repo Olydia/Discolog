@@ -250,9 +250,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
 				getProposalsWithStatus(Status.ACCEPTED);
 
-		//		if(accepted.contains(c))
-		//			accepted.remove(c);
-
 		for(PowHypothesis model: models){
 
 			double self = this.getNegotiation().computeSelf(model.getPow());
@@ -279,6 +276,30 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	}
 
 
+	public Map <Double,Float> getRejectScore(List<PowHypothesis> models,
+			CriterionProposal c){
+
+		Map <Double,Float> acc = new HashMap<Double,Float>();
+
+		Class<? extends Criterion> cType =c.getValue().getClass();
+
+		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
+				getProposalsWithStatus(Status.REJECTED);
+
+		for(PowHypothesis model: models){
+
+			double self = this.getNegotiation().computeSelf(model.getPow());
+			
+			acc.put(model.getPow(),
+					model.scoreAcc(c.getValue(),accepted, self, 
+							getNegotiation().getContext().isFirstMove(true)));
+		}
+
+		//System.out.println("Values of acceptability " + acc);
+		return acc;
+	}
+	
+	
 	public float getProposePropotion(){
 		List<NegotiationUtterance> otherUtt = this.getNegotiation().getContext().getHistory(true);
 		int proposals = 0;
