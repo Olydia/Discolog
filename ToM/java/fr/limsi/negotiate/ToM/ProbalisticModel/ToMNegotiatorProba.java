@@ -93,8 +93,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 		
-	//	System.out.println("-------------------------------------------------------------------------------------");
-		//if ( utterance != null )  System.out.println(utterance.format() + "\n");
+		System.out.println("-------------------------------------------------------------------------------------");
+		if ( utterance != null )  System.out.println(utterance.format() + "\n");
 		//System.out.println(otherModel.getHypotheses());
 
 
