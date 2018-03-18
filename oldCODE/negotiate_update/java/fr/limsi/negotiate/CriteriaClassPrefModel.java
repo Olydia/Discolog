@@ -110,7 +110,8 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 		return pref;
 	}
 
-	/** IsImportantCriterion (criterion, dom, minProposals, limitPropo) calculates in function of the relation of dominance whether a criterion 
+	/** IsImportantCriterion (criterion, dom, minProposals, limitPropo) calculates in 
+	 * function of the relation of dominance whether a criterion 
 	 * is important to choose an option
 	 * The calcul depends on the rank of the criterion
 	 * nbTurns in function of the number of turns spoken in the negotiation
@@ -119,7 +120,8 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	 * @param limitPropos: the number of proposals that activates the ignorance of criteria
 	 * @param nbProposals: the number of opened proposals which has not been accepted yet
 	 */
-	public boolean IsImportantCriterion (Class<? extends Criterion> criterion, int dom,  int nbProposals){
+	public boolean IsImportantCriterion 
+	(Class<? extends Criterion> criterion, int dom,  int nbProposals){
 		int minProposals = 1; 
 		int limitProps=1;
 		List <Class<? extends Criterion>>criteria = sortCriteria();
@@ -135,7 +137,8 @@ public class CriteriaClassPrefModel<O extends Option> extends PreferenceModel<Cl
 	public List<Class<? extends Criterion>> importantCriteria(int dom, int nbProposals){
 		ArrayList<Class<? extends Criterion>> importantC= new ArrayList<Class<? extends Criterion>>();
 		@SuppressWarnings("unchecked")
-		ArrayList<Class<? extends Criterion>> criteria = (ArrayList<Class<? extends Criterion>>) sortCriteria().clone();
+		ArrayList<Class<? extends Criterion>> criteria = 
+		(ArrayList<Class<? extends Criterion>>) sortCriteria().clone();
 		Iterator<Class<? extends Criterion>> it = criteria.iterator();
 		while(it.hasNext()){
 			Class<? extends Criterion> elm = it.next();

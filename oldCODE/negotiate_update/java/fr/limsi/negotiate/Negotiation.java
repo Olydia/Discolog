@@ -267,7 +267,8 @@ public class Negotiation<O extends Option> {
 	}
 	public boolean isAcceptable (Proposal proposal){
 		int spokenTurns = getProposalsWithoutStatus(Status.ACCEPTED).size();
-		List<Class<?extends Criterion>> importantCriteria = this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
+		List<Class<?extends Criterion>> importantCriteria = 
+				this.criteriaPreferences.importantCriteria(getDom(), spokenTurns);
 		if (proposal instanceof CriterionProposal) {
 			Criterion criterion = (Criterion) proposal.getValue();
 			if(!importantCriteria.contains(criterion.getClass()))
