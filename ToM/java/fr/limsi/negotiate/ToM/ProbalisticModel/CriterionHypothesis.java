@@ -92,7 +92,7 @@ public class CriterionHypothesis{
 		
 		int subset = m - getT(accepted);
 		int r = rejected.size();
-		int total = getDomainSize() - (satValues.size() + getT(accepted)+ r);
+		int total = getDomainSize() - (satValues.size() + r);
 		double combi = Combination.combination(subset, total);
 		return combi;
 	}

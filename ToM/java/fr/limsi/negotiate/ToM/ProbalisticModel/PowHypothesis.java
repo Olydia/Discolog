@@ -161,7 +161,7 @@ public class PowHypothesis{
 
 	}
 	
-	public float scoreReject(Criterion criterion, List<CriterionProposal> rejected, 
+	public float scoreReject(Criterion criterion, List<CriterionProposal> rejected, List<CriterionProposal> accepted, 
 			double self, boolean isFirstMove){
 
 
@@ -177,25 +177,23 @@ public class PowHypothesis{
 
 		if(m == 0 && isFirstMove){
 			// check if its the first utterance
-			
 			revise(new Statement<Criterion>(criterion, Satisfiable.FALSE));
+			
 			float result =  ( (float) hypothesis.size()/ initModels);
 			//System.out.println( result + " il reste " + hypothesis.size() + " sur un total de " + initModels) ;
 			return result;
 		}
 
 		int totalScore = 0;
+		// n = Ci - S 
 		int n = type.getEnumConstants().length - sat;
-		
-		// ensemble de valeurs non acceptable a ce moment de la négociation
-		int rejet = type.getEnumConstants().length - (acc+ rejected.size());
-		//perfectScore dans le cas ou il n'ya pas de valeur deja acceptée
-		double perfectScore =  Combination.combination(rejet, n);
+
+		double perfectScore =  Combination.combination(m, n);
 
 		for(Hypothesis h : this.hypothesis){
 
 			CriterionHypothesis current = h.getCriterionSat(type);
-			totalScore += ((float)current.scoreRject(criterion, m, rejected));
+			totalScore += ((float)current.scoreRject(criterion, m, rejected, accepted));
 
 		}
 		
