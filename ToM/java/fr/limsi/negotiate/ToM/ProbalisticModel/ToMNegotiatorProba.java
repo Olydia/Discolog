@@ -190,17 +190,18 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			return this.otherModel.reviseHypothese(models, c, previousPow);
 
 		}else if(u instanceof Reject){
-			return this.otherModel.updateReject(models, ((Reject) u).getProposal(), previousPow);
-
+			//return this.otherModel.updateReject(models, ((Reject) u).getProposal(), previousPow);
+			return this.updateProposal(models,((Reject) u).getProposal(), false, previousPow);
 
 
 		}else if (u instanceof Accept || u instanceof Propose){
-			return updateAccept(models,((ProposalUtterance) u).getProposal(), previousPow);
+			return updateProposal(models,((ProposalUtterance) u).getProposal(), true, previousPow);
 
 
 		}else if (u instanceof AcceptPropose){
 			// Il manque le cas du propose 
-			return updateAccept(models, ((AcceptPropose) u).getAccepted(), previousPow);
+			updateProposal(models, ((AcceptPropose) u).getAccepted(),true, previousPow);
+			return updateProposal(models, ((AcceptPropose) u).getProposal() ,true, previousPow);
 
 
 		}else if(u instanceof RejectState){
@@ -208,17 +209,20 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			Proposal reject = ((RejectState) u).getProposal();
 			Criterion justify = ((RejectState) u).getJustify();
 			if(reject.getValue().equals(justify))
-				return this.otherModel.updateReject(models, reject, previousPow);
+				return this.updateProposal(models,reject, false, previousPow);
+						//this.otherModel.updateReject(models, reject, previousPow);
 
 			else{
-				this.otherModel.updateReject(models, reject, previousPow);
+				//this.otherModel.updateReject(models, reject, previousPow);
+				this.updateProposal(models,reject, false, previousPow);
 				return this.otherModel.reviseHypothese(new Statement<Criterion>
 				(justify, Satisfiable.FALSE), previousPow);
 			}
 
 		}else if(u instanceof RejectPropose){
-			this.otherModel.updateReject(models, ((RejectPropose) u).getReject(), previousPow);
-			return this.updateAccept(models,((RejectPropose) u).getProposal(), previousPow);
+			//this.otherModel.updateReject(models, ((RejectPropose) u).getReject(), previousPow);
+			this.updateProposal(models,((RejectPropose) u).getProposal(), false, previousPow);
+			return this.updateProposal(models,((RejectPropose) u).getProposal(), true, previousPow);
 		
 		}else if(u instanceof AskPreference){
 			Map<Double, Float> values =this.otherModel.getHypothesesSize(models); 
@@ -234,14 +238,15 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 	// Accept Update
 
-	public Map <Double,Float> getAcceptability(CriterionProposal c){
-
-		return getAcceptability(otherModel.getHypotheses(), c);
-	}
-
-
-	public Map <Double,Float> getAcceptability(List<PowHypothesis> models,
-			CriterionProposal c){
+	/**
+	 * 
+	 * @param models
+	 * @param c: criterion that is proposed
+	 * @param accept true if it is Accept or Propose, False if Reject
+	 * @return the score of the acceptability affected to each hypothesis
+	 */
+	public Map <Double,Float> scoreProposal(List<PowHypothesis> models,
+			CriterionProposal c, boolean accept){
 
 		Map <Double,Float> acc = new HashMap<Double,Float>();
 
@@ -250,6 +255,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
 				getProposalsWithStatus(Status.ACCEPTED);
 
+		List<CriterionProposal> rejected = this.getNegotiation().getValueNegotiation(cType).
+				getProposalsWithStatus(Status.REJECTED);
+		
 		for(PowHypothesis model: models){
 
 			double self = this.getNegotiation().computeSelf(model.getPow());
@@ -264,11 +272,12 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	}
 	
 	
-	public double updateAccept( List<PowHypothesis> models, Proposal accepted, double previousPow){
+	public double updateProposal( List<PowHypothesis> models, Proposal accepted, 
+			boolean accept, double previousPow){
 
 		if(accepted instanceof CriterionProposal){
 
-			Map <Double,Float> acc = getAcceptability(models, (CriterionProposal) accepted);
+			Map <Double,Float> acc = scoreProposal(models, (CriterionProposal) accepted, accept);
 			return this.otherModel.reviseOtherPow(acc, previousPow);
 		}
 
@@ -276,30 +285,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	}
 
 
-	public Map <Double,Float> getRejectScore(List<PowHypothesis> models,
-			CriterionProposal c){
-
-		Map <Double,Float> acc = new HashMap<Double,Float>();
-
-		Class<? extends Criterion> cType =c.getValue().getClass();
-
-		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
-				getProposalsWithStatus(Status.REJECTED);
-
-		for(PowHypothesis model: models){
-
-			double self = this.getNegotiation().computeSelf(model.getPow());
-			
-			acc.put(model.getPow(),
-					model.scoreAcc(c.getValue(),accepted, self, 
-							getNegotiation().getContext().isFirstMove(true)));
-		}
-
-		//System.out.println("Values of acceptability " + acc);
-		return acc;
-	}
-	
-	
 	public float getProposePropotion(){
 		List<NegotiationUtterance> otherUtt = this.getNegotiation().getContext().getHistory(true);
 		int proposals = 0;

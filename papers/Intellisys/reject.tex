@@ -1,0 +1,160 @@
+
+	\documentclass[conference, letterpaper]{article}
+	\usepackage{booktabs}
+	\usepackage[rflt]{floatflt}
+	\usepackage{frame,caption,subcaption,calc}
+	\usepackage{mathrsfs}
+	\usepackage{array}
+	\usepackage{amsmath,amssymb}
+	\usepackage{color}
+	\usepackage{setspace}
+	\usepackage[francais]{babel}
+	\usepackage[utf8]{inputenc}
+	\usepackage{fancyhdr}
+%	\usepackage[caption=false,font=footnotesize]{subfig}
+	\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+	% correct bad hyphenation here
+	\hyphenation{op-tical net-works semi-conduc-tor}
+	
+	%\usepackage{subcaption}
+
+	
+	
+	%
+	
+
+	
+	\begin{document}
+	
+	%
+	% paper title
+	% can use linebreaks \\ within to get better formatting as desired
+	\title{Guess my power: A computational model to simulate the behavior of a partner in the context of collaborative negotiation}
+	
+	
+	% author names and affiliations
+	% use a multiple column layout for up to three different
+	% affiliations
+	\author{\IEEEauthorblockN{Lydia OULDOUALI}
+	\IEEEauthorblockA{LIMSI-CNRS, UPR 3251, Orsay, France\\
+	Universit\'e Paris-Sud, Orsay, France \\
+	Email: ouldouali@limsi.fr}
+	\and
+	\IEEEauthorblockN{Nicolas Sabouret}
+	\IEEEauthorblockA{LIMSI-CNRS, UPR 3251, Orsay, France\\
+	Universit\'e Paris-Sud, Orsay, France \\
+	Email: nicolas.sabouret@limsi.fr}
+	\and
+	\IEEEauthorblockN{Charles Rich}
+	\IEEEauthorblockA{	Worcester Polytechnic Institute\\ Worcester, Massachusetts, USA\\
+	Email:rich@wpi.edu}}
+	
+	% conference papers do not typically use \thanks and this command
+	% is locked out in conference mode. If really needed, such as for
+	% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+	% after \documentclass
+	
+	% for over three affiliations, or if they all won't fit within the width
+	% of the page, use this alternative format:
+	% 
+	%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+	%Homer Simpson\IEEEauthorrefmark{2},
+	%James Kirk\IEEEauthorrefmark{3}, 
+	%Montgomery Scott\IEEEauthorrefmark{3} and
+	%Eldon Tyrell\IEEEauthorrefmark{4}}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+	%Georgia Institute of Technology,
+	%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+	%Email: homer@thesimpsons.com}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+	%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+	
+	
+	
+	
+	% use for special paper notices
+	%\IEEEspecialpapernotice{(Invited Paper)}
+	
+	
+	
+	
+	% make the title area
+
+	
+		
+	
+	\subsection*{Simulation of the other's preferences}
+	
+
+	\subsection{Accept or Proposal}
+		When the interlocutor accepts (\emph{Accept(p)}) or proposes a proposal (\emph{Propose(p)}), means that the value is acceptable $p \in Ac(t)$. 
+		The agent has to calculate for each $h_i \in H_{pow}$ the score of acceptability attributed to this value. 
+		
+		The set of acceptable values $Ac(t)$ depends on the value of $self(t)$, knowing that $self(t)$ decreases over time when the negotiation is not converging. Our goal is to capture the behaviors of concessions over time. Concretely, this means that the set of acceptable values $Ac(t)$ grows during the negotiation, and new values become acceptable noted $M(t)$. 
+		
+		Thus, for each hypothesis on power $h_i$, we associate a value $self_i(t)$ that represents the level of concessions at the current time. Using this value, and the set of satisfiable values, the agent can compute the number of acceptable values $|Ac(t)_i|$, as presented in \ref{sec:acc}, and the number of the values which became acceptable due to concessions $|M(t)_i|$.
+		
+		Therefore, we propose to adapt the calculation of $acceptabilty$ only with partial knowledge available. For a hypothesis of power $h_i$, for each hypothesis on preferences $S_i \in M_h(h_i)$, and the list of accepted values during the negotiation $A$, the score that a value $p \in C_i$ is acceptable, is computed as follows:
+		
+		\begin{equation}
+		Acc(p, h_i) = C_{|C_i|-(|S_i| + k)}^{|M_i(t)| - k}
+		\end{equation}
+		$k = |K| $ is the number of elements in the set $K=A \cap \overline S_i$, the set of accepted values which are not satisfiable. The score of acceptability is the number of possible sets $M_i(t)$ that are compatible with the value $p\in C_i$ (i.e. the value that was proposed or accepted by the interlocutor) and the hypothesis $S_i$.
+		%Using this function, the agent can compute the $acceptability$ of each value of $cuisine$ for the the set $S_i$ relied to $h_4$. 
+		
+
+		In addition, we normalize this score of acceptability in order to have a coherent comparison between the different hypotheses (the number of hypotheses for each value of $pow$ can differ). Thus, given a hypothesis on power $h_i$, he score of acceptability is normalized by taking into account the ideal score of acceptability. We can compute the "best" score of acceptability a priori:
+		
+		$$I_{pow} = C_{|C_i|-|S_i|}^{|M_i(t)|}$$
+		
+		
+		The final value of acceptability normalized is then:
+		\begin{equation}
+		score(h_i, t)= \left( \begin{array}{c}  \frac{1}{I_{pow}} \cdot \sum_{S_i \in M_h(h_i) } acc(p, h_i) 
+		\end{array}\right) \frac{1}{| M_h(h_i)|}
+		\end{equation}
+		
+			%	------------------------------------------------------------------------------------------------------------------------------
+
+	
+
+		 \subsection{Reject}
+			Les utilisateurs humains sont imprévisibles dans leur prise de décision. Par exemple, ils peuvent avoir des raisons outres que leur préférences pour accepter ou refuser une proposition. 
+			Par conséquent, durant une négociation l'agent peut rencontrer le cas suivant:			
+					\begin{enumerate}
+					\item	Agent: Do you like \emph{x}?	
+					\item	User : I like \emph{x}
+					\item	Agent: Let's go to \emph{x}
+					\item	User : Let's rather choose something else. 
+					\end{enumerate}
+					
+			 
+			En utilisant l'algorithme de théorie d'esprit afin de mettre à jour les hypothèses sur le comportements de pouvoir de l'utilisateur comme suit:
+
+					\begin{enumerate}
+						\item	Agent: Do you like \emph{x}?	
+						\item	User : I like \emph{x} : Suppression de toutes les hypothèses $h_i / x \notin S_i$ tel que \emph{x} n'est pas satisfiable dans l'hypothèse. 
+						\item	Agent: Let's go to \emph{x}
+						\item	User : Let's rather choose something else: Si une valeur est rejetée, est interprétée comme $x \notin Ac_i$ et donc $x \notin S_i$.
+						Par conséquent, il faut supprimer toutes les hypothèses où \emph{x} est satisfiable. 
+					\end{enumerate}
+			Après le 4ème acte de dialogue, toute les hypothèses sont donc supprimées. Pour autant, la valeur rejetée est satisfiable. 
+			Afin d'éviter ce type de comportement imprévisible, nous avons décider de réviser l'hypothèse forte qui affirme qu'une valeur rejetée est forcément pas satisfiable, et donc de réviser les hypothèses en conséquence. 
+		
+			En outre, avec le comportement adaptatif de l'agent généré à partir des prédictions de la théorie de l'esprit, la valeur de pouvoir peut croître de  manière à générer les comportements expliqués plus haut. En effet, si due à une adaptation de pouvoir qui rendrait $ Self \geq Pow_{init}$, une valeur satisfiable peut être rejetée. Néanmoins, ce cas n'a pas été rencontré dans le cas pratique. 
+			
+			Nous proposons de mettre à jours les hypothèses après réception d'un \emph{Reject}.
+			Notons,$R$ l'ensemble des valeurs rejetées dans la négociation. Nous proposons de calculer le score de chaque hypothèse en mettant à jour le score d'acceptabilité (voir section acceptabilité) attribué à chaque hypothèse $h_i$ et soustraire l'ensemble des valeurs rejetées.
+			Par conséquent, le score d'acceptabilité est mis à jour comme suit:
+			
+			\begin{equation}
+			Acc(p, h_i) = C_{|C_i|-(|S_i| + k + r)}^{|M_i(t)| - k}
+			\end{equation}
+			sachant que $r = |R|$.
+			
+
+	\end{document}
+	
+	

@@ -87,12 +87,12 @@ public class CriterionHypothesis{
 	}
 	
 
-	public double scoreRject(Criterion criterion, int m, List<CriterionProposal> rejected){
+	public double scoreRject(Criterion criterion, int m, List<CriterionProposal> rejected,
+			List<CriterionProposal> accepted){
 		
-		// Otherwise computes the score of acceptability
-		int acc  = satValues.size() + m;
-		int subset = getDomainSize()-(acc + rejected.size());
-		int total = getDomainSize()-(satValues.size() + rejected.size());
+		int subset = m - getT(accepted);
+		int r = rejected.size();
+		int total = getDomainSize() - (satValues.size() + getT(accepted)+ r);
 		double combi = Combination.combination(subset, total);
 		return combi;
 	}
