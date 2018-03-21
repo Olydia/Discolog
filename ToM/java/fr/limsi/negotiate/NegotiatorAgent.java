@@ -63,10 +63,10 @@ public class NegotiatorAgent extends Agent {
 		//ToyModel model = new ToyModel();
 		Dual dual = new Dual(
 				//new NegotiatorAgent("Agent1", model.model1()), 
-				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.NONADAPT), 
+				new ToMNegotiatorProba("Agent1", model.model1(), ADAPT.MIMIC), 
 
 				//new NegotiatorAgent("Agent2", model.model3()), 
-				new ToMNegotiatorProba("Agent2", model.model2(), ADAPT.NONADAPT), 
+				new ToMNegotiatorProba("Agent2", model.model2(), ADAPT.MIMIC), 
 
 				false);
 
@@ -78,7 +78,7 @@ public class NegotiatorAgent extends Agent {
 
 		//((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
 		
-		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(SUBMISSIVE);
+		((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(DOMINANT);
 		
 
 		dual.start();

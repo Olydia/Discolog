@@ -45,7 +45,7 @@
 	
 	\maketitle
 	\begin{abstract}
-		Cet article se situe dans le contexte de la conception d'agents conversationnels capables d'exprimer des comportements sociaux. Il présente un modèle informatique de sélection d'énoncés qui permet d'exprimer différents niveaux de pouvoir (au sens de la relation sociale de dominance) dans un dialogue de négociation collaborative avec un interlocuteur humain. Nous avons extraits de la littérature en psychologie sociale trois principes de négociation en rapport avec la notion de pouvoir social. Nous présentons le modèle informatique qui permet de rendre visible ces principes à travers la stratégie de dialogue de l'agent. Nous présentons ensuite évaluation de ce modèle dans le contexte d'une interaction humain-agent. Nos résultats montrent que les participants perçoivent correctement les différences dans les stratégies de l'agent en fonction de la relation de pouvoir qu'il cherche à d'exprimer.
+		Cet article se situe dans le contexte de la conception d'agents conversationnels capables d'exprimer des comportements sociaux. Il présente un modèle informatique de sélection d'énoncés qui permet d'exprimer différents niveaux de pouvoir (au sens de la relation sociale de dominance) dans un dialogue de négociation collaborative avec un interlocuteur humain. Nous avons extrait de la littérature en psychologie sociale trois principes de négociation en rapport avec la notion de pouvoir social. Nous présentons le modèle informatique qui permet de rendre visibles ces principes à travers la stratégie de dialogue de l'agent. Nous présentons ensuite l'évaluation de ce modèle dans le contexte d'une interaction humain-agent. Nos résultats montrent que les participants perçoivent correctement les différences dans les stratégies de l'agent en fonction de la relation de pouvoir qu'il cherche à exprimer.
 	\end{abstract}
 
 	\keywords{Dialogue de négociation collaborative, relation de pouvoir, stratégie de négociation}
@@ -53,18 +53,18 @@
 
 
 	\section{Introduction}
-	Les agents conversationnels connaissent un essor important  dans plusieurs domaines d'applications: systèmes de tuteur intelligents \cite{graesser2001intelligent} pour enfant, compagnon pour personnes âgées isolées \cite{bickmore2005s}, etc.
-	Dans le contexte de ces interactions, l'agent et l'utilisateur humain  sont amenés à collaborer afin de réaliser des tâches communes ou atteindre des buts communs. Par exemple, un agent tuteur et un élève, qui collaborent pour	résoudre des exercices, comparent leur connaissances respectives et
+	Les agents conversationnels connaissent un essor important  dans plusieurs domaines d'application: systèmes de tuteur intelligents \cite{graesser2001intelligent} pour enfant, compagnon pour personnes âgées isolées \cite{bickmore2005s}, etc.
+	Dans le contexte de ces interactions, l'agent et l'utilisateur humain  sont amenés à collaborer afin de réaliser des tâches communes ou atteindre des buts communs. Par exemple, un agent tuteur et un élève, qui collaborent pour	résoudre des exercices, comparent leurs connaissances respectives et
 	discutent des solutions possibles. Une telle confrontation offre un enseignement personnalisé à l'élève. 
 	
-	La collaboration entre interlocuteurs pour la satisfaction de buts implique donc la confrontation des préférences et expertises de chacun des partis, ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} À la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les intérêts des deux participants au lieu de maximiser ses propres gains.
+	La collaboration entre interlocuteurs pour la satisfaction de buts implique donc la confrontation des préférences et expertises de chacun des partis, ce qui les conduit à négocier sur la manière de satisfaire le but en prenant en compte les préférences des deux partis. Ce type de négociation est appelée \emph{négociation collaborative.} À la différence de la négociation compétitive, la négociation collaborative fait l'hypothèse que chaque participant est motivé par le but de trouver le meilleur compromis satisfaisant les intérêts des deux participants au lieu de maximiser ses propres gains \cite{sidner1994artificial,chu1995response}.
 	
 	Notre but est de modéliser un agent conversationnel capable d'avoir des négociations collaboratives crédibles avec un utilisateur humain.
-	Pour ce faire, il est nécessaire de comprendre les comportements adoptés durant les négociations humains/humain. En effet,  Broekens \cite{broekens2010affective} présente la négociation comme un processus multidimensionnel qui implique une interaction sociale, des affects ainsi que des préférences et des opinions. La compréhension de l'aspect social est donc crucial pour l'étude du processus de négociation.
-	De plus, la littérature en psychologie sociale a déjà démontré que la \emph{relation de pouvoir} a un effet direct sur les stratégies qu'utilisent les négociateurs.
+	Pour ce faire, il est nécessaire de comprendre les comportements adoptés par des humains. Broekens \cite{broekens2010affective} présente la négociation comme un processus multidimensionnel qui implique une interaction sociale, des affects ainsi que des préférences et des opinions. La compréhension de l'aspect social est donc crucial pour l'étude du processus de négociation.
+	De plus, la littérature en psychologie sociale a déjà démontré que la \emph{relation de pouvoir} a un effet direct sur les stratégies qu'utilisent les négociateurs \cite{fiske1993controlling, de1995impact,de2004influence}.
 	Il est par conséquent important pour un agent conversationnel qui négocie avec un utilisateur humain, de prendre en compte sa perception de la relation de pouvoir pour construire sa stratégie de négociation.
 	
-	Dans cette optique nous proposons dans ce papier, un agent conversationnel capable de mener une négociation collaborative avec un utilisateur humain. De plus, il est capable de déployer différentes stratégies de négociation en se basant sur la relation de pouvoir qu'il cherche à exprimer. Le plan de l'article se présente comme suit. La section 2 présente un état de l'art concis sur l'impact de la relation de pouvoir sur la négociation aussi bien en psychologie sociale qu'en informatique affective.  La section 3 présente les éléments de notre modèle de négociation collaborative. À partir d'un ensemble d'actes de dialogues et de préférences, nous proposons un modèle général de décision basé sur trois principes de négociation tirés de la psychologie sociale. Nous présentons en section 4 l'évaluation de notre modèle de négociation dans des interactions avec des utilisateurs humains qui montrent la pertinence des comportements implémentés. 
+	Dans cette optique nous proposons dans cet article un agent conversationnel capable de mener une négociation collaborative avec un utilisateur humain. De plus, il est capable de déployer différentes stratégies de négociation en se basant sur la relation de pouvoir qu'il cherche à exprimer. Le plan de l'article se présente comme suit. La section 2 présente un état de l'art concis sur l'impact de la relation de pouvoir sur la négociation aussi bien en psychologie sociale qu'en informatique affective.  La section 3 présente les éléments de notre modèle de négociation collaborative. À partir d'un ensemble d'actes de dialogues et de préférences, nous proposons un modèle général de décision basé sur trois principes de négociation tirés de la psychologie sociale. Nous présentons en section 4 l'évaluation de notre modèle de négociation dans des interactions avec des utilisateurs humains qui montrent la pertinence des comportements implémentés. 
 	
 	\section{État de l'art}
 		La notion de pouvoir social a été largement étudiée dans les domaines de la communication interpersonnelle et de la psychologie \cite{kecskes2013research}. Le pouvoir peut être défini comme la capacité à produire les effets voulus et à influencer le comportement de l'autre personne dans la conversation \cite {dunbar2005perceptions}. Dans le contexte de la communication et de la négociation, le pouvoir est une variable dyadique qui intervient au cours du dialogue.
@@ -74,19 +74,20 @@
 		\label{sec:domDialogue}
 	
 		Au cours d'un dialogue, le pouvoir peut se manifester à travers des comportements verbaux et non verbaux.
-		Au niveau non verbal, un large éventail de comportements a été associé à la relation de pouvoir dont les mouvements kinesthésiques (expression faciale, mouvements corporels et gestes) et vocale (durée de la parole, intensité de la parole, contrôle de la voix et tonalité) \cite {burgoonnonverbal}. Sur la base de ce ces travaux, plusieurs agents conversationnels ont été développés avec la capacité d'exprimer un pouvoir social par le biais de comportements non verbaux, tels que le regard \cite {lance2008relation}, mouvements corporels \cite {mignault2003many} ou inclinaison de la tête  \cite {gebhard2014exploring} en relation avec la perception de pouvoir.
+		Au niveau non verbal, un large éventail de comportements a été associé à la relation de pouvoir dont les mouvements kinesthésiques (expression faciale, mouvements corporels et gestes) et vocaux (durée de la parole, intensité de la parole, contrôle de la voix et tonalité) \cite {burgoonnonverbal}. Sur la base de ces travaux, plusieurs agents conversationnels ont été développés avec la capacité d'exprimer un pouvoir social par le biais de comportements non verbaux, tels que le regard \cite {lance2008relation}, mouvements corporels \cite {mignault2003many} ou inclinaison de la tête  \cite {gebhard2014exploring} en relation avec la perception de pouvoir.
 	
 	
-		Cependant, le pouvoir est également exprimé par des comportements verbaux. Un nombre considérable de recherches en sciences sociales et en communication ont documenté les effets du pouvoir sur les comportements utilisés par les négociateurs et donc sur les résultats de la négociation. De Dreu \cite {de1995impact} a démontré que les négociateurs avec un pouvoir élevé ont des aspirations plus grandes, ont plus d'exigences et concèdent moins. Galinsky \cite{galinsky2003power} affirme que le pouvoir renforce l'orientation des actions: les négociateurs  avec un pouvoir élevé contrôlent le flux de la négociation. En outre, la un pouvoir élevé augmente la direction de travaux avec des comportements axé sur la satisfaction des objectifs. Giebels \cite {giebels2000interdependence} montre que cela conduit les négociateurs avec un pouvoir élevé à se retrouver avec la part la plus grande du gâteau.
+		Cependant, le pouvoir est également exprimé par des comportements verbaux. Un nombre considérable de recherches en sciences sociales et en communication ont documenté les effets du pouvoir sur les comportements utilisés par les négociateurs et donc sur les résultats de la négociation. De Dreu \cite {de1995impact} a démontré que les négociateurs avec un pouvoir élevé ont des aspirations plus grandes, ont plus d'exigences et concèdent moins. Galinsky \cite{galinsky2003power} affirme que le pouvoir renforce l'orientation des actions: les négociateurs  avec un pouvoir élevé contrôlent le flux de la négociation. En outre, un pouvoir élevé se focalisent sur des comportements de direction de travaux avec des comportements axés sur la satisfaction des objectifs. Giebels \cite {giebels2000interdependence} montre que cela conduit les négociateurs avec un pouvoir élevé à se retrouver avec la part la plus grande du gâteau.
 		
-		En outre, le pouvoir affecte la manière dont les négociateurs collectent des informations sur leurs partenaires \cite {de2004influence}. Les négociateurs de faible pouvoir aspirent plus à développer une compréhension précise de leur partenaire et de ses comportements, chose qui les amènent à poser plus de questions  de \emph {diagnostic} que de questions \emph{directives}.
+		En outre, le pouvoir affecte la manière dont les négociateurs collectent des informations sur leurs partenaires \cite {de2004influence}. Les négociateurs de faible pouvoir aspirent plus à développer une compréhension précise de leur partenaire et de ses comportements, chose qui les amène à poser plus de questions  de \emph {diagnostic} que de questions \emph{directives}.
 		
 		Il a également été montré que les négociateurs de grande puissance sont égocentriques et ont tendance à ne pas prêter attention aux préférences des négociateurs avec un pouvoir plus faible \cite{fiske1993controlling, de1995impact}.
 		
-		Notre objectif est de développer un modèle de dialogue pour des agents virtuels qui prends en compte ces propriétés liées au pouvoir social. Nous voulons rendre visibles \emph {les stratégies} déployées durant la négociation en fonction du pouvoir. Afin de mettre en œuvre ces différents comportements, nous avons identifié trois principes liés à la relation de pouvoir et leur impact sur la stratégie de négociation.
+		\subsection{Principes de comportements de pouvoir dans la négociation}
+		Notre objectif est de développer un modèle de dialogue pour des agents virtuels qui prend en compte ses propriétés liées au pouvoir social. Nous voulons rendre visibles \emph {les stratégies} déployées durant la négociation en fonction du pouvoir. Afin de mettre en œuvre ces différents comportements, nous avons identifié trois principes liés à la relation de pouvoir et leur impact sur la stratégie de négociation.
 		
 			\begin{enumerate}
-				\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs avec un pouvoir élevé affichent un niveau d'exigence plus important que les négociateurs avec un pouvoir plus faible. De plus, les exigences des négociateurs de faible pouvoir diminuent avec le temps il a tendance à faire des concessions plus importantes comparés a des négociateurs avec un pouvoir plus grand \cite{de1995impact}.
+				\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs avec un pouvoir élevé affichent un niveau d'exigence plus important que les négociateurs avec un pouvoir plus faible. De plus, les exigences des négociateurs de faible pouvoir diminuent avec le temps et ont tendance à faire des concessions plus importantes comparés à des négociateurs avec un pouvoir plus grand \cite{de1995impact}.
 				
 				\item \textbf{Soi \emph{vs} autrui:} Les négociateurs de faible pouvoir prennent en compte les préférences de l'autre dans la négociation, alors que les négociateurs avec un pouvoir plus grand sont égocentriques et ne s'intéressent qu'à satisfaire leurs propres préférences. \cite{fiske1993controlling,de1995impact}
 				
@@ -98,21 +99,22 @@
 			Dans le contexte de la négociation collaborative, nous devons combiner ces principes dans le but de trouver le meilleur compromis qui satisfasse les deux négociateurs.
 			
 		\subsection{Travaux similaires dans la littérature}	
-		Seuls quelques chercheurs ont étudié l'expression du pouvoir dans le comportement verbal d'un agent conversationnel. \cite {bee2010bossy} a développé un agent qui exprime le pouvoir social à travers le regard et les caractéristiques linguistiques. Ils ont démontré que les traits de personnalité linguistiques influencent la perception du pouvoir. Cependant, ce travail ne considère pas comment le pouvoir affecte les stratégies de négociation dans le dialogue. Plus récemment, \cite{broekens2010affective, de2015humans} a étudié la confiance, l'expression des émotions comme de la colère et du bonheur comme dimensions de stratégies de négociations d'un agent virtuel. Cependant, cette recherche se concentre davantage sur l'aspect de la négociation que sur l'expression du pouvoir social. Dans notre travail, nous voulons étudier l'expression du pouvoir à travers la stratégie de dialogue, qui n'a pas été considérée par des travaux antérieurs.
+		Seuls quelques chercheurs ont étudié l'expression du pouvoir dans le comportement verbal d'un agent conversationnel. \cite {bee2010bossy} a développé un agent qui exprime le pouvoir social à travers le regard et les caractéristiques linguistiques. Ils ont démontré que les traits de personnalité linguistiques influencent la perception du pouvoir. Cependant, ce travail ne considère pas comment le pouvoir affecte les stratégies de négociation dans le dialogue. Plus récemment, \cite{broekens2010affective, de2015humans} ont étudié la confiance, l'expression des émotions comme de la colère et du bonheur comme dimensions de stratégies de négociations d'un agent virtuel. Cependant, cette recherche se concentre davantage sur l'aspect de la négociation que sur l'expression du pouvoir social. Dans notre travail, nous voulons étudier l'expression du pouvoir à travers la stratégie de dialogue, qui n'a pas été considérée par des travaux antérieurs.
 
-		Dans un contexte différent, \cite {nazari2015opponent} a étudié comment la communication des préférences dans une négociation avec un humain peut avoir un impact sur les résultats de la négociation. Ils considèrent des situations dans lesquelles les négociateurs peuvent utiliser la tromperie pour obtenir un avantage déloyal et cacher leurs intentions. Nous ne considérons pas ce cas dans notre travail. Nos agents ne sont pas seulement collaboratifs, mais ils donnent également des informations correctes sur leurs préférences et ils n'essaient pas de cacher des informations. Des travaux antérieurs tels que \cite {swartout2006toward} ont montré que, même en négociation collaborative, il n'est pas toujours possible ni recommandé de donner des informations sur toutes les préférences.
+		Dans un contexte différent, \cite {nazari2015opponent} a étudié comment la communication des préférences dans une négociation avec un humain peut avoir un impact sur les résultats de la négociation. Ils considèrent des situations dans lesquelles les négociateurs peuvent utiliser la tromperie pour obtenir un avantage déloyal et cacher leurs intentions. Nous ne considérons pas ce cas dans notre travail. Nos agents ne sont pas seulement collaboratifs, mais ils donnent également des informations correctes sur leurs préférences et ils n'essaient pas de cacher des informations. 
+		%Des travaux antérieurs tels que \cite {swartout2006toward} ont montré que, même en négociation collaborative, il n'est pas toujours possible ni recommandé de donner des informations sur toutes les préférences.
 
 
 
 	\section{Modèle de négociation basé sur la relation de pouvoir}
 		
-		Nous présentons dans cette section notre modèle de dialogue pour un agent virtuel dans le contexte de négociation collaborative. 
+		Nous présentons dans cette section notre modèle de dialogue pour un agent virtuel dans le contexte d'une négociation collaborative. 
 		Premièrement, nous présenterons le domaine de négociation à savoir la définition du sujet de conversation ainsi que les préférences sur ses valeurs. 
 		Ensuite, nous présenterons le modèle de communication utilisé.
-		Finalement, nous présenterons notre algorithme de décision qui prend en compte les principes de comportements de pouvoirs (voir section 2.1) .
+		Finalement, nous présenterons notre algorithme de décision qui prend en compte les principes de comportements de pouvoirs (voir section 2.1).
 		
 		\subsection{le domaine de la négociation}
-			Le but de chaque processus de négociation est de trouver une \textbf{option} parmi un ensemble d'option $\mathcal{O}$. Le choix d'une option repose sur les critères qui caractérisent l'option.  Nous considérons l'ensemble $\mathcal{C}$ composé de $n$ critères, chacun disposant respectivement d'un domaine de valeurs  $C_1 \ldots C_n$. Nous pouvons donc représenter $\mathcal{O}$ comme le produit cartésien de  $C_1\times\ldots\times C_n$ et chaque option $o \in \mathcal{O}$ comme un tuple $(v_1,\ldots,v_n)$ en faisant l'hypothèse que toutes les options d'un sujet donné sont \textit{toutes connues}.
+			Le but de chaque processus de négociation est de trouver une \textbf{option} parmi un ensemble d'option $\mathcal{O}$. Le choix d'une option repose sur les critères qui caractérisent l'option.  Nous considérons l'ensemble $\mathcal{C}$ composé de $n$ critères, chacun disposant respectivement d'un domaine de valeurs  $C_1 \ldots C_n$. Nous pouvons donc représenter $\mathcal{O}$ comme le produit cartésien de  $C_1\times\ldots\times C_n$ et chaque option $o \in \mathcal{O}$ comme un tuple $(v_1,\ldots,v_n)$ en formulant l'hypothèse que toutes les options d'un sujet donné sont \textit{toutes connues}.
 	
 			Par exemple, pour un dialogue a propos des restaurants, les critères peuvent être le type de cuisine et le prix. Une option pourrait donc être représenté par le couple suivant: $(française, abordable)$
 		
@@ -137,14 +139,14 @@
 			 
 		\subsection{Le modèle de dialogue}
 		\label {sec:com}
-		Les négociateurs communiquent pendant la négociation en utilisant des \emph {actes de dialogue}. Chaque acte de dialogue possède un ensemble spécifique d'arguments et est associé à une expression en langage naturel (NL). Nous utilisons cinq types d'actes de dialogues, basés sur le travail de Sidner \cite {sidner1994artificial} et deux actes supplémentaires pour conclure la négociation. la table \ref {table:utt} résume les différents actes de dialogues  génériques. 
+		Les négociateurs communiquent pendant la négociation en utilisant des \emph {actes de dialogue}. Chaque acte de dialogue possède un ensemble spécifique d'arguments et est associé à une expression en langage naturel (NL). Nous utilisons cinq types d'actes de dialogues, basés sur le travail de Sidner \cite {sidner1994artificial} et deux actes supplémentaires pour conclure la négociation. la table \ref {table:utt} résume les différents actes de dialogue  génériques. 
 		
 		Comme les expressions dépendent du domaine d'application, seule la génération NL de ces énoncés doit être spécialisée. Dans cet article, nous illustrerons ce modèle par une négociation collaborative sur les restaurants. La valeur / $ v $ / dans la table \ref {table:utt} fait référence à ce format  en NL pour exprimer une valeur.
 		
 		Chaque type d'acte prend comme paramètre soit une valeur de critère $v \in C_i$, une option $o \in \mathcal{O}$, ou un critère $i \in \mathcal{C}$. 
-		Nous distinguons trois groupes d'actes. Premièrement, les actes informatifs (\textit{AskValue/AskCriterion} et \textit{StateValue}) qui sont utilisés pour échanger des informations sur les préférences des interlocuteurs.  Nous avons remarqué que dans les interactions humain-humain, les interlocuteurs expriment implicitement leur préférences en spécifiant ce qu'ils aiment ou pas ( \emph{e.x.}\textit{I like Chinese more than French}) au lieu de faire une comparaison binaire
+		Nous distinguons trois groupes d'actes. Premièrement, les actes informatifs (\textit{AskValue/AskCriterion} et \textit{StateValue}) qui sont utilisés pour échanger des informations sur les préférences des interlocuteurs.  Nous avons remarqué que dans les interactions humain-humain, les interlocuteurs expriment implicitement leur préférences en spécifiant ce qu'ils aiment ou pas (\emph{e.x.}\textit{ I like Chinese restaurants}) au lieu de faire une comparaison binaire (\emph{e.x.}\textit{ I like Chinese more than French}).
 		
-		Deuxièmement, les actes de négociation (\textit{Propose}, \textit{Accept} and \textit{Reject}) permettent à l'agent de participer au processus négociation soit exprimant des propositions ou en accepter/ rejeter. Une proposition peut concerner soit une valeur de critère (``Let's go to a Chinese restaurant'') ou bien une option (``Let's go to \emph{Chez Francis} restaurant'').
+		Deuxièmement, les actes de négociation (\textit{Propose}, \textit{Accept} and \textit{Reject}) permettent à l'agent de participer au processus négociation soit  en exprimant des propositions ou en accepter/ rejeter. Une proposition peut concerner soit une valeur de critère (``Let's go to a Chinese restaurant'') ou bien une option (``Let's go to \emph{Chez Francis} restaurant'').
 		
 		Troisièmement, les actes de fermeture de négociation (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) sont utilisés pour clore un dialogue. 
 		Des exemples de dialogues utilisant ces actes sont présentés dans la section \ref{sec:eval}.
@@ -158,7 +160,7 @@
 						\hline
 						\textbf{Utterance type}  &\textbf{ NL generation} & \textbf{Postcondition}\\
 						\hline
-						StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
+						StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline locuteur:  \newline $v\in A_i$ is satisfiable, $v\in U_i$ sinon \\
 						\hline
 						AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
 						
@@ -193,7 +195,7 @@
 			
 			
 			\subsection{Modèle des préférences de l'opposant}
-				En utilisant les ensemble $A_i$ et $U_i$ qui représentent les goûts de l'interlocuteur, l'agent peut calculer la satisfaction d'une valeur $v\in C_i$ pour l'interlocuteur en utilisant la formule suivante: 
+				En utilisant les ensembles $A_i$ et $U_i$ qui représentent les goûts de l'interlocuteur, l'agent peut calculer la satisfaction d'une valeur $v\in C_i$ pour l'interlocuteur en utilisant la formule suivante: 
 				
 				Notez que certaines valeurs peuvent rester inconnues: dans une négociation collaborative, ces valeurs peuvent être considérées comme potentiellement satisfaisantes. Par conséquent, nous leur donnons une valeur arbitraire fixée à 0.5.
 					\begin{equation}
@@ -209,7 +211,7 @@
 				sat_{other}(o, A, U) = \frac{ \sum_{i}^{n} sat_{other}(v_i, A_i, U_i) } {n}
 				\end{equation}
 			
-			La satisfaction représente l'attente qu'a un agent a propos du comportement de son interlocuteur pour soit accepter ou rejeter une proposition. Il sera utilisé pour sélectionner la proposition la plus tolérable à faire dans la négociation. Le concept de tolérable est présenté dans le section suivante.	
+			La satisfaction représente l'attente qu'a un agent à propos du comportement de son interlocuteur pour soit accepter ou rejeter une proposition. Il sera utilisé pour sélectionner la proposition la plus tolérable à faire dans la négociation. Le concept de tolérable est présenté dans la section suivante.	
 			
 			
 			\subsection{Processus de décision basé sur le pouvoir dans la négociation}
@@ -251,7 +253,7 @@
 		
 		Cette fonction est généralisable à toutes les options,  $o \in O$: $acc(pow,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(pow,t))$.
 		
-		\subsection{Soi \emph{vs} autrui}
+		\subsubsection{Soi \emph{vs} autrui}
 	
 		Selon notre second principe, les négociateurs avec un pouvoir élevé donnent plus de poids à leur propre satisfaction. Pour implémenter ce principe dans le contexte d'une négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \textit{tolérable} en considérant la satisfaction de l'agent et de son partenaire.
 		
@@ -262,7 +264,7 @@
 			\end{equation}
 		
 		
-		Nous calculons la tolérance d'une valeur donnée $ v \in V_i (pow, t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
+		Nous calculons la tolérance d'une valeur donnée $ v \in V_i (pow, t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son autosatisfaction:
 			\begin{equation}
 			\begin{split}
 			tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
@@ -306,7 +308,7 @@
 		
 		Notez qu'un agent avec un pouvoir élevé se concentrera sur le maintien de la négociation en choisissant  des \emph{actes de négociation} (ProposeValue / ProposeOption, RejectValue / RejectOption, AcceptValue / AcceptOption) comme présenté dans les lignes (4 à 10). L'agent priorise un processus de négociation plutôt que d'échanger des informations sur les préférences. En effet, comme présenté à la ligne 3, après les tours $ \alpha $ consacrés au partage d'informations, l'agent fera plutôt des propositions que d'exprimer ses préférences. Un exemple est présenté dans la figure \ref {fig:ex-dialogue}.
 		
-		\begin{figure}
+		\begin{figure}[h]
 			\fbox{\begin{minipage}{.95\textwidth}
 					{\scriptsize\ttfamily
 						\begin{addmargin}[1em]{2em}% 1em left, 2em right
@@ -403,17 +405,23 @@
 		
 			\section{Évaluation}
 			\label{sec:eval}
-			Nous avons mené une étude afin d'évaluer notre modèle de négociation collaborative dans le contexte d'interactions avec des utilisateurs humains. Nous visons à analyser la perception de l'utilisateur des comportement d'adopte l'agent au cours de la négociation.
+			Nous avons mené une étude afin d'évaluer notre modèle de négociation collaborative dans le contexte d'interactions avec des utilisateurs humains. Nous visons à analyser la perception de l'utilisateur des comportements qu'adopte l'agent au cours de la négociation.
 			
 			\subsection{Design expérimental}
 			
-			Nous considérons le scénario social qui consiste à choisir un restaurants. Notre objectif était de définir un sujet social qui ne requiert pas d'expertise spécifique et pour lequel les participants ont des préférences personnelles.
+			Nous considérons le scénario social qui consiste à choisir un restaurants. Notre objectif est de définir un sujet social qui ne requiert pas d'expertise spécifique et pour lequel les participants ont des préférences personnelles.
 			
-			Les critères sélectionnés pour choisir un restaurant étaient \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
+			Les critères sélectionnés pour choisir un restaurant sont \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
 				
 			Nous avons défini deux agents Bob et Arthur qui jouent des comportements différents. Bob a été conçu pour générer un comportement dominant (un pouvoir élevé) (\textit {i.e} pow (Bob) = 0.8) et Arthur pour jouer le rôle d'un négociateur avec un pouvoir faible (\textit {i.e} pow (Arthur) = 0.4).
-			Les participants ont interagi avec les deux agents via une interface graphique (GUI) que nous avons conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons précédemment définis voir (section \ref {sec:com}).
+			Les participants ont interagi avec les deux agents via une interface graphique (GUI) présenté dans la figure \ref{fig:ihm} conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons précédemment définis voir (section \ref {sec:com}).
 
+						\begin{figure*}[t]
+							\centering
+							\fbox{\includegraphics [width=.7\textwidth, height = 0.27\textheight]{graphs/ihm1.png}}
+							\caption{GUI d'interaction avec l'agent}
+							\label{fig:ihm}
+						\end{figure*}
 						
 			Nous avons défini deux conditions expérimentales dans le but d'éviter de biaiser la perception des participants. Dans la première condition, les participants ont d'abord interagi avec Bob, l'agent dont le pouvoir est élevé. Ensuite, une interaction avec l'agent de pouvoir faible Arthur.
 			A l'opposé, la deuxième condition, les participants ont d'abord interagi  avec Arthur puis avec Bob.
@@ -437,7 +445,7 @@
 			\subsection{Évaluation Agent/Agent}
 				Dans le but de valider la perception des comportements de pouvoir généré par notre modèle de négociation, nous avons effectué une première évaluation agent/agent où les participants avaient le rôle de juge externe pour évaluer le comportement des agents lors de leur négociation.
 				
-				Nous avons manipulé deux paramètres de simulations à savoir les valeurs de pouvoir des deux agents ainsi sur l'ensemble de leurs préférences. Ces derniers ont un effet direct sur le rendu des négociations. Au final, nous avons obtenus quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues), un exemple de dialogue est présenté dans la figure \ref{fig:ex-dialogue}. De plus, les hypothèses formulées sont identiques a celles présentées dans la section précédente. 
+				Nous avons manipulé deux paramètres de simulations à savoir les valeurs de pouvoir des deux agents ainsi sur l'ensemble de leurs préférences. Ces derniers ont un effet direct sur le rendu des négociations. Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues), un exemple de dialogue est présenté dans la figure \ref{fig:ex-dialogue}. De plus, les hypothèses formulées sont identiques à celles présentées dans la section précédente. 
 						\begin{table}[h]
 							\centering
 							\begin{tabular}{ |l|c|c|l| }
@@ -456,7 +464,7 @@
 							\caption{Conditions expérimentales pour la génération des dialogues.} 
 							\label{table:conditions}
 						\end{table}
-				Nous avons conduit une étude inter-sujet dans la quelle chaque participant évalue uniquement un dialogue. Les résultats obtenus  suite au test de Wilcoxon confirment fortement nos hypothèses. En effet, les participants ont observé une différence significative entre le comportement de l'agent avec un pouvoir élevé et l'agent dont le pouvoir est faible. L'agent avec un pouvoir élevé a été perçu comme égocentrique, ayant un haut niveau d'exigences et faisant moins de concessions que l'agent avec un pouvoir faible. Par opposition, l'agent avec un pouvoir faible a été perçu comme tenant compte des préférences de son interlocuteur dans sa prise de décision et manquait de prise d'initiative. Par conséquence, les comportements de pouvoir ont été correctement perçu dans la totalité des dialogues.
+				Nous avons conduit une étude inter-sujet dans laquelle chaque participant évalue uniquement un dialogue. Les résultats obtenus  suite au test de Wilcoxon confirment fortement nos hypothèses. En effet, les participants ont observé une différence significative entre le comportement de l'agent avec un pouvoir élevé et l'agent dont le pouvoir est faible. L'agent avec un pouvoir élevé a été perçu comme égocentrique, ayant un haut niveau d'exigences et faisant moins de concessions que l'agent avec un pouvoir faible. Par opposition, l'agent avec un pouvoir faible a été perçu comme tenant compte des préférences de son interlocuteur dans sa prise de décision et manquait de prise d'initiative. Par conséquence, les comportements de pouvoir ont été correctement perçu dans la totalité des dialogues. Cette étude est expliquée en détails dans un précédent travail \cite{ouali2017computational}.
 				
 				Dans la suite de cet article, nous chercherons à valider la perception de ces comportements dans le contexte d'une interaction humain agent. 
 				
@@ -467,31 +475,33 @@
 			Nous avons mené une étude inter-sujets où chaque participant a interagi avec les deux agents, Bob et Arthur.
 			
 			Au départ, le participant est invité à signer un formulaire de consentement éclairé, et  la tâche de négociation lui est expliquée. 
-			Suite à cela, la  session d'entraînement commence, le participant reçoit des instructions sur l'utilisation de l'interface graphique pour interagir avec l'agent, l'expérimentateur lance la session et quitte la salle jusqu'à ce que l'entraînement soit terminé et que le participant se soit familiarisé avec l'interface.
-			 Après la formation, l'expérience commence et le participant négocie avec les deux agents. À la fin de la négociation, le participant est invité à remplir un questionnaire sur son expérience.
+			Suite à cela, la  session d'entraînement commence, le participant reçoit des instructions sur l'utilisation de l'interface graphique pour interagir avec l'agent, l'expérimentateur lance la session et quitte la salle jusqu'à ce que l'entraînement soit terminé et que le participant se soit familiarisé avec l'interface. Le participant peur rappeler l'expérimentateur en cas de problèmes d'incompréhensions. 
+			 
+			 Après la formation, l'expérimentateur lance l'expérience et quitte la pièce. 
+			 Le participant négocie avec les deux agents. À la fin de la négociation, le participant est invité à remplir un questionnaire sur son expérience.
 			
-			Nous avons conçu un questionnaire permettant aux participants de rapporter leurs perception des comportements de l'agent lors des processus de négociation. Pour chaque hypothèse, nous avons défini deux questions avec des formulations différentes afin de ne pas biaiser les réponses des participants. En outre, nous avons défini des questions de test pour vérifier la validité des réponses des participants. Les réponses sont données sur l'échelle de Likert.
+			Nous avons conçu un questionnaire permettant aux participants de rapporter leurs perceptions des comportements de l'agent lors des processus de négociation. Pour chaque hypothèse, nous avons défini deux questions avec des formulations différentes afin de ne pas biaiser les réponses des participants. En outre, nous avons défini des questions de tests pour vérifier la validité des réponses des participants. Les réponses sont données sur l'échelle de Likert.
 			
 			Au total, 40 participants ont participé à l'expérience. Ils ont été assignés au hasard aux conditions expérimentales.
 			
 			\subsection{Résultats}
 				Nous avons effectué une étude statistique afin d'analyser la perception des comportements des agents au cours de l'interaction. Les résultats sont présentés dans la figure \ref{res}.
 				
-				Les participants ont majoritairement perçu que l'agent bob a tendance a mener la négociation (\emph {M = 4.40, SD = 0.9}). Ils ont également noté que Bob était exigeant (\emph {M = 3,59, SD = 1,3}) un peu égocentrique(\emph {M = 2,92, SD = 1,3}). En outre, nous avons analysé la perception des concessions faites par bob durant la négociation, les participants ont perçu que Bob faisait peu de concessions (\emph {M = 3.29, SD = 1.24}).
+				Les participants ont majoritairement perçu que l'agent bob a tendance à mener la négociation (\emph {M = 4.40, SD = 0.9}). Ils ont également noté que Bob était exigeant (\emph {M = 3,59, SD = 1,3}) un peu égocentrique(\emph {M = 2,92, SD = 1,3}). En outre, nous avons analysé la perception des concessions faites par bob durant la négociation, les participants ont perçu que Bob faisait peu de concessions (\emph {M = 3.29, SD = 1.24}).
 				
-				Au contraire, les participants ont perçu le comportement d'Arthur comme suit: En moyenne, Arthur ne cherche pas à mener pas le dialogue (\emph {M = 1.76, SD = 1.09}). Il a un faible niveau d'exigence (\emph {M = 2.32, SD = 1.3}) et a tendance à faire des concessions (\emph {M = 3.39, SD = 1.16}). De plus, Arthur a été perçu comme prenant en compte les préférences des participants et n'est pas égoïste (\emph {M = 2.7, SD = 1.13}).
+				Au contraire, les participants ont perçu le comportement d'Arthur comme suit: En moyenne, Arthur ne cherche pas à mener le dialogue (\emph {M = 1.76, SD = 1.09}). Il a un faible niveau d'exigence (\emph {M = 2.32, SD = 1.3}) et a tendance à faire des concessions (\emph {M = 3.39, SD = 1.16}). De plus, Arthur a été perçu comme prenant en compte les préférences des participants et n'est pas égoïste (\emph {M = 2.7, SD = 1.13}).
 				
 				La deuxième étape de notre analyse concerne l'évaluation des comportements des deux agents. Nous avons comparé le comportement de Bob et d'Arthur en utilisant un test non paramétrique de \emph{ Wilcoxon pour deux échantillons appariés}. Notre première hypothèse prédit que l'agent avec un pouvoir élevé Bob serait perçu comme plus égocentrique que l'agent Arthur dont le pouvoir est faible. Notre analyse a confirmé notre prédiction; les participants ont perçu que Bob était plus égocentrique qu'Arthur (\emph {Z = -3,2, p = 0,001, d = -0,3}). Dans la même veine, notre seconde hypothèse a également été confirmée. Bob était perçu comme étant plus exigeant qu'Arthur avec un petit effet de taille (\emph {Z = -3.6, p <0.001, d = -0.3}).
 				
-				La troisième hypothèse stipulait qu'Arthur allait exprimer des concessions plus importantes que Bob. Cependant, l'analyse de nos données a confirmé une tendance dans la différence de concessions (\emph {Z = -3.2, p = 0.001, d = -0.05}).
+				La troisième hypothèse stipulait qu'Arthur exprimerait des concessions plus importantes que Bob. L'analyse de nos données n'a pas confirmé cette hypothèse mais elle montre une tendance dans la différence de concessions (\emph {Z = -3.2, p = 0.05, d = -0.05}).
 				
 				La dernière hypothèse a été confirmée. Le test Wilcoxon a révélé que l'agent Bob était perçu comme significativement plus meneur dans dialogue qu'Arthur, avec une taille d'effet moyenne (\emph {Z = -3.2, p = 0.001, d = -0.6}).
 				
 			
 				\begin{figure}[t]
 					\centering
-					\includegraphics[width=\textwidth,height=0.3\textheight]{graphs/res.pdf}
-					\caption{Résultats de notre analyse}
+					\includegraphics[width=\textwidth,height=0.27\textheight]{graphs/res.pdf}
+					\caption{Perception des comportements des agents \textit{A} et \textit{B} pour chaque hypothèse}
 					\label{res}
 				\end{figure}
 			
@@ -499,8 +509,8 @@
 			
 			Les résultats de notre expérience appuient trois des quatre hypothèses. Les participants ont perçu Bob l'agent avec un pouvoir élevé comme meneur dans la négociation, centré sur lui-même et plus exigeant par rapport à Arthur, l'agent avec un faible pouvoir. Ces résultats sont conformes avec ceux présenté dans les travaux de Dedreu, Van Kleef et \emph{al} \cite {de1995impact, de2004influence, de2004influence} sur l'impact du pouvoir sur les stratégies de négociation.
 			
-			Cependant, notre troisième hypothèse n'a pas été confirmée car les participants n'ont pas perçu de différence significative dans le niveau de concession exprimé par Bob et Arthur. Ce résultat peut s'expliquer par l'impact des préférences sur le résultat de la négociation. Les préférences affectent la stratégie suivie par l'agent. Dans le cas où l'agent et l'utilisateur partagent des préférences communes, la négociation convergera rapidement et aucune confrontation des préférences ne sera expérimentée pendant la négociation. Ceci est une limitation de notre expérience. Nous n'avons pas recueilli de connaissances préalables sur les préférences des participants. Par conséquent, nous n'avons pas été en mesure de mesurer la distance entre les préférences de l'agent et l'utilisateur et ainsi analyser l'impact des préférences sur le niveau des concessions.
-			Nous n'avons pas été en mesure d'analyser les réponses à l'hypothèse 3 pour indiquer si les concessions étaient uniquement influencées par les préférences ou la relation de pouvoir.
+			Cependant, la troisième hypothèse n'a pas été totalement confirmée car les participants n'ont pas perçu de différence significative dans le niveau de concession exprimé par Bob et Arthur. Ce résultat s'explique par l'impact des préférences sur le résultat de la négociation. Les préférences affectent la stratégie suivie par l'agent. Dans le cas où l'agent et l'utilisateur partagent des préférences communes, la négociation convergera rapidement et aucune confrontation des préférences ne sera expérimentée pendant la négociation. Ceci représente une limitation de notre expérience. Nous n'avons pas recueilli de connaissances préalables sur les préférences des participants. Par conséquent, nous n'avons pas été en mesure de mesurer la distance entre les préférences de l'agent et l'utilisateur et ainsi analyser l'impact des préférences sur le niveau des concessions.
+			Nous n'avons pas été en mesure d'analyser les réponses à l'hypothèse 3 pour indiquer si les concessions étaient uniquement influencées par les préférences ou la relation de pouvoir. 
 			
 			
 	\section{Conclusion}
@@ -511,8 +521,18 @@
 	Les résultats ont des implications importantes dans le domaine des agents artificiels qui peuvent négocier avec les humains. La recherche sur l'intelligence artificielle dans la négociation automatisée s'est concentrée sur différents aspects de la tâche de négociation, tels que le nombre de questions discutées, les parties impliquées dans la négociation, et ainsi de suite. Cependant, peu de recherches étudient l'impact du contexte social \cite {de2011effect, nazari2015opponent}. Ce travail est dans la continuation de ce domaine, où nous visons à démontrer l'importance des comportements sociaux lors de la mise en œuvre des agents qui interagissent avec un être humain. Nous nous concentrons sur l'impact de la relation interpersonnelle de dominance dans la stratégie de négociation d'agent.
 	
 	La prochaine étape de nos travaux se focalisera sur la simulation d'une relation de dominance entre l'agent et l'utilisateur humain, en permettant à l'agent d'adapter ses comportements de pouvoir afin de compléter ceux exprimés par l'utilisateur grâce à des mécanismes de la théorie de l'esprit. Cette adaptation permettra à l'agent de simuler une relation complémentaire de dominance dont l'impact positif sur la négociation a été déjà démontré par des travaux en psychologie sociale \cite{tiedens2003power,wiltermuth2015benefits}. 
+
+
+
+		\section*{Remerciements}
+		
+
+		Nous remercions \emph{Hatem Dhouib} pour la conception de l'interface graphique qui a servie à notre étude ainsi qu'a sa participation autant qu'expérimentateur. 
 	
+
 	\bibliographystyle{acm}
+
 	\bibliography{Library} 
+	 
 	
 \end{document}

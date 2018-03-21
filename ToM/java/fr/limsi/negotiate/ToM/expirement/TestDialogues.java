@@ -1,15 +1,15 @@
-package fr.limsi.negotiate;
+package fr.limsi.negotiate.ToM.expirement;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
-import com.sun.org.apache.xpath.internal.operations.Neg;
 import edu.wpi.disco.Dual;
+import fr.limsi.negotiate.Criterion;
+import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.NegotiatorAgent;
+import fr.limsi.negotiate.Option;
+import fr.limsi.negotiate.Self_Ci;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
-import fr.limsi.negotiate.ToM.expirement.FileAppend;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import fr.limsi.negotiate.toyExample.*;
@@ -41,7 +41,7 @@ public class TestDialogues {
 				FileAppend file = new FileAppend(fileName);
 
 				Dual dual = new Dual(
-						new ToMNegotiatorProba("Agent1", negotiation, ADAPT.COMPLEMENT),
+						new ToMNegotiatorProba("Agent1", negotiation, ADAPT.NONADAPT),
 						new NegotiatorAgent("Agent2", negotiation2),
 						false);
 
