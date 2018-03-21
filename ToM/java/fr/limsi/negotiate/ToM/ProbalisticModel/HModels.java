@@ -91,7 +91,11 @@ public class HModels {
 	public double reviseOtherPow(Map<Double, Float> values, double previousPow){
 		Map<Double, Float> result = sortPower(values); 
 		//System.out.println(result);
+		if(result.values().isEmpty()){
+			//System.out.println("khlassou les hypotheses");
+			return previousPow;
 
+		}
 		float max = java.util.Collections.max(result.values());
 		
 		List<Double> keys = new ArrayList<Double>();
@@ -111,15 +115,7 @@ public class HModels {
 		return average.isPresent() ? average.getAsDouble() : 0; 
 	}
 
-	//	public Statement<Criterion> isStatement(Utterance u){
-	//		if(u instanceof StatePreference)
-	//			 return (new Statement<Criterion>(((StatePreference) u).getValue(), 
-	//					((StatePreference) u).getLikable()));
-	//		if (u instanceof RejectState)
-	//			return (new Statement<Criterion>(((RejectState) u).getJustify(),Satisfiable.FALSE));
-	//		
-	//		return null;
-	//	}
+
 
 	public List<PowHypothesis> getDom(){
 		List<PowHypothesis> p = new ArrayList<PowHypothesis>();
