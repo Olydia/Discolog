@@ -553,6 +553,7 @@ public class Negotiation<O extends Option> {
 	public boolean match(Proposal p1, Proposal p2){
 		if(p1.getClass().equals(p2.getClass()))
 			return p1.equals(p2);
+		
 		if(p1 instanceof OptionProposal){
 			Option p = (Option) p1.getValue();
 			@SuppressWarnings("unchecked")

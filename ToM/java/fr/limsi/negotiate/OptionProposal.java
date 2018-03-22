@@ -83,6 +83,7 @@ public class OptionProposal extends Proposal {
 
 	}
 
+	
 
 	@Override
 	public String afficherPropDetail() {
@@ -98,6 +99,15 @@ public class OptionProposal extends Proposal {
 		p.setStatus(this.getStatus());
 		return p;
 	}
+
+
+	@Override
+	public String sameProposal() {
+		// TODO Auto-generated method stub
+		return "restaurant "+ getValue() + ". "+  this.getValue().afficher();
+	}
+
+
 
 }
 

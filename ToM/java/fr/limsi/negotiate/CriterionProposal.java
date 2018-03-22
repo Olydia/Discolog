@@ -102,4 +102,11 @@ public class CriterionProposal extends Proposal {
 		return p;
 	}
 
+	@Override
+	public String sameProposal() {
+		// TODO Auto-generated method stub
+		return "restaurant " + this.getValue().afficher();
+	}
+	
+
 }

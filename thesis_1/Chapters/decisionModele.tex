@@ -28,56 +28,96 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 
  
 \section{Règles de décision}
-	Nous avons construit des règles de décision modélisé sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue étant géré par le logiciel \emph{DISCO}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs (Hierarchical Task Networks) \cite{erol1994htn} pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
+	Nous avons construit des règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue étant géré par le logiciel \emph{DISCO}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme Collagen \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des HTNs (Hierarchical Task Networks) \cite{erol1994htn} pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
 	
 	De plus, Disco a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue.
 	
-	Nous avons complété ce système avec les actes de dialogues présenté dans la section précédente afin qu'il puisse supporter la négociation sur les préférences.
+	Nous avons complété ce système avec les actes de dialogues présenté dans la section \label{sec:communication} afin qu'il puisse supporter la négociation sur les préférences.
 	
-	Pour chaque acte de dialogue que l'agent reçois, nous modélisons l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte Propose énoncé par l'utilisateur, l'agent peut répondre par un Accept, un Reject ou un autre Propose ("User: Allons au Chinois. Agent: Et si nous allions plutôt au Japonais?"). 
+	Pour chaque acte de dialogue que l'agent reçois, nous modélisons l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose} ("User: Allons au Chinois. Agent: Et si nous allions plutôt au Japonais?"). 
 	Chaque branche est définie avec des conditions d'applicabilités pour décider quelle réponse est adoptée. 
 	Ces conditions prennent en compte le pouvoir de l'agent en plus du contexte courent de la négociation. Dans l'exemple précédent, l'agent doit être dominant pour répondre à un Propose par un autre Propose. 
 	
 	
 
 	
-	\subsection{Sélection de l'acte de dialogue}*
-		Division du spectre de pouvoir sur deux. Agent dominant et agent soumis.
-		pour chaque type d'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possible. Chaque réponse dépend du pouvoir de l'agent.
+	\subsection{Sélection de l'acte de dialogue}
+		Nous avons initialisé l'agent avec un comportement de pouvoir parmi trois types de comportements de pouvoir inspirés de la littérature en psychologies social.  L'agent peut suivre un comportement \emph{dominant, soumis} ou \emph{neutre}. 
 		
+		En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend du pouvoir de l'agent.
+		
+		Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 		\subsubsection{State Preference}
-			Quand l'utilisateur énonce un statePreference, l'agent a le choix entre 4 réponses:
+			Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale:
+			\begin{itemize}
+				\item \emph{Propose(x)}: Si l'agent est \emph{soumis} ou si il a la même préférence que l'utilisateur, il va proposer de choisir la valeur préférée de l'utilisateur.
+				\item \emph{Propose}: Si le nombre de \emph{StatePreferences} autorisé est atteint (voir figure \ref{alg:maxtours}), l'agent doit respecter le principe 3 et faire évoluer la négociation. La valeur proposé doit respecter les préférences de l'agent. 
+				\item \emph{StatePreference}:l'agent est \emph{soumis} ou \emph{neutre}, il va vouloir exprimer ses préférences afin de construire une meilleure connaissance.
+				\item \emph{AskPreference}:l'agent est \emph{neutre} ou \emph{dominant}. Dans le cas où toutes les valeurs du critères courent ont été discutés, l'agent va respecter le principe 3 et faire évoluer la négociation en ouvrant la discussion sur un autre critère.
+			\end{itemize}
 			
-		\subsection{Propose}
-			A la réception d'un propose comme présenté dans la figure ..., l'agent choisis sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
-			Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de dominance de l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
-			
-			En effet, au fur et a mesure que la négociation évolue, l'agent décide de faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{location} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de location est désormais \emph{acceptable}.
-			
-			Par ailleurs, la notion d'exigence apparaît dans l'algorithme ci-dessous. Si l'agent est dominant, l'ensemble de valeurs acceptables est plus restreint qu'un agent soumis.
-			
-					\begin{figure}[]
+			\begin{figure}[]
 				\begin{algorithmic}[1]\small
-					\Function{isAcceptable}{$value$, $relation$}
-					\If{(type de $value$ n'est pas un critère important)} 
+					\Function{MaxStatements}{$proposal$, $relation$}
+					\State $nbTours$ = Nombre de \emph{StatePreferences} exprimés successivement.
+					\State $maxTours$ 
+					\If{($dominant$)} 
+					\State $maxTours = 1$
+					\EndIf
+					\If{($peer$)} \State $maxTours = 2$
+					\EndIf
+					\If{($soumis$)} 
+					\State $maxTours = 4$
+					\EndIf
+					\State $retrun$ $nbTours\geq maxTours$
+					\EndFunction
+				\end{algorithmic}
+				\vskip 8pt
+				\label{alg:maxtours}
+				\caption{Maximum de tours de \emph{StatePreference} autorisé en fonction du pouvoir de l'agent}
+			\end{figure} 
+		\subsection{Propose}
+			A la réception d'un \emph{Propose} comme présenté dans la figure ..., l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
+			Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de pouvoir de l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
+			
+			En effet, au fur et a mesure que la négociation évolue, l'agent décide de faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
+			
+			Par ailleurs, la notion d'exigence apparaît dans l'algorithme ci-dessous. Si l'agent est \emph{dominant}, l'ensemble de valeurs acceptables est plus restreint qu'un agent \emph{soumis}.
+			
+			\begin{figure}[]
+				\begin{algorithmic}[1]\small
+					\Function{isAcceptable}{$proposal$, $relation$}
+					\If{(type de $proposal$ n'est pas un critère important)} 
 					\State return $true$
 					\EndIf
 					
-					\State List = trier les valeurs par ordre décroissant
-					\If{($relation = dominant$)} 
-					\State $return$ index($value$)< $size(List)/2$
+					\State List = trier les valeurs par ordre décroissant de préférences
+					\If{($dominant$)} 
+					\State $return$ index($proposal$)< $size(List)/2$
 					\EndIf
-					\If{($relation = sub$)} 
-					\State return $return$ index($value$)< $size(List)/4$
+					\If{($soumis$)} 
+					\State return $return$ index($proposal$)< $size(List)/4$
 					\EndIf
 					\EndFunction
 				\end{algorithmic}
 				\vskip 8pt
-				\caption{pseudo}{Calcul d'acceptabilité d'une proposition $value$}
+				\label{pseudo}
+				\caption{Calcul d'acceptabilité d'une proposition $value$}
 			\end{figure} 
 			
-			Par conséquent, l'arbre de dialogue est le suivant:
+			
+			L'arbre de décision produit pour répondre à un \emph{Propose(p)} est présenté dans la figure .... 
+			\begin{itemize}
+			
+				\item  \emph{Accept(p)}: Si la proposition $p$ est acceptable, l'agent doit exprimer un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. En fonction de la relation de pouvoir l'agent choisit un acte de dialogue spécifique.
+				\item \emph{Ask :} l'agent \emph{soumis} va suivre les comportements décrit dans les principes 1 et 3. En effet, il va essayer de collecter plus de connaissances sur les préférences de l'autre et ainsi prendre en compte ses préférences. 
+				\item \emph{Reject :} l'agent qui n'est pas dominant (\emph{i.e. soumis ou neutre}) rejete une proposition qui n'est pas acceptable.
+				\item \emph{Propose :} suivant le principe 3, l'agent \emph{dominant} fait évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences. 
+			\end{itemize}
+	
+	
 		\subsection{Accept }
+				
 				
 		%----------------------------------------------------------------
 			Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.

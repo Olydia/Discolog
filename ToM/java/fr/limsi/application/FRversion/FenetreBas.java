@@ -45,10 +45,10 @@ public class FenetreBas extends AnchorPane{
 	/**
 	 * details allows to create the instructions used for execute:
 	 * details[0]: The action. Ex: Propose.
-	 * details[1]: The situation of the negotiation
+	 * details[1]: The topic of the negotiation
 	 * details[2]: criterion or situation(when an option is chosen)
 	 * details[3]: value of the criterion or option
-	 * details[4]: criterion or situation(when an option is chosen) for the second part
+	 * details[4]: criterion or topic (when an option is chosen) for the second part
 	 * details[5]: value of the criterion or option for the second part
 	 * details[6]: To specify if the user likes or not the preference he is expressing
 	 * details[7]: contains General or Specific to differentiate between the 2 forms of AskPreference
@@ -231,7 +231,7 @@ public class FenetreBas extends AnchorPane{
 
 		interaction.setGuess(false);
 		interaction.start(true); // give user first turn
-		OptionChoice optionChoice=new OptionChoice();
+		ChoixOption optionChoice=new ChoixOption();
 		Stage optionStage=new Stage();
 
 		Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
@@ -284,7 +284,7 @@ public class FenetreBas extends AnchorPane{
 
 		Button rejectOnlyButton = new Button("Juste Reject");
 		Button rejectStateButton = new Button("Reject et expliquer");
-		Button rejectProposeButton = new Button("Reject et countre propose");
+		Button rejectProposeButton = new Button("Reject et contre propose");
 
 		Button stateButton = new Button("J'aime/ je n'aime pas ...");
 		Button askGeneralButton = new Button("Quel type de ... aimes tu?");
@@ -790,7 +790,7 @@ public class FenetreBas extends AnchorPane{
 
 				list.add(sendHBox);
 
-				OptionChoice optionChoice=new OptionChoice();
+				ChoixOption optionChoice=new ChoixOption();
 				Stage optionStage=new Stage();
 				Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 
@@ -1629,8 +1629,8 @@ public class FenetreBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
-					command2="Packages.fr.limsi.negotiate."+details[1]+"FR"+details[4]+"."+details[5];
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
+					command2="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[4]+"."+details[5];
 				}
 				else {
 					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
@@ -1643,8 +1643,8 @@ public class FenetreBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
-					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[4]+"."+details[5]+")";
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
+					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[4]+"."+details[5]+")";
 				}
 				command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
 				if (command2!="") command=command+"/"+command2;
@@ -1656,12 +1656,13 @@ public class FenetreBas extends AnchorPane{
 					list.add(errorLabel);
 				}
 				else{
+					//System.out.println(command);
 					interaction.getConsole().execute(command);
 					boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 					interaction.getSystem().respond(interaction, false, guess);
 					if (negotiationSuccess()){
 
-						System.out.println("We reached an agreement, the negotiation is over!");
+						System.out.println("Nous avons trouvé une solution! La négociation est terminée");
 						File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 						File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
 								username+".txt");

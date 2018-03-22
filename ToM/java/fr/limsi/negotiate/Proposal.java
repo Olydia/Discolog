@@ -55,5 +55,5 @@ public abstract class Proposal {
 	public abstract String afficherProp();
 	public abstract String afficherPropDetail();
 	public static enum Status { OPEN, REJECTED, ACCEPTED }
-
+	public abstract String sameProposal();
 }
