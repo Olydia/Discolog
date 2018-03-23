@@ -47,6 +47,10 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 		En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend du pouvoir de l'agent.
 		
 		Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
+		
+		\subsection{AskPreference}
+	
+	
 		\subsubsection{State Preference}
 			Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale:
 			\begin{itemize}
@@ -58,7 +62,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			
 			\begin{figure}[]
 				\begin{algorithmic}[1]\small
-					\Function{MaxStatements}{$proposal$, $relation$}
+					\Function{MaxStatements}{}
 					\State $nbTours$ = Nombre de \emph{StatePreferences} exprimés successivement.
 					\State $maxTours$ 
 					\If{($dominant$)} 
@@ -86,7 +90,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			
 			\begin{figure}[]
 				\begin{algorithmic}[1]\small
-					\Function{isAcceptable}{$proposal$, $relation$}
+					\Function{isAcceptable}{$proposal$}
 					\If{(type de $proposal$ n'est pas un critère important)} 
 					\State return $true$
 					\EndIf
@@ -115,17 +119,52 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 				\item \emph{Propose :} suivant le principe 3, l'agent \emph{dominant} fait évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences. 
 			\end{itemize}
 	
+			 
 	
 		\subsection{Accept }
 			A la réception	d'un \emph{Accept}, nous séparons deux cas de réponses en fonction du type de la valeur acceptée $v$.
 			Premièrement, $ v \in \mathcal{O}$ une \textit{option}, l'agent clos la négociation par un \emph{succès}.
-			Sinon, $v \in C_i$ est une valeur de critère, l'agent choisit sa réponse en fonction de la relation de pouvoir à exprimer.
+			Sinon, $v \in C_i$ est une valeur de critère, l'agent entame la négociation sur un autre critère et sa réponse sera choisie en fonction de la relation de pouvoir à exprimer.
 			
 			\begin{itemize}
-				\item \emph{Propose}: L'agent peut répondre avec un
+				\item \emph{Propose}: La condition d'applicabilité pour cet acte de dialogue dépend du pouvoir de l'agent. Un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences. Cependant, un agent \emph{soumis} n'est autorisé à faire une proposition que s'il a des connaissances sur les préférences de l'autres,  communiqués par des \emph{StatePreferences}, qui lui permettront de prendre une décision équitable. cet algorithme traduit les comportements présentés dans les principes 1 et 3. 
+				
+				\item \emph{AskPreference}: Comme présenté dans le principe 3,l'agent est \emph{soumis} collecte le plus d'informations possibles sur les préférences de son interlocuteur. 
+				\item \emph{StatePreference}: L'agent est \emph{peer} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
+				
 			\end{itemize}
 			
+%				\begin{figure}[]
+%					\begin{algorithmic}[1]\small
+%						\Function{CanPropose}{}
+%						\If{($dominant$)} 
+%						\State return $true$
+%						\EndIf
+%						
+%						\State 
+%						\If{($soumis$)} 
+%						\State l'agent a des connaissances suffisantes sur les préférences de l'interlocuteur
+%						\State return $true$
+%						\EndIf
+%						\EndFunction
+%					\end{algorithmic}
+%					\vskip 8pt
+%					\label{alg:canPropose}
+%					\caption{Calcul d'acceptabilité d'une proposition $value$}
+%				\end{figure}
+%				
 				
+		\subsection{Reject}
+			Suite à un \emph{Reject}, l'agent choisis une réponse en suivant les trois principes comme présenté ci-dessous:
+			\begin{itemize}
+				\item \emph{AskPreference}: Si la proposition d'un agent \emph{soumis} est rejetée, il va considérer qu'il n'avait pas assez de connaissances pour prendre une bonne décision. Pour compenser, il va demander à l'utilisateur ses préférences sur des valeurs qu'il ne connaît pas déjà. 
+				
+				\item \emph{Propose}: Suivant les principes 1 et 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus, il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
+				
+				\item \emph{StatePreference}: l'agent \emph{peer} continue la négociation en exprimant ses préférences sur d'autres valeurs. 
+			
+				
+			\end{itemize}	
 		%----------------------------------------------------------------
 			Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
 		Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présentées dans la .
