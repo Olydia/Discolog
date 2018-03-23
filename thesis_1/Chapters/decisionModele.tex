@@ -44,11 +44,11 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 	\subsection{Sélection de l'acte de dialogue}
 		Nous avons initialisé l'agent avec un comportement de pouvoir parmi trois types de comportements de pouvoir inspirés de la littérature en psychologies social.  L'agent peut suivre un comportement \emph{dominant, soumis} ou \emph{neutre}. 
 		
-		En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend du pouvoir de l'agent.
+		En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend du pouvoir de l'agent. Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
 		
 		Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 		
-		\subsection{AskPreference}
+		\subsubsection{AskPreference}
 	
 	
 		\subsubsection{State Preference}
@@ -80,7 +80,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 				\label{alg:maxtours}
 				\caption{Maximum de tours de \emph{StatePreference} autorisé en fonction du pouvoir de l'agent}
 			\end{figure} 
-		\subsection{Propose}
+		\subsubsection{Propose}
 			A la réception d'un \emph{Propose} comme présenté dans la figure ..., l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
 			Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de pouvoir de l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
 			
@@ -121,7 +121,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 	
 			 
 	
-		\subsection{Accept }
+		\subsubsection{Accept }
 			A la réception	d'un \emph{Accept}, nous séparons deux cas de réponses en fonction du type de la valeur acceptée $v$.
 			Premièrement, $ v \in \mathcal{O}$ une \textit{option}, l'agent clos la négociation par un \emph{succès}.
 			Sinon, $v \in C_i$ est une valeur de critère, l'agent entame la négociation sur un autre critère et sa réponse sera choisie en fonction de la relation de pouvoir à exprimer.
@@ -154,7 +154,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 %				\end{figure}
 %				
 				
-		\subsection{Reject}
+		\subsubsection{Reject}
 			Suite à un \emph{Reject}, l'agent choisis une réponse en suivant les trois principes comme présenté ci-dessous:
 			\begin{itemize}
 				\item \emph{AskPreference}: Si la proposition d'un agent \emph{soumis} est rejetée, il va considérer qu'il n'avait pas assez de connaissances pour prendre une bonne décision. Pour compenser, il va demander à l'utilisateur ses préférences sur des valeurs qu'il ne connaît pas déjà. 
@@ -162,13 +162,19 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 				\item \emph{Propose}: Suivant les principes 1 et 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus, il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
 				
 				\item \emph{StatePreference}: l'agent \emph{peer} continue la négociation en exprimant ses préférences sur d'autres valeurs. 
-			
-				
 			\end{itemize}	
 		%----------------------------------------------------------------
-			Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
-		Par exemple, les réponses que l'agent peut générer quand il reçoit un \emph{StatePreference} de la part de l'utilisateur sont présentées dans la .
+			
+	\subsubsection{Exemple}	Exemple de fdialogue généré
 	
+	\subsection{Limites des arbres de dialogue}
+		Parler de l'étude qui a montré une ambiguité dans la perception des comportement et la capacité à isoler l'impact de chaque principe sur la prise de décision
+		
+		Comportement incongrue ou non attendue.
+		
+		Situation de \textit{breakdown}, du a une modèlisation manuelle, nous avions rencontrer des situations où aucune condition d'applicabilité n'étaient vrai. 
+		
+		Pour toutes ces raisons, nous avons repenser notre solution pour qu'elle soit plus fidèle aux principe de négociation et qu'elle puisse refléter les comportements de pouvoir. 
 	
-	
+	\section{Modèle de décision basé sur les comportements de pouvoirs}
 	
