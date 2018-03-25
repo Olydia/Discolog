@@ -18,6 +18,7 @@ public class chatConsole extends OutputStream{
 	public void write(int i) throws IOException
 	{
 		String local = output.getText();
+		boolean retour = false;
 		String value = String.valueOf((char) i);
 		if(idPrec == -61)
 			value = value.replaceAll("ﾠ", "à");
@@ -27,9 +28,14 @@ public class chatConsole extends OutputStream{
 		value = value.replaceAll("ﾩ", "é");
 		value = value.replaceAll("ﾧ", "ç");	
 		
-		//if(idPrec == 10 && ("BAK".indexOf(value.charAt(0)) != -1))
+		if(retour && "BAK".indexOf(value.charAt(0)) != -1){
+			System.err.println(value);
+			retour =false;
+					
+		}
 		if(idPrec == 10)
-			System.err.println("retour chariot " + value);
+			retour = true;
+			//System.err.println("retour chariot " + value);
 		output.appendText(value) ;
 		output.setStyle("-fx-font-size: 16px;");
 		idPrec = i;
