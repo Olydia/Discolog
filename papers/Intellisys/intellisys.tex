@@ -73,7 +73,12 @@
 	\usepackage{amsmath,amssymb}
 	\usepackage{color}
 	\usepackage{setspace}
-
+	\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
 	\usepackage{fancyhdr}
 %	\usepackage[caption=false,font=footnotesize]{subfig}
 	\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
@@ -184,9 +189,9 @@
 	
 	\begin{abstract}
 		%\boldmath
-		Interpersonal dominance relation has a major effect on the outcome of a negotiation. It has been shown that when participants adopt complementary dominance behaviors (one being dominant and the other being submissive), they reach mutually beneficial outcomes and this increases their reciprocal likings. In this paper, we investigate about the simulation of this interpersonal relationship in the context of collaborative negotiation between artificial agents.
-		
-		Our simulation is based on a previously published model. We present a Theory of Mind model that allows an agent to evaluate its interlocutor's level of dominance. The agent establishes the relation of dominance by adapting its behavior of power to complement the power of its interlocutor. We show on agent-agent simulation that the system correctly predicts the interlocutor's power. 
+	%	Interpersonal dominance relation has a major effect on the outcome of a negotiation. It has been shown that when participants adopt complementary dominance behaviors (one being dominant and the other being submissive), they reach mutually beneficial outcomes and this increases their reciprocal likings. 
+	We present in this paper a computational model of collaborative negotiation capable of simulating an interpersonal relationship of dominance between two negotiator agents.
+	Our simulation is based on a previously published model. We present a model based on Theory of Mind that allows an agent to evaluate its interlocutor's level of power at each negotiation turn. We show on agent-agent simulation that the system correctly predicts the interlocutor's power. 
 	\end{abstract}
 	% IEEEtran.cls defaults to using nonbold math in the Abstract.
 	% This preserves the distinction between vectors and scalars. However,
@@ -214,16 +219,16 @@
 	% creates the second title. It will be ignored for other modes.
 	\IEEEpeerreviewmaketitle
 	\section{Introduction}
-		Recent years have witnessed substantial growth in research on interactions between humans and intelligent agents and robots. Many new applications require agents to collaborate with the human in order to achieve joint goals and tasks. These includes agents such as an \textit{eCoach} collaborating with a patient to choose a course of treatment from among many viable options \cite{robertson2015visual}, or an educational agent collaborating with a student to resolve problems \cite{howard2017shifting} along side with companions for the eldery \cite{bickmore2005s}. In such situations, users might have to negotiate with the conversational agent regarding the plan that achieves their common goals in a way that both satisfies them. This type of negotiation is called \emph{"Collaborative negotiation"}. It assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest \cite{sidner1994artificial,chu1995response}.
-	
-	%	Negotiation is a common task in daily life. People negotiate not only in professional situations (\emph{e.g.} for a salary increase or a promotion) but also in more simple situations such as choosing the movie to watch or the holiday destination. In the last decade, a variety of conversational agents have been created to negotiate with people \cite{pynadath2013you,gratch2016misrepresentation,klatt2011negotiations}. Theses agents are designed with a growing number of decisional abilities, including multi-party and multi-issues negotiation capabilities.
+		Recent years have witnessed substantial growth in research on interactions between humans and intelligent agents and robots. Many new applications require agents to collaborate with the human in order to achieve joint goals and tasks. These includes agents such as an \textit{eCoach} collaborating with a patient to choose a course of treatment from among many viable options \cite{robertson2015visual}, or an educational agent collaborating with a student to resolve problems \cite{howard2017shifting} along side with companions for the eldery \cite{sidner2014robotic}. 
+		In such situations, users might have to negotiate with the conversational agent regarding the plan that achieves their common goals in such way that both satisfies them. This type of negotiation is called \emph{"Collaborative negotiation"}. It assumes that each participant is driven by the goal of finding a trade-off that best satisfies the interests of all the participants as a group, instead of one that maximizes his own interest \cite{sidner1994artificial,chu1995response}.
 	
 		However, negotiation is a multifaceted process which also involves social interaction and affects, as well as personal preferences and opinions  \cite{bro2010affective}. Several research considered the role of social behavior in the negotiation process. For instance, \cite{de2011effect} studied the impact of emotions of anger and happiness on the outcome of the negotiation.  \cite{kraus1995designing} developed an agent that behaves according to different personalities and has a learning mechanism to learn the personality of its opponents. 
 	
-		One key element in the social aspect of negotiation is the interpersonal relation between the participants. Indeed, research in social psychology demonstrated that the relation of dominance affects the way the negotiation process is perceived by the participants \cite{van2006power}.  
+		One key element in the social aspect of negotiation is the interpersonal relation between the participants. Indeed, research in social psychology demonstrated that the relation of dominance affects the perception of the negotiation process \cite{van2006power}.  
 		Negotiating parties often differ in terms of dominance and this difference exerts an important influence on the behavior of participants. Negotiators build different negotiation's strategies depending on their relative dominance. This directly influences the outcomes of the negotiation. More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings. \cite{wiltermuth2015benefits,tiedens2003power}.
 	
-		When building conversational agents that collaborate with a human user, it is important  to take into account the interpersonal relationship that they establish. We focus in this paper on the relation of dominance. Burgoon \cite{burgoon1998nature} defined interpersonal dominance as expressive, relationally based communicative acts by which behaviors of power are exerted and influence achieved. They further defined dominance as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior. 
+		When building conversational agents that collaborate with a human user, it is important to take into account the interpersonal relationship established between the negotiators.
+		 We focus in this paper on the relation of dominance. Burgoon \cite{burgoon1998nature} defined interpersonal dominance as expressive, relationally based communicative acts by which behaviors of power are exerted and influence achieved. They further defined dominance as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior. 
 	
 		To express those behaviors of power, we designed a model of collaborative negotiation that allows an agent to express its power through negotiation strategies \cite{ouali2017computational}. We showed that human observers correctly perceived the power expressed by the agent.
 		The next step is to extend this model in order to simulate an interpersonal relation of dominance between the agent and the user. This means that if one negotiator exerts behaviors of high power, its partner has to adapt in order to exert complementary behaviors of low power, and vice versa.
@@ -231,13 +236,14 @@
 		\begin{figure*}[h]
 			\centering
 			\includegraphics[width=0.8\linewidth]{figs/model/general.png}
-			\caption{Model of collaborative negotiation with a model of other} 
+			\caption{Model of collaborative negotiation with a model of other. Process of decision step by step} 
 			\label{fig:schema-general}
 		\end{figure*} 
+
 	
 		Our work aims at developing such an agent that is capable of evaluating and adapting his social behavior to the degree of power expressed by interlocutor. We propose a model of theory of mind based on \emph{simulation-theory (ST)} \cite{gordon1986folk} to evaluate the behavior of the partner. \emph{ST} suggests that humans, have the ability to project oneself in the other person’s shoes \cite{shanton2010simulation}. Therefore, we can simulate his or her mental activity with our own capacities for practical reasoning. It allows us to mimic the mental state of our interactional partner \cite{harbers2009modeling}.%\cite{http://ii.tudelft.nl/~maaike/papers/Iat_2009.pdf}
 		  
-		 This paper describes our model of \emph{ST} that allows the agent to simulate the behavior of its interlocutor and to reason about it in order to predict its intentional power as presented in the figure~\ref{fig:schema-general}. The agent assumes that its interlocutor has a similar decision's model based on power. Therefore, for each enunciated utterance by the user, the agent tries to guess the behavior of power that its partner intends to express. 
+		This paper describes our model of \emph{ST} that allows the agent to evaluate the behavior of its interlocutor and to reason about it in order to predict its intentional power as presented in the figure~\ref{fig:schema-general}. The agent assumes that its interlocutor has a similar decision's model based on power. Therefore, for each enunciated utterance by the user, the agent tries to guess the behavior of power that its partner intends to express. 
 		 %In addition, we present the first step of our validation process, that aims to validate the accuracy of prediction made on the partner's behaviors. We study in the context of agent/agent interaction, in which one agent is implemented with our model of \emph{ST}, the degree of exactitude the agent guessed its interlocutor's behaviors of power. 
 
 		The paper is organized as follows. Section II gives an overview of previous automated negotiation agents with theory of mind and other related work on social behavior recognition. In section III, we briefly present our model of dialogue for collaborative negotiation. We show that extending this model with a theory of mind raises computational issues. We propose a new model to evaluate the dominance of the interlocutor, based on reasoning with uncertainty. Section IV presents an evaluation of this new model in the context of agent-agent negotiation. We show that the system correctly predicts the interlocutor's power in spite of the restrictions on the model. In section V, we discuss the future use of this new model for building an adaptive negotiator agent.
@@ -263,7 +269,7 @@
 	
 %	Marcella \textit{et al} \cite{klatt2011negotiations} proposed a model of negotiation in the context of aid prevention. The model tries to combine handling of emotions with general structures of negotiations. 
 	
-	In the context our work, we focus on the impact of dominance in the negotiation. Dominance as an interpersonal relation is defined by burgoon \cite{burgoon1998nature} as expressive, relationally based communicative acts by which power is exerted and influence achieved. Furthermore, it is a dyadic variable in which control attempts by one individual are accepted by the
+	In the context of our work, we focus on the impact of dominance in the negotiation. Dominance as an interpersonal relation is defined by burgoon \cite{burgoon1998nature} as expressive, relationally based communicative acts by which power is exerted and influence achieved. Furthermore, it is a dyadic variable in which control attempts by one individual are accepted by the
 	interactional partner \cite{dunbar2005perceptions}. For this reason, we focus on dominance complementarity between a negotiator agent and a human user in the context of collaborative negotiation. 
 	
 	Dominance complementarity is characterized by one person in a dyadic interaction behaving dominantly and his counterpart behaving submissively \cite{tiedens2003power} and those behaviors have been investigated in the context of negotiation. \cite{tiedens2003power} showed that when complementarity occurs in an interaction, people feel more comfortable and helps to create interpersonal liking relation.
@@ -343,11 +349,11 @@
 	
 	For example, let us consider the preference set $\prec_{cuisine}$ whose values of satisfiability are given on table~\ref{tab:sat}. Assume a first agent Bob with a value of power $pow = 0.7$. We can compute, using the above function, that bob likes only $french$ cuisine $S= \{fr\}$. On the contrary, a second agent Arthur with a smaller value of power $pow=0.4$ will have its set of satisfiable values initiated to $S= \{fr, it\}$. 
 	
-    This set $S$ is used directly to compute the values of \emph{StatePreference} utterances.
+    This set $S$ is used directly to compute the likability of values expressed in the \emph{StatePreference} utterances.
 	
 	\subsubsection{Acceptability}
 	\label{sec:acc}
-	In collaborative negotiation, both negotiators might have to reduce their level of demand over time because they want to reach an agreement. The level of concessions expressed in a negotiation is affected by power. It was demonstrated that low-power negotiators tend to make larger concessions than high-power negotiators \cite{de1995impact}.
+	In collaborative negotiation, both negotiators might have to reduce their level of demand over time because they want to reach a mutual agreement. The level of concessions expressed in a negotiation is affected by power. It was demonstrated that low-power negotiators tend to make larger concessions than high-power negotiators \cite{de1995impact}.
 	
 	We designed a function that decreases the agent level's of demand during the negotiation, specifically, when the negotiation is not converging.  To model this behavior, we use a \emph{concession curve}, named $self(t)$ . %and illustrated in Figure \ref{fig:conc}.
 	We define this function to be a time varying function of $pow$ which decreases over time $t$ and follows the concession curve. In the beginning, $self(0) = pow$ and when the negotiation evolves without converging, the function decreases as illustrated in the figure \ref{fig:conc}.
@@ -417,7 +423,7 @@
 					\end{minipage}
 				}
 			
-		\caption{\label{fig:ex-dia}Example of dialogue.}
+		\caption{\label{fig:ex-dia}Example of dialogue between agents \emph{A} and \emph{B} implemented with our model of collaborative negotiation.}
 	\end{figure}
 
 
@@ -430,7 +436,7 @@
 	\begin{figure*}
 		\centering
 		\includegraphics[width=0.8\linewidth]{figs/model/tom_select.png}
-		\caption{A theory of mind approach to evaluate the user's level of power} 
+		\caption{Model of theory of mind to evaluate hypotheses on the power of the intertlocutor from its utterance} 
 		\label{fig:tom}
 	\end{figure*} 
 	
