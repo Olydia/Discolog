@@ -102,20 +102,20 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 //		//System.out.println(otherModel.getHypotheses());
 
 
-		//		try {
-		//			Thread.currentThread().sleep(1000);
-		//		} catch (InterruptedException e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
-		//		int time = new Random().nextInt(500) + 550;
-		//		//pause(time);
-		//		try {
-		//			Thread.sleep(time);
-		//		} catch (InterruptedException e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
+				try {
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int time = new Random().nextInt(500) + 550;
+				//pause(time);
+				try {
+					Thread.sleep(time);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 		if (utterance != null){
 			double other = guess(utterance, getOther());
@@ -142,12 +142,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 
 		Utterance u = respondTo(utterance, disco);
-//		if(u instanceof AcceptPropose){
-//			Criterion cr = ((AcceptPropose) u).getAccepted().getValue();
-//			Proposal p = super.createProposal(Cuisine.TURQUE, false);
-//			return new Propose(disco, false, p);
-//
-//		}
+
 		return u ;
 	}
 
