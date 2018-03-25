@@ -49,15 +49,15 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 		Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 		
 		\subsubsection{AskPreference}
-	
+			A la réception d'un \emph{AskPreference}, l'agent répond en exprimant ses préférences sur la question demandée comme présenté dans la figure .. .
 	
 		\subsubsection{State Preference}
 			Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale:
 			\begin{itemize}
-				\item \emph{Propose(x)}: Si l'agent est \emph{soumis} ou si il a la même préférence que l'utilisateur, il va proposer de choisir la valeur préférée de l'utilisateur.
-				\item \emph{Propose}: Si le nombre de \emph{StatePreferences} autorisé est atteint (voir figure \ref{alg:maxtours}), l'agent doit respecter le principe 3 et faire évoluer la négociation. La valeur proposé doit respecter les préférences de l'agent. 
-				\item \emph{StatePreference}:l'agent est \emph{soumis} ou \emph{neutre}, il va vouloir exprimer ses préférences afin de construire une meilleure connaissance.
-				\item \emph{AskPreference}:l'agent est \emph{neutre} ou \emph{dominant}. Dans le cas où toutes les valeurs du critères courent ont été discutés, l'agent va respecter le principe 3 et faire évoluer la négociation en ouvrant la discussion sur un autre critère.
+				\item \emph{Propose(x)}: Si la valeur exprimée par l'utilisateur est acceptable (voir figure \ref{pseudo}) pour l'agent, il va proposer de choisir cette valeur. Ce comportement relate le principe 1.
+				\item \emph{Propose}: Si le nombre de \emph{StatePreferences} autorisé est atteint (voir figure \ref{alg:maxtours}), l'agent doit respecter le principe 3 et faire évoluer la négociation. La valeur proposée doit respecter les préférences de l'agent. 
+				\item \emph{StatePreference}:l'agent est \emph{neutre}, il va vouloir exprimer ses préférences afin de construire une meilleure connaissance.
+				\item \emph{AskPreference}:l'agent est \emph{soumis}. Dans le cas où toutes les valeurs du critères courent ont été discutés, l'agent va respecter le principe 3 et faire évoluer la négociation en ouvrant la discussion sur un autre critère.
 			\end{itemize}
 			
 			\begin{figure}[]
@@ -84,7 +84,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			A la réception d'un \emph{Propose} comme présenté dans la figure ..., l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
 			Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de pouvoir de l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
 			
-			En effet, au fur et a mesure que la négociation évolue, l'agent décide de faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
+			En effet, au fur et à mesure que la négociation évolue, l'agent va faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
 			
 			Par ailleurs, la notion d'exigence apparaît dans l'algorithme ci-dessous. Si l'agent est \emph{dominant}, l'ensemble de valeurs acceptables est plus restreint qu'un agent \emph{soumis}.
 			
@@ -114,7 +114,7 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			\begin{itemize}
 			
 				\item  \emph{Accept(p)}: Si la proposition $p$ est acceptable, l'agent doit exprimer un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. En fonction de la relation de pouvoir l'agent choisit un acte de dialogue spécifique.
-				\item \emph{Ask :} l'agent \emph{soumis} va suivre les comportements décrit dans les principes 1 et 3. En effet, il va essayer de collecter plus de connaissances sur les préférences de l'autre et ainsi prendre en compte ses préférences. 
+				\item \emph{Ask :} l'agent \emph{soumis} va suivre les comportements décrit dans les principes 1 et 3. En effet, il va essayer de collecter plus de connaissances sur les préférences de l'autre et ainsi prendre en compte ses préférences. De plus, en vue du principe 2 qui affirme qu'un agent soumis doit faire des concessions, l'agent soumis n'est pas autorisé à exprimer plus d'un nombre de rejets successifs.  
 				\item \emph{Reject :} l'agent qui n'est pas dominant (\emph{i.e. soumis ou neutre}) rejete une proposition qui n'est pas acceptable.
 				\item \emph{Propose :} suivant le principe 3, l'agent \emph{dominant} fait évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences. 
 			\end{itemize}
@@ -129,8 +129,8 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			\begin{itemize}
 				\item \emph{Propose}: La condition d'applicabilité pour cet acte de dialogue dépend du pouvoir de l'agent. Un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences. Cependant, un agent \emph{soumis} n'est autorisé à faire une proposition que s'il a des connaissances sur les préférences de l'autres,  communiqués par des \emph{StatePreferences}, qui lui permettront de prendre une décision équitable. cet algorithme traduit les comportements présentés dans les principes 1 et 3. 
 				
-				\item \emph{AskPreference}: Comme présenté dans le principe 3,l'agent est \emph{soumis} collecte le plus d'informations possibles sur les préférences de son interlocuteur. 
-				\item \emph{StatePreference}: L'agent est \emph{peer} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
+				\item \emph{AskPreference}: Comme présenté dans le principe 3, l'agent est \emph{soumis} collecte le plus d'informations possibles sur les préférences de son interlocuteur. 
+				\item \emph{StatePreference}: L'agent est \emph{neutre} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
 				
 			\end{itemize}
 			
@@ -165,7 +165,37 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 			\end{itemize}	
 		%----------------------------------------------------------------
 			
-	\subsubsection{Exemple}	Exemple de fdialogue généré
+	\subsubsection{Exemple}
+		Nous présentons un dialogue généré en utilisant notre modèle de dialogue. Deux agents\textit{A} et \textit{B}
+		A: "Let's go to a Chinese restaurant."
+		
+		B: "I like Italian more than Chinese restaurants."
+		
+		A: "Let's go to a quiet restaurant."
+		
+		B: "I don't like quiet restaurants."
+		
+		A: "Let's go to a cheap restaurant."
+		
+		B: "Do you like quiet or lively restaurants? "
+		
+		A: "I like quiet restaurants."
+		
+		B: "I like lively restaurants."
+		
+		A: "Let's go to the Samura restaurant. It's a lively, cheap Japanese restaurant."
+		
+		B: "What kind of cuisine do you like?"
+		
+		A: "I like Chinese restaurants."
+		
+		B: "I like Italian restaurants."
+		
+		A: "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
+		
+		B: "Okay. Let's go to the Dragon restaurant."
+		
+		A: "Okay. I'll call to book a table."
 	
 	\subsection{Limites des arbres de dialogue}
 		Parler de l'étude qui a montré une ambiguité dans la perception des comportement et la capacité à isoler l'impact de chaque principe sur la prise de décision
