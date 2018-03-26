@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.ToM.ProbalisticModel;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import com.sun.scenario.effect.impl.prism.PrCropPeer;
 
@@ -98,24 +99,11 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 
 //		System.out.println("-------------------------------------------------------------------------------------");
-		if ( utterance != null )  System.out.println(utterance.format() + "\n");
+	//	if ( utterance != null )  System.out.println(utterance.format() + "\n");
 //		//System.out.println(otherModel.getHypotheses());
 
 //
-//				try {
-//					Thread.currentThread().sleep(1000);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				int time = new Random().nextInt(500) + 550;
-//				//pause(time);
-//				try {
-//					Thread.sleep(time);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+	
 
 		if (utterance != null){
 			double other = guess(utterance, getOther());
@@ -136,12 +124,18 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 			}
 
-			System.out.println( this.getName() +" predicted the pow of the other to : " + other);
+		//	System.out.println( this.getName() +" predicted the pow of the other to : " + other);
 
 		}
 
 
 		Utterance u = respondTo(utterance, disco);
+		try {
+			TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return u ;
 	}

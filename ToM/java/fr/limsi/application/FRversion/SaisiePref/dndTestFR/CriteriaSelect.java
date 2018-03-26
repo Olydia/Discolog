@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -107,14 +109,29 @@ public class CriteriaSelect extends JDialog {
 
 		ListTransferHandler h = new ListTransferHandler(toBeRanked);
 		toBeRanked.setTransferHandler(h);
-		ranked.setTransferHandler(h);
-        
+		ranked.setTransferHandler(h);		
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		
 		this.setMinimumSize(new Dimension(300, 350));
-
+		this.showOnScreen(1);
 		this.pack();
 
+	}
+	
+	public void showOnScreen(int screen) {
+	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    GraphicsDevice[] gd = ge.getScreenDevices();
+	    int width = 0, height = 0;
+	    if( screen > -1 && screen < gd.length ) {
+	        width = gd[screen].getDefaultConfiguration().getBounds().width;
+	        height = gd[screen].getDefaultConfiguration().getBounds().height;
+	        this.setLocation(
+	            ((width / 2) - (this.getSize().width / 2)) + gd[screen].getDefaultConfiguration().getBounds().x, 
+	            ((height / 2) - (this.getSize().height / 2)) + gd[screen].getDefaultConfiguration().getBounds().y
+	        );
+	    } else {
+	        throw new RuntimeException( "No Screens Found" );
+	    }
 	}
 	
 	public ListModel<String> getValues(){

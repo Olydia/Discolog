@@ -1,6 +1,8 @@
 package fr.limsi.application.FRversion;
 
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.List;
 
@@ -144,6 +146,8 @@ public class Acceuil1 extends Application {
 				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
 				username+".txt");
 				
+				   
+				    
 				PrefAcceuil frame = new PrefAcceuil(username, history);
 				Stage acceuil = new Stage();
 				frame.start(acceuil);
