@@ -1666,6 +1666,8 @@ public class FenetreBas extends AnchorPane{
 						File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 						File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
 								username+".txt");
+						System.out.println("Nombbre de tours :" +
+								agent.getNegotiation().getContext().getNumberTour());
 						sauvegarde(fichier1, fichier2);
 						nextStep(nbAgents);
 					}

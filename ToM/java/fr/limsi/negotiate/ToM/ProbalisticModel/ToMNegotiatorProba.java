@@ -1,6 +1,7 @@
 package fr.limsi.negotiate.ToM.ProbalisticModel;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import com.sun.scenario.effect.impl.prism.PrCropPeer;
 
@@ -98,24 +99,16 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public Utterance respond (Utterance utterance, Disco disco) {
 
 //		System.out.println("-------------------------------------------------------------------------------------");
-//		if ( utterance != null )  System.out.println(utterance.format() + "\n");
+	if ( utterance != null )  System.out.println(utterance.format() + "\n");
 //		//System.out.println(otherModel.getHypotheses());
+		int time = new Random().nextInt(2) + 1;
 
-
-				try {
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				int time = new Random().nextInt(500) + 550;
-				//pause(time);
-				try {
-					Thread.sleep(time);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//		try {
+//			TimeUnit.SECONDS.sleep(time);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		if (utterance != null){
 			double other = guess(utterance, getOther());

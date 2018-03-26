@@ -12,16 +12,15 @@ import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.ToM.preferencesGeneration.Models;
 import fr.limsi.negotiate.restaurant.Restaurant;
-import fr.limsi.negotiate.toyExample.*;
 
 public class TestDialogues {
 	// creer les models de pref
-	public static int ID = 0;
+	public static int ID = 1000;
 	public static void excuteTests(Negotiation<? extends Option> negotiation, 
 		Negotiation<? extends Option> negotiation2){
 		String local=System.getProperty("user.dir");
 
-		String path = local+"/Exp_Tom/" ;
+		String path = local+"/Exp_Tom/newTests" ;
 		String csvPath = path+"/CSV/results.csv";
 		FileAppend csvFile = new FileAppend(csvPath);
 		csvFile.write("ID;ToMAgent;NegotiatorAgent;FinalGuess;GuessedValues \n");
@@ -42,7 +41,7 @@ public class TestDialogues {
 
 				Dual dual = new Dual(
 						new ToMNegotiatorProba("Agent1", negotiation, ADAPT.NONADAPT),
-						new NegotiatorAgent("Agent2", negotiation2),
+						new ToMNegotiatorProba("Agent2", negotiation2, ADAPT.NONADAPT),
 						false);
 
 				// note not loading Negotiotion.xml!
@@ -65,9 +64,16 @@ public class TestDialogues {
 					List<Double> pow =((ToMNegotiatorProba) dual.interaction1.getSystem()).getGuessed();
 					double finalOther = ((ToMNegotiatorProba) dual.interaction1.getSystem()).getOther();
 					String guessedPow = pow.toString();
+					
+					List<Double> pow2 =((ToMNegotiatorProba) dual.interaction2.getSystem()).getGuessed();
+					double finalOther2 = ((ToMNegotiatorProba) dual.interaction2.getSystem()).getOther();
+					String guessedPow2 = pow2.toString();
 					//csvFile.write(ID+";"+relationAgent2 + ";"+relationAgent1 +";"+finalOther+";"+guessedPow+"\n");
 					csvFile.write(ID+";"+relationAgent1 + ";"+relationAgent2 +";"+finalOther+";"+guessedPow+"\n");
+					csvFile.write(ID+";"+relationAgent2 + ";"+relationAgent1 +";"+finalOther2+";"+guessedPow2+"\n");
+
 					file.write(guessedPow);
+					file.write(guessedPow2);
 					file.write("Time execution : "+ (endTime - startTime));
 
 
@@ -90,12 +96,12 @@ public class TestDialogues {
 
 	public static void main(String[] args) {
 
-		Models<ToyRestaurant> m = new Models<ToyRestaurant>();
-		m.generateSelfs(ToyRestaurant.A_CITADELLA.getCriteria(), ToyRestaurant.class);
-		for (Models<ToyRestaurant>.Tuple<List<Self_Ci<Criterion>>,
+		Models<Restaurant> m = new Models<Restaurant>();
+		m.generateSelfs(Restaurant.A_CITADELLA.getCriteria(), Restaurant.class);
+		for (Models<Restaurant>.Tuple<List<Self_Ci<Criterion>>,
 				List<Self_Ci<Criterion>> > e:m.getFinalList()){
-			excuteTests(m.createNegotiation(e.a, ToyRestaurant.class),
-					m.createNegotiation(e.b, ToyRestaurant.class));
+			excuteTests(m.createNegotiation(e.a, Restaurant.class),
+					m.createNegotiation(e.b, Restaurant.class));
 		}
 
 		//		

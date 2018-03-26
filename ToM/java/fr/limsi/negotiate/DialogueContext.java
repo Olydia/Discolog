@@ -47,7 +47,22 @@ public class DialogueContext {
 
 		return discussedCriteria;
 	} 
-
+	/**
+	 * 
+	 * @return le nomber de tour de parole 
+	 */
+	public int getNumberTour (){
+		int nb = 0;
+		for (NegotiationUtterance u: history){
+			if(u instanceof RejectPropose || 
+					u instanceof AcceptPropose ||
+					u instanceof RejectState)
+				nb+=2;
+			else
+				nb ++;
+		}
+		return nb;
+	}
 	public void setDiscussedCriteria(List<Class<? extends Criterion>> discussedCriteria) {
 
 		this.discussedCriteria = discussedCriteria;
