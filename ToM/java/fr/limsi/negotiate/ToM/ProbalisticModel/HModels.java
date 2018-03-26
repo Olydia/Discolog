@@ -34,13 +34,13 @@ public class HModels {
 	}
 
 
-
+	
 	public double updateReject(List<PowHypothesis> models, 
 			Proposal rejected, double previousPow){
 		if(rejected instanceof CriterionProposal){
-//			Criterion elem = (Criterion) rejected.getValue();
-//			return reviseHypothese(models, new Statement<Criterion>
-//			(elem, Satisfiable.FALSE), previousPow);
+			Criterion elem = (Criterion) rejected.getValue();
+			return reviseHypothese(models, new Statement<Criterion>
+			(elem, Satisfiable.FALSE), previousPow);
 			
 		}
 		// Creer une fonction 
@@ -88,14 +88,26 @@ public class HModels {
 
 	}
 
+	public boolean isEmpty(){
+
+		for(PowHypothesis p : hypotheses){
+			if(!p.getHypothesis().isEmpty())
+				return false;
+		}
+		return true;
+		
+	}
 	public double reviseOtherPow(Map<Double, Float> values, double previousPow){
+		
+		//dans le cas ou il n'ya plus d'hypothese
+		if(isEmpty())
+			return 0.5;
+		
 		Map<Double, Float> result = sortPower(values); 
 		//System.out.println(result);
-		if(result.values().isEmpty()){
-			//System.out.println("khlassou les hypotheses");
-			return previousPow;
+		
 
-		}
+		
 		float max = java.util.Collections.max(result.values());
 		
 		List<Double> keys = new ArrayList<Double>();

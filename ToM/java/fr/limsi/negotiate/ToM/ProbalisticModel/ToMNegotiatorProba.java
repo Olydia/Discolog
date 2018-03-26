@@ -98,10 +98,10 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	@Override
 	public Utterance respond (Utterance utterance, Disco disco) {
 
-//		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.println("-------------------------------------------------------------------------------------");
 	if ( utterance != null )  System.out.println(utterance.format() + "\n");
-//		//System.out.println(otherModel.getHypotheses());
-		int time = new Random().nextInt(2) + 1;
+	//	System.out.println(otherModel.getHypotheses());
+//		int time = new Random().nextInt(2) + 1;
 
 //		try {
 //			TimeUnit.SECONDS.sleep(time);
@@ -133,7 +133,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 		}
 
-
+		System.out.println(this.getName() + " a predit que l'autre pow est " + other );
 		Utterance u = respondTo(utterance, disco);
 
 		return u ;
@@ -176,7 +176,9 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 	public double guess(Utterance u, double previousPow){
 
 		//System.out.println(u.format());
-
+		if(otherModel.isEmpty())
+			return 0.5;
+		
 		List<PowHypothesis> models = leadDialogue();
 		// si c'est superieurs r�cuperer uniquement les pow> 0.5 et les donner en entr�e
 
@@ -188,8 +190,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			return this.otherModel.reviseHypothese(models, c, previousPow);
 
 		}else if(u instanceof Reject){
-			//return this.otherModel.updateReject(models, ((Reject) u).getProposal(), previousPow);
-			return this.updateProposal(models,((Reject) u).getProposal(), false, previousPow);
+			return this.otherModel.updateReject(models, ((Reject) u).getProposal(), previousPow);
+
 
 
 		}else if (u instanceof Accept || u instanceof Propose){
@@ -198,8 +200,7 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 		}else if (u instanceof AcceptPropose){
 			// Il manque le cas du propose 
-			updateProposal(models, ((AcceptPropose) u).getAccepted(),true, previousPow);
-			return updateProposal(models, ((AcceptPropose) u).getProposal() ,true, previousPow);
+			return updateProposal(models, ((AcceptPropose) u).getAccepted(), true, previousPow);
 
 
 		}else if(u instanceof RejectState){
@@ -207,21 +208,17 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 			Proposal reject = ((RejectState) u).getProposal();
 			Criterion justify = ((RejectState) u).getJustify();
 			if(reject.getValue().equals(justify))
-				return this.updateProposal(models,reject, false, previousPow);
-			//this.otherModel.updateReject(models, reject, previousPow);
+				return this.otherModel.updateReject(models, reject, previousPow);
 
 			else{
-				//this.otherModel.updateReject(models, reject, previousPow);
-				this.updateProposal(models,reject, false, previousPow);
+				this.otherModel.updateReject(models, reject, previousPow);
 				return this.otherModel.reviseHypothese(new Statement<Criterion>
 				(justify, Satisfiable.FALSE), previousPow);
 			}
 
 		}else if(u instanceof RejectPropose){
-			//this.otherModel.updateReject(models, ((RejectPropose) u).getReject(), previousPow);
-			this.updateProposal(models,((RejectPropose) u).getProposal(), false, previousPow);
+			this.otherModel.updateReject(models, ((RejectPropose) u).getReject(), previousPow);
 			return this.updateProposal(models,((RejectPropose) u).getProposal(), true, previousPow);
-
 		}else if(u instanceof AskPreference){
 			Map<Double, Float> values =this.otherModel.getHypothesesSize(models); 
 			//System.out.println(values);// get the number of elements divided by total
@@ -253,8 +250,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 		List<CriterionProposal> accepted = this.getNegotiation().getValueNegotiation(cType).
 				getProposalsWithStatus(Status.ACCEPTED);
 
-		List<CriterionProposal> rejected = this.getNegotiation().getValueNegotiation(cType).
-				getProposalsWithStatus(Status.REJECTED);
+//		List<CriterionProposal> rejected = this.getNegotiation().getValueNegotiation(cType).
+//				getProposalsWithStatus(Status.REJECTED);
 
 		// update case Propose or Accept
 		if(accept){
@@ -267,17 +264,17 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 								getNegotiation().getContext().isFirstMove(true)));
 			}
 		}
-		// case Reject
-		else{
-			for(PowHypothesis model: models){
-
-				double self = this.getNegotiation().computeSelf(model.getPow());
-
-				acc.put(model.getPow(),
-						model.scoreReject(c.getValue(),rejected, accepted, self, 
-								getNegotiation().getContext().isFirstMove(true)));
-			}
-		}
+//		// case Reject
+//		else{
+//			for(PowHypothesis model: models){
+//
+//				double self = this.getNegotiation().computeSelf(model.getPow());
+//
+//				acc.put(model.getPow(),
+//						model.scoreReject(c.getValue(),rejected, accepted, self, 
+//								getNegotiation().getContext().isFirstMove(true)));
+//			}
+//		}
 		//System.out.println("Values of acceptability " + acc);
 		return acc;
 	}
@@ -294,7 +291,6 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 		return previousPow;
 	}
-
 
 	public float getProposePropotion(){
 		List<NegotiationUtterance> otherUtt = this.getNegotiation().getContext().getHistory(true);

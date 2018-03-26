@@ -15,7 +15,7 @@ import fr.limsi.negotiate.restaurant.Restaurant;
 
 public class TestDialogues {
 	// creer les models de pref
-	public static int ID = 2000;
+	public static int ID = 300;
 	public static void excuteTests(Negotiation<? extends Option> negotiation, 
 		Negotiation<? extends Option> negotiation2){
 		String local=System.getProperty("user.dir");
