@@ -107,12 +107,15 @@ public class HModels {
 		//System.out.println(result);
 		
 
+		if(result.values().isEmpty())
+			return 0.5;
 		
 		float max = java.util.Collections.max(result.values());
 		
 		List<Double> keys = new ArrayList<Double>();
 
-		for(Iterator<Entry<Double, Float>> it = result.entrySet().iterator(); it.hasNext();){
+		for(Iterator<Entry<Double, Float>> it =
+				result.entrySet().iterator(); it.hasNext();){
 
 			Entry<Double, Float> entry = it.next();
 

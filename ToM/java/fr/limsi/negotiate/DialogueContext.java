@@ -194,24 +194,15 @@ public class DialogueContext {
 	public Proposal getLastProposal(boolean isSelf){
 		for (int i = history.size()-1; i>= 0; i--){
 			NegotiationUtterance utt = history.get(i);
-			if(utt instanceof Propose && utt.getExternal().equals(!isSelf))
+			if(isProposalUtt(utt)&& utt.getExternal().equals(!isSelf))
 				return  (Proposal) utt.getValue();
 		}
 		return null;
 
 	}
-	
-	public boolean isFirstProposal(boolean external){
-		for (NegotiationUtterance utt : history){
-			
-			if(utt instanceof Propose && utt.getExternal().equals(external)){
-				Proposal propsal =  (Proposal) utt.getValue();
-				return propsal.equals(getLastProposal(!external));
 
-			}
-		}
-		return false;
-
+	public boolean isProposalUtt(NegotiationUtterance utt){
+		return (utt instanceof Propose || utt instanceof RejectPropose || utt instanceof AcceptPropose);
 	}
 
 	public List<Proposal> getNonAcceptedProposals(){

@@ -15,13 +15,13 @@ import fr.limsi.negotiate.restaurant.Restaurant;
 
 public class TestDialogues {
 	// creer les models de pref
-	public static int ID = 300;
+	public static int ID = 500;
 	public static void excuteTests(Negotiation<? extends Option> negotiation, 
 		Negotiation<? extends Option> negotiation2){
 		String local=System.getProperty("user.dir");
 
 		String path = local+"/Exp_Tom/newTests" ;
-		String csvPath = path+"/CSV/results.csv";
+		String csvPath = path+"/CSV/resultsmimic.csv";
 		FileAppend csvFile = new FileAppend(csvPath);
 		csvFile.write("ID;ToMAgent;NegotiatorAgent;FinalGuess;GuessedValues \n");
 		//initiate the relation of dominance
@@ -41,16 +41,17 @@ public class TestDialogues {
 
 				Dual dual = new Dual(
 						new ToMNegotiatorProba("Agent1", negotiation, ADAPT.NONADAPT),
-						new ToMNegotiatorProba("Agent2", negotiation2, ADAPT.NONADAPT),
+						new ToMNegotiatorProba("Agent2", negotiation2, ADAPT.MIMIC),
 						false);
 
 				// note not loading Negotiotion.xml!
 				dual.interaction1.load("models/Negotiate.xml");
 				dual.interaction2.load("models/Negotiate.xml");
-				((NegotiatorAgent) dual.interaction2.getSystem()).setRelation(relationAgent1);
-				((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(relationAgent2);
-				((NegotiatorAgent) dual.interaction2.getSystem()).getNegotiation().setDominance(relationAgent1);
-				((ToMNegotiatorProba) dual.interaction1.getSystem()).getNegotiation().setDominance(relationAgent2);
+				((ToMNegotiatorProba) dual.interaction2.getSystem()).setRelation(relationAgent2);
+				((ToMNegotiatorProba) dual.interaction2.getSystem()).getNegotiation().setDominance(relationAgent2);
+
+				((ToMNegotiatorProba) dual.interaction1.getSystem()).setRelation(relationAgent1);
+				((ToMNegotiatorProba) dual.interaction1.getSystem()).getNegotiation().setDominance(relationAgent1);
 				long startTime = System.currentTimeMillis();
 				dual.start();
 				try {
@@ -65,15 +66,14 @@ public class TestDialogues {
 					double finalOther = ((ToMNegotiatorProba) dual.interaction1.getSystem()).getOther();
 					String guessedPow = pow.toString();
 					
-					List<Double> pow2 =((ToMNegotiatorProba) dual.interaction2.getSystem()).getGuessed();
-					double finalOther2 = ((ToMNegotiatorProba) dual.interaction2.getSystem()).getOther();
-					String guessedPow2 = pow2.toString();
-					//csvFile.write(ID+";"+relationAgent2 + ";"+relationAgent1 +";"+finalOther+";"+guessedPow+"\n");
+//					List<Double> pow2 =((ToMNegotiatorProba) dual.interaction2.getSystem()).getGuessed();
+//					double finalOther2 = ((ToMNegotiatorProba) dual.interaction2.getSystem()).getOther();
+//					String guessedPow2 = pow2.toString();
 					csvFile.write(ID+";"+relationAgent1 + ";"+relationAgent2 +";"+finalOther+";"+guessedPow+"\n");
-					csvFile.write(ID+";"+relationAgent2 + ";"+relationAgent1 +";"+finalOther2+";"+guessedPow2+"\n");
+				//	csvFile.write(ID+";"+relationAgent2 + ";"+relationAgent1 +";"+finalOther2+";"+guessedPow2+"\n");
 
 					file.write(guessedPow);
-					file.write(guessedPow2);
+					//file.write(guessedPow2);
 					file.write("Time execution : "+ (endTime - startTime));
 
 
