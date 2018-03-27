@@ -15,6 +15,7 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba;
 import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.restaurant.FR.*;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -83,7 +84,8 @@ public class FenetreBas extends AnchorPane{
 
 
 		for (int i=0; i<criteria.size();i++){
-			if (ch.toUpperCase().equals(criteria.get(i))) return true;
+			if (ch.toUpperCase().equals(criteria.get(i))) 
+				return true;
 		}
 		return false;
 	}
@@ -243,7 +245,7 @@ public class FenetreBas extends AnchorPane{
 		scene.getStylesheets().add
 		(Acceuil1.class.getResource("application2.css").toExternalForm());
 
-		for (int i=0;i<8;i++){
+		for (int i=0;i<details.length;i++){
 			details[i]="";
 		}
 		details[1]=situation;
@@ -1179,26 +1181,14 @@ public class FenetreBas extends AnchorPane{
 				c2Button.setStyle(on);
 				c4Button.setStyle(off);
 				colorButtons(c2Buttons);
-				if (situation=="restaurant")
-				{
-
-					for (int i=0;i<3;i++){
+					for (int i=0;i<c2HBoxs.size();i++){
 
 						setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
 						setLeftAnchor(c2HBoxs.get(i),300.0+250.0*i);
 						list.add(c2HBoxs.get(i));
 					}
 
-				}
-				else{
-					for (int i=0;i<5;i++){
-
-						setTopAnchor(c2HBoxs.get(i),getTopAnchor(c2HBox)+50.0);
-						setLeftAnchor(c2HBoxs.get(i),200.0+150.0*i);
-						list.add(c2HBoxs.get(i));
-					}
-				}
-
+				
 			}
 		});
 
@@ -1213,23 +1203,15 @@ public class FenetreBas extends AnchorPane{
 				c2Button.setStyle(off);
 				c4Button.setStyle(off);
 				colorButtons(c3Buttons);
-				if (situation=="restaurant")
-				{
 
-					for (int i=0;i<7;i++){
+
+					for (int i=0;i<c3HBoxs.size();i++){
 						setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
 						setLeftAnchor(c3HBoxs.get(i),150.0+150.0*i);
 						list.add(c3HBoxs.get(i));
 					}
 
-				}
-				else{
-					for (int i=0;i<5;i++){
-						setTopAnchor(c3HBoxs.get(i),getTopAnchor(c3HBox)+50.0);
-						setLeftAnchor(c3HBoxs.get(i),200.0+150.0*i);
-						list.add(c3HBoxs.get(i));
-					}
-				}
+				
 
 			}
 		});
@@ -1245,7 +1227,7 @@ public class FenetreBas extends AnchorPane{
 				c2Button.setStyle(off);
 				c4Button.setStyle(on);
 				colorButtons(c4Buttons);
-				for (int i=0;i<5;i++){
+				for (int i=0;i<c4HBoxs.size();i++){
 					setTopAnchor(c4HBoxs.get(i),getTopAnchor(c4HBox)+50.0);
 					setLeftAnchor(c4HBoxs.get(i),200.0+200.0*i);
 					list.add(c4HBoxs.get(i));
@@ -1332,22 +1314,17 @@ public class FenetreBas extends AnchorPane{
 				c42Button.setStyle(off);
 				colorButtons(c12Buttons);
 
-				if (situation=="restaurant")
-				{
+				
 
-					for (int i=0;i<4;i++){
+
+					for (int i=0;i<c12HBoxs.size();i++){
 						setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
 						setLeftAnchor(c12HBoxs.get(i),300.0+200.0*i);
 						list.add(c12HBoxs.get(i));
-					}
+				
 
-				}
-				else{
-					for (int i=0;i<6;i++){
-						setTopAnchor(c12HBoxs.get(i),getTopAnchor(c12HBox)+50.0);
-						setLeftAnchor(c12HBoxs.get(i),200.0+150.0*i);
-						list.add(c12HBoxs.get(i));
-					}
+						
+						
 				}
 			}
 		});
@@ -1363,24 +1340,15 @@ public class FenetreBas extends AnchorPane{
 				c22Button.setStyle(on);
 				c42Button.setStyle(off);
 				colorButtons(c22Buttons);
-				if (situation=="restaurant")
-				{
 
-					for (int i=0;i<3;i++){
+
+					for (int i=0;i<c22HBoxs.size();i++){
 						setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
 						setLeftAnchor(c22HBoxs.get(i),300.0+250.0*i);
 						list.add(c22HBoxs.get(i));
 					}
 
-				}
-				else{
-					for (int i=0;i<5;i++){
-						setTopAnchor(c22HBoxs.get(i),getTopAnchor(c22HBox)+50.0);
-						setLeftAnchor(c22HBoxs.get(i),200.0+150.0*i);
-						list.add(c22HBoxs.get(i));
-					}
-				}
-
+	
 			}
 		});
 
@@ -1395,23 +1363,15 @@ public class FenetreBas extends AnchorPane{
 				c22Button.setStyle(off);
 				c42Button.setStyle(off);
 				colorButtons(c32Buttons);
-				if (situation=="restaurant")
-				{
 
-					for (int i=0;i<7;i++){
+
+					for (int i=0;i<c32HBoxs.size();i++){
 						setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
 						setLeftAnchor(c32HBoxs.get(i),150.0+150.0*i);
 						list.add(c32HBoxs.get(i));
 					}
 
-				}
-				else{
-					for (int i=0;i<5;i++){
-						setTopAnchor(c32HBoxs.get(i),getTopAnchor(c32HBox)+50.0);
-						setLeftAnchor(c32HBoxs.get(i),200.0+150.0*i);
-						list.add(c32HBoxs.get(i));
-					}
-				}
+				
 
 			}
 		});
@@ -1427,7 +1387,8 @@ public class FenetreBas extends AnchorPane{
 				c22Button.setStyle(off);
 				c42Button.setStyle(on);
 				colorButtons(c42Buttons);
-				for (int i=0;i<5;i++){
+				
+				for (int i=0;i<c42HBoxs.size();i++){
 					setTopAnchor(c42HBoxs.get(i),getTopAnchor(c42HBox)+50.0);
 					setLeftAnchor(c42HBoxs.get(i),200.0+200.0*i);
 					list.add(c42HBoxs.get(i));
@@ -1656,7 +1617,7 @@ public class FenetreBas extends AnchorPane{
 					list.add(errorLabel);
 				}
 				else{
-					//System.out.println(command);
+					System.err.println(command);
 					interaction.getConsole().execute(command);
 					boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 					interaction.getSystem().respond(interaction, false, guess);
@@ -1666,9 +1627,16 @@ public class FenetreBas extends AnchorPane{
 						File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 						File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
 								username+".txt");
-						System.out.println("Nombbre de tours :" +
-								agent.getNegotiation().getContext().getNumberTour());
+						WriteHistory writer = new WriteHistory();
+
+						String donne = "\n Nombre de tours : " +
+								agent.getNegotiation().getContext().getNumberTour();
+						donne += " \n power trouvé : "+ agent.getOther() + " \n valeurs power "+ agent.getGuessed();
+						
+						
 						sauvegarde(fichier1, fichier2);
+						writer.write(donne, fichier2);
+						
 						nextStep(nbAgents);
 					}
 				}
@@ -1694,6 +1662,7 @@ public class FenetreBas extends AnchorPane{
 				if (result.isPresent()){
 					if(result.get().equals(passWord)){
 						Stage chatStage2=new Stage();
+						Stage chatStage3=new Stage();
 
 						switch(nbAgents){
 						case(0):{
@@ -1714,21 +1683,25 @@ public class FenetreBas extends AnchorPane{
 						case(1):{
 							FenetreHaut chat3 = new FenetreHaut("Kevin",username, ADAPT.NONADAPT);
 							chat3.situation="restaurant";
-							Stage chatStage3=new Stage();
 
 							String kevin = "--------------------------------------------- \n \n"+
 									"Preferences of agent Kevin \n \n" +
 									PrefAcceuil.negotiators.get(2).printPreferences();
 
 							writer.write(kevin, fichier2);
+							
 							chatStage2.hide();
+							
 							chat3.setPrefModel(PrefAcceuil.getNegotiators().get(2));
 							chat3.start(chatStage3);
 
 							break;
 						}
-						default: 
+						default: {
+					        Platform.exit();
 							break;
+							
+						}
 
 						}
 					} 

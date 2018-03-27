@@ -19,11 +19,11 @@ public class ModelDePreferencesTotal {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.CORÉEN);
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.JAPONAIS);
+		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.COREEN);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.JAPONAIS);
 		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.MEXICAIN);
-		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURQUE);
-		d1_cuisine.addPreference(Cuisine.TURQUE, Cuisine.ITALIEN);
+		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.ITALIEN);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
 //		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.C);
 //		d1_cuisine.addPreference(Cuisine.C, Cuisine.K);
@@ -79,12 +79,12 @@ public class ModelDePreferencesTotal {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.TURQUE, Cuisine.MEXICAIN);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.MEXICAIN);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
 		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.CHINOIS);
-		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.CORÉEN);
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.JAPONAIS);
+		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.COREEN);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.JAPONAIS);
 
 
 
@@ -139,16 +139,16 @@ public class ModelDePreferencesTotal {
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
 		d1_cuisine.setType(Cuisine.class);
 		
-		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.CORÉEN);
-		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.CORÉEN);
+		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.COREEN);
+		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.JAPONAIS);
 		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.ITALIEN);
 		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.MEXICAIN);
-		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURQUE);
+		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.FRANÇAIS);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.JAPONAIS);
-		d1_cuisine.addPreference(Cuisine.TURQUE, Cuisine.CORÉEN);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.COREEN);
 
 
 
@@ -210,11 +210,11 @@ public class ModelDePreferencesTotal {
 //		d4_cuisine.addPreference(Cuisine.JAPANESE, Cuisine.FRENCH);
 		
 		d4_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.MEXICAIN);
-		d4_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.CORÉEN);
-		d4_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.MEXICAIN);
-		d4_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.TURQUE);
+		d4_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.COREEN);
+		d4_cuisine.addPreference(Cuisine.COREEN, Cuisine.MEXICAIN);
+		d4_cuisine.addPreference(Cuisine.COREEN, Cuisine.TURC);
 		d4_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
-		d4_cuisine.addPreference(Cuisine.TURQUE, Cuisine.ITALIEN);
+		d4_cuisine.addPreference(Cuisine.TURC, Cuisine.ITALIEN);
 		d4_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
 
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d4_cuisine);

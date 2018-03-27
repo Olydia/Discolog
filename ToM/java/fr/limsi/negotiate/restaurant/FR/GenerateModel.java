@@ -45,12 +45,12 @@ public class GenerateModel {
 		d1_criteria.addPreference(Prix.class, Cuisine.class);
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.CHINOIS);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.CHINOIS);
 		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.CHINOIS);
-		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.CORÉEN);
+		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
-		d1_cuisine.addPreference(Cuisine.TURQUE, Cuisine.JAPONAIS);
-		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURQUE);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.JAPONAIS);
+		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.FRANÇAIS);
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
@@ -81,13 +81,13 @@ public class GenerateModel {
 		d1_criteria.addPreference(Prix.class, Ambiance.class);
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.CORÉEN);
+		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.JAPONAIS);
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.FRANÇAIS);
-		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.TURQUE);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.FRANÇAIS);
+		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.MEXICAIN);
 		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.ITALIEN);
-		d1_cuisine.addPreference(Cuisine.TURQUE, Cuisine.MEXICAIN);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.MEXICAIN);
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 
 		Self_Ci<Ambiance> d1_atmosphere = new Self_Ci<Ambiance>(Ambiance.class);
@@ -122,11 +122,11 @@ public class GenerateModel {
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
 		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.FRANÇAIS);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.JAPONAIS);
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.ITALIEN);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.ITALIEN);
 		//d1_cuisine.addPreference(Cuisine.CHINESE, Cuisine.TURKISH));
-		d1_cuisine.addPreference(Cuisine.CORÉEN, Cuisine.MEXICAIN);
-		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURQUE);
-		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.TURQUE);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.MEXICAIN);
+		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
+		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.TURC);
 
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
 

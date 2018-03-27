@@ -2,9 +2,6 @@ package fr.limsi.negotiate.ToM.ProbalisticModel;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
-import com.sun.scenario.effect.impl.prism.PrCropPeer;
-
 import edu.wpi.cetask.Plan;
 import edu.wpi.cetask.Task;
 import edu.wpi.disco.Disco;
@@ -14,8 +11,7 @@ import fr.limsi.negotiate.*;
 import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
-import fr.limsi.negotiate.restaurant.Location;
-import fr.limsi.negotiate.restaurant.FR.Cuisine;
+
 
 
 
@@ -130,13 +126,8 @@ public class ToMNegotiatorProba extends NegotiatorAgent{
 
 
 		Utterance u = respondTo(utterance, disco);
-		try {
-			TimeUnit.SECONDS.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
+		
 		return u ;
 	}
 

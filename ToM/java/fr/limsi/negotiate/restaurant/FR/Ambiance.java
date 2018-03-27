@@ -14,8 +14,6 @@ public enum Ambiance implements Criterion{
 
 	@Override
 	public String toString(){
-		if(this.equals(ANIME))
-			return "anim\u00e9";
 		return this.name().toLowerCase();
 	}
 
@@ -26,7 +24,8 @@ public enum Ambiance implements Criterion{
 	}
 
 	public String afficher(){
-
+		if(this.equals(ANIME))
+			return "anim\u00e9";
 		return StringToUTF8.convertToUTF8(this.toString());
 	}
 

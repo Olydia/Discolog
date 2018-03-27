@@ -4,7 +4,7 @@ import fr.limsi.negotiate.StringToUTF8;
 
 public enum Cuisine implements Criterion {
 
-	CHINOIS, FRANÇAIS,  ITALIEN, JAPONAIS, CORÉEN, MEXICAIN, TURQUE;
+	CHINOIS, FRANÇAIS,  ITALIEN, JAPONAIS, COREEN, MEXICAIN, TURC;
 
 
 	@Override
@@ -40,8 +40,8 @@ public enum Cuisine implements Criterion {
 		case ITALIEN:
 			fr += "italien";
 			break;
-		case TURQUE:
-			fr += "turque";
+		case TURC:
+			fr += "turc";
 			break;
 		case JAPONAIS:
 			fr += "japonais";
@@ -49,7 +49,7 @@ public enum Cuisine implements Criterion {
 		case MEXICAIN:
 			fr += "mexicain";
 			break;
-		case CORÉEN:
+		case COREEN:
 			fr += "cor\u00e9en";
 			break;
 		default:
@@ -66,13 +66,13 @@ public enum Cuisine implements Criterion {
 		case ITALIEN:
 			fr+= "italiens";
 			break;
-		case TURQUE:
+		case TURC:
 			fr += "turques";
 			break;
 		case MEXICAIN:
 			fr += "mexicains";
 			break;
-		case CORÉEN:
+		case COREEN:
 			fr += "cor\u00e9ens";	
 			
 			break;

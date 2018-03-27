@@ -13,7 +13,10 @@ public enum Prix implements Criterion {
    
 	@Override
 	public String toString(){
-		return this.name().toLowerCase();
+		String input = this.name().toLowerCase();
+		input = input.replace("_", " ");
+
+		return input;
 	}
 	
 	@Override

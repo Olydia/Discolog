@@ -224,7 +224,7 @@ public class TutorialBas extends AnchorPane{
 
 		ModelDePreferencesTotal model = new ModelDePreferencesTotal();
 		Negotiation<fr.limsi.negotiate.restaurant.FR.Restaurant> m1 = model.model1();
-		m1.addProposal(new CriterionProposal(true,Cuisine.CORÉEN));
+		m1.addProposal(new CriterionProposal(true,Cuisine.COREEN));
 		ToMNegotiatorProba agent= new ToMNegotiatorProba("Amine", m1, ADAPT.NONADAPT);
 		User user= new User("User");
 		Interaction interaction = new Interaction(
@@ -1112,20 +1112,12 @@ public class TutorialBas extends AnchorPane{
 				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
 				list.addAll(rejectOnlyHBox,rejectStateHBox,rejectProposeHBox);
 
-				answer1.setText("I don't want to go to ");
-				answer3.setText(". Let's rather go to ");
-				answer2.setText("");
-				answer4.setText("");
+
 
 				rejectOnlyButton.setStyle(off);
 				rejectStateButton.setStyle(off);
 				rejectProposeButton.setStyle(on);
 
-				/*setTopAnchor(criterionHBox ,150.0);
-	     		   	setLeftAnchor(criterionHBox ,530.0);
-
-	     		  	setTopAnchor(optionHBox ,150.0);
-	     		   	setLeftAnchor(optionHBox ,730.0);*/
 
 				setTopAnchor(open,150.0);
 				setLeftAnchor(open,400.0);
@@ -1144,15 +1136,6 @@ public class TutorialBas extends AnchorPane{
 
 				setTopAnchor(sendHBox,450.0);
 				setLeftAnchor(sendHBox,600.0);
-
-
-				/*	setTopAnchor(criterion2HBox ,300.0);
-	     		   	setLeftAnchor(criterion2HBox ,530.0);
-
-	     		  	setTopAnchor(option2HBox ,300.0);
-	     		   	setLeftAnchor(option2HBox ,730.0);*/
-
-				// list.addAll(optionHBox,criterionHBox,option2HBox,criterion2HBox);
 
 				list.addAll(rejectLabel,proposeLabel,open,counterproposeOptionHBox,counterproposeValueHBox);
 			}
