@@ -40,7 +40,7 @@ public class FenetreBas extends AnchorPane{
 
 	public String action;
 	private ToMNegotiatorProba agent;
-	static double relation=0.5;
+	static double relation=0.55;
 	private String agentName;
 	private String passWord = "next12";
 	/**
@@ -270,10 +270,10 @@ public class FenetreBas extends AnchorPane{
 		ObservableList<Node> list = getChildren();
 
 		/*The buttons*/
-		Button proposeButton = new Button("Propose");
-		Button acceptButton = new Button("Accept");
-		Button rejectButton = new Button("Reject");
-		Button stateAskButton = new Button("State/Ask");
+		Button proposeButton = new Button("Proposer");
+		Button acceptButton = new Button("Accepter");
+		Button rejectButton = new Button("Rejeter");
+		Button stateAskButton = new Button("Exprimer/demander");
 		Button stopButton = new Button("Mes preferences");
 
 		Button proposeOptionButton = new Button(situation);
@@ -282,11 +282,11 @@ public class FenetreBas extends AnchorPane{
 		Button counterproposeOptionButton = new Button(situation);
 		Button counterproposeValueButton = new Button("crit\u00e8re");
 
-		Button acceptProposeButton = new Button("Accept et Propose");
+		Button acceptProposeButton = new Button("Accepter et Proposer");
 
-		Button rejectOnlyButton = new Button("Juste Reject");
-		Button rejectStateButton = new Button("Reject et expliquer");
-		Button rejectProposeButton = new Button("Reject et contre propose");
+		Button rejectOnlyButton = new Button("Rejecter seulement");
+		Button rejectStateButton = new Button("Rejeter et expliquer pourquoi");
+		Button rejectProposeButton = new Button("Rejeter et contre proposer");
 
 		Button stateButton = new Button("J'aime/ je n'aime pas ...");
 		Button askGeneralButton = new Button("Quel type de ... aimes tu?");
@@ -534,7 +534,7 @@ public class FenetreBas extends AnchorPane{
 		setLeftAnchor(stateAskHBox,800.0);
 
 		setTopAnchor(stopHBox,50.0);
-		setLeftAnchor(stopHBox,950.0);
+		setLeftAnchor(stopHBox,1000.0);
 
 		setTopAnchor(sendHBox,400.0);
 		setLeftAnchor(sendHBox,600.0);

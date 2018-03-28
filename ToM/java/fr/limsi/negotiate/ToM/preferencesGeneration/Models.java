@@ -168,7 +168,7 @@
 		public List<List<Self_Ci<Criterion>>> agentModels(List<List<Self_Ci<Criterion>>> preferences,
 				List<Self_Ci<Criterion>> userPref) {
 	
-			int nbModels = 15;
+			int nbModels = 35;
 			List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
 			List<List<Self_Ci<Criterion>>> agentModels= new ArrayList<>();
 			for(int i=0; i<nbModels; i++){
@@ -330,6 +330,7 @@
 			return nego;
 		}
 		public List<List<Self_Ci<Criterion>>> getMax(List<List<Self_Ci<Criterion>>> elements){
+			
 			Map<List<List<Self_Ci<Criterion>>>, Double> returned = new HashMap<List<List<Self_Ci<Criterion>>>, Double>();
 			for (int i=0; i< elements.size(); i++){
 				for (int j=0; j< elements.size(); j++){
