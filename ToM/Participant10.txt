@@ -1,0 +1,116 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (chic<abordable)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Italien<Japonais), (Chinois<Italien), (Français<Chinois), (Mexicain<Français), (Coreen<Mexicain), (Turc<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(anime<cosy), (romantique<anime), (familial<romantique), (moderne<familial), (calme<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pres de la tour eiffel), (montparnasse<centre de paris), (gare du nord<montparnasse), (pere lachaise<gare du nord)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<chic), (chic<abordable)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Coreen<Français), (Français<Italien), (Italien<Japonais), (Japonais<Chinois), (Chinois<Mexicain), (Mexicain<Turc)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(anime<cosy), (cosy<familial), (familial<romantique), (romantique<moderne), (moderne<calme)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<montparnasse), (montparnasse<gare du nord), (gare du nord<pres de la tour eiffel), (pres de la tour eiffel<pere lachaise)]
+
+    # Mar 28, 2018 11:07:39 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Je propose que nous allions dans un restaurant près du Père lachaise."
+    User says "Je ne veux pas aller dans un restaurant près du Père lachaise. Allons plutôt dans un restaurant près de la tour Eiffel."
+    Bob says "D'accord, allons dans un restaurant près de la tour Eiffel."
+    User says "Quel type de cuisine aimes-tu ?"
+    Bob says "J'aime les restaurants turques."
+    User says "Je propose que nous allions au restaurant Nodaiwa1. c'est un restaurant japonais, abordable avec une ambiance cosy situé près de la tour Eiffel."
+    Bob says "D'accord, allons au restaurant Nodaiwa1."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 8 
+ power trouvé : 0.4000000000000001 
+ valeurs power [0.75, 0.4000000000000001, 0.4000000000000001]--------------------------------------------- 
+ 
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (abordable<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Mexicain<Chinois), (Chinois<Italien), (Italien<Japonais), (Japonais<Coreen), (Coreen<Turc), (Turc<Français)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (cosy<romantique), (romantique<calme), (calme<familial), (familial<anime)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pres de la tour eiffel<montparnasse), (montparnasse<centre de paris), (centre de paris<pere lachaise), (pere lachaise<gare du nord)]
+
+    # Mar 28, 2018 11:14:32 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Arthur says "Je propose que nous allions dans un restaurant près de Gare du Nord."
+  >     User says "Je ne veux pas aller dans un restaurant près de Gare du Nord. Allons plutôt dans un restaurant Dans le centre de Paris."
+    Arthur says "Je ne veux pas aller dans un restaurant Dans le centre de Paris. Allons plutôt dans un restaurant animé."
+    User says "Je propose que nous allions dans un restaurant près de la tour Eiffel."
+    Arthur says "Je ne veux pas aller dans un restaurant près de la tour Eiffel. Allons plutôt dans un restaurant animé."
+    User says "Je propose que nous allions au restaurant Akito. c'est un restaurant japonais, abordable avec une ambiance animé situé près de Gare du Nord."
+    Arthur says "D'accord, allons au restaurant Akito."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 10 
+ power trouvé : 0.75 
+ valeurs power [0.75, 0.75, 0.75]--------------------------------------------- 
+ 
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Mexicain<Français), (Français<Japonais), (Japonais<Italien), (Italien<Chinois), (Chinois<Turc), (Turc<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<romantique), (romantique<familial), (familial<anime), (anime<calme), (calme<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pres de la tour eiffel<centre de paris), (centre de paris<gare du nord), (gare du nord<pere lachaise), (pere lachaise<montparnasse)]
+
+    # Mar 28, 2018 11:20:31 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Kevin says "Je propose que nous allions dans un restaurant près de Montparnasse."
+    User says "Je propose que nous allions dans un restaurant cosy."
+    Kevin says "Je ne veux pas aller dans un restaurant cosy. Allons plutôt dans un restaurant moderne."
+    User says "D'accord, je propose que nous allions dans un restaurant près de la tour Eiffel."
+    Kevin says "Je ne veux pas aller dans un restaurant près de la tour Eiffel. Allons plutôt à un autrerestaurant Gopchang. c'est un restaurant coréen, chic avec une ambiance moderne situé près de la tour Eiffel."
+    User says "Je ne veux pas aller au restaurant Gopchang. Allons plutôt au restaurant Hokkaido. c'est un restaurant japonais, chic avec une ambiance moderne situé près de la tour Eiffel."
+    Kevin says "D'accord, allons au restaurant Hokkaido."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 11 
+ power trouvé : 0.6 
+ valeurs power [0.6, 0.6, 0.6]
