@@ -1,16 +1,14 @@
-ID de la réponse	Date de soumission	Dernière page	Langue de départ	Date de lancement	Date de la dernière action	Merci d'appeler l'expérimentateur pour cette partie.(Seul l'expérimentateur est autorisé à répondre) 	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	Merci d'evaluer chaque affirmation 	
-id	submitdate	lastpage	startlanguage	startdate	datestamp	UserNum	App_SQ001	App_SQ002	App_SQ003	App_SQ004	userConfort_SQ001	userConfort_SQ005	userConfort_SQ002	userConfort_SQ003	userConfort_SQ004	AgentBehavior_SQ001	AgentBehavior_SQ002	AgentBehavior_SQ003	AgentBehavior_SQ004	AgentBehavior_SQ005	AgentBehavior_SQ006	AgentBehavior_SQ007	AgentBehavior_SQ008	AgentBehavior_SQ010	utilisateur_SQ001	utilisateur_SQ002	utilisateur_SQ003	utilisateur_SQ004	utilisateur_SQ005	utilisateur_SQ006	utilisateur_SQ007	utilisateur_SQ008	utilisateur_SQ009	
-1	2018-03-27 14:59:46	4	fr	2018-03-27 14:57:43	2018-03-27 14:59:46	3.0000000000	A5	A5	A1	A1	A4	A4	A4	A4	A1	A4	A3	A5	A5	A4	A3	A4	A2	A2	A1	A5	A2	A1	A5	A5	A5	A4	A4
-2	2018-03-27 15:53:03	4	fr	2018-03-27 15:48:37	2018-03-27 15:53:03	4.0000000000	A4	A4	A5	A1	A4	A4	A4	A4	A2	A4	A4	A3	A4	A2	A3	A2	A3	A2	A4	A3	A2	A4	A4	A3	A4	A3	A4
-3	2018-03-27 16:34:35	4	fr	2018-03-27 16:32:28	2018-03-27 16:34:35	5.0000000000	A4	A4	A1	A1	A4	A4	A4	A4	A2	A4	A1	A4	A4	A2	A2	A2	A2	A2	A4	A2	A4	A4	A3	A2	A3	A2	A4
-4	2018-03-27 17:33:58	4	fr	2018-03-27 17:31:02	2018-03-27 17:33:58	6.0000000000	A2	A3	A1	A1	A2	A2	A2	A3	A1	A2	A5	A2	A3	A2	A3	A3	A4	A2	A5	A2	A4	A5	A3	A2	A3	A2	A4
-5	2018-03-27 18:28:12	4	fr	2018-03-27 18:26:28	2018-03-27 18:28:12	7.0000000000	A4	A5	A2	A2	A4	A4	A4	A5	A2	A4	A4	A4	A4	A3	A3	A3	A4	A2	A4	A3	A2	A4	A3	A2	A3	A4	A4
-6	2018-03-28 10:31:17	4	fr	2018-03-28 10:29:20	2018-03-28 10:31:17	8.0000000000	A5	A1	A1	A5	A2	A2	A1	A2	A3	A2	A4	A4	A4	A4	A5	A4	A4	A2	A1	A4	A1	A4	A4	A2	A2	A4	A4
-7	2018-03-28 10:52:20	4	fr	2018-03-28 10:50:25	2018-03-28 10:52:20	9.0000000000	A4	A4	A4	A4	A4	A4	A4	A4	A2	A4	A3	A4	A4	A3	A2	A3	A3	A2	A4	A4	A4	A4	A4	A3	A4	A4	A4
-8	2018-03-28 11:20:13	4	fr	2018-03-28 11:17:20	2018-03-28 11:20:13	10.0000000000	A4	A5	A1	A1	A5	A4	A4	A5	A1	A2	A4	A1	A1	A4	A3	A4	A4	A2	A4	A2	A4	A5	A2	A2	A2	A2	A4
-9	2018-03-28 11:25:43	4	fr	2018-03-28 11:23:07	2018-03-28 11:25:43	10.0000000000	A2	A3	A1	A1	A5	A4	A3	A5	A1	A2	A4	A2	A2	A4	A4	A4	A4	A2	A4	A2	A4	A4	A2	A2	A2	A2	A4
-10	2018-03-28 13:34:12	4	fr	2018-03-28 13:32:08	2018-03-28 13:34:12	11.0000000000	A5	A1	A1	A1	A2	A2	A2	A3	A3	A5	A1	A5	A5	A1	A2	A1	A1	A2	A1	A5	A1	A1	A4	A5	A4	A4	A4
-11	2018-03-28 14:29:03	4	fr	2018-03-28 14:25:40	2018-03-28 14:29:03	12.0000000000	A4	A5	A1	A1	A4	A4	A5	A4	A1	A4	A2	A5	A5	A5	A2	A5	A4	A2	A4	A2	A5	A5	A2	A5	A1	A5	A4
-12	2018-03-28 16:02:32	4	fr	2018-03-28 16:00:14	2018-03-28 16:02:32	13.0000000000	A4	A5	A1	A3	A5	A5	A5	A5	A1	A5	A1	A4	A5	A2	A1	A2	A2	A2	A4	A2	A2	A4	A3	A4	A4	A4	A4
-13	2018-03-28 17:35:53	4	fr	2018-03-28 17:33:42	2018-03-28 17:35:53	14.0000000000	A4	A3	A1	A1	A3	A2	A2	A2	A2	A3	A4	A3	A2	A5	A3	A5	A4	A2	A4	A2	A3	A4	A2	A2	A2	A2	A4
-14	2018-03-28 18:03:37	4	fr	2018-03-28 18:00:24	2018-03-28 18:03:37	15.0000000000	A4	A4	A1	A5	A4	A2	A2	A2	A3	A4	A4	A4	A4	A4	A4	A3	A4	A2	A1	A2	A4	A4	A5	A5	A5	A5	A4
+id;submitdate;lastpage;startlanguage;startdate;datestamp;UserNum;App_SQ001;App_SQ002;App_SQ003;App_SQ004;userConfort_SQ001;userConfort_SQ005;userConfort_SQ002;userConfort_SQ003;userConfort_SQ004;AgentBehavior_SQ001;AgentBehavior_SQ002;AgentBehavior_SQ003;AgentBehavior_SQ004;AgentBehavior_SQ005;AgentBehavior_SQ006;AgentBehavior_SQ007;AgentBehavior_SQ008;AgentBehavior_SQ010;utilisateur_SQ001;utilisateur_SQ002;utilisateur_SQ003;utilisateur_SQ004;utilisateur_SQ005;utilisateur_SQ006;utilisateur_SQ007;utilisateur_SQ008;utilisateur_SQ009
+1;27/03/2018 14:55;4;fr;27/03/2018 14:53;27/03/2018 14:55;3.0000000000;5;4;3;1;5;5;5;4;1;5;2;3;1;1;1;1;1;2;1;5;1;1;5;5;5;4;3
+2;27/03/2018 15:44;4;fr;27/03/2018 15:38;27/03/2018 15:44;4.0000000000;5;4;2;1;5;5;5;5;1;2;3;2;4;2;2;2;2;2;4;2;1;4;5;3;5;4;3
+3;27/03/2018 16:27;4;fr;27/03/2018 16:24;27/03/2018 16:27;5.0000000000;4;4;5;1;2;4;4;4;2;2;2;4;4;2;5;1;2;2;4;2;4;4;3;2;4;2;3
+4;27/03/2018 17:26;4;fr;27/03/2018 17:22;27/03/2018 17:26;6.0000000000;4;4;1;1;5;3;4;3;1;4;1;2;5;2;2;3;2;2;4;2;4;4;3;1;3;2;3
+5;27/03/2018 18:22;4;fr;27/03/2018 18:19;27/03/2018 18:22;7.0000000000;5;4;3;5;3;3;3;3;4;4;3;4;4;2;3;2;4;2;4;2;3;4;4;4;4;3;3
+6;28/03/2018 10:25;4;fr;28/03/2018 10:23;28/03/2018 10:25;8.0000000000;4;5;1;1;5;5;5;5;4;4;1;2;4;4;2;4;2;1;4;4;4;4;3;1;3;2;3
+7;28/03/2018 10:48;4;fr;28/03/2018 10:46;28/03/2018 10:48;9.0000000000;4;4;4;4;4;4;4;4;2;4;2;4;4;2;2;2;3;2;3;4;2;3;4;3;4;3;3
+8;28/03/2018 11:14;4;fr;28/03/2018 11:10;28/03/2018 11:14;10.0000000000;4;4;1;4;5;5;4;5;5;5;1;5;5;2;1;2;1;2;1;5;1;2;4;3;4;2;3
+9;28/03/2018 13:26;4;fr;28/03/2018 13:22;28/03/2018 13:26;11.0000000000;5;4;2;2;3;4;4;3;3;4;1;3;4;3;2;3;4;2;4;4;2;4;2;2;2;4;3
+10;28/03/2018 14:22;4;fr;28/03/2018 14:20;28/03/2018 14:22;12.0000000000;5;5;2;1;4;4;5;4;1;5;1;5;5;4;1;5;1;2;1;1;1;1;1;4;1;1;3
+11;28/03/2018 15:57;4;fr;28/03/2018 15:53;28/03/2018 15:57;13.0000000000;4;4;2;1;3;4;4;3;2;5;1;4;4;2;2;3;1;1;4;2;4;4;3;2;3;4;3
+12;28/03/2018 17:31;4;fr;28/03/2018 17:28;28/03/2018 17:31;14.0000000000;5;2;1;1;4;4;5;2;2;5;1;5;5;2;1;2;2;2;2;4;1;2;4;4;4;5;3
+13;28/03/2018 17:58;4;fr;28/03/2018 17:56;28/03/2018 17:58;15.0000000000;1;3;1;1;5;4;5;5;1;5;1;5;5;1;1;1;1;2;1;5;1;1;5;3;5;2;3
