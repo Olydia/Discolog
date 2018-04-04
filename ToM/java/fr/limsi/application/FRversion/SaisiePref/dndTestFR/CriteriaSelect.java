@@ -29,9 +29,9 @@ import fr.limsi.negotiate.Criterion;
 public class CriteriaSelect extends JDialog {
 
 	private JLabel welcomText = new JLabel("Toutes choses \u00e9gales par ailleurs,"
-											+ "classez par ordre croissant de vos pr\u00e9ferences "
-											+ "les valeurs suivantes");
-	
+			+ "classez par ordre croissant de vos pr\u00e9ferences "
+			+ "les valeurs suivantes");
+
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());
 	private JList<String> ranked = new JList<>(new DefaultListModel<>());
 	protected JButton confim;
@@ -46,12 +46,12 @@ public class CriteriaSelect extends JDialog {
 	}
 
 	public CriteriaSelect(Class<? extends Criterion> type) {
-	    EmptyBorder border = new EmptyBorder(10, 20, 10, 20);
-	    
-	    toBeRanked.setFont(new Font("Arial", Font.PLAIN, 16));
-	    ranked.setFont(new Font("Arial", Font.PLAIN, 16));
+		EmptyBorder border = new EmptyBorder(10, 20, 10, 20);
 
-	    
+		toBeRanked.setFont(new Font("Arial", Font.PLAIN, 16));
+		ranked.setFont(new Font("Arial", Font.PLAIN, 16));
+
+
 		Font font = new Font("Arial",Font.BOLD,14);
 		welcomText.setFont(font);
 		welcomText.setBorder(border);
@@ -67,8 +67,8 @@ public class CriteriaSelect extends JDialog {
 		}
 
 		//confim.addActionListener(new confirmAction(this));
-	
-		
+
+
 		Box nameBox = Box.createHorizontalBox();
 		nameBox.add(welcomText);
 
@@ -77,7 +77,7 @@ public class CriteriaSelect extends JDialog {
 		toRank.setAlignmentX(Component.CENTER_ALIGNMENT);
 		toRank.setBorder(border);
 		sourceBox.add(toRank);
-		
+
 		sourceBox.add(new JScrollPane(toBeRanked));
 
 		Box destBox = Box.createVerticalBox();
@@ -111,36 +111,38 @@ public class CriteriaSelect extends JDialog {
 		toBeRanked.setTransferHandler(h);
 		ranked.setTransferHandler(h);		
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		
+
 		this.setMinimumSize(new Dimension(300, 350));
 		this.showOnScreen(1);
 		this.pack();
 
 	}
-	
+
 	public void showOnScreen(int screen) {
-	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    GraphicsDevice[] gd = ge.getScreenDevices();
-	    int width = 0, height = 0;
-	    if( screen > -1 && screen < gd.length ) {
-	        width = gd[screen].getDefaultConfiguration().getBounds().width;
-	        height = gd[screen].getDefaultConfiguration().getBounds().height;
-	        this.setLocation(
-	            ((width / 2) - (this.getSize().width / 2)) + gd[screen].getDefaultConfiguration().getBounds().x, 
-	            ((height / 2) - (this.getSize().height / 2)) + gd[screen].getDefaultConfiguration().getBounds().y
-	        );
-	    } else {
-	        throw new RuntimeException( "No Screens Found" );
-	    }
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] gd = ge.getScreenDevices();
+		if(gd.length> 1){
+			int width = 0, height = 0;
+			if( screen > -1 && screen < gd.length ) {
+				width = gd[screen].getDefaultConfiguration().getBounds().width;
+				height = gd[screen].getDefaultConfiguration().getBounds().height;
+				this.setLocation(
+						((width / 2) - (this.getSize().width / 2)) + gd[screen].getDefaultConfiguration().getBounds().x, 
+						((height / 2) - (this.getSize().height / 2)) + gd[screen].getDefaultConfiguration().getBounds().y
+						);
+			} else {
+				throw new RuntimeException( "No Screens Found" );
+			}
+		}
 	}
-	
+
 	public ListModel<String> getValues(){
 		if(this.getSourceList().getModel().getSize()!=0){
 			JOptionPane.showMessageDialog(this, "Merci de classer toutes les valeurs avant de confirmer", "Warning",
-			        JOptionPane.WARNING_MESSAGE);
+					JOptionPane.WARNING_MESSAGE);
 		}
 
-			
+
 		else{
 			//System.out.println(this.getDestList().getModel());
 			return this.getDestList().getModel();
@@ -151,18 +153,18 @@ public class CriteriaSelect extends JDialog {
 
 	public  List<String> asList() {
 		final ListModel<String> model = this.getValues();
-	     return new AbstractList<String>() {
-	          @Override public String get(int index) {
-	              return        model.getElementAt(index);
-	          }
+		return new AbstractList<String>() {
+			@Override public String get(int index) {
+				return        model.getElementAt(index);
+			}
 
 			@Override
 			public int size() {
 				// TODO Auto-generated method stub
 				return model.getSize();
 			}
-	     };
-	 }
+		};
+	}
 
 }
 
