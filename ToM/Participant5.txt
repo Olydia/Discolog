@@ -86,7 +86,8 @@ class fr.limsi.negotiate.restaurant.FR.Localisation
     User says "Je propose que nous allions au restaurant L garbino. c'est un restaurant italien, abordable avec une ambiance animé situé près du Père lachaise."
     Arthur says "D'accord, allons au restaurant L garbino."
 Nous avons trouvé une solution! La négociation est terminée
-Nombre de tours :13power trouvé : 0.4000000000000001valeurs power [0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001]--------------------------------------------- 
+Nombre de tours :13
+power trouvé : 0.4000000000000001valeurs power [0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001, 0.4000000000000001]--------------------------------------------- 
  
 Preferences of agent Kevin 
  
