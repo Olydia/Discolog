@@ -1,37 +1,30 @@
 package fr.limsi.application.FRversion;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
-
+/**
+ * Read a csv file that contains agents preferences and user preferences 
+ * transform them to instances of Negotiation<Restaurant>
+ * 
+ * @author ouldouali
+ *
+ */
 public class CSVReader {
-	
-	public String[] codes = {"BFGF",
-			"BTGT",
-			"BFGT",
-			 "BTGF",
-			 "BFGFAU4",
-			"BTGTAU4",
-			 "BFGTAU4",
-			 "BTGFAU4",
-			 "BFGFAU1+AU2",
-			 "BTGTAU1+AU2",
-			 "BFGTAU1+AU2",
-			 "BTGFAU1+AU2"
-};
-	
-	public static HashMap<String, Double>  parse (String csvFile){
-		
-		HashMap<String, Double>  elements = new HashMap<String, Double> ();
-		BufferedReader br = null;
+	/* Odre des criteres : Prix, Cuisine, Ambiance, Localisation 
+	 */
+
+	public static ArrayList<String[]> parse (String csvFile){
+		ArrayList<String[]> preferences = new ArrayList<String[]>();
+ 		BufferedReader br = null;
         String line = "";
-        String cvsSplitBy = ";";
 
         try {
 
@@ -39,9 +32,12 @@ public class CSVReader {
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
-                String[] country = line.split(cvsSplitBy);
-                elements.put(country[0], Double.valueOf(country[1]));
-              //  System.out.println("code " + country[0] + " , value=" + country[1] + "]");
+            	if(!line.contains("class fr.limsi.negotiate.restaurant") &&  !line.equals("")) {
+            		
+            		preferences.add(nettoyer(line));
+            		
+            	}
+               
 
             }
         } catch (FileNotFoundException e) {
@@ -57,56 +53,31 @@ public class CSVReader {
                 }
             }
         }
-		return elements;
+        return preferences;
 	}
-	public static double [] [] createMatrix(String[] codes, String csvFile){
-		int size= codes.length;
-		double [] [] pvalues = new double [size][size];
-		HashMap<String, Double>  elements = parse(csvFile);
-		
-		for (Map.Entry<String,Double> mapentry : elements.entrySet()) {
-	        String key =  mapentry.getKey();
-	        String[] c =key.split("-");
-	        System.out.println("HashMap : " +c[0] + "  "+ c[1]);
-	        
-	        int ligne = Arrays.asList(codes).indexOf(c[0]);
-	        int colonne = Arrays.asList(codes).indexOf(c[1]);
-	        System.out.println("Dans la liste :" + codes[ligne]+ "  "+ codes[colonne] );
-	       
-	        pvalues[ligne][colonne] =  mapentry.getValue();
-//			System.out.println("clé: "+mapentry.getKey() 
-//	                              + " | valeur: " + mapentry.getValue());
-	        }
-		return pvalues;
-	}
-    public static void main(String[] args) {
-    	String[] b = {"BFGF",
-    			"BTGT",
-    			"BFGT",
-    			 "BTGF",
-    			 "BFGFAU4",
-    			"BTGTAU4",
-    			 "BFGTAU4",
-    			 "BTGFAU4",
-    			 "BFGFAU1+AU2",
-    			 "BTGTAU1+AU2",
-    			 "BFGTAU1+AU2",
-    			 "BTGFAU1+AU2"
-    };
 
-       String csvFile = "/people/ouldouali/Desktop/exemple.csv";
-       double[][] matrix = createMatrix(b, csvFile);
-       System.out.println(b);
-       for (int k = 0; k < b.length; k++)
-    	   System.out.print(b[k] + ";");
-    	   
-       for (int i = 0; i < matrix.length; i++) {
-    	    for (int j = 0; j < matrix[i].length; j++) {
-    	        System.out.print(matrix[i][j] + ";");
-    	    }
-    	    System.out.println("\n");
-    	}
-       
+	protected static String[] nettoyer( String line) {
+        String cvsSplitBy = ",";
+		line = line.replace("[", "");
+		line = line.replace("]", "");
+//		
+		line = line.replace("(", "");
+		line = line.replace(")", "");
+		
+		 String[] country = line.split(cvsSplitBy);
+		return country;
+	}
+	
+    public static void main(String[] args) {
+    	
+       String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
+		ArrayList<String[]> preferences = new ArrayList<String[]>();
+
+		preferences = parse(csvFile);
+		for(String[] e : preferences){
+			System.out.println(e);
+		}
+
     }
 
 }
