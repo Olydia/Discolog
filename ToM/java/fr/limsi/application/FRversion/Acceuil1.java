@@ -38,9 +38,11 @@ import javafx.stage.Stage;
 
 
 public class Acceuil1 extends Application {
-	String username = "1";
+	String username = " ";
 	//WriteHistory writer;
 	File history ;
+	File powerUser;
+	File dialogueTurn;
 	public Acceuil1(/*Acceuil frame*/){
 		//this.frame = frame;
 		// writer = new WriteHistory();
@@ -146,7 +148,15 @@ public class Acceuil1 extends Application {
 				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
 				username+".txt");
 				
-
+				String init = "\n"+ username + ";";
+				File nbTours =  new File(System.getProperty("user.dir")+File.separator+"turnsdialogue.txt");
+				File userPower =  new File(System.getProperty("user.dir")+File.separator+"power.txt");
+				
+				WriteHistory writer = new WriteHistory();
+				
+				writer.write(init, nbTours);
+				writer.write(init, userPower);
+				
 				PrefAcceuil frame = new PrefAcceuil(username, history);
 				Stage acceuil = new Stage();
 				frame.start(acceuil);

@@ -190,8 +190,8 @@
 	\begin{abstract}
 		%\boldmath
 	%	Interpersonal dominance relation has a major effect on the outcome of a negotiation. It has been shown that when participants adopt complementary dominance behaviors (one being dominant and the other being submissive), they reach mutually beneficial outcomes and this increases their reciprocal likings. 
-	We present in this paper a computational model of collaborative negotiation capable of simulating an interpersonal relationship of dominance between two negotiator agents.
-	Our simulation is based on a previously published model. We present a model based on Theory of Mind that allows an agent to evaluate its interlocutor's level of power at each negotiation turn. We show on agent-agent simulation that the system correctly predicts the interlocutor's power. 
+	We present in this paper a computational model of collaborative negotiation capable of guessing the behavior of powed expressed by his partner.
+	Our model is a straight continuation of our model of negotiation based on power \cite{ouali2017computational}. We present a model inspired from Theory of Mind  based on simulation that allows an agent to evaluate its interlocutor's level of power at each negotiation turn. We show on agent-agent simulation that the system correctly predicts the interlocutor's power. 
 	\end{abstract}
 	% IEEEtran.cls defaults to using nonbold math in the Abstract.
 	% This preserves the distinction between vectors and scalars. However,
@@ -224,11 +224,11 @@
 	
 		However, negotiation is a multifaceted process which also involves social interaction and affects, as well as personal preferences and opinions  \cite{bro2010affective}. Several research considered the role of social behavior in the negotiation process. For instance, \cite{de2011effect} studied the impact of emotions of anger and happiness on the outcome of the negotiation.  \cite{kraus1995designing} developed an agent that behaves according to different personalities and has a learning mechanism to learn the personality of its opponents. 
 	
-		One key element in the social aspect of negotiation is the interpersonal relation between the participants. Indeed, research in social psychology demonstrated that the relation of dominance affects the perception of the negotiation process \cite{van2006power}.  
+		One key element in the social aspect of negotiation, is the interpersonal relation between the participants. Indeed, research in social psychology have demonstrated that the relation of dominance affects the perception of the negotiation process \cite{van2006power}.  
 		Negotiating parties often differ in terms of dominance and this difference exerts an important influence on the behavior of participants. Negotiators build different negotiation's strategies depending on their relative dominance. This influences directly the outcomes of the negotiation. More precisely, Tidens \cite{tiedens2003power} showed that dominance complementarity (\emph{i.e.} one negotiator exhibits dominant behaviors while the other one responds with submissive ones) leads the negotiators to reach mutually beneficial outcomes and increases their reciprocal likings. \cite{wiltermuth2015benefits,tiedens2003power}.
 	
 		When building conversational agents that collaborate with a human user, it is important to take into account the interpersonal relationship established between the negotiators.
-		 We focus in this paper on the relation of dominance. Burgoon \cite{burgoon1998nature} defined interpersonal dominance as expressive, relationally based communicative acts by which behaviors of power are exerted and influence achieved. They further defined dominance as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior. 
+		 We focus in this paper on the relation of dominance. Burgoon \cite{burgoon1998nature} defines interpersonal dominance as expressive, relationally based communicative acts by which behaviors of power are exerted and influence achieved. They further define dominance as a dyadic variable in which control attempts by one individual are accepted by the partner, which means if one individual expresses behaviors of high power, the interactional partner will adapt with a low power behavior. 
 	
 		To express those behaviors of power, we designed a model of collaborative negotiation that allows an agent to express its power through negotiation strategies \cite{ouali2017computational}. We showed that human observers correctly perceived the power expressed by the agent.
 		The next step is to extend this model in order to simulate an interpersonal relation of dominance between the agent and the user. This means that if one negotiator exerts behaviors of high power, its partner has to adapt in order to exert complementary behaviors of low power, and vice versa.
@@ -281,7 +281,7 @@
 	
 	
 	\section{Model of collaborative negotiation}
-	The goal of our work is to simulate an interpersonal relation of dominance. We allow the agent to adapt its behaviors of power to complement its partner behavior. We use a model inspired form simulation theory to guess the power of the partner. To this aim, we will use and adapt our model of collaborative negotiation to guess the partner's behavior. In this model of collaborative negotiation, the decisional process is governed by the power the agent seek to express. Indeed, the strategies expressed by the agent are influenced by power. Theses strategies were designed based on researches from social psychology which studied the impact of power on negotiator's strategies. 
+	The goal of our work is to simulate an interpersonal relation of dominance. We allow the agent to adapt its behaviors of power to complement its partner's behavior. We use a model inspired form simulation theory to guess the power of the partner. To this aim, we will use and adapt our model of collaborative negotiation to guess the partner's behavior. In this model of collaborative negotiation, the decisional process is governed by the power the agent seeks to express. Indeed, the strategies expressed by the agent are influenced by power. These strategies were designed based on researches from social psychology which studied the impact of power on negotiator's strategies. 
 	%Indeed, in addition the agent's preferences,the decisional process of this model takes into account the power of this agent to make decisions during the negotiation.
 	
 	In this section, we present an overview of our collaborative negotiation model. Indeed, it is not necessary to have a complete knowledge of this dialogue model to understand the simulation presented here. However, some elements are required to explain our approach. This section briefly presents the main principles of the collaborative negotiation dialogue model. The detailed presentation is explained in a previous work \cite{ouali2017computational}.
@@ -295,7 +295,7 @@
 	The goal of a negotiation is to choose an option in a set of possible options $\mathcal{O}$. Each option $o\in\mathcal{O}$ is defined as a set of values $\{v_1, ..., v_n\}$ associated to criteria $\{C_1, ..., C_n\}$ that reflect the option's characteristics.  
 	For instance, in a negotiation about restaurants, the criteria might be the type of cuisine and the price, we could have the option: $(French,Expensive)$.
 	
-	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using theses preferences, the agent can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
+	The agent is provided with a set of partial or total ordered preferences $\prec_i$ defined for each criterion $C_i$. Using these preferences, the agent can compute a score of satisfaction $sat(v)$ for each value of each criterion. The satisfaction of a value $v \in C_i$ is computed as the number of values that the agent prefers less in the preferences order $\prec_i$. The notion of satisfaction represents the score of liking for the value. The closer the satisfaction of a value $v$ gets to 1, the more the agent likes $v$.
 	 
 	 
 	For example, let's consider the criteria of $cuisine$ defined with the following values: $\{$\emph{french$(fr)$, italian$(it)$, japanese$(jap)$, chinese$(ch)$}$\}$. In addition, the agent has a total order of preferences on these values $\prec_{cuisine}$$=\{ch$$\prec$$jap, jap$$\prec$$it, it$$\prec$ $fr\}$. Based on this order of preferences $\prec_{cuisine}$, the agent is able to compute the value of satisfiability associated to each value as presented in table \ref{tab:sat}.
@@ -453,7 +453,7 @@
 		\item For each hypothesis $h$, build the set of all possible preferences $Prec_h$: the elements $p\in Prec_h$ are partial orders on the criteria.
 		\item After each user utterance $u$, remove all elements in $Prec_h$ that are not compatible with $u$. Concretely, if the applicability condition of $u$ is not satisfied in $p\in Prec_h$, then $p$ must be removed from the candidate mental states.
 		\item For each $h$, generate the corresponding utterance using $h$ as input for the decisional model.
-		\item Compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated bu the user. 
+		\item Compute a score $score(h)$ based on the size of remaining hypothesis $|Prec_h|$ that generate an output similar to the utterance, $Utterance_{other}$, enunciated by the user. 
 		\item 	The hypothesis with the highest score is the most probable value for the user's power value.
 
 		\begin{equation}
@@ -478,6 +478,7 @@
 		 	\begin{table} [h]
 		 		\centering
 		 		\large
+		 		\caption{$Sat$ computed on the set of preferences for two total ordered preferences sets.}
 		 		\begin{tabular}{ |c|c|c|c|c| }
 		 			\hline
 		 			value & $ch$ & $jap$ & $it$ & $fr$ \\	
@@ -487,7 +488,7 @@
 		 			sat(value) $\prec'_{cuisine}$ & 1 & 0.33 & 0 & 0.66 \\
 		 			\hline
 		 		\end{tabular}
-		 		\caption{$Sat$ computed on the set of preferences for two total ordered preferences sets.}
+
 		 		\label{tab:ex2_sat}
 		 		
 		 	\end{table}
@@ -586,7 +587,7 @@
 		\end{array}\right.
 		\end{equation}
 		
-		Once, the list of possible hypotheses to consider is restricted, we update the hypotheses by taking into account the value associated to the expressed utterance.
+		Once, the list of possible hypotheses to consider is restricted, we update the hypotheses by taking into consideration the value associated to the expressed utterance.
 		For example, suppose that the agent assumes that $\frac{history(Propose)}{hisotry} > 0.5$. Therefore, the agent will only considers the hypotheses $\{h_4 - h_9\}$ to compute the power of its interlocutor.
 		
 	\subsection{Share a preference}
@@ -605,7 +606,7 @@
 			\end{equation}
 			
 		Therefore, when the agent learns a new preference about its interlocutor, he updates his hypotheses as follows: 
-		for each  $h_i \in H_{pow}$, we propose to update the agent's hypotheses $M_h(h_i)$ by removing all the hypotheses on preferences that are no longer consistent with the information learned. 
+		for each  $h_i \in H_{pow}$, we propose to update the agent's hypotheses $M_h(h_i)$ by removing all the hypotheses on preferences that are no longer consistent with the information acquired. 
 		Then, we compute the score of each $h_i$ at the moment $t$ :
 		
 		$$score(h_i,t) = \frac{|M_h(h_i, t)|}{|M_h(h_i, init)|}$$
@@ -765,6 +766,7 @@
 	\begin{table}[h]
 		\centering
 		\large
+		\caption{Average number of iterations to compute a prediction} 
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{Number of iteration to make predictions} \\
@@ -774,7 +776,7 @@
 			2.53 & 3.25 & 3.79\\
 			\hline
 		\end{tabular}
-		\caption{Average number of iterations to compute a prediction} 
+
 		\label{tab:conv}
 	\end{table}
 	Finally, for all the dialogues in which the agent was able to find a good prediction (in total $1050$), we analyzed the rapidity of convergence of our algorithm. The results are presented in table \ref{tab:conv}. Indeed, for each dialogue, we computed the number of iterations necessary to find a good prediction and maintain it. On average, the algorithm needed $3$ iterations in order to predict the right range of the power of the other (whether the agent has a dominant or a submissive behavior). 
@@ -798,7 +800,7 @@
 	
 	\begin{figure}[]
 		\fbox{\includegraphics[width=\linewidth]{figs/total}}
-		\caption{Algorithm convergence for all topics} 
+		\caption{Resudial variation computed between the real value of power and the guessed one at each dialogue turn} 
 		\label{fig:converge}
 	\end{figure}
 	
@@ -808,7 +810,7 @@
 	
 	\begin{figure}[]
 		\fbox{\includegraphics[width=\linewidth]{figs/time_exec.png}}
-		\caption{Algorithm convergence for all topics} 
+		\caption{Iime execution of the ToM algorithm at each dialogue turn} 
 		\label{fig:time}
 	\end{figure}
 	

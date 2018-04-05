@@ -1627,16 +1627,25 @@ public class FenetreBas extends AnchorPane{
 						File fichier1 = new File(System.getProperty("java.io.tmpdir")+File.separator+"Console.test");
 						File fichier2 =  new File(System.getProperty("user.dir")+File.separator+"Participant"+
 								username+".txt");
+						
+						File nbTours =  new File(System.getProperty("user.dir")+File.separator+"turnsdialogue.txt");
+						File userPower =  new File(System.getProperty("user.dir")+File.separator+"power.txt");
+
 						WriteHistory writer = new WriteHistory();
 
-						String donne = "\n Nombre de tours : " +
-								agent.getNegotiation().getContext().getNumberTour();
-						donne += " \n power trouvé : "+ agent.getOther() + " \n valeurs power "+ agent.getGuessed();
+						String donne =";" +agent.getNegotiation().getContext().getNumberTour();
+						
+						String power = ";" +  agent.getGuessed();
 						
 						
 						sauvegarde(fichier1, fichier2);
-						writer.write(donne, fichier2);
 						
+						// Sauvegarde du nombre de tours 
+						
+						writer.write(donne, nbTours);
+						
+						// sauvegarde pouvoir de l'utilisateur en cours
+						writer.write(power, userPower);
 						nextStep(nbAgents);
 					}
 				}
