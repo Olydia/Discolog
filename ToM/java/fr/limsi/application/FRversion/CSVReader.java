@@ -5,10 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
+
 
 /**
  * Read a csv file that contains agents preferences and user preferences 
@@ -69,16 +68,19 @@ public class CSVReader {
 	}
 	
     public static void main(String[] args) {
-    	
-       String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
-       ArrayList<String[]> preferences = new ArrayList<String[]>();
-
-		preferences = parse(csvFile);
-		for(String[] e : preferences){
-			System.out.println("");
-			for(String ee : e)
-				System.out.print(ee + "\t");
-		}
+//    	
+//       String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
+//       ArrayList<String[]> preferences = new ArrayList<String[]>();
+//
+//		preferences = parse(csvFile);
+//		for(String[] e : preferences){
+//			System.out.println("");
+//			for(String ee : e)
+//				System.out.print(ee + "\t");
+//		}
+    	List<String> myList = Arrays.asList("Bob", "Arthur", "Kevin");
+    	String line = "Preferences of agent Arthur";
+    	 System.out.println(myList.stream().anyMatch(str -> line.contains(str)));
 
     }
 

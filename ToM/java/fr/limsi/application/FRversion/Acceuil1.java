@@ -144,7 +144,7 @@ public class Acceuil1 extends Application {
 				history = new File(System.getProperty("user.dir")+File.separator+"Participant"+
 				username+".txt");
 				
-				String init = "\n"+ username + ";";
+				String init = "\n"+ username;
 				File nbTours =  new File(System.getProperty("user.dir")+File.separator+"turnsdialogue.txt");
 				File userPower =  new File(System.getProperty("user.dir")+File.separator+"power.txt");
 				
