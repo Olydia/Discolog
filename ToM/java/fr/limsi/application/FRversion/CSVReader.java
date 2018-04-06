@@ -30,7 +30,7 @@ public class CSVReader {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-
+            	
                 // use comma as separator
             	if(!line.contains("class fr.limsi.negotiate.restaurant") &&  !line.equals("")) {
             		
@@ -71,11 +71,13 @@ public class CSVReader {
     public static void main(String[] args) {
     	
        String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
-		ArrayList<String[]> preferences = new ArrayList<String[]>();
+       ArrayList<String[]> preferences = new ArrayList<String[]>();
 
 		preferences = parse(csvFile);
 		for(String[] e : preferences){
-			System.out.println(e);
+			System.out.println("");
+			for(String ee : e)
+				System.out.print(ee + "\t");
 		}
 
     }

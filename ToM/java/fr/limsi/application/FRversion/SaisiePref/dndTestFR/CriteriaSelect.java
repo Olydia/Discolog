@@ -29,7 +29,7 @@ import fr.limsi.negotiate.Criterion;
 public class CriteriaSelect extends JDialog {
 
 	private JLabel welcomText = new JLabel("Toutes choses \u00e9gales par ailleurs,"
-			+ "classez par ordre croissant de vos pr\u00e9ferences "
+			+ "classez par ordre décroissant de vos pr\u00e9ferences "
 			+ "les valeurs suivantes");
 
 	private JList<String> toBeRanked = new JList<>(new DefaultListModel<>());

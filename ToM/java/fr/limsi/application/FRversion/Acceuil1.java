@@ -1,19 +1,15 @@
 package fr.limsi.application.FRversion;
 
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.util.List;
 
-import javax.print.DocFlavor.URL;
+import java.io.File;
+
 
 import fr.limsi.application.FRversion.SaisiePref.dndTestFR.PrefAcceuil;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
