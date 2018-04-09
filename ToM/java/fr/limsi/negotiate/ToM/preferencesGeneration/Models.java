@@ -168,7 +168,7 @@
 		public List<List<Self_Ci<Criterion>>> agentModels(List<List<Self_Ci<Criterion>>> preferences,
 				List<Self_Ci<Criterion>> userPref) {
 	
-			int nbModels = 35;
+			int nbModels = 40;
 			List<List<Self_Ci<Criterion>>> visitedCombination= new ArrayList<>();
 			List<List<Self_Ci<Criterion>>> agentModels= new ArrayList<>();
 			for(int i=0; i<nbModels; i++){

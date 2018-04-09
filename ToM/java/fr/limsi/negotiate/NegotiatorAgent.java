@@ -128,10 +128,10 @@ public class NegotiatorAgent extends Agent {
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 			
 			else{
-				//int random = new Random().nextInt(criteria.size());
-				//Class<? extends Criterion> opent = criteria.get(random);
+				int random = new Random().nextInt(criteria.size());
+				Class<? extends Criterion> opent = criteria.get(random);
 
-				Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
+				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 				
 
 
