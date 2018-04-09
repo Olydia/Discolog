@@ -35,7 +35,7 @@ public enum Cuisine implements Criterion {
 			fr += "chinois";
 			break;
 		case FRANCAIS:
-			fr += "français"; // \u00e7
+			fr += "fran\u00e7ais"; // \u00e7
 			break;
 		case ITALIEN:
 			fr += "italien";
