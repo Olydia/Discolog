@@ -1,0 +1,98 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<chic), (abordable<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Francais<Chinois), (Coreen<Francais), (Japonais<Coreen), (Turc<Japonais), (Mexicain<Turc), (Italien<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<familial), (anime<cosy), (romantique<anime), (calme<romantique), (moderne<calme)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(gare du nord<pere lachaise), (pres de la tour eiffel<gare du nord), (centre de paris<pres de la tour eiffel), (montparnasse<centre de paris)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<chic), (chic<abordable)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Chinois<Japonais), (Japonais<Coreen), (Coreen<Francais), (Francais<Turc), (Turc<Italien), (Italien<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(familial<anime), (anime<cosy), (cosy<calme), (calme<moderne), (moderne<romantique)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(montparnasse<pere lachaise), (pere lachaise<gare du nord), (gare du nord<pres de la tour eiffel), (pres de la tour eiffel<centre de paris)]
+
+    # 9 avr. 2018 14:47:12 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Je propose que nous allions dans un restaurant Dans le centre de Paris."
+    User says "D'accord, allons dans un restaurant Dans le centre de Paris."
+    Bob says "Je propose que nous allions au restaurant Viva mexico. c'est un restaurant mexicain, abordable avec une ambiance romantique situé Dans le centre de Paris."
+    User says "D'accord, allons au restaurant Viva mexico."
+    Bob says "Okay."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(chic<abordable), (abordable<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Francais<Turc), (Turc<Chinois), (Chinois<Coreen), (Coreen<Japonais), (Japonais<Mexicain), (Mexicain<Italien)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(familial<anime), (anime<cosy), (cosy<romantique), (romantique<moderne), (moderne<calme)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pres de la tour eiffel<gare du nord), (gare du nord<centre de paris), (centre de paris<montparnasse), (montparnasse<pere lachaise)]
+
+    # 9 avr. 2018 14:55:10 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Arthur says "Je propose que nous allions dans un restaurant près du Père lachaise."
+    User says "Je préfèrerais autre chose."
+    Arthur says "Je propose que nous allions au restaurant Dolce italia. c'est un restaurant italien, à bas prix avec une ambiance calme situé près du Père lachaise."
+    User says "D'accord, allons au restaurant Dolce italia."
+    Arthur says "Okay."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(chic<abordable), (abordable<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Mexicain<Francais), (Francais<Chinois), (Chinois<Italien), (Italien<Japonais), (Japonais<Coreen), (Coreen<Turc)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<romantique), (romantique<familial), (familial<calme), (calme<anime), (anime<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<gare du nord), (gare du nord<centre de paris), (centre de paris<pres de la tour eiffel), (pres de la tour eiffel<montparnasse)]
+
+    # 9 avr. 2018 15:02:50 - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Kevin says "Je propose que nous allions dans un restaurant près de Montparnasse."
+    User says "Je propose que nous allions au restaurant Blue pasta1. c'est un restaurant italien, abordable avec une ambiance moderne situé près de Montparnasse."
+    Kevin says "D'accord, allons au restaurant Blue pasta1."
+Nous avons trouvé une solution! La négociation est terminée

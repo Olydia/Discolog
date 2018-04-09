@@ -106,29 +106,6 @@ class fr.limsi.negotiate.restaurant.FR.Localisation
     User says "D'accord, allons au restaurant Song hoat."
     Arthur says "Okay."
 Nous avons trouvé une solution! La négociation est terminée
-    # Apr 9, 2018 12:57:48 PM - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     Arthur says "Je propose que nous allions dans un restaurant près de Gare du Nord."
-    User says "Je n'aime pas les restaurants près de Gare du Nord."
-    Arthur says "Je propose que nous allions dans un restaurant romantique."
-    User says "Je n'aime pas les restaurants romantiques."
-    Arthur says "Je propose que nous allions dans un restaurant chinois."
-    User says "D'accord, allons dans un restaurant chinois."
-    Arthur says "Je propose que nous allions dans un restaurant à bas prix."
-    User says "Je ne veux pas aller dans un restaurant à bas prix. Allons plutôt dans un restaurant abordable."
-    Arthur says "Je ne veux pas aller dans un restaurant abordable. Allons plutôt au restaurant New china11. c'est un restaurant chinois, à bas prix avec une ambiance familial situé près de Gare du Nord."
-    User says "Je n'aime pas les restaurants près de Gare du Nord, Choisissons autre chose."
-    Arthur says "Je propose que nous allions au restaurant New fuli. c'est un restaurant chinois, à bas prix avec une ambiance familial situé près de Montparnasse."
-    User says "Je n'aime pas les restaurants familiaux, Choisissons autre chose."
-    Arthur says "Je propose que nous allions au restaurant Song hoat. c'est un restaurant chinois, abordable avec une ambiance animé situé près de Montparnasse."
-    User says "D'accord, allons au restaurant Song hoat."
-    Arthur says "Okay."
-Nous avons trouvé une solution! La négociation est terminée
-Done
-Done
-    User says "Est-que tu aimes les restaurants japonais ?"
-    Arthur says "Okay."
-Nous avons trouvé une solution! La négociation est terminée
 --------------------------------------------- 
  
 Preferences of agent Kevin 
