@@ -260,7 +260,65 @@ public class ModelDePreferencesTotal {
 		
 		return models;
 	}
+	//----------------------------------------
 	
+	public  Negotiation<Restaurant>  modelBob(){
+
+
+		Self_C<Restaurant>  d1_criteria = new Self_C<Restaurant> (Restaurant.class);
+		d1_criteria.addPreference(Ambiance.class, Prix.class);
+		d1_criteria.addPreference(Prix.class, Cuisine.class);
+		d1_criteria.addPreference(Localisation.class, Ambiance.class);
+
+
+		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
+		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.CHINOIS);
+		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.ITALIEN);
+		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.TURC);
+		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.COREEN);
+		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.JAPONAIS);
+		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.MEXICAIN);
+
+
+
+
+
+		
+		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d1_cuisine);
+
+		Self_Ci<Ambiance> d1_atmosphere = new Self_Ci<Ambiance>(Ambiance.class);
+		d1_atmosphere.addPreference(Ambiance.CALME, Ambiance.MODERNE);
+		d1_atmosphere.addPreference(Ambiance.MODERNE, Ambiance.FAMILIAL);
+		d1_atmosphere.addPreference(Ambiance.ROMANTIQUE, Ambiance.FAMILIAL);
+		d1_atmosphere.addPreference(Ambiance.FAMILIAL, Ambiance.ANIME);
+		d1_atmosphere.addPreference(Ambiance.ANIME, Ambiance.COSY);
+		d1_atmosphere.addPreference(Ambiance.COSY, Ambiance.ROMANTIQUE);
+
+
+
+		CriterionNegotiation<Ambiance> atmospher = new CriterionNegotiation<>(d1_atmosphere);
+
+		Self_Ci<Localisation> d1_location =  new Self_Ci<>(Localisation.class);
+		d1_location.addPreference(Localisation.MONTPARNASSE, Localisation.GARE_DU_NORD);
+		d1_location.addPreference(Localisation.GARE_DU_NORD, Localisation.PERE_LACHAISE);
+		d1_location.addPreference(Localisation.PERE_LACHAISE, Localisation.CENTRE_DE_PARIS);
+		d1_location.addPreference(Localisation.CENTRE_DE_PARIS, Localisation.PRES_DE_LA_TOUR_EIFFEL);
+
+		CriterionNegotiation<Localisation> location = new CriterionNegotiation<>(d1_location);
+		
+		Self_Ci<Prix> d1_cost = new Self_Ci<Prix>(Prix.class);
+		d1_cost.addPreference(Prix.ABORDABLE, Prix.BAS_PRIX);
+		d1_cost.addPreference(Prix.BAS_PRIX, Prix.CHIC);
+		
+		CriterionNegotiation<Prix> cost = new CriterionNegotiation<>(d1_cost);
+
+		@SuppressWarnings("unchecked")
+		Negotiation<Restaurant> model1 = new Negotiation<Restaurant> 
+		(new CriterionNegotiation[] {cost, cuisine, atmospher, location}, d1_criteria, Restaurant.class);
+		return model1;
+
+	}
+
 	public static void main (String[] args)  {
 		
 		ModelDePreferencesTotal m = new ModelDePreferencesTotal();
