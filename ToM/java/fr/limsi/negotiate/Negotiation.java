@@ -521,8 +521,8 @@ public class Negotiation<O extends Option> {
 	}
 	// check if the last utterance is a Propose
 	public boolean isPropose(boolean isSelf){
-		NegotiationUtterance uttSelf = getContext().getHistory().get(getContext().getHistory().size()-2);//getContext().getLastMove(!isSelf);
-
+		NegotiationUtterance uttSelf = getContext().getHistory().get(getContext().getHistory().size()-2);
+		//getContext().getLastMove(!isSelf);
 
 		return (uttSelf instanceof ProposalUtterance);
 
