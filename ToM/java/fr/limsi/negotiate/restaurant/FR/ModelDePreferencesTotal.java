@@ -24,7 +24,7 @@ public class ModelDePreferencesTotal {
 		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.MEXICAIN);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.ITALIEN);
-		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
+		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANCAIS);
 //		d1_cuisine.addPreference(Cuisine.FRENCH, Cuisine.C);
 //		d1_cuisine.addPreference(Cuisine.C, Cuisine.K);
 //		d1_cuisine.addPreference(Cuisine.K, Cuisine.M);
@@ -81,8 +81,8 @@ public class ModelDePreferencesTotal {
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
 		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.MEXICAIN);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
-		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
-		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.CHINOIS);
+		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANCAIS);
+		d1_cuisine.addPreference(Cuisine.FRANCAIS, Cuisine.CHINOIS);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.COREEN, Cuisine.JAPONAIS);
 
@@ -142,11 +142,11 @@ public class ModelDePreferencesTotal {
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.JAPONAIS, Cuisine.COREEN);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.JAPONAIS);
-		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.ITALIEN);
-		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.MEXICAIN);
+		d1_cuisine.addPreference(Cuisine.FRANCAIS, Cuisine.ITALIEN);
+		d1_cuisine.addPreference(Cuisine.FRANCAIS, Cuisine.MEXICAIN);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
-		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.FRANÇAIS);
+		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.FRANCAIS);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.JAPONAIS);
 		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.COREEN);
 
@@ -215,7 +215,7 @@ public class ModelDePreferencesTotal {
 		d4_cuisine.addPreference(Cuisine.COREEN, Cuisine.TURC);
 		d4_cuisine.addPreference(Cuisine.MEXICAIN, Cuisine.ITALIEN);
 		d4_cuisine.addPreference(Cuisine.TURC, Cuisine.ITALIEN);
-		d4_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANÇAIS);
+		d4_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.FRANCAIS);
 
 		CriterionNegotiation<Cuisine> cuisine = new CriterionNegotiation<>(d4_cuisine);
 
@@ -272,7 +272,7 @@ public class ModelDePreferencesTotal {
 
 
 		Self_Ci<Cuisine> d1_cuisine = new Self_Ci <Cuisine>(Cuisine.class);
-		d1_cuisine.addPreference(Cuisine.FRANÇAIS, Cuisine.CHINOIS);
+		d1_cuisine.addPreference(Cuisine.FRANCAIS, Cuisine.CHINOIS);
 		d1_cuisine.addPreference(Cuisine.CHINOIS, Cuisine.ITALIEN);
 		d1_cuisine.addPreference(Cuisine.ITALIEN, Cuisine.TURC);
 		d1_cuisine.addPreference(Cuisine.TURC, Cuisine.COREEN);
