@@ -21,6 +21,7 @@ import fr.limsi.negotiate.ToM.ProbalisticModel.ToMNegotiatorProba.ADAPT;
 import fr.limsi.negotiate.restaurant.Restaurant;
 import fr.limsi.negotiate.restaurant.totalOrderedModels;
 import fr.limsi.negotiate.restaurant.FR.*;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -205,10 +206,10 @@ public class TutorialBas extends AnchorPane{
 	}
 
 	public void setCriterionButtonsTexts(Button b1,Button b2, Button b3, Button b4, String situation){
-			b1.setText("Ambiance");
-			b2.setText("Prix");
-			b3.setText("Cuisine");
-			b4.setText("Localisation");
+		b1.setText("Ambiance");
+		b2.setText("Prix");
+		b3.setText("Cuisine");
+		b4.setText("Localisation");
 
 	}
 	public void addElements(String username, String situation,Stage chatStage/*,Interaction interaction*/){
@@ -225,6 +226,7 @@ public class TutorialBas extends AnchorPane{
 		ModelDePreferencesTotal model = new ModelDePreferencesTotal();
 		Negotiation<fr.limsi.negotiate.restaurant.FR.Restaurant> m1 = model.model1();
 		m1.addProposal(new CriterionProposal(true,Cuisine.COREEN));
+		m1.addProposal(new CriterionProposal(true,Ambiance.CALME));
 		ToMNegotiatorProba agent= new ToMNegotiatorProba("Amine", m1, ADAPT.NONADAPT);
 		User user= new User("User");
 		Interaction interaction = new Interaction(
@@ -623,9 +625,10 @@ public class TutorialBas extends AnchorPane{
 				stopButton.setStyle(off);
 
 				openList.clear();
+
 				for(CriterionNegotiation<Criterion> cr :agent.getNegotiation().getValuesNegotiation()){
 					for(CriterionProposal co:cr.getProposalsWithStatus(Status.OPEN,true))
-						openList.add(co.toString());
+						openList.add(co.getValue().toString());
 
 				}
 
@@ -742,7 +745,7 @@ public class TutorialBas extends AnchorPane{
 				stopButton.setStyle(on);
 				HashMap<String, List<String>> preferencesUser= 
 						new HashMap<String, List<String>>();
-				
+
 				preferencesUser.put("Cuisine", new ArrayList<String>());
 				preferencesUser.put("Prix", new ArrayList<String>());
 				preferencesUser.put("Localisation", new ArrayList<String>());
@@ -846,19 +849,8 @@ public class TutorialBas extends AnchorPane{
 				counterproposeOptionButton.setStyle(on);
 				counterproposeValueButton.setStyle(off);
 
-				//details[0]="Propose";
 
-
-
-				/*list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);*/
 				list.add(sendHBox);
-
-				/*answer1.setText("Let's go to the ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");*/
 
 				ChoixOption optionChoice=new ChoixOption();
 				Stage optionStage=new Stage();
@@ -867,13 +859,12 @@ public class TutorialBas extends AnchorPane{
 				Scene scene = new Scene(optionChoice, visualBounds.getWidth(), visualBounds.getHeight());
 				optionStage.setScene(scene);
 				optionStage.setFullScreen(true);
-				// Scene scene = new Scene(pane, 400, 300);
+
 				optionStage.setScene(scene);
 				scene.getStylesheets().add
 				(Acceuil1.class.getResource("application2.css").toExternalForm());
 				optionChoice.start(optionStage);
-				//	setTopAnchor(list.get(list.size()-1),300.0);
-				//setLeftAnchor(list.get(list.size()-1),400.0);
+
 				optionChoice.addElements(situation,optionStage,chatStage,details,list);
 				chatStage.hide();
 
@@ -883,22 +874,7 @@ public class TutorialBas extends AnchorPane{
 				setTopAnchor(co3HBox,200.0);
 				setTopAnchor(co4HBox,200.0);
 
-				/*  	if (situation=="restaurant")
-		    	        {
-		            	setLeftAnchor(co1HBox,300.0);
-		            	setLeftAnchor(co2HBox,500.0);
-		            	setLeftAnchor(co3HBox,700.0);
-		            	setLeftAnchor(co4HBox,900.0);
-		            	list.addAll(co1HBox,co2HBox,co3HBox,co4HBox);
-		    	        }
-	            	else{
-	            		setLeftAnchor(co1HBox,350.0);
-	            		setLeftAnchor(co2HBox,600.0);
-	            		setLeftAnchor(co3HBox,850.0);
-	            		list.addAll(co1HBox,co2HBox,co3HBox);
-	            		}*/
 
-				//list.addAll(proposeOptionLabel);
 			}
 		});
 
@@ -909,17 +885,6 @@ public class TutorialBas extends AnchorPane{
 			public void handle(ActionEvent prosposeEvent) {
 				counterproposeOptionButton.setStyle(off);
 				counterproposeValueButton.setStyle(on);
-
-				//details[0]="Propose";
-
-				/*	list.clear();
-		     		list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
-		     		list.addAll(proposeOptionHBox,proposeValueHBox);*/
-
-				/*answer1.setText("Let's go to a ");
-		     		answer2.setText("");
-	            	answer3.setText("");
-	            	answer4.setText("");*/
 				setTopAnchor(proposeCriterionLabel,150.0);
 				setLeftAnchor(proposeCriterionLabel,100.0);
 				list.clear();
@@ -1267,10 +1232,6 @@ public class TutorialBas extends AnchorPane{
 			@Override
 			public void handle(ActionEvent prosposeEvent) {
 				details[6]="TRUE";
-				answer1.setText("I like ");
-				answer2.setText("");
-				answer4.setText("");
-				answer3.setText("");
 
 				likeButton.setStyle(on);
 				dontLikeButton.setStyle(off);
@@ -1283,10 +1244,6 @@ public class TutorialBas extends AnchorPane{
 			@Override
 			public void handle(ActionEvent prosposeEvent) {
 				details[6]="FALSE";
-				answer1.setText("I don't like ");
-				answer2.setText("");
-				answer4.setText("");
-				answer3.setText("");
 
 				dontLikeButton.setStyle(on);
 				likeButton.setStyle(off);
@@ -1939,8 +1896,8 @@ public class TutorialBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
-					command2="Packages.fr.limsi.negotiate."+details[1]+"FR"+details[4]+"."+details[5];
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
+					command2="Packages.fr.limsi.negotiate."+details[1]+".FR."+details[4]+"."+details[5];
 				}
 				else {
 					if (isCriterion(open.getSelectionModel().getSelectedItem(),situation)){
@@ -1953,8 +1910,8 @@ public class TutorialBas extends AnchorPane{
 						details[3]=open.getSelectionModel().getSelectedItem().toUpperCase();
 						details[3]=details[3].replace(" ","_");
 					}
-					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[2]+"."+details[3]+")";
-					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR"+details[4]+"."+details[5]+")";
+					command1="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[2]+"."+details[3]+")";
+					command2="createProposal(Packages.fr.limsi.negotiate."+details[1]+".FR."+details[4]+"."+details[5]+")";
 				}
 				command="fr.limsi.negotiate.lang."+details[0]+"/"+command1;
 				if (command2!="") command=command+"/"+command2;
@@ -1966,8 +1923,11 @@ public class TutorialBas extends AnchorPane{
 					list.add(errorLabel);
 				}
 				else{
+					//System.err.println(command);
 					interaction.getConsole().execute(command);
-					interaction.getProperty("interaction@guess", interaction.isGuess());
+			//		boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
+//					interaction.getSystem().respond(interaction, false, guess);
+
 				}
 				list.clear();
 				list.addAll( actionLabel,proposeHBox,acceptHBox,rejectHBox,stateAskHBox,stopHBox);
@@ -1977,7 +1937,7 @@ public class TutorialBas extends AnchorPane{
 				stateAskButton.setStyle(off);
 				stopButton.setStyle(off);
 			}
-		});
 
+		});
 	}
 }
