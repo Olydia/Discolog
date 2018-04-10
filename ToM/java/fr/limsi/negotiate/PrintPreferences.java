@@ -13,6 +13,7 @@ public class PrintPreferences<O extends Option> {
 		this.model = model;
 	}
 
+	
 	public void printSatisfiability(){
 		for (CriterionNegotiation<Criterion> cr: model.getValuesNegotiation()){
 			// add the new commit
