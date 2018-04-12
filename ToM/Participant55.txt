@@ -1,0 +1,190 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Italien), (Turc<Japonais), (Mexicain<Turc), (Francais<Mexicain), (Coreen<Francais), (Chinois<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (anime<moderne), (calme<anime), (familial<calme), (romantique<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pere lachaise), (pres de la tour eiffel<centre de paris), (montparnasse<pres de la tour eiffel), (gare du nord<montparnasse)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Turc), (Turc<Chinois), (Chinois<Coreen), (Coreen<Francais), (Francais<Italien), (Italien<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<cosy), (cosy<moderne), (moderne<anime), (anime<romantique), (romantique<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(montparnasse<pere lachaise), (pere lachaise<centre de paris), (centre de paris<gare du nord), (gare du nord<pres de la tour eiffel)]
+
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Italien), (Turc<Japonais), (Mexicain<Turc), (Francais<Mexicain), (Coreen<Francais), (Chinois<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (anime<moderne), (calme<anime), (familial<calme), (romantique<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pere lachaise), (pres de la tour eiffel<centre de paris), (montparnasse<pres de la tour eiffel), (gare du nord<montparnasse), (centre de paris<pere lachaise), (pres de la tour eiffel<centre de paris), (montparnasse<pres de la tour eiffel), (gare du nord<montparnasse)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Chinois), (Chinois<Italien), (Italien<Mexicain), (Mexicain<Francais), (Francais<Turc), (Turc<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<anime), (anime<familial), (familial<romantique), (romantique<cosy), (cosy<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pere lachaise), (pere lachaise<pres de la tour eiffel), (pres de la tour eiffel<montparnasse), (montparnasse<gare du nord)]
+
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Italien), (Turc<Japonais), (Mexicain<Turc), (Francais<Mexicain), (Coreen<Francais), (Chinois<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (anime<moderne), (calme<anime), (romantique<calme), (familial<romantique)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pere lachaise), (pres de la tour eiffel<centre de paris), (montparnasse<pres de la tour eiffel), (gare du nord<montparnasse)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Turc<Italien), (Italien<Mexicain), (Mexicain<Coreen), (Coreen<Francais), (Francais<Chinois), (Chinois<Japonais)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<familial), (familial<calme), (calme<anime), (anime<cosy), (cosy<romantique)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pres de la tour eiffel), (pres de la tour eiffel<pere lachaise), (pere lachaise<gare du nord), (gare du nord<montparnasse)]
+
+    # Apr 12, 2018 10:53:21 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Je propose que nous allions dans un restaurant près de Montparnasse."
+    User says "D'accord, je propose que nous allions dans un restaurant cosy."
+    Bob says "Quel type de prix aimes-tu ?"
+    User says "Je propose que nous allions dans un restaurant abordable."
+    Bob says "Est-que tu aimes les restaurants chics ?"
+    User says "Je n'aime pas les restaurants chics."
+    Bob says "Est-que tu aimes les restaurants à bas prix ?"
+    User says "J'aime les restaurants à bas prix."
+    Bob says "Je propose que nous allions dans un restaurant cosy."
+    User says "D'accord, je propose que nous allions dans un restaurant italien."
+    Bob says "D'accord, allons dans un restaurant italien."
+    User says "D'accord, allons dans un restaurant cosy."
+    Bob says "Je propose que nous allions au restaurant Nagoya. c'est un restaurant japonais, à bas prix avec une ambiance cosy situé près de Montparnasse."
+    User says "Je ne veux pas aller au restaurant Nagoya. Allons plutôt dans un restaurant italien."
+    Bob says "D'accord, allons dans un restaurant italien."
+    User says "Je propose que nous allions au restaurant Casa 281. c'est un restaurant italien, abordable avec une ambiance cosy situé près de Montparnasse."
+    Bob says "Finalement, je préfère aller dans un restaurant abordable."
+    User says "Finalement, je préfère aller dans un restaurant cosy."
+    Bob says "D'accord, allons au restaurant Casa 281."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (abordable<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Mexicain<Italien), (Italien<Japonais), (Japonais<Francais), (Francais<Coreen), (Coreen<Turc), (Turc<Chinois)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (cosy<anime), (anime<calme), (calme<romantique), (romantique<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<montparnasse), (montparnasse<gare du nord), (gare du nord<pres de la tour eiffel), (pres de la tour eiffel<centre de paris)]
+
+    # Apr 12, 2018 11:05:35 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Arthur says "Je propose que nous allions dans un restaurant Dans le centre de Paris."
+    User says "D'accord, je propose que nous allions dans un restaurant cosy."
+    Arthur says "Je ne veux pas aller dans un restaurant cosy. Allons plutôt au restaurant Dong. c'est un restaurant chinois, chic avec une ambiance familial situé Dans le centre de Paris."
+    User says "Je ne veux pas aller au restaurant Dong. Allons plutôt dans un restaurant abordable."
+    Arthur says "D'accord, je propose que nous allions au restaurant Asia star1. c'est un restaurant chinois, abordable avec une ambiance familial situé Dans le centre de Paris."
+    User says "D'accord, allons au restaurant Asia star1."
+    Arthur says "Okay."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<chic), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Chinois<Turc), (Turc<Italien), (Italien<Coreen), (Coreen<Francais), (Francais<Japonais), (Japonais<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<moderne), (moderne<anime), (anime<romantique), (romantique<familial), (familial<calme)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<centre de paris), (centre de paris<montparnasse), (montparnasse<pres de la tour eiffel), (pres de la tour eiffel<gare du nord)]
+
+    # Apr 12, 2018 11:12:02 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Kevin says "Je propose que nous allions dans un restaurant près de Gare du Nord."
+    User says "Je ne veux pas aller dans un restaurant près de Gare du Nord. Allons plutôt dans un restaurant près de Montparnasse."
+    Kevin says "Je ne veux pas aller dans un restaurant près de Montparnasse. Allons plutôt dans un restaurant calme."
+    User says "D'accord, je propose que nous allions dans un restaurant Dans le centre de Paris."
+    Kevin says "D'accord, je propose que nous allions au restaurant Sandia. c'est un restaurant mexicain, à bas prix avec une ambiance calme situé Dans le centre de Paris."
+    User says "D'accord, allons au restaurant Sandia."
+    Kevin says "Okay."
+Nous avons trouvé une solution! La négociation est terminée
