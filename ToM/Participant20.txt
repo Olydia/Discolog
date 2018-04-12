@@ -46,23 +46,7 @@ class fr.limsi.negotiate.restaurant.FR.Localisation
     User says "Je n'aime pas les restaurants animés, Choisissons autre chose."
     Bob says "D'accord, allons au restaurant Arlecchino."
 Nous avons trouvé une solution! La négociation est terminée
-    # Apr 6, 2018 4:25:10 PM - TaskEngine 1.11 / Disco 1.17
-    Welcome to Disco! (Type 'help' for command list)
-  >     Bob says "Je propose que nous allions dans un restaurant près du Père lachaise."
-    User says "Je propose que nous allions au restaurant Arlecchino. c'est un restaurant italien, chic avec une ambiance calme situé Dans le centre de Paris."
-    Bob says "Quel type de localisation aimes-tu ?"
-    User says "J'aime les restaurants Dans le centre de Paris."
-    Bob says "Je propose que nous allions dans un restaurant Dans le centre de Paris."
-    User says "D'accord, allons dans un restaurant Dans le centre de Paris."
-    Bob says "Je propose que nous allions au restaurant Aki. c'est un restaurant japonais, chic avec une ambiance animé situé Dans le centre de Paris."
-    User says "Je n'aime pas les restaurants animés, Choisissons autre chose."
-    Bob says "D'accord, allons au restaurant Arlecchino."
-Nous avons trouvé une solution! La négociation est terminée
-Done
-Done
-    User says "Finalement, je préfère aller dans un restaurant près du Père lachaise."
-    Bob says "Okay."
-Nous avons trouvé une solution! La négociation est terminée
+
 --------------------------------------------- 
  
 Preferences of agent Arthur 
