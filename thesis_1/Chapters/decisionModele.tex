@@ -197,6 +197,8 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 		
 		A: "Okay. I'll call to book a table."
 	
+	
+	\subsection{Evaluation du modèle}
 	\subsection{Limites des arbres de dialogue}
 		Parler de l'étude qui a montré une ambiguïté dans la perception des comportement et la capacité à isoler l'impact de chaque principe sur la prise de décision
 		
@@ -208,3 +210,198 @@ Dans ce qui suit nous présenterons, le modèle décision de l'agent qui prend e
 	
 	\section{Modèle de décision basé sur les comportements de pouvoirs}
 	
+		Nous proposons un modèle computationnel de décision, qui reprend les trois principes de pouvoir dans le modèle décisionnel de l'agent. 
+		A cause de la rigidité des arbres de dialogues, nous adaptons la solution afin qu'elle soit plus flexible de l'utilisateur et surtout afin que les comportements de pouvoir soient plus saillant dans les décisions de l'agent.
+		
+		Par conséquent, nous présentons dans ce qui suit, l'adaptation algorithmique de chaque principe de pouvoir extraits de la psychologie sociale.
+		
+		\subsection{Principe 1: Niveau d'exigence}
+		
+			Selon notre premier principe, le niveau d'exigence devrait être plus important chez les agents avec un pouvoir élevé. Cependant, au cours d'une négociation collaborative, les deux négociateurs sont amenés à réduire leur niveau d'exigences parce qu'ils veulent parvenir à un accord. Les psychologues observent des concessions plus importantes pour les négociateurs avec un pouvoir faible. 
+			
+			Nous avons implémentés ces comportements en deux phases. En effet, afin de modéliser la différence d'exigence dans la négociation, nous avons implémenté une fonction de satisfiabilité qui prend en compte la valeur de pouvoir initiale de l'agent. 
+			
+			Soit $S$ l'ensemble de valeurs satisfiables pour l'agent. Ceci se traduit par les valeurs que l'agent se dit \textit{"aimer" (i.e. l'expression d'un } \emph{StatePreference}). Cet ensemble varie en fonction de la valeur $pow$ de l'agent:
+			
+			\begin{equation}
+			\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq pow
+			\end{equation}
+			
+			En effet, une valeur est dite \textit{satisfiable} si sa valeur de satisfiabilité est plus grande que la valeur de pouvoir de l'agent.
+			
+			Par exemple, pour le même ensemble de valeurs présentés dans l'exemple ... et les mêmes relations de préférences, deux agents avec des valeurs de pouvoir différents n'ont pas le même niveau d'exigence. Celà se voit sur l'ensemble $S$ ... terminer exemple
+			
+			Afin de modéliser le comportement de concession, nous avons élaboré une \emph {courbe de concession} illustrée sur la figure \ref{fig:conc}. 
+		
+			Soit $ self (pow, t) $ une fonction variant dans le temps, suivant la courbe de concession:
+				\begin{equation}
+				self(pow, t) = \left\{\begin{array}{ll}
+				pow & \mathrm{if\ } (t \leq \tau)\\
+				max(0, pow - (\frac{\delta}{pow} \cdot (t - \tau))) & \mathrm{otherwise}
+				\end{array}\right.
+				\end{equation}
+		
+			
+		
+		tel que :
+		\begin{itemize}
+			\item $t \geq 0$ est le nombre de propositions ouvertes ou rejetées ayant été exprimé durant la négociation.
+			\item $\tau > 0$ le nombre minimal de propositions pour que les concessions commencent.
+			\item  $\delta > 0$ un paramètre de calcul de la courbe de concession.
+			
+		\end{itemize}  
+		
+		La fonction $self(pow,t)$ représente le poids que l'agent attribut à sa satisfaction personnelle par rapport à la satisfaction de son partenaire de négociation. Plus le pouvoir de l'agent est élevé, plus son niveau d'exigence est important. Par ailleurs, la courbe de concession décroît plus rapidement pour des valeurs de pouvoirs faibles.
+		
+		Ces comportements d'exigences et de concessions sont modélisés pour calculer l'acceptabilité d'une proposition 
+		
+		L'acceptabilité d'une valeur de critère $v \in C_i$ est défini comme une fonction booléenne:
+		\begin{equation}
+		\vspace{-.5em} 
+		acc(pow,v, t) = sat_{self}(v, \prec_i) \geq  (\beta \cdot self(pow,t))
+		\end{equation}
+		
+		\medskip
+		où $\beta>0$ est un paramètre théorique qui définit le poids accordé au niveau d'exigence.
+		
+		cette fonction est généralisable aux options $o \in O$: $acc(pow,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(pow,t))$. Elle est utilisée afin de déterminer si une proposition est acceptable.
+		
+		\begin{floatingfigure}[l]{2.1 in}
+			\includegraphics[width=2in]{Figures/sv3.png}
+			\caption{\label{fig:conc}Courbe de concession reprenant le principe 1}
+		\end{floatingfigure} 
+		
+		
+		\subsection {Prise en compte des préférences de soi Vs autrui}
+		Selon notre second principe, les négociateurs avec un pouvoir élevé donnent plus de poids à leur propre satisfaction qu'a leur partenaires de négociation. 
+		Pour implémenter ce principe dans le contexte de la négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \emph{tolérable} pour la satisfiabilité de l'agent et de son partenaire.
+	
+		% The value returned by $tol$ is used to build proposals during the negotiation. 
+		
+		Soit un critère $i\in\mathcal{C}$, considérons le sous ensemble $V_i\subseteq C_i$ de valeurs acceptables pour l'agent:
+		\vspace{-0.5em} 
+		\begin{equation}
+		V_i(pow,t) = \{ v\in C_i : acc(pow,v,t) \}
+		\vspace{-0.5em}
+		\end{equation}
+		
+		Cet ensemble correspond à toutes les propositions qu'un agent pourrait faire à un moment donné de la négociation.
+		
+		Nous calculons la tolérabilité d'une valeur donnée $ v \ dans V_i (pow, t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
+		
+		\begin{equation}
+		\begin{split}
+		tol(v, t, \prec_i, A_i, U_i, pow) & = self(pow, t)  \cdot sat_{self}(v, \prec_i) \\
+		& +  (1 - self(pow, t)) \cdot sat_{other}(v, A_i, U_i)
+		\end{split} 
+		\end{equation}
+		
+		\noindent
+		Nous généralisons cette fonction à toute option $o=(v_1,\ldots,v_n) \in O$:
+		
+		\begin{equation}
+		tol(o, t, \prec, A, U, pow) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, pow) } {n}
+		\end{equation}
+		
+		\noindent
+		Par conséquent, l'agent propose la valeur la plus \emph{tolérable} dans l'ensemble $V_i$:
+		\begin{equation}
+		propose(V_i, \prec_i,pow) =  \operatorname*{arg\,max}_{v \in V_i} ( tol(v))
+		\end{equation}
+		
+		\subsubsection*{Résumé des paramètres computationnels}
+		\begin{itemize}[noitemsep]
+			
+			\item $\pi \in $[0,1] : La frontière entre  les comportements soumis et dominants utilisé dans le choix d'un type d'acte de dialogue. (voir )
+			\item $\tau > 0$ : le nombre minimal de propositions ouvertes ou rejetées avant le début de la concession.
+			\item $\delta > 0$ : paramètre dans la pente de la courbe de concession.
+			\item $\alpha> 0$: Le nombre maximums d'actes de dialogues informatifs consécutifs.
+		\end{itemize}
+	
+	\subsection{Contrôle de la négociation}
+	
+		Le troisième principe stipule que les négociateurs avec un pouvoir élevé ont tendance à contrôler la négociation.
+		Nous avons implémenté ce principe à travers un algorithme pour le choix de l'acte de dialogue à énoncer, comme présenté dans la table \ref{table:uttChoice}.
+
+		Nous avons défini un seuil $\pi$  qui divise le spectre de pouvoir en deux, à savoir comportements de haus pouvoir (dominant), où comportements de pouvoir faible (soumis).
+
+		Prenant en compte trois paramètres; la valeur de pouvoir $pow$, l'acte de dialogue énoncé par le partenaire $u^{-1}$ et l'état courent de la négociation, l'agent sélectionne le premier acte dans la table \ref{table:uttChoice} dont la condition d'applicabilité est vérifiée.  
+	
+		
+		Par exemple, un agent avec un pouvoir élevé mettra fin à la négociation dès que toutes les options restantes seront inacceptables (ligne 2). Un agent avec un pouvoir faible rejettera et exprimera une \emph{State}, afin d'expliquer pourquoi la proposition n'est pas acceptable (ligne 14). S'il n'y a pas de proposition ouverte, l'agent avec un pouvoir faible demandera de nouvelles informations (ligne 18 -19).
+	
+		Dans notre modèle, un agent peut exprimer plusieurs actes de dialogues dans un même tour de parole. Ces cas sont représentés avec un signe $"+"$ dans la table \ref{table:uttChoice}.
+	
+		En fonction de la valeur de pouvoir, l'agent va adopter différentes stratégies dans la sélection de l'acte de dialogue à exprimer. En effet, dans les travaux en psychologie social, les négociateurs dominants se concentrent sur l'avancement de la tâche de négociation. Ceci ce traduit par le choix d'actes de négociations (ProposeValue /ProposeOption, RejectValue /RejectOption, AcceptValue/ AcceptOption) comme il est présenté dans les lignes (4 à 10).
+		
+		L'agent priorise les actes de négociations plutôt que les actes d'échanger d'informations sur les préférences. En effet, comme présenté à la ligne 3, après un nombre de tours $ \alpha $ consacrés au partage d'informations, l'agent fera plutôt des propositions que informer le partenaire de ses goûts. Un exemple est présenté dans le dialogue \ref{fig: ex-dialogue}.
+	
+		Au contraire, un négociateur avec un pouvoir faible se concentrera sur la construction d'un modèle précis des préférences de son partenaire afin de prendre la décision la plus équitable. Il se concentrera plus sur \emph {actes d'échanges d'information} (StateValue ou AskValue / AskCriterion) comme le montre les lignes (18-20). De plus, les mouvements de négociation sont limités par des conditions qui garantissent que l'agent ait rassemblé suffisamment d'informations sur les préférences de son partenaire avant d'exprimer une proposition (ligne 16-17).
+	
+	\begin{table}[!t]
+		
+			\centering
+			\begin{tabular}{|p{.5cm}|p{.9cm}|p{4cm}|p{7.5cm}|}
+				\hline
+				\parbox[t]{3mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\centering \textbf{pow  $>\pi$}}}}&$N $de ligne& \textbf{Acte de dialogue} & \textbf{Condition} \\
+				\cline{2-4}
+				&1&NegotiationSuccess & $\exists o \in T\cup P$, $acc(pow,o,t)$ \\
+				\cline{2-4}
+				& 2& NegotiationFailure & $ \forall o \in \mathcal{O},  \neg acc(pow,o,t)$\\
+				\cline{2-4}
+				&3& StateValue(v) & $type(u^{-1}) = AskPreference \land n < \alpha$ \newline $n$ est le nombre d'actes informatifs successifs\\
+				\cline{2-4}
+				&4& AcceptValue(v)+ \newline ProposeValue(c) & $ \exists v \in P_i$ / $acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+				\cline{2-4}
+				&5& AcceptValue(v)+\newline ProposeOption(o) &  $ \exists v \in P_i$ / $ acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $ v \in o \land acc(pow,o,t)$ \\
+				\cline{2-4}
+				&6& RejectValue(v)+\newline ProposeValue(c) & $ \exists v \in P_i$ / $ \neg acc(pow,v,t) \land \exists i\in\mathcal{C}, acc(pow,c,t)$ \\
+				\cline{2-4}
+				&7& RejectValue(v)+ \newline ProposeOption(o) &  $ \exists v \in P_i$ / $  \neg acc(pow,v,t) \land \exists o \in \mathcal{O}$/ $acc(pow,o,t)$ \\
+				\cline{2-4}
+				& 8&RejectOption($o_1$)+ ProposeOption($o_2$) & $ \exists o_1 \in P$ / $ \neg acc(pow,o_1,t) \land \exists o_2\in\mathcal{O}, acc(pow,o_2,t)$ \\
+				\cline{2-4}
+				&9& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+				\cline{2-4}
+				&10& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
+				
+				\hline
+				
+				\parbox[t]{2mm}{
+					\multirow{5}{*}{\rotatebox[origin=c]{90}{ \textbf{pow  $ \leq \pi$}}}} & 11& Negotiation success &  $\exists o \in T$ \\
+				\cline{2-4}
+				&12& AcceptValue(v) & $\exists i\in\mathcal{C}, \exists v \in P_i, acc(pow, v, t)$ \\
+				\cline{2-4}
+				&13&AcceptOption(o) & $\exists o \in P, acc(pow, o, t)$ \\
+				\cline{2-4}
+				&14&RejectValue(v)+\newline StateValue(v) & $ t<\tau \land (\exists i\in\mathcal{C}, \exists v \in P_i, \neg acc(pow,v, t))$.\\
+				\cline{2-4}
+				&15&RejectOption(o)+ \newline StateValue(v) & $ t<\tau \land (\exists o \in P,  \neg acc(pow,o, t) \land \exists v \in o, \neg acc(pow,v, t))$.\\
+				\cline{2-4}
+				&16&ProposeValue(v) &  $\exists i\in\mathcal{C}, \exists v \in C_i, v \in A_i  \land acc(pow, v, t) $\\
+				\cline{2-4} 
+				&17&ProposeOption(o)  & $\forall i\in\mathcal{C},\exists v \in C_i, v \in T_i  \land v \in o$ \\
+				\cline{2-4} 
+				&18&AskValue(v) & $t > \tau \land \exists i\in\mathcal{C}, \exists c \in P_i, \neg acc(c, t)$ \\
+				\cline{2-4} 	
+				&19&AskCriterion(i) & $\exists i\in\mathcal{C}, A_i \cup U_i= \emptyset $\\
+				\cline{2-4}	
+				&20&StateValue(v) & $\exists i\in\mathcal{C}, C_i\cap S_i \neq \emptyset$	\\
+				\cline{2-4}
+				&21& ProposeValue(v) & $\exists v \in C_i$ / $tol(v, t, \prec_i, A_i, U_i, pow)$\\
+				\cline{2-4}
+				&22& ProposeOption(o) & $\exists o \in \mathcal{O}$ / $tol(o, t, \prec_i, A_i, U_i, pow)$\\
+				
+				\hline
+			\end{tabular}
+		
+		\caption{Ordre de sélection d'actes de dialogues en fonction de la valeur de pouvoir}
+		\label{table:uttChoice}
+	\end{table}
+
+Ajout d'exemple pour chaque cas
+
+Exemple de satisfiabilité dans chapitre précédent
+
+
+	\section{Évaluation du modèle}
