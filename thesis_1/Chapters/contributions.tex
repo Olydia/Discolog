@@ -88,7 +88,7 @@
 		
 		Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, ce fait est aussi observé dans l'étude que nous avions effectué dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères ont soit été abordé simultanément dans la négociation, ou bien un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'à aboutir a un compromis.
 		
-		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \colorbox{red}{Mentionner que la la négociation multicritères permet fournit un context permettant voir papier dederu1995 page 3}
+		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \colorbox{red}{Mentionner que la la négociation multicritères  fournit un context permettant voir papier dederu1995 page 3}
 	
 		% 	Pour toutes ces raisons, notre choix s'est porter sur la négociation multi-critère
 	
@@ -100,10 +100,10 @@
 		L'évaluation de chaque option repose sur un ensemble de critères $\mathcal{C}$ reflétant les caractéristiques de l'option. Nous définissons l'ensemble $\mathcal{C}$ de $n$ critères, et $C_1,\ldots,C_n$, comme le domaine de valeurs de chaque critère de l'ensemble. 
 		Par conséquent, $\mathcal{O}$ peut être défini comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $O \in \mathcal{O}$ est un tuple $(v_1,\ldots,v_n)$. 
 		
-		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant où dîner peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C} = \{Cuisine, Prix, Emplacement, Athmosphère, \}$. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est $ Anterprima(Italien, coûteux , animé, west side)$. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
+		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant où dîner peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C}$ = \emph{$\{$Cuisine, Prix, Emplacement, Athmosphère, $\}$}. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est  \emph{Anterprima(Italien, coûteux , animé, Montparnasse)}. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
 		\begin{table}[h]
 			\centering
-			\begin{tabular}{|p{2.25cm}|p{9.25cm}|}
+			\begin{tabular}{|p{2.25cm}|p{10cm}|}
 				\hline
 				Critère $i $ & Domaine de valeur $C_i$ \\
 				\hline
@@ -113,7 +113,7 @@
 				\hline
 				Prix & \{Coûteux, abordable, a prix bas\} \\
 				\hline
-				Emplacement & \{West side, East side, Downtown, North side, South side\} \\
+				Emplacement & \{Père Lachaise, Centre de Paris, Montparnasse, Tour Eiffel, gare du Nord\} \\
 				\hline
 				
 			\end{tabular}
@@ -159,7 +159,9 @@
 			 Ces conditions garantissent que les préférences de l'agent sont cohérentes dans le domaine de la négociation; et la condition de transitivité assure que toutes les valeurs sont comparables. Un exemple de modèle de préférences défini sur le critère de cuisine est présenté dans la figure \ref{fig:ex_pref}.
 			
 			
-			Les préférences étant un aspect essentiel dans la prise de décision durant la négociation, nous avons modélisé une fonction qui représente la valeur d'utilité ou satisfaction pour chaque valeur calculé à partir de l'ensemble des préférences. Donc, pour un critère $i\in \mathcal{C}$, pour une valeur $v\in C_i$, l'agent calcule sa \emph{satisfaction} $sat_{self}(v \prec_i)$ pour cette valeur comme le nombre de valeurs qu'il préfère moins dans l'ordre partiel des préférences $\prec_i$. La valeur est ensuite normalisé dans l'intervalle [0,1]:
+			Les préférences étant un aspect essentiel dans la prise de décision durant la négociation, nous avons modélisé une fonction qui représente la valeur d'utilité ou satisfaction pour chaque valeur calculé à partir de l'ensemble des préférences. 
+			
+			Par conséquent, pour un critère $i\in \mathcal{C}$, pour une valeur $v\in C_i$, l'agent calcule sa \emph{satisfaction} $sat_{self}(v \prec_i)$ pour cette valeur comme le nombre de valeurs qu'il préfère moins dans l'ordre partiel des préférences $\prec_i$. La valeur est ensuite normalisé dans l'intervalle [0,1]:
 			
 			\begin{equation}
 			sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
@@ -178,10 +180,10 @@
 								{\scriptsize
 						\begin{tabular}{ |c|c|c|c|c|c|c|c| }
 							\hline				
-							valeur & Italien & Français & Japonais & Chinois & Mexicain & Turque & Coréen \\
+							valeur & Japonais & Coréen & Chinois &  Mexicain & Turque & Italien & Français \\
 							\hline
 							
-							sat(valeur) & 0.83 & 1 & 0.16 & 0.5 & 0.66 & 0.66 & 0.33 \\
+							sat(valeur) & 0.16 & 0.33 & 0.5 & 0.66 & 0.66 & 0.83 & 1\\
 							\hline
 							
 						\end{tabular}}
@@ -191,11 +193,11 @@
 	
 	\subsubsection{Communication}
 	\label{sec:communication}
-		Le modèle de communication étant implémenté sur la plateforme \emph{Disco} \cite{rich09}, l'agent communique avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et est associé à une expression spécifique formulé dans un langage naturel (NL).
+		Le modèle de communication est implémenté sur la plateforme \emph{Disco} \cite{rich09}, qui permet à l'agent de communiquer avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et est associé à une expression spécifique formulé dans un langage naturel (NL).
 		
-		La modélisation des actes de dialogue est basée sur les travaux de Sidner \cite{sidner1994artificial} qui avait proposé des actes de dialogues qui permettent à un agent de communiquer dans le contexte de négociation collaborative. Ces actes lui permettent aussi de gérer son état mental en terme d'intention et croyances communiquées durant la négociation. 
+		La modélisation des actes de dialogue est basée sur les travaux de Sidner \cite{sidner1994artificial} qui avait proposé des actes de dialogues qui permettent à un agent de communiquer dans le contexte de négociation collaborative. Ces actes lui permettent aussi de gérer son état mental en terme d'intentions et croyances communiquées durant la négociation. 
 		
-		Nous avons définis cinq types d'actes de dialogues génériques et deux actes additionnels pour la fin de négociation. Les actes de dialogues sont présentés dans la table \ref{table:utt}. Seule la génération en NL de ces énoncés doit être spécifié pour le domaine de négociation. La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en NL pour exprimer une valeur d'un acte de dialogue.
+		Nous avons définis cinq types d'actes de dialogues génériques et deux actes additionnels pour la gestion de fin de négociation. Les actes de dialogues sont présentés dans la table \ref{table:utt}. Seule la génération en langage naturel(LN) de ces énoncés doit être spécifié pour le domaine de négociation. La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en LN pour exprimer une valeur d'un acte de dialogue.
 		Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
 		
 		Chaque type d'acte de dialogue prend un argument qui peut être soit un une valeur de critère  $v \in C_i$, une option $o \in \mathcal{O}$ ou encore critère $i \in \mathcal{C}$. 
@@ -217,11 +219,11 @@
 		
 			\begin{table}[t]
 					\centering
-					\begin{tabular} {|p{3.25cm}|p{4cm}|p{3.25cm}|}
+					\begin{tabular} {|p{3.25cm}|p{6cm}|p{3.25cm}|}
 						\hline
 						\textbf{Type d'acte de dialogue}  &\textbf{ Génération en NL} & \textbf{Postcondition}\\
 						\hline
-						StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
+						StateValue(v) &  I (don't) like /$v$/. \newline  J'aime/Je n'aime pas /$v$/ & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
 						\hline
 						AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
 						
