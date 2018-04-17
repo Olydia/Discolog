@@ -8,7 +8,9 @@ import java.io.IOException;
 
 import java.util.*;
 
-import sun.management.resources.agent_zh_CN;
+import fr.limsi.application.FRversion.SaisiePref.dndTestFR.ModelDePreferences;
+import fr.limsi.negotiate.Negotiation;
+import fr.limsi.negotiate.Option;
 
 
 /**
@@ -22,7 +24,7 @@ public class CSVReader {
 	/* Odre des criteres : Prix, Cuisine, Ambiance, Localisation 
 	 */
 
-	public static ArrayList<String[]> parse (String csvFile){
+	public static HashMap<Integer, ArrayList<String[]>>  parse (String csvFile){
 		ArrayList<String[]> preferences = new ArrayList<String[]>();
 		HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
  		BufferedReader br = null;
@@ -36,34 +38,28 @@ public class CSVReader {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
             	
-                // use comma as separator
-            	if(!line.contains("class fr.limsi.negotiate.restaurant") &&  !line.equals("")) {
+            	if(line.startsWith("[(")) {
             		
-            		if(isAgentName(line)){
-            			lecture = true;
-            		}
-            		
+            		criteria ++;
         			preferences.add(nettoyer(line));
 
-//            		if(lecture && criteria <=4){
-//            			preferences.add(nettoyer(line));
-//            			criteria ++;
-//
-//            		}
-            		
-            		
-//            		else {
-//            			
-//            			values.put(agents,(ArrayList<String[]>) preferences.clone());
-//            			preferences.clear();
-//            			agents ++;
-//            			lecture = false;
-//            			criteria = 1;
-//            		}
-            		
             	}
                
-
+            	if(criteria>=5){
+            		ArrayList<String[]> clone = new ArrayList<String[]>();
+            		for(String[] e : preferences){
+            			clone.add(e.clone());
+       					for(String ee : e)
+       						System.out.print(ee + "\t");
+       				}
+       				System.out.println("\n");
+            		values.put(agents,clone);
+            		preferences.clear();
+       				criteria = 1;
+            		agents ++;
+//        			lecture = false;
+            	}
+            		
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -78,7 +74,7 @@ public class CSVReader {
                 }
             }
         }
-        return preferences;
+        return values;
 	}
 	
 	public static boolean isAgentName(String line){
@@ -91,29 +87,36 @@ public class CSVReader {
 		line = line.replace("[", "");
 		line = line.replace("]", "");
 //		
+		line = line.replace(" (", "");
 		line = line.replace("(", "");
 		line = line.replace(")", "");
 		
 		 String[] country = line.split(cvsSplitBy);
 		return country;
 	}
+	public static Negotiation<? extends Option> createModel
+				(ArrayList<String[]> values){
+		
+		ModelDePreferences model = new ModelDePreferences();
+		model.d1_cost.fromStringToPreferences(values.get(0));
+		model.d1_cuisine.fromStringToPreferences(values.get(1));
+		model.d1_atmosphere.fromStringToPreferences(values.get(2));
+		model.d1_location.fromStringToPreferences(values.get(3));
+		
+		return model.createModel();
+	}
 	
     public static void main(String[] args) {	
     	
 
        String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
-       ArrayList<String[]> preferences = new ArrayList<String[]>();
 
-		preferences = parse(csvFile);
-		for(String[] e : preferences){
-			System.out.println("");
-			for(String ee : e)
-				System.out.print(ee + "\t");
-		}
-    	
+       HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
+    		  values = parse(csvFile);
+       
+       System.out.println(createModel(values.get(1)).printPreferences());
+       
 
     
-    	String line = "";
-    	System.out.println(isAgentName(line));
     }
 }
