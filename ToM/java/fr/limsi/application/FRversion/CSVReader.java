@@ -109,12 +109,12 @@ public class CSVReader {
     public static void main(String[] args) {	
     	
 
-       String csvFile = System.getProperty("user.dir")+File.separator+"Participant.txt";
+       String csvFile = System.getProperty("user.dir")+File.separator+"Participant16.txt";
 
        HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
     		  values = parse(csvFile);
-       
-       System.out.println(createModel(values.get(1)).printPreferences());
+       for(int e : values.keySet())
+    	   System.out.println(createModel(values.get(e)).printPreferences());
        
 
     

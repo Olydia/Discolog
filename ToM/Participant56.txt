@@ -14,42 +14,6 @@ class fr.limsi.negotiate.restaurant.FR.Ambiance
 
 
 class fr.limsi.negotiate.restaurant.FR.Localisation
-[(montparnasse<centre de paris), (pres de la tour eiffel<montparnasse), (pere lachaise<pres de la tour eiffel), (gare du nord<pere lachaise)]
-
-Preferences of agent Bob 
- 
-
-class fr.limsi.negotiate.restaurant.FR.Prix
-[(chic<abordable), (abordable<bas prix)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Cuisine
-[(Italien<Francais), (Francais<Mexicain), (Mexicain<Japonais), (Japonais<Chinois), (Chinois<Turc), (Turc<Coreen)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Ambiance
-[(cosy<calme), (calme<anime), (anime<moderne), (moderne<romantique), (romantique<familial)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Localisation
-[(pere lachaise<centre de paris), (centre de paris<montparnasse), (montparnasse<pres de la tour eiffel), (pres de la tour eiffel<gare du nord)]
-
-User Preferences : 
- 
-
-class fr.limsi.negotiate.restaurant.FR.Prix
-[(abordable<chic), (bas prix<abordable)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Cuisine
-[(Italien<Japonais), (Coreen<Italien), (Francais<Coreen), (Mexicain<Francais), (Turc<Mexicain), (Chinois<Turc)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Ambiance
-[(cosy<moderne), (calme<cosy), (romantique<calme), (familial<romantique), (anime<familial)]
-
-
-class fr.limsi.negotiate.restaurant.FR.Localisation
 [(montparnasse<centre de paris), (pres de la tour eiffel<montparnasse), (pere lachaise<pres de la tour eiffel), (gare du nord<pere lachaise), (montparnasse<centre de paris), (pres de la tour eiffel<montparnasse), (pere lachaise<pres de la tour eiffel), (gare du nord<pere lachaise)]
 
 Preferences of agent Bob 

@@ -97,7 +97,7 @@ class fr.limsi.negotiate.restaurant.FR.Localisation
     Arthur says "Je propose que nous allions dans un restaurant calme."
     User says "D'accord, allons dans un restaurant calme."
     Arthur says "Je propose que nous allions au restaurant Lion . c'est un restaurant chinois, à bas prix avec une ambiance calme situé près de Gare du Nord."
-    User says "D'accord, allons au restaurant Lion ."
+    User says "D'accord, allons au restaurant Lion."
     Arthur says "Okay."
 Nous avons trouvé une solution! La négociation est terminée
 --------------------------------------------- 

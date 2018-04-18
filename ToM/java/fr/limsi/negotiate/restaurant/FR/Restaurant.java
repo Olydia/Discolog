@@ -315,7 +315,7 @@ public enum Restaurant implements Option {
 	LE_YANG_TSE(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.CENTRE_DE_PARIS),
 	LIDO(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.PRES_DE_LA_TOUR_EIFFEL),
 	LIN(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.PERE_LACHAISE),
-	LION_(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.GARE_DU_NORD),
+	LION(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.GARE_DU_NORD),
 	LOTUS_FLOWER(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.CALME, Localisation.MONTPARNASSE),
 	LUNE_ROUGE(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.ROMANTIQUE, Localisation.CENTRE_DE_PARIS),
 	LYS(Cuisine.CHINOIS, Prix.BAS_PRIX, Ambiance.ROMANTIQUE, Localisation.PRES_DE_LA_TOUR_EIFFEL),

@@ -134,7 +134,7 @@ class fr.limsi.negotiate.restaurant.FR.Localisation
     User says "Je propose que nous allions dans un restaurant cosy."
     Kevin says "D'accord, je propose que nous allions au restaurant Kawloon. c'est un restaurant chinois, chic avec une ambiance cosy situé près de Gare du Nord."
     User says "Je ne veux pas aller dans un restaurant animé. Allons plutôt dans un restaurant Dans le centre de Paris."
-    Kevin says "Je ne veux pas aller dans un restaurant Dans le centre de Paris. Allons plutôt à un autrerestaurant Jiliya. c'est un restaurant chinois, chic avec une ambiance cosy situé Dans le centre de Paris."
+    Kevin says "Je ne veux pas aller dans un restaurant Dans le centre de Paris. Allons plutôt à un autre restaurant Jiliya. c'est un restaurant chinois, chic avec une ambiance cosy situé Dans le centre de Paris."
     User says "D'accord, allons au restaurant Jiliya."
     Kevin says "Okay."
 Nous avons trouvé une solution! La négociation est terminée
