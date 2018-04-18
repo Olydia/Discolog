@@ -1617,7 +1617,6 @@ public class FenetreBas extends AnchorPane{
 					list.add(errorLabel);
 				}
 				else{
-					System.err.println(command);
 					interaction.getConsole().execute(command);
 					boolean guess = interaction.getProperty("interaction@guess", interaction.isGuess());
 					interaction.getSystem().respond(interaction, false, guess);

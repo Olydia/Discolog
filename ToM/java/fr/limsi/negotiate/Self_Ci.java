@@ -73,7 +73,20 @@ public class Self_Ci <C> extends Self<C> {
 			return null;
 		}
 		
-
+		public C fromStringToCriterion(String name){
+			
+			//return type.getField(name.toUpperCase());
+			for (C elem: type.getEnumConstants()){
+				if(((Criterion) elem).toString().toLowerCase().equals(name.toLowerCase()))
+						return elem;
+			}
+			return null;
+		}
+		
+		/**
+		 * 
+		 * @param classement ordre décroissant des préférences
+		 */
 		public void createPreferences(ListModel<String> classement){
 			
 			for(int i = 0; i< classement.getSize()-1; i++){
@@ -83,5 +96,23 @@ public class Self_Ci <C> extends Self<C> {
 				this.addPreference(less, more);
 			}
 		}
+		/**
+		 * 
+		 * @param Transforme le tosTring de preferences a 
+		 * une preference réelle du modele
+		 * 
+		 */
+		public void fromStringToPreferences(String[] values){
+			for(String element: values){
+				String[] split = element.split("<");
+				C less = fromStringToCriterion(split[0]);
+				C more = fromStringToCriterion(split[1]);
+
+				
+				this.addPreference(less, more);
+			}
+		}
+		
+		
 	
 }
