@@ -109,13 +109,22 @@ public class CSVReader {
     public static void main(String[] args) {	
     	
 
-       String csvFile = System.getProperty("user.dir")+File.separator+"Participant16.txt";
+       String csvFile = System.getProperty("user.dir")+File.separator+"Participant50.txt";
 
        HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
     		  values = parse(csvFile);
        for(int e : values.keySet())
     	   System.out.println(createModel(values.get(e)).printPreferences());
        
+       
+       /**
+        * Pour chaque model calculer les distances avec le premier model
+        * lire fichier csv avec separateur
+        * En fonction du id dans csv ouvrir fichier et creer preference
+        * pour colonne 1 pref(user + bob)
+        * pour colonne 2 pref(user +arthur)
+        * pour colonne 3 pref(user + kevin)
+        */
 
     
     }
