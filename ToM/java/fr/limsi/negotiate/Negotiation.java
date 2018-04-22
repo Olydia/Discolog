@@ -725,4 +725,12 @@ public class Negotiation<O extends Option> {
 
 	}
 	
+	public double getSat(String optionName){
+		for(O op: getOptions()){
+			if(op.toString().toUpperCase().equals(optionName))
+				return satisfiability(op);
+		}
+		return 0;
+	}
+	
 }

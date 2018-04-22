@@ -20,16 +20,22 @@ import fr.limsi.negotiate.Option;
  * @author ouldouali
  *
  */
-public class CSVReader {
+public class PreferencesExtracter {
 	/* Odre des criteres : Prix, Cuisine, Ambiance, Localisation 
 	 */
+	String csvFile;
+	
+	public PreferencesExtracter(String csvFile){
+		this.csvFile = csvFile;
+	}
 
-	public static HashMap<Integer, ArrayList<String[]>>  parse (String csvFile){
+	
+	
+	public  HashMap<Integer, ArrayList<String[]>>  parse (){
 		ArrayList<String[]> preferences = new ArrayList<String[]>();
 		HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
  		BufferedReader br = null;
         String line = "";
-        boolean lecture = false;
         int criteria = 1;
         int agents = 0;
         
@@ -77,12 +83,13 @@ public class CSVReader {
         return values;
 	}
 	
-	public static boolean isAgentName(String line){
+	public  boolean isAgentName(String line){
 		List<String> myList = Arrays.asList("Bob", "Arthur", "Kevin", "User");
     	return (myList.stream().anyMatch(str -> line.contains(str)));
     	
 	}
-	protected static String[] nettoyer( String line) {
+	
+	protected  String[] nettoyer( String line) {
         String cvsSplitBy = ",";
 		line = line.replace("[", "");
 		line = line.replace("]", "");
@@ -94,7 +101,7 @@ public class CSVReader {
 		 String[] country = line.split(cvsSplitBy);
 		return country;
 	}
-	public static Negotiation<? extends Option> createModel
+	public Negotiation<? extends Option> createModel
 				(ArrayList<String[]> values){
 		
 		ModelDePreferences model = new ModelDePreferences();
@@ -110,11 +117,11 @@ public class CSVReader {
     	
 
        String csvFile = System.getProperty("user.dir")+File.separator+"Participant50.txt";
-
+       PreferencesExtracter p = new PreferencesExtracter(csvFile);
        HashMap<Integer, ArrayList<String[]>> values = new HashMap<Integer, ArrayList<String[]>>();
-    		  values = parse(csvFile);
+    		  values = p.parse();
        
-       System.out.println(createModel(values.get(1)).printPreferences());
+       System.out.println(p.createModel(values.get(1)).printPreferences());
        
        
        /**
