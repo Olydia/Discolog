@@ -1,6 +1,6 @@
 normalityTest <- function(name, sheet)
 {
-  donne <- read_xlsx(name, sheet = sheet)
+  donne <- read.xlsx(name, sheetIndex = sheet)
   View(donne)
   noms <-names(donne)
   print(noms)

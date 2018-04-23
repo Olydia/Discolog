@@ -727,10 +727,11 @@ public class Negotiation<O extends Option> {
 	
 	public double getSat(String optionName){
 		for(O op: getOptions()){
-			String opName = op.getSimpleName();
+			String opName = op.getSimpleName().toUpperCase();
 			if(opName.equals(optionName))
 				return satisfiability(op);
 		}
+		System.err.println(optionName+ " pas trouvé");
 		return -1;
 	}
 	

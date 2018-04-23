@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -54,20 +55,21 @@ public class CSVReader {
                 values = extracter.parse();
                 Negotiation<? extends Option> userPref = extracter.createModel(values.get(0));
                 StringBuilder result = new StringBuilder();
-
-                for(String r : restaurants){
+                result.append(userId);
+                for(int i =1; i<restaurants.length; i++ ){
+                	String r = restaurants[i];
                 	int index = 1;
                     Negotiation<? extends Option> agentPref = extracter.createModel(values.get(index));
                     
                     // getSat of the restaurant
                     double agent = agentPref.getSat(r);
                     double user = userPref.getSat(r);
-                    result.append(user +";"+ agent+";");
+                    result.append(";"+user +";"+ agent);
                     
                     index ++;
                 }
                 
-                writeLine(result.toString(), System.getProperty("user.dir")+File.separator+
+                writeLine(result.toString()+"\n", System.getProperty("user.dir")+File.separator+
                 		"restaurantsSat.txt");
                 
             }
@@ -88,14 +90,23 @@ public class CSVReader {
 
     }
 	
-	public void writeLine(String line, String file){
+	public void writeLine(String line, String fileName){
 		BufferedWriter bw = null;
 		FileWriter fw = null;
 
 		try {
 
-			fw = new FileWriter(file);
+			File file = new File(fileName);
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			// true = append file
+			fw = new FileWriter(file.getAbsoluteFile(), true);
 			bw = new BufferedWriter(fw);
+
 			bw.write(line);
 
 		} catch (IOException e) {
@@ -117,10 +128,10 @@ public class CSVReader {
 				ex.printStackTrace();
 
 			}
-
 		}
 
 	}
+	
 	
     public static void main(String[] args) {
     	CSVReader read = new CSVReader("compVsMimic_Etude/EtudeFinale/Data/restaurantsChoisis");
