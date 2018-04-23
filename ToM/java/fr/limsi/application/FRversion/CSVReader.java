@@ -20,41 +20,56 @@ public class CSVReader {
 		this.fileName = fileName;
 	}
 	
+	/**
+     * 0 id user
+     * 1 Bob
+     * 2 Arthur
+     * 3 Kevin
+     * 
+     */
 	public void readCSV(){
-		String path ="";
-    	String csvFile = path +".csv";
+		String path =System.getProperty("user.dir")+File.separator+"";
+    	String csvFile = path + fileName+".csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
 
         try {
-
+        	 
             br = new BufferedReader(new FileReader(csvFile));
+            //igner la premiere ligne
+            line = br.readLine();
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
                 String[] restaurants = line.split(cvsSplitBy);
-                /**
-                 * 0 id user
-                 * 1 Bob
-                 * 2 Arthur
-                 * 3 Kevin
-                 * 
-                 */
+               
                 String userId = restaurants[0];
                 String prefFile = System.getProperty("user.dir")+File.separator+
-                		"Participant"+userId+"txt";
+                		"Participant"+userId+".txt";
                
                 PreferencesExtracter extracter = new PreferencesExtracter(prefFile);
                 HashMap<Integer, ArrayList<String[]>> values = 
                 		new HashMap<Integer, ArrayList<String[]>>();
                 values = extracter.parse();
+                Negotiation<? extends Option> userPref = extracter.createModel(values.get(0));
+                StringBuilder result = new StringBuilder();
+
+                for(String r : restaurants){
+                	int index = 1;
+                    Negotiation<? extends Option> agentPref = extracter.createModel(values.get(index));
+                    
+                    // getSat of the restaurant
+                    double agent = agentPref.getSat(r);
+                    double user = userPref.getSat(r);
+                    result.append(user +";"+ agent+";");
+                    
+                    index ++;
+                }
                 
-                //Bob
-                Negotiation<? extends Option> bob = extracter.createModel(values.get(0));
+                writeLine(result.toString(), System.getProperty("user.dir")+File.separator+
+                		"restaurantsSat.txt");
                 
-                // getRestaurant name
-                bob.getSat(restaurants[1]);
             }
 
         } catch (FileNotFoundException e) {
@@ -108,6 +123,8 @@ public class CSVReader {
 	}
 	
     public static void main(String[] args) {
+    	CSVReader read = new CSVReader("compVsMimic_Etude/EtudeFinale/Data/restaurantsChoisis");
+    	read.readCSV();
     	
     }
 

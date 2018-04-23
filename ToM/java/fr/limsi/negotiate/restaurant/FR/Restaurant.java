@@ -694,4 +694,9 @@ public enum Restaurant implements Option {
 		return this.capitalize(this.name());
 	}
 
+	@Override
+	public String getSimpleName() {
+		// TODO Auto-generated method stub
+		return this.name();
+	}
 }

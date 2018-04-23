@@ -10,4 +10,5 @@ public interface Option {
     String getFrVersion();
     String print();
     public String afficher();
+    String getSimpleName();
 }

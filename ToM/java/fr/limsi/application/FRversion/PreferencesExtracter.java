@@ -55,10 +55,10 @@ public class PreferencesExtracter {
             		ArrayList<String[]> clone = new ArrayList<String[]>();
             		for(String[] e : preferences){
             			clone.add(e.clone());
-       					for(String ee : e)
-       						System.out.print(ee + "\t");
+//       					for(String ee : e)
+//       						System.out.print(ee + "\t");
        				}
-       				System.out.println("\n");
+       				//System.out.println("\n");
             		values.put(agents,clone);
             		preferences.clear();
        				criteria = 1;

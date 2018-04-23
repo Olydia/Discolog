@@ -149,5 +149,11 @@ public enum ToyRestaurant implements Option {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String getSimpleName() {
+		// TODO Auto-generated method stub
+		return this.name();
+	}
 
 }
