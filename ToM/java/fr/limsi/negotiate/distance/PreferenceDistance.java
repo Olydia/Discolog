@@ -1,6 +1,5 @@
 package fr.limsi.negotiate.distance;
 import  fr.limsi.negotiate.*;
-import fr.limsi.negotiate.restaurant.totalOrderedModels;
 
 import java.util.List;
 

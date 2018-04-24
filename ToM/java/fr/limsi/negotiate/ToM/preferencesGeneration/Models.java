@@ -275,7 +275,6 @@
 	
 			getCombinationAmine(models);
 	
-			System.out.println("zzz");
 	
 		}
 	
