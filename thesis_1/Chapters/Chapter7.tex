@@ -1,0 +1,55 @@
+
+\section{Évaluation}
+
+Des études en psychologie sociale qui ont exploré l'impact de la relation de dominance sur l'expérience de la négociation et de ses résultats. Certains travaux ont montré l'impact de la complémentarité de la dominance tant sur le vécu de la négociation que sur les résultats obtenues en fin de négociation.
+En parallèle, d'autres travaux ont étudié l'impact de la mimicrie ou bien la similarité dans les comportements de dominance dans la négociation. Les résultats obtenus ont démontré leurs impact positif sur la négociation.
+
+Partant de ces études,  nous nous intéressons à explorer l'impact de ces stratégies qu'elles soient complémentaires ou similaires sur les stratégies de négociation dans le contexte d'une négociation collaborative entre un agent et un utilisateur humain. Cependant, comme la relation de dominance qui s'installe durant l'interaction est forcément complémentaire nous pensons que les stratégies complémentaires auront un impact positif plus important que des stratégies similaires. Ceci nous motive à adapter les hypothèses présentées dans les recherches en psychologie sociale à notre étude. Nous présenterons dans la section suivante les hypothèses que nous avons formulé sur l'impact de la relation complémentaire de dominance sur la négociation.
+
+\section{Protocole expérimental}
+
+	Afin d'illustrer notre modèle de négociation, nous reprenons le scénario d'une négociation collaborative pour le choix d'un restaurant.
+	Ce scénario ne nécessite pas une expertise pour prendre part dans la négociation. De plus, il est facile pour les participants de reporter leur préférences pour les différents critères du'un choix de restaurant. En effet, nous considérons les critères \textit{cuisine, ambiance, localisation et prix} pour le choix d'un restaurant, chaque critère est défini avec un ensemble de valeurs présenté dans la table \ref{tab:valeursCritere}. Un total de 630 options ont été généré à partir des critère regroupant les différentes possibilités. 
+	
+	Les préférences des agents utilisés dans cette étude ont été générés à partir des préférences saisis par les participants (voir section \ref{sec:procedure}). 
+	En effet, nous avons utilisé la distance de kendall \cite{bra2013Kendall} afin de générer les modèles de préférences des agents. Nous avons pris en compte deux conditions dans la génération des préférences. Premièrement, il fallait que le modèle de préférence généré pour l'agent soit différent des préférences du participant \emph{(Kendall's tau $\geq 0.7$)}. Deuxièmement, il fallait que les préférences générées pour les différents agents soient aussi différents. 
+	Le but est d'éviter d'avoir des agents qui paraissent similaires et peut donner l'impression d'interagir avec la même personne qui exprime différents comportements. Nous avons généré des modèles dont la distance Kendall's tau $\geq 0.35$. De plus, nous avons ajouté la condition que les modèles ne devaient pas avoir les mêmes valeurs en top des préférences. 
+	Par exemple, deux modèles \emph{P1, P2} dont la distance est supérieur à $0.35$. De plus, pour le critère \textit{cuisine}, les deux modèles ont la valeur $Italien$ comme la valeur la plus satisfiable $sat_{P1}(Italien) = 1$ et $sat_{P2}(Italien) = 1$. Ces deux modèles sont automatiquement rejetés pour les mêmes raisons présentées plus hauts. 
+	
+	\section{conditions}
+	
+	Nous avons implémenté trois agents, tous initialisé avec une valeur de pouvoir $pow =0.55$ afin d'avoir un comportement de pouvoir neutre.
+	De plus, chaque agent adopte une stratégie distincte représentant une condition expérimentale pour notre étude: 
+	
+	\begin{itemize}
+		\item \textit{Comportement complémentaire}: L'agent va utiliser son modèle de la ToM afin d'adopter un comportement de pouvoir complémentaire à celui exprimé par son partenaire (\emph{le participant}).
+		
+		\item \textit{Comportement similaire}: L'agent va adopter une stratégie similaire à celle exprimé par le participant. D'une manière il va imiter les comportements de pouvoir exprimé par le participant.
+		
+		\item \textit{Condition de contrôle} : L'agent ne s'adapte à son interlocuteur et suit un comportement de pouvoir statique.
+	\end{itemize}
+
+\section{Hypothèses}
+
+	suivant les travaux de \cite{}, nous supposons que la relation de dominance établie entre l'agent et l'utilisateur a une influence sur les stratégies exprimées par les négociateurs. Elle va donc avoir une conséquence sur les résultats obtenues lors de la négociation ainsi que l'appréciation qu'il ont ressentie en négociant avec leur partenaire. Par conséquent, nous définissons les hypothèses suivantes: 
+		\begin{itemize}
+			\item \textbf{H1} Les participants vont atteindre un gain commun plus important dans la condition complémentaire comparé aux autres conditions. 
+			\item \textbf{H2} La négociation converge plus rapidement dans la condition complémentaire comparé aux autres conditions. 
+			\item \textbf{H3} Les participants se sentent plus à l'aise avec un agent qui exprime un comportement complémentaire.
+			\item \textbf{H4} La complémentarité dans la relation de dominance augmente l'appréciation entre les négociateurs comparés aux autres conditions.
+		\end{itemize}
+
+
+
+
+\section{Procédure expérimentale}
+\label{sec:procedure}
+Inta sujet
+Expliquer le but de la négociation 
+but commun
+Tutoriel
+Saisie préference
+Commencement de l'interaction
+Questionnaire
+
+
