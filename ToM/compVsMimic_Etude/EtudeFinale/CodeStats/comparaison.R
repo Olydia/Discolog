@@ -24,18 +24,18 @@ comparaison <- function(donne1, donne2){
   cat("H3 ;", sd(b3), "; " , sd(a3), "\n")
   cat("H4 ;", sd(b4), "; " , sd(a4), "\n")
   
-  p1<- wilcox.test(b1, a1, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.95, exact=F, correct = F)
+  p1<- wilcox.test(b1, a1, mu=0, alt ="greater", paired =T, conf.int= T, conf.level = 0.7, exact=F, correct = F)
   cat("H1 ;","\n")
   print(p1)
   
-  p2<-  wilcox.test(b2, a2, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.95, exact=F, correct = F)
+  p2<-  wilcox.test(b2, a2, mu=0, alt ="greater", paired =T, conf.int= T, conf.level = 0.7, exact=F, correct = F)
   cat("H2 ;","\n")
   print(p2)
-  p3 <- wilcox.test(b3, a3, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.95, exact=F, correct = F)
+  p3 <- wilcox.test(b3, a3, mu=0, alt ="greater", paired =T, conf.int= T, conf.level = 0.7, exact=F, correct = F)
   cat("H3 ;", "\n")
   print(p3)
   
-  p4 <-  wilcox.test(b4, a4, mu=0, alt ="two.sided", paired =T, conf.int= T, conf.level = 0.95, exact=F, correct = F)
+  p4 <-  wilcox.test(b4, a4, mu=0, alt ="greater", paired =T, conf.int= T, conf.level = 0.7, exact=F, correct = F)
   cat("H4 ;","\n")
   print(p4)
 }
