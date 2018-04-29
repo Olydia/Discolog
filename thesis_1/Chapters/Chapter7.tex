@@ -26,7 +26,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 \label{sec:methodo}
 
 	Afin d'illustrer notre modèle de négociation, nous reprenons le scénario d'une négociation collaborative pour le choix d'un restaurant.
-	Ce scénario ne nécessite aucune une expertise pour prendre part dans la négociation. De plus, il est facile pour les participants de reporter leur préférences pour les différents critères pris en compte pour le choix d'un restaurant. En effet, nous considérons les critères \textit{cuisine, ambiance, localisation et prix} pour le choix d'un restaurant, chaque critère est défini avec un ensemble de valeurs présenté dans la table \ref{tab:valeursCritere}. Un total de 630 options ont été généré à partir des critère regroupant les différentes possibilités.
+	Ce scénario ne nécessite aucune une expertise pour prendre part dans la négociation. De plus, il est facile pour les participants de reporter leur préférences pour les différents critères pris en compte pour le choix d'un restaurant. En effet, nous considérons les critères \textit{cuisine, ambiance, localisation et prix} pour le choix d'un restaurant, chaque critère est défini avec un ensemble de valeurs présenté dans la table \ref{tab:valeursCritere}. Un total de 630 restaurants ont été généré à partir des critère regroupant les différentes possibilités.
 	
 	\begin{table}[b]
 		\caption{Ensemble de valeurs possible pour chaque critère afin de choisir un restaurant}
@@ -46,7 +46,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		\end{tabular}
 	\end{table}
 	Trois paramètres importants sont à prendre en compte pour initialiser les comportements des agents. 
-	En premier lieu, fixer la valeur initiale de pouvoir affectée à chaque agent, nous avons choisi une valeur de pouvoir $pow =0.55$ afin d'avoir un comportement de pouvoir initialement neutre.
+	En premier lieu, fixer la valeur initiale de pouvoir affectée à chaque agent, nous avons choisi une valeur de pouvoir $pow =0.55$ afin de générer des comportements de pouvoir initialement neutres.
 	
 	En second lieu, il faut initialiser les préférences des agents. Afin d'éviter les limites rencontrées dans la précédente étude, nous avons demandé aux participants de saisir leur préférences (voir section \ref{sec:procedure}).
 	
@@ -58,9 +58,9 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 	
 	Nous avons donc garder uniquement des modèles différents (Kendall's  $ \tau \geq 0.35$). De plus, nous avons ajouté une condition qui assure une différence de perception. pour chaque critère, les modèles ne devaient pas avoir les mêmes valeurs en top des préférences. 
 	
-	Par exemple, deux modèles \emph{P1, P2} dont la distance est supérieur à $0.35$. De plus, pour le critère \textit{cuisine}, les deux modèles ont la valeur $Italien$ comme la valeur la plus satisfiable $sat_{P1}(Italien) = 1$ et $sat_{P2}(Italien) = 1$. Ces deux modèles sont automatiquement rejetés.
+	Par exemple, considérons deux modèles \emph{P1, P2} générés et qui ont une distance est supérieur à $0.35$. De plus, pour le critère \textit{cuisine}, les deux modèles ont la valeur $Italien$ comme la valeur la plus satisfiable $sat_{P1}(Italien) = 1$ et $sat_{P2}(Italien) = 1$. Ces deux modèles sont automatiquement rejetés.
 	
-	En dernier lieu, nous avons paramétré la stratégie comportemental des agent. Comme note but est d'analyser l'impact de la complémentarité versus la similarité durant la négociation, nous avons implémenté trois stratégies distinctes reproduisant les comportements désirés. 
+	En dernier lieu, nous avons paramétré la stratégie comportemental des agent. Comme notre but est d'analyser l'impact de la complémentarité versus la similarité de la dominance durant la négociation, nous avons implémenté trois stratégies distinctes reproduisant les comportements désirés. 
 	A partir de notre algorithme de la théorie de l'esprit, l'agent calcule la valeur de pouvoir de l'utilisateur $pow_{user}$ pour chaque tour de parole exprimé par ce dernier. Suivant la valeur de pouvoir calculée $pow_{user}$, l'agent adopte une des stratégie suivante:
 	
 	
@@ -72,20 +72,21 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		
 		\item \textit{Comportement similaire}: L'agent va adopter une stratégie similaire à celle exprimé par son partenaire. C'est à dire que l'agent va imiter les comportements de pouvoir exprimé par le participant $pow_{agent} = pow_{user}$.
 		
-		\item \textit{Comportement de contrôle} : L'agent ne s'adapte pas à son interlocuteur et suit un comportement de pouvoir statique.
+		\item \textit{Comportement neutre} : L'agent ne s'adapte pas à son interlocuteur et suit un comportement de pouvoir statique.
 	\end{enumerate}
 	
-	En modifiant la valeur de pouvoir de l'agent à chaque tour, nous avons du ajouter une contrainte dans son le modèle décisionnel de l'agent afin d'assurer une cohérence des les comportements générés. 
-	En effet, la valeur de pouvoir est essentielle pour le calcul des satisfiabilité des valeurs et un changement de cette valeur risque de fausser les préférences de l'agent.
+	En modifiant la valeur de pouvoir de l'agent à chaque tour, nous avons du ajouter une contrainte dans son modèle décisionnel afin d'assurer une cohérence dans les comportements générés. 
+	En effet, la valeur de pouvoir est essentielle pour le calcul des satisfiabilité des valeurs et un changement de cette valeur risque de fausser l'ordre des valeurs satisfiables de l'agent.
 	Par exemple, à un moment $t$ de la négociation, une valeur $v$ est satisfiable, mais due à une adaptation qui cause un changement de pouvoir la même valeur $v$ peut devenir non satisfiable.
 	En vue de protéger des préférences et donc la cohérence des comportements de l'agent, nous avons fait le choix d'utiliser uniquement la valeur de pouvoir initiale $pow_{agent} = 0.55$ pour calculer la satisfiabilité des valeurs.
 	
-	Nous avons donc implémenté trois agents \emph{Bob, Arthur} et \emph{Kevin}. \emph{Bob} adoptant un comportement complémentaire, \emph{Arthur} qui suit un comportement similaire à celui exprimé par son partenaire de négociation, et enfin \emph{Kevin}, un agent contrôle qui suit une seul stratégie de pouvoir neutre. 
+	Nous avons donc implémenté trois agents \emph{Bob, Arthur} et \emph{Kevin}. \emph{Bob} adoptant un comportement complémentaire, \emph{Arthur} qui suit un comportement similaire à celui exprimé par son partenaire de négociation, et enfin \emph{Kevin}, un agent contrôle qui suit une seule stratégie de pouvoir neutre. 
 	
 \section{Hypothèses}
 \label{sec:H}
 
-	suivant les travaux de \cite{tiedens2003power,..}, nous supposons que la relation de dominance établie entre l'agent et l'utilisateur a une influence sur les stratégies exprimées par les négociateurs. Elle va donc avoir une conséquence sur les résultats obtenues lors de la négociation ainsi que l'appréciation que les négociateurs ont ressentis en négociant avec leur partenaire. Par conséquent, nous définissons les hypothèses suivantes: 
+	suivant les travaux de \cite{tiedens2003power,..}, nous supposons que la relation de dominance établie entre l'agent et l'utilisateur a une influence sur les stratégies exprimées par les négociateurs. Elle va donc avoir une conséquence sur les résultats obtenues lors de la négociation ainsi que le niveau d'appréciation à négocier avec l'agent.
+	 Par conséquent, nous définissons les hypothèses suivantes: 
 		\begin{itemize}
 			\item\textbf{H0}: Les comportements de complémentarité et de similarité des agents virtuels sont perçus par les participants.
 			\item [$\bullet$] \textbf{H1}: Les négociateurs atteignent un gain commun plus important quand les négociateurs établissent une relation de dominance complémentaire.
@@ -121,7 +122,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		 Nous nous sommes principalement intéressés aux comportements de pouvoir exprimés par l'agent. Pour cela, nous avons utilisé le même questionnaire sur les comportements de pouvoir (voir section ...)
  
 		 \subsection{Questionnaire concernant l'interaction}
-		 Pour évaluer l'appréciation du participant vis a vis de l'interaction qu'il a eu avec l'agent. Nous nous sommes basés sur les travaux de \cite{tiedens2003power} pour définir le questionnaire ci-dessous:
+		 Pour évaluer l'appréciation du participant vis à vis de l'interaction qu'il a eu avec l'agent. Nous nous sommes basés sur les travaux de \cite{tiedens2003power} pour définir le questionnaire ci-dessous:
 		
 		 \begin{enumerate}
 		 	\item Je suis satisfait de la décision finale.
@@ -151,22 +152,21 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		\begin{figure}[h]
 			\fbox{\begin{minipage}{.95\textwidth}
 					{\ttfamily
-					\textbf{Instruction:} Mettez vous dans la situation où vous allez dîner avec un ami ou un collègue pour la première fois, vous ne connaissez pas ses préférences et il ne connaît pas les votres. Le but est de négocier en fonction de vos préférences respectives pour de choisir un restaurant qui \underline{vous convienne à tous les deux}.
+					\textbf{Instruction:} Mettez vous dans la situation où vous allez dîner avec un ami ou un collègue pour la première fois, vous ne connaissez pas ses goûts et il ne connaît pas les vôtres. Le but est de négocier en fonction de vos préférences respectives pour de choisir un restaurant qui \underline{vous convienne à tous les deux}.
 					}
 				\end{minipage}}
 				
-				\caption{\label{fig:instruction}Excerpt of Dialogue 2.}
+				\caption{\label{fig:instruction}Explication du but de l'étude.}
 			\end{figure}
 
 
 		Une fois le but de l'étude expliqué, l'expérimentateur lançait la phase de tutoriel afin de familiariser le participant à l'utilisation de l'interface de communication. 	L'expérimentateur présentait les différents les actes de dialogues possibles pour communiquer avec l'agent. 	
-		Le participant était informé que durant cette session l'agent ne répondait pas à ses actes, et que le but était de manipuler l'interface pour générer des actes. 
+		Le participant était informé que durant cette session l'agent ne répondait pas à ses actes, et que le but était uniquement de manipuler l'interface pour générer des actes. 
 	
 		L’expérimentateur répondait alors à d’éventuelles questions concernant la génération d'actes de dialogue ou leur significations.
 		
-		Ensuite, l’expérimentateur annonçait au participant qu’il/elle allait négocier avec trois différents agents virtuels et
-		qu’après chaque négociation, il/elle devrait répondre à différents questionnaires pour évaluer son interaction avec l’agent avec lequel il/elle
-		venait de négocier.  Avant de commencer l'expérience, le participant est invité à saisir ses préférences pour les valeurs de chaque critères dans un ordre décroissant (voir la figure \ref{fig:pref}).
+		Ensuite, l’expérimentateur annonçait au participant qu’il/elle allait négocier avec trois  agents virtuels différents et
+		qu’après chaque négociation, il/elle devrait répondre à différents questionnaires pour évaluer son interaction avec l’agent avec lequel il/elle venait de négocier.  Avant de commencer l'expérience, le participant est invité à saisir ses préférences pour les valeurs de chaque critère (voir la figure \ref{fig:pref}).
 		
 		Une fois les préférences pour les différentes valeurs de critères saisies, la fenêtre avec le premier agent s'ouvrait automatiquement invitant le participant à prendre part à la négociation. 
 		
@@ -191,7 +191,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 				\subitem $\circ$ Les participants prennent plus de tours de négociations afin trouver une solution avec l'agent similaire comparé aux autres agents.
 
 
-			\item [$\bullet$] \textit{\textbf{H3}: Le négociateur se sent plus à l'aise avec un partenaire qui exprime un comportement complémentaire.}
+			\item [$\bullet$] \textit{\textbf{H3}: Le particiapant se sent plus à l'aise avec un partenaire qui exprime un comportement complémentaire.}
 				\subitem $\circ$ Les scores de \emph{confort} perçu sont plus hauts pour l'agent complémentaire et contrôle que pour l'agent similaire.
 				\subitem $\circ$ Les participants trouvent que la négociation est plus aisée avec l'agent complémentaire comparé aux autres agents.
 			\item [$\bullet$] \textit{\textbf{H4}: La complémentarité dans la relation de dominance augmente l'appréciation entre les négociateurs.}
@@ -269,9 +269,6 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		\subsubsection{Analyse du gain commun } Concernant l'analyse objective du gain commun atteint à la fin de chaque négociation, nous avons dans un premier temps, récupéré les préférences des participants et des agents avec lesquels avaient interagi. 
 		Ensuite,nous avons calculé la satisfiabilité du restaurant choisi pour chaque négociateur en fonction de leurs préférences (\textit{i.e l'agent et le participant}). Nous avons ensuite, calculé le gain commun atteint à chaque négociation comme la moyenne des valeur de satisfiabilité des deux négociateurs.  Les résultats obtenus pour chaque agent sont présentés dans la table \ref{tab:gain}. Les valeurs de satisfiabilité sont supérieurs à la moyenne pour tous les agents. Rappelons que les valeurs de satisfiabilité sont normalisé dans un intervalle $[0, 1]$. Nous avons étudiais si les négociateurs avaient atteint un gain commun plus importants en négociant avec l'agent complémentaires comparés aux autres agents. En vue de la distributions normales des valeurs, nous avons appliqué un T-test afin de comparé chaque paire d'agents. Les résultats obtenus sont présentés dans la figure (table + graphe). L'analyse de la variance a montré une interaction significative entre la relation de dominance et le gain commun atteint lors des négociation. effectivement, participants ont atteint un gain commun significativement plus élevé en négociant avec l'agent complémentaire qu'avec l'agent similaire (\emph{t= 8.9, p < 0.01}). La même différence a été perçue en comparant avec l'agent neutre (\emph{t= 6.4, p < 0.01}).
 		De plus, les participants ont atteint un meilleur gain commun avec l'agent neutre qu'avec l'agent similaire (\emph{t= 2.3, p = 0.02}).
-		
-		
-		
 		
 
 		\begin{table}[h]
@@ -364,7 +361,12 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 				\label{tab:app}
 			\end{table}
 			
-
+\subsection{Analyses complémentaires}
 
 \section{Discussion}
 \label{sec:discussion}
+Parlons d'abord de la perception de la relation de dominance, dans le cas complémentaire et similaire. Ces résultats appuient la validité de notre modèle de théorie de l'esprit dans le cadre d'une interaction agent/humain.   
+
+Continuer avec l'analyse de la complémentarité 
+
+\subsection{title}
