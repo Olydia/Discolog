@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import fr.limsi.negotiate.Negotiation;
 import fr.limsi.negotiate.Option;
@@ -21,6 +22,58 @@ public class CSVReader {
 		this.fileName = fileName;
 	}
 	
+	public double getFinalPow(String pow){
+		pow =pow.replace("[", "");
+		pow = pow.replace("]", "");
+		String [] v = pow.split(",");
+		String po = v[v.length-1];
+		po = po.replaceAll(" ", "");
+		return Double.parseDouble(po);
+	}
+	public ArrayList<String> getPower (){
+			
+			ArrayList<String> agents = new ArrayList<String>();
+			String path =System.getProperty("user.dir")+File.separator+"";
+	    	String csvFile = path + "power.txt";
+	        BufferedReader br = null;
+	        String line = "";
+
+	        try {
+	        	 
+	            br = new BufferedReader(new FileReader(csvFile));
+	            //igner la premiere ligne
+	            line = br.readLine();
+	            while ((line = br.readLine()) != null) {
+	            	String[] powers = line.split(";");
+	            	StringBuilder concat = new StringBuilder();
+	            	concat.append(powers[0]+";"); 
+	            		
+	            	for ( int i =1; i<powers.length; i++){
+	            		String p = powers[i];
+	            		double value = getFinalPow(p);
+	            		concat.append(value+";");
+	            	}
+	            	agents.add(concat.toString());
+	            }
+
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	            if (br != null) {
+	                try {
+	                    br.close();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        return agents;
+	    }
+	            
+	
+ 	
 	/**
      * 0 id user
      * 1 Bob
@@ -134,8 +187,10 @@ public class CSVReader {
 	
 	
     public static void main(String[] args) {
-    	CSVReader read = new CSVReader("compVsMimic_Etude/EtudeFinale/Data/restaurantsChoisis");
-    	read.readCSV();
+    	CSVReader read = new CSVReader(""); //compVsMimic_Etude/EtudeFinale/Data/restaurantsChoisis
+    	//read.readCSV();
+    	for(String line : read.getPower())
+    		System.out.println(line);
     	
     }
 
