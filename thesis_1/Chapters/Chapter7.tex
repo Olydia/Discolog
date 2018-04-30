@@ -216,76 +216,73 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		\item \textbf{D3}: Le niveau d'exigence du négociateur.
 		\item \textbf{D4}: Le négociateur est leader dans la négociation.
 	\end{itemize}
+\begin{table}[t]
+	\caption{Différence de perception de pouvoir entre l'agent et le participant pour chaque comportement} 
+	\centering
+	
+	\begin{tabular}{ l c c c c c }
+		\hline\hline
+		\textbf{ }& & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\ 
+		\hline
+		
+		\multirow{3}{*} {Agent Comp.}  &  Z-Wilcoxon test  & -4.61 & -5.3 & -6.28 & -0.43 \\ 	
+		& p-value & 2.88E-06 & 7.31E-08 & 1.42E-10 & 0.65 \\ 
+		& Effect size & -0.29 & -0.34 & -0.4 & -0.03\\ 
+		\hline
+		
+		\multirow{3}{*} {Agent similaire}  &  Z-Wilcoxon test  & -1.57 & -2.21 & -1.45 & -1.33\\ 	
+		& p-value & 0.11 & 0.024 & 0.14 & 0.17 \\ 
+		& Effect size & -0.1 & -0.14& -0.09 & -0.08 \\ 
+		\hline
+		
+		\multirow{3}{*} {Agent neutre}  &  Z-Wilcoxon test  & -6.23 & -5.72 & -7.056 & -0.77\\ 	
+		& p value & 2.52E-10 & 6.85E-09 & 8.19E-13 & 0.4351 \\ 
+		& Effect size & -0.4 & -0.36 & -0.45 & -0.049 \\ 
+		\hline \hline
+		
+	\end{tabular}
+	
+	\label{tab:powPercption}
+\end{table}
 	
 	Pour l'analyse des différences entre les comportements des agents et des participants, des statistiques non-paramétriques ont été utilisées car la normalité des données ne pouvaient être assurée. Pour l'analyse principal, le test des rangs signés de Wilcoxon a été appliqué pour chaque comportement.
-	\begin{figure}[h]
-		\centering
-		% this is wide enough
-		\begin{subfigure}{0.8\textwidth}
-				\centering
-				\includegraphics[clip=false]{Figures/chap7/comPow.PNG}
-				\caption{Score de perception des comportements de pouvoir}
-		\end{subfigure}
-		
-		% this has a too narrow subfigure
-		\begin{subfigure}{0.8\textwidth}
-			\centering
-			\begin{tabular}{l c c c c c c}
-				\hline\hline
-				\multicolumn{2}{c}{} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
-				\hline
-				
-				\multirow{2}{*}{Agent }& Moyenne & 1,94& 3,80 & 2,24 & 3,08 \\
-											& Ecart-type & 0,93 & 1,05 & 1,03 & 1,11 \\
-
-				\hline
-				\multirow{2}{*}{Participant }& Moyenne & 2,69 & 2,94 & 3,4 & 3,02 \\
-				& Ecart-type & 1,14 & 1,23 & 1,03 & 1,02\\
-				\hline
-
-			\end{tabular}
-						\caption{Moyenne et écart type dans les comportements de pouvoir}
-		\end{subfigure}
-		\caption{Perception des comportements de pouvoirs avec l'agent complémentaire}
-		\label{fig:comp}
-	\end{figure}
-	
-	\begin{table}[t]
-				\caption{Différence de perception de pouvoir entre l'agent et le participant pour chaque comportement} 
-		\centering
-
-		\begin{tabular}{ l c c c c c }
-			\hline\hline
-			\textbf{ }& & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\ 
-			\hline
-			
-			\multirow{3}{*} {Agent Comp.}  &  Z-Wilcoxon test  & -4.61 & -5.3 & -6.28 & -0.43 \\ 	
-			   & p-value & 2.88E-06 & 7.31E-08 & 1.42E-10 & 0.65 \\ 
-			   & Effect size & -0.29 & -0.34 & -0.4 & -0.03\\ 
-			\hline
-			
-			\multirow{3}{*} {Agent similaire}  &  Z-Wilcoxon test  & -1.57 & -2.21 & -1.45 & -1.33\\ 	
-			   & p-value & 0.11 & 0.024 & 0.14 & 0.17 \\ 
-			   & Effect size & -0.1 & -0.14& -0.09 & -0.08 \\ 
-			\hline
-			
-				\multirow{3}{*} {Agent neutre}  &  Z-Wilcoxon test  & -6.23 & -5.72 & -7.056 & -0.77\\ 	
-				   & p value & 2.52E-10 & 6.85E-09 & 8.19E-13 & 0.4351 \\ 
-				   & Effect size & -0.4 & -0.36 & -0.45 & -0.049 \\ 
-				\hline \hline
-		
-		\end{tabular}
-
-		\label{tab:powPercption}
-	\end{table}
-	
 	
 	\subsubsection{Perception de complémentarité}
 			
 		Pour chaque comportement, nous avons comparé la perception des participants de leur comportements de pouvoir et ceux de l'agent complémentaire avec lesquels ils ont interagi. Les statistiques descriptives sont présentées dans la figure \ref{fig:comp}. 
 		
 		Les résultats de l'analyse de Wilcoxon a révélé que les participants ont perçus une différence significative entre leurs comportements et celui de l'agent comme présenté dans la table \ref{tab:powPercption}. Cette différence concerne les comportements \textbf{D1, D2} et \textbf{D3}. Cependant, aucune différence significative n'a été perçu pour le comportement \textbf{D4}. 
+			\begin{figure}[h]
+			\centering
+			% this is wide enough
+			\begin{subfigure}{0.8\textwidth}
+				\centering
+				\includegraphics[clip=false]{Figures/chap7/comPow.PNG}
+				\caption{Score de perception des comportements de pouvoir}
+			\end{subfigure}
 			
+			% this has a too narrow subfigure
+			\begin{subfigure}{0.8\textwidth}
+				\centering
+				\begin{tabular}{l c c c c c c}
+					\hline\hline
+					\multicolumn{2}{c}{} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
+					\hline
+					
+					\multirow{2}{*}{Agent }& Moyenne & 1,94& 3,80 & 2,24 & 3,08 \\
+					& Ecart-type & 0,93 & 1,05 & 1,03 & 1,11 \\
+					
+					\hline
+					\multirow{2}{*}{Participant }& Moyenne & 2,69 & 2,94 & 3,4 & 3,02 \\
+					& Ecart-type & 1,14 & 1,23 & 1,03 & 1,02\\
+					\hline
+					
+				\end{tabular}
+				\caption{Moyenne et écart type dans les comportements de pouvoir}
+			\end{subfigure}
+			\caption{Perception des comportements de pouvoirs avec l'agent complémentaire}
+			\label{fig:comp}
+		\end{figure}	
 			
 	\subsubsection{Perception de similarité}
 		Nous avons aussi analysé les comportements des négociateurs lors de leurs interactions avec l'agent similaire. Les statistiques descriptives ont déjà montre une forte similarité dans la perception de tout les comportements (voir la figure \ref{fig:sim}). Nous avons complété l'étude par une comparaison de Wilcoxon a confirmé l'absence de différence significative comme présenté dans la table \ref{tab:powPercption}.  
@@ -294,7 +291,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		\begin{figure}[h]
 		\centering
 		% this is wide enough
-		\begin{subfigure}{0.8\textwidth}
+		\begin{subfigure}[h]{0.8\textwidth}
 			\centering
 			\includegraphics[clip=false]{Figures/chap7/simPow.PNG}
 			\caption{Score de perception des comportements de pouvoir}
@@ -302,7 +299,7 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		
 		%\vspace{1em}
 		% this has a too narrow subfigure
-		\begin{subfigure}{0.8\textwidth}
+		\begin{subfigure}[h]{0.8\textwidth}
 			\centering
 			\begin{tabular}{l c c c c c c}
 				\hline\hline
@@ -369,10 +366,11 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		Les résultats sont présentés dans la figure \ref{fig:gainCom}. D'abord, les statistiques descriptives montrent qu'en moyenne les participants étaient satisfaits du restaurant choisi, et ce pour toutes les négociations. Les scores sont plutôt supérieurs à la moyenne pour tous les agents (les valeurs varient entre \emph{3.83} et \emph{4.5} sur une échelle de \emph{5}). 
 		
 		\begin{figure}
-			\label{fig:gainCom}
+
 		\centering
 		\includegraphics[width= 0.65 \linewidth,clip=false]{Figures/chap7/percpGain.PNG}
 		\caption{Perception du gain commun obtenu pour tous les agents \textit{Aucune différence significative entre les agents}}
+		\label{fig:gainCom}
 		\end{figure}
 		
 		En outre, nous avons analysé si les participants étaient significativement plus satisfaits du restaurants choisi lors de la négociation avec l'agent complémentaire qu'avec les autres agents. Nous avons effectué un test de rangs signés de Wilcoxon car la normalité des données n'avait pu être assuré. L'analyse n'a montré aucune différence significative de la perception de gain et d'équité sur le choix du restaurant entre les différents agents. 
@@ -383,15 +381,15 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		Les valeurs de satisfiabilité sont supérieurs à la moyenne pour tous les agents. Rappelons que les valeurs de satisfiabilité sont normalisées dans un intervalle $[0, 1]$. Nous avons étudié si les négociateurs avaient atteint un gain commun plus importants en négociant avec l'agent complémentaires comparés aux autres agents. En vue de la distributions normales des valeurs, nous avons appliqué un T-test afin de comparer chaque paire d'agents. Les résultats obtenus sont présentés dans la figure (table + graphe). L'analyse de la variance a montré une interaction significative entre la relation de dominance et le gain commun atteint lors des négociation. effectivement, les participants ont atteint un gain commun significativement plus élevé en négociant avec l'agent complémentaire qu'avec l'agent similaire (\emph{t= 8.9, p < 0.01}). La même différence a été perçue en comparant avec l'agent neutre (\emph{t= 6.4, p < 0.01}).
 		De plus, les participants ont atteint un meilleur gain commun avec l'agent neutre qu'avec l'agent similaire (\emph{t= 2.3, p = 0.02}).
 
-		\begin{figure}
+		\begin{figure}[h]
 
-			\begin{subfigure}[b]{0.8\textwidth}
+			\begin{subfigure}[h]{0.8\textwidth}
 			\centering
 			\includegraphics[clip=false]{Figures/chap7/gainCommun.PNG}
 			\caption{Score du gain commun atteint pour tous les agents  \\ \textit{les population regroupées avec $(*)$ sont significativement différentes }}
 		\end{subfigure}
 		
-		\begin{subfigure}[b]{0.8\textwidth}
+		\begin{subfigure}[h]{0.8\textwidth}
 			\centering
 			\begin{tabular}{l c c c}
 			\hline
@@ -404,19 +402,25 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 			\end{tabular}
 			\caption{Score du gain commun obtenu par négociation}
 		\end{subfigure}
-				\label{fig:gain}
 				\caption{Les résultats obtenus pour le gain commun atteint durant la négociation}
+				\label{fig:gain}
 	\end{figure}
 	
 	\subsection{Tours de paroles}
 			
-			Pour l'analyse de l'impact de la relation de dominance sur nombres de tours de paroles, nous avons recueilli le nombre de tours de paroles énoncé durant chaque négociation. Les statistiques descriptives sont présentées dans la figure \ref{tab:tour}.Un test paramétrique a été utilisée car les données suivent une distribution normale. Les résultats montrent que la négociation convergeait plus rapidement de manière significative quand les participants négociaient avec l'agent complémentaire en comparaison avec l'agent similaire (\emph{t= 2.7, p = 0.003}). Pareillement, la négociation convergeait plus rapidement avec l'agent neutre comparé à l'agent similaire (\emph{t= 4.43, p < 0.01}).  
+			Pour l'analyse de l'impact de la relation de dominance sur nombres de tours de paroles, nous avons recueilli le nombre de tours de paroles énoncé durant chaque négociation. Les statistiques descriptives sont présentées dans la figure \ref{fig:tour}.Un test paramétrique a été utilisée car les données suivent une distribution normale. Les résultats montrent que la négociation convergeait significative plus rapidement quand les participants négociaient avec l'agent complémentaire en comparaison avec l'agent similaire (\emph{t= 2.7, p = 0.003}). Pareillement, la négociation convergeait plus rapidement avec l'agent neutre comparé à l'agent similaire (\emph{t= 4.43, p < 0.01}).  
 			Cependant, aucune différence significative n'a été perçu entre l'agent complémentaire et l'agent neutre (\emph{t= 1.3, p = 0.09}).  
-		
-			\begin{table}[b]
-				\caption{Nombre de tours de paroles par négociation} 
+			
+		\begin{figure}[h]
+			
+			\begin{subfigure}[h]{0.8\textwidth}
 				\centering
-				
+				\includegraphics[clip=false]{Figures/chap7/tours.PNG}
+				\caption{Nombre de tours de paroles durant une négociation pour tous les agents \\ \textit{les population regroupées avec $(*)$ sont significativement différentes }}
+			\end{subfigure}
+		
+			\begin{subfigure}[h]{0.8\textwidth}
+				\centering
 				\begin{tabular}{ l c c c }
 					\hline
 					\textbf{ }& \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
@@ -426,10 +430,11 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 					\hline
 					
 				\end{tabular}
-				
-				\label{tab:tour}
-			\end{table}
-	
+				\caption{Nombre de tours de paroles par négociation} 
+			\end{subfigure}
+			\caption{Résultats pour l'hypothèse H3.}
+			\label{fig:tour}
+	\end{figure}
 	\subsection{Confort}
 		
 		Les statistiques descriptives sont présentées dans la table \ref{tab:confort}. Les participants se sont globalement sentis à l'aise avec tous les agents.
@@ -439,50 +444,97 @@ Partant de ces études, notre objectif est d'explorer l'impact de ces comporteme
 		Les résultats montrent que les participants se sont senti plus à l'aise avec l'agent complémentaire qu'avec l'agent similaire (\emph{Z= -2.73, p = 0.002})
 		avec un effet de taille faible (\emph{e = -0.1}). Cependant, aucune différence significative n'a été perçu entre l'agent complémentaire et l'agent neutre. 
 	
-		\begin{table}[h]
-			\caption{L'effet de la relation de dominance sur le confort ressenti pendant la négociation avec l'agent} 
-			\centering
-			
-			\begin{tabular}{ l l c c c  }
-				\hline
-				\textbf{ }& & \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
-				\hline
-				\newline \newline\multirow{2}{*} {Détendu} & Moyenne &3.79 & 3.47 & 3.79 \\
-				\newline  & Écart type & 1 & 1.2 & 1 \\
-				\hline
-
-				\newline \newline\multirow{2}{*} {Anxieux} & Moyenne & 1.79 & 2.13 & 1.93 \\
-				\newline  & Écart type & 7.38 & 6.87 & 5.6 \\
-				\hline
-			\end{tabular}
-			
-			\label{tab:confort}
-		\end{table}
-	\subsection{Appréciation}
-		Les statistiques descriptives concernant les scores d’appréciation sont présentées dans la table \ref{tab:app}. Globalement,
-		les scores sont centrés autour de 3.7 (sur une échelle de 5). L'analyse de variance montre l'effet de la relation de dominance sur la perception de l'appréciation. Les résultats sont présentés dans la figure ?.
-		
-		Le test de rangs signé de Wilcoxon montre que l'agent complémentaire a été perçu comme significativement plus agréable que l'agent similaire (\emph{p < 0.01, Z = -3.17}). Par ailleurs, l'agent neutre a aussi été perçu comme plus agréable que l'agent similaire (\emph{p < 0.01, Z = -3.3}). Cependant, aucune différence n'a été perçu entre l'agent complémentaire et l'agent neutre (\emph{p = 0.6, Z = -0.31}).
 	
-		Nous nous sommes aussi intéressé à la facilité de collaboration entre le participant et l'agent. En effet, nous avons demandé aux participants de relater le degrés de facilité de négociation avec l'agent. Les résultats sont présentés dans la figure... En général, les participants ont trouvé que la négociation été aisée avec l'agent complémentaire (\emph{M= 4, SD = 1}) ainsi qu'avec l'agent neutre (\emph{M=3.9, SD =0.99}). Les participants ont perçue la négociation avec l'agent similaire comme moins aisée (\emph{M=3.16, SD = 1.06 }). 
-		Nous avons ensuite analysé si cette différence de perception été significative. Comme les données ne sont pas normalement distribué, nous avons appliqué le test de rangs signé de Wilcoxon. Les résultats montrent qu'en effet les participants ont trouvé que négocier avec l'agent similaire été significativement moins aisée comparé à l'agent complémentaire (\emph{p < 0.01, Z = -3.86} avec un effet de taille moyen \emph{e = -0.35}) et l'agent neutre (\emph{p < 0.01, Z = -3.61} avec un effet de taille moyen \emph{e = -0.32}).
-		Cependant, aucune différence n'a été perçue entre l'agent complémentaire et l'agent neutre.
-			\begin{table}[!tb]
-				\caption{L'effet de la relation de dominance sur l'appréciation perçue} 
+		\begin{figure}[h]
+			
+			\begin{subfigure}[h]{0.8\textwidth}
 				\centering
+				\includegraphics[clip=false]{Figures/chap7/confort.PNG}
+				\caption{ Score de confort que les participants ont ressenti pour tous les agents. \textit{les population regroupées avec $(*)$ sont significativement différentes }}
+			\end{subfigure}
+			
+			\begin{subfigure}[h]{0.8\textwidth}
+				\centering
+				 \begin{tabular}{ l l c c c  }
+				 	\hline
+				 	\textbf{ }& & \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
+				 	\hline
+				 	\newline \newline\multirow{2}{*} {Détendu} & Moy. &3.79 & 3.47 & 3.79 \\
+				 	\newline  & SD & 1 & 1.2 & 1 \\
+				 	\hline
+				 	
+				 	\newline \newline\multirow{2}{*} {Anxieux} & Moy. & 1.79 & 2.13 & 1.93 \\
+				 	\newline  & SD & 7.38 & 6.87 & 5.6 \\
+				 	\hline
+				 \end{tabular}
+			 	\caption{L'effet de la relation de dominance sur le confort ressenti pendant la négociation avec l'agent} 
+			\end{subfigure}
+			\caption{Résultats pour la perception du confort durant la négociation.}
+			\label{tab:confort}
+		\end{figure}	
+	\vspace{- 1 em}
+	\subsection{Appréciation}
+		Les statistiques descriptives concernant les scores d’appréciation sont présentées dans la figure \ref{fig:app}. Globalement,
+		les scores sont centrés autour de 3.7 (sur une échelle de 5). L'analyse de variance montre l'effet de la relation de dominance sur la perception de l'appréciation. Les résultats sont présentés en annexe \ref{chap:Annexe}.
+		
+			\begin{figure}[h]
+			
+			\begin{subfigure}[h]{0.8\textwidth}
+				\centering
+				\includegraphics[clip=false]{Figures/chap7/appreciation.PNG}
+				\caption{ Score d'appréciation perçue pour tous les agents. \textit{les population regroupées avec $(*)$ sont significativement différentes }}
+			\end{subfigure}
+			
+			\begin{subfigure}[h]{0.8\textwidth}
 				
+				\centering
 				\begin{tabular}{ l c c c c c }
 					\hline
 					\textbf{ }& \textbf{Agent Comp.} & &  \textbf{Agent similaire} & & \textbf{Agent neutre} \\ 
 					\hline
-					\newline Moyenne & 3.83 & &3.46 & & 3.85 \\
-					\newline Écart type & 1.01 & & 1.09& &  1.02 \\
+					\newline Moy. & 3.83 & &3.46 & & 3.85 \\
+					\newline SD & 1.01 & & 1.09& &  1.02 \\
 					\hline
 					
 				\end{tabular}
+				\caption{L'effet de la relation de dominance sur l'appréciation perçue} 
+			\end{subfigure}
+			\caption{Résultats pour la perception de l'appréciation.}
+			\label{fig:app}
+		\end{figure}
+		
+		
+		Le test de rangs signé de Wilcoxon montre que l'agent complémentaire a été perçu comme significativement plus agréable que l'agent similaire (\emph{p < 0.01, Z = -3.17}). Par ailleurs, l'agent neutre a aussi été perçu comme plus agréable que l'agent similaire (\emph{p < 0.01, Z = -3.3}). Cependant, aucune différence n'a été perçu entre l'agent complémentaire et l'agent neutre (\emph{p = 0.6, Z = -0.31}).
+	
+		Nous nous sommes aussi intéressé à la facilité de collaboration entre le participant et l'agent. En effet, nous avons demandé aux participants de relater le degrés de facilité de négociation avec l'agent. Les résultats sont présentés dans la figure \ref{fig:aise}. En général, les participants ont trouvé que la négociation été aisée avec l'agent complémentaire (\emph{M= 4, SD = 1}) ainsi qu'avec l'agent neutre (\emph{M=3.9, SD =0.99}). Les participants ont perçue la négociation avec l'agent similaire comme moins aisée (\emph{M=3.16, SD = 1.06 }). 
+		Nous avons ensuite analysé si cette différence de perception été significative. Comme les données ne sont pas normalement distribué, nous avons appliqué le test de rangs signé de Wilcoxon. Les résultats montrent qu'en effet les participants ont trouvé que négocier avec l'agent similaire été significativement moins aisée comparé à l'agent complémentaire (\emph{p < 0.01, Z = -3.86} avec un effet de taille moyen \emph{e = -0.35}) et l'agent neutre (\emph{p < 0.01, Z = -3.61} avec un effet de taille moyen \emph{e = -0.32}).
+		Cependant, aucune différence n'a été perçue entre l'agent complémentaire et l'agent neutre.
+			\begin{figure}[h]
+			
+			\begin{subfigure}[h]{0.8\textwidth}
+				\centering
+				\includegraphics[clip=false]{Figures/chap7/aisee.PNG}
+				\caption{ Evaluation de la collaboration durant la négociation. \textit{les population regroupées avec $(*)$ sont significativement différentes }}
+			\end{subfigure}
+			
+			\begin{subfigure}[h]{0.8\textwidth}
 				
-				\label{tab:app}
-			\end{table}
+				\centering
+				\begin{tabular}{ l c c c c c }
+					\hline
+					\textbf{ }& \textbf{Agent Comp.} & &  \textbf{Agent similaire} & & \textbf{Agent neutre} \\ 
+					\hline
+					\newline Moy. & 4 & & 3.16 & & 3.9 \\
+					\newline SD & 1 & & 1.09  & & 0.99   \\
+					\hline
+					
+				\end{tabular}
+				\caption{L'effet de la relation de dominance sur la facilité de collaboration} 
+			\end{subfigure}
+			\caption{Résultats pour la facilité de collaboration durant la négociation.}
+			\label{fig:aise}
+		\end{figure}
+		
 			
 \subsection{Analyses complémentaires}
 
@@ -538,8 +590,8 @@ Par ailleurs, la perception des comportements de l'agent neutre comme complémen
 		& \multicolumn{2}{c}{Agent Comp.} & & \multicolumn{2}{c}{Agent similaire}& & \multicolumn{2}{c}{Agent neutre} \\ % column 4 blank, for spacing
 		\cline{2-3} \cline{5-6} \cline{8-9} % horizontal lines connecting cols. 2-3, 5-6
 		& Participant & Agent & & Participant & Agent & &  Participant & Agent \\ \hline
-		Moyenne &0,71 & 0,53 & &  0,69 & 0,33 & & 0,73 & 0,34 \\
-		Écart type & 0,2 & 0,24 & &  0,18 & 0,19 & & 0,18 & 0,16 \\
+		Moy. &0,71 & 0,53 & &  0,69 & 0,33 & & 0,73 & 0,34 \\
+		SD & 0,2 & 0,24 & &  0,18 & 0,19 & & 0,18 & 0,16 \\
 		\hline
 	\end{tabular}
 			\label{tab:gainPerceptif}
