@@ -16,13 +16,16 @@ success than other species mates or (2) emergent properties of social interactio
 that entail the ability to manipulate others and form alliances.
 
 Those who subscribe to the former viewpoint see in many intraspecific and interspecific displays vestiges
-of inborn tendencies to exert power and domination, to elicit deference and acquiescence, or to appease and submit to a stronger conspecific (see Andrew, 1972;Keltner, 1995; Smith, 1974; Thorpe, 1972).
-Displays such as fight-flight, or more abbreviated intention signals of approach avoidance, are thought to be universal and innate, the result of natural selection leading to ritualized displays. Behaviors such as sprawling, relaxed postures and sweeping
+of inborn tendencies to exert power and domination, to elicit deference and acquiescence, or to appease and submit to a stronger conspecific 
+(see Andrew, 1972;Keltner, 1995; Smith, 1974; Thorpe, 1972).
+Displays such as fight-flight, or more abbreviated intention signals of approach avoidance, are thought to be universal and innate, 
+the result of natural selection leading to ritualized displays. Behaviors such as sprawling, relaxed postures and sweeping
 gestures that signal lack of fear among humans find parallels in the expansive posture or tail-in-the-air gait of other warmblooded creatures.
 Yet many behaviors that appear to be homologs across species do not necessarily share a genetic origin. Some signals may actually
 be conventionalized, the result of learning at critical periods in an animal’s development (Fridlund, 1991a). Contemporary ethological
 work is shifting away from viewing dominance strictly as an innate pattern based  dominance is also socially negotiated;
-away from partitioning variance into separate individual and social components, toward understanding the interaction between organisms and their social environment
+away from partitioning variance into separate individual and social components, toward understanding the interaction between organisms
+ and their social environment
 (Burgoon & Dunbar, 2000).
 Representative of this view is the behavioral ecology perspective, a term coined by Fridlund (1991a, 1991b), that acknowledges
 the fundamentally social and communicative nature of these dominance displays, their inborn origins notwithstanding.
@@ -36,7 +39,8 @@ states such as modesty, shyness, embarrassment, and shame have all evolved from 
 and serve appeasement-related functions in humans. Appeasement signals are intended to placate or pacify others when social relationships
 are disrupted and conflicts arise.
 Violations of social rules or breeches of expected social distance may prompt appeasement gestures in the form of submissiveness,
-affiliative displays, or inhibitionsof other actions. Acceptance of an appeasement gesture may take the form of reduced aggressiveness and increased social
+affiliative displays, or inhibitionsof other actions.
+Acceptance of an appeasement gesture may take the form of reduced aggressiveness and increased social
 approach.
 
 
