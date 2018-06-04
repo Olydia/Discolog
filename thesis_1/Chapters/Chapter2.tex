@@ -234,3 +234,51 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 %Intro de négociation et pouvoir %https://msbfile03.usc.edu/digitalmeasures/kimpeter/intellcont/Power%20dynamics%20in%20negotiation%20(AMR,%202005)-1.pdf
 
 
+	\section{Modèles de négociations automatiques}
+	
+	Au cours des dernières années, de nombreux nouveaux modèles d'agents négociateurs ont été développés. Deux champs de recherche liés à ce domaine peuvent être distingués: les systèmes de soutien à la négociation \emph{ negotiation support system (NSS)} et les agents de négociation automatisés \emph{automated negotiation agents (ANA)}.
+	
+%	\textit{Jonker et al} \cite{jonker2012negotiating} présentent dans un travail un état de l'art sur les systèmes de support à la négociation.
+
+	 les NNS sont utilisés pour aider les novices en négociation à améliorer leurs compétences. Les données collectées permettent aux chercheurs de mieux comprendre les difficultés que rencontrent les négociateurs au cours d'une négociation \cite{jonker2012negotiating}. Néanmoins, ces systèmes sont encore peu utilisés, nous citerons les systèmes tel que \emph{Inspire} [ref] un système complet avec une interface de communication, il permet de spécifier les préférences et de gérer les offres au cours de la négociation. De plus, il permet aux utilisateurs de faire une analyse post-accord. 
+	 Il a été utilisé comme  un outils de simulation afin de mieux préparer les négociateurs au cas réels ce qui le rend un bon outils d'apprentissage de négociation. Un autre outils d'éducation est le système \emph{Athena}. Enfin, nous citons le système \emph{SmartSettle} qui permet d'assister les utilisateurs lors de négociations complexes. Il est fournis avec un support de propositions qui permet de faire des suggestions aux négociateurs. 
+	  
+	Concernant les recherches pour développer des ANAs, les travaux se sont principalement concentrés sur trois aspects à savoir la conception de stratégies de négociation, des protocoles, et la modélisation du domaine de négociation \cite{jonker2012negotiating}. De plus, depuis l'émergence de la compétition internationale \emph{International Automated Negotiating Agents Competition (ANAC)}, une compétition regroupe les meilleurs agents négociateurs, de nouveaux modèles de négociations sont proposés chaque année. 
+	
+	Ces nouveaux modèles innovent sur l'aspect rationnel de l'agent, et proposent de nouvelles stratégies qui permettent à l'agent d'atteindre de meilleurs gains. 
+	En effet, les stratégies de négociation prennent en compte trois modules : un module pour décider de l'acceptabilité des offres reçues, un module pour définir la stratégie d'enchères et enfin un modèle de l'adversaire afin calculer ses préférences et décider lesquels prendre en compte dans la prise de décision.
+	
+	Par exemple, l'agent K proposé par .. dispose d'un mécanisme sophistiqué pour accepter une offre. En effet, il utilise la moyenne et la variance de l'utilité de toutes les offres reçues, puis détermine la probabilité de recevoir une meilleure offre dans le futur et définit sa cible de proposition. En conséquence, il accepte ou rejette l'offre. Sa stratégie d'enchère consiste à d'abord définir une valeur d'utilité cible pour les propositions et va aléatoirement sélectionner des offres dont l'utilité est dans l'intervalle de valeurs cibles. Si aucune proposition n'est trouvée, l'agent décroît valeur d'utilité cible.
+	Cependant, ce système ne prend pas en compte les préférences de son adversaire. 
+	
+	Cet agent joue une stratégie tit-for-tat par rapport à sa propre utilité. L'agent coopérera d'abord, puis répondra en nature à l'action précédente de l'adversaire, tout en visant le point Nash dans le scénario. Si l'offre de l'opposant améliore son utilité, l'agent concède en conséquence. L'agent est gentil dans le sens où il ne riposte pas. Par conséquent, lorsque l'adversaire fait une offre qui réduit l'utilité de l'agent, l'Agent Tit-for-Tat de Nice suppose que l'adversaire a fait une erreur et ne fait rien, attendant une meilleure offre. Cette approche est basée sur [14]. Nice Tit-for-Tat Agent maintient un modèle bayésien [15] de son adversaire, mis à jour après chaque coup par l'adversaire. Ce modèle est utilisé pour essayer d'identifier les enchères optimales de Pareto afin de pouvoir répondre à une concession de l'adversaire avec un bon mouvement. L'agent essayera de refléter la concession de l'adversaire en fonction de sa propre fonction d'utilité. L'agent détecte des scénarios très coopératifs pour viser un peu plus que l'utilitaire Nash. En outre, si le domaine est important, si le facteur d'actualisation est élevé ou si le temps est écoulé, l'agent fera des concessions plus importantes en ce qui concerne sa cible d'enchères. L'agent tente d'optimiser l'utilité de l'adversaire en effectuant un certain nombre d'enchères différentes avec approximativement cet utilitaire de cible d'enchères.
+	
+	%http://www.ifaamas.org/Proceedings/aamas08/proceedings/pdf/paper/AAMAS08_0385.pdf
+	
+	 %https://ac.els-cdn.com/S0004370212001105/1-s2.0-S0004370212001105-main.pdf?_tid=3fb41905-2d3a-4662-aa2a-5a608b9d8587&acdnat=1528135687_1d2be1d9ea1f434c06689901851602de
+	ValueModelAgent
+	This agent uses temporal difference reinforcement learning to predict the opponent’s utility function. The particular
+	learning technique is focused on finding the amount of utility lost by the opponent for each value. However, as the bid
+	(expected) utilities represent the decrease in all issues, a method is needed to decide which values should change the most.
+	To achieve this, the agent uses estimations of standard deviation and reliability of a value to decide how to make the split.
+	The reliability is also used to decide the learning factor of the individual learning. The agent uses a symmetric lower-bound
+	to approximate the opponent’s concession (if the opponent makes 100 different bids, and the 100th bid is worth 0.94, it is
+	assumed the opponent conceded at least 6%). These parameters were determined in advance, based on average performance
+	across a set of scenarios available for testing before the competition.
+	In more detail, ValueModelAgent starts by making bids which lie in the top 2% of the outcome space. It severely limits the
+	concession in the first 80% of the time-line. If there is a large discount, the agent compromises only as much as its prediction
+	of the opponent’s compromise. If there is no discount, the agent does not concede as long as the opponent is compromising.
+	If the opponent stops moving, the agent compromises up to two thirds of the opponent’s approximated compromise. As the
+	deadline approaches (80–90% of the time has elapsed), the agent compromises up to 50% of the difference, providing that
+	the opponent is still not compromising. Once 90% of the time has elapsed, the agent sleeps and makes the “final offer", if
+	the opponent returns offers the agent sends the best offer that has been received from the opponent (accepting his last
+	offer only if its close enough). ValueModelAgent has a fixed lower limit on its acceptance threshold, of 0.7. Therefore it never
+	accepts an offer with an undiscounted utility lower than this value.
+	
+	Un aspect important dans la modélisation d'un agent négociateur est le module de communication qu'il utilise pour interagir avec son adversaire 
+	
+
+	
+	
+	
+	  
