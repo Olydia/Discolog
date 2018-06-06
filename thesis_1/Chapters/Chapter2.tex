@@ -255,16 +255,39 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	
 	Les agents proposés ci-dessus sont conçus pour améliorer leurs gains personnels dans le contextes de négociations compétitives. Un autre champs de recherche vise à proposer des modèles de négociations pour optimiser les gains des deux négociateurs, ce type de négociation est nommé négociation coopérative ou collaborative. 
 	
-	Dans un contexte où des agents partagent des ressources importantes et limitées, ils peuvent faire face à des situations de conflit pour l'allocation de ces ressources. Dans ce cadre précis, une négociation coopérative peut être décrite comme un processus de prise de décision pour résoudre un conflit impliquant deux ou plusieurs parties sur plusieurs objectifs interdépendants, mais non mutuellement exclusifs \cite{lewicki2011essentials}. 
+	Nous présenterons dans la section suivante l'approche coopérative dans les coalitions multi-agents et dans la définition des stratégies de négociations. 
 	
-	Par exemple, \cite{wollkind2004automated} propose un système multi-agents pour gérer l'espace aérien national. Le modèle proposé utilise des stratégies de négociation collaborative pour la résolution des conflits de trafic aérien. Les agents utilisent un protocole de concessions monotoniques \cite{Zlotkin and Rosenschein} qui consiste à faire des propositions et contre-propositions en diminuant l'utilité de ces dernières jusqu'à atteindre une offre qui peut être acceptée par les deux agents. 
+		\subsection{Coopération et collaboration en négociation}
+		
+		Dans le domaine des systèmes multi-agents, les concepts de coopération et de collaboration mettent en évidence les interactions entre les agents et la cognition: il faut des actions de coordination et des algorithmes de résolution de conflit pour réaliser les tâches \cite{jennings1995controlling}. Il existe néanmoins des différences entre la collaboration et la coopération.
+		La collaboration est définie comme une forme d'interaction qui s'intéresse à la répartition du travail entre plusieurs agents, qu'il s'agisse de techniques centralisées ou distribuées \cite{ferber1997systemes}. La coopération reste la prérogative d'être capables de s'engager dans un projet explicite commun \cite{lucien2016multiagent}.
+		La collaboration est donc considérée comme une coopération affinée par le développement d'une compréhension mutuelle associée à un point de vue partagé de la tâche à résoudre par plusieurs individus en interaction \cite{weiss1999multiagent,blanquet2007web}. \emph{Legras} \cite{legrascooperation} ajoute que la collaboration est une coopération pour laquelle des agents partagent un but commun et aucun autre but personnel incompatible. 
+		
+		Dans des systèmes multi agents coopératifs, il est typique que chaque agent ait son propre ensemble de buts qui peuvent potentiellement rentrer en conflit avec les objectifs des autres agents du système.
+		 Dans ces cas, les agents utilisent des protocoles de négociation pour résoudre leurs conflits de telle sorte que le résultat soit acceptable pour toutes les parties impliquées \cite{wollkind2004automated}. Les agents sont capables de mettre en œuvre des solutions plus efficaces en coopérant qu'en établissant des solutions individuel. Ce type de négociation coopératif peut être décrit comme un processus de prise de décision pour résoudre un conflit impliquant deux ou plusieurs parties sur plusieurs objectifs interdépendants, mais non mutuellement exclusifs \cite{lewicki2011essentials}. 
 	
-	Par ailleurs, \emph{Gutman et Maes} [13] discutent de la différence entre les modèles de négociation compétitive et coopérative. Ils montrent que les négociations compétitives sur les marchés de détail sont inutilement hostiles aux clients et n'offrent aucun avantage à long terme aux commerçants.
-	Essentiellement, dans des négociations concurrentielles, le commerçant est opposé au client dans un tiraillement de guerre. Ils concluent que les commerçants se soucient souvent moins du profit sur une transaction donnée et se soucient davantage de la rentabilité à long terme, ce qui implique la satisfaction du client et des relations clients à long terme. 
-	Dans cette continuité, \emph{Jonker et al} \cite{jonker2007agent} proposent un modèle de négociation multi-critères coopérative pour le e-commerce pour lequel ils utilisent une approche heuristique pour calculer l'utilité des critères et modélisent des agents capables d'explorer conjointement l'espace des résultats possibles avec des informations limitées. 
+		Par exemple, \cite{wollkind2004automated} propose un système multi-agents pour gérer l'espace aérien national. Un agent a été implémenté au sein de chaque avion pour gérer les conflits que peuvent rencontrer les avions. Le modèle proposé utilise des stratégies de négociation coopérative pour la résolution des conflits de trafic aérien. Les agents utilisent un protocole de concessions monotoniques \cite{zlotkin1989negotiation} qui consiste à faire des propositions et contre-propositions en diminuant l'utilité de ces dernières jusqu'à atteindre une offre qui peut être acceptée par les deux agents. 
+		 \emph{Boutilier} \cite{boutilier2002cooperative} propose un modèle de négociation coopérative pour l'allocation des ressources au sein d'un système autonome distribué. Le modèle repose sur une stratégie élicitation d'utilité incrémentielle en plus d'utiliser des algorithmes de \textit{minimax regret: un critère de décision couramment utilisé dans des situations caractérisées par une incertitude stricte ne pouvant donc pas être quantifiée de façon probabiliste} \cite{borodin2005online}, pour l'optimisation des allocations de ressources.   
 	
-	Revenir sur 
+		Par ailleurs, \emph{Gutman et Maes} [13] discutent de la différence entre les modèles de négociation compétitive et coopérative. Ils montrent que les négociations compétitives sur les marchés de détail sont inutilement hostiles aux clients et n'offrent aucun avantage à long terme aux commerçants.
+		Essentiellement, dans des négociations concurrentielles, le commerçant est opposé au client dans un tiraillement de guerre. Ils concluent que les commerçants se soucient souvent moins du profit sur une transaction donnée et se soucient davantage de la rentabilité à long terme, ce qui implique la satisfaction du client et des relations clients à long terme. 
+		Dans cette continuité, \emph{Jonker et al} \cite{jonker2007agent} proposent un modèle de négociation multi-critères coopérative pour le e-commerce pour lequel ils utilisent une approche heuristique pour calculer l'utilité des critères et modélisent des agents capables d'explorer conjointement l'espace des résultats possibles avec des informations limitées. 
 	
+		Dans une autre veine, la négociation collaborative a été étudié comme une méthode qui facilite l'échange d'information, la compréhension mutuelle et prise de décision conjointe \cite{jin2010study}. 
+		Dans cette perspective ABEN \cite{jin2009argumentation}, un framework de négociation collaborative appliqué au domaine des conceptions techniques a été réalisé. Le modèle proposé a pour but de résoudre les divergences entre les concepteurs lors de la coopération, qui permet de mettre en œuvre un processus de synthèse dans lequel les concepteurs co-construisent pour développer une meilleure compréhension des tâches de conception, de meilleures façons de concevoir et de nouvelles alternatives comme solutions de conception. La stratégie de négociation a pour objectif d'utiliser des protocoles d'argumentation pour permettre aux négociateurs d'expliquer leurs points de vue et leurs attentes. L'objectif est d'atteindre une (\emph{ZOPA  Zone of Possible Agreement}). Une extension de ce modèle appelé \emph{ANED} a été proposé qui possède en plus un protocole de négociation fournissant des formats de message de communication, et une information de conception de mappage de modèle de contexte de conception au protocole et au processus \cite{jin2010study}. 
+		
+		
+		Enfin, un système multi-agents pour représenter un réseau de chaîne d'approvisionnement de fabrication qui utilise la négociation collaborative pour la résolution des conflits \cite{jiao2006agent}. En effet, à la réception de chaque commande, le système définit un ensembles de spécification des exigences matérielles. Le processus de négociation collaborative se trouve être efficace afin de trouver rapidement un fournisseur capable de répondre aux exigences matérielles.
+		
+		  
+		Nous pouvons conclure que les travaux en négociation couvent le questions stratégiques de la négociation, proposent des modèles adapté à l'environnement d'application. Dans le cadre de cette thèse, nous nous intéresserons plus particulièrement à la négociation collaborative dans laquelle les négociateurs partagent un objectif commun et par conséquent adoptent une stratégie honnête. Notre modèle de négociation collaborative sera abordé plus en détails dans le chapitre 3. 
+		
+%		CONVINCER (Pena-Mora and Wang, 1998) is a computer program that
+%		facilitates the negotiation process in large-scale infrastructure projects by integrating the
+%		concepts of game theory and negotiation forms and guiding negotiations toward
+%		sustainable outcomes. 
+		
+
 %	Mixed stratégie
 %	Cet agent joue une stratégie tit-for-tat par rapport à sa propre utilité. L'agent coopérera d'abord, puis répondra en nature à l'action précédente de l'adversaire, tout en visant le point Nash dans le scénario. Si l'offre de l'opposant améliore son utilité, l'agent concède en conséquence. L'agent est gentil dans le sens où il ne riposte pas. Par conséquent, lorsque l'adversaire fait une offre qui réduit l'utilité de l'agent, l'Agent Tit-for-Tat de Nice suppose que l'adversaire a fait une erreur et ne fait rien, attendant une meilleure offre. Cette approche est basée sur [14]. Nice Tit-for-Tat Agent maintient un modèle bayésien [15] de son adversaire, mis à jour après chaque coup par l'adversaire. Ce modèle est utilisé pour essayer d'identifier les enchères optimales de Pareto afin de pouvoir répondre à une concession de l'adversaire avec un bon mouvement. L'agent essayera de refléter la concession de l'adversaire en fonction de sa propre fonction d'utilité. L'agent détecte des scénarios très coopératifs pour viser un peu plus que l'utilitaire Nash. En outre, si le domaine est important, si le facteur d'actualisation est élevé ou si le temps est écoulé, l'agent fera des concessions plus importantes en ce qui concerne sa cible d'enchères. L'agent tente d'optimiser l'utilité de l'adversaire en effectuant un certain nombre d'enchères différentes avec approximativement cet utilitaire de cible d'enchères.
 	
@@ -273,10 +296,14 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	 %https://ac.els-cdn.com/S0004370212001105/1-s2.0-S0004370212001105-main.pdf?_tid=3fb41905-2d3a-4662-aa2a-5a608b9d8587&acdnat=1528135687_1d2be1d9ea1f434c06689901851602de
 
 	
-	Un aspect important dans la modélisation d'un agent négociateur est le module de communication qu'il utilise pour interagir avec son adversaire 
+%	Un aspect important dans la modélisation d'un agent négociateur est le module de communication qu'il utilise pour interagir avec son adversaire 
 	
-
+	\subsection{Aspect social dans les modèles de négociations automatique}
 	
-	
+	 Après plus d'une décennie de recherche, les agents de négociation rationnels sont capables de définir des stratégies de négociations efficaces et qui dépassent même les capacité humaine en terme d'optimalité \cite{jonker2012negotiating}. Néanmoins, le processus de négociation est aussi un processus émotionnel complexe qui peut modifier les stratégies de négociation. De ce fait, ces agent purement rationnels ne peuvent pas remplacer un négociateur humain au cours d'une négociation ni avoir une négociation avec un humain et être en mesure de comprendre complètement la stratégie de son adversaire.
+	 
+	 Afin de mieux comprendre le processus de négociation, plusieurs études en négociation automatique se sont intéressés à l'apport de l'affect et émotions sur la négociation. Nous présenterons dans cette section des contributions dans ce domaine. 
+	 
+	 
 	
 	  
