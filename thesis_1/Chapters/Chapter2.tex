@@ -240,8 +240,11 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	
 %	\textit{Jonker et al} \cite{jonker2012negotiating} présentent dans un travail un état de l'art sur les systèmes de support à la négociation.
 
-	 les NNS sont utilisés pour aider les novices en négociation à améliorer leurs compétences. Les données collectées permettent aux chercheurs de mieux comprendre les difficultés que rencontrent les négociateurs au cours d'une négociation \cite{jonker2012negotiating}. Néanmoins, ces systèmes sont encore peu utilisés, nous citerons les systèmes tel que \emph{Inspire} [ref] un système complet avec une interface de communication, il permet de spécifier les préférences et de gérer les offres au cours de la négociation. De plus, il permet aux utilisateurs de faire une analyse post-accord. 
-	 Il a été utilisé comme  un outils de simulation afin de mieux préparer les négociateurs au cas réels ce qui le rend un bon outils d'apprentissage de négociation. Un autre outils d'éducation est le système \emph{Athena}. Enfin, nous citons le système \emph{SmartSettle} qui permet d'assister les utilisateurs lors de négociations complexes. Il est fournis avec un support de propositions qui permet de faire des suggestions aux négociateurs. 
+	 Les NSS sont utilisés pour aider les novices en négociation à améliorer leurs compétences en structurant le processus de négociation. Cela soutient aux négociateurs pour la partie rationnelle du processus de négociation, comme l'exploration des problèmes, l'identification des solutions de rechange et le calcul des soumissions \cite{hindriks2008creating}. Les données collectées permettent aux chercheurs de mieux comprendre les difficultés que rencontrent les négociateurs au cours d'une négociation \cite{jonker2012negotiating}. 
+	 
+	 En vue de leurs compétences, les NSS peuvent être utilisés dans différents contextes. En effet, les experts de négociations identifient deux champs d'applications \cite{pommeranz2009design}. Ils peuvent être utilisé comme une\textit{ outils de préparation et de formation à la négociation} en offrant une structuration de l'environnement de la négociation comme la structuration des préférence, l'identification  des alternatives possibles \emph{etc.} \cite{broekens2010affective}.  Ils peuvent aussi permettre aux utilisateurs un \textit{usage en temps réel} pour négocier avec des adversaires via la plateforme \cite{pommeranz2009design}. 
+	 \emph{Inspire} [ref] un système complet avec une interface de communication, permet de spécifier les préférences et de gérer les offres au cours de la négociation. De plus, il permet aux utilisateurs de faire une analyse post-accord. 
+	 Il a été utilisé comme  un outils de simulation afin de mieux préparer les négociateurs au cas réels ce qui le rend un bon outils d'apprentissage de négociation. Un autre outils de formation est le système \emph{Athena} similaire au premier système, il offre un support aux négociateurs afin de créer eux mêmes le contenu de la négociation et la structure du domaine. Enfin, nous citons le système \emph{SmartSettle} qui permet d'assister les utilisateurs lors de négociations complexes. Il est fournis avec un support pour la gestion propositions qui permet de faire des suggestions aux négociateurs. 
 	  
 	Concernant les recherches pour développer des ANAs, les travaux se sont principalement concentrés sur trois aspects à savoir la conception de stratégies de négociation, des protocoles, et la modélisation du domaine de négociation \cite{jonker2012negotiating}. De plus, depuis l'émergence de la compétition internationale \emph{International Automated Negotiating Agents Competition (ANAC)} \cite{reftoANAc}, une compétition qui regroupe les meilleurs agents négociateurs, de nouveaux modèles de négociations sont proposés chaque année. 
 	
@@ -250,7 +253,9 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	
 	Par exemple, \textit{l'agent K} gagnant d'\emph{ANAC 10} dispose d'un mécanisme sophistiqué pour accepter une offre. En effet, il utilise la moyenne et la variance de l'utilité de toutes les offres reçues, puis détermine la probabilité de recevoir une meilleure offre dans le futur et définit sa cible de proposition. En conséquence, il accepte ou rejette l'offre. Sa stratégie d'enchère consiste à d'abord définir une valeur d'utilité cible pour les propositions et va aléatoirement sélectionner des offres dont l'utilité est dans l'intervalle de valeurs cibles. Si aucune proposition n'est trouvée, l'agent décroît valeur d'utilité cible.	Cependant, ce système ne prend pas en compte les préférences de son adversaire. 
 	
-	A l'opposé, plusieurs travaux ont mis en avant l'importance de définir un modèle de l'adversaire \cite{}. Par exemple, l'agent \textit{IAMhaggler2011} utilise une technique de régression gaussienne afin de prédire la stratégie de son adversaire. Un élément clé d'une négociation réussie est d'optimiser sa stratégie de concessions. A cet effet, l'agent prend en comptes la stratégie de concessions de son adversaire calculé à partir de la gaussienne et les contraintes temporelles liées à la négociation pour définir sa stratégie de concessions. 
+	Un problème recrurent dans la modélisation d'agents conversationnels reste le manque d'information sur le domaine de négociation. Pour cette raison, des approches pour apprendre les préférences de l'adversaire ont été proposés  \cite{ref}. Ces modèles ont amélioré les stratégies des négociateurs et ont permis de mettre en avant l'importance de définir un modèle de l'adversaire \cite{}. Par exemple, l'agent \textit{IAMhaggler2011} utilise une technique de régression gaussienne afin de prédire la stratégie de son adversaire. Un élément clé d'une négociation réussie est d'optimiser sa stratégie de concessions. A cet effet, l'agent prend en comptes la stratégie de concessions de son adversaire calculé à partir de la gaussienne et les contraintes temporelles liées à la négociation pour définir sa stratégie de concessions. 
+	
+	
 	
 	
 	Les agents proposés ci-dessus sont conçus pour améliorer leurs gains personnels dans le contextes de négociations compétitives. Un autre champs de recherche vise à proposer des modèles de négociations pour optimiser les gains des deux négociateurs, ce type de négociation est nommé négociation coopérative ou collaborative. 
@@ -274,9 +279,7 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 		Dans cette continuité, \emph{Jonker et al} \cite{jonker2007agent} proposent un modèle de négociation multi-critères coopérative pour le e-commerce pour lequel ils utilisent une approche heuristique pour calculer l'utilité des critères et modélisent des agents capables d'explorer conjointement l'espace des résultats possibles avec des informations limitées. 
 	
 		Dans une autre veine, la négociation collaborative a été étudié comme une méthode qui facilite l'échange d'information, la compréhension mutuelle et prise de décision conjointe \cite{jin2010study}. 
-		Dans cette perspective ABEN \cite{jin2009argumentation}, un framework de négociation collaborative appliqué au domaine des conceptions techniques a été réalisé. Le modèle proposé a pour but de résoudre les divergences entre les concepteurs lors de la coopération, qui permet de mettre en œuvre un processus de synthèse dans lequel les concepteurs co-construisent pour développer une meilleure compréhension des tâches de conception, de meilleures façons de concevoir et de nouvelles alternatives comme solutions de conception. La stratégie de négociation a pour objectif d'utiliser des protocoles d'argumentation pour permettre aux négociateurs d'expliquer leurs points de vue et leurs attentes. L'objectif est d'atteindre une (\emph{ZOPA  Zone of Possible Agreement}). Une extension de ce modèle appelé \emph{ANED} a été proposé qui possède en plus un protocole de négociation fournissant des formats de message de communication, et une information de conception de mappage de modèle de contexte de conception au protocole et au processus \cite{jin2010study}. 
-		
-		
+		Dans cette perspective ABEN \cite{jin2009argumentation}, un framework de négociation collaborative appliqué au domaine des conceptions techniques a été réalisé. Le modèle proposé a pour but de résoudre les divergences entre les concepteurs lors de la coopération, qui permet de mettre en œuvre un processus de synthèse dans lequel les concepteurs co-construisent pour développer une meilleure compréhension des tâches de conception, de meilleures façons de concevoir et de nouvelles alternatives comme solutions de conception. La stratégie de négociation a pour objectif d'utiliser des protocoles d'argumentation pour permettre aux négociateurs d'expliquer leurs points de vue et leurs attentes. L'objectif est d'atteindre une (\emph{ZOPA  Zone of Possible Agreement}). Une extension de ce modèle appelé \emph{ANED} a été proposé qui possède en plus un protocole de négociation fournissant des formats de message de communication, et une information de conception de mappage de modèle de contexte de conception au protocole et au processus \cite{jin2010study}. 	
 		Enfin, un système multi-agents pour représenter un réseau de chaîne d'approvisionnement de fabrication qui utilise la négociation collaborative pour la résolution des conflits \cite{jiao2006agent}. En effet, à la réception de chaque commande, le système définit un ensembles de spécification des exigences matérielles. Le processus de négociation collaborative se trouve être efficace afin de trouver rapidement un fournisseur capable de répondre aux exigences matérielles.
 		
 		  
@@ -300,9 +303,25 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	
 	\subsection{Aspect social dans les modèles de négociations automatique}
 	
-	 Après plus d'une décennie de recherche, les agents de négociation rationnels sont capables de définir des stratégies de négociations efficaces et qui dépassent même les capacité humaine en terme d'optimalité \cite{jonker2012negotiating}. Néanmoins, le processus de négociation est aussi un processus émotionnel complexe qui peut modifier les stratégies de négociation. De ce fait, ces agent purement rationnels ne peuvent pas remplacer un négociateur humain au cours d'une négociation ni avoir une négociation avec un humain et être en mesure de comprendre complètement la stratégie de son adversaire.
+	 Après plus d'une décennie de recherches, les agents de négociation rationnels sont capables de définir des stratégies de négociations efficaces et qui dépassent même les capacité humaine en terme d'optimalité \cite{jonker2012negotiating}. Néanmoins, le processus de négociation est aussi un processus émotionnel complexe qui peut modifier les stratégies de négociation \cite{broekens2010affective}. De ce fait, ces agent purement rationnels ne peuvent pas remplacer un négociateur humain au cours d'une négociation ni avoir une négociation avec un humain et être en mesure de comprendre complètement la stratégie de son adversaire.
 	 
 	 Afin de mieux comprendre le processus de négociation, plusieurs études en négociation automatique se sont intéressés à l'apport de l'affect et émotions sur la négociation. Nous présenterons dans cette section des contributions dans ce domaine. 
+	 
+	 Affective Negotiation Support Systems 
+	 notes 
+	 
+	 However, negotiation also involves social interaction and dilemmas as well
+	 as personal preferences and opinions. Negotiation is a multifaceted process in which affect plays a critical role, a role con-
+	 firmed in recent empirical studies.
+	 In this position paper we first argue that affect is an important issue to consider when devel-
+	 oping a negotiation support system.
+	 
+	 As
+	 emotions play such an important role in the negotia-
+	 tion process, in this article we argue that negotiation
+	 support systems should help negotiators cope with
+	 the interplay between emotion and the negotiation
+	 process
 	 
 	 
 	
