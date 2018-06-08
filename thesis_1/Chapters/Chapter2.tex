@@ -303,26 +303,45 @@ En revanche, une personne soumise va utiliser un mouvement contraint, une utilis
 	
 	\subsection{Aspect social dans les modèles de négociations automatique}
 	
-	 Après plus d'une décennie de recherches, les agents de négociation rationnels sont capables de définir des stratégies de négociations efficaces et qui dépassent même les capacité humaine en terme d'optimalité \cite{jonker2012negotiating}. Néanmoins, le processus de négociation est aussi un processus émotionnel complexe qui peut modifier les stratégies de négociation \cite{broekens2010affective}. De ce fait, ces agent purement rationnels ne peuvent pas remplacer un négociateur humain au cours d'une négociation ni avoir une négociation avec un humain et être en mesure de comprendre complètement la stratégie de son adversaire.
+	 Après plus d'une décennie de recherches, les agents de négociation rationnels sont capables de définir des stratégies de négociations efficaces et qui dépassent même les capacité humaine en terme d'optimalité \cite{jonker2012negotiating}. Néanmoins, comme nous l'avons présenté dans la section précédente, le processus de négociation est aussi un processus émotionnel complexe qui peut modifier les stratégies de négociation \cite{broekens2010affective}. De ce fait, 
+	 un agent qui va négocier avec des humains ou remplacer les humains sur un processus de négociation doit être en mesure de comprendre l'apport des comportement sociaux aux stratégies de négociation. Donc un agent purement rationnel ne peut par exemple pas comprendre la stratégie de son adversaire. 
+	 C'est pourquoi, plusieurs études en négociation automatique se sont intéressées à l'apport de l'affect et des émotions sur la négociation. Nous présenterons dans cette section quelques contributions majeures dans ce domaine. 
 	 
-	 Afin de mieux comprendre le processus de négociation, plusieurs études en négociation automatique se sont intéressés à l'apport de l'affect et émotions sur la négociation. Nous présenterons dans cette section des contributions dans ce domaine. 
+	 Parmi les premiers modèles de négociation affective, l'agent diplomate \cite{kraus1995designing}, conçu pour pouvoir négocier dans un environnement complexes qui impliquant un large choix de stratégies. L'agent diplomate est implémenté avec un panel de personnalités qu'il choisi en fonction de son environnement et la personnalité de son interlocuteur.  Un algorithme d'apprentissage lui permet de d'apprendre la personnalité respective de ses interlocuteurs. 
+	 \emph{Gratch} \cite{gratch2016misrepresentation} présente une plateforme nommée \emph{"the misrepresentation game"}. Un agent négociateur qui peut de cacher et mentir sur ses préférences tout en paraissant équitable et honnête. Par exemple, l'agent peut signaler à un adversaire qu'il préfère un objet tout en étant vraiment en faveur d'un autre. Dans un contexte conflictuel, l'agent va tenter de maximiser ses gains en cachant ses préférences réelles. Ils ont montré que les participants étaient plus disposés à accepter les offres d'un agent qui donnait une présentation fausse de ses préférences que quand il était honnête. Cette affirmation n'est vraie que dans le cas où les participants percevaient un échange d'information (l'agent accepte aussi de communiquer ses propres préférences). Par conséquent, l'agent devait trouver une équilibre entre l'équité relative de l'offre et l'équité relative de l'échange d'informations \cite{gratch2016misrepresentation}.
 	 
-	 Affective Negotiation Support Systems 
-	 notes 
+	 Sur la base des travaux en psychologie sociale qui ont mis en exergue l'impact des émotions sur la négociation \cite{van2006power}. Des chercheurs en informatique affective ont repris ces recherches dans le contexte de négociations entre un humain et un agent autonome. \emph{De Malo et al} \cite{de2011effect,de2015humans} proposent un agent négociateur capable d'exprimer des émotions de colère et de joie. Ils démontrent qu'en fonction de l'émotion affichée, le négociateur humain change sa stratégie de concession. En effet, les négociateurs concèdent plus à un agent en colère qu'un agent joyeux. Dans la même veine, \emph{Dehghani et al} \cite{dehghani2014interpersonal} ont étudié l'influence des émotions tels que la colère et la tristesse dans le contexte de négociation sur des sujets moraux. Ils présentent un agent négociateur qui exprime des émotions à travers des expressions faciales.
+	 Les résultats obtenus montrent que les négociateurs qui associent une valeur morale à l'objet de la négociation faisaient des concessions plus importantes face à l'agent triste. A l'opposé, les participants rejetaient plus les propositions d'un agent en colère. De plus, une réciprocité des émotions a été trouvé, les participants ressentaient plus de tristesse à la fin d'une négociation avec un agent triste.  
+	 Enfin, \emph{De Melo} \cite{de2015humans} dans une étude, montre que la perception de ces émotions est plus importante chez un avatar en comparaison à un agent. C'est à dire que l'expression des émotions chez un avatar va influencer de manière plus importante le comportement de l'humain et affecter son processus de prise de décision.  
 	 
-	 However, negotiation also involves social interaction and dilemmas as well
-	 as personal preferences and opinions. Negotiation is a multifaceted process in which affect plays a critical role, a role con-
-	 firmed in recent empirical studies.
-	 In this position paper we first argue that affect is an important issue to consider when devel-
-	 oping a negotiation support system.
 	 
-	 As
-	 emotions play such an important role in the negotia-
-	 tion process, in this article we argue that negotiation
-	 support systems should help negotiators cope with
-	 the interplay between emotion and the negotiation
-	 process
+	 Les agents avec des comportements sociaux se sont montrés aussi performants dans l'apprentissage de négociation à des novices. \cite{broekens2012virtual} propose un système de réalité virtuel pour la formation à la négociation avec un agent négociateur doté de comportements sociaux tels que l'expression des émotions et la capacité d'expliquer ses choix. En effet, l'agent est capable d'exprimer trois émotions (joie, colère et tristesse). De plus, afin d'aider les négociateurs à analyser les comportements de leurs adversaires et de connaître leurs préférences, l'agent est défini avec un module qui lui permet d'expliquer ses choix et ses stratégies employées durant la négociation. Cet agent permet aux négociateurs novices d'améliorer leur compétences de conversation et leur connaissances en négociation. 
+	 \emph{Gratch et al} \cite{gratch2016benefits} présentent l'agent \textit{"Conflict Resolution Agent"} implémenté dans un environnement virtuel capable de négocier avec le novice en langage naturel. Il peut aussi exprimé un panel de comportement sociaux. Une étude mené par eux a révélé que les novices se sentaient plus à l'aise en négociant avec l'agent, et montrent plus d'intérêt. Toujours dans la même perspective, \emph{Jonker} \cite{jonker2012negotiating} présentent "Pocket Agent" un NSS avec des compétences sociales. Ils affirment que l'agent permet au novice de réguler ses émotion et de gérer les conséquences négatives des émotions lors de la négociation.
 	 
+	 Ces systèmes révèlent que les capacité sociales et plus précisément les émotions exprimés influencent les stratégies des négociateurs humains change les résultats de la négociation. A notre connaissance aucune recherche ne s'est intéressées à l'impact de la dominance interpersonnelle sur les stratégies de négociation dans le contexte agent/humain. 
+	 
+	 Néanmoins, des travaux existants ont déjà travaillé à modéliser des comportements verbaux et non verbaux de dominance pour des agents conversationnels. 
+	 
+	 \subsection{Comportements de dominance chez les agents conversationnels}
+		
+%	 Overall, the contribution of our work is two-fold. First, our results are consistent with the general view that social context and emotion expression interact in their impact on behavior (Elfenbein, 2007). 
+%	 
+%	 
+%	 
+%	 Affective Negotiation Support Systems 
+%	 notes 
+%	 
+%	 However, negotiation also involves social interaction and dilemmas as well
+%	 as personal preferences and opinions. Negotiation is a multifaceted process in which affect plays a critical role, a role con-
+%	 firmed in recent empirical studies.
+%	 In this position paper we first argue that affect is an important issue to consider when devel-
+%	 oping a negotiation support system.
+%	 
+%	 As
+%	 emotions play such an important role in the negotiation process, in this article we argue that negotiation support systems should help negotiators cope with
+%	 the interplay between emotion and the negotiation process
+%	 Our aim is to develop a Pocket Negotiator agent that assists (not supplants) the user in an integrative bargaining task: assessing the situation, regulating emotions, and coping with negative consequences of emotions.
+%	 The Pocket Negotiator agent is to enhance the negotiation skills and performance of the user by helping the user to explore the negotiation space  and obtain win-win outcomes that are better for both parties. The Pocket Negotiator should also help negotiators become aware of the role of emotions, moods, and interaction in negotiation;
 	 
 	
 	  
