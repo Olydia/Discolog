@@ -125,35 +125,35 @@
 		\subsection{Préférences}
 		
 			L'agent conversationnel est défini avec un ensemble de préférences formalisé  par un ordre partiel $\prec_i$, défini sur chaque domaine de critères $C_i$. 
-					\begin{figure}[] 
-						\centering 
-						\begin{tabular}{l}
-							\subfloat[]{\adjustbox{raise=-5pc}{\includegraphics[height=4.8cm]{Figures/cuisine_ex2.png} \label{fig:sub_pref}}}
-							\subfloat[]{
-								%\input{Figures/Tikz/goldMineState.tex}\label{fig:goldMineState}}  
-								\begin{tabular}{|c|c|}
-									\hline
-									& Critère cuisine \\
-									\cline{2-2}
-									\parbox[t]{2mm}{\multirow{7}{*}{\rotatebox[origin=c]{90}{\textbf{Préférences}}}} & Japonais $\prec_{cuisine}$ Coréen\\
-									\cline{2-2}
-									& Chinois $\prec_{cuisine}$ Mexicain\\
-									\cline{2-2}
-									&  Coréen$\prec_{cuisine}$ Mexicain\\
-									\cline{2-2}
-									&  Coréen $\prec_{cuisine}$ Turque \\	
-									\cline{2-2}
-									&  Mexicain$\prec_{cuisine}$ Italien \\
-									\cline{2-2}
-									&  Turque $\prec_{cuisine}$ Italien\\
-									\cline{2-2}
-									&  Italien $\prec_{cuisine}$ Français\\	
-									\hline								
-								\end{tabular}}
-							\end{tabular}
-							\caption{Exemple de modèle de préférences défini sur le critère cuisine}
-							\label{fig:ex_pref}
-						\end{figure}
+%					\begin{figure}[] 
+%						\centering 
+%						\begin{tabular}{l}
+%							\subfloat[]{\adjustbox{raise=-5pc}{\includegraphics[height=4.8cm]{Figures/cuisine_ex2.png} \label{fig:sub_pref}}}
+%							\subfloat[]{
+%								%\input{Figures/Tikz/goldMineState.tex}\label{fig:goldMineState}}  
+%								\begin{tabular}{|c|c|}
+%									\hline
+%									& Critère cuisine \\
+%									\cline{2-2}
+%									\parbox[t]{2mm}{\multirow{7}{*}{\rotatebox[origin=c]{90}{\textbf{Préférences}}}} & Japonais $\prec_{cuisine}$ Coréen\\
+%									\cline{2-2}
+%									& Chinois $\prec_{cuisine}$ Mexicain\\
+%									\cline{2-2}
+%									&  Coréen$\prec_{cuisine}$ Mexicain\\
+%									\cline{2-2}
+%									&  Coréen $\prec_{cuisine}$ Turque \\	
+%									\cline{2-2}
+%									&  Mexicain$\prec_{cuisine}$ Italien \\
+%									\cline{2-2}
+%									&  Turque $\prec_{cuisine}$ Italien\\
+%									\cline{2-2}
+%									&  Italien $\prec_{cuisine}$ Français\\	
+%									\hline								
+%								\end{tabular}}
+%							\end{tabular}
+%							\caption{Exemple de modèle de préférences défini sur le critère cuisine}
+%							\label{fig:ex_pref}
+%						\end{figure}
 			Nous définissons la relation de préférence comme une relation binaire. Par exemple, $japonais \prec_{cuisine} italien$ signifie que l'agent préfère la cuisine italienne à la cuisine japonaise. Elle est aussi transitive, par exemple, l'agent dispose d'une autre préférence $italien \prec_{cuisine} français$. Nous pouvons donc déduire que l'agent $japonais \prec_{cuisine} français$.
 			
 			 Ces conditions garantissent que les préférences de l'agent soient cohérentes dans le domaine de la négociation; et la condition de transitivité assure que toutes les valeurs soient comparables. Un exemple de modèle de préférences défini sur le critère de cuisine est présenté dans la figure \ref{fig:ex_pref}.

@@ -203,7 +203,7 @@
 	A: "Okay. I'll call to book a table."
 	
 	
-	\subsection{Evaluation du modèle}
+	\subsection{Évaluation du modèle}
 	\subsection{Limites des arbres de dialogue}
 	Parler de l'étude qui a montré une ambiguïté dans la perception des comportement et la capacité à isoler l'impact de chaque principe sur la prise de décision
 	
@@ -216,7 +216,7 @@
 	\section{Modèle de décision basé sur les comportements de pouvoirs}
 	
 	Nous proposons un modèle computationnel de décision, qui reprend les trois principes de pouvoir dans le modèle décisionnel de l'agent. 
-	A cause de la rigidité des arbres de dialogues, nous adaptons la solution afin qu'elle soit plus flexible de l'utilisateur et surtout afin que les comportements de pouvoir soient plus saillant dans les décisions de l'agent.
+	A cause de la rigidité des arbres de dialogues, nous adaptons la solution afin qu'elle soit plus flexible et surtout afin que les comportements de dominance soient plus saillant dans les décisions de l'agent.
 	
 	Par conséquent, nous présentons dans ce qui suit, l'adaptation algorithmique de chaque principe de dominance extraits de la psychologie sociale.
 	
@@ -467,7 +467,7 @@
 				\vspace{1 em}
 				\textbf{Définition. }
 %				\vspace{0.75 em}
-				La distance de Kendall considère les distances entre deux ordres partiels en fonction de leurs ensembles d'extensions totales.
+				La distance de \emph{Kendall} considère les distances entre deux ordres partiels en fonction de leurs ensembles d'extensions totales.
 				
 				Pour chaque ensemble partiel, l'algorithme génère des extensions de cet ensemble jusqu'à arriver à un des ordre total. Pour un ensemble $\sigma$, nous notons l'ensemble des extensions possibles de ce modèle $ext(\sigma)$.
 				
@@ -484,9 +484,11 @@
 				Enfin, nous avons défini le sujet de négociation. Nous avons opté pour un sujet social qui n'exige pas de compétence techniques. Les négociateurs avait pour but de négocier afin de choisir un restaurant. Nous avons pris en compte quatre critères pour le choix d'un restaurant. 	Les critères sélectionnés sont \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
 				
 				
-				Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues). Les dialogues générés sont disponibles en Appendixe ...
+				Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues). Un seul dialogue a été produit pour la condition dans laquelle les préférences des agents sont similaires, car dans le cas précis, les dialogues générés se ressemblaient et convergeaient rapidement vers un compromis. Par conséquent, les comportements produits étaient proches.   
 				
-				\begin{table}[b]
+				Les dialogues générés sont disponibles en Appendixe ...
+				
+				\begin{table}[h]
 					\centering
 					\begin{tabular}{ |l|c|c|l| }
 						\hline
@@ -506,13 +508,146 @@
 				\end{table}
 		
 			\subsubsection{Procédure}
-					We conducted a between-subject study using the online crowdsoursing website \emph{CrowdFlower}\footnote{https://www.crowdflower.com/}. 
-					Each participant was shown only one dialogue. Speaker A and B were described as two friends trying to negotiate a restaurant to have dinner. %We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
-					Participants were asked to read the assigned dialogue and answer a questionnaire. 
+				
+					Nous avons mené une étude inter-sujets via le site web de crowdsourcing  \emph {CrowdFlower} \footnote {https://www.crowdflower.com/}.
+					Chaque participant a évalué uniquement un seul dialogue pour lequel les agents A et B étaient décrits comme deux amis essayant de négocier un restaurant pour dîner.
+					Les participants ont été invités à lire le dialogue qui leur a été assigné et à répondre à un questionnaire.
+					Deux questions ont été défini pour chaque hypothèse. Par ailleurs, nous avons inclus deux questions de test pour vérifier la crédibilité des réponses fournies par les participants. Par la suite, nous avons écarté les participants ayant fourni des mauvaises réponses à ces questions. 
+					Chaque item devait être évalué sur une échelle de Likert à 5 points allant de ``Je ne suis pas du tout d'accord'' à ``Je suis totalement d'accord".
+			
+					Les items du questionnaires sont présentés dans la table \ref{table:questionnaire}. L'étude ayant été réalisé sur une population anglophone, nous présentons les questions dans leurs version originale. 
+						
+								\begin{table}[h]
+																\centering
+								\begin{tabular}{|p{1.75cm}|p{5cm}|p{5.5cm}|}
+
+									\hline
+									Hypothesis &question 1& question 2 \\
+									\hline
+									\textbf{H1} &Speaker (A/B) is self-centered. &Speaker (A/B) takes his friend's preferences into account in the choice of the restaurant.\\
+									\hline
+									\textbf{H2} &Speaker (A/B) makes concessions in the negotiation.&Speaker (A/B) gives up his position in the negotiation\\
+									\hline
+									\textbf{H3} & Speaker (A/B) is demanding&Speaker (A/B) presses his position in the negotiation. \\
+									\hline
+									\textbf{H4} &Speaker (A/B) takes the lead in the negotiation.&Speaker (A/B) takes the initiative in the negotiation \\
+									\hline
+								\end{tabular}
+							
+							\caption{Items proposés pour le questionnaire sur la perception des comportements de dominance.}
+							\label{table:questionnaire}
+						\end{table}
 					
-					We defined two questions for each hypothesis. Two test questions were included to check the	sanity of the answers. We eliminated participants providing wrong answers to those questions. Each one of these questions was to be answered on a 5 points Likert scale ranging from ``I totally disagree" to ``I totally agree".
-			
+					Au total 120 participants ont pris part à l'étude (30 par condition). Les participants devaient être anglophone de naissance. Chaque sujet a perçu \textit{25 cents} pour sa participation. Au final, 15 participants on été exclus pour avoir mal répondu au questions de test. 
+					
+					Dans la prochaine section, nous présentons l'analyse des donnés obtenus suite à cette étude.
+					
+					
 			\subsubsection{Résultats}
+				Comme nous avions formulé deux questions pour chaque hypothèse, nous avons d'abord calculé la corrélation entre chaque paire de question. En moyenne, nous avons obtenus une corrélation de l'ordre de $0.5$. Cette forte corrélation nous permet d'utiliser ces données pour évaluer les comportements des locuteurs (speakers) sur chaque principe. 
+				
+				L'ensemble des résultats sont résumés dans la table \ref{tab:resetude1}. Nous avons commencé par effectuer les statistiques descriptives pour évaluer la perception des comportements de dominance affilié à chaque agent. 
+					\begin{itemize}
+							\item \textbf{Soi versus autrui :} L'agent A qui exprimait des comportements de dominance a été en moyenne vu comme égocentrique, alors que l'agent B, l'agent soumis, n'a pas été vu comme égocentrique et ce résultat a été trouvé pour les quatre dialogues.
+							Par exemple, pour le dialogue 2, l'agentA a été moyenne perçu comme s'intéressant uniquement à ses préférences \textit{(M=3.6, ET=0.9)} contrairement à l'agent B \textit{(M=2.2, ET=0.8)}.
+							
+							\item \textbf{Niveau exigence et concessions :} En moyenne l'agent A a été perçu comme exigent durant le dialogue. Par exemple, les participants ayant évalué le dialogue 1 ont trouvé que l'agent A était exigent \textit{(M=4.1, ET=0.8)} alors que l'agent B n'a pas du tout été perçu comme exigent durant la négociation \textit{(M=2.6, ET=1.1)}. A l'opposé, l'agent B a été vu comme exprimant des concessions durant la négociation contrairement à l'agent A. Par exemple, dans le dialogue 1, l'agent A été perçu comme n'exprimant que trés peu de concessions \textit{(M=2.2, ET=1.1)} contrairement à l'agent B qui a été largement évalué comme exprimant des concessions \textit{(M=4.3, ET=0.8)}.
+							
+							\item  \textbf{Le contrôle de la négociation:} Les comportements de prise de contrôle ont été correctement perçu par les participants. En effet, même dans le condition ou les préférences des agents étaient similaires dont le dialogue était assez court, les participants ont perçu l'agent A comme leader de la négociation \textit{(M=4.5, ET=0.9)}, tandis que l'agent B a été en moyenne perçu comme manquant d'initiative \textit{(M=1.9, ET=0.9)}.
+					\end{itemize}
+				
+			Nous avons ensuite comparé les comportements des deux agents pour chaque principe. Pour ce faire, nous avons en premier lieu analysé la distribution des données qui nous a révélé que ces dernières ne suivent pas une distribution normale. C'est la raison pour laquelle nous avons utilisé un test non-paramétrique de \emph{Wilcoxon  de rang signé} afin de comparer la perception des comportements de l'agent A contre l'agent B.
 			
+			Les résultats présentés dans la figure \ref{fig:H1} montrent que l'agent A qui produisait des comportements dominant a été largement perçu comme étant plus centré sur lui-même, comme supposé par l'hypothèse \textbf {H1}, avec une taille d'effet importante. Par exemple, considérons le dialogue 1 sur la Table ~\ref {tab:resetude1}, le test statistique indique que l'agent A était significativement perçu comme étant plus centré sur lui-même que l'agent B avec (\emph {Z = -5.28} et  \emph {p $ <0,001 $}).
+			
+			Par ailleurs, une différence significative dans le niveau des concessions exprimé dans tous les dialogues a été révélée confirmant notre hypothèse \textbf {H2}. En effet, les résultats dans la figure \ref{fig:H2} montrent que l'agent dominant était perçu comme faisant moins de concessions. La taille d'effet a montré un effet moyen pour les dialogues 2 à 4, et un effet important pour Dialogue 1 avec (\emph {Z = -5.34} et \emph {p $ <$ 0.001}).
+			
+			L'hypothèse \textbf {H3} a également été confirmée par le \emph {test de rang signé de Wilcoxon} (voir figure \ref{fig:H3}), où l'agent A a été perçu comme le négociateur le plus exigeant, avec une grande taille d'effet observée pour tous les dialogues. 
+			
+			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le ialogue3 comme décrit dans Table ~\ref {tab:resetude1} et la figure \ref{fig:H4}.
+			\begin{figure}[!htb]
+				\begin{minipage}{0.48\textwidth}
+					\centering
+					\includegraphics[width=\linewidth]{Figures/chap4/AA/H2.PNG}
+					\subcaption{Résultats pour l'hypothèse H2 sur le niveau de concessions}\label{fig:H2}
+				\end{minipage}\hfill
+				\begin {minipage}{0.48\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{Figures/chap4/AA/H3.PNG}
+				\subcaption{Résultats pour l'hypothèse H3 sur le niveau d'exigence}\label{fig:H3}
+			\end{minipage}
+		\end{figure}
+	
+	
+		\begin{table*}
+				\begin{adjustbox}{angle=90}
+					\begin{tabular}{|ll|c|c|c|c|c|c|c|c|} 
+						\cline{3-10}
+						
+						\multicolumn{1}{c} {}	& \multirow{2}{*} {}& \multicolumn{2}{c|} {Dialogue1} & \multicolumn{2}{c|} {Dialogue2} & \multicolumn{2}{c|} {Dialogue3} &\multicolumn{2}{c|} {Dialogue4} \\ 
+						\cline{3-10}
+						
+						
+						\multicolumn{1}{c} {} & & SpeakerA & SpeakerB & SpeakerA & SpeakerB & SpeakerA & SpeakerB & SpeakerA & SpeakerB \\
+						\hline 
+						%\multicolumn{9}{|c|}{ \textbf{Results for H1}} \\
+						%	\hline
+						\newline \multirow{4}{*} {\textbf{H1}}  & \multicolumn{1}{|l|}{ \textit{Moyenne} $\pm$ \textit{ET} } & 3.9 $\pm$ 1.1 & 2.2$\pm$ 0.9  & 3.6 $\pm$0.9 & 2.2 $\pm$0.8  &2.8 $\pm$1.1  & 2.13$\pm$ 0.7 & 3.4 $\pm$ 1 & 2 $\pm$0.9 \\
+						\cline{2-10}	
+						\newline & \multicolumn{1}{|l|}{p-value} & \multicolumn{2}{c|}{ $9.75E^{-08}$} & \multicolumn{2}{c|}{ $5.14E^{-08}$} & \multicolumn{2}{c|}{ $0.002$}& \multicolumn{2}{c|}{ $6.23E^{-08}$}\\
+						\cline{2-10}	
+						% -------------
+						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.28$} & \multicolumn{2}{c|}{ $-5.34$} & \multicolumn{2}{c|}{ $-3$}& \multicolumn{2}{c|}{ $-4.93$}\\
+						\cline{2-10}	
+						%*************
+						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.51$} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.3$}& \multicolumn{2}{c|}{ $0.47$}\\
+						\hline	
+						%*************
+						
+						\newline \multirow{4}{*} {\textbf{H2}} &\multicolumn{1}{|l|}{ \textit{Moyenne} $\pm$ \textit{ET} } & 2.2 $\pm$ 1.1 & 4.3$\pm$ 0.8  & 2.5 $\pm$1.2 & 3.8 $\pm$1.04 &2.7 $\pm$1.2  & 3.6$\pm$ 0.8 & 2.3 $\pm$ 1 & 3.2 $\pm$1.2 \\
+						\cline{2-10}	
+						\newline & \multicolumn{1}{|l|}{p-value} & \multicolumn{2}{c|}{ $7.07E^{-08}$} & \multicolumn{2}{c|}{ $3.71E^{-05}$} & \multicolumn{2}{c|}{ $=0.01$}& \multicolumn{2}{c|}{ $1.73E^{-04}$}\\
+						\cline{2-10}	
+						
+						% -------------
+						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.34$} & \multicolumn{2}{c|}{ $-4.05$} & \multicolumn{2}{c|}{ $-3.13$}& \multicolumn{2}{c|}{ $-3.69$}\\
+						\cline{2-10}	
+						%*************
+						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.39$} & \multicolumn{2}{c|}{ $0.32$}& \multicolumn{2}{c|}{ $0.35$}\\
+						\hline	
+						%*************
+						
+						\newline \multirow{4}{*} {\textbf{H3}} &\multicolumn{1}{|l|}{ \textit{Moyenne} $\pm$ \textit{ET} } & 4.1 $\pm$ 0.8 & 2.6$\pm$ 1.1 & 4.03 $\pm$ 0.8 & 2.7 $\pm$0.9 &3.5 $\pm$1.1 & 2.3$\pm$ 1 & 3.8 $\pm$ 1.8 & 1.8 $\pm$0.8 \\
+						\cline{2-10}	
+						\newline & \multicolumn{1}{|l|}{p-value}  & \multicolumn{2}{c|}{ $2.93E^{-08}$} & \multicolumn{2}{c|}{ $4.77E^{-07}$} & \multicolumn{2}{c|}{ $1.19E^{-04}$}& \multicolumn{2}{c|}{ $2.56E^{-09}$}\\
+						\cline{2-10}	
+						%				
+						% -------------
+						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-4.62$} & \multicolumn{2}{c|}{ $-4.96$} & \multicolumn{2}{c|}{ $-3.80$}& \multicolumn{2}{c|}{ $-5.86$}\\
+						\cline{2-10}	
+						%*************
+						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.45$} & \multicolumn{2}{c|}{ $0.49$} & \multicolumn{2}{c|}{ $0.39$}& \multicolumn{2}{c|}{ $0.56$}\\
+						\hline	
+						%*************
+						
+						\newline \multirow{4}{*} {\textbf{H4}} & \multicolumn{1}{|l|}{ \textit{Moyenne} $\pm$ \textit{SD} } & 4.2 $\pm$ 0.9 & 2.3$\pm$ 1.1  & 3.8 $\pm$0.9 & 2.6 $\pm$1.07 & 3.8 $\pm$0.9  & 2.8$\pm$ 1.1  & 4.5 $\pm$0.5  & 1.9 $\pm$ 0.9\\
+						\cline{2-10}
+						\newline & \multicolumn{1}{|l|}{p-value} & \multicolumn{2}{c|}{ $2.44E^{-07}$} & \multicolumn{2}{c|}{ $3.28E^{-05}$} & \multicolumn{2}{c|}{ $0.03$}& \multicolumn{2}{c|}{ $7.04E^{-10}$}\\
+						\cline{2-10}	
+						% -------------
+						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.11$} & \multicolumn{2}{c|}{ $-4.08$} & \multicolumn{2}{c|}{ $-2.86$}& \multicolumn{2}{c|}{ $-6.09$}\\
+						\cline{2-10}	
+						%*************
+						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.5$} & \multicolumn{2}{c|}{ $0.4$} & \multicolumn{2}{c|}{ $0.29$}& \multicolumn{2}{c|}{ $0.57$}\\
+						\hline	
+						%*************
+					\end{tabular}
+					
+					\caption{résumé des résultats statistiques obtenus pour chaque hypothèses}
+					\label{tab:resetude1}
+				\end{adjustbox}
+			\end{table*}
+				
 			\subsubsection{Discussion}	
+				Les résultats obtenus confirment l'ensemble de nos hypothèses.
 				
