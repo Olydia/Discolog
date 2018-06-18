@@ -427,9 +427,92 @@
 		\label{table:uttChoice}
 	\end{table}
 	
-	
+			\colorbox{red}{AJOUTER UN DIALOGUE EXEMPLE AVEC LES VALEURS DE DOMINANCE}
 	
 	\section{Évaluation du modèle}
-	
-		Evaluation agent agent 
 		
+		Dans cette section, nous présentons une première évaluation de notre modèle de négociation collaborative. Cette dernière a pour objectif de valider l'implémentation de notre modèle de négociation collaborative et étudier la perception des comportements de dominance exprimés par l'agent au cours d'une négociation. 
+		Pour ce faire, nous avons mené deux études, la première étude agent/agent où les participants avaient le rôle de juge externe pour évaluer le comportement des agents lors de leur négociation.
+		La seconde étude visait à évaluer les comportements de l'agent au cours d'une interaction avec un utilisateur humain. Par conséquent, les participants ont négocié avec des agents pour ensuite évaluer leurs comportements. 
+		
+		\subsection{Hypothèses}
+				
+				Nous avons défini quatre hypothèses qui reflètent les différents comportements et stratégies affichés par les agents lors de la négociation. Dans ce qui suit, nous noterons l'agent qui exhibe des comportements dominants dans la relation interpersonnelle comme \emph{agent dominant}, et l'agent dans la position soumise comme \emph{l'agent soumis}.
+				
+				\begin{itemize}
+					\item \textbf {H1:} L'agent dominant sera plus fortement perçu comme étant égocentrique que l'agent soumis.
+					
+					\item \textbf {H2:} L'agent dominant sera plus fortement perçu comme exigeant que l'agent soumis.
+					
+					\item \textbf {H3:} L'agent soumis sera perçu comme faisant des concessions plus importantes que l'agent dominant.
+					
+					\item \textbf {H4:} L'agent dominant sera plus fortement perçu comme prenant le contrôle de la négociation que l'agent soumis.
+					
+				\end{itemize}
+				
+		\subsection{Étude 1: Évaluation Agent/Agent}
+				L'objectif de cette étude est d'analyser la perception des différents comportements de dominance qui peuvent apparaître au cours d'une négociation. En effet, chaque comportement implémenté est lié à un principe et donc indépendant des autres principe. Nous visons donc à étudier si les différents comportements de l'agent durant la négociation vont être correctement associé à des comportements de dominance. Pour ce faire, nous avons généré des dialogues entre deux agents doté de notre modèle de négociation. 
+			
+			\subsubsection{Implémentation des agents négociateurs}
+				Nous avons implémenté deux agents qui devaient simuler une relation interpersonnelle de dominance. Pour ce faire, un agent a été initialisé pour produire des comportements dominants et l'autre agent produisait des comportements complémentaire de soumission. 
+				
+				
+				Nous avons manipulé des paramètres de simulations afin d'initialiser les comportements des deux agents.
+				
+				Premièrement, nous avons fixé les paramètres computationnels de nos fonctions de décisions: $\tau=2$, $\pi=0.5$, $\alpha=2$, $\beta=1$ et $\delta=0.1$. 
+				Deuxièmement, nous avons choisi les valeurs de dominance $dom$ de chaque agent afin de le positionner dans le spectre de dominance. 
+				Ensuite, nous avons défini les préférences de chaque agent. En effet, les préférences ont un impact direct sur le processus de décision, il fallait donc générer des préférences différentes qui vont stimuler le processus de décision. Pour cela, nous avons utilisé la mesure de distance \emph{Kendall tau} \cite{bra2013Kendall} qui permet de calculer la distance entre deux ensembles de préférences d'ordre partiel. 
+				Nous présentons dans ce qui suit la définition de la distance de Kendall. 
+				
+				\vspace{1 em}
+				\textbf{Définition. }
+%				\vspace{0.75 em}
+				La distance de Kendall considère les distances entre deux ordres partiels en fonction de leurs ensembles d'extensions totales.
+				
+				Pour chaque ensemble partiel, l'algorithme génère des extensions de cet ensemble jusqu'à arriver à un des ordre total. Pour un ensemble $\sigma$, nous notons l'ensemble des extensions possibles de ce modèle $ext(\sigma)$.
+				
+				La distance entre deux modèle partiels  $\sigma$ et $\mu$ est donc calculé comme suit: 
+
+				
+				\begin{equation*}
+					K_H(\sigma,\mu) = max \left \{ \max\limits_{\alpha \in ext(\sigma)} \min\limits_{\beta \in ext(\mu)} K(\alpha , \beta), \max\limits_{\beta \in ext(\mu)} \min\limits_{\alpha \in ext(\sigma)} K(\beta, \alpha)  \right \}
+				\end{equation*}
+				
+				tel que $K(\alpha , \beta)$ est la distance entre les deux ensembles d'ordre totaux $\alpha$ et $\beta$ qui compte le nombre les désaccords ou des inversions de paires de préférences entre les deux ensembles. 
+				 
+				
+				Enfin, nous avons défini le sujet de négociation. Nous avons opté pour un sujet social qui n'exige pas de compétence techniques. Les négociateurs avait pour but de négocier afin de choisir un restaurant. Nous avons pris en compte quatre critères pour le choix d'un restaurant. 	Les critères sélectionnés sont \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
+				
+				
+				Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues). Les dialogues générés sont disponibles en Appendixe ...
+				
+				\begin{table}[b]
+					\centering
+					\begin{tabular}{ |l|c|c|l| }
+						\hline
+						\textbf{Préférences}& \textbf{A} & \textbf{B} & \textbf{Label} \\ 
+						\hline
+						\newline\multirow{3}{*} {Préférences distantes (Kendall's tau = $0.96$)} & 0.9 & 0.4 & Dialogue 1 \\ \cline{2-4}
+						
+						\newline  & 0.7 & 0.4 & Dialogue 2\\ \cline{2-4}
+						
+						\newline   &0.7 & 0.2 & Dialogue 3\\ 
+						\hline
+						\newline Préférences similaire (Kendall's tau = $0.46$) & 0.7 & 0.4 & Dialogue 4\\
+						\hline
+					\end{tabular}
+					\caption{Conditions expérimentales pour la génération des dialogues.} 
+					\label{table:conditions}
+				\end{table}
+		
+			\subsubsection{Procédure}
+					We conducted a between-subject study using the online crowdsoursing website \emph{CrowdFlower}\footnote{https://www.crowdflower.com/}. 
+					Each participant was shown only one dialogue. Speaker A and B were described as two friends trying to negotiate a restaurant to have dinner. %We wanted to avoid skewing the participant's perception by the fact that negotiators are artificial agents. 
+					Participants were asked to read the assigned dialogue and answer a questionnaire. 
+					
+					We defined two questions for each hypothesis. Two test questions were included to check the	sanity of the answers. We eliminated participants providing wrong answers to those questions. Each one of these questions was to be answered on a 5 points Likert scale ranging from ``I totally disagree" to ``I totally agree".
+			
+			\subsubsection{Résultats}
+			
+			\subsubsection{Discussion}	
+				
