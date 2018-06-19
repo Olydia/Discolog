@@ -1,14 +1,14 @@
 	\label{chap:dec}
 	%Après avoir défini la relation interpersonnelle de dominance dans le chapitre \ref{chap:etat}, ainsi que sa manifestation dans l'interaction tant sur l'aspect verbal que non verbal, nous avons ensuite détaillé son impact sur les stratégies de négociations. 
 	
-	Ce chapitre introduit le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de pouvoir inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres défini dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prends en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Ensuite, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
+	Ce chapitre introduit le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de dominance inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres défini dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prends en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Ensuite, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
 	
-	\section{Comportements de pouvoir et stratégies de négociation}
+	\section{Comportements de dominance et stratégies de négociation}
 	\label{chap:domer}
 	Comme nous l'avons présenté dans le chapitre \ref{chap:etat}, nous nous sommes essentiellement basés sur les travaux en psychologie sociale pour la définition de la dominance. 
 	La dominance comme relation interpersonnelle est présentée comme la capacité à exprimer des comportements verbaux et non verbaux par lesquels  l'influence est atteinte. Prenant cette définition comme point de départ, nous nous sommes ensuite intéressé à la manifestation des comportements de dominance durant le processus de négociation et comment ces comportements influençaient les stratégies de négociations dans le contexte d'interaction humain/humain. 
 	
-	Dans ce qui suit, nous présentons \emph{trois principes} de comportements extraits des travaux en psychologie sociale qui ont étudiaient l'impact du pouvoir sur les négociateurs et leur stratégies.
+	Dans ce qui suit, nous présentons \emph{trois principes} de comportements extraits des travaux en psychologie sociale qui ont étudiaient l'impact des comportements de dominance sur les négociateurs et leur stratégies.
 	
 	\begin{enumerate}
 		\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs dominants affichent un niveau d'exigence plus important comparés aux négociateurs soumis. Par ailleurs, les exigences des négociateurs soumis diminuent avec le temps. Ceci se traduit par des concessions plus importantes comparés aux négociateurs plus dominants. \cite{de1995impact}
@@ -16,7 +16,7 @@
 		\item \textbf{Soi \emph{vs} autrui:} Les négociateurs soumis prennent en compte les préférences de leur interlocuteur dans la négociation, tandis que les négociateurs  dominants sont centrés sur eux-mêmes et s'intéressent uniquement à la satisfaction leurs propres préférences. \cite{fiske1993controlling,de1995impact}
 		
 		\item \textbf{Contrôle du flux de la négociation:}
-		Les négociateurs dominant ont tendance à faire le premier pas et à prendre les devants dans la négociation \cite {magee2007domer}. Ils sont centrés sur l'avancement du processus de prise de décision, en prenant des décisions rapides \cite{zablotskaya2012relating}.
+		Les négociateurs dominant ont tendance à faire le premier pas et à prendre les devants dans la négociation \cite {magee2007power}. Ils sont centrés sur l'avancement du processus de prise de décision, en prenant des décisions rapides \cite{zablotskaya2012relating}.
 		A l'opposé, les négociateurs moins dominants visent à construire un modèle précis des préférences du partenaire de négociation. 
 		Par conséquent,  ils posent plus de questions afin de collecter les informations nécessaires qui leurs permettent de prendre la décision la plus équitable(\emph{e.g}  faire des propositions)~\cite{de2004influence}. 
 		
@@ -25,46 +25,65 @@
 	
 	Le but est de construire un modèle de décision capable d'illustrer ces comportements de dominance et par conséquent, adapter la stratégie de négociation en fonction de la dominance de l'agent.
 	
-	Dans ce qui suit nous présenterons le modèle décision de l'agent qui prend en compte la relation de pouvoir.
+	Dans ce qui suit nous présenterons le modèle décision de l'agent qui prend en compte la relation de dominance.
 	
 	
 	\section{Règles de décision}
-	Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est géré par le logiciel \emph{Disco}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme des \textbf{HTNs} (Hierarchical Task Networks) \cite{erol1994htn} pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
+	Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est géré par le logiciel \emph{Disco}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme d'arbre hiérarchique pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
 	
 	De plus, \emph{Disco} a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue.
 	
 	Nous avons complété ce système avec les actes de dialogues présenté dans la section \ref{sec:communication} afin qu'il puisse supporter la négociation sur les préférences.
 	
-	Pour chaque acte de dialogue que l'agent reçois, nous modélisons l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose}. Par exemple:
-	("User: Je propose que nous allions dans un restaurant Chinois. 
-	
-	Agent: je propose que nous allions plutôt dans un restaurant Japonais"). 
-	
+	Pour chaque acte de dialogue que l'agent reçois, nous modélisons l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose}. 
+	Par exemple:
+	\begin{verbatim}
+	User: "Je propose que nous allions dans un restaurant Chinois." 
+		Agent: "je propose que nous allions plutôt dans un restaurant
+			   Japonais". 
+	\end{verbatim}
 	Chaque branche est définie avec des conditions d'applicabilités pour décider quelle réponse est adoptée. 
-	Ces conditions prennent en compte la dominance de l'agent en plus du contexte courent de la négociation. Dans l'exemple précédent, l'agent doit être dominant pour répondre à un Propose par un autre Propose. 
+	Ces conditions prennent en compte la relation de  dominance en plus du contexte courent de la négociation. Dans l'exemple précédent, l'agent doit être dominant pour répondre à un Propose par un autre Propose. 
 	
 	
 	\subsection{Sélection de l'acte de dialogue}
-	Nous avons initialisé l'agent avec un comportement de pouvoir parmi trois types de comportements de pouvoir inspirés de la littérature en psychologies social.  L'agent peut suivre un comportement \emph{dominant, soumis} ou \emph{neutre}. 
+	Nous avons initialisé l'agent avec un comportement de dominance parmi trois types de comportements inspirés de la littérature en psychologies social.  L'agent peut suivre un comportement \emph{dominant, soumis} ou \emph{neutre}. 
 	
-	En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend du pouvoir de l'agent. Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
+	En fonction de l'acte de dialogue que l'agent reçoit, nous générons un ensemble de réponses possibles. Chaque réponse dépend de la position de dominance initiale de l'agent. Le système de dialogue offre à l'utilisateur la liberté de choisir n'importe quel acte de dialogue pour son tour de parole. Disco déroule alors l'arbre de dialogue correspondant de gauche à droite (en commençant par la branche la plus à gauche). La première branche applicable rencontrée est directement exécutée sans vérifier les branches restantes.
 	
 	Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 	
 	\subsubsection{AskPreference}
-	A la réception d'un \emph{AskPreference}, l'agent répond en exprimant ses préférences sur la question demandée comme présenté dans la figure .. .
+	A la réception d'un \emph{AskPreference}, l'agent répond en exprimant ses préférences sur la question demandée.
 	
+%		 \begin{figure} [h]
+%		 	\label{fig:StatePref1}
+%		 	\centerline{\includegraphics[width=4.5in]{}}
+%		 	\caption{}
+%		 \end{figure} 
+		 
+		 
+		 
 	\subsubsection{State Preference}
-	Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale:
+	Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale comme présenté dans la figure \ref{fig:SP}:
 	\begin{itemize}
-		\item \emph{Propose(x)}: Si la valeur exprimée par l'utilisateur est acceptable (voir figure \ref{pseudo}) pour l'agent, il va proposer de choisir cette valeur. Ce comportement relate le principe 1.
+		\item \emph{Propose(x)}: Si la valeur exprimée par l'utilisateur est acceptable (voir figure \ref{alg:pseudo}) pour l'agent, il va proposer de choisir cette valeur. Ce comportement relate le principe 1.
 		\item \emph{Propose}: Si le nombre de \emph{StatePreferences} autorisé est atteint (voir figure \ref{alg:maxtours}), l'agent doit respecter le principe 3 et faire évoluer la négociation. La valeur proposée doit respecter les préférences de l'agent. 
-		\item \emph{StatePreference}: l'agent est \emph{neutre}, il va vouloir exprimer ses préférences afin de construire une meilleure connaissance.
+		\item \emph{StatePreference}: l'agent est \emph{neutre}, il va exprimer ses préférences afin de construire une meilleure connaissance.
 		\item \emph{AskPreference}: l'agent est \emph{soumis}. Dans le cas où toutes les valeurs du critères courent ont été discutés, l'agent va respecter le principe 3 et faire évoluer la négociation en ouvrant la discussion sur un autre critère.
 	\end{itemize}
 	
-	\begin{figure}[]
-		\begin{algorithmic}[1]\small
+	\begin{figure}[!t]
+		\centering
+		\includegraphics[width=4.5in] {Figures/chap4/statePref.pdf}
+		\caption{Les réponses générés suite à un StatePreference}
+		\label{fig:SP}
+	\end{figure}
+	 
+	
+	\begin{figure}[t]
+
+		\begin{algorithmic}[1]
 			\Function{MaxStatements}{}
 			\State $nbTours$ = Nombre de \emph{StatePreferences} exprimés successivement.
 			\State $maxTours$ 
@@ -79,20 +98,23 @@
 			\State $retrun$ $nbTours\geq maxTours$
 			\EndFunction
 		\end{algorithmic}
-		\vskip 8pt
-		\label{alg:maxtours}
-		\caption{Maximum de tours de \emph{StatePreference} autorisé en fonction du pouvoir de l'agent}
+
+		\caption{Maximum de tours de \emph{StatePreference} autorisé en fonction des comportements de dominance de l'agent}
 	\end{figure} 
+	
+	
+	
+	 
 	\subsubsection{Propose}
-	A la réception d'un \emph{Propose} comme présenté dans la figure ..., l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
-	Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de pouvoir de l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
+	A la réception d'un \emph{Propose}, l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
+	Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de dominance affecté à l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
 	
 	En effet, au fur et à mesure que la négociation évolue, l'agent va faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
 	
 	Par ailleurs, la notion d'exigence apparaît dans l'algorithme ci-dessous. Si l'agent est \emph{dominant}, l'ensemble de valeurs acceptables est plus restreint qu'un agent \emph{soumis}.
 	
 	\begin{figure}[]
-		\begin{algorithmic}[1]\small
+		\begin{algorithmic}[1]
 			\Function{isAcceptable}{$proposal$}
 			\If{(type de $proposal$ n'est pas un critère important)} 
 			\State return $true$
@@ -107,16 +129,15 @@
 			\EndIf
 			\EndFunction
 		\end{algorithmic}
-		\vskip 8pt
-		\label{pseudo}
+		\label{alg:pseudo}
 		\caption{Calcul d'acceptabilité d'une proposition $value$}
 	\end{figure} 
 	
 	
-	L'arbre de décision produit pour répondre à un \emph{Propose(p)} est présenté dans la figure .... 
+
 	\begin{itemize}
 		
-		\item  \emph{Accept(p)}: Si la proposition \emph{p} est acceptable, l'agent doit exprimer un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. En fonction de la relation de pouvoir l'agent choisit un acte de dialogue spécifique.
+		\item  \emph{Accept(p)}: Si la proposition \emph{p} est acceptable, l'agent accepte la proposition via l'acte de dialogue un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. En fonction de la relation de dominance l'agent choisit un acte de dialogue spécifique.
 		\item \emph{Ask :} l'agent \emph{soumis} va suivre les comportements décrit dans les principes 1 et 3. En effet, il va essayer de collecter plus de connaissances sur les préférences de l'autre et ainsi prendre en compte ses préférences. De plus, en vue du principe 2 qui affirme qu'un agent soumis doit faire des concessions, l'agent soumis n'est pas autorisé à exprimer plus d'un nombre de rejets successifs.  
 		\item \emph{Reject :} l'agent qui n'est pas dominant (\emph{i.e. soumis ou neutre}) rejete une proposition qui n'est pas acceptable.
 		\item \emph{Propose :} suivant le principe 3, l'agent \emph{dominant} fait évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences. 
@@ -127,10 +148,10 @@
 	\subsubsection{Accept }
 	A la réception	d'un \emph{Accept}, nous séparons deux cas de réponses en fonction du type de la valeur acceptée $v$.
 	Premièrement, $ v \in \mathcal{O}$ une \textit{option}, l'agent clos la négociation par un \emph{succès}.
-	Sinon, $v \in C_i$ est une valeur de critère, l'agent entame la négociation sur un autre critère et sa réponse sera choisie en fonction de la relation de pouvoir à exprimer.
+	Sinon, $v \in C_i$ est une valeur de critère, l'agent entame la négociation sur un autre critère et sa réponse sera choisie en fonction de la relation de dominance à exprimer.
 	
 	\begin{itemize}
-		\item \emph{Propose}: La condition d'applicabilité pour cet acte de dialogue dépend du pouvoir de l'agent. Un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences. Cependant, un agent \emph{soumis} n'est autorisé à faire une proposition que s'il a des connaissances sur les préférences de l'autres,  communiqués par des \emph{StatePreferences}, qui lui permettront de prendre une décision équitable. cet algorithme traduit les comportements présentés dans les principes 1 et 3. 
+		\item \emph{Propose}: La condition d'applicabilité pour cet acte de dialogue dépend de la valeur de dominance initiale de l'agent. Un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences. Cependant, un agent \emph{soumis} n'est autorisé à faire une proposition que s'il a des connaissances sur les préférences de l'autres,  communiqués par des \emph{StatePreferences}, qui lui permettront de prendre une décision équitable. cet algorithme traduit les comportements présentés dans les principes 1 et 3. 
 		
 		\item \emph{AskPreference}: Comme présenté dans le principe 3, l'agent est \emph{soumis} collecte le plus d'informations possibles sur les préférences de son interlocuteur. 
 		\item \emph{StatePreference}: L'agent est \emph{neutre} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
@@ -169,53 +190,59 @@
 	%----------------------------------------------------------------
 	
 	\subsubsection{Exemple}
-	Nous présentons un dialogue généré en utilisant notre modèle de dialogue. Deux agents\textit{A} et \textit{B}
+	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B}. 
 	
+	\begin{minipage}{.95\textwidth}
+		{\ttfamily
+			\begin{addmargin}[1em]{2em}% 1em left, 2em right
+			\vspace{1em}
+			A: "Let's go to a Chinese restaurant."
+			
+			\hspace*{3mm} B: "I like Italian more than Chinese restaurants."
+			
+			A: "Let's go to a quiet restaurant."
+			
+			\hspace*{3mm} B: "I don't like quiet restaurants."
+			
+			A: "Let's go to a cheap restaurant."
+			
+			\hspace*{3mm} B: "Do you like quiet or lively restaurants? "
+			
+			A: "I like quiet restaurants."
+			
+			\hspace*{3mm} B: "I like lively restaurants."
+			
+			A: "Let's go to the Samura restaurant. It's a lively, cheap Japanese restaurant."
+			
+			\hspace*{3mm} B: "What kind of cuisine do you like?"
+			
+			A: "I like Chinese restaurants."
+			
+			\hspace*{3mm} B: "I like Italian restaurants."
+			
+			A: "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
+			
+			\hspace*{3mm} B: "Okay. Let's go to the Dragon restaurant."
+			
+			A: "Okay. I'll call to book a table."
+			
+			\end{addmargin}
+		}
+	\end{minipage}
 	
-	A: "Let's go to a Chinese restaurant."
-	
-	B: "I like Italian more than Chinese restaurants."
-	
-	A: "Let's go to a quiet restaurant."
-	
-	B: "I don't like quiet restaurants."
-	
-	A: "Let's go to a cheap restaurant."
-	
-	B: "Do you like quiet or lively restaurants? "
-	
-	A: "I like quiet restaurants."
-	
-	B: "I like lively restaurants."
-	
-	A: "Let's go to the Samura restaurant. It's a lively, cheap Japanese restaurant."
-	
-	B: "What kind of cuisine do you like?"
-	
-	A: "I like Chinese restaurants."
-	
-	B: "I like Italian restaurants."
-	
-	A: "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
-	
-	B: "Okay. Let's go to the Dragon restaurant."
-	
-	A: "Okay. I'll call to book a table."
-	
-	
-	\subsection{Évaluation du modèle}
 	\subsection{Limites des arbres de dialogue}
-	Parler de l'étude qui a montré une ambiguïté dans la perception des comportement et la capacité à isoler l'impact de chaque principe sur la prise de décision
+		Un module décisionnel à base d'arbre de dialogue repose essentiellement sur une modélisation manuelle de tous les cas possibles pouvant survenir à la réception d'un acte de dialogue. Par conséquent, ce processus est lourd et nécessite une révision constante à chaque apparition de nouveaux cas non modélisés. Cette rigidité expose notre modèle de négociation à des situations de \textit{breakdown}, où à la réception d'un acte de dialogue, l'agent ne trouve aucun branchement applicable (condition d'applicabilité non remplie). 
+		
+		En parallèle, nous avons fait une pré-étude où nous avions demandé à des participants de juger les comportements de dominance de deux agents implémentés avec notre modèle. Les résultats obtenus ont démontré une ambiguïté dans la perception des comportements de dominance et la capacité à isoler l'impact de chaque principe sur la prise de décision.
+		
+		Pour toutes ces raisons, nous devions repenser l'implémentation de notre modèle décisionnel. Deux solutions étaient possibles. Premièrement, nous faisons le choix de garder les arbres construits et complémenter par un algorithme d'apprentissage. Le problème de cette solution est qu'elle n'est pas écologique car nous nous disposons pas d'un corpus de données annotés avec les principes de dominance. 
+		
+		Nous avons opté pour la seconde solution, qui propose un modèle de décision computationnel avec des formules de décisions associées à chaque principe. 
+		Ce dernier est pensé pour être plus fidèle aux principes de négociation et qu'il puisse refléter les comportements de dominance. 
 	
-	Comportement incongrue ou non attendue.
+	\section{Modèle de décision basé sur les comportements de dominance}
 	
-	Situation de \textit{breakdown}, du a une modélisation manuelle, nous avions rencontrer des situations où aucune condition d'applicabilité n'étaient vrai. 
-	
-	Pour toutes ces raisons, nous avons repenser notre solution pour qu'elle soit plus fidèle aux principe de négociation et qu'elle puisse refléter les comportements de pouvoir. 
-	
-	\section{Modèle de décision basé sur les comportements de pouvoirs}
-	
-	Nous proposons un modèle computationnel de décision, qui reprend les trois principes de pouvoir dans le modèle décisionnel de l'agent. 
+	Nous proposons un modèle computationnel de décision, qui reprend les trois principes de dominance dans le modèle décisionnel de l'agent. 
 	A cause de la rigidité des arbres de dialogues, nous adaptons la solution afin qu'elle soit plus flexible et surtout afin que les comportements de dominance soient plus saillant dans les décisions de l'agent.
 	
 	Par conséquent, nous présentons dans ce qui suit, l'adaptation algorithmique de chaque principe de dominance extraits de la psychologie sociale.
@@ -226,7 +253,7 @@
 	
 	Selon notre premier principe, le niveau d'exigence devrait être plus important chez les agents dominants. Cependant, au cours d'une négociation collaborative, les deux négociateurs sont amenés à réduire leur niveau d'exigences parce qu'ils veulent parvenir à un accord. Les psychologues observent des concessions plus importantes pour les négociateurs soumis. 
 	
-	Nous avons implémentés ces comportements en deux phases. En effet, afin de modéliser la différence d'exigence dans la négociation, nous avons implémenté une fonction de satisfiabilité qui prend en compte la valeur de pouvoir initiale de l'agent. 
+	Nous avons implémentés ces comportements en deux phases. En effet, afin de modéliser la différence d'exigence dans la négociation, nous avons implémenté une fonction de satisfiabilité qui prend en compte la valeur de dominance initiale de l'agent. 
 	
 	Soit $S$ l'ensemble de valeurs satisfiables pour l'agent. Ceci se traduit par les valeurs que l'agent se dit \textit{"aimer" (i.e. l'expression d'un } \emph{StatePreference}). Cet ensemble varie en fonction de la valeur $dom$ de l'agent:
 	
@@ -255,10 +282,7 @@
 			\caption{Ensemble de valeurs satisfiables de l'agent$_A$ et l'agent $_B$}
 			\label{tab:exSat}
 		\end{table}
-			\begin{floatingfigure}[l]{2.1 in}
-				\includegraphics[width=2in]{Figures/sv3.png}
-				\caption{\label{fig:conc}Courbe de concession reprenant le principe 1}
-			\end{floatingfigure} 
+
 			
 	
 	
@@ -282,8 +306,14 @@
 		\item  $\delta > 0$ un paramètre de calcul de la courbe de concession.
 		
 	\end{itemize}  
-	
+			
 	La fonction $self(dom,t)$ représente le poids que l'agent attribut à sa satisfaction personnelle par rapport à la satisfaction de son partenaire de négociation. Plus la dominance de l'agent est élevée, plus son niveau d'exigence est important. Par ailleurs, la courbe de concession décroît plus rapidement pour des valeurs de dominance faibles.
+	
+		\begin{floatingfigure}[l]{2.1 in}
+			\includegraphics[width=2in]{Figures/sv3.png}
+			\caption{\label{fig:conc}Courbe de concession reprenant le principe 1}
+		\end{floatingfigure} 
+		
 	
 	Ces comportements d'exigences et de concessions sont modélisés pour calculer l'acceptabilité d'une proposition 
 	
@@ -356,7 +386,7 @@
 	Prenant en compte trois paramètres; la valeur de dominance $dom$, l'acte de dialogue énoncé par le partenaire $u^{-1}$ et l'état courent de la négociation, l'agent sélectionne le premier acte dans la table \ref{table:uttChoice} dont la condition d'applicabilité est vérifiée.  
 	
 	
-	Par exemple, un agent dominant mettra fin à la négociation dès que toutes les options restantes seront inacceptables (ligne 2). Un agent soumis rejettera et exprimera une \emph{State}, afin de justifier son refus et expliquer pourquoi la proposition n'est pas acceptable (ligne 14). S'il n'y a pas de proposition ouverte, l'agent avec un pouvoir faible demandera de nouvelles informations (ligne 18 -19).
+	Par exemple, un agent dominant mettra fin à la négociation dès que toutes les options restantes seront inacceptables (ligne 2). Un agent soumis rejettera et exprimera une \emph{State}, afin de justifier son refus et expliquer pourquoi la proposition n'est pas acceptable (ligne 14). S'il n'y a pas de proposition ouverte, l'agent avec une dominance faible demandera de nouvelles informations (ligne 18 -19).
 	
 	Dans notre modèle, un agent peut exprimer plusieurs actes de dialogues dans un même tour de parole. Ces cas sont représentés avec un signe $"+"$ dans la table \ref{table:uttChoice}.
 	
@@ -423,7 +453,7 @@
 			\hline
 		\end{tabular}
 		
-		\caption{Ordre de sélection d'actes de dialogues en fonction de la valeur de pouvoir}
+		\caption{Ordre de sélection d'actes de dialogues en fonction de la valeur de dominance}
 		\label{table:uttChoice}
 	\end{table}
 	
@@ -486,7 +516,7 @@
 				
 				Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues). Un seul dialogue a été produit pour la condition dans laquelle les préférences des agents sont similaires, car dans le cas précis, les dialogues générés se ressemblaient et convergeaient rapidement vers un compromis. Par conséquent, les comportements produits étaient proches.   
 				
-				Les dialogues générés sont disponibles en Appendixe ...
+				Les dialogues générés sont disponibles en annexe \ref{annexe:crowd}.
 				
 				\begin{table}[h]
 					\centering
@@ -553,7 +583,7 @@
 							
 							\item \textbf{Niveau exigence et concessions :} En moyenne l'agent A a été perçu comme exigent durant le dialogue. Par exemple, les participants ayant évalué le dialogue 1 ont trouvé que l'agent A était exigent \textit{(M=4.1, ET=0.8)} alors que l'agent B n'a pas du tout été perçu comme exigent durant la négociation \textit{(M=2.6, ET=1.1)}. A l'opposé, l'agent B a été vu comme exprimant des concessions durant la négociation contrairement à l'agent A. Par exemple, dans le dialogue 1, l'agent A été perçu comme n'exprimant que trés peu de concessions \textit{(M=2.2, ET=1.1)} contrairement à l'agent B qui a été largement évalué comme exprimant des concessions \textit{(M=4.3, ET=0.8)}.
 							
-							\item  \textbf{Le contrôle de la négociation:} Les comportements de prise de contrôle ont été correctement perçu par les participants. En effet, même dans le condition ou les préférences des agents étaient similaires dont le dialogue était assez court, les participants ont perçu l'agent A comme leader de la négociation \textit{(M=4.5, ET=0.9)}, tandis que l'agent B a été en moyenne perçu comme manquant d'initiative \textit{(M=1.9, ET=0.9)}.
+							\item  \textbf{Le contrôle de la négociation:} Les comportements de prise de contrôle ont été correctement perçu par les participants. En effet, même dans le condition ou les préférences des agents étaient similaires dont le dialogue était assez court, les participants ont perçu l'agent A comme leader de la négociation \textit{(M=4.5, ET=0.9)}, tandis que l'agent B a été en moyenne perçu comme manquant de prise d'initiatives \textit{(M=1.9, ET=0.9)}.
 					\end{itemize}
 				
 			Nous avons ensuite comparé les comportements des deux agents pour chaque principe. Pour ce faire, nous avons en premier lieu analysé la distribution des données qui nous a révélé que ces dernières ne suivent pas une distribution normale. C'est la raison pour laquelle nous avons utilisé un test non-paramétrique de \emph{Wilcoxon  de rang signé} afin de comparer la perception des comportements de l'agent A contre l'agent B.
@@ -564,21 +594,33 @@
 			
 			L'hypothèse \textbf {H3} a également été confirmée par le \emph {test de rang signé de Wilcoxon} (voir figure \ref{fig:H3}), où l'agent A a été perçu comme le négociateur le plus exigeant, avec une grande taille d'effet observée pour tous les dialogues. 
 			
-			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le ialogue3 comme décrit dans Table ~\ref {tab:resetude1} et la figure \ref{fig:H4}.
-			\begin{figure}[!htb]
-				\begin{minipage}{0.48\textwidth}
-					\centering
-					\includegraphics[width=\linewidth]{Figures/chap4/AA/H2.PNG}
-					\subcaption{Résultats pour l'hypothèse H2 sur le niveau de concessions}\label{fig:H2}
-				\end{minipage}\hfill
-				\begin {minipage}{0.48\textwidth}
-				\centering
-				\includegraphics[width=\linewidth]{Figures/chap4/AA/H3.PNG}
-				\subcaption{Résultats pour l'hypothèse H3 sur le niveau d'exigence}\label{fig:H3}
-			\end{minipage}
-		\end{figure}
+			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le dialogue3 comme décrit dans Table ~\ref {tab:resetude1} et la figure \ref{fig:H4}.
+
+			   \begin{figure}[!htb]
+			   	\subfloat[Résultats pour l'hypothèse H2 sur le niveau de concessions \label{fig:H2}]{%
+			   		\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive2.PNG}
+			   	}
+			   	\hfill
+			   	\subfloat[Résultats pour l'hypothèse H3 sur le niveau d'exigence\label{fig:H3}]{%
+			   		\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive3.PNG}
+			   	}
+				  \caption{Résultats statistiques}
+			   	\end{figure}
+
+				   \begin{figure}[!htb]
+				   	\subfloat[Résultats pour l'hypothèse H1 sur l'égocentrisme \label{fig:H1}]{%
+				   		\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive1.PNG}
+				   	}
+				   	\hfill
+				   	\subfloat[Résultats pour l'hypothèse H4 sur la prise de contrôle \label{fig:H4}]{%
+				   		\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive4.PNG}
+				   	}
+				   	\caption{Résultats statistiques}
+				   \end{figure}
+				   
+				   
 	
-	
+			
 		\begin{table*}
 				\begin{adjustbox}{angle=90}
 					\begin{tabular}{|ll|c|c|c|c|c|c|c|c|} 
@@ -600,7 +642,7 @@
 						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.28$} & \multicolumn{2}{c|}{ $-5.34$} & \multicolumn{2}{c|}{ $-3$}& \multicolumn{2}{c|}{ $-4.93$}\\
 						\cline{2-10}	
 						%*************
-						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.51$} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.3$}& \multicolumn{2}{c|}{ $0.47$}\\
+						\newline & \multicolumn{1}{|l|}{Taille d'effet (d)} & \multicolumn{2}{c|}{ $0.51$} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.3$}& \multicolumn{2}{c|}{ $0.47$}\\
 						\hline	
 						%*************
 						
@@ -613,7 +655,7 @@
 						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.34$} & \multicolumn{2}{c|}{ $-4.05$} & \multicolumn{2}{c|}{ $-3.13$}& \multicolumn{2}{c|}{ $-3.69$}\\
 						\cline{2-10}	
 						%*************
-						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.39$} & \multicolumn{2}{c|}{ $0.32$}& \multicolumn{2}{c|}{ $0.35$}\\
+						\newline & \multicolumn{1}{|l|}{Taille d'effet (d)} & \multicolumn{2}{c|}{ $0.52$} & \multicolumn{2}{c|}{ $0.39$} & \multicolumn{2}{c|}{ $0.32$}& \multicolumn{2}{c|}{ $0.35$}\\
 						\hline	
 						%*************
 						
@@ -626,7 +668,7 @@
 						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-4.62$} & \multicolumn{2}{c|}{ $-4.96$} & \multicolumn{2}{c|}{ $-3.80$}& \multicolumn{2}{c|}{ $-5.86$}\\
 						\cline{2-10}	
 						%*************
-						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.45$} & \multicolumn{2}{c|}{ $0.49$} & \multicolumn{2}{c|}{ $0.39$}& \multicolumn{2}{c|}{ $0.56$}\\
+						\newline & \multicolumn{1}{|l|}{Taille d'effet (d)} & \multicolumn{2}{c|}{ $0.45$} & \multicolumn{2}{c|}{ $0.49$} & \multicolumn{2}{c|}{ $0.39$}& \multicolumn{2}{c|}{ $0.56$}\\
 						\hline	
 						%*************
 						
@@ -638,16 +680,100 @@
 						\newline & \multicolumn{1}{|l|}{Z-Wilcoxon test} & \multicolumn{2}{c|}{ $-5.11$} & \multicolumn{2}{c|}{ $-4.08$} & \multicolumn{2}{c|}{ $-2.86$}& \multicolumn{2}{c|}{ $-6.09$}\\
 						\cline{2-10}	
 						%*************
-						\newline & \multicolumn{1}{|l|}{Taille d'effet} & \multicolumn{2}{c|}{ $0.5$} & \multicolumn{2}{c|}{ $0.4$} & \multicolumn{2}{c|}{ $0.29$}& \multicolumn{2}{c|}{ $0.57$}\\
+						\newline & \multicolumn{1}{|l|}{Taille d'effet (d)} & \multicolumn{2}{c|}{ $0.5$} & \multicolumn{2}{c|}{ $0.4$} & \multicolumn{2}{c|}{ $0.29$}& \multicolumn{2}{c|}{ $0.57$}\\
 						\hline	
 						%*************
 					\end{tabular}
 					
-					\caption{résumé des résultats statistiques obtenus pour chaque hypothèses}
+					\caption{Résumé des résultats statistiques obtenus pour chaque hypothèses}
 					\label{tab:resetude1}
 				\end{adjustbox}
 			\end{table*}
 				
 			\subsubsection{Discussion}	
-				Les résultats obtenus confirment l'ensemble de nos hypothèses.
+				Dans cette étude, nous avons présenté des dialogues générés entre deux agents négociateurs simulant une relation interpersonnelle de dominance. 
+				Les résultats obtenus confirment l'ensemble de nos hypothèses. En effet, l'analyse de ces dialogues par des juges externes a révélé que ces derniers étaient en mesure de percevoir les comportements de dominance exprimés par les deux agents. L'agent A qui était placé dans la position dominante a été perçu comme plus égocentrique, exigeant, leader et exprimait peu de concessions durant la négociation. En revanche, l'agent B qui exprimait des comportements de faible dominance (soumission) a été perçu comme prenant en compte les préférences de son interlocuteur, peu exigent, avait tendance à faire des concessions mais ne prenait pas assez d'initiatives.  
+				
+				Par ailleurs, nous avons réalisé une analyse post-étude qui avait pour but de comparer la perception des comportements de l'agent A à travers les différents dialogues. 
+				Nous avons calculé la différence entre l'évaluation de l'agent A et B dans le dialogue 1 et le dialogue 2. En effet, dans le dialogue 1 l'agent A a une dominance à 0.9, alors que dans le dialogue 2, sa dominance est à 0.7. En revanche, la position de dominance de l'agent B est fixée à 0.4 pour les deux dialogues. 
+				
+				Notre hypothèse était qu'une plus grande différence de dominance entre les interlocuteurs conduirait à une meilleure perception de leurs comportements. Les résultats obtenus ne confirment pas cette hypothèse. En effet, seulement une tendance a été observée ($ p \simeq 0,1 $) pour l'égocentrisme, les concessions et le niveau d'exigence. Seule une corrélation entre la dominance et la prise de contrôle de la négociation était nettement perçu ($p = 0.043$). Plus la position de dominance de l'agent augmentait, plus il était perçu comme leader. 
+				
+				Ces résultats mitigés renforcent la définition dyadique de la dominance. La perception des comportements de dominance d'un interlocuteur est relative à ceux exprimés par son partenaire \cite{dunbar2005perceptions}. 
+				Pour cette raison, agréger les évaluations des différents dialogues n'apporte pas d'informations pertinente. Ceci explique pourquoi nous avons obtenu des résultats mitigés sur cet aspect.
+				
+				Une limite de cette étude que nous avons étudié la perception de tous les principes liés à la dominance simultanément. Nous n'avons pas considéré la perception de chaque principe individuellement. Cependant, lors des expériences précédentes, nous avons détecté que les principes sont interdépendants, ce qui rend difficile une évaluation séparée de chacun d'entre eux dans un dialogue.
+				
+				De plus,la relation interpersonnelle de dominance simulée est complémentaire mais nous n'avons pas considéré les cas où les comportements de dominance des deux interlocuteurs étaient similaires. Nous avions présentés dans le chapitre \ref{chap:etat} que la relation de dominance était majoritairement complémentaire, pour cette raison nous n'avons pas considéré le cas des comportements similaires. 
+				
+				Enfin, cette étude a confirmé la validité des comportements des agents négociateurs et nous a encouragé à entreprendre une étude pour confronter ces agents face à des participants humains. Nous présentons les détails de cette étude dans la section suivante.
+				
+		\subsection{Étude agent/humain}
+		
+					L'objectif de cette étude est d'analyser les comportements de nos agents dans le contexte d'une interaction agent/humain où le comportement des utilisateurs est imprévisible. D'un coté, cela permet d'évaluer la robustesse notre modèle de négociation face à des situations inattendus, et d'un autre coté, évaluer la perception des comportements de dominance des agents. 
+					
+					
+				\subsubsection{Design expérimental}
+				
+				Nous considérons le scénario social qui consiste à choisir un restaurants. Notre objectif est de définir un sujet social qui ne requiert pas d'expertise spécifique et pour lequel les participants ont des préférences personnelles. Pour cela, nous avons repris le sujet de négociation de l'étude agent/agent les mêmes critères.
+					
+				Nous avons défini deux agents Bob et Arthur qui jouent des comportements différents. Bob a été conçu pour générer un comportement dominant (\textit{Dom(Bob) = 0.8}) et Arthur pour jouer le rôle d'un négociateur dans une position de faible dominance (\textit{Dom(Arthur) = 0.4}).
+				Les participants ont interagi avec les deux agents via une interface graphique (GUI) présenté dans la figure \ref{fig:ihm} conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons précédemment définis voir (section \ref {sec:communication}).
+					
+					\begin{figure*}[t]
+						\centering
+						\fbox{\includegraphics [width=\textwidth, height = 0.4\textheight]{Figures/chap4/AH/ihm1.png}}
+						\caption{GUI d'interaction avec l'agent}
+						\label{fig:ihm}
+					\end{figure*}
+					
+				Nous avons défini deux conditions expérimentales dans le but d'éviter de biaiser la perception des participants. Dans la première condition, les participants ont d'abord interagi avec Bob, l'agent dont les comportements sont dominants. Ensuite, une interaction avec l'agent dans la position de faible dominance, Arthur.
+				A l'opposé, la deuxième condition, les participants ont d'abord interagi  avec Arthur puis avec Bob.
+								
+			
+			\subsubsection{Procédure}
+			
+			Nous avons mené une étude inter-sujets où chaque participant a interagi avec les deux agents, Bob et Arthur.
+			
+			Au départ, le participant est invité à signer un formulaire de consentement éclairé, et  la tâche de négociation lui est expliquée. 
+			Suite à cela, la  session d'entraînement commence, le participant reçoit des instructions sur l'utilisation de l'interface graphique pour interagir avec l'agent, l'expérimentateur lance la session et quitte la salle jusqu'à ce que l'entraînement soit terminé et que le participant se soit familiarisé avec l'interface. Le participant peur rappeler l'expérimentateur en cas de problèmes d'incompréhensions. 
+			
+			Après la formation, l'expérimentateur lance l'expérience et quitte la pièce. 
+			Le participant négocie avec les deux agents. À la fin de chaque session de négociation, le participant est invité à remplir un questionnaire sur son expérience.
+			
+			Nous avons conçu un questionnaire permettant aux participants de rapporter leurs perceptions des comportements de l'agent lors des processus de négociation. Pour chaque hypothèse, nous avons défini deux questions avec des formulations différentes afin de ne pas biaiser les réponses des participants. En outre, nous avons défini des questions de tests pour vérifier la validité des réponses des participants. Les réponses sont données sur l'échelle de Likert.
+			
+			Au total, 40 participants ont participé à l'expérience. Ils ont été assignés au hasard aux conditions expérimentales.
+			
+			\subsubsection{Résultats}
+			Nous avons effectué une étude statistique afin d'analyser la perception des comportements des agents au cours de l'interaction. Les résultats sont présentés dans la figure \ref{res}.
+			
+			Les participants ont majoritairement perçu que l'agent bob a tendance à mener la négociation (\emph {M = 4.40, SD = 0.9}). Ils ont également noté que Bob était exigeant (\emph {M = 3,59, SD = 1,3}) un peu égocentrique(\emph {M = 2,92, SD = 1,3}). En outre, nous avons analysé la perception des concessions faites par bob durant la négociation, les participants ont perçu que Bob faisait peu de concessions (\emph {M = 3.29, SD = 1.24}).
+			
+			Au contraire, les participants ont perçu le comportement d'Arthur comme suit: En moyenne, Arthur ne cherche pas à mener le dialogue (\emph {M = 1.76, SD = 1.09}). Il a un faible niveau d'exigence (\emph {M = 2.32, SD = 1.3}) et a tendance à faire des concessions (\emph {M = 3.39, SD = 1.16}). De plus, Arthur a été perçu comme prenant en compte les préférences des participants et n'est pas égoïste (\emph {M = 2.7, SD = 1.13}).
+			
+			La deuxième étape de notre analyse concerne l'évaluation des comportements des deux agents. Nous avons comparé le comportement de Bob et d'Arthur en utilisant un test non paramétrique de \emph{Wilcoxon pour deux échantillons appariés}. Notre première hypothèse prédit que l'agent qui exprimait des comportements de dominance Bob serait perçu comme plus égocentrique que l'agent Arthur dont les comportements sont de faible dominance. Notre analyse a confirmé notre prédiction; les participants ont perçu que Bob était plus égocentrique qu'Arthur (\emph {Z = -3,2, p = 0,001, d = -0,3}). Dans la même veine, notre seconde hypothèse a également été confirmée. Bob était perçu comme étant plus exigeant qu'Arthur avec un petit effet de taille (\emph {Z = -3.6, p <0.001, d = -0.3}).
+			
+			La troisième hypothèse stipulait qu'Arthur exprimerait des concessions plus importantes que Bob. L'analyse de nos données n'a pas confirmé cette hypothèse mais elle montre une tendance dans la différence de concessions (\emph {Z = -3.2, p = 0.05, d = -0.05}).
+			
+			La dernière hypothèse a été confirmée. Le test Wilcoxon a révélé que l'agent Bob était perçu comme significativement plus meneur dans dialogue qu'Arthur, avec une taille d'effet moyenne (\emph {Z = -3.2, p = 0.001, d = -0.6}).
+			
+			
+			\begin{figure}[t]
+				\centering
+				\includegraphics[width=\textwidth]{Figures/chap4/AH/res.pdf}
+				\caption{Perception des comportements des agents \textit{A} et \textit{B} pour chaque hypothèse}
+				\label{res}
+				\end{figure}
+				
+				\subsubsection{Discussion}
+				
+				Les résultats de notre expérience appuient trois des quatre hypothèses. Les participants ont perçu Bob l'agent dominant comme meneur dans la négociation, centré sur lui-même et plus exigeant par rapport à Arthur, l'agent de faible dominance. Ces résultats sont conformes avec ceux présenté dans les travaux de Dedreu, Van Kleef et \emph{al} \cite {de1995impact, de2004influence, de2004influence} sur l'impact des comportements de dominance sur les stratégies de négociation.
+				
+				Cependant, la troisième hypothèse n'a pas été totalement confirmée car les participants n'ont pas perçu de différence significative dans le niveau de concession exprimé par Bob et Arthur. Ce résultat s'explique par l'impact des préférences sur le résultat de la négociation. Les préférences affectent la stratégie suivie par l'agent. Dans le cas où l'agent et l'utilisateur partagent des préférences communes, la négociation convergera rapidement et aucune confrontation des préférences ne sera expérimentée pendant la négociation. Ceci représente une limitation de notre expérience. Nous n'avons pas recueilli de connaissances préalables sur les préférences des participants. Par conséquent, nous n'avons pas été en mesure de mesurer la distance entre les préférences de l'agent et l'utilisateur et ainsi analyser l'impact des préférences sur le niveau des concessions.
+				Nous n'avons pas été en mesure d'analyser les réponses à l'hypothèse 3 pour indiquer si les concessions étaient uniquement influencées par les préférences ou la relation de dominance. 
+			
+		\subsection{Discussion générale}
+		
+				
 				
