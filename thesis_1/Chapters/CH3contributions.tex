@@ -6,7 +6,7 @@
 	Dans ce chapitre, nous présentons notre modèle de négociation collaborative sur lequel sera construit notre modèle de décision basé sur la dominance. 
 	
 	Afin de définir un système de dialogue dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord enregistré des dialogues de négociation entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social de type "négociation collaborative". Nous avons annotés et analysé les dialogues. Cette étude nous a livré un ensemble d'informations sur les comportements des négociateurs que nous présenterons dans la première section de ce chapitre. 
-	Les informations collectées grâce l'observation des comportements humains nous a guidés dans la conception de notre modèle de négociation.
+	Les informations collectées grâce à l'observation des comportements humains nous a guidé dans la conception de notre modèle de négociation.
 	
 	Dans la seconde section, nous présentons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisés dans la mise en œuvre de systèmes de négociations automatiques. 
 	
@@ -42,15 +42,17 @@
 			 Nous présentons dans cette section un exemple de l'analyse dite en DSP que nous avons effectué sur un dialogue préalablement enregistré. Le texte a été édité afin d'améliorer son intelligibilité en supprimant les pauses et des mots tels que "hmm, oué $\ldots$".
 			 
 			 D'abord, nous nous sommes intéressés à la structure linguistique. En effet, nous avons extrait les actes de dialogues de chaque tour de dialogue, que nous avons ensuite regroupé en \emph{DS}. 
+			
+			 \begin{figure}[!h]
+			 	\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
+			 	\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS}}
+			 \end{figure} 
 			 
 			 La seconde étape consistait à analyser le but ou l'intention caché derrière chaque \emph{DS}. Par conséquent, nous avons formulé les \emph{DSPs} comme présenté dans l'exemple ci-dessus. L'état attentionnel nous a aidé à la construction des différents \emph{DS} et a formuler les intentions pour chaque \emph{DSP}	
 			
 			L'analyse du dialogue est présentée dans la figure \ref{fig:DSP}.
 			
-			\begin{figure}
-				\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
-				\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS}}
-			\end{figure} 
+			
 			 
 		\subsection{Résultats de l'analyse}
 		
@@ -62,8 +64,8 @@
 			De plus, Les critères les plus importants sont les premiers à être abordés, et en cas de conflit, d'autre critères sont abordés. 
 			Ceci est confirmé par des travaux en négociations automatiques qui mettent en avant l'intérêt de la modalisation multicritères dans les systèmes de négociation \cite{jonker2007agent,lai2004literature}. Ce point sera abordé plus en détails en section suivante. 
 			 
-			 Nous nous sommes aussi intéressé à l'aspect dialogique de la négociation. En effet, notre modèle se basant sur des actes de dialogue, nous avons analysé les différentes informations échangées lors de la négociation. 
-			 Nous avons récoltés des informations sur le style linguistique sur lequel seront basés nos actes de dialogues.
+			 Nous nous sommes aussi intéressé à l'aspect dialogique de la négociation. En effet, notre modèle se basant sur des actes de dialogue, nous avons analysé les informations échangées lors de la négociation. 
+			 Nous avons récolté des informations sur le style linguistique sur lequel seront basés nos actes de dialogues.
 			 
 			 Finalement, nous avons utilisé la structure attentionnelle et intentionnelle afin d'étudier les stratégies de négociation adoptées par les négociateurs. nous avions analyser la corrélation entre différents comportements durant la négociation influencés par la dimension de la dominance.
 			 
@@ -88,9 +90,9 @@
 	
 		La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères. Cependant, La littérature existante se concentre plus sur la négociation uni critère \cite{lai2008decentralized,lai2004literature}. 
 		
-		Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, comme nous l'avons vu dans l'étude que nous avions effectué dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères ont soit été abordé simultanément dans la négociation, ou bien un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'à aboutir a un compromis.
+		Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, comme nous l'avons vu dans l'étude que nous avions effectué dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères sont soit abordé simultanément dans la négociation, ou bien un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discuter des différents critères jusqu'à aboutir a un compromis.
 		
-		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \emph{Dedreu} ajoute que la négociation multi-critères offre un contexte pour différentes types de stratégies coopératives. D'un coté des négociateurs qui peuvent faire des concessions sur tout les critères. D'un autre coté, des négociateurs qui ont un ordre de priorité sur les critères où il a plus tendance à faire des concessions sur les critères avec une priorité faible. 
+		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \emph{Dedreu} ajoute que la négociation multi-critères offre un contexte pour différents types de stratégies coopératives. D'un coté des négociateurs qui peuvent faire des concessions sur tout les critères. D'un autre coté, des négociateurs qui ont un ordre de priorité sur les critères où ils ont plus tendance à faire des concessions sur les critères avec une priorité faible. 
 	
 		Les résultats des précédents travaux nous ont motivé à utiliser une représentation multi-critères pour modéliser notre domaine de négociation collaborative. 
 		
@@ -100,7 +102,7 @@
 		L'évaluation de chaque option repose sur un ensemble de critères $\mathcal{C}$ reflétant les caractéristiques de l'option. Nous définissons l'ensemble $\mathcal{C}$ de $n$ critères, et $C_1,\ldots,C_n$, comme le domaine de valeurs de chaque critère de l'ensemble. 
 		Par conséquent, $\mathcal{O}$ peut être défini comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $O \in \mathcal{O}$ est un tuple $(v_1,\ldots,v_n)$. 
 		
-		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant où dîner peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C}$ = \emph{$\{$Cuisine, Prix, Emplacement, Atmosphère, $\}$}. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est  \emph{Anterprima(Italien, coûteux , animé, Montparnasse)}. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
+		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C}$ = \emph{$\{$Cuisine, Prix, Emplacement, Atmosphère, $\}$}. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est  \emph{Anterprima(Italien, coûteux , animé, Montparnasse)}. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
 		\begin{table}[h]
 			\centering
 			\begin{tabular}{|p{2.25cm}|p{10cm}|}
@@ -193,11 +195,11 @@
 	
 	\subsubsection{Communication}
 	\label{sec:communication}
-		Le modèle de communication est implémenté sur la plateforme \emph{Disco} \cite{rich09}, qui permet à l'agent de communiquer avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et est associé à une expression spécifique formulé dans un langage naturel (NL).
+		Le modèle de communication est implémenté sur la plateforme \emph{Disco} \cite{rich09}, qui permet à l'agent de communiquer avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et est associé à une expression spécifique formulé dans un langage naturel.
 		
 		La modélisation des actes de dialogue est basée sur les travaux de Sidner \cite{sidner1994artificial} qui avait proposé des actes de dialogues qui permettent à un agent de communiquer dans le contexte de négociation collaborative. Ces actes lui permettent aussi de gérer son état mental en terme d'intentions et croyances communiquées durant la négociation. 
 		
-		Nous avons définis cinq types d'actes de dialogues génériques et deux actes additionnels pour la gestion de fin de négociation. Les actes de dialogues sont présentés dans la table \ref{table:utt}. Seule la génération en langage naturel(LN) de ces énoncés doit être spécifié pour le domaine de négociation. La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en LN pour exprimer une valeur d'un acte de dialogue.
+		Nous avons définis cinq types d'actes de dialogues génériques et deux actes additionnels pour la gestion de fin de négociation. Les actes de dialogues sont présentés dans la table \ref{table:utt}. Seule la génération en langage naturel (LN) de ces énoncés doit être spécifié pour le domaine de négociation. La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en LN pour exprimer une valeur d'un acte de dialogue.
 		Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
 		
 		Chaque type d'acte de dialogue prend un argument qui peut être soit un une valeur de critère  $v \in C_i$, une option $o \in \mathcal{O}$ ou encore critère $i \in \mathcal{C}$. 
