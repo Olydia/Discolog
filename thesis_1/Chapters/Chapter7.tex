@@ -83,7 +83,9 @@ A partir de notre algorithme de la théorie de l'esprit présenté dans le chapi
 	
 	\item \textit{Comportement similaire}: L'agent va imiter les comportements de dominance exprimés par le participant $dom_{agent} = dom_{user}$.
 	
-	\item \textit{Comportement neutre} : L'agent ne s'adapte pas à son interlocuteur et suit un comportement de dominance statique. $dom_{agent} = dom_{agent} (t=0)$
+	\item \textit{Comportement neutre} : L'agent ne s'adapte pas à son interlocuteur et suit un comportement de dominance statique.
+	
+	 $dom_{agent} = dom_{agent} (t=0)$
 \end{enumerate}
 
 En modifiant la valeur de dominance de l'agent à chaque tour, nous avons dû ajouter une contrainte dans son modèle décisionnel afin d'assurer une cohérence dans les comportements générés. 
@@ -97,8 +99,8 @@ Nous avons donc implémenté trois agents \emph{Bob, Arthur} et \emph{Kevin}. \e
 \section{Hypothèses}
 \label{sec:H}
 
-suivant les travaux de \cite{tiedens2003power,dryer1997opposites,wiltermuth2015benefits}, nous supposons que la relation de dominance établie entre l'agent et l'utilisateur a une influence sur les stratégies exprimées par les négociateurs. Elle va donc avoir une conséquence sur les résultats obtenues lors de la négociation ainsi que le niveau d'appréciation à négocier avec l'agent.
-Par conséquent, nous faisons les hypothèses suivantes: 
+Suivant les travaux de \cite{tiedens2003power,dryer1997opposites,wiltermuth2015benefits}, nous supposons que la relation de dominance établie entre l'agent et l'utilisateur a une influence sur les stratégies exprimées par les négociateurs. Elle va donc avoir une conséquence sur les résultats obtenues lors de la négociation ainsi que le niveau d'appréciation à négocier avec l'agent.
+Nous faisons les hypothèses suivantes: 
 \begin{itemize}
 	\item [$\bullet$] \textbf{H1}: Les comportements de complémentarité et de similarité des agents virtuels sont perçus par les participants.
 	\item [$\bullet$] \textbf{H2}: Les négociateurs atteignent un gain commun plus important quand les négociateurs établissent une relation de dominance complémentaire.
@@ -114,7 +116,14 @@ Par conséquent, nous faisons les hypothèses suivantes:
 Nous présentons dans cette section, le protocole expérimental employé, en commençant par les mesures utilisés pour questionner les participants sur leur interactions. Ensuite, nous présenterons la population de participants et enfin le protocole suivi pour chaque participant. 
 
 \subsection{Mesures}
-Après chaque interaction avec un agent, le participant était invité à remplir un questionnaire sur la perception des comportements de dominance que nous avons présenté dans le chapitre 4. De plus, pour chaque questionnaire, nous avons insérés quelques items de manipulation afin de vérifier la concordance des réponses. 
+Après chaque interaction avec un agent, le participant était invité à remplir un questionnaire sur la perception des comportements de dominance.
+Nous avons repris les trois principes de dominance (voir section \ref{chap:domer}) pour évaluer les comportements des participants et des agents. De plus, pour chaque questionnaire, nous avons insérés quelques items de manipulation afin de vérifier la concordance des réponses.  Les trois principes représentent quatre comportements de dominance, à savoir :
+	\begin{itemize}
+		\item \textbf{D1}: La prise en compte des préférences de l'autre dans la prise de décision. Nous avons évalué l'égocentrisme des négociateurs dans leurs stratégies de négociation. 
+		\item \textbf{D2}: Le niveau de concessions exprimé durant la négociation.
+		\item \textbf{D3}: Le niveau d'exigence du négociateur.
+		\item \textbf{D4}: Le négociateur est leader dans la négociation.
+	\end{itemize}
 
 \subsubsection{Questionnaire en auto-attribution} Les participants ont répondu pour eux-même au questionnaire des comportements de dominance dans la négociation que nous avons conçu, afin de mesurer les comportements qu'ils ont exhibé durant leur interaction. Ce questionnaire utilise une échelle de Likert à 5 points. Nous présentons ci-dessous les items de ce questionnaire. 
 \begin{enumerate}
@@ -172,7 +181,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	\end{figure}
 	
 	
-	Une fois le but de l'étude expliqué, l'expérimentateur lançait la phase de tutoriel afin de familiariser le participant à l'utilisation de l'interface de communication. 	L'expérimentateur présentait les différents les actes de dialogues possibles pour communiquer avec l'agent. 	
+	Une fois le but de l'étude expliqué, l'expérimentateur lançait la phase de tutoriel afin de familiariser le participant à l'utilisation de l'interface de communication. L'expérimentateur présentait les différents les actes de dialogues possibles pour communiquer avec l'agent. 	
 	Le participant était informé que durant cette session l'agent ne répondait pas à ses actes, et que le but était uniquement de manipuler l'interface pour générer des actes. 
 	
 	L’expérimentateur répondait alors à d’éventuelles questions concernant la génération d'actes de dialogue ou leur significations.
@@ -193,21 +202,20 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	\begin{itemize}
 		\item\textit{\textbf{H1}: Les comportements de complémentarité et de similarité des agents virtuels sont perçus par les participants.}
 		
-		\subitem $\circ$  Les participants perçoivent une différence entre leurs comportements et celui de l'agent complémentaire.
-		\subitem $\circ$ Les participants ne perçoivent aucune différence entre leurs comportements et celui de l'agent similaire.
-		\subitem $\circ$ la perception des comportements de dominance de l'agent neutre sont autours de trois. 
+			\subitem $\circ$  Les comportements de dominance attribués par les participants aux agents sont \textit{significativement différents} des comportements de dominance qu'ils se sont auto-attribués.
+			\subitem $\circ$ Les comportements de dominance attribués par les participants aux agent sont \textit{similaires} aux comportements de dominance qu'ils se sont auto-attribués.
+		
 		\item [$\bullet$]\textit{ \textbf{H2}: Les négociateurs atteignent un gain commun plus important quand les négociateurs établissent une relation de dominance complémentaire.}
-		\subitem $\circ$ Les négociateurs obtiennent un meilleurs gain dans la condition complémentaire comparé aux autres conditions. La moyenne de satisfiabilité de l'option choisie est toujours supérieurs à 0.5. 
-		
+			\subitem $\circ$ Le restaurant choisi à la fin de la négociation a une valeur de satisfaction  est significativement plus importante pour les préférences des deux négociateurs dans la condition complémentaire comparé aux autres conditions. 
+			
 		\item [$\bullet$] \textit{\textbf{H3}: La négociation converge plus rapidement dans le cas où les négociateurs ont un relation de dominance complémentaire.}
-		\subitem $\circ$ Les participants prennent plus de tours de négociations afin trouver une solution avec l'agent similaire comparé aux autres agents.
-		
+			\subitem $\circ$ Les participants engageront plus de tours de négociations pour trouver un compromis dans la condition similaire et neutre comparé à la condition complémentaire.
 		
 		\item [$\bullet$] \textit{\textbf{H4}: Le participant se sent plus à l'aise avec un partenaire qui exprime un comportement complémentaire.}
-		\subitem $\circ$ Les scores de \emph{confort} perçu sont plus hauts pour l'agent complémentaire et contrôle que pour l'agent similaire.
-		\subitem $\circ$ Les participants trouvent que la négociation est plus aisée avec l'agent complémentaire comparé aux autres agents.
+			\subitem $\circ$ Les scores de \emph{confort} perçus sont plus hauts pour l'agent complémentaire et contrôle que pour l'agent similaire.
+			\subitem $\circ$ Les participants trouvent que la négociation est plus aisée avec l'agent complémentaire comparé aux autres agents.
 		\item [$\bullet$] \textit{\textbf{H5}: La complémentarité dans la relation de dominance augmente l'appréciation entre les négociateurs.}
-		\subitem $\circ$ Les scores \emph{d'appréciation} perçue sont plus hauts pour l'agent complémentaire et contrôle que pour l'agent similaire.
+			\subitem $\circ$ Les participants vont percevoir l'agent complémentaire comme significativement plus appréciable que l'agent similaire ou neutre.
 		
 	\end{itemize}
 	
@@ -219,15 +227,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	%	Nous avons d'abord analyser la perception des comportements de pouvoir lors de la négociation. En effet, avant d'analyser les hypothèses, nous voudrions étudier la perception des comportements de complémentarité et la similarité durant la négociation. 
 	\subsection{Perception des comportements des agents}
 	
-	Nous avons repris les trois principes de dominance (voir section \ref{chap:domer}) pour évaluer les comportements des participants et des agents. 
-	Rappelons que les trois principes représentent quatre comportements de dominance, à savoir :
-	
-	\begin{itemize}
-		\item \textbf{D1}: La prise en compte des préférences de l'autre dans la prise de décision. Nous avons évalué l'égocentrisme des négociateurs dans leurs stratégies de négociation. 
-		\item \textbf{D2}: Le niveau de concessions exprimé durant la négociation.
-		\item \textbf{D3}: Le niveau d'exigence du négociateur.
-		\item \textbf{D4}: Le négociateur est leader dans la négociation.
-	\end{itemize}
+
 	\begin{table}[t]
 		\caption{Différence de perception de dominance entre l'agent et le participant pour chaque comportement} 
 		\centering
@@ -238,17 +238,17 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 			\hline
 			
 			\multirow{3}{*} {Agent Comp.}  &  Z-Wilcoxon test  & -4.61 & -5.3 & -6.28 & -0.43 \\ 	
-			& p-value & 2.88E-06 & 7.31E-08 & 1.42E-10 & 0.65 \\ 
+			& p-value & 2.88E-06 & 7.31E-08 & 1.42E-10 & \textbf{0.65 }\\ 
 			& Effect size & -0.29 & -0.34 & -0.4 & -0.03\\ 
 			\hline
 			
 			\multirow{3}{*} {Agent similaire}  &  Z-Wilcoxon test  & -1.57 & -2.21 & -1.45 & -1.33\\ 	
-			& p-value & 0.11 & 0.024 & 0.14 & 0.17 \\ 
+			& p-value & 0.11 & \textbf{0.024} & 0.14 & 0.17 \\ 
 			& Effect size & -0.1 & -0.14& -0.09 & -0.08 \\ 
 			\hline
 
 			\multirow{3}{*} {Agent neutre}  &  Z-Wilcoxon test  & -6.23 & -5.72 & -7.056 & -0.77\\ 	
-			& p value & 2.52E-10 & 6.85E-09 & 8.19E-13 & 0.4351 \\ 
+			& p value & 2.52E-10 & 6.85E-09 & 8.19E-13 & \textbf{0.4351} \\ 
 			& Effect size & -0.4 & -0.36 & -0.45 & -0.049 \\ 
 			\hline \hline
 			
@@ -257,13 +257,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\label{tab:domPercption}
 	\end{table}
 	
-	Pour l'analyse des différences entre les comportements des agents et des participants, des statistiques non-paramétriques ont été utilisées car la normalité des données ne pouvaient être assurée. Pour l'analyse principal, le test des rangs signés de Wilcoxon a été appliqué pour chaque comportement.
+	Pour l'analyse des différences entre les comportements de dominance des agents et des participants, des statistiques non-paramétriques ont été utilisées car la normalité des données ne pouvaient être assurée. Pour l'analyse principale, le test des rangs signés de Wilcoxon a été appliqué pour évaluer chacun des quatre comportements.
 	
 	\subsubsection{Perception de complémentarité}
 	
 	Pour chaque comportement, nous avons comparé la perception des participants de leur comportements de dominance et ceux de l'agent complémentaire avec lesquels ils ont interagi. Les statistiques descriptives sont présentées dans la figure \ref{fig:comp}. 
 	
-	Les résultats de l'analyse de Wilcoxon a révélé que les participants ont perçus une différence significative entre leurs comportements et celui de l'agent comme présenté dans la table \ref{tab:domPercption}. Cette différence concerne les comportements \textbf{D1, D2} et \textbf{D3}. Cependant, aucune différence significative n'a été perçu pour le comportement \textbf{D4}. 
+	Les résultats de l'analyse de Wilcoxon a révélé que les participants ont perçus une différence significative entre leurs comportements et celui de l'agent comme présenté dans la table \ref{tab:domPercption}. Cette différence concerne les comportements \textbf{D1, D2} et \textbf{D3}. Cependant, aucune différence significative n'a été perçu pour le comportement de leader dans la négociation \textbf{D4}. 
 	\begin{figure}[h]
 		\centering
 		% this is wide enough
@@ -293,10 +293,8 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	\end{figure}	
 	
 	\subsubsection{Perception de similarité}
-	Nous avons aussi analysé les comportements des négociateurs lors de leurs interactions avec l'agent similaire. Les statistiques descriptives ont déjà montre une forte similarité dans la perception de tout les comportements (voir la figure \ref{fig:sim}). Nous avons complété l'étude par une comparaison de Wilcoxon a confirmé l'absence de différence significative comme présenté dans la table \ref{tab:domPercption}.  
-	
-	
-	\begin{figure}[h]
+	Nous avons aussi analysé les comportements des négociateurs lors de leurs interactions avec l'agent Arthur. Les statistiques descriptives ont déjà montre une forte similarité dans la perception de tout les comportements (voir la figure \ref{fig:sim}). Nous avons complété l'étude par une comparaison de Wilcoxon a confirmé l'absence de différence significative comme présenté dans la table \ref{tab:domPercption}.  
+	\begin{figure}[!tb]
 		\centering
 		% this is wide enough
 		\subfloat[Score de perception des comportements de dominance]{
@@ -323,7 +321,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 				
 			\end{tabular}
 		}
-		\caption{Perception des comportements de dominance avec l'agent similaire}
+		\caption{Perception des comportements de dominance avec l'agent similaire Arthur}
 		\label{fig:sim}
 	\end{figure}
 	
@@ -331,7 +329,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	
 	Nous avons conduit les mêmes études statistiques pour analyser la perception des comportements de l'agent neutre. L'analyse descriptive présentée dans la figure \ref{fig:neutre} montre que les participants ont perçu que l'agent adoptait une stratégie complémentaire pour les comportements \textbf{D1}, \textbf{D2} et \textbf{D3}. Cependant, aucune différence significative n'a été perçu pour le comportement \textbf{D4}.
 	
-	\begin{figure}[h]
+	\begin{figure}[!tb]
 		\centering
 		% this is wide enough
 		\subfloat[Score de perception des comportements de dominance]{
@@ -365,29 +363,26 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	\end{figure}
 	
 	\subsection{Gain commun}
-	Nous avons analysé le gain commun des négociateurs durant les différentes négociations tant sur l'aspect perceptif qu'objectif. L'ensemble des résultats est présenté en Annexe \ref{chap:Annexe}.
+	Nous avons analysé le gain commun des négociateurs durant les différentes négociations. Nous avons d'abord demandé aux participants leurs ressentis sur la satisfaction du restaurant choisi. Nous avons complété cette analyse par une étude objective dans laquelle nous avons calculé le score de satisfaction du restaurant choisi à partir des préférences du participant et de l'agent. L'ensemble des résultats est présenté en Annexe \ref{chap:Annexe}.
 	
-	\subsubsection{Perception du gain commun} Nous avons demandé aux participants de renseigner leur degrés de satisfaction du restaurant choisi avec l'agent.
-	
-	Les résultats sont présentés dans la figure \ref{fig:gainCom}. D'abord, les statistiques descriptives montrent qu'en moyenne les participants étaient satisfaits du restaurant choisi, et ce pour toutes les négociations. Les scores sont plutôt supérieurs à la moyenne pour tous les agents (les valeurs varient entre \emph{3.83} et \emph{4.5} sur une échelle de \emph{5}). 
-	
-	\begin{figure}
+		\begin{figure}[h]
 		
 		\centering
 		\includegraphics[width= 0.65 \linewidth,clip=false]{Figures/chap7/percpGain.PNG}
 		\caption{Perception du gain commun obtenu pour tous les agents \textit{Aucune différence significative entre les agents}}
 		\label{fig:gainCom}
 	\end{figure}
+
+	\subsubsection{Perception du gain commun} Nous avons demandé aux participants de renseigner leur degrés de satisfaction du restaurant choisi avec l'agent.
 	
-	En outre, nous avons analysé si les participants étaient significativement plus satisfaits du restaurants choisi lors de la négociation avec l'agent complémentaire qu'avec les autres agents. Nous avons effectué un test de rangs signés de Wilcoxon car la normalité des données n'avait pu être assuré. L'analyse n'a montré aucune différence significative de la perception de gain et d'équité sur le choix du restaurant entre les différents agents. 
+	Les résultats sont présentés dans la figure \ref{fig:gainCom}. D'abord, les statistiques descriptives montrent qu'en moyenne les participants étaient satisfaits du restaurant choisi, et ce pour toutes les négociations. Les scores sont plutôt supérieurs à la moyenne pour tous les agents (les valeurs varient entre \emph{3.83} et \emph{4.5} sur une échelle de \emph{5}). 
+	
+	En outre, nous avons analysé si les participants étaient significativement plus satisfaits du restaurants choisi lors de la négociation avec l'agent Bob qu'avec les autres agents. Nous avons effectué un test de rangs signés de Wilcoxon car la normalité des données n'avait pu être assurée. L'analyse n'a montré aucune différence significative de la perception de gain et d'équité sur le choix du restaurant entre les différents agents. 
 	
 	\subsubsection{Analyse du gain commun } Concernant l'analyse objective du gain commun atteint à la fin de chaque négociation, nous avons dans un premier temps, récupéré les préférences des participants et des agents avec lesquels avaient interagi. 
-	Ensuite,nous avons calculé la satisfiabilité du restaurant choisi pour chaque négociateur en fonction de leurs préférences (\textit{i.e l'agent et le participant}). Nous avons ensuite, calculé le gain commun atteint à chaque négociation comme la moyenne des valeur de satisfiabilité des deux négociateurs.  Les résultats obtenus pour chaque agent sont présentés dans la figure \ref{fig:gain}. 
+	Ensuite, nous avons calculé la satisfiabilité du restaurant choisi pour chaque négociateur en fonction de leurs préférences (\textit{i.e l'agent et le participant}). Nous avons ensuite, calculé le gain commun atteint à chaque négociation comme \textbf{la moyenne des valeur de satisfiabilité} des deux négociateurs.  Les résultats obtenus pour chaque agent sont présentés dans la figure \ref{fig:gain}. 
 	
-	Les valeurs de satisfiabilité sont supérieurs à la moyenne pour tous les agents. Rappelons que les valeurs de satisfiabilité sont normalisées dans un intervalle $[0, 1]$. Nous avons étudié si les négociateurs avaient atteint un gain commun plus importants en négociant avec l'agent complémentaires comparés aux autres agents. En vue de la distributions normales des valeurs, nous avons appliqué un T-test afin de comparer chaque paire d'agents. Les résultats obtenus sont présentés dans la figure (table + graphe). L'analyse de la variance a montré une interaction significative entre la relation de dominance et le gain commun atteint lors des négociation. effectivement, les participants ont atteint un gain commun significativement plus élevé en négociant avec l'agent complémentaire qu'avec l'agent similaire (\emph{t= 8.9, p < 0.01}). La même différence a été perçue en comparant avec l'agent neutre (\emph{t= 6.4, p < 0.01}).
-	De plus, les participants ont atteint un meilleur gain commun avec l'agent neutre qu'avec l'agent similaire (\emph{t= 2.3, p = 0.02}).
-	
-	\begin{figure}[h]
+		\begin{figure}[h]
 		
 		\subfloat[Score du gain commun atteint pour tous les agents  \textit{les population regroupées avec $(*)$ sont significativement différentes }]{
 			\includegraphics[clip=false]{Figures/chap7/gainCommun.PNG}}
@@ -407,13 +402,18 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\caption{Les résultats obtenus pour le gain commun atteint durant la négociation}
 		\label{fig:gain}
 	\end{figure}
+
+	Les valeurs de satisfiabilité sont supérieurs à la moyenne pour tous les agents. Rappelons que les valeurs de satisfiabilité sont normalisées dans un intervalle $[0, 1]$. Nous avons étudié si les négociateurs avaient atteint un gain commun plus importants en négociant avec l'agent complémentaires comparés aux autres agents. En vue de la distributions normales des valeurs, nous avons appliqué un T-test afin de comparer chaque paire d'agents. Les résultats obtenus sont présentés dans la figure \ref{fig:gain}. L'analyse de la variance a montré une interaction significative entre la relation de dominance et le gain commun atteint lors des négociation. Effectivement, les participants ont atteint un gain commun significativement plus élevé en négociant avec l'agent complémentaire qu'avec l'agent similaire (\emph{t= 8.9, p < 0.01}). La même différence a été perçue en comparant avec l'agent neutre (\emph{t= 6.4, p < 0.01}).
+	De plus, les participants ont atteint un meilleur gain commun avec l'agent neutre qu'avec l'agent similaire (\emph{t= 2.3, p = 0.02}).
+	
+
 	
 	\subsection{Tours de paroles}
 	
-	Pour l'analyse de l'impact de la relation de dominance sur nombres de tours de paroles, nous avons recueilli le nombre de tours de paroles énoncé durant chaque négociation. Les statistiques descriptives sont présentées dans la figure \ref{fig:tour}.Un test paramétrique a été utilisée car les données suivent une distribution normale. Les résultats montrent que la négociation convergeait significative plus rapidement quand les participants négociaient avec l'agent complémentaire en comparaison avec l'agent similaire (\emph{t= 2.7, p = 0.003}). Pareillement, la négociation convergeait plus rapidement avec l'agent neutre comparé à l'agent similaire (\emph{t= 4.43, p < 0.01}).  Les résultats sont présentées en Annexe \ref{chap:Annexe}.
+	Pour l'analyse de l'impact de la relation de dominance sur nombres de tours de paroles, nous avons recueilli le nombre de tours de paroles énoncé durant chaque négociation. Les statistiques descriptives sont présentées dans la figure \ref{fig:tour}. Un test paramétrique a été utilisée car les données suivent une distribution normale. Les résultats montrent que la négociation convergeait significative plus rapidement quand les participants négociaient avec l'agent complémentaire par rapport à l'agent similaire (\emph{t= 2.7, p = 0.003}). De même, la négociation convergeait plus rapidement avec l'agent neutre comparé à l'agent similaire (\emph{t= 4.43, p < 0.01}).  Les résultats sont présentés en Annexe \ref{chap:Annexe}.
 	Cependant, aucune différence significative n'a été perçu entre l'agent complémentaire et l'agent neutre (\emph{t= 1.3, p = 0.09}).  
 	
-	\begin{figure}[h]
+	\begin{figure}[!tbh]
 		
 		\subfloat[Nombre de tours de paroles durant une négociation pour tous les agents \textit{les population regroupées avec $(*)$ sont significativement différentes}] {\includegraphics{Figures/chap7/tours.PNG}}
 		
@@ -526,15 +526,17 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	\end{figure}
 	
 	
-	\subsection{Analyses complémentaires}
+	\section{Analyses complémentaires}
 	Dans le chapitre 2, nous présentons la relation de dominance comme une relation interpersonnelle qui s'établie durant l'interaction. 
 	Par conséquent, en plus du trais de personnalité, un individu est influencé par l'environnement de l'interaction (\textit{e.g} contexte de l'interaction, rôle social ...). Ces différents paramètres vont créer une certaine relation de dominance qui peut varier d'une interaction à une autre.  
-	Afin de vérifier si les participants produisaient différents comportements de dominance durant les différentes négociations, nous avons recueilli la perception de l'agent des comportements de dominance de son interlocuteur.  Les résultats sont présentés dans la figure ?
+	Afin de vérifier si les participants produisaient différents comportements de dominance durant les différentes négociations, nous avons recueilli la perception de l'agent des comportements de dominance de son interlocuteur.  Les résultats sont présentés dans la figure \ref{fig:dom}.
 	
 	Nous avons analysé, pour le même participant, la variance des comportements de dominance à travers les trois négociations. Pour ce faire, nous avons utilisé le test de rang signé de Wilcoxon car la normalité des données n'a pu être assurée. 
 	
 	Les résultats montrent les comportements de dominance des participants variaient d'une interaction à une autre. En effet, le test de Wilcoxon révèle une différence significative entre les comportements perçus par l'agent complémentaire et l'agent similaire (\emph{p<0.01, Z = -3.35}). Ces mêmes résultats sont observé en comparant la perception de l'agent complémentaire et l'agent neutre (\emph{p< 0.01, Z = -3.88}).
 	Toutefois, aucune différence entre l'agent similaire et l'agent neutre n'a été vérifié (\emph{p = 0.6, Z = 0.44}). 
+	
+	Ces résultats suggèrent que les participants ont adopté une stratégie de négociation différente en fonction de la relation établie avec l'agent. 
 	
 	\begin{figure}[h]
 		
@@ -559,7 +561,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	
 	\section{Discussion}
 	\label{sec:discussion}
-	En général, toutes nos hypothèses ont été validé. Ces résultats appuient la validité de notre modèle de théorie de l'esprit dans le cadre d'une interaction agent/humain.   
+	En général, toutes nos hypothèses ont été validées. Ces résultats appuient la validité de notre modèle négociation collaborative et de théorie de l'esprit dans le cadre d'une interaction agent/humain.   
 	
 	\subsection{Perception des comportements des agents}
 	Notre hypothèse H1 (\textit{les comportements de complémentarité et de similarité des agents virtuels sont perçus par les participants}) est partiellement validée. 
@@ -567,7 +569,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	Quatre comportements de dominance ont été pris en compte pour mesurer la stratégie de négociation. 
 	Les participants ont été en mesure de distinguer une différence significative de trois comportements sur quatre entre leurs stratégie et celle de l'agent complémentaire.
 	
-	En effet, les participants ont perçu une différence entre leurs niveau d'exigence et de concessions textbf{D3}, \textbf{D2}, ainsi que la prise en compte des préférences de l'autre\textbf{D1}. Cependant, aucune différence n'a été perçu concernant les comportements de leadership durant la négociation \textbf{D4}. 
+	En effet, les participants ont perçu une différence entre leurs niveau d'exigence et de concessions \textbf{D3}, \textbf{D2}, ainsi que la prise en compte des préférences de l'autre\textbf{D1}. Cependant, aucune différence n'a été perçu concernant les comportements de leadership durant la négociation \textbf{D4}. 
 	
 	Concernant, les comportements de l'agent neutre, ce dernier a été perçu comme significativement complémentaires aux utilisateurs pour les comportements \textbf{D1}, \textbf{D2} et \textbf{D3}. 
 	Toutefois, comme l'agent complémentaire, aucune différence n'a été perçue dans les comportements relatifs à \textbf{D4} entre l'agent neutre et les participants. 
@@ -588,11 +590,11 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	Par ailleurs, la perception des comportements de l'agent neutre comme complémentaires à ceux des participants soutient que la relation interpersonnelle de dominance qui s'établie au cours de l'interaction est complémentaire \cite{burgoonnonverbal}. En effet, indépendamment des deux autres agents où nous avions manipulé l'adaptation de l'agent, dans la condition neutre l'agent ne s'adapte pas aux comportements du participant. Néanmoins, les résultats démontrent que le participant s'est adapté aux comportements exhibés par l'agent et a ainsi établie une relation interpersonnelle de dominance complémentaire.
 	
 	\subsection{Gain commun}
-	Notre seconde hypothèse (\textit{Les négociateurs atteignent un gain commun plus important quand les négociateurs établissent une relation de dominance complémentaire.}) est validé. 
+	Notre seconde hypothèse (\textit{Les négociateurs atteignent un gain commun plus important quand les négociateurs établissent une relation de dominance complémentaire.}) est validée. 
 	
 	Nous avons en premier temps demandé aux participants de relater leur avis sur le restaurant choisi pour chaque négociation.
 	En général, les participants ont été satisfaits du choix final et le trouvaient équitable pour toutes les négociation. 
-	En analysant le valeur de satisfiabilité du restaurant choisi pour les préférences des participants (voir table \ref{tab:gainPerceptif}), les valeurs étaient autours de 0.7 (\emph{min =0.69, max = 0.73}). 
+	En analysant le valeur de satisfiabilité du restaurant choisi pour les préférences des participants (voir table \ref{tab:gainPerceptif}), les valeurs étaient autour de 0.7 (\emph{min =0.69, max = 0.73}). 
 	
 	Cependant, en analysant la valeur de satisfiabilité pour les préférences de l'agent,  en moyenne, seul l'agent complémentaire a pu converger vers un restaurant qui respecte ses préférences (\emph{M = 0.53, SD = 0.2}). 
 	
@@ -624,9 +626,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	
 	
 	\subsection{Tours de paroles}
-	Notre hypothèse H3 (\textit{La négociation converge plus rapidement dans le cas où les négociateurs ont un relation de dominance complémentaire. }) est validée. En effet, la négociation convergeait en moyenne plus rapidement quand une relation de dominance complémentaire s'établissait entre l'agent et le participant. De plus, les négociateurs atteignaient à un gain commun plus important. Ceci confirme que la relation interpersonnelle de dominance permet un meilleur échange d'informations au cours de la négociation en temps réduit qui aboutit à de meilleurs gains. 
+	Notre hypothèse H3 (\textit{La négociation converge plus rapidement dans le cas où les négociateurs ont un relation de dominance complémentaire. }) est validée. En effet, la négociation convergeait en moyenne plus rapidement quand une relation de dominance complémentaire s'établissait entre l'agent et le participant. De plus, dans cette même condition le gain commun atteint par les négociateurs était plus important. Ainsi, ces résultats appuient les théories de  psychologie sociales selon lesquelles la relation interpersonnelle de dominance améliore la coordination et l'échange d'informations.
 	
-	En ce qui concerne l'agent neutre, comme une relation complémentaire s'est installée et en raison du niveau d'exigence moyen de l'agent, la négociation convergeait plus rapidement qu'avec l'agent similaire et permettait aux négociateurs d'obtenir un meilleur gain. Ceci offre une autre confirmation de l'apport de la relation de dominance complémentaire à la collaboration dans la négociation. 
+		
+	En ce qui concerne l'agent neutre, la négociation convergeait rapidement à cause de deux raisons. Premièrement, avec une valeur de dominance initialisé à 0.5, l'agent avait un niveau d'exigence moyen ce qui facilitait le processus pour trouver un compromis. 
+	Deuxièmement, d'après nos résultats, dans cette condition, une relation complémentaire de dominance s'était établie entre les négociateurs ce qui facilitait la coordination. 
+	
+	En conclusion, la relation interpersonnelle de dominance améliore la coordination et l'échange d'information qui résulte en des processus de négociation court et plus efficaces. 
 	
 	\subsection{Appréciation de l'agent}
 	Nos hypothèses H4 (\textit{Le négociateur se sent plus à l'aise avec un partenaire qui exprime un comportement complémentaire})  et H5 (\textit{ La complémentarité dans la relation de dominance augmente l'appréciation entre les négociateurs.}) sont validées. 
@@ -643,7 +649,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	
 	
 	\section{Conclusion}
-	Pour cette quatrième étude, nous avions pour objectif d'étudier l'effet de la relation de dominance sur la négociation entre un agent et un participant humain. Nous nous sommes basés sur les travaux de Tienders et Wiltermuth \cite{wiltermuth2009benefits,tiedens2003domer}qui affirment que la complémentarité dans la relation de dominance avait un impact positif sur la négociation. 
+	Pour cette quatrième étude, nous avions pour objectif d'étudier l'effet de la relation de dominance sur la négociation entre un agent et un participant humain. Nous nous sommes basés sur les travaux de Tienders et Wiltermuth \cite{wiltermuth2009benefits,tiedens2003power} qui affirment que la complémentarité dans la relation de dominance avait un impact positif sur la négociation. 
 	
 	Nous avons implémenté trois agents négociateurs adoptant trois stratégies différentes, un agent complémentaire, un agent similaire et un agent neutre. 
 	63 participants ont pris part à  des négociations collaboratives avec ces agents dans le but de trouver un restaurant qui satisfassent leurs préférences. 
@@ -651,8 +657,8 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 	Les résultats ont confirmé la majorité de nos hypothèses et nous ont permis d'aller plus loin dans l'analyse des comportements de dominance dans la négociation. 
 	
 	D'abord, nous avons pu validé notre modèle de la théorie de l'esprit dans le cadre d'une interaction avec un utilisateur humain. 
-	Les résultats montrent que les participants ont été capables de percevoir une différence dans les stratégies qu'adoptaient les agents. Ceci renforce la crédibilité de notre modèle. 
+	Les résultats montrent que les participants ont été capables de percevoir une différence dans les stratégies qu'adoptaient les agents. Ceci nous permet de valider la robustesse des prédictions de notre notre modèle. 
 	
 	Par ailleurs, toutes les hypothèses relatives à l'effet positif de la relation de dominance complémentaire ont été validées. Quand les négociateurs établissaient une relation de dominance complémentaire, ils atteignaient un meilleur gain commun et ceux dans un délais plus court comparés aux autres configurations. La négociation était vécue comme plus agréable et confortable et les négociateurs semblaient mieux collaborer. 
 	
-	Les résultats ont aussi révélés des comportements qui soutiennent les travaux en psychologie sociale. En effet, en analysant les comportements exprimés lors des négociations avec l'agent neutre, nous nous sommes rendu compte qu'une relation complémentaire de dominance s'était installé entre les négociateurs. Ces résultats appuient la définition de Dunbar and Burgoon \cite{dunbar2005perceptions} qui affirment que la relation de dominance est forcément complémentaire. En outre, la relation de dominance étant interpersonnelle, elle s'établie durant l'interaction. Ce point a aussi été validé par nos analyses qui nous ont permis de montrer que les participants ont adopté des comportements de dominance différents d'une négociation à une autre. Cela confirme que les négociateurs s'adapte à leur interlocuteur pour définir une relation de dominance propre à l'interaction. 
+	Les résultats ont aussi révélés des comportements qui soutiennent les travaux en psychologie sociale. En effet, en analysant les comportements exprimés lors des négociations avec l'agent neutre, nous nous sommes rendu compte qu'une relation complémentaire de dominance s'était installé entre les négociateurs. Ces résultats appuient la définition de Dunbar and Burgoon \cite{dunbar2005perceptions} qui affirment que la relation de dominance est forcément complémentaire. En outre, la relation de dominance étant interpersonnelle, elle s'établie durant l'interaction. Ce point a aussi été validé par nos analyses qui nous ont permis de montrer que les participants ont adopté des comportements de dominance différents d'une négociation à une autre. Cela suggère que les négociateurs s'adapte à leur interlocuteur pour définir une relation de dominance propre à l'interaction. 
