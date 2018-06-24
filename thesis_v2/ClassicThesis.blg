@@ -1,0 +1,24 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ClassicThesis.aux
+The style file: biblatex.bst
+A level-1 auxiliary file: Chapters/Chapter2Etat.aux
+A level-1 auxiliary file: Chapters/CH3contributions.aux
+A level-1 auxiliary file: Chapters/CH4decisionModele.aux
+A level-1 auxiliary file: Chapters/CH5TOM.aux
+A level-1 auxiliary file: Chapters/Chapter7.aux
+A level-1 auxiliary file: Chapters/Annexe.tex.aux
+A level-1 auxiliary file: FrontBackmatter/Bibliography.aux
+A level-1 auxiliary file: FrontBackmatter/Declaration.aux
+A level-1 auxiliary file: FrontBackmatter/Colophon.aux
+Database file #1: ClassicThesis-blx.bib
+Database file #2: Library.bib
+Repeated entry---line 907 of file Library.bib
+ : @inproceedings{strassmann2016effect
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 931 of file Library.bib
+ : @book{leary2004interpersonal
+ :                             ,
+I'm skipping whatever remains of this entry
+Database file #3: AMiede_Publications.bib
+Biblatex version: 3.3
+(There were 2 error messages)
