@@ -55,14 +55,17 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 			$$dom_{other} = \operatorname*{arg\,max}_{h} (score(h))$$
 		\end{enumerate}
 		
-		\subsection{Limites de l'approche naïve}
+		\subsection{Limites de l'approche naïve: Représentation des préférences}
 			L'approche naïve repose sur deux hypothèses fortes, la première sur la validité du processus décisionnel. Cependant, comme le préconise la \emph{Simulation théorie}, se projeter à la place d'autrui est une solution plausible pour raisonner sur l'autre.
 			
-			La seconde hypothèse repose sur la capacité de notre système a générer toutes les hypothèses et à les réviser à chaque tour de parole en temps réel. Cependant, la génération de toutes les relations de préférences est coûteuse. En effet, afin de générer l'ensemble des préférences pour chaque hypothèse, nous devons considérer tout les ordres partiels $\prec_i$ pour chaque critère $C_i$.
-			
+			La seconde hypothèse repose sur la capacité de notre système a générer toutes les hypothèses et à les réviser à chaque tour de parole en temps réel. La génération de toutes les relations de préférences est coûteuse. En effet, afin de générer l'ensemble des préférences pour chaque hypothèse, nous devons considérer tout les ordres partiels $\prec_i$ pour chaque critère $C_i$.
 			Nous pouvons calculer la taille de l'ensemble des relations de préférences binaires en fonction du nombre de valeurs, fixé à $(|C_i|+1)! $ ordre partiel possibles pour chaque critère. Par conséquent, pour un sujet de négociation avec $n$ critères , il y a $\prod_{i=1}^n (|C_i|+1)!$ ensembles de préférences possibles.
 			
 			
+			Si nous considérons un exemple raisonnable, avec 5 critères. Pour chaque critère, nous considérons environ 4 à 10 valeurs possibles pour chaque domaine de critère. L'ensemble des préférences possibles pour le modèle de l'utilisateur est compris entre $ 24.10 ^ 9 $ et $ 10 ^ {38} $ ensembles de préférences possibles.
+			Nous pouvons facilement conclure qu'il n'est pas raisonnable de considérer toutes ces hypothèses, une à une, à chaque étape du dialogue.
+			
+			Cette limite nous a poussé à analyser plus en détails l'utilisation des préférences durant le processus décisionnel. Comme nous l'avions présenté dans la section .., les préférences sont requises pour calculer l'ordre de satisfiabilité des valeurs pour chaque critère. 
 
 \section{Approche adaptative: Simulation de l'autre}
 	

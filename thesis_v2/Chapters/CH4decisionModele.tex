@@ -261,7 +261,8 @@
 	\end{equation}
 	
 	En effet, une valeur est dite \textit{satisfiable} si sa valeur de satisfiabilité est plus grande que la valeur de dominance de l'agent.
-	
+	Par conséquent, pour chaque critère $C_i$, nous définissons l'ensemble $S_i$ comme l'ensemble de valeurs satisfiables. 
+		
 	Par exemple, pour le même ensemble de valeurs présentés dans l'exemple présenté dans le table \ref{tab:sat} et les mêmes relations de préférences, deux agents avec des valeurs de dominance différentes n'ont pas le même niveau d'exigence. Supposons, un agent$_A$ dont la dominance est à $dom_A=0.7$ et un autre agent$_B$ dont la dominance est à $dom_B=0.4$, pour le même ensemble de préférences ( voir table \ref{tab:sat} ), les deux agents ont un ensemble de valeurs satisfiables différents comme présenté dans la table \ref{tab:exSat}.
 	
 	\begin{table}[h]
@@ -323,12 +324,16 @@
 	\end{equation}
 	
 	\medskip
-	où $\beta>0$ est un paramètre théorique qui définit le poids accordé au niveau d'exigence.
+	où $\beta>0$ est un paramètre théorique qui définit le poids accordé au niveau d'exigence. Cette fonction est utilisée afin de déterminer si une proposition est acceptable. Par conséquent, nous notons $Ac(t)$ l'ensemble de valeurs acceptables au moment $t$ de la négociation. En effet, plus la négociation évolue plus l'agent est apte à faire des concessions. Par conséquent, le nombre de valeurs dans $Ac(t)$ évolue avec le temps. 
+	Nous notons, donc, $M(t)\subsetneq Ac(t)$ l'ensemble des valeurs non-satisfaisantes qui peuvent devenir acceptables en raison de concessions: $M(t)=Ac(t)\setminus S$.
 	
-	cette fonction est généralisable aux options $o \in O$:
-	 $$acc(dom,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(dom,t))$$. Elle est utilisée afin de déterminer si une proposition est acceptable.
+	Par exemple, ...	Ajouter exemple ici à partir d'intellisys
 	
+	La fonction d'acceptabilité est généralisable aux options $o \in O$:
+	 $$acc(dom,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(dom,t))$$
+
 	
+
 	
 	
 	\subsection {Prise en compte des préférences de soi Vs autrui}
