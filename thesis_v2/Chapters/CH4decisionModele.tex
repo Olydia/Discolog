@@ -324,10 +324,31 @@
 	\end{equation}
 	
 	\medskip
-	où $\beta>0$ est un paramètre théorique qui définit le poids accordé au niveau d'exigence. Cette fonction est utilisée afin de déterminer si une proposition est acceptable. Par conséquent, nous notons $Ac(t)$ l'ensemble de valeurs acceptables au moment $t$ de la négociation. En effet, plus la négociation évolue plus l'agent est apte à faire des concessions. Par conséquent, le nombre de valeurs dans $Ac(t)$ évolue avec le temps. 
-	Nous notons, donc, $M(t)\subsetneq Ac(t)$ l'ensemble des valeurs non-satisfaisantes qui peuvent devenir acceptables en raison de concessions: $M(t)=Ac(t)\setminus S$.
+	où $\beta>0$ est un paramètre théorique qui définit le poids accordé au niveau d'exigence. Cette fonction est utilisée afin de déterminer si une proposition est acceptable. Par conséquent, nous notons $Ac_i(t) \subseteq C_i $ l'ensemble de valeurs acceptables du critère $C_i$ au moment $t$ de la négociation. 
 	
-	Par exemple, ...	Ajouter exemple ici à partir d'intellisys
+	\begin{equation}
+	V_i(dom,t) = \{ v\in C_i : acc(dom,v,t) \}
+	\end{equation}
+	
+	En effet, plus la négociation évolue plus l'agent est apte à faire des concessions. Par conséquent, le nombre de valeurs dans $Ac(t)$ évolue avec le temps. 	Nous notons, donc, $M(t) \not \subseteq Ac(t)$ l'ensemble des valeurs non-satisfaisantes qui peuvent devenir acceptables en raison de concessions: $M(t)=Ac(t)\setminus S$.
+	
+		\begin{table} [h]
+		\centering
+		\begin{tabular}{ |c|c|c|c|c| }
+			\hline
+			value & $ch$ & $jap$ & $it$ & $fr$ \\	
+			\hline
+			sat(valeur) & 0 & 0.33 & 0.66 & 1 \\
+			\hline
+		\end{tabular}
+		\caption{$Sat$ calculé sur l'ensemble de préférences $\prec_{cuisine}$.}
+		\label{tab:ch4sat}	
+	\end{table}
+
+	Par exemple, considérons un exemple jouet avec un seul critère de cuisine contenant les valeurs suivantes: 
+	$\{$ \emph {français$ (fr)$, italien$ (it)$, japonais$ (jap)$, chinois$ (ch)$}$ \}$. En outre, l'agent a un ordre total de préférences sur ces valeurs$ \prec_ {cuisine}$$ = \{ch$$ \prec$$ jap, jap$$ \prec$$ it,  it$ $\prec$$ fr\}$. Sur la base de cet ordre de préférences $\prec_{cuisine}$, l'agent est capable de calculer la valeur de satisfiabilité associée à chaque valeur comme présenté dans la table \ref {tab:ch4sat}.
+	
+	
 	
 	La fonction d'acceptabilité est généralisable aux options $o \in O$:
 	 $$acc(dom,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(dom,t))$$
@@ -340,15 +361,10 @@
 	Selon notre second principe, les négociateurs dominants donnent plus de poids à leur propre satisfaction qu'a leur partenaires de négociation. 
 	Pour implémenter ce principe dans le contexte de la négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \emph{tolérable} pour la satisfiabilité de l'agent et de son partenaire.
 	En effet, à chaque fois que l'agent énoncera une proposition, la valeur de cette dernière doit prendre en compte les préférences des deux interlocuteurs. 
-	Donc, pour chaque critère $i\in\mathcal{C}$, considérons le sous ensemble $V_i\subseteq C_i$ de valeurs acceptables pour l'agent:
-
-	\begin{equation}
-	V_i(dom,t) = \{ v\in C_i : acc(dom,v,t) \}
-	\end{equation}
-	
+	Donc, pour chaque critère $i\in \mathcal{C}$, considérons le sous ensemble $Ac_i(t)\subseteq C_i$ de valeurs acceptables pour l'agent.
 	Cet ensemble correspond à toutes les propositions acceptables qu'un agent pourrait faire à un moment donné de la négociation.
 	
-	Nous calculons la tolérabilité d'une valeur donnée $ v \ dans V_i (dom, t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
+	Nous calculons la tolérabilité d'une valeur donnée $ v \in Ac_i(t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
 	
 	\begin{equation}
 	\begin{split}
@@ -358,7 +374,8 @@
 	\end{equation}
 	
 
-	Nous généralisons cette fonction à toute option $o=(v_1,\ldots,v_n) \in O$:
+	Nous généralisons cette fonction à toute option 
+	$o = (v_1,\ldots,v_n) \in O$:
 	
 	\begin{equation}
 	tol(o, t, \prec, A, U, dom) = \frac{ \sum_{i}^{n} tol(v_i, t, \prec_i, A_i, U_i, dom) } {n}
