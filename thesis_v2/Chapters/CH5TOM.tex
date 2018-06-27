@@ -7,26 +7,25 @@
 \clearpage
 \endgroup
 
-Comme nous l'avion mentionné dans l'introduction, la principale contribution de cette thèse est d'étudier l'impact d'une relation interpersonnelle de dominance sur les stratégies de négociations entre un agent conversationnel et un humain. 
-Pour ce faire, l'agent doit être en mesure de simuler une relation de dominance entre lui et l'utilisateur humain. Nous proposons dans ce chapitre un algorithme pour simuler cette relation de dominance. 
+Afin d'étudier l'impact d'une relation interpersonnelle de dominance sur les stratégies de négociations entre un agent conversationnel et un humain, l'agent doit être en mesure de simuler une relation de dominance entre lui et l'utilisateur humain. Nous proposons dans ce chapitre un algorithme pour simuler cette relation de dominance. 
 
 A partir de notre modèle de négociation collaborative présenté dans la chapitre \ref{chap:dec}, nous proposons une extension qui permet à l'agent de raisonner sur les comportements de dominance de son interlocuteur, et d'automatiquement adapter ses comportements à ceux perçus chez son interlocuteur dans le but de créer une relation complémentaire de dominance.
 
-Dans la section 1, nous présentons brièvement le modèle théorique de la théorie de l'esprit sur lequel se base notre approche pour raisonner sur les comportements de l'interlocuteur. Dans la suite, nous présentons une première solution naïve et nous discuterons ses limites. Ensuite, dans la section 3, nous détaillerons notre solution et nous présenterons dans la section 5 son évaluation.  
+Dans la section 1, nous présentons brièvement le modèle théorique de la théorie de l'esprit sur lequel se base notre approche pour raisonner sur les comportements de l'interlocuteur. Par la suite, nous présentons une première solution naïve et nous discuterons ses limites. Ensuite, dans la section 3, nous détaillons notre solution et nous présentons dans la section 5 son évaluation.  
 
 
 
 
 \section{Croyances sur l'autre: Théorie de l'esprit}
 La théorie de l'esprit (ToM) est un processus cognitif permettant d'attribuer des états mentaux à autrui. En effet, un individu doté de ToM est capable d'attribuer
-des états mentaux tels que des croyances, intentions et désirs à autrui afin de mieux comprendre, expliquer, prédire ou manipuler leurs comportements  \cite{harbers2012modeling}. Il a été démontré que la ToM est un concept crucial dans la compréhensions des interactions humaines. Pour cette raison, une large communauté étudie les mécanismes de la ToM. Cependant, un débat subsiste sur la nature des mécanismes de théorie de l’esprit partagé entre deux approches: une approche \textit{théorie-théorie}  \emph{(TT)} et une approche \textit{simulation théorie} \emph{(ST)}.
+des états mentaux tels que des croyances, intentions et désirs à autrui afin de mieux comprendre, expliquer, prédire ou manipuler leurs comportements  \cite{harbers2012modeling}. Il a été démontré que la ToM est un concept crucial dans la compréhension des interactions humaines. Pour cette raison, une large communauté étudie les mécanismes de la ToM. Cependant, un débat subsiste sur la nature des mécanismes de théorie de l’esprit partagé entre deux approches: une approche \textit{théorie-théorie}  \emph{(TT)} et une approche \textit{simulation théorie} \emph{(ST)}.
 Les défenseurs de la théorie-théorie(TT) postulent que la ToM s’appuie sur une représentation implicite du raisonnement de l'autre construite à partir d'un ensemble de concepts tels que les désirs, les croyances ou les plans de l'autre \cite{harbers2012modeling}. En effet, cette théorie se base sur une représentation basique de l'environnement \emph{"folk theory"}. A partir de comportements observés chez l'autre, l'individu fait des inférences théoriques sur ses états mentaux \cite{shanton2010simulation}.
 
 En revanche, les partisans de simulation théorie(ST)  suggèrent que  que les humains ont la capacité de se projeter dans la perspective d'une autre personne \cite{shanton2010simulation}.
 Par conséquent, ils peuvent simuler l'activité mentale d'autrui avec leurs propres capacités de raisonnement pratiques. Cela leurs permet d'imiter l'état mental de leurs partenaire interactionnel \cite{harbers2009modeling}.
 Par ailleurs, cette approche stipule qu'il n'est pas pas nécessaire d'être capable d'introspection complète de l'autre pour simuler ses processus mentaux. En d'autres mots, il n'est pas nécessaire de catégoriser toutes les croyances et les désirs attribués à cette personne pour pouvoir simuler son état mental \cite{harbers2012modeling}.
 
-Enfin, les partisans de la \emph{ST} ajoutent que simulation est plus efficace que l'acquisition d'une théorie complète. Pour ces raisons, certains partisans de la théorie-théorie admettent qu'au moins une certaine forme de simulation doit avoir lieu lorsque les gens raisonnent au sujet d'autrui, et incorporent des aspects de simulation dans une approche théorie-théorie \cite{harbers2012modeling}.
+Enfin, les partisans de la \emph{ST} ajoutent que la simulation est plus efficace que l'acquisition d'une théorie complète. Pour ces raisons, certains partisans de la théorie-théorie admettent qu'au moins une certaine forme de simulation doit avoir lieu lorsque les gens raisonnent au sujet d'autrui, et incorporent des aspects de simulation dans une approche théorie-théorie \cite{harbers2012modeling}.
 
 Dans le contexte de cette thèse, nous utiliserons l'approche de \emph{simulation théorie (ST)} qui permet d'utiliser le modèle de décision de l'agent pour raisonner sur les comportements de dominance de l'interlocuteur. 
 
@@ -37,7 +36,7 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 \section{Approche naïve}
 	Notre but est de proposer un modèle de négociation collaborative capable de simuler une relation interpersonnelle de dominance. La relation de dominance étant complémentaire, l'agent doit être capable de prédire les comportements de dominance de son interlocuteur afin d'adopter un comportement complémentaire comme présenté dans la figure. Nous proposons une solution basé sur la \emph{ST}, pour laquelle nous adaptons le modèle décisionnel de l'agent pour raisonner sur les comportements de son interlocuteur. 
 	
-	Le modèle décisionnel proposé est régi par l'état mental: les préférences du négociateur ainsi que sa position dans le spectre de dominance. Une proposition naïve consisterait à formuler des hypothèses sur l'état mental de l'interlocuteur, pour chaque hypothèse, appeler le modèle décisionnel de l'agent pour simuler les réponses possibles dans le contexte courent de la négociation. Ensuite, nous comparons les réponses produites par la simulation avec l'acte de dialogue de l'utilisateur $utterance_{other}$ produite dans l'étape 3 (voir la figure). 
+	Le modèle décisionnel de l'agent est régi par son état mental: ses préférences ainsi que sa position dans le spectre de dominance. Une proposition naïve pour adapter ce modèle afin qu'il raisonne sur les comportements de l'interlocuteur consisterait à formuler des hypothèses sur l'état mental de l'interlocuteur. Pour chaque hypothèse, appeler le modèle décisionnel de l'agent pour simuler les réponses possibles dans le contexte courent de la négociation. Ensuite, nous comparons les réponses produites par la simulation avec l'acte de dialogue de l'utilisateur $utterance_{other}$ produite dans l'étape 3 (voir la figure). 
 	La dernière étape consiste à mettre à jours les hypothèses jusqu'à converger à une valeur de dominance précise. 
 	
 	Cette approche repose toutefois sur quelques hypothèses fortes. Tout d'abord, nous supposons que le modèle de décision est une représentation précise du processus décisionnel de l'utilisateur. Il n'y a aucun moyen de garantir cette hypothèse. Cependant, dans le chapitre \ref{chap:dec}, nous avons montré que les comportements de dominance exprimés par les agents sont correctement perçus par les utilisateurs humains. La seconde hypothèse repose sur la capacité de notre système à générer toutes les hypothèses sur l'état mental de l'interlocuteur pour n'importe quel sujet de négociation. C'est à dire, pour chaque hypothèse sur une valeur de dominance, générer l'ensemble de modèles de préférences $\prec_i$ pour chaque critère.
@@ -46,9 +45,9 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 
 		\begin{enumerate}
 			\item Construire l'ensemble $H_{dom}$ des hypothèse sur la valeur de dominance: $h\in H_{dom}$ représente l'hypothèse $dom=h$. Nous considérons 9 valeurs de dominance: $H_{dom}=\{0.1, 0.2, \ldots, 0.9\}$.
-			\item Pour chaque hypothèse $h$, construire l'ensemble des préférences possibles $Prec_h$: les éléments $p\in Prec_h$ sont des préférences d'ordre partiels définis sur les critères du sujet de négociation.
+			\item Pour chaque hypothèse $h$, construire l'ensemble des préférences possibles $Prec_h$: les éléments $p\in Prec_h$ sont des préférences d'ordre partiel définis sur les critères du sujet de négociation.
 			
-			\item Après chaque acte de dialogue reçu $u$, supprimer tout les élements de $Prec_h$ qui ne sont pas compatibles avec $u$. Concrètement, si la condition d'applicabilité d' $u$ n'est pas satisfaite dans $p \ dans Prec_h$, alors $p$ doit être retiré des états mentaux candidats.
+			\item Après chaque acte de dialogue reçu $u$, supprimer tout les élements de $Prec_h$ qui ne sont pas compatibles avec $u$. Concrètement, si la condition d'applicabilité d' $u$ n'est pas satisfaite dans $p \in Prec_h$, alors $p$ doit être retiré des états mentaux candidats.
 			\item Pour chaque $h$, générer l'acte de dialogue correspondant en utilisant $h$ comme état mental pour le processus décisionnel.
 			\item Calculer le $score(h)$ comme le nombre d'hypothèses restantes $|Prec_h|$ générant le même acte de dialogue que celle produite par l'interlocuteur $Utterance_{other}$. 
 			\item 	L'hypothèse avec le score le plus élevé est est considéré comme la plus proche de l'état mental de l'interlocuteur.
@@ -56,28 +55,206 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 		\end{enumerate}
 		
 		\subsection{Limites de l'approche naïve: Représentation des préférences}
-			L'approche naïve repose sur deux hypothèses fortes, la première sur la validité du processus décisionnel. Cependant, comme le préconise la \emph{Simulation théorie}, se projeter à la place d'autrui est une solution plausible pour raisonner sur l'autre.
+			L'approche naïve repose sur deux hypothèses fortes, la première sur la validité du processus décisionnel. Cependant, comme le préconise la \emph{simulation théorie}, se projeter à la place d'autrui est une solution plausible pour raisonner sur l'autre.
 			
 			La seconde hypothèse repose sur la capacité de notre système a générer toutes les hypothèses et à les réviser à chaque tour de parole en temps réel. La génération de toutes les relations de préférences est coûteuse. En effet, afin de générer l'ensemble des préférences pour chaque hypothèse, nous devons considérer tout les ordres partiels $\prec_i$ pour chaque critère $C_i$.
-			Nous pouvons calculer la taille de l'ensemble des relations de préférences binaires en fonction du nombre de valeurs, fixé à $(|C_i|+1)! $ ordre partiel possibles pour chaque critère. Par conséquent, pour un sujet de négociation avec $n$ critères , il y a $\prod_{i=1}^n (|C_i|+1)!$ ensembles de préférences possibles.
+			Nous pouvons calculer la taille de l'ensemble des relations de préférences binaires en fonction du nombre de valeurs. Ainsi, pour un critère $C_i$, l'ensemble ordre partiel possibles est  $(|C_i|+1)! $. Par conséquent, pour un sujet de négociation avec $n$ critères , il y a $\prod_{i=1}^n (|C_i|+1)!$ ensembles de préférences possibles.
 			
 			
 			Si nous considérons un exemple raisonnable, avec 5 critères. Pour chaque critère, nous considérons environ 4 à 10 valeurs possibles pour chaque domaine de critère. L'ensemble des préférences possibles pour le modèle de l'utilisateur est compris entre $ 24.10 ^ 9 $ et $ 10 ^ {38} $ ensembles de préférences possibles.
 			Nous pouvons facilement conclure qu'il n'est pas raisonnable de considérer toutes ces hypothèses, une à une, à chaque étape du dialogue.
 			
-			Cette limite nous a poussé à analyser plus en détails l'utilisation des préférences durant le processus décisionnel. Comme nous l'avions présenté dans la section .., les préférences sont requises pour calculer l'ordre de satisfiabilité des valeurs pour chaque critère. 
+			Cette limite nous a poussé à analyser plus en détails l'utilisation des préférences durant le processus décisionnel. Comme nous l'avions présenté dans la section .., les préférences sont requises pour calculer la satisfiabilité des valeurs pour chaque critère. Cette valeur de satisfiabilité est essentielle durant le processus décisionnel. Pour cause, l'agent l'utilise principalement pour calculer l'ensemble de valeurs satisfiables $S$ ainsi que les valeurs acceptables $Act(t)$.
+			
+			La satisfiabilité est calculée à partir du nombre de prédécesseurs dans l'ordre des relations binaires de préférences. 
+			Supposons un \textit{ordre total} de préférences $\prec_j$, dans lequel toutes les valeurs sont comparables, donc nous avons $|\prec_j| -1$ relations binaires de préférences. Indépendamment des valeurs elles-mêmes, en connaissant seulement le nombre de valeurs, nous somme capables de calculer la satisfiabilité de chaque valeur à partir de son rang dans l'ordre de préférences.
+			
+			Par exemple, considérons le critère cuisine composé de quatre valeurs $\{jap,it,fr,ch\}$ sur lequel est défini un ensemble de préférences d'ordre total $\prec_{cuisine} = \{jap$$\prec$ $fr, fr$$\prec$$ ch, ch$$\prec$$it\}$, la satisfiabilité des valeurs est présenté dans la table \ref{tab:ex2_sat}. Considérons maintenant, un second ordre total de préférences $\prec'_{cuisine} = \{it$$\prec$ $jap, jap$$\prec$$ fr, fr$$\prec$$ch\}$, nous remarquons que les valeurs de satisfiabilité sont les mêmes que celles pour le modèle $\prec_{cuisine}$ illustré dans la table \ref{tab:ex2_sat}. 
+			
+			
+				 	\begin{table} [h]
+				 		\centering
+				 		\caption{Valeurs de satisfiabilité des éléments du critères $cuisine$.}
+				 		\begin{tabular}{ |c|c|c|c|c| }
+				 			\hline
+				 			value & $jap$ & $fr$ & $ch$ & $it$ \\	
+				 			\hline
+				 			sat(value) $\prec_{cuisine}$ & 0 & 0.33 & 0.66 & 1 \\
+				 			\hline
+				 			sat(value) $\prec'_{cuisine}$ & 0.33 & 0.66 & 1 & 0 \\
+				 			\hline
+				 		\end{tabular}
+				 		
+				 		\label{tab:ex2_sat}
+				 		
+				 	\end{table}
+				 	
+			Par conséquent, dans un ordre total de préférence pour un critère donné, seul le nombre de valeurs est nécessaire pour définir leur rang dans l'ordre de préférences et ainsi calculer leur satisfiabilités comme il est présenté dans la table \ref{tab:poss}. 
+			
+			
+			\begin{table}[h]
+				\caption{Satisfiabilité déduite à partir d'un ensemble de quatre éléments.}
+				\label{tab:poss}
+				\centering
 
-\section{Approche adaptative: Simulation de l'autre}
+				\begin{tabular}{ |c|c|c|c|c| }
+					\hline				
+					rang(valeur) & 1 & 2 & 3 & 4 \\
+					\hline
+					Nb prédécesseurs & 3 & 2 & 1& 0 \\
+					\hline
+					$sat(valeur)$ & 0 & 0.33 & 0.66 &1 \\
+					\hline
+				\end{tabular}
+			\end{table}
+		
+		A partir  des valeurs de satisfiabilité d'un critère donné, et la valeur de dominance de l'agent $dom$, nous pouvons déduire le nombre de valeurs satisfiables, sans pour autant connaître les relations binaires de préférences. 
+		
+		Par exemple, pour le critère $cuisine$ présenté plus haut, associé à une valeur de dominance $dom= 0.6$
+		nous pouvons calculer la taille de l'ensemble $S$ pour n'importe quel modèle de préférences d'ordre total. En effet, à partir des valeurs de satisfiabilité présentées dans la table \ref{tab:poss},  nous pouvons conclure que le nombre de valeurs satisfiables de l'agent est toujours $|S| = 2$.
+		
+		Dans le but de réduire le coût généré par la simulation des relations de préférences possibles de l'interlocuteur, nous proposons une modélisation partielle de son état mental en calculant uniquement le nombre de valeurs satisfiables $|S|$ pour chaque critère. Concrètement, considérons un critère avec $n$ valeurs défini avec un ordre total de préférences. Pour une valeur de dominance $dom$ donnée, nous pouvons calculer la taille de l'ensemble $S$ que nous notons $s$. 
+		Par conséquent, nous générons uniquement des hypothèses sur les valeurs $v \in S$ qui seront satisfiables pour l'agent. Ainsi,
+		la génération des hypothèses concernant les valeurs de l'ensemble $S$ sont au nombre de  $\binom{n}{s}$ possibilités. 
+		Par exemple, pour le critère $cuisine$ et une valeur de dominance $dom =0.6$, nous avons déduit la taille de l'ensemble $S$ à $s=2$. Donc, la génération des hypothèses sur les valeurs satisfiables possible est au nombres de 6 modèles comme il est présenté dans la table \ref{tab:sat_poss}.
+		\begin{table}[h]
+			\centering
+			\caption{L'ensembles des $S$ possibles pour le critère $cuisine$, avec $dom=0.6$}
+			\label{tab:sat_poss}
+			\large
+			\begin{tabular}{|c|c|c|}%|p{1.9cm}|p{2.25cm}|p{2cm}|p{2.25cm}|p{2cm}|p{2.25cm}| }
+				\hline
+				$S_1=(it,fr)$& $S_2=(it,jap)$ & $S_3=(it,ch)$\\
+				\hline
+				$S_4=(fr,jap)$ & $S_5=(fr,ch)$ & $S_6=(jap,ch)$ \\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+		Cette représentation partielle des préférences à l'avantage de réduire l'ensemble des hypothèses en comparaison à l'approche naïve qui nécessitait une représentation complète des préférences. En effet, Si l'on considère le même exemple, avec 5 critères et 10 valeurs par critère, le nombre maximum d'hypothèses à considérer pour une valeur de dominance donnée est de $ \binom {10} {5} = 252 $ (cette valeur est maximale pour $ dom = 0,5 $).
+		
+		Cependant, simuler le comportement de l'interlocuteur avec une connaissance incomplète de son état mental a deux conséquences.
+		Premièrement, il faut réviser  le modèle décisionnel de l'agent pour qu'il puisse gérer une représentation partielle des valeurs satisfiables $S$ et les valeurs acceptables $Ac(t)$. Deuxièmement, cette adaptation pourrait affecter la précision des prédictions des comportements de dominance de l'interlocuteur.
+		
+		Dans la suite de ce chapitre, nous présentons notre modèle de raisonnement avec connaissance partielle ainsi que son évaluation. 
+		
+			
+
+\section{Modèle de raisonnement avec représentation partielle de l'état mental}
+	La représentation partielle de l'état mentale repose sur une hypothèse forte. En effet, nous faisons l'hypothèse que l'interlocuteur a un \textit{ordre total} sur ses préférences. Par conséquent, pour chaque hypothèse $h\in H_{dom} $ formulée sur la valeur de dominance, et pour chaque critère, nous générons le nombre de valeurs satisfiables $s$ qui nous permet par la suite de calculer les hypothèses possibles sur les valeurs satisfiables $v\in S$ que nous notons $M_h(dom)$. Nous présentons dans la table ~\ref{tab:hypo} un exemple de génération des hypothèses sur les valeurs satisfiables calculées pour le critère $cuisine$. 
+
+
+		\begin{table}[!tb]
+			\centering
+			\caption{Hypothèses sur les valeurs satisfiables du critère $cuisine$}
+			\begin{tabular}{ |p{2cm}|p{1.5cm}|p{8cm}| }
+				\hline
+				& \multicolumn{2}{c|}{Hypothèses}  \\
+				\hline
+				Hypothèse & $h_i(dom)$ & Hypothèses des valeurs satisfiables $ M_h(h_i)$\\
+				\hline
+				H1&0.3&$\{(fr,it,jap)\}$, $\{(fr,it,ch)\}$, $\{(fr,jap,ch)\}$, $\{(it,jap,ch)\}$ \\
+				\hline
+				H2&0.4&$\{(fr,it)\}$, $\{(fr,jap)\}$, $\{(fr,ch)\}$, $\{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$ \\
+				\hline
+				H3&0.5&$\{(fr,it)\}$, $\{(fr,jap)\}$, $\{(fr,ch)\}$, $\{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$\\
+				\hline
+				H4&0.6&$\{(fr,it)\}$, $\{(fr,jap)\}$, $\{(fr,ch)\}$, $\{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch)\}$ \\
+				\hline
+				H5&0.7&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$\\
+				\hline
+				H6&0.8&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$ \\
+				\hline
+				
+				H7&0.9&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$ \\
+				\hline
+			\end{tabular}		
+			\label{tab:hypo}
+		\end{table}
+		
+	A partir de de l'acte de dialogue reçu par l'interlocuteur $utterance_{other}$, l'agent doit simuler le comportement de l'interlocuteur pour chaque hypothèse $h_i \in H_{dom}$ et ce pour chaque hypothèse sur les préférences partielles. Pour ce faire, nous présentons l'adaptation du modèle décisionnel de l'agent pour gérer l'incertitude sur les préférences de l'interlocuteur. 
+	
+
+	La proposition générale de ce modèle consiste à réviser les hypothèses sur l'état mental de l'interlocuteur après chaque réception d'un nouvel acte dialogique de l'interlocuteur $utterance_{other}$. Suivant le type d'acte de dialogue reçu, l'agent calcule pour chaque hypothèse, un score $score(h_i,t)$ représentant l'exactitude de cette hypothèse à représenter le comportement exprimé par l'interlocuteur. Ensuite, l'agent associe la valeur de dominance de l'interlocuteur à l'hypothèse qui a obtenu le meilleur score:
+				\begin{equation}
+				dom_{other} = \operatorname*{arg\,max}_{h_i \in H_{dom}} (score(h_i,t))
+				\end{equation}
+		
+	Nous détaillons le processus de simulation en fonction de l'acte de dialogue reçu. En effet, pour chaque acte, l'agent va faire appel à un module de décision qui reflète un principe de dominance. Par conséquent, nous présentons l'adaptation de chaque module décisionnel pour simuler le comportement de l'interlocuteur avec des connaissances partielles. 
+	
+	\subsection{Contrôle de la négociation}	
+	
+	Nous avons présenté dans la section \ref{chp4:controle} l'algorithme pour le choix d'un acte de dialogue prenant en compte la valeur de dominance. Nous avons démontré qu'une valeur haute dans le spectre de dominance se traduisait pour une utilisation fréquentes des \emph{actes de négociations}. A l'opposé, une expression fréquente des \emph{actes informatif} traduisait un comportement de soumission (faible dominance). 
+	
+	Nous notons \textit{history}, la liste des actes de dialogue énoncé par l'interlocuteur tout au long de la négociation. La dominance de l'interlocuteur est calculée à partir du ratio des actes \emph{propose} versus \emph{ask} :
+		
+		\begin{equation}
+		pow_{other} = \left\{\begin{array}{ll}
+		> 0.5 & \mathrm{if } \frac{history(Propose)}{hisotry} > 0.5\\
+		\leq 0.5 & \mathrm{if  } \frac{history(Ask)}{hisotry} > 0.5
+		\end{array}\right.
+		\end{equation}
+		
+	Cette fonction est utilisée afin de restreindre le nombre d'hypothèses à partir uniquement du type de l'acte de dialogue. L'ensemble restreint est ensuite utilisé pour simuler la valeurs exprimé dans l'acte de dialogue. Par exemple, à la réception d'un $propose(chinese)$, l'agent utilise la fonction 2.2 pour restreindre les hypothèses à considérer pour simuler l'obtention de la valeur $chinese$. Supposons que $\frac{history(Propose)}{history} > 0.5$, alors l'agent simulera l'obtention de la valeur $chinese$ sur les hypothèses $\{h_4 - h_9\}$.
+	
+	
+	\subsection{Partager des préférences}
+		A la réception d'un acte de dialogue \emph{StatePreference(v,s)}, l'interlocuteur exprime une préférence vis à vis de la valeur $v$. Si $s =true$, la valeur $v$ est considérée comme satisfiable $v \in S$, sinon $v \not \in S$ (I don't like v). 
+		
+		Pour calculer la satisfiabilité d'une valeur  $v \in C_i$ dans les hypothèses, il suffit de vérifier pour chaque $h_i \in H_{dom}$ si cette valeur appartient à un ensemble $S_i \in M_h(dom)$ :
+		
+				\begin{equation}
+				sat_{S_i}(v)= \left\{\begin{array}{ll}
+				True	 & \mathrm{if\ }  v \in S_i\\
+				False & \mathrm{otherwise}
+				\end{array}\right.
+				\end{equation}
+				
+		Par conséquent, a chaque fois que l'agent apprend une nouvelle connaissance sur les préférences de son interlocuteur, il met à jours ses hypothèses  comme suit: 
+			Pour chaque hypothèse $h_i \in H_{dom}$, l'agent supprime toutes les hypothèses $M_h(h_i)$ qui ne sont plus consistantes avec l'information apprises, par exemple si $v$ est satisfiable mais dans une hypothèse $v \not \in S_i$. En conséquences, nous calculons le score de chaque hypothèse $h_i$ à un moment $t$ comme suit: 
+			
+			$$score(h_i,t) = \frac{|M_h(h_i, t)|}{|M_h(h_i, init)|}$$
+			
+			Tel que $init$ représente les hypothèses à l'état initial $(t=0)$.
+		
+		\subsubsection{Exemple}
+				Supposons que l'interlocuteur a exprimé un  $\emph{StatePreference(fr, true)}$. Par conséquent, l'agent doit supprimer toutes les hypothèses où $fr \not\in S_i$. La mise à jour de chaque hypothèse et leurs scores respectifs sont présentés dans la table~\ref{tab:update_hyp}. 
+				
+				Par exemple, pour l'hypothèse $h_4$, sur les six hypothèses initiale, l'agent en supprime trois: $(\{(it,jap)\}$, $\{(it,ch)\}$, $\{(jap,ch))$. Au final, $score(h_4) = 0.5$. 
+				\begin{table}[h]
+					\centering
+					\caption{Hypothèses pour le critère $cuisine$ après réception d'un $StatePreference(fr,true$)}
+					\begin{tabular}{ >{\centering\arraybackslash}m{1.8cm} >{\centering\arraybackslash}m {1.2cm} >{\centering\arraybackslash}m{7.2cm} >{\centering\arraybackslash}m{1.6cm}}
+						\hline
+						\hline
+						& \multicolumn{3}{c}{Hypothèses}  \\
+						\hline
+						\hline
+						Hypothèse & $h_i(pow)$ & \centering Hypothèses sur $ M_h(h_i)$ & $Score(h_i,t)$\\
+						\hline
+						H1&0.3& \centering $\{(fr,it,jap)\}$, $\{(fr,it,ch)\}$, $\{(fr,jap,ch)\}$ & $3/4$ \\
+						\hline
+						H2&0.4& \centering $\{(fr,it)\}$,$\{(fr,jap)\}$, $\{(fr,ch)\}$ & $0.5$ \\
+						\hline
+						H3&0.5& \centering $\{(fr,it)\}$,$\{(fr,jap)\}$, $\{(fr,ch)\}$ & $0.5$\\
+						\hline
+						H4&0.6& \centering$\{(fr,it)\}$,$\{(fr,jap)\}$, $\{(fr,ch)\}$& $0.5$ \\
+						\hline
+						H5&0.7&\centering $\{(fr)\}$ & $1/4$\\
+						\hline
+						H6&0.8& \centering $\{(fr)\}$ &$1/4$\\
+						\hline
+						
+						H7&0.9& \centering $\{(fr)\}$ &$1/4$\\
+						\hline
+						\hline
+					\end{tabular}		
+					\label{tab:update_hyp}
+				\end{table}
+				
+	\subsection{Exprimer des propositions}
+		
 	
 \section{Évaluation}
-
-\section{Exemple}
-
-
-Approche computationnelle
-
-Exemples
-
-Etude
 
 conculsion
