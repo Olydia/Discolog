@@ -147,9 +147,11 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 		\begin{table}[!tb]
 			\centering
 			\caption{Hypothèses sur les valeurs satisfiables du critère $cuisine$}
-			\begin{tabular}{ |p{2cm}|p{1.5cm}|p{8cm}| }
+			\begin{tabular}{ p{2cm} p{1.5cm} p{8cm}}
 				\hline
-				& \multicolumn{2}{c|}{Hypothèses}  \\
+				\hline
+				& \multicolumn{2}{c}{Hypothèses}  \\
+				\hline
 				\hline
 				Hypothèse & $h_i(dom)$ & Hypothèses des valeurs satisfiables $ M_h(h_i)$\\
 				\hline
@@ -168,6 +170,7 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 				
 				H7&0.9&$\{(fr)\}, \{(it)\}, \{(jap)\}, \{(ch)\}$ \\
 				\hline
+				\hline
 			\end{tabular}		
 			\label{tab:hypo}
 		\end{table}
@@ -184,9 +187,9 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 	
 	\subsection{Contrôle de la négociation}	
 	
-	Nous avons présenté dans la section \ref{chp4:controle} l'algorithme pour le choix d'un acte de dialogue prenant en compte la valeur de dominance. Nous avons démontré qu'une valeur haute dans le spectre de dominance se traduisait pour une utilisation fréquentes des \emph{actes de négociations}. A l'opposé, une expression fréquente des \emph{actes informatif} traduisait un comportement de soumission (faible dominance). 
+	Nous avons présenté dans la section \ref{chp4:controle} l'algorithme pour le choix d'un acte de dialogue prenant en compte la valeur de dominance. Nous avons démontré qu'un agent avec une valeur haute dans le spectre de dominance utilisait plus fréquemment des \emph{actes de négociations}. A l'opposé, une expression fréquente des \emph{actes informatif} traduisait un comportement de soumission (faible dominance). 
 	
-	Nous notons \textit{history}, la liste des actes de dialogue énoncé par l'interlocuteur tout au long de la négociation. La dominance de l'interlocuteur est calculée à partir du ratio des actes \emph{propose} versus \emph{ask} :
+	Nous notons \textit{history}, la liste des actes de dialogue énoncés par l'interlocuteur tout au long de la négociation. L'estimation de la dominance de l'interlocuteur est calculée à partir du ratio des actes \emph{propose} versus \emph{ask} :
 		
 		\begin{equation}
 		pow_{other} = \left\{\begin{array}{ll}
@@ -195,13 +198,13 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 		\end{array}\right.
 		\end{equation}
 		
-	Cette fonction est utilisée afin de restreindre le nombre d'hypothèses à partir uniquement du type de l'acte de dialogue. L'ensemble restreint est ensuite utilisé pour simuler la valeurs exprimé dans l'acte de dialogue. Par exemple, à la réception d'un $propose(chinese)$, l'agent utilise la fonction 2.2 pour restreindre les hypothèses à considérer pour simuler l'obtention de la valeur $chinese$. Supposons que $\frac{history(Propose)}{history} > 0.5$, alors l'agent simulera l'obtention de la valeur $chinese$ sur les hypothèses $\{h_4 - h_9\}$.
+	Cette fonction est utilisée afin de restreindre le nombre d'hypothèses à partir uniquement du type de l'acte de dialogue. cet ensemble restreint est ensuite utilisé pour prédire la valeur de dominance à partir de la valeurs exprimé dans l'acte de dialogue. Par exemple, à la réception d'un $propose(chinese)$, l'agent utilise la fonction 2.2 pour restreindre les hypothèses à considérer pour prédire le comportement de l'utilisateur qui l'a mené à choisir la valeur $chinese$. Supposons que $\frac{history(Propose)}{history} > 0.5$, alors l'agent simulera l'obtention de la valeur $chinese$ sur les hypothèses $\{h_4 - h_9\}$.
 	
 	
 	\subsection{Partager des préférences}
-		A la réception d'un acte de dialogue \emph{StatePreference(v,s)}, l'interlocuteur exprime une préférence vis à vis de la valeur $v$. Si $s =true$, la valeur $v$ est considérée comme satisfiable $v \in S$, sinon $v \not \in S$ (I don't like v). 
+		A travers un acte de dialogue \emph{StatePreference(v,s)}, l'interlocuteur exprime une préférence vis à vis de la valeur $v$. Si $s =true$, la valeur $v$ est considérée comme satisfiable $v \in S$, sinon $v \not \in S$ (I don't like v). 
 		
-		Pour calculer la satisfiabilité d'une valeur  $v \in C_i$ dans les hypothèses, il suffit de vérifier pour chaque $h_i \in H_{dom}$ si cette valeur appartient à un ensemble $S_i \in M_h(dom)$ :
+		Par conséquent, à la réception d'un \emph{StatePreference(v,s)}, l'agent doit calculer la satisfiabilité de la valeur  $v \in C_i$ dans les hypothèses. Pour ce faire, il suffit de vérifier pour chaque $h_i \in H_{dom}$ si cette valeur appartient à un ensemble $S_i \in M_h(dom)$ :
 		
 				\begin{equation}
 				sat_{S_i}(v)= \left\{\begin{array}{ll}
@@ -210,8 +213,9 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 				\end{array}\right.
 				\end{equation}
 				
-		Par conséquent, a chaque fois que l'agent apprend une nouvelle connaissance sur les préférences de son interlocuteur, il met à jours ses hypothèses  comme suit: 
-			Pour chaque hypothèse $h_i \in H_{dom}$, l'agent supprime toutes les hypothèses $M_h(h_i)$ qui ne sont plus consistantes avec l'information apprises, par exemple si $v$ est satisfiable mais dans une hypothèse $v \not \in S_i$. En conséquences, nous calculons le score de chaque hypothèse $h_i$ à un moment $t$ comme suit: 
+		Par conséquent, à chaque fois que l'agent apprend une nouvelle connaissance sur les préférences de son interlocuteur, il met à jours ses hypothèses  comme suit: 
+			Pour chaque hypothèse $h_i \in H_{dom}$, l'agent supprime toutes les hypothèses $M_h(h_i)$ qui ne sont plus consistantes avec l'information apprise. Par exemple si $v$ est satisfiable mais dans une hypothèse $v \not \in S_i$, l'hypothèse $S_i$ doit être supprimer.
+			 En conséquences, nous calculons le score de chaque hypothèse $h_i$ à un moment $t$ comme suit: 
 			
 			$$score(h_i,t) = \frac{|M_h(h_i, t)|}{|M_h(h_i, init)|}$$
 			
@@ -253,8 +257,68 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 				\end{table}
 				
 	\subsection{Exprimer des propositions}
+		A la réception d'un acte de dialogue \emph{Accept(p)} ou \emph{Propose(p)}, cela traduit que la valeur $p$ est acceptable $p \in Ac(t)$. 
+		Par conséquent, l'agent doit calculer pour chaque hypothèse $h_i \in H_{dom}$, l'acceptabilité de la valeur $p$. 
 		
+		Rappelons que l'acceptabilité d'une valeur $p$ dépend de la fonction $self(t)$ (voir section \ref{sec:concessions}), tel qu'une valeur $v$ est dite acceptable si et seulement si $sat(v) \geq self(t)$. Cette fonction représente le niveau de concession que l'agent est capable de faire au moment $t$. Par conséquent, la valeur $self(t)$ est amenée à décroître durant la négociation, causant le changement des valeurs dans l'ensemble $Ac(t)$. En effet, à l'état initial $(t=0)$, $self(0) = dom$ et donc $Ac(0) = S$. Avec l'évolution de la négociation amenant l'agent à faire des concessions, $self(t)$ décroît. Ainsi, de nouvelles valeurs, initialement, non satisfiables deviennent acceptables, ces valeurs sont notées $M(t)$. Donc $ Ac(t) = S + M(t)$.
+		
+		La première étape pour calculer le score d'acceptabilité d'une valeur $p$, consiste donc, à définir pour chaque hypothèse $h_i \in H_{dom}$, la valeur de la fonction $self_i(t)$ associée, représentant le niveau de concessions de cette hypothèse à l'état courant de la négociation. 
+		La seconde étape consiste à calculer le nombre de valeurs acceptables $Ac_i(t)$ comme nous l'avons précédemment fait avec l'ensemble $S_i$. De plus, en cas  où $self_i(t) > h_i$ l'agent doit calculer le nombre de valeurs initialement non satisfiables qui sont devenues maintenant acceptables $M_i(t)$.
+		
+		Par exemple, reprenons le critère $cuisine$ avec ces quatre valeurs et la valeur $dom=0.6$. La négociation ayant évoluée, la valeur décroît à $self(t) = 0.3$. 
+		Selon la table \ref{tab:poss}, le nombre de valeurs acceptables durant l'état courent $Ac(t) = 3$. Donc $M(t) =1$. Une nouvelle valeur est maintenant acceptable. 
+		
+		Le problème qui se pose avec la modélisation partielle des préférences est qu'on dispose uniquement d'hypothèses sur $S$. Par conséquent, il n'est pas possible de savoir quelle valeur $v \not \in S$ est maintenant $v \in M(t)$. Il faut alors adapter le calcul du score d'acceptabilité pour gérer ce manque de connaissance.
+		
+		Nous proposons une fonction capable d'énumérer les possibilités qu'une valeur $p$ soit acceptable $p \in Ac(t)$ considérant les différents cas: 
+			\begin{itemize}
+				\item $p \in S_i$ est satisfiable.
+				\item $p \in M_i(t)$ est devenue acceptable. 
+			\end{itemize} 
+		Pour ce faire, nous considérons les valeurs d'entrées suivantes:
+		 pour chaque hypothèse $h_i \in H_{dom}$, pour chaque hypothèse sur les préférences $S_i \in M_h(h_i)$, et l'ensemble des valeurs déjà acceptées durant la négociation $A$.
+		 Le score d'acceptabilité d'une valeur $p \in C_i$ est calculé comme suit:
+			  \begin{equation}
+			  \centering
+			  Acc(p, h_i) = C_{|C_i|-(|S_i| + k)}^{|M_i(t)| - k}
+			  \end{equation}
+		 tel que $k = |K| $ est l'ensemble des valeurs acceptées qui ne sont pas satisfiables dans l'hypothèse $K=A \cap \overline S_i$. Cette fonction calcule les différentes possibilités pour obtenir des ensembles de $M_i(t)$ tels que $p \in Ac_i(t)$. 
+		 
+		 Ensuite, la fonction est normalisée pour pouvoir comparer les différentes hypothèses $h_i \in H_{dom}$. Ainsi, pour chaque hypothèse, le score d'acceptabilité est normalisé en utilisant une fonction représentant le cas "idéal" où toutes les valeurs sont acceptables: 
+		 		$$I_{dom} = C_{|C_i|-|S_i|}^{|M_i(t)|}$$
+		 		
+		 La valeur finale d'acceptabilité est obtenue:
+		 
+		 	\begin{equation}
+			 	score(h_i, t)= \left( \begin{array}{c}  \frac{1}{I_{dom}} \cdot \sum_{S_i \in M_h(h_i) } acc(p, h_i) 
+			 	\end{array}\right) \frac{1}{| M_h(h_i)|}
+		 	\end{equation} 
+		 
+		   
+		\subsubsection{Exemple: }   
+			L'agent reçoit l'acte de dialogue \emph{Accept(jap)}. Nous prenons comme exemple, $h_4$ pour calculer le score d'acceptabilité de $jap$.
+			
+			Due à la représentation partielle des préférence, l'agent dispose uniquement de connaissance sur $S_i \in M_h(h_i)$.
+			Dans le cous où aucune concessions n'est possible ($self_i(t)=h_i$), l'agent peut déduire l'ensemble de valeurs acceptables car $|Ac_i(t)| = s$.
+			
+			Néanmoins, si nous supposons que  $self_i(t)=0.3$, le nombre de valeurs acceptables $|Ac_4(t)| = 3$.  Par conséquence, l'agent déduit qu'une nouvelle valeur est acceptable $|M_4(t)|=1$, mais est incapable de déduire de quelle valeur il s'agit. Par exemple, la première hypothèse dans l'ensemble $h_4$: $S_i = \{fr, it\}$, l'agent ne peut pas déduire si la valeur qui est devenue acceptable est la valeur $jap$ ou $ch$. La fonction d'acceptabilité avec la prise en compte d'incertitude définit le score d'acceptabilité de $jap$ : 
+			$ acc(jap, h4) = C^1_2 = 2$. Ensuite, nous normalisons avec le meilleurs score possible pour $dom$ $I_{0.6}=2$. Donc, le score d'acceptabilité de la valeur $jap$ dans l'hypothèse $h_4$ est $score(h_4,t)= 1/6$
+			
+	
+	Maintenant, considérons le cas opposé; l'agent reçoit un $Reject(p)$ exprimant donc $p \not \in Ac(t)$. Par conséquent, nous réutilisons le même principe utilisé pour le score d'acceptabilité afin de calculer les possibles ensembles de valeurs non acceptables $ p \in \overline Ac(t)$. Pour chaque hypothèse $h_i \in H_{dom}$ et pour chaque hypothèse $Si \in M_h(h_i)$ de préférences associé à $h_i$, nous considérons l'ensemble des valeurs rejetées durant la négociation $R$ de taille $ |R| = r$. Nous proposons de mettre à jour le score d'acceptabilité attribué à chaque hypothèse $h_i$ en soustrayant l'ensemble des valeurs rejetées.
+	Par conséquent, le score de rejet d'une valeur$p$ est mis à jour comme suit:
+	
+		\begin{equation}
+			Rej(p, h_i) = C_{|C_i|-(|S_i| + k + r)}^{|M_i(t)| - k}
+		\end{equation}
+	
+	
 	
 \section{Évaluation}
-
+	Nous avons proposé un modèle la ToM capable de simuler les comportements d'un interlocuteur dans el but de prédire la valeur de dominance $dom_{other}$. Afin d'évaluer la pertinence des prédictions de notre modèle de ToM. Nous proposons de doter deux agents conversationnels de ce modèle, faire négocier ces deux agents avec le but de deviner les comportements de dominance de leur interlocuteur. Ce cadre nous permet de vérifier la valeur de dominance déduite par les agents et la valeur de dominance réelle de l'agent interlocuteur. 
+	
+	Nous prenons en compte trois critères pour l'évaluation de ce modèle. Premièrement, nous étudions la pertinence de la prédiction faite par l'agent par rapport à la valeur réelle. Deuxièmement, la rapidité de révision des hypothèses  et enfin la complexité du modèle face à différents sujets de négociations.
+	
+	\subsection{Méthodologie}
+		
 conculsion
