@@ -1,0 +1,44 @@
+Contexte théorique et applicatif
+	Cette thèse s'intéresse à l'apport des comportements sociaux dans l'implémentation d'agents conversationnels (2 phr). Ce travail s'inscrit dans la continuété des travaux en informatique affective 
+ou nous assistons à un intéret majeur à l'impact de l'intelligence sociau-affective sur l'acceptabilité et la crédibilité des agents. 
+
+	** titre ? **
+
+ 	- Domaines d'applications des agents conversationnel: companion atificiels, tuteur, formateur dans divers champs .
+	- Un des domaines applicatifs: associé ou collaborateur : collaboration agent humain
+	
+	-> - Dans un contexte collaboratif, les compétences sociales des agents est cruciale dans l'établissement des échanges d'information et de la construction de plans conjoints -- ex appli (plans et echange)
+
+	- Collaboration ; echange répétifs dans laquelle les interlocuteurs vont construire une relation interpersonnelle qui affectera leurs comportements. 
+	D'autant plus que dans un environnement collaboratif, les négociations sont fréquentes afin de faciliter l'échange d'informations (pas clair) et l'affectation des tâches [ref 46]. -- pkoi on fait de la nego coll
+
+	Faire le lien avec les humains dont la stratégie de négociation est affectée par les facteurs sociaux tels que la personnalité ou sa relation avec son interlocuteurs [ref a papier intro nego ] 	En effet, les humains n'agissent pas toujours de manière rationnel (dans la nego) à optimiser leurs propre gain, mais visent aussi à préserver la bonne entente avec leurs partenaire [ref Negotiation paper]
+	
+	En psychologie social, la litérature a commencé à s'interesser aux comportements sociaux des négociateurs dans les années 80, et une pletor de travaux ont mis en exregues l'influence des 		comportements de dominance sur les stratégies des négociateurs ....
+	Les comp de dom s'expriment...
+ 
+	notre but est de concevoir des aca capable d'adopter des comportements sociaux dans un contexte de négociation collab. dans ce travail, nous nous sommes concentrés sur l'impact de la relation sociale de dominance sur la stratégie de négotiation.
+	
+	** Objectif scientifiques **
+
+	Les travaux présentés dans ce manuscrit ont été dirigés	par deux objectifs. 
+	Notre premier objectif est de présenter un modèle de négociation collaboratif dans lequel nous injectons des comportements sociaux pour influencer la stratégie de négociation.
+	Notre second objectif vise à étudier l'impact de ces comportements sur le processus de négociation entre un agent artificiel et un humain. 
+	Le but est de pouvoir transposer les résultats trouvés en psychologie social dans un cadre d'une interaction agent/humain. C'est pourquoi nous avons utilisé des méthodos issues de la psycho sociale non seulement dans la modélisation informatique du comportement, mais aussi dans le processus d'évaluation de l'agent face à un humain (2 ou 3 phrases).
+
+	** Plan **
+
+	Dans le premier chapitre... (3 lignes à chaque fois)
+
+
+	
+	(((les éléments qui suivent participeront au plan)))
+	
+	Dans un premier temps, nous étudions le concept de la relation interpersonnelle de dominance et la manifestation des comportements de dominance dans les négociations humain humain.
+
+	En se basant sur cette littérature issue de la psychologie, nous proposerons un modèle computationnel de négociation basé sur la relation de dominance.
+
+	L'agent est capable d'exprimer une strategie de négociation en fonction de comportements de dominance.  
+	 
+
+	(((en conclusion juste avant les persp, discussion sur "validation" d'un modèle psycho-info, de la démarche)))
