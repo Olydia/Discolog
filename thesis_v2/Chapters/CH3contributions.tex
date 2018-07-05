@@ -1,5 +1,5 @@
 	\chapter{Modèle de négociation collaborative}
-	
+	\label{chap:chap3}
 	\begingroup
 	\parindent=0em
 	\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
@@ -15,7 +15,7 @@
 	Afin de définir un système de dialogue dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord enregistré des dialogues de négociation entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social de type "négociation collaborative". Nous avons annotés et analysé les dialogues. Cette étude nous a livré un ensemble d'informations sur les comportements des négociateurs que nous présenterons dans la première section de ce chapitre. 
 	Les informations collectées grâce à l'observation des comportements humains nous a guidé dans la conception de notre modèle de négociation.
 	
-	Dans la seconde section, nous présentons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisés dans la mise en œuvre de systèmes de négociations automatiques. 
+	Dans la seconde section, nous présentons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisés dans la mise en œuvre de systèmes de négociations automatiques \cite{jonker2007agent,lai2004literature,lai2008decentralized}. Nous réutilisons les principes de modélisation multi-critères du domaine de négociation et nous l'adaptons à une négociation avec un humain dont les préférences sont partielle.  
 	
 	La troisième section va porter sur notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réappropriés les actes de dialogue de \emph{Grosz et Sidner} \cite{grosz1986attention} pour la négociation collaborative.
 	
@@ -47,29 +47,106 @@
 
 		 \subsection{Exemple d'analyse}
 			 Nous présentons dans cette section deux extraits de l'analyse en DSP que nous avons effectuée sur les deux dialogues préalablement enregistrés. Chaque texte a été édité afin d'améliorer son intelligibilité en supprimant les pauses et des mots tels que "hmm, oué $\ldots$".
+			 Les deux analyses sont présentées dans les figures \ref{fig:DSP},\ref{fig:DSP2}.
 			 
+			 Pour chaque dialogue, nous avons effectué l'analyse suivante. 
 			 D'abord, nous nous sommes intéressés à la structure linguistique. En effet, nous avons extrait les actes de dialogues de chaque tour de dialogue, que nous avons ensuite regroupé en \emph{DS}. 
-			
 			 \begin{figure}[!h]
-			 	\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
-			 	\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS}}
-			 \end{figure} 
+				\includegraphics[width=5in]{Figures/YC_DSP.pdf}
+				\caption{\label{fig:DSP2} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 1}
+			\end{figure} 
+		
+		\begin{figure}[!h]
+			\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
+			\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 2}
+		\end{figure} 
+		
+			La seconde étape consistait à effectuer l'analyser intentionnelle. Pour ce faire, nous avons analyser l'intention cachée derrière chaque \emph{DS}. Par conséquent, nous avons formulé les intentions comme présenté dans les figures \ref{fig:DSP},\ref{fig:DSP2}.  L'état attentionnel nous a aidé à la construction des différents \emph{DS} et a la formulation des leur intentions.	
+			Une fois les intentions identifiés, nous avons analysé les relation de dominances et de dépendances entres les différents \emph{DS}s. Les relations de dominance sont présentés dans la table \ref{tab:domRelation} et les relation de satisfaction dans la table \ref{tab:dependanceRelation} .
 			 
-			 La seconde étape consistait à analyser le but ou l'intention caché derrière chaque \emph{DS}. Par conséquent, nous avons formulé les \emph{DSPs} comme présenté dans l'exemple ci-dessus. L'état attentionnel nous a aidé à la construction des différents \emph{DS} et a la formulation des intentions pour chaque \emph{DSP}	
+		
+	\begin{table}
+		\parbox{.45\linewidth}{
+			\centering
+			\begin{tabular}{c}
+				\hline
+				\hline
+				Dialogue 1 \\
+				\hline
+				\hline
+				$I_0$ DOM $I_1$ \\
+				$I_0$ DOM $I_2$ \\
+				$I_0$ DOM $I_6$ \\
+				$I_0$ DOM $I_8$ \\
+				$I_2$ DOM $I_3$ \\
+				$I_2$ DOM $I_4$ \\
+				$I_2$ DOM $I_5$ \\
+				$I_6$ DOM $I_7$ \\
+				\hline
+				\hline
+			\end{tabular}
+		}
+		\hfill
+		\parbox{.45\linewidth}{
+			\centering
+			\begin{tabular}{c}
+				\hline
+				\hline
+				Dialogue 2 \\
+				\hline
+				\hline
+				$I_0$ DOM $I_1$ \\
+				$I_0$ DOM $I_2$ \\
+				$I_0$ DOM $I_3$ \\
+				$I_0$ DOM $I_4$ \\
+				$I_0$ DOM $I_5$ \\
+				\hline
+				\hline
+			\end{tabular} 
 			
-			L'analyse du dialogue est présentée dans la figure \ref{fig:DSP}.
+		}
+		\caption{ \label{tab:domRelation} Relation de dominance entre les intentions}
+	\end{table}
+
+	\begin{table}
+	\parbox{.45\linewidth}{
+		\centering
+		\begin{tabular}{c}
+			\hline
+			\hline
+			Dialogue 1 \\
+			\hline
+			\hline
+			$I_1$ SP $I_2$ \\
+			$I_2$ SP $I_3$ \\
+			$I_3$ SP $I_4$ \\
+			$I_4$ SP $I_5$ \\
+			\hline
+			\hline
 			
-			\begin{table}
-				\begin{tabular} {c}
-					\hline
-					\hline
-					dominance entre les intentions \\
-					\hline
-					\hline
-				\end{tabular}
-			\end{table}
-			
-			 
+		\end{tabular}
+	}
+	\hfill
+	\parbox{.45\linewidth}{
+		\centering
+		\begin{tabular}{c}
+			\hline
+			\hline
+			Dialogue 2 \\
+			\hline
+			\hline
+			$I_1$ SP $I_2$ \\
+			$I_1$ SP $I_3$ \\
+			$I_1$ SP $I_4$ \\
+			$I_3$ SP $I_4$ \\
+			\hline
+			\hline
+		\end{tabular} 
+		
+	}
+	\caption{ \label{tab:dependanceRelation} Relation de dépendance entre les intentions}
+\end{table}
+	
 		\subsection{Résultats de l'analyse}
 		
 			L'analyse en DSPs nous a révélé un nombre de comportements intéressants tant sur l'aspect structurel de la négociation que sur les stratégies de négociations déployées par les interlocuteurs. 	
@@ -77,7 +154,7 @@
 			\subsection{Structure d'un dialogue de négociation collaborative}
 			
 					Sur l'aspect structurel, la décomposition du dialogue en \emph{DS} nous a confirmé que les négociateurs s'intéressaient à différents critères pour le choix d'une option (les restaurants dans notre exemple). Ces critères sont négociés simultanément durant la négociation jusqu'à ce que les interlocuteurs trouvent un compromis acceptable sur les critères jugés importants. 
-					Par exemple, dans le dialogue présenté dans la figure \ref{}, les interlocuteurs se sont plus intéressés à l'ambiance du restaurant et son emplacement pour le choix final. En revanche, dans le dialogue \ref{fig:DSP}, les interlocuteurs se sont principalement concentré sur type et la qualité de la cuisine.
+					Par exemple, dans le dialogue présenté dans la figure \ref{fig:DSP2}, les interlocuteurs se sont plus intéressés à l'ambiance du restaurant et son emplacement pour le choix final. En revanche, dans le dialogue \ref{fig:DSP}, les interlocuteurs se sont principalement concentré sur type et la qualité de la cuisine.
 					    
 					De plus, les critères les plus importants sont les premiers à être abordés, et en cas de conflit, d'autre critères sont abordés. 
 					Ceci est confirmé par des travaux en négociations automatiques qui mettent en avant l'intérêt de la modalisation multicritères dans les systèmes de négociation \cite{jonker2007agent,lai2004literature}. Ce point sera abordé plus en détails en section suivante. 
@@ -100,10 +177,9 @@
 			
 				 La prise de pouvoir se manifeste par les stratégies de prise de parole. Le négociateur avec un haut niveau de dominance avait tendance à prendre la parole plus fréquemment, et plus longtemps. Par exemple, en analysant le \emph{DS1} et \emph{DS3} de la figure \ref{fig:DSP}, nous observons que l'interlocuteur \textit{B} prend plus de tours de parole et pour chaque tour, plusieurs actes dialogiques sont énoncés. 
 				 
-			
 			 
 			Ces résultats obtenus ont soutenu les comportements de dominance relayé dans les travaux en psychologie sociale et nous ont aidé à orienter la conception de notre modèle de dialogue
-			
+		
 		
 	
 	\section{Domaine de négociation}
@@ -113,13 +189,17 @@
 	% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
 	%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
 	
-		La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères. %Cependant, La littérature existante se concentre plus sur la négociation uni critère \cite{lai2008decentralized,lai2004literature}. 
+		La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères.  
 		
 		Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, comme nous l'avons vu dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères sont abordés soit simultanément dans la négociation, soit un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discutaient des différents critères jusqu'à aboutir a un compromis.
 		
 		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \emph{Dedreu} \cite{de1995impact} ajoute que la négociation multi-critères offre un contexte pour différents types de stratégies coopératives. Certains négociateurs peuvent faire des concessions sur tout les critères. D'autres ont un ordre de priorité sur les critères où ils ont plus tendance à faire des concessions sur les critères avec une priorité faible. 
 	
 		Les résultats des précédents travaux nous ont motivé à utiliser une représentation multi-critères pour modéliser notre domaine de négociation collaborative. 
+		
+		Il existe une vaste littérature sur la modélisation d'une négociation multi-critères existe en négociation automatique \cite{jonker2007agent,lai2008decentralized,lai2004literature,hindriks2008opponent,traum2008multi}. Nous nous basons sur cette représentation pour décrire le domaine de négociation.
+		De plus, nous nous basons dans cette thèse sur des travaux en économie spécialisés dans la décision multi-critères \cite{greco2016multiple} pour adapter la fonction d'utilité afin qu'elle supporte une ordre partiel de préférences sur les critères.
+		
 		
 		\section{Représentation formelle des éléments de la négociation}	
 		Le but de la négociation est de choisir une \textit{option} $O$ dans l'ensemble des options $\mathcal{O}$ comprenant toutes les options alternatives envisagé pour un sujet de négociation donnée. 
@@ -281,7 +361,7 @@
 				\end{table}
 				
 		\subsubsection{Formalisation des actes en langage naturel}
-		
+		\label{sec:formalisation}
 			La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en langage naturel pour exprimer une valeur d'un acte de dialogue.
 			Un partie importante dans la modélisation d'actes de dialogue pour une interaction avec un humain est la définition de l'expression en langage naturel associé à chaque acte. En effet, le format en langage naturel doit traduire fidèlement l'acte de dialogue pour chaque valeur qui y est associée.
 			Cependant, en fonction du domaine de négociation, la formalisation des actes de dialogue peut varier. trois contraintes se sont imposées dans le processus de formalisation en langage naturel. 

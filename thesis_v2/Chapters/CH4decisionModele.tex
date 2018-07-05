@@ -66,7 +66,7 @@
 	Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 	
 	\subsubsection{AskPreference}
-		Quand l'agent reçoit un \emph{AskPreference} de la part de son interlocuteur, l'agent répond en exprimant ses préférences sur la question demandée. Par exemple: 
+		Quand l'agent reçoit un \emph{AskPreference} de la part de son interlocuteur, la réponse de l'agent consistera à donner son avis sur la question: partager ses préférences sur la question demandée. Par exemple: 
 		
 		\begin{verbatim}
 			User : AskPreference(Japanese) 
@@ -175,7 +175,7 @@
 		\item  \emph{Accept(p)}: Si la proposition \emph{p} est acceptable, l'agent accepte la proposition via l'acte de dialogue un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. 
 		\item \textbf{Stratégie de rejet :} En fonction de sa dominance, l'agent rejette une proposition de différentes manières:
 		\begin{itemize}[label= $\circ$]
-			\item \emph{AskPreference(v)} l'agent est \emph{soumis}, il choisis alors d'énoncer un acte de dialogue \emph{Ask} tel que $v \not\in (U_i or A_i)$. Les personnes soumises ont tendance à ne pas exprimer leurs opinions ouvertement. Pour cela, au lieu de rejeter une proposition non acceptable, l'agent change le sujet de négociation et active le principe 3 pour collecter plus de connaissances sur les préférences de son interlocuteur. Cette branche est applicable uniquement quand l'agent refuse consécutivement deux propositions.  
+			\item \emph{AskPreference(v)} l'agent est \emph{soumis}, il choisis alors d'énoncer un acte de dialogue \emph{Ask} tel que $v \not\in (U_i or A_i)$. Les personnes soumises ont tendance à ne pas exprimer leurs opinions ouvertement. Pour cela, au lieu de rejeter une proposition non acceptable, l'agent change le sujet de négociation et active le principe 3 pour collecter plus de connaissances sur les préférences de son interlocuteur. Cette branche est applicable uniquement quand l'agent reçoit une proposition pour la première fois où il a déjà refusé deux propositions.  
 			
 			\item \emph{Reject(p)}: l'agent est \emph{neutre} ou \emph{soumis}. Par conséquent, sa stratégie consistera à rejeter ouvertement toute proposition non acceptable.
 			
@@ -245,7 +245,7 @@
 	\begin{itemize}
 		\item \emph{AskPreference (v)}: Si la proposition d'un agent \emph{soumis} est rejetée, il va considérer qu'il n'avait pas assez de connaissances pour prendre une bonne décision. Pour compenser, il va demander à l'utilisateur ses préférences sur des valeurs qu'il ne connaît pas déjà. 
 		
-		\item \emph{Propose(p')}: Suivant les principes 1 et 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus ( \textit{i.e.} $sat(p) =1$), il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
+		\item \emph{Propose(p')}: Suivant le principe 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus (\textit{i.e.} $sat(p) =1$), il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
 		
 		\item \emph{StatePreference (v)}: l'agent \emph{neutre} continue la négociation en exprimant ses préférences sur d'autres valeurs qu'il n'a pas déjà communiqué. Le but est d'échanger le plus d'informations possibles pour faire de meilleures propositions. 
 	\end{itemize}	
@@ -255,49 +255,73 @@
 	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B} est soumis. 
 
 
-	\fbox{
-	\begin{minipage}{.99\textwidth}
+
+	\begin{minipage}{\textwidth}
 		{\ttfamily
+			\linenumbers
 			\begin{addmargin}[1em]{2em}% 1em left, 2em right
-			
+
+				
 			\vspace{0.5em}
-				\textbf{A:} $Propose(Chinese)$ "Let's go to a Chinese restaurant."
+
+						 	
+			1.	\textbf{A:} $Propose(Chinese)$ "Let's go to a Chinese \hspace*{3mm} restaurant."
 				
-				 \hspace*{3mm} \textbf{B:} $AskPreference(Ambiance)$  "What kind of ambiance do you like?"
+			2.	 \hspace*{3mm} \textbf{B:} $AskPreference(Ambiance)$  "What kind of \hspace*{4mm} ambiance do you like?"
 				
-				\textbf{A:} $StatePreference(family,true)$ "I like family restaurants."
+			3.	\textbf{A:} $StatePreference(family,true)$ "I like family  \hspace*{3mm} restaurants."
 				
-				\hspace*{3mm} 	\textbf{B:}  $StatePreference(family,false)$ "I don't like family restaurants."
+			4.	\hspace*{3mm} 	\textbf{B:}  $StatePreference(family,false)$ "I don't like \hspace*{4mm} family restaurants."
 				
-				\textbf{A:}  $Propose(family)$ "Let's go to a family restaurant."
+			5.	\textbf{A:}  $Propose(family)$ "Let's go to a family \hspace*{3mm} restaurant."
 				
-				\hspace*{3mm} 	\textbf{B:} $Reject(family)$ "Sorry, I'd rather choose something else, because I don't like family restaurants."
+			6.	\hspace*{3mm} 	\textbf{B:} $Reject(family)$ "Sorry, I'd rather choose \hspace*{4mm} something else, because I don't like family \hspace*{4mm} restaurants."
 				
-				\textbf{A:}  $Propose(family)$ "Let's go to a family restaurant."
+			7.	\textbf{A:}  $Propose(family)$ "Let's go to a family \hspace*{3mm} \hspace*{3mm} restaurant."
 				
-				\hspace*{3mm} 	\textbf{B:} $AskPreference(Cost)$ "What kind of cost do you like?"
+			8.	\hspace*{3mm} 	\textbf{B:} $AskPreference(Cost)$ "What kind of cost do you \hspace*{3mm} like?"
 				
-				\textbf{A:} $StatePreference(cheap,true)$ "I like cheap restaurants."
+			9.	\textbf{A:} $StatePreference(cheap,true)$ "I like cheap \hspace*{3mm} restaurants."
 				
-				\hspace*{3mm} 	\textbf{B:} $Propose(cheap)$ "Let's go to a cheap restaurant."
+			10.	\hspace*{3mm} 	\textbf{B:} $Propose(cheap)$ "Let's go to a cheap \hspace*{4mm} restaurant."
 				
-				\textbf{A:}  $Propose(Jiliya)$ "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+			11.	\textbf{A:}  $Propose(Jiliya)$ "Let's go to the Jiliya. It's a \hspace*{3mm} quiet, cheap Chinese restaurant."
 				
-				\hspace*{3mm} 	\textbf{B:} $Accept(Jiliya)$  "Okay. Let's go to the Jiliya."
-				
-				\vspace{0.5 em}
+			12.	\hspace*{3mm} 	\textbf{B:} $Accept(Jiliya)$  "Okay. Let's go to the Jiliya."
+
+
 			\end{addmargin}
 		} 
 	\end{minipage}
-	}	
+	%	\subsubsection{Stratégie de l'agent A}
+				\vspace{1 em}
+	\par 
+	L'agent A, initialisé avec un comportement dominant, initie la négociation en exprimant un \emph{Propose} de la valeur qu'il préfère le plus \textit{c.à.d} la cuisine chinoise. (Activer principe 1 et 3). En revanche, l'agent B, soumis, active la première option de rejet et détourne la négociation de la cuisine pour négocier sur l'ambiance. 
 	
+	Les tours de paroles 3 et 4 sont consacrés à échanger des informations sur les préférences. 
 	
+	L'agent A propose la valeur \emph{family} car c'est la valeur qu'il préfère le plus pour le critère Ambiance et ignore les préférences de l'agent B qui n'aime pas les restaurants familiaux. Ceci respecte le principe 1 qui stipule que les personnes dominantes sont égocentriques. 
+	A son tour, l'agent B rejette cette valeur et explique pourquoi. 
+	
+	Cependant, au tour de négociation 7, l'agent repropose la même valeur \emph{family}. Comme nous l'avons expliqué plus haut, l'agent dominant ne cède pas sur les valeurs jugées très importantes ($sat(family) =1$). 
+	
+	Dans le tour 8, l'agent soumis évite de ré-exprimer un refus et change le critère de négociation, pour parler du critère des prix.
+	
+	Dans les tours 9 et 10, les agents s'accordent sur la valeur \emph{cheap}. 
+	Ainsi, l'agent A propose un restaurant dont le prix est \emph{cheap} mais le type de cuisine est \emph{Chinese}. 
+
+	Au final, l'agent B accepte cette proposition qui respecte les préférences des deux agents.
+	
+	%\subsubsection{Stratégie de l'agent B}
+
 	\subsection{Limites des arbres de dialogue}
-		Un module décisionnel à base d'arbre de dialogue repose essentiellement sur une modélisation manuelle de tous les cas possibles pouvant survenir à la réception d'un acte de dialogue. Par conséquent, ce processus est lourd et nécessite une révision constante à chaque apparition de nouveaux cas non modélisés. Cette rigidité expose notre modèle de négociation à des situations de \textit{breakdown}, où à la réception d'un acte de dialogue, l'agent ne trouve aucun branchement applicable (condition d'applicabilité non remplie). 
+		Un module décisionnel à base d'arbre de dialogue repose essentiellement sur une modélisation manuelle de tous les cas possibles pouvant survenir à la réception d'un acte de dialogue. Par conséquent, ce processus est lourd et nécessite une révision constante à chaque apparition de nouveaux cas non modélisés.
+		
+		De plus, pour chaque arbre de dialogue, \emph{DISCO} déroule les branches en commençant par la plus gauche, et execute la première branche dont la condition d'applicabilité est vérifiée. Cependant, si un cas non prévu apparaît et aucune branche de l'arbre de réponses est applicable, l'agent sera face à \textit{breakdown} et sera de l'impossibilité de générer une réponse à son interlocuteur. 
 		
 		En parallèle, nous avons fait une pré-étude où nous avions demandé à des participants de juger les comportements de dominance de deux agents implémentés avec notre modèle. Les résultats obtenus ont démontré une ambiguïté dans la perception des comportements de dominance et la capacité à isoler l'impact de chaque principe sur la prise de décision.
 		
-		Pour toutes ces raisons, nous devions repenser l'implémentation de notre modèle décisionnel. Deux solutions étaient possibles. Premièrement, nous faisons le choix de garder les arbres construits et complémenter par un algorithme d'apprentissage. Le problème de cette solution est qu'elle n'est pas écologique car nous nous disposons pas d'un corpus de données annotés avec les principes de dominance. 
+		Pour toutes ces raisons, nous devions repenser l'implémentation de notre modèle décisionnel. Deux solutions étaient possibles. La première solution est de complémenter les arbres de dialogues par un algorithme d'apprentissage, type arbres de décision ID3 \cite{utgoff1989incremental}. Le problème de cette solution est que nous nous disposons pas d'un corpus de données annotés avec les principes de dominance. 
 		
 		Nous avons opté pour la seconde solution, qui propose un modèle de décision computationnel avec des formules de décisions associées à chaque principe. 
 		Ce dernier est pensé pour être plus fidèle aux principes de négociation et qu'il puisse refléter les comportements de dominance. 
@@ -305,19 +329,21 @@
 	\section[Modèle de décision]{Modèle de décision basé sur les comportements de dominance}
 	
 	Nous proposons un modèle computationnel de décision, qui reprend les trois principes de dominance dans le modèle décisionnel de l'agent. 
-	A cause de la rigidité des arbres de dialogues, nous adaptons la solution afin qu'elle soit plus flexible et surtout afin que les comportements de dominance soient plus saillant dans les décisions de l'agent.
 	
-	Par conséquent, nous présentons dans ce qui suit, l'adaptation algorithmique de chaque principe de dominance extraits de la psychologie sociale.
+	Nous présentons dans ce qui suit, l'adaptation algorithmique de chaque principe de dominance extraits de la psychologie sociale.
 	
 	L'agent est défini avec une valeur de dominance $dom \in [0,1]$ qui représente sa position de dominance dans l'interaction, tel que plus $dom$ se rapproche de 1, plus l'agent est dominant. 
 	
 	\subsection{Principe 1: Niveau d'exigence}
 	\label{sec:concessions}
-	Selon notre premier principe, le niveau d'exigence devrait être plus important chez les agents dominants. Cependant, au cours d'une négociation collaborative, les deux négociateurs sont amenés à réduire leur niveau d'exigences parce qu'ils veulent parvenir à un accord. Les psychologues observent des concessions plus importantes pour les négociateurs soumis. 
+	Selon notre premier principe, le niveau d'exigence devrait être plus important chez les agents dominants. Ce qui signifie que plus l'agent est dominant, plus l'ensemble des valeurs qu'il peut accepter est restreint.
+	Cependant, au cours d'une négociation collaborative, les deux négociateurs sont amenés à réduire leur niveau d'exigences parce qu'ils veulent parvenir à un accord. Les psychologues observent des concessions plus importantes pour les négociateurs soumis. 
 	
 	Nous avons implémentés ces comportements en deux phases. En effet, afin de modéliser la différence d'exigence dans la négociation, nous avons implémenté une fonction de satisfiabilité qui prend en compte la valeur de dominance initiale de l'agent. 
 	
-	Soit $S$ l'ensemble de valeurs satisfiables pour l'agent. Ceci se traduit par les valeurs que l'agent se dit \textit{"aimer" (i.e. l'expression d'un } \emph{StatePreference}). Cet ensemble varie en fonction de la valeur $dom$ de l'agent:
+	\subsubsection{Satisfiabilité}
+	
+	Soit $S$ l'ensemble de valeurs satisfiables pour l'agent (voir chapitre \ref{chap:chap3}). Ceci se traduit par les valeurs que l'agent se dit \textit{"aimer" (i.e. l'expression d'un } \emph{StatePreference}). Cet ensemble varie en fonction de la valeur $dom$ de l'agent:
 	
 	\begin{equation}
 	\forall v,\hspace{2mm} v\in S\hspace{2mm}\mathrm{iff}\hspace{2mm}sat(v) \geq dom
@@ -325,8 +351,11 @@
 	
 	En effet, une valeur est dite \textit{satisfiable} si sa valeur de satisfiabilité est plus grande que la valeur de dominance de l'agent.
 	Par conséquent, pour chaque critère $C_i$, nous définissons l'ensemble $S_i$ comme l'ensemble de valeurs satisfiables. 
-		
-	Par exemple, pour le même ensemble de valeurs présentés dans l'exemple présenté dans le table \ref{tab:sat} et les mêmes relations de préférences, deux agents avec des valeurs de dominance différentes n'ont pas le même niveau d'exigence. Supposons, un agent$_A$ dont la dominance est à $dom_A=0.7$ et un autre agent$_B$ dont la dominance est à $dom_B=0.4$, pour le même ensemble de préférences ( voir table \ref{tab:sat} ), les deux agents ont un ensemble de valeurs satisfiables différents comme présenté dans la table \ref{tab:exSat}.
+	
+	\subsubsection{Exemple}	
+	Par exemple, pour le même ensemble de valeurs présentés dans l'exemple présenté dans le table \ref{tab:sat} et les mêmes relations de préférences, deux agents avec des valeurs de dominance différentes n'ont pas le même niveau d'exigence. 
+	
+	Supposons, un agent$_A$ dont la dominance est à $dom_A=0.7$ et un autre agent$_B$ dont la dominance est à $dom_B=0.4$, pour le même ensemble de préférences (voir table \ref{tab:sat}), les deux agents ont un ensemble de valeurs satisfiables différents comme présenté dans la table \ref{tab:exSat}.
 	
 	\begin{table}[h]
 		\centering
@@ -346,6 +375,7 @@
 			\label{tab:exSat}
 		\end{table}
 
+	\subsubsection{Concessions}
 	
 	Concernant, les comportements de concession, nous avons élaboré une \emph {courbe de concession} illustrée sur la figure \ref{fig:conc}. 
 	
@@ -380,6 +410,7 @@
 		
 	Ces comportements d'exigences et de concessions sont modélisés pour calculer l'acceptabilité d'une proposition 
 	
+	\subsubsection{Acceptabilité }
 	L'acceptabilité d'une valeur de critère $v \in C_i$ est défini comme une fonction booléenne:
 	\begin{equation}
 	\vspace{0.5em}
@@ -407,8 +438,9 @@
 		\caption{$Sat$ calculé sur l'ensemble de préférences $\prec_{cuisine}$.}
 		\label{tab:ch4sat}	
 	\end{table}
+	\subsubsection{Exemple}
 
-	Par exemple, considérons un exemple jouet avec un seul critère de cuisine contenant les valeurs suivantes: 
+	Considérons un exemple jouet avec un seul critère de cuisine contenant les valeurs suivantes: 
 	$\{$ \emph {français$ (fr)$, italien$ (it)$, japonais$ (jap)$, chinois$ (ch)$}$ \}$. En outre, l'agent a un ordre total de préférences sur ces valeurs$ \prec_ {cuisine}$$ = \{ch$$ \prec$$ jap, jap$$ \prec$$ it,  it$ $\prec$$ fr\}$. Sur la base de cet ordre de préférences $\prec_{cuisine}$, l'agent est capable de calculer la valeur de satisfiabilité associée à chaque valeur comme présenté dans la table \ref {tab:ch4sat}.
 	
 	
@@ -417,9 +449,6 @@
 	 $$acc(dom,o, t) = sat_{self}(o, \prec) \geq  (\beta \cdot self(dom,t))$$
 
 	
-
-	
-	
 	\subsection {Prise en compte des préférences de soi Vs autrui}
 	Selon notre second principe, les négociateurs dominants donnent plus de poids à leur propre satisfaction qu'a leur partenaires de négociation. 
 	Pour implémenter ce principe dans le contexte de la négociation collaborative, nous calculons dans quelle mesure une proposition donnée est \emph{tolérable} pour la satisfiabilité de l'agent et de son partenaire.
@@ -427,6 +456,7 @@
 	Donc, pour chaque critère $i\in \mathcal{C}$, considérons le sous ensemble $Ac_i(t)\subseteq C_i$ de valeurs acceptables pour l'agent.
 	Cet ensemble correspond à toutes les propositions acceptables qu'un agent pourrait faire à un moment donné de la négociation.
 	
+	\subsubsection{Tolérabilité}
 	Nous calculons la tolérabilité d'une valeur donnée $ v \in Ac_i(t) $ en équilibrant entre les préférences de l'agent et celles de son partenaire. Nous supposons que l'agent donne un poids à la satisfaction de son partenaire qui est complémentaire à son auto-satisfaction:
 	
 	\begin{equation}
@@ -546,66 +576,66 @@
 	
 	
 	\begin{figure*}[!t]
-	\fbox{\begin{minipage}{\textwidth}
+	\begin{minipage}{\textwidth}
 			{\ttfamily
 				\begin{addmargin}[1em]{2em}% 1em left, 2em right
 					\vspace{0.5 em}
-					A: "Let's go to a restaurant near eiffel tower."
+					1. \textbf{A:} $Propose(eiffel\_tower)$ "Let's go to a restaurant near \hspace*{3mm} eiffel tower."
 					
 					
-					\hspace*{3mm}B: "I don't like restaurants near eiffel tower, let's choose something else."
+					2. \hspace*{3mm}\textbf{B}: $RejectState(eiffel\_tower)$ "I don't like restaurants \hspace*{4mm} near eiffel tower, let's choose something else."
 					
 					
-					A: "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the near eiffel tower."
+					3. \textbf{A:} $Propose(Ebis)$ "Let's go to the Ebis restaurant. It's \hspace*{3mm} a lively, expensive Japanese restaurant on the near \hspace*{3mm} eiffel tower."
 					
 					
-					\hspace*{3mm}B: "Do you like restaurants at montparnasse?"
+					4. \hspace*{3mm}\textbf{B}: $AskPreference(Montparnasse)$ "Do you like \hspace*{4mm} restaurants at montparnasse?"
 					
 					
-					A: "I don't like restaurants at montparnasse."
+					5. \textbf{A}: $StatePreference(Montparnasse,false)$ "I don't like \hspace*{3mm} restaurants at montparnasse."
 					
 					
-					\hspace*{3mm}B: "Do you like restaurants at gare du nord?"
+					6. \hspace*{3mm}\textbf{B}: $AskPreference(Gare\_du\_nord)$ "Do you like restaurants \hspace*{4mm} at gare du nord?"
 					
 					
-					A: "Let's go to the Ebis restaurant. It's a lively, expensive Japanese restaurant on the near eiffel tower."
+					7. \textbf{A}: $Propose(Ebis)$ "Let's go to the Ebis restaurant. It's \hspace*{3mm} a lively, expensive Japanese restaurant on the near \hspace*{3mm} eiffel tower."
 					
 					
-					\hspace*{3mm}B: "Do you like restaurants at gare du nord?"
+					8. \hspace*{3mm}\textbf{B}: $AskPreference(Gare\_du_nord)$ "Do you like restaurants \hspace*{4mm} at gare du nord?"
 					
 					
-					A: "I don't like restaurants at gare du nord."
+					9. \textbf{A}: $StatePreference(Gare\_du\_nord,false)$ "I don't like \hspace*{3mm} restaurants at gare du nord."
 					
 					
-					\hspace*{3mm}B: "Do you like restaurants at pere lachaise?"
+					10. \hspace*{3mm}\textbf{B}: $AskPreference(pere\_lachaise)$ "Do you like restaurants \hspace*{4mm} at pere lachaise?"
 					
 					
-					A: "Let's go to a cozy restaurant."
+					11. \textbf{A}: $Propose(cozy)$ "Let's go to a cozy restaurant."
 					
 					
-					\hspace*{3mm}B: "Okay, let's go to a cozy restaurant."
+					12. \hspace*{3mm}\textbf{B}: $Accept(cozy)$ "Okay, let's go to a cozy \hspace*{4mm} restaurant."
 					
 					
-					A: "Let's go to an expensive restaurant."
+					13. \textbf{A}: $Propose(expensive)$ "Let's go to an expensive \hspace*{3mm} restaurant."
 					
 					
-					\hspace*{3mm}B: "Okay, let's go to an expensive restaurant."
+					14. \hspace*{3mm}\textbf{B}: $Accept(expensive)$ "Okay, let's go to an expensive \hspace*{4mm} restaurant."
 					
 					
-					A: "Let's go to the Juji restaurant. It's a cozy, expensive Japanese restaurant on the near eiffel tower."
+					15. \textbf{A}: $Propose(Juji)$ "Let's go to the Juji restaurant. It's a \hspace*{3mm} cozy, expensive Japanese restaurant on the near \hspace*{3mm} eiffel tower."
 					
 					
-					\hspace*{3mm}B: "Okay, let's go to the Juji restaurant."
+					16. \hspace*{3mm}\textbf{B}: $Accept(Juji)$ "Okay, let's go to the Juji \hspace*{4mm} restaurant."
 					\vspace{0.5 em}
 				\end{addmargin}
 			}
-	\end{minipage}}
+	\end{minipage}
 			\caption{\label{fig: ex-dialogue} Exemple de dialogue généré avec un agent A $dom_A$ = 0.8 et un agent B $dom_B$ = 0.4}
 \end{figure*}
 	
 	\section{Évaluation du modèle}
 		
-		Dans cette section, nous présentons une première évaluation de notre modèle de négociation collaborative. Cette dernière a pour objectif de valider l'implémentation de notre modèle de négociation collaborative et étudier la perception des comportements de dominance exprimés par l'agent au cours d'une négociation. 
+		Dans cette section, nous présentons une première évaluation de notre modèle de négociation collaborative. Cette dernière a pour objectif de valider l'implémentation de notre modèle de négociation collaborative et d'étudier la perception des comportements de dominance exprimés par l'agent au cours d'une négociation. 
 		Pour ce faire, nous avons mené deux études, la première étude agent/agent où les participants avaient le rôle de juge externe pour évaluer le comportement des agents lors de leur négociation.
 		La seconde étude visait à évaluer les comportements de l'agent au cours d'une interaction avec un utilisateur humain. Par conséquent, les participants ont négocié avec des agents pour ensuite évaluer leurs comportements. 
 		
@@ -624,6 +654,8 @@
 					
 				\end{itemize}
 				
+				Ces hypothèses sont utilisés pour valider les comportements de dominance de nos agents négociateurs dans les deux études. 
+				
 		\subsection{Étude 1: Évaluation Agent/Agent}
 				L'objectif de cette étude est d'analyser la perception des différents comportements de dominance qui peuvent apparaître au cours d'une négociation. En effet, chaque comportement implémenté est lié à un principe et donc indépendant des autres principe. Nous visons donc à étudier si les différents comportements de l'agent durant la négociation vont être correctement associé à des comportements de dominance. Pour ce faire, nous avons généré des dialogues entre deux agents doté de notre modèle de négociation. 
 			
@@ -633,13 +665,15 @@
 				
 				Nous avons manipulé des paramètres de simulations afin d'initialiser les comportements des deux agents.
 				
+				\paragraph{i. Variables comportementales}
+				
 				Premièrement, nous avons fixé les paramètres computationnels de nos fonctions de décisions: $\tau=2$, $\pi=0.5$, $\alpha=2$, $\beta=1$ et $\delta=0.1$. 
 				Deuxièmement, nous avons choisi les valeurs de dominance $dom$ de chaque agent afin de le positionner dans le spectre de dominance. 
 				Ensuite, nous avons défini les préférences de chaque agent. En effet, les préférences ont un impact direct sur le processus de décision, il fallait donc générer des préférences différentes qui vont stimuler le processus de décision. Pour cela, nous avons utilisé la mesure de distance \emph{Kendall tau} \cite{bra2013Kendall} qui permet de calculer la distance entre deux ensembles de préférences d'ordre partiel. 
 				Nous présentons dans ce qui suit la définition de la distance de Kendall. 
 				
 				\vspace{1 em}
-				\textbf{Définition. }
+				\paragraph{ii. Distance de Kendall}
 %				\vspace{0.75 em}
 				La distance de \emph{Kendall} considère les distances entre deux ordres partiels en fonction de leurs ensembles d'extensions totales.
 				
@@ -654,11 +688,16 @@
 				
 				tel que $K(\alpha , \beta)$ est la distance entre les deux ensembles d'ordre totaux $\alpha$ et $\beta$ qui compte le nombre les désaccords ou des inversions de paires de préférences entre les deux ensembles. 
 				 
+				\paragraph{iii. Domaine de négociation}
 				
 				Enfin, nous avons défini le sujet de négociation. Nous avons opté pour un sujet social qui n'exige pas de compétence techniques. Les négociateurs avait pour but de négocier afin de choisir un restaurant. Nous avons pris en compte quatre critères pour le choix d'un restaurant. 	Les critères sélectionnés sont \ {\textit {cuisine, prix, ambiance, emplacement} \}. Chaque critère a été défini avec un domaine de valeurs, et un total de 420 restaurants a été généré à partir des valeurs de chaque critère.
 				
+				Afin d'analyser la perception des comportements de dominances des agents, il faut varier les paramètres d'initialisation des agents, à savoir la valeur de dominance ainsi que les préférences
 				
-				Au final, nous avons obtenu quatre conditions expérimentales résumées dans la table \ref{table:conditions}. Nous avons généré un dialogue par condition (pour un total de 4 dialogues). Un seul dialogue a été produit pour la condition dans laquelle les préférences des agents sont similaires, car dans le cas précis, les dialogues générés se ressemblaient et convergeaient rapidement vers un compromis. Par conséquent, les comportements produits étaient proches.   
+				La variation de ces comportements définit nos conditions expérimentales. 
+				Au total, nous avons généré quatre conditions expérimentales résumées dans la table \ref{table:conditions}. 
+				
+				Nous avons généré un dialogue par condition pour un total de 4 dialogues: trois dialogues avec des agents dont les préférences sont distantes. Un seul dialogue a été produit pour la condition dans laquelle les préférences des agents sont similaires. En effet, quand les préférences sont similaires les dialogues générés se ressemblaient et convergeaient rapidement vers un compromis. Par conséquent, les comportements produits étaient proches même en variant la valeur de dominance initiale de l'agent.   
 				
 				Les dialogues générés sont disponibles en annexe \ref{annexe:crowd}.
 				
@@ -712,7 +751,7 @@
 							\label{table:questionnaire}
 						\end{table}
 					
-					Au total 120 participants ont pris part à l'étude (30 par condition). Les participants devaient être anglophone de naissance. Chaque sujet a perçu \textit{25 cents} pour sa participation. Au final, 15 participants on été exclus pour avoir mal répondu au questions de test. 
+					Au total 120 participants ont pris part à l'étude (30 par condition). Les participants devaient être anglophone de naissance. Chaque sujet a perçu \textit{25 cents} pour sa participation. Au final, 15 participants ont été exclus pour avoir mal répondu au questions de test. 
 					
 					Dans la prochaine section, nous présentons l'analyse des donnés obtenus suite à cette étude.
 					
@@ -732,13 +771,13 @@
 				
 			Nous avons ensuite comparé les comportements des deux agents pour chaque principe. Pour ce faire, nous avons en premier lieu analysé la distribution des données qui nous a révélé que ces dernières ne suivent pas une distribution normale. C'est la raison pour laquelle nous avons utilisé un test non-paramétrique de \emph{Wilcoxon  de rang signé} afin de comparer la perception des comportements de l'agent A contre l'agent B.
 			
-			Les résultats présentés dans la figure \ref{fig:H1} montrent que l'agent A qui produisait des comportements dominant a été largement perçu comme étant plus centré sur lui-même, comme supposé par l'hypothèse \textbf {H1}, avec une taille d'effet importante. Par exemple, considérons le dialogue 1 sur la Table ~\ref {tab:resetude1}, le test statistique indique que l'agent A était significativement perçu comme étant plus centré sur lui-même que l'agent B avec (\emph {Z = -5.28} et  \emph {p $ <0,001 $}).
+			Les résultats présentés dans la figure \ref{fig:H1} montrent que l'agent A qui produisait des comportements dominant a été largement perçu comme étant plus centré sur lui-même, comme supposé par l'hypothèse \textbf {H1}, avec une taille d'effet importante. Par exemple, considérons le dialogue 1 sur la Table~\ref {tab:resetude1}, le test statistique indique que l'agent A était significativement perçu comme étant plus centré sur lui-même que l'agent B avec (\emph {Z = -5.28} et  \emph {p $ <0,001 $}).
 			
 			Par ailleurs, une différence significative dans le niveau des concessions exprimé dans tous les dialogues a été révélée confirmant notre hypothèse \textbf {H2}. En effet, les résultats dans la figure \ref{fig:H2} montrent que l'agent dominant était perçu comme faisant moins de concessions. La taille d'effet a montré un effet moyen pour les dialogues 2 à 4, et un effet important pour Dialogue 1 avec (\emph {Z = -5.34} et \emph {p $ <$ 0.001}).
 			
 			L'hypothèse \textbf {H3} a également été confirmée par le \emph {test de rang signé de Wilcoxon} (voir figure \ref{fig:H3}), où l'agent A a été perçu comme le négociateur le plus exigeant, avec une grande taille d'effet observée pour tous les dialogues. 
 			
-			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le dialogue3 comme décrit dans Table ~\ref {tab:resetude1} et la figure \ref{fig:H4}.
+			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le dialogue3 comme décrit dans Table~\ref {tab:resetude1} et la figure \ref{fig:H4}.
 
 				
 				\begin{figure}[!htb]
@@ -866,19 +905,51 @@
 				Nous considérons le scénario social qui consiste à choisir un restaurants. Notre objectif est de définir un sujet social qui ne requiert pas d'expertise spécifique et pour lequel les participants ont des préférences personnelles. Pour cela, nous avons repris le sujet de négociation de l'étude agent/agent les mêmes critères.
 					
 				Nous avons défini deux agents Bob et Arthur qui jouent des comportements différents. Bob a été conçu pour générer un comportement dominant (\textit{Dom(Bob) = 0.8}) et Arthur pour jouer le rôle d'un négociateur dans une position de faible dominance (\textit{Dom(Arthur) = 0.4}).
-				Les participants ont interagi avec les deux agents via une interface graphique (GUI) présenté dans la figure \ref{fig:ihm} conçue pour l'expérience. Ils ont communiqué en utilisant les actes de dialogue que nous avons précédemment définis voir (section \ref {sec:communication}).
+			
+					
+				Nous avons défini deux conditions expérimentales dans le but d'éviter de biaiser la perception des participants. Dans la première condition, les participants ont d'abord interagi avec Bob, l'agent dont les comportements sont dominants. Ensuite, une interaction avec l'agent dans la position de faible dominance, Arthur.
+				A l'opposé, la deuxième condition, les participants ont d'abord interagi  avec Arthur puis avec Bob.
+				
+				\paragraph{Interface de négociation}			
+					Les participants ont interagi avec les deux agents via une interface graphique (GUI) présenté dans la figure \ref{fig:ihm} conçue pour l'expérience. 
 					
 					\begin{figure*}[t]
 						\centering
 						\fbox{\includegraphics [width=\textwidth, height=0.4\textheight]{Figures/chap4/AH/ihm1.png}}
 						\caption{GUI d'interaction avec l'agent}
 						\label{fig:ihm}
+					\end{figure*} 
+				
+				
+					L'interface se présente en deux parties. La partie supérieure de l'interface affiche le cours de la négociation avec tous les messages échangés. 
+					 
+					Les négociateurs communiquent en utilisant les actes de dialogue que nous avons précédemment définis voir (section \ref {sec:communication}). 
+
+					Pour ce faire, nous avons modélisé la partie inférieure de l'interface pour afficher les actes de dialogues avec toutes les combinaisons possibles. 
+					Nous avons simplifié la notation des actes de dialogues pour qu'il soient compréhensibles par les participants. Par exemple, au lieu d'afficher \emph{StatePreference}, nous avons affiché un choix \emph{I (d'ont) like}.
+					
+					Au commencement de chaque tour, seuls les actes de dialogue sont affichés comme présenté dans la figure \ref{fig:commencement}. 
+					\begin{figure*}[t]
+						\centering
+						\fbox{\includegraphics [width=\textwidth, height=0.25\textheight]{Figures/chap4/AH/depart.JPG}}
+						\caption{GUI d'interaction avec l'agent au début de la négociation}
+						\label{fig:commencement}
+					\end{figure*} 
+					Le participant est invité à choisir d'abord l'acte de dialogue qu'il veut annoncer. ensuite, il choisis la valeur qu'il veut exprimer avec l'acte choisi, comme présenté dans la figure \ref{fig:statIhm}.
+					
+					Nous avons aussi permis au participant de pouvoir utiliser les actes de dialogues combinés, par exemple \emph{Propose and counterPropose} comme présenté dans la figure 
+					
+					Une fois les valeurs de l'acte dialogique sont choisi, le participant envoie la requête, et notre système se charge de la formulation en langage naturel (voir section \ref{sec:formalisation} et l'affiche dans la fenêtre de dialogue. Dés la réception de la réponse du participant, l'agent affiche un message en langage naturel contenant sa réponse. 
+					
+					
+					
+					\begin{figure*}[b]
+						\centering
+						\fbox{\includegraphics [width=0.85\textwidth]{Figures/chap4/AH/choixState.JPG}}
+						\caption{GUI pour choisir \emph{StatePreference(French,true)} }
+						\label{fig:statIhm}
 					\end{figure*}
 					
-				Nous avons défini deux conditions expérimentales dans le but d'éviter de biaiser la perception des participants. Dans la première condition, les participants ont d'abord interagi avec Bob, l'agent dont les comportements sont dominants. Ensuite, une interaction avec l'agent dans la position de faible dominance, Arthur.
-				A l'opposé, la deuxième condition, les participants ont d'abord interagi  avec Arthur puis avec Bob.
-								
-			
 			\subsubsection{Procédure}
 			
 			Nous avons mené une étude inter-sujets où chaque participant a interagi avec les deux agents, Bob et Arthur.
