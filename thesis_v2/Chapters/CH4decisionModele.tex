@@ -10,14 +10,14 @@
 	\endgroup
 	%Après avoir défini la relation interpersonnelle de dominance dans le chapitre \ref{chap:etat}, ainsi que sa manifestation dans l'interaction tant sur l'aspect verbal que non verbal, nous avons ensuite détaillé son impact sur les stratégies de négociations. 
 	
-	Ce chapitre introduit le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de dominance inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres défini dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prends en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Ensuite, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
+	Ce chapitre présente le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de dominance inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres défini dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prends en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Enfin, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
 	
 	\section{Comportements de dominance et stratégies de négociation}
 	
 	\label{chap:domer}
 	Comme nous l'avons présenté dans le chapitre 2  %\ref{chap:etat}
 	, nous nous sommes essentiellement basés sur les travaux en psychologie sociale pour la définition de la dominance. 
-	La dominance comme relation interpersonnelle est présentée comme la capacité à exprimer des comportements verbaux et non verbaux par lesquels  l'influence est atteinte. Prenant cette définition comme point de départ, nous nous sommes ensuite intéressé à la manifestation des comportements de dominance durant le processus de négociation et comment ces comportements influençaient les stratégies de négociations dans le contexte d'interaction humain/humain. 
+	La dominance comme relation interpersonnelle est présentée comme la capacité à exprimer des comportements verbaux et non verbaux par lesquels l'influence est atteinte \cite{burgoon2006nonverbal}. Prenant cette définition comme point de départ, nous nous sommes ensuite intéressé à la manifestation des comportements de dominance durant le processus de négociation et comment ces comportements influençaient les stratégies de négociations dans le contexte d'interaction humain/humain. 
 	
 	Dans ce qui suit, nous présentons \emph{trois principes} de comportements extraits des travaux en psychologie sociale qui ont étudiaient l'impact des comportements de dominance sur les négociateurs et leur stratégies.
 	
@@ -34,27 +34,28 @@
 	\end{enumerate}
 	
 	
-	Le but est de construire un modèle de décision capable d'illustrer ces comportements de dominance et par conséquent, adapter la stratégie de négociation en fonction de la dominance de l'agent.
+	Notre but est de construire un modèle de décision capable d'illustrer ces comportements de dominance et par conséquent, adapter la stratégie de négociation en fonction de la dominance de l'agent.
 	
 	Dans ce qui suit nous présenterons le modèle décision de l'agent qui prend en compte la relation de dominance.
 	
 	
 	\section{Règles de décision}
-	Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est géré par le logiciel \emph{Disco}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme d'arbre hiérarchique pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
+	Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est géré par le logiciel \emph{Disco} \cite{rich09}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme d'arbre hiérarchique pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
 	
-	De plus, \emph{Disco} a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. D4g est déjà fourni avec un ensemble d'actes de dialogue.
+	De plus, \emph{Disco} a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. 
 	
 	Nous avons complété ce système avec les actes de dialogues présenté dans la section \ref{sec:communication} afin qu'il puisse supporter la négociation sur les préférences.
 	
-	Pour chaque acte de dialogue que l'agent reçois, nous modélisons l'ensemble des réponses que l'agent peut sélectionner. Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose}. 
-	Par exemple:
-	\begin{verbatim}
-	User: "Je propose que nous allions dans un restaurant Chinois." 
-		Agent: "je propose que nous allions plutôt dans un restaurant
-			   Japonais". 
-	\end{verbatim}
-	Chaque branche est définie avec des conditions d'applicabilités pour décider quelle réponse est adoptée. 
-	Ces conditions prennent en compte la relation de  dominance en plus du contexte courent de la négociation. Dans l'exemple précédent, l'agent doit être dominant pour répondre à un Propose par un autre Propose. 
+	Pour chaque acte de dialogue que l'agent reçoit, nous modélisons des règles de décisions sous forme d'arbre de décisions pour permettre à l'agent de décider du prochain acte de dialogue à énoncer.
+	Chaque branchement dans l'arbre dispose d'une condition d'applicabilité. Cette dernière prend en compte le contexte courant de la négociation. De plus, elle prend en compte la position de l'agent dans le spectre de dominance pour exprimer des stratégies de négociation compatibles avec sa relation de dominance.
+	%Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose}. 
+%	Par exemple:
+%	\begin{verbatim}
+%	User: "Je propose que nous allions dans un restaurant Chinois." 
+%		Agent: "je propose que nous allions plutôt dans un restaurant
+%			   Japonais". 
+%	\end{verbatim}
+
 	
 	
 	\subsection{Sélection de l'acte de dialogue}
@@ -65,56 +66,133 @@
 	Notons que dans la suite, chaque arbre de dialogue est défini avec une condition de sortie qui clos la négociation avec un échec. Cette dernière est activée seulement par agent \emph{dominant} dans la situation où toutes les valeurs restantes ne sont pas acceptables. 
 	
 	\subsubsection{AskPreference}
-	A la réception d'un \emph{AskPreference}, l'agent répond en exprimant ses préférences sur la question demandée.
+		Quand l'agent reçoit un \emph{AskPreference} de la part de son interlocuteur, l'agent répond en exprimant ses préférences sur la question demandée. Par exemple: 
+		
+		\begin{verbatim}
+			User : AskPreference(Japanese) 
+					"Do you like Japanese cuisine ?"
+			Agent : StatePreference(Japanese, true)
+					"I like Japanese cuisine."
+		\end{verbatim}
 	
 
 		 
-		 \begin{figure}[t]
-		 	\caption{\label{alg:maxtours} Maximum de tours de \emph{StatePreference} autorisé en fonction des comportements de dominance de l'agent}
-		 	\begin{algorithmic}[1]
-		 		\Function{MaxStatements}{}
-		 		\State $nbTours$ = Nombre de \emph{StatePreferences} exprimés successivement.
-		 		\State $maxTours$ 
-		 		\If{($dominant$)} 
-		 		\State $maxTours = 1$
-		 		\EndIf
-		 		\If{($peer$)} \State $maxTours = 2$
-		 		\EndIf
-		 		\If{($soumis$)} 
-		 		\State $maxTours = 4$
-		 		\EndIf
-		 		\State $retrun$ $nbTours\geq maxTours$
-		 		\EndFunction
-		 	\end{algorithmic}
-		 \end{figure} 
 		 
-	\subsubsection{State Preference}
-	Le comportement standard qu'un agent adopte à la réception d'un \emph{StatePreference(v)} est de donner son opinion sur la valeur exprimée (c-à-d que l'agent calcule la valeur de satisfiabilité de \textit{v}). Cependant, si l'agent a déjà exprimé ses préférences sur ces valeurs, il va vouloir choisir un autre acte de dialogue en fonction de la relation sociale comme présenté dans la figure \ref{fig:SP}:
-	\begin{itemize}
-		\item \emph{Propose(x)}: Si la valeur exprimée par l'utilisateur est acceptable (voir figure \ref{alg:pseudo}) pour l'agent, il va proposer de choisir cette valeur. Ce comportement relate le principe 1.
-		\item \emph{Propose}: Si le nombre de \emph{StatePreferences} autorisé est atteint (voir figure \ref{alg:maxtours}), l'agent doit respecter le principe 3 et faire évoluer la négociation. La valeur proposée doit respecter les préférences de l'agent. 
-		\item \emph{StatePreference}: l'agent est \emph{neutre}, il va exprimer ses préférences afin de construire une meilleure connaissance.
-		\item \emph{AskPreference}: l'agent est \emph{soumis}. Dans le cas où toutes les valeurs du critères courent ont été discutés, l'agent va respecter le principe 3 et faire évoluer la négociation en ouvrant la discussion sur un autre critère.
-	\end{itemize}
+	\subsubsection{State Preference(v)}
+		Durant le processus de négociation, les négociateurs partagent des informations sur leurs préférences via des \emph{StatePreference(v)}. Par conséquent, quand l'agent reçoit ce type d'acte de dialogue, il a le choix entre deux stratégies possibles. Nous utiliserons l'exemple où l'interlocuteur ait exprimé  \emph{StatePreference(calme, true)} (I like calm restaurants) pour illustrer les choix de l'agent. 
+		
+		
+		\paragraph{ i. Actes de négociations :}
+			L'agent peut décider d'utiliser des actes de négociations et plus précisément un \emph{Propose} suite à la reception d'un \emph{StatePreference} pour deux raisons relatives à ses comportements de dominance. Nous présentons ci dessous les conditions d'applicabilités ainsi que la valeur associée à l'acte dialogique \emph{Propose}. 
+			\begin{itemize}
+				
+				\item L'agent propose la valeur $v$ exprimée par l'interlocuteur. La condition d'applicabilité repose sur l'acceptabilité de la valeur $v$. En effet, si l'interlocuteur énonce apprécier $v$ et que dans l'état mental de l'agent $v$ est satisfiable, l'agent proposera donc de choisir la valeur $v$. Par exemple, suite au \emph{StatePreference(calme, true)} énoncé par l'interlocuteur, si $Italian$ est acceptable pour l'agent, il énoncera un \emph{Propose(Italian)} au prochain tour. Ce comportement traduit le premier principe qui stipule que l'agent prend en compte les préférences de son interlocuteur dans la prise de décision.
+				
+				\item Le second cas illustre le troisième principe. En effet, dans un processus de négociation, plus l'agent est dominant, plus il veut prendre le contrôle de la négociation et faire avancer la prise de décision le plus rapidement possible. Ceci se traduit par des expressions de \emph{Propose} jusqu'a arriver à un compromis.
+				Pour ce faire, l'agent analyse le contexte de la négociation afin d'évaluer s'il a collecté les informations suffisantes (les tours de \emph{StatePreferences}) pour prendre une décision équitable. Nous avons proposé ce simple algorithme (voir figure \ref{alg:maxtours}),qui définit un nombre maximums de tours de paroles réservé à l'échange d'information. Cet algorithme prend en compte les comportements de dominance de l'agent. En effet, plus l'agent est soumis, plus il va chercher à collecter le maximum d'informations comme le spécifie le principe 3. 
+				
+				Une fois le nombre de tous maximum alloués à l'échange d'informations atteint, l'agent énonce une proposition avec une valeur acceptable. 
+								
+			\end{itemize}
+			
+			
+		\paragraph{ii. Partager des préférences:} Cette stratégie est activée si aucune condition d'applicabilité n'est satisfaite dans la première stratégie. 
+		L'agent peut échanger des informations sur les préférences dans le but d'optimiser ses décisions pour un solution équitable. En fonction de contexte de la négociation l'agent peut choisir un acte de dialogue précis.
+			\begin{enumerate}
+				\item \emph{StatePreference(v)}: La première réponse possible est de partager ses préférences la valeur communiqué par l'interlocuteur. Pour cela, une condition d'applicabilité est définie. En effet, il faut que $v \notin S_i$, c'est à dire que l'agent n'ait pas déjà communiqué son avis sur la valeurs $v$ comme présenté dans la figure \ref{fig:SP}. Dans notre exemple, cela voudrait dire que l'agent n'a pas encore partagé son avis sur la cuisine italienne.
+				Cependant, si cette condition d'applicabilité n'est pas vérifiée (l'agent a déjà parlé de la cuisine italienne dans la négociation), l'agent peut échanger des informations sur d'autres valeurs en fonction de sa valeur de dominance. 
+				
+				\item \emph{StatePreference (x)}: l'agent est \emph{neutre}, il va exprimer ses préférences sur des valeurs qu'il n'a pas encore communiqués $x \notin S_i$ afin d'inciter son interlocuteur à partager des informations sur ses préférences.
+				\item \emph{AskPreference (x)}: l'agent est \emph{soumis}, il va respecter le principe 3 et essayer de collecter des informations sur les préférences de son interlocuteur $x \not \in (U_i or A_i)$.
+			\end{enumerate}  
 	
-	\begin{figure}[!t]
-		\centering
-		\includegraphics[width=4.5in] {Figures/chap4/statePref.pdf}
-		\caption{Les réponses générés suite à un StatePreference}
-		\label{fig:SP}
-	\end{figure}
+	\begin{figure}[t]
+		\caption{\label{alg:maxtours} Maximum de tours de \emph{StatePreference} autorisé en fonction des comportements de dominance de l'agent}
+		\begin{algorithmic}[1]
+			\Function{MaxStatements}{}
+			\State $nbTours$ = Nombre de \emph{StatePreferences} exprimés successivement.
+			\State $maxTours$ 
+			\If{($dominant$)} 
+			\State $maxTours = 1$
+			\EndIf
+			\If{($peer$)} \State $maxTours = 2$
+			\EndIf
+			\If{($soumis$)} 
+			\State $maxTours = 4$
+			\EndIf
+			\State $retrun$ $nbTours\geq maxTours$
+			\EndFunction
+		\end{algorithmic}
+	\end{figure} 
+	
+	
+%	\begin{figure}[!t]
+%		\centering
+%		\includegraphics[width=4.5in] {Figures/chap4/statePref.pdf}
+%		\caption{Les réponses générés suite à un StatePreference}
+%		\label{fig:SP}
+%	\end{figure}
 %	
 	
+	
+	
+	 
+	\subsubsection{Propose}
+	A la réception d'un \emph{Propose}, l'agent doit décider d'accepter ou refuser la proposition. En conséquence, il choisit une réponse en fonction de ses comportements de dominance.
+	
+	Pour calculer l'acceptabilité de l'offre reçue, l'agent met en application le principe 2. En fonction de sa dominance, l'agent a niveau d'exigence et de concessions. 
+	\paragraph{i. Niveau de concessions}
+	
+	Au fur et à mesure que la négociation évolue, si un compromis n'est pas trouvé, l'agent sera amené à faire des concessions sur certains critères. L'agent dispose de relations de préférences sur les critères. Par exemple, il peut considérer que le type de cuisine est le critère le plus important pour choisir un restaurant. En fonction de son ordre de préférences et de sa dominance, l'agent peut faire des concessions sur des critères et ne plus les considérer comme importants dans sa prise de décision. C'est à dire, pour un critère donné, il va considérer que toutes les valeurs de ce critères sont maintenant acceptables. 
+	Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
+	
+	Nous présentons dans la figure \ref{alg:important}, l'algorithme pour calculer si un critère est toujours important compte tenu l'état courant de la négociation. L'agent dominant est conçu pour considérer tout les critères importants. Cependant, un agent neutre ou soumis augmentera ses concessions en fonction de l'évolution de la négociation. 
+	
+	\begin{figure}[h]
+		\caption{\label{alg:important} Calcul de l'importance d'un critère $C$}
+		\begin{algorithmic}[1]
+			\Function{isImportant}{$C$}
+			\State $nbProposal = |P| + |R|$ 
+			\Comment{Les propositions non acceptées durant la négociation}
+			\State criteria = trier les critères par ordre décroissant de préférences
+			\State $minProposals$ \Comment{Le nombre minimums de propositions pour activer la concession}
+			\If{($dominant$ \textbf{OR} $nbProposal < minProposals$}) 
+			\State $true$ \Comment{L'agent dominant ne fait pas de concessions}
+			\Else
+			\State $concession $ = ($nbProposal - minProposal$)/ $minProposal$
+			\State return $rank(C) < |\mathcal{C}| - concession$
+			\EndIf 
+			\EndFunction
+		\end{algorithmic}
+	\end{figure}
+	
+	\paragraph{ii. Niveau d'exigence}
+		Une fois que l'agent décide si un critère est important (dans le cadre d'une proposition concernant une valeur de critère), l'agent calcule l'acceptabilité de cette valeur en fonction de son niveau d'exigence. Plus l'agent est dominant plus il est exigent et donc tend à avoir un ensemble restreints de valeurs acceptables. Nous avons écrit un algorithme simple, présenté dans la figure \ref{alg:pseudo} pour simuler ce comportement d'exigence. 
+	
+	En fonction du résultat obtenu à partir de ces deux fonctions, l'agent définit sa stratégie de réponse: 
+	
+	\begin{itemize}	
+		\item  \emph{Accept(p)}: Si la proposition \emph{p} est acceptable, l'agent accepte la proposition via l'acte de dialogue un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. 
+		\item \textbf{Stratégie de rejet :} En fonction de sa dominance, l'agent rejette une proposition de différentes manières:
+		\begin{itemize}[label= $\circ$]
+			\item \emph{AskPreference(v)} l'agent est \emph{soumis}, il choisis alors d'énoncer un acte de dialogue \emph{Ask} tel que $v \not\in (U_i or A_i)$. Les personnes soumises ont tendance à ne pas exprimer leurs opinions ouvertement. Pour cela, au lieu de rejeter une proposition non acceptable, l'agent change le sujet de négociation et active le principe 3 pour collecter plus de connaissances sur les préférences de son interlocuteur. Cette branche est applicable uniquement quand l'agent refuse consécutivement deux propositions.  
+			
+			\item \emph{Reject(p)}: l'agent est \emph{neutre} ou \emph{soumis}. Par conséquent, sa stratégie consistera à rejeter ouvertement toute proposition non acceptable.
+			
+			\item \emph{Propose(p1)}: L'agent \emph{dominant} activera le principe 3 en énonçant un acte dialogique \emph{Propose}. Son but est de faire évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences (p1 est acceptable voir figure \ref{alg:pseudo}). 
+		
+		\end{itemize}
+	\end{itemize}
 	\begin{figure}[]
 		\caption{\label{alg:pseudo} Calcul d'acceptabilité d'une proposition $value$}
 		\begin{algorithmic}[1]
 			\Function{isAcceptable}{$proposal$}
-			\If{(type de $proposal$ n'est pas un critère important)} 
+			\If{( $\neg$ isImportant($type(proposal)$)} 
 			\State return $true$
 			\EndIf
 			
 			\State List = trier les valeurs par ordre décroissant de préférences
-			\If{($dominant$)} 
+			\If{($dominant$ \textbf{OR} $neutre$)} 
 			\State $return$ index($proposal$)< $size(List)/2$
 			\EndIf
 			\If{($soumis$)} 
@@ -125,35 +203,21 @@
 	\end{figure}
 	
 	
-	 
-	\subsubsection{Propose}
-	A la réception d'un \emph{Propose}, l'agent choisit sa réponse en fonction de l'\emph{acceptabilité} de la proposition.
-	Nous avons écrit l'algorithme d'acceptabilité afin qu'il s'adapte à la valeur de dominance affecté à l'agent. Ce choix permet de refléter les comportements du principe 2 \emph{niveau d'exigences et concessions}.
+	\subsubsection{Accept}
+	Dans le cas où l'interlocuteur exprime un \emph{Accept(v)}, nous séparons deux cas de réponses en fonction du type de la valeur acceptée $v$.
 	
-	En effet, au fur et à mesure que la négociation évolue, l'agent va faire des concessions sur certains critères. Par exemple, il peut considérer que le critère de \emph{localisation} n'est plus important pour le choix d'un restaurant. Par conséquent, il considérera que toute valeur de \emph{localisation} est désormais \emph{acceptable}.
+	Premièrement, si la valeur est une \textit{option} $ v \in \mathcal{O}$, ça voudrait dire que l'interlocuteur a accepté l'option proposé par l'agent et un compromis acceptables pour les deux est atteint. Par conséquent, l'agent énonce un acte de dialogue qui clos la négociation par un \emph{succès}.
 	
-	Par ailleurs, la notion d'exigence apparaît dans l'algorithme ci-dessous. Si l'agent est \emph{dominant}, l'ensemble de valeurs acceptables est plus restreint qu'un agent \emph{soumis}.
-
-	\begin{itemize}
-		
-		\item  \emph{Accept(p)}: Si la proposition \emph{p} est acceptable, l'agent accepte la proposition via l'acte de dialogue un \emph{Accept(p)}. Sinon, l'agent doit faire évoluer la négociation pour trouver un meilleurs compromis. En fonction de la relation de dominance l'agent choisit un acte de dialogue spécifique.
-		\item \emph{Ask :} l'agent \emph{soumis} va suivre les comportements décrit dans les principes 1 et 3. En effet, il va essayer de collecter plus de connaissances sur les préférences de l'autre et ainsi prendre en compte ses préférences. De plus, en vue du principe 2 qui affirme qu'un agent soumis doit faire des concessions, l'agent soumis n'est pas autorisé à exprimer plus d'un nombre de rejets successifs.  
-		\item \emph{Reject :} l'agent qui n'est pas dominant (\emph{i.e. soumis ou neutre}) rejete une proposition qui n'est pas acceptable.
-		\item \emph{Propose :} suivant le principe 3, l'agent \emph{dominant} fait évoluer la négociation en proposant une autre valeur qui respecte mieux ses préférences. 
-	\end{itemize}
-	
-	\subsubsection{Accept }
-	A la réception	d'un \emph{Accept}, nous séparons deux cas de réponses en fonction du type de la valeur acceptée $v$.
-	Premièrement, $ v \in \mathcal{O}$ une \textit{option}, l'agent clos la négociation par un \emph{succès}.
-	Sinon, $v \in C_i$ est une valeur de critère, l'agent entame la négociation sur un autre critère et sa réponse sera choisie en fonction de la relation de dominance à exprimer.
+	$v \in C_i$ est une valeur de critère. Donc, les négociateurs sont tombés d'accord sur une valeurs qui clos la négociation sur le critère courant. Pour continuer la négociation, l'agent "aborde" la négociation sur un autre critère important (voir figure \ref{alg:important}). La stratégie que déploie l'agent pour ouvrir la négociation sur le nouveau critère dépends de sa dominance et plus précisément du principe 3:
 	
 	\begin{itemize}
-		\item \emph{Propose}: La condition d'applicabilité pour cet acte de dialogue dépend de la valeur de dominance initiale de l'agent. Un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences. Cependant, un agent \emph{soumis} n'est autorisé à faire une proposition que s'il a des connaissances sur les préférences de l'autres,  communiqués par des \emph{StatePreferences}, qui lui permettront de prendre une décision équitable. cet algorithme traduit les comportements présentés dans les principes 1 et 3. 
+		\item \emph{Propose(x)}: un agent \emph{dominant} entamera la négociation sur le nouveau critère en proposant une valeur qui respecte ses préférences afin de faire avancer le processus de négociation. 
 		
-		\item \emph{AskPreference}: Comme présenté dans le principe 3, l'agent est \emph{soumis} collecte le plus d'informations possibles sur les préférences de son interlocuteur. 
-		\item \emph{StatePreference}: L'agent est \emph{neutre} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
+		\item \emph{AskPreference(x)}: Comme présenté dans le principe 3, l'agent est \emph{soumis} ouvre la négociation sur un nouveau critère en demandant à son interlocuteur ses préférences sur les valeurs de ce critère.
 		
+		\item \emph{StatePreference(x)}: L'agent est \emph{neutre} ouvre la négociation en communiquant ses préférences sur le nouveau critère à discuter. 
 	\end{itemize}
+	La	valeur $x$ associée à tous ces cas possible, représente la valeur que l'agent préfère le plus pour ce critère, c'est à dire, $sat(x) =1$.
 	
 	%				\begin{figure}[]
 	%					\begin{algorithmic}[1]\small
@@ -175,60 +239,59 @@
 	%				\end{figure}
 	%				
 	
-	\subsubsection{Reject}
-	Suite à un \emph{Reject}, l'agent choisis une réponse en suivant les trois principes comme présenté ci-dessous:
+	\subsubsection{Reject(p)}
+	
+	Suite à un \emph{Reject(p)}, l'agent déploie une stratégie spécifique à sa valeur de dominance :
 	\begin{itemize}
-		\item \emph{AskPreference}: Si la proposition d'un agent \emph{soumis} est rejetée, il va considérer qu'il n'avait pas assez de connaissances pour prendre une bonne décision. Pour compenser, il va demander à l'utilisateur ses préférences sur des valeurs qu'il ne connaît pas déjà. 
+		\item \emph{AskPreference (v)}: Si la proposition d'un agent \emph{soumis} est rejetée, il va considérer qu'il n'avait pas assez de connaissances pour prendre une bonne décision. Pour compenser, il va demander à l'utilisateur ses préférences sur des valeurs qu'il ne connaît pas déjà. 
 		
-		\item \emph{Propose}: Suivant les principes 1 et 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus, il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
+		\item \emph{Propose(p')}: Suivant les principes 1 et 3, l'agent \emph{dominant} fait avancer la négociation en proposant de nouvelles valeurs. Cependant, si la valeur rejetée se trouve être la valeur qu'il préfère le plus ( \textit{i.e.} $sat(p) =1$), il va refuser de concéder et donc proposer la valeur encore une fois. Ce comportement est fidèle au principe 2. 
 		
-		\item \emph{StatePreference}: l'agent \emph{peer} continue la négociation en exprimant ses préférences sur d'autres valeurs. 
+		\item \emph{StatePreference (v)}: l'agent \emph{neutre} continue la négociation en exprimant ses préférences sur d'autres valeurs qu'il n'a pas déjà communiqué. Le but est d'échanger le plus d'informations possibles pour faire de meilleures propositions. 
 	\end{itemize}	
 	%----------------------------------------------------------------
 	
-	\subsubsection{Exemple}
-	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B}. 
-				\vspace{0.5em}
+	\subsection{Exemple}
+	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B} est soumis. 
+
+
 	\fbox{
-	\begin{minipage}{.95\textwidth}
+	\begin{minipage}{.99\textwidth}
 		{\ttfamily
 			\begin{addmargin}[1em]{2em}% 1em left, 2em right
 			
 			\vspace{0.5em}
-			A: "Let's go to a Chinese restaurant."
-			
-			\hspace*{3mm} B: "I like Italian more than Chinese restaurants."
-			
-			A: "Let's go to a quiet restaurant."
-			
-			\hspace*{3mm} B: "I don't like quiet restaurants."
-			
-			A: "Let's go to a cheap restaurant."
-			
-			\hspace*{3mm} B: "Do you like quiet or lively restaurants? "
-			
-			A: "I like quiet restaurants."
-			
-			\hspace*{3mm} B: "I like lively restaurants."
-			
-			A: "Let's go to the Samura restaurant. It's a lively, cheap Japanese restaurant."
-			
-			\hspace*{3mm} B: "What kind of cuisine do you like?"
-			
-			A: "I like Chinese restaurants."
-			
-			\hspace*{3mm} B: "I like Italian restaurants."
-			
-			A: "Let's go to the Dragon restaurant. It's a lively, cheap Chinese restaurant."
-			
-			\hspace*{3mm} B: "Okay. Let's go to the Dragon restaurant."
-			
-			A: "Okay. I'll call to book a table."
-		\vspace{0.5 em}
+				\textbf{A:} $Propose(Chinese)$ "Let's go to a Chinese restaurant."
+				
+				 \hspace*{3mm} \textbf{B:} $AskPreference(Ambiance)$  "What kind of ambiance do you like?"
+				
+				\textbf{A:} $StatePreference(family,true)$ "I like family restaurants."
+				
+				\hspace*{3mm} 	\textbf{B:}  $StatePreference(family,false)$ "I don't like family restaurants."
+				
+				\textbf{A:}  $Propose(family)$ "Let's go to a family restaurant."
+				
+				\hspace*{3mm} 	\textbf{B:} $Reject(family)$ "Sorry, I'd rather choose something else, because I don't like family restaurants."
+				
+				\textbf{A:}  $Propose(family)$ "Let's go to a family restaurant."
+				
+				\hspace*{3mm} 	\textbf{B:} $AskPreference(Cost)$ "What kind of cost do you like?"
+				
+				\textbf{A:} $StatePreference(cheap,true)$ "I like cheap restaurants."
+				
+				\hspace*{3mm} 	\textbf{B:} $Propose(cheap)$ "Let's go to a cheap restaurant."
+				
+				\textbf{A:}  $Propose(Jiliya)$ "Let's go to the Jiliya. It's a quiet, cheap Chinese restaurant."
+				
+				\hspace*{3mm} 	\textbf{B:} $Accept(Jiliya)$  "Okay. Let's go to the Jiliya."
+				
+				\vspace{0.5 em}
 			\end{addmargin}
 		} 
 	\end{minipage}
 	}	
+	
+	
 	\subsection{Limites des arbres de dialogue}
 		Un module décisionnel à base d'arbre de dialogue repose essentiellement sur une modélisation manuelle de tous les cas possibles pouvant survenir à la réception d'un acte de dialogue. Par conséquent, ce processus est lourd et nécessite une révision constante à chaque apparition de nouveaux cas non modélisés. Cette rigidité expose notre modèle de négociation à des situations de \textit{breakdown}, où à la réception d'un acte de dialogue, l'agent ne trouve aucun branchement applicable (condition d'applicabilité non remplie). 
 		
