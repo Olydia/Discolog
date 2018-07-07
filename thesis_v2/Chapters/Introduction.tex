@@ -7,48 +7,49 @@
 %\clearpage
 %\endgroup 
 
-Cette thèse s'intéresse à l'apport des comportements sociaux dans les interactions homme/machine, et plus précisément à l'implémentation de ces comportements dans un agent conversationnel. Nous proposons un agent conversationnel doté de compétences en négociation collaborative. L'agent est capable de négocier avec un utilisateur humain et d'adapter sa stratégie de négociation à la relation interpersonnelle de dominance établie avec l'interlocuteur. 
+Cette thèse s'intéresse à l'apport des comportements sociaux dans les interactions homme/machine, et plus précisément à l'implémentation de ces comportements dans un agent conversationnel. Nous proposons un agent conversationnel doté de compétences en négociation collaborative. En effet, l'agent est capable de négocier avec un utilisateur humain dans un environnement collaboratif. De plus, il est capable d'adapter sa stratégie de négociation à la relation interpersonnelle de dominance établie avec son partenaire de négociation. 
 
 
-Ce travail s'inscrit dans la continuité de la recherche en informatique affective (\emph{affective computing}): ce champs de recherche s'intéresse au développement de systèmes d'interaction avec des utilisateurs humains capables de percevoir, de reconnaître et de simuler les affects sociaux impliqués dans les interactions humaines. Cette intelligence sociaux-émotionnelle a pour but d'améliorer les interactions ainsi que l'acceptabilité et la crédibilité des agents conversationnels. 
+Ce travail s'inscrit dans la continuité de la recherche en informatique affective (\emph{affective computing}): un domaine de recherche qui s'étend de l'informatique à la psychologie, et des sciences sociales aux sciences cognitives. Ce champs de recherche s'intéresse au développement de systèmes intelligents d'interaction avec des utilisateurs humains capables de percevoir, de reconnaître et de simuler les affects sociaux impliqués dans les interactions humaines. Cette intelligence sociaux-émotionnelle a pour but d'améliorer les interactions ainsi que l'acceptabilité et la crédibilité des agents conversationnels. 
 
 Nous assistons, donc, à l'émergence croissante d'agents conversationnels sociaux dans des domaines d'applications variés.  Ces agents jouent différents rôles allant de compagnon artificiel \cite{ring2013addressing,sidner2013always}, patient virtuel\cite{kenny2007virtual,kleinheksel2017virtual} ou tuteur pour le \emph{e-learning} \cite{kerly2008calmsystem,kerry2009conversational}.
 
- Dans ce contexte, l'agent et l'utilisateur partagent des buts et intérêts communs qui les mènent à collaborer, à travers leur interaction, afin d'atteindre ces objectifs communs. 
-Par exemple, \emph{Hayashi et al} proposent un agent collaborateur \cite{hayashi2013embodied} ou encore \cite{soliman2010intelligent} qui propose un agent pédagogique intelligent qui assiste un étudiant dans son apprentissage. Il propose une pédagogie collaborative dans laquelle il explique à l'étudiant les sujets, lui pose des questions et l'aide à collaborer avec d'autres étudiants afin de fournir un soutien à l'apprentissage personnalisé.
+Les interactions entre un agent conversationnel et un utilisateur humain prennent place généralement dans un environnement collaboratif où l'agent et l'utilisateur partagent des objectifs et des intérêts communs. 
+Par conséquent, ils sont conduits à collaborer, à travers leur interaction, afin d'atteindre ces objectifs communs. 
+Par exemple, \emph{Hayashi et al} proposent un agent qui prend part à une interaction collaborative afin d'améliorer la créativité des collaborateurs \cite{hayashi2013embodied} ou encore \cite{soliman2010intelligent} qui propose un agent pédagogique intelligent qui assiste  l'étudiant dans son apprentissage. Il propose une pédagogie collaborative dans laquelle il explique à l'étudiant les sujets, lui pose des questions et l'aide à collaborer avec d'autres étudiants afin de fournir un soutien à l'apprentissage personnalisé.
 
 Dans un environnement collaboratif où chaque interlocuteur dispose d'une expertise et des préférences qui lui sont propres, des divergences de stratégies peuvent apparaître durant la collaboration. 
 Pour résoudre ces divergences, les interlocuteurs sont amenés à négocier pour présenter leurs points de vue respectifs et trouver un compromis acceptable pour les deux.  
-En effet, \emph{Dillengbourg et Baker} \cite{dillenbourg1996negotiation} affirment que la collaboration est une forme spécifique de coopération synchrone en interaction où la négociation a lieu \textit{simultanément} sur trois niveaux. Premièrement, le niveau communicatif qui repose sur un bon échange d'informations et la compréhension mutuelle des phrases ou actes de dialogue échangés. Le second niveau concerne la proposition de stratégies, méthodes et solutions pour résoudre le problème ou achever la tâche commune. Enfin, le dernier niveau correspond à la gestion de l'interaction afin de coordonner la communication et la construction de stratégies communes.
+En effet, \emph{Dillengbourg et Baker} \cite{dillenbourg1996negotiation} affirment que la collaboration est une interaction où la négociation a lieu \textit{simultanément} sur trois niveaux. Premièrement, le niveau communicatif qui repose sur un bon échange d'informations et la compréhension mutuelle des phrases ou actes de dialogue échangés. Le second niveau concerne une négociation pour proposer des stratégies, méthodes et solutions pour résoudre le problème ou achever la tâche commune. Enfin, le dernier niveau correspond à la gestion de l'interaction afin de coordonner la communication et la construction de stratégies communes. En d'autres mots, la négociation collaborative permet d'améliorer l'échange d'informations et les stratégies communes pour trouver une solution optimale pour les deux partis. 
 
-En parallèle, la négociation est considérée comme un processus social qui va influencer le cours de la négociation et ses résultats \cite{broekens2010affective}. Par conséquent, les compétences sociales des agents négociateurs sont cruciales dans l'établissement des échanges d'informations et de la construction des stratégies de négociation \cite{jin2010study}. 
+En parallèle, la négociation est  considérée comme un processus social dont les affects vont influencer le cours de la négociation et ses résultats \cite{broekens2010affective}. Par conséquent, les compétences sociales des agents négociateurs sont cruciales dans l'établissement des échanges d'informations et de la construction des stratégies de négociation \cite{jin2010study}. 
 
 Ces affirmations sont soutenues par des années de recherches en psychologie sociale qui ont mis en exergue que les relations sociales avaient un impact majeur sur le processus de négociation \cite{thompson2010negotiation}. Parmi ces relations, nous nous intéressons à la relation interpersonnelle de dominance où des études en psychologie sociale et en communications ont montré que l'expression de comportements de dominance avaient une influence directe sur la construction des stratégies des négociateurs, et par conséquent, sur le processus de négociation et ses résultats.
 Les comportements de dominance sont le résultat des stratégies des négociations et sont exprimés tant sur le niveau verbal que non verbal.
 
-Notre but est de concevoir un agent conversationnel capable d'adopter des comportements sociaux dans un contexte de négociation collaborative. Nous nous sommes concentrés sur l'impact de la relation sociale de dominance sur la stratégie de négociation.
+Notre but est de concevoir un agent conversationnel capable d'adopter des comportements sociaux dans un contexte de négociation collaborative avec un utilisateur humain. Nous nous sommes concentrés sur l'impact de la relation sociale de dominance sur la stratégie de négociation.
 
 Les travaux présentés dans ce manuscrit ont été dirigés	par deux objectifs. 
-Notre premier objectif est de présenter un modèle de négociation collaboratif permettant à un agent conversationnel de négocier avec un utilisateur humain. De plus, nous injectons des comportements sociaux dans le processus décisionnel de l'agent qui vont orienter sa stratégie de négociation.
+Notre premier objectif est de présenter un modèle de négociation collaboratif permettant à un agent conversationnel de négocier avec un utilisateur humain. De plus, nous injectons des comportements sociaux de dominance dans le processus décisionnel de l'agent qui vont orienter sa stratégie de négociation.
 
-Notre second objectif vise à étudier l'impact de la relation interpersonnelle de dominance sur le processus de négociation entre un agent artificiel et un humain à partir des travaux réalisés sur des interactions humain/humain.
-Pour ce faire, nous utilisons les méthodologies issues de psychologie sociale pour proposer un modèle décisionnel régit par des comportements de dominance. En parallèle, nous mettons en œuvres des études expérimentales pour évaluer les comportements de dominance de notre agent conversationnel.  
+Notre second objectif vise à étudier l'impact d'une relation interpersonnelle de dominance sur le processus de négociation entre un agent artificiel et un humain à partir des travaux réalisés sur des interactions humain/humain.
+Pour ce faire, nous utilisons les méthodologies issues de psychologie sociale pour proposer un modèle décisionnel régit par des comportements de dominance. En parallèle, nous mettons en œuvres des études expérimentales inspirées des méthodologies de recherches en psychologie pour évaluer les comportements de dominance de notre agent conversationnel.  
 
 
-%
-%	** Plan **
-%
-%	Dans le premier chapitre... (3 lignes à chaque fois)
-%
-%
-%	
-%	(((les éléments qui suivent participeront au plan)))
-%	
-%	Dans un premier temps, nous étudions le concept de la relation interpersonnelle de dominance et la manifestation des comportements de dominance dans les négociations humain humain.
-%
-%	En se basant sur cette littérature issue de la psychologie, nous proposerons un modèle computationnel de négociation basé sur la relation de dominance.
-%
-%	L'agent est capable d'exprimer une strategie de négociation en fonction de comportements de dominance.  
-%	 
-%
-%	(((en conclusion juste avant les persp, discussion sur "validation" d'un modèle psycho-info, de la démarche)))
+Ce manuscrit est organisé en six chapitres.
+Le chapitre \ref{chap:etat}, dresse un état de l'art sur les domaines de recherches autours de notre sujet de recherche. La première partie porte sur les travaux en psychologie sociale. Nous présentons les différentes recherches sur la définition du concept de dominance, sa manifestation dans les interactions,et les comportements verbaux et non verbaux qui y sont liés. Nous nous penchons ensuite sur l'impact de ces comportements sur les stratégies de négociation humain / humain. 
+
+Dans la seconde partie, nous nous intéressons aux travaux en informatique. Tout d'abord, nous présentons les architectures de négociation automatique existantes. Ensuite, nous présentons l'évolution de ce domaine vers l'intégration de comportements sociaux dans la modélisation de stratégies de négociation automatique. Enfin, nous présentons les agents conversationnels existants capables d'exprimer et de percevoir les comportements de dominance. 
+
+Dans le chapitre \ref{chap:chap3}, nous introduisons notre modèle de négociation collaborative. Nous présentons en première partie une collecte de données qui nous a permis d'identifier des comportements des négociateurs. Ensuite, le domaine de négociation est détaillé, suivi de notre modèle de communication à base d'actes de dialogue. 
+
+Dans le chapitre \ref{chap:dec}, nous présentons le modèle décisionnel de l'agent régit par les comportements de dominance. En première partie, nous présentons les principes de stratégies de négociation liées aux comportements de dominance. Nous présentons ensuite, l'implémentation de chaque principe. Enfin, la validation de ces comportement est introduite. Nous présentons deux études dont le but est d'évaluer la perception des stratégies de négociation et les comportements de dominance. Une première étude qui s'intéresse à l'évaluation de comportements de dominance dans une négociation agent/agent. La seconde étude présente l'évaluation la perception des comportements de dominance par des participants qui ont négocié avec nos agents.
+
+Le chapitre \ref{chap:Tom} la construction de la relation interpersonnelle de dominance entre l'agent et son interlocuteur. 
+Nous introduisons notre modèle de simulation des comportements de l'interlocuteur inspiré des travaux en théorie de l'esprit. Nous nous intéressons particulièrement aux travaux utilisant une approche de \emph{simulation-theory}.
+Nous détaillons notre démarche de recherche qui nous a mener à proposer un modèle adaptatif capable de reconnaître les comportements de dominance de l'interlocuteur avec seulement une modélisation partielle de son état mental.
+Une étude agent/agent est présenté pour valider la pertinence des prédictions de notre modèle. 
+ 
+Suite au modèle implémenté, nous proposons dans le chapitre \ref{chap:chap6}, une étude agent/humain dans laquelle les agents produits ont interagi avec des participants. Nous avons manipulé la simulation de la relation de dominance entre l'agent et son interlocuteur. Nous avons implémenté un agent pour simuler une relation complémentaire de dominance avec le participant. A l'opposé, un autre agent devait simuler une relation dans laquelle il avait adoptait des comportements de dominance similaires à ceux du participant. Notre but est d'étudier si la relation complémentaire de dominance avait un impact positif sur la négociation en terme du gain commun atteint et de l'agréabilité à négocier avec l'agent. 
+
+Cette thèse s’achève sur une conclusion présentant une prise de recul synthétisant notre démarche ainsi que les contributions de nos travaux. Elle présente également les perspectives nouvelles que soulèvent ce travail.
