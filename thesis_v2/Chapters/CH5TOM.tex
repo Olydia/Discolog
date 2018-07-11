@@ -36,12 +36,14 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 \section{Approche naïve}
 L'agent dispose d'un modèle de négociation dont les stratégies décisionnels reposent sur les comportements de dominance. Ce modèle fut validé durant une interaction agent/agent et agent/humain. Par conséquent, afin de modéliser le fonctionnement de l'état mental de l'interlocuteur, nous proposons une solution basé sur la \emph{ST}, pour laquelle nous adaptons le modèle décisionnel de l'agent pour qu'il raisonne sur les comportements de son interlocuteur. 
 
-\begin{figure*}[t]
+\begin{sidewaysfigure}
 	\centering
-	\includegraphics[width=\linewidth, height=0.2\textheight]{Figures/chap5/model/general.png}
+	\includegraphics[width=\linewidth, height=0.35\textheight]{Figures/chap5/model/general.png}
 	\caption{Modèle de négociation collaborative avec un modèle de l'interlocuteur. Processus de décision étape par étape} 
 	\label{fig:schema-general}
-\end{figure*} 
+\end{sidewaysfigure}
+	
+
 
 
 Le modèle décisionnel de l'agent est régi par son état mental: ses préférences ainsi que sa position dans le spectre de dominance. Une proposition naïve pour adapter ce modèle afin qu'il raisonne sur les comportements de l'interlocuteur consisterait à formuler des hypothèses sur l'état mental de l'interlocuteur. 
@@ -182,7 +184,7 @@ A partir de de l'acte de dialogue reçu par l'interlocuteur $utterance_{other}$,
 	\begin{table}[h]
 		\centering
 		\caption{Hypothèses sur les valeurs satisfiables du critère $cuisine$}
-		\begin{tabular}{ p{2cm} p{1.5cm} p{8cm}}
+		\begin{tabular}{  >{\centering\arraybackslash}m{2cm}  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{6.5cm}}
 			\hline
 			\hline
 			& \multicolumn{2}{c}{Hypothèses}  \\

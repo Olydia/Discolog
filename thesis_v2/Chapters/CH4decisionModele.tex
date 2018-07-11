@@ -251,19 +251,14 @@
 	%----------------------------------------------------------------
 	
 	\subsection{Exemple}
-	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B} est soumis. 
+	Nous présentons un dialogue généré entre deux \textit{A} et \textit{B} implémenté avec notre modèle de dialogue, tel que l'agent \textit{A} est dominant et l'agent \textit{B} est soumis (voir figure \ref{fig:ex-dialogue}). 
 
-
-
-	\begin{minipage}{\textwidth}
+	\begin{figure} [t]
+		\begin{minipage}{.95\textwidth}
 		{\ttfamily
 			\linenumbers
-			\begin{addmargin}[1em]{2em}% 1em left, 2em right
-
-				
-			\vspace{0.5em}
-
-						 	
+			\begin{addmargin}[1em]{2em}% 1em left, 2em right	
+			\vspace{0.5em}			 	
 			1.	\textbf{A:} $Propose(Chinese)$ "Let's go to a Chinese \hspace*{3mm} restaurant."
 				
 			2.	 \hspace*{3mm} \textbf{B:} $AskPreference(Ambiance)$  "What kind of \hspace*{4mm} ambiance do you like?"
@@ -287,13 +282,11 @@
 			11.	\textbf{A:}  $Propose(Jiliya)$ "Let's go to the Jiliya. It's a \hspace*{3mm} quiet, cheap Chinese restaurant."
 				
 			12.	\hspace*{3mm} 	\textbf{B:} $Accept(Jiliya)$  "Okay. Let's go to the Jiliya."
-
-
 			\end{addmargin}
 		} 
 	\end{minipage}
-	%	\subsubsection{Stratégie de l'agent A}
-				\vspace{1 em}
+	\caption{\label{fig:ex-dialogue} Exemple d'un dialogue entre deux agents implémenté avec l'arbre décisionnel.}
+\end{figure}
 	\par 
 	L'agent A, initialisé avec un comportement dominant, initie la négociation en exprimant un \emph{Propose} de la valeur qu'il préfère le plus \textit{c.à.d} la cuisine chinoise. (Activer principe 1 et 3). En revanche, l'agent B, soumis, active la première option de rejet et détourne la négociation de la cuisine pour négocier sur l'ambiance. 
 	
@@ -508,7 +501,7 @@
 	\begin{table}[!t]
 		
 		\centering
-		\begin{tabular}{|p{.5cm}|p{.9cm}|p{3.6cm}|p{7.6cm}|}
+		\begin{tabular}{|p{.5cm}|p{.9cm}|p{3.6cm}|p{5.2cm}|}
 			\hline
 			\parbox[t]{3mm}{\multirow{5}{*}{\rotatebox[origin=c]{90}{\centering \textbf{dom  $>\pi$}}}}&$N $de ligne& \textbf{Acte de dialogue} & \textbf{Condition} \\
 			\cline{2-4}
@@ -771,43 +764,32 @@
 			Nous avons ensuite comparé les comportements des deux agents pour chaque principe. Pour ce faire, nous avons en premier lieu analysé la distribution des données qui nous a révélé que ces dernières ne suivent pas une distribution normale. C'est la raison pour laquelle nous avons utilisé un test non-paramétrique de \emph{Wilcoxon  de rang signé} afin de comparer la perception des comportements de l'agent A contre l'agent B.
 			
 			Les résultats présentés dans la figure \ref{fig:H1} montrent que l'agent A qui produisait des comportements dominant a été largement perçu comme étant plus centré sur lui-même, comme supposé par l'hypothèse \textbf {H1}, avec une taille d'effet importante. Par exemple, considérons le dialogue 1 sur la Table~\ref {tab:resetude1}, le test statistique indique que l'agent A était significativement perçu comme étant plus centré sur lui-même que l'agent B avec (\emph {Z = -5.28} et  \emph {p $ <0,001 $}).
+				\begin{figure}[h]
+				\includegraphics[width=0.9\textwidth, height= 0.25 \textheight]{Figures/chap4/AA/graphs/Diapositive1.PNG}
+					\caption{Résultats pour l'hypothèse H1 sur l'égocentrisme \label{fig:H1}}
+				\end{figure}	
 			
-			Par ailleurs, une différence significative dans le niveau des concessions exprimé dans tous les dialogues a été révélée confirmant notre hypothèse \textbf {H2}. En effet, les résultats dans la figure \ref{fig:H2} montrent que l'agent dominant était perçu comme faisant moins de concessions. La taille d'effet a montré un effet moyen pour les dialogues 2 à 4, et un effet important pour Dialogue 1 avec (\emph {Z = -5.34} et \emph {p $ <$ 0.001}).
+			\par Par ailleurs, une différence significative dans le niveau des concessions exprimé dans tous les dialogues a été révélée confirmant notre hypothèse \textbf {H2}. En effet, les résultats dans la figure \ref{fig:H2} montrent que l'agent dominant était perçu comme faisant moins de concessions. La taille d'effet a montré un effet moyen pour les dialogues 2 à 4, et un effet important pour Dialogue 1 avec (\emph {Z = -5.34} et \emph {p $ <$ 0.001}).
 			
-			L'hypothèse \textbf {H3} a également été confirmée par le \emph {test de rang signé de Wilcoxon} (voir figure \ref{fig:H3}), où l'agent A a été perçu comme le négociateur le plus exigeant, avec une grande taille d'effet observée pour tous les dialogues. 
+			\begin{figure}[h]
+				\includegraphics[width=0.9\textwidth, height= 0.25 \textheight]{Figures/chap4/AA/graphs/Diapositive2.PNG}
+				\caption{Résultats pour l'hypothèse H2 sur le niveau de concessions \label{fig:H2}}
+			\end{figure}
 			
-			L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le dialogue3 comme décrit dans Table~\ref {tab:resetude1} et la figure \ref{fig:H4}.
-
-				
-				\begin{figure}[!htb]
-					\subfloat[Résultats pour l'hypothèse H1 sur l'égocentrisme \label{fig:H1}]{%
-						\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive1.PNG}
-					}
-					\hfill
-					\subfloat[Résultats pour l'hypothèse H2 sur le niveau de concessions \label{fig:H2}]{%
-						\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive2.PNG}
-					}
-					
-					\caption{Résultats statistiques}
+			\par L'hypothèse \textbf {H3} a également été confirmée par le \emph {test de rang signé de Wilcoxon} (voir figure \ref{fig:H3}), où l'agent A a été perçu comme le négociateur le plus exigeant, avec une grande taille d'effet observée pour tous les dialogues. 
+			\begin{figure}[h]
+				\includegraphics[width=0.9\textwidth, height= 0.25 \textheight]{Figures/chap4/AA/graphs/Diapositive3.PNG}
+				\caption{Résultats pour l'hypothèse H3 sur le niveau d'exigence\label{fig:H3}}
+			\end{figure}
+			
+			\par L'hypothèse (\textbf {H4}) a été confirmée. Le test de Wilcoxon a révélé que l'agent A avec des comportements dominants  était perçu comme significativement plus leader du dialogue que l'agent B, avec une grande taille d'effet pour les dialogues 1, 2 et 4, et une taille d'effet moyenne pour le dialogue3 comme décrit dans Table~\ref {tab:resetude1} et la figure \ref{fig:H4}.
+				\begin{figure}[h]
+					\includegraphics[width=0.9\textwidth, height= 0.25 \textheight]{Figures/chap4/AA/graphs/Diapositive4.PNG}
+					\caption{Résultats pour l'hypothèse H4 sur la prise de contrôle \label{fig:H4}}
 				\end{figure}
-				
-			   \begin{figure}[!htb]
-			   	
-			   	\subfloat[Résultats pour l'hypothèse H3 sur le niveau d'exigence\label{fig:H3}]{%
-			   		\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive3.PNG}
-			   	}
-		   		\hfill
-		   		\subfloat[Résultats pour l'hypothèse H4 sur la prise de contrôle \label{fig:H4}]{%
-		   			\includegraphics[width=0.48\textwidth]{Figures/chap4/AA/graphs/Diapositive4.PNG}
-		   		}
-				  \caption{Résultats statistiques}
-			   	\end{figure}
 
-				   
-				   
-	
 			
-		\begin{table*}
+		\begin{table*}[p]
 				\begin{adjustbox}{angle=90}
 					\begin{tabular}{|ll|c|c|c|c|c|c|c|c|} 
 						\cline{3-10}

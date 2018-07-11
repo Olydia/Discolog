@@ -48,7 +48,8 @@ Ce scénario ne nécessite aucune une expertise pour prendre part dans la négoc
 	\caption{Ensemble de valeurs possible pour chaque critère afin de choisir un restaurant}
 	\label{tab:valeursCritere}
 	\centering
-	\begin{tabular}{|p{2cm}|p{9.5cm}|}
+	\begin{tabular}{ >{\centering\arraybackslash}m{2cm}| >{\centering\arraybackslash}m{9cm}}
+		\hline
 		\hline
 		\textbf{Critère} & \textbf{Ensemble des valeurs} \\
 		\hline
@@ -59,6 +60,7 @@ Ce scénario ne nécessite aucune une expertise pour prendre part dans la négoc
 		Prix  & abordable ,bas prix ,chic \\
 		\hline
 		Localisation & centre de paris ,Gare du nord , Montparnasse , près de la tour Eiffel ,Père lachaise \\
+		\hline
 		\hline
 	\end{tabular}
 \end{table}
@@ -239,22 +241,22 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\caption{Différence de perception de dominance entre l'agent et le participant pour chaque comportement} 
 		\centering
 		
-		\begin{tabular}{ l c c c c c }
+		\begin{tabular}{  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{2.2cm}  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{1.5cm}  >{\centering\arraybackslash}m{1.5cm}}
 			\hline\hline
-			\textbf{ }& & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\ 
+			\textbf{Agent}& Évaluation & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\ 
 			\hline
 			
-			\multirow{3}{*} {Agent Comp.}  &  Z-Wilcoxon test  & -4.61 & -5.3 & -6.28 & -0.43 \\ 	
+			\multirow{3}{*} {\textbf{Comp.}}  &  Z-Wilcoxon test  & -4.61 & -5.3 & -6.28 & -0.43 \\ 	
 			& p-value & 2.88E-06 & 7.31E-08 & 1.42E-10 & \textbf{0.65 }\\ 
 			& Effect size & -0.29 & -0.34 & -0.4 & -0.03\\ 
 			\hline
 			
-			\multirow{3}{*} {Agent similaire}  &  Z-Wilcoxon test  & -1.57 & -2.21 & -1.45 & -1.33\\ 	
+			\multirow{3}{*} {\textbf{Similaire}}  &  Z-Wilcoxon test  & -1.57 & -2.21 & -1.45 & -1.33\\ 	
 			& p-value & 0.11 & \textbf{0.024} & 0.14 & 0.17 \\ 
 			& Effect size & -0.1 & -0.14& -0.09 & -0.08 \\ 
 			\hline
 
-			\multirow{3}{*} {Agent neutre}  &  Z-Wilcoxon test  & -6.23 & -5.72 & -7.056 & -0.77\\ 	
+			\multirow{3}{*} {\textbf{Neutre}}  &  Z-Wilcoxon test  & -6.23 & -5.72 & -7.056 & -0.77\\ 	
 			& p value & 2.52E-10 & 6.85E-09 & 8.19E-13 & \textbf{0.4351} \\ 
 			& Effect size & -0.4 & -0.36 & -0.45 & -0.049 \\ 
 			\hline \hline
@@ -282,14 +284,14 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\subfloat[Moyenne et écart type dans les comportements de dominance]{
 			\begin{tabular}{l c c c c c c}
 				\hline\hline
-				\multicolumn{2}{c}{} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
+				\textbf{Agent} & Evaluation&  \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
 				\hline
 				
-				\multirow{2}{*}{Agent }& Moyenne & 1,94& 3,80 & 2,24 & 3,08 \\
+				\multirow{2}{*}{\textbf{Comp.} }& Moyenne & 1,94& 3,80 & 2,24 & 3,08 \\
 				& Ecart-type & 0,93 & 1,05 & 1,03 & 1,11 \\
 				
 				\hline
-				\multirow{2}{*}{Participant }& Moyenne & 2,69 & 2,94 & 3,4 & 3,02 \\
+				\multirow{2}{*}{\textbf{Part.}}& Moyenne & 2,69 & 2,94 & 3,4 & 3,02 \\
 				& Ecart-type & 1,14 & 1,23 & 1,03 & 1,02\\
 				\hline
 				\hline
@@ -315,14 +317,14 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 			\centering
 			\begin{tabular}{l c c c c c c}
 				\hline\hline
-				\multicolumn{2}{c}{} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
+				\textbf{Agent} & Evaluation& \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
 				\hline
 				
-				\multirow{2}{*}{Agent }& Moyenne & 2,47 & 3,70 & 3,09 & 3,23 \\
+				\multirow{2}{*}{\textbf{Simil.}}& Moyenne & 2,47 & 3,70 & 3,09 & 3,23 \\
 				& Ecart-type & 1,11 & 1,10 & 1,19 & 1,12 \\
 				
 				\hline
-				\multirow{2}{*}{Participant }& Moyenne & 2,71 & 3,37 & 3,33 & 2,98 \\
+				\multirow{2}{*}{\textbf{Part.}}& Moyenne & 2,71 & 3,37 & 3,33 & 2,98 \\
 				& Ecart-type & 1,06 & 1,03 & 1,06 & 1,09\\
 				\hline \hline
 				
@@ -350,14 +352,14 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 			
 			\begin{tabular}{l c c c c c c}
 				\hline\hline
-				\multicolumn{2}{c}{} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
+				\textbf{Agent} & Evaluation& \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} \\
 				\hline
 				
-				\multirow{2}{*}{Agent }& Moyenne & 1,99 & 3,81 & 2,28 & 3,02 \\
+				\multirow{2}{*}{\textbf{Neutre}}& Moyenne & 1,99 & 3,81 & 2,28 & 3,02 \\
 				& Ecart-type & 0,94 & 0,94 & 1,01 & 1,12 \\
 				
 				\hline
-				\multirow{2}{*}{Participant }& Moyenne & 2,98 & 2,88 & 3,60 & 3,17 \\
+				\multirow{2}{*}{\textbf{Part}}& Moyenne & 2,98 & 2,88 & 3,60 & 3,17 \\
 				
 				& Ecart-type & 1,08 & 1,12 & 1,01 & 1,10 \\
 				\hline \hline
@@ -398,12 +400,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 			\centering
 			\begin{tabular}{l c c c}
 				\hline
+				\hline
 				\textbf{ }& \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
 				\hline
 				\newline Moyenne & 0.62& 0.5 & 0.53 \\
 				\newline Écart type & 0.06 & 0.08 & 0.07 \\
 				\hline
-				
+				\hline
 			\end{tabular}
 		}
 		\caption{Les résultats obtenus pour le gain commun atteint durant la négociation}
@@ -429,12 +432,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 			\centering
 			\begin{tabular}{ l c c c }
 				\hline
+				\hline
 				\textbf{ }& \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
 				\hline
 				\newline Moyenne & 16.61& 19.94 & 15.13 \\
 				\newline Écart type & 7.38 & 6.87 & 5.6 \\
 				\hline
-				
+				\hline
 			\end{tabular}
 		}
 		\caption{Résultats pour l'hypothèse H3.}
@@ -461,7 +465,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\subfloat[L'effet de la relation de dominance sur le confort ressenti pendant la négociation avec l'agent]{
 			\centering
 			\begin{tabular}{ l l c c c  }
-				\hline
+				\hline\hline
 				\textbf{ }& & \textbf{Agent Comp.} & \textbf{Agent similaire} & \textbf{Agent neutre} \\ 
 				\hline
 				\newline \newline\multirow{2}{*} {Détendu} & Moy. &3.79 & 3.47 & 3.79 \\
@@ -470,7 +474,7 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 				
 				\newline \newline\multirow{2}{*} {Anxieux} & Moy. & 1.79 & 2.13 & 1.93 \\
 				\newline  & SD & 7.38 & 6.87 & 5.6 \\
-				\hline
+				\hline\hline
 			\end{tabular}
 		}
 		\caption{Résultats pour la perception du confort durant la négociation.}
@@ -491,12 +495,12 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\subfloat[L'effet de la relation de dominance sur l'appréciation perçue]{			
 			
 			\begin{tabular}{ l c c c c c }
-				\hline
+				\hline\hline
 				\textbf{ }& \textbf{Agent Comp.} & &  \textbf{Agent similaire} & & \textbf{Agent neutre} \\ 
 				\hline
 				\newline Moy. & 3.83 & &3.46 & & 3.85 \\
 				\newline SD & 1.01 & & 1.09& &  1.02 \\
-				\hline
+				\hline\hline
 				
 			\end{tabular}
 		}
@@ -519,12 +523,12 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\subfloat[L'effet de la relation de dominance sur la facilité de collaboration]{
 			\centering
 			\begin{tabular}{ l c c c c c }
-				\hline
+				\hline\hline
 				\textbf{ }& \textbf{Agent Comp.} & &  \textbf{Agent similaire} & & \textbf{Agent neutre} \\ 
 				\hline
 				\newline Moy. & 4 & & 3.16 & & 3.9 \\
 				\newline SD & 1 & & 1.09  & & 0.99   \\
-				\hline
+				\hline\hline
 				
 			\end{tabular}
 		}
@@ -554,12 +558,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\subfloat[Perception de l'agent des comportements de dominance exprimés par les participants]{
 			\begin{tabular}{ l c c c c c }
 				\hline
+				\hline
 				\textbf{ }& \textbf{Agent Comp.} & &  \textbf{Agent similaire} & & \textbf{Agent neutre} \\ 
 				\hline
 				\newline Moy. & 0.51 && 0.64 && 0.66 \\
 				\newline SD & 0.17 && 0.21 && 0.219   \\
 				\hline
-				
+				\hline
 			\end{tabular}
 		}
 		\caption{Résultats pour la variation des comportements de dominance à travers les interactions.}
@@ -611,11 +616,13 @@ Premièrement, il expliquait que le but de l'interaction était de négocier ave
 		\caption{Moyenne des valeurs de satisfiabilité du restaurant choisi pour chaque négociateur} 
 		\begin{tabular} {lcccccccc}
 			\hline
+			\hline
 			& \multicolumn{2}{c}{Agent Comp.} & & \multicolumn{2}{c}{Agent similaire}& & \multicolumn{2}{c}{Agent neutre} \\ % column 4 blank, for spacing
 			\cline{2-3} \cline{5-6} \cline{8-9} % horizontal lines connecting cols. 2-3, 5-6
-			& Participant & Agent & & Participant & Agent & &  Participant & Agent \\ \hline
+			& Part. & Agent & & Part. & Agent & &  Part. &Agent \\ \hline
 			Moy. &0,71 & 0,53 & &  0,69 & 0,33 & & 0,73 & 0,34 \\
 			SD & 0,2 & 0,24 & &  0,18 & 0,19 & & 0,18 & 0,16 \\
+			\hline
 			\hline
 		\end{tabular}
 		\label{tab:gainPerceptif}
