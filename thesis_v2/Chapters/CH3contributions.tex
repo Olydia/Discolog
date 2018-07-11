@@ -213,7 +213,7 @@
 		Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
 		\begin{table}[h]
 			\centering
-			\begin{tabular}{|p{2.25cm}|p{9.5cm}|}
+			\begin{tabular}{|p{2.25cm}|p{8.6cm}|}
 				\hline
 				Critère $i $ & Domaine de valeur $C_i$ \\
 				\hline
@@ -328,13 +328,17 @@
 			
 		\end{enumerate}
 		 
-				\begin{table}[t]
-					\centering
-					\begin{tabular} {|p{3.25cm}|p{6cm}|p{3.25cm}|}
+				\begin{table*}[p]
+				\begin{adjustbox}{angle=90}
+%					\begin{tabular} {|p{3.25cm}|p{6cm}|p{3.25cm}|}
+					\begin{tabular} {|c|c|c|}
 						\hline
 						\textbf{Type d'acte de dialogue}  &\textbf{ Génération en NL} & \textbf{Postcondition}\\
 						\hline
-						StateValue(v) &  I (don't) like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ is likable, $v\in U_i$ otherwise \\
+						\multirow{2}{*}{StateValue(v)} &  I like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ \\
+						
+						\cline{2-3} & I don't like /$v$/. & Speaker : $v \notin S_i$ \newline Hearer:  $v\in U_i$ \\
+					
 						\hline
 						AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
 						
@@ -359,7 +363,9 @@
 					\end{tabular}
 					
 					\caption{\label{table:utt}Liste des actes de dialogues pour le modèle de négociation collaborative.}
-				\end{table}
+					\end{adjustbox}
+				\end{table*}
+				
 				
 		\subsubsection{Formalisation des actes en langage naturel}
 		\label{sec:formalisation}
@@ -392,7 +398,7 @@
 					\caption{\label{tab:askEx} Exemple de formalisation en langage naturel associé à \emph{AskPreference(v)}}
 				\end{table}
 			
-			Les deux premières contraintes visaient la formalisation génériques des actes de dialogues. Cependant, en lançant des tests, nous nous sommes rendus compte que la spécification des textes en langue naturel devait prendre en compte le domaine du dialogue ainsi que le contexte courent de la négociation. 
+			Les deux premières contraintes visaient la formalisation générique des actes de dialogues. Cependant, en lançant des tests, nous nous sommes rendus compte que la spécification des textes en langue naturel devait prendre en compte le domaine du dialogue ainsi que le contexte courent de la négociation. 
 			Par conséquent, nous avons ajouté une adaptation pour rester cohérent avec le contexte courent de la négociation. Un exemple pour l'acte \emph{Accept} est présenté dans la table \ref{tab:AcceptEx} dans le domaine des restaurant avec présentation du contexte.
 			
 			\begin{table} [h]
@@ -407,7 +413,7 @@
 					$ v $ est la dernière proposition  & \textit{Okay. Let's go to \ $v$ \ } \\
 					\hline
 					 $ v \in C_i,  O \in P  \& v \in O$ & \textit{I prefer to go to \ $v$ \, but not to \ $O$\ }
-															\newline \emph{e.x.} I prefer to go to a japanese restaurant but not to Samura. \\
+															\newline \emph{e.x.} I prefer to go to a japanese restaurant but not to Samura rstaurant. \\
 					\hline
 					$ v $ n'est pas la dernière proposition & \textit{In the end, I prefer to go to  \ $v$ \ } \\
 					\hline
