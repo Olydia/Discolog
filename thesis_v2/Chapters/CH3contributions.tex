@@ -480,8 +480,14 @@
 			Premièrement, nous avons appuyé notre recherche par une collecte de données où nous avons enregistré des négociations humains/humain qui nous a révélé nombres de comportements qui apparaissent au cours de la négociation. Ces résultats ont été discutés et nous ont permis de guider notre recherche. Entre autres, les résultats obtenus nous ont soutenu dans notre choix de modéliser une négociation  multi-critères.
 			Nous avons donc présenté le domaine de négociation multi-critères ainsi que la représentation classique de préférences.
 			
-			Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémenté dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposées permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. 
+			Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémenté dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposées permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. Ces actes ont pour fonction primaire d'interagir uniquement sur la tâche de la négociation, mais ne dote pas l'agent de nuances d'expressivité dialogique qu'on retrouve habituellement dans les interaction humaines.
+			Par exemple, nous avons codé le dialogue \ref{fig:DSP} à l'aide de nos actes de dialogues présenté dans la figure \ref{fig:natUtt}. Ces derniers sont capables de reproduire les tours de paroles qui impliquent une négociation comme dans le \emph{DS5}. Cependant, ils ne peuvent pas prendre en compte les informations externes à la négociation. Par exemple, dans le \emph{DS2}, les actes de dialogue ne peuvent pas capturer les informations autours de la négociation qui n'engagent pas un échange d'informations directe sur les préférences.
 			
+			\begin{figure}[t]
+				\includegraphics[width=\linewidth, height=0.8\textheight]{Figures/natToUtt.pdf}
+				\caption{\label{fig:natUtt} Formalisation du dialogue \ref{fig:DSP} en actes de dialogue}
+				
+			\end{figure} 
 			Ce modèle de négociation collaborative est utilisé pour construire un modèle de décision qui prend en compte les comportements de dominance. Le chapitre suivant présente donc la construction du modèle décisionnel de notre système de négociation. Nous présenterons un algorithme décisionnel capable de refléter différentes stratégies de négociation en fonction de la position de dominance de l'agent dans l'interaction.
 					
 			
