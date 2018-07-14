@@ -3,20 +3,20 @@
 \begingroup
 \parindent=0em
 \etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
-\large Sommaire
+
 \localtableofcontents 
 \clearpage
 \endgroup
 
 Cette thèse s'est intéressée à la simulation d'une relation interpersonnelle de dominance entre un agent conversationnel et un humain.
-Nous nous plaçons dans le contexte des environnements collaboratifs dans lesquels l'agent partage des objectifs communs avec l'utilisateur. Dans le contexte de ce type d'interaction, les négociations sont fréquentes afin de mettre en œuvres des stratégies pour résoudre les conflit liés aux tâches communes. 
-L'étude de l'existant a montré qu'une relation sociale s'établissait entre les interlocuteurs qui influençait leurs stratégies d'interaction et plus particulièrement les stratégies de négociation. La relation de dominance est parmi les relations les plus étudiés dans le contexte de négociation humain/humain. 
+Nous nous plaçons dans le contexte des environnements collaboratifs dans lesquels l'agent partage des objectifs communs avec l'utilisateur. Dans le cadre de ce type d'interaction, les négociations sont fréquentes afin de mettre en œuvre des stratégies qui vont résoudre les conflits liés à ces tâches communes. 
+L'étude de l'existant a montré qu'une relation sociale s'établissait entre les interlocuteur. Cette dernière influençait leurs stratégies d'interaction et plus particulièrement les stratégies de négociation. La relation de dominance est parmi les relations les plus étudiées dans le contexte de négociation humain/humain. 
 
-Nous avons choisi de nous intéresser à la modélisation de cette relation interpersonnelle entre un agent et un humain et d'étudier son impact sur le processus de négociation.  Nous rappelons dans ce chapitre nos contributions majeurs, les résultats obtenus et nous terminons par les perspectives sur le court et long terme. 
+Nous avons choisi de nous intéresser à la modélisation de cette relation interpersonnelle entre un agent et un humain et d'étudier son impact sur le processus de négociation.  Nous rappelons dans ce chapitre nos contributions majeures, les résultats obtenus et nous terminons par les perspectives sur le court et long terme. 
 
  
 \section{Contributions}
-	La première partie de ce travail était consacré à construire un état de l'art regroupant les travaux en psychologie sociale et en informatique.  Sur l'aspect psychologie, nous nous sommes penchés sur les recherches sur le concept de dominance. Nous avons présenté les différents travaux autours de ce concept, comme trait de personnalité, statut ou relation interpersonnelle.
+	La première partie de ce travail était consacrée à construire un état de l'art regroupant les travaux en psychologie sociale et en informatique.  Sur l'aspect psychologie, nous nous sommes penchés sur les recherches étudiant la dominance dans les interactions. Nous avons présenté les différents travaux autours de ce concept, comme trait de personnalité, statut ou relation interpersonnelle.
 	Nous avons détaillé sa manifestation dans les interactions tant sur le niveau verbal que non verbal. Ensuite, nous avons expliqué la manifestation des comportements de dominance sur un niveau stratégique au cours de négociations humain/humain.
 	Cet état de l'art nous a permis d'identifier les comportements récurrents dans les négociations qui sont liés à la relation de dominance.
 	
@@ -36,12 +36,12 @@ Nous avons choisi de nous intéresser à la modélisation de cette relation inte
 	 En effet, à partir de sa position sur le spectre de dominance, l'agent va exprimer ses stratégies de concessions et d'exigences spécifiques. Il va donner plus de poids à ses préférences et essayer de contrôler la négociation. 
 	
 	Une expérimentation a ensuite été mise en place afin de vérifier la perception des comportements de dominance exprimés par nos agents.
-	Nous avons conduit une première étude agent/agent où des dyades dans lesquels des agents avec des comportements dominants ont négocié avec des agents soumis. Les participants ont joué le rôle de juges externes afin d'évaluer les comportements des agents dans le dialogue de négociation produits. 
+	Nous avons conduit une première étude agent/agent où des dyades dans lesquels des agents avec des comportements dominants ont négocié avec des agents soumis. Les participants ont joué le rôle de juges externes afin d'évaluer les comportements des agents dans les dialogues de négociation produits. 
 
-	Les résultats obtenus confirment que les participants été capables de distinguer différents comportements de dominance d'un agent à un autre. Nous avons complété cette expérimentation par une étude agent/humain. 
+	Les résultats obtenus confirment que les participants étaient capables de distinguer différents comportements de dominance d'un agent à un autre. Nous avons complété cette expérimentation par une étude agent/humain. 
 	
-	Les participants ont négocié avec deux agents, un agent dominant et un agent soumis. Le but est d'évaluer si les participants percevaient une différences significative entre les deux agents et identifiaient leurs comportements de dominance.
-	Les résultats suggèrent que les participants percevaient les comportements de dominance exprimés par les agents. En effet, l'agent dominant était perçu comme plus égocentrique et plus exigent et tentait contrôler la négociation alors que l'agent soumis manquait d'initiatives. Cependant, peu de différences ont été perçus sur les comportements liés aux concessions due à une limite de notre méthodologie. En effet, nous n'avons pas pris en compte l'impact de la distance des préférences pour la mise en place de l'étude. En conséquence, sur beaucoup de dyades les participants avaient des préférences similaires avec l'agent dominant et des préférences opposées avec l'agent soumis. 
+	Dans cette étude, les participants ont négocié avec deux agents, un agent dominant et un agent soumis. Le but était d'évaluer si les participants percevaient une différences significative entre les deux agents et identifiaient leurs comportements de dominance.
+	Les résultats suggèrent que les participants percevaient les comportements de dominance exprimés par les agents. En effet, l'agent dominant était perçu comme plus égocentrique et plus exigent et tentait contrôler la négociation alors que l'agent soumis manquait d'initiatives et prenait en compte les préférences de son interlocuteur. Cependant, peu de différences ont été perçus sur les comportements liés aux concessions due à une limite de notre méthodologie. En effet, nous n'avons pas pris en compte l'impact de la distance des préférences pour la mise en place de l'étude. En conséquence, sur beaucoup de dyades les participants avaient des préférences similaires avec l'agent dominant et des préférences opposées avec l'agent soumis. 
 	
 	Globalement, les résultats de cette expérimentation suggèrent que les comportements de dominance implémentés sont correctement perçus par les participants. Ces résultats nous ont encouragé dans la suite de nos travaux. 
 	
@@ -50,78 +50,84 @@ Nous avons choisi de nous intéresser à la modélisation de cette relation inte
 	\subsection{Simulation des comportements de l'interlocuteur}
 	
 		Notre seconde contribution est l'extension de notre modèle de négociation collaborative pour qu'il raisonne sur les comportements de dominance d'un interlocuteur. Ce modèle est cruciale, car à travers ces prédictions, l'agent révise ses comportements de dominance dans le but de simuler une relation interpersonnelle de dominance avec son interlocuteur. 
-		Pour mise en œuvre ce modèle, nous nous sommes inspirés des travaux en théorie de l'esprit, et plus particulièrement, l'approche \emph{simulationo-theory}. Par conséquent, nous avons utilisé le modèle décisionnel de l'agent pour qu'il puisse prédire les comportements de dominance de son interlocuteur. 
-		Pour ce faire, nous avons du adapté le modèle décisionnel de l'agent pour qu'il puisse prédire les comportements de dominance à chaque tour de parole, avec seulement une connaissance partielle des préférences de l'interlocuteur. 
+		Pour la mise en œuvre ce modèle, nous nous sommes inspirés des travaux en théorie de l'esprit, et plus particulièrement, l'approche \emph{simulation-theory}. Par conséquent, nous avons utilisé le modèle décisionnel de l'agent pour qu'il puisse prédire les comportements de dominance de son interlocuteur. 
+		Pour ce faire, nous avons dû adapter le modèle décisionnel de l'agent pour qu'il puisse prédire les comportements de dominance à chaque tour de parole, avec seulement une connaissance partielle des préférences de l'interlocuteur. 
 		
-		Nous avons validé la pertinence des prédictions dans une étude agent/agent. Nous avons générés plusieurs dyades d'agents négociateurs. En plus de négocier avec l'autre, chaque agent devait deviner la valeur de dominance de son interlocuteur.
+		Nous avons validé la pertinence des prédictions dans une étude agent/agent. Nous avons générés plusieurs dyades d'agents négociateurs (au total $1080$ dyades). En plus de négocier avec l'autre, chaque agent devait deviner la valeur de dominance de son interlocuteur.
 		Les résultat obtenus montrent que les prédictions étaient correctes dans $96\%$ des cas avec un temps de raisonnement court. 
 		
 		\subsection{Impact de la complémentarité de la dominance sur la négociation}
 		
 		Notre modèle de négociation collaborative enfin implémenté, nous avons étudié l'impact de la relation interpersonnelle sur le processus de négociation. 
-		Sur la base des travaux en psychologie sociale qui stipule qu'une relation interpersonnelle de dominance améliore l'échange d'information qui mène à un meilleur gain commun des négociateurs. Par conséquent, l'expérience de la négociation est mieux vécue et une relation d'appréciation s'établie entre les négociateurs. 
+		Les travaux en psychologie sociale stipulent qu’une relation interpersonnelle de dominance complémentaire améliore l’échange 
+		d’information et mène à un meilleur gain commun des négociateurs.
+		L’expérience de la négociation est mieux vécue et une relation d’appréciation s’établit entre les négociateurs. 
 		
 		Nous avons manipulé trois conditions pour la création des dyades de négociation. Dans la première dyade, l'agent adoptait un comportement complémentaire à celui du participant. En revanche, dans la seconde dyade, l'agent a été manipulé pour exprimer des comportements de dominance similaire à ceux détectés chez le participant. Enfin, dans la dernière dyade l'agent adopte un comportement neutre et ne s'adapte pas à son interlocuteur.
 		
-		Les résultats ont confirmé la majorité de nos hypothèses, ou les dyades complémentaires atteignaient de meilleurs gains communs. Par ailleurs,  la négociation était vécue comme plus agréable et confortable et les négociateurs semblaient mieux collaborer. 
+		Les résultats ont confirmé la majorité de nos hypothèses, ou les dyades complémentaires atteignaient de meilleurs gains communs. Par ailleurs,  la négociation était vécue comme plus agréable et confortable. Enfin, les négociateurs semblaient mieux collaborer. 
 		
-		Néanmoins, il est nécessaire de garder à l’esprit que l’expérimentation informatique n’est pas une "validation" en soi d’un modèle psychologique. En effet, les études que nous avons mené évaluent la perception des comportements généré par notre implémentation. Ce processus étant subjectif, d'autres modèles informatique même sans aucune base théorique peuvent atteindre les mêmes résultats que ceux obtenus par notre modèle.
+		Néanmoins, il est nécessaire de garder à l’esprit que l’expérimentation informatique n’est pas une validation en soi d’un modèle psychologique. En effet, les études que nous avons mené évaluent la perception des comportements générés par notre implémentation. Ce processus étant subjectif, d'autres modèles informatiques même sans aucune base théorique peuvent atteindre les mêmes résultats que ceux obtenus par notre modèle.
 		
-		L'intérêt de faire une étude expérimentale réside dans la réflexion bidirectionnelle qu’elle nourrit par rapport au
-		concept implémenté que par rapport aux choix computationnels faits \cite{faur2016approche}.
+		L'intérêt de faire une étude expérimentale réside dans la réflexion bidirectionnelle qu’elle nourrit par rapport au concept implémenté que par rapport aux choix computationnels faits \cite{faur2016approche}.
 		
-\section{Perspectives à long termes}
+\section{Perspectives à court et à long termes}
 
-	A l’issue des travaux de cette thèse, nous avons relevé quelques perspectives à explorer dans des travaux futurs.			
+	A l’issue des travaux de cette thèse, nous avons relevé quelques perspectives à explorer dans des travaux futurs.		
 	
-	Un premier axe à étudier est l'enrichissement des stratégies de communication de l'agent. Ce dernier ne communique qu'a travers des actes de dialogue dont le texte en langage naturel est codé manuellement. Cependant, nous avons montré dans la section \ref{sec:manifesationDom}, les comportements de dominance s'exprime aussi avec des comportement verbaux et non verbaux.
-	Il est donc nécessaire d'améliorer l'expressivité de l'agent afin de rendre ses stratégies de négociation saillantes dans la négociation. 
+	\subsection{Trait individuels des négociateurs}
+		La première perspective a pour but de palier à la limite principale de cette thèse. Le modèle de négociation n'a été testé que pour une seule interaction avec un contexte applicatif basique. Cependant, les environnements collaboratifs impliquent généralement des interactions à répétitions avec un contexte applicatif précis. Par conséquent, les traits individuels des interlocuteurs sont à prendre en compte pour la simulation de la relation interpersonnelle. 
+		
+		Le contexte applicatif a pour conséquence de définir les rôles des interlocuteurs dans l'interaction qui définira leur statut hiérarchique. Notre modélisation initie la relation de dominance sans prérequis, et le comportement de l'agent est donc neutre. Cependant, en fonction du rôle joué par l'agent, son comportement de dominance doit être initié en conséquences. Par exemple, une agent jouant un rôle de tuteur va être initialisé dans le haut spectre de dominance. 
+		
+		Par ailleurs, les interactions répétés, vont faire resurgir les traits individuels de chaque interlocuteurs et vont affecter l'évolution de la relation interpersonnelle et les comportements exhibés. Il devient essentiel à ce point de les considérer pour rendre l'interaction plus crédible.	
 	
-	L'idée est d'améliorer l'expressivité en plusieurs étapes. 
-	La première étape vise à améliorer le style linguistique de l'agent. Nous avons montré dans la section \ref{sec:communication} que la formalisation des actes de dialogue en langage naturelle était neutre. 
-	Nous cherchons donc à donner pour chaque acte de dialogue une formalisation spécifique en fonction de la dominance de l'agent. Les travaux en psychologie sociales ont montrés que les individus dominants exprimaient clairement leurs préférences. En revanche, les personnes soumises exprimaient des hésitations et ne rendaient pas leur préférences explicites.  Ceci est soutenu par la collecte de données que nous avons effectué.
-	Par exemple, dans le second dialogue enregistré (voir figure \ref{fig:DSP}), les individus utilisait deux styles linguistiques différents pour le même acte de dialogue \emph{StatePreference}. Par exemple, dans le \emph{DS1} l'interlocuteur B exprime qu'il n'aime pas vraiment les crêperies sur Paris en insinuant uniquement qu'il a vécu trois ans à Rennes et ce n'est qu'en \emph{DS2} qu'il explique trouver les crêperies sur Paris moyenne.
-	A l'opposé, l'interlocuteur A qui avait un comportement dominant, affichait ses préférences comme montré dans le \emph{DS3}:
+	\subsection{Expressivité de l'agent}
+		Un premier axe à étudier sur le long terme est l'enrichissement des stratégies de communication de l'agent. Ce dernier ne communique qu'à travers des actes de dialogue dont le texte en langage naturel est codé manuellement. Cependant, nous avons montré dans la section \ref{sec:manifesationDom}, que les comportements de dominance s'expriment aussi avec des comportement verbaux et non verbaux.
+		Il est donc nécessaire d'améliorer l'expressivité de l'agent afin de rendre ses stratégies de négociation saillantes dans la négociation. 
 	
-	\begin{minipage}{\textwidth}
-		{\ttfamily
-
-			\begin{addmargin}[1em]{2em}% 1em left, 2em right
-				
-				\vspace{0.5em}
-			
-				
-					 \hspace*{3mm} \textbf{B:}  Sinon j'aime bien japonais 
-				
-				
-					\textbf{A:} \textbf{Je n'aime pas du tout} le japonais.
-				
-					\hspace*{3mm} 	\textbf{B:} tu n'aimes pas tous ce qui est poisson cru ... 
-				
-					\textbf{A:}  \textbf{je n'aime pas trop la cuisine asiatique encore moins japonais}.
+		\subsubsection{Comportement verbal}
+		La première étape vise à améliorer le style linguistique de l'agent. Nous avons montré dans la section \ref{sec:communication} que la formalisation des actes de dialogue en langage naturelle était neutre. 
+		Nous cherchons donc à donner pour chaque acte de dialogue une formalisation spécifique en fonction de la dominance de l'agent. Les travaux en psychologie sociale ont montrés que les individus dominants exprimaient clairement leurs préférences. En revanche, les personnes soumises exprimaient des hésitations et ne rendaient pas leur préférences explicites.  Ceci est soutenu par la collecte de données que nous avons effectué.
+		Par exemple, dans le second dialogue enregistré (voir figure \ref{fig:DSP}), les individus utilisaient deux styles linguistiques différents pour le même acte de dialogue \emph{StatePreference}. Par exemple, dans le \emph{DS1} l'interlocuteur B exprime qu'il n'aime pas vraiment les crêperies sur Paris en insinuant uniquement qu'il a vécu trois ans à Rennes et ce n'est qu'en \emph{DS2} qu'il explique trouver les crêperies sur Paris moyenne.
+		A l'opposé, l'interlocuteur A qui avait un comportement dominant, affichait ses préférences comme montré dans le \emph{DS3}:
+	
+			\begin{minipage}{\textwidth}
+				{\ttfamily
+		
+					\begin{addmargin}[1em]{2em}% 1em left, 2em right
+						
+						\vspace{0.5em}
 					
-					\hspace*{3mm} 	\textbf{B:} \textbf{Je n'aime pas trop }les sushi déjà.
-					
-					\textbf{A:} \textbf{Non je ne suis pas trop} cuisine asiatique
-					\vspace{1.5em}
-			\end{addmargin}
-		} 
-	\end{minipage}
+						
+							 \hspace*{3mm} \textbf{B:}  Sinon j'aime bien japonais 
+						
+						
+							\textbf{A:} \textbf{Je n'aime pas du tout} le japonais.
+						
+							\hspace*{3mm} 	\textbf{B:} tu n'aimes pas tous ce qui est poisson cru ... 
+						
+							\textbf{A:}  \textbf{je n'aime pas trop la cuisine asiatique encore moins japonais}.
+							
+							\hspace*{3mm} 	\textbf{B:} \textbf{Je n'aime pas trop }les sushi déjà.
+							
+							\textbf{A:} \textbf{Non je ne suis pas trop} cuisine asiatique
+							\vspace{1.5em}
+					\end{addmargin}
+				} 
+			\end{minipage}
 
-	La seconde étape est d'améliorer l'expressivité sur un niveau décisionnel. En effet, l'argumentation est un processus important durant la négociation, qui permet aux négociateurs de persuader et de convaincre leurs interlocuteurs. L'argumentation dans la négociation a déjà fait l'objet de plusieurs travaux en négociation automatique \cite{toni2010argumentative,oliva2010argumentation}. Cependant, ces travaux se focalisent toujours sur une négociation rationnelle. Il serait intéressant d'étudier comment les comportements de dominance vont affecter les stratégies d'argumentations et leurs expressions dans la négociation.
+	\subsubsection{Comportement décisionnel}
+	La seconde possibilité est d'améliorer l'expressivité sur un niveau décisionnel. En effet, l'argumentation est un processus important durant la négociation, qui permet aux négociateurs de persuader et de convaincre leurs interlocuteurs. L'argumentation dans la négociation a déjà fait l'objet de plusieurs travaux en négociation automatique \cite{toni2010argumentative,oliva2010argumentation}. Cependant, ces travaux se focalisent toujours sur une négociation rationnelle. Il serait intéressant d'étudier comment les comportements de dominance vont affecter les stratégies d'argumentations et leurs expressions dans la négociation.
 	
-	La dernière étape serait d'intégrer le modèle de négociation collaborative dans un agent incarné. La but est de doter l'agent de comportements non verbaux. Nous avons présenté dans la section, plusieurs contributions en informatique affective qui ont implémenté des comportements non verbaux de dominance dans des agents incarnés. Ces comportements ont eu un impact direct sur l'interaction et sur les stratégies de négociation \cite{de2011effect,de2015humans}. 
+	\subsubsection{Comportement non verbal}
+	La dernière perspective serait d'intégrer le modèle de négociation collaborative dans un agent incarné. La but est de doter l'agent de comportements non verbaux. Nous avons présenté dans le chapitre \ref{chap:etat}, plusieurs contributions en informatique affective qui ont implémenté des comportements non verbaux de dominance dans des agents incarnés. Ces comportements ont eu un impact direct sur l'interaction et sur les stratégies de négociation \cite{de2011effect,de2015humans}. 
 	
-	Sur la base que l'agent est doté de comportements non-verbaux, il est intéressant de continuer d'étudier l'impact des affects et des émotions sur les stratégies de négociation. Ce qui nous amène a notre second axe de perspectives. En effet, des chercheurs en psychologies sociale \cite{van2006power} ont montré que l'expression de  joie et de colère combinée aux comportements de dominance avait un impact direct sur la négociation. Les négociateurs concédaient plus à un négociateur dominant qui exprimait de la colère qu'à un négociateur joyeux. 
-	
-	La dernière perspective a pour but de palier à la limite principale de cette thèse. Le modèle de négociation n'a été testé que pour une seule interaction avec un contexte applicatif basique. Cependant, les environnements collaboratifs impliquent généralement des interactions à répétitions avec un contexte applicatif précis. Par conséquent, les traits individuels des interlocuteurs sont à prendre en compte pour la simulation de la relation interpersonnelle. 
-	
-	Le contexte applicatif a pour conséquence de définir les rôles des interlocuteurs dans l'interaction qui définira leur statut hiérarchique. Notre modélisation initie la relation de dominance sans prérequis, et le comportement de l'agent est neutre. Cependant, en fonction du rôle joué par l'agent, son comportement de dominance doit être initié en conséquences. Par exemple, une agent jouant un rôle de tuteur va être initialisé dans le haut spectre de dominance. 
-	
-	Par ailleurs, les interactions répétés, vont faire resurgir les traits individuels de chaque interlocuteurs et vont affecter l'évolution de la relation interpersonnelle et les comportements exhibés. Il devient essentiel à ce point de les considérer pour rendre l'interaction plus crédible.
+	Sur la base que l'agent soit doté de comportements non-verbaux, il est intéressant de continuer d'étudier l'impact des affects et des émotions sur les stratégies de négociation.  En effet, des chercheurs en psychologies sociale \cite{van2006power} ont montré que l'expression de  joie et de colère combinée aux comportements de dominance avait un impact direct sur la négociation. Les négociateurs concédaient plus à un négociateur dominant qui exprimait de la colère qu'à un négociateur joyeux. 
 	
 	
 	
+	Ces perspectives vont dans la continuité des recherches qui visent à améliorer la crédibilité des interactions d'un agent virtuel et un utilisateur humain. Ceci est d'autant plus important dans les environnements collaboratifs où les interactions ont un rôle important dans l'échange d'information et l'amélioration de la collaboration et la bonne entente. 
 	 
 	
 	
