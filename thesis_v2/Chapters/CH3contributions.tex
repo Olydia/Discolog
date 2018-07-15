@@ -3,6 +3,7 @@
 	\begingroup
 	\parindent=0em
 	\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
+	\emph{\textbf{Sommaire}}
 	\localtableofcontents 
 	\clearpage
 	\endgroup
@@ -213,9 +214,10 @@
 		Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
 		\begin{table}[h]
 			\centering
-			\begin{tabular}{|p{2.25cm}|p{8.6cm}|}
+			\begin{tabular}{ >{\centering\arraybackslash}m{2.25cm}  >{\centering\arraybackslash}m{8.6cm}}
 				\hline
-				Critère $i $ & Domaine de valeur $C_i$ \\
+				\hline
+			\textbf{Critère $i $} &\textbf{ Domaine de valeur $C_i$} \\
 				\hline
 				Cuisine & \{Italien, Français, Japonais, Chinois, Mexicain, Turque, Coréen\} \\
 				\hline
@@ -225,7 +227,7 @@
 				\hline
 				Emplacement & \{Père Lachaise, Centre de Paris, Montparnasse, Tour Eiffel, gare du Nord\} \\
 				\hline
-				
+				\hline
 			\end{tabular}
 			\caption{Domaine de valeurs pour les critères de choix d'un restaurant} 
 			\label{tab:domain}
@@ -384,7 +386,7 @@
 					\begin{tabular} {c c}
 						\hline
 						\hline
-						Condition & Formalisation en langage naturel \\
+						\textbf{Condition} &\textbf{ Formalisation en langage naturel }\\
 						\hline
 						$v$= indéfinie & \textit{What would you like ?} \\
 						\hline
@@ -406,7 +408,7 @@
 				\begin{tabular} {p{4cm}| p{6.5cm}}
 					\hline
 					\hline
-					Condition & Formalisation en langage naturel \\
+					\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
 					\hline
 					$v$= indéfinie & \textit{Okay. Let's go somewhere} \\
 					\hline
@@ -430,7 +432,7 @@
 						\begin{tabular} {p{3.5cm} p{7cm}}
 							\hline
 							\hline
-							Condition & Formalisation en langage naturel \\
+							\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
 							\hline
 							$v$= indéfinie & \textit{Let's go somewhere } \\
 							\hline
