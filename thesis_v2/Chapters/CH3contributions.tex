@@ -1,115 +1,115 @@
 	\chapter{Modèle de négociation collaborative}
-	\label{chap:chap3}
-	\begingroup
-	\parindent=0em
-	\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
-	\emph{\textbf{Sommaire}}
-	\localtableofcontents 
-	\clearpage
-	\endgroup
-	
-	La principale contribution de cette thèse est d'étudier l'impact de la relation de dominance sur les stratégies de négociation dans le cadre de négociation collaborative entre un agent conversationnel et un utilisateur humain. 
-	Pour ce faire, un modèle de négociation est implémenté permettant aux négociateurs de formuler leur préférences et de communiquer. 
-	
-	Dans ce chapitre, nous présentons notre modèle de négociation collaborative sur lequel sera construit notre modèle de décision basé sur la dominance. 
-	
-	Afin de définir un système de dialogue dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord enregistré des dialogues de négociation entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social de type "négociation collaborative". Nous avons annotés et analysé les dialogues. Cette étude nous a livré un ensemble d'informations sur les comportements des négociateurs que nous présenterons dans la première section de ce chapitre. 
-	Les informations collectées grâce à l'observation des comportements humains nous a guidé dans la conception de notre modèle de négociation.
-	
-	Dans la seconde section, nous présentons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multi-critères largement utilisés dans la mise en œuvre de systèmes de négociations automatiques \cite{jonker2007agent,lai2004literature,lai2008decentralized}. Nous réutilisons les principes de modélisation multi-critères du domaine de négociation et nous l'adaptons à une négociation avec un humain dont les préférences sont partielle.  
-	
-	La troisième section va porter sur notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réappropriés les actes de dialogue de \emph{Grosz et Sidner} \cite{grosz1986attention} pour la négociation collaborative.
-	
-	
-	 \section{Collecte de données}
-	
-		% Dans le but de définir un modèle de négociation avec des stratégies basées sur la dominance, nous voulions analyser les comportements pouvant apparaître au cours d'une négociation humain/humain. 
-		
-		Afin de comprendre les mécanismes et  les comportements sociaux qui peuvent apparaître au cours d'une interaction humain/humain.
-		Nous avons mené une étude où nous avons demandé à des interlocuteurs de discuter/négocier pour trouver un restaurant où dîner de sorte que le restaurant leur plaisent.
-		Les interlocuteurs ne se connaissaient pas, de ce fait, ils ne connaissaient pas les goûts et les préférences de leurs interlocuteurs. Au total, nous avons enregistré deux dialogues de quinze minutes environs.
-		 	
-		Une fois le dialogue enregistré, nous les avons annoté et analyser la structure du dialogue en suivant la théorie de \emph{Grosz et Sidner} \cite{sidner1994artificial} qui stipule que la structure du dialogue est composée de trois éléments à savoir la structure linguistique, la structure intentionnelle et enfin l'état attentionnel.	
-		Nous présenterons dans ce qui suit la procédure de l'analyse ainsi que les résultats obtenus. 
-		
-		\subsection{Analyse de la structure de dialogue}  
-			La théorie présenté par \emph{Grosz et Sidner} propose que la structure d'un dialogue orienté tâche est constituée de trois éléments, chacun agissant sur un aspect du dialogue. 
-			
-			D'abord, \emph{la structure linguistique} a pour but de décomposer le dialogue en une séquence de segments de dialogue (\textit{DS: discourse segment }). Chaque segment est composé d'une séquence d'énoncés appartenant uniquement à ce dernier et d'un ensemble de sous-segments. Les énoncés au sein d'un même segment contribuent à un but unique. Cette décomposition est non strict du fait qu'il est difficile de trouver des indices de segmentation. Des exemples d'indices proposés sont l'intention communicative commune à chaque DS, des expressions  linguistiques comme l'utilisation de termes "d'abord, finalement, $\ldots$". Des indices plus subtiles tels que le changement d'intonation, le temps de pause peuvent aussi être utilisés.
-			
-	%	\subsection{Structure intentionnelle}
-			Vient ensuite \emph{la structure intentionnelle}. En effet, un interlocuteur s'engage dans un dialogue poussé par une ou plusieurs intentions internes qu'on nomme \emph{DP: discourse purpose}. Pour chaque \emph{DS}, nous pouvons isoler un but spécifique noté \emph{DSP: Discourse segment purpose}. Le but est d'analyser comment les\emph{ DSPs} participent à la satisfaction du \emph{DS} initial. En outre, cette structure comprend l'analyse des relations entre les différents \emph{DSPs}. Deux relations ont été identifiées, \emph{dominance} et \emph{satisfaction-precedence}. Si la satisfaction de l'intention d'un \emph{DSP1} participe à la satisfaction de celle d'un \emph{DSP2}, alors le \emph{DSP1} \textbf{contribue} au \emph{DSP2}. Par opposition le \emph{DSP2} \textbf{domine} le \emph{DSP1}.
-	
-			
-			Finalement, \emph{l'état attentionnel} s'intéresse à l'abstraction de l'attention des participants au fur et à mesure que leur dialogue avance \cite{sidner1994artificial}. Il est défini avec une pile dynamique nommée \emph{"focus stack"} qui enregistre les objets, propriétés et les intentions saillantes  à un moment donné dans le dialogue. Le processus de manipulation des espaces dans le dialogue sur la pile attentionnelle (\emph{focus stack}). Cette pile est aussi utilisé pour faciliter l'identification des relations entre les différents \emph{DSPs}
-			
+\label{chap:chap3}
+\begingroup
+\parindent=0em
+\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
+\emph{\textbf{Sommaire}}
+\localtableofcontents 
+\clearpage
+\endgroup
+
+La principale contribution de cette thèse est d'étudier l'impact de la relation de dominance sur les stratégies de négociation dans le cadre de négociation collaborative entre un agent conversationnel et un utilisateur humain. 
+Pour ce faire, un modèle de négociation est implémenté permettant aux négociateurs de formuler leurs préférences et de communiquer. 
+
+Dans ce chapitre, nous présentons notre modèle de négociation collaborative sur lequel sera construit notre modèle de décision basé sur la dominance. 
+
+Afin de définir un système de dialogue dans lequel la relation de dominance régit le choix du prochain énoncé, nous avons d'abord enregistré des dialogues de négociation entre deux personnes afin d'observer leurs comportements dans un cadre de dialogue social de type "négociation collaborative". Nous avons annotés et analysé les dialogues. Cette étude nous a livré un ensemble d'informations sur les comportements des négociateurs que nous présenterons dans la première section de ce chapitre. 
+Les informations collectées grâce à l'observation des comportements humains nous a guidé dans la conception de notre modèle de négociation.
+
+Dans la seconde section, nous présentons le domaine de négociation utilisé. Dans le cadre de cette thèse, nous nous basons sur les modèles de négociations multicritères largement utilisés dans la mise en œuvre de systèmes de négociations automatiques \cite{jonker2007agent,lai2004literature,lai2008decentralized}. Nous réutilisons les principes de modélisation multicritères du domaine de négociation et nous l'adaptons à une négociation avec un humain dont les préférences sont partielles.  
+
+La troisième section va porter sur notre modèle de communication basé sur des actes de dialogues. En effet, nous nous sommes réappropriés les actes de dialogue de \emph{Grosz et Sidner} \cite{grosz1986attention} pour la négociation collaborative.
+
+
+\section{Collecte de données}
+
+% Dans le but de définir un modèle de négociation avec des stratégies basées sur la dominance, nous voulions analyser les comportements pouvant apparaître au cours d'une négociation humain/humain. 
+
+Afin de comprendre les mécanismes et  les comportements sociaux qui peuvent apparaître au cours d'une interaction humain/humain.
+Nous avons mené une étude où nous avons demandé à des interlocuteurs de discuter/négocier pour trouver un restaurant où dîner de sorte que le restaurant leur plaise.
+Les interlocuteurs ne se connaissaient pas, de ce fait, ils ne connaissaient pas les goûts et les préférences de leurs interlocuteurs. Au total, nous avons enregistré deux dialogues de quinze minutes environs.
+
+Une fois le dialogue enregistré, nous les avons annotés. Ensuite, nous avons analysé la structure du dialogue en suivant la théorie de \emph{Grosz et Sidner} \cite{sidner1994artificial} qui stipule que la structure du dialogue est composée de trois éléments à savoir la structure linguistique, la structure intentionnelle et enfin l'état attentionnel.	
+Nous présenterons dans ce qui suit la procédure de l'analyse ainsi que les résultats obtenus. 
+
+\subsection{Analyse de la structure de dialogue}  
+La théorie présentée par \emph{Grosz et Sidner} propose que la structure d'un dialogue orienté tâche est constituée de trois éléments, chacun agissant sur un aspect du dialogue. 
+
+D'abord, \emph{la structure linguistique} a pour but de décomposer le dialogue en une séquence de segments de dialogue (\textit{DS: discourse segment }). Chaque segment est composé d'une séquence d'énoncés appartenant uniquement à ce dernier et d'un ensemble de sous-segments. Les énoncés au sein d'un même segment contribuent à un but unique. Cette décomposition est non stricte du fait qu'il est difficile de trouver des indices de segmentation. Des exemples d'indices proposés sont l'intention communicative commune à chaque DS, des expressions  linguistiques comme l'utilisation de termes "d'abord, finalement, $\ldots$". Des indices plus subtils tels que le changement d'intonation, le temps de pause peuvent aussi être utilisés.
+
+%	\subsection{Structure intentionnelle}
+Vient ensuite \emph{la structure intentionnelle}. En effet, un interlocuteur s'engage dans un dialogue poussé par une ou plusieurs intentions internes qu'on nomme \emph{DP: discourse purpose}. Pour chaque \emph{DS}, nous pouvons isoler un but spécifique noté \emph{DSP: Discourse segment purpose}. Le but est d'analyser comment les\emph{ DSPs} participent à la satisfaction du \emph{DS} initial. En outre, cette structure comprend l'analyse des relations entre les différents \emph{DSPs}. Deux relations ont été identifiées, \emph{dominance} et \emph{satisfaction-precedence}. Si la satisfaction de l'intention d'un \emph{DSP1} participe à la satisfaction de celle d'un \emph{DSP2}, alors le \emph{DSP1} \textbf{contribue} au \emph{DSP2}. Par opposition le \emph{DSP2} \textbf{domine} le \emph{DSP1}.
+
+
+Finalement, \emph{l'état attentionnel} s'intéresse à l'abstraction de l'attention des participants au fur et à mesure que leur dialogue avance \cite{sidner1994artificial}. Il est défini avec une pile dynamique nommée \emph{"focus stack"} qui enregistre les objets, propriétés et les intentions saillantes  à un moment donné dans le dialogue. Le processus de manipulation des espaces dans le dialogue sur la pile attentionnelle (\emph{focus stack}). Cette pile est aussi utilisée pour faciliter l'identification des relations entre les différents \emph{DSPs}
+
 %			% Dynamic stack that records salient objects, properties and relations Focusing – process of manipulating focus spaces on attentional (focus) stack
 %			 Focus space: les entités saillantes du dilaogue
 
-		 \subsection{Exemple d'analyse}
-			 Nous présentons dans cette section deux extraits de l'analyse en DSP que nous avons effectuée sur les deux dialogues préalablement enregistrés. Chaque texte a été édité afin d'améliorer son intelligibilité en supprimant les pauses et des mots tels que "hmm, oué $\ldots$".
-			 Les deux analyses sont présentées dans les figures \ref{fig:DSP},\ref{fig:DSP2}.
-			 
-			 Pour chaque dialogue, nous avons effectué l'analyse suivante. 
-			 D'abord, nous nous sommes intéressés à la structure linguistique. En effet, nous avons extrait les actes de dialogues de chaque tour de dialogue, que nous avons ensuite regroupé en \emph{DS}. 
-			 \begin{figure}[!h]
-				\includegraphics[width=5in]{Figures/YC_DSP.pdf}
-				\caption{\label{fig:DSP2} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 1}
-			\end{figure} 
-		
-		\begin{figure}[!h]
-			\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
-			\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 2}
-		\end{figure} 
-		
-			La seconde étape consistait à effectuer l'analyser intentionnelle. Pour ce faire, nous avons analyser l'intention cachée derrière chaque \emph{DS}. Par conséquent, nous avons formulé les intentions comme présenté dans les figures \ref{fig:DSP},\ref{fig:DSP2}.  L'état attentionnel nous a aidé à la construction des différents \emph{DS} et a la formulation des leur intentions.	
-			Une fois les intentions identifiés, nous avons analysé les relation de dominances et de dépendances entres les différents \emph{DS}s. Les relations de dominance sont présentés dans la table \ref{tab:domRelation} et les relation de satisfaction dans la table \ref{tab:dependanceRelation} .
-			 
-		
-	\begin{table}
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{c}
-				\hline
-				\hline
-				Dialogue 1 \\
-				\hline
-				\hline
-				$I_0$ DOM $I_1$ \\
-				$I_0$ DOM $I_2$ \\
-				$I_0$ DOM $I_6$ \\
-				$I_0$ DOM $I_8$ \\
-				$I_2$ DOM $I_3$ \\
-				$I_2$ DOM $I_4$ \\
-				$I_2$ DOM $I_5$ \\
-				$I_6$ DOM $I_7$ \\
-				\hline
-				\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{c}
-				\hline
-				\hline
-				Dialogue 2 \\
-				\hline
-				\hline
-				$I_0$ DOM $I_1$ \\
-				$I_0$ DOM $I_2$ \\
-				$I_0$ DOM $I_3$ \\
-				$I_0$ DOM $I_4$ \\
-				$I_0$ DOM $I_5$ \\
-				\hline
-				\hline
-			\end{tabular} 
-			
-		}
-		\caption{ \label{tab:domRelation} Relation de dominance entre les intentions}
-	\end{table}
+\subsection{Exemple d'analyse}
+Nous présentons dans cette section deux extraits de l'analyse en DSP que nous avons effectuée sur les deux dialogues préalablement enregistrés. Chaque texte a été édité afin d'améliorer son intelligibilité en supprimant les pauses et des mots tels que "hmm, oué $\ldots$".
+Les deux analyses sont présentées dans les figures \ref{fig:DSP},\ref{fig:DSP2}.
 
-	\begin{table}
+Pour chaque dialogue, nous avons effectué l'analyse suivante. 
+D'abord, nous nous sommes intéressés à la structure linguistique. En effet, nous avons extrait les actes de dialogues de chaque tour de dialogue, que nous avons ensuite regroupé en \emph{DS}. 
+\begin{figure}[!h]
+	\includegraphics[width=5in]{Figures/YC_DSP.pdf}
+	\caption{\label{fig:DSP2} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 1}
+\end{figure} 
+
+\begin{figure}[!h]
+	\includegraphics[width=5in]{Figures/dsp_analysis.pdf}
+	\caption{\label{fig:DSP} Exemple d'une décomposition en \emph{discourse segment} \emph{DS} effectué sur le dialogue 2}
+\end{figure} 
+
+La seconde étape consistait à effectuer l'analyser intentionnelle. Pour ce faire, nous avons analyser l'intention cachée derrière chaque \emph{DS}. Par conséquent, nous avons formulé les intentions comme présenté dans les figures \ref{fig:DSP},\ref{fig:DSP2}.  L'état attentionnel nous a aidé à la construction des différents \emph{DS} et a la formulation des leur intentions.	
+Une fois les intentions identifiés, nous avons analysé les relation de dominances et de dépendances entres les différents \emph{DS}s. Les relations de dominance sont présentés dans la table \ref{tab:domRelation} et les relation de satisfaction dans la table \ref{tab:dependanceRelation} .
+
+
+\begin{table}
+	\parbox{.45\linewidth}{
+		\centering
+		\begin{tabular}{c}
+			\hline
+			\hline
+			Dialogue 1 \\
+			\hline
+			\hline
+			$I_0$ DOM $I_1$ \\
+			$I_0$ DOM $I_2$ \\
+			$I_0$ DOM $I_6$ \\
+			$I_0$ DOM $I_8$ \\
+			$I_2$ DOM $I_3$ \\
+			$I_2$ DOM $I_4$ \\
+			$I_2$ DOM $I_5$ \\
+			$I_6$ DOM $I_7$ \\
+			\hline
+			\hline
+		\end{tabular}
+	}
+	\hfill
+	\parbox{.45\linewidth}{
+		\centering
+		\begin{tabular}{c}
+			\hline
+			\hline
+			Dialogue 2 \\
+			\hline
+			\hline
+			$I_0$ DOM $I_1$ \\
+			$I_0$ DOM $I_2$ \\
+			$I_0$ DOM $I_3$ \\
+			$I_0$ DOM $I_4$ \\
+			$I_0$ DOM $I_5$ \\
+			\hline
+			\hline
+		\end{tabular} 
+		
+	}
+	\caption{ \label{tab:domRelation} Relation de dominance entre les intentions}
+\end{table}
+
+\begin{table}
 	\parbox{.45\linewidth}{
 		\centering
 		\begin{tabular}{c}
@@ -147,352 +147,352 @@
 	}
 	\caption{ \label{tab:dependanceRelation} Relation de dépendance entre les intentions}
 \end{table}
-	
-		\subsection{Résultats de l'analyse}
-		
-			L'analyse en DSPs nous a révélé un nombre de comportements intéressants tant sur l'aspect structurel de la négociation que sur les stratégies de négociations déployées par les interlocuteurs. 	
-			
-			\subsection{Structure d'un dialogue de négociation collaborative}
-			
-					Sur l'aspect structurel, la décomposition du dialogue en \emph{DS} nous a confirmé que les négociateurs s'intéressaient à différents critères pour le choix d'une option (les restaurants dans notre exemple). Ces critères sont négociés simultanément durant la négociation jusqu'à ce que les interlocuteurs trouvent un compromis acceptable sur les critères jugés importants. 
-					Par exemple, dans le dialogue présenté dans la figure \ref{fig:DSP2}, les interlocuteurs se sont plus intéressés à l'ambiance du restaurant et son emplacement pour le choix final. En revanche, dans le dialogue \ref{fig:DSP}, les interlocuteurs se sont principalement concentré sur type et la qualité de la cuisine.
-					    
-					De plus, les critères les plus importants sont les premiers à être abordés, et en cas de conflit, d'autre critères sont abordés. 
-					Ceci est confirmé par des travaux en négociations automatiques qui mettent en avant l'intérêt de la modalisation multicritères dans les systèmes de négociation \cite{jonker2007agent,lai2004literature}. Ce point sera abordé plus en détails en section suivante. 
-		
-			\subsection{Aspect dialogique de la négociation collaborative}
-					 \label{sec:aspectDial}
-				 Nous nous sommes aussi intéressé à l'aspect dialogique de la négociation. En effet, notre modèle se basant sur des actes de dialogue, nous avons analysé les informations échangées lors de la négociation. 
-				 Nous avons récolté des informations sur le style linguistique sur lequel seront basés nos actes de dialogues. En effet, les négociateurs utilisaient deux types d'énonciations. Le premier type leur permettait d'exprimer leur préférences sur les valeurs du critères discuté. Le second type d'renonciations était utilisé pour négocier, soit pour faire des propositions, les accepter ou les rejeter. 
-				 
-				 Par ailleurs, l'expression de ces énonciations était influencé par le style linguistique des négociateurs.  Le style linguistique est influencé par les comportements de dominance. Nous avons observé que la personne dominante avait tendance à facilement exprimer ses préférences (\emph{e.g.} voir \emph{DS3}), argumenter ses choix et décisions dans le but de convaincre l'autre.  
-				 
-				 
-				  Par exemple, en analysant le dsp 3 du dialogue 2 nous pouvons extraire les énonciations suivantes: 
-				 
-			\subsection{Structure intentionnelle et attentionnelle}	  
-				 
-				 Finalement, nous avons utilisé la structure attentionnelle et intentionnelle afin d'étudier les stratégies de négociation adoptées par les négociateurs. Nous avons étudié la manifestation de comportements durant la négociation influencés par la dimension de la dominance.
-				 
-				 Le résultats obtenus montrent qu'une relation complémentaire de dominance s'installe entre les négociateurs. C'est à dire que dans la situation où un négociateur prend le pouvoir, l'autre parti accepte cette prise de pouvoir et adapte son comportement.
-			
-				 La prise de pouvoir se manifeste par les stratégies de prise de parole. Le négociateur avec un haut niveau de dominance avait tendance à prendre la parole plus fréquemment, et plus longtemps. Par exemple, en analysant le \emph{DS1} et \emph{DS3} de la figure \ref{fig:DSP}, nous observons que l'interlocuteur \textit{B} prend plus de tours de parole et pour chaque tour, plusieurs actes dialogiques sont énoncés. 
-				 
-			 
-			Ces résultats obtenus ont soutenu les comportements de dominance relayé dans les travaux en psychologie sociale et nous ont aidé à orienter la conception de notre modèle de dialogue
-		
-		
-	
-	\section{Domaine de négociation}
-	\label{domaine}
-	
-	%	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
-	% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
-	%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
-	
-		La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multi-critères.  
-		
-		Dans le cadre d'une interaction avec un négociateur humain, la négociation multi-critère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, comme nous l'avons vu dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères sont abordés soit simultanément dans la négociation, soit un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discutaient des différents critères jusqu'à aboutir a un compromis.
-		
-		De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multi-critères. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \emph{Dedreu} \cite{de1995impact} ajoute que la négociation multi-critères offre un contexte pour différents types de stratégies coopératives. Certains négociateurs peuvent faire des concessions sur tout les critères. D'autres ont un ordre de priorité sur les critères où ils ont plus tendance à faire des concessions sur les critères avec une priorité faible. 
-	
-		Les résultats des précédents travaux nous ont motivé à utiliser une représentation multi-critères pour modéliser notre domaine de négociation collaborative. 
-		
-		Il existe une vaste littérature sur la modélisation d'une négociation multi-critères existe en négociation automatique \cite{jonker2007agent,lai2008decentralized,lai2004literature,hindriks2008opponent,traum2008multi}. Nous nous basons sur cette représentation pour décrire le domaine de négociation.
-		De plus, nous nous basons dans cette thèse sur des travaux en économie spécialisés dans la décision multi-critères \cite{greco2016multiple} pour adapter la fonction d'utilité afin qu'elle supporte une ordre partiel de préférences sur les critères.
-		
-		
-		\section{Représentation formelle des éléments de la négociation}
-			
-		Le but de la négociation est de choisir une \textit{option} $O$ dans l'ensemble des options $\mathcal{O}$ comprenant toutes les options alternatives envisagé pour un sujet de négociation donnée. 
-		
-		L'évaluation de chaque option repose sur un ensemble de critères $\mathcal{C}$ reflétant les caractéristiques de l'option. Nous définissons l'ensemble $\mathcal{C}$ de $n$ critères, et $C_1,\ldots,C_n$, comme le domaine de valeurs de chaque critère de l'ensemble. 
-		Par conséquent, $\mathcal{O}$ peut être défini comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $O \in \mathcal{O}$ est un tuple $(v_1,\ldots,v_n)$. 
-		
-		Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C}$ = \emph{$\{$Cuisine, Prix, Emplacement, Atmosphère, $\}$}. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est  \emph{Anterprima(Italien, coûteux , animé, Montparnasse)}. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
-		
-		Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
-		\begin{table}[h]
-			\centering
-			\begin{tabular}{ >{\centering\arraybackslash}m{2.25cm}  >{\centering\arraybackslash}m{8.6cm}}
+
+\subsection{Résultats de l'analyse}
+
+L'analyse en DSPs nous a révélé un nombre de comportements intéressants tant sur l'aspect structurel de la négociation que sur les stratégies de négociations déployées par les interlocuteurs. 	
+
+\subsection{Structure d'un dialogue de négociation collaborative}
+
+Sur l'aspect structurel, la décomposition du dialogue en \emph{DS} nous a confirmé que les négociateurs s'intéressaient à différents critères pour le choix d'une option (les restaurants dans notre exemple). Ces critères sont négociés simultanément durant la négociation jusqu'à ce que les interlocuteurs trouvent un compromis acceptable sur les critères jugés importants. 
+Par exemple, dans le dialogue présenté dans la figure \ref{fig:DSP2}, les interlocuteurs se sont plus intéressés à l'ambiance du restaurant et son emplacement pour le choix final. En revanche, dans le dialogue \ref{fig:DSP}, les interlocuteurs se sont principalement concentrés sur type et la qualité de la cuisine.
+
+De plus, les critères les plus importants sont les premiers à être abordés, et en cas de conflit, d'autre critères sont abordés. 
+Ceci est confirmé par des travaux en négociations automatiques qui mettent en avant l'intérêt de la modalisation multicritères dans les systèmes de négociation \cite{jonker2007agent,lai2004literature}. Ce point sera abordé plus en détails en section suivante. 
+
+\subsection{Aspect dialogique de la négociation collaborative}
+\label{sec:aspectDial}
+Nous nous sommes aussi intéressés à l'aspect dialogique de la négociation. En effet, notre modèle se basant sur des actes de dialogue, nous avons analysé les informations échangées lors de la négociation. 
+Nous avons récolté des informations sur le style linguistique sur lequel seront basés nos actes de dialogues. En effet, les négociateurs utilisaient deux types d'énonciations. Le premier type leur permettait d'exprimer leurs préférences sur les valeurs du critère discuté. Le second type d'renonciations était utilisé pour négocier, soit pour faire des propositions, les accepter ou les rejeter. 
+
+Par ailleurs, l'expression de ces énonciations était influencée par le style linguistique des négociateurs.  Le style linguistique est influencée par les comportements de dominance. Nous avons observé que la personne dominante avait tendance à facilement exprimer ses préférences (\emph{e.g.} voir \emph{DS3}), argumenter ses choix et décisions dans le but de convaincre l'autre.  
+
+
+Par exemple, en analysant le dsp 3 du dialogue 2 nous pouvons extraire les énonciations suivantes: 
+
+\subsection{Structure intentionnelle et attentionnelle}	  
+
+Finalement, nous avons utilisé la structure attentionnelle et intentionnelle afin d'étudier les stratégies de négociation adoptées par les négociateurs. Nous avons étudié la manifestation de comportements durant la négociation influencés par la dimension de la dominance.
+
+Les résultats obtenus montrent qu'une relation complémentaire de dominance s'installe entre les négociateurs. C'est à dire que dans la situation où un négociateur prend le pouvoir, l'autre parti accepte cette prise de pouvoir et adapte son comportement.
+
+La prise de pouvoir se manifeste par les stratégies de prise de parole. Le négociateur avec un haut niveau de dominance avait tendance à prendre la parole plus fréquemment, et plus longtemps. Par exemple, en analysant le \emph{DS1} et \emph{DS3} de la figure \ref{fig:DSP}, nous observons que l'interlocuteur \textit{B} prend plus de tours de parole et pour chaque tour, plusieurs actes dialogiques sont énoncés. 
+
+
+Ces résultats obtenus ont soutenu les comportements de dominance relayé dans les travaux en psychologie sociale et nous ont aidé à orienter la conception de notre modèle de dialogue
+
+
+
+\section{Domaine de négociation}
+\label{domaine}
+
+%	L'interet d'une négociation multi-critères dans la modélisation d'un sujet social
+% voir intro :https://www.ri.cmu.edu/pub_files/pub4/lai_guoming_2008_1/lai_guoming_2008_1.pdf
+%https://link.springer.com/content/pdf/10.1007/s10458-006-9009-y.pdf
+
+La recherche en négociation automatique peut être divisée en deux catégories en ce qui concerne la représentation du domaine: négociation sur un critère et la négociation multicritère.  
+
+Dans le cadre d'une interaction avec un négociateur humain, la négociation multicritère est cruciale. En effet, dans un environnement humain, les négociateurs peuvent discuter de plusieurs critères simultanément, comme nous l'avons vu dans la section précédente.  Nous avons observé que les négociateurs s'intéressaient à plusieurs critères pour le choix d'un restaurant. Par exemple le type de cuisine, la location ou encore l'ambiance de ce dernier. Ces critères sont abordés soit simultanément dans la négociation, soit un par un. C'est à dire que les négociateurs s'accordaient sur un premier critère avant d'aborder un autre, ou bien discutaient des différents critères jusqu'à aboutir a un compromis.
+
+De plus, plusieurs travaux en négociation automatique ont mis en exergue l'apport de la négociation multicritère. Elle permet d'augmenter la coordination et collaboration durant le processus de négociation afin de rechercher un résultat qui apporte des gains communs pour les deux parties \cite{jonker2007agent,lai2008decentralized,lai2004literature}. \emph{Dedreu} \cite{de1995impact} ajoute que la négociation multicritère offre un contexte pour différents types de stratégies coopératives. Certains négociateurs peuvent faire des concessions sur tous les critères. D'autres ont un ordre de priorité sur les critères où ils ont plus tendance à faire des concessions sur les critères avec une priorité faible. 
+
+Les résultats des précédents travaux nous ont motivé à utiliser une représentation multicritères pour modéliser notre domaine de négociation collaborative. 
+
+Il existe une vaste littérature sur la modélisation d'une négociation multicritère existe en négociation automatique \cite{jonker2007agent,lai2008decentralized,lai2004literature,hindriks2008opponent,traum2008multi}. Nous nous basons sur cette représentation pour décrire le domaine de négociation.
+De plus, nous nous basons dans cette thèse sur des travaux en économie spécialisés dans la décision multicritère \cite{greco2016multiple} pour adapter la fonction d'utilité afin qu'elle supporte un ordre partiel de préférences sur les critères.
+
+
+\section{Représentation formelle des éléments de la négociation}
+
+Le but de la négociation est de choisir une \textit{option} $O$ dans l'ensemble des options $\mathcal{O}$ comprenant toutes les options alternatives envisagé pour un sujet de négociation donnée. 
+
+L'évaluation de chaque option repose sur un ensemble de critères $\mathcal{C}$ reflétant les caractéristiques de l'option. Nous définissons l'ensemble $\mathcal{C}$ de $n$ critères, et $C_1,\ldots,C_n$, comme le domaine de valeurs de chaque critère de l'ensemble. 
+Par conséquent, $\mathcal{O}$ peut être défini comme le produit vectoriel de  $C_1\times\ldots\times C_n$ et chaque option $O \in \mathcal{O}$ est un tuple $(v_1,\ldots,v_n)$. 
+
+Par exemple, une négociation collaborative qui porte sur le choix d'un restaurant peut être modélisé en prenant en compte quatre critères à savoir $\mathcal{C}$ = \emph{$\{$Cuisine, Prix, Emplacement, Atmosphère, $\}$}. La table \ref{tab:domain} résume un exemple de domaine de valeurs possible pour chaque critère. Nous faisons l'hypothèse que l'agent connaisse toutes les options pour un domaine donné. Un exemple d'option est  \emph{Anterprima(Italien, coûteux, animé, Montparnasse)}. Au total, $638$ options peuvent être généré à partir du domaine présenté dans la table \ref{tab:domain}. 
+
+Nous utiliserons tout le long de ce manuscrit l'exemple d'une négociation collaborative pour le choix d'un restaurant. 
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ >{\centering\arraybackslash}m{2.25cm}  >{\centering\arraybackslash}m{8.6cm}}
+		\hline
+		\hline
+		\textbf{Critère $i $} &\textbf{ Domaine de valeur $C_i$} \\
+		\hline
+		Cuisine & \{Italien, Français, Japonais, Chinois, Mexicain, Turque, Coréen\} \\
+		\hline
+		Atmosphère & \{Animé, Calme, Romantique, Familial, Cosy, Moderne\} \\
+		\hline
+		Prix & \{Coûteux, abordable, a prix bas\} \\
+		\hline
+		Emplacement & \{Père Lachaise, Centre de Paris, Montparnasse, Tour Eiffel, gare du Nord\} \\
+		\hline
+		\hline
+	\end{tabular}
+	\caption{Domaine de valeurs pour les critères de choix d'un restaurant} 
+	\label{tab:domain}
+\end{table}
+
+
+\subsection{Préférences}
+
+L'agent conversationnel est défini avec un ensemble de préférences formalisé  par un ordre partiel $\prec_i$, défini sur chaque domaine de critères $C_i$. 
+\begin{figure}[] 
+	\centering 
+	\begin{tabular}{l}
+		\subfloat[]{\adjustbox{raise=-5pc}{\includegraphics[height=4.8cm]{Figures/cuisine_ex2.png} \label{fig:sub_pref}}}
+		\subfloat[]{
+			%\input{Figures/Tikz/goldMineState.tex}\label{fig:goldMineState}}  
+			\begin{tabular}{|c|c|}
 				\hline
-				\hline
-			\textbf{Critère $i $} &\textbf{ Domaine de valeur $C_i$} \\
-				\hline
-				Cuisine & \{Italien, Français, Japonais, Chinois, Mexicain, Turque, Coréen\} \\
-				\hline
-				Atmosphère & \{Animé, Calme, Romantique, Familial, Cosy, Moderne\} \\
-				\hline
-				Prix & \{Coûteux, abordable, a prix bas\} \\
-				\hline
-				Emplacement & \{Père Lachaise, Centre de Paris, Montparnasse, Tour Eiffel, gare du Nord\} \\
-				\hline
-				\hline
-			\end{tabular}
-			\caption{Domaine de valeurs pour les critères de choix d'un restaurant} 
-			\label{tab:domain}
-		\end{table}
-		
-		
-		\subsection{Préférences}
-		
-			L'agent conversationnel est défini avec un ensemble de préférences formalisé  par un ordre partiel $\prec_i$, défini sur chaque domaine de critères $C_i$. 
-					\begin{figure}[] 
-						\centering 
-						\begin{tabular}{l}
-							\subfloat[]{\adjustbox{raise=-5pc}{\includegraphics[height=4.8cm]{Figures/cuisine_ex2.png} \label{fig:sub_pref}}}
-							\subfloat[]{
-								%\input{Figures/Tikz/goldMineState.tex}\label{fig:goldMineState}}  
-								\begin{tabular}{|c|c|}
-									\hline
-									& Critère cuisine \\
-									\cline{2-2}
-									\parbox[t]{2mm}{\multirow{7}{*}{\rotatebox[origin=c]{90}{\textbf{Préférences}}}} & Japonais $\prec_{cuisine}$ Coréen\\
-									\cline{2-2}
-									& Chinois $\prec_{cuisine}$ Mexicain\\
-									\cline{2-2}
-									&  Coréen$\prec_{cuisine}$ Mexicain\\
-									\cline{2-2}
-									&  Coréen $\prec_{cuisine}$ Turque \\	
-									\cline{2-2}
-									&  Mexicain$\prec_{cuisine}$ Italien \\
-									\cline{2-2}
-									&  Turque $\prec_{cuisine}$ Italien\\
-									\cline{2-2}
-									&  Italien $\prec_{cuisine}$ Français\\	
-									\hline								
-								\end{tabular}}
-							\end{tabular}
-							\caption{Exemple de modèle de préférences défini sur le critère cuisine}
-							\label{fig:ex_pref}
-						\end{figure}
-			Nous définissons la relation de préférence comme une relation binaire. Par exemple, $japonais \prec_{cuisine} italien$ signifie que l'agent préfère la cuisine italienne à la cuisine japonaise. Elle est aussi transitive, par exemple, l'agent dispose d'une autre préférence $italien \prec_{cuisine} français$. Nous pouvons donc déduire que l'agent $japonais \prec_{cuisine} français$.
+				& Critère cuisine \\
+				\cline{2-2}
+				\parbox[t]{2mm}{\multirow{7}{*}{\rotatebox[origin=c]{90}{\textbf{Préférences}}}} & Japonais $\prec_{cuisine}$ Coréen\\
+				\cline{2-2}
+				& Chinois $\prec_{cuisine}$ Mexicain\\
+				\cline{2-2}
+				&  Coréen$\prec_{cuisine}$ Mexicain\\
+				\cline{2-2}
+				&  Coréen $\prec_{cuisine}$ Turque \\	
+				\cline{2-2}
+				&  Mexicain$\prec_{cuisine}$ Italien \\
+				\cline{2-2}
+				&  Turque $\prec_{cuisine}$ Italien\\
+				\cline{2-2}
+				&  Italien $\prec_{cuisine}$ Français\\	
+				\hline								
+		\end{tabular}}
+	\end{tabular}
+	\caption{Exemple de modèle de préférences défini sur le critère cuisine}
+	\label{fig:ex_pref}
+\end{figure}
+Nous définissons la relation de préférence comme une relation binaire. Par exemple, $japonais \prec_{cuisine} italien$ signifie que l'agent préfère la cuisine italienne à la cuisine japonaise. Elle est aussi transitive, par exemple, l'agent dispose d'une autre préférence $italien \prec_{cuisine} français$. Nous pouvons donc déduire que l'agent $japonais \prec_{cuisine} français$.
+
+Ces conditions garantissent que les préférences de l'agent soient cohérentes dans le domaine de la négociation; et la condition de transitivité assure que toutes les valeurs soient comparables. Un exemple de modèle de préférences défini sur le critère de cuisine est présenté dans la figure \ref{fig:ex_pref}.
+
+\subsection{Utilité des critères: Satisfiabilité}
+
+Les préférences étant un aspect essentiel dans la prise de décision durant la négociation, nous avons modélisé une fonction qui représente la valeur d'utilité ou satisfaction pour chaque valeur calculée à partir de l'ensemble des préférences. 
+
+Par conséquent, pour un critère $i\in \mathcal{C}$, pour une valeur $v\in C_i$, l'agent calcule sa \emph{satisfaction} $sat_{self}(v \prec_i)$ pour cette valeur comme le nombre de valeurs qu'il préfère moins dans l'ordre partiel des préférences $\prec_i$. La valeur est ensuite normalisée dans l'intervalle [0,1]:
+
+\begin{equation}
+sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
+\end{equation}
+
+La notion de satisfaction est généralisée pour chaque option $ o= (v_1, \ldots, v_n) \in \mathcal{O}$ comme une moyenne des valeurs de satisfactions des différentes valeurs de critères. Il existe une grande quantité de travaux  dans le domaine de la prise de décision  qui traitent sur la combinaison de plusieurs critères pour le calcul d'utilité en utilisant par exemple des moyennes pondérées ou des intégrales de Choquet. Nous nous ne intéressons pas dans nos travaux à l'optimisation de la fonction de calcul, pour cette raison nous optons pour une fonction simple d'agrégation de préférences.
+
+\begin{equation}
+sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
+\end{equation}
+
+Un exemple de valeurs de satisfactions calculé à partir de l'ensemble des préférences de l'exemple \ref{fig:ex_pref} est illustré dans la table \ref{tab:sat}
+\begin{table}[h]
+	\centering
+	{\scriptsize
+		\begin{tabular}{ |c|c|c|c|c|c|c|c| }
+			\hline				
+			valeur & Japonais & Coréen & Chinois &  Mexicain & Turque & Italien & Français \\
+			\hline
 			
-			 Ces conditions garantissent que les préférences de l'agent soient cohérentes dans le domaine de la négociation; et la condition de transitivité assure que toutes les valeurs soient comparables. Un exemple de modèle de préférences défini sur le critère de cuisine est présenté dans la figure \ref{fig:ex_pref}.
+			sat(valeur) & 0.16 & 0.33 & 0.5 & 0.66 & 0.66 & 0.83 & 1\\
+			\hline
 			
-			\subsection{Utilité des critères: Satisfiabilité}
-			
-			Les préférences étant un aspect essentiel dans la prise de décision durant la négociation, nous avons modélisé une fonction qui représente la valeur d'utilité ou satisfaction pour chaque valeur calculée à partir de l'ensemble des préférences. 
-			
-			Par conséquent, pour un critère $i\in \mathcal{C}$, pour une valeur $v\in C_i$, l'agent calcule sa \emph{satisfaction} $sat_{self}(v \prec_i)$ pour cette valeur comme le nombre de valeurs qu'il préfère moins dans l'ordre partiel des préférences $\prec_i$. La valeur est ensuite normalisé dans l'intervalle [0,1]:
-			
-			\begin{equation}
-			sat_{self}(v, \prec_i) =	1 - \left( \frac{|\{v' : v' \neq v \  \wedge \ (v \prec_i v')\}| }{( |C_i| - 1 )}\right)
-			\end{equation}
-			
-			La notion de satisfaction est généralisée pour chaque option $ o= (v_1, \ldots, v_n) \in \mathcal{O}$ comme une moyenne des valeurs de satisfactions des différentes valeurs de critères. Il existe une grande quantité de travaux  dans le domaine de la prise de décision  qui traitent sur la combinaison de plusieurs critères pour le calcul d'utilité en utilisant par exemple des moyennes pondérées ou des intégrales de Choquet. Nous nous ne intéressons pas dans nos travaux à l'optimisation de la fonction de calcul, pour cette raison nous optons pour une fonction simple d'agrégation de préférences.
+	\end{tabular}}
+	\caption{Valeurs de satisfiabilité pour le modèle de préférences défini sur le critère de cuisine}
+	\label{tab:sat}
+\end{table}
+
+\subsection{Communication}
+\label{sec:communication}
+
+
+La modélisation des actes de dialogue est basée sur les travaux de Sidner \cite{sidner1994artificial} qui avait proposé des actes de dialogues qui permettent à un agent de communiquer dans le contexte de négociation collaborative. Ces actes lui permettent aussi de gérer son état mental en termes d'intentions et croyances communiquées durant la négociation. 
+
+Sur la base des actes dialogiques de Sidner, et de l'analyse des dialogues dans la section \ref{sec:aspectDial}, nous proposons cinq types d'actes de dialogues génériques et deux actes additionnels pour la gestion de fin de négociation. 
+Ce modèle de communication est implémenté sur la plateforme \emph{Disco} \cite{rich09}, qui permet à l'agent de communiquer avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et permet de lui associer une expression spécifique formulé dans un langage naturel.
+
+Chaque type d'acte de dialogue prend un argument qui peut être soit un une valeur de critère  $v \in C_i$, une option $o \in \mathcal{O}$ ou encore critère $i \in \mathcal{C}$. 
+Les actes de dialogues sont présentés dans la table \ref{table:utt}
+
+\subsubsection{Catégorisation des actes de dialogue}
+
+En fonction des informations qu'ils communiquent, ces actes de dialogues peuvent être divisé en trois groupes:
+
+\begin{enumerate}
 	
-			\begin{equation}
-			sat_{self}(o, \prec) = \frac{\sum_{i=1}^{n} sat_{self}(v_i, \prec_i) }{n}
-			\end{equation}
-		
-			Un exemple de valeurs de satisfactions calculé à partir de l'ensemble des préférences de l'exemple \ref{fig:ex_pref} est illustré dans la table \ref{tab:sat}
-					\begin{table}[h]
-						\centering
-								{\scriptsize
-						\begin{tabular}{ |c|c|c|c|c|c|c|c| }
-							\hline				
-							valeur & Japonais & Coréen & Chinois &  Mexicain & Turque & Italien & Français \\
-							\hline
-							
-							sat(valeur) & 0.16 & 0.33 & 0.5 & 0.66 & 0.66 & 0.83 & 1\\
-							\hline
-							
-						\end{tabular}}
-						\caption{Valeurs de satisfiabilité pour le modèle de préférences défini sur le critère de cuisine}
-						\label{tab:sat}
-					\end{table}
+	\item \textit{Actes de dialogues informatifs}; ce groupe fait référence aux actes de dialogues utilisés pour échanger des informations sur les préférences respectives des négociateurs, à savoir (\textit{AskValue/AskCriterion} et \textit{StateValue}). 
+	Nous avons fait le choix d'attribuer une seule valeur pour les actes informatifs car nous avions observé dans les négociations humain/humain enregistrés que les négociateurs utilisaient généralement une formulation pour exprimer les valeurs qu'ils appréciaient ou non. Par exemple \textit{I (don't)like Chinese restaurants} plutôt qu'une expression avec une comparaison binaire du type \textit{I like Chinese more than French}.
 	
-	\subsection{Communication}
-	\label{sec:communication}
+	\item \textit{Actes de négociation}; ces actes de dialogues permettent à l'agent de gérer la négociation en exprimant des propositions a son interlocuteur (\textit{Propose}) ou bien de répondre à des propositions exprimées par son interlocuteur. L'agent peut accepter ou rejeter une proposition (\textit{Accept, Reject}). Les valeurs en arguments dans les actes de négociation peuvent être soit des valeurs de critère comme (``Let's go to a Chinese restaurant''), soit des options  (``Let's go to \emph{Chez Francis}''). 
 	
-		
-		La modélisation des actes de dialogue est basée sur les travaux de Sidner \cite{sidner1994artificial} qui avait proposé des actes de dialogues qui permettent à un agent de communiquer dans le contexte de négociation collaborative. Ces actes lui permettent aussi de gérer son état mental en terme d'intentions et croyances communiquées durant la négociation. 
-		
-		Sur la base des actes dialogiques de Sidner, et de l'analyse des dialogues dans la section \ref{sec:aspectDial}, nous proposons cinq types d'actes de dialogues génériques et deux actes additionnels pour la gestion de fin de négociation. 
-		Ce modèle de communication est implémenté sur la plateforme \emph{Disco} \cite{rich09}, qui permet à l'agent de communiquer avec l'utilisateur via des actes de dialogues. Chaque acte de dialogue a un ensemble spécifique d'arguments et permet de lui associer une expression spécifique formulé dans un langage naturel.
-		
-		Chaque type d'acte de dialogue prend un argument qui peut être soit un une valeur de critère  $v \in C_i$, une option $o \in \mathcal{O}$ ou encore critère $i \in \mathcal{C}$. 
-		Les actes de dialogues sont présentés dans la table \ref{table:utt}
-		
-		\subsubsection{Catégorisation des actes de dialogue}
-		
-		En fonction des informations qu'ils communiquent, ces actes de dialogues peuvent être divisé en trois groupes:
-		
-		\begin{enumerate}
-			
-			\item \textit{Actes de dialogues informatifs}; ce groupe fait référence aux actes de dialogues utilisés pour échanger des informations sur les préférences respectives des négociateurs, à savoir (\textit{AskValue/AskCriterion} et \textit{StateValue}). 
-			Nous avons fait le choix d'attribuer une seule valeur pour les actes informatifs car nous avions observé dans les négociations humain/humain enregistrés que les négociateurs utilisaient généralement une formulation pour exprimer les valeurs qu'ils appréciaient ou non. Par exemple \textit{I (don't)like Chinese restaurants} plutôt qu'une expression avec une comparaison binaire du type \textit{I like Chinese more than French}.
-			
-			\item \textit{Actes de négociation}; ces actes de dialogues permettent à l'agent de gérer la négociation en exprimant des propositions a son interlocuteur (\textit{Propose}) ou bien de répondre à des propositions exprimées par son interlocuteur. L'agent peut accepter ou rejeter une proposition (\textit{Accept, Reject}). Les valeurs en arguments dans les actes de négociation peuvent être soit des valeurs de critère comme (``Let's go to a Chinese restaurant''), soit des options  (``Let's go to \emph{Chez Francis}''). 
-			
-			\item \textit{Actes de fin de négociation}; les actes  (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) sont utilisés pour clore une négociation soit par une réussite, soit par un échec. Le choix de l'acte dépend de l'état mental de l'agent. En effet, si une option est acceptée par les deux négociateurs, l'agent exprime alors un \textit{NegotiationSuccess} et termine la négociation. Sinon, si la négociation échoue, alors l'agent exprime un \textit{NegotiationFailure}. Les conditions d'échec d'une négociation sont présentées dans le chapitre suivant. 
-			
-		\end{enumerate}
-		 
-				\begin{table*}[p]
-				\begin{adjustbox}{angle=90}
-%					\begin{tabular} {|p{3.25cm}|p{6cm}|p{3.25cm}|}
-					\begin{tabular} {|c|c|c|}
-						\hline
-						\textbf{Type d'acte de dialogue}  &\textbf{ Génération en NL} & \textbf{Postcondition}\\
-						\hline
-						\multirow{2}{*}{StateValue(v)} &  I like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ \\
-						
-						\cline{2-3} & I don't like /$v$/. & Speaker : $v \notin S_i$ \newline Hearer:  $v\in U_i$ \\
-					
-						\hline
-						AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
-						
-						AskCriterion(i) &  What kind of /$i$/ do you like ? & \\
-						\hline
-						ProposeOption(o)  & Let's go to /$o$/. & $o \in P$\\
-						
-						ProposeValue(v) & Let's go to a /$v$/. & $v \in P_i$\\
-						\hline
-						AcceptOption(o)& Okay, let's go to /$o$/.& $o \in T$ \\
-						
-						AcceptValue(v) & Okay, let's go to a /$v$/.& $v \in T_i$ \\
-						\hline
-						RejectOption(o) & I'd rather choose  something else. & $o \in R$\\
-						
-						RejectValue(v) &  I'd rather choose  something else. & $v \in R_i$ \\
-						\hline
-						NegotiationSuccess &  We reached an agreement. & \multirow{2}{*}{}\\
-						\cline{1-2}
-						NegotiationFailure &  Sorry, but I no longer want to discuss this. & \\
-						\hline
-					\end{tabular}
-					
-					\caption{\label{table:utt}Liste des actes de dialogues pour le modèle de négociation collaborative.}
-					\end{adjustbox}
-				\end{table*}
-				
-				
-		\subsubsection{Formalisation des actes en langage naturel}
-		\label{sec:formalisation}
-			La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en langage naturel pour exprimer une valeur d'un acte de dialogue.
-			Un partie importante dans la modélisation d'actes de dialogue pour une interaction avec un humain est la définition de l'expression en langage naturel associé à chaque acte. En effet, le format en langage naturel doit traduire fidèlement l'acte de dialogue pour chaque valeur qui y est associée.
-			Cependant, en fonction du domaine de négociation, la formalisation des actes de dialogue peut varier. trois contraintes se sont imposées dans le processus de formalisation en langage naturel. 
-			
-			Premièrement, la formalisation des actes en langage naturel devait avoir un style linguistique naturel mais neutre pour ne pas biaiser la perception des stratégies des négociateur. Nous avons montré dans le chapitre 2 que le contenu verbal avait un impact direct sur la perception des comportements de dominance. 
-			Notre but étant de manipuler les stratégies de négociation, le contenu verbal devait rester neutre pour ne pas ajouter un biais cognitif.
-			
-			Deuxièmement, pour chaque acte, il faut définir une formulation qui puisse le distinguer et éviter ainsi toute confusion avec d'autres actes. Par exemple, pour proposer d'aller dans un restaurant japonais \emph{Propose(Japonais)}, nous pouvons trouver une première formalisation: \emph{" Est que tu veux aller dans un restaurant japonais ?"}. Cette dernière peut causer une ambiguïté avec l'acte dialogique "\textit{AskPreference(japonais)}". 
-			La formulation générique des actes est proposé dans la table \ref{table:utt}. En outre, la formalisation doit prendre en compte le type de valeur associé à l'acte de dialogue. La valeur peut être soit une option, un critère ou une valeur de critère. Un exemple est donnédans la table \ref{tab:askEx} pour l'acte de dialogue \emph{AskPreference}. 
-			
-			
-				\begin{table} [h]
-					\begin{tabular} {c c}
-						\hline
-						\hline
-						\textbf{Condition} &\textbf{ Formalisation en langage naturel }\\
-						\hline
-						$v$= indéfinie & \textit{What would you like ?} \\
-						\hline
-						$v \in \mathcal{C}$ & \textit{What kind of $v$ do you like ?} \\
-						\hline
-						$ v \in C_i $ & \textit{Do you like $v$ ?} \\
-						\hline
-						\hline
-						
-					\end{tabular}
-					\caption{\label{tab:askEx} Exemple de formalisation en langage naturel associé à \emph{AskPreference(v)}}
-				\end{table}
-			
-			Les deux premières contraintes visaient la formalisation générique des actes de dialogues. Cependant, en lançant des tests, nous nous sommes rendus compte que la spécification des textes en langue naturel devait prendre en compte le domaine du dialogue ainsi que le contexte courent de la négociation. 
-			Par conséquent, nous avons ajouté une adaptation pour rester cohérent avec le contexte courent de la négociation. Un exemple pour l'acte \emph{Accept} est présenté dans la table \ref{tab:AcceptEx} dans le domaine des restaurant avec présentation du contexte.
-			
-			\begin{table} [h]
-				\centering
-				\begin{tabular} {p{4cm}| p{6.5cm}}
-					\hline
-					\hline
-					\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
-					\hline
-					$v$= indéfinie & \textit{Okay. Let's go somewhere} \\
-					\hline
-					$ v $ est la dernière proposition  & \textit{Okay. Let's go to \ $v$ \ } \\
-					\hline
-					 $ v \in C_i,  O \in P  \& v \in O$ & \textit{I prefer to go to \ $v$ \, but not to \ $O$\ }
-															\newline \emph{e.x.} I prefer to go to a japanese restaurant but not to Samura rstaurant. \\
-					\hline
-					$ v $ n'est pas la dernière proposition & \textit{In the end, I prefer to go to  \ $v$ \ } \\
-					\hline
-					$u^{-1} \not \in Propose$ & \textit{You proposed  \ $v$ \ earlier. In the end that's suits me fine} \\
-					\hline
-					\hline
-				\end{tabular}
-				\caption{\label{tab:AcceptEx} Exemple de formalisation en langage naturel associé à \emph{AskPreference(v)}}
-			\end{table}
-			
-			Un exemple pour gérer les valeurs du domaine de négociation est présenté dans la table \ref{tab:ProposeEx}. Cet exemple définit la formalisation des propositions pour l'acte \emph{Propose(v)} pour le domaine des restaurants.
-					\begin{table} [h]
-						\centering
-						\begin{tabular} {p{3.5cm} p{7cm}}
-							\hline
-							\hline
-							\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
-							\hline
-							$v$= indéfinie & \textit{Let's go somewhere } \\
-							\hline
-							$ v \in C_i$ (Italian)  & \textit{Let's go to an $italian$ restaurant} \\
-							\hline
-							$v \in O$ (Anju) & \textit{Let's go to the Anju restaurant. It's a lively, expensive Korean restaurant at Montparnasse.}\\
-							\hline
-							\hline
-						\end{tabular}
-						\caption{\label{tab:ProposeEx} Exemple de formalisation en langage naturel associé à \emph{Propose(v)} appliqué au domaine "\textit{Restaurant}"}
-					\end{table}
+	\item \textit{Actes de fin de négociation}; les actes  (\textit{NegotiationSuccess} or \textit{NegotiationFailure}) sont utilisés pour clore une négociation soit par une réussite, soit par un échec. Le choix de l'acte dépend de l'état mental de l'agent. En effet, si une option est acceptée par les deux négociateurs, l'agent exprime alors un \textit{NegotiationSuccess} et termine la négociation. Sinon, si la négociation échoue, alors l'agent exprime un \textit{NegotiationFailure}. Les conditions d'échec d'une négociation sont présentées dans le chapitre suivant. 
 	
+\end{enumerate}
+
+\begin{table*}[p]
+	\begin{adjustbox}{angle=90}
+		%					\begin{tabular} {|p{3.25cm}|p{6cm}|p{3.25cm}|}
+		\begin{tabular} {|c|c|c|}
+			\hline
+			\textbf{Type d'acte de dialogue}  &\textbf{ Génération en NL} & \textbf{Postcondition}\\
+			\hline
+			\multirow{2}{*}{StateValue(v)} &  I like /$v$/. & Speaker : $v \in S_i$ \newline Hearer:  \newline $v\in A_i$ \\
+			
+			\cline{2-3} & I don't like /$v$/. & Speaker : $v \notin S_i$ \newline Hearer:  $v\in U_i$ \\
+			
+			\hline
+			AskValue(v)& Do you like /$v$/ ? & \multirow{2}{*}{} \\
+			
+			AskCriterion(i) &  What kind of /$i$/ do you like ? & \\
+			\hline
+			ProposeOption(o)  & Let's go to /$o$/. & $o \in P$\\
+			
+			ProposeValue(v) & Let's go to a /$v$/. & $v \in P_i$\\
+			\hline
+			AcceptOption(o)& Okay, let's go to /$o$/.& $o \in T$ \\
+			
+			AcceptValue(v) & Okay, let's go to a /$v$/.& $v \in T_i$ \\
+			\hline
+			RejectOption(o) & I'd rather choose  something else. & $o \in R$\\
+			
+			RejectValue(v) &  I'd rather choose  something else. & $v \in R_i$ \\
+			\hline
+			NegotiationSuccess &  We reached an agreement. & \multirow{2}{*}{}\\
+			\cline{1-2}
+			NegotiationFailure &  Sorry, but I no longer want to discuss this. & \\
+			\hline
+		\end{tabular}
 		
-			\subsection{Mise à jour des connaissances durant la communication}
-			
-			Le choix d'un type d'acte de dialogue par l'agent est le résultat d'un processus décisionnel que nous détaillerons dans le chapitre \ref{chap:dec}. 
-			Afin de prendre des décisions pertinentes, l'agent garde en mémoire l'historique des échanges d'informations formulées au cours de la négociation.  En effet, après chaque acte de dialogue échangé, l'agent met à jour ses connaissances sur le contexte courent de la négociation, les informations échangées ainsi que ses connaissances sur les préférences de son partenaire de négociation.  
-			
-			\subsubsection{Historique de la négociation}
-			Premièrement, l'agent garde en mémoire les informations qu'il a communiqué sur ses préférences.			
-			Pour chaque critère $i\in\mathcal{C}$, l'agent construit un ensemble $S_i \subseteq C_i$ des préférences sur les valeurs de ce critère qu'il a déjà communiqué. Cela prévient la répétition d'informations échangées précédemment. 
-			
-			Deuxièmement, l'agent maintient aussi les propositions énoncé au cours de la négociation. Soient $P_i \subseteq C_i$, $T_i\subseteq C_i$ et $R_i\subseteq C_i$ les ensembles de toutes les valeurs proposées, acceptées et rejetées pour chaque type de critère. 
-			De même, nous considérons $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ et $R\subseteq \mathcal{O}$ les ensembles de toutes les options proposées, acceptées et rejetées au cours de la négociation.
-			
-			
-			Enfin, l'agent garde en mémoire les préférences communiquées par son interlocuteur. Nous notons les ensembles $A_i\subseteq C_i$ et $U_i\subseteq C_i$, respectivement l'ensemble des valeurs que l'interlocuteur a communiqué comme appréciées (\textit{I like $\ldots$}) et non appréciées  (\textit{I don't like $\ldots$}) à travers l'acte de dialogue \textit{StatePreference}.
-			
-			
-			
-			\subsubsection{Préférences de  l'interlocuteur}
-				Dans le contexte d'une négociation collaborative, l'agent prend en compte les préférences de son interlocuteur pour prendre des décisions. Pour cette raison, l'agent a besoin de collecter des informations sur les préférences de son interlocuteur. En effet, l'agent utilise les ensembles $A_i$ et $U_i$ qui représentent les préférences de l'interlocuteurs collectés lors des interactions, pour calculer une valeur de \emph{satisfaction}  qu'a l'interlocuteur pour toute valeur $v\in C_i$: 
-				
-					\begin{equation}
-					sat_{other}(v)= \left\{\begin{array}{ll}
-					1	 & \mathrm{if\ }  c \in A_i\\
-					0    & \mathrm{if\ }c \in U_i\\
-					0.5	 & \mathrm{otherwise}
-					\end{array}\right.
-					\end{equation}
-					
-				Notons que l'agent possède une connaissance partielle des préférences de son interlocuteur. Par conséquent, les préférences sur certaines valeurs peuvent rester inconnues. Dans  le contexte d'une négociation collaborative, ces valeurs sont considérées comme \textit{potentiellement satisfiables}. Par conséquent, nous leur affectons une valeur arbitraire fixée à \textbf{0.5}.
-				
-	\section{Conclusion}
-			Ce chapitre a présenté les différents éléments de notre modèle de négociation collaborative essentiels pour étudier l'impact de la dominance durant la négociation. Nous avons fait le choix de construire un modèle de négociation générique capable de gérer différent sujets de conversation. De plus, nous avions l'objectif de définir un domaine qui nous permettrait de refléter différents comportements durant la négociation. 
-			
-			Premièrement, nous avons appuyé notre recherche par une collecte de données où nous avons enregistré des négociations humains/humain qui nous a révélé nombres de comportements qui apparaissent au cours de la négociation. Ces résultats ont été discutés et nous ont permis de guider notre recherche. Entre autres, les résultats obtenus nous ont soutenu dans notre choix de modéliser une négociation  multi-critères.
-			Nous avons donc présenté le domaine de négociation multi-critères ainsi que la représentation classique de préférences.
-			
-			Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémenté dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposées permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. Ces actes ont pour fonction primaire d'interagir uniquement sur la tâche de la négociation, mais ne dote pas l'agent de nuances d'expressivité dialogique qu'on retrouve habituellement dans les interaction humaines.
-			Par exemple, nous avons codé le dialogue \ref{fig:DSP} à l'aide de nos actes de dialogues présenté dans la figure \ref{fig:natUtt}. Ces derniers sont capables de reproduire les tours de paroles qui impliquent une négociation comme dans le \emph{DS5}. Cependant, ils ne peuvent pas prendre en compte les informations externes à la négociation. Par exemple, dans le \emph{DS2}, les actes de dialogue ne peuvent pas capturer les informations autours de la négociation qui n'engagent pas un échange d'informations directe sur les préférences.
-			
-			\begin{figure}[t]
-				\includegraphics[width=\linewidth, height=0.8\textheight]{Figures/natToUtt.pdf}
-				\caption{\label{fig:natUtt} Formalisation du dialogue \ref{fig:DSP} en actes de dialogue}
-				
-			\end{figure} 
-			Ce modèle de négociation collaborative est utilisé pour construire un modèle de décision qui prend en compte les comportements de dominance. Le chapitre suivant présente donc la construction du modèle décisionnel de notre système de négociation. Nous présenterons un algorithme décisionnel capable de refléter différentes stratégies de négociation en fonction de la position de dominance de l'agent dans l'interaction.
-					
-			
+		\caption{\label{table:utt}Liste des actes de dialogues pour le modèle de négociation collaborative.}
+	\end{adjustbox}
+\end{table*}
+
+
+\subsubsection{Formalisation des actes en langage naturel}
+\label{sec:formalisation}
+La valeur /$v$/ dans la table \ref{table:utt} fait référence au format en langage naturel pour exprimer une valeur d'un acte de dialogue.
+Une partie importante dans la modélisation d'actes de dialogue pour une interaction avec un humain est la définition de l'expression en langage naturel associé à chaque acte. En effet, le format en langage naturel doit traduire fidèlement l'acte de dialogue pour chaque valeur qui y est associée.
+Cependant, en fonction du domaine de négociation, la formalisation des actes de dialogue peut varier. Trois contraintes se sont imposées dans le processus de formalisation en langage naturel. 
+
+Premièrement, la formalisation des actes en langage naturel devait avoir un style linguistique naturel mais neutre pour ne pas biaiser la perception des stratégies des négociateur. Nous avons montré dans le chapitre 2 que le contenu verbal avait un impact direct sur la perception des comportements de dominance. 
+Notre but étant de manipuler les stratégies de négociation, le contenu verbal devait rester neutre pour ne pas ajouter un biais cognitif.
+
+Deuxièmement, pour chaque acte, il faut définir une formulation qui puisse le distinguer et éviter ainsi toute confusion avec d'autres actes. Par exemple, pour proposer d'aller dans un restaurant japonais \emph{Propose(Japonais)}, nous pouvons trouver une première formalisation: \emph{" Est que tu veux aller dans un restaurant japonais ?"}. Cette dernière peut causer une ambiguïté avec l'acte dialogique "\textit{AskPreference(japonais)}". 
+La formulation générique des actes est proposée dans la table \ref{table:utt}. En outre, la formalisation doit prendre en compte le type de valeur associé à l'acte de dialogue. La valeur peut être soit une option, un critère ou une valeur de critère. Un exemple est donné dans la table \ref{tab:askEx} pour l'acte de dialogue \emph{AskPreference}. 
+
+
+\begin{table} [h]
+	\begin{tabular} {c c}
+		\hline
+		\hline
+		\textbf{Condition} &\textbf{ Formalisation en langage naturel }\\
+		\hline
+		$v$= indéfinie & \textit{What would you like ?} \\
+		\hline
+		$v \in \mathcal{C}$ & \textit{What kind of $v$ do you like ?} \\
+		\hline
+		$ v \in C_i $ & \textit{Do you like $v$ ?} \\
+		\hline
+		\hline
+		
+	\end{tabular}
+	\caption{\label{tab:askEx} Exemple de formalisation en langage naturel associé à \emph{AskPreference(v)}}
+\end{table}
+
+Les deux premières contraintes visaient la formalisation générique des actes de dialogues. Cependant, en lançant des tests, nous nous sommes rendus compte que la spécification des textes en langage naturel devait prendre en compte le domaine du dialogue ainsi que le contexte courent de la négociation. 
+Par conséquent, nous avons ajouté une adaptation pour rester cohérent avec le contexte courent de la négociation. Un exemple pour l'acte \emph{Accept} est présenté dans la table \ref{tab:AcceptEx} dans le domaine des restaurant avec présentation du contexte.
+
+\begin{table} [h]
+	\centering
+	\begin{tabular} {p{4cm}| p{6.5cm}}
+		\hline
+		\hline
+		\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
+		\hline
+		$v$= indéfinie & \textit{Okay. Let's go somewhere} \\
+		\hline
+		$ v $ est la dernière proposition  & \textit{Okay. Let's go to \ $v$ \ } \\
+		\hline
+		$ v \in C_i,  O \in P  \& v \in O$ & \textit{I prefer to go to \ $v$ \, but not to \ $O$\ }
+		\newline \emph{e.x.} I prefer to go to a japanese restaurant but not to Samura restaurant. \\
+		\hline
+		$ v $ n'est pas la dernière proposition & \textit{In the end, I prefer to go to  \ $v$ \ } \\
+		\hline
+		$u^{-1} \not \in Propose$ & \textit{You proposed  \ $v$ \ earlier. In the end that's suits me fine} \\
+		\hline
+		\hline
+	\end{tabular}
+	\caption{\label{tab:AcceptEx} Exemple de formalisation en langage naturel associé à \emph{AskPreference(v)}}
+\end{table}
+
+Un exemple pour gérer les valeurs du domaine de négociation est présenté dans la table \ref{tab:ProposeEx}. Cet exemple définit la formalisation des propositions pour l'acte \emph{Propose(v)} pour le domaine des restaurants.
+\begin{table} [h]
+	\centering
+	\begin{tabular} {p{3.5cm} p{7cm}}
+		\hline
+		\hline
+		\textbf{Condition} & \textbf{Formalisation en langage naturel} \\
+		\hline
+		$v$= indéfinie & \textit{Let's go somewhere } \\
+		\hline
+		$ v \in C_i$ (Italian)  & \textit{Let's go to an $italian$ restaurant} \\
+		\hline
+		$v \in O$ (Anju) & \textit{Let's go to the Anju restaurant. It's a lively, expensive Korean restaurant at Montparnasse.}\\
+		\hline
+		\hline
+	\end{tabular}
+	\caption{\label{tab:ProposeEx} Exemple de formalisation en langage naturel associé à \emph{Propose(v)} appliqué au domaine "\textit{Restaurant}"}
+\end{table}
+
+
+\subsection{Mise à jour des connaissances durant la communication}
+
+Le choix d'un type d'acte de dialogue par l'agent est le résultat d'un processus décisionnel que nous détaillerons dans le chapitre \ref{chap:dec}. 
+Afin de prendre des décisions pertinentes, l'agent garde en mémoire l'historique des échanges d'informations formulées au cours de la négociation.  En effet, après chaque acte de dialogue échangé, l'agent met à jour ses connaissances sur le contexte courent de la négociation, les informations échangées ainsi que ses connaissances sur les préférences de son partenaire de négociation.  
+
+\subsubsection{Historique de la négociation}
+Premièrement, l'agent garde en mémoire les informations qu'il a communiqué sur ses préférences.			
+Pour chaque critère $i\in\mathcal{C}$, l'agent construit un ensemble $S_i \subseteq C_i$ des préférences sur les valeurs de ce critère qu'il a déjà communiqué. Cela prévient la répétition d'informations échangées précédemment. 
+
+Deuxièmement, l'agent maintient aussi les propositions énoncées au cours de la négociation. Soient $P_i \subseteq C_i$, $T_i\subseteq C_i$ et $R_i\subseteq C_i$ les ensembles de toutes les valeurs proposées, acceptées et rejetées pour chaque type de critère. 
+De même, nous considérons $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ et $R\subseteq \mathcal{O}$ les ensembles de toutes les options proposées, acceptées et rejetées au cours de la négociation.
+
+
+Enfin, l'agent garde en mémoire les préférences communiquées par son interlocuteur. Nous notons les ensembles $A_i\subseteq C_i$ et $U_i\subseteq C_i$, respectivement l'ensemble des valeurs que l'interlocuteur a communiqué comme appréciées (\textit{I like $\ldots$}) et non appréciées  (\textit{I don't like $\ldots$}) à travers l'acte de dialogue \textit{StatePreference}.
+
+
+
+\subsubsection{Préférences de  l'interlocuteur}
+Dans le contexte d'une négociation collaborative, l'agent prend en compte les préférences de son interlocuteur pour prendre des décisions. Pour cette raison, l'agent a besoin de collecter des informations sur les préférences de son interlocuteur. En effet, l'agent utilise les ensembles $A_i$ et $U_i$ qui représentent les préférences de l'interlocuteurs collectés lors des interactions, pour calculer une valeur de \emph{satisfaction}  qu'a l'interlocuteur pour toute valeur $v\in C_i$: 
+
+\begin{equation}
+sat_{other}(v)= \left\{\begin{array}{ll}
+1	 & \mathrm{if\ }  c \in A_i\\
+0    & \mathrm{if\ }c \in U_i\\
+0.5	 & \mathrm{otherwise}
+\end{array}\right.
+\end{equation}
+
+Notons que l'agent possède une connaissance partielle des préférences de son interlocuteur. Par conséquent, les préférences sur certaines valeurs peuvent rester inconnues. Dans  le contexte d'une négociation collaborative, ces valeurs sont considérées comme \textit{potentiellement satisfiables}. Par conséquent, nous leur affectons une valeur arbitraire fixée à \textbf{0.5}.
+
+\section{Conclusion}
+Ce chapitre a présenté les différents éléments de notre modèle de négociation collaborative essentiels pour étudier l'impact de la dominance durant la négociation. Nous avons fait le choix de construire un modèle de négociation générique capable de gérer différents sujets de conversation. De plus, nous avions l'objectif de définir un domaine qui nous permettrait de refléter différents comportements durant la négociation. 
+
+Premièrement, nous avons appuyé notre recherche par une collecte de données où nous avons enregistré des négociations humains/humain qui nous a révélé nombres de comportements qui apparaissent au cours de la négociation. Ces résultats ont été discutés et nous ont permis de guider notre recherche. Entre autres, les résultats obtenus nous ont soutenu dans notre choix de modéliser une négociation  multicritères.
+Nous avons donc présenté le domaine de négociation multicritère ainsi que la représentation classique de préférences.
+
+Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémenté dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposées permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. Ces actes ont pour fonction primaire d'interagir uniquement sur la tâche de la négociation, mais ne dote pas l'agent de nuances d'expressivité dialogique qu'on retrouve habituellement dans les interactions humaines.
+Par exemple, nous avons codé le dialogue \ref{fig:DSP} à l'aide de nos actes de dialogues présentés dans la figure \ref{fig:natUtt}. Ces derniers sont capables de reproduire les tours de paroles qui impliquent une négociation comme dans le \emph{DS5}. Cependant, ils ne peuvent pas prendre en compte les informations externes à la négociation. Par exemple, dans le \emph{DS2}, les actes de dialogue ne peuvent pas capturer les informations autours de la négociation qui n'engagent pas un échange d'informations directe sur les préférences.
+
+\begin{figure}[t]
+	\includegraphics[width=\linewidth, height=0.8\textheight]{Figures/natToUtt.pdf}
+	\caption{\label{fig:natUtt} Formalisation du dialogue \ref{fig:DSP} en actes de dialogue}
+	
+\end{figure} 
+Ce modèle de négociation collaborative est utilisé pour construire un modèle de décision qui prend en compte les comportements de dominance. Le chapitre suivant présente donc la construction du modèle décisionnel de notre système de négociation. Nous présenterons un algorithme décisionnel capable de refléter différentes stratégies de négociation en fonction de la position de dominance de l'agent dans l'interaction.
+
+
 %	Présentation des actes de dialogues avec leurs catégories et conditions d'applicabilité. 
 %	\textcolor{red}{Expliquer que note choix d'utterances se basent sur les travaux de Candece Sidner. De plus, l'analyse en DSP nous a révélé que les participants utiliser des doubles utterances dans leur négociation, et ceci de manière réccurente. Ceci traduisait de plus leur stratégies de négociation influncé par des comportements de pouvoir}
-	
+
