@@ -24,8 +24,8 @@ Ce processus d'attribution d'état mentaux sur les comportements de l'interlocut
 Les défenseurs de l'approche \textit{theory-theory} (TT) postulent que la ToM s’appuie sur une représentation implicite du raisonnement de l'autre construite à partir d'un ensemble de concepts tels que les désirs, les croyances ou les plans de l'autre \cite{harbers2012modeling}. En effet, cette théorie se base sur une représentation basique de l'environnement \emph{"folk theory"}. A partir de comportements observés chez l'autre, l'individu fait des inférences théoriques sur ses états mentaux \cite{shanton2010simulation}.
 
 En revanche, les partisans de simulation théorie(ST) suggèrent que les humains ont la capacité de se projeter dans la perspective d'une autre personne \cite{shanton2010simulation}.
-Par conséquent, ils peuvent simuler l'activité mentale d'autrui avec leurs propres capacités de raisonnement pratiques. Cela leurs permet d'imiter l'état mental de leurs partenaire interactionnel \cite{harbers2009modeling}.
-Par ailleurs, cette approche stipule qu'il n'est pas pas nécessaire d'être capable d'introspection complète de l'autre pour simuler ses processus mentaux. En d'autres mots, il n'est pas nécessaire de catégoriser toutes les croyances et les désirs attribués à cette personne pour pouvoir simuler son état mental \cite{harbers2012modeling}.
+Par conséquent, ils peuvent simuler l'activité mentale d'autrui avec leurs propres capacités de raisonnement pratiques. Cela leurs permet d'imiter l'état mental de leurs partenaires interactionnels \cite{harbers2009modeling}.
+Par ailleurs, cette approche stipule qu'il n'est pas nécessaire d'être capable d'introspection complète de l'autre pour simuler ses processus mentaux. En d'autres mots, il n'est pas nécessaire de catégoriser toutes les croyances et les désirs attribués à cette personne pour pouvoir simuler son état mental \cite{harbers2012modeling}.
 
 Enfin, les partisans de la \emph{ST} ajoutent que la simulation est plus efficace que l'acquisition d'une théorie complète. Pour ces raisons, certains partisans de la théorie-théorie admettent qu'au moins une certaine forme de simulation doit avoir lieu lorsque les gens raisonnent au sujet d'autrui, et incorporent des aspects de simulation dans une approche théorie-théorie \cite{harbers2012modeling}.
 
@@ -35,7 +35,7 @@ Dans la suite de ce chapitre, nous présentons notre algorithme pour simuler le 
 
 
 \section{Approche naïve}
-L'agent dispose d'un modèle de négociation dont les stratégies décisionnels reposent sur les comportements de dominance. Ce modèle fut validé durant une interaction agent/agent et agent/humain. Par conséquent, afin de modéliser le fonctionnement de l'état mental de l'interlocuteur, nous proposons une solution basé sur la \emph{ST}, pour laquelle nous adaptons le modèle décisionnel de l'agent pour qu'il raisonne sur les comportements de son interlocuteur. 
+L'agent dispose d'un modèle de négociation dont les stratégies décisionnelles reposent sur les comportements de dominance. Ce modèle fut validé durant une interaction agent/agent et agent/humain. Par conséquent, nous proposons une extension de ce modèle pour représenter le fonctionnement de l'état mental de l'interlocuteur. Cette solution est basée sur la \emph{ST}, pour laquelle nous adaptons le modèle décisionnel de l'agent afin qu'il raisonne sur les stratégies comportementales de son interlocuteur. 
 
 \begin{sidewaysfigure}
 	\centering
@@ -59,14 +59,14 @@ De plus, nous partons du principe que notre système soit capable de générer t
 Sur la base de ces hypothèses, nous présentons l'algorithme général du modèle d'état mental de l'interlocuteur illustré dans la figure \ref{fig:schema-general} comme suit:
 
 \begin{enumerate}
-	\item Construire l'ensemble $H_{dom}$ des la valeur de dominance potentielles de l'interlocuteur : $h\in H_{dom}$ représente la possibilité que la valeur $h$ soit la valeur réelle de dominance $dom_{other}=h$. Nous considérons 9 valeurs de dominance: $H_{dom}=\{0.1, 0.2, \ldots, 0.9\}$.
+	\item Construire l'ensemble $H_{dom}$ des  valeurs de dominance potentielles de l'interlocuteur : $h\in H_{dom}$ représente la possibilité que la valeur $h$ soit la valeur réelle de dominance $dom_{other}=h$. Nous considérons 9 valeurs de dominance: $H_{dom}=\{0.1, 0.2, \ldots, 0.9\}$.
 	
 	\item Pour chaque valeur $h$, construire l'ensemble des préférences possibles $Prec_h$: les éléments $p\in Prec_h$ sont des préférences, c'est à dire des ordres sur l'ensemble des éléments de $\mathcal{C}$.
 	
-	\item Après chaque acte de dialogue reçu $u$ de la part de l'interlocuteur, supprimer tout les éléments de $Prec_h$ qui ne sont pas compatibles avec $u$. Concrètement, si la condition d'applicabilité de $u$ n'est pas satisfaite dans $p \in Prec_h$, alors $p$ doit être retirée des états mentaux candidats.
+	\item Après chaque acte de dialogue reçu $u$ de la part de l'interlocuteur, supprimer tous les éléments de $Prec_h$ qui ne sont pas compatibles avec $u$. Concrètement, si la condition d'applicabilité de $u$ n'est pas satisfaite dans $p \in Prec_h$, alors $p$ doit être retirée des états mentaux candidats.
 	\item Pour chaque état mental potentiel: pour chaque $h$ et pour chaque $p \in  Prec_h$,  calculer l'acte de dialogue obtenu à l'issue du processus décisionnel (suivant l'approche de la \emph{simulation-theory}).s
 	\item Calculer le $score(h)$ comme le nombre d'hypothèses restantes $|Prec_h|$ générant le même acte de dialogue que celui produit par l'interlocuteur $Utterance_{other}$. 
-	\item 	La valeur $h \in H_{dom}$ avec le score le plus élevé est est considéré comme la plus proche de l'état mental de l'interlocuteur.
+	\item 	La valeur $h \in H_{dom}$ avec le score le plus élevé est considéré comme la plus proche de l'état mental de l'interlocuteur.
 	$$dom_{other} = \operatorname*{arg\,max}_{h} (score(h))$$
 \end{enumerate}
 
@@ -79,9 +79,9 @@ Sur la base de ces hypothèses, nous présentons l'algorithme général du modè
 	
 \subsection{Limites de l'approche naïve: Représentation des préférences}
 
-L'approche proposée repose sur la capacité de notre système a générer toutes les états mentaux possibles et à les réviser à chaque tour de parole en temps réel. La génération de toutes les relations de préférences est coûteuse. En effet, afin de générer l'ensemble des préférences pour chaque valeur de dominance possible, nous devons considérer tout les ordres partiels $\prec_i$ pour chaque critère $C_i$. 
+L'approche proposée repose sur la capacité de notre système a générer tous les états mentaux possibles et à les réviser à chaque tour de parole en temps réel. La génération de toutes les relations de préférences est coûteuse. En effet, afin de générer l'ensemble des préférences pour chaque valeur de dominance possible, nous devons considérer tous les ordres partiels $\prec_i$ pour chaque critère $C_i$. 
 
-Nous pouvons calculer la taille de l'ensemble des relations de préférences binaires en fonction du nombre de valeurs défini dans le domaine de négociation. Ainsi, pour un critère $C_i$, l'ensemble ordre partiel possibles est  $(|C_i|+1)! $. Par conséquent, pour un sujet de négociation avec $n$ critères , il y a $\prod_{i=1}^n (|C_i|+1)!$ ensembles de préférences possibles.
+Nous pouvons calculer la taille de l'ensemble des relations de préférences binaires en fonction du nombre de valeurs défini dans le domaine de négociation. Ainsi, pour un critère $C_i$, l'ensemble ordre partiel possibles est  $(|C_i|+1)! $. Par conséquent, pour un sujet de négociation avec $n$ critères, il y a $\prod_{i=1}^n (|C_i|+1)!$ ensembles de préférences possibles.
 
 
 Si nous considérons un exemple raisonnable, avec 5 critères. Pour chaque critère, nous considérons environ 4 à 10 valeurs possibles pour chaque domaine de critère. L'ensemble des préférences possibles pour le modèle de l'interlocuteur est compris entre $ 24.10 ^ 9 $ et $ 10 ^ {38} $ ensembles de préférences possibles.
@@ -94,9 +94,9 @@ Cette limite nous a poussé à analyser plus en détails l'utilisation des préf
 La satisfiabilité est calculée à partir du nombre de prédécesseurs dans l'ordre des relations binaires de préférences, et l'acceptabilité à partir des valeurs de satisfiabilité. Nous proposons, donc, un modèle qui reconstitue le calcul de ses deux valeurs afin de limiter l'explosion combinatoire causé par les relations de préférences. 
 
 \subsubsection{Relation d'ordre sur les préférences}
-	Les relations d'ordre sur les préférences peuvent être totales ou partielles. En effet, en fonction du domaine de négociation, un agent peut avoir un ordre de préférence stricte où chaque valeur est comparable à toutes les autres. Au contraire, il se peut dans un autre contexte, qu'un agent n'est pas un ordre total de préférences, c'est à dire, que l'agent peut n'avoir aucune préférence entre deux valeurs $a$ et $b$ du domaine. Pour autant, nous pouvons générer un ensemble d'ordre totaux à partir d'un ordre partiel. Par exemple, nous pouvons suppose que l'agent $a \prec b$ ou bien au contraire $b \prec a$. Cette supposition n'affecte pas énormément le processus décisionnel de l'agent. 
+	Les relations d'ordre sur les préférences peuvent être totales ou partielles. En effet, en fonction du domaine de négociation, un agent peut avoir un ordre de préférence strict où chaque valeur est comparable à toutes les autres. Au contraire, il se peut dans un autre contexte, qu'un agent n'est pas un ordre total de préférences, c'est à dire, que l'agent peut n'avoir aucune préférence entre deux valeurs $a$ et $b$ du domaine. Pour autant, nous pouvons générer un ensemble d'ordre totaux à partir d'un ordre partiel. Par exemple, nous pouvons suppose que l'agent $a \prec b$ ou bien au contraire $b \prec a$. Cette supposition n'affecte pas énormément le processus décisionnel de l'agent. 
 	
-	Néanmoins, un ordre total de préférence facilite la simulation des comportement d'autrui. En effet, supposons un \textit{ordre total} de préférences $\prec_j$, dans lequel toutes les valeurs sont comparables, donc nous avons $|\prec_j| -1$ relations binaires de préférences. Indépendamment des valeurs elles-mêmes, en connaissant seulement le nombre de valeurs, nous somme capables de calculer la satisfiabilité de chaque valeur à partir de son rang dans l'ordre de préférences.
+	Néanmoins, un ordre total de préférence facilite la simulation des comportement d'autrui. En effet, supposons un \textit{ordre total} de préférences $\prec_j$, dans lequel toutes les valeurs sont comparables, donc nous avons $|\prec_j| -1$ relations binaires de préférences. Indépendamment des valeurs elles-mêmes, en connaissant seulement le nombre de valeurs, nous sommes capables de calculer la satisfiabilité de chaque valeur à partir de son rang dans l'ordre de préférences.
 
 	Par exemple, considérons le critère $cuisine$ composé de quatre valeurs $\{jap,it,fr,ch\}$ sur lequel est défini un ensemble de préférences d'ordre total $\prec_{cuisine} = \{jap$$\prec$ $fr, fr$$\prec$$ ch, ch$$\prec$$it\}$, la satisfiabilité des valeurs est présenté dans la table \ref{tab:ex2_sat}. Considérons maintenant, un second ordre total de préférences $\prec'_{cuisine} = \{it$$\prec$ $jap, jap$$\prec$$ fr, fr$$\prec$$ch\}$, nous remarquons que les valeurs de satisfiabilité sont les mêmes que celles pour le modèle $\prec_{cuisine}$ illustré dans la table \ref{tab:ex2_sat}. 
 
@@ -118,7 +118,7 @@ La satisfiabilité est calculée à partir du nombre de prédécesseurs dans l'o
 		
 	\end{table}
 	
-	Par conséquent, dans un \emph{ordre total} de préférence pour un critère donné, seul le nombre de valeurs est nécessaire pour définir leur rang dans l'ordre de préférences et ainsi calculer leur satisfiabilités comme il est présenté dans la table \ref{tab:poss}. 
+	Par conséquent, dans un \emph{ordre total} de préférence pour un critère donné, seul le nombre de valeurs est nécessaire pour définir leur rang dans l'ordre de préférences et ainsi calculer leurs satisfiabilités comme il est présenté dans la table \ref{tab:poss}. 
 
 
 	\begin{table}[h]
@@ -147,7 +147,7 @@ La satisfiabilité est calculée à partir du nombre de prédécesseurs dans l'o
 	Par conséquent, nous générons uniquement des hypothèses sur les valeurs $v \in S$ qui seront satisfiables pour l'agent. Ainsi,
 	la génération des hypothèses concernant les valeurs de l'ensemble $S$ sont au nombre de  $\binom{n}{s}$ possibilités. 
 	
-	Par exemple, pour le critère $cuisine$ et une valeur de dominance $dom =0.6$, nous avons déduit la taille de l'ensemble $S$ à $s=2$. Donc, la génération des hypothèses sur les valeurs satisfiables possible est au nombres de 6 modèles comme il est présenté dans la table \ref{tab:sat_poss}.
+	Par exemple, pour le critère $cuisine$ et une valeur de dominance $dom =0.6$, nous avons déduit la taille de l'ensemble $S$ à $s=2$. Donc, la génération des hypothèses sur les valeurs satisfiables possible est au nombre de \textit{6 modèles} comme il est présenté dans la table \ref{tab:sat_poss}.
 	\begin{table}[h]
 		\centering
 		\caption{L'ensembles des $S$ possibles pour le critère $cuisine$, avec $dom=0.6$}
@@ -226,7 +226,7 @@ A partir de de l'acte de dialogue reçu par l'interlocuteur $utterance_{other}$,
 	\end{array}\right.
 	\end{equation}
 	
-	Cette fonction est utilisée afin de restreindre le nombre d'hypothèses à partir uniquement du type de l'acte de dialogue. cet ensemble restreint est ensuite utilisé pour prédire la valeur de dominance à partir de la valeurs exprimé dans l'acte de dialogue. Par exemple, à la réception d'un $propose(chinese)$, l'agent utilise la fonction (2.2) pour restreindre les hypothèses à considérer pour prédire le comportement de l'utilisateur qui l'a mené à choisir la valeur $chinese$. Supposons que $\frac{history(Propose)}{history} > 0.5$, alors l'agent simulera l'obtention de la valeur $chinese$ sur les hypothèses $\{h_4 - h_9\}$.
+	Cette fonction est utilisée afin de restreindre le nombre d'hypothèses à partir uniquement du type de l'acte de dialogue. cet ensemble restreint est ensuite utilisé pour prédire la valeur de dominance à partir de la valeur exprimée dans l'acte de dialogue. Par exemple, à la réception d'un $propose(chinese)$, l'agent utilise la fonction (2.2) pour restreindre les hypothèses à considérer pour prédire le comportement de l'utilisateur qui l'a mené à choisir la valeur $chinese$. Supposons que $\frac{history(Propose)}{history} > 0.5$, alors l'agent simulera l'obtention de la valeur $chinese$ sur les hypothèses $\{h_4 - h_9\}$.
 	
 
 \subsection{Partager des préférences}
@@ -328,29 +328,29 @@ score(h_i, t)= \left( \begin{array}{c}  \frac{1}{I_{dom}} \cdot \sum_{S_i \in M_
 L'agent reçoit l'acte de dialogue \emph{Accept(jap)}. Nous prenons comme exemple $h_4$ pour calculer le score d'acceptabilité de $jap$.
 
 Due à la représentation partielle des préférence, l'agent dispose uniquement de connaissance sur $S_i \in M_h(h_i)$.
-Dans le cous où aucune concessions n'est possible ($self_i(t)=h_i =0.6$), l'agent peut déduire l'ensemble de valeurs acceptables car $Ac_i(t) = S_i$.
+Dans le cas où aucune concessions n'est possible ($self_i(t)=h_i =0.6$), l'agent peut déduire l'ensemble de valeurs acceptables car $Ac_i(t) = S_i$.
 
 Néanmoins, si nous supposons que  $self_i(t)=0.3$, le nombre de valeurs acceptables $|Ac_4(t)| = 3$.  Par conséquence, l'agent déduit qu'une nouvelle valeur est acceptable $|M_4(t)|=1$, mais est incapable de déduire de quelle valeur il s'agit. 
 
 Par exemple, la première hypothèse dans l'ensemble $h_4$: $S_i = \{fr, it\}$, l'agent ne peut pas déduire si la valeur qui est devenue acceptable est la valeur $jap$ ou $ch$. La fonction d'acceptabilité avec la prise en compte d'incertitude définit le score d'acceptabilité de $jap$ : 
-$ acc(jap, h4) = C^1_2 = 2$. Ensuite, nous normalisons avec le meilleurs score possible pour $dom$ $I_{0.6}=2$. Donc, le score d'acceptabilité de la valeur $jap$ dans l'hypothèse $h_4$ est $score(h_4,t)= 1/6$
+$ acc(jap, h4) = C^1_2 = 2$. Ensuite, nous normalisons avec le meilleur score possible pour $dom$ $I_{0.6}=2$. Donc, le score d'acceptabilité de la valeur $jap$ dans l'hypothèse $h_4$ est $score(h_4,t)= 1/6$
 
 \subsubsection{Cas de rejet}
-Maintenant, considérons le cas opposé; l'agent reçoit un $Reject(p)$ exprimant donc $p \not \in Ac(t)$. Par conséquent, nous réutilisons le même principe utilisé pour le score d'acceptabilité afin de calculer les possibles ensembles de valeurs non acceptables $ p \in \overline Ac(t)$. Pour chaque hypothèse $h_i \in H_{dom}$ et pour chaque hypothèse $Si \in M_h(h_i)$ de préférences associée à $h_i$, nous considérons l'ensemble des valeurs rejetées durant la négociation $R$ de taille $ |R| = r$. Nous proposons de mettre à jour le score d'acceptabilité attribué à chaque hypothèse $h_i$ en soustrayant l'ensemble des valeurs rejetées.
-Par conséquent, le score de rejet d'une valeur$p$ est mis à jour comme suit:
+Maintenant, considérons le cas opposé; l'agent reçoit un $Reject(p)$ exprimant donc $p \not \in Ac(t)$. Par conséquent, nous réutilisons le même principe utilisé pour le score d'acceptabilité afin de calculer les possibles ensembles de valeurs non acceptables $ p \in \overline Ac(t)$. Pour chaque hypothèse $h_i \in H_{dom}$ et pour chaque hypothèse $Si \in M_h(h_i)$ de préférences associées à $h_i$, nous considérons l'ensemble des valeurs rejetées durant la négociation $R$ de taille $ |R| = r$. Nous proposons de mettre à jour le score d'acceptabilité attribué à chaque hypothèse $h_i$ en soustrayant l'ensemble des valeurs rejetées.
+Par conséquent, le score de rejet d'une valeur $p$ est mis à jour comme suit:
 
 \begin{equation}
 Rej(p, h_i) = C_{|C_i|-(|S_i| + k + r)}^{|M_i(t)| - k}
 \end{equation}
 
 \subsection{Conclusion}
-	Nous avons expliqué dans cette section notre démarche pour implémenter un modèle de la ToM capable de prédire les comportements de dominance d'un interlocuteur. Pour ce faire, nous avons utilisé une approche de \emph{simulation theory} pour laquelle nous avons adapté le modèle décisionnel de l'agent afin qu'il reproduise le comportement d'autrui. Ce modèle de la ToM repose sur l'hypothèse qu'autrui dispose d'un ordre total sur ses préférence nous permettant de générer  seulement une vision partielle des préférences pour reproduire son état mental. 
+	Nous avons expliqué dans cette section notre démarche pour implémenter un modèle de la ToM capable de prédire les comportements de dominance d'un interlocuteur. Pour ce faire, nous avons utilisé une approche de \emph{simulation theory} pour laquelle nous avons adapté le modèle décisionnel de l'agent afin qu'il reproduise le comportement d'autrui. Ce modèle de la ToM repose sur l'hypothèse qu'autrui dispose d'un ordre total sur ses préférences nous permettant de générer  seulement une vision partielle des préférences pour reproduire son état mental. 
 	
-	A cause de ces hypothèse, nous devons mettre en œuvre une évaluation pour vérifier la pertinence des prédictions de l'agent.
+	A cause de ces hypothèses, nous devons mettre en œuvre une évaluation pour vérifier la pertinence des prédictions de l'agent.
 
 \section{Évaluation}
 
-Nous avons proposé un modèle la ToM capable de simuler les comportements d'un interlocuteur dans el but de prédire sa valeur de dominance $dom_{other}$. Afin d'évaluer la pertinence des prédictions de notre modèle de ToM, nous proposons une étude  dans le contexte d'une négociation agent/agent. Nous avons implémenté  deux agents conversationnels avec ce modèle ToM. Ces agents avaient pour but de négocier et d'analyser les comportements de dominance de leur interlocuteur afin de deviner leurs comportements de dominance ($dom_{other}$).
+Nous avons proposé un modèle la ToM capable de simuler les comportements d'un interlocuteur dans le but de prédire sa valeur de dominance $dom_{other}$. Afin d'évaluer la pertinence des prédictions de notre modèle de ToM, nous proposons une étude  dans le contexte d'une négociation agent/agent. Nous avons implémenté  deux agents conversationnels avec ce modèle ToM. Ces agents avaient pour but de négocier et d'analyser les comportements de dominance de leur interlocuteur afin de deviner leurs comportements de dominance ($dom_{other}$).
 
 Le cadre d'une négociation agent/agent nous permet d'abord de varier les états mentaux des agents et les faire négocier autant de fois possibles.
 De plus, les données initiales des agents nous permettent de vérifier la pertinence des valeurs de dominance déduites par les agents avec la valeur de dominance réelle de l'agent interlocuteur. 
@@ -428,7 +428,7 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 	Premièrement, nous avons calculé l'\emph {erreur quadratique moyenne} qui indique l'écart-type des différences entre les valeurs de dominance prédites par l'agent et la valeur réelle de l'interlocuteur.
 	Pour l'ensemble des $1080$ dialogues, un écart de $rmse = 0,12$ a été observée entre la valeur de dominance estimée et la valeur de dominance réelle. Rappelons, que les valeurs de dominance $dom \in [0,1]$, donc un écart de $0,12$ est considéré comme une légère déviation et prouve la pertinence des prédictions de l'agent. 
 	
-	 De plus, afin d'analyser les résultats de manière plus générale, nous avons calculé le \emph {variation résiduelle} qui calcule la précision de la variable dépendante mesurée. Nous avons calculé l'écart de prédiction entre la valeur prédite $ dom_{other} $ et la valeur réelle de dominance $dom$.
+	 De plus, afin d'analyser les résultats de manière plus générale, nous avons calculé la \emph {variation résiduelle} qui calcule la précision de la variable dépendante mesurée. Nous avons calculé l'écart de prédiction entre la valeur prédite $ dom_{other} $ et la valeur réelle de dominance $dom$.
 	Nous observons des déviations de l'ordre $ rv = 0.015 $.
 	
 	 Sur la base de cette analyse statistique, notre modèle fait des prédictions précises sur les comportements de dominance de son interlocuteur.
@@ -452,7 +452,7 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 	Par exemple, l'agent$_A$ a prédit que l'agent$_B$ était dominant, tandis que l'agent$_B$ a été initialisé pour suivre un comportement soumis $dom_B \leq 0.5$.  Pour chaque dialogue, nous avons comparé la prédiction de l'agent à la valeur réelle de dominance. Sur les $1080$ dialogues, seules $ 30 $ prédictions étaient incorrectes, ce qui signifie que $ 2,6 \% $ de prédictions étaient fausses. 
 	Ce résultat confirme la fiabilité de notre algorithme dans le contexte d'une négociation agent/agent.
 	
-	Enfin, pour tout les dialogues dans lesquels l'agent a pu trouver une bonne prédiction (au total $ 1050 $), nous avons analysé la rapidité de convergence de notre algorithme. Les résultats sont présentés dans la table \ref {tab:conv}. En effet, pour chaque dialogue, nous avons calculé le nombre d'itérations (\emph{i.e.} tours de paroles) nécessaires pour trouver une bonne prédiction et la maintenir. 
+	Enfin, pour tous les dialogues dans lesquels l'agent a pu trouver une bonne prédiction (au total $ 1050 $), nous avons analysé la rapidité de convergence de notre algorithme. Les résultats sont présentés dans la table \ref {tab:conv}. En effet, pour chaque dialogue, nous avons calculé le nombre d'itérations (\emph{i.e.} tours de paroles) nécessaires pour trouver une bonne prédiction et la maintenir. 
 	
 	
 	\begin{table}[h]
@@ -499,7 +499,7 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 	%	\end{table}
 	
 	\subsubsection{Rapidité de raisonnement}
-	Nous évaluons le temps d'exécution de l'algorithme afin d'étudier l'évolution du modèle de la théorie de l'esprit en fonction du complexité du domaine de négociation.
+	Nous évaluons le temps d'exécution de l'algorithme afin d'étudier l'évolution du modèle de la théorie de l'esprit en fonction de la complexité du domaine de négociation.
 	
 	Pour chaque dialogue, nous avons calculé le temps d'exécution moyen que met l'algorithme à faire une prédiction et ce à chaque tour de négociation. 
 	Nous cherchons à étudier l'effet de la taille des hypothèses sur la rapidité de la prédiction à chaque tour. Les résultats sont présentés dans la figure \ref{fig:time}. En comparant  le temps d'exécution obtenu pour les domaines \emph{grand} et \emph{moyen}, nous observons que l'algorithme a pris en moyenne $12$ millisecondes de plus à chaque tour. Cependant, cette différence n'est pas significative puisque l'exécution totale reste très rapide.
@@ -528,6 +528,6 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 	
 	Le modèle proposé repose sur une représentation partielle de l'état mental de l'autre qui nous a poussé à adapter le processus décisionnel pour gérer les cas d'incertitudes. 
 	
-	Ce modèle a ensuite fait l'objet d'une évaluation agent/agent pour analyser la pertinence des prédictions de comportements de dominance. Les résultats obtenus montrent la justesses des prédictions fournis par le modèle de la ToM. Ces résultats sont encourageants, toutefois, une évaluation dans le contexte agent/humain où les comportements de l'utilisateur sont imprévisibles reste à faire. Le chapitre suivant s'attache donc à proposer une étude pour évaluer notre modèle de négociation collaborative dans le cadre une interaction agent/humain.
+	Ce modèle a ensuite fait l'objet d'une évaluation agent/agent pour analyser la pertinence des prédictions de comportements de dominance. Les résultats obtenus montrent la justesse des prédictions fournis par le modèle de la ToM. Ces résultats sont encourageants, toutefois, une évaluation dans le contexte agent/humain où les comportements de l'utilisateur sont imprévisibles reste à faire. Le chapitre suivant s'attache donc à proposer une étude pour évaluer notre modèle de négociation collaborative dans le cadre une interaction agent/humain.
 	
 	
