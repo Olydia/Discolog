@@ -453,22 +453,20 @@ Un exemple pour gérer les valeurs du domaine de négociation est présenté dan
 \subsection{Mise à jour des connaissances durant la communication}
 
 Le choix d'un type d'acte de dialogue par l'agent est le résultat d'un processus décisionnel que nous détaillerons dans le chapitre \ref{chap:dec}. 
-Afin de prendre des décisions pertinentes, l'agent garde en mémoire l'historique des échanges d'informations formulées au cours de la négociation.  En effet, après chaque acte de dialogue échangé, l'agent met à jour ses connaissances sur le contexte courent de la négociation, les informations échangées ainsi que ses connaissances sur les préférences de son partenaire de négociation.  
+Afin de prendre des décisions pertinentes, l'agent garde en mémoire l'historique des échanges d'informations formulées au cours de la négociation.  En effet, après chaque acte de dialogue échangé, l'agent met à jour ses connaissances sur le contexte courant de la négociation, les informations échangées ainsi que ses connaissances sur les préférences de son partenaire de négociation.  
 
 \subsubsection{Historique de la négociation}
-Premièrement, l'agent garde en mémoire les informations qu'il a communiqué sur ses préférences.			
+Premièrement, l'agent garde en mémoire les informations communiquées sur ses préférences.
+
 Pour chaque critère $i\in\mathcal{C}$, l'agent construit un ensemble $S_i \subseteq C_i$ des préférences sur les valeurs de ce critère qu'il a déjà communiqué. Cela prévient la répétition d'informations échangées précédemment. 
 
 Deuxièmement, l'agent maintient aussi les propositions énoncées au cours de la négociation. Soient $P_i \subseteq C_i$, $T_i\subseteq C_i$ et $R_i\subseteq C_i$ les ensembles de toutes les valeurs proposées, acceptées et rejetées pour chaque type de critère. 
 De même, nous considérons $P\subseteq \mathcal{O}$, $T\subseteq \mathcal{O}$ et $R\subseteq \mathcal{O}$ les ensembles de toutes les options proposées, acceptées et rejetées au cours de la négociation.
 
-
-Enfin, l'agent garde en mémoire les préférences communiquées par son interlocuteur. Nous notons les ensembles $A_i\subseteq C_i$ et $U_i\subseteq C_i$, respectivement l'ensemble des valeurs que l'interlocuteur a communiqué comme appréciées (\textit{I like $\ldots$}) et non appréciées  (\textit{I don't like $\ldots$}) à travers l'acte de dialogue \textit{StatePreference}.
-
-
+Enfin, l'agent garde en mémoire les préférences communiquées par son interlocuteur. Nous notons les ensembles $A_i\subseteq C_i$ et $U_i\subseteq C_i$, respectivement l'ensemble des valeurs que l'interlocuteur a communiquées comme appréciées (\textit{I like $\ldots$}) et non appréciées  (\textit{I don't like $\ldots$}) à travers l'acte de dialogue \textit{StatePreference}.
 
 \subsubsection{Préférences de  l'interlocuteur}
-Dans le contexte d'une négociation collaborative, l'agent prend en compte les préférences de son interlocuteur pour prendre des décisions. Pour cette raison, l'agent a besoin de collecter des informations sur les préférences de son interlocuteur. En effet, l'agent utilise les ensembles $A_i$ et $U_i$ qui représentent les préférences de l'interlocuteurs collectés lors des interactions, pour calculer une valeur de \emph{satisfaction}  qu'a l'interlocuteur pour toute valeur $v\in C_i$: 
+Dans le contexte d'une négociation collaborative, l'agent prend en compte les préférences de son interlocuteur pour prendre des décisions. Pour cette raison, l'agent a besoin de collecter des informations sur les préférences de son interlocuteur. En effet, l'agent utilise les ensembles $A_i$ et $U_i$ qui représentent les préférences de l'interlocuteur collectées lors des interactions, pour calculer une valeur de \emph{satisfaction}  qu'a l'interlocuteur pour toute valeur $v\in C_i$:
 
 \begin{equation}
 sat_{other}(v)= \left\{\begin{array}{ll}
@@ -483,11 +481,11 @@ Notons que l'agent possède une connaissance partielle des préférences de son 
 \section{Conclusion}
 Ce chapitre a présenté les différents éléments de notre modèle de négociation collaborative essentiels pour étudier l'impact de la dominance durant la négociation. Nous avons fait le choix de construire un modèle de négociation générique capable de gérer différents sujets de conversation. De plus, nous avions l'objectif de définir un domaine qui nous permettrait de refléter différents comportements durant la négociation. 
 
-Premièrement, nous avons appuyé notre recherche par une collecte de données où nous avons enregistré des négociations humains/humain qui nous a révélé nombres de comportements qui apparaissent au cours de la négociation. Ces résultats ont été discutés et nous ont permis de guider notre recherche. Entre autres, les résultats obtenus nous ont soutenu dans notre choix de modéliser une négociation  multicritères.
+Premièrement, nous avons appuyé notre recherche par une collecte de données où nous avons enregistré des négociations humains/humain qui nous ont révélé nombre de comportements qui apparaissent au cours de la négociation. Ces résultats ont été discutés et nous ont permis de guider notre recherche. Entre autres, les résultats obtenus nous ont soutenus dans notre choix de modéliser une négociation  multicritères.
 Nous avons donc présenté le domaine de négociation multicritère ainsi que la représentation classique de préférences.
 
-Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémenté dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposées permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. Ces actes ont pour fonction primaire d'interagir uniquement sur la tâche de la négociation, mais ne dote pas l'agent de nuances d'expressivité dialogique qu'on retrouve habituellement dans les interactions humaines.
-Par exemple, nous avons codé le dialogue \ref{fig:DSP} à l'aide de nos actes de dialogues présentés dans la figure \ref{fig:natUtt}. Ces derniers sont capables de reproduire les tours de paroles qui impliquent une négociation comme dans le \emph{DS5}. Cependant, ils ne peuvent pas prendre en compte les informations externes à la négociation. Par exemple, dans le \emph{DS2}, les actes de dialogue ne peuvent pas capturer les informations autours de la négociation qui n'engagent pas un échange d'informations directe sur les préférences.
+Nous avons ensuite considéré les modèles de communication existants et nous avons choisi de nous appuyer sur une approche à base d'actes de dialogues implémentés dans DISCO \cite{rich09}. Nous avons conçu notre propre modèle adapté à une négociation collaborative. En effet, les actes proposés permettent à l'agent d'une part d'échanger des informations sur les préférences et d'autre part de négocier. Ces actes ont pour fonction primaire d'interagir uniquement sur la tâche de la négociation, mais ne dotent pas l'agent de nuances d'expressivité dialogique qu'on retrouve habituellement dans les interactions humaines.
+Par exemple, nous avons codé le dialogue \ref{fig:DSP} à l'aide de nos actes de dialogues présentés dans la figure \ref{fig:natUtt}. Ces derniers sont capables de reproduire les tours de paroles qui impliquent une négociation comme dans le \emph{DS5}. Cependant, ils ne peuvent pas prendre en compte les informations externes à la négociation. Par exemple, dans le \emph{DS2}, les actes de dialogue ne peuvent pas capturer les informations autour de la négociation qui n'engagent pas un échange d'informations direct sur les préférences.
 
 \begin{figure}[t]
 	\includegraphics[width=\linewidth, height=0.8\textheight]{Figures/natToUtt.pdf}
