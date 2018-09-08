@@ -11,42 +11,50 @@
 	\endgroup
 	%Après avoir défini la relation interpersonnelle de dominance dans le chapitre \ref{chap:etat}, ainsi que sa manifestation dans l'interaction tant sur l'aspect verbal que non verbal, nous avons ensuite détaillé son impact sur les stratégies de négociations. 
 	
-	Ce chapitre présente le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de dominance inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres défini dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prends en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Enfin, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
+	Ce chapitre présente le modèle de décision d'un agent négociateur qui lui permet d'adapter sa stratégie de négociation à la relation de dominance qu'il vise à instaurer avec son interlocuteur. Dans la section 1, nous définissons les principes de décisions basés sur les comportements de dominance inspirés des travaux en psychologie sociale. Dans la section 2, nous présentons un premier modèle décisionnel utilisant des règles de décisions.  Pour ce modèle, nous nous sommes basés sur la structure d'arbres définis dans \emph{DISCO} \cite{rich09} et nous discuterons ses limites. Ensuite dans la section 3, nous présenterons notre modèle décisionnel final qui prend en compte les comportements de dominance de l'agent associés à ses préférences pour construire sa stratégie de négociation. Enfin, nous présenterons deux études visant à valider le modèle décisionnel dans les deux cas d'interaction agent/agent et agent/humain.
+	
 	
 	\section{Comportements de dominance et stratégies de négociation}
 	\label{chap:domer}
 	Comme nous l'avons présenté dans le chapitre \ref{chap:etat}, nous nous sommes essentiellement basés sur les travaux en psychologie sociale pour la définition de la dominance. 
 	La relation interpersonnelle de dominance est présentée comme la capacité d'exprimer des comportements verbaux et non verbaux par lesquels l'influence est atteinte \cite{burgoon2006nonverbal}. Prenant cette définition comme point de départ, nous nous sommes ensuite intéressés à la manifestation des comportements de dominance durant le processus de négociation et comment ces comportements influençaient les stratégies de négociations dans le contexte d'interactions humain/humain. 
 	
-	Dans ce qui suit, nous présentons \emph{trois principes} de comportements extraits des travaux en psychologie sociale qui ont étudiaient l'impact des comportements de dominance sur les négociateurs et leur stratégies.
+	Dans ce qui suit, nous présentons \emph{trois principes} de comportements extraits des travaux en psychologie sociale qui ont étudiaient l'impact des comportements de dominance sur les négociateurs et leurs stratégies.
 	
 	\begin{enumerate}
-		\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs dominants affichent un niveau d'exigence plus important comparés aux négociateurs soumis. Par ailleurs, les exigences des négociateurs soumis diminuent avec le temps. Ceci se traduit par des concessions plus importantes comparés aux négociateurs plus dominants. \cite{de1995impact}
+		\item \textbf{Niveau d'exigence et de concessions:} Les négociateurs dominants affichent un niveau d'exigence plus important comparé aux négociateurs soumis. Par ailleurs, les exigences des négociateurs soumis diminuent avec le temps. Ceci se traduit par des concessions plus importantes comparées aux négociateurs plus dominants. \cite{de1995impact}
 		
 		\item \textbf{Soi \emph{vs} autrui:} Les négociateurs soumis prennent en compte les préférences de leur interlocuteur dans la négociation, tandis que les négociateurs  dominants sont centrés sur eux-mêmes et s'intéressent uniquement à la satisfaction leurs propres préférences. \cite{fiske1993controlling,de1995impact}
 		
 		\item \textbf{Contrôle du flux de la négociation:}
-		Les négociateurs dominant ont tendance à faire le premier pas et à prendre les devants dans la négociation \cite {magee2007power}. Ils sont centrés sur l'avancement du processus de prise de décision, en prenant des décisions rapides \cite{zablotskaya2012relating}.
-		A l'opposé, les négociateurs moins dominants visent à construire un modèle précis des préférences du partenaire de négociation. 
-		Par conséquent,  ils posent plus de questions afin de collecter les informations nécessaires qui leurs permettent de prendre la décision la plus équitable (\emph{ex.}  faire des propositions)~\cite{de2004influence}. 
+		
+		Les négociateurs dominants ont tendance à faire le premier pas et à prendre les devants dans la négociation \cite {magee2007power}. Ils sont centrés sur l'avancement du processus de prise de décision, en prenant des décisions rapides \cite{zablotskaya2012relating}.
+		
+		À l'opposé, les négociateurs moins dominants visent à construire un modèle précis des préférences du partenaire de négociation. 
+		
+		Par conséquent,  ils posent plus de questions afin de collecter les informations nécessaires qui leurs permettent de prendre la décision la plus équitable (\emph{ex.}  faire des propositions)~\cite{de2004influence}.
+
 		
 	\end{enumerate}
 	
 	
-	Notre but est de construire un modèle de décision capable d'illustrer ces comportements de dominance et par conséquent, adapter la stratégie de négociation en fonction de la dominance de l'agent.
-	
-	Dans ce qui suit nous présenterons le modèle décision de l'agent qui prend en compte la relation de dominance.
-	
-	
-	\section{Règles de décision}
-	Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est géré par le logiciel \emph{Disco} \cite{rich09}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orienté tâches pour lequel il utilise le formalisme d'arbre hiérarchique pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définit avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
-	
-	De plus, \emph{Disco} a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. 
-	
-	Nous avons complété ce système avec les actes de dialogues présenté dans la section \ref{sec:communication} afin qu'il puisse supporter la négociation sur les préférences.
-	
-	Pour chaque acte de dialogue que l'agent reçoit, nous modélisons des règles de décisions sous forme d'arbre de décisions pour permettre à l'agent de décider du prochain acte de dialogue à énoncer.
-	Chaque branchement dans l'arbre dispose d'une condition d'applicabilité. Cette dernière prend en compte le contexte courant de la négociation. De plus, elle prend en compte la position de l'agent dans le spectre de dominance pour exprimer des stratégies de négociation compatibles avec sa relation de dominance.
+Notre but est de construire un modèle de décision capable d'illustrer ces comportements de dominance et par conséquent, adapter la stratégie de négociation en fonction de la dominance de l'agent.
+
+Dans ce qui suit nous présenterons le modèle décision de l'agent qui prend en compte la relation de dominance.
+
+\section{Règles de décision}
+
+Dans le cadre de cette thèse, nous avons construit un premier modèle de décisions composé de règles de décision modélisées sous forme d'arbres de dialogues. L'implémentation de notre système de dialogue est gérée par le logiciel \emph{Disco} \cite{rich09}. Disco est une implémentation d'un ``collaborative discourse manager'' inspiré d'une théorie de dialogue collaboratif comme \emph{Collagen} \cite{rich1997collagen}. Disco est un système qui permet la génération de dialogues orientés tâches pour lequel il utilise le formalisme d'arbre hiérarchique pour la gestion des tâches. Il est implémenté avec le standard ANSI/CEA-2018 : chaque tâche est définie avec des préconditions, des effets et des postconditions. Les tâches sont regroupées par \emph{recettes} munies de conditions d'applicabilité.
+
+De plus, \emph{Disco} a été étendu avec un module génération d'arbres de dialogues afin de communiquer et collaborer avec l'utilisateur pour la réalisation des tâches. Ce module est nommé Disco for Games (D4g) et permet de définir des sémantiques d'actes de dialogue. 
+
+Nous avons complété ce système avec les actes de dialogues présenté dans la section \ref{sec:communication} afin qu'il puisse supporter la négociation sur les préférences.
+
+Pour chaque acte de dialogue que l'agent reçoit, nous modélisons des règles de décisions sous forme d'arbre de décisions pour permettre à l'agent de décider du prochain acte de dialogue à énoncer.
+
+Chaque branchement dans l'arbre dispose d'une condition d'applicabilité. Cette dernière prend en compte le contexte courant de la négociation. De plus, elle prend en compte la position de l'agent dans le spectre de dominance pour exprimer des stratégies de négociation compatibles avec sa relation de dominance.
+
+
 	%Par exemple, suite à un acte \emph{Propose} énoncé par l'utilisateur, l'agent peut répondre par un \emph{Accept}, un \emph{Reject} ou un autre \emph{Propose}. 
 %	Par exemple:
 %	\begin{verbatim}
