@@ -9,8 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[a4paper]{article}
-\usepackage[T1]{fontenc}
-\usepackage[bookmarksnumbered=true]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
@@ -33,7 +31,7 @@
 \setlength{\columnseprule}{0pt}
 \setlength\columnsep{10pt}
 \usepackage[french]{babel}
-\usepackage[a-1b]{pdfx}
+
 \label{form}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,9 +56,9 @@
 %%% Établissement / Institution
 %%% Si la thèse a été produite dans le cadre d'une co-tutelle, commenter la partie "Pas de co-tutelle" et décommenter la partie "Co-tutelle" / If the thesis has been prepared in guardianship, comment the part "Pas de co-tutelle" and uncomment the part "Co-tutelle"
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%% Pas de co-tutelle %%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Pas de co-tutelle %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\newcommand{\logoEtt}{blank}																%% NE PAS MODIFIER / DO NOT MODIFY
 %\newcommand{\vpostt}{0.1} 																	%% NE PAS MODIFIER / DO NOT MODIFY
@@ -69,9 +67,9 @@
 %\newcommand{\vpos}{0.1}																		%% À modifier au besoin pour aligner le logo verticalement / If needed, modify to align logo vertilcally
 %\newcommand{\hpos}{11}																		%% À modifier au besoin pour aligner le logo horizontalement / If needed, modify to align logo horizontaly
 
-		%%%%%%%%%%%%%%%%%%
-		%%% Co-tutelle %%%
-		%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%% Co-tutelle %%%
+%%%%%%%%%%%%%%%%%%
 
 \newcommand{\logoEt}{etab} 																%% Logo de l'université partenaire. Placer le fichier .png dans le répertoire '/media/etab' et indiquer le nom du fichier sans l'extension / Logo of partner university. Place the .png file in the directory '/media/etab' and point the file name without the extension
 \newcommand{\vpos}{0.1}																	%% À modifier au besoin pour aligner les logos verticalement / If needed, modify to align logos vertilcally
@@ -143,89 +141,89 @@
 }
 
 \begin{document}
-
-
-\thispagestyle{empty}
-
-%\color{bordeau} \hfill \vfill \tiny \ecodocnum
-\begin{textblock}{5}(0,0)
-	\textblockcolour{bordeau}
-	%\vspace{10mm}
-	\includegraphics [scale=1]{media/bande.png}
-	\vspace{300mm}
-\end{textblock}
-
-
-
-\begin{textblock}{1}(0.3,3)
-	\Large{\rotatebox{90}{\color{white}{NNT : \NNT}}}
-\end{textblock}
-
-
-                            
-
-\begin{textblock}{1}(\hpostt,\vpostt)
-	\textblockcolour{white}
-	\includegraphics[scale=1]{media/etab/blank.png}
-\end{textblock}
-
-\begin{textblock}{1}(\hpos,\vpos)
-	\textblockcolour{white}
+	
+	
+	\thispagestyle{empty}
+	
+	%\color{bordeau} \hfill \vfill \tiny \ecodocnum
+	\begin{textblock}{5}(0,0)
+		\textblockcolour{bordeau}
+		%\vspace{10mm}
+		\includegraphics [scale=1]{media/bande.png}
+		\vspace{300mm}
+	\end{textblock}
+	
+	
+	
+	\begin{textblock}{1}(0.3,3)
+		\Large{\rotatebox{90}{\color{white}{NNT : \NNT}}}
+	\end{textblock}
+	
+	
+	
+	
+	\begin{textblock}{1}(\hpostt,\vpostt)
+		\textblockcolour{white}
+		\includegraphics[scale=1]{media/etab/blank.png}
+	\end{textblock}
+	
+	\begin{textblock}{1}(\hpos,\vpos)
+		\textblockcolour{white}
 		\includegraphics[scale=1]{media/etab/UPSUD.png}	
-\end{textblock}
-
-%\vspace{6cm}
-%% Texte
-\begin{textblock}{10.3}(5.4,3)
-	\textblockcolour{white}
+	\end{textblock}
 	
-	\color{bordeau}
-	%\begin{center}  
-	\begin{flushright}
-		\huge{\PhDTitle} \bigskip %% Titre de la thèse 
-		\vfill
-		\color{black} %% Couleur noire du reste du texte
-		\normalsize {Thèse de doctorat de l'Université Paris-Saclay} \\
-		préparée à \PhDworkingplace \\ \bigskip
-		\vfill
-		Ecole doctorale n$^{\circ}$\ecodocnum ~\ecodoctitle ~(\ecodocacro)  \\
+	%\vspace{6cm}
+	%% Texte
+	\begin{textblock}{10.3}(5.4,3)
+		\textblockcolour{white}
 		
-		\small{Spécialité de doctorat: \PhDspeciality} \bigskip %% Spécialité 
-		\vfill  
-		\footnotesize{Thèse présentée et soutenue à \defenseplace, le \defensedate, par} \bigskip
-		\vfill
-		\Large{\textbf{\textsc{\PhDname}}} %% Nom du docteur
-		\vfill
-		%\bigskip
-	\end{flushright}
-	
-	%\end{center}
-	\color{black}
-	%% Jury
-	\begin{flushleft}
+		\color{bordeau}
+		%\begin{center}  
+		\begin{flushright}
+			\huge{\PhDTitle} \bigskip %% Titre de la thèse 
+			\vfill
+			\color{black} %% Couleur noire du reste du texte
+			\normalsize {Thèse de doctorat de l'Université Paris-Saclay} \\
+			préparée à \PhDworkingplace \\ \bigskip
+			\vfill
+			Ecole doctorale n$^{\circ}$\ecodocnum ~\ecodoctitle ~(\ecodocacro)  \\
+			
+			\small{Spécialité de doctorat: \PhDspeciality} \bigskip %% Spécialité 
+			\vfill  
+			\footnotesize{Thèse présentée et soutenue à \defenseplace, le \defensedate, par} \bigskip
+			\vfill
+			\Large{\textbf{\textsc{\PhDname}}} %% Nom du docteur
+			\vfill
+			%\bigskip
+		\end{flushright}
 		
-		\small Composition du Jury :
-	\end{flushleft}
-	%% Members of the jury
-
-	\small
-	%\begin{center}
-	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}lm{#1}}
+		%\end{center}
+		\color{black}
+		%% Jury
+		\begin{flushleft}
+			
+			\small Composition du Jury :
+		\end{flushleft}
+		%% Members of the jury
+		
+		\small
+		%\begin{center}
+		\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+		\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}lm{#1}}
+		
+		\label{jury} 																				%% Mettre à jour si des membres ont été ajoutés ou retirés / Update if members have been added or removed
+		\begin{flushleft}
+			\begin{tabular}{@{} L{10cm} R{4cm}}
+				\jurynameA  \\ \juryadressA & \juryroleA \\
+				\jurynameB  \\ \juryadressB & \juryroleB \\
+				\jurynameE  \\ \juryadressE & \juryroleE \\
+				\jurynameD  \\ \juryadressD & \juryroleD \\
+				\jurynameF  \\ \juryadressF & \juryroleF \\
+				%	\jurynameG  \\ \juryadressG & \juryroleG \\
+				\jurynameH  \\ \juryadressH & \juryroleH \\
+			\end{tabular} 
+		\end{flushleft}   
+		%\end{center}
+	\end{textblock}
 	
-	\label{jury} 																				%% Mettre à jour si des membres ont été ajoutés ou retirés / Update if members have been added or removed
-	\begin{flushleft}
-	\begin{tabular}{@{} L{10cm} R{4cm}}
-		\jurynameA  \\ \juryadressA & \juryroleA \\
-		\jurynameB  \\ \juryadressB & \juryroleB \\
-		\jurynameE  \\ \juryadressE & \juryroleE \\
-		\jurynameD  \\ \juryadressD & \juryroleD \\
-		\jurynameF  \\ \juryadressF & \juryroleF \\
-	%	\jurynameG  \\ \juryadressG & \juryroleG \\
-		\jurynameH  \\ \juryadressH & \juryroleH \\
-	\end{tabular} 
-	\end{flushleft}   
-	%\end{center}
-\end{textblock}
-
 \end{document}
