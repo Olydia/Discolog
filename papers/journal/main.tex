@@ -75,7 +75,7 @@
  
 %----------------------------------------------------------------------------------------
 \section{Dominance and negotiation}	
-	
+	\label{sec:Dom}
 	Negotiation has been defined as an interpersonal decision-making process in which two or more people agree on how to allocate scarce resources \emph{(\cite {thompson2000mind})}.  Social psychology literature has shown the importance of dominance in the negotiation process \emph{(\cite{de1995impact,van2006power,fiske1993controlling})}. For this reason, several works have been focused on investigating the impact of dominance in negotiation in various disciplines, including communication, economics, social psychology and sociology.
 	
 	\subsection{What are the impact of dominance behaviors in negotiation ?}
@@ -289,6 +289,7 @@
 		
 		
 		\subsection{Protocol}
+		\label{sec:proto}
 		After explaining the purpose of the study, which was to evaluate the behavior of virtual agents, the experimenter started the study process. 
 		First, he explained that the purpose of the interaction was to negotiate with each agent to find a restaurant where to have dinner. He gave them instructions to project themselves into a real situation in addition to emphasizing the "collaborative" aspect of negotiation as presented in the figure %\ref{fig:instruction}.
 		[Ajouter figure en En]
@@ -412,9 +413,9 @@
 			\begin{figure}[!tb]
 				\centering
 				% this is wide enough
-				\subfloat[Perception score of dominance behaviors]{
+				\subfloat[Score of dominance behaviors]{
 					\centering
-					\includegraphics[clip=false]{Figures/chap7/simPow.PNG}
+					\includegraphics[clip=false]{figs/simPow.PNG}
 				}
 				
 				%\vspace{1em}
@@ -436,7 +437,7 @@
 						
 					\end{tabular}
 				}
-				\caption{Perception of behaviors of dominance  with the similar agent Arthur}
+				\caption{Perception of behaviors of dominance with the similar agent Arthur}
 				\label{fig:sim}
 			\end{figure}
 			
@@ -447,14 +448,14 @@
 			\begin{figure}[!tb]
 				\centering
 				% this is wide enough
-				\subfloat[Score de perception des comportements de dominance]{
+				\subfloat[Score of dominance behaviors]{
 					
-					\includegraphics[clip=false]{Figures/chap7/neutrePow.PNG}
+					\includegraphics[clip=false]{figs/neutrePow.PNG}
 				}
 				
 				%\vspace{1em}
 				% this has a too narrow subfigure
-				\subfloat[Moyenne et écart type dans les comportements de dominance]{
+				\subfloat[Mean and standard deviation for the behavior of dominance perceived]{
 					
 					\begin{tabular}{l c c c c c c}
 						\hline\hline
@@ -473,13 +474,321 @@
 					\end{tabular}
 					
 				}
-				\caption{Perception des comportements de dominance avec l'agent neutre}
+				\caption{Behviors of the neutral agent Kevin}
 				\label{fig:neutre}
 			\end{figure}
 		
+	\subsection{Common gain}
+		We analysed the impact of the dominance on the joint gain during the various negotiations. First, we asked the participants their degree of satisfaction regarding the chosen the chosen restaurant. We completed this analysis with an objective study in which we calculated the satisfaction score of the chosen restaurant based on the preferences of the participant and the agent. All the results are presented in Appendix \ref{chap:Appendix}.
+		
+			\begin{figure}[h]
+			
+			\centering
+			\includegraphics[width= 0.65 \linewidth,clip=false]{figs/percpGain.PNG}
+			\caption{Perception of the joint gain for all the agents \textit{No significant difference was observed}}
+			\label{fig:gainCom}
+		\end{figure}
+	
+	\subsubsection{Perception of common gain}
+	Participants were asked to rate their satisfaction with the restaurant they chose with the agent.
+	
+	The results are presented in figure \ref{fig:gainCom}. First, descriptive statistics show that, on average, participants were satisfied with the restaurant chosen for all negotiations. The scores are above average for all agents (values range from \emph{3.83} to \emph{4.5} on a scale of \emph{5}). 
+	
+	In addition, we analyzed whether participants were significantly more satisfied with the restaurant chosen during the negotiation with Agent Bob than with the other agents. We performed a test of Wilcoxon's signed ranks because the normality of the data could not be assured. The analysis showed no significant difference in the perception of gain and fairness in the choice of restaurant between the different agents. 
+	
+	\subsubsection{Analysis of the common gain achieved} 
+	Regarding the objective analysis of the common gain achieved at the end of each negotiation, we used the preferences of the participants and the agents with whom they had interacted as presented in the section \ref{sec:proto}. 
+	Based on each negotiator preferences, we calculated their satisfaction of the restaurant chosen. We then calculated the common gain achieved at each negotiation as \textbf{the average of the satisfaction values} of the two negotiators. The results obtained for each agent are presented in Figure \ref{fig:gain}. 
+	
+				\begin{figure}[h]
+			
+			\subfloat[Score of the common gain achieved for all agents \textit{Populations grouped with $(*)$ are significantly different}]{
+				\includegraphics[clip=false]{figs/gainCommun.PNG}}
+			
+			\subfloat []{
+				\centering
+				\begin{tabular}{l c c c}
+					\hline
+					\hline
+					\textbf{ }& \textbf{Comp.} & \textbf{Similar} & \textbf{Neutral} \\ 
+					\hline
+					\newline Mean & 0.62& 0.5 & 0.53 \\
+					\newline SD & 0.06 & 0.08 & 0.07 \\
+					\hline
+					\hline
+				\end{tabular}
+			}
+			\caption{Common gain achieved during the negotiationn}
+			\label{fig:gain}
+		\end{figure}
+		
+	Satisfaction values are above average for all agents. It should be recalled that the satisfaction values are normalized within a range of $[0, 1] $. We examined whether negotiators had achieved a greater joint gain by negotiating with the complementary agent, compared to other agents. Because the  distribution of data is normal, we applied a T-test to compare each pair of agents. The results obtained are presented in figure \ref{fig:gain}. The analysis of variance showed a significant interaction between the dominance relationship and the common gain achieved during the negotiations. Indeed, participants achieved a significantly higher common gain by negotiating with the complementary agent than with the similar agent (\emph{t= 8.9, p < 0.01}). The same difference was perceived when compared with the neutral agent (\emph{t= 6.4, p < 0.01}).
+	
+	In addition, participants achieved a better common gain with the neutral agent than with the similar agent (\emph{t= 2.3, p = 0.02}).
+	
+	\subsection{Number of negotiation turns}
+	
+	For each negotiation, we collected the number of utterances stated. Our purpose is to analyze the impact of the dominance on the number of utterances stated before reaching a compromise. 
+	
+	The descriptive statistics are presented in Figure \ref{fig:tour}. A parametric test was used because the data have a normal distribution. The results show that the negotiation converged significantly faster when participants negotiated with the complementary agent compared to the similar agent (\emph{t= 2.7, p = 0.003}). Similarly, negotiation converges more quickly with the neutral agent than with the similar agent (\emph{t= 4.43, p < 0.01}).  The results are presented in Appendix \ref{chap:Appendix}.
+	
+	However, no significant difference was perceived between the complementary agent and the neutral agent (\emph{t=1.3, p = 0.09}).
+
+		
+		\begin{figure}[!tbh]
+			
+			\subfloat[Number of negotiation rounds during a negotiation for all agents \textit{the populations grouped with $(*)$ are significantly different}] {\includegraphics{figs/tours.PNG}}
+			
+			
+			\subfloat[Number of utterances stated for each negotiation]{
+				\centering
+				\begin{tabular}{ l c c c }
+					\hline
+					\hline
+					\textbf{ }& \textbf{Comp.} & \textbf{Similar} & \textbf{Neutral} \\ 
+					\hline
+					\newline Mean & 16.61& 19.94 & 15.13 \\
+					\newline SD & 7.38 & 6.87 & 5.6 \\
+					\hline
+					\hline
+				\end{tabular}
+			}
+			\caption{Results obtained for H3.}
+			\label{fig:tour}
+		\end{figure}
+%	
+	
+	\subsection{Comfort during negotiation}
+	
+	The descriptive statistics are presented in the table \ref{tab:comfort}. Globally, participants felt comfortable with all agents.
+	The scores of compfort enunciated by participants are 3.4 higher (on a 5-point scale) for all agents. On the contrary, the anxiety scores are 2 lower (on a 5-point scale) for all agents. 
+	
+	In order to analyse the possible differences in perceived comfort, we used a non-parametric test because normality could not be ensured. The Wilcoxon signed rank test was applied to analyze whether participants felt more comfortable with the complementary agent than with other agents. (See results in appendix \ref{chap:appendix}). 
+	The results show that participants felt more comfortable with the complementary agent compared to the similar agent (\emph{Z= -2.73, p = 0.002})
+	with a small size effect (\emph{e = -0.1}). However, no significant difference was perceived between the complementary agent and the neutral agent. 
+	
+	\begin{figure}[h]
+	
+	\subfloat[Comfort score that participants felt for all agents. \textit{the populations grouped with $(*)$ are significantly different}]{
+		\includegraphics[clip=false]{figs/confort.PNG}
+	}
+	
+	\subfloat[The effect of the dominance on the comfort felt during negotiation]{
+		\centering
+		\begin{tabular}{ l l c c c  }
+			\hline\hline
+			\textbf{ }& & \textbf{Comp.} & \textbf{Similar} & \textbf{ Neutral} \\ 
+			\hline
+			\newline \newline\multirow{2}{*} {Détendu} & Moy. &3.79 & 3.47 & 3.79 \\
+			\newline  & SD & 1 & 1.2 & 1 \\
+			\hline
+			
+			\newline \newline\multirow{2}{*} {Anxieux} & Moy. & 1.79 & 2.13 & 1.93 \\
+			\newline  & SD & 7.38 & 6.87 & 5.6 \\
+			\hline\hline
+		\end{tabular}
+	}
+	\caption{Result of the analysis of comfort during negotiation}
+	\label{tab:confort}
+\end{figure}
+
+	\subsection{Appreciation}
+		Descriptive statistics on the appreciation scores are presented in Figure \ref{fig:app}. Overall, scores are centered around 3.7 (on a scale of 5). The analysis of variance shows the effect of the dominance relation on the perception of appreciation. The results are presented in appendix \ref{chap:appendix}.
+		
+				\begin{figure}[h]
+				
+				\subfloat[Appreciation score that participants felt for all agents. \textit{the populations grouped with $(*)$ are significantly different}]{
+					\includegraphics[clip=false]{figs/appreciation.PNG}
+				}
+				
+				\subfloat[The effect of the dominance relation on perceived appreciation]{			
+					
+					\begin{tabular}{ l c c c c c }
+						\hline\hline
+						\textbf{Agent}& \textbf{Comp.} & &  \textbf{Similar} & & \textbf{Neutral} \\ 
+						\hline
+						\newline Moy. & 3.83 & &3.46 & & 3.85 \\
+						\newline SD & 1.01 & & 1.09& &  1.02 \\
+						\hline\hline
+						
+					\end{tabular}
+				}
+				\caption{Perception of appreciation}
+				\label{fig:app}
+			\end{figure}
+			
+		The Wilcoxon signed rank test shows that the complementary agent was perceived as significantly more pleasant than the similar agent (\emph{p < 0.01, Z=-3.17}). In addition, the neutral agent was also perceived as more pleasant than the similar agent (\emph{p < 0.01, Z = -3.3}). However, no difference was perceived between the complementary agent and the neutral agent (\emph{p = 0.6, Z = -0.31}).
+		
+		We also looked at the ease of collaboration between the participant and the agent. Indeed, we asked participants to report on the degree of ease of negotiation with the agent. The results are presented in figure \ref{fig:ease}. In general, participants found that negotiating with the complementary agent was easy (\emph{M=4, SD = 1}) as well as with the neutral agent (\emph{M=3.9, SD =0.99}). Participants perceived negotiation with the similar agent as less easy (\emph{M=3.16, SD = 1.06}). 
+		
+		Then, we analysed whether this difference in their perceptions was significant. As the data are not normally distributed, we applied the Wilcoxon signed rank test. The results show that participants found that negotiating with the similar agent was significantly less comfortable compared to the complementary agent (\emph{p < 0.01, Z = -3.86} with a medium size effect \emph{e = -0.35}) and the neutral agent (\emph{p < 0.01, Z = -3.61} with a medium size effect \emph{e = -0.32}).
+		However, no difference was perceived between the complementary agent and the neutral agent.
+		
+			\begin{figure}[h]
+			
+			\subfloat[Evaluation of collaboration during negotiation. \textit{the populations grouped with $(*)$ are significantly different}]{
+				\includegraphics[clip=false]{figs/aisee.PNG}
+			}
+			
+			\subfloat[Impact of dominance on the ease of negotiation]{
+				\centering
+				\begin{tabular}{ l c c c c c }
+					\hline\hline
+					\textbf{ }& \textbf{Comp.} & &  \textbf{Similar} & & \textbf{Neutral} \\ 
+					\hline
+					\newline Mean & 4 & & 3.16 & & 3.9 \\
+					\newline SD & 1 & & 1.09  & & 0.99   \\
+					\hline\hline
+					
+				\end{tabular}
+			}
+			\caption{Results for ease of collaboration during negotiation.}
+			\label{fig:aise}
+		\end{figure}
+	
+	
+	\section{Complementary analysis}
+	In section \ref{sec:Dom}, we presented the dominance as an interpersonal relationship that develops during the interaction. 
+	Therefore, in addition to the personality trait, an individual is influenced by the environment of the interaction (e. g. context of the interaction, social role...). These different parameters will create a certain dominance relationship that may vary from one interaction to another.  
+	In order to check whether participants produced different dominance behaviours during the different negotiations, we collected the agent's perception of the interlocutor's dominance behaviours.  The results are presented in figure \ref{fig:dom}.
+	
+	For the same participant, we analyzed the variance of dominance behaviours across the three negotiations. To do this, we used the Wilcoxon signed rank test because the normality of the data could not be ensured. 
+	
+	The results show that participants' dominance behaviours varied from one interaction to another. Indeed, the Wilcoxon test reveals a significant difference between the behaviour perceived by the complementary agent and the similar agent (\emph{p<0.01, Z = -3.35}). These same results are observed by comparing the perception of the complementary agent and the neutral agent (\emph{p< 0.01, Z = -3.88}).
+	However, no difference between the similar agent and the neutral agent was observed (\emph{p = 0.6, Z = 0.44}). 
+	
+	These results suggest that participants have adopted a different negotiation strategy based on the relationship established with the agent.
+%		
+%		\begin{figure}[h]
+%		
+%		\subfloat[Evaluation of participants' perceived dominance behaviours by agents. \textit{the populations grouped with $(*)$ are significantly different }]{
+%			\includegraphics[clip=false]{figs/pow.png}
+%		}
+%		
+%		\subfloat[Agent's perception of the dominance behaviours expressed by participants]{
+%			\begin{tabular}{ l c c c c c }
+%				\hline
+%				\hline
+%				\textbf{ }& \textbf{Comp.} & &  \textbf{Similar} & & \textbf{Neutral} \\ 
+%				\hline
+%				\newline Moy. & 0.51 && 0.64 && 0.66 \\
+%				\newline SD & 0.17 && 0.21 && 0.219   \\
+%				\hline
+%				\hline
+%			\end{tabular}
+%		}
+%		\caption{Results for the variation of dominance behaviours through interactions.}
+%		\label{fig:dom}
+%	\end{figure}
+
+\section{Discussion}
+\label{sec:discussion}
+In general, all our assumptions have been validated. These results support the validity of our collaborative negotiation and theory of mind model in agent/human interaction.   
+
+\subsection{Perception of agent behaviors}
+Our H1 hypothesis (\textit{the complementarity and similarity behaviours of virtual agents are perceived by participants}) is partially validated. 
+
+Four dominant behaviours were taken into account to measure the negotiation strategy. 
+Participants were able to distinguish a significant difference from three out of four behaviours between their strategies and that of the complementary agent.
+
+Indeed, participants perceived a difference between their levels of level and concessions \textbf{D3}, \textbf{D2}, as well as the consideration of the other's preferences \textbf{D1}. However, no difference was perceived regarding leadership behaviours during the negotiation \textbf{D4}. 
+
+We then analyzed the behaviour of the neutral agent. The agent was perceived as adopting dominance behaviours significantly complementary to those of users for the behaviours \textbf{D1}, \textbf{D2} and \textbf{D3}. 
+However, no difference was perceived in the behaviours related to \textbf{D4} between the neutral agent and the participants. 
+
+We studied the data to understand why participants did not perceive any difference in leadership behaviours. 
+
+Concerning the complementary agent, the leadership behaviours could be masked because of his adaptation strategy which modifies his dominance behaviours at each speaking turn.
+
+In addition, the collaborative aspect of bargaining may have reduced the perception of leadership in bargaining, which may explain the case of the neutral agent. 
+
+Finally, the lack of results for the two agents leads us to question the items proposed to measure leadership. 
+It would be interesting to do a post-hoc evaluation to ask participants what kind of behaviours they would relate to leadership during the negotiation.
+
+At the same time, participants perceived a similarity between their behaviours and those of the similar agent. On average, for each behaviour, the values assigned in self-attribution and hetero evalutation are very close. In addition, the absence of significant differences supports this result. We are aware that the absence of difference is not an insurance of similarity of perception. However, it is difficult to find a statistical calculation that ensures similarity between two populations.
+
+More generally, the results obtained support the consistency of our decision-making model both on the perception of dominant behaviours and on the agent's ability to perceive and adapt correctly to the other person's behaviours.  
+
+Moreover, the perception of the neutral agent's behaviours as complementary to those of the participants argues that the interpersonal relationship of dominance that develops during the interaction is complementary \cite{burgoonnonverbal}. Indeed, independently of the other two agents where we had manipulated the agent's adaptation, in the neutral condition the agent does not adapt to the participant's behaviours. Nevertheless, the results show that the participant has adapted to the behaviours exhibited by the agent and has thus established an interpersonal relationship of complementary dominance.
+
+\subsection{Common gain}
+Our second hypothesis (\textit{negotiators achieve a greater common gain when they establish a complementary dominance relationship.}) is validated. 
+
+First, we asked participants to share their preferences on the restaurant chosen for each negotiation.
+In general, participants were satisfied with the final choice and found it fair for all negotiations. 
+By analyzing the satisfaction value of the chosen restaurant for the participants' preferences (see table \ref{tab:gainPerceptive}), the values were around 0.7 (\emph{min =0.69, max = 0.73}). 
+
+However, by analyzing the satisfaction value for the agent's preferences, on average, only the complementary agent was able to converge on a restaurant that respects his preferences (\emph{M = 0.53, SD = 0.2}). 
+
+%	\begin{table}
+%	\centering
+%	\caption{Average of the satisfaction values of the restaurant chosen for each negotiator} 
+%	\begin{tabular} {lcccccccc}
+%		\hline
+%		\hline
+%		& \multicolumn{2}{c}{Comp.} & & \multicolumn{2}{c}{Similar}& & \multicolumn{2}{c}{Neutral} \\ % column 4 blank, for spacing
+%		\cline{2-3} \cline{5-6} \cline{8-9} % horizontal lines connecting cols. 2-3, 5-6
+%		& Part. & Agent & & Part. & Agent & &  Part. &Agent \\ \hline
+%		Mean &0,71 & 0,53 & &  0,69 & 0,33 & & 0,73 & 0,34 \\
+%		SD & 0,2 & 0,24 & &  0,18 & 0,19 & & 0,18 & 0,16 \\
+%		\hline
+%		\hline
+%	\end{tabular}
+%	\label{tab:gainPerceptif}
+%	
+%\end{table}
+
+This is due to the fact that negotiators did not communicate well during the negotiation. As a result, the negotiation was taking longer, causing the $Self$ concession function to fall. As a result, the agent made more concessions and ended up accepting a restaurant with a low level of satisfaction (\emph{M = 0.33, SD = 0.18}).
+
+Concerning the neutral agent, which is not very dominant, it is normal that in most cases, the concession curve eventually decreased leading the agent to make significant concessions. This explains the average satisfaction achieved by the neutral agent (\emph{M = 0.34, SD = 0.16}).
+
+This analysis confirms the results of the objective study conducted.
+For all negotiations, we compared the common gain and observed that it was significantly more important during negotiations with the complementary agent than with other agents. In addition, negotiators had better gains during negotiations with the neutral agent compared to the similar agent. This proves that the complementary relationship that developed during the negotiation with the neutral agent allowed for a better exchange of information. 
+
+These results confirm that negotiators communicate better and therefore negotiate better in a complementary dominance relationship.  
+
+
+\subsection{Turn of utterances}
+Our H3 hypothesis (\textit{Negotiation converges more quickly when negotiators have a complementary dominance relationship}) is validated. Indeed, negotiation converged on average more quickly when a complementary dominance relationship was established between the agent and the participant. Moreover, under the same condition, the common gain achieved by the negotiators was greater. Thus, these results support social psychology theories that interpersonal dominance relationships improve coordination and information exchange.
+
+
+As for the neutral agent, negotiation converged quickly for two reasons. First, with a dominance value initialized at 0.5, the agent had an average level of demand which facilitated the process of finding a compromise. 
+Second, according to our results, in this condition, a complementary dominance relationship had been established between the negotiators, which facilitated coordination. 
+
+In conclusion, the interpersonal dominance relationship improves coordination and information exchange that results in short and more effective negotiation processes.
+
+\subsection{Appreciation of the agent}
+Our hypotheses H4 (\textit{The negotiator feels more comfortable with a partner who expresses complementary behaviour}) and H5 (\textit{Complementarity in the dominance relationship increases the appreciation between negotiators.}) are validated. 
+
+For appreciation, the scores are above average for all agents. This may reflect a slight positive bias towards agents. However, the analysis of the differences revealed that participants significantly appreciated the negotiation with the complementary agent more than the similar agent. Similarly, participants felt that the neutral agent was also more pleasant than the similar agent. 
+
+In addition, we analysed the comfort felt during the negotiation. Overall, participants felt relaxed during the negotiation and found the negotiation comfortable with all agents.  
+
+The analysis of variance revealed that participants felt more comfortable with the complementary agent than with the similar agent. However, no difference was perceived between the complementary agent and the neutral agent, and between the neutral agent and the similar agent.
+
+In addition to comfort, we analyzed the ease of collaborating with the agent during the negotiation. The results show that participants perceived the negotiation process to be easier with the complementary agent and the neutral agent than with the agent adopting a similar strategy to their own. 
+
+These results confirm our assumptions. Participants prefer to negotiate with a partner with whom they have established a complementary relationship rather than with a negotiator who exhibits similar dominant behaviours. 
+
+
+
 %----------------------------------------------------------------------------------------
 					
-			
+\section{Conclusion}
+
+For this fourth study, our objective was to study the effect of the dominance relationship on bargaining between an agent and a human participant. We have based ourselves on the work of Tienders and Wiltermuth \cite{wiltermuth2009benefits,tiedens2003power} which asserts that complementarity in the dominance relationship had a positive impact on negotiation. 
+
+We implemented three bargaining agents adopting three different strategies, a complementary agent, a similar agent and a neutral agent. 
+63 participants took part in collaborative negotiations with these agents to find a restaurant that meets their preferences. 
+
+The results confirmed most of our assumptions and allowed us to go further in the analysis of dominance behaviours in negotiation. 
+
+First, we were able to validate our theory of mind model through interaction with a human user. 
+The results show that participants were able to perceive a difference in the strategies adopted by the agents. This allows us to validate the robustness of our model's predictions. 
+
+In addition, all hypotheses relating to the positive effect of the complementary dominance relationship have been validated. When negotiators established a complementary dominance relationship, they achieved a better common gain and those in a shorter time frame compared to other configurations. The negotiation was perceived as more pleasant and comfortable and the negotiators seemed to collaborate better. 
+
+The results also revealed behaviours that support social psychology work. Indeed, by analyzing the behaviours expressed during negotiations with the neutral agent, we realized that a complementary relationship of dominance had developed between the negotiators. These results support Dunbar and Burgoon's definition of \cite{dunbar2005perceptions}, which asserts that the dominance relationship is necessarily complementary. In addition, since the dominance relationship is interpersonal, it is established during the interaction. This point was also validated by our analyses, which allowed us to show that participants adopted different dominance behaviours from one negotiation to another. This suggests that negotiators should adapt to their interlocutor to define a dominance relationship specific to the interaction. 			
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
