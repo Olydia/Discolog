@@ -65,33 +65,21 @@
 %------------------------------------------------
 Affective computing is an emerging field of research that ranges from computer science to psychology, and from social sciences to cognitive sciences. This field of research focuses on building intelligent conversational agents interacting with human users. These agents are capable of perceiving, recognizing and stimulating social affects involved in human interactions.
 
-Social and emotional behaviors play a crucial role in our daily lives. They affect our decision-making process, our verbal and nonverbal behaviors during interactions. Therefore, extending conversational agents with this social-emotional intelligence will improve the quality of interactions. As a results, it increases the acceptability and credibility of conversational agents. 
+Social and emotional behaviors play a crucial role in our daily lives. They affect our decision-making process, our verbal and nonverbal behaviors during interactions. Therefore, extending conversational agents with this social-emotional intelligence will improve the quality of interactions. As a result, it increases their acceptability and credibility perceived by human users. 
 
-Therefore, we witness an increasing emergence of social conversational agents in various application areas.  These agents play different roles ranging from artificial companion \cite{ring2013addressing,sidner2013always}, virtual patient \cite{kenny2007virtual,kleinheksel2017virtual} or tutor for \emph{e-learning}  \cite{kerly2008calmsystem,kerry2009conversational}.
-
-Interactions between a conversational agent and a human user generally take place in a collaborative environment where the agent and user share common objectives and interests. 
+Therefore, we witness an increasing emergence of social conversational agents in various application areas.  These agents play different roles ranging from artificial companion \cite{ring2013addressing,sidner2013always}, virtual patient \cite{kenny2007virtual,kleinheksel2017virtual} or tutor for \emph{e-learning}  \cite{kerly2008calmsystem,kerry2009conversational}. Those agents generally interact with users in a collaborative environment where they share common objectives and interests. 
 Consequently, they are led to collaborate, through their interaction, in order to achieve these common objectives. 
 
-For example, \emph{Hayashi et al} propose an agent who takes part in collaborative interaction to improve the creativity of collaborators \cite{hayashi2013embodied} or \cite{soliman2010intelligent} who proposes an intelligent pedagogical agent who assists the student in his learning. It offers a collaborative pedagogy in which it explains the courses's topic to the student, asks questions and helps him/her to collaborate with other students to provide personalized learning support.
+For example, \emph{Hayashi et al} propose an agent who takes part in collaborative interaction to improve the creativity of collaborators \cite{hayashi2013embodied} or \emph{Soliman} \cite{soliman2010intelligent} who proposes an intelligent pedagogical agent who assists the student in his learning. It offers a collaborative pedagogy in which it explains the courses's topic to the student, asks questions and helps him/her to collaborate with other students to provide personalized learning support.
 
 In a collaborative environment where each interlocutor has his or her own expertise and preferences, divergences in strategies can arise during the collaboration. 
 To resolve these differences, the interlocutors are required to negotiate to share their respective points of view and deliver outcomes that meet joint benefits for both parties.  
 
-Indeed, \emph{Dillengburg and Baker} \cite{dillenbourg1996negotiation} assert that collaboration is an interaction where negotiation takes place \textit{simultaneously} on three levels. 
-
-First, the communicative level, which is based on a good exchange of information and mutual understanding of the sentences or acts of dialogue exchanged. 
-
-The second level concerns a negotiation that aims to propose strategies, methods and solutions to resolve conflicts and complete the joint task. 
-
-Finally, the last level corresponds to the management of interaction in order to coordinate communication and the construction of common strategies. In other words, collaborative negotiation improves information exchange and common strategies to find optimal solutions for both parties. 
-
 In parallel, negotiation is considered as a social process whose affects will influence the course of the negotiation and its outcomes \cite{broekens2010affective}. Therefore, the social skills of these negotiation agents are crucial in establishing information exchanges and building negotiation strategies \cite{jin2010study}. 
 
-These statements are supported by years of research in social psychology that has highlighted the major impact of social affects on the negotiation process \cite{thompson2010negotiation}. For example, \emph{Van Kleef et al.} \cite{van2006power} showed that expressing emotions such anger and happiness affect the level of concessions that a partner is able to express during a negotiation. Furthermore, individual differences such personality traits \cite{sharma2013role} play also a role in how an individual construct its negotiation strategy and how it will be expressed. 
 
-
-In this work, we are interested in the interpersonal relationship of dominance. Studies in social psychology and communication have shown that the expression of dominant behaviors has a direct influence on the construction of negotiators' strategies, and consequently, on the negotiation process and its results.
-Dominance behaviors are the result of negotiation strategies and are expressed  both at a verbal and non-verbal level.
+In this work, we are interested in the influence of interpersonal relationship of dominance in the negotiation process. Studies in social psychology and communication have shown that the expression of dominant behaviors has a direct influence on the construction of negotiators' strategies, and consequently, on the negotiation process and its results.
+Dominance behaviors are the result of negotiation strategies and are expressed both at a verbal and non-verbal level.
 
 Our goal is to design a conversational agent capable of adopting social behaviors in a context of collaborative negotiation with a human user. We focus on the impact of the social relationship of dominance on negotiation strategies and the outcomes of a negotiation.
 
@@ -101,17 +89,48 @@ Our first objective is to present a collaborative negotiation model that allows 
 Our second objective is to study the impact of a dominant interpersonal relationship on the negotiation process between an artificial agent and a human from the work done on human/human interactions.
 To do this, we use methodologies from social psychology to propose a decision-making model governed by dominant behaviors. In parallel, we are implementing experimental studies inspired by psychological research methodologies to evaluate the dominance behaviors of our conversational agent. 
 
-In this article, we aim to present a study on the possible impacts of complementarity in dominance on collaborative negotiation between an agent and a user.
 
-In a first section, we give readers a state-of-art around the concept of dominance and its manifestation in negotiation. 
 
-The second section will present an overview of our model of collaborative negotiation. We will discuss the negotiation domain, and most importantly the decisional model of the agent. Indeed, we managed to convert social behaviors of dominance into a computational model, allowing the agent to adapt its negotiation strategy to its behaviors of dominance.
+\subsection{Collaboration implies negotiation}
 
-In section 3, we investigate the positive impact of dominance simulation in collaborative negotiation through a study involving negotiations between an agent and human user.
-
-We present the results of this study and discussion in section 4. Section 5 present the perspectives of our works and future challenges of affective computing. 
-
+	%Collaboration in multi-agent systems is defined as a form of interaction that focuses on the distribution of work among several agents, whether centralized or distributed techniques \cite{ferber1997systemes}. Cooperation remains the prerogative to be able to engage in an explicit common project \cite{lucien2016multiagent}.
+	
+	Collaboration is considered as a cooperation refined by the development of a mutual understanding associated with a shared point of view of the task to be solved by several individuals interacting \cite{weiss1999multiagent,blanquet2007web}. \emph{Legras} \cites{legrascooperation} adds that collaboration is a cooperation in which agents share  common goals and no incompatible personal goals. 
+	However, for some complex tasks that involves different expertises, conflicts about the plan to adopt might emerge. In those situation, collaborators have to negotiate in order to develop collaborative agreements and find mutual benefits.
+		
+	Indeed, \emph{Dillengburg and Baker} \cite{dillenbourg1996negotiation} assert that collaboration is an interaction where negotiation takes place \textit{simultaneously} on three levels. 
+	
+	First, the communicative level, which is based on a good exchange of information and mutual understanding of the sentences or acts of dialogue exchanged. 
+	
+	The second level concerns a negotiation that aims to propose strategies, methods and solutions to resolve conflicts and complete the joint task. 
+	
+	Finally, the last level corresponds to the management of interaction in order to coordinate communication and construct common strategies. In other words, collaborative negotiation improves information exchange and common strategies to find optimal solutions for both parties. 
  
+	 Along the same line, research in social psychology has highlighted that the behaviors of negotiators are not always rational but are mainly affected by social affects \cite{thompson2010negotiation}. For example, \emph{Van Kleef et al.} \cite{van2006power} showed that expressing emotions such anger and happiness affect the level of concessions that a partner is able to express during a negotiation. Furthermore, individual differences such personality traits \cite{sharma2013role} play a role in how an individual construct its negotiation strategy and how it will be expressed. 
+	 	
+	  Based on this works on social psychology and motivated by \emph{Nass et al} \cite{nass1994computers} which noted that social factors governing human-human interaction equally apply to human-computer interaction.  Researchers in affective computing have taken up this research in the context of negotiations between a human being and an autonomous agent. \emph{De Malo et al} \cite{de2011effect,de2015humans} propose a negotiator agent capable of expressing emotions of anger and joy. They show that, depending on the emotion displayed, the human negotiator changes his concession strategy. Indeed, negotiators concede more to an angry agent than to a happy one. In the same vein, Dehghani et al \cite{dehghani2014interpersonal} studied the influence of emotions such as anger and sadness in the context of negotiating on moral issues. They present a negotiator agent that expresses emotions through facial expressions.
+	 
+	 The results obtained show that negotiators who associate moral value with the subject matter of the negotiation made greater concessions to the sad agent. In contrast, participants rejected more proposals from an angry agent. In addition, reciprocity of emotions was found, participants felt more sad at the end of a negotiation with a sad agent.  
+	 
+	 Finally, \emph{De Melo} \cites{de2015humans} in a study, shows that the perception of these emotions is more important in an avatar than in an agent. That is, the expression of emotions in an avatar will have a greater influence on human behavior and affect their decision-making process.  
+	 
+	 Agents with social behaviors have also proven to be equally effective in teaching novices how to negotiate. \cite{broekens2012virtual} offers a virtual reality system for negotiation training with an agent with social behaviors such as emotional expression and the ability to explain choices. Indeed, the agent is able to express three emotions (joy, anger and sadness). In addition, in order to help negotiators analyze the behaviors of their opponents and know their preferences, the agent is defined with a module that allows him to explain his choices and strategies used during the negotiation. This agent allows novice negotiators to improve their conversation skills and negotiation knowledge. 
+	 
+	 \emph{Gratch et al} \cite{gratch2016benefits} present the agent \textit{"Conflict Resolution Agent"} implemented in a virtual environment capable of negotiating with the natural language novice. He can also express a panel of social behavior. A study conducted found that novices felt more comfortable negotiating with the agent and showed more interest. Always with the same perspective, Jonker. \cite{jonker2012negotiating} present "Pocket Agent" an NSS \emph{(negotiation support system)} with social skills. They claim that the agent allows the novice to regulate his emotions and manage the negative consequences of emotions during negotiation.
+	 
+	 These systems reveal that social capacities and more precisely the emotions expressed influence the strategies of human negotiators and change the results of negotiation. To our knowledge, no research has been conducted on the impact of interpersonal dominance on negotiation strategies in the agent/human context. 	 
+	 Nevertheless, existing work has already been done to model verbal and non-verbal dominance behaviors for conversational agents. 
+	 
+	
+	In this article, we aim to present a study on the possible impacts of complementarity in dominance on collaborative negotiation between an agent and a user.
+	
+	In a first section, we give readers a state-of-art around the concept of dominance and its manifestation in negotiation. 
+	
+	The second section will present an overview of our model of collaborative negotiation. We will discuss the negotiation domain, and most importantly the decisional model of the agent. Indeed, we managed to convert social behaviors of dominance into a computational model, allowing the agent to adapt its negotiation strategy to its behaviors of dominance.
+	
+	In section 3, we investigate the positive impact of dominance simulation in collaborative negotiation through a study involving negotiations between an agent and human user.
+	
+	We present the results of this study and discussion in section 4. Section 5 present the perspectives of our works and future challenges of affective computing. 
 %%----------------------------------------------------------------------------------------
 %\section{Dominance and negotiation}	
 %	\label{sec:Dom}
