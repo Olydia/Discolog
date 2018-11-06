@@ -329,15 +329,15 @@ score(h_i, t)= \left( \begin{array}{c}  \frac{1}{I_{dom}} \cdot \sum_{S_i \in M_
 
 
 \subsubsection{Exemple: }   
-L'agent reçoit l'acte de dialogue \emph{Accept(jap)}. Nous prenons comme exemple $h_4$ pour calculer le score d'acceptabilité de $jap$.
+L'agent reçoit l'acte de dialogue \emph{Accept(jap)}. Nous prenons comme exemple $H_4$ pour calculer le score d'acceptabilité de $jap$.
 
-Due à la représentation partielle des préférence, l'agent dispose uniquement de connaissance sur $S_i \in M_h(h_i)$.
-Dans le cas où aucune concessions n'est possible ($self_i(t)=h_i =0.6$), l'agent peut déduire l'ensemble de valeurs acceptables car $Ac_i(t) = S_i$.
+Due à la représentation partielle des préférences, l'agent dispose uniquement de connaissances sur $S_i \in M_h(h_i)$.
+Dans le cas où aucune concession n'est possible ($self_i(t)=h_i =0.6$), l'agent peut déduire l'ensemble de valeurs acceptables car $Ac_i(t) = S_i$.
 
 Néanmoins, si nous supposons que  $self_i(t)=0.3$, le nombre de valeurs acceptables $|Ac_4(t)| = 3$.  Par conséquence, l'agent déduit qu'une nouvelle valeur est acceptable $|M_4(t)|=1$, mais est incapable de déduire de quelle valeur il s'agit. 
 
-Par exemple, la première hypothèse dans l'ensemble $h_4$: $S_i = \{fr, it\}$, l'agent ne peut pas déduire si la valeur qui est devenue acceptable est la valeur $jap$ ou $ch$. La fonction d'acceptabilité avec la prise en compte d'incertitude définit le score d'acceptabilité de $jap$ : 
-$ acc(jap, h4) = C^1_2 = 2$. Ensuite, nous normalisons avec le meilleur score possible pour $dom$ $I_{0.6}=2$. Donc, le score d'acceptabilité de la valeur $jap$ dans l'hypothèse $h_4$ est $score(h_4,t)= 1/6$
+Par exemple, la première hypothèse dans l'ensemble $H_4$: $S_i = \{fr, it\}$, l'agent ne peut pas déduire si la valeur qui est devenue acceptable est la valeur $jap$ ou $ch$. La fonction d'acceptabilité avec la prise en compte d'incertitude définit le score d'acceptabilité de $jap$ : 
+$ acc(jap, H4) = C^1_2 = 2$. Ensuite, nous normalisons avec le meilleur score possible pour $dom$ $I_{0.6}=2$. Donc, le score d'acceptabilité de la valeur $jap$ dans l'hypothèse $H_4$ est $score(H_4,t)= 1/6$
 
 \subsubsection{Cas de rejet}
 Maintenant, considérons le cas opposé; l'agent reçoit un $Reject(p)$ exprimant donc $p \not \in Ac(t)$. Par conséquent, nous réutilisons le même principe utilisé pour le score d'acceptabilité afin de calculer les possibles ensembles de valeurs non acceptables $ p \in \overline Ac(t)$. Pour chaque hypothèse $h_i \in H_{dom}$ et pour chaque hypothèse $Si \in M_h(h_i)$ de préférences associées à $h_i$, nous considérons l'ensemble des valeurs rejetées durant la négociation $R$ de taille $ |R| = r$. Nous proposons de mettre à jour le score d'acceptabilité attribué à chaque hypothèse $h_i$ en soustrayant l'ensemble des valeurs rejetées.
@@ -359,16 +359,16 @@ Nous avons proposé un modèle la ToM capable de simuler les comportements d'un 
 Le cadre d'une négociation agent/agent nous permet d'abord de varier les états mentaux des agents et les faire négocier autant de fois possibles.
 De plus, les données initiales des agents nous permettent de vérifier la pertinence des valeurs de dominance déduites par les agents avec la valeur de dominance réelle de l'agent interlocuteur. 
 
-Nous prenons en compte trois critères pour l'évaluation de ce modèle. Premièrement, nous étudions la pertinence de la prédiction faite par l'agent par rapport à la valeur réelle. Deuxièmement, la rapidité de révision des hypothèses à chaque tour de parole et enfin la complexité du modèle face à différents sujets de négociations.
+Nous prenons en compte trois critères pour l'évaluation de ce modèle. Premièrement, nous étudions la pertinence de la prédiction faite par l'agent par rapport à la valeur réelle. Deuxièmement, la rapidité de révision des hypothèses à chaque tour de parole et enfin la complexité du modèle face à différents sujets de négociation.
 
 \subsection{Méthodologie}
 
-Les deux agents doivent négocier sur le thème des restaurants. De plus, chaque agent doit prédire le comportement de dominance exprimés par l'autre agent.
+Les deux agents doivent négocier sur le thème des restaurants. De plus, chaque agent doit prédire le comportement de dominance exprimé par l'autre agent.
 Le premier agent ($ agent_A $) joue le rôle d'agent dominant, alors que le second agent ($ agent_B $) joue le rôle d'agent soumis.
 
 Nous avons manipulé deux paramètres de simulation pour l'initialisation de nos agents.
 
-Premièrement, nous varions les valeurs de dominance assignées à chaque agent (appelée \emph {$dom_a$} et \emph {$dom_b$}), afin d'étudier l'exactitude de la prédiction dans les différentes plages du spectre de dominance tel que présenté dans la Table ~\ref {tab:domsettings}. Nous avons généré des dialogues pour chaque combinaison possible de valeurs de dominance.
+Premièrement, nous varions les valeurs de dominance assignées à chaque agent (appelée \emph {$dom_a$} et \emph {$dom_b$}), afin d'étudier l'exactitude de la prédiction dans les différentes plages du spectre de dominance tel que présenté dans la Table ~\ref {tab:domsettings}. Nous avons généré des dialogues pour chaque combinaison possible de valeurs de dominance. L'agent est initié avec une valeur de dominance qui ne changera pas au long de la négociation.
 
 \begin{table}[h]
 	\centering
@@ -377,9 +377,9 @@ Premièrement, nous varions les valeurs de dominance assignées à chaque agent 
 		\hline 
 		\textbf{Agent} &	\multicolumn{4}{c|}{ \textbf{Valeurs initiales de dominance}} \\
 		\hline
-		Agent dominant $dom_A$ & 0.3 & 0.4 & 0.5 &  \\
+		Agent dominant $dom_A$ & 0.6 & 0.7 & 0.8 & 0.9 \\
 		\hline
-		Agent soumis $dom_B$ & 0.6 & 0.7 & 0.8 & 0.9\\
+		Agent soumis $dom_B$ &  0.3 & 0.4 & 0.5 & \\
 		\hline
 	\end{tabular}
 	
@@ -391,20 +391,20 @@ Deuxièmement, nous varions les préférences initiales affectées à chaque age
 Pour chaque type de modèle de préférences, nous faisons varier, respectivement, le nombre de critères discutés et le nombre de valeurs attribuées à chaque critère comme présenté dans la table ~\ref {tab:initP}. La table présente aussi pour chaque condition, le nombre d'hypothèses $Mh$ que l'agent doit gérer pour chaque hypothèse sur la dominance $h_i \in H_{dom}$.
 
 Nous avons définis trois conditions \emph {$\{$Petit, Medium, Large$\}$}.
-Pour chaque condition, nous avons généré $ 30 $ différentes combinaisons de modèles de préférences à affecter aux deux agents. De plus, pour chaque combinaison, les modèles générés devaient respecter la condition de distance minimale fixée à $\tau =0.5$. 
+Pour chaque condition, nous avons généré $ 30 $ combinaisons différentes de modèles de préférences à affecter aux deux agents. De plus, pour chaque combinaison, les modèles générés devaient respecter la condition de distance minimale fixée à $\tau =0.5$. 
 
 Considérant les deux paramètres de simulation, nous avons généré au total $1080$ dialogues. Pour chaque dialogue nous avons gardé les informations suivantes:
 \begin{itemize}
-	\item Le dialogue produit
-	\item La valeur de dominance prédite à chaque tour.
-	\item Le temps de prédiction et des révisions des hypothèses à chaque tour.
+	\item le dialogue produit
+	\item la valeur de dominance prédite à chaque tour.
+	\item le temps de prédiction et des révisions des hypothèses à chaque tour.
 	
 \end{itemize} 
 
 
 
 \begin{table}[]
-	\caption{réglage des conditions initiales pour le modèles de préférences} 
+	\caption{réglage des conditions initiales pour le modèle de préférences} 
 	\centering
 	\begin{tabular}{|p{2cm}|p{2cm}|p{2.65cm}|p{2.35cm}|}
 		\hline 
@@ -427,25 +427,27 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
  
 	\subsubsection{Exactitude des prédictions}
 	
-	Pour chaque dialogue de négociation produit par les deux agents, nous obtenons les prédictions faites sur les comportements de dominance de l'autre agent. Les résultats sont résumés dans la table \ref{tab:res1}. 
+	Pour chaque dialogue de négociation produit par les deux agents, nous obtenons les prédictions faites sur les comportements de dominance de l'autre agent.
+	
+	Afin d'évaluer la pertinence des prédictions, nous avons généré un prédicateur naïf quo évalue toujours la dominance de l'interlocuteur à $dom_{other} = 0.55$ .
+	
+	La première étape consiste à estimer les prédictions. Pour ce faire, nous avons utilisé deux estimateurs à savoir, \textit{rmse }, l'\emph {erreur quadratique moyenne} et \textit{MAE}, l'\emph {erreur moyenne absolue}. 
 
-	Premièrement, nous avons calculé l'\emph {erreur quadratique moyenne} qui indique l'écart-type des différences entre les valeurs de dominance prédites par l'agent et la valeur réelle de l'interlocuteur.
-	Pour l'ensemble des $1080$ dialogues, un écart de $rmse = 0,12$ a été observé entre la valeur de dominance estimée et la valeur de dominance réelle. Rappelons, que les valeurs de dominance $dom \in [0,1]$, donc un écart de $0,12$ est considéré comme une légère déviation et prouve la pertinence des prédictions de l'agent. 
+	Pour l'ensemble des $1080$ dialogues, nous présentons les résultats dans la table \ref{tab:res1}.  Un écart de $rmse = 0,12$ a été observé entre la valeur de dominance estimée et la valeur de dominance réelle, comparé à$rmse = 0.2$ de différence pour le modèle naïf. Par conséquent, notre modèle réduit de moitié le risque de mauvaise prédiction.
 	
-	 De plus, afin d'analyser les résultats de manière plus générale, nous avons calculé la \emph {variation résiduelle} qui calcule la précision de la variable dépendante mesurée. Nous avons calculé l'écart de prédiction entre la valeur prédite $ dom_{other} $ et la valeur réelle de dominance $dom$.
-	Nous observons des déviations de l'ordre $ rv = 0.015 $.
-	
-	 Sur la base de cette analyse statistique, notre modèle fait des prédictions précises sur les comportements de dominance de son interlocuteur.
+	 Sur la base de cette analyse statistique, notre modèle fait des prédictions précises sur les comportements de dominance de son interlocuteur. Les mêmes résultats sont observés pour l'analyse de la $mae$.
 	
 	
 	\begin{table}[h]
 		\centering
 		\caption{Résultats de l'erreur marginale pour la prédiction des comportements de dominance} 
-		\begin{tabular}{|l|c|}
+		\begin{tabular}{|l|c|c|}
 			\hline
-			Erreur quadratique moyenne & 0,12 \\
+			Modèle & RMSE & MAE  \\
 			\hline
-			Variation résiduelle (rv) & 0,015 \\
+			Naïf & 0.2 & 0.15 \\
+			\hline
+			ToM & 0.12 & 0.07 \\
 			\hline
 		\end{tabular}
 		
@@ -467,7 +469,7 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 			\hline
 			\multicolumn{3}{|c|}{Nb. tours de paroles pour converger} \\
 			\hline
-			Prédictions correctes & $rv \leq 0.02$ & Meilleures prédictions \\
+			Prédictions correctes & $mse \leq 0.02$ & Meilleures prédictions \\
 			\hline
 			2.53 & 3.25 & 3.79\\
 			\hline
@@ -481,7 +483,7 @@ Nous avons divisé cette analyse en deux parties, chacune avait pour but de couv
 	
 	En moyenne, l'algorithme avait besoin de itérations $3$ pour correctement prédire les comportements de dominance de son interlocuteur (l'interlocuteur a un comportement dominant ou un comportement soumis). 
 	
-	De plus, nous avons calculé le nombre moyen d'itérations nécessaires pour trouver une prédiction telle que la variation résiduelle est minime $ rv \leq 0.02 $. En moyenne, l'agent avait besoin de $3$ itérations pour évaluer une valeur de dominance similaire de celle de son interlocuteur. L'évolution de la convergence pour tous les dialogues est présentée dans la figure \ref{fig:converge}.
+	De plus, nous avons calculé le nombre moyen d'itérations nécessaires pour trouver une prédiction telle que la variation résiduelle est minime $ mse \leq 0.02 $. En moyenne, l'agent avait besoin de $3$ itérations pour évaluer une valeur de dominance similaire de celle de son interlocuteur. L'évolution de la convergence pour tous les dialogues est présentée dans la figure \ref{fig:converge}.
 	\begin{figure}[]
 		\fbox{\includegraphics[width=0.75\linewidth]{Figures/chap5/total.png}}
 		\caption{Variation résiduelle calculée entre la valeur de dominance réelle et celle prédite à chaque tour de dialogue} 
