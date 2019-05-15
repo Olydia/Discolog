@@ -104,8 +104,6 @@ public class NegotiatorAgent extends Agent {
 	 * Return response to given utterance in current negotiation state,
 	 * or null if no response.
 	 * 
-	 * This function is a manual "compilation" of the dialogue tree in Negotiation.d4g.xml
-	 * into plain Java.
 	 *
 	 * @param utterance Last user utterance or null if agent going first
 	 * @param disco Needed for constructing new utterances
@@ -124,6 +122,7 @@ public class NegotiatorAgent extends Agent {
 		List<Class<? extends Criterion>> criteria = getNegotiation().getCriteria().getElements();
 		if ( utterance == null ) {
 			
+			// closing negotiation in case of failure only applicable for dominant agent
 			if (relation >  NegotiationParameters.pi && negotiation.negotiationFailure(utterance))
 
 				return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
@@ -132,7 +131,6 @@ public class NegotiatorAgent extends Agent {
 				int random = new Random().nextInt(criteria.size());
 				Class<? extends Criterion> opent = criteria.get(random);
 
-				//Class<? extends Criterion> opent = getNegotiation().getCriteria().sortValues().get(0);
 				
 
 
@@ -158,12 +156,7 @@ public class NegotiatorAgent extends Agent {
 
 			return new Say(disco, false, "Sorry, but I no longer want to do for dinner");
 
-			//				} else if (negotiation.negotiationSuccess(relation, utterance)!= null){
-			//					
-			//
-			//					//Option o = negotiation.negotiationSuccess(relation, utterance);
-			//					//return new Say(disco, false, "Let's book a table at the " + o.toString() + " " + o.getClass().getSimpleName());
-
+			
 		} else if ( utterance instanceof AskPreference && !takeThelead()) {
 
 			PreferenceUtterance ask = (PreferenceUtterance)getNegotiation().getContext().getLastMove(true);
@@ -185,11 +178,8 @@ public class NegotiatorAgent extends Agent {
 
 			// DOMINANT case only propose !		
 		}else if (relation > NegotiationParameters.pi && !getNegotiation().remainProposals().isEmpty()){
-			//System.out.println("t =" +getNegotiation().computeT() +"  Self(t) =" + getNegotiation().self());
 			if(isProposition(utterance)){
 
-				// if the proposal is an optionProposal  and its acceptable accept
-				// Otherwise 
 				Proposal u = ((ProposalUtterance) utterance).getProposal();
 
 				Proposal p = getNegotiation().chooseProposal();
@@ -261,7 +251,6 @@ public class NegotiatorAgent extends Agent {
 
 		}
 	}
-	// JavasScript helpers from Negotiation.d4g.xml translated to Java
 
 	private boolean isProposition(Utterance utterance) {
 		if(utterance instanceof Propose || utterance instanceof RejectPropose || utterance instanceof AcceptPropose)
