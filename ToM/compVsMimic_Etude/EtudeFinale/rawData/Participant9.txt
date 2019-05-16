@@ -1,0 +1,128 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(chic<abordable), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Italien<Japonais), (Français<Italien), (Mexicain<Français), (Turc<Mexicain), (Chinois<Turc), (Coreen<Chinois)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<cosy), (moderne<calme), (romantique<moderne), (anime<romantique), (familial<anime)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<centre de paris), (montparnasse<pere lachaise), (pres de la tour eiffel<montparnasse), (gare du nord<pres de la tour eiffel)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(chic<abordable), (abordable<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Français<Mexicain), (Mexicain<Chinois), (Chinois<Turc), (Turc<Italien), (Italien<Japonais), (Japonais<Coreen)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(moderne<cosy), (cosy<calme), (calme<familial), (familial<romantique), (romantique<anime)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<centre de paris), (centre de paris<montparnasse), (montparnasse<pres de la tour eiffel), (pres de la tour eiffel<gare du nord)]
+
+    # Mar 28, 2018 10:44:28 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Je propose que nous allions dans un restaurant près de Gare du Nord."
+    User says "Je n'aime pas les restaurants près de Gare du Nord, Choisissons autre chose."
+    Bob says "Est-que tu aimes les restaurants près de la tour Eiffel ?"
+    User says "J'aime les restaurants Dans le centre de Paris."
+    Bob says "Je propose que nous allions dans un restaurant animé."
+    User says "Je ne veux pas aller dans un restaurant animé. Allons plutôt dans un restaurant cosy."
+    Bob says "D'accord, allons dans un restaurant cosy."
+    User says "Je propose que nous allions dans un restaurant japonais."
+    Bob says "D'accord, allons dans un restaurant japonais."
+    User says "Je propose que nous allions au restaurant Naritake1. c'est un restaurant japonais, abordable avec une ambiance cosy situé Dans le centre de Paris."
+    Bob says "D'accord, allons au restaurant Naritake1."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 13 
+ power trouvé : 0.6499999999999999 
+ valeurs power [0.8500000000000001, 0.4000000000000001, 0.6499999999999999, 0.6499999999999999, 0.6499999999999999]--------------------------------------------- 
+ 
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Italien), (Italien<Turc), (Turc<Coreen), (Coreen<Mexicain), (Mexicain<Chinois), (Chinois<Français)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<moderne), (moderne<anime), (anime<calme), (calme<romantique), (romantique<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pere lachaise<centre de paris), (centre de paris<pres de la tour eiffel), (pres de la tour eiffel<gare du nord), (gare du nord<montparnasse)]
+
+    # Mar 28, 2018 10:48:22 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+    Arthur says "Je propose que nous allions dans un restaurant près de Montparnasse."
+  >     User says "D'accord, je propose que nous allions dans un restaurant japonais."
+    Arthur says "Je ne veux pas aller dans un restaurant japonais. Allons plutôt au restaurant Au bon vivant. c'est un restaurant français, chic avec une ambiance familial situé près de Montparnasse."
+    User says "Je n'aime pas les restaurants chics, Choisissons autre chose."
+    Arthur says "Est-que tu aimes les restaurants à bas prix ?"
+    User says "Je n'aime pas les restaurants à bas prix."
+    Arthur says "Je propose que nous allions dans un restaurant familial."
+    User says "Je n'aime pas les restaurants familiaux, Choisissons autre chose."
+    Arthur says "Je propose que nous allions au restaurant Edokko1. c'est un restaurant japonais, abordable avec une ambiance romantique situé près de Montparnasse."
+    User says "Je ne veux pas aller au restaurant Edokko1. Allons plutôt dans un restaurant cosy."
+    Arthur says "D'accord, je propose que nous allions au restaurant Casa 281. c'est un restaurant italien, abordable avec une ambiance cosy situé près de Montparnasse."
+    User says "D'accord, allons au restaurant Casa 281."
+    Arthur says "Okay."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 18 
+ power trouvé : 0.6 
+ valeurs power [0.6, 0.4000000000000001, 0.6, 0.6, 0.6, 0.6]--------------------------------------------- 
+ 
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<chic), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Coreen<Français), (Français<Italien), (Italien<Japonais), (Japonais<Turc), (Turc<Chinois), (Chinois<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<cosy), (cosy<romantique), (romantique<familial), (familial<anime), (anime<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<montparnasse), (montparnasse<pres de la tour eiffel), (pres de la tour eiffel<gare du nord), (gare du nord<pere lachaise)]
+
+    # Mar 28, 2018 10:52:32 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Kevin says "Je propose que nous allions dans un restaurant près du Père lachaise."
+    User says "D'accord, je propose que nous allions dans un restaurant japonais."
+    Kevin says "Je ne veux pas aller dans un restaurant japonais. Allons plutôt au restaurant Mexicor. c'est un restaurant mexicain, à bas prix avec une ambiance moderne situé près du Père lachaise."
+    User says "Je n'aime pas les restaurants à bas prix, Choisissons autre chose."
+    Kevin says "Je propose que nous allions au restaurant Tokyo. c'est un restaurant japonais, chic avec une ambiance moderne situé près du Père lachaise."
+    User says "Je n'aime pas les restaurants chics, Choisissons autre chose."
+    Kevin says "Je propose que nous allions au restaurant Sakura1. c'est un restaurant japonais, abordable avec une ambiance moderne situé près du Père lachaise."
+    User says "Je ne veux pas aller au restaurant Sakura1. Allons plutôt au restaurant Naritake1. c'est un restaurant japonais, abordable avec une ambiance cosy situé Dans le centre de Paris."
+    Kevin says "D'accord, allons au restaurant Naritake1."
+Nous avons trouvé une solution! La négociation est terminée
+
+ Nombre de tours : 14 
+ power trouvé : 0.6 
+ valeurs power [0.6, 0.4000000000000001, 0.6, 0.6]

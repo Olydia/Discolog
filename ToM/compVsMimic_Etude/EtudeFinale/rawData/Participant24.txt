@@ -1,0 +1,126 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Italien<Japonais), (Coreen<Italien), (Mexicain<Coreen), (Français<Mexicain), (Chinois<Français), (Turc<Chinois)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(anime<cosy), (familial<anime), (calme<familial), (romantique<calme), (moderne<romantique)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(pres de la tour eiffel<montparnasse), (centre de paris<pres de la tour eiffel), (gare du nord<centre de paris), (pere lachaise<gare du nord)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Japonais<Italien), (Italien<Mexicain), (Mexicain<Français), (Français<Chinois), (Chinois<Coreen), (Coreen<Turc)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(romantique<moderne), (moderne<familial), (familial<anime), (anime<cosy), (cosy<calme)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<pres de la tour eiffel), (pres de la tour eiffel<montparnasse), (montparnasse<gare du nord), (gare du nord<pere lachaise)]
+
+    # Apr 9, 2018 10:52:08 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Bob says "Je propose que nous allions dans un restaurant près du Père lachaise."
+    User says "Je ne veux pas aller dans un restaurant près du Père lachaise. Allons plutôt au restaurant Nagoya. c'est un restaurant japonais, à bas prix avec une ambiance cosy situé près de Montparnasse."
+    Bob says "Est-que tu aimes les restaurants près de Gare du Nord ?"
+    User says "Je n'aime pas les restaurants romantiques."
+    Bob says "Tu avais proposé d'aller au restaurant Nagoya précédemment. Finalement, j’aimerais bien y aller."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Coreen<Mexicain), (Mexicain<Chinois), (Chinois<Japonais), (Japonais<Italien), (Italien<Turc), (Turc<Français)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<familial), (familial<calme), (calme<anime), (anime<moderne), (moderne<romantique)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<gare du nord), (gare du nord<pres de la tour eiffel), (pres de la tour eiffel<pere lachaise), (pere lachaise<montparnasse)]
+
+    # Apr 9, 2018 11:03:14 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Arthur says "Je propose que nous allions dans un restaurant près de Montparnasse."
+    User says "Je propose que nous allions dans un restaurant italien."
+    Arthur says "D'accord, je propose que nous allions au restaurant Roseraie. c'est un restaurant français, chic avec une ambiance romantique situé près de Montparnasse."
+    User says "Je n'aime pas les restaurants romantiques."
+    Arthur says "Tu avais proposé d'aller dans un restaurant près de Montparnasse précédemment. Finalement, j’aimerais bien y aller."
+    User says "Je propose que nous allions au restaurant Le visconti. c'est un restaurant italien, abordable avec une ambiance animé situé près de Montparnasse."
+    Arthur says "Finalement, je préfère aller au restaurant Roseraie."
+Nous avons trouvé une solution! La négociation est terminée
+--------------------------------------------- 
+ 
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<chic), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Français<Japonais), (Japonais<Italien), (Italien<Coreen), (Coreen<Turc), (Turc<Chinois), (Chinois<Mexicain)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<anime), (anime<familial), (familial<romantique), (romantique<calme), (calme<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(montparnasse<pres de la tour eiffel), (pres de la tour eiffel<centre de paris), (centre de paris<pere lachaise), (pere lachaise<gare du nord)]
+
+    # Apr 9, 2018 11:12:37 AM - TaskEngine 1.11 / Disco 1.17
+    Welcome to Disco! (Type 'help' for command list)
+  >     Kevin says "Je propose que nous allions dans un restaurant près de Gare du Nord."
+    User says "Est-que tu aimes les restaurants près de Montparnasse ?"
+    Kevin says "Je n'aime pas les restaurants près de Montparnasse."
+    User says "Est-que tu aimes les restaurants abordables ?"
+    Kevin says "Je propose que nous allions dans un restaurant à bas prix."
+    User says "J'aime les restaurants cosy."
+    Kevin says "Je propose que nous allions dans un restaurant moderne."
+    User says "Je n'aime pas les restaurants modernes."
+    Kevin says "Je propose que nous allions dans un restaurant à bas prix."
+    User says "Est-que tu aimes les restaurants près de la tour Eiffel ?"
+    Kevin says "Je n'aime pas les restaurants près de la tour Eiffel."
+    User says "J'aime les restaurants japonais."
+    Kevin says "Je propose que nous allions dans un restaurant mexicain."
+    User says "Quel type de cuisine aimes-tu ?"
+    Kevin says "J'aime les restaurants mexicains."
+    User says "J'aime les restaurants calmes."
+    Kevin says "Je propose que nous allions dans un restaurant calme."
+    User says "Je n'aime pas les restaurants mexicains."
+    Kevin says "Je propose que nous allions dans un restaurant japonais."
+    User says "Est-que tu aimes les restaurants Dans le centre de Paris ?"
+    Kevin says "Je n'aime pas les restaurants Dans le centre de Paris."
+    User says "J'aime les restaurants près de la tour Eiffel."
+    Kevin says "Je propose que nous allions dans un restaurant près de la tour Eiffel."
+    User says "Quel type d'ambiance aimes-tu ?"
+    Kevin says "J'aime les restaurants modernes."
+    User says "Je propose que nous allions dans un restaurant italien."
+    Kevin says "D'accord, je propose que nous allions au restaurant Au soleil italien. c'est un restaurant italien, chic avec une ambiance calme situé près de la tour Eiffel."
+    User says "Je propose que nous allions au restaurant Milano. c'est un restaurant italien, abordable avec une ambiance calme situé près de Montparnasse."
+    Kevin says "D'accord, allons au restaurant Milano."
+Nous avons trouvé une solution! La négociation est terminée

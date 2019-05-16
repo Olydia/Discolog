@@ -1,0 +1,73 @@
+User Preferences : 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<abordable), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Italien<Français), (Mexicain<Italien), (Turc<Mexicain), (Japonais<Turc), (Chinois<Japonais), (Coreen<Chinois)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<calme), (romantique<cosy), (moderne<romantique), (anime<moderne), (familial<anime)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(montparnasse<centre de paris), (pres de la tour eiffel<montparnasse), (pere lachaise<pres de la tour eiffel), (gare du nord<pere lachaise)]
+
+Preferences of agent Bob 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<chic), (chic<bas prix)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Français<Turc), (Turc<Japonais), (Japonais<Chinois), (Chinois<Mexicain), (Mexicain<Coreen), (Coreen<Italien)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<cosy), (cosy<romantique), (romantique<moderne), (moderne<anime), (anime<familial)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<gare du nord), (gare du nord<pres de la tour eiffel), (pres de la tour eiffel<montparnasse), (montparnasse<pere lachaise)]
+
+
+Preferences of agent Arthur 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(abordable<bas prix), (bas prix<chic)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Italien<Mexicain), (Mexicain<Coreen), (Coreen<Turc), (Turc<Chinois), (Chinois<Japonais), (Japonais<Français)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(cosy<anime), (anime<calme), (calme<romantique), (romantique<familial), (familial<moderne)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<montparnasse), (montparnasse<gare du nord), (gare du nord<pere lachaise), (pere lachaise<pres de la tour eiffel)]
+
+
+Preferences of agent Kevin 
+ 
+
+class fr.limsi.negotiate.restaurant.FR.Prix
+[(bas prix<chic), (chic<abordable)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Cuisine
+[(Français<Italien), (Italien<Japonais), (Japonais<Mexicain), (Mexicain<Coreen), (Coreen<Chinois), (Chinois<Turc)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Ambiance
+[(calme<romantique), (romantique<familial), (familial<cosy), (cosy<moderne), (moderne<anime)]
+
+
+class fr.limsi.negotiate.restaurant.FR.Localisation
+[(centre de paris<montparnasse), (montparnasse<pres de la tour eiffel), (pres de la tour eiffel<pere lachaise), (pere lachaise<gare du nord)]
