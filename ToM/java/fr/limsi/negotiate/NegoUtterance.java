@@ -1,3 +1,9 @@
+
+/** this class is used to captue the utterances exchanged between the agents during the negotiation
+ * Used to keep the history of the negotiation
+ * 
+ */
+
 package fr.limsi.negotiate;
 
 public abstract class NegoUtterance {
