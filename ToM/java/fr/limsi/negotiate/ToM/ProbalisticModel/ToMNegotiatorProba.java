@@ -12,7 +12,16 @@ import fr.limsi.negotiate.Proposal.Status;
 import fr.limsi.negotiate.Statement.Satisfiable;
 import fr.limsi.negotiate.lang.*;
 
-
+/**
+ * extension de l'agent négociateur afin qu'il soit capable de prédir la dominance de son interlocuteur
+ * et ensuite adapter sa stratégie de négociation
+ * @author ouldouali
+ * @param otherModel: hypothèses sur l'état mental de l'interlocuteur
+ * @param other: la valeur de dominance prédite à l'état courant
+ * @param guessed : historique des valeurs de dominance prédite aux tours précédents
+ * @param state: Stratégie d'adaptation de l'agent (complémentaire, mimic, ou ne s'adapte pas
+ *
+ */
 
 
 public class ToMNegotiatorProba extends NegotiatorAgent{
